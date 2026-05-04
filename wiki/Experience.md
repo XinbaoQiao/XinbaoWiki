@@ -20,6 +20,6 @@ Related pages: [[Machine_Unlearning]], [[Influence_Functions]], [[Certified_Data
 
 **Full-time research intern**, 2025-06 to 2025-12. Advisor: Pang Yan, James, [[NUSRI_CQ]].
 
-This research line studies LLM reliability and synthetic-data evaluation. It includes work on illusory pattern perception in LLMs and distributed Wasserstein methods for synthetic-data evaluation when real data are limited.
+This research line studies trustworthy model behavior and synthetic-data evaluation, including distributed Wasserstein methods for synthetic-data evaluation when real data are limited.
 
-Related pages: [[LLM_Reliability]], [[LLMs_Are_More_Prone_Than_Humans_to_Infer_Spurious_Relationships_Through_Illusory_Pattern_Perception]], [[Synthetic_Data_and_Model_Collapse]], and [[Wasserstein_Geometry]].
+Related pages: [[LLM_Reliability]], [[Synthetic_Data_and_Model_Collapse]], and [[Wasserstein_Geometry]].

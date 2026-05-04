@@ -17,7 +17,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
               Xinbaopedia
               <span>academic wiki</span>
             </a>
-            <a className="lang-toggle" href={pathWithBasePath('/wiki/Xinbao_Qiao/')}>
+            <a className="lang-toggle" href={pathWithBasePath('/wiki/Qiao_Xinbao_zh/')}>
               中文
             </a>
             <form className="wiki-search" role="search">
@@ -28,7 +28,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <nav className="wiki-tabs" aria-label="Article tools">
           <div className="wiki-tabs-inner">
             <a className="active" href={pathWithBasePath('/wiki/Xinbao_Qiao/')}>Article</a>
-            <a className="external" href="mailto:xinbaoqiao@cuhk.edu.hk">Talk</a>
+            <a className="external" href="https://github.com/XinbaoQiao/XinbaoWiki/issues" target="_blank" rel="noreferrer">Talk</a>
             <a className="external" href={source} target="_blank" rel="noreferrer">View source</a>
             <a href={pathWithBasePath('/wiki/log/')}>History</a>
           </div>

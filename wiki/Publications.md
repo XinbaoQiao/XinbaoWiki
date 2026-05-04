@@ -20,7 +20,6 @@ This page is the curated publication index. Each paper has a dedicated wiki page
 | Manuscript | Research cluster |
 |---|---|
 | **[[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters: Data Pruning for Efficient Decentralized Learning]]**. Xinbao Qiao, Xunhao Jiang, Zuozhu Liu, Peng Sun, Meng Zhang. Under review. | [[AI_and_Networks]], [[Distributed_Learning]], [[Data_Centric_Machine_Learning]] |
-| **[[LLMs_Are_More_Prone_Than_Humans_to_Infer_Spurious_Relationships_Through_Illusory_Pattern_Perception|LLMs Are More Prone Than Humans to Infer Spurious Relationships Through Illusory Pattern Perception]]**. Zhuoyan Shao, Peihua Mai, Xinbao Qiao, Meng Zhang, Xinyue Zhou, Yan Pang. Under review. | [[Trustworthy_AI]], [[LLM_Reliability]], [[Interpretability]] |
 
 ## Topic index
 

@@ -1,80 +1,74 @@
 ---
 name: "Xinbao Qiao"
-native_name: "乔鑫宝; Chinese order: Qiao Xinbao"
-born: null
-birth_place: null
+native_name: "乔鑫宝"
+born: "30 September 2000 (age 25)"
+birth_place: "Xishuangbanna, Yunnan, China"
 nationality: "Chinese"
 residence: "Hong Kong"
 image: "/images/Portrait.png"
 image_caption: "Qiao in an earlier homepage photograph"
 occupation:
-  - "PhD student in Information Engineering"
-  - "Researcher in trustworthy and data-centric machine learning"
+  - "PhD student"
+  - "Research Assistant"
 affiliation:
-  - "Department of Information Engineering, The Chinese University of Hong Kong"
-  - "National University of Singapore (Chongqing) Research Institute"
+  - label: "The Chinese University of Hong Kong"
+    url: "/wiki/The_Chinese_University_of_Hong_Kong/"
+  - label: "NUSRI-CQ"
+    url: "/wiki/NUSRI_CQ/"
 education:
-  - "PhD, Information Engineering, The Chinese University of Hong Kong, 2026-present"
-  - "M.Sc., Artificial Intelligence, Zhejiang University, 2022-2025"
-  - "B.Eng., Communication Engineering, Shandong University, 2018-2022"
+  - label: "Shandong University (BEng, 2022)"
+    url: "/wiki/Shandong_University/"
+  - label: "Zhejiang University (MSc, 2025)"
+    url: "/wiki/Zhejiang_University/"
+  - label: "The Chinese University of Hong Kong (PhD, ongoing)"
+    url: "/wiki/The_Chinese_University_of_Hong_Kong/"
 links:
-  - label: "Email: xinbaoqiao@cuhk.edu.hk"
+  - label: "xinbaoqiao@cuhk.edu.hk"
     url: "mailto:xinbaoqiao@cuhk.edu.hk"
-  - label: "Email: xinbaoqiao01@gmail.com"
-    url: "mailto:xinbaoqiao01@gmail.com"
-  - label: "Google Scholar"
-    url: "https://scholar.google.com/citations?user=nhC_OfEAAAAJ&hl=en"
-  - label: "LinkedIn"
-    url: "https://www.linkedin.com/in/xinbaoqiao/"
-  - label: "GitHub"
-    url: "https://github.com/XinbaoQiao"
-  - label: "OpenReview"
-    url: "https://openreview.net/profile?id=~Xinbao_Qiao1"
-  - label: "ORCID"
-    url: "https://orcid.org/0009-0007-8359-7701"
-  - label: "DBLP"
-    url: "https://dblp.uni-trier.de/pid/374/6619.html"
-  - label: "X"
-    url: "https://x.com/XinbaoCiao"
-  - label: "Hugging Face"
-    url: "https://huggingface.co/MrCiao"
-summary: "Xinbao Qiao is a PhD student in Information Engineering at CUHK working on trustworthy AI, data-centric machine learning, machine unlearning, synthetic-data model collapse, and AI-network systems."
+summary: "PhD student at The Chinese University of Hong Kong; researcher in trustworthy AI, data-centric machine learning, and machine unlearning"
 ---
 
-**Xinbao Qiao** (Chinese: **乔鑫宝**; Chinese order: **Qiao Xinbao**) is a PhD student in Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]]. His [[Research]] focuses on [[Trustworthy_AI|trustworthy AI]], [[Data_Centric_Machine_Learning|data-centric machine learning]], [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic data and model collapse]], and [[AI_and_Networks|AI-network systems]]. His [[Publications]] include papers at ICML, AAAI, and ICLR.
+**Xinbao Qiao** (Chinese: **乔鑫宝**; born 30 September 2000) is a Chinese PhD student and Research Assistant in Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]]. His research focuses on [[Trustworthy_AI|trustworthy AI]], [[Data_Centric_Machine_Learning|data-centric machine learning]], [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic-data model collapse]], and [[AI_and_Networks|AI-network systems]].
 
-Qiao's OpenReview profile lists him as a PhD student and Research Assistant in Information Engineering at CUHK, an intern at NUSRI-CQ, and a former MS student at Zhejiang University. The local [[CV]] page records CV-derived details and links to the PDF version.
+Before his doctoral studies, Qiao received a Bachelor of Engineering in Communication Engineering from [[Shandong_University|Shandong University]] and a Master of Science in Artificial Intelligence from [[Zhejiang_University|Zhejiang University]]. His [[Publications]] include accepted or published papers at ICML, AAAI, and ICLR.
 
 ## Education
 
-Qiao received a B.Eng. in Communication Engineering from [[Shandong_University|Shandong University]] in 2022 and pursued an M.Sc. in Artificial Intelligence at [[Zhejiang_University|Zhejiang University]] from 2022 to 2025. His master's transcript records a major GPA of 90/100 and a rank of 3/25.
+Qiao received a Bachelor of Engineering in Communication Engineering from [[Shandong_University|Shandong University]] in 2022. From 2022 to 2025 he studied Artificial Intelligence at [[Zhejiang_University|Zhejiang University]], where his master's transcript records a major GPA of 90/100 and a rank of 3/25.
 
-He is a PhD student in Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]].
-
-## Research
-
-Qiao's work studies how machine learning systems can remain reliable when the data process is imperfect: when data must be removed, when synthetic data recursively enters the training loop, when data are fragmented across silos, when decentralized training is resource-constrained, or when fairness and robustness require non-binary interventions.
-
-The unifying theme is to treat data operations, including selection, deletion, valuation, filtering, collaboration, and verification, as first-class algorithmic objects rather than peripheral preprocessing.
-
-## Publications
-
-- **[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]]**, accepted to ICML 2026. A study of selection-induced model collapse in siloed recursive synthetic-data training, with collaborative Wasserstein-geometry proxies for synthetic-data verification.
-- **[[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]]**, AAAI 2026. A corrective unlearning framework for fairness and robustness settings where hard binary deletion is too coarse.
-- **[[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]]**, ICLR 2025 poster. A Hessian-free certified unlearning method based on per-sample recollected statistics.
-- **[[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]]**, ICLR 2025 poster. An efficient random-forest unlearning framework using occurrence control and lazy updates.
-
-For a full list, see [[Publications]].
+He is enrolled as a PhD student in Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]].
 
 ## Research experience
 
-From 2023 to 2025, Qiao worked on data-centric machine learning systems at [[Zhejiang_University|Zhejiang University]], with projects on data influence attribution, machine unlearning, and the trade-offs among fairness, robustness, privacy, and utility.
+### Data-centric machine learning at Zhejiang University (2023-2025)
 
-From 2025, he worked as a research intern at [[NUSRI_CQ|NUSRI-CQ]] on trustworthy LLM systems, including illusory pattern perception in LLMs and distributed Wasserstein methods for synthetic-data evaluation.
+From March 2023 to December 2025, Qiao worked on data-centric machine learning systems at [[Zhejiang_University|Zhejiang University]]. The work centered on data influence attribution, machine unlearning, and the trade-offs among fairness, robustness, privacy, and utility.
+
+This period includes work on [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]], [[DynFrs]], and [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]].
+
+### Trustworthy LLM systems at NUSRI-CQ (2025)
+
+From June 2025 to December 2025, Qiao worked as a full-time research intern at [[NUSRI_CQ|NUSRI-CQ]]. The research focused on trustworthy large language model systems and synthetic-data evaluation, including distributed Wasserstein methods for studying recursive synthetic-data training.
+
+### The Chinese University of Hong Kong (2026-present)
+
+Qiao is a PhD student and Research Assistant in Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]]. His doctoral research continues the data-centric and trustworthy-machine-learning line, with emphasis on how data selection, deletion, collaboration, and synthetic-data verification shape model reliability.
 
 ## Academic projects
 
-Qiao's research projects are indexed under [[Projects]], [[Research]], and [[Publications]]. The wiki groups them by machine unlearning, synthetic-data model collapse, trustworthy AI, and AI-network systems.
+In addition to the biographical education and affiliation record, Qiao's wiki organizes his research output as standalone project-style articles.
+
+### Machine unlearning (2023-2026)
+
+Qiao's machine unlearning work studies how trained models can be updated after data-removal or correction requests. The line includes [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]], which targets certified deletion without explicit Hessian inversion; [[DynFrs]], an efficient random-forest unlearning framework; and [[Soft_Weighted_Machine_Unlearning|Soft-Weighted Machine Unlearning]], which treats non-binary removal weights as a mechanism for fairness and robustness correction.
+
+### Decentralized and networked learning (2024-2025)
+
+The [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters]] project studies data pruning for efficient decentralized learning. It is organized under [[AI_and_Networks]], [[Distributed_Learning]], and [[Data_Centric_Machine_Learning]].
+
+### Synthetic-data model collapse (2025-2026)
+
+The ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] studies recursive synthetic-data training under local sample-selection bias. The project connects [[Synthetic_Data_and_Model_Collapse]], [[Sample_Selection_Bias]], [[Data_Silos]], [[Collaborative_Evaluation]], and [[Wasserstein_Geometry]].
 
 ## See also
 
@@ -83,6 +77,7 @@ Qiao's research projects are indexed under [[Projects]], [[Research]], and [[Pub
 - [[Projects]]
 - [[CV]]
 - [[Education]]
+- [[Qiao_Xinbao_zh|Chinese version]]
 
 ## External links
 

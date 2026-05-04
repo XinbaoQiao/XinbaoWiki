@@ -22,10 +22,6 @@ The common thread is **data-process reliability**: how to design learning algori
 
 [[AI_and_Networks]] covers the intersection of AI with networking and communication systems: AI for communication, communication for AI, decentralized learning, data pruning, and cloud-edge collaborative healthcare. The active manuscript [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning]] belongs to this cluster.
 
-## Trustworthy LLM systems
-
-[[LLM_Reliability]] studies reliability failures and interpretability in large language models. The manuscript [[LLMs_Are_More_Prone_Than_Humans_to_Infer_Spurious_Relationships_Through_Illusory_Pattern_Perception]] is organized here.
-
 ## Data-centric and trustworthy AI
 
 [[Data_Centric_Machine_Learning]] covers data selection, valuation, filtering, and evaluation. [[Trustworthy_AI]] connects unlearning, fairness, robustness, privacy, security, interpretability, and reliability.

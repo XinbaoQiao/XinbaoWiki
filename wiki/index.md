@@ -8,6 +8,7 @@ summary: "Index of wiki pages."
 
 - [[Xinbao_Qiao|Qiao Xinbao]]
 - [[CV]]
+- [[Qiao_Xinbao_zh|乔鑫宝]]
 - [[Education]]
 - [[Experience]]
 - [[Skills]]
@@ -37,7 +38,6 @@ summary: "Index of wiki pages."
 - [[Hessian_Free_Online_Certified_Unlearning]]
 - [[DynFrs]]
 - [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning]]
-- [[LLMs_Are_More_Prone_Than_Humans_to_Infer_Spurious_Relationships_Through_Illusory_Pattern_Perception]]
 
 ## Synthetic data and model collapse
 

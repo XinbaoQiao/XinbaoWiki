@@ -18,12 +18,12 @@ This page records CV-derived facts in wiki form. The PDF version is available at
 
 ## Publications
 
-See [[Publications]]. The CV lists accepted, published, and under-review work in machine unlearning, decentralized learning, LLM reliability, and synthetic-data model collapse.
+See [[Publications]]. The CV lists accepted, published, and under-review work in machine unlearning, decentralized learning, and synthetic-data model collapse.
 
 ## Research experience
 
 - **Research on data-centric ML systems**, 2023-03 to 2025-12, advised by Meng Zhang at [[Zhejiang_University]]. Topics include data influence attribution, machine unlearning, and trade-offs among fairness, robustness, privacy, and utility.
-- **Research on trustworthy LLM systems**, 2025-06 to 2025-12, full-time research intern advised by Yan Pang at [[NUSRI_CQ]]. Topics include illusory pattern perception in LLMs and distributed Wasserstein methods for synthetic-data evaluation.
+- **Research on trustworthy model systems**, 2025-06 to 2025-12, full-time research intern advised by Yan Pang at [[NUSRI_CQ]]. Topics include model reliability and distributed Wasserstein methods for synthetic-data evaluation.
 
 ## Skills
 

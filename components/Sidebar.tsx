@@ -1,12 +1,7 @@
 import { pathWithBasePath } from '@/lib/wiki';
 
 const navigation = ['Xinbao_Qiao'];
-const notableWorks = [
-  'When_Sample_Selection_Bias_Precipitates_Model_Collapse',
-  'Soft_Weighted_Machine_Unlearning',
-  'Hessian_Free_Online_Certified_Unlearning',
-  'DynFrs'
-];
+const researchTopics = ['Machine_Unlearning', 'Synthetic_Data_and_Model_Collapse', 'Data_Centric_Machine_Learning', 'AI_and_Networks'];
 const experience = ['The_Chinese_University_of_Hong_Kong', 'NUSRI_CQ', 'Zhejiang_University'];
 const education = ['Zhejiang_University', 'Shandong_University'];
 
@@ -37,7 +32,7 @@ export function Sidebar() {
   return (
     <aside className="wiki-sidebar">
       <NavSection title="Navigation" items={navigation} />
-      <NavSection title="Notable works" items={notableWorks} />
+      <NavSection title="Research topics" items={researchTopics} />
       <NavSection title="Experience" items={experience} />
       <NavSection title="Education" items={education} />
       <section className="nav-section">

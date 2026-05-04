@@ -119,7 +119,7 @@ export function Infobox({ data }: Props) {
           <table>
             <tbody>
               {links.map((item) => {
-                const label = item.label.startsWith('Email:') ? 'Email' : item.label;
+                const label = item.url.startsWith('mailto:') ? 'Email' : item.label;
                 return (
                   <tr key={`${item.label}-${item.url}`}>
                     <th>{label}</th>

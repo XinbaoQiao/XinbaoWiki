@@ -12,6 +12,8 @@ summary: "Append-only maintenance log for the wiki."
 - Linked the local CV PDF from [[CV]] and refreshed [[Xinbao_Qiao]], [[Publications]], and the main publication pages with date/status notes.
 - Added `scripts/test-wiki-data.mjs` and wired it into `npm run check` to guard required pages, local assets, CV links, and backup URL removal.
 - Tightened the page framework to match Colarpedia class names and structure, and reduced displayed media to one portrait image.
+- Added [[Qiao_Xinbao_zh|乔鑫宝]] as the Chinese version, moved Talk to GitHub Issues, simplified Contact to one email address, renamed the sidebar's publication list to research topics, and rewrote [[Xinbao_Qiao]] around chronological research experience and academic-project sections.
+- Removed the temporarily withheld LLM manuscript from [[Publications]] and the public index.
 
 ## 2026-05-04
 
@@ -20,6 +22,6 @@ summary: "Append-only maintenance log for the wiki."
 - Added Qiao Xinbao's Chinese name, birthday, birthplace, education timeline, GPA/rank details, research experience, technical skills, and research map.
 - Reused visual assets from the earlier GitHub homepage through the backup branch.
 - Expanded publication pages for ICML 2026, AAAI 2026, and ICLR 2025 papers.
-- Added CV-provided active manuscript pages for decentralized data pruning and LLM illusory pattern perception.
+- Added a CV-provided active manuscript page for decentralized data pruning.
 - Classified [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]] under synthetic data, recursive synthetic-data training, selection bias, model collapse, data silos, collaborative evaluation, and Wasserstein geometry.
 - Added `CLAUDE.md` rules for future LLM-maintained wiki updates: new papers must be created as pages, categorized, backlinked, indexed, and logged.
