@@ -306,6 +306,10 @@ a.external::after {
   padding-left: 16px;
 }
 
+.infobox-detail {
+  color: var(--wiki-text);
+}
+
 .wiki-main h2 {
   margin: 28px 0 8px;
   padding-bottom: 4px;

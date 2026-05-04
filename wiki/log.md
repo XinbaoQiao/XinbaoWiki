@@ -13,7 +13,11 @@ summary: "Append-only maintenance log for the wiki."
 - Added `scripts/test-wiki-data.mjs` and wired it into `npm run check` to guard required pages, local assets, CV links, and backup URL removal.
 - Tightened the page framework to match Colarpedia class names and structure, and reduced displayed media to one portrait image.
 - Added [[Qiao_Xinbao_zh|乔鑫宝]] as the Chinese version, moved Talk to GitHub Issues, simplified Contact to one email address, renamed the sidebar's publication list to research topics, and rewrote [[Xinbao_Qiao]] around chronological research experience and academic-project sections.
-- Removed the temporarily withheld LLM manuscript from [[Publications]] and the public index.
+- Removed a temporarily withheld manuscript from [[Publications]] and the public index.
+- Updated the infobox framework so Affiliation lists only the current institution, Education links only the school name with degree details on the next line, Contact includes Website and GitHub, and the portrait caption records Singapore.
+- Made the language toggle route-aware so the Chinese article links back to the English article; pointed Talk to GitHub new issue creation and History to GitHub commits.
+- Added paper figures extracted from owner-provided zip packages to [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]], [[Hessian_Free_Online_Certified_Unlearning]], and [[Soft_Weighted_Machine_Unlearning]].
+- Refreshed the LaTeX CV source with current CUHK contact, education, research experience, publication statuses, and the public-paper list.
 
 ## 2026-05-04
 

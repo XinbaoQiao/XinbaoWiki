@@ -54,9 +54,15 @@ The proposed mitigation shifts from single-silo verification to [[Collaborative_
 
 These proxies support Wasserstein-gradient-based sample scoring, so synthetic samples are evaluated against a collective distributional reference instead of one local silo.
 
+![Collaborative Wasserstein barycenter methodology](/papers/model-collapse/barycenter-methodology.png)
+
 ## Experiments
 
 The experiments use DDPM-style image generation on CIFAR-10, STL-10, and CelebA, with baselines including Random selection, K-means, CenterMatch, and CovMatch. The manuscript reports that local-selection baselines can help under IID reference data but may underperform under non-IID skew, while the collaborative schemes better preserve both quality and diversity.
+
+![FID trends under recursive synthetic-data training](/papers/model-collapse/fid-trends-combined.png)
+
+![Class-proportion trends under recursive selection](/papers/model-collapse/class-proportions-trend.png)
 
 ## Source status
 

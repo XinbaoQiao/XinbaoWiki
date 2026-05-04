@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
 
-export type LinkItem = { label: string; url: string };
+export type LinkItem = { label: string; url: string; detail?: string; title?: string };
 
 export type WikiFrontmatter = {
   name?: string;
@@ -11,7 +11,7 @@ export type WikiFrontmatter = {
   birth_place?: string | null;
   residence?: string | null;
   occupation?: string | string[];
-  affiliation?: string[];
+  affiliation?: unknown[];
   education?: unknown[];
   avatar?: string;
   image?: string;

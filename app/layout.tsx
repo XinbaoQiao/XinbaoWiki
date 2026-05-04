@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import { LanguageToggle } from '@/components/LanguageToggle';
 import { Sidebar } from '@/components/Sidebar';
 import { pathWithBasePath } from '@/lib/wiki';
 import './globals.css';
@@ -8,6 +9,8 @@ export const metadata: Metadata = { title: 'Qiao Xinbao | Academic Wiki', descri
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   const source = 'https://github.com/XinbaoQiao/XinbaoWiki/tree/main/wiki';
+  const talk = 'https://github.com/XinbaoQiao/XinbaoWiki/issues/new';
+  const history = 'https://github.com/XinbaoQiao/XinbaoWiki/commits/main/';
   return (
     <html lang="en">
       <body>
@@ -17,9 +20,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
               Xinbaopedia
               <span>academic wiki</span>
             </a>
-            <a className="lang-toggle" href={pathWithBasePath('/wiki/Qiao_Xinbao_zh/')}>
-              中文
-            </a>
+            <LanguageToggle />
             <form className="wiki-search" role="search">
               <input aria-label="Search Xinbaopedia" placeholder="Search Xinbaopedia" />
             </form>
@@ -28,9 +29,9 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <nav className="wiki-tabs" aria-label="Article tools">
           <div className="wiki-tabs-inner">
             <a className="active" href={pathWithBasePath('/wiki/Xinbao_Qiao/')}>Article</a>
-            <a className="external" href="https://github.com/XinbaoQiao/XinbaoWiki/issues" target="_blank" rel="noreferrer">Talk</a>
+            <a className="external" href={talk} target="_blank" rel="noreferrer">Talk</a>
             <a className="external" href={source} target="_blank" rel="noreferrer">View source</a>
-            <a href={pathWithBasePath('/wiki/log/')}>History</a>
+            <a className="external" href={history} target="_blank" rel="noreferrer">History</a>
           </div>
         </nav>
         <div className="wiki-shell">

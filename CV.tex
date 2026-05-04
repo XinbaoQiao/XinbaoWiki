@@ -1,0 +1,123 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[empty]{fullpage}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage[T1]{fontenc}
+
+\definecolor{darkblue}{RGB}{0,0,139}
+\geometry{left=1.4cm, top=1.0cm, right=1.4cm, bottom=1.2cm}
+\hypersetup{
+  colorlinks=true,
+  linkcolor=darkblue,
+  urlcolor=darkblue
+}
+\urlstyle{same}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+\setlist[itemize]{leftmargin=*, itemsep=1pt, topsep=2pt}
+\setlist[enumerate]{leftmargin=*, itemsep=3pt, topsep=2pt}
+
+\titleformat{\section}
+  {\large\scshape\raggedright}
+  {}
+  {0em}
+  {}
+  [\titlerule]
+\titlespacing*{\section}{0pt}{8pt}{5pt}
+
+\newcommand{\entry}[4]{
+  \textbf{#1}\hfill{\small #2}\\
+  \textit{#3}\hfill{\small #4}
+}
+
+\begin{document}
+\begin{center}
+  {\LARGE \textbf{Xinbao Qiao}}\\
+  \vspace{2pt}
+  \href{mailto:xinbaoqiao@cuhk.edu.hk}{xinbaoqiao@cuhk.edu.hk}
+  \quad|\quad
+  \href{https://xinbaoqiao.github.io/XinbaoWiki/}{Homepage}
+  \quad|\quad
+  \href{https://github.com/XinbaoQiao}{GitHub}
+  \quad|\quad
+  \href{https://scholar.google.com/citations?user=nhC_OfEAAAAJ\&hl=en}{Google Scholar}
+\end{center}
+
+\section*{Education}
+\entry{The Chinese University of Hong Kong}{Hong Kong, China}
+{Ph.D. student in Information Engineering}{2026--present}
+
+\vspace{3pt}
+\entry{Zhejiang University}{Hangzhou, China}
+{M.Sc. in Artificial Intelligence}{2022--2025}
+\begin{itemize}
+  \item Major GPA: 90/100; rank: 3/25.
+  \item Selected coursework: AI Algorithms and Systems (100), Secure Artificial Intelligence (97).
+\end{itemize}
+
+\entry{Shandong University}{Jinan, China}
+{B.Eng. in Communication Engineering}{2018--2022}
+\begin{itemize}
+  \item Major GPA: 82.47/100.
+  \item Third-class Academic Award, 2018--2019.
+\end{itemize}
+
+\section*{Research Interests}
+Trustworthy AI; data-centric machine learning; machine unlearning; synthetic-data evaluation and model collapse; AI and networked learning systems.
+
+\section*{Publications}
+\begin{enumerate}[label={\textbf{[\arabic*]}}]
+  \item \textbf{When Sample Selection Bias Precipitates Model Collapse}.\\
+  \textbf{Xinbao Qiao}, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, Yan Pang. \textit{ICML, 2026}.
+
+  \item \textbf{Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness}.\\
+  \textbf{Xinbao Qiao}, Ningning Ding, Yushi Cheng, Meng Zhang. \textit{AAAI, 2026}.
+
+  \item \textbf{Hessian-Free Online Certified Unlearning}.\\
+  \textbf{Xinbao Qiao}, Meng Zhang, Ming Tang, Ermin Wei. \textit{ICLR, 2025}.
+
+  \item \textbf{DynFrs: An Efficient Framework for Machine Unlearning in Random Forest}.\\
+  Shurong Wang, Zhuoyang Shen, \textbf{Xinbao Qiao}, Tongning Zhang, Meng Zhang. \textit{ICLR, 2025}.
+
+  \item \textbf{Learn What Matters: Data Pruning for Efficient Decentralized Learning}.\\
+  \textbf{Xinbao Qiao}, Xunhao Jiang, Zuozhu Liu, Peng Sun, Meng Zhang. Under review.
+\end{enumerate}
+
+\section*{Research Experience}
+\entry{The Chinese University of Hong Kong}{Hong Kong, China}
+{Ph.D. student and Research Assistant}{2026--present}
+\begin{itemize}
+  \item Study data-centric and trustworthy machine-learning systems, with emphasis on how data selection, deletion, collaboration, and synthetic-data verification affect model reliability.
+\end{itemize}
+
+\entry{National University of Singapore Research Institute (Chongqing)}{Chongqing, China}
+{Full-time Research Intern; advisor: Yan Pang}{2025}
+\begin{itemize}
+  \item Worked on trustworthy LLM systems and synthetic-data evaluation.
+  \item Developed collaborative Wasserstein-geometry methods for evaluating recursive synthetic-data training under local sample-selection bias.
+\end{itemize}
+
+\entry{Zhejiang University}{Hangzhou, China}
+{M.Sc. researcher; advisor: Meng Zhang}{2023--2025}
+\begin{itemize}
+  \item Studied data influence attribution, certified data removal, and machine unlearning.
+  \item Developed methods that examine trade-offs among fairness, robustness, privacy, and utility in data-centric learning systems.
+\end{itemize}
+
+\section*{Selected Academic Projects}
+\begin{itemize}
+  \item \textbf{Synthetic-data model collapse}: analyzed how locally biased sample selection can accelerate model collapse, and proposed collaborative Wasserstein proxy references for distributed evaluation.
+  \item \textbf{Machine unlearning}: designed Hessian-free certified unlearning and soft-weighted unlearning methods for privacy, fairness, and robustness settings.
+  \item \textbf{Efficient decentralized learning}: studied data pruning for communication-efficient decentralized learning.
+\end{itemize}
+
+\section*{Skills}
+\textbf{Programming}: Python, PyTorch, TensorFlow, MATLAB, C/C++, SQL, Linux, Docker, Git, \LaTeX.\\
+\textbf{Languages}: Mandarin Chinese (native), English.
+
+\end{document}

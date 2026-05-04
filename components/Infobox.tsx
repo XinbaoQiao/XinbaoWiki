@@ -76,9 +76,17 @@ function render(value: unknown): ReactNode {
   }
   if (isLink(value)) {
     return (
-      <a href={pathWithBasePath(value.url)} target={value.url.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
-        {value.label}
-      </a>
+      <>
+        <a href={pathWithBasePath(value.url)} target={value.url.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
+          {value.label}
+        </a>
+        {value.detail && (
+          <>
+            <br />
+            <span className="infobox-detail">{value.detail}</span>
+          </>
+        )}
+      </>
     );
   }
   if (typeof value === 'object') return <span>{Object.values(value as Record<string, unknown>).filter(Boolean).join(', ')}</span>;
@@ -119,7 +127,7 @@ export function Infobox({ data }: Props) {
           <table>
             <tbody>
               {links.map((item) => {
-                const label = item.url.startsWith('mailto:') ? 'Email' : item.label;
+                const label = item.title || (item.url.startsWith('mailto:') ? 'Email' : item.label);
                 return (
                   <tr key={`${item.label}-${item.url}`}>
                     <th>{label}</th>

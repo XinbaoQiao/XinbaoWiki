@@ -32,6 +32,8 @@ Instead of treating samples as either fully retained or fully removed, soft-weig
 
 The paper frames hard deletion in fairness and robustness settings as a source of over-unlearning. It then uses counterfactual leave-one-out analysis and influence-function reasoning to assign tailored sample weights through a convex quadratic programming problem. The resulting soft scheme is designed to plug into existing unlearning algorithms with small overhead.
 
+![Soft-weighted unlearning experiment summary](/papers/soft-weighted/sec-5-1-1.png)
+
 ## Publication record
 
 AAAI-26 listed 2025-11-03 as the notification date for final acceptance or rejection in the main technical track. Public indexing records list the paper in the AAAI 2026 proceedings, volume 40, issue 29, pages 24936-24944.
