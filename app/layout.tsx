@@ -7,7 +7,7 @@ import './globals.css';
 export const metadata: Metadata = { title: 'Qiao Xinbao | Academic Wiki', description: 'Personal academic wiki homepage for Qiao Xinbao / Xinbao Qiao.' };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
-  const source = 'https://github.com/XinbaoQiao/XinbaoQiao.github.io/tree/main/wiki';
+  const source = 'https://github.com/XinbaoQiao/XinbaoWiki/tree/main/wiki';
   return (
     <html lang="en">
       <body>
