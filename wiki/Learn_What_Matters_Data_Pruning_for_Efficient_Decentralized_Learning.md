@@ -11,20 +11,19 @@ venue: "TNNLS, under review"
 year: 2025
 status: "under review; CV-provided"
 publication_type: "Journal manuscript"
-categories:
-  - "AI and Networks"
-  - "Distributed Learning"
-  - "Data-Centric Machine Learning"
-  - "Data Selection"
 summary: "Manuscript on data pruning for efficient decentralized learning."
 ---
 
 **Learn What Matters: Data Pruning for Efficient Decentralized Learning** is an active manuscript listed in Qiao Xinbao's CV.
 
+## Status
+
+The current public wiki page records only bibliographic metadata available from the CV. No paper package, poster, abstract, or public preprint was available in the local project materials during the 5 May 2026 update.
+
 ## Placement
 
-The manuscript belongs to [[AI_and_Networks]], [[Distributed_Learning]], and [[Data_Centric_Machine_Learning]]. Its title indicates a focus on identifying which data are most useful for decentralized learning, with the goal of improving efficiency under distributed data and communication constraints.
+The manuscript belongs to [[AI_and_Networks]], [[Distributed_Learning]], [[Data_Centric_Machine_Learning]], and [[Data_Selection]]. Its title indicates a focus on identifying useful data for decentralized learning, with the goal of improving efficiency under distributed-data and communication constraints.
 
-## Wiki role
+## Update workflow
 
-This page is a placeholder with confirmed bibliographic metadata from the CV. Additional abstract, method, figures, and links should be added when the manuscript is publicly available or when the author provides the paper package.
+When the manuscript becomes public or a source package is provided, this page should be expanded with the same structure used by the accepted paper pages: overview, method, key formula, results, and placement.

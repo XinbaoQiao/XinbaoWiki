@@ -9,8 +9,8 @@ summary: "Research area on removing or correcting data influence from trained mo
 ## Publications
 
 - [[Hessian_Free_Online_Certified_Unlearning]]
-- [[Soft_Weighted_Machine_Unlearning]]
-- [[DynFrs]]
+- [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]]
+- [[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]]
 
 ## Themes
 

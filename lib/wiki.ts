@@ -19,6 +19,7 @@ export type WikiFrontmatter = {
   type?: string;
   authors?: string[];
   venue?: string;
+  location?: string;
   year?: string | number;
   status?: string;
   publication_type?: string;

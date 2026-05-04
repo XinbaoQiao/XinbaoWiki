@@ -12,7 +12,7 @@ summary: "Research projects and project clusters."
 
 ### Machine unlearning
 
-[[Machine_Unlearning]] includes both approximate certified unlearning for differentiable models and exact or efficient unlearning for tree ensembles. Project pages include [[Hessian_Free_Online_Certified_Unlearning]], [[Soft_Weighted_Machine_Unlearning]], and [[DynFrs]].
+[[Machine_Unlearning]] includes both approximate certified unlearning for differentiable models and exact or efficient unlearning for tree ensembles. Project pages include [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]], [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]], and [[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]].
 
 ### Collaborative evaluation
 

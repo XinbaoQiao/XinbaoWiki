@@ -403,6 +403,31 @@ a.external::after {
   font-size: .92em;
 }
 
+.wiki-main pre {
+  overflow-x: auto;
+  margin: 10px 0 14px;
+  padding: 10px 12px;
+  border: 1px solid var(--wiki-border-light);
+  background: var(--wiki-bg-alt);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.wiki-main pre code {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-size: inherit;
+}
+
+.wiki-main section[data-footnotes] {
+  margin-top: 18px;
+  border-top: 1px solid var(--wiki-border-light);
+  color: var(--wiki-text-soft);
+  font-size: 12px;
+}
+
 .wiki-main figure,
 .wiki-main img {
   border: 1px solid var(--wiki-border-light);

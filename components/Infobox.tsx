@@ -16,10 +16,10 @@ const labels: Record<string, string> = {
   type: 'Type',
   authors: 'Authors',
   venue: 'Venue',
+  location: 'Conference location',
   year: 'Year',
   status: 'Status',
   publication_type: 'Publication type',
-  categories: 'Categories',
   links: 'Contact'
 };
 
@@ -35,10 +35,10 @@ const order = [
   'type',
   'authors',
   'venue',
+  'location',
   'year',
   'status',
-  'publication_type',
-  'categories'
+  'publication_type'
 ];
 
 function empty(value: unknown) {

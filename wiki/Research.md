@@ -16,7 +16,7 @@ The common thread is **data-process reliability**: how to design learning algori
 
 ## Machine unlearning
 
-[[Machine_Unlearning]] studies certified data removal and low-cost update mechanisms after deletion requests. Related pages include [[Hessian_Free_Online_Certified_Unlearning]], [[Soft_Weighted_Machine_Unlearning]], [[DynFrs]], [[Influence_Functions]], and [[Certified_Data_Removal]].
+[[Machine_Unlearning]] studies certified data removal and low-cost update mechanisms after deletion requests. Related pages include [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]], [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]], [[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]], [[Influence_Functions]], and [[Certified_Data_Removal]].
 
 ## AI and networks
 

@@ -6,9 +6,13 @@ summary: "Append-only maintenance log for the wiki."
 
 ## 2026-05-05
 
+- Rewrote the accepted paper pages with consistent overview, method, formula, results, and placement sections.
+- Replaced publication infobox categories with conference locations for ICLR 2025, AAAI 2026, and ICML 2026 entries.
+- Added wiki-style footnotes to [[Xinbao_Qiao]] and [[Qiao_Xinbao_zh]], and removed unused References sections.
+- Added compressed ICLR 2025 poster images for [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]] and [[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]], plus the soft-weighted unlearning framework figure.
 - Rebuilt the local `XinbaoWiki` project as a Next.js 15 static-export wiki using `react-markdown` and `gray-matter`.
 - Updated the page framework toward the Colarpedia/Wikipedia layout: left navigation sections, article tabs, right-side infobox, source/history links, and encyclopedia-style body typography.
-- Retained one old-homepage portrait in `public/images/Portrait.png` and removed publication-page image displays.
+- Retained one old-homepage portrait in `public/images/Portrait.png`; paper-specific figures are stored separately under `public/papers`.
 - Linked the local CV PDF from [[CV]] and refreshed [[Xinbao_Qiao]], [[Publications]], and the main publication pages with date/status notes.
 - Added `scripts/test-wiki-data.mjs` and wired it into `npm run check` to guard required pages, local assets, CV links, and backup URL removal.
 - Tightened the page framework to match Colarpedia class names and structure, and reduced displayed media to one portrait image.
@@ -16,7 +20,7 @@ summary: "Append-only maintenance log for the wiki."
 - Removed a temporarily withheld manuscript from [[Publications]] and the public index.
 - Updated the infobox framework so Affiliation lists only the current institution, Education links only the school name with degree details on the next line, Contact includes Website and GitHub, and the portrait caption records Singapore.
 - Made the language toggle route-aware so the Chinese article links back to the English article; pointed Talk to GitHub new issue creation and History to GitHub commits.
-- Added paper figures extracted from owner-provided zip packages to [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]], [[Hessian_Free_Online_Certified_Unlearning]], and [[Soft_Weighted_Machine_Unlearning]].
+- Added paper figures extracted from owner-provided zip packages to [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]], [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]], and [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]].
 - Refreshed the LaTeX CV source with current CUHK contact, education, research experience, publication statuses, and the public-paper list.
 
 ## 2026-05-04

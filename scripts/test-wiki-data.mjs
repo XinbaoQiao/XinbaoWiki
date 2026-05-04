@@ -79,10 +79,62 @@ assert.doesNotMatch(sidebar, /Notable works/, 'sidebar no longer uses Notable wo
 const publications = read('Publications.md');
 assert.doesNotMatch(publications, /raw\.githubusercontent\.com/, 'publication index avoids backup-branch image URLs');
 assert.doesNotMatch(publications, /!\[/, 'publication index is text-only');
+assert.doesNotMatch(publications, /Soft-Weighted Machine Unlearning/, 'publication index uses the final AAAI title');
+assert.match(publications, /DynFrs: An Efficient Framework for Machine Unlearning in Random Forest/, 'publication index uses full DynFrs title');
+
+for (const page of [
+  'Xinbao_Qiao.md',
+  'Qiao_Xinbao_zh.md',
+  'Hessian_Free_Online_Certified_Unlearning.md',
+  'Soft_Weighted_Machine_Unlearning.md',
+  'DynFrs.md',
+  'When_Sample_Selection_Bias_Precipitates_Model_Collapse.md',
+  'Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning.md'
+]) {
+  assert.doesNotMatch(read(page), /^## References$/m, `${page} removes unused References section`);
+  assert.doesNotMatch(read(page), /^## 参考资料$/m, `${page} removes unused Chinese references section`);
+}
+
+assert.match(home, /\[\^xinbao-name\]/, 'home article uses a real footnote for the given name');
+assert.match(home, /^\[\^xinbao-name\]:/m, 'home article defines the given-name footnote');
+assert.match(home, /\[\^timeline-note\]/, 'home article uses a timeline/status footnote');
+assert.match(home, /^\[\^timeline-note\]:/m, 'home article defines the timeline/status footnote');
+assert.match(zhHome, /\[\^xinbao-name-zh\]/, 'Chinese home article uses a real footnote');
+assert.match(zhHome, /^\[\^xinbao-name-zh\]:/m, 'Chinese home article defines the given-name footnote');
+
+const acceptedPublicationPages = [
+  'When_Sample_Selection_Bias_Precipitates_Model_Collapse.md',
+  'Soft_Weighted_Machine_Unlearning.md',
+  'Hessian_Free_Online_Certified_Unlearning.md',
+  'DynFrs.md'
+];
+
+for (const page of acceptedPublicationPages) {
+  const fm = frontmatter(page);
+  const body = read(page);
+  assert.doesNotMatch(fm, /^categories:/m, `${page} publication infobox omits categories`);
+  assert.match(fm, /^location:/m, `${page} publication infobox includes conference location`);
+  for (const section of ['## Overview', '## Method', '## Key formula', '## Results', '## Placement']) {
+    assert.match(body, new RegExp(`^${section}$`, 'm'), `${page} has ${section}`);
+  }
+  assert.match(body, /```text\n[\s\S]*?```/, `${page} includes a readable formula block`);
+}
+
+const learnPageFm = frontmatter('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning.md');
+assert.doesNotMatch(learnPageFm, /^categories:/m, 'under-review manuscript infobox omits categories');
 
 assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /!\[[^\]]+\]\(\/papers\/model-collapse\/fid-trends-combined\.png\)/, 'model-collapse paper page displays a figure');
 assert.match(read('Hessian_Free_Online_Certified_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/hessian-free\/ours\.png\)/, 'Hessian-free paper page displays a figure');
 assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/soft-weighted\/sec-5-1-1\.png\)/, 'soft-weighted paper page displays a figure');
+assert.match(read('DynFrs.md'), /!\[[^\]]+\]\(\/papers\/dynfrs\/lazy-tags\.png\)/, 'DynFrs paper page displays a figure');
+assert.match(read('Hessian_Free_Online_Certified_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/hessian-free\/poster\.png\)/, 'Hessian-free paper page includes poster image');
+assert.match(read('DynFrs.md'), /!\[[^\]]+\]\(\/papers\/dynfrs\/poster\.png\)/, 'DynFrs paper page includes poster image');
+assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/soft-weighted\/framework\.png\)/, 'soft-weighted paper page includes framework image');
+
+const infobox = fs.readFileSync(path.join(root, 'components/Infobox.tsx'), 'utf8');
+assert.match(infobox, /location: 'Conference location'/, 'infobox labels conference location');
+assert.doesNotMatch(infobox, /categories: 'Categories'/, 'infobox does not label categories');
+assert.doesNotMatch(infobox, /'categories'/, 'infobox does not render categories rows');
 
 const allMarkdown = fs.readdirSync(wikiDir)
   .filter((file) => file.endsWith('.md'))
@@ -113,7 +165,11 @@ for (const file of [
   'public/papers/model-collapse/class-proportions-trend.png',
   'public/papers/hessian-free/ours.png',
   'public/papers/hessian-free/mia-tradeoff.png',
-  'public/papers/soft-weighted/sec-5-1-1.png'
+  'public/papers/hessian-free/poster.png',
+  'public/papers/soft-weighted/sec-5-1-1.png',
+  'public/papers/soft-weighted/framework.png',
+  'public/papers/dynfrs/lazy-tags.png',
+  'public/papers/dynfrs/poster.png'
 ]) {
   assertFile(file);
 }
