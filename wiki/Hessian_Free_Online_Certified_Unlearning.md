@@ -21,8 +21,6 @@ links:
     url: "https://arxiv.org/abs/2404.01712"
   - label: "Code"
     url: "https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning"
-image: "/images/HF%20Unlearning.png"
-image_caption: "Hessian-free unlearning overview figure from the earlier homepage assets."
 summary: "ICLR 2025 paper on efficient Hessian-free certified machine unlearning."
 ---
 
@@ -34,10 +32,6 @@ The paper addresses efficient online [[Certified_Data_Removal|certified data rem
 
 The manuscript package describes the method as maintaining a statistical vector for each training data point through an affine stochastic recursion of the discrepancy between retrained and learned models. The online deletion operation then becomes near-instantaneous because the update can be reduced to vector addition.
 
-![Hessian-free unlearning method visual](/papers/hessian-free/ours.png)
-
 ## Positioning
 
 The work is part of [[Machine_Unlearning]] and [[Trustworthy_AI]], targeting the gap between theoretical certified unlearning and high-dimensional over-parameterized models. OpenReview lists the paper as published on 2025-01-22, matching the ICLR 2025 final decision date.
-
-![Membership inference trade-off](/papers/hessian-free/mia-tradeoff.png)

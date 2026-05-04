@@ -1,17 +1,13 @@
 ---
 name: "Old Homepage Resources"
 occupation: "Resource inventory"
-summary: "Inventory of preserved media from the earlier GitHub homepage."
+summary: "Record of the single preserved image from the earlier GitHub homepage."
 ---
 
-This page records media reused from the earlier GitHub homepage backup branch.
+This page records the media policy for the wiki. The public site intentionally uses a single portrait image in the main biography infobox.
 
-## Reused assets
+## Retained asset
 
-- Avatar: `images/android-chrome-512x512.png`
-- Soft-weighted unlearning figure: `images/SW Unlearning.png`
-- Hessian-free unlearning figure: `images/HF Unlearning.png`
-- DynFrs figure: `images/DynFrs.png`
-- ICLR 2025 posters: `images/ICLR2025-Poster-1.png`, `images/ICLR2025-Poster-2.png`
+- Portrait: `images/Portrait.png`
 
-These are referenced through raw GitHub URLs from the backup branch rather than re-committed as duplicated binary assets.
+Paper figures, posters, favicons, and secondary portraits are not displayed in the wiki framework. Publication pages are written as article text and source links rather than visual galleries.

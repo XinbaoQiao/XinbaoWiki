@@ -8,9 +8,10 @@ summary: "Append-only maintenance log for the wiki."
 
 - Rebuilt the local `XinbaoWiki` project as a Next.js 15 static-export wiki using `react-markdown` and `gray-matter`.
 - Updated the page framework toward the Colarpedia/Wikipedia layout: left navigation sections, article tabs, right-side infobox, source/history links, and encyclopedia-style body typography.
-- Copied old-homepage images into `public/images/` and extracted representative paper figures from owner-provided manuscript zip files into `public/papers/`.
-- Linked the local CV PDF from [[CV]] and refreshed [[Xinbao_Qiao]], [[Publications]], and the main publication pages with local assets and date/status notes.
+- Retained one old-homepage portrait in `public/images/Portrait.png` and removed publication-page image displays.
+- Linked the local CV PDF from [[CV]] and refreshed [[Xinbao_Qiao]], [[Publications]], and the main publication pages with date/status notes.
 - Added `scripts/test-wiki-data.mjs` and wired it into `npm run check` to guard required pages, local assets, CV links, and backup URL removal.
+- Tightened the page framework to match Colarpedia class names and structure, and reduced displayed media to one portrait image.
 
 ## 2026-05-04
 

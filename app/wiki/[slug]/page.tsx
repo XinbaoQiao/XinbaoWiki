@@ -19,5 +19,18 @@ export default async function WikiPage({ params }: Props) {
   const { slug } = await params;
   const page = getWikiPageBySlug(slug);
   if (!page) notFound();
-  return <article className="wiki-page"><Infobox data={page.data} /><h1>{page.title}</h1><WikiMarkdown markdown={preprocessWikiLinks(page.content)} /></article>;
+  const sourceHref = `https://github.com/XinbaoQiao/XinbaoWiki/edit/main/wiki/${encodeURIComponent(page.fileName)}`;
+  return (
+    <article className="wiki-page">
+      <h1 className="wiki-title">
+        {page.title}
+        <span className="edit-link">
+          <a href={sourceHref} target="_blank" rel="noreferrer">edit</a>
+        </span>
+      </h1>
+      {page.summary && <p className="wiki-title-sub">{page.summary}</p>}
+      <Infobox data={page.data} />
+      <WikiMarkdown sourceHref={sourceHref} markdown={preprocessWikiLinks(page.content)} />
+    </article>
+  );
 }

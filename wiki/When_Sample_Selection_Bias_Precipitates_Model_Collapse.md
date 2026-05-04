@@ -28,8 +28,6 @@ categories:
 links:
   - label: "ICML 2026 dates"
     url: "https://icml.cc/Conferences/2026/Dates"
-image: "/papers/model-collapse/fid-trends-combined.png"
-image_caption: "Representative experiment figure extracted from the owner-provided ICML 2026 manuscript package."
 summary: "ICML 2026 paper on local sample-selection bias, model collapse, and collaborative Wasserstein-geometry proxies."
 ---
 
@@ -56,13 +54,9 @@ The proposed mitigation shifts from single-silo verification to [[Collaborative_
 
 These proxies support Wasserstein-gradient-based sample scoring, so synthetic samples are evaluated against a collective distributional reference instead of one local silo.
 
-![Collaborative Wasserstein barycenter methodology](/papers/model-collapse/barycenter-methodology.png)
-
 ## Experiments
 
 The experiments use DDPM-style image generation on CIFAR-10, STL-10, and CelebA, with baselines including Random selection, K-means, CenterMatch, and CovMatch. The manuscript reports that local-selection baselines can help under IID reference data but may underperform under non-IID skew, while the collaborative schemes better preserve both quality and diversity.
-
-![Class proportions under recursive synthetic-data training](/papers/model-collapse/class-proportions-trend.png)
 
 ## Source status
 

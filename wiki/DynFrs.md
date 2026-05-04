@@ -22,8 +22,6 @@ links:
     url: "https://github.com/shurongwang/DynFrs"
   - label: "arXiv"
     url: "https://arxiv.org/abs/2410.01588"
-image: "/images/DynFrs.png"
-image_caption: "DynFrs overview figure from the earlier homepage assets."
 summary: "ICLR 2025 paper on efficient machine unlearning for random forests."
 ---
 

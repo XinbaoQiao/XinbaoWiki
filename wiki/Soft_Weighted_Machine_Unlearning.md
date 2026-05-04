@@ -21,8 +21,6 @@ links:
     url: "https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning"
   - label: "AAAI 2026 lecture page"
     url: "https://underline.io/lecture/139759-beyond-binary-erasure-soft-weighted-unlearning-for-fairness-and-robustness"
-image: "/images/SW%20Unlearning.png"
-image_caption: "Soft-weighted unlearning figure from the earlier homepage assets."
 summary: "A soft-weighted unlearning framework for fairness and robustness settings."
 ---
 
@@ -33,8 +31,6 @@ summary: "A soft-weighted unlearning framework for fairness and robustness setti
 Instead of treating samples as either fully retained or fully removed, soft-weighted unlearning assigns continuous removal weights. This makes unlearning usable as a corrective mechanism when the objective is to reduce harmful influence rather than satisfy a strict right-to-be-forgotten request.
 
 The paper frames hard deletion in fairness and robustness settings as a source of over-unlearning. It then uses counterfactual leave-one-out analysis and influence-function reasoning to assign tailored sample weights through a convex quadratic programming problem. The resulting soft scheme is designed to plug into existing unlearning algorithms with small overhead.
-
-![Utility and fairness experiment](/papers/soft-weighted/utility-fairness.png)
 
 ## Publication record
 

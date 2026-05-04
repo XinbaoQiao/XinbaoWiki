@@ -8,6 +8,7 @@ const labels: Record<string, string> = {
   native_name: 'Native name',
   born: 'Born',
   birth_place: 'Birthplace',
+  nationality: 'Nationality',
   residence: 'Residence',
   occupation: 'Occupation',
   affiliation: 'Affiliation',
@@ -26,6 +27,7 @@ const order = [
   'native_name',
   'born',
   'birth_place',
+  'nationality',
   'residence',
   'occupation',
   'affiliation',
@@ -36,8 +38,7 @@ const order = [
   'year',
   'status',
   'publication_type',
-  'categories',
-  'links'
+  'categories'
 ];
 
 function empty(value: unknown) {
@@ -86,23 +87,50 @@ function render(value: unknown): ReactNode {
 
 export function Infobox({ data }: Props) {
   const title = typeof data.name === 'string' ? data.name : 'Infobox';
-  const image = typeof data.image === 'string' ? data.image : typeof data.avatar === 'string' ? data.avatar : '';
+  const image = typeof data.image === 'string' ? data.image : '';
   const caption = typeof data.image_caption === 'string' ? data.image_caption : '';
   const rows = order
     .filter((key) => !empty(data[key]))
     .map((key) => (
-      <div className="infobox-row" key={key}>
-        <div className="infobox-key">{labels[key] || key.replaceAll('_', ' ')}</div>
-        <div className="infobox-value">{render(data[key])}</div>
-      </div>
+      <tr key={key}>
+        <th>{labels[key] || key.replaceAll('_', ' ')}</th>
+        <td>{render(data[key])}</td>
+      </tr>
     ));
+  const links = Array.isArray(data.links) ? data.links.filter(isLink) : [];
   if (!rows.length && !image) return null;
   return (
-    <aside className="infobox">
-      <div className="infobox-title">{title}</div>
-      {image && <img className="infobox-image" src={pathWithBasePath(image)} alt={`${title} image`} />}
-      {caption && <div className="infobox-caption">{caption}</div>}
-      {rows}
+    <aside className="wiki-infobox">
+      <div className="wiki-infobox-title">{title}</div>
+      {image && (
+        <div className="wiki-infobox-image">
+          <img src={pathWithBasePath(image)} alt={`${title} image`} />
+          {caption && <div className="wiki-infobox-caption">{caption}</div>}
+        </div>
+      )}
+      {rows.length > 0 && (
+        <table>
+          <tbody>{rows}</tbody>
+        </table>
+      )}
+      {links.length > 0 && (
+        <>
+          <div className="wiki-infobox-section">Contact</div>
+          <table>
+            <tbody>
+              {links.map((item) => {
+                const label = item.label.startsWith('Email:') ? 'Email' : item.label;
+                return (
+                  <tr key={`${item.label}-${item.url}`}>
+                    <th>{label}</th>
+                    <td>{render(item)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </>
+      )}
     </aside>
   );
 }

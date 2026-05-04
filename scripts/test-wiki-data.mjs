@@ -34,21 +34,19 @@ assert.match(read('Xinbao_Qiao.md'), /\[\[Research\]\]/, 'home article links to 
 assert.match(read('CV.md'), /\/files\/XinbaoQiao_CV\.pdf/, 'CV page links to local PDF');
 
 const publications = read('Publications.md');
-assert.doesNotMatch(publications, /raw\.githubusercontent\.com/, 'publication index uses local images');
-assert.match(publications, /\/papers\/model-collapse\/fid-trends-combined\.png/, 'model-collapse visual is local');
+assert.doesNotMatch(publications, /raw\.githubusercontent\.com/, 'publication index avoids backup-branch image URLs');
+assert.doesNotMatch(publications, /!\[/, 'publication index is text-only');
 
 const allMarkdown = fs.readdirSync(wikiDir)
   .filter((file) => file.endsWith('.md'))
   .map((file) => read(file))
   .join('\n');
 assert.doesNotMatch(allMarkdown, /backup\/old-homepage/, 'wiki no longer depends on backup-branch image URLs');
+assert.doesNotMatch(allMarkdown, /\/papers\//, 'wiki does not display paper figures');
+assert.doesNotMatch(allMarkdown, /!\[/, 'wiki markdown does not display inline images');
 
 for (const file of [
   'public/images/Portrait.png',
-  'public/images/Portrait-1.png',
-  'public/papers/model-collapse/fid-trends-combined.png',
-  'public/papers/hessian-free/ours.png',
-  'public/papers/soft-weighted/utility-fairness.png',
   'public/files/XinbaoQiao_CV.pdf'
 ]) {
   assertFile(file);
