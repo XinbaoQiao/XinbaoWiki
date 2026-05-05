@@ -192,6 +192,9 @@ assert.match(chatWithXinbao, /Xinbao AI is temporarily unavailable\. Please try 
 assert.match(chatWithXinbao, /language: Language/, 'chat client localizes UI from current wiki language');
 assert.match(chatWithXinbao, /distilled/, 'chat client introduces itself as a distilled academic skill');
 assert.match(chatWithXinbao, /家人们[\s\S]*顷刻炼化[\s\S]*数字分身 skill[\s\S]*给他爆了[\s\S]*资料稳/, 'chat client Chinese greeting uses varied playful digital-proxy phrasing');
+assert.match(chatWithXinbao, /Xinbao AI is on the way[\s\S]*Checking Xinbaopedia notes[\s\S]*Almost there/, 'chat client includes varied English typing messages');
+assert.match(chatWithXinbao, /Xinbao AI 正在赶来的路上[\s\S]*家人们，答案正在路上[\s\S]*正在切换到资料稳模式/, 'chat client includes varied Chinese typing messages');
+assert.match(chatWithXinbao, /function randomTypingMessage[\s\S]*Math\.random\(\)[\s\S]*setTypingMessage\(randomTypingMessage\(strings\.typing\)\)/, 'chat client randomly selects one typing message per request');
 assert.doesNotMatch(chatWithXinbao, /YUNWU_API_KEY|UPSTASH_REDIS_REST_TOKEN|api\.yunwu|Bearer/, 'chat client contains no backend key names or provider endpoint');
 assert.match(chatRoute, /runtime = 'nodejs'/, 'chat API route uses the Node runtime');
 assert.match(chatRoute, /export async function GET\(request: NextRequest\)/, 'chat API exposes a backend quota endpoint');

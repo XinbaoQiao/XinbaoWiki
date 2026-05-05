@@ -21,7 +21,24 @@ const copy = {
     inputLabel: 'Message Chat with Xinbao',
     placeholder: 'Ask about Xinbao, research, papers, projects...',
     send: 'Send',
-    typing: 'Xinbao AI is typing',
+    typing: [
+      'Xinbao AI is on the way',
+      'Checking Xinbaopedia notes',
+      'Distilling the source notes',
+      'Locking in the relevant context',
+      'Avoiding unsupported claims',
+      'Tracing the research thread',
+      'Scanning public wiki pages',
+      'Composing a concise answer',
+      'Looking up the project trail',
+      'Aligning with the source notes',
+      'Sorting papers and projects',
+      'Turning notes into a reply',
+      'Calibrating academic mode',
+      'Keeping the answer grounded',
+      'Gathering the public facts',
+      'Almost there'
+    ],
     quotaUnknown: '20 messages/day',
     quota: (remaining: number, limit: number) => `${remaining}/${limit} messages left today`,
     empty: 'Please enter a question.',
@@ -36,7 +53,24 @@ const copy = {
     inputLabel: '向 Chat with Xinbao 发送消息',
     placeholder: '询问研究方向、论文、项目、联系方式...',
     send: '发送',
-    typing: 'Xinbao AI 正在输入',
+    typing: [
+      'Xinbao AI 正在赶来的路上',
+      '家人们，答案正在路上',
+      '先别急，Xinbao AI 正在检索',
+      '这题我会，正在组织语言',
+      '正在翻 Xinbaopedia 的公开资料',
+      '正在把 source notes 拿捏一下',
+      '正在从研究笔记里捞重点',
+      '正在把项目线索串起来',
+      '正在给上下文做蒸馏',
+      '正在检查公开资料，拒绝硬编',
+      '正在把 wiki 页压缩成人话',
+      '正在论文和项目之间来回穿梭',
+      '正在校准哈基米 energy',
+      '正在轻轻召唤 citation',
+      '正在切换到资料稳模式',
+      '正在把回答打磨得不啰嗦'
+    ],
     quotaUnknown: '每天 20 条消息',
     quota: (remaining: number, limit: number) => `今天还剩 ${remaining}/${limit} 条消息`,
     empty: '请输入一个问题。',
@@ -49,6 +83,10 @@ function chatEndpoint() {
   return `${basePath}/api/chat-with-xinbao/`;
 }
 
+function randomTypingMessage(options: string[]) {
+  return options[Math.floor(Math.random() * options.length)] ?? options[0] ?? '';
+}
+
 export function ChatWithXinbao({ language }: Props) {
   const strings = copy[language];
   const initialMessages = useMemo<Message[]>(() => [{ role: 'assistant', content: strings.greeting }], [strings.greeting]);
@@ -57,6 +95,7 @@ export function ChatWithXinbao({ language }: Props) {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [typingMessage, setTypingMessage] = useState(() => randomTypingMessage(strings.typing));
   const [error, setError] = useState('');
   const [remaining, setRemaining] = useState<number | null>(null);
   const [limit, setLimit] = useState(20);
@@ -115,6 +154,7 @@ export function ChatWithXinbao({ language }: Props) {
 
     setError('');
     setInput('');
+    setTypingMessage(randomTypingMessage(strings.typing));
     setLoading(true);
     setMessages((current) => [...current, { role: 'user', content: message }]);
 
@@ -203,7 +243,7 @@ export function ChatWithXinbao({ language }: Props) {
             ))}
             {loading && (
               <div className="chat-xinbao-typing" role="status">
-                <span>{strings.typing}</span>
+                <span>{typingMessage}</span>
                 <i />
                 <i />
                 <i />
