@@ -69,7 +69,7 @@ summary: "香港中文大学信息工程系博士候选人；研究方向包括 
 
 ### AI 与网络（2024-2026）
 
-乔鑫宝当前的主要研究主线是[[AI_and_Networks|AI 与网络]]，关注数据和计算分布在设备、机构或网络基础设施中时，学习系统如何保持效率与可靠性。该主线包括[[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters: Data Pruning for Efficient Decentralized Learning]]，也包括[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]]中的跨数据孤岛协作评估设置。
+乔鑫宝当前的主要研究主线是[[AI_and_Networks|AI 与网络]]，关注数据和计算分布在设备、机构或网络基础设施中时，学习系统如何保持效率与可靠性。在这一主线下，[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]]中的跨数据孤岛协作评估设置研究了局部样本选择偏差下的模型可靠性。
 
 ### 机器遗忘（2023-2026）
 

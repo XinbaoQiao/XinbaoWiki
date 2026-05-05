@@ -68,7 +68,7 @@ In addition to the biographical education and affiliation record, Qiao's wiki or
 
 ### AI and networks (2024-2026)
 
-Qiao's current primary line, [[AI_and_Networks|AI and networks]], studies how learning systems behave when data and computation are distributed across devices, institutions, or networked infrastructure. The line includes [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters: Data Pruning for Efficient Decentralized Learning]] and the collaborative evaluation setting in [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]].
+Qiao's current primary line, [[AI_and_Networks|AI and networks]], studies how learning systems behave when data and computation are distributed across devices, institutions, or networked infrastructure. Within this line, the collaborative evaluation setting in [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] examines model reliability under siloed access and local sample-selection bias.
 
 ### Machine unlearning (2023-2026)
 
