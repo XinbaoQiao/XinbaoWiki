@@ -160,6 +160,8 @@ assert.match(wikiLib, /preprocessWikiLinks\(markdown: string, options: \{ langua
 assert.match(wikiLib, /export type SearchIndexItem/, 'wiki library exposes a typed static search index item');
 assert.match(wikiLib, /export function getSearchIndex\(\): SearchIndexItem\[\]/, 'wiki library builds a static search index from markdown pages');
 assert.match(wikiLib, /plainText\(page\.content\)/, 'search index uses markdown body text, not only frontmatter');
+assert.match(wikiLib, /hidden\?: boolean/, 'wiki frontmatter supports hidden pages');
+assert.match(wikiLib, /\.filter\(\(page\) => page\.data\.hidden !== true\)/, 'search index excludes hidden pages');
 assert.match(wikiPageTsx, /isChineseSlug\(page\.slug\)/, 'wiki page detects Chinese article slugs');
 assert.match(wikiPageTsx, /preprocessWikiLinks\(page\.content, \{ language \}\)/, 'wiki page passes language into wikilink preprocessing');
 assert.match(wikiSearch, /'use client';/, 'wiki search is a client component');
@@ -225,6 +227,7 @@ assert.match(chatKnowledge, /import 'server-only';/, 'chat knowledge builder is 
 assert.match(chatKnowledge, /project\.md/, 'chat knowledge builder can prioritize project.md if it is added later');
 assert.match(chatKnowledge, /wiki'\)/, 'chat knowledge builder reads the local wiki directory');
 assert.match(chatKnowledge, /Xinbao_Qiao[\s\S]*Qiao_Xinbao_zh[\s\S]*Projects[\s\S]*Research[\s\S]*Publications[\s\S]*CV/, 'chat knowledge builder prioritizes homepage, projects, research, publications, and CV pages');
+assert.doesNotMatch(chatKnowledge, /Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning/, 'chat knowledge builder does not prioritize the hidden under-review manuscript');
 assert.match(chatKnowledge, /digital proxy/, 'persona identifies the assistant as a digital proxy');
 assert.match(chatKnowledge, /academic skill[\s\S]*distilled/, 'persona can introduce the assistant as a distilled academic skill');
 assert.match(chatKnowledge, /must not claim to be the real Xinbao Qiao/, 'persona prevents impersonating Xinbao');
@@ -266,7 +269,7 @@ assert.doesNotMatch(publications, /!\[/, 'publication index is text-only');
 assert.doesNotMatch(publications, /Soft-Weighted Machine Unlearning/, 'publication index uses the final AAAI title');
 assert.match(publications, /DynFrs: An Efficient Framework for Machine Unlearning in Random Forest/, 'publication index uses full DynFrs title');
 assert.doesNotMatch(publications, /(?<!\*)Xinbao Qiao(?!\*)/, 'publication index bolds Xinbao Qiao in author lists');
-assert.equal((publications.match(/\*\*Xinbao Qiao\*\*/g) || []).length, 5, 'publication index bolds Xinbao Qiao in every listed paper');
+assert.equal((publications.match(/\*\*Xinbao Qiao\*\*/g) || []).length, 4, 'publication index bolds Xinbao Qiao in every visible listed paper');
 
 for (const page of [
   'Xinbao_Qiao.md',
@@ -339,6 +342,17 @@ assert.match(angelaZhang, /\[\[Xinbao_Qiao\|Xinbao Qiao\]\]/, 'Angela Yingjun Zh
 
 const learnPageFm = frontmatter('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning.md');
 assert.doesNotMatch(learnPageFm, /^categories:/m, 'under-review manuscript infobox omits categories');
+assert.match(learnPageFm, /^hidden: true$/m, 'under-review manuscript is hidden from public indexes for now');
+assert.match(frontmatter('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning_zh.md'), /^hidden: true$/m, 'Chinese under-review manuscript is hidden from public indexes for now');
+
+const hiddenManuscriptPattern = /Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters/;
+const publicMarkdownFiles = fs.readdirSync(wikiDir)
+  .filter((file) => file.endsWith('.md'))
+  .filter((file) => !file.startsWith('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning'));
+for (const page of publicMarkdownFiles) {
+  assert.doesNotMatch(read(page), hiddenManuscriptPattern, `${page} does not surface the hidden under-review manuscript`);
+}
+assert.doesNotMatch(fs.readFileSync(path.join(wikiDir, 'pages.json'), 'utf8'), hiddenManuscriptPattern, 'manual page index does not surface the hidden under-review manuscript');
 
 assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /!\[[^\]]+\]\(\/papers\/model-collapse\/fid-trends-combined\.png\)/, 'model-collapse paper page displays a figure');
 assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /!\[[^\]]+\]\(\/papers\/model-collapse\/teaser\.png\)/, 'model-collapse paper page displays a local teaser figure');
@@ -501,12 +515,12 @@ for (const file of generatedConceptImages) {
   assert.ok(size < 600_000, `${file} is compressed enough for static-page delivery`);
 }
 
-assert.match(read('AI_and_Networks.md'), /\| \[\[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning\|Learn What Matters: Data Pruning for Efficient Decentralized Learning\]\] \| under review\. \|/, 'AI and Networks shortens under-review status');
+assert.doesNotMatch(read('AI_and_Networks.md'), /Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters/, 'AI and Networks does not surface the hidden under-review manuscript');
 assert.match(read('AI_and_Networks.md'), /\| \[\[When_Sample_Selection_Bias_Precipitates_Model_Collapse\|When Sample Selection Bias Precipitates Model Collapse\]\] \| ICML 2026, 6-11 July 2026, Seoul\. \|/, 'AI and Networks lists only conference, date, and place');
 assert.match(read('Machine_Unlearning.md'), /ICLR 2025, 24-28 April 2025, Singapore\./, 'Machine Unlearning lists only ICLR conference timing');
 assert.match(read('Machine_Unlearning.md'), /AAAI 2026, 20-27 January 2026, Singapore\./, 'Machine Unlearning lists only AAAI conference timing');
 assert.match(read('Synthetic_Data_and_Model_Collapse.md'), /ICML 2026, 6-11 July 2026, Seoul\./, 'Synthetic Data lists only ICML conference timing');
-assert.match(read('Data_Centric_Machine_Learning.md'), /\| \[\[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning\|Learn What Matters: Data Pruning for Efficient Decentralized Learning\]\] \| under review\. \|/, 'Data Centric ML shortens under-review status');
+assert.doesNotMatch(read('Data_Centric_Machine_Learning.md'), /Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters/, 'Data Centric ML does not surface the hidden under-review manuscript');
 
 function sectionBetween(body, start, end) {
   const startIndex = body.indexOf(start);
@@ -521,7 +535,7 @@ for (const page of researchTopicPages) {
   const publicationsBlock = sectionBetween(read(page), '## Publications', "## Connection to Qiao's work");
   assert.doesNotMatch(publicationsBlock, verboseStatusPattern, `${page} keeps Venue/status cells concise`);
 }
-const publicationIndexBlock = sectionBetween(read('Publications.md'), '## Peer-reviewed and accepted papers', '## Under review and active manuscripts');
+const publicationIndexBlock = sectionBetween(read('Publications.md'), '## Peer-reviewed and accepted papers', '## Topic index');
 assert.doesNotMatch(publicationIndexBlock, verboseStatusPattern, 'publication index keeps venue/status cells concise');
 
 for (const page of ['AI_and_Networks.md', 'Xinbao_Qiao.md', 'Qiao_Xinbao_zh.md', 'The_Chinese_University_of_Hong_Kong.md']) {

@@ -14,7 +14,7 @@ translation_of: "Data_Silos"
 
 ## 与乔鑫宝工作的关系
 
-数据孤岛是 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 的核心设置，论文研究局部样本选择偏差下的递归合成数据训练。它也激励 [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters]]：去中心化学习必须决定哪些数据值得通信或保留。两个问题都不是单纯模型精度问题，而是多方如何在不假定完整数据访问的情况下协调。
+数据孤岛是 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 的核心设置，论文研究局部样本选择偏差下的递归合成数据训练。在这一设置中，问题不是单纯模型精度，而是多方如何在不假定完整数据访问的情况下协调。
 
 ## 参见
 
@@ -22,4 +22,3 @@ translation_of: "Data_Silos"
 - [[Distributed_Learning|分布式学习]]
 - [[Collaborative_Evaluation|协作评估]]
 - [[Sample_Selection_Bias|样本选择偏差]]
-

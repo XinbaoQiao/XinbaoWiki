@@ -22,12 +22,11 @@ translation_of: "AI_and_Networks"
 
 | 论文 | 会议/状态 |
 | --- | --- |
-| [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters：高效去中心化学习的数据剪枝]] | under review。 |
 | [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] | ICML 2026，2026年7月6日至11日，首尔。 |
 
 ## 与乔鑫宝工作的关系
 
-[[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters]] 直接研究去中心化学习前哪些本地数据值得保留。[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 则把问题放在合成数据与数据孤岛中，研究单个本地验证者如何造成递归训练分布变窄。早期 [[Machine_Unlearning|机器遗忘]] 工作也体现同一系统视角：算法不仅要准确，还要在删除、更新、通信和延迟成本上可用。
+[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 把问题放在合成数据与数据孤岛中，研究单个本地验证者如何造成递归训练分布变窄。早期 [[Machine_Unlearning|机器遗忘]] 工作也体现同一系统视角：算法不仅要准确，还要在删除、更新、通信和延迟成本上可用。
 
 ## 参见
 
@@ -38,4 +37,3 @@ translation_of: "AI_and_Networks"
 - [[The_Chinese_University_of_Hong_Kong|香港中文大学]]
 
 [^sources]: 该专题名称与 CUHK IE 的[官方系所介绍](https://www.ie.cuhk.edu.hk/about-the-department/)相一致：信息工程同时处理信息的生成、传输、存储、处理与应用；ICML 2026 的会议时间来自[官方会议页面](https://icml.cc/Conferences/2026)。
-

@@ -43,7 +43,6 @@ translation_of: "index"
 - [[Soft_Weighted_Machine_Unlearning|超越二元擦除：用于公平性与鲁棒性的软加权遗忘]]
 - [[Hessian_Free_Online_Certified_Unlearning|无 Hessian 在线认证遗忘]]
 - [[DynFrs|DynFrs：随机森林机器遗忘高效框架]]
-- [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters：高效去中心化学习的数据剪枝]]
 
 ## 合成数据与模型坍缩
 
@@ -70,4 +69,3 @@ translation_of: "index"
 - [[Zhejiang_University|浙江大学]]
 - [[Shandong_University|山东大学]]
 - [[NUSRI_CQ|NUSRI-CQ]]
-

@@ -12,7 +12,7 @@ Data silos are a key reason why [[AI_and_Networks|AI and networks]] differs from
 
 ## Connection to Qiao's work
 
-Data silos are central to [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]], where recursive synthetic-data training is studied under local sample-selection bias. They also motivate [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters]], where decentralized learning requires deciding which data are worth communicating or retaining. In both cases, the research question is not just model accuracy, but how distributed parties can coordinate without assuming complete data access.
+Data silos are central to [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]], where recursive synthetic-data training is studied under local sample-selection bias. In this setting, the research question is not just model accuracy, but how distributed parties can coordinate without assuming complete data access.
 
 ## See also
 

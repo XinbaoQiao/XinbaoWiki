@@ -42,7 +42,6 @@ summary: "Index of wiki pages."
 - [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]]
 - [[Hessian_Free_Online_Certified_Unlearning]]
 - [[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]]
-- [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning]]
 
 ## Synthetic data and model collapse
 

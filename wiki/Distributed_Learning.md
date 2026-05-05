@@ -12,13 +12,12 @@ Distributed learning is a foundation page for [[AI_and_Networks|AI and networks]
 
 ## Connection to Qiao's work
 
-The project [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters]] sits directly under this page. It studies how data pruning can make decentralized learning more efficient. The same perspective appears indirectly in Qiao's synthetic-data work, where multiple silos must reason about distributional drift without a pooled dataset. Distributed learning therefore provides the infrastructure context for Qiao's current [[AI_and_Networks|AI and networks]] direction.
+This perspective appears in Qiao's synthetic-data work, where multiple silos must reason about distributional drift without a pooled dataset. Distributed learning therefore provides the infrastructure context for Qiao's current [[AI_and_Networks|AI and networks]] direction.
 
 ## See also
 
 - [[AI_and_Networks]]
 - [[Data_Selection]]
 - [[Data_Silos]]
-- [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning]]
 
 [^fed]: McMahan et al., "Communication-Efficient Learning of Deep Networks from Decentralized Data", AISTATS 2017, is a standard reference point for federated learning and communication-efficient decentralized optimization.

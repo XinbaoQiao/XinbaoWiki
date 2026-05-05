@@ -34,6 +34,7 @@ export type WikiFrontmatter = {
   links?: LinkItem[];
   summary?: string;
   aliases?: string[];
+  hidden?: boolean;
   [key: string]: unknown;
 };
 
@@ -152,6 +153,7 @@ export function getSearchIndex(): SearchIndexItem[] {
   return getAllWikiSlugs()
     .map((slug) => getWikiPageBySlug(slug))
     .filter((page): page is WikiPage => Boolean(page))
+    .filter((page) => page.data.hidden !== true)
     .map((page) => {
       const aliases = Array.isArray(page.data.aliases) ? page.data.aliases.filter((alias): alias is string => typeof alias === 'string') : [];
       const frontmatterText = asSearchStrings({

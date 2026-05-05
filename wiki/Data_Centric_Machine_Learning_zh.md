@@ -28,11 +28,10 @@ translation_of: "Data_Centric_Machine_Learning"
 | [[DynFrs|DynFrs：随机森林机器遗忘高效框架]] | ICLR 2025，2025年4月24日至28日，新加坡。 |
 | [[Soft_Weighted_Machine_Unlearning|超越二元擦除：用于公平性与鲁棒性的软加权遗忘]] | AAAI 2026，2026年1月20日至27日，新加坡。 |
 | [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] | ICML 2026，2026年7月6日至11日，首尔。 |
-| [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters：高效去中心化学习的数据剪枝]] | under review。 |
 
 ## 与乔鑫宝工作的关系
 
-在乔鑫宝的论文记录中，数据中心 ML 以多种形式出现。机器遗忘中，数据操作是训练后的删除或重加权；模型坍缩工作中，数据操作是递归训练前对真实或合成样本的选择；去中心化学习中，数据操作是通信前对本地数据的剪枝。共同主题是让学习系统在真实成本约束下识别“哪些数据重要”。
+在乔鑫宝的论文记录中，数据中心 ML 以多种形式出现。机器遗忘中，数据操作是训练后的删除或重加权；模型坍缩工作中，数据操作是递归训练前对真实或合成样本的选择。共同主题是让学习系统在真实成本约束下识别“哪些数据重要”。
 
 ## 参见
 
@@ -41,4 +40,3 @@ translation_of: "Data_Centric_Machine_Learning"
 - [[Synthetic_Data_and_Model_Collapse|合成数据]]
 - [[Machine_Unlearning|机器遗忘]]
 - [[AI_and_Networks|AI 与网络]]
-

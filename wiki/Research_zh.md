@@ -14,7 +14,7 @@ translation_of: "Research"
 
 ## AI 与网络
 
-[[AI_and_Networks|AI 与网络]] 覆盖 AI 与网络通信系统的交叉：用于通信的 AI、服务 AI 的通信、去中心化学习、数据剪枝和协作评估。活跃手稿 [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters]] 属于该方向。
+[[AI_and_Networks|AI 与网络]] 覆盖 AI 与网络通信系统的交叉：用于通信的 AI、服务 AI 的通信、去中心化学习、数据剪枝和协作评估。
 
 ## 机器遗忘
 
@@ -31,4 +31,3 @@ translation_of: "Research"
 ## 几何与分布式学习
 
 [[Wasserstein_Geometry|Wasserstein 几何]] 与 [[Distributed_Learning|分布式学习]] 为协作评估、最优传输代理和去中心化数据访问提供工具。
-

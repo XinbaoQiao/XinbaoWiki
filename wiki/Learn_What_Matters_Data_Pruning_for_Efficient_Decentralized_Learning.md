@@ -11,6 +11,7 @@ venue: "under review"
 year: 2025
 status: "under review"
 publication_type: "Journal manuscript"
+hidden: true
 summary: "Manuscript on data pruning for efficient decentralized learning."
 ---
 

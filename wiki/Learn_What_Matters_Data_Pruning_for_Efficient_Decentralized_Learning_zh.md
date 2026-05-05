@@ -11,6 +11,7 @@ venue: "under review"
 year: 2025
 status: "under review"
 publication_type: "Journal manuscript"
+hidden: true
 summary: "关于高效去中心化学习中数据剪枝的在审手稿。"
 language: "zh"
 translation_of: "Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning"
@@ -29,4 +30,3 @@ translation_of: "Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Lea
 ## 更新工作流
 
 当手稿公开或提供源文件包后，本页应扩展为与已录用论文一致的结构：概述、方法、关键公式、结果和定位。
-

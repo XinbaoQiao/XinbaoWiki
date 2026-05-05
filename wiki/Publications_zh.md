@@ -17,12 +17,6 @@ translation_of: "Publications"
 | **[[Hessian_Free_Online_Certified_Unlearning|无 Hessian 在线认证遗忘]]**。**乔鑫宝**、张萌、Ming Tang、Ermin Wei。研究不显式求逆 Hessian 的认证遗忘，以及基于轨迹统计的高效删除。 | ICLR 2025，2025年4月24日至28日，新加坡。 |
 | **[[DynFrs|DynFrs：随机森林机器遗忘高效框架]]**。Shurong Wang、Zhuoyang Shen、**乔鑫宝**、Tongning Zhang、张萌。研究动态环境中随机森林的精确高效遗忘。 | ICLR 2025，2025年4月24日至28日，新加坡。 |
 
-## 在审与活跃手稿
-
-| 手稿 | 研究专题 |
-|---|---|
-| **[[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters：高效去中心化学习的数据剪枝]]**。**乔鑫宝**、Xunhao Jiang、Zuozhu Liu、Peng Sun、张萌。Under review。 | [[AI_and_Networks|AI 与网络]]、[[Distributed_Learning|分布式学习]]、[[Data_Centric_Machine_Learning|数据中心 ML]] |
-
 ## 专题索引
 
 - [[Synthetic_Data_and_Model_Collapse|合成数据]]
@@ -31,4 +25,3 @@ translation_of: "Publications"
 - [[Data_Centric_Machine_Learning|数据中心 ML]]
 - [[AI_and_Networks|AI 与网络]]
 - [[Wasserstein_Geometry|Wasserstein 几何]]
-

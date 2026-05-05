@@ -8,7 +8,7 @@ summary: "Research projects and project clusters."
 
 ### AI and networks
 
-[[AI_and_Networks]] is the current primary project cluster. It includes data pruning for decentralized learning, communication-aware evaluation, and cross-silo reliability. The active manuscript [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning]] belongs here.
+[[AI_and_Networks]] is the current primary project cluster. It includes data pruning for decentralized learning, communication-aware evaluation, and cross-silo reliability.
 
 ### Machine unlearning
 

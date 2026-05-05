@@ -14,14 +14,12 @@ translation_of: "Distributed_Learning"
 
 ## 与乔鑫宝工作的关系
 
-[[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters]] 直接位于本页主题之下，研究数据剪枝如何提高去中心化学习效率。相同视角也间接出现在合成数据工作中：多个孤岛需要在没有汇总数据集的情况下判断分布漂移。分布式学习因此为乔鑫宝当前 AI 与网络方向提供基础设施背景。
+相同视角出现在合成数据工作中：多个孤岛需要在没有汇总数据集的情况下判断分布漂移。分布式学习因此为乔鑫宝当前 AI 与网络方向提供基础设施背景。
 
 ## 参见
 
 - [[AI_and_Networks|AI 与网络]]
 - [[Data_Selection|数据选择]]
 - [[Data_Silos|数据孤岛]]
-- [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters]]
 
 [^fed]: McMahan 等人的 “Communication-Efficient Learning of Deep Networks from Decentralized Data”（AISTATS 2017）是联邦学习与通信高效去中心化优化的标准参考之一。
-

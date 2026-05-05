@@ -15,12 +15,6 @@ This page is the curated publication index. Each paper has a dedicated wiki page
 | **[[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]]**. **Xinbao Qiao**, Meng Zhang, Ming Tang, Ermin Wei. Certified unlearning without explicit Hessian inversion; efficient removal through recollected statistics. | ICLR 2025, 24-28 April 2025, Singapore. |
 | **[[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]]**. Shurong Wang, Zhuoyang Shen, **Xinbao Qiao**, Tongning Zhang, Meng Zhang. Exact and efficient random-forest unlearning in dynamic environments. | ICLR 2025, 24-28 April 2025, Singapore. |
 
-## Under review and active manuscripts
-
-| Manuscript | Research cluster |
-|---|---|
-| **[[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters: Data Pruning for Efficient Decentralized Learning]]**. **Xinbao Qiao**, Xunhao Jiang, Zuozhu Liu, Peng Sun, Meng Zhang. Under review. | [[AI_and_Networks]], [[Distributed_Learning]], [[Data_Centric_Machine_Learning|Data Centric ML]] |
-
 ## Topic index
 
 - [[Synthetic_Data_and_Model_Collapse|Synthetic Data]]

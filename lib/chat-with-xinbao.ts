@@ -28,7 +28,6 @@ const PRIORITY_SLUGS = [
   'Machine_Unlearning',
   'Synthetic_Data_and_Model_Collapse',
   'Data_Centric_Machine_Learning',
-  'Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning',
   'When_Sample_Selection_Bias_Precipitates_Model_Collapse',
   'Hessian_Free_Online_Certified_Unlearning',
   'Soft_Weighted_Machine_Unlearning',
@@ -62,7 +61,14 @@ function fileSlugs() {
     .readdirSync(WIKI_DIR)
     .filter((file) => file.endsWith('.md'))
     .map((file) => file.replace(/\.md$/, ''))
+    .filter((slug) => !pageIsHidden(slug))
     .sort();
+}
+
+function pageIsHidden(slug: string) {
+  const filePath = path.join(WIKI_DIR, `${slug}.md`);
+  if (!fs.existsSync(filePath)) return false;
+  return matter(fs.readFileSync(filePath, 'utf8')).data.hidden === true;
 }
 
 function languageMatches(slug: string, language: Language) {

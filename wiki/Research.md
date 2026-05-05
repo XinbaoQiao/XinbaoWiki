@@ -12,7 +12,7 @@ The common thread is **data-process reliability under networked constraints**: h
 
 ## AI and networks
 
-[[AI_and_Networks]] covers the intersection of AI with networking and communication systems: AI for communication, communication for AI, decentralized learning, data pruning, and collaborative evaluation. The active manuscript [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning]] belongs to this cluster.
+[[AI_and_Networks]] covers the intersection of AI with networking and communication systems: AI for communication, communication for AI, decentralized learning, data pruning, and collaborative evaluation.
 
 ## Machine unlearning
 

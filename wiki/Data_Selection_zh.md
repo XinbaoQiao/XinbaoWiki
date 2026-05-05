@@ -14,7 +14,7 @@ translation_of: "Data_Selection"
 
 ## 与乔鑫宝工作的关系
 
-数据选择直接出现在 [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters]] 中：问题是哪部分本地数据应被保留以提高去中心化学习效率。它也出现在 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 中：有偏的本地选择会加剧递归合成数据训练的分布退化。在机器遗忘论文中，选择又以删除或重加权的形式出现。
+数据选择出现在 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 中：有偏的本地选择会加剧递归合成数据训练的分布退化。在机器遗忘论文中，选择又以删除或重加权的形式出现。
 
 ## 参见
 
@@ -22,4 +22,3 @@ translation_of: "Data_Selection"
 - [[Data_Centric_Machine_Learning|数据中心 ML]]
 - [[Distributed_Learning|分布式学习]]
 - [[Synthetic_Data|合成数据（概念）]]
-

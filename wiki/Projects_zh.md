@@ -10,7 +10,7 @@ translation_of: "Projects"
 
 ### AI 与网络
 
-[[AI_and_Networks|AI 与网络]] 是当前主要项目簇。它包括去中心化学习的数据剪枝、通信感知评估和跨孤岛可靠性。活跃手稿 [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters]] 属于这里。
+[[AI_and_Networks|AI 与网络]] 是当前主要项目簇。它包括去中心化学习的数据剪枝、通信感知评估和跨孤岛可靠性。
 
 ### 机器遗忘
 
@@ -23,4 +23,3 @@ translation_of: "Projects"
 ### 合成数据
 
 [[Synthetic_Data_and_Model_Collapse|合成数据]] 追问生成数据何时能够安全替代或增强真实数据，以及递归训练何时放大偏差或侵蚀多样性。主论文页是 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]]。
-
