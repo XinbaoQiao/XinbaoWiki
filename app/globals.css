@@ -78,29 +78,18 @@ a.external::after {
 }
 
 .wiki-logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--wiki-text);
   font-family: var(--font-serif);
   font-size: 22px;
   font-weight: 400;
-  line-height: 1;
-}
-
-.wiki-logo:hover {
-  text-decoration: none;
-}
-
-.wiki-logo-mark {
-  display: block;
-  width: 32px;
-  height: 32px;
+  color: var(--wiki-text);
 }
 
 .wiki-logo span {
-  color: var(--wiki-text);
+  color: var(--wiki-text-soft);
+  font-size: 12px;
+  display: block;
   line-height: 1;
+  margin-top: 2px;
 }
 
 .lang-toggle {
@@ -209,7 +198,6 @@ a.external::after {
 
 .wiki-sidebar a {
   color: var(--wiki-link);
-  white-space: nowrap;
 }
 
 .wiki-main {

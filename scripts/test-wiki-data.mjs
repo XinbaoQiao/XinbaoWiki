@@ -79,24 +79,37 @@ assert.match(bio, /title: "GitHub"[\s\S]*https:\/\/github\.com\/XinbaoQiao/, 'co
 const layout = fs.readFileSync(path.join(root, 'app/layout.tsx'), 'utf8');
 const wikiPageTsx = fs.readFileSync(path.join(root, 'app/wiki/[slug]/page.tsx'), 'utf8');
 assertFile('components/LanguageToggle.tsx');
+assertFile('components/ArticleTabs.tsx');
 assertFile('public/xinbaopedia-icon.svg');
 const languageToggle = fs.readFileSync(path.join(root, 'components/LanguageToggle.tsx'), 'utf8');
+const articleTabs = fs.readFileSync(path.join(root, 'components/ArticleTabs.tsx'), 'utf8');
 assert.match(layout, /title: 'Xinbaopedia'/, 'site metadata title is Xinbaopedia');
-assert.match(layout, /icons: \{ icon: '\/xinbaopedia-icon\.svg' \}/, 'site metadata exposes a wiki-style icon');
-assert.match(layout, /<img className="wiki-logo-mark"/, 'topbar renders a wiki-style icon next to the site name');
+assert.match(layout, /icons: \{ icon: pathWithBasePath\('\/xinbaopedia-icon\.svg'\) \}/, 'site metadata exposes a base-path-aware wiki-style icon');
+assert.doesNotMatch(layout, /wiki-logo-mark|<img className=/, 'topbar follows Colarpedia with a text-only wordmark');
+assert.match(layout, /className="wiki-logo"[\s\S]*style=\{\{ textDecoration: 'none' \}\}[\s\S]*Xinbaopedia/, 'topbar wordmark mirrors Colarpedia link styling');
+assert.match(layout, /<ArticleTabs \/>/, 'article tools are isolated like Colarpedia WikiTopBar');
 assert.doesNotMatch(wikiPageTsx, /Qiao Xinbao Academic Wiki/, 'article metadata no longer uses old Academic Wiki suffix');
 assert.match(wikiPageTsx, /\$\{page\.title\} \| Xinbaopedia/, 'article metadata uses Xinbaopedia as the site name');
 assert.match(languageToggle, /usePathname/, 'language toggle is route-aware');
 assert.match(languageToggle, /Qiao_Xinbao_zh/, 'language toggle links to Chinese version');
 assert.match(languageToggle, /Xinbao_Qiao/, 'language toggle links back to English version');
 assert.match(languageToggle, /English/, 'Chinese page can switch back to English');
-assert.match(layout, /XinbaoWiki\/issues\/new/, 'Talk links to GitHub new issue page');
-assert.match(layout, /XinbaoWiki\/commits\/main/, 'History links to GitHub commits');
+assert.match(articleTabs, /usePathname/, 'article tools derive the active page from the current route');
+assert.match(articleTabs, /href="#"/, 'active Article tab uses the Colarpedia inert article link');
+assert.match(articleTabs, /issues\/new\?title=/, 'Talk links directly to GitHub new issue creation');
+assert.match(articleTabs, /Talk: \$\{slug\}/, 'Talk issue title is page-specific');
+assert.match(articleTabs, /edit\/main\/wiki\/\$\{encodeURIComponent\(fileName\)\}/, 'View source edits the current markdown page');
+assert.match(articleTabs, /commits\/main\/wiki\/\$\{encodeURIComponent\(fileName\)\}/, 'History opens the current markdown page commits');
 
 const sidebar = fs.readFileSync(path.join(root, 'components/Sidebar.tsx'), 'utf8');
 assert.doesNotMatch(sidebar, /Notable works/, 'sidebar no longer uses Notable works');
+assert.match(sidebar, /<aside className="wiki-sidebar" aria-label="Navigation">/, 'sidebar matches Colarpedia aside structure and aria label');
+assert.doesNotMatch(sidebar, /function NavSection|className="nav-section"|<section className="nav-section">/, 'sidebar uses flat Colarpedia h4 plus ul blocks');
+assert.match(sidebar, /<h4>Navigation<\/h4>[\s\S]*<h4>Research topics<\/h4>[\s\S]*<h4>Experience<\/h4>[\s\S]*<h4>Education<\/h4>[\s\S]*<h4>Contribute<\/h4>/, 'sidebar section order follows the Colarpedia framework');
 assert.doesNotMatch(sidebar, /Source repository/, 'sidebar contribute links avoid the source repository label');
-assert.match(sidebar, /OpenReview profile/, 'sidebar contribute links to an academic profile');
+assert.doesNotMatch(sidebar, /OpenReview profile/, 'sidebar contribute avoids non-Colarpedia sidebar labels');
+assert.match(sidebar, /LinkedIn[\s\S]*Email the author/, 'sidebar contribute mirrors Colarpedia with LinkedIn before email');
+assert.doesNotMatch(sidebar, /className="external" href="mailto:/, 'email link is not styled as an external link');
 for (const shortLabel of ['CUHK', 'NUSRI-CQ', 'ZJU', 'SDU']) {
   assert.match(sidebar, new RegExp(`'[^']+': '${shortLabel}'`), `sidebar uses short label ${shortLabel}`);
 }
@@ -164,6 +177,11 @@ assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers
 
 const infobox = fs.readFileSync(path.join(root, 'components/Infobox.tsx'), 'utf8');
 const styles = fs.readFileSync(path.join(root, 'app/globals.css'), 'utf8');
+assert.doesNotMatch(styles, /\.wiki-logo-mark|\.wiki-logo:hover/, 'topbar CSS does not keep custom logo-image styling');
+assert.match(styles, /\.wiki-logo \{\n\s+font-family: var\(--font-serif\);\n\s+font-size: 22px;\n\s+font-weight: 400;\n\s+color: var\(--wiki-text\);\n\}/, 'topbar logo CSS matches Colarpedia text wordmark');
+const sidebarLinkStyle = styles.match(/\.wiki-sidebar a \{([\s\S]*?)\}/);
+assert.ok(sidebarLinkStyle, 'sidebar link style block exists');
+assert.doesNotMatch(sidebarLinkStyle[1], /white-space: nowrap;/, 'sidebar link CSS follows Colarpedia without custom nowrap styling');
 assert.match(infobox, /location: 'Conference location'/, 'infobox labels conference location');
 assert.match(infobox, /department: 'Department'/, 'infobox supports institution department rows');
 assert.match(infobox, /dates: 'Dates'/, 'infobox supports institution date rows');

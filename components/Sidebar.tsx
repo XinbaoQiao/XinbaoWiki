@@ -25,35 +25,51 @@ function label(slug: string) {
   return slug.replaceAll('_', ' ');
 }
 
-function NavSection({ title, items }: { title: string; items: string[] }) {
-  return (
-    <section className="nav-section">
-      <h4>{title}</h4>
-      <ul>
-        {items.map((item) => (
-          <li key={item}>
-            <a href={wikiHref(item)}>{item === 'Xinbao_Qiao' ? 'Main page' : label(item)}</a>
-          </li>
-        ))}
-      </ul>
-    </section>
-  );
-}
-
 export function Sidebar() {
   return (
-    <aside className="wiki-sidebar">
-      <NavSection title="Navigation" items={navigation} />
-      <NavSection title="Research topics" items={researchTopics} />
-      <NavSection title="Experience" items={experience} />
-      <NavSection title="Education" items={education} />
-      <section className="nav-section">
-        <h4>Contribute</h4>
-        <ul>
-          <li><a className="external" href="mailto:xinbaoqiao@cuhk.edu.hk">Email the author</a></li>
-          <li><a className="external" href="https://openreview.net/profile?id=~Xinbao_Qiao1" target="_blank" rel="noreferrer">OpenReview profile</a></li>
-        </ul>
-      </section>
+    <aside className="wiki-sidebar" aria-label="Navigation">
+      <h4>Navigation</h4>
+      <ul>
+        {navigation.map((item) => (
+          <li key={item}><a href={wikiHref(item)}>Main page</a></li>
+        ))}
+      </ul>
+
+      <h4>Research topics</h4>
+      <ul>
+        {researchTopics.map((item) => (
+          <li key={item}><a href={wikiHref(item)}>{label(item)}</a></li>
+        ))}
+      </ul>
+
+      <h4>Experience</h4>
+      <ul>
+        {experience.map((item) => (
+          <li key={item}><a href={wikiHref(item)}>{label(item)}</a></li>
+        ))}
+      </ul>
+
+      <h4>Education</h4>
+      <ul>
+        {education.map((item) => (
+          <li key={item}><a href={wikiHref(item)}>{label(item)}</a></li>
+        ))}
+      </ul>
+
+      <h4>Contribute</h4>
+      <ul>
+        <li>
+          <a
+            className="external"
+            href="https://www.linkedin.com/in/xinbaoqiao/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            LinkedIn
+          </a>
+        </li>
+        <li><a href="mailto:xinbaoqiao@cuhk.edu.hk">Email the author</a></li>
+      </ul>
     </aside>
   );
 }

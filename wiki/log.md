@@ -6,6 +6,7 @@ summary: "Append-only maintenance log for the wiki."
 
 ## 2026-05-05
 
+- Matched the Colarpedia source framework for the visible chrome: text-only top wordmark, page-specific Article/Talk/View source/History tabs, and a flat `h4`/`ul` sidebar with LinkedIn and Email the author under Contribute.
 - Renamed site metadata to Xinbaopedia, added a wiki-style site icon, shortened left-sidebar institution labels, and aligned the biography Born row with the Colarpedia infobox pattern.
 - Standardized the four Research topics pages with Introduction, Role in this wiki, Publications, Connection to Qiao's work, and See also sections; publication tables now include conference timing, arXiv timing, or ongoing status.
 - Expanded institution pages for [[The_Chinese_University_of_Hong_Kong]], [[Zhejiang_University]], [[Shandong_University]], and [[NUSRI_CQ]] with logos, program context, Qiao-specific connections, and explanatory footnotes.
