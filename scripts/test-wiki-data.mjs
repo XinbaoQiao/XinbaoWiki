@@ -45,7 +45,7 @@ assert.match(affiliation, /Department of Information Engineering/, 'affiliation 
 assert.doesNotMatch(affiliation, /NUSRI/, 'affiliation excludes past institutions');
 assert.doesNotMatch(bio, /^native_name:/m, 'English infobox follows Colarpedia by folding native name into Born');
 assert.doesNotMatch(bio, /^birth_place:/m, 'birthplace is kept in prose rather than the infobox');
-assert.match(bio, /born: "Qiao Xinbao \(乔鑫宝\) 30 September 2000 \(age 25\) Xishuangbanna, Yunnan, China"/, 'English Born row includes name, native name, date, and birthplace');
+assert.match(bio, /born: \|\n\s+Qiao Xinbao \(乔鑫宝\)\n\s+30 September 2000 \(age 25\)\n\s+Xishuangbanna, Yunnan, China/, 'English Born row is a multiline Colarpedia-style value');
 assert.match(bio, /occupation:\n\s+- "PhD candidate"/, 'occupation uses PhD candidate');
 assert.match(bio, /image_caption: "Photograph taken in Singapore"/, 'English portrait caption identifies Singapore');
 const educationBlock = frontmatterSlice(bio, 'education:', 'links:');
@@ -60,7 +60,7 @@ assert.match(zhAffiliation, /信息工程系/, 'Chinese affiliation includes cur
 assert.doesNotMatch(zhAffiliation, /新加坡国立大学重庆研究院/, 'Chinese affiliation excludes past institutions');
 assert.doesNotMatch(zhBio, /^native_name:/m, 'Chinese infobox follows Colarpedia by folding English name into Born');
 assert.doesNotMatch(zhBio, /^birth_place:/m, 'Chinese birthplace is kept in prose rather than the infobox');
-assert.match(zhBio, /born: "乔鑫宝 \(Xinbao Qiao\) 2000年9月30日 \(25岁\) 中国云南西双版纳"/, 'Chinese Born row includes name, English name, date, and birthplace');
+assert.match(zhBio, /born: \|\n\s+乔鑫宝 \(Xinbao Qiao\)\n\s+2000年9月30日 \(25岁\)\n\s+中国云南西双版纳/, 'Chinese Born row is a multiline Colarpedia-style value');
 assert.match(zhBio, /image_caption: "摄于新加坡"/, 'Chinese portrait caption identifies Singapore');
 const zhEducationBlock = frontmatterSlice(zhBio, 'education:', 'links:');
 assert.match(zhEducationBlock, /label: "香港中文大学"[\s\S]*label: "浙江大学"[\s\S]*label: "山东大学"/, 'Chinese education is reverse chronological');
@@ -158,6 +158,7 @@ for (const page of acceptedPublicationPages) {
   const body = read(page);
   assert.doesNotMatch(fm, /^categories:/m, `${page} publication infobox omits categories`);
   assert.match(fm, /^location:/m, `${page} publication infobox includes conference location`);
+  assert.doesNotMatch(fm, /owner-provided|author notification|published on OpenReview|presentation listed|arXiv submitted/i, `${page} publication status row stays concise`);
   for (const section of ['## Overview', '## Method', '## Key formula', '## Results', '## Placement']) {
     assert.match(body, new RegExp(`^${section}$`, 'm'), `${page} has ${section}`);
   }
@@ -188,10 +189,11 @@ assert.match(infobox, /dates: 'Dates'/, 'infobox supports institution date rows'
 assert.match(infobox, /place: 'Location'/, 'infobox supports institution location rows');
 assert.doesNotMatch(infobox, /categories: 'Categories'/, 'infobox does not label categories');
 assert.doesNotMatch(infobox, /'categories'/, 'infobox does not render categories rows');
-const infoboxListStyle = styles.match(/\.infobox-list \{([\s\S]*?)\}/);
-assert.ok(infoboxListStyle, 'infobox list style block exists');
-assert.match(infoboxListStyle[1], /list-style: none;/, 'infobox lists hide bullets like Colarpedia rows');
-assert.match(infoboxListStyle[1], /padding-left: 0;/, 'infobox lists remove bullet indentation');
+assert.doesNotMatch(infobox, /<ul className="infobox-list">/, 'infobox avoids nested list indentation in standard rows');
+assert.match(infobox, /className="infobox-lines"/, 'infobox renders multiline values as aligned line groups');
+assert.match(infobox, /className="infobox-line"/, 'infobox renders each row value line without list indentation');
+assert.doesNotMatch(styles, /\.infobox-list/, 'infobox CSS no longer keeps list-style row formatting');
+assert.match(styles, /\.infobox-lines \{[\s\S]*display: block;[\s\S]*\}/, 'infobox line groups align with ordinary scalar rows');
 
 for (const page of [
   'The_Chinese_University_of_Hong_Kong.md',
@@ -264,13 +266,34 @@ for (const page of researchTopicPages) {
   assert.doesNotMatch(body, /Central paper|Central publication/i, `${page} avoids inconsistent central-paper phrasing`);
 }
 
-assert.match(read('AI_and_Networks.md'), /TNNLS under review; ongoing journal manuscript/, 'AI and Networks lists ongoing status for the decentralized-learning manuscript');
-assert.match(read('AI_and_Networks.md'), /ICML 2026, 6-11 July 2026, Seoul; accepted 30 April 2026/, 'AI and Networks lists ICML conference timing');
-assert.match(read('Machine_Unlearning.md'), /ICLR 2025, 24-28 April 2025, Singapore; OpenReview published 22 January 2025/, 'Machine Unlearning lists ICLR conference timing');
-assert.match(read('Machine_Unlearning.md'), /AAAI 2026, 20-27 January 2026, Singapore; accepted main track/, 'Machine Unlearning lists AAAI conference timing');
-assert.match(read('Synthetic_Data_and_Model_Collapse.md'), /ICML 2026, 6-11 July 2026, Seoul; accepted 30 April 2026/, 'Synthetic Data lists ICML conference timing');
-assert.match(read('Data_Centric_Machine_Learning.md'), /arXiv v1 24 May 2025/, 'Data Centric ML records arXiv timing when useful');
-assert.match(read('Data_Centric_Machine_Learning.md'), /ongoing journal manuscript/, 'Data Centric ML records ongoing status when there is no conference acceptance');
+assert.match(read('AI_and_Networks.md'), /\| \[\[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning\|Learn What Matters: Data Pruning for Efficient Decentralized Learning\]\] \| under review\. \|/, 'AI and Networks shortens under-review status');
+assert.match(read('AI_and_Networks.md'), /\| \[\[When_Sample_Selection_Bias_Precipitates_Model_Collapse\|When Sample Selection Bias Precipitates Model Collapse\]\] \| ICML 2026, 6-11 July 2026, Seoul\. \|/, 'AI and Networks lists only conference, date, and place');
+assert.match(read('Machine_Unlearning.md'), /ICLR 2025, 24-28 April 2025, Singapore\./, 'Machine Unlearning lists only ICLR conference timing');
+assert.match(read('Machine_Unlearning.md'), /AAAI 2026, 20-27 January 2026, Singapore\./, 'Machine Unlearning lists only AAAI conference timing');
+assert.match(read('Synthetic_Data_and_Model_Collapse.md'), /ICML 2026, 6-11 July 2026, Seoul\./, 'Synthetic Data lists only ICML conference timing');
+assert.match(read('Data_Centric_Machine_Learning.md'), /\| \[\[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning\|Learn What Matters: Data Pruning for Efficient Decentralized Learning\]\] \| under review\. \|/, 'Data Centric ML shortens under-review status');
+
+function sectionBetween(body, start, end) {
+  const startIndex = body.indexOf(start);
+  assert.ok(startIndex >= 0, `body includes ${start}`);
+  const endIndex = body.indexOf(end, startIndex + start.length);
+  assert.ok(endIndex > startIndex, `body includes ${end} after ${start}`);
+  return body.slice(startIndex, endIndex);
+}
+
+const verboseStatusPattern = /owner-provided|author-notification|OpenReview published|accepted main track|presentation listed|ongoing journal manuscript|according to|listed in the CV|arXiv v1/i;
+for (const page of researchTopicPages) {
+  const publicationsBlock = sectionBetween(read(page), '## Publications', "## Connection to Qiao's work");
+  assert.doesNotMatch(publicationsBlock, verboseStatusPattern, `${page} keeps Venue/status cells concise`);
+}
+const publicationIndexBlock = sectionBetween(read('Publications.md'), '## Peer-reviewed and accepted papers', '## Under review and active manuscripts');
+assert.doesNotMatch(publicationIndexBlock, verboseStatusPattern, 'publication index keeps venue/status cells concise');
+
+for (const page of ['AI_and_Networks.md', 'Xinbao_Qiao.md', 'Qiao_Xinbao_zh.md', 'The_Chinese_University_of_Hong_Kong.md']) {
+  assert.match(read(page), /https:\/\/www\.ie\.cuhk\.edu\.hk\/about-the-department\//, `${page} cites the CUHK IE source URL for information-engineering framing`);
+}
+assert.match(read('The_Chinese_University_of_Hong_Kong.md'), /https:\/\/www\.ie\.cuhk\.edu\.hk\/programmes\/mphil-phd-in-information-engineering\//, 'CUHK page cites the IE MPhil-PhD overview URL');
+assert.match(read('The_Chinese_University_of_Hong_Kong.md'), /https:\/\/www\.cuhk\.edu\.hk\/english\/aboutus\/university-intro\.html/, 'CUHK page cites the official university introduction URL');
 
 const allMarkdown = fs.readdirSync(wikiDir)
   .filter((file) => file.endsWith('.md'))

@@ -7,9 +7,9 @@ authors:
   - "Zuozhu Liu"
   - "Peng Sun"
   - "Meng Zhang"
-venue: "TNNLS, under review"
+venue: "under review"
 year: 2025
-status: "under review; CV-provided"
+status: "under review"
 publication_type: "Journal manuscript"
 summary: "Manuscript on data pruning for efficient decentralized learning."
 ---

@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { Fragment, type ReactNode } from 'react';
 import type { LinkItem, WikiFrontmatter } from '@/lib/wiki';
 import { pathWithBasePath } from '@/lib/wiki';
 
@@ -74,17 +74,28 @@ function scalar(value: string | number | boolean) {
   return text;
 }
 
+function lineGroup(lines: ReactNode[]) {
+  return (
+    <span className="infobox-lines">
+      {lines.map((line, index) => (
+        <span className="infobox-line" key={index}>{line}</span>
+      ))}
+    </span>
+  );
+}
+
+function renderString(value: string) {
+  const lines = value.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
+  if (lines.length > 1) return lineGroup(lines.map((line) => scalar(line)));
+  return scalar(value);
+}
+
 function render(value: unknown): ReactNode {
   if (empty(value)) return null;
-  if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') return scalar(value);
+  if (typeof value === 'string') return renderString(value);
+  if (typeof value === 'number' || typeof value === 'boolean') return scalar(value);
   if (Array.isArray(value)) {
-    return (
-      <ul className="infobox-list">
-        {value.map((item, index) => (
-          <li key={index}>{render(item)}</li>
-        ))}
-      </ul>
-    );
+    return lineGroup(value.map((item, index) => <Fragment key={index}>{render(item)}</Fragment>));
   }
   if (isLink(value)) {
     return (

@@ -13,7 +13,7 @@ authors:
 venue: "ICML 2026"
 location: "COEX Convention & Exhibition Center, Seoul, South Korea"
 year: 2026
-status: "accepted; owner-provided, with ICML author notification on 2026-04-30"
+status: "accepted"
 publication_type: "Conference paper"
 links:
   - label: "ICML 2026 conference"

@@ -9,7 +9,7 @@ authors:
 venue: "ICLR 2025"
 location: "Singapore EXPO, Singapore"
 year: 2025
-status: "published on OpenReview on 2025-01-22; ICLR 2025 poster"
+status: "ICLR 2025 poster"
 publication_type: "Conference paper"
 links:
   - label: "OpenReview"

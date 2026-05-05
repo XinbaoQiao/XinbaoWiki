@@ -1,6 +1,9 @@
 ---
 name: "乔鑫宝"
-born: "乔鑫宝 (Xinbao Qiao) 2000年9月30日 (25岁) 中国云南西双版纳"
+born: |
+  乔鑫宝 (Xinbao Qiao)
+  2000年9月30日 (25岁)
+  中国云南西双版纳
 nationality: "中国"
 residence: "香港"
 image: "/images/Portrait.png"
@@ -99,7 +102,7 @@ ICML 2026 论文[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sa
 
 [^research-scope-zh]: 侧栏中的研究主题有意使用短标签：AI and Networks、Machine Unlearning、Synthetic Data、Data Centric ML。较长的定义和边界放在各自 topic 页面中展开，以保持人物正文的阅读速度。
 
-[^cuhk-ie-zh]: 香港中文大学信息工程系的官方介绍覆盖信息生成、传输、存储、处理及其现实应用；香港中文大学研究院也将 Information Engineering 列为工程学院研究型硕博项目。
+[^cuhk-ie-zh]: 香港中文大学信息工程系在[官方部门介绍](https://www.ie.cuhk.edu.hk/about-the-department/)中将研究范围概括为现实应用中的信息生成、通信、存储与处理；香港中文大学研究院也在工程学院项目列表中列出 [MPhil-PhD in Information Engineering](https://www.gs.cuhk.edu.hk/programmes/engineering)。
 
 [^zju-program-zh]: 浙江大学校史可追溯至1897年的求是书院，总部位于杭州；本 wiki 的浙江大学条目记录其与乔鑫宝硕士阶段数据中心机器学习工作的关系。
 

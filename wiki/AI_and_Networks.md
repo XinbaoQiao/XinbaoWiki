@@ -18,8 +18,8 @@ This page is the top-level hub for research in which model performance is shaped
 
 | Paper | Venue/status |
 | --- | --- |
-| [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters: Data Pruning for Efficient Decentralized Learning]] | TNNLS under review; ongoing journal manuscript listed in the CV. |
-| [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] | ICML 2026, 6-11 July 2026, Seoul; accepted 30 April 2026 according to owner-provided records and the ICML author-notification date. |
+| [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters: Data Pruning for Efficient Decentralized Learning]] | under review. |
+| [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] | ICML 2026, 6-11 July 2026, Seoul. |
 
 ## Connection to Qiao's work
 
@@ -33,6 +33,6 @@ The clearest project in this area is [[Learn_What_Matters_Data_Pruning_for_Effic
 - [[Data_Centric_Machine_Learning|Data Centric ML]]
 - [[The_Chinese_University_of_Hong_Kong]]
 
-[^scope]: The phrasing follows the Information Engineering framing used by CUHK, where generation, transmission, storage, and processing of information are treated together rather than as isolated subfields.
+[^scope]: The phrasing follows CUHK IE's [official department description](https://www.ie.cuhk.edu.hk/about-the-department/), which frames information engineering around information generation, communication, storage, and processing in real-world applications.
 
-[^icml-2026]: ICML lists its 2026 meeting for 6-11 July 2026 at COEX in Seoul, with author notification on 30 April 2026; the date is used here to separate accepted-conference timing from ongoing manuscript status.
+[^icml-2026]: The [ICML 2026 conference page](https://icml.cc/Conferences/2026) lists the meeting for 6-11 July 2026 at COEX in Seoul, South Korea.

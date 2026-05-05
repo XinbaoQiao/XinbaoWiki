@@ -1,6 +1,9 @@
 ---
 name: "Xinbao Qiao"
-born: "Qiao Xinbao (乔鑫宝) 30 September 2000 (age 25) Xishuangbanna, Yunnan, China"
+born: |
+  Qiao Xinbao (乔鑫宝)
+  30 September 2000 (age 25)
+  Xishuangbanna, Yunnan, China
 nationality: "Chinese"
 residence: "Hong Kong"
 image: "/images/Portrait.png"
@@ -101,7 +104,7 @@ The ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|Whe
 
 [^research-scope]: The short topic labels in the sidebar intentionally use compact names: "AI and Networks", "Machine Unlearning", "Synthetic Data", and "Data Centric ML". Longer phrases are kept inside topic pages where they can be defined without slowing the biography lead.
 
-[^cuhk-ie]: CUHK's Department of Information Engineering describes its scope as information generation, transmission, storage, processing, and real-world applications; the CUHK Graduate School lists an MPhil-PhD in Information Engineering within Engineering.
+[^cuhk-ie]: CUHK's Department of Information Engineering describes its scope as information generation, communication, storage, and processing in real-world applications on its [official department page](https://www.ie.cuhk.edu.hk/about-the-department/); the CUHK Graduate School also lists [MPhil-PhD in Information Engineering](https://www.gs.cuhk.edu.hk/programmes/engineering) within Engineering.
 
 [^zju-program]: Zhejiang University traces its origin to Qiushi Academy in 1897 and is headquartered in Hangzhou. In this wiki, the ZJU page records Qiao's master's period and its relation to his data-centric machine-learning work.
 

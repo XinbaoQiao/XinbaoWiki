@@ -6,6 +6,7 @@ summary: "Append-only maintenance log for the wiki."
 
 ## 2026-05-05
 
+- Shortened Venue/status cells to status-only or conference/date/place format, added source URLs to CUHK-related footnotes, and rendered biography infobox rows as aligned multiline values rather than nested lists.
 - Matched the Colarpedia source framework for the visible chrome: text-only top wordmark, page-specific Article/Talk/View source/History tabs, and a flat `h4`/`ul` sidebar with LinkedIn and Email the author under Contribute.
 - Renamed site metadata to Xinbaopedia, added a wiki-style site icon, shortened left-sidebar institution labels, and aligned the biography Born row with the Colarpedia infobox pattern.
 - Standardized the four Research topics pages with Introduction, Role in this wiki, Publications, Connection to Qiao's work, and See also sections; publication tables now include conference timing, arXiv timing, or ongoing status.

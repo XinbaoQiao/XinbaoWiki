@@ -9,7 +9,7 @@ authors:
 venue: "AAAI 2026"
 location: "Singapore EXPO, Singapore"
 year: 2026
-status: "accepted; AAAI 2026 presentation listed for 2026-01-25; arXiv submitted on 2025-05-24"
+status: "accepted"
 publication_type: "Conference paper"
 links:
   - label: "arXiv"

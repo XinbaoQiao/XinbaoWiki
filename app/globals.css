@@ -301,13 +301,17 @@ a.external::after {
   text-transform: uppercase;
 }
 
-.infobox-list {
-  margin: 0;
-  padding-left: 0;
-  list-style: none;
+.infobox-lines {
+  display: block;
 }
 
-.infobox-list li + li {
+.infobox-line {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.infobox-line + .infobox-line {
   margin-top: 3px;
 }
 

@@ -20,7 +20,7 @@ This page keeps the biography readable by giving the long technical background i
 
 | Paper | Venue/status |
 | --- | --- |
-| [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] | ICML 2026, 6-11 July 2026, Seoul; accepted 30 April 2026 according to owner-provided records and the ICML author-notification date. |
+| [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] | ICML 2026, 6-11 July 2026, Seoul. |
 
 ## Connection to Qiao's work
 

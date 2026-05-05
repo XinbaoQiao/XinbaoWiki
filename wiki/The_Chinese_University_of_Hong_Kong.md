@@ -42,8 +42,8 @@ Qiao's CUHK period begins after a master's phase focused on [[Data_Centric_Machi
 - [[Experience]]
 - [[Zhejiang_University]]
 
-[^cuhk-intro]: CUHK's official introduction describes the university as founded in 1963 and as a comprehensive research university with a college system, bilingualism, and multiculturalism.
+[^cuhk-intro]: CUHK's [official university introduction](https://www.cuhk.edu.hk/english/aboutus/university-intro.html) describes the university as founded in 1963 and as a comprehensive research university with a college system, bilingualism, and multiculturalism.
 
-[^cuhk-grad]: The CUHK Graduate School page for Engineering lists the MPhil-PhD in Information Engineering and describes the PhD stream as requiring a substantial research project, candidacy examination, and approved graduate coursework.
+[^cuhk-grad]: The CUHK IE [MPhil-PhD in Information Engineering overview](https://www.ie.cuhk.edu.hk/programmes/mphil-phd-in-information-engineering/) describes the programme's research areas and PhD-stream requirements; the CUHK Graduate School also lists [MPhil-PhD in Information Engineering](https://www.gs.cuhk.edu.hk/programmes/engineering) under Engineering.
 
-[^cuhk-ie]: The Department of Information Engineering website states that the department was established in 1989 and focuses on information generation, transmission, storage, processing, and applications.
+[^cuhk-ie]: The Department of Information Engineering's [official department page](https://www.ie.cuhk.edu.hk/about-the-department/) states that the department was established in 1989 and focuses on information generation, communication, storage, processing, and applications.
