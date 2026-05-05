@@ -14,7 +14,7 @@ publication_type: "Journal manuscript"
 summary: "Manuscript on data pruning for efficient decentralized learning."
 ---
 
-**Learn What Matters: Data Pruning for Efficient Decentralized Learning** is an active manuscript listed in Qiao Xinbao's CV.
+**Learn What Matters: Data Pruning for Efficient Decentralized Learning** is an active manuscript by **Xinbao Qiao** and collaborators, listed in Qiao Xinbao's CV.
 
 ## Status
 

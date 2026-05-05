@@ -1,9 +1,8 @@
 ---
 name: "Xinbao Qiao"
 born: |
-  Qiao Xinbao (乔鑫宝)
-  30 September 2000 (age 25)
-  Xishuangbanna, Yunnan, China
+  September 2000 (age 25)
+  Xishuangbanna, Yunnan
 nationality: "Chinese"
 residence: "Hong Kong"
 image: "/images/Portrait.png"
@@ -35,7 +34,7 @@ links:
 summary: "PhD candidate in Information Engineering at The Chinese University of Hong Kong; researcher in AI and networks, machine unlearning, and synthetic-data reliability"
 ---
 
-**Xinbao Qiao** (Chinese: **乔鑫宝**; born 30 September 2000 in Xishuangbanna, Yunnan) is a Chinese PhD candidate in the Department of Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]].[^xinbao-name] His current research is centered on [[AI_and_Networks|AI and networks]], with related work in [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic data]], and [[Data_Centric_Machine_Learning|data centric ML]].
+**Xinbao Qiao** (Chinese: **乔鑫宝**; born September 2000 in Xishuangbanna, Yunnan) is a Chinese PhD candidate in the Department of Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]].[^xinbao-name] His current research is centered on [[AI_and_Networks|AI and networks]], with related work in [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic data]], and [[Data_Centric_Machine_Learning|data centric ML]].
 
 Before his doctoral studies, Qiao received a Master of Science in Artificial Intelligence from [[Zhejiang_University|Zhejiang University]] and a Bachelor of Engineering in Communication Engineering from [[Shandong_University|Shandong University]]. His [[Publications]] include accepted or published papers at ICML, AAAI, and ICLR.
 

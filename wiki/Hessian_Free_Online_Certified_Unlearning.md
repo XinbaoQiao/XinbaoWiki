@@ -21,7 +21,7 @@ links:
 summary: "ICLR 2025 paper on efficient Hessian-free certified machine unlearning."
 ---
 
-**Hessian-Free Online Certified Unlearning** is an ICLR 2025 conference paper by [[Xinbao_Qiao|Xinbao Qiao]], Meng Zhang, Ming Tang, and Ermin Wei. OpenReview lists the paper as an ICLR 2025 poster, published on 22 January 2025.
+**Hessian-Free Online Certified Unlearning** is an ICLR 2025 conference paper by **[[Xinbao_Qiao|Xinbao Qiao]]**, Meng Zhang, Ming Tang, and Ermin Wei. OpenReview lists the paper as an ICLR 2025 poster, published on 22 January 2025.
 
 ## Overview
 

@@ -22,7 +22,7 @@ links:
 summary: "ICLR 2025 paper on efficient machine unlearning for random forests."
 ---
 
-**DynFrs: An Efficient Framework for Machine Unlearning in Random Forest** is an ICLR 2025 conference paper by Shurong Wang, Zhuoyang Shen, [[Xinbao_Qiao|Xinbao Qiao]], Tongning Zhang, and Meng Zhang. OpenReview lists the paper as an ICLR 2025 poster, published on 22 January 2025.
+**DynFrs: An Efficient Framework for Machine Unlearning in Random Forest** is an ICLR 2025 conference paper by Shurong Wang, Zhuoyang Shen, **[[Xinbao_Qiao|Xinbao Qiao]]**, Tongning Zhang, and Meng Zhang. OpenReview lists the paper as an ICLR 2025 poster, published on 22 January 2025.
 
 ## Overview
 

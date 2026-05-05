@@ -21,7 +21,7 @@ links:
 summary: "AAAI 2026 paper on soft-weighted unlearning for fairness and robustness correction."
 ---
 
-**Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness** is an AAAI 2026 conference paper by [[Xinbao_Qiao|Xinbao Qiao]], Ningning Ding, Yushi Cheng, and Meng Zhang. The arXiv v1 predates the final AAAI presentation title, which is used as the canonical title on this wiki.
+**Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness** is an AAAI 2026 conference paper by **[[Xinbao_Qiao|Xinbao Qiao]]**, Ningning Ding, Yushi Cheng, and Meng Zhang. The arXiv v1 predates the final AAAI presentation title, which is used as the canonical title on this wiki.
 
 ## Overview
 

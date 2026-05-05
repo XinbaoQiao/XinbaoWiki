@@ -21,7 +21,7 @@ links:
 summary: "ICML 2026 paper on local sample-selection bias, model collapse, and collaborative Wasserstein-geometry proxies."
 ---
 
-**When Sample Selection Bias Precipitates Model Collapse** is an ICML 2026 conference paper by [[Xinbao_Qiao|Xinbao Qiao]], Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, and Yan Pang. The page is based on an owner-provided accepted manuscript package.
+**When Sample Selection Bias Precipitates Model Collapse** is an ICML 2026 conference paper by **[[Xinbao_Qiao|Xinbao Qiao]]**, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, and Yan Pang. The page is based on an owner-provided accepted manuscript package.
 
 ## Overview
 

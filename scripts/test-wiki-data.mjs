@@ -45,7 +45,8 @@ assert.match(affiliation, /Department of Information Engineering/, 'affiliation 
 assert.doesNotMatch(affiliation, /NUSRI/, 'affiliation excludes past institutions');
 assert.doesNotMatch(bio, /^native_name:/m, 'English infobox follows Colarpedia by folding native name into Born');
 assert.doesNotMatch(bio, /^birth_place:/m, 'birthplace is kept in prose rather than the infobox');
-assert.match(bio, /born: \|\n\s+Qiao Xinbao \(乔鑫宝\)\n\s+30 September 2000 \(age 25\)\n\s+Xishuangbanna, Yunnan, China/, 'English Born row is a multiline Colarpedia-style value');
+assert.match(bio, /born: \|\n\s+September 2000 \(age 25\)\n\s+Xishuangbanna, Yunnan\n/, 'English Born row uses the requested month-and-place format');
+assert.doesNotMatch(bio, /30 September 2000|Xishuangbanna, Yunnan, China/, 'English Born row omits day and country');
 assert.match(bio, /occupation:\n\s+- "PhD candidate"/, 'occupation uses PhD candidate');
 assert.match(bio, /image_caption: "Photograph taken in Singapore"/, 'English portrait caption identifies Singapore');
 const educationBlock = frontmatterSlice(bio, 'education:', 'links:');
@@ -68,7 +69,8 @@ assert.match(zhEducationBlock, /label: "山东大学"\n\s+url: "\/wiki\/Shandong
 
 assert.match(home, /\[\[Publications\]\]/, 'home article links to Publications');
 assert.match(home, /\[\[Research\]\]/, 'home article links to Research');
-assert.match(home, /30 September 2000/, 'home article includes birth date');
+assert.match(home, /born September 2000 in Xishuangbanna, Yunnan/, 'home article uses month-level birth date');
+assert.doesNotMatch(home, /30 September 2000/, 'home article omits exact birth day');
 assert.match(zhHome, /2000年9月30日/, 'Chinese page includes birth date');
 assert.match(read('CV.md'), /\/files\/XinbaoQiao_CV\.pdf/, 'CV page links to local PDF');
 
@@ -125,6 +127,8 @@ assert.doesNotMatch(publications, /raw\.githubusercontent\.com/, 'publication in
 assert.doesNotMatch(publications, /!\[/, 'publication index is text-only');
 assert.doesNotMatch(publications, /Soft-Weighted Machine Unlearning/, 'publication index uses the final AAAI title');
 assert.match(publications, /DynFrs: An Efficient Framework for Machine Unlearning in Random Forest/, 'publication index uses full DynFrs title');
+assert.doesNotMatch(publications, /(?<!\*)Xinbao Qiao(?!\*)/, 'publication index bolds Xinbao Qiao in author lists');
+assert.equal((publications.match(/\*\*Xinbao Qiao\*\*/g) || []).length, 5, 'publication index bolds Xinbao Qiao in every listed paper');
 
 for (const page of [
   'Xinbao_Qiao.md',
@@ -169,6 +173,7 @@ const acceptedPublicationPages = [
 for (const page of acceptedPublicationPages) {
   const fm = frontmatter(page);
   const body = read(page);
+  assert.match(body, /\*\*\[\[Xinbao_Qiao\|Xinbao Qiao\]\]\*\*/, `${page} bolds Xinbao Qiao in the article author line`);
   assert.doesNotMatch(fm, /^categories:/m, `${page} publication infobox omits categories`);
   assert.match(fm, /^location:/m, `${page} publication infobox includes conference location`);
   assert.doesNotMatch(fm, /owner-provided|author notification|published on OpenReview|presentation listed|arXiv submitted/i, `${page} publication status row stays concise`);
@@ -177,6 +182,8 @@ for (const page of acceptedPublicationPages) {
   }
   assert.match(body, /```text\n[\s\S]*?```/, `${page} includes a readable formula block`);
 }
+
+assert.match(read('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning.md'), /\*\*Xinbao Qiao\*\*/, 'under-review publication page bolds Xinbao Qiao in the author context');
 
 const learnPageFm = frontmatter('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning.md');
 assert.doesNotMatch(learnPageFm, /^categories:/m, 'under-review manuscript infobox omits categories');
