@@ -5,7 +5,11 @@ import { Sidebar } from '@/components/Sidebar';
 import { pathWithBasePath } from '@/lib/wiki';
 import './globals.css';
 
-export const metadata: Metadata = { title: 'Qiao Xinbao | Academic Wiki', description: 'Personal academic wiki homepage for Qiao Xinbao / Xinbao Qiao.' };
+export const metadata: Metadata = {
+  title: 'Xinbaopedia',
+  description: 'Personal academic wiki homepage for Qiao Xinbao / Xinbao Qiao.',
+  icons: { icon: '/xinbaopedia-icon.svg' }
+};
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   const source = 'https://github.com/XinbaoQiao/XinbaoWiki/tree/main/wiki';
@@ -17,8 +21,8 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <header className="wiki-topbar">
           <div className="wiki-topbar-inner">
             <a className="wiki-logo" href={pathWithBasePath('/')}>
-              Xinbaopedia
-              <span>academic wiki</span>
+              <img className="wiki-logo-mark" src={pathWithBasePath('/xinbaopedia-icon.svg')} alt="" />
+              <span>Xinbaopedia</span>
             </a>
             <LanguageToggle />
             <form className="wiki-search" role="search">

@@ -43,7 +43,9 @@ const affiliation = frontmatterSlice(bio, 'affiliation:', 'education:');
 assert.match(affiliation, /The Chinese University of Hong Kong/, 'affiliation lists current institution');
 assert.match(affiliation, /Department of Information Engineering/, 'affiliation includes current department');
 assert.doesNotMatch(affiliation, /NUSRI/, 'affiliation excludes past institutions');
+assert.doesNotMatch(bio, /^native_name:/m, 'English infobox follows Colarpedia by folding native name into Born');
 assert.doesNotMatch(bio, /^birth_place:/m, 'birthplace is kept in prose rather than the infobox');
+assert.match(bio, /born: "Qiao Xinbao \(乔鑫宝\) 30 September 2000 \(age 25\) Xishuangbanna, Yunnan, China"/, 'English Born row includes name, native name, date, and birthplace');
 assert.match(bio, /occupation:\n\s+- "PhD candidate"/, 'occupation uses PhD candidate');
 assert.match(bio, /image_caption: "Photograph taken in Singapore"/, 'English portrait caption identifies Singapore');
 const educationBlock = frontmatterSlice(bio, 'education:', 'links:');
@@ -56,7 +58,9 @@ const zhAffiliation = frontmatterSlice(zhBio, 'affiliation:', 'education:');
 assert.match(zhAffiliation, /香港中文大学/, 'Chinese affiliation lists current institution');
 assert.match(zhAffiliation, /信息工程系/, 'Chinese affiliation includes current department');
 assert.doesNotMatch(zhAffiliation, /新加坡国立大学重庆研究院/, 'Chinese affiliation excludes past institutions');
+assert.doesNotMatch(zhBio, /^native_name:/m, 'Chinese infobox follows Colarpedia by folding English name into Born');
 assert.doesNotMatch(zhBio, /^birth_place:/m, 'Chinese birthplace is kept in prose rather than the infobox');
+assert.match(zhBio, /born: "乔鑫宝 \(Xinbao Qiao\) 2000年9月30日 \(25岁\) 中国云南西双版纳"/, 'Chinese Born row includes name, English name, date, and birthplace');
 assert.match(zhBio, /image_caption: "摄于新加坡"/, 'Chinese portrait caption identifies Singapore');
 const zhEducationBlock = frontmatterSlice(zhBio, 'education:', 'links:');
 assert.match(zhEducationBlock, /label: "香港中文大学"[\s\S]*label: "浙江大学"[\s\S]*label: "山东大学"/, 'Chinese education is reverse chronological');
@@ -73,8 +77,15 @@ assert.equal(contactCount, 1, 'home infobox contact exposes one email address');
 assert.match(bio, /title: "GitHub"[\s\S]*https:\/\/github\.com\/XinbaoQiao/, 'contact includes GitHub');
 
 const layout = fs.readFileSync(path.join(root, 'app/layout.tsx'), 'utf8');
+const wikiPageTsx = fs.readFileSync(path.join(root, 'app/wiki/[slug]/page.tsx'), 'utf8');
 assertFile('components/LanguageToggle.tsx');
+assertFile('public/xinbaopedia-icon.svg');
 const languageToggle = fs.readFileSync(path.join(root, 'components/LanguageToggle.tsx'), 'utf8');
+assert.match(layout, /title: 'Xinbaopedia'/, 'site metadata title is Xinbaopedia');
+assert.match(layout, /icons: \{ icon: '\/xinbaopedia-icon\.svg' \}/, 'site metadata exposes a wiki-style icon');
+assert.match(layout, /<img className="wiki-logo-mark"/, 'topbar renders a wiki-style icon next to the site name');
+assert.doesNotMatch(wikiPageTsx, /Qiao Xinbao Academic Wiki/, 'article metadata no longer uses old Academic Wiki suffix');
+assert.match(wikiPageTsx, /\$\{page\.title\} \| Xinbaopedia/, 'article metadata uses Xinbaopedia as the site name');
 assert.match(languageToggle, /usePathname/, 'language toggle is route-aware');
 assert.match(languageToggle, /Qiao_Xinbao_zh/, 'language toggle links to Chinese version');
 assert.match(languageToggle, /Xinbao_Qiao/, 'language toggle links back to English version');
@@ -84,6 +95,11 @@ assert.match(layout, /XinbaoWiki\/commits\/main/, 'History links to GitHub commi
 
 const sidebar = fs.readFileSync(path.join(root, 'components/Sidebar.tsx'), 'utf8');
 assert.doesNotMatch(sidebar, /Notable works/, 'sidebar no longer uses Notable works');
+assert.doesNotMatch(sidebar, /Source repository/, 'sidebar contribute links avoid the source repository label');
+assert.match(sidebar, /OpenReview profile/, 'sidebar contribute links to an academic profile');
+for (const shortLabel of ['CUHK', 'NUSRI-CQ', 'ZJU', 'SDU']) {
+  assert.match(sidebar, new RegExp(`'[^']+': '${shortLabel}'`), `sidebar uses short label ${shortLabel}`);
+}
 assert.match(sidebar, /'AI_and_Networks': 'AI and Networks'/, 'sidebar labels AI and Networks as a short topic');
 assert.match(sidebar, /'Synthetic_Data_and_Model_Collapse': 'Synthetic Data'/, 'sidebar shortens synthetic-data topic');
 assert.match(sidebar, /'Data_Centric_Machine_Learning': 'Data Centric ML'/, 'sidebar shortens data-centric topic');
@@ -147,12 +163,17 @@ assert.match(read('DynFrs.md'), /!\[[^\]]+\]\(\/papers\/dynfrs\/poster\.png\)/, 
 assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/soft-weighted\/framework\.png\)/, 'soft-weighted paper page includes framework image');
 
 const infobox = fs.readFileSync(path.join(root, 'components/Infobox.tsx'), 'utf8');
+const styles = fs.readFileSync(path.join(root, 'app/globals.css'), 'utf8');
 assert.match(infobox, /location: 'Conference location'/, 'infobox labels conference location');
 assert.match(infobox, /department: 'Department'/, 'infobox supports institution department rows');
 assert.match(infobox, /dates: 'Dates'/, 'infobox supports institution date rows');
 assert.match(infobox, /place: 'Location'/, 'infobox supports institution location rows');
 assert.doesNotMatch(infobox, /categories: 'Categories'/, 'infobox does not label categories');
 assert.doesNotMatch(infobox, /'categories'/, 'infobox does not render categories rows');
+const infoboxListStyle = styles.match(/\.infobox-list \{([\s\S]*?)\}/);
+assert.ok(infoboxListStyle, 'infobox list style block exists');
+assert.match(infoboxListStyle[1], /list-style: none;/, 'infobox lists hide bullets like Colarpedia rows');
+assert.match(infoboxListStyle[1], /padding-left: 0;/, 'infobox lists remove bullet indentation');
 
 for (const page of [
   'The_Chinese_University_of_Hong_Kong.md',
@@ -200,6 +221,38 @@ for (const page of [
   assert.match(body, /\[\^[^\]]+\]/, `${page} uses footnotes for background`);
   assert.ok(body.split(/\s+/).length >= 120, `${page} is no longer a one-paragraph placeholder`);
 }
+
+function assertSectionOrder(page, sections) {
+  const body = read(page);
+  let lastIndex = -1;
+  for (const section of sections) {
+    const index = body.indexOf(section);
+    assert.ok(index > lastIndex, `${page} includes ${section} in the shared topic-page order`);
+    lastIndex = index;
+  }
+}
+
+const researchTopicPages = [
+  'AI_and_Networks.md',
+  'Machine_Unlearning.md',
+  'Synthetic_Data_and_Model_Collapse.md',
+  'Data_Centric_Machine_Learning.md'
+];
+
+for (const page of researchTopicPages) {
+  const body = read(page);
+  assertSectionOrder(page, ['## Introduction', '## Role in this wiki', '## Publications', "## Connection to Qiao's work", '## See also']);
+  assert.match(body, /\| Paper \| Venue\/status \|/, `${page} uses the shared publications table heading`);
+  assert.doesNotMatch(body, /Central paper|Central publication/i, `${page} avoids inconsistent central-paper phrasing`);
+}
+
+assert.match(read('AI_and_Networks.md'), /TNNLS under review; ongoing journal manuscript/, 'AI and Networks lists ongoing status for the decentralized-learning manuscript');
+assert.match(read('AI_and_Networks.md'), /ICML 2026, 6-11 July 2026, Seoul; accepted 30 April 2026/, 'AI and Networks lists ICML conference timing');
+assert.match(read('Machine_Unlearning.md'), /ICLR 2025, 24-28 April 2025, Singapore; OpenReview published 22 January 2025/, 'Machine Unlearning lists ICLR conference timing');
+assert.match(read('Machine_Unlearning.md'), /AAAI 2026, 20-27 January 2026, Singapore; accepted main track/, 'Machine Unlearning lists AAAI conference timing');
+assert.match(read('Synthetic_Data_and_Model_Collapse.md'), /ICML 2026, 6-11 July 2026, Seoul; accepted 30 April 2026/, 'Synthetic Data lists ICML conference timing');
+assert.match(read('Data_Centric_Machine_Learning.md'), /arXiv v1 24 May 2025/, 'Data Centric ML records arXiv timing when useful');
+assert.match(read('Data_Centric_Machine_Learning.md'), /ongoing journal manuscript/, 'Data Centric ML records ongoing status when there is no conference acceptance');
 
 const allMarkdown = fs.readdirSync(wikiDir)
   .filter((file) => file.endsWith('.md'))

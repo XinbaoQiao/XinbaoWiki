@@ -6,6 +6,8 @@ summary: "Append-only maintenance log for the wiki."
 
 ## 2026-05-05
 
+- Renamed site metadata to Xinbaopedia, added a wiki-style site icon, shortened left-sidebar institution labels, and aligned the biography Born row with the Colarpedia infobox pattern.
+- Standardized the four Research topics pages with Introduction, Role in this wiki, Publications, Connection to Qiao's work, and See also sections; publication tables now include conference timing, arXiv timing, or ongoing status.
 - Expanded institution pages for [[The_Chinese_University_of_Hong_Kong]], [[Zhejiang_University]], [[Shandong_University]], and [[NUSRI_CQ]] with logos, program context, Qiao-specific connections, and explanatory footnotes.
 - Expanded linked research-topic pages, including [[AI_and_Networks]], [[Machine_Unlearning]], [[Synthetic_Data_and_Model_Collapse|Synthetic Data]], and [[Data_Centric_Machine_Learning|Data Centric ML]], so topic links open into standalone wiki articles rather than brief placeholders.
 - Updated [[Xinbao_Qiao]] and [[Qiao_Xinbao_zh]] so the current occupation is PhD candidate, affiliation is the Department of Information Engineering at CUHK, birthplace appears in prose rather than the infobox, and education is ordered from newest to oldest.

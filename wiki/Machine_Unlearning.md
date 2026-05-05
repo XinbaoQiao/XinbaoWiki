@@ -6,9 +6,21 @@ summary: "Research topic on removing or correcting data influence from trained m
 
 **Machine Unlearning** studies how to remove, reduce, or correct the effect of selected training data after a model has already been trained. In this wiki it is treated as both a privacy topic and a data-centric systems topic: an unlearning method must say what it removes, how faithfully it approximates retraining, and how much computation or latency is saved.[^unlearning]
 
+## Introduction
+
+The topic covers post-training data operations: certified deletion, exact removal in tree ensembles, and continuous reweighting for fairness or robustness correction. The shared question is whether a trained system can be revised after deployment without simply retraining from scratch each time the data record changes.
+
 ## Role in this wiki
 
 This page organizes Qiao's publication line on post-training data operations. The line includes certified deletion, weighted correction, and tree-ensemble updates. It is closely connected to [[Data_Centric_Machine_Learning|Data Centric ML]] because the central object is not a new model architecture, but a data operation that changes model behavior. It also connects to [[Trustworthy_AI|Trustworthy AI]], since deletion requests, fairness corrections, and robustness interventions are forms of governance over a trained system.
+
+## Publications
+
+| Paper | Venue/status |
+| --- | --- |
+| [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]] | ICLR 2025, 24-28 April 2025, Singapore; OpenReview published 22 January 2025. |
+| [[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]] | ICLR 2025, 24-28 April 2025, Singapore; OpenReview published 22 January 2025. |
+| [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]] | AAAI 2026, 20-27 January 2026, Singapore; accepted main track, with arXiv v1 24 May 2025 and presentation listed for 25 January 2026. |
 
 ## Connection to Qiao's work
 

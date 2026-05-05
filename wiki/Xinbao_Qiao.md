@@ -1,7 +1,6 @@
 ---
 name: "Xinbao Qiao"
-native_name: "乔鑫宝"
-born: "30 September 2000 (age 25)"
+born: "Qiao Xinbao (乔鑫宝) 30 September 2000 (age 25) Xishuangbanna, Yunnan, China"
 nationality: "Chinese"
 residence: "Hong Kong"
 image: "/images/Portrait.png"

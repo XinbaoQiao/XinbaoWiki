@@ -12,7 +12,7 @@ export function generateStaticParams() { return getAllWikiSlugs().map((slug) => 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const page = getWikiPageBySlug(slug);
-  return page ? { title: `${page.title} | Qiao Xinbao Academic Wiki`, description: page.summary || `Wiki page: ${page.title}` } : { title: 'Page not found' };
+  return page ? { title: `${page.title} | Xinbaopedia`, description: page.summary || `Wiki page: ${page.title}` } : { title: 'Page not found' };
 }
 
 export default async function WikiPage({ params }: Props) {

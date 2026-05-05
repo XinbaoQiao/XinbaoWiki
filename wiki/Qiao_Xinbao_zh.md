@@ -1,7 +1,6 @@
 ---
 name: "乔鑫宝"
-native_name: "Xinbao Qiao"
-born: "2000年9月30日（25岁）"
+born: "乔鑫宝 (Xinbao Qiao) 2000年9月30日 (25岁) 中国云南西双版纳"
 nationality: "中国"
 residence: "香港"
 image: "/images/Portrait.png"

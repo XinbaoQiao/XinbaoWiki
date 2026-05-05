@@ -78,17 +78,28 @@ a.external::after {
 }
 
 .wiki-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   color: var(--wiki-text);
   font-family: var(--font-serif);
   font-size: 22px;
   font-weight: 400;
+  line-height: 1;
+}
+
+.wiki-logo:hover {
+  text-decoration: none;
+}
+
+.wiki-logo-mark {
+  display: block;
+  width: 32px;
+  height: 32px;
 }
 
 .wiki-logo span {
-  display: block;
-  margin-top: 2px;
-  color: var(--wiki-text-soft);
-  font-size: 12px;
+  color: var(--wiki-text);
   line-height: 1;
 }
 
@@ -198,6 +209,7 @@ a.external::after {
 
 .wiki-sidebar a {
   color: var(--wiki-link);
+  white-space: nowrap;
 }
 
 .wiki-main {
@@ -303,7 +315,12 @@ a.external::after {
 
 .infobox-list {
   margin: 0;
-  padding-left: 16px;
+  padding-left: 0;
+  list-style: none;
+}
+
+.infobox-list li + li {
+  margin-top: 3px;
 }
 
 .infobox-detail {

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Xinbaopedia icon">
+  <rect width="64" height="64" rx="6" fill="#f8f9fa"/>
+  <circle cx="32" cy="32" r="24" fill="#ffffff" stroke="#a2a9b1" stroke-width="2"/>
+  <path d="M13 32h38M32 8c7 7 10 15 10 24s-3 17-10 24M32 8c-7 7-10 15-10 24s3 17 10 24M15 22h34M15 42h34" fill="none" stroke="#a2a9b1" stroke-width="1.5"/>
+  <text x="32" y="41" text-anchor="middle" font-family="Georgia, Times New Roman, serif" font-size="25" font-weight="700" fill="#202122">X</text>
+</svg>
