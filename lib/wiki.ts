@@ -46,6 +46,17 @@ export type WikiPage = {
   fileName: string;
 };
 
+export type SearchIndexItem = {
+  slug: string;
+  href: string;
+  title: string;
+  summary: string;
+  language: 'en' | 'zh';
+  type: string;
+  aliases: string[];
+  text: string;
+};
+
 const WIKI_DIR = path.join(process.cwd(), 'wiki');
 
 export function getBasePath() {
@@ -115,6 +126,64 @@ export function getWikiPageBySlug(slug: string): WikiPage | null {
   const title = typeof data.name === 'string' && data.name.trim() ? data.name : resolved.replaceAll('_', ' ');
   const summary = typeof data.summary === 'string' ? data.summary : '';
   return { slug: resolved, title, summary, data, content: parsed.content.trim(), fileName };
+}
+
+function asSearchStrings(value: unknown): string[] {
+  if (value === null || value === undefined) return [];
+  if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') return [String(value)];
+  if (Array.isArray(value)) return value.flatMap(asSearchStrings);
+  if (typeof value === 'object') return Object.values(value).flatMap(asSearchStrings);
+  return [];
+}
+
+function plainText(markdown: string) {
+  return markdown
+    .replace(/!\[[^\]]*\]\([^)]+\)/g, ' ')
+    .replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (_match, target, label) => String(label || target).replaceAll('_', ' '))
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/\$\$[\s\S]*?\$\$/g, ' ')
+    .replace(/`{1,3}[\s\S]*?`{1,3}/g, ' ')
+    .replace(/[#>*_|~`$\\-]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+export function getSearchIndex(): SearchIndexItem[] {
+  return getAllWikiSlugs()
+    .map((slug) => getWikiPageBySlug(slug))
+    .filter((page): page is WikiPage => Boolean(page))
+    .map((page) => {
+      const aliases = Array.isArray(page.data.aliases) ? page.data.aliases.filter((alias): alias is string => typeof alias === 'string') : [];
+      const frontmatterText = asSearchStrings({
+        occupation: page.data.occupation,
+        affiliation: page.data.affiliation,
+        education: page.data.education,
+        type: page.data.type,
+        authors: page.data.authors,
+        venue: page.data.venue,
+        location: page.data.location,
+        year: page.data.year,
+        status: page.data.status,
+        publication_type: page.data.publication_type
+      }).join(' ');
+      const text = [
+        page.title,
+        page.summary,
+        aliases.join(' '),
+        frontmatterText,
+        plainText(page.content)
+      ].join(' ');
+      return {
+        slug: page.slug,
+        href: pathWithBasePath(`/wiki/${encodeURIComponent(page.slug)}/`),
+        title: page.title,
+        summary: page.summary,
+        language: isChineseSlug(page.slug) ? 'zh' : 'en',
+        type: typeof page.data.type === 'string' ? page.data.type : 'article',
+        aliases,
+        text: text.slice(0, 8000)
+      };
+    });
 }
 
 function hrefFor(target: string, language: 'en' | 'zh' = 'en') {

@@ -3,7 +3,8 @@ import type { ReactNode } from 'react';
 import { ArticleTabs } from '@/components/ArticleTabs';
 import { LanguageToggle } from '@/components/LanguageToggle';
 import { Sidebar } from '@/components/Sidebar';
-import { pathWithBasePath } from '@/lib/wiki';
+import { WikiSearch } from '@/components/WikiSearch';
+import { getSearchIndex, pathWithBasePath } from '@/lib/wiki';
 import 'katex/dist/katex.min.css';
 import './globals.css';
 
@@ -14,6 +15,8 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+  const searchIndex = getSearchIndex();
+
   return (
     <html lang="en">
       <body>
@@ -27,9 +30,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
               Xinbaopedia
             </a>
             <LanguageToggle />
-            <form className="wiki-search" role="search">
-              <input aria-label="Search Xinbaopedia" placeholder="Search Xinbaopedia" />
-            </form>
+            <WikiSearch items={searchIndex} />
           </div>
         </header>
         <ArticleTabs />
