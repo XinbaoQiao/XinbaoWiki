@@ -39,7 +39,7 @@ function prepareItem(item: SearchIndexItem): PreparedSearchItem {
   };
 }
 
-function scoreItem(item: PreparedSearchItem, normalizedQuery: string, terms: string[], preferredLanguage: 'en' | 'zh') {
+function scoreItem(item: PreparedSearchItem, normalizedQuery: string, terms: string[]) {
   if (!normalizedQuery) return 0;
 
   let score = 0;
@@ -60,7 +60,6 @@ function scoreItem(item: PreparedSearchItem, normalizedQuery: string, terms: str
     else if (item.normalizedText.includes(term)) score += 6;
   }
 
-  if (score > 0 && item.language === preferredLanguage) score += 8;
   if (score > 0 && item.slug === 'Xinbao_Qiao') score += 5;
   if (score > 0 && item.slug === 'Qiao_Xinbao_zh') score += 5;
   return score;
@@ -85,16 +84,20 @@ export function WikiSearch({ items }: Props) {
 
   const preferredLanguage = pathname?.includes('_zh') || pathname?.includes('/Qiao_Xinbao_zh/') ? 'zh' : 'en';
   const preparedItems = useMemo(() => items.map(prepareItem), [items]);
+  const languageItems = useMemo(
+    () => preparedItems.filter((item) => item.language === preferredLanguage),
+    [preparedItems, preferredLanguage]
+  );
   const normalizedQuery = normalize(query);
   const terms = useMemo(() => queryTerms(query), [query]);
   const results = useMemo<SearchResult[]>(() => {
     if (!normalizedQuery) return [];
-    return preparedItems
-      .map((item) => ({ ...item, score: scoreItem(item, normalizedQuery, terms, preferredLanguage) }))
+    return languageItems
+      .map((item) => ({ ...item, score: scoreItem(item, normalizedQuery, terms) }))
       .filter((item) => item.score > 0)
       .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title))
       .slice(0, 8);
-  }, [preparedItems, normalizedQuery, preferredLanguage, terms]);
+  }, [languageItems, normalizedQuery, terms]);
 
   useEffect(() => {
     setActive(0);

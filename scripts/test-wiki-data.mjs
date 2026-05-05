@@ -150,7 +150,9 @@ assert.match(wikiPageTsx, /preprocessWikiLinks\(page\.content, \{ language \}\)/
 assert.match(wikiSearch, /'use client';/, 'wiki search is a client component');
 assert.match(wikiSearch, /useMemo/, 'wiki search memoizes query scoring');
 assert.match(wikiSearch, /scoreItem/, 'wiki search has a ranking function');
-assert.match(wikiSearch, /usePathname/, 'wiki search can prioritize current page language');
+assert.match(wikiSearch, /usePathname/, 'wiki search can detect the current page language');
+assert.match(wikiSearch, /preparedItems\.filter\(\(item\) => item\.language === preferredLanguage\)/, 'wiki search only returns results from the current page language');
+assert.doesNotMatch(wikiSearch, /item\.language === preferredLanguage\) score \+=/, 'wiki search no longer mixes languages by language-score boosting');
 assert.match(wikiSearch, /onKeyDown/, 'wiki search supports keyboard navigation');
 assert.match(wikiSearch, /role="listbox"/, 'wiki search renders accessible result listbox');
 assert.match(wikiSearch, /window\.location\.assign\(item\.href\)/, 'wiki search submit navigates to the selected result');

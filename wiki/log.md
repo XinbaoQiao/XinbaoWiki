@@ -4,6 +4,10 @@ occupation: "Maintenance log"
 summary: "Append-only maintenance log for the wiki."
 ---
 
+## 2026-05-06
+
+- Restricted the top search dropdown to the active page language, so English pages return English wiki entries and Chinese pages return Chinese wiki entries.
+
 ## 2026-05-05
 
 - Replaced the inert top search form with a client-side static wiki search index, ranked dropdown results, and keyboard navigation.
