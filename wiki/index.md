@@ -21,6 +21,11 @@ summary: "Index of wiki pages."
 - [[Old_Homepage_Resources]]
 - [[log]]
 
+## Advisors
+
+- [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]
+- [[Meng_Zhang|Meng Zhang]]
+
 ## Research clusters
 
 - [[AI_and_Networks]]

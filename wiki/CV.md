@@ -22,7 +22,8 @@ See [[Publications]]. The CV lists accepted, published, and under-review work in
 
 ## Research experience
 
-- **Research on data-centric ML systems**, 2023-03 to 2025-12, advised by Meng Zhang at [[Zhejiang_University]]. Topics include data influence attribution, machine unlearning, and trade-offs among fairness, robustness, privacy, and utility.
+- **Doctoral research in AI and networks**, 2026-present, advised by [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]] at [[The_Chinese_University_of_Hong_Kong]]. Topics include networked AI systems, decentralized learning, and communication-aware model reliability.
+- **Research on data-centric ML systems**, 2023-03 to 2025-12, advised by [[Meng_Zhang|Meng Zhang]] at [[Zhejiang_University]]. Topics include data influence attribution, machine unlearning, and trade-offs among fairness, robustness, privacy, and utility.
 - **Research on trustworthy model systems**, 2025-06 to 2025-12, full-time research intern advised by Yan Pang at [[NUSRI_CQ]]. Topics include model reliability and distributed Wasserstein methods for synthetic-data evaluation.
 
 ## Skills

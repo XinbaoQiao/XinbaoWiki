@@ -24,7 +24,7 @@ summary: "Current doctoral institution of Xinbao Qiao."
 
 ## Program
 
-Qiao's current program is Information Engineering within CUHK Engineering. The CUHK Graduate School describes the MPhil-PhD in Information Engineering as a research program for students pursuing fundamental and applied work in communications, networking, information processing, and security.[^cuhk-grad] This program context is closely aligned with Qiao's current emphasis on [[AI_and_Networks|AI and networks]], where learning algorithms are studied together with communication constraints, decentralized data access, and cross-silo evaluation.
+Qiao's current program is Information Engineering within CUHK Engineering, advised by [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]. The CUHK Graduate School describes the MPhil-PhD in Information Engineering as a research program for students pursuing fundamental and applied work in communications, networking, information processing, and security.[^cuhk-grad] This program context is closely aligned with Qiao's current emphasis on [[AI_and_Networks|AI and networks]], where learning algorithms are studied together with communication constraints, decentralized data access, and cross-silo evaluation.
 
 ## Academic context
 
@@ -32,11 +32,12 @@ The Department of Information Engineering was established in 1989 and describes 
 
 ## Connection to Qiao
 
-Qiao's CUHK period begins after a master's phase focused on [[Data_Centric_Machine_Learning|data centric ML]] and [[Machine_Unlearning|machine unlearning]]. The doctoral phase shifts the center of gravity toward networked AI systems: efficient decentralized learning, collaborative evaluation across [[Data_Silos|data silos]], and reliability questions that arise when training data are selected, removed, or synthesized. The page is therefore linked from the biography infobox as the sole current affiliation, while past institutions remain under education and research experience.
+Qiao's CUHK period begins after a master's phase focused on [[Data_Centric_Machine_Learning|data centric ML]] and [[Machine_Unlearning|machine unlearning]]. Under [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]'s supervision, the doctoral phase shifts the center of gravity toward networked AI systems: efficient decentralized learning, collaborative evaluation across [[Data_Silos|data silos]], and reliability questions that arise when training data are selected, removed, or synthesized. The page is therefore linked from the biography infobox as the sole current affiliation, while past institutions remain under education and research experience.
 
 ## See also
 
 - [[Xinbao_Qiao]]
+- [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]
 - [[AI_and_Networks]]
 - [[Education]]
 - [[Experience]]

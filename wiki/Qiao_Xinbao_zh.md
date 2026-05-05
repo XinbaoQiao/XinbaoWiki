@@ -7,7 +7,7 @@ born: |
 nationality: "中国"
 residence: "香港"
 image: "/images/Portrait.png"
-image_caption: "摄于新加坡"
+image_caption: "摄于 ICLR 2025，新加坡 EXPO"
 occupation:
   - "博士候选人"
 affiliation:
@@ -41,9 +41,9 @@ summary: "香港中文大学信息工程系博士候选人；研究方向包括 
 
 ## 教育经历
 
-乔鑫宝目前在[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系攻读博士学位。[^cuhk-ie-zh]
+乔鑫宝目前在[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系攻读博士学位，博士导师为[[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]。[^cuhk-ie-zh]
 
-2022年至2025年，他在[[Zhejiang_University|浙江大学]]攻读人工智能硕士学位，硕士阶段专业 GPA 为 90/100，排名 3/25。
+2022年至2025年，他在[[Zhejiang_University|浙江大学]]攻读人工智能硕士学位，硕士阶段专业 GPA 为 90/100，排名 3/25；硕士导师为[[Meng_Zhang|Meng Zhang]]。
 
 乔鑫宝于2022年获得[[Shandong_University|山东大学]]通信工程工学学士学位。
 
@@ -51,7 +51,7 @@ summary: "香港中文大学信息工程系博士候选人；研究方向包括 
 
 ### 浙江大学的数据中心机器学习研究（2023-2025）
 
-2023年3月至2025年12月，乔鑫宝在[[Zhejiang_University|浙江大学]]开展数据中心机器学习系统研究。相关工作围绕数据影响归因、机器遗忘，以及公平性、鲁棒性、隐私与效用之间的权衡展开。
+2023年3月至2025年12月，乔鑫宝在[[Zhejiang_University|浙江大学]]、[[Meng_Zhang|Meng Zhang]]指导下开展数据中心机器学习系统研究。相关工作围绕数据影响归因、机器遗忘，以及公平性、鲁棒性、隐私与效用之间的权衡展开。
 
 这一时期的代表工作包括[[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]]、[[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]] 和 [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]]。
 
@@ -61,7 +61,7 @@ summary: "香港中文大学信息工程系博士候选人；研究方向包括 
 
 ### 香港中文大学博士阶段（2026至今）
 
-乔鑫宝现为[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程方向博士候选人。其博士阶段研究延续数据中心与可信机器学习主线，并进一步强调网络化 AI 系统：数据选择、数据删除、通信约束、协作评估和合成数据验证如何共同影响模型可靠性。
+乔鑫宝现为[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程方向博士候选人，导师为[[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]。其博士阶段研究延续数据中心与可信机器学习主线，并进一步强调网络化 AI 系统：数据选择、数据删除、通信约束、协作评估和合成数据验证如何共同影响模型可靠性。
 
 ## 学术项目
 

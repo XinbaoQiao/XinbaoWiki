@@ -20,7 +20,7 @@ function assertFile(file) {
   assert.ok(fs.existsSync(path.join(root, file)), `${file} exists`);
 }
 
-for (const file of ['Xinbao_Qiao.md', 'Qiao_Xinbao_zh.md', 'index.md', 'log.md', 'CV.md']) {
+for (const file of ['Xinbao_Qiao.md', 'Qiao_Xinbao_zh.md', 'index.md', 'log.md', 'CV.md', 'Meng_Zhang.md', 'Angela_Yingjun_Zhang.md']) {
   assertFile(`wiki/${file}`);
 }
 assertFile('CV.tex');
@@ -48,7 +48,7 @@ assert.doesNotMatch(bio, /^birth_place:/m, 'birthplace is kept in prose rather t
 assert.match(bio, /born: \|\n\s+September 2000 \(age 25\)\n\s+Xishuangbanna, Yunnan\n/, 'English Born row uses the requested month-and-place format');
 assert.doesNotMatch(bio, /30 September 2000|Xishuangbanna, Yunnan, China/, 'English Born row omits day and country');
 assert.match(bio, /occupation:\n\s+- "PhD candidate"/, 'occupation uses PhD candidate');
-assert.match(bio, /image_caption: "Photograph taken in Singapore"/, 'English portrait caption identifies Singapore');
+assert.match(bio, /image_caption: "Photograph taken at Singapore EXPO during ICLR 2025"/, 'English portrait caption identifies ICLR 2025 at Singapore EXPO');
 const educationBlock = frontmatterSlice(bio, 'education:', 'links:');
 assert.match(educationBlock, /label: "The Chinese University of Hong Kong"[\s\S]*label: "Zhejiang University"[\s\S]*label: "Shandong University"/, 'English education is reverse chronological');
 assert.match(educationBlock, /label: "Shandong University"\n\s+url: "\/wiki\/Shandong_University\/"\n\s+detail: "\(BEng, 2022\)"/, 'English education links only school name and keeps degree detail separate');
@@ -62,16 +62,20 @@ assert.doesNotMatch(zhAffiliation, /新加坡国立大学重庆研究院/, 'Chin
 assert.doesNotMatch(zhBio, /^native_name:/m, 'Chinese infobox follows Colarpedia by folding English name into Born');
 assert.doesNotMatch(zhBio, /^birth_place:/m, 'Chinese birthplace is kept in prose rather than the infobox');
 assert.match(zhBio, /born: \|\n\s+乔鑫宝 \(Xinbao Qiao\)\n\s+2000年9月30日 \(25岁\)\n\s+中国云南西双版纳/, 'Chinese Born row is a multiline Colarpedia-style value');
-assert.match(zhBio, /image_caption: "摄于新加坡"/, 'Chinese portrait caption identifies Singapore');
+assert.match(zhBio, /image_caption: "摄于 ICLR 2025，新加坡 EXPO"/, 'Chinese portrait caption identifies ICLR 2025 at Singapore EXPO');
 const zhEducationBlock = frontmatterSlice(zhBio, 'education:', 'links:');
 assert.match(zhEducationBlock, /label: "香港中文大学"[\s\S]*label: "浙江大学"[\s\S]*label: "山东大学"/, 'Chinese education is reverse chronological');
 assert.match(zhEducationBlock, /label: "山东大学"\n\s+url: "\/wiki\/Shandong_University\/"\n\s+detail: "（工学学士，2022）"/, 'Chinese education links only school name and keeps degree detail separate');
 
 assert.match(home, /\[\[Publications\]\]/, 'home article links to Publications');
 assert.match(home, /\[\[Research\]\]/, 'home article links to Research');
+assert.match(home, /\[\[Angela_Yingjun_Zhang\|Angela Yingjun Zhang\]\]/, 'home article links to the PhD advisor page');
+assert.match(home, /\[\[Meng_Zhang\|Meng Zhang\]\]/, 'home article links to the master advisor page');
 assert.match(home, /born September 2000 in Xishuangbanna, Yunnan/, 'home article uses month-level birth date');
 assert.doesNotMatch(home, /30 September 2000/, 'home article omits exact birth day');
 assert.match(zhHome, /2000年9月30日/, 'Chinese page includes birth date');
+assert.match(zhHome, /\[\[Angela_Yingjun_Zhang\|Angela Yingjun Zhang\]\]/, 'Chinese home article links to the PhD advisor page');
+assert.match(zhHome, /\[\[Meng_Zhang\|Meng Zhang\]\]/, 'Chinese home article links to the master advisor page');
 assert.match(read('CV.md'), /\/files\/XinbaoQiao_CV\.pdf/, 'CV page links to local PDF');
 
 const contactCount = (home.match(/mailto:/g) || []).length;
@@ -185,6 +189,18 @@ for (const page of acceptedPublicationPages) {
 
 assert.match(read('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning.md'), /\*\*Xinbao Qiao\*\*/, 'under-review publication page bolds Xinbao Qiao in the author context');
 
+const mengZhang = read('Meng_Zhang.md');
+const angelaZhang = read('Angela_Yingjun_Zhang.md');
+assert.match(mengZhang, /https:\/\/person\.zju\.edu\.cn\/mengzhang/, 'Meng Zhang page cites the official ZJU profile');
+assert.match(mengZhang, /ZJU-UIUC Institute/, 'Meng Zhang page identifies the ZJU-UIUC Institute affiliation');
+assert.match(mengZhang, /wireless and computer networks[\s\S]*edge intelligence[\s\S]*network economics[\s\S]*intelligent IoT/i, 'Meng Zhang page summarizes official research areas');
+assert.match(mengZhang, /\[\[Xinbao_Qiao\|Xinbao Qiao\]\]/, 'Meng Zhang page connects to Qiao');
+assert.match(angelaZhang, /https:\/\/staff\.ie\.cuhk\.edu\.hk\/~yjzhang\//, 'Angela Yingjun Zhang page cites the official CUHK profile');
+assert.match(angelaZhang, /Professor[\s\S]*Department of Information Engineering[\s\S]*The Chinese University of Hong Kong/, 'Angela Yingjun Zhang page identifies CUHK IE affiliation');
+assert.match(angelaZhang, /IEEE Fellow/, 'Angela Yingjun Zhang page records IEEE Fellow status');
+assert.match(angelaZhang, /5G and 6G/, 'Angela Yingjun Zhang page summarizes official research interests');
+assert.match(angelaZhang, /\[\[Xinbao_Qiao\|Xinbao Qiao\]\]/, 'Angela Yingjun Zhang page connects to Qiao');
+
 const learnPageFm = frontmatter('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning.md');
 assert.doesNotMatch(learnPageFm, /^categories:/m, 'under-review manuscript infobox omits categories');
 
@@ -236,6 +252,9 @@ for (const page of [
   }
   assert.ok(body.split(/\s+/).length >= 180, `${page} is not a placeholder institution page`);
 }
+
+assert.match(read('The_Chinese_University_of_Hong_Kong.md'), /\[\[Angela_Yingjun_Zhang\|Angela Yingjun Zhang\]\]/, 'CUHK page links to the PhD advisor page');
+assert.match(read('Zhejiang_University.md'), /\[\[Meng_Zhang\|Meng Zhang\]\]/, 'ZJU page links to the master advisor page');
 
 for (const page of [
   'AI_and_Networks.md',

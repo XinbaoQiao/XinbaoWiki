@@ -6,11 +6,11 @@ summary: "Research experience and affiliations."
 
 ## Current affiliation
 
-- PhD candidate, Department of Information Engineering, [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]].
+- PhD candidate, Department of Information Engineering, [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]], advised by [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]].
 
 ## Research on data-centric ML systems
 
-**M.Eng. / master's research student**, 2023-03 to 2025-12. Advisor: Meng Zhang, [[Zhejiang_University]].
+**M.Eng. / master's research student**, 2023-03 to 2025-12. Advisor: [[Meng_Zhang|Meng Zhang]], [[Zhejiang_University]].
 
 This line of work developed theoretically grounded approaches for data influence attribution, machine unlearning, and data-centric trade-offs in trustworthy AI. It also included cloud-edge collaborative human-space healthcare, where multimodal video, audio, and sensor signals were considered for real-time monitoring.
 

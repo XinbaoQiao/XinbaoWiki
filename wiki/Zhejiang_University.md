@@ -23,7 +23,7 @@ summary: "Master's institution of Xinbao Qiao."
 
 ## Program
 
-Qiao studied Artificial Intelligence at Zhejiang University and received a master's degree in 2025. His biography records a major GPA of 90/100 and a rank of 3/25. The ZJU period is the main bridge between his undergraduate communication-engineering background and his later doctoral focus on [[AI_and_Networks|AI and networks]]: the work moved from general AI systems toward data operations that directly affect model behavior.
+Qiao studied Artificial Intelligence at Zhejiang University and received a master's degree in 2025. His master's research was advised by [[Meng_Zhang|Meng Zhang]]. His biography records a major GPA of 90/100 and a rank of 3/25. The ZJU period is the main bridge between his undergraduate communication-engineering background and his later doctoral focus on [[AI_and_Networks|AI and networks]]: the work moved from general AI systems toward data operations that directly affect model behavior.
 
 ## Academic context
 
@@ -31,11 +31,12 @@ Zhejiang University traces its institutional origin to Qiushi Academy, founded i
 
 ## Connection to Qiao
 
-During the ZJU phase Qiao worked on [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]], [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]], and related data influence studies. The period also overlaps with [[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]], which connects tree models, exact update logic, and practical latency constraints. In the broader biography, ZJU is therefore the institution most directly associated with the machine-unlearning branch of Qiao's publication record.
+During the ZJU phase Qiao worked with [[Meng_Zhang|Meng Zhang]] on [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]], [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]], and related data influence studies. The period also overlaps with [[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]], which connects tree models, exact update logic, and practical latency constraints. In the broader biography, ZJU is therefore the institution most directly associated with the machine-unlearning branch of Qiao's publication record.
 
 ## See also
 
 - [[Xinbao_Qiao]]
+- [[Meng_Zhang|Meng Zhang]]
 - [[Machine_Unlearning]]
 - [[Data_Centric_Machine_Learning]]
 - [[Hessian_Free_Online_Certified_Unlearning]]

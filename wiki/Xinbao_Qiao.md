@@ -6,7 +6,7 @@ born: |
 nationality: "Chinese"
 residence: "Hong Kong"
 image: "/images/Portrait.png"
-image_caption: "Photograph taken in Singapore"
+image_caption: "Photograph taken at Singapore EXPO during ICLR 2025"
 occupation:
   - "PhD candidate"
 affiliation:
@@ -40,9 +40,9 @@ Before his doctoral studies, Qiao received a Master of Science in Artificial Int
 
 ## Education
 
-Qiao is enrolled as a PhD candidate in Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]].[^cuhk-ie]
+Qiao is enrolled as a PhD candidate in Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]]. His doctoral advisor is [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]].[^cuhk-ie]
 
-From 2022 to 2025 he studied Artificial Intelligence at [[Zhejiang_University|Zhejiang University]], where his master's transcript records a major GPA of 90/100 and a rank of 3/25.
+From 2022 to 2025 he studied Artificial Intelligence at [[Zhejiang_University|Zhejiang University]], where his master's transcript records a major GPA of 90/100 and a rank of 3/25. His master's research was advised by [[Meng_Zhang|Meng Zhang]].
 
 Qiao received a Bachelor of Engineering in Communication Engineering from [[Shandong_University|Shandong University]] in 2022.
 
@@ -50,7 +50,7 @@ Qiao received a Bachelor of Engineering in Communication Engineering from [[Shan
 
 ### Data-centric machine learning at Zhejiang University (2023-2025)
 
-From March 2023 to December 2025, Qiao worked on data-centric machine learning systems at [[Zhejiang_University|Zhejiang University]]. The work centered on data influence attribution, machine unlearning, and the trade-offs among fairness, robustness, privacy, and utility.
+From March 2023 to December 2025, Qiao worked on data-centric machine learning systems at [[Zhejiang_University|Zhejiang University]] under the supervision of [[Meng_Zhang|Meng Zhang]]. The work centered on data influence attribution, machine unlearning, and the trade-offs among fairness, robustness, privacy, and utility.
 
 This period includes work on [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]], [[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]], and [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]].
 
@@ -60,7 +60,7 @@ From June 2025 to December 2025, Qiao worked as a full-time research intern at [
 
 ### The Chinese University of Hong Kong (2026-present)
 
-Qiao is a PhD candidate in Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]]. His doctoral research continues the data-centric and trustworthy-machine-learning line, with a stronger emphasis on networked AI systems: how data selection, deletion, communication, collaboration, and synthetic-data verification shape model reliability.
+Qiao is a PhD candidate in Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]], advised by [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]. His doctoral research continues the data-centric and trustworthy-machine-learning line, with a stronger emphasis on networked AI systems: how data selection, deletion, communication, collaboration, and synthetic-data verification shape model reliability.
 
 ## Academic projects
 
