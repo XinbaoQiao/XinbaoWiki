@@ -137,10 +137,15 @@ function logServerIssue(type: string, status?: number) {
   console.error(`[chat-with-xinbao] ${type}`);
 }
 
-function withXinbaoSignature(reply: string) {
+function withXinbaoSignature(reply: string, language: 'en' | 'zh') {
+  const signature = language === 'zh' ? '喵~' : 'meow~';
   const trimmed = reply.trim();
-  if (/喵~\s*$/.test(trimmed)) return trimmed;
-  return `${trimmed}\n\n喵~`;
+  const unsigned = trimmed
+    .replace(/\s*(?:喵~|meow~)\s*$/i, '')
+    .trim()
+    .replace(/[。！？.!?]+$/u, '');
+  if (!unsigned) return signature;
+  return `${unsigned}${signature}`;
 }
 
 export async function POST(request: NextRequest) {
@@ -208,6 +213,7 @@ export async function POST(request: NextRequest) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
   const baseUrl = (process.env.YUNWU_API_BASE_URL || DEFAULT_BASE_URL).replace(/\/$/, '');
+  const language = inferLanguage(request);
 
   try {
     const response = await fetch(`${baseUrl}/chat/completions`, {
@@ -219,7 +225,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         model: MODEL,
         messages: [
-          { role: 'system', content: getXinbaoChatSystemPrompt(inferLanguage(request)) },
+          { role: 'system', content: getXinbaoChatSystemPrompt(language) },
           ...sanitizeHistory(body.history),
           { role: 'user', content: message }
         ],
@@ -244,7 +250,7 @@ export async function POST(request: NextRequest) {
     }
 
     return jsonResponse(
-      { reply: withXinbaoSignature(reply), remaining: Math.max(0, DAILY_LIMIT - dailyCount), limit: DAILY_LIMIT },
+      { reply: withXinbaoSignature(reply, language), remaining: Math.max(0, DAILY_LIMIT - dailyCount), limit: DAILY_LIMIT },
       200,
       visitorCookie
     );
