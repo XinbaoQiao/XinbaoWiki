@@ -21,6 +21,7 @@ const DAILY_LIMIT_MESSAGE = 'Daily limit reached. Please come back tomorrow.';
 type ChatRole = 'user' | 'assistant';
 type ChatMessage = { role: ChatRole; content: string };
 type CompletionResponse = { choices?: Array<{ message?: { content?: unknown } }> };
+type RequestIdentity = { visitorHash: string; browserHash: string; ipHash: string };
 
 let redisClient: Redis | null = null;
 
@@ -77,6 +78,16 @@ function hashIdentity(value: string) {
   return crypto.createHash('sha256').update(`${salt}:${value}`).digest('hex').slice(0, 40);
 }
 
+function getRequestIdentity(request: NextRequest, visitorId: string): RequestIdentity | null {
+  const ip = requestIp(request);
+  const userAgent = request.headers.get('user-agent') || 'unknown';
+  const visitorHash = hashIdentity(`${visitorId}:${ip}:${userAgent}`);
+  const browserHash = hashIdentity(`${ip}:${userAgent}`);
+  const ipHash = hashIdentity(ip);
+  if (!visitorHash || !browserHash || !ipHash) return null;
+  return { visitorHash, browserHash, ipHash };
+}
+
 function tokyoDateParts(date: Date) {
   const parts = new Intl.DateTimeFormat('en-CA', {
     timeZone: 'Asia/Tokyo',
@@ -101,6 +112,27 @@ function secondsUntilNextTokyoMidnight(now = new Date()) {
   const { year, month, day } = tokyoDateParts(now);
   const nextTokyoMidnightUtc = Date.UTC(year, month - 1, day + 1, -9, 0, 0);
   return Math.max(60, Math.ceil((nextTokyoMidnightUtc - now.getTime()) / 1000));
+}
+
+function dailyQuotaKeys(dateKey: string, identity: RequestIdentity) {
+  return [
+    `xinbao-chat:daily:${dateKey}:visitor:${identity.visitorHash}`,
+    `xinbao-chat:daily:${dateKey}:browser:${identity.browserHash}`
+  ];
+}
+
+async function readDailyUsage(redis: Redis, keys: string[]) {
+  const values = await Promise.all(keys.map((key) => redis.get<number>(key)));
+  return Math.max(0, ...values.map((value) => Number(value) || 0));
+}
+
+async function incrementDailyUsage(redis: Redis, keys: string[], ttl: number) {
+  const counts = await Promise.all(keys.map(async (key) => {
+    const count = await redis.incr(key);
+    if (count === 1) await redis.expire(key, ttl);
+    return count;
+  }));
+  return Math.max(...counts);
 }
 
 function inferLanguage(request: NextRequest): 'en' | 'zh' {
@@ -138,14 +170,33 @@ function logServerIssue(type: string, status?: number) {
 }
 
 function withXinbaoSignature(reply: string, language: 'en' | 'zh') {
-  const signature = language === 'zh' ? '喵~' : 'meow~';
+  const signature = language === 'zh' ? '喵~' : ' meow~';
   const trimmed = reply.trim();
   const unsigned = trimmed
     .replace(/\s*(?:喵~|meow~)\s*$/i, '')
     .trim()
     .replace(/[。！？.!?]+$/u, '');
-  if (!unsigned) return signature;
+  if (!unsigned) return signature.trim();
   return `${unsigned}${signature}`;
+}
+
+export async function GET(request: NextRequest) {
+  const visitorCookie = getVisitorId(request);
+  const redis = getRedis();
+  if (!redis || !process.env.RATE_LIMIT_SALT) {
+    logServerIssue('missing quota configuration');
+    return genericUnavailable(visitorCookie);
+  }
+
+  const identity = getRequestIdentity(request, visitorCookie.visitorId);
+  if (!identity) return genericUnavailable(visitorCookie);
+
+  const dailyUsage = await readDailyUsage(redis, dailyQuotaKeys(tokyoDateKey(), identity));
+  return jsonResponse(
+    { remaining: Math.max(0, DAILY_LIMIT - dailyUsage), limit: DAILY_LIMIT },
+    200,
+    visitorCookie
+  );
 }
 
 export async function POST(request: NextRequest) {
@@ -168,19 +219,20 @@ export async function POST(request: NextRequest) {
     return genericUnavailable(visitorCookie);
   }
 
-  const ip = requestIp(request);
-  const userAgent = request.headers.get('user-agent') || 'unknown';
-  const visitorHash = hashIdentity(`${visitorCookie.visitorId}:${ip}:${userAgent}`);
-  const ipHash = hashIdentity(ip);
-  if (!visitorHash || !ipHash) return genericUnavailable(visitorCookie);
+  const identity = getRequestIdentity(request, visitorCookie.visitorId);
+  if (!identity) return genericUnavailable(visitorCookie);
 
   const dateKey = tokyoDateKey();
-  const dailyKey = `xinbao-chat:daily:${dateKey}:${visitorHash}`;
-  const cooldownKey = `xinbao-chat:cooldown:${visitorHash}`;
-  const hourlyIpKey = `xinbao-chat:ip-hour:${ipHash}:${Math.floor(Date.now() / 3_600_000)}`;
+  const dailyKeys = dailyQuotaKeys(dateKey, identity);
+  const cooldownKey = `xinbao-chat:cooldown:${identity.visitorHash}`;
+  const hourlyIpKey = `xinbao-chat:ip-hour:${identity.ipHash}:${Math.floor(Date.now() / 3_600_000)}`;
   const quotaTtl = secondsUntilNextTokyoMidnight();
 
-  const previousDailyCount = Number(await redis.get<number>(dailyKey)) || 0;
+  const previousDailyCount = await readDailyUsage(redis, dailyKeys);
+  if (previousDailyCount >= DAILY_LIMIT) {
+    return jsonResponse({ error: DAILY_LIMIT_MESSAGE, remaining: 0, limit: DAILY_LIMIT }, 429, visitorCookie);
+  }
+
   const cooldown = await redis.set(cooldownKey, '1', { nx: true, ex: COOLDOWN_SECONDS });
   if (cooldown !== 'OK') {
     return jsonResponse(
@@ -204,8 +256,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const dailyCount = await redis.incr(dailyKey);
-  if (dailyCount === 1) await redis.expire(dailyKey, quotaTtl);
+  const dailyCount = await incrementDailyUsage(redis, dailyKeys, quotaTtl);
   if (dailyCount > DAILY_LIMIT) {
     return jsonResponse({ error: DAILY_LIMIT_MESSAGE, remaining: 0, limit: DAILY_LIMIT }, 429, visitorCookie);
   }

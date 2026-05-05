@@ -184,11 +184,14 @@ assert.match(chatWithXinbao, /'use client';/, 'Chat with Xinbao is a client comp
 assert.match(chatWithXinbao, /Chat with Xinbao/, 'chat window uses the required title');
 assert.match(chatWithXinbao, /MAX_INPUT_LENGTH = 1000/, 'chat client caps input length at 1000 characters');
 assert.match(chatWithXinbao, /\/api\/chat-with-xinbao/, 'chat client calls only the same-site API route');
+assert.match(chatWithXinbao, /method: 'GET'/, 'chat client refreshes quota from the backend when the chat opens');
 assert.match(chatWithXinbao, /remaining.*limit/s, 'chat client displays remaining daily quota');
 assert.match(chatWithXinbao, /Xinbao AI is temporarily unavailable\. Please try again later\./, 'chat client uses a generic model-error message');
 assert.match(chatWithXinbao, /language: Language/, 'chat client localizes UI from current wiki language');
+assert.match(chatWithXinbao, /distilled/, 'chat client introduces itself as a distilled academic skill');
 assert.doesNotMatch(chatWithXinbao, /YUNWU_API_KEY|UPSTASH_REDIS_REST_TOKEN|api\.yunwu|Bearer/, 'chat client contains no backend key names or provider endpoint');
 assert.match(chatRoute, /runtime = 'nodejs'/, 'chat API route uses the Node runtime');
+assert.match(chatRoute, /export async function GET\(request: NextRequest\)/, 'chat API exposes a backend quota endpoint');
 assert.match(chatRoute, /MODEL = 'deepseek-v4-flash'/, 'chat API fixes the requested Yunwu model');
 assert.match(chatRoute, /DEFAULT_BASE_URL = 'https:\/\/api\.yunwu\.ai\/v1'/, 'chat API uses the documented Yunwu base URL');
 assert.match(chatRoute, /YUNWU_API_KEY/, 'chat API reads the Yunwu key from server env');
@@ -196,6 +199,7 @@ assert.match(chatRoute, /YUNWU_API_BASE_URL/, 'chat API supports a server env ba
 assert.match(chatRoute, /UPSTASH_REDIS_REST_URL[\s\S]*UPSTASH_REDIS_REST_TOKEN/, 'chat API reads Upstash credentials from server env');
 assert.match(chatRoute, /RATE_LIMIT_SALT/, 'chat API hashes visitor identifiers with a server salt');
 assert.match(chatRoute, /DAILY_LIMIT = 20/, 'chat API enforces 20 messages per day');
+assert.match(chatRoute, /hashIdentity\(`\$\{ip\}:\$\{userAgent\}`\)/, 'chat API keeps an IP plus user-agent daily key so refreshes cannot reset quota');
 assert.match(chatRoute, /COOLDOWN_SECONDS = 4/, 'chat API enforces the per-visitor cooldown');
 assert.match(chatRoute, /HOURLY_IP_LIMIT = 80/, 'chat API enforces the hourly IP cap');
 assert.match(chatRoute, /MAX_INPUT_LENGTH = 1000/, 'chat API validates input length server-side');
@@ -212,6 +216,7 @@ assert.match(chatRoute, /function withXinbaoSignature\(reply: string, language: 
 assert.match(chatRoute, /language: 'en' \| 'zh'/, 'chat API chooses the signature language from the current wiki language');
 assert.doesNotMatch(chatRoute, /\\n\\n\$?\{?signature/, 'chat API keeps the meow signature on the same line as the reply');
 assert.match(chatRoute, /\.replace\(\/\[。！？\.!\?\]\+\$\/u/, 'chat API removes terminal punctuation before the meow signature');
+assert.match(chatRoute, /language === 'zh' \? '喵~' : ' meow~'/, 'chat API keeps Chinese suffix attached and adds a space before the English suffix');
 assert.match(chatRoute, /meow~/, 'chat API appends the English meow signature on English pages');
 assert.match(chatRoute, /喵~/, 'chat API appends the Chinese meow signature on Chinese pages');
 assert.match(chatRoute, /Authorization: `Bearer \$\{apiKey\}`/, 'chat API proxies authorization only on the server');
@@ -221,6 +226,7 @@ assert.match(chatKnowledge, /project\.md/, 'chat knowledge builder can prioritiz
 assert.match(chatKnowledge, /wiki'\)/, 'chat knowledge builder reads the local wiki directory');
 assert.match(chatKnowledge, /Xinbao_Qiao[\s\S]*Qiao_Xinbao_zh[\s\S]*Projects[\s\S]*Research[\s\S]*Publications[\s\S]*CV/, 'chat knowledge builder prioritizes homepage, projects, research, publications, and CV pages');
 assert.match(chatKnowledge, /digital proxy/, 'persona identifies the assistant as a digital proxy');
+assert.match(chatKnowledge, /academic skill[\s\S]*distilled/, 'persona can introduce the assistant as a distilled academic skill');
 assert.match(chatKnowledge, /must not claim to be the real Xinbao Qiao/, 'persona prevents impersonating Xinbao');
 assert.match(chatKnowledge, /Do not browse, invent, infer private facts/, 'persona constrains answers to local wiki sources');
 assert.match(chatKnowledge, /XINBAO_CHAT_VOICE_STYLE/, 'chat knowledge builder supports a server-only private voice style layer');

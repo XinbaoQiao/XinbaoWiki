@@ -17,7 +17,7 @@ const copy = {
     close: 'Close',
     minimize: 'Minimize',
     restore: 'Restore Chat with Xinbao',
-    greeting: 'Hi, I am Xinbao Qiao’s academic homepage assistant. Ask me about his research, publications, projects, academic background, or public contact information.',
+    greeting: 'Hi, I am a lightweight academic skill distilled from Xinbao Qiao’s public homepage and research notes. Ask me about his research, publications, projects, academic background, or public contact information.',
     inputLabel: 'Message Chat with Xinbao',
     placeholder: 'Ask about Xinbao, research, papers, projects...',
     send: 'Send',
@@ -32,7 +32,7 @@ const copy = {
     close: '关闭',
     minimize: '最小化',
     restore: '恢复 Chat with Xinbao',
-    greeting: '你好，我是 Xinbao Qiao 学术主页的 AI 助手。你可以询问他的研究方向、论文项目、学术经历或公开联系方式。',
+    greeting: '你好，我是从乔鑫宝公开主页和研究资料里蒸馏出来的学术 skill。你可以询问他的研究方向、论文项目、学术经历或公开联系方式。',
     inputLabel: '向 Chat with Xinbao 发送消息',
     placeholder: '询问研究方向、论文、项目、联系方式...',
     send: '发送',
@@ -73,6 +73,28 @@ export function ChatWithXinbao({ language }: Props) {
     if (!open || minimized) return;
     endRef.current?.scrollIntoView({ block: 'end' });
   }, [messages, loading, open, minimized]);
+
+  useEffect(() => {
+    if (!open) return;
+    let cancelled = false;
+
+    async function refreshQuota() {
+      try {
+        const response = await fetch(chatEndpoint(), { method: 'GET' });
+        const data = await response.json().catch(() => null) as { remaining?: unknown; limit?: unknown } | null;
+        if (cancelled || !response.ok) return;
+        if (typeof data?.limit === 'number') setLimit(data.limit);
+        if (typeof data?.remaining === 'number') setRemaining(data.remaining);
+      } catch {
+        // Keep the neutral quota label if the quota endpoint is temporarily unavailable.
+      }
+    }
+
+    void refreshQuota();
+    return () => {
+      cancelled = true;
+    };
+  }, [open]);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
