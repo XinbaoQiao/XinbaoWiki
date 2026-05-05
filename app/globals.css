@@ -448,23 +448,23 @@ a.external::after {
 }
 
 .wiki-body p:has(> img:only-child) {
-  clear: both;
+  display: flow-root;
   margin: 18px 0;
+  text-align: center;
 }
 
 .wiki-body img {
-  clear: both;
   display: block;
   width: auto;
-  max-width: min(100%, 320px);
-  max-height: 240px;
+  max-width: min(100%, 520px);
+  max-height: 380px;
   margin: 14px auto;
   object-fit: contain;
   background: var(--wiki-bg);
 }
 
 .wiki-body img[src$=".svg"] {
-  max-height: 320px;
+  max-height: 440px;
 }
 
 .wiki-body .katex-display {
