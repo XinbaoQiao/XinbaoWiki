@@ -40,7 +40,7 @@ Before his doctoral studies, Qiao received a Master of Science in Artificial Int
 
 ## Education
 
-Qiao is enrolled as a PhD candidate in Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]]. His doctoral advisor is [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]].[^cuhk-ie]
+Qiao is enrolled as a PhD candidate in Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]] in Fall 2026. His PhD. advisor is [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]].[^cuhk-ie]
 
 From 2022 to 2025 he studied Artificial Intelligence at [[Zhejiang_University|Zhejiang University]], where his master's transcript records a major GPA of 90/100 and a rank of 3/25. His master's research was advised by [[Meng_Zhang|Meng Zhang]].
 
