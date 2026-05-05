@@ -137,6 +137,12 @@ function logServerIssue(type: string, status?: number) {
   console.error(`[chat-with-xinbao] ${type}`);
 }
 
+function withXinbaoSignature(reply: string) {
+  const trimmed = reply.trim();
+  if (/喵~\s*$/.test(trimmed)) return trimmed;
+  return `${trimmed}\n\n喵~`;
+}
+
 export async function POST(request: NextRequest) {
   const visitorCookie = getVisitorId(request);
   const body = await parseBody(request);
@@ -238,7 +244,7 @@ export async function POST(request: NextRequest) {
     }
 
     return jsonResponse(
-      { reply: reply.trim(), remaining: Math.max(0, DAILY_LIMIT - dailyCount), limit: DAILY_LIMIT },
+      { reply: withXinbaoSignature(reply), remaining: Math.max(0, DAILY_LIMIT - dailyCount), limit: DAILY_LIMIT },
       200,
       visitorCookie
     );

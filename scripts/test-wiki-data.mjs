@@ -208,6 +208,8 @@ assert.match(chatRoute, /sameSite: 'lax'/, 'visitor cookie uses SameSite=Lax');
 assert.match(chatRoute, /Asia\/Tokyo/, 'daily quota keys use Asia/Tokyo date boundaries');
 assert.match(chatRoute, /Daily limit reached\. Please come back tomorrow\./, 'chat API returns the required daily-limit message');
 assert.match(chatRoute, /Xinbao AI is temporarily unavailable\. Please try again later\./, 'chat API returns only the generic model-error message');
+assert.match(chatRoute, /function withXinbaoSignature\(reply: string\)/, 'chat API post-processes successful replies with a stable signature');
+assert.match(chatRoute, /喵~/, 'chat API appends the requested meow signature to successful replies');
 assert.match(chatRoute, /Authorization: `Bearer \$\{apiKey\}`/, 'chat API proxies authorization only on the server');
 assert.doesNotMatch(chatRoute, /console\.error\([^)]*message|console\.log\([^)]*message|system prompt/i, 'chat API does not log user messages or prompt text');
 assert.match(chatKnowledge, /import 'server-only';/, 'chat knowledge builder is server-only');
