@@ -6,7 +6,7 @@ born: |
 nationality: "Chinese"
 residence: "Hong Kong"
 image: "/images/Portrait.png"
-image_caption: "Photograph taken at Singapore EXPO during ICLR 2025"
+image_caption: "Photograph taken at Singapore EXPO, 2025"
 occupation:
   - "PhD candidate"
 affiliation:
