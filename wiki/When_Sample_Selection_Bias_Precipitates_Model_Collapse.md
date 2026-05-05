@@ -21,17 +21,19 @@ links:
 summary: "ICML 2026 paper on local sample-selection bias, model collapse, and collaborative Wasserstein-geometry proxies."
 ---
 
-**When Sample Selection Bias Precipitates Model Collapse** is an ICML 2026 conference paper by **[[Xinbao_Qiao|Xinbao Qiao]]**, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, and Yan Pang. The page is based on an owner-provided accepted manuscript package.
+**When Sample Selection Bias Precipitates Model Collapse** is an ICML 2026 conference paper by **[[Xinbao_Qiao|Xinbao Qiao]]**, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, and Yan Pang. It examines how local verification in data silos can turn recursive synthetic-data training into a diversity-loss process, and how collaborative distributional proxies can reduce that failure mode.
+
+![Teaser: local selection bias narrows recursive synthetic data, while collaborative Wasserstein verification preserves diversity](/papers/model-collapse/teaser.svg)
 
 ## Overview
 
-The paper studies [[Model_Collapse|model collapse]] in recursive synthetic-data training. Prior work often treats data selection as a stabilizing tool: a verifier filters generated samples so that only high-quality synthetic data are reused for training. This paper argues that the verifier itself can be a source of collapse when it only sees a biased local slice of the target distribution.
+The paper studies [[Model_Collapse|model collapse]] in recursive synthetic-data training. Prior work often treats data selection as a stabilizing tool: a verifier filters generated samples so that only high-quality synthetic data are reused for training. This paper makes the verifier the object of analysis. When the verifier sees only a biased local slice of the target distribution, selection can repeatedly reward samples near that local slice and remove tail modes that future generators need.
 
 The motivating setting is a data-silo environment. A hospital, bank, or proprietary institution may evaluate synthetic samples against its own limited reference data. Selection then becomes a confirmation-bias mechanism: samples close to the local view are retained, while distributional tails needed for generalization are pruned away.
 
 ## Method
 
-The paper first formalizes biased top-alpha selection under Gaussian modeling and shows that local selection can drive variance collapse. It then proposes collaborative evaluation methods that replace a single local verifier with distributional proxies computed across parties without raw-data exchange.
+The paper first formalizes biased top-alpha selection under Gaussian modeling and connects it to variance collapse across recursive generations. It then proposes collaborative evaluation methods that replace a single local verifier with distributional proxies computed across parties without raw-data exchange. The methodological shift is from sample quality as judged by one silo to distributional fit against a proxy for the global target.
 
 Two schemes are described:
 
@@ -44,29 +46,45 @@ Both schemes use Wasserstein-gradient-based sample scoring, so the synthetic poo
 
 ## Key formula
 
-The paper's theory links local selection, diversity decay, and Wasserstein cost. In the following summary, `R_t` is the selected top-alpha region, `D_t` is the filtered synthetic distribution at generation `t`, and `D*` is the true target manifold.
+The paper's theory links local selection, diversity decay, and Wasserstein cost. In the following summary, $R_t$ is the selected top-$\alpha$ region, $D_t$ is the filtered synthetic distribution at generation $t$, and $D^\star$ is the target distribution.
 
-```text
-Biased selection:
-  X_{i,t} ~ TN(mu_{t-1}, Sigma_{t-1}, R_t)
-  P(X in R_t) = alpha
+Local verifier selection is summarized as truncated sampling:
 
-Asymptotic diversity decay:
-  Tr(Sigma_t) / Tr(Sigma_0) ~= C * t^{-lambda_min(Psi_infty)}
+$$
+X_{i,t}\sim \operatorname{TN}(\mu_{t-1},\Sigma_{t-1},R_t),
+\qquad
+\Pr(X\in R_t)=\alpha .
+$$
 
-Wasserstein-cost view:
-  Risk_{D*}(h_t)
-    <= Risk_{D_t}(h_t) + 2 l epsilon W_p(D_t, D*) + delta
+The resulting diversity decay can be expressed through the covariance trace:
 
-Sample score from dual potential f*:
-  S(x_i) = f*(x_i) - (1 / (N - 1)) sum_{j != i} f*(x_j)
-```
+$$
+\frac{\operatorname{Tr}(\Sigma_t)}{\operatorname{Tr}(\Sigma_0)}
+\asymp C\,t^{-\lambda_{\min}(\Psi_\infty)} .
+$$
+
+A Wasserstein generalization bound then relates model risk under the target distribution to the filtered distribution:
+
+$$
+\mathcal{R}_{D^\star}(h_t)
+\le
+\mathcal{R}_{D_t}(h_t)
++2L\epsilon\,W_p(D_t,D^\star)+\delta .
+$$
+
+The collaborative scoring rule can be viewed through a dual potential $f^\star$:
+
+$$
+S(x_i)
+= f^\star(x_i)
+-\frac{1}{N-1}\sum_{j\ne i} f^\star(x_j).
+$$
 
 The formulas explain the paper's main mechanism: biased selection can make the retained distribution increasingly narrow, while collaborative Wasserstein proxies try to reduce the discrepancy between filtered synthetic data and the global target distribution.
 
 ## Results
 
-The owner-provided manuscript reports DDPM-style recursive image-generation experiments on CIFAR-10, STL-10, and CelebA. Baselines include Random selection, K-means, CenterMatch, and CovMatch. Under non-IID or locally skewed references, local-selection baselines can fall behind random selection, while the collaborative schemes better preserve both quality and diversity.
+The manuscript reports DDPM-style recursive image-generation experiments on CIFAR-10, STL-10, and CelebA. Baselines include Random selection, K-means, CenterMatch, and CovMatch. Under non-IID or locally skewed references, local-selection baselines can fall behind random selection, while the collaborative schemes better preserve both sample quality and mode coverage.
 
 ![FID trends under recursive synthetic-data training](/papers/model-collapse/fid-trends-combined.png)
 

@@ -1,5 +1,7 @@
 import ReactMarkdown from 'react-markdown';
+import rehypeKatex from 'rehype-katex';
 import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
 import { pathWithBasePath } from '@/lib/wiki';
 
 type Props = { markdown: string; sourceHref?: string };
@@ -21,7 +23,8 @@ export function WikiMarkdown({ markdown, sourceHref }: Props) {
   return (
     <div className="wiki-body">
       <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
+        remarkPlugins={[remarkGfm, remarkMath]}
+        rehypePlugins={[rehypeKatex]}
         components={{
           a({ href, children }) {
             const safe = pathWithBasePath(href || '#');

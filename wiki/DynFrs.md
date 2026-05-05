@@ -22,13 +22,13 @@ links:
 summary: "ICLR 2025 paper on efficient machine unlearning for random forests."
 ---
 
-**DynFrs: An Efficient Framework for Machine Unlearning in Random Forest** is an ICLR 2025 conference paper by Shurong Wang, Zhuoyang Shen, **[[Xinbao_Qiao|Xinbao Qiao]]**, Tongning Zhang, and Meng Zhang. OpenReview lists the paper as an ICLR 2025 poster, published on 22 January 2025.
+**DynFrs: An Efficient Framework for Machine Unlearning in Random Forest** is an ICLR 2025 conference paper by Shurong Wang, Zhuoyang Shen, **[[Xinbao_Qiao|Xinbao Qiao]]**, Tongning Zhang, and Meng Zhang. The work targets exact and efficient data removal for random-forest models under dynamic online updates.
 
 ## Overview
 
 The paper studies exact and efficient [[Machine_Unlearning|machine unlearning]] for [[Random_Forest|random forests]]. Random forests are still widely used in privacy-sensitive domains such as healthcare, finance, and recommendation, but their tree-ensemble structure makes standard gradient-based unlearning tools inapplicable.
 
-DynFrs targets three online operations on a forest: prediction, sample removal, and sample addition. The key design goal is low-latency modification without losing the distributional equivalence required by exact unlearning.
+DynFrs targets three online operations on a forest: prediction, sample removal, and sample addition. The key design goal is low-latency modification without losing the distributional equivalence required by exact unlearning. The paper therefore treats unlearning as a data-structure and randomized-algorithm problem, not only as a model-update problem.
 
 ## Method
 
@@ -44,21 +44,38 @@ DynFrs combines three mechanisms:
 
 ## Key formula
 
-The framework reduces the number of trees touched by each sample and amortizes tree repair over later queries. The following summary keeps the notation used in the paper: `T` is the forest size, `q < 1` is the occurrence factor, and `k = ceil(qT)`.
+The framework reduces the number of trees touched by each sample and amortizes tree repair over later queries. The following summary keeps the notation used in the paper: $T$ is the forest size, $q<1$ is the occurrence factor, and $k=\lceil qT\rceil$.
 
-```text
-k = ceil(qT)
-Pr[z_i in S^(t)] = k / T ~= q
+The OCC rule limits how many trees contain each sample:
 
-training time:
-  O(q T d_max p n log s)
+$$
+k=\lceil qT\rceil,
+\qquad
+\Pr\!\left[z_i\in S^{(t)}\right]
+=\frac{k}{T}\approx q .
+$$
 
-expected unlearning speedup from OCC(q):
-  E[N_naive / N_occ] ~= 1 / q^2
+The resulting training-time scaling is:
 
-exact unlearning condition:
-  A^-(A(S), S, z)  has the same distribution as  A(S \ {z})
-```
+$$
+\mathcal{T}_{\mathrm{train}}
+=O(qT d_{\max}pn\log s).
+$$
+
+The expected unlearning speedup from OCC($q$) is summarized as:
+
+$$
+\mathbb{E}\!\left[\frac{N_{\mathrm{naive}}}{N_{\mathrm{occ}}}\right]
+\approx \frac{1}{q^2}.
+$$
+
+Exact unlearning is stated as distributional equivalence between unlearning and retraining without the removed sample:
+
+$$
+\mathcal{A}^{-}(\mathcal{A}(S),S,z)
+\overset{d}{=}
+\mathcal{A}(S\setminus\{z\}).
+$$
 
 The lazy-tag mechanism then turns a potentially large subtree retraining operation into path-level reconstruction only when a future query reaches the tagged node.
 

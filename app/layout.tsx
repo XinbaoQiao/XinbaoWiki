@@ -4,6 +4,7 @@ import { ArticleTabs } from '@/components/ArticleTabs';
 import { LanguageToggle } from '@/components/LanguageToggle';
 import { Sidebar } from '@/components/Sidebar';
 import { pathWithBasePath } from '@/lib/wiki';
+import 'katex/dist/katex.min.css';
 import './globals.css';
 
 export const metadata: Metadata = {

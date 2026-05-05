@@ -447,6 +447,22 @@ a.external::after {
   height: auto;
 }
 
+.wiki-body img {
+  display: block;
+  width: auto;
+  max-width: min(100%, 680px);
+  max-height: 520px;
+  margin: 14px auto;
+  object-fit: contain;
+  background: var(--wiki-bg);
+}
+
+.wiki-body .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 2px 0 4px;
+}
+
 .wiki-footer {
   max-width: 1200px;
   margin: 40px auto 0;

@@ -6,6 +6,7 @@ summary: "Append-only maintenance log for the wiki."
 
 ## 2026-05-05
 
+- Rendered publication formulas with KaTeX display math, constrained paper figures to readable article widths, and added a local teaser diagram for [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]].
 - Enlarged the Xinbaopedia favicon mark and added custom SVG topic diagrams to the four main research-topic infoboxes.
 - Updated portrait captions to identify Singapore EXPO during ICLR 2025 and added advisor pages for [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]] and [[Meng_Zhang|Meng Zhang]], with official profile links and biography back-links.
 - Updated the English biography Born row to month-level date and place, and bolded Xinbao Qiao's author name in publication index and paper pages.

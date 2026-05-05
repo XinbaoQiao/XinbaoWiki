@@ -21,7 +21,7 @@ links:
 summary: "AAAI 2026 paper on soft-weighted unlearning for fairness and robustness correction."
 ---
 
-**Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness** is an AAAI 2026 conference paper by **[[Xinbao_Qiao|Xinbao Qiao]]**, Ningning Ding, Yushi Cheng, and Meng Zhang. The arXiv v1 predates the final AAAI presentation title, which is used as the canonical title on this wiki.
+**Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness** is an AAAI 2026 conference paper by **[[Xinbao_Qiao|Xinbao Qiao]]**, Ningning Ding, Yushi Cheng, and Meng Zhang. It reframes unlearning as a continuous correction problem rather than only a binary erasure operation.
 
 ## Overview
 
@@ -31,7 +31,7 @@ The paper names the resulting failure mode **over-unlearning**: hard deletion ca
 
 ## Method
 
-The method replaces binary deletion weights with continuous sample weights. It first estimates each sample's influence on both the target metric and utility, then solves a convex quadratic program for a tailored weight vector. The resulting weights are plugged into influence-function-style unlearning or related correction methods.
+The method replaces binary deletion weights with continuous sample weights. It first estimates each sample's influence on both the target metric and utility, then solves a convex quadratic program for a tailored weight vector. The resulting weights are plugged into influence-function-style unlearning or related correction methods, so harmful samples can be downweighted without being treated as equally removable.
 
 ![Soft-weighted unlearning framework](/papers/soft-weighted/framework.png)
 
@@ -43,19 +43,37 @@ The three-stage workflow is:
 
 ## Key formula
 
-The paper's optimization can be summarized as a constrained reweighting problem. `I_metric` denotes the influence on the fairness or robustness objective, and `I_util` denotes the influence on utility.
+The paper's optimization can be summarized as a constrained reweighting problem. $I_{\mathrm{metric}}(z_i)$ denotes a sample's influence on the fairness or robustness objective, and $I_{\mathrm{util}}(z_i)$ denotes its influence on utility.
 
-```text
-epsilon* = argmin_epsilon
-  sum_i I_metric(z_i; epsilon_i) + lambda ||epsilon||_2^2
+The soft deletion weights solve a regularized correction problem:
 
-subject to
-  sum_i I_metric(z_i; epsilon_i) <= -Delta
-  sum_i I_util(z_i; epsilon_i) <= 0
+$$
+\epsilon^\star
+=
+\arg\min_{\epsilon}
+\sum_i \epsilon_i I_{\mathrm{metric}}(z_i)
++\lambda\lVert\epsilon\rVert_2^2
+$$
 
-theta_soft = theta_hat
-  - H_{theta_hat}^{-1} * sum_i epsilon_i* grad_theta l(z_i; theta_hat)
-```
+subject to:
+
+$$
+\sum_i \epsilon_i I_{\mathrm{metric}}(z_i)\le -\Delta,
+\qquad
+\sum_i \epsilon_i I_{\mathrm{util}}(z_i)\le 0,
+\qquad
+0\le \epsilon_i\le 1 .
+$$
+
+The resulting model correction follows an influence-function update:
+
+$$
+\theta_{\mathrm{soft}}
+=
+\widehat{\theta}
+-H_{\widehat{\theta}}^{-1}
+\sum_i \epsilon_i^\star\nabla_\theta \ell(z_i;\widehat{\theta}) .
+$$
 
 The constraints distinguish this approach from hard top-k deletion: the target metric must improve, but the update is not allowed to pay for that improvement through avoidable utility degradation.
 

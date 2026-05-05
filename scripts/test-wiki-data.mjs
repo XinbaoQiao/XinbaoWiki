@@ -84,6 +84,8 @@ assert.match(bio, /title: "GitHub"[\s\S]*https:\/\/github\.com\/XinbaoQiao/, 'co
 
 const layout = fs.readFileSync(path.join(root, 'app/layout.tsx'), 'utf8');
 const wikiPageTsx = fs.readFileSync(path.join(root, 'app/wiki/[slug]/page.tsx'), 'utf8');
+const wikiMarkdownTsx = fs.readFileSync(path.join(root, 'components/WikiMarkdown.tsx'), 'utf8');
+const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 assertFile('components/LanguageToggle.tsx');
 assertFile('components/ArticleTabs.tsx');
 assertFile('public/xinbaopedia-icon.svg');
@@ -95,11 +97,19 @@ assert.match(siteIcon, /font-size="34"/, 'site icon enlarges the X glyph for sma
 assert.doesNotMatch(siteIcon, /r="24"|font-size="25"/, 'site icon no longer uses the undersized original mark');
 assert.match(layout, /title: 'Xinbaopedia'/, 'site metadata title is Xinbaopedia');
 assert.match(layout, /icons: \{ icon: pathWithBasePath\('\/xinbaopedia-icon\.svg'\) \}/, 'site metadata exposes a base-path-aware wiki-style icon');
+assert.match(layout, /import 'katex\/dist\/katex\.min\.css';/, 'layout imports KaTeX CSS for rendered formulas');
 assert.doesNotMatch(layout, /wiki-logo-mark|<img className=/, 'topbar follows Colarpedia with a text-only wordmark');
 assert.match(layout, /className="wiki-logo"[\s\S]*style=\{\{ textDecoration: 'none' \}\}[\s\S]*Xinbaopedia/, 'topbar wordmark mirrors Colarpedia link styling');
 assert.match(layout, /<ArticleTabs \/>/, 'article tools are isolated like Colarpedia WikiTopBar');
 assert.doesNotMatch(wikiPageTsx, /Qiao Xinbao Academic Wiki/, 'article metadata no longer uses old Academic Wiki suffix');
 assert.match(wikiPageTsx, /\$\{page\.title\} \| Xinbaopedia/, 'article metadata uses Xinbaopedia as the site name');
+for (const dependency of ['remark-math', 'rehype-katex', 'katex']) {
+  assert.ok(packageJson.dependencies?.[dependency], `package.json includes ${dependency}`);
+}
+assert.match(wikiMarkdownTsx, /import remarkMath from 'remark-math';/, 'Markdown renderer imports remark-math');
+assert.match(wikiMarkdownTsx, /import rehypeKatex from 'rehype-katex';/, 'Markdown renderer imports rehype-katex');
+assert.match(wikiMarkdownTsx, /remarkPlugins=\{\[remarkGfm, remarkMath\]\}/, 'Markdown renderer enables GFM and math parsing');
+assert.match(wikiMarkdownTsx, /rehypePlugins=\{\[rehypeKatex\]\}/, 'Markdown renderer renders math through KaTeX');
 assert.match(languageToggle, /usePathname/, 'language toggle is route-aware');
 assert.match(languageToggle, /Qiao_Xinbao_zh/, 'language toggle links to Chinese version');
 assert.match(languageToggle, /Xinbao_Qiao/, 'language toggle links back to English version');
@@ -188,7 +198,9 @@ for (const page of acceptedPublicationPages) {
   for (const section of ['## Overview', '## Method', '## Key formula', '## Results', '## Placement']) {
     assert.match(body, new RegExp(`^${section}$`, 'm'), `${page} has ${section}`);
   }
-  assert.match(body, /```text\n[\s\S]*?```/, `${page} includes a readable formula block`);
+  assert.doesNotMatch(body, /```text\n[\s\S]*?```/, `${page} uses rendered math instead of text code formulas`);
+  assert.doesNotMatch(body, /\\\(|\\\)/, `${page} uses dollar-delimited inline math compatible with remark-math`);
+  assert.match(body, /\$\$[\s\S]*?\$\$/, `${page} includes display math syntax`);
 }
 
 assert.match(read('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning.md'), /\*\*Xinbao Qiao\*\*/, 'under-review publication page bolds Xinbao Qiao in the author context');
@@ -209,6 +221,7 @@ const learnPageFm = frontmatter('Learn_What_Matters_Data_Pruning_for_Efficient_D
 assert.doesNotMatch(learnPageFm, /^categories:/m, 'under-review manuscript infobox omits categories');
 
 assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /!\[[^\]]+\]\(\/papers\/model-collapse\/fid-trends-combined\.png\)/, 'model-collapse paper page displays a figure');
+assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /!\[[^\]]+\]\(\/papers\/model-collapse\/teaser\.svg\)/, 'model-collapse paper page displays a local teaser figure');
 assert.match(read('Hessian_Free_Online_Certified_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/hessian-free\/ours\.png\)/, 'Hessian-free paper page displays a figure');
 assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/soft-weighted\/sec-5-1-1\.png\)/, 'soft-weighted paper page displays a figure');
 assert.match(read('DynFrs.md'), /!\[[^\]]+\]\(\/papers\/dynfrs\/lazy-tags\.png\)/, 'DynFrs paper page displays a figure');
@@ -219,6 +232,8 @@ assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers
 const infobox = fs.readFileSync(path.join(root, 'components/Infobox.tsx'), 'utf8');
 const styles = fs.readFileSync(path.join(root, 'app/globals.css'), 'utf8');
 assert.doesNotMatch(styles, /\.wiki-logo-mark|\.wiki-logo:hover/, 'topbar CSS does not keep custom logo-image styling');
+assert.match(styles, /\.wiki-body img \{[\s\S]*max-width: min\(100%, 680px\);[\s\S]*max-height: 520px;[\s\S]*object-fit: contain;[\s\S]*\}/, 'article images are constrained to a readable paper-figure size');
+assert.match(styles, /\.wiki-body \.katex-display \{[\s\S]*overflow-x: auto;[\s\S]*\}/, 'display formulas can scroll horizontally on narrow screens');
 assert.match(styles, /\.wiki-logo \{\n\s+font-family: var\(--font-serif\);\n\s+font-size: 22px;\n\s+font-weight: 400;\n\s+color: var\(--wiki-text\);\n\}/, 'topbar logo CSS matches Colarpedia text wordmark');
 const sidebarLinkStyle = styles.match(/\.wiki-sidebar a \{([\s\S]*?)\}/);
 assert.ok(sidebarLinkStyle, 'sidebar link style block exists');
@@ -405,6 +420,7 @@ for (const file of [
   'public/topics/synthetic-data.svg',
   'public/topics/data-centric-ml.svg',
   'public/files/XinbaoQiao_CV.pdf',
+  'public/papers/model-collapse/teaser.svg',
   'public/papers/model-collapse/fid-trends-combined.png',
   'public/papers/model-collapse/barycenter-methodology.png',
   'public/papers/model-collapse/class-proportions-trend.png',
