@@ -217,13 +217,16 @@ assert.match(chatKnowledge, /Xinbao_Qiao[\s\S]*Qiao_Xinbao_zh[\s\S]*Projects[\s\
 assert.match(chatKnowledge, /digital proxy/, 'persona identifies the assistant as a digital proxy');
 assert.match(chatKnowledge, /must not claim to be the real Xinbao Qiao/, 'persona prevents impersonating Xinbao');
 assert.match(chatKnowledge, /Do not browse, invent, infer private facts/, 'persona constrains answers to local wiki sources');
+assert.match(chatKnowledge, /XINBAO_CHAT_VOICE_STYLE/, 'chat knowledge builder supports a server-only private voice style layer');
+assert.match(chatKnowledge, /private voice notes/, 'persona prevents revealing private voice notes');
 assert.match(chatReadme, /Vercel deployment/, 'chat documentation explains Vercel deployment');
 assert.match(chatReadme, /rg "YUNWU_API_KEY\|sk-\|Bearer\|api\.yunwu\|UPSTASH_REDIS_REST_TOKEN"/, 'chat documentation includes the key leak check command');
 assert.match(chatReadme, /21st daily request[\s\S]*429/, 'chat documentation explains testing the 20-message limit');
-for (const envName of ['YUNWU_API_KEY', 'YUNWU_API_BASE_URL', 'UPSTASH_REDIS_REST_URL', 'UPSTASH_REDIS_REST_TOKEN', 'RATE_LIMIT_SALT']) {
+for (const envName of ['YUNWU_API_KEY', 'YUNWU_API_BASE_URL', 'UPSTASH_REDIS_REST_URL', 'UPSTASH_REDIS_REST_TOKEN', 'RATE_LIMIT_SALT', 'XINBAO_CHAT_VOICE_STYLE']) {
   assert.match(chatEnvExample, new RegExp(`^${envName}=`, 'm'), `env.example includes ${envName}`);
 }
 assert.match(chatPersona, /You are Chat with Xinbao/, 'persona prompt template documents assistant identity');
+assert.match(chatPersona, /XINBAO_CHAT_VOICE_STYLE/, 'persona prompt template documents the private voice style layer');
 assert.doesNotMatch(chatEnvExample, /sk-[A-Za-z0-9_-]{12,}/, 'env.example contains no real-looking API key');
 
 const sidebar = fs.readFileSync(path.join(root, 'components/Sidebar.tsx'), 'utf8');
