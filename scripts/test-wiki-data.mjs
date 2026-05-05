@@ -195,7 +195,7 @@ assert.match(chatWithXinbao, /language: Language/, 'chat client localizes UI fro
 assert.match(chatWithXinbao, /distilled/, 'chat client introduces itself as a distilled academic skill');
 assert.match(chatWithXinbao, /家人们[\s\S]*顷刻炼化[\s\S]*数字分身 skill[\s\S]*给他爆了[\s\S]*资料稳/, 'chat client Chinese greeting uses varied playful digital-proxy phrasing');
 assert.match(chatWithXinbao, /Xinbao AI is on the way[\s\S]*Checking Xinbaopedia notes[\s\S]*Almost there/, 'chat client includes varied English typing messages');
-assert.match(chatWithXinbao, /Xinbao AI 正在赶来的路上[\s\S]*家人们，答案正在路上[\s\S]*886 还早[\s\S]*跑堂一下[\s\S]*来踩踩[\s\S]*正在切换到资料稳模式/, 'chat client includes varied Chinese typing messages');
+assert.match(chatWithXinbao, /Xinbao AI 正在赶来的路上[\s\S]*家人们，答案正在路上[\s\S]*886 还早[\s\S]*来踩踩[\s\S]*正在切换到资料稳模式/, 'chat client includes varied Chinese typing messages');
 assert.match(chatWithXinbao, /function randomTypingMessage[\s\S]*Math\.random\(\)[\s\S]*setTypingMessage\(randomTypingMessage\(strings\.typing\)\)/, 'chat client randomly selects one typing message per request');
 assert.doesNotMatch(chatWithXinbao, /YUNWU_API_KEY|UPSTASH_REDIS_REST_TOKEN|api\.yunwu|Bearer/, 'chat client contains no backend key names or provider endpoint');
 assert.match(chatRoute, /runtime = 'nodejs'/, 'chat API route uses the Node runtime');
@@ -238,7 +238,9 @@ assert.match(chatKnowledge, /digital proxy/, 'persona identifies the assistant a
 assert.match(chatKnowledge, /academic skill[\s\S]*distilled/, 'persona can introduce the assistant as a distilled academic skill');
 assert.match(chatKnowledge, /顷刻炼化[\s\S]*数字分身 skill[\s\S]*恐怖如斯/, 'persona can introduce itself with the requested playful Chinese phrasing');
 assert.match(chatKnowledge, /家人们[\s\S]*跟他爆了[\s\S]*直接拿捏[\s\S]*包的[\s\S]*先别急[\s\S]*不硬编/s, 'persona supports a small Chinese meme-style expression pool without encouraging unsupported claims');
-assert.match(chatKnowledge, /00s retro Chinese web voice[\s\S]*886[\s\S]*跑堂[\s\S]*踩踩[\s\S]*QQ空间 energy/, 'persona supports light 00s retro web catchphrases');
+assert.match(chatKnowledge, /Modern meme-guide voice[\s\S]*情绪价值[\s\S]*City不City[\s\S]*YYDS[\s\S]*我去不早说/, 'persona supports current meme-guide catchphrases');
+assert.match(chatKnowledge, /00s retro Chinese web voice[\s\S]*886[\s\S]*踩踩[\s\S]*QQ空间 energy/, 'persona supports light 00s retro web catchphrases');
+assert.doesNotMatch(chatKnowledge, /\u8dd1\u5802/, 'persona removes the disallowed catchphrase');
 assert.match(chatKnowledge, /must not claim to be the real Xinbao Qiao/, 'persona prevents impersonating Xinbao');
 assert.match(chatKnowledge, /Do not browse, invent, infer private facts/, 'persona constrains answers to local wiki sources');
 assert.match(chatKnowledge, /XINBAO_CHAT_VOICE_STYLE/, 'chat knowledge builder supports a server-only private voice style layer');
@@ -252,9 +254,13 @@ for (const envName of ['YUNWU_API_KEY', 'YUNWU_API_BASE_URL', 'UPSTASH_REDIS_RES
 assert.match(chatPersona, /You are Chat with Xinbao/, 'persona prompt template documents assistant identity');
 assert.match(chatPersona, /XINBAO_CHAT_VOICE_STYLE/, 'persona prompt template documents the private voice style layer');
 assert.match(chatPersona, /do not repeat one fixed meme[\s\S]*家人们[\s\S]*跟他爆了[\s\S]*顷刻炼化[\s\S]*never use memes to cover missing evidence/, 'persona prompt template documents varied meme-style wording with factual boundaries');
-assert.match(chatPersona, /00s retro Chinese web voice[\s\S]*886[\s\S]*跑堂[\s\S]*踩踩[\s\S]*留言板 energy/, 'persona prompt template documents the 00s retro phrase pool');
+assert.match(chatPersona, /Modern meme-guide voice[\s\S]*情绪价值[\s\S]*City不City[\s\S]*YYDS[\s\S]*爱你老己/, 'persona prompt template documents current meme-guide wording');
+assert.match(chatPersona, /00s retro Chinese web voice[\s\S]*886[\s\S]*踩踩[\s\S]*留言板 energy/, 'persona prompt template documents the 00s retro phrase pool');
 assert.match(chatMemeNotes, /46 notes\.hdoc[\s\S]*private reference material[\s\S]*should not quote it or commit it/, 'meme voice notes document private hdoc handling');
-assert.match(chatMemeNotes, /00s retro web nostalgia[\s\S]*886[\s\S]*跑堂[\s\S]*踩踩[\s\S]*火钳刘明/, 'meme voice notes organize retro catchphrase categories');
+assert.match(chatMemeNotes, /Modern meme-guide references[\s\S]*情绪价值[\s\S]*班味儿[\s\S]*绝绝子/, 'meme voice notes organize current meme-guide categories');
+assert.match(chatMemeNotes, /Web references[\s\S]*news\.cn[\s\S]*nlp\.ccnu\.edu\.cn[\s\S]*lingoace[\s\S]*jiuzhe/, 'meme voice notes record web sources for meme-guide knowledge');
+assert.match(chatMemeNotes, /00s retro web nostalgia[\s\S]*886[\s\S]*踩踩[\s\S]*火钳刘明/, 'meme voice notes organize retro catchphrase categories');
+assert.doesNotMatch(`${chatWithXinbao}\n${chatPersona}\n${chatMemeNotes}`, /\u8dd1\u5802/, 'chat voice knowledge removes the disallowed catchphrase everywhere public');
 assert.doesNotMatch(chatEnvExample, /sk-[A-Za-z0-9_-]{12,}/, 'env.example contains no real-looking API key');
 
 const sidebar = fs.readFileSync(path.join(root, 'components/Sidebar.tsx'), 'utf8');

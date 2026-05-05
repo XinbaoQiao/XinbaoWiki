@@ -62,7 +62,6 @@ const copy = {
       'Xinbao AI 正在赶来的路上',
       '家人们，答案正在路上',
       '886 还早，答案马上到',
-      '跑堂一下，去拿 source notes',
       '来踩踩 Xinbaopedia 的公开资料',
       '冒泡检索中',
       '先别急，Xinbao AI 正在检索',
