@@ -13,6 +13,7 @@ chat with xinbao/
   README.md
   env.example
   persona-prompt.md
+  meme-voice-notes.md
 ```
 
 ## Runtime flow
