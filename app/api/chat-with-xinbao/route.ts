@@ -219,6 +219,7 @@ export async function POST(request: NextRequest) {
         ],
         temperature: 0.3,
         max_tokens: MAX_OUTPUT_TOKENS,
+        thinking: { type: 'disabled' },
         stream: false
       }),
       signal: controller.signal
