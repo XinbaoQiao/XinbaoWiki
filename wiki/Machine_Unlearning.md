@@ -1,5 +1,7 @@
 ---
 name: "Machine Unlearning"
+image: "/topics/machine-unlearning.svg"
+image_caption: "Machine unlearning topic diagram"
 occupation: "Research topic"
 summary: "Research topic on removing or correcting data influence from trained models."
 ---

@@ -1,5 +1,7 @@
 ---
 name: "Synthetic Data"
+image: "/topics/synthetic-data.svg"
+image_caption: "Synthetic data topic diagram"
 aliases:
   - "Synthetic Data and Model Collapse"
 occupation: "Research topic"

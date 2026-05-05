@@ -6,6 +6,7 @@ summary: "Append-only maintenance log for the wiki."
 
 ## 2026-05-05
 
+- Enlarged the Xinbaopedia favicon mark and added custom SVG topic diagrams to the four main research-topic infoboxes.
 - Updated portrait captions to identify Singapore EXPO during ICLR 2025 and added advisor pages for [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]] and [[Meng_Zhang|Meng Zhang]], with official profile links and biography back-links.
 - Updated the English biography Born row to month-level date and place, and bolded Xinbao Qiao's author name in publication index and paper pages.
 - Pruned explanatory-only footnotes from the biography and generic topic pages; retained only compact source notes or name/context notes that improve readability without cluttering the prose.

@@ -1,5 +1,7 @@
 ---
 name: "AI and Networks"
+image: "/topics/ai-and-networks.svg"
+image_caption: "AI and networks topic diagram"
 occupation: "Research topic"
 summary: "Primary research topic for Qiao Xinbao, covering AI systems under networked data and communication constraints."
 ---

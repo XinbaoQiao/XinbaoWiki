@@ -87,8 +87,12 @@ const wikiPageTsx = fs.readFileSync(path.join(root, 'app/wiki/[slug]/page.tsx'),
 assertFile('components/LanguageToggle.tsx');
 assertFile('components/ArticleTabs.tsx');
 assertFile('public/xinbaopedia-icon.svg');
+const siteIcon = fs.readFileSync(path.join(root, 'public/xinbaopedia-icon.svg'), 'utf8');
 const languageToggle = fs.readFileSync(path.join(root, 'components/LanguageToggle.tsx'), 'utf8');
 const articleTabs = fs.readFileSync(path.join(root, 'components/ArticleTabs.tsx'), 'utf8');
+assert.match(siteIcon, /r="30"/, 'site icon fills the favicon canvas with a larger wiki mark');
+assert.match(siteIcon, /font-size="34"/, 'site icon enlarges the X glyph for small favicon rendering');
+assert.doesNotMatch(siteIcon, /r="24"|font-size="25"/, 'site icon no longer uses the undersized original mark');
 assert.match(layout, /title: 'Xinbaopedia'/, 'site metadata title is Xinbaopedia');
 assert.match(layout, /icons: \{ icon: pathWithBasePath\('\/xinbaopedia-icon\.svg'\) \}/, 'site metadata exposes a base-path-aware wiki-style icon');
 assert.doesNotMatch(layout, /wiki-logo-mark|<img className=/, 'topbar follows Colarpedia with a text-only wordmark');
@@ -320,8 +324,21 @@ const researchTopicPages = [
   'Data_Centric_Machine_Learning.md'
 ];
 
+const researchTopicImages = new Map([
+  ['AI_and_Networks.md', '/topics/ai-and-networks.svg'],
+  ['Machine_Unlearning.md', '/topics/machine-unlearning.svg'],
+  ['Synthetic_Data_and_Model_Collapse.md', '/topics/synthetic-data.svg'],
+  ['Data_Centric_Machine_Learning.md', '/topics/data-centric-ml.svg']
+]);
+
 for (const page of researchTopicPages) {
   const body = read(page);
+  const fm = frontmatter(page);
+  const image = researchTopicImages.get(page);
+  assert.ok(image, `${page} has a topic image mapping`);
+  assert.match(fm, new RegExp(`^image: "${image}"$`, 'm'), `${page} uses a custom topic illustration`);
+  assert.match(fm, /^image_caption: ".*topic diagram.*"$/m, `${page} captions the topic illustration`);
+  assert.doesNotMatch(fm, /institutions|university|emblem|logo/i, `${page} does not reuse school imagery`);
   assertSectionOrder(page, ['## Introduction', '## Role in this wiki', '## Publications', "## Connection to Qiao's work", '## See also']);
   assert.match(body, /\| Paper \| Venue\/status \|/, `${page} uses the shared publications table heading`);
   assert.doesNotMatch(body, /Central paper|Central publication/i, `${page} avoids inconsistent central-paper phrasing`);
@@ -383,6 +400,10 @@ for (const file of [
   'public/institutions/zhejiang-university-logo.png',
   'public/institutions/shandong-university-logo.png',
   'public/institutions/nusri-cq-logo.svg',
+  'public/topics/ai-and-networks.svg',
+  'public/topics/machine-unlearning.svg',
+  'public/topics/synthetic-data.svg',
+  'public/topics/data-centric-ml.svg',
   'public/files/XinbaoQiao_CV.pdf',
   'public/papers/model-collapse/fid-trends-combined.png',
   'public/papers/model-collapse/barycenter-methodology.png',
