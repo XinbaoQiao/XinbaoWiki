@@ -447,14 +447,24 @@ a.external::after {
   height: auto;
 }
 
+.wiki-body p:has(> img:only-child) {
+  clear: both;
+  margin: 18px 0;
+}
+
 .wiki-body img {
+  clear: both;
   display: block;
   width: auto;
-  max-width: min(100%, 680px);
-  max-height: 520px;
+  max-width: min(100%, 560px);
+  max-height: 440px;
   margin: 14px auto;
   object-fit: contain;
   background: var(--wiki-bg);
+}
+
+.wiki-body img[src$=".svg"] {
+  max-height: 360px;
 }
 
 .wiki-body .katex-display {

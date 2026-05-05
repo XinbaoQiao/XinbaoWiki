@@ -48,7 +48,7 @@ assert.doesNotMatch(bio, /^birth_place:/m, 'birthplace is kept in prose rather t
 assert.match(bio, /born: \|\n\s+September 2000 \(age 25\)\n\s+Xishuangbanna, Yunnan\n/, 'English Born row uses the requested month-and-place format');
 assert.doesNotMatch(bio, /30 September 2000|Xishuangbanna, Yunnan, China/, 'English Born row omits day and country');
 assert.match(bio, /occupation:\n\s+- "PhD candidate"/, 'occupation uses PhD candidate');
-assert.match(bio, /image_caption: "Photograph taken at Singapore EXPO during ICLR 2025"/, 'English portrait caption identifies ICLR 2025 at Singapore EXPO');
+assert.match(bio, /image_caption: "Photograph taken at Singapore EXPO, 2025"/, 'English portrait caption identifies Singapore EXPO and year');
 const educationBlock = frontmatterSlice(bio, 'education:', 'links:');
 assert.match(educationBlock, /label: "The Chinese University of Hong Kong"[\s\S]*label: "Zhejiang University"[\s\S]*label: "Shandong University"/, 'English education is reverse chronological');
 assert.match(educationBlock, /label: "Shandong University"\n\s+url: "\/wiki\/Shandong_University\/"\n\s+detail: "\(BEng, 2022\)"/, 'English education links only school name and keeps degree detail separate');
@@ -221,7 +221,7 @@ const learnPageFm = frontmatter('Learn_What_Matters_Data_Pruning_for_Efficient_D
 assert.doesNotMatch(learnPageFm, /^categories:/m, 'under-review manuscript infobox omits categories');
 
 assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /!\[[^\]]+\]\(\/papers\/model-collapse\/fid-trends-combined\.png\)/, 'model-collapse paper page displays a figure');
-assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /!\[[^\]]+\]\(\/papers\/model-collapse\/teaser\.svg\)/, 'model-collapse paper page displays a local teaser figure');
+assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /!\[[^\]]+\]\(\/papers\/model-collapse\/teaser\.png\)/, 'model-collapse paper page displays a local teaser figure');
 assert.match(read('Hessian_Free_Online_Certified_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/hessian-free\/ours\.png\)/, 'Hessian-free paper page displays a figure');
 assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/soft-weighted\/sec-5-1-1\.png\)/, 'soft-weighted paper page displays a figure');
 assert.match(read('DynFrs.md'), /!\[[^\]]+\]\(\/papers\/dynfrs\/lazy-tags\.png\)/, 'DynFrs paper page displays a figure');
@@ -232,7 +232,9 @@ assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers
 const infobox = fs.readFileSync(path.join(root, 'components/Infobox.tsx'), 'utf8');
 const styles = fs.readFileSync(path.join(root, 'app/globals.css'), 'utf8');
 assert.doesNotMatch(styles, /\.wiki-logo-mark|\.wiki-logo:hover/, 'topbar CSS does not keep custom logo-image styling');
-assert.match(styles, /\.wiki-body img \{[\s\S]*max-width: min\(100%, 680px\);[\s\S]*max-height: 520px;[\s\S]*object-fit: contain;[\s\S]*\}/, 'article images are constrained to a readable paper-figure size');
+assert.match(styles, /\.wiki-body p:has\(> img:only-child\) \{[\s\S]*clear: both;[\s\S]*\}/, 'article image paragraphs clear floated infoboxes before rendering');
+assert.match(styles, /\.wiki-body img \{[\s\S]*max-width: min\(100%, 560px\);[\s\S]*max-height: 440px;[\s\S]*object-fit: contain;[\s\S]*\}/, 'article images are constrained to a readable paper-figure size');
+assert.match(styles, /\.wiki-body img\[src\$="\.svg"\] \{[\s\S]*max-height: 360px;[\s\S]*\}/, 'SVG article diagrams keep a compact readable height');
 assert.match(styles, /\.wiki-body \.katex-display \{[\s\S]*overflow-x: auto;[\s\S]*\}/, 'display formulas can scroll horizontally on narrow screens');
 assert.match(styles, /\.wiki-logo \{\n\s+font-family: var\(--font-serif\);\n\s+font-size: 22px;\n\s+font-weight: 400;\n\s+color: var\(--wiki-text\);\n\}/, 'topbar logo CSS matches Colarpedia text wordmark');
 const sidebarLinkStyle = styles.match(/\.wiki-sidebar a \{([\s\S]*?)\}/);
@@ -340,10 +342,10 @@ const researchTopicPages = [
 ];
 
 const researchTopicImages = new Map([
-  ['AI_and_Networks.md', '/topics/ai-and-networks.svg'],
-  ['Machine_Unlearning.md', '/topics/machine-unlearning.svg'],
-  ['Synthetic_Data_and_Model_Collapse.md', '/topics/synthetic-data.svg'],
-  ['Data_Centric_Machine_Learning.md', '/topics/data-centric-ml.svg']
+  ['AI_and_Networks.md', '/topics/ai-and-networks.png'],
+  ['Machine_Unlearning.md', '/topics/machine-unlearning.png'],
+  ['Synthetic_Data_and_Model_Collapse.md', '/topics/synthetic-data.png'],
+  ['Data_Centric_Machine_Learning.md', '/topics/data-centric-ml.png']
 ]);
 
 for (const page of researchTopicPages) {
@@ -357,6 +359,21 @@ for (const page of researchTopicPages) {
   assertSectionOrder(page, ['## Introduction', '## Role in this wiki', '## Publications', "## Connection to Qiao's work", '## See also']);
   assert.match(body, /\| Paper \| Venue\/status \|/, `${page} uses the shared publications table heading`);
   assert.doesNotMatch(body, /Central paper|Central publication/i, `${page} avoids inconsistent central-paper phrasing`);
+}
+
+const generatedConceptImages = [
+  'public/topics/ai-and-networks.png',
+  'public/topics/machine-unlearning.png',
+  'public/topics/synthetic-data.png',
+  'public/topics/data-centric-ml.png',
+  'public/papers/model-collapse/teaser.png'
+];
+
+for (const file of generatedConceptImages) {
+  assertFile(file);
+  const { size } = fs.statSync(path.join(root, file));
+  assert.ok(size > 100_000, `${file} is a generated raster illustration, not a tiny placeholder`);
+  assert.ok(size < 600_000, `${file} is compressed enough for static-page delivery`);
 }
 
 assert.match(read('AI_and_Networks.md'), /\| \[\[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning\|Learn What Matters: Data Pruning for Efficient Decentralized Learning\]\] \| under review\. \|/, 'AI and Networks shortens under-review status');
@@ -415,12 +432,12 @@ for (const file of [
   'public/institutions/zhejiang-university-logo.png',
   'public/institutions/shandong-university-logo.png',
   'public/institutions/nusri-cq-logo.svg',
-  'public/topics/ai-and-networks.svg',
-  'public/topics/machine-unlearning.svg',
-  'public/topics/synthetic-data.svg',
-  'public/topics/data-centric-ml.svg',
+  'public/topics/ai-and-networks.png',
+  'public/topics/machine-unlearning.png',
+  'public/topics/synthetic-data.png',
+  'public/topics/data-centric-ml.png',
   'public/files/XinbaoQiao_CV.pdf',
-  'public/papers/model-collapse/teaser.svg',
+  'public/papers/model-collapse/teaser.png',
   'public/papers/model-collapse/fid-trends-combined.png',
   'public/papers/model-collapse/barycenter-methodology.png',
   'public/papers/model-collapse/class-proportions-trend.png',

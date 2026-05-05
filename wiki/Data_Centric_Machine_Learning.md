@@ -1,6 +1,6 @@
 ---
 name: "Data Centric ML"
-image: "/topics/data-centric-ml.svg"
+image: "/topics/data-centric-ml.png"
 image_caption: "Data centric ML topic diagram"
 aliases:
   - "Data-Centric Machine Learning"

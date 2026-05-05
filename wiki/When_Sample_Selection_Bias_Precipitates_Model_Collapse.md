@@ -23,7 +23,7 @@ summary: "ICML 2026 paper on local sample-selection bias, model collapse, and co
 
 **When Sample Selection Bias Precipitates Model Collapse** is an ICML 2026 conference paper by **[[Xinbao_Qiao|Xinbao Qiao]]**, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, and Yan Pang. It examines how local verification in data silos can turn recursive synthetic-data training into a diversity-loss process, and how collaborative distributional proxies can reduce that failure mode.
 
-![Teaser: local selection bias narrows recursive synthetic data, while collaborative Wasserstein verification preserves diversity](/papers/model-collapse/teaser.svg)
+![Teaser: local selection bias narrows recursive synthetic data, while collaborative Wasserstein verification preserves diversity](/papers/model-collapse/teaser.png)
 
 ## Overview
 
