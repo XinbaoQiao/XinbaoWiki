@@ -4,7 +4,7 @@ occupation: "Research concept"
 summary: "Concept page for generated data used in training, evaluation, or privacy-preserving collaboration."
 ---
 
-**Synthetic Data** refers to generated examples that are used in place of, alongside, or as a proxy for real data. In machine learning, synthetic data can expand coverage, reduce annotation cost, protect privacy, or enable evaluation when real data are scarce. It can also introduce failure modes when generated samples are recursively reused without enough real-data anchoring.[^synthetic]
+**Synthetic Data** refers to generated examples that are used in place of, alongside, or as a proxy for real data. In machine learning, synthetic data can expand coverage, reduce annotation cost, protect privacy, or enable evaluation when real data are scarce. It can also introduce failure modes when generated samples are recursively reused without enough real-data anchoring.
 
 ## Role in this wiki
 
@@ -20,5 +20,3 @@ Qiao's ICML 2026 work studies synthetic data under selection bias and siloed acc
 - [[Recursive_Synthetic_Data_Training]]
 - [[Sample_Selection_Bias]]
 - [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]]
-
-[^synthetic]: Synthetic data is used across privacy, simulation, data augmentation, and generative-model training. The risks discussed in this wiki concern recursive reuse and biased selection, not every use of generated data.

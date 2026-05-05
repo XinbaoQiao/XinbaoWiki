@@ -23,11 +23,11 @@ summary: "Research internship institution of Xinbao Qiao."
 
 ## Program
 
-Qiao's internship work is summarized in the biography as trustworthy LLM systems and synthetic-data evaluation. The institute context is relevant because NUSRI-CQ presents itself as a platform for research, technology transfer, education, and innovation in Chongqing.[^nusri-home] This mixed research-and-translation environment helps explain why the related wiki pages emphasize both methodological questions and deployment constraints.
+Qiao's internship work is summarized in the biography as trustworthy LLM systems and synthetic-data evaluation. The institute context is relevant because NUSRI-CQ presents itself as a platform for research, technology transfer, education, and innovation in Chongqing.[^nusri-intro] This mixed research-and-translation environment helps explain why the related wiki pages emphasize both methodological questions and deployment constraints.
 
 ## Academic context
 
-Public NUS material describes NUSRI-CQ as a joint effort between the National University of Singapore and Chongqing Liangjiang New Area, with research areas including information engineering and artificial intelligence, modern logistics, finance and risk management, and advanced materials and manufacturing.[^nus-news] The institute's own English site frames its mission around innovation and talent development for Chongqing and Western China.[^nusri-vision]
+Public NUS material describes NUSRI-CQ as a joint effort between the National University of Singapore and Chongqing Liangjiang New Area, while the institute's own English site frames it as NUS's cooperation window in western China.[^nus-news]
 
 ## Connection to Qiao
 
@@ -41,8 +41,6 @@ The NUSRI-CQ period is associated in this wiki with [[Synthetic_Data_and_Model_C
 - [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]]
 - [[The_Chinese_University_of_Hong_Kong]]
 
-[^nusri-home]: The NUSRI-CQ homepage describes activities spanning enterprise, education, and research, including technology transfer and research fields such as new materials, new energy, and life health.
+[^nusri-intro]: The NUSRI-CQ English [institute introduction](https://en.nusricq.cn/about/yjyjj) describes the institute as a research, incubation, education, and training platform focused on industry-academia-research integration.
 
-[^nus-news]: NUS News reported in September 2018 that NUS signed an agreement to establish NUSRI@CQ and listed expected areas including modern logistics, finance and risk management, information engineering and technology, and advanced manufacturing and materials.
-
-[^nusri-vision]: NUSRI-CQ's vision and mission page states the aim of being a global institute for innovation and talent development and contributing to R&D industries and communities in Chongqing and Western China.
+[^nus-news]: [NUS News](https://news.nus.edu.sg/news-reports/nus-signs-agreement-establish-nusricq) reported in September 2018 that NUS signed a strategic framework agreement with Chongqing Liangjiang New Area Administrative Committee to establish NUSRI@CQ.

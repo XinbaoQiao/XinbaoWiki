@@ -19,7 +19,7 @@ links:
 summary: "Master's institution of Xinbao Qiao."
 ---
 
-**Zhejiang University** (**ZJU**) was [[Xinbao_Qiao|Xinbao Qiao]]'s master's institution from 2022 to 2025. In this wiki the article records the institutional setting for the work that led into Qiao's publications on [[Machine_Unlearning|machine unlearning]], influence-based data correction, and [[Data_Centric_Machine_Learning|data centric ML]]. It is not intended as a full university history; instead, it explains the ZJU phase within Qiao's academic timeline.[^zju-history]
+**Zhejiang University** (**ZJU**) was [[Xinbao_Qiao|Xinbao Qiao]]'s master's institution from 2022 to 2025. In this wiki the article records the institutional setting for the work that led into Qiao's publications on [[Machine_Unlearning|machine unlearning]], influence-based data correction, and [[Data_Centric_Machine_Learning|data centric ML]]. It is not intended as a full university history; instead, it explains the ZJU phase within Qiao's academic timeline.
 
 ## Program
 
@@ -27,7 +27,7 @@ Qiao studied Artificial Intelligence at Zhejiang University and received a maste
 
 ## Academic context
 
-Zhejiang University traces its institutional origin to Qiushi Academy, founded in 1897, and is headquartered in Hangzhou.[^zju-about] Public descriptions of ZJU emphasize its comprehensive structure and research strength across engineering, computer science, medicine, agriculture, and interdisciplinary innovation.[^zju-wef] For Qiao's wiki, the relevant context is the university's scale as a research environment in which data-centric and trustworthy machine-learning projects could be developed into conference submissions.
+Zhejiang University traces its institutional origin to Qiushi Academy, founded in 1897, and is headquartered in Hangzhou.[^zju-about] Public descriptions of ZJU emphasize its comprehensive structure and research strength across engineering, computer science, medicine, agriculture, and interdisciplinary innovation. For Qiao's wiki, the relevant context is the university's scale as a research environment in which data-centric and trustworthy machine-learning projects could be developed into conference submissions.
 
 ## Connection to Qiao
 
@@ -41,8 +41,4 @@ During the ZJU phase Qiao worked on [[Hessian_Free_Online_Certified_Unlearning|H
 - [[Hessian_Free_Online_Certified_Unlearning]]
 - [[Soft_Weighted_Machine_Unlearning]]
 
-[^zju-history]: The page follows the Colarpedia-style institutional article pattern by describing the institution through its relationship to the biography subject.
-
-[^zju-about]: Zhejiang University's English site places the university's historical origin in 1897; public fact sheets likewise identify Qiushi Academy as the institutional predecessor.
-
-[^zju-wef]: The World Economic Forum profile describes Zhejiang University as a public research university in Hangzhou and notes its C9 League and Double First-Class context.
+[^zju-about]: Zhejiang University's English [About page](https://www.zju.edu.cn/english/_t874/about/list.htm) places the university's historical origin in 1897 and describes it as a comprehensive research university headquartered in Hangzhou.

@@ -4,7 +4,7 @@ occupation: "Research concept"
 summary: "Concept page for choosing training or evaluation data under reliability constraints."
 ---
 
-**Data Selection** is the process of choosing which examples are used for training, pruning, evaluation, or synthetic-data reuse. In this wiki it is treated as a central data-centric operation: selection can reduce cost and improve quality, but biased selection can also distort a model's view of the target distribution.[^selection]
+**Data Selection** is the process of choosing which examples are used for training, pruning, evaluation, or synthetic-data reuse. In this wiki it is treated as a central data-centric operation: selection can reduce cost and improve quality, but biased selection can also distort a model's view of the target distribution.
 
 ## Role in this wiki
 
@@ -20,5 +20,3 @@ Data selection appears directly in [[Learn_What_Matters_Data_Pruning_for_Efficie
 - [[Data_Centric_Machine_Learning|Data Centric ML]]
 - [[Distributed_Learning]]
 - [[Synthetic_Data]]
-
-[^selection]: The term is used broadly here and includes pruning, subset selection, filtering, curriculum-style choice, and weighted retention.

@@ -6,7 +6,7 @@ occupation: "Research topic"
 summary: "Research topic focused on data quality, selection, valuation, correction, and governance."
 ---
 
-**Data Centric ML** is the short label used in this wiki for data-centric machine learning. It refers to research where changes to data, rather than only changes to model architecture, are treated as first-order interventions. The relevant operations include selection, pruning, weighting, deletion, synthesis, and cross-party evaluation.[^data-centric]
+**Data Centric ML** is the short label used in this wiki for data-centric machine learning. It refers to research where changes to data, rather than only changes to model architecture, are treated as first-order interventions. The relevant operations include selection, pruning, weighting, deletion, synthesis, and cross-party evaluation.
 
 ## Introduction
 
@@ -37,5 +37,3 @@ In Qiao's publication record, data-centric ML appears in several forms. In unlea
 - [[Synthetic_Data_and_Model_Collapse|Synthetic Data]]
 - [[Machine_Unlearning]]
 - [[AI_and_Networks]]
-
-[^data-centric]: The term "data-centric AI" is commonly used for approaches that improve model performance by systematically improving data quality, consistency, and representativeness rather than only changing model code.

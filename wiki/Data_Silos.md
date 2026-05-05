@@ -4,7 +4,7 @@ occupation: "Research concept"
 summary: "Concept page for learning and evaluation when data are distributed across separate holders."
 ---
 
-**Data Silos** are organizational, legal, technical, or geographic separations that prevent all training data from being pooled in one place. In this wiki the term is used for institutions, devices, or clients that each hold only a partial view of the target distribution.[^silos]
+**Data Silos** are organizational, legal, technical, or geographic separations that prevent all training data from being pooled in one place. In this wiki the term is used for institutions, devices, or clients that each hold only a partial view of the target distribution.
 
 ## Role in this wiki
 
@@ -20,5 +20,3 @@ Data silos are central to [[When_Sample_Selection_Bias_Precipitates_Model_Collap
 - [[Distributed_Learning]]
 - [[Collaborative_Evaluation]]
 - [[Sample_Selection_Bias]]
-
-[^silos]: Data silos are common in healthcare, finance, mobile computing, and cross-institutional research, where data pooling can be restricted by privacy, regulation, ownership, or infrastructure.

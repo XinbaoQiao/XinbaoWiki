@@ -139,12 +139,25 @@ for (const page of [
   assert.doesNotMatch(read(page), /^## 参考资料$/m, `${page} removes unused Chinese references section`);
 }
 
-assert.match(home, /\[\^xinbao-name\]/, 'home article uses a real footnote for the given name');
-assert.match(home, /^\[\^xinbao-name\]:/m, 'home article defines the given-name footnote');
-assert.match(home, /\[\^timeline-note\]/, 'home article uses a timeline/status footnote');
-assert.match(home, /^\[\^timeline-note\]:/m, 'home article defines the timeline/status footnote');
-assert.match(zhHome, /\[\^xinbao-name-zh\]/, 'Chinese home article uses a real footnote');
-assert.match(zhHome, /^\[\^xinbao-name-zh\]:/m, 'Chinese home article defines the given-name footnote');
+function footnoteRefs(body) {
+  return body
+    .split('\n')
+    .filter((line) => !line.startsWith('[^'))
+    .flatMap((line) => [...line.matchAll(/\[\^([^\]]+)\]/g)].map((match) => match[1]));
+}
+
+function footnoteDefs(body) {
+  return [...body.matchAll(/^\[\^([^\]]+)\]:/gm)].map((match) => match[1]);
+}
+
+assert.deepEqual(footnoteDefs(home).sort(), ['cuhk-ie', 'xinbao-name'].sort(), 'English biography keeps only essential footnotes');
+assert.deepEqual(footnoteDefs(zhHome).sort(), ['cuhk-ie-zh', 'xinbao-name-zh'].sort(), 'Chinese biography keeps only essential footnotes');
+for (const removedNote of ['timeline-note', 'research-scope', 'zju-program', 'sdu-background', 'ai-networks-note']) {
+  assert.doesNotMatch(home, new RegExp(`\\[\\^${removedNote}\\]`), `English biography removes ${removedNote}`);
+}
+for (const removedNote of ['timeline-note-zh', 'research-scope-zh', 'zju-program-zh', 'sdu-background-zh', 'ai-networks-note-zh']) {
+  assert.doesNotMatch(zhHome, new RegExp(`\\[\\^${removedNote}\\]`), `Chinese biography removes ${removedNote}`);
+}
 
 const acceptedPublicationPages = [
   'When_Sample_Selection_Bias_Precipitates_Model_Collapse.md',
@@ -209,7 +222,11 @@ for (const page of [
   for (const section of ['## Program', '## Academic context', '## Connection to Qiao', '## See also']) {
     assert.match(body, new RegExp(`^${section}$`, 'm'), `${page} follows the Colarpedia-style institution structure`);
   }
-  assert.match(body, /\[\^[^\]]+\]/, `${page} uses explanatory footnotes`);
+  assert.ok(footnoteRefs(body).length <= 3, `${page} uses footnotes sparingly`);
+  for (const note of footnoteDefs(body)) {
+    const match = body.match(new RegExp(`^\\[\\^${note}\\]: ([\\s\\S]*?)(?=\\n\\[\\^|$)`, 'm'));
+    assert.ok(match?.[1].includes('http'), `${page} footnote ${note} cites a source URL`);
+  }
   assert.ok(body.split(/\s+/).length >= 180, `${page} is not a placeholder institution page`);
 }
 
@@ -238,8 +255,26 @@ for (const page of [
   const body = read(page);
   assert.match(body, /^## Role in this wiki$/m, `${page} explains its role in the wiki`);
   assert.match(body, /^## Connection to Qiao's work$/m, `${page} connects the topic to Qiao's work`);
-  assert.match(body, /\[\^[^\]]+\]/, `${page} uses footnotes for background`);
+  assert.ok(footnoteRefs(body).length <= 1, `${page} avoids over-footnoting background`);
+  assert.ok(footnoteDefs(body).length <= 1, `${page} keeps at most one source note`);
   assert.ok(body.split(/\s+/).length >= 120, `${page} is no longer a one-paragraph placeholder`);
+}
+
+for (const page of [
+  'Collaborative_Evaluation.md',
+  'Data_Centric_Machine_Learning.md',
+  'Data_Selection.md',
+  'Data_Silos.md',
+  'Fairness_and_Robustness.md',
+  'Interpretability.md',
+  'LLM_Reliability.md',
+  'Sample_Selection_Bias.md',
+  'Synthetic_Data.md',
+  'Trustworthy_AI.md'
+]) {
+  const body = read(page);
+  assert.equal(footnoteRefs(body).length, 0, `${page} keeps generic topic prose unfootnoted`);
+  assert.equal(footnoteDefs(body).length, 0, `${page} removes explanatory-only footnotes`);
 }
 
 function assertSectionOrder(page, sections) {

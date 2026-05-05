@@ -4,7 +4,7 @@ occupation: "Research concept"
 summary: "Concept page for explaining model behavior and data influence."
 ---
 
-**Interpretability** refers to methods that help people understand why a model behaves the way it does. In this wiki the emphasis is narrower than the whole interpretability field: it focuses on data influence, error diagnosis, and explanations that support trustworthiness decisions.[^interp]
+**Interpretability** refers to methods that help people understand why a model behaves the way it does. In this wiki the emphasis is narrower than the whole interpretability field: it focuses on data influence, error diagnosis, and explanations that support trustworthiness decisions.
 
 ## Role in this wiki
 
@@ -20,5 +20,3 @@ Qiao's wiki connects interpretability most directly through [[Influence_Function
 - [[Trustworthy_AI]]
 - [[Machine_Unlearning]]
 - [[Data_Centric_Machine_Learning|Data Centric ML]]
-
-[^interp]: In this page, interpretability includes influence analysis and process-level diagnosis, not only feature-attribution heat maps or natural-language explanations.

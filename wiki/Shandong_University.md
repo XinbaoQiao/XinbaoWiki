@@ -27,7 +27,7 @@ Qiao's undergraduate program was Communication Engineering. The program context 
 
 ## Academic context
 
-Shandong University identifies its main body, Shandong Imperial College, as established in 1901 and describes it as one of the first institutions of modern higher education in China.[^sdu-history] The university is a broad comprehensive institution with campuses across Jinan, Qingdao, and Weihai. For this wiki, the relevant point is not the full institutional history, but the combination of engineering education and a large research-university setting that preceded Qiao's master's specialization in artificial intelligence.
+Shandong University identifies its main body, Shandong Imperial College, as established in 1901 and describes it as one of the first institutions of modern higher education in China. The university is a broad comprehensive institution with campuses across Jinan, Qingdao, and Weihai. For this wiki, the relevant point is not the full institutional history, but the combination of engineering education and a large research-university setting that preceded Qiao's master's specialization in artificial intelligence.
 
 ## Connection to Qiao
 
@@ -41,6 +41,4 @@ The SDU phase is used in the biography to explain why Qiao's later machine-learn
 - [[Distributed_Learning]]
 - [[Zhejiang_University]]
 
-[^sdu-about]: Shandong University's English introduction describes the university as a key comprehensive university with a long history and broad disciplines.
-
-[^sdu-history]: SDU's official history traces the institution to Shandong Imperial College in 1901 and records later mergers, including the 2000 merger with Shandong Medical University and Shandong University of Technology.
+[^sdu-about]: Shandong University's English [About page](https://en.sdu.edu.cn/About.htm) describes the university as a key comprehensive university with a long history and broad disciplines, and its history section traces the main body to Shandong Imperial College in 1901.

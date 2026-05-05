@@ -4,7 +4,7 @@ occupation: "Research concept"
 summary: "Concept page for evaluating models or data processes across multiple parties."
 ---
 
-**Collaborative Evaluation** refers to evaluation procedures in which multiple parties contribute evidence about model behavior, data quality, or distributional drift. In this wiki the concept is used mainly for cross-silo settings, where each participant has local observations but no participant has complete access to the global distribution.[^eval]
+**Collaborative Evaluation** refers to evaluation procedures in which multiple parties contribute evidence about model behavior, data quality, or distributional drift. In this wiki the concept is used mainly for cross-silo settings, where each participant has local observations but no participant has complete access to the global distribution.
 
 ## Role in this wiki
 
@@ -20,5 +20,3 @@ In [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selectio
 - [[Data_Silos]]
 - [[Wasserstein_Geometry]]
 - [[Synthetic_Data_and_Model_Collapse|Synthetic Data]]
-
-[^eval]: The page uses "evaluation" broadly, including data-quality checking, distribution-shift detection, failure diagnosis, and validation of generated data.

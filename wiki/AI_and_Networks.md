@@ -4,11 +4,11 @@ occupation: "Research topic"
 summary: "Primary research topic for Qiao Xinbao, covering AI systems under networked data and communication constraints."
 ---
 
-**AI and Networks** is the primary research topic currently emphasized in [[Xinbao_Qiao|Xinbao Qiao]]'s wiki. The term is used here in a deliberately broad but bounded sense: it covers AI methods for networked settings, and learning algorithms whose behavior depends on communication, decentralization, edge devices, institutional data silos, or cross-party evaluation.[^scope]
+**AI and Networks** is the primary research topic currently emphasized in [[Xinbao_Qiao|Xinbao Qiao]]'s wiki. The term is used here in a deliberately broad but bounded sense: it covers AI methods for networked settings, and learning algorithms whose behavior depends on communication, decentralization, edge devices, institutional data silos, or cross-party evaluation.[^sources]
 
 ## Introduction
 
-In this wiki, AI and Networks is not a separate application label but the organizing frame for research in which learning is shaped by where data live, how information moves, and which parties can evaluate a model. The topic therefore includes decentralized learning, data pruning, collaborative evaluation, and synthetic-data verification under siloed access.[^icml-2026]
+In this wiki, AI and Networks is not a separate application label but the organizing frame for research in which learning is shaped by where data live, how information moves, and which parties can evaluate a model. The topic therefore includes decentralized learning, data pruning, collaborative evaluation, and synthetic-data verification under siloed access.
 
 ## Role in this wiki
 
@@ -33,6 +33,4 @@ The clearest project in this area is [[Learn_What_Matters_Data_Pruning_for_Effic
 - [[Data_Centric_Machine_Learning|Data Centric ML]]
 - [[The_Chinese_University_of_Hong_Kong]]
 
-[^scope]: The phrasing follows CUHK IE's [official department description](https://www.ie.cuhk.edu.hk/about-the-department/), which frames information engineering around information generation, communication, storage, and processing in real-world applications.
-
-[^icml-2026]: The [ICML 2026 conference page](https://icml.cc/Conferences/2026) lists the meeting for 6-11 July 2026 at COEX in Seoul, South Korea.
+[^sources]: The topic label follows CUHK IE's [official department description](https://www.ie.cuhk.edu.hk/about-the-department/), which frames information engineering around information generation, communication, storage, and processing in real-world applications; the ICML 2026 timing in the publications table follows the [official ICML 2026 conference page](https://icml.cc/Conferences/2026).

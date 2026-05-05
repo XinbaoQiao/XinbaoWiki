@@ -35,17 +35,17 @@ links:
 summary: "PhD candidate in Information Engineering at The Chinese University of Hong Kong; researcher in AI and networks, machine unlearning, and synthetic-data reliability"
 ---
 
-**Xinbao Qiao** (Chinese: **乔鑫宝**; born 30 September 2000 in Xishuangbanna, Yunnan) is a Chinese PhD candidate in the Department of Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]].[^xinbao-name] His current research is centered on [[AI_and_Networks|AI and networks]], with related work in [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic data]], and [[Data_Centric_Machine_Learning|data centric ML]].[^research-scope]
+**Xinbao Qiao** (Chinese: **乔鑫宝**; born 30 September 2000 in Xishuangbanna, Yunnan) is a Chinese PhD candidate in the Department of Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]].[^xinbao-name] His current research is centered on [[AI_and_Networks|AI and networks]], with related work in [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic data]], and [[Data_Centric_Machine_Learning|data centric ML]].
 
-Before his doctoral studies, Qiao received a Master of Science in Artificial Intelligence from [[Zhejiang_University|Zhejiang University]] and a Bachelor of Engineering in Communication Engineering from [[Shandong_University|Shandong University]]. His [[Publications]] include accepted or published papers at ICML, AAAI, and ICLR.[^timeline-note]
+Before his doctoral studies, Qiao received a Master of Science in Artificial Intelligence from [[Zhejiang_University|Zhejiang University]] and a Bachelor of Engineering in Communication Engineering from [[Shandong_University|Shandong University]]. His [[Publications]] include accepted or published papers at ICML, AAAI, and ICLR.
 
 ## Education
 
 Qiao is enrolled as a PhD candidate in Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]].[^cuhk-ie]
 
-From 2022 to 2025 he studied Artificial Intelligence at [[Zhejiang_University|Zhejiang University]], where his master's transcript records a major GPA of 90/100 and a rank of 3/25.[^zju-program]
+From 2022 to 2025 he studied Artificial Intelligence at [[Zhejiang_University|Zhejiang University]], where his master's transcript records a major GPA of 90/100 and a rank of 3/25.
 
-Qiao received a Bachelor of Engineering in Communication Engineering from [[Shandong_University|Shandong University]] in 2022.[^sdu-background]
+Qiao received a Bachelor of Engineering in Communication Engineering from [[Shandong_University|Shandong University]] in 2022.
 
 ## Research experience
 
@@ -69,7 +69,7 @@ In addition to the biographical education and affiliation record, Qiao's wiki or
 
 ### AI and networks (2024-2026)
 
-Qiao's current primary line, [[AI_and_Networks|AI and networks]], studies how learning systems behave when data and computation are distributed across devices, institutions, or networked infrastructure. The line includes [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters: Data Pruning for Efficient Decentralized Learning]] and the collaborative evaluation setting in [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]].[^ai-networks-note]
+Qiao's current primary line, [[AI_and_Networks|AI and networks]], studies how learning systems behave when data and computation are distributed across devices, institutions, or networked infrastructure. The line includes [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters: Data Pruning for Efficient Decentralized Learning]] and the collaborative evaluation setting in [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]].
 
 ### Machine unlearning (2023-2026)
 
@@ -100,14 +100,4 @@ The ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|Whe
 
 [^xinbao-name]: The romanized given name "Xinbao" is also used by the [San Diego Zoo's giant panda Xin Bao](https://zoo.sandiegozoo.org/giant-pandas), whose name the zoo glosses as "precious treasure of prosperity and abundance"; this note records a name coincidence, not a biographical relation.
 
-[^timeline-note]: Publication statuses on this page combine owner-provided CV records with public conference, OpenReview, arXiv, and lecture-page metadata checked on 5 May 2026.
-
-[^research-scope]: The short topic labels in the sidebar intentionally use compact names: "AI and Networks", "Machine Unlearning", "Synthetic Data", and "Data Centric ML". Longer phrases are kept inside topic pages where they can be defined without slowing the biography lead.
-
 [^cuhk-ie]: CUHK's Department of Information Engineering describes its scope as information generation, communication, storage, and processing in real-world applications on its [official department page](https://www.ie.cuhk.edu.hk/about-the-department/); the CUHK Graduate School also lists [MPhil-PhD in Information Engineering](https://www.gs.cuhk.edu.hk/programmes/engineering) within Engineering.
-
-[^zju-program]: Zhejiang University traces its origin to Qiushi Academy in 1897 and is headquartered in Hangzhou. In this wiki, the ZJU page records Qiao's master's period and its relation to his data-centric machine-learning work.
-
-[^sdu-background]: Shandong University identifies its 1901 Shandong Imperial College predecessor as one of the first institutions of modern Chinese higher education; Qiao's undergraduate degree there supplied the communication-engineering background behind later AI-network work.
-
-[^ai-networks-note]: In this wiki, "AI and networks" includes both AI-for-networked systems and network-aware learning, including decentralized training, data pruning, communication constraints, and cross-silo evaluation.

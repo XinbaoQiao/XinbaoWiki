@@ -4,7 +4,7 @@ occupation: "Research concept"
 summary: "Concept page for fairness and robustness as data-centric correction objectives."
 ---
 
-**Fairness and Robustness** are treated in this wiki as reliability objectives that can sometimes be improved by changing the training data or their weights. Fairness concerns systematic performance or treatment differences across groups, while robustness concerns stability under perturbations, corruptions, adversarial inputs, or distribution shift.[^fairness]
+**Fairness and Robustness** are treated in this wiki as reliability objectives that can sometimes be improved by changing the training data or their weights. Fairness concerns systematic performance or treatment differences across groups, while robustness concerns stability under perturbations, corruptions, adversarial inputs, or distribution shift.
 
 ## Role in this wiki
 
@@ -20,5 +20,3 @@ Qiao's AAAI 2026 paper frames soft-weighted unlearning as a way to solve non-bin
 - [[Machine_Unlearning]]
 - [[Trustworthy_AI]]
 - [[Influence_Functions]]
-
-[^fairness]: The terms are used here descriptively. Specific fairness metrics vary by task and may include demographic parity, equalized odds, calibration, subgroup loss, or problem-specific constraints.

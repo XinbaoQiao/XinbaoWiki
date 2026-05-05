@@ -4,7 +4,7 @@ occupation: "Research concept"
 summary: "Concept page for reliability issues in large language model systems."
 ---
 
-**LLM Reliability** concerns whether large language model systems behave consistently, safely, and truthfully under realistic use. In this wiki the term is connected to synthetic data, evaluation, and trustworthy systems rather than to a separate product-building track.[^llm]
+**LLM Reliability** concerns whether large language model systems behave consistently, safely, and truthfully under realistic use. In this wiki the term is connected to synthetic data, evaluation, and trustworthy systems rather than to a separate product-building track.
 
 ## Role in this wiki
 
@@ -20,5 +20,3 @@ Qiao's public publication pages currently emphasize machine unlearning, AI and n
 - [[Synthetic_Data_and_Model_Collapse|Synthetic Data]]
 - [[Collaborative_Evaluation]]
 - [[Trustworthy_AI]]
-
-[^llm]: This page avoids listing non-public manuscript material. It only summarizes the reliability context already represented by the public wiki and CV-visible research record.
