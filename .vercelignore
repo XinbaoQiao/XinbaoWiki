@@ -1,0 +1,4 @@
+*.hdoc
+*.token
+.secrets
+tsconfig.tsbuildinfo
