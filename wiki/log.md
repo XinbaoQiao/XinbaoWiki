@@ -6,6 +6,7 @@ summary: "Append-only maintenance log for the wiki."
 
 ## 2026-05-06
 
+- Added `Chat with Xinbao`, a same-site AI assistant entry beside the search bar, with a server-only Next.js API route, Yunwu model proxying, Upstash-backed rate limits, and deployment/security documentation.
 - Restricted the top search dropdown to the active page language, so English pages return English wiki entries and Chinese pages return Chinese wiki entries.
 
 ## 2026-05-05

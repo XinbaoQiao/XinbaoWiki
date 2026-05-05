@@ -102,14 +102,27 @@ const wikiPageTsx = fs.readFileSync(path.join(root, 'app/wiki/[slug]/page.tsx'),
 const wikiMarkdownTsx = fs.readFileSync(path.join(root, 'components/WikiMarkdown.tsx'), 'utf8');
 const wikiLib = fs.readFileSync(path.join(root, 'lib/wiki.ts'), 'utf8');
 const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+const nextConfig = fs.readFileSync(path.join(root, 'next.config.mjs'), 'utf8');
 assertFile('components/LanguageToggle.tsx');
 assertFile('components/ArticleTabs.tsx');
 assertFile('components/WikiSearch.tsx');
+assertFile('components/ChatWithXinbao.tsx');
+assertFile('app/api/chat-with-xinbao/route.ts');
+assertFile('lib/chat-with-xinbao.ts');
+assertFile('chat with xinbao/README.md');
+assertFile('chat with xinbao/env.example');
+assertFile('chat with xinbao/persona-prompt.md');
 assertFile('public/xinbaopedia-icon.svg');
 const siteIcon = fs.readFileSync(path.join(root, 'public/xinbaopedia-icon.svg'), 'utf8');
 const languageToggle = fs.readFileSync(path.join(root, 'components/LanguageToggle.tsx'), 'utf8');
 const articleTabs = fs.readFileSync(path.join(root, 'components/ArticleTabs.tsx'), 'utf8');
 const wikiSearch = fs.readFileSync(path.join(root, 'components/WikiSearch.tsx'), 'utf8');
+const chatWithXinbao = fs.readFileSync(path.join(root, 'components/ChatWithXinbao.tsx'), 'utf8');
+const chatRoute = fs.readFileSync(path.join(root, 'app/api/chat-with-xinbao/route.ts'), 'utf8');
+const chatKnowledge = fs.readFileSync(path.join(root, 'lib/chat-with-xinbao.ts'), 'utf8');
+const chatReadme = fs.readFileSync(path.join(root, 'chat with xinbao/README.md'), 'utf8');
+const chatEnvExample = fs.readFileSync(path.join(root, 'chat with xinbao/env.example'), 'utf8');
+const chatPersona = fs.readFileSync(path.join(root, 'chat with xinbao/persona-prompt.md'), 'utf8');
 assert.match(siteIcon, /r="30"/, 'site icon fills the favicon canvas with a larger wiki mark');
 assert.match(siteIcon, /font-size="34"/, 'site icon enlarges the X glyph for small favicon rendering');
 assert.doesNotMatch(siteIcon, /r="24"|font-size="25"/, 'site icon no longer uses the undersized original mark');
@@ -128,6 +141,8 @@ assert.match(wikiPageTsx, /\$\{page\.title\} \| Xinbaopedia/, 'article metadata 
 for (const dependency of ['remark-math', 'rehype-katex', 'katex']) {
   assert.ok(packageJson.dependencies?.[dependency], `package.json includes ${dependency}`);
 }
+assert.ok(packageJson.dependencies?.['@upstash/redis'], 'package.json includes Upstash Redis for server-side rate limits');
+assert.doesNotMatch(nextConfig, /output:\s*['"]export['"]/, 'Next config no longer forces static export');
 assert.match(wikiMarkdownTsx, /import remarkMath from 'remark-math';/, 'Markdown renderer imports remark-math');
 assert.match(wikiMarkdownTsx, /import rehypeKatex from 'rehype-katex';/, 'Markdown renderer imports rehype-katex');
 assert.match(wikiMarkdownTsx, /remarkPlugins=\{\[remarkGfm, remarkMath\]\}/, 'Markdown renderer enables GFM and math parsing');
@@ -148,6 +163,8 @@ assert.match(wikiLib, /plainText\(page\.content\)/, 'search index uses markdown 
 assert.match(wikiPageTsx, /isChineseSlug\(page\.slug\)/, 'wiki page detects Chinese article slugs');
 assert.match(wikiPageTsx, /preprocessWikiLinks\(page\.content, \{ language \}\)/, 'wiki page passes language into wikilink preprocessing');
 assert.match(wikiSearch, /'use client';/, 'wiki search is a client component');
+assert.match(wikiSearch, /import \{ ChatWithXinbao \} from '@\/components\/ChatWithXinbao';/, 'wiki search imports Chat with Xinbao');
+assert.match(wikiSearch, /<ChatWithXinbao language=\{preferredLanguage\} \/>[\s\S]*<form/, 'chat icon renders before the search form');
 assert.match(wikiSearch, /useMemo/, 'wiki search memoizes query scoring');
 assert.match(wikiSearch, /scoreItem/, 'wiki search has a ranking function');
 assert.match(wikiSearch, /usePathname/, 'wiki search can detect the current page language');
@@ -162,6 +179,51 @@ assert.match(articleTabs, /issues\/new\?title=/, 'Talk links directly to GitHub 
 assert.match(articleTabs, /Talk: \$\{slug\}/, 'Talk issue title is page-specific');
 assert.match(articleTabs, /edit\/main\/wiki\/\$\{encodeURIComponent\(fileName\)\}/, 'View source edits the current markdown page');
 assert.match(articleTabs, /commits\/main\/wiki\/\$\{encodeURIComponent\(fileName\)\}/, 'History opens the current markdown page commits');
+
+assert.match(chatWithXinbao, /'use client';/, 'Chat with Xinbao is a client component');
+assert.match(chatWithXinbao, /Chat with Xinbao/, 'chat window uses the required title');
+assert.match(chatWithXinbao, /MAX_INPUT_LENGTH = 1000/, 'chat client caps input length at 1000 characters');
+assert.match(chatWithXinbao, /\/api\/chat-with-xinbao/, 'chat client calls only the same-site API route');
+assert.match(chatWithXinbao, /remaining.*limit/s, 'chat client displays remaining daily quota');
+assert.match(chatWithXinbao, /Xinbao AI is temporarily unavailable\. Please try again later\./, 'chat client uses a generic model-error message');
+assert.match(chatWithXinbao, /language: Language/, 'chat client localizes UI from current wiki language');
+assert.doesNotMatch(chatWithXinbao, /YUNWU_API_KEY|UPSTASH_REDIS_REST_TOKEN|api\.yunwu|Bearer/, 'chat client contains no backend key names or provider endpoint');
+assert.match(chatRoute, /runtime = 'nodejs'/, 'chat API route uses the Node runtime');
+assert.match(chatRoute, /MODEL = 'deepseek-v4-flash'/, 'chat API fixes the requested Yunwu model');
+assert.match(chatRoute, /DEFAULT_BASE_URL = 'https:\/\/api\.yunwu\.ai\/v1'/, 'chat API uses the documented Yunwu base URL');
+assert.match(chatRoute, /YUNWU_API_KEY/, 'chat API reads the Yunwu key from server env');
+assert.match(chatRoute, /YUNWU_API_BASE_URL/, 'chat API supports a server env base URL override');
+assert.match(chatRoute, /UPSTASH_REDIS_REST_URL[\s\S]*UPSTASH_REDIS_REST_TOKEN/, 'chat API reads Upstash credentials from server env');
+assert.match(chatRoute, /RATE_LIMIT_SALT/, 'chat API hashes visitor identifiers with a server salt');
+assert.match(chatRoute, /DAILY_LIMIT = 20/, 'chat API enforces 20 messages per day');
+assert.match(chatRoute, /COOLDOWN_SECONDS = 4/, 'chat API enforces the per-visitor cooldown');
+assert.match(chatRoute, /HOURLY_IP_LIMIT = 80/, 'chat API enforces the hourly IP cap');
+assert.match(chatRoute, /MAX_INPUT_LENGTH = 1000/, 'chat API validates input length server-side');
+assert.match(chatRoute, /MAX_HISTORY_MESSAGES = 6/, 'chat API sends at most six history messages');
+assert.match(chatRoute, /MAX_OUTPUT_TOKENS = 450/, 'chat API caps model output tokens');
+assert.match(chatRoute, /REQUEST_TIMEOUT_MS = 12_000/, 'chat API has a backend timeout');
+assert.match(chatRoute, /httpOnly: true/, 'visitor cookie is HTTP-only');
+assert.match(chatRoute, /sameSite: 'lax'/, 'visitor cookie uses SameSite=Lax');
+assert.match(chatRoute, /Asia\/Tokyo/, 'daily quota keys use Asia/Tokyo date boundaries');
+assert.match(chatRoute, /Daily limit reached\. Please come back tomorrow\./, 'chat API returns the required daily-limit message');
+assert.match(chatRoute, /Xinbao AI is temporarily unavailable\. Please try again later\./, 'chat API returns only the generic model-error message');
+assert.match(chatRoute, /Authorization: `Bearer \$\{apiKey\}`/, 'chat API proxies authorization only on the server');
+assert.doesNotMatch(chatRoute, /console\.error\([^)]*message|console\.log\([^)]*message|system prompt/i, 'chat API does not log user messages or prompt text');
+assert.match(chatKnowledge, /import 'server-only';/, 'chat knowledge builder is server-only');
+assert.match(chatKnowledge, /project\.md/, 'chat knowledge builder can prioritize project.md if it is added later');
+assert.match(chatKnowledge, /wiki'\)/, 'chat knowledge builder reads the local wiki directory');
+assert.match(chatKnowledge, /Xinbao_Qiao[\s\S]*Qiao_Xinbao_zh[\s\S]*Projects[\s\S]*Research[\s\S]*Publications[\s\S]*CV/, 'chat knowledge builder prioritizes homepage, projects, research, publications, and CV pages');
+assert.match(chatKnowledge, /digital proxy/, 'persona identifies the assistant as a digital proxy');
+assert.match(chatKnowledge, /must not claim to be the real Xinbao Qiao/, 'persona prevents impersonating Xinbao');
+assert.match(chatKnowledge, /Do not browse, invent, infer private facts/, 'persona constrains answers to local wiki sources');
+assert.match(chatReadme, /Vercel deployment/, 'chat documentation explains Vercel deployment');
+assert.match(chatReadme, /rg "YUNWU_API_KEY\|sk-\|Bearer\|api\.yunwu\|UPSTASH_REDIS_REST_TOKEN"/, 'chat documentation includes the key leak check command');
+assert.match(chatReadme, /21st daily request[\s\S]*429/, 'chat documentation explains testing the 20-message limit');
+for (const envName of ['YUNWU_API_KEY', 'YUNWU_API_BASE_URL', 'UPSTASH_REDIS_REST_URL', 'UPSTASH_REDIS_REST_TOKEN', 'RATE_LIMIT_SALT']) {
+  assert.match(chatEnvExample, new RegExp(`^${envName}=`, 'm'), `env.example includes ${envName}`);
+}
+assert.match(chatPersona, /You are Chat with Xinbao/, 'persona prompt template documents assistant identity');
+assert.doesNotMatch(chatEnvExample, /sk-[A-Za-z0-9_-]{12,}/, 'env.example contains no real-looking API key');
 
 const sidebar = fs.readFileSync(path.join(root, 'components/Sidebar.tsx'), 'utf8');
 assert.doesNotMatch(sidebar, /Notable works/, 'sidebar no longer uses Notable works');

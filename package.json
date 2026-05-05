@@ -2,7 +2,7 @@
   "name": "xinbao-qiao-academic-wiki",
   "version": "0.3.0",
   "private": true,
-  "description": "Static personal academic wiki homepage for Xinbao Qiao.",
+  "description": "Personal academic wiki homepage for Xinbao Qiao.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -13,6 +13,7 @@
     "check": "npm run typecheck && npm run lint:wiki && npm run test:wiki"
   },
   "dependencies": {
+    "@upstash/redis": "^1.38.0",
     "gray-matter": "^4.0.3",
     "katex": "^0.16.45",
     "next": "15",

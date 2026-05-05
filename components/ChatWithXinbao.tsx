@@ -1,0 +1,219 @@
+'use client';
+
+import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
+
+type Language = 'en' | 'zh';
+type MessageRole = 'user' | 'assistant';
+type Message = { role: MessageRole; content: string };
+
+type Props = { language: Language };
+
+const MAX_INPUT_LENGTH = 1000;
+const GENERIC_ERROR = 'Xinbao AI is temporarily unavailable. Please try again later.';
+
+const copy = {
+  en: {
+    ariaOpen: 'Open Chat with Xinbao',
+    close: 'Close',
+    minimize: 'Minimize',
+    restore: 'Restore Chat with Xinbao',
+    greeting: 'Hi, I am Xinbao Qiao’s academic homepage assistant. Ask me about his research, publications, projects, academic background, or public contact information.',
+    inputLabel: 'Message Chat with Xinbao',
+    placeholder: 'Ask about Xinbao, research, papers, projects...',
+    send: 'Send',
+    typing: 'Xinbao AI is typing',
+    quotaUnknown: '20 messages/day',
+    quota: (remaining: number, limit: number) => `${remaining}/${limit} messages left today`,
+    empty: 'Please enter a question.',
+    tooLong: `Please keep the message within ${MAX_INPUT_LENGTH} characters.`
+  },
+  zh: {
+    ariaOpen: '打开 Chat with Xinbao',
+    close: '关闭',
+    minimize: '最小化',
+    restore: '恢复 Chat with Xinbao',
+    greeting: '你好，我是 Xinbao Qiao 学术主页的 AI 助手。你可以询问他的研究方向、论文项目、学术经历或公开联系方式。',
+    inputLabel: '向 Chat with Xinbao 发送消息',
+    placeholder: '询问研究方向、论文、项目、联系方式...',
+    send: '发送',
+    typing: 'Xinbao AI 正在输入',
+    quotaUnknown: '每天 20 条消息',
+    quota: (remaining: number, limit: number) => `今天还剩 ${remaining}/${limit} 条消息`,
+    empty: '请输入一个问题。',
+    tooLong: `请将消息控制在 ${MAX_INPUT_LENGTH} 个字符以内。`
+  }
+};
+
+function chatEndpoint() {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  return `${basePath}/api/chat-with-xinbao/`;
+}
+
+export function ChatWithXinbao({ language }: Props) {
+  const strings = copy[language];
+  const initialMessages = useMemo<Message[]>(() => [{ role: 'assistant', content: strings.greeting }], [strings.greeting]);
+  const [open, setOpen] = useState(false);
+  const [minimized, setMinimized] = useState(false);
+  const [messages, setMessages] = useState<Message[]>(initialMessages);
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [remaining, setRemaining] = useState<number | null>(null);
+  const [limit, setLimit] = useState(20);
+  const endRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMessages((current) => {
+      if (current.length > 1) return current;
+      return initialMessages;
+    });
+  }, [initialMessages]);
+
+  useEffect(() => {
+    if (!open || minimized) return;
+    endRef.current?.scrollIntoView({ block: 'end' });
+  }, [messages, loading, open, minimized]);
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const message = input.trim();
+    if (!message) {
+      setError(strings.empty);
+      return;
+    }
+    if (message.length > MAX_INPUT_LENGTH) {
+      setError(strings.tooLong);
+      return;
+    }
+
+    const history = messages
+      .filter((item) => item.role === 'user' || item.role === 'assistant')
+      .slice(-6)
+      .map((item) => ({ role: item.role, content: item.content.slice(0, MAX_INPUT_LENGTH) }));
+
+    setError('');
+    setInput('');
+    setLoading(true);
+    setMessages((current) => [...current, { role: 'user', content: message }]);
+
+    try {
+      const response = await fetch(chatEndpoint(), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message, history })
+      });
+      const data = await response.json().catch(() => null) as
+        | { reply?: unknown; error?: unknown; remaining?: unknown; limit?: unknown }
+        | null;
+
+      if (typeof data?.limit === 'number') setLimit(data.limit);
+      if (typeof data?.remaining === 'number') setRemaining(data.remaining);
+
+      if (!response.ok) {
+        const visibleError = response.status === 429 && typeof data?.error === 'string' ? data.error : GENERIC_ERROR;
+        setError(visibleError);
+        return;
+      }
+
+      const reply = typeof data?.reply === 'string' ? data.reply.trim() : '';
+      if (!reply) {
+        setError(GENERIC_ERROR);
+        return;
+      }
+
+      setMessages((current) => [...current, { role: 'assistant', content: reply }]);
+    } catch {
+      setError(GENERIC_ERROR);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <>
+      <button
+        aria-label={strings.ariaOpen}
+        className="chat-xinbao-trigger"
+        onClick={() => {
+          setOpen(true);
+          setMinimized(false);
+        }}
+        type="button"
+      >
+        <span aria-hidden="true">AI</span>
+      </button>
+      {open && minimized && (
+        <button
+          aria-label={strings.restore}
+          className="chat-xinbao-minimized"
+          onClick={() => setMinimized(false)}
+          type="button"
+        >
+          Chat with Xinbao
+        </button>
+      )}
+      {open && !minimized && (
+        <section aria-label="Chat with Xinbao" className="chat-xinbao-shell">
+          <header className="chat-xinbao-header">
+            <div>
+              <h2>Chat with Xinbao</h2>
+              <p>{remaining === null ? strings.quotaUnknown : strings.quota(remaining, limit)}</p>
+            </div>
+            <div className="chat-xinbao-actions">
+              <button aria-label={strings.minimize} onClick={() => setMinimized(true)} type="button">-</button>
+              <button
+                aria-label={strings.close}
+                onClick={() => {
+                  setOpen(false);
+                  setMinimized(false);
+                }}
+                type="button"
+              >
+                ×
+              </button>
+            </div>
+          </header>
+          <div className="chat-xinbao-messages">
+            {messages.map((message, index) => (
+              <div className={`chat-xinbao-message ${message.role}`} key={`${message.role}-${index}`}>
+                {message.content}
+              </div>
+            ))}
+            {loading && (
+              <div className="chat-xinbao-typing" role="status">
+                <span>{strings.typing}</span>
+                <i />
+                <i />
+                <i />
+              </div>
+            )}
+            <div ref={endRef} />
+          </div>
+          {error && <div className="chat-xinbao-error" role="alert">{error}</div>}
+          <form className="chat-xinbao-composer" onSubmit={submit}>
+            <label className="sr-only" htmlFor="chat-with-xinbao-input">{strings.inputLabel}</label>
+            <textarea
+              disabled={loading}
+              id="chat-with-xinbao-input"
+              maxLength={MAX_INPUT_LENGTH}
+              onChange={(event) => setInput(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' && !event.shiftKey) {
+                  event.preventDefault();
+                  event.currentTarget.form?.requestSubmit();
+                }
+              }}
+              placeholder={strings.placeholder}
+              rows={3}
+              value={input}
+            />
+            <div className="chat-xinbao-composer-footer">
+              <span>{MAX_INPUT_LENGTH - input.length}</span>
+              <button disabled={loading || !input.trim()} type="submit">{strings.send}</button>
+            </div>
+          </form>
+        </section>
+      )}
+    </>
+  );
+}

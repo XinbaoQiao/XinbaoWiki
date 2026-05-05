@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { ChatWithXinbao } from '@/components/ChatWithXinbao';
 import type { SearchIndexItem } from '@/lib/wiki';
 
 type Props = { items: SearchIndexItem[] };
@@ -118,6 +119,7 @@ export function WikiSearch({ items }: Props) {
 
   return (
     <div className="wiki-search" role="search" ref={rootRef}>
+      <ChatWithXinbao language={preferredLanguage} />
       <form
         className="wiki-search-form"
         onSubmit={(event) => {
