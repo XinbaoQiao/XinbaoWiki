@@ -456,8 +456,8 @@ a.external::after {
   clear: both;
   display: block;
   width: auto;
-  max-width: min(100%, 560px);
-  max-height: 440px;
+  max-width: min(100%, 380px);
+  max-height: 300px;
   margin: 14px auto;
   object-fit: contain;
   background: var(--wiki-bg);

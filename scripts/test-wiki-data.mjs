@@ -233,7 +233,7 @@ const infobox = fs.readFileSync(path.join(root, 'components/Infobox.tsx'), 'utf8
 const styles = fs.readFileSync(path.join(root, 'app/globals.css'), 'utf8');
 assert.doesNotMatch(styles, /\.wiki-logo-mark|\.wiki-logo:hover/, 'topbar CSS does not keep custom logo-image styling');
 assert.match(styles, /\.wiki-body p:has\(> img:only-child\) \{[\s\S]*clear: both;[\s\S]*\}/, 'article image paragraphs clear floated infoboxes before rendering');
-assert.match(styles, /\.wiki-body img \{[\s\S]*max-width: min\(100%, 560px\);[\s\S]*max-height: 440px;[\s\S]*object-fit: contain;[\s\S]*\}/, 'article images are constrained to a readable paper-figure size');
+assert.match(styles, /\.wiki-body img \{[\s\S]*max-width: min\(100%, 380px\);[\s\S]*max-height: 300px;[\s\S]*object-fit: contain;[\s\S]*\}/, 'article images are constrained to a compact paper-figure size');
 assert.match(styles, /\.wiki-body img\[src\$="\.svg"\] \{[\s\S]*max-height: 360px;[\s\S]*\}/, 'SVG article diagrams keep a compact readable height');
 assert.match(styles, /\.wiki-body \.katex-display \{[\s\S]*overflow-x: auto;[\s\S]*\}/, 'display formulas can scroll horizontally on narrow screens');
 assert.match(styles, /\.wiki-logo \{\n\s+font-family: var\(--font-serif\);\n\s+font-size: 22px;\n\s+font-weight: 400;\n\s+color: var\(--wiki-text\);\n\}/, 'topbar logo CSS matches Colarpedia text wordmark');
