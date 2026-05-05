@@ -6,6 +6,7 @@ summary: "Append-only maintenance log for the wiki."
 
 ## 2026-05-05
 
+- Enlarged standalone poster images while keeping ordinary paper figures at the medium article size.
 - Rebalanced standalone paper-image sizing and replaced float-clearing image layout with `flow-root` image paragraphs to avoid large blanks beside infoboxes.
 - Added static Chinese pages for the full wiki article set, made the language toggle page-specific, and routed Chinese-page body WikiLinks to Chinese counterparts.
 - Further reduced body article image sizing so standalone paper figures stay compact inside publication pages.

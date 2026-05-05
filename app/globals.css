@@ -463,6 +463,11 @@ a.external::after {
   background: var(--wiki-bg);
 }
 
+.wiki-body img[src$="poster.png"] {
+  max-width: min(100%, 720px);
+  max-height: 640px;
+}
+
 .wiki-body img[src$=".svg"] {
   max-height: 440px;
 }
