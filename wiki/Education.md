@@ -6,9 +6,9 @@ summary: "Education timeline for Qiao Xinbao."
 
 ## Timeline
 
-- **2018-2022**: B.Eng. in Communication Engineering, [[Shandong_University]]. Major GPA: 82.47/100. Third-class Academic Award, 2018-2019.
+- **2026-present**: PhD candidate in Information Engineering, [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]].
 - **2022-2025**: M.Sc. in Artificial Intelligence, [[Zhejiang_University]], advised by Meng Zhang. Major GPA: 90/100; rank 3/25.
-- **2026-present**: PhD student in Information Engineering, [[The_Chinese_University_of_Hong_Kong]].
+- **2018-2022**: B.Eng. in Communication Engineering, [[Shandong_University]]. Major GPA: 82.47/100. Third-class Academic Award, 2018-2019.
 
 ## Coursework noted in CV
 
@@ -19,4 +19,4 @@ summary: "Education timeline for Qiao Xinbao."
 
 ## Notes
 
-The birth date is intentionally omitted from [[Xinbao_Qiao]] because it was not present in the provided CV text or the public profile pages used for this build.
+Education entries are ordered reverse-chronologically to match the biography infobox and Colarpedia-style profile layout.

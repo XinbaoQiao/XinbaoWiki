@@ -19,13 +19,13 @@ This page is the curated publication index. Each paper has a dedicated wiki page
 
 | Manuscript | Research cluster |
 |---|---|
-| **[[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters: Data Pruning for Efficient Decentralized Learning]]**. Xinbao Qiao, Xunhao Jiang, Zuozhu Liu, Peng Sun, Meng Zhang. Under review. | [[AI_and_Networks]], [[Distributed_Learning]], [[Data_Centric_Machine_Learning]] |
+| **[[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters: Data Pruning for Efficient Decentralized Learning]]**. Xinbao Qiao, Xunhao Jiang, Zuozhu Liu, Peng Sun, Meng Zhang. Under review. | [[AI_and_Networks]], [[Distributed_Learning]], [[Data_Centric_Machine_Learning|Data Centric ML]] |
 
 ## Topic index
 
-- [[Synthetic_Data_and_Model_Collapse]]
+- [[Synthetic_Data_and_Model_Collapse|Synthetic Data]]
 - [[Machine_Unlearning]]
 - [[Trustworthy_AI]]
-- [[Data_Centric_Machine_Learning]]
+- [[Data_Centric_Machine_Learning|Data Centric ML]]
 - [[AI_and_Networks]]
 - [[Wasserstein_Geometry]]

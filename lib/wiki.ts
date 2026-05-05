@@ -13,6 +13,13 @@ export type WikiFrontmatter = {
   occupation?: string | string[];
   affiliation?: unknown[];
   education?: unknown[];
+  person?: unknown;
+  program?: unknown;
+  school?: unknown;
+  department?: unknown;
+  dates?: unknown;
+  place?: unknown;
+  focus?: unknown;
   avatar?: string;
   image?: string;
   image_caption?: string;

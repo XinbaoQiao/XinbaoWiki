@@ -6,6 +6,10 @@ summary: "Append-only maintenance log for the wiki."
 
 ## 2026-05-05
 
+- Expanded institution pages for [[The_Chinese_University_of_Hong_Kong]], [[Zhejiang_University]], [[Shandong_University]], and [[NUSRI_CQ]] with logos, program context, Qiao-specific connections, and explanatory footnotes.
+- Expanded linked research-topic pages, including [[AI_and_Networks]], [[Machine_Unlearning]], [[Synthetic_Data_and_Model_Collapse|Synthetic Data]], and [[Data_Centric_Machine_Learning|Data Centric ML]], so topic links open into standalone wiki articles rather than brief placeholders.
+- Updated [[Xinbao_Qiao]] and [[Qiao_Xinbao_zh]] so the current occupation is PhD candidate, affiliation is the Department of Information Engineering at CUHK, birthplace appears in prose rather than the infobox, and education is ordered from newest to oldest.
+- Recentered the wiki's research framing around [[AI_and_Networks|AI and Networks]] and shortened sidebar topic labels to compact wiki-style names.
 - Rewrote the accepted paper pages with consistent overview, method, formula, results, and placement sections.
 - Replaced publication infobox categories with conference locations for ICLR 2025, AAAI 2026, and ICML 2026 entries.
 - Added wiki-style footnotes to [[Xinbao_Qiao]] and [[Qiao_Xinbao_zh]], and removed unused References sections.
@@ -18,7 +22,7 @@ summary: "Append-only maintenance log for the wiki."
 - Tightened the page framework to match Colarpedia class names and structure, and reduced displayed media to one portrait image.
 - Added [[Qiao_Xinbao_zh|乔鑫宝]] as the Chinese version, moved Talk to GitHub Issues, simplified Contact to one email address, renamed the sidebar's publication list to research topics, and rewrote [[Xinbao_Qiao]] around chronological research experience and academic-project sections.
 - Removed a temporarily withheld manuscript from [[Publications]] and the public index.
-- Updated the infobox framework so Affiliation lists only the current institution, Education links only the school name with degree details on the next line, Contact includes Website and GitHub, and the portrait caption records Singapore.
+- Updated the infobox framework so Affiliation lists only the current institution, Education links only the school name with degree details on the next line, Contact includes OpenReview and GitHub, and the portrait caption records Singapore.
 - Made the language toggle route-aware so the Chinese article links back to the English article; pointed Talk to GitHub new issue creation and History to GitHub commits.
 - Added paper figures extracted from owner-provided zip packages to [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]], [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]], and [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]].
 - Refreshed the LaTeX CV source with current CUHK contact, education, research experience, publication statuses, and the public-paper list.

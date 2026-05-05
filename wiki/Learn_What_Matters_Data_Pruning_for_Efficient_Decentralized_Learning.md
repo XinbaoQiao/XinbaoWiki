@@ -22,7 +22,7 @@ The current public wiki page records only bibliographic metadata available from 
 
 ## Placement
 
-The manuscript belongs to [[AI_and_Networks]], [[Distributed_Learning]], [[Data_Centric_Machine_Learning]], and [[Data_Selection]]. Its title indicates a focus on identifying useful data for decentralized learning, with the goal of improving efficiency under distributed-data and communication constraints.
+The manuscript belongs to [[AI_and_Networks]], [[Distributed_Learning]], [[Data_Centric_Machine_Learning|Data Centric ML]], and [[Data_Selection]]. Its title indicates a focus on identifying useful data for decentralized learning, with the goal of improving efficiency under distributed-data and communication constraints.
 
 ## Update workflow
 

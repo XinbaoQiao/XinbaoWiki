@@ -41,16 +41,26 @@ function frontmatterSlice(fm, start, end) {
 
 const affiliation = frontmatterSlice(bio, 'affiliation:', 'education:');
 assert.match(affiliation, /The Chinese University of Hong Kong/, 'affiliation lists current institution');
+assert.match(affiliation, /Department of Information Engineering/, 'affiliation includes current department');
 assert.doesNotMatch(affiliation, /NUSRI/, 'affiliation excludes past institutions');
+assert.doesNotMatch(bio, /^birth_place:/m, 'birthplace is kept in prose rather than the infobox');
+assert.match(bio, /occupation:\n\s+- "PhD candidate"/, 'occupation uses PhD candidate');
 assert.match(bio, /image_caption: "Photograph taken in Singapore"/, 'English portrait caption identifies Singapore');
-assert.match(frontmatterSlice(bio, 'education:', 'links:'), /label: "Shandong University"\n\s+url: "\/wiki\/Shandong_University\/"\n\s+detail: "\(BEng, 2022\)"/, 'English education links only school name and keeps degree detail separate');
+const educationBlock = frontmatterSlice(bio, 'education:', 'links:');
+assert.match(educationBlock, /label: "The Chinese University of Hong Kong"[\s\S]*label: "Zhejiang University"[\s\S]*label: "Shandong University"/, 'English education is reverse chronological');
+assert.match(educationBlock, /label: "Shandong University"\n\s+url: "\/wiki\/Shandong_University\/"\n\s+detail: "\(BEng, 2022\)"/, 'English education links only school name and keeps degree detail separate');
+assert.match(bio, /title: "OpenReview"[\s\S]*https:\/\/openreview\.net\/profile\?id=~Xinbao_Qiao1/, 'contact replaces Website with OpenReview');
 
 const zhBio = frontmatter('Qiao_Xinbao_zh.md');
 const zhAffiliation = frontmatterSlice(zhBio, 'affiliation:', 'education:');
 assert.match(zhAffiliation, /香港中文大学/, 'Chinese affiliation lists current institution');
+assert.match(zhAffiliation, /信息工程系/, 'Chinese affiliation includes current department');
 assert.doesNotMatch(zhAffiliation, /新加坡国立大学重庆研究院/, 'Chinese affiliation excludes past institutions');
+assert.doesNotMatch(zhBio, /^birth_place:/m, 'Chinese birthplace is kept in prose rather than the infobox');
 assert.match(zhBio, /image_caption: "摄于新加坡"/, 'Chinese portrait caption identifies Singapore');
-assert.match(frontmatterSlice(zhBio, 'education:', 'links:'), /label: "山东大学"\n\s+url: "\/wiki\/Shandong_University\/"\n\s+detail: "（工学学士，2022）"/, 'Chinese education links only school name and keeps degree detail separate');
+const zhEducationBlock = frontmatterSlice(zhBio, 'education:', 'links:');
+assert.match(zhEducationBlock, /label: "香港中文大学"[\s\S]*label: "浙江大学"[\s\S]*label: "山东大学"/, 'Chinese education is reverse chronological');
+assert.match(zhEducationBlock, /label: "山东大学"\n\s+url: "\/wiki\/Shandong_University\/"\n\s+detail: "（工学学士，2022）"/, 'Chinese education links only school name and keeps degree detail separate');
 
 assert.match(home, /\[\[Publications\]\]/, 'home article links to Publications');
 assert.match(home, /\[\[Research\]\]/, 'home article links to Research');
@@ -60,7 +70,6 @@ assert.match(read('CV.md'), /\/files\/XinbaoQiao_CV\.pdf/, 'CV page links to loc
 
 const contactCount = (home.match(/mailto:/g) || []).length;
 assert.equal(contactCount, 1, 'home infobox contact exposes one email address');
-assert.match(bio, /title: "Website"[\s\S]*https:\/\/xinbaoqiao\.github\.io\/XinbaoWiki\//, 'contact includes website');
 assert.match(bio, /title: "GitHub"[\s\S]*https:\/\/github\.com\/XinbaoQiao/, 'contact includes GitHub');
 
 const layout = fs.readFileSync(path.join(root, 'app/layout.tsx'), 'utf8');
@@ -75,6 +84,12 @@ assert.match(layout, /XinbaoWiki\/commits\/main/, 'History links to GitHub commi
 
 const sidebar = fs.readFileSync(path.join(root, 'components/Sidebar.tsx'), 'utf8');
 assert.doesNotMatch(sidebar, /Notable works/, 'sidebar no longer uses Notable works');
+assert.match(sidebar, /'AI_and_Networks': 'AI and Networks'/, 'sidebar labels AI and Networks as a short topic');
+assert.match(sidebar, /'Synthetic_Data_and_Model_Collapse': 'Synthetic Data'/, 'sidebar shortens synthetic-data topic');
+assert.match(sidebar, /'Data_Centric_Machine_Learning': 'Data Centric ML'/, 'sidebar shortens data-centric topic');
+assert.match(sidebar, /const education = \['The_Chinese_University_of_Hong_Kong', 'Zhejiang_University', 'Shandong_University'\]/, 'sidebar education is reverse chronological');
+assert.doesNotMatch(sidebar, /Synthetic Data and Model Collapse/, 'sidebar avoids long research-topic labels');
+assert.doesNotMatch(sidebar, /Data Centric Machine Learning/, 'sidebar avoids long research-topic labels');
 
 const publications = read('Publications.md');
 assert.doesNotMatch(publications, /raw\.githubusercontent\.com/, 'publication index avoids backup-branch image URLs');
@@ -133,8 +148,58 @@ assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers
 
 const infobox = fs.readFileSync(path.join(root, 'components/Infobox.tsx'), 'utf8');
 assert.match(infobox, /location: 'Conference location'/, 'infobox labels conference location');
+assert.match(infobox, /department: 'Department'/, 'infobox supports institution department rows');
+assert.match(infobox, /dates: 'Dates'/, 'infobox supports institution date rows');
+assert.match(infobox, /place: 'Location'/, 'infobox supports institution location rows');
 assert.doesNotMatch(infobox, /categories: 'Categories'/, 'infobox does not label categories');
 assert.doesNotMatch(infobox, /'categories'/, 'infobox does not render categories rows');
+
+for (const page of [
+  'The_Chinese_University_of_Hong_Kong.md',
+  'Zhejiang_University.md',
+  'Shandong_University.md',
+  'NUSRI_CQ.md'
+]) {
+  const fm = frontmatter(page);
+  const body = read(page);
+  assert.match(fm, /^image:/m, `${page} institution page has an infobox image`);
+  assert.match(fm, /^place:/m, `${page} uses institution place rather than conference location`);
+  assert.doesNotMatch(fm, /^location:/m, `${page} does not reuse conference location field`);
+  for (const section of ['## Program', '## Academic context', '## Connection to Qiao', '## See also']) {
+    assert.match(body, new RegExp(`^${section}$`, 'm'), `${page} follows the Colarpedia-style institution structure`);
+  }
+  assert.match(body, /\[\^[^\]]+\]/, `${page} uses explanatory footnotes`);
+  assert.ok(body.split(/\s+/).length >= 180, `${page} is not a placeholder institution page`);
+}
+
+for (const page of [
+  'AI_and_Networks.md',
+  'Machine_Unlearning.md',
+  'Data_Centric_Machine_Learning.md',
+  'Synthetic_Data_and_Model_Collapse.md',
+  'Certified_Data_Removal.md',
+  'Collaborative_Evaluation.md',
+  'Data_Selection.md',
+  'Data_Silos.md',
+  'Distributed_Learning.md',
+  'Fairness_and_Robustness.md',
+  'Influence_Functions.md',
+  'Interpretability.md',
+  'LLM_Reliability.md',
+  'Model_Collapse.md',
+  'Random_Forest.md',
+  'Recursive_Synthetic_Data_Training.md',
+  'Sample_Selection_Bias.md',
+  'Synthetic_Data.md',
+  'Trustworthy_AI.md',
+  'Wasserstein_Geometry.md'
+]) {
+  const body = read(page);
+  assert.match(body, /^## Role in this wiki$/m, `${page} explains its role in the wiki`);
+  assert.match(body, /^## Connection to Qiao's work$/m, `${page} connects the topic to Qiao's work`);
+  assert.match(body, /\[\^[^\]]+\]/, `${page} uses footnotes for background`);
+  assert.ok(body.split(/\s+/).length >= 120, `${page} is no longer a one-paragraph placeholder`);
+}
 
 const allMarkdown = fs.readdirSync(wikiDir)
   .filter((file) => file.endsWith('.md'))
@@ -159,6 +224,10 @@ assert.deepEqual(publicImages, ['Portrait.png'], 'public site uses exactly one i
 
 for (const file of [
   'public/images/Portrait.png',
+  'public/institutions/cuhk-emblem.svg',
+  'public/institutions/zhejiang-university-logo.png',
+  'public/institutions/shandong-university-logo.png',
+  'public/institutions/nusri-cq-logo.svg',
   'public/files/XinbaoQiao_CV.pdf',
   'public/papers/model-collapse/fid-trends-combined.png',
   'public/papers/model-collapse/barycenter-methodology.png',

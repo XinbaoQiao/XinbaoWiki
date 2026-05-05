@@ -23,12 +23,12 @@ summary: "Index of wiki pages."
 
 ## Research clusters
 
-- [[Synthetic_Data_and_Model_Collapse]]
-- [[Machine_Unlearning]]
-- [[Trustworthy_AI]]
-- [[Data_Centric_Machine_Learning]]
-- [[Distributed_Learning]]
 - [[AI_and_Networks]]
+- [[Machine_Unlearning]]
+- [[Synthetic_Data_and_Model_Collapse|Synthetic Data]]
+- [[Data_Centric_Machine_Learning|Data Centric ML]]
+- [[Trustworthy_AI]]
+- [[Distributed_Learning]]
 - [[LLM_Reliability]]
 
 ## Publications

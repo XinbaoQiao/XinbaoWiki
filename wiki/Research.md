@@ -4,27 +4,27 @@ occupation: "Research overview"
 summary: "Research overview for Qiao Xinbao."
 ---
 
-This page summarizes the main research directions in Qiao Xinbao's academic wiki.
+This page summarizes the main research directions in Qiao Xinbao's academic wiki. The current center of gravity is [[AI_and_Networks|AI and networks]].
 
 ## Research thesis
 
-The common thread is **data-process reliability**: how to design learning algorithms when data are selected, removed, synthesized, siloed, biased, privacy-constrained, or communication-constrained. The work is primarily positioned in trustworthy AI, data-centric machine learning, machine unlearning, distributed learning, and AI-network systems.
+The common thread is **data-process reliability under networked constraints**: how to design learning algorithms when data are selected, removed, synthesized, siloed, biased, privacy-constrained, or communication-constrained. The work is primarily positioned in AI and networks, machine unlearning, synthetic data, and data centric ML.
 
-## Synthetic data and model collapse
+## AI and networks
 
-[[Synthetic_Data_and_Model_Collapse]] studies recursive synthetic-data training, [[Data_Selection]], [[Sample_Selection_Bias]], [[Model_Collapse]], and collaborative mitigation in [[Data_Silos]]. The central paper is [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]].
+[[AI_and_Networks]] covers the intersection of AI with networking and communication systems: AI for communication, communication for AI, decentralized learning, data pruning, and collaborative evaluation. The active manuscript [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning]] belongs to this cluster.
 
 ## Machine unlearning
 
 [[Machine_Unlearning]] studies certified data removal and low-cost update mechanisms after deletion requests. Related pages include [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]], [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]], [[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]], [[Influence_Functions]], and [[Certified_Data_Removal]].
 
-## AI and networks
+## Synthetic data
 
-[[AI_and_Networks]] covers the intersection of AI with networking and communication systems: AI for communication, communication for AI, decentralized learning, data pruning, and cloud-edge collaborative healthcare. The active manuscript [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning]] belongs to this cluster.
+[[Synthetic_Data_and_Model_Collapse|Synthetic Data]] studies recursive synthetic-data training, [[Data_Selection]], [[Sample_Selection_Bias]], [[Model_Collapse]], and collaborative mitigation in [[Data_Silos]]. The central paper is [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]].
 
-## Data-centric and trustworthy AI
+## Data centric ML and trustworthy AI
 
-[[Data_Centric_Machine_Learning]] covers data selection, valuation, filtering, and evaluation. [[Trustworthy_AI]] connects unlearning, fairness, robustness, privacy, security, interpretability, and reliability.
+[[Data_Centric_Machine_Learning|Data Centric ML]] covers data selection, valuation, filtering, and evaluation. [[Trustworthy_AI]] connects unlearning, fairness, robustness, privacy, security, interpretability, and reliability.
 
 ## Geometry and distributed learning
 

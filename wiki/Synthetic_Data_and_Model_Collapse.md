@@ -1,26 +1,27 @@
 ---
-name: "Synthetic Data and Model Collapse"
-occupation: "Research cluster"
-summary: "Research cluster on recursive synthetic data, selection bias, and model collapse."
+name: "Synthetic Data"
+aliases:
+  - "Synthetic Data and Model Collapse"
+occupation: "Research topic"
+summary: "Research topic on synthetic data, recursive training, selection bias, and model collapse."
 ---
 
-**Synthetic Data and Model Collapse** is a research cluster on recursive synthetic-data training, distributional degeneration, and verification under imperfect data access.
+**Synthetic Data** is the short research-topic label for Qiao's work on generated data, recursive training, and model collapse. The full cluster remains broader than the label: it includes [[Recursive_Synthetic_Data_Training|recursive synthetic-data training]], [[Data_Selection|data selection]], [[Sample_Selection_Bias|sample selection bias]], [[Model_Collapse|model collapse]], [[Data_Silos|data silos]], and [[Wasserstein_Geometry|Wasserstein geometry]].[^collapse]
 
-## Central paper
+## Role in this wiki
+
+This page keeps the biography readable by giving the long technical background its own location. On the main page, "Synthetic Data" is enough to signal the topic. Here, the topic is unpacked as a research problem: generated samples can improve coverage or reduce access costs, but recursive use of generated data can amplify bias, erase modes, or distort the target distribution. The wiki therefore treats synthetic data as both an asset and a failure mode.
+
+## Connection to Qiao's work
+
+The central publication is [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]], accepted at ICML 2026 according to owner-provided records. The paper studies how local selection bias can trigger collapse in siloed recursive training, then uses collaborative Wasserstein-style signals to diagnose the problem. This connects synthetic-data reliability to [[AI_and_Networks|AI and networks]] because the key difficulty is not only generation quality, but also distributed access to evidence about the data distribution.
+
+## See also
 
 - [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]]
-
-## Subtopics
-
 - [[Synthetic_Data]]
-- [[Recursive_Synthetic_Data_Training]]
-- [[Data_Selection]]
-- [[Sample_Selection_Bias]]
 - [[Model_Collapse]]
 - [[Data_Silos]]
 - [[Collaborative_Evaluation]]
-- [[Wasserstein_Geometry]]
 
-## Positioning
-
-The cluster asks how synthetic data should be selected, verified, and reused when no single party has complete access to the global data distribution.
+[^collapse]: Shumailov et al., "AI models collapse when trained on recursively generated data", Nature 631, 755-759 (2024), is a widely cited reference for the recursive model-collapse framing.

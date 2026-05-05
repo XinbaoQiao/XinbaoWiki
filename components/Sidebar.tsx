@@ -1,15 +1,23 @@
 import { pathWithBasePath } from '@/lib/wiki';
 
 const navigation = ['Xinbao_Qiao'];
-const researchTopics = ['Machine_Unlearning', 'Synthetic_Data_and_Model_Collapse', 'Data_Centric_Machine_Learning', 'AI_and_Networks'];
+const researchTopics = ['AI_and_Networks', 'Machine_Unlearning', 'Synthetic_Data_and_Model_Collapse', 'Data_Centric_Machine_Learning'];
 const experience = ['The_Chinese_University_of_Hong_Kong', 'NUSRI_CQ', 'Zhejiang_University'];
-const education = ['Zhejiang_University', 'Shandong_University'];
+const education = ['The_Chinese_University_of_Hong_Kong', 'Zhejiang_University', 'Shandong_University'];
+
+const topicLabels: Record<string, string> = {
+  'AI_and_Networks': 'AI and Networks',
+  'Machine_Unlearning': 'Machine Unlearning',
+  'Synthetic_Data_and_Model_Collapse': 'Synthetic Data',
+  'Data_Centric_Machine_Learning': 'Data Centric ML'
+};
 
 function wikiHref(slug: string) {
   return pathWithBasePath(`/wiki/${encodeURIComponent(slug)}/`);
 }
 
 function label(slug: string) {
+  if (topicLabels[slug]) return topicLabels[slug];
   return slug.replaceAll('_', ' ');
 }
 

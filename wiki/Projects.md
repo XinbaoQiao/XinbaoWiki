@@ -6,9 +6,9 @@ summary: "Research projects and project clusters."
 
 ## Research project clusters
 
-### Synthetic data and model collapse
+### AI and networks
 
-[[Synthetic_Data_and_Model_Collapse]] asks when synthetic data can safely replace or augment real data, and when recursive training amplifies bias or erodes diversity. The main paper page is [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]].
+[[AI_and_Networks]] is the current primary project cluster. It includes data pruning for decentralized learning, communication-aware evaluation, and cross-silo reliability. The active manuscript [[Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning]] belongs here.
 
 ### Machine unlearning
 
@@ -17,3 +17,7 @@ summary: "Research projects and project clusters."
 ### Collaborative evaluation
 
 [[Collaborative_Evaluation]] studies verification without raw-data exchange. It is used in the ICML 2026 model-collapse work to replace a single biased verifier with multi-party Wasserstein-geometry proxies.
+
+### Synthetic data
+
+[[Synthetic_Data_and_Model_Collapse|Synthetic Data]] asks when generated data can safely replace or augment real data, and when recursive training amplifies bias or erodes diversity. The main paper page is [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]].

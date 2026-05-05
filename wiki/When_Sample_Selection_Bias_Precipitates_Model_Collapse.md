@@ -74,4 +74,4 @@ The owner-provided manuscript reports DDPM-style recursive image-generation expe
 
 ## Placement
 
-This work belongs to [[Synthetic_Data_and_Model_Collapse]], [[Synthetic_Data]], [[Recursive_Synthetic_Data_Training]], [[Data_Selection]], [[Sample_Selection_Bias]], [[Data_Silos]], [[Collaborative_Evaluation]], and [[Wasserstein_Geometry]]. It is the synthetic-data counterpart to Qiao's unlearning papers: instead of asking how to remove data after training, it asks how selection and verification shape the data stream before future training.
+This work belongs to [[Synthetic_Data_and_Model_Collapse|Synthetic Data]], [[Synthetic_Data]], [[Recursive_Synthetic_Data_Training]], [[Data_Selection]], [[Sample_Selection_Bias]], [[Data_Silos]], [[Collaborative_Evaluation]], and [[Wasserstein_Geometry]]. It is the synthetic-data counterpart to Qiao's unlearning papers: instead of asking how to remove data after training, it asks how selection and verification shape the data stream before future training.

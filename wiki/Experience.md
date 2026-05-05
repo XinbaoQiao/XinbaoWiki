@@ -6,7 +6,7 @@ summary: "Research experience and affiliations."
 
 ## Current affiliation
 
-- PhD student, Department of Information Engineering, [[The_Chinese_University_of_Hong_Kong]].
+- PhD candidate, Department of Information Engineering, [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]].
 
 ## Research on data-centric ML systems
 
@@ -14,7 +14,7 @@ summary: "Research experience and affiliations."
 
 This line of work developed theoretically grounded approaches for data influence attribution, machine unlearning, and data-centric trade-offs in trustworthy AI. It also included cloud-edge collaborative human-space healthcare, where multimodal video, audio, and sensor signals were considered for real-time monitoring.
 
-Related pages: [[Machine_Unlearning]], [[Influence_Functions]], [[Certified_Data_Removal]], [[Trustworthy_AI]], and [[Data_Centric_Machine_Learning]].
+Related pages: [[Machine_Unlearning]], [[Influence_Functions]], [[Certified_Data_Removal]], [[Trustworthy_AI]], and [[Data_Centric_Machine_Learning|Data Centric ML]].
 
 ## Research on trustworthy LLM systems
 
@@ -22,4 +22,4 @@ Related pages: [[Machine_Unlearning]], [[Influence_Functions]], [[Certified_Data
 
 This research line studies trustworthy model behavior and synthetic-data evaluation, including distributed Wasserstein methods for synthetic-data evaluation when real data are limited.
 
-Related pages: [[LLM_Reliability]], [[Synthetic_Data_and_Model_Collapse]], and [[Wasserstein_Geometry]].
+Related pages: [[LLM_Reliability]], [[Synthetic_Data_and_Model_Collapse|Synthetic Data]], and [[Wasserstein_Geometry]].
