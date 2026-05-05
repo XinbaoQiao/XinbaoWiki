@@ -1,0 +1,27 @@
+---
+name: "影响函数"
+occupation: "研究概念"
+summary: "解释估计训练样本如何影响学习模型的概念页。"
+language: "zh"
+translation_of: "Influence_Functions"
+---
+
+**影响函数** 是估计某个训练样本如何影响拟合模型或下游预测的分析工具。在现代机器学习中，它经常作为近似方法使用：与其在每次改变样本后重新训练，不如通过梯度和曲率信息估计影响。[^influence]
+
+## 在本 wiki 中的作用
+
+本页解释为什么影响式推理会出现在数据中心 ML 中。如果研究者能够估计一个点、一组样本或一个加权子集的影响，就可以判断哪些数据应删除、下调权重、保留或检查。影响函数因此连接 [[Data_Selection|数据选择]]、[[Machine_Unlearning|机器遗忘]]、公平性修正和鲁棒性分析。
+
+## 与乔鑫宝工作的关系
+
+乔鑫宝的机器遗忘工作以多种形式使用影响式推理。[[Hessian_Free_Online_Certified_Unlearning|无 Hessian 在线认证遗忘]] 依赖避免显式 Hessian 求逆的高效更新；[[Soft_Weighted_Machine_Unlearning|超越二元擦除]] 用加权影响把删除问题转化为公平性和鲁棒性修正问题。在本 wiki 中，影响函数是数据操作论文背后的局部敏感性语言。
+
+## 参见
+
+- [[Machine_Unlearning|机器遗忘]]
+- [[Data_Centric_Machine_Learning|数据中心 ML]]
+- [[Fairness_and_Robustness|公平性与鲁棒性]]
+- [[Hessian_Free_Online_Certified_Unlearning|无 Hessian 在线认证遗忘]]
+
+[^influence]: Koh 和 Liang 的 “Understanding Black-box Predictions via Influence Functions”（ICML 2017）把经典影响函数思想重新引入现代机器学习预测解释。
+

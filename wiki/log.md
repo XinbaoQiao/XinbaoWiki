@@ -6,6 +6,8 @@ summary: "Append-only maintenance log for the wiki."
 
 ## 2026-05-05
 
+- Added static Chinese pages for the full wiki article set, made the language toggle page-specific, and routed Chinese-page body WikiLinks to Chinese counterparts.
+- Further reduced body article image sizing so standalone paper figures stay compact inside publication pages.
 - Replaced the custom topic diagrams and model-collapse teaser with generated conceptual PNG illustrations using short English labels, and reduced standalone paper-image sizing.
 - Removed numeric prefixes from generated concept-illustration titles and reduced standalone paper-image sizing by roughly one third.
 - Rendered publication formulas with KaTeX display math, constrained paper figures to readable article widths, and added a local teaser diagram for [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]].

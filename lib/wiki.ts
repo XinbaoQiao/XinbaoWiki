@@ -84,8 +84,23 @@ function resolveSlug(target: string) {
   return normalized;
 }
 
-function exists(slug: string) {
+function pageExists(slug: string) {
   return fs.existsSync(path.join(WIKI_DIR, `${resolveSlug(slug)}.md`));
+}
+
+export function isChineseSlug(slug: string) {
+  return slug === 'Qiao_Xinbao_zh' || slug.endsWith('_zh');
+}
+
+export function toChineseSlug(slug: string) {
+  if (slug === 'Xinbao_Qiao') return 'Qiao_Xinbao_zh';
+  if (isChineseSlug(slug)) return slug;
+  return `${slug}_zh`;
+}
+
+export function toEnglishSlug(slug: string) {
+  if (slug === 'Qiao_Xinbao_zh') return 'Xinbao_Qiao';
+  return slug.endsWith('_zh') ? slug.slice(0, -3) : slug;
 }
 
 export function getWikiPageBySlug(slug: string): WikiPage | null {
@@ -102,15 +117,18 @@ export function getWikiPageBySlug(slug: string): WikiPage | null {
   return { slug: resolved, title, summary, data, content: parsed.content.trim(), fileName };
 }
 
-function hrefFor(target: string) {
+function hrefFor(target: string, language: 'en' | 'zh' = 'en') {
   const slug = resolveSlug(target);
-  const encoded = encodeURIComponent(slug);
-  return exists(slug) ? `/wiki/${encoded}/` : `/wiki/${encoded}/?missing=1`;
+  const localizedSlug = language === 'zh' ? toChineseSlug(slug) : toEnglishSlug(slug);
+  const hrefSlug = pageExists(localizedSlug) ? localizedSlug : slug;
+  const encoded = encodeURIComponent(hrefSlug);
+  return pageExists(hrefSlug) ? `/wiki/${encoded}/` : `/wiki/${encoded}/?missing=1`;
 }
 
-export function preprocessWikiLinks(markdown: string) {
+export function preprocessWikiLinks(markdown: string, options: { language?: 'en' | 'zh' } = {}) {
+  const language = options.language || 'en';
   return markdown.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (_match, target, label) => {
     const text = label || String(target).replaceAll('_', ' ');
-    return `[${text}](${hrefFor(target)})`;
+    return `[${text}](${hrefFor(target, language)})`;
   });
 }

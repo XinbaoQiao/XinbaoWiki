@@ -29,6 +29,31 @@ const labels: Record<string, string> = {
   links: 'Contact'
 };
 
+const zhLabels: Record<string, string> = {
+  native_name: '本名',
+  born: '出生',
+  nationality: '国籍',
+  residence: '居住地',
+  occupation: '职业',
+  affiliation: '现机构',
+  education: '教育经历',
+  person: '人物',
+  program: '项目',
+  school: '学院',
+  department: '系所',
+  dates: '时间',
+  place: '地点',
+  focus: '方向',
+  type: '类型',
+  authors: '作者',
+  venue: '会议',
+  location: '会议地点',
+  year: '年份',
+  status: '状态',
+  publication_type: '论文类型',
+  links: '联系方式'
+};
+
 const order = [
   'native_name',
   'born',
@@ -120,11 +145,12 @@ export function Infobox({ data }: Props) {
   const title = typeof data.name === 'string' ? data.name : 'Infobox';
   const image = typeof data.image === 'string' ? data.image : '';
   const caption = typeof data.image_caption === 'string' ? data.image_caption : '';
+  const rowLabels = data.language === 'zh' ? zhLabels : labels;
   const rows = order
     .filter((key) => !empty(data[key]))
     .map((key) => (
       <tr key={key}>
-        <th>{labels[key] || key.replaceAll('_', ' ')}</th>
+        <th>{rowLabels[key] || labels[key] || key.replaceAll('_', ' ')}</th>
         <td>{render(data[key])}</td>
       </tr>
     ));
@@ -146,7 +172,7 @@ export function Infobox({ data }: Props) {
       )}
       {links.length > 0 && (
         <>
-          <div className="wiki-infobox-section">Contact</div>
+          <div className="wiki-infobox-section">{data.language === 'zh' ? '联系方式' : 'Contact'}</div>
           <table>
             <tbody>
               {links.map((item) => {

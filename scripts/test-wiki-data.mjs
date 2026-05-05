@@ -25,6 +25,21 @@ for (const file of ['Xinbao_Qiao.md', 'Qiao_Xinbao_zh.md', 'index.md', 'log.md',
 }
 assertFile('CV.tex');
 
+const chinesePageFiles = fs.readdirSync(wikiDir).filter((file) => file.endsWith('_zh.md'));
+assert.ok(chinesePageFiles.length >= 40, 'wiki includes static Chinese versions for the article set');
+for (const file of [
+  'AI_and_Networks_zh.md',
+  'Machine_Unlearning_zh.md',
+  'Publications_zh.md',
+  'When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md',
+  'The_Chinese_University_of_Hong_Kong_zh.md',
+  'index_zh.md',
+  'log_zh.md'
+]) {
+  assertFile(`wiki/${file}`);
+  assert.match(frontmatter(file), /language: "zh"/, `${file} marks the Chinese language`);
+}
+
 const bio = frontmatter('Xinbao_Qiao.md');
 for (const field of ['name:', 'residence:', 'occupation:', 'education:', 'links:']) {
   assert.ok(bio.includes(field), `Xinbao_Qiao.md frontmatter includes ${field}`);
@@ -85,6 +100,7 @@ assert.match(bio, /title: "GitHub"[\s\S]*https:\/\/github\.com\/XinbaoQiao/, 'co
 const layout = fs.readFileSync(path.join(root, 'app/layout.tsx'), 'utf8');
 const wikiPageTsx = fs.readFileSync(path.join(root, 'app/wiki/[slug]/page.tsx'), 'utf8');
 const wikiMarkdownTsx = fs.readFileSync(path.join(root, 'components/WikiMarkdown.tsx'), 'utf8');
+const wikiLib = fs.readFileSync(path.join(root, 'lib/wiki.ts'), 'utf8');
 const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 assertFile('components/LanguageToggle.tsx');
 assertFile('components/ArticleTabs.tsx');
@@ -111,9 +127,17 @@ assert.match(wikiMarkdownTsx, /import rehypeKatex from 'rehype-katex';/, 'Markdo
 assert.match(wikiMarkdownTsx, /remarkPlugins=\{\[remarkGfm, remarkMath\]\}/, 'Markdown renderer enables GFM and math parsing');
 assert.match(wikiMarkdownTsx, /rehypePlugins=\{\[rehypeKatex\]\}/, 'Markdown renderer renders math through KaTeX');
 assert.match(languageToggle, /usePathname/, 'language toggle is route-aware');
+assert.match(languageToggle, /function activeSlug/, 'language toggle reads the active wiki slug');
+assert.match(languageToggle, /function chineseSlug/, 'language toggle can derive page-specific Chinese slugs');
+assert.match(languageToggle, /return `\$\{slug\}_zh`;/, 'language toggle maps arbitrary English pages to _zh counterparts');
 assert.match(languageToggle, /Qiao_Xinbao_zh/, 'language toggle links to Chinese version');
 assert.match(languageToggle, /Xinbao_Qiao/, 'language toggle links back to English version');
 assert.match(languageToggle, /English/, 'Chinese page can switch back to English');
+assert.match(wikiLib, /export function isChineseSlug/, 'wiki library exposes Chinese slug detection');
+assert.match(wikiLib, /export function toChineseSlug/, 'wiki library maps English slugs to Chinese slugs');
+assert.match(wikiLib, /preprocessWikiLinks\(markdown: string, options: \{ language\?: 'en' \| 'zh' \}/, 'wikilink preprocessing is language-aware');
+assert.match(wikiPageTsx, /isChineseSlug\(page\.slug\)/, 'wiki page detects Chinese article slugs');
+assert.match(wikiPageTsx, /preprocessWikiLinks\(page\.content, \{ language \}\)/, 'wiki page passes language into wikilink preprocessing');
 assert.match(articleTabs, /usePathname/, 'article tools derive the active page from the current route');
 assert.match(articleTabs, /href="#"/, 'active Article tab uses the Colarpedia inert article link');
 assert.match(articleTabs, /issues\/new\?title=/, 'Talk links directly to GitHub new issue creation');
@@ -233,8 +257,8 @@ const infobox = fs.readFileSync(path.join(root, 'components/Infobox.tsx'), 'utf8
 const styles = fs.readFileSync(path.join(root, 'app/globals.css'), 'utf8');
 assert.doesNotMatch(styles, /\.wiki-logo-mark|\.wiki-logo:hover/, 'topbar CSS does not keep custom logo-image styling');
 assert.match(styles, /\.wiki-body p:has\(> img:only-child\) \{[\s\S]*clear: both;[\s\S]*\}/, 'article image paragraphs clear floated infoboxes before rendering');
-assert.match(styles, /\.wiki-body img \{[\s\S]*max-width: min\(100%, 380px\);[\s\S]*max-height: 300px;[\s\S]*object-fit: contain;[\s\S]*\}/, 'article images are constrained to a compact paper-figure size');
-assert.match(styles, /\.wiki-body img\[src\$="\.svg"\] \{[\s\S]*max-height: 360px;[\s\S]*\}/, 'SVG article diagrams keep a compact readable height');
+assert.match(styles, /\.wiki-body img \{[\s\S]*max-width: min\(100%, 320px\);[\s\S]*max-height: 240px;[\s\S]*object-fit: contain;[\s\S]*\}/, 'article images are constrained to a small paper-figure size');
+assert.match(styles, /\.wiki-body img\[src\$="\.svg"\] \{[\s\S]*max-height: 320px;[\s\S]*\}/, 'SVG article diagrams keep a compact readable height');
 assert.match(styles, /\.wiki-body \.katex-display \{[\s\S]*overflow-x: auto;[\s\S]*\}/, 'display formulas can scroll horizontally on narrow screens');
 assert.match(styles, /\.wiki-logo \{\n\s+font-family: var\(--font-serif\);\n\s+font-size: 22px;\n\s+font-weight: 400;\n\s+color: var\(--wiki-text\);\n\}/, 'topbar logo CSS matches Colarpedia text wordmark');
 const sidebarLinkStyle = styles.match(/\.wiki-sidebar a \{([\s\S]*?)\}/);
@@ -409,6 +433,12 @@ const allMarkdown = fs.readdirSync(wikiDir)
   .filter((file) => file.endsWith('.md'))
   .map((file) => read(file))
   .join('\n');
+const allChineseMarkdown = chinesePageFiles.map((file) => read(file)).join('\n');
+assert.doesNotMatch(allChineseMarkdown, /ZXQ|XQ0|当_ 抽样|软件_ Weightd|学习什么 内容|首尔首尔|大赦国际|高山模型|秋奥|\[\[\[/, 'Chinese markdown pages avoid broken machine-translation artifacts');
+assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md'), /\\operatorname\{TN\}/, 'Chinese model-collapse page preserves rendered formula syntax');
+assert.match(read('Hessian_Free_Online_Certified_Unlearning_zh.md'), /\\widehat\{H\}/, 'Chinese Hessian-free page preserves rendered formula syntax');
+assert.match(read('DynFrs_zh.md'), /\\lceil qT\\rceil/, 'Chinese DynFrs page preserves rendered formula syntax');
+assert.match(read('Soft_Weighted_Machine_Unlearning_zh.md'), /\\epsilon\^\\star/, 'Chinese soft-weighted page preserves rendered formula syntax');
 assert.doesNotMatch(allMarkdown, /backup\/old-homepage/, 'wiki no longer depends on backup-branch image URLs');
 assert.doesNotMatch(allMarkdown, /withheld\s+LLM\s+manuscript/i, 'withheld manuscript notes are not public content');
 

@@ -7,10 +7,33 @@ function withBasePath(pathname: string) {
   return basePath ? `${basePath}${pathname}` : pathname;
 }
 
+function activeSlug(pathname: string) {
+  const decoded = decodeURIComponent(pathname);
+  const parts = decoded.replace(/\/+$/, '').split('/').filter(Boolean);
+  const wikiIndex = parts.lastIndexOf('wiki');
+  return wikiIndex >= 0 && parts[wikiIndex + 1] ? parts[wikiIndex + 1] : 'Xinbao_Qiao';
+}
+
+function isChineseSlug(slug: string) {
+  return slug === 'Qiao_Xinbao_zh' || slug.endsWith('_zh');
+}
+
+function chineseSlug(slug: string) {
+  if (slug === 'Xinbao_Qiao') return 'Qiao_Xinbao_zh';
+  if (isChineseSlug(slug)) return slug;
+  return `${slug}_zh`;
+}
+
+function englishSlug(slug: string) {
+  if (slug === 'Qiao_Xinbao_zh') return 'Xinbao_Qiao';
+  return slug.endsWith('_zh') ? slug.slice(0, -3) : slug;
+}
+
 export function LanguageToggle() {
-  const pathname = usePathname() || '';
-  const isChinesePage = decodeURIComponent(pathname).includes('/wiki/Qiao_Xinbao_zh');
-  const href = isChinesePage ? '/wiki/Xinbao_Qiao/' : '/wiki/Qiao_Xinbao_zh/';
+  const slug = activeSlug(usePathname() || '');
+  const isChinesePage = isChineseSlug(slug);
+  const targetSlug = isChinesePage ? englishSlug(slug) : chineseSlug(slug);
+  const href = `/wiki/${encodeURIComponent(targetSlug)}/`;
 
   return (
     <a className="lang-toggle" href={withBasePath(href)}>

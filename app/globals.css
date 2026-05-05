@@ -456,15 +456,15 @@ a.external::after {
   clear: both;
   display: block;
   width: auto;
-  max-width: min(100%, 380px);
-  max-height: 300px;
+  max-width: min(100%, 320px);
+  max-height: 240px;
   margin: 14px auto;
   object-fit: contain;
   background: var(--wiki-bg);
 }
 
 .wiki-body img[src$=".svg"] {
-  max-height: 360px;
+  max-height: 320px;
 }
 
 .wiki-body .katex-display {

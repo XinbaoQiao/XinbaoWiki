@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Infobox } from '@/components/Infobox';
 import { WikiMarkdown } from '@/components/WikiMarkdown';
-import { getAllWikiSlugs, getWikiPageBySlug, preprocessWikiLinks } from '@/lib/wiki';
+import { getAllWikiSlugs, getWikiPageBySlug, isChineseSlug, preprocessWikiLinks } from '@/lib/wiki';
 
 export const dynamicParams = false;
 type Props = { params: Promise<{ slug: string }> };
@@ -20,6 +20,7 @@ export default async function WikiPage({ params }: Props) {
   const page = getWikiPageBySlug(slug);
   if (!page) notFound();
   const sourceHref = `https://github.com/XinbaoQiao/XinbaoWiki/edit/main/wiki/${encodeURIComponent(page.fileName)}`;
+  const language = isChineseSlug(page.slug) ? 'zh' : 'en';
   return (
     <article className="wiki-page">
       <h1 className="wiki-title">
@@ -30,7 +31,7 @@ export default async function WikiPage({ params }: Props) {
       </h1>
       {page.summary && <p className="wiki-title-sub">{page.summary}</p>}
       <Infobox data={page.data} />
-      <WikiMarkdown sourceHref={sourceHref} markdown={preprocessWikiLinks(page.content)} />
+      <WikiMarkdown sourceHref={sourceHref} markdown={preprocessWikiLinks(page.content, { language })} />
     </article>
   );
 }
