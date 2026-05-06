@@ -40,6 +40,7 @@ function parseLimit(request: NextRequest) {
 }
 
 function parseQuestionLog(value: unknown) {
+  if (value && typeof value === 'object') return value;
   if (typeof value !== 'string') return null;
   try {
     const parsed = JSON.parse(value) as unknown;

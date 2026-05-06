@@ -193,6 +193,8 @@ assert.match(chatWithXinbao, /MAX_INPUT_LENGTH = 1000/, 'chat client caps input 
 assert.match(chatWithXinbao, /\/api\/chat-with-xinbao/, 'chat client calls only the same-site API route');
 assert.match(chatWithXinbao, /method: 'GET'/, 'chat client refreshes quota from the backend when the chat opens');
 assert.match(chatWithXinbao, /remaining.*limit/s, 'chat client displays remaining daily quota');
+assert.match(chatWithXinbao, /Questions may be logged to improve preset answers\./, 'chat client discloses English question logging');
+assert.match(chatWithXinbao, /问题可能会被记录，用于改进预设回答。/, 'chat client discloses Chinese question logging');
 assert.match(chatWithXinbao, /Xinbao AI is temporarily unavailable\. Please try again later\./, 'chat client uses a generic model-error message');
 assert.match(chatWithXinbao, /language: Language/, 'chat client localizes UI from current wiki language');
 assert.match(chatWithXinbao, /distilled/, 'chat client introduces itself as a distilled academic skill');
@@ -241,6 +243,7 @@ assert.doesNotMatch(chatRoute, /console\.error\([^)]*message|console\.log\([^)]*
 assert.match(chatQuestionsRoute, /runtime = 'nodejs'/, 'question-log export route uses the Node runtime');
 assert.match(chatQuestionsRoute, /XINBAO_CHAT_ADMIN_TOKEN/, 'question-log export route requires an admin token');
 assert.match(chatQuestionsRoute, /timingSafeEqual/, 'question-log export route compares admin tokens safely');
+assert.match(chatQuestionsRoute, /if \(value && typeof value === 'object'\) return value;/, 'question-log export route accepts Upstash object values as well as JSON strings');
 assert.match(chatQuestionsRoute, /QUESTION_LOG_RECENT_KEY[\s\S]*lrange<string>/, 'question-log export route can read recent question logs');
 assert.match(chatQuestionsRoute, /mode === 'frequency'[\s\S]*zrange<unknown\[]>/, 'question-log export route can read normalized question frequencies');
 assert.match(chatQuestionsRoute, /MAX_EXPORT_LIMIT = 500/, 'question-log export route caps export size');
@@ -252,6 +255,8 @@ assert.match(chatKnowledge, /Xinbao_Qiao[\s\S]*Qiao_Xinbao_zh[\s\S]*Projects[\s\
 assert.doesNotMatch(chatKnowledge, /Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning/, 'chat knowledge builder does not prioritize the hidden under-review manuscript');
 assert.match(chatKnowledge, /digital proxy/, 'persona identifies the assistant as a digital proxy');
 assert.match(chatKnowledge, /academic skill[\s\S]*distilled/, 'persona can introduce the assistant as a distilled academic skill');
+assert.match(chatKnowledge, /Accepted user questions may be logged server-side/, 'persona transparently explains question logging when asked');
+assert.match(chatKnowledge, /chat history, raw IPs, system prompts, and API keys are not stored/, 'persona documents what question logging must not claim to store');
 assert.match(chatKnowledge, /顷刻炼化[\s\S]*数字分身 skill[\s\S]*恐怖如斯/, 'persona can introduce itself with the requested playful Chinese phrasing');
 assert.match(chatKnowledge, /家人们[\s\S]*跟他爆了[\s\S]*直接拿捏[\s\S]*包的[\s\S]*先别急[\s\S]*不硬编/s, 'persona supports a small Chinese meme-style expression pool without encouraging unsupported claims');
 assert.match(chatKnowledge, /Modern meme-guide voice[\s\S]*情绪价值[\s\S]*City不City[\s\S]*YYDS[\s\S]*我去不早说[\s\S]*尊嘟假嘟[\s\S]*退一万步讲/, 'persona supports current meme-guide catchphrases');
@@ -271,6 +276,7 @@ for (const envName of ['YUNWU_API_KEY', 'YUNWU_API_BASE_URL', 'UPSTASH_REDIS_RES
 }
 assert.match(chatPersona, /You are Chat with Xinbao/, 'persona prompt template documents assistant identity');
 assert.match(chatPersona, /XINBAO_CHAT_VOICE_STYLE/, 'persona prompt template documents the private voice style layer');
+assert.match(chatPersona, /Accepted user questions may be logged server-side/, 'persona prompt template documents question logging transparency');
 assert.match(chatPersona, /do not repeat one fixed meme[\s\S]*家人们[\s\S]*跟他爆了[\s\S]*顷刻炼化[\s\S]*never use memes to cover missing evidence/, 'persona prompt template documents varied meme-style wording with factual boundaries');
 assert.match(chatPersona, /Modern meme-guide voice[\s\S]*情绪价值[\s\S]*City不City[\s\S]*YYDS[\s\S]*爱你老己[\s\S]*这谁顶得住啊/, 'persona prompt template documents current meme-guide wording');
 assert.match(chatPersona, /Abstract-literature voice[\s\S]*听君一席话如听一席话[\s\S]*不按套路但按 source notes/, 'persona prompt template documents abstract-literature wording');

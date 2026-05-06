@@ -46,6 +46,7 @@ const copy = {
     ],
     quotaUnknown: '20 messages/day',
     quota: (remaining: number, limit: number) => `${remaining}/${limit} messages left today`,
+    logNotice: 'Questions may be logged to improve preset answers.',
     empty: 'Please enter a question.',
     tooLong: `Please keep the message within ${MAX_INPUT_LENGTH} characters.`
   },
@@ -85,6 +86,7 @@ const copy = {
     ],
     quotaUnknown: '每天 20 条消息',
     quota: (remaining: number, limit: number) => `今天还剩 ${remaining}/${limit} 条消息`,
+    logNotice: '问题可能会被记录，用于改进预设回答。',
     empty: '请输入一个问题。',
     tooLong: `请将消息控制在 ${MAX_INPUT_LENGTH} 个字符以内。`
   }
@@ -232,6 +234,7 @@ export function ChatWithXinbao({ language }: Props) {
             <div>
               <h2>Chat with Xinbao</h2>
               <p>{remaining === null ? strings.quotaUnknown : strings.quota(remaining, limit)}</p>
+              <p>{strings.logNotice}</p>
             </div>
             <div className="chat-xinbao-actions">
               <button aria-label={strings.minimize} onClick={() => setMinimized(true)} type="button">-</button>
