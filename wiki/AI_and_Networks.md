@@ -10,11 +10,15 @@ summary: "Primary research topic for Qiao Xinbao, covering AI systems under netw
 
 ## Introduction
 
-In this wiki, AI and Networks is not a separate application label but the organizing frame for research in which learning is shaped by where data live, how information moves, and which parties can evaluate a model. The topic therefore includes decentralized learning, data pruning, collaborative evaluation, and synthetic-data verification under siloed access.
+In this wiki, AI and Networks is not a separate application label but the organizing frame for research in which learning is shaped by where data live, how information moves, and which parties can evaluate a model. The topic therefore includes decentralized learning, distributed computing, data pruning, collaborative evaluation, and synthetic-data verification under siloed access.
 
 ## Role in this wiki
 
-This page is the top-level hub for research in which model performance is shaped by where data live and how information moves. It links Qiao's background in communication engineering with later work on [[Distributed_Learning|distributed learning]], [[Data_Silos|data silos]], [[Collaborative_Evaluation|collaborative evaluation]], and data pruning for decentralized training. The page also explains why several apparently separate projects are grouped together: they all treat communication, locality, or infrastructure as part of the learning problem, not merely as deployment details.
+This page is the top-level hub for research in which model performance is shaped by where data live and how information moves. It links Qiao's background in communication engineering with later work on [[Distributed_Learning|distributed learning]], [[Data_Silos|data silos]], [[Collaborative_Evaluation|collaborative evaluation]], [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenters]], and data pruning for decentralized training. The page also explains why several apparently separate projects are grouped together: they all treat communication, locality, or infrastructure as part of the learning problem, not merely as deployment details.
+
+## Current doctoral focus
+
+In the CUHK doctoral stage, Qiao's recent focus within this topic is distributed computation for [[Distributed_Wasserstein_Barycenter|Wasserstein barycenters]]. The problem is a natural fit for AI and networks: each participant can hold a local empirical distribution, while the system needs a collective distributional reference for comparison, verification, or control. This places the emphasis on algorithms that respect communication and data-access constraints, not only on centralized statistical objectives.
 
 ## Publications
 
@@ -24,13 +28,14 @@ This page is the top-level hub for research in which model performance is shaped
 
 ## Connection to Qiao's work
 
-The ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] belongs here because it studies collaborative verification under siloed access. Earlier work in [[Machine_Unlearning|machine unlearning]] contributes the same systems instinct: algorithms are evaluated not only by accuracy, but also by latency, communication, and the cost of changing data after training.
+The ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] belongs here because it studies collaborative verification under siloed access. The current Wasserstein-barycenter focus continues that thread by treating a reference distribution as something that may need to be computed across a network rather than assumed to exist centrally. Earlier work in [[Machine_Unlearning|machine unlearning]] contributes the same systems instinct: algorithms are evaluated not only by accuracy, but also by latency, communication, and the cost of changing data after training.
 
 ## See also
 
 - [[Distributed_Learning]]
 - [[Data_Silos]]
 - [[Collaborative_Evaluation]]
+- [[Distributed_Wasserstein_Barycenter]]
 - [[Data_Centric_Machine_Learning|Data Centric ML]]
 - [[The_Chinese_University_of_Hong_Kong]]
 

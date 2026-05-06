@@ -32,10 +32,10 @@ links:
   - title: "GitHub"
     label: "XinbaoQiao"
     url: "https://github.com/XinbaoQiao"
-summary: "香港中文大学信息工程系博士候选人；研究方向包括 AI 与网络、机器遗忘和合成数据可靠性"
+summary: "香港中文大学信息工程系博士候选人；研究方向包括 AI 与网络、分布式 Wasserstein 计算、机器遗忘和合成数据可靠性"
 ---
 
-**乔鑫宝**（英文发表名：**Xinbao Qiao**[^xinbao-qiao-bridge-zh]；生于2000年9月30日，云南西双版纳）是中国博士候选人，现为[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系博士生。[^xinbao-name-zh] 他的当前研究主要集中于[[AI_and_Networks|AI 与网络]]，并与[[Machine_Unlearning|机器遗忘]]、[[Synthetic_Data_and_Model_Collapse|合成数据]]和[[Data_Centric_Machine_Learning|Data Centric ML]]相交。
+**乔鑫宝**（英文发表名：**Xinbao Qiao**[^xinbao-qiao-bridge-zh]；生于2000年9月30日，云南西双版纳）是中国博士候选人，现为[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系博士生。[^xinbao-name-zh] 他的当前研究主要集中于[[AI_and_Networks|AI 与网络]]，尤其关注数据、计算和分布证据分散在网络化参与方中时，学习系统如何训练、评估和保持可靠。其近期博士阶段关注点包括用于协作分布参考的[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]计算；相关研究还与[[Machine_Unlearning|机器遗忘]]、[[Synthetic_Data_and_Model_Collapse|合成数据]]和[[Data_Centric_Machine_Learning|Data Centric ML]]相交。
 
 在博士阶段以前，乔鑫宝于[[Zhejiang_University|浙江大学]]获得人工智能硕士学位，并于[[Shandong_University|山东大学]]获得通信工程工学学士学位。他的[[Publications|论文]]包括 ICML、AAAI 与 ICLR 录用或发表的工作。
 
@@ -61,15 +61,17 @@ summary: "香港中文大学信息工程系博士候选人；研究方向包括 
 
 ### 香港中文大学博士阶段（2026至今）
 
-乔鑫宝现为[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程方向博士候选人，导师为[[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]。其博士阶段研究延续数据中心与可信机器学习主线，并进一步强调网络化 AI 系统：数据选择、数据删除、通信约束、协作评估和合成数据验证如何共同影响模型可靠性。
+乔鑫宝现为[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程方向博士候选人，导师为[[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]。其博士阶段研究以[[AI_and_Networks|AI 与网络]]为组织主线，关注数据和计算不能被简单汇总时，学习系统如何被训练、评估和维护。
+
+这一阶段近期关注[[Distributed_Wasserstein_Barycenter|Wasserstein barycenter 的分布式计算]]。该问题把最优传输几何与网络化 AI 连接起来：每个参与方可能只持有局部经验分布，而学习系统仍需要共享的分布参考，用于评估、样本打分或合成数据验证。因此，研究重点不仅是模型结构，也包括使可靠全局视图成为可能的信息流动方式。
 
 ## 学术项目
 
 除教育和研究经历外，本 wiki 将乔鑫宝的研究输出组织为若干独立项目式条目。
 
-### AI 与网络（2024-2026）
+### AI 与网络（2024至今）
 
-乔鑫宝当前的主要研究主线是[[AI_and_Networks|AI 与网络]]，关注数据和计算分布在设备、机构或网络基础设施中时，学习系统如何保持效率与可靠性。在这一主线下，[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]]中的跨数据孤岛协作评估设置研究了局部样本选择偏差下的模型可靠性。
+乔鑫宝当前的主要研究主线是[[AI_and_Networks|AI 与网络]]，关注数据和计算分布在设备、机构或网络基础设施中时，学习系统如何保持效率与可靠性。在本 wiki 中，该主线不是单篇论文标签，而是一个持续编译的研究图谱：它连接去中心化学习、通信感知评估、[[Data_Silos|数据孤岛]]、[[Collaborative_Evaluation|协作评估]]和[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]。在这一主线下，[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]]中的跨数据孤岛协作评估设置研究了局部样本选择偏差下的模型可靠性。
 
 ### 机器遗忘（2023-2026）
 

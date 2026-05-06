@@ -34,6 +34,7 @@ summary: "Index of wiki pages."
 - [[Data_Centric_Machine_Learning|Data Centric ML]]
 - [[Trustworthy_AI]]
 - [[Distributed_Learning]]
+- [[Distributed_Wasserstein_Barycenter]]
 - [[LLM_Reliability]]
 
 ## Publications
@@ -53,6 +54,7 @@ summary: "Index of wiki pages."
 - [[Data_Silos]]
 - [[Collaborative_Evaluation]]
 - [[Wasserstein_Geometry]]
+- [[Distributed_Wasserstein_Barycenter]]
 
 ## Unlearning
 

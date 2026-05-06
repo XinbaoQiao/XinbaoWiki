@@ -6,6 +6,7 @@ summary: "Append-only maintenance log for the wiki."
 
 ## 2026-05-06
 
+- Updated the CUHK doctoral-stage narrative around [[AI_and_Networks|AI and networks]], added [[Distributed_Wasserstein_Barycenter]] as the current Wasserstein barycenter focus, and reorganized research overview pages toward a compiled LLM-wiki-style map.
 - Added `Chat with Xinbao`, a same-site AI assistant entry beside the search bar, with a server-only Next.js API route, Yunwu model proxying, Upstash-backed rate limits, and deployment/security documentation.
 - Restricted the top search dropdown to the active page language, so English pages return English wiki entries and Chinese pages return Chinese wiki entries.
 

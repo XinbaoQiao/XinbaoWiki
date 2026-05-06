@@ -10,7 +10,11 @@ translation_of: "Projects"
 
 ### AI 与网络
 
-[[AI_and_Networks|AI 与网络]] 是当前主要项目簇。它包括去中心化学习的数据剪枝、通信感知评估和跨孤岛可靠性。
+[[AI_and_Networks|AI 与网络]] 是当前主要项目簇。它包括去中心化学习的数据剪枝、通信感知评估、跨孤岛可靠性，以及 Wasserstein 风格分布参考的分布式计算。
+
+### 分布式 Wasserstein barycenter
+
+[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]] 是 AI 与网络项目簇中的当前博士阶段关注点。它研究多方如何从局部经验分布计算或近似共享的分布参考，并服务于协作评估、样本打分和合成数据验证。
 
 ### 机器遗忘
 

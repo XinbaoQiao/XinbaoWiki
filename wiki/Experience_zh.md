@@ -10,6 +10,14 @@ translation_of: "Experience"
 
 - [[The_Chinese_University_of_Hong_Kong|香港中文大学]] 信息工程系博士候选人，导师 [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]。
 
+## AI 与网络博士研究
+
+**博士候选人**，2026年至今。导师：[[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]，[[The_Chinese_University_of_Hong_Kong|香港中文大学]]。
+
+乔鑫宝当前博士研究以[[AI_and_Networks|AI 与网络]]为核心，关注数据、计算和评估信号分散在客户端、机构或网络基础设施中时，学习系统应如何运行。近期关注点是[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]计算：在不假设原始数据可以集中汇总的情况下，从多方局部经验分布构造共享的分布参考。
+
+相关页面：[[AI_and_Networks|AI 与网络]]、[[Distributed_Learning|分布式学习]]、[[Wasserstein_Geometry|Wasserstein 几何]]、[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]] 和 [[Collaborative_Evaluation|协作评估]]。
+
 ## 数据中心 ML 系统研究
 
 **硕士研究生**，2023-03 至 2025-12。导师：[[Meng_Zhang|张萌]]，[[Zhejiang_University|浙江大学]]。
@@ -25,4 +33,3 @@ translation_of: "Experience"
 该研究线关注可信模型行为和合成数据评估，包括在真实数据有限时用于合成数据评估的分布式 Wasserstein 方法。
 
 相关页面：[[LLM_Reliability|大语言模型可靠性]]、[[Synthetic_Data_and_Model_Collapse|合成数据]] 和 [[Wasserstein_Geometry|Wasserstein 几何]]。
-

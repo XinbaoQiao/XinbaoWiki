@@ -6,15 +6,15 @@ language: "zh"
 translation_of: "Research"
 ---
 
-本页总结乔鑫宝学术 wiki 中的主要研究方向。当前重心是 [[AI_and_Networks|AI 与网络]]。
+本页总结乔鑫宝学术 wiki 中的主要研究方向。它不是静态兴趣列表，而是由多个相互链接的专题页编译出的研究图谱。当前重心是 [[AI_and_Networks|AI 与网络]]。
 
 ## 研究主线
 
-共同主线是 **网络约束下的数据过程可靠性**：当数据被选择、删除、合成、孤岛化、偏置化、隐私约束或通信约束时，如何设计学习算法。研究主要位于 AI 与网络、机器遗忘、合成数据和数据中心 ML 之间。
+共同主线是 **网络约束下的数据过程可靠性**：当数据被选择、删除、合成、孤岛化、偏置化、隐私约束或通信约束时，如何设计学习算法。研究主要位于 AI 与网络、机器遗忘、合成数据和数据中心 ML 之间。按照 wiki 的维护方式，每个概念页保存一个稳定的局部综合，并继续连接论文、机构和相邻方法，使后续更新是在已有图谱上修订，而不是每次从零开始整理材料。
 
 ## AI 与网络
 
-[[AI_and_Networks|AI 与网络]] 覆盖 AI 与网络通信系统的交叉：用于通信的 AI、服务 AI 的通信、去中心化学习、数据剪枝和协作评估。
+[[AI_and_Networks|AI 与网络]] 覆盖 AI 与网络通信系统的交叉：用于通信的 AI、服务 AI 的通信、去中心化学习、数据剪枝和协作评估。在当前 CUHK 博士阶段，这条主线包括[[Distributed_Wasserstein_Barycenter|Wasserstein barycenter 的分布式计算]]，即在不默认汇总原始数据的前提下，把多方局部分布组合成共享的分布参考。
 
 ## 机器遗忘
 
@@ -30,4 +30,4 @@ translation_of: "Research"
 
 ## 几何与分布式学习
 
-[[Wasserstein_Geometry|Wasserstein 几何]] 与 [[Distributed_Learning|分布式学习]] 为协作评估、最优传输代理和去中心化数据访问提供工具。
+[[Wasserstein_Geometry|Wasserstein 几何]]、[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]] 与 [[Distributed_Learning|分布式学习]] 为协作评估、最优传输代理、去中心化数据访问，以及网络化 AI 系统中的分布参考提供工具。

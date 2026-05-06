@@ -15,8 +15,8 @@ translation_of: "CV"
 
 ## 研究兴趣
 
-- 可信机器学习：可解释性、隐私、安全与鲁棒性。
-- AI 与网络：AI for communication 与 communication for AI。
+- AI 与网络：分布式计算、通信感知学习和协作评估。
+- 可信机器学习：可解释性、隐私、安全、鲁棒性和合成数据可靠性。
 
 ## 论文
 
@@ -24,11 +24,10 @@ translation_of: "CV"
 
 ## 研究经历
 
-- **AI 与网络博士研究**，2026年至今，导师 [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]，机构 [[The_Chinese_University_of_Hong_Kong|香港中文大学]]。主题包括网络化 AI 系统、去中心化学习和通信感知模型可靠性。
+- **AI 与网络博士研究**，2026年至今，导师 [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]，机构 [[The_Chinese_University_of_Hong_Kong|香港中文大学]]。主题包括网络化 AI 系统、分布式 Wasserstein barycenter 计算、去中心化学习和通信感知模型可靠性。
 - **数据中心 ML 系统研究**，2023-03 至 2025-12，导师 [[Meng_Zhang|张萌]]，机构 [[Zhejiang_University|浙江大学]]。主题包括数据影响归因、机器遗忘，以及公平性、鲁棒性、隐私和效用之间的权衡。
 - **可信模型系统研究**，2025-06 至 2025-12，全职研究实习，导师 Yan Pang，机构 [[NUSRI_CQ|NUSRI-CQ]]。主题包括模型可靠性和合成数据评估的分布式 Wasserstein 方法。
 
 ## 技能
 
 见 [[Skills|技能]]。CV 列出 Python、MATLAB、LaTeX、Markdown、C/C++、Linux、Java、TensorFlow、PyTorch、SQL、Git、Docker 和基于 Linux 的研究工作流。
-

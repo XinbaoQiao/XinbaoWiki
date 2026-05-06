@@ -35,6 +35,7 @@ translation_of: "index"
 - [[Data_Centric_Machine_Learning|数据中心 ML]]
 - [[Trustworthy_AI|可信 AI]]
 - [[Distributed_Learning|分布式学习]]
+- [[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]
 - [[LLM_Reliability|大语言模型可靠性]]
 
 ## 论文
@@ -54,6 +55,7 @@ translation_of: "index"
 - [[Data_Silos|数据孤岛]]
 - [[Collaborative_Evaluation|协作评估]]
 - [[Wasserstein_Geometry|Wasserstein 几何]]
+- [[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]
 
 ## 机器遗忘
 

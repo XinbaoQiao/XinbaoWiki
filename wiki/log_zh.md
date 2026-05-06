@@ -6,6 +6,10 @@ language: "zh"
 translation_of: "log"
 ---
 
+## 2026-05-06
+
+- 围绕 [[AI_and_Networks|AI 与网络]] 更新 CUHK 博士阶段叙述，新增 [[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]] 作为当前博士阶段关注点，并将研究概览整理为更接近 LLM Wiki 的编译式研究图谱。
+
 ## 2026-05-05
 
 - 为全站 wiki 页面补齐静态中文版本，并使语言切换在每个页面的中英文版本之间对应跳转。
@@ -20,4 +24,3 @@ translation_of: "log"
 - 将本地 XinbaoWiki 重建为 Next.js 15 静态导出的 wiki，使用 react-markdown 与 gray-matter。
 - 建立 wiki/*.md 作为 source of truth 的页面结构，并加入人物主页、索引、日志、论文页与 CV 页面。
 - 增加 CLAUDE.md，规定新增页面、更新索引、追加日志和保持第三人称百科语气的工作流。
-
