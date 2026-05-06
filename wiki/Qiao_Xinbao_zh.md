@@ -35,7 +35,7 @@ links:
 summary: "香港中文大学信息工程系博士候选人；研究方向包括 AI 与网络、机器遗忘和合成数据可靠性"
 ---
 
-**乔鑫宝**（英文发表名：**Xinbao Qiao**；生于2000年9月30日，云南西双版纳）是中国博士候选人，现为[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系博士生。[^xinbao-name-zh] 他的当前研究主要集中于[[AI_and_Networks|AI 与网络]]，并与[[Machine_Unlearning|机器遗忘]]、[[Synthetic_Data_and_Model_Collapse|合成数据]]和[[Data_Centric_Machine_Learning|Data Centric ML]]相交。
+**乔鑫宝**（英文发表名：**Xinbao Qiao**[^xinbao-qiao-bridge-zh]；生于2000年9月30日，云南西双版纳）是中国博士候选人，现为[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系博士生。[^xinbao-name-zh] 他的当前研究主要集中于[[AI_and_Networks|AI 与网络]]，并与[[Machine_Unlearning|机器遗忘]]、[[Synthetic_Data_and_Model_Collapse|合成数据]]和[[Data_Centric_Machine_Learning|Data Centric ML]]相交。
 
 在博士阶段以前，乔鑫宝于[[Zhejiang_University|浙江大学]]获得人工智能硕士学位，并于[[Shandong_University|山东大学]]获得通信工程工学学士学位。他的[[Publications|论文]]包括 ICML、AAAI 与 ICLR 录用或发表的工作。
 
@@ -97,5 +97,7 @@ ICML 2026 论文[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sa
 - [DBLP](https://dblp.uni-trier.de/pid/374/6619.html)
 
 [^xinbao-name-zh]: “Xinbao”这一拼写也用于[圣地亚哥动物园的大熊猫 Xin Bao](https://zoo.sandiegozoo.org/giant-pandas)；动物园将该熊猫名字解释为“precious treasure of prosperity and abundance”。此处为同名脚注，并非传记关联。
+
+[^xinbao-qiao-bridge-zh]: “Xinbao Qiao”作为拼音式拼写，也可对应“新寶橋”（Xinbao Bridge）。高雄市政府工务建设导览记录了[六龟新寶橋](https://pwbgis.kcg.gov.tw/construction/construction.aspx?id=7252)，Mapcarta/GeoNames 列出 [Hsin-pao Number 2 Bridge](https://mapcarta.com/25634858) 的别名“Xinbao Er Qiao”；此处仅为罗马化/拼写巧合，并非传记关联。
 
 [^cuhk-ie-zh]: 香港中文大学信息工程系在[官方部门介绍](https://www.ie.cuhk.edu.hk/about-the-department/)中将研究范围概括为现实应用中的信息生成、通信、存储与处理；香港中文大学研究院也在工程学院项目列表中列出 [MPhil-PhD in Information Engineering](https://www.gs.cuhk.edu.hk/programmes/engineering)。

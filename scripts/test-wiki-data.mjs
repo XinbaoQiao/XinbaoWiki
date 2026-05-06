@@ -352,8 +352,12 @@ function footnoteDefs(body) {
   return [...body.matchAll(/^\[\^([^\]]+)\]:/gm)].map((match) => match[1]);
 }
 
-assert.deepEqual(footnoteDefs(home).sort(), ['cuhk-ie', 'xinbao-name'].sort(), 'English biography keeps only essential footnotes');
-assert.deepEqual(footnoteDefs(zhHome).sort(), ['cuhk-ie-zh', 'xinbao-name-zh'].sort(), 'Chinese biography keeps only essential footnotes');
+assert.deepEqual(footnoteDefs(home).sort(), ['cuhk-ie', 'xinbao-name', 'xinbao-qiao-bridge'].sort(), 'English biography keeps only essential footnotes');
+assert.deepEqual(footnoteDefs(zhHome).sort(), ['cuhk-ie-zh', 'xinbao-name-zh', 'xinbao-qiao-bridge-zh'].sort(), 'Chinese biography keeps only essential footnotes');
+assert.match(home, /\*\*Xinbao Qiao\*\*\[\^xinbao-qiao-bridge\]/, 'English biography attaches the bridge-name footnote to the romanized name');
+assert.match(zhHome, /英文发表名：\*\*Xinbao Qiao\*\*\[\^xinbao-qiao-bridge-zh\]/, 'Chinese biography attaches the bridge-name footnote to the romanized name');
+assert.match(home, /Xinbao Qiao[\s\S]*新寶橋[\s\S]*pwbgis\.kcg\.gov\.tw[\s\S]*mapcarta\.com\/25634858/, 'English bridge-name footnote cites Taiwan bridge sources');
+assert.match(zhHome, /Xinbao Qiao[\s\S]*新寶橋[\s\S]*pwbgis\.kcg\.gov\.tw[\s\S]*mapcarta\.com\/25634858/, 'Chinese bridge-name footnote cites Taiwan bridge sources');
 for (const removedNote of ['timeline-note', 'research-scope', 'zju-program', 'sdu-background', 'ai-networks-note']) {
   assert.doesNotMatch(home, new RegExp(`\\[\\^${removedNote}\\]`), `English biography removes ${removedNote}`);
 }
