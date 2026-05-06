@@ -44,10 +44,10 @@ Admin export is available only from the server endpoint with `XINBAO_CHAT_ADMIN_
 
 ```bash
 curl -H "Authorization: Bearer $XINBAO_CHAT_ADMIN_TOKEN" \
-  "https://xinbaopedia.vercel.app/api/chat-with-xinbao/questions?limit=100"
+  "https://xinbaopedia.top/api/chat-with-xinbao/questions?limit=100"
 
 curl -H "Authorization: Bearer $XINBAO_CHAT_ADMIN_TOKEN" \
-  "https://xinbaopedia.vercel.app/api/chat-with-xinbao/questions?mode=frequency&language=zh&limit=50"
+  "https://xinbaopedia.top/api/chat-with-xinbao/questions?mode=frequency&language=zh&limit=50"
 ```
 
 Use these logs to identify repeated questions and then add grounded preset answers to the wiki or prompt. Do not publish raw visitor questions without review.
