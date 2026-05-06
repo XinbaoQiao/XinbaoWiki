@@ -14,14 +14,31 @@ const MAX_INPUT_LENGTH = 1000;
 const MAX_HISTORY_MESSAGES = 6;
 const MAX_OUTPUT_TOKENS = 450;
 const REQUEST_TIMEOUT_MS = 12_000;
+const QUESTION_LOG_MAX_RECENT = 2_000;
+const QUESTION_LOG_RETENTION_DAYS = 90;
+const QUESTION_LOG_MESSAGE_LENGTH = 1_000;
 const COOKIE_NAME = 'xinbao_chat_vid';
 const UNAVAILABLE_MESSAGE = 'Xinbao AI is temporarily unavailable. Please try again later.';
 const DAILY_LIMIT_MESSAGE = 'Daily limit reached. Please come back tomorrow.';
+const QUESTION_LOG_RECENT_KEY = 'xinbao-chat:questions:recent';
 
 type ChatRole = 'user' | 'assistant';
 type ChatMessage = { role: ChatRole; content: string };
 type CompletionResponse = { choices?: Array<{ message?: { content?: unknown } }> };
 type RequestIdentity = { visitorHash: string; browserHash: string; ipHash: string };
+type QuestionLogEntry = {
+  id: string;
+  createdAt: string;
+  dateKey: string;
+  language: 'en' | 'zh';
+  message: string;
+  normalized: string;
+  messageLength: number;
+  pagePath: string;
+  visitorHash: string;
+  browserHash: string;
+  ipHash: string;
+};
 
 let redisClient: Redis | null = null;
 
@@ -169,6 +186,60 @@ function logServerIssue(type: string, status?: number) {
   console.error(`[chat-with-xinbao] ${type}`);
 }
 
+function sanitizeRefererPath(request: NextRequest) {
+  const referer = request.headers.get('referer') || '';
+  if (!referer) return '';
+  try {
+    const url = new URL(referer);
+    return url.pathname.slice(0, 180);
+  } catch {
+    return '';
+  }
+}
+
+function normalizeQuestion(message: string) {
+  return message.replace(/\s+/g, ' ').trim().toLocaleLowerCase().slice(0, 240);
+}
+
+async function recordQuestionLog(
+  redis: Redis,
+  identity: RequestIdentity,
+  message: string,
+  request: NextRequest,
+  dateKey: string,
+  language: 'en' | 'zh'
+) {
+  const entry: QuestionLogEntry = {
+    id: crypto.randomUUID(),
+    createdAt: new Date().toISOString(),
+    dateKey,
+    language,
+    message: message.slice(0, QUESTION_LOG_MESSAGE_LENGTH),
+    normalized: normalizeQuestion(message),
+    messageLength: message.length,
+    pagePath: sanitizeRefererPath(request),
+    visitorHash: identity.visitorHash,
+    browserHash: identity.browserHash,
+    ipHash: identity.ipHash
+  };
+  const payload = JSON.stringify(entry);
+  const dayKey = `xinbao-chat:questions:day:${dateKey}`;
+  const frequencyKey = `xinbao-chat:questions:frequency:${language}`;
+  const retentionTtl = 60 * 60 * 24 * QUESTION_LOG_RETENTION_DAYS;
+
+  try {
+    await Promise.all([
+      redis.lpush(QUESTION_LOG_RECENT_KEY, payload),
+      redis.ltrim(QUESTION_LOG_RECENT_KEY, 0, QUESTION_LOG_MAX_RECENT - 1),
+      redis.lpush(dayKey, payload),
+      redis.expire(dayKey, retentionTtl),
+      redis.zincrby(frequencyKey, 1, entry.normalized)
+    ]);
+  } catch {
+    logServerIssue('question log write failed');
+  }
+}
+
 function withXinbaoSignature(reply: string, language: 'en' | 'zh') {
   const signature = language === 'zh' ? '喵~' : ' meow~';
   const trimmed = reply.trim();
@@ -265,6 +336,7 @@ export async function POST(request: NextRequest) {
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
   const baseUrl = (process.env.YUNWU_API_BASE_URL || DEFAULT_BASE_URL).replace(/\/$/, '');
   const language = inferLanguage(request);
+  await recordQuestionLog(redis, identity, message, request, dateKey, language);
 
   try {
     const response = await fetch(`${baseUrl}/chat/completions`, {

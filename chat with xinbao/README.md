@@ -7,6 +7,7 @@
 ```text
 components/ChatWithXinbao.tsx
 app/api/chat-with-xinbao/route.ts
+app/api/chat-with-xinbao/questions/route.ts
 lib/chat-with-xinbao.ts
 wiki/*.md
 chat with xinbao/
@@ -21,7 +22,35 @@ chat with xinbao/
 1. The search bar renders an `AI` icon button before the search input.
 2. The client sends `{ message, history }` to `/api/chat-with-xinbao`.
 3. The route validates input, enforces cooldown and daily quotas in Upstash Redis, builds a server-only prompt from `wiki/*.md` and optional `project.md`, then calls Yunwu at `https://api.yunwu.ai/v1/chat/completions`.
-4. The route returns `{ reply, remaining, limit }` or a safe generic error.
+4. Accepted questions are written to server-side Upstash logs for later FAQ and predicted-answer mining.
+5. The route returns `{ reply, remaining, limit }` or a safe generic error.
+
+## Question logs
+
+`POST /api/chat-with-xinbao` stores each accepted question in Redis after quota and cooldown checks pass. It records the trimmed question text, normalized text, language, page path, timestamp, message length, and anonymous visitor/browser/IP hashes. It does not record chat history, system prompts, model raw errors, API keys, or full IP addresses.
+
+Stored keys:
+
+```text
+xinbao-chat:questions:recent
+xinbao-chat:questions:day:YYYY-MM-DD
+xinbao-chat:questions:frequency:zh
+xinbao-chat:questions:frequency:en
+```
+
+The recent list is capped at 2,000 items. Daily logs expire after 90 days.
+
+Admin export is available only from the server endpoint with `XINBAO_CHAT_ADMIN_TOKEN`:
+
+```bash
+curl -H "Authorization: Bearer $XINBAO_CHAT_ADMIN_TOKEN" \
+  "https://xinbaopedia.vercel.app/api/chat-with-xinbao/questions?limit=100"
+
+curl -H "Authorization: Bearer $XINBAO_CHAT_ADMIN_TOKEN" \
+  "https://xinbaopedia.vercel.app/api/chat-with-xinbao/questions?mode=frequency&language=zh&limit=50"
+```
+
+Use these logs to identify repeated questions and then add grounded preset answers to the wiki or prompt. Do not publish raw visitor questions without review.
 
 ## Vercel deployment
 

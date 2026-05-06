@@ -108,6 +108,7 @@ assertFile('components/ArticleTabs.tsx');
 assertFile('components/WikiSearch.tsx');
 assertFile('components/ChatWithXinbao.tsx');
 assertFile('app/api/chat-with-xinbao/route.ts');
+assertFile('app/api/chat-with-xinbao/questions/route.ts');
 assertFile('lib/chat-with-xinbao.ts');
 assertFile('chat with xinbao/README.md');
 assertFile('chat with xinbao/env.example');
@@ -120,11 +121,13 @@ const articleTabs = fs.readFileSync(path.join(root, 'components/ArticleTabs.tsx'
 const wikiSearch = fs.readFileSync(path.join(root, 'components/WikiSearch.tsx'), 'utf8');
 const chatWithXinbao = fs.readFileSync(path.join(root, 'components/ChatWithXinbao.tsx'), 'utf8');
 const chatRoute = fs.readFileSync(path.join(root, 'app/api/chat-with-xinbao/route.ts'), 'utf8');
+const chatQuestionsRoute = fs.readFileSync(path.join(root, 'app/api/chat-with-xinbao/questions/route.ts'), 'utf8');
 const chatKnowledge = fs.readFileSync(path.join(root, 'lib/chat-with-xinbao.ts'), 'utf8');
 const chatReadme = fs.readFileSync(path.join(root, 'chat with xinbao/README.md'), 'utf8');
 const chatEnvExample = fs.readFileSync(path.join(root, 'chat with xinbao/env.example'), 'utf8');
 const chatPersona = fs.readFileSync(path.join(root, 'chat with xinbao/persona-prompt.md'), 'utf8');
 const chatMemeNotes = fs.readFileSync(path.join(root, 'chat with xinbao/meme-voice-notes.md'), 'utf8');
+const questionLogFunction = chatRoute.match(/async function recordQuestionLog[\s\S]*?\n}\n\nfunction withXinbaoSignature/)?.[0] || '';
 assert.match(siteIcon, /r="30"/, 'site icon fills the favicon canvas with a larger wiki mark');
 assert.match(siteIcon, /font-size="34"/, 'site icon enlarges the X glyph for small favicon rendering');
 assert.doesNotMatch(siteIcon, /r="24"|font-size="25"/, 'site icon no longer uses the undersized original mark');
@@ -215,6 +218,12 @@ assert.match(chatRoute, /MAX_HISTORY_MESSAGES = 6/, 'chat API sends at most six 
 assert.match(chatRoute, /MAX_OUTPUT_TOKENS = 450/, 'chat API caps model output tokens');
 assert.match(chatRoute, /thinking: \{ type: 'disabled' \}/, 'chat API disables model thinking output so the 450-token cap is reserved for the final answer');
 assert.match(chatRoute, /REQUEST_TIMEOUT_MS = 12_000/, 'chat API has a backend timeout');
+assert.match(chatRoute, /QUESTION_LOG_MAX_RECENT = 2_000/, 'chat API caps the retained recent question log');
+assert.match(chatRoute, /QUESTION_LOG_RETENTION_DAYS = 90/, 'chat API expires daily question logs after 90 days');
+assert.match(chatRoute, /function recordQuestionLog[\s\S]*message: message\.slice\(0, QUESTION_LOG_MESSAGE_LENGTH\)/, 'chat API records accepted questions with a bounded message field');
+assert.match(chatRoute, /redis\.lpush\(QUESTION_LOG_RECENT_KEY[\s\S]*redis\.ltrim\(QUESTION_LOG_RECENT_KEY[\s\S]*redis\.zincrby\(frequencyKey/, 'chat API writes recent, capped, and frequency question logs');
+assert.match(chatRoute, /sanitizeRefererPath\(request\)/, 'chat API records only a sanitized page path for question logs');
+assert.doesNotMatch(questionLogFunction, /history/, 'chat API question logging does not store chat history');
 assert.match(chatRoute, /httpOnly: true/, 'visitor cookie is HTTP-only');
 assert.match(chatRoute, /sameSite: 'lax'/, 'visitor cookie uses SameSite=Lax');
 assert.match(chatRoute, /Asia\/Tokyo/, 'daily quota keys use Asia/Tokyo date boundaries');
@@ -229,6 +238,13 @@ assert.match(chatRoute, /meow~/, 'chat API appends the English meow signature on
 assert.match(chatRoute, /喵~/, 'chat API appends the Chinese meow signature on Chinese pages');
 assert.match(chatRoute, /Authorization: `Bearer \$\{apiKey\}`/, 'chat API proxies authorization only on the server');
 assert.doesNotMatch(chatRoute, /console\.error\([^)]*message|console\.log\([^)]*message|system prompt/i, 'chat API does not log user messages or prompt text');
+assert.match(chatQuestionsRoute, /runtime = 'nodejs'/, 'question-log export route uses the Node runtime');
+assert.match(chatQuestionsRoute, /XINBAO_CHAT_ADMIN_TOKEN/, 'question-log export route requires an admin token');
+assert.match(chatQuestionsRoute, /timingSafeEqual/, 'question-log export route compares admin tokens safely');
+assert.match(chatQuestionsRoute, /QUESTION_LOG_RECENT_KEY[\s\S]*lrange<string>/, 'question-log export route can read recent question logs');
+assert.match(chatQuestionsRoute, /mode === 'frequency'[\s\S]*zrange<unknown\[]>/, 'question-log export route can read normalized question frequencies');
+assert.match(chatQuestionsRoute, /MAX_EXPORT_LIMIT = 500/, 'question-log export route caps export size');
+assert.doesNotMatch(chatQuestionsRoute, /console\.log|console\.error|YUNWU_API_KEY/, 'question-log export route does not log or reference unrelated model secrets');
 assert.match(chatKnowledge, /import 'server-only';/, 'chat knowledge builder is server-only');
 assert.match(chatKnowledge, /project\.md/, 'chat knowledge builder can prioritize project.md if it is added later');
 assert.match(chatKnowledge, /wiki'\)/, 'chat knowledge builder reads the local wiki directory');
@@ -250,7 +266,7 @@ assert.match(chatKnowledge, /private voice notes/, 'persona prevents revealing p
 assert.match(chatReadme, /Vercel deployment/, 'chat documentation explains Vercel deployment');
 assert.match(chatReadme, /rg "YUNWU_API_KEY\|sk-\|Bearer\|api\.yunwu\|UPSTASH_REDIS_REST_TOKEN"/, 'chat documentation includes the key leak check command');
 assert.match(chatReadme, /21st daily request[\s\S]*429/, 'chat documentation explains testing the 20-message limit');
-for (const envName of ['YUNWU_API_KEY', 'YUNWU_API_BASE_URL', 'UPSTASH_REDIS_REST_URL', 'UPSTASH_REDIS_REST_TOKEN', 'RATE_LIMIT_SALT', 'XINBAO_CHAT_VOICE_STYLE']) {
+for (const envName of ['YUNWU_API_KEY', 'YUNWU_API_BASE_URL', 'UPSTASH_REDIS_REST_URL', 'UPSTASH_REDIS_REST_TOKEN', 'RATE_LIMIT_SALT', 'XINBAO_CHAT_VOICE_STYLE', 'XINBAO_CHAT_ADMIN_TOKEN']) {
   assert.match(chatEnvExample, new RegExp(`^${envName}=`, 'm'), `env.example includes ${envName}`);
 }
 assert.match(chatPersona, /You are Chat with Xinbao/, 'persona prompt template documents assistant identity');
