@@ -30,7 +30,7 @@ summary: "Append-only maintenance log for the wiki."
 - Standardized the four Research topics pages with Introduction, Role in this wiki, Publications, Connection to Qiao's work, and See also sections; publication tables now include conference timing, arXiv timing, or ongoing status.
 - Expanded institution pages for [[The_Chinese_University_of_Hong_Kong]], [[Zhejiang_University]], [[Shandong_University]], and [[NUSRI_CQ]] with logos, program context, Qiao-specific connections, and explanatory footnotes.
 - Expanded linked research-topic pages, including [[AI_and_Networks]], [[Machine_Unlearning]], [[Synthetic_Data_and_Model_Collapse|Synthetic Data]], and [[Data_Centric_Machine_Learning|Data Centric ML]], so topic links open into standalone wiki articles rather than brief placeholders.
-- Updated [[Xinbao_Qiao]] and [[Qiao_Xinbao_zh]] so the current occupation is PhD candidate, affiliation is the Department of Information Engineering at CUHK, birthplace appears in prose rather than the infobox, and education is ordered from newest to oldest.
+- Updated [[Xinbao_Qiao]] and [[Qiao_Xinbao_zh]] so the current occupation is PhD student, affiliation is the Department of Information Engineering at CUHK, birthplace appears in prose rather than the infobox, and education is ordered from newest to oldest.
 - Recentered the wiki's research framing around [[AI_and_Networks|AI and Networks]] and shortened sidebar topic labels to compact wiki-style names.
 - Rewrote the accepted paper pages with consistent overview, method, formula, results, and placement sections.
 - Replaced publication infobox categories with conference locations for ICLR 2025, AAAI 2026, and ICML 2026 entries.

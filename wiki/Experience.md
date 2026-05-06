@@ -6,11 +6,11 @@ summary: "Research experience and affiliations."
 
 ## Current affiliation
 
-- PhD candidate, Department of Information Engineering, [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]], advised by [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]].
+- PhD student, Department of Information Engineering, [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]], advised by [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]].
 
 ## Doctoral research in AI and networks
 
-**PhD candidate**, 2026-present. Advisor: [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]], [[The_Chinese_University_of_Hong_Kong]].
+**PhD student**, 2026-present. Advisor: [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]], [[The_Chinese_University_of_Hong_Kong]].
 
 Qiao's current doctoral work is centered on [[AI_and_Networks|AI and networks]]. The research asks how learning systems should operate when data, computation, and evaluation signals are distributed across clients, institutions, or networked infrastructure. A recent focus is [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenter]] computation: constructing shared distributional references from local empirical measures without assuming that all raw data can be pooled.
 

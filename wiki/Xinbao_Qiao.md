@@ -8,7 +8,7 @@ residence: "Hong Kong"
 image: "/images/Portrait.png"
 image_caption: "Photograph taken at Singapore EXPO, 2025"
 occupation:
-  - "PhD candidate"
+  - "PhD student"
 affiliation:
   - label: "Department of Information Engineering, The Chinese University of Hong Kong"
     url: "/wiki/The_Chinese_University_of_Hong_Kong/"
@@ -31,16 +31,16 @@ links:
   - title: "GitHub"
     label: "XinbaoQiao"
     url: "https://github.com/XinbaoQiao"
-summary: "PhD candidate in Information Engineering at The Chinese University of Hong Kong; researcher in AI and networks, distributed Wasserstein computation, machine unlearning, and synthetic-data reliability"
+summary: "PhD student in Information Engineering at The Chinese University of Hong Kong; researcher in AI and networks, distributed Wasserstein computation, machine unlearning, and synthetic-data reliability"
 ---
 
-**Xinbao Qiao**[^xinbao-qiao-bridge] (Chinese: **乔鑫宝**; born September 2000 in Xishuangbanna, Yunnan) is a Chinese PhD candidate in the Department of Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]].[^xinbao-name] His current research is centered on [[AI_and_Networks|AI and networks]], especially learning and evaluation problems in which data, computation, and distributional evidence are spread across networked parties. A recent doctoral focus is [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenter]] computation for collaborative distributional references. Related work spans [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic data]], and [[Data_Centric_Machine_Learning|data centric ML]].
+**Xinbao Qiao**[^xinbao-qiao-bridge] (Chinese: **乔鑫宝**; born September 2000 in Xishuangbanna, Yunnan) is a Chinese PhD student in the Department of Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]].[^xinbao-name] His current research is centered on [[AI_and_Networks|AI and networks]], especially learning and evaluation problems in which data, computation, and distributional evidence are spread across networked parties. A recent doctoral focus is [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenter]] computation for collaborative distributional references. Related work spans [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic data]], and [[Data_Centric_Machine_Learning|data centric ML]].
 
 Before his doctoral studies, Qiao received a Master of Science in Artificial Intelligence from [[Zhejiang_University|Zhejiang University]] and a Bachelor of Engineering in Communication Engineering from [[Shandong_University|Shandong University]]. His [[Publications]] include accepted or published papers at ICML, AAAI, and ICLR.
 
 ## Education
 
-Qiao is enrolled as a PhD candidate in Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]] in Fall 2026. His PhD. advisor is [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]].[^cuhk-ie]
+Qiao is enrolled as a PhD student in Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]] in Fall 2026. His PhD advisor is [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]].[^cuhk-ie]
 
 From 2022 to 2025 he studied Artificial Intelligence at [[Zhejiang_University|Zhejiang University]], where his master's transcript records a major GPA of 90/100 and a rank of 3/25. His master's research was advised by [[Meng_Zhang|Meng Zhang]].
 
@@ -60,7 +60,7 @@ From June 2025 to December 2025, Qiao worked as a full-time research intern at [
 
 ### The Chinese University of Hong Kong (2026-present)
 
-Qiao is a PhD candidate in Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]], advised by [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]. His doctoral stage is organized around [[AI_and_Networks|AI and networks]]: how learning systems should be trained, evaluated, and maintained when data and computation are distributed rather than pooled.
+Qiao is a PhD student in Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]], advised by [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]. His doctoral stage is organized around [[AI_and_Networks|AI and networks]]: how learning systems should be trained, evaluated, and maintained when data and computation are distributed rather than pooled.
 
 Within this stage, his recent work has focused on distributed computation for [[Distributed_Wasserstein_Barycenter|Wasserstein barycenters]]. The topic connects optimal-transport geometry to networked AI: each party may hold only a local empirical distribution, while the learning system needs a shared distributional reference for evaluation, sample scoring, or synthetic-data verification. The emphasis is therefore not only on a model architecture, but also on the information flow that makes a reliable global view possible.
 

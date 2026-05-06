@@ -62,7 +62,7 @@ assert.doesNotMatch(bio, /^native_name:/m, 'English infobox follows Colarpedia b
 assert.doesNotMatch(bio, /^birth_place:/m, 'birthplace is kept in prose rather than the infobox');
 assert.match(bio, /born: \|\n\s+September 2000 \(age 25\)\n\s+Xishuangbanna, Yunnan\n/, 'English Born row uses the requested month-and-place format');
 assert.doesNotMatch(bio, /30 September 2000|Xishuangbanna, Yunnan, China/, 'English Born row omits day and country');
-assert.match(bio, /occupation:\n\s+- "PhD candidate"/, 'occupation uses PhD candidate');
+assert.match(bio, /occupation:\n\s+- "PhD student"/, 'occupation uses PhD student');
 assert.match(bio, /image_caption: "Photograph taken at Singapore EXPO, 2025"/, 'English portrait caption identifies Singapore EXPO and year');
 const educationBlock = frontmatterSlice(bio, 'education:', 'links:');
 assert.match(educationBlock, /label: "The Chinese University of Hong Kong"[\s\S]*label: "Zhejiang University"[\s\S]*label: "Shandong University"/, 'English education is reverse chronological');
@@ -209,8 +209,8 @@ assert.match(chatWithXinbao, /remaining.*limit/s, 'chat client displays remainin
 assert.match(chatWithXinbao, /quotaUnknown: '10 messages\/day'/, 'chat client English quota fallback uses the 10-message daily limit');
 assert.match(chatWithXinbao, /quotaUnknown: '每天 10 条消息'/, 'chat client Chinese quota fallback uses the 10-message daily limit');
 assert.match(chatWithXinbao, /useState\(10\)/, 'chat client initializes the quota display to 10');
-assert.match(chatWithXinbao, /Questions may be logged to improve preset answers\./, 'chat client discloses English question logging');
-assert.match(chatWithXinbao, /问题可能会被记录，用于改进预设回答。/, 'chat client discloses Chinese question logging');
+assert.match(chatWithXinbao, /Questions may be logged to improve answers\./, 'chat client discloses English question logging');
+assert.match(chatWithXinbao, /问题可能会被记录，用于改进回答。/, 'chat client discloses Chinese question logging');
 assert.match(chatWithXinbao, /Xinbao AI is temporarily unavailable\. Please try again later\./, 'chat client uses a generic model-error message');
 assert.match(chatWithXinbao, /language: Language/, 'chat client localizes UI from current wiki language');
 assert.match(chatWithXinbao, /distilled/, 'chat client introduces itself as a distilled academic skill');

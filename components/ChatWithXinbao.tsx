@@ -50,7 +50,7 @@ const copy = {
     ],
     quotaUnknown: '10 messages/day',
     quota: (remaining: number, limit: number) => `${remaining}/${limit} messages left today`,
-    logNotice: 'Questions may be logged to improve preset answers.',
+    logNotice: 'Questions may be logged to improve answers.',
     empty: 'Please enter a question.',
     tooLong: `Please keep the message within ${MAX_INPUT_LENGTH} characters.`
   },
@@ -90,7 +90,7 @@ const copy = {
     ],
     quotaUnknown: '每天 10 条消息',
     quota: (remaining: number, limit: number) => `今天还剩 ${remaining}/${limit} 条消息`,
-    logNotice: '问题可能会被记录，用于改进预设回答。',
+    logNotice: '问题可能会被记录，用于改进回答。',
     empty: '请输入一个问题。',
     tooLong: `请将消息控制在 ${MAX_INPUT_LENGTH} 个字符以内。`
   }

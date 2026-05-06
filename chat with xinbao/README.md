@@ -50,7 +50,7 @@ curl -H "Authorization: Bearer $XINBAO_CHAT_ADMIN_TOKEN" \
   "https://xinbaopedia.top/api/chat-with-xinbao/questions?mode=frequency&language=zh&limit=50"
 ```
 
-Use these logs to identify repeated questions and then add grounded preset answers to the wiki or prompt. Do not publish raw visitor questions without review.
+Use these logs to identify repeated questions and then improve grounded answers in the wiki or prompt. Do not publish raw visitor questions without review.
 
 ## Vercel deployment
 
