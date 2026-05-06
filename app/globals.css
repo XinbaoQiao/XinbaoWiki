@@ -350,12 +350,63 @@ a.external::after {
 
 .chat-xinbao-message.assistant {
   background: var(--wiki-bg-alt);
+  white-space: normal;
 }
 
 .chat-xinbao-message.user {
   margin-left: auto;
   border-color: #a3b8e6;
   background: #f0f4ff;
+  white-space: pre-wrap;
+}
+
+.chat-xinbao-message p,
+.chat-xinbao-message ul,
+.chat-xinbao-message ol {
+  margin: 0 0 8px;
+}
+
+.chat-xinbao-message p:last-child,
+.chat-xinbao-message ul:last-child,
+.chat-xinbao-message ol:last-child {
+  margin-bottom: 0;
+}
+
+.chat-xinbao-message ul,
+.chat-xinbao-message ol {
+  padding-left: 18px;
+}
+
+.chat-xinbao-message code {
+  padding: 1px 3px;
+  background: #eaecf0;
+  font-family: var(--font-mono);
+  font-size: .92em;
+}
+
+.chat-xinbao-message pre {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 8px 0 0;
+  padding: 8px;
+  background: #eaecf0;
+}
+
+.chat-xinbao-message pre code {
+  padding: 0;
+  background: transparent;
+}
+
+.chat-xinbao-message .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  margin: 8px 0;
+  padding-bottom: 2px;
+}
+
+.chat-xinbao-message .katex {
+  font-size: 1em;
 }
 
 .chat-xinbao-typing {

@@ -1,6 +1,10 @@
 'use client';
 
 import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import rehypeKatex from 'rehype-katex';
+import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
 
 type Language = 'en' | 'zh';
 type MessageRole = 'user' | 'assistant';
@@ -44,7 +48,7 @@ const copy = {
       'Throwback mode is loading',
       'Almost there'
     ],
-    quotaUnknown: '20 messages/day',
+    quotaUnknown: '10 messages/day',
     quota: (remaining: number, limit: number) => `${remaining}/${limit} messages left today`,
     logNotice: 'Questions may be logged to improve preset answers.',
     empty: 'Please enter a question.',
@@ -84,7 +88,7 @@ const copy = {
       '正在从 00s 留言板赶来',
       '正在把回答打磨得不啰嗦'
     ],
-    quotaUnknown: '每天 20 条消息',
+    quotaUnknown: '每天 10 条消息',
     quota: (remaining: number, limit: number) => `今天还剩 ${remaining}/${limit} 条消息`,
     logNotice: '问题可能会被记录，用于改进预设回答。',
     empty: '请输入一个问题。',
@@ -101,6 +105,21 @@ function randomTypingMessage(options: string[]) {
   return options[Math.floor(Math.random() * options.length)] ?? options[0] ?? '';
 }
 
+function ChatMessageContent({ message }: { message: Message }) {
+  if (message.role === 'assistant') {
+    return (
+      <ReactMarkdown
+        remarkPlugins={[remarkGfm, remarkMath]}
+        rehypePlugins={[rehypeKatex]}
+      >
+        {message.content}
+      </ReactMarkdown>
+    );
+  }
+
+  return message.content;
+}
+
 export function ChatWithXinbao({ language }: Props) {
   const strings = copy[language];
   const initialMessages = useMemo<Message[]>(() => [{ role: 'assistant', content: strings.greeting }], [strings.greeting]);
@@ -112,7 +131,7 @@ export function ChatWithXinbao({ language }: Props) {
   const [typingMessage, setTypingMessage] = useState(() => randomTypingMessage(strings.typing));
   const [error, setError] = useState('');
   const [remaining, setRemaining] = useState<number | null>(null);
-  const [limit, setLimit] = useState(20);
+  const [limit, setLimit] = useState(10);
   const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -253,7 +272,7 @@ export function ChatWithXinbao({ language }: Props) {
           <div className="chat-xinbao-messages">
             {messages.map((message, index) => (
               <div className={`chat-xinbao-message ${message.role}`} key={`${message.role}-${index}`}>
-                {message.content}
+                <ChatMessageContent message={message} />
               </div>
             ))}
             {loading && (

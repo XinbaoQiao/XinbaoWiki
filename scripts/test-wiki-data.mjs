@@ -188,11 +188,21 @@ assert.match(articleTabs, /edit\/main\/wiki\/\$\{encodeURIComponent\(fileName\)\
 assert.match(articleTabs, /commits\/main\/wiki\/\$\{encodeURIComponent\(fileName\)\}/, 'History opens the current markdown page commits');
 
 assert.match(chatWithXinbao, /'use client';/, 'Chat with Xinbao is a client component');
+assert.match(chatWithXinbao, /import ReactMarkdown from 'react-markdown';/, 'chat client renders assistant replies with ReactMarkdown');
+assert.match(chatWithXinbao, /import rehypeKatex from 'rehype-katex';/, 'chat client imports KaTeX rendering for formulas');
+assert.match(chatWithXinbao, /import remarkMath from 'remark-math';/, 'chat client imports math parsing for formulas');
+assert.match(chatWithXinbao, /function ChatMessageContent/, 'chat client isolates message markdown rendering');
+assert.match(chatWithXinbao, /message\.role === 'assistant'/, 'chat client renders assistant messages as markdown while keeping user messages plain');
+assert.match(chatWithXinbao, /remarkPlugins=\{\[remarkGfm, remarkMath\]\}/, 'chat client enables GFM and math parsing for assistant replies');
+assert.match(chatWithXinbao, /rehypePlugins=\{\[rehypeKatex\]\}/, 'chat client enables KaTeX output for assistant replies');
 assert.match(chatWithXinbao, /Chat with Xinbao/, 'chat window uses the required title');
 assert.match(chatWithXinbao, /MAX_INPUT_LENGTH = 1000/, 'chat client caps input length at 1000 characters');
 assert.match(chatWithXinbao, /\/api\/chat-with-xinbao/, 'chat client calls only the same-site API route');
 assert.match(chatWithXinbao, /method: 'GET'/, 'chat client refreshes quota from the backend when the chat opens');
 assert.match(chatWithXinbao, /remaining.*limit/s, 'chat client displays remaining daily quota');
+assert.match(chatWithXinbao, /quotaUnknown: '10 messages\/day'/, 'chat client English quota fallback uses the 10-message daily limit');
+assert.match(chatWithXinbao, /quotaUnknown: '每天 10 条消息'/, 'chat client Chinese quota fallback uses the 10-message daily limit');
+assert.match(chatWithXinbao, /useState\(10\)/, 'chat client initializes the quota display to 10');
 assert.match(chatWithXinbao, /Questions may be logged to improve preset answers\./, 'chat client discloses English question logging');
 assert.match(chatWithXinbao, /问题可能会被记录，用于改进预设回答。/, 'chat client discloses Chinese question logging');
 assert.match(chatWithXinbao, /Xinbao AI is temporarily unavailable\. Please try again later\./, 'chat client uses a generic model-error message');
@@ -211,7 +221,7 @@ assert.match(chatRoute, /YUNWU_API_KEY/, 'chat API reads the Yunwu key from serv
 assert.match(chatRoute, /YUNWU_API_BASE_URL/, 'chat API supports a server env base URL override');
 assert.match(chatRoute, /UPSTASH_REDIS_REST_URL[\s\S]*UPSTASH_REDIS_REST_TOKEN/, 'chat API reads Upstash credentials from server env');
 assert.match(chatRoute, /RATE_LIMIT_SALT/, 'chat API hashes visitor identifiers with a server salt');
-assert.match(chatRoute, /DAILY_LIMIT = 20/, 'chat API enforces 20 messages per day');
+assert.match(chatRoute, /DAILY_LIMIT = 10/, 'chat API enforces 10 messages per day');
 assert.match(chatRoute, /hashIdentity\(`\$\{ip\}:\$\{userAgent\}`\)/, 'chat API keeps an IP plus user-agent daily key so refreshes cannot reset quota');
 assert.match(chatRoute, /COOLDOWN_SECONDS = 4/, 'chat API enforces the per-visitor cooldown');
 assert.match(chatRoute, /HOURLY_IP_LIMIT = 80/, 'chat API enforces the hourly IP cap');
@@ -270,7 +280,7 @@ assert.match(chatKnowledge, /XINBAO_CHAT_VOICE_STYLE/, 'chat knowledge builder s
 assert.match(chatKnowledge, /private voice notes/, 'persona prevents revealing private voice notes');
 assert.match(chatReadme, /Vercel deployment/, 'chat documentation explains Vercel deployment');
 assert.match(chatReadme, /rg "YUNWU_API_KEY\|sk-\|Bearer\|api\.yunwu\|UPSTASH_REDIS_REST_TOKEN"/, 'chat documentation includes the key leak check command');
-assert.match(chatReadme, /21st daily request[\s\S]*429/, 'chat documentation explains testing the 20-message limit');
+assert.match(chatReadme, /11th daily request[\s\S]*429/, 'chat documentation explains testing the 10-message limit');
 for (const envName of ['YUNWU_API_KEY', 'YUNWU_API_BASE_URL', 'UPSTASH_REDIS_REST_URL', 'UPSTASH_REDIS_REST_TOKEN', 'RATE_LIMIT_SALT', 'XINBAO_CHAT_VOICE_STYLE', 'XINBAO_CHAT_ADMIN_TOKEN']) {
   assert.match(chatEnvExample, new RegExp(`^${envName}=`, 'm'), `env.example includes ${envName}`);
 }
@@ -422,6 +432,7 @@ assert.match(styles, /\.wiki-body \.katex-display \{[\s\S]*overflow-x: auto;[\s\
 assert.match(styles, /\.wiki-search-panel \{[\s\S]*position: absolute;[\s\S]*max-height: min\(420px, 70vh\);[\s\S]*\}/, 'search results render in a bounded dropdown panel');
 assert.match(styles, /\.wiki-search-result \{[\s\S]*display: grid;[\s\S]*grid-template-columns: 1fr auto;[\s\S]*\}/, 'search result rows use a compact two-column layout');
 assert.match(styles, /\.wiki-search-result:hover,[\s\S]*\.wiki-search-result\[aria-selected="true"\] \{[\s\S]*background: #eaecf0;[\s\S]*\}/, 'search result hover and keyboard active states are visible');
+assert.match(styles, /\.chat-xinbao-message \.katex-display \{[\s\S]*overflow-x: auto;[\s\S]*\}/, 'chat markdown formulas can scroll inside message bubbles');
 assert.match(styles, /\.wiki-logo \{\n\s+font-family: var\(--font-serif\);\n\s+font-size: 22px;\n\s+font-weight: 400;\n\s+color: var\(--wiki-text\);\n\}/, 'topbar logo CSS matches Colarpedia text wordmark');
 const sidebarLinkStyle = styles.match(/\.wiki-sidebar a \{([\s\S]*?)\}/);
 assert.ok(sidebarLinkStyle, 'sidebar link style block exists');

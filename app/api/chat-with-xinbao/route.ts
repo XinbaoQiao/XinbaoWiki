@@ -7,7 +7,7 @@ export const runtime = 'nodejs';
 
 const MODEL = 'deepseek-v4-flash';
 const DEFAULT_BASE_URL = 'https://api.yunwu.ai/v1';
-const DAILY_LIMIT = 20;
+const DAILY_LIMIT = 10;
 const COOLDOWN_SECONDS = 4;
 const HOURLY_IP_LIMIT = 80;
 const MAX_INPUT_LENGTH = 1000;
