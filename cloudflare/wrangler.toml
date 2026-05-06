@@ -1,0 +1,6 @@
+name = "xinbaopedia-proxy"
+main = "xinbaopedia-proxy-worker.js"
+compatibility_date = "2026-05-06"
+
+[vars]
+ORIGIN = "https://xinbaopedia.vercel.app"
