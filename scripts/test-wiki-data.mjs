@@ -310,6 +310,8 @@ assert.match(packageJson.scripts?.['cf:deploy'] || '', /wrangler deploy --config
 assert.match(packageJson.scripts?.['cf:dev'] || '', /wrangler dev --config cloudflare\/wrangler\.toml/, 'package scripts include local Cloudflare Worker dev');
 assert.match(cloudflareWrangler, /name = "xinbaopedia-proxy"/, 'Cloudflare config names the proxy worker');
 assert.match(cloudflareWrangler, /main = "xinbaopedia-proxy-worker\.js"/, 'Cloudflare config points to the proxy worker entry');
+assert.match(cloudflareWrangler, /workers_dev = true/, 'Cloudflare config explicitly enables the workers.dev route');
+assert.match(cloudflareWrangler, /preview_urls = true/, 'Cloudflare config explicitly enables preview URLs');
 assert.match(cloudflareWrangler, /ORIGIN = "https:\/\/xinbaopedia\.vercel\.app"/, 'Cloudflare config proxies the production Vercel origin');
 assert.match(cloudflareWorker, /const DEFAULT_ORIGIN = 'https:\/\/xinbaopedia\.vercel\.app';/, 'Cloudflare worker has a safe default origin');
 assert.match(cloudflareWorker, /url\.pathname\.startsWith\('\/api\/'\)/, 'Cloudflare worker avoids caching API routes');
@@ -317,6 +319,7 @@ assert.match(cloudflareWorker, /cacheEverything: true/, 'Cloudflare worker can c
 assert.match(cloudflareWorker, /headers\.set\('Location'/, 'Cloudflare worker rewrites origin redirects back to the edge host');
 assert.match(cloudflareWorker, /X-Xinbaopedia-Edge/, 'Cloudflare worker marks proxied responses for verification');
 assert.match(cloudflareReadme, /custom domain[\s\S]*Cloudflare Workers/, 'Cloudflare guide documents custom-domain routing');
+assert.match(cloudflareReadme, /https:\/\/xinbaopedia-proxy\.xinbaopedia\.workers\.dev/, 'Cloudflare guide records the current workers.dev endpoint');
 assert.match(cloudflareReadme, /CLOUDFLARE_API_TOKEN[\s\S]*CLOUDFLARE_ACCOUNT_ID/, 'Cloudflare guide documents required deployment environment variables');
 assert.match(cloudflareReadme, /ICP|mainland China|China Network/i, 'Cloudflare guide notes mainland-China reliability limits');
 assert.doesNotMatch(`${cloudflareWorker}\n${cloudflareWrangler}\n${cloudflareReadme}`, /sk-[A-Za-z0-9_-]{12,}|vcp_[A-Za-z0-9]+|UPSTASH_REDIS_REST_TOKEN=.*[A-Za-z0-9]/, 'Cloudflare files contain no real provider tokens');

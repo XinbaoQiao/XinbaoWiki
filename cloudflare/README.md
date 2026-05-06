@@ -34,6 +34,12 @@ export CLOUDFLARE_ACCOUNT_ID="$(cat /data/qiaoxinbao/.secrets/cloudflare.account
 npm run cf:deploy
 ```
 
+The current workers.dev endpoint is:
+
+```text
+https://xinbaopedia-proxy.xinbaopedia.workers.dev
+```
+
 For local testing:
 
 ```bash
