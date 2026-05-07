@@ -1,11 +1,12 @@
 import { pathWithBasePath } from '@/lib/wiki';
 
-const navigation = ['Xinbao_Qiao'];
+const navigation = ['Xinbao_Qiao', 'Publications'];
 const researchTopics = ['AI_and_Networks', 'Machine_Unlearning', 'Synthetic_Data_and_Model_Collapse', 'Data_Centric_Machine_Learning'];
-const experience = ['The_Chinese_University_of_Hong_Kong', 'NUSRI_CQ', 'Zhejiang_University'];
+const experience = ['NUSRI_CQ'];
 const education = ['The_Chinese_University_of_Hong_Kong', 'Zhejiang_University', 'Shandong_University'];
 
 const navLabels: Record<string, string> = {
+  'Xinbao_Qiao': 'Main page',
   'AI_and_Networks': 'AI and Networks',
   'Machine_Unlearning': 'Machine Unlearning',
   'Synthetic_Data_and_Model_Collapse': 'Synthetic Data',
@@ -31,7 +32,7 @@ export function Sidebar() {
       <h4>Navigation</h4>
       <ul>
         {navigation.map((item) => (
-          <li key={item}><a href={wikiHref(item)}>Main page</a></li>
+          <li key={item}><a href={wikiHref(item)}>{label(item)}</a></li>
         ))}
       </ul>
 
@@ -42,16 +43,16 @@ export function Sidebar() {
         ))}
       </ul>
 
-      <h4>Experience</h4>
+      <h4>Education</h4>
       <ul>
-        {experience.map((item) => (
+        {education.map((item) => (
           <li key={item}><a href={wikiHref(item)}>{label(item)}</a></li>
         ))}
       </ul>
 
-      <h4>Education</h4>
+      <h4>Experience</h4>
       <ul>
-        {education.map((item) => (
+        {experience.map((item) => (
           <li key={item}><a href={wikiHref(item)}>{label(item)}</a></li>
         ))}
       </ul>

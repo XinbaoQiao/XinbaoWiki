@@ -339,7 +339,9 @@ const sidebar = fs.readFileSync(path.join(root, 'components/Sidebar.tsx'), 'utf8
 assert.doesNotMatch(sidebar, /Notable works/, 'sidebar no longer uses Notable works');
 assert.match(sidebar, /<aside className="wiki-sidebar" aria-label="Navigation">/, 'sidebar matches Colarpedia aside structure and aria label');
 assert.doesNotMatch(sidebar, /function NavSection|className="nav-section"|<section className="nav-section">/, 'sidebar uses flat Colarpedia h4 plus ul blocks');
-assert.match(sidebar, /<h4>Navigation<\/h4>[\s\S]*<h4>Research topics<\/h4>[\s\S]*<h4>Experience<\/h4>[\s\S]*<h4>Education<\/h4>[\s\S]*<h4>Contribute<\/h4>/, 'sidebar section order follows the Colarpedia framework');
+assert.match(sidebar, /const navigation = \['Xinbao_Qiao', 'Publications'\]/, 'sidebar navigation includes the main page and Publications');
+assert.match(sidebar, /'Xinbao_Qiao': 'Main page'/, 'sidebar keeps the homepage label compact');
+assert.match(sidebar, /<h4>Navigation<\/h4>[\s\S]*<h4>Research topics<\/h4>[\s\S]*<h4>Education<\/h4>[\s\S]*<h4>Experience<\/h4>[\s\S]*<h4>Contribute<\/h4>/, 'sidebar places Experience after Education');
 assert.doesNotMatch(sidebar, /Source repository/, 'sidebar contribute links avoid the source repository label');
 assert.doesNotMatch(sidebar, /OpenReview profile/, 'sidebar contribute avoids non-Colarpedia sidebar labels');
 assert.match(sidebar, /LinkedIn[\s\S]*Email the author/, 'sidebar contribute mirrors Colarpedia with LinkedIn before email');
@@ -351,6 +353,7 @@ assert.match(sidebar, /'AI_and_Networks': 'AI and Networks'/, 'sidebar labels AI
 assert.match(sidebar, /'Synthetic_Data_and_Model_Collapse': 'Synthetic Data'/, 'sidebar shortens synthetic-data topic');
 assert.match(sidebar, /'Data_Centric_Machine_Learning': 'Data Centric ML'/, 'sidebar shortens data-centric topic');
 assert.match(sidebar, /const education = \['The_Chinese_University_of_Hong_Kong', 'Zhejiang_University', 'Shandong_University'\]/, 'sidebar education is reverse chronological');
+assert.match(sidebar, /const experience = \['NUSRI_CQ'\]/, 'sidebar experience keeps only NUSRI-CQ');
 assert.doesNotMatch(sidebar, /Synthetic Data and Model Collapse/, 'sidebar avoids long research-topic labels');
 assert.doesNotMatch(sidebar, /Data Centric Machine Learning/, 'sidebar avoids long research-topic labels');
 
