@@ -15,6 +15,8 @@ chat with xinbao/
   env.example
   persona-prompt.md
   meme-voice-notes.md
+wiki/Internet_Slang_2026.md
+wiki/Internet_Slang_2026_zh.md
 ```
 
 ## Runtime flow
@@ -51,6 +53,10 @@ curl -H "Authorization: Bearer $XINBAO_CHAT_ADMIN_TOKEN" \
 ```
 
 Use these logs to identify repeated questions and then improve grounded answers in the wiki or prompt. Do not publish raw visitor questions without review.
+
+## Voice updates
+
+Public meme and slang notes are maintained as yearly wiki pages. The 2026 phrase bank lives in `wiki/Internet_Slang_2026.md` and `wiki/Internet_Slang_2026_zh.md`; it is included only as tone guidance, not as a factual source about Xinbao Qiao. Keep greetings playful but restrained, and keep research answers fact-first.
 
 ## Vercel deployment
 

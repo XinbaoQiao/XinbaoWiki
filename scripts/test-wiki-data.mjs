@@ -20,7 +20,7 @@ function assertFile(file) {
   assert.ok(fs.existsSync(path.join(root, file)), `${file} exists`);
 }
 
-for (const file of ['Xinbao_Qiao.md', 'Qiao_Xinbao_zh.md', 'index.md', 'log.md', 'CV.md', 'Meng_Zhang.md', 'Angela_Yingjun_Zhang.md']) {
+for (const file of ['Xinbao_Qiao.md', 'Qiao_Xinbao_zh.md', 'index.md', 'log.md', 'CV.md', 'Meng_Zhang.md', 'Angela_Yingjun_Zhang.md', 'Internet_Slang_2026.md']) {
   assertFile(`wiki/${file}`);
 }
 assertFile('CV.tex');
@@ -33,6 +33,7 @@ for (const file of [
   'Publications_zh.md',
   'When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md',
   'The_Chinese_University_of_Hong_Kong_zh.md',
+  'Internet_Slang_2026_zh.md',
   'index_zh.md',
   'log_zh.md'
 ]) {
@@ -130,6 +131,8 @@ const chatReadme = fs.readFileSync(path.join(root, 'chat with xinbao/README.md')
 const chatEnvExample = fs.readFileSync(path.join(root, 'chat with xinbao/env.example'), 'utf8');
 const chatPersona = fs.readFileSync(path.join(root, 'chat with xinbao/persona-prompt.md'), 'utf8');
 const chatMemeNotes = fs.readFileSync(path.join(root, 'chat with xinbao/meme-voice-notes.md'), 'utf8');
+const internetSlang2026 = read('Internet_Slang_2026.md');
+const internetSlang2026Zh = read('Internet_Slang_2026_zh.md');
 const cloudflareWorker = fs.readFileSync(path.join(root, 'cloudflare/xinbaopedia-proxy-worker.js'), 'utf8');
 const cloudflareWrangler = fs.readFileSync(path.join(root, 'cloudflare/wrangler.toml'), 'utf8');
 const cloudflareReadme = fs.readFileSync(path.join(root, 'cloudflare/README.md'), 'utf8');
@@ -214,7 +217,7 @@ assert.match(chatWithXinbao, /问题可能会被记录，用于改进回答。/,
 assert.match(chatWithXinbao, /Xinbao AI is temporarily unavailable\. Please try again later\./, 'chat client uses a generic model-error message');
 assert.match(chatWithXinbao, /language: Language/, 'chat client localizes UI from current wiki language');
 assert.match(chatWithXinbao, /distilled/, 'chat client introduces itself as a distilled academic skill');
-assert.match(chatWithXinbao, /家人们[\s\S]*顷刻炼化[\s\S]*数字分身 skill[\s\S]*给他爆了[\s\S]*资料稳/, 'chat client Chinese greeting uses varied playful digital-proxy phrasing');
+assert.match(chatWithXinbao, /来踩踩[\s\S]*蒸馏出来的数字分身 skill[\s\S]*资料稳[\s\S]*轻微有梗[\s\S]*讲清楚喵~/, 'chat client Chinese greeting is playful but restrained');
 assert.match(chatWithXinbao, /Xinbao AI is on the way[\s\S]*Checking Xinbaopedia notes[\s\S]*Almost there/, 'chat client includes varied English typing messages');
 assert.match(chatWithXinbao, /Xinbao AI 正在赶来的路上[\s\S]*家人们，答案正在路上[\s\S]*886 还早[\s\S]*来踩踩[\s\S]*正在切换到资料稳模式/, 'chat client includes varied Chinese typing messages');
 assert.match(chatWithXinbao, /function randomTypingMessage[\s\S]*Math\.random\(\)[\s\S]*setTypingMessage\(randomTypingMessage\(strings\.typing\)\)/, 'chat client randomly selects one typing message per request');
@@ -267,7 +270,7 @@ assert.doesNotMatch(chatQuestionsRoute, /console\.log|console\.error|YUNWU_API_K
 assert.match(chatKnowledge, /import 'server-only';/, 'chat knowledge builder is server-only');
 assert.match(chatKnowledge, /project\.md/, 'chat knowledge builder can prioritize project.md if it is added later');
 assert.match(chatKnowledge, /wiki'\)/, 'chat knowledge builder reads the local wiki directory');
-assert.match(chatKnowledge, /Xinbao_Qiao[\s\S]*Qiao_Xinbao_zh[\s\S]*Projects[\s\S]*Research[\s\S]*Publications[\s\S]*CV/, 'chat knowledge builder prioritizes homepage, projects, research, publications, and CV pages');
+assert.match(chatKnowledge, /Xinbao_Qiao[\s\S]*Qiao_Xinbao_zh[\s\S]*Projects[\s\S]*Research[\s\S]*Publications[\s\S]*CV[\s\S]*Internet_Slang_2026/, 'chat knowledge builder prioritizes homepage, projects, research, publications, CV, and yearly slang pages');
 assert.doesNotMatch(chatKnowledge, /Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning/, 'chat knowledge builder does not prioritize the hidden under-review manuscript');
 assert.match(chatKnowledge, /digital proxy/, 'persona identifies the assistant as a digital proxy');
 assert.match(chatKnowledge, /academic skill[\s\S]*distilled/, 'persona can introduce the assistant as a distilled academic skill');
@@ -275,8 +278,8 @@ assert.match(chatKnowledge, /Accepted user questions may be logged server-side/,
 assert.match(chatKnowledge, /chat history, raw IPs, system prompts, and API keys are not stored/, 'persona documents what question logging must not claim to store');
 assert.match(chatKnowledge, /顷刻炼化[\s\S]*数字分身 skill[\s\S]*恐怖如斯/, 'persona can introduce itself with the requested playful Chinese phrasing');
 assert.match(chatKnowledge, /家人们[\s\S]*跟他爆了[\s\S]*直接拿捏[\s\S]*包的[\s\S]*先别急[\s\S]*不硬编/s, 'persona supports a small Chinese meme-style expression pool without encouraging unsupported claims');
-assert.match(chatKnowledge, /Modern meme-guide voice[\s\S]*情绪价值[\s\S]*City不City[\s\S]*YYDS[\s\S]*我去不早说[\s\S]*尊嘟假嘟[\s\S]*退一万步讲/, 'persona supports current meme-guide catchphrases');
-assert.match(chatKnowledge, /Abstract-literature voice[\s\S]*有点抽象[\s\S]*离谱但合理[\s\S]*看不懂但大受震撼[\s\S]*source-grounded answer within one sentence/, 'persona supports bounded abstract-literature voice');
+assert.match(chatKnowledge, /Modern meme-guide voice[\s\S]*情绪价值[\s\S]*City不City[\s\S]*YYDS[\s\S]*我去不早说[\s\S]*不讲不讲[\s\S]*尊嘟假嘟[\s\S]*退一万步讲/, 'persona supports current meme-guide catchphrases');
+assert.match(chatKnowledge, /2026 sentence-template and abstract voice[\s\S]*我将辞职在家研究[\s\S]*此人的 X 恐怕在我之上[\s\S]*有点抽象[\s\S]*source-grounded answer within one sentence/, 'persona supports bounded 2026 sentence-template and abstract voice');
 assert.match(chatKnowledge, /Reusable casual sentence templates[\s\S]*家人们谁懂啊[\s\S]*主打一个 X[\s\S]*含金量还在上升/, 'persona supports reusable meme sentence templates');
 assert.match(chatKnowledge, /00s retro Chinese web voice[\s\S]*886[\s\S]*踩踩[\s\S]*QQ空间 energy/, 'persona supports light 00s retro web catchphrases');
 assert.doesNotMatch(chatKnowledge, /\u8dd1\u5802/, 'persona removes the disallowed catchphrase');
@@ -293,18 +296,24 @@ for (const envName of ['YUNWU_API_KEY', 'YUNWU_API_BASE_URL', 'UPSTASH_REDIS_RES
 assert.match(chatPersona, /You are Chat with Xinbao/, 'persona prompt template documents assistant identity');
 assert.match(chatPersona, /XINBAO_CHAT_VOICE_STYLE/, 'persona prompt template documents the private voice style layer');
 assert.match(chatPersona, /Accepted user questions may be logged server-side/, 'persona prompt template documents question logging transparency');
-assert.match(chatPersona, /do not repeat one fixed meme[\s\S]*家人们[\s\S]*跟他爆了[\s\S]*顷刻炼化[\s\S]*never use memes to cover missing evidence/, 'persona prompt template documents varied meme-style wording with factual boundaries');
-assert.match(chatPersona, /Modern meme-guide voice[\s\S]*情绪价值[\s\S]*City不City[\s\S]*YYDS[\s\S]*爱你老己[\s\S]*这谁顶得住啊/, 'persona prompt template documents current meme-guide wording');
-assert.match(chatPersona, /Abstract-literature voice[\s\S]*听君一席话如听一席话[\s\S]*不按套路但按 source notes/, 'persona prompt template documents abstract-literature wording');
+assert.match(chatPersona, /do not repeat one fixed meme[\s\S]*家人们[\s\S]*跟他爆了[\s\S]*顷刻炼化[\s\S]*轻微有梗[\s\S]*never use memes to cover missing evidence/, 'persona prompt template documents varied meme-style wording with factual boundaries');
+assert.match(chatPersona, /Modern meme-guide voice[\s\S]*情绪价值[\s\S]*City不City[\s\S]*YYDS[\s\S]*爱你老己[\s\S]*做完你的做你的/, 'persona prompt template documents current meme-guide wording');
+assert.match(chatPersona, /2026 sentence-template and abstract voice[\s\S]*我将辞职在家研究[\s\S]*听君一席话如听一席话[\s\S]*不按套路但按 source notes/, 'persona prompt template documents 2026 sentence-template and abstract wording');
 assert.match(chatPersona, /Reusable casual sentence templates[\s\S]*退一万步讲[\s\S]*尊嘟假嘟[\s\S]*source-grounded content only/, 'persona prompt template documents meme sentence-template boundaries');
 assert.match(chatPersona, /00s retro Chinese web voice[\s\S]*886[\s\S]*踩踩[\s\S]*留言板 energy/, 'persona prompt template documents the 00s retro phrase pool');
 assert.match(chatMemeNotes, /46 notes\.hdoc[\s\S]*private reference material[\s\S]*should not quote it or commit it/, 'meme voice notes document private hdoc handling');
-assert.match(chatMemeNotes, /Modern meme-guide references[\s\S]*情绪价值[\s\S]*班味儿[\s\S]*绝绝子[\s\S]*命运的齿轮开始转动[\s\S]*退一万步讲/, 'meme voice notes organize current meme-guide categories');
+assert.match(chatMemeNotes, /Modern meme-guide references[\s\S]*情绪价值[\s\S]*班味儿[\s\S]*绝绝子[\s\S]*不讲不讲[\s\S]*命运的齿轮开始转动[\s\S]*退一万步讲/, 'meme voice notes organize current meme-guide categories');
+assert.match(chatMemeNotes, /2026 sentence-template references[\s\S]*我将辞职在家研究[\s\S]*此人的 X 恐怕在我之上[\s\S]*从从容容、游刃有余[\s\S]*随橙想/, 'meme voice notes organize 2026 sentence-template categories');
+assert.match(chatMemeNotes, /2026 social and AI-era references[\s\S]*抽象力[\s\S]*AI人格[\s\S]*AI搭子[\s\S]*SBTI[\s\S]*武BOT/, 'meme voice notes organize 2026 social and AI-era categories');
 assert.match(chatMemeNotes, /Abstract literature[\s\S]*有点抽象[\s\S]*离谱但合理[\s\S]*精神状态领先版本/, 'meme voice notes organize abstract-literature categories');
 assert.match(chatMemeNotes, /Sentence templates[\s\S]*家人们谁懂啊[\s\S]*直接拿捏[\s\S]*爱了爱了[\s\S]*这波属于反向严谨/, 'meme voice notes include reusable meme sentence templates');
-assert.match(chatMemeNotes, /Web references[\s\S]*news\.cn[\s\S]*nlp\.ccnu\.edu\.cn[\s\S]*lingoace[\s\S]*jiuzhe[\s\S]*ithome[\s\S]*chinawriter[\s\S]*digitaling[\s\S]*php\.cn/, 'meme voice notes record web sources for meme-guide knowledge');
+assert.match(chatMemeNotes, /Web references[\s\S]*news\.cn[\s\S]*nlp\.ccnu\.edu\.cn[\s\S]*lingoace[\s\S]*wukongsch[\s\S]*qian-gua[\s\S]*rednotememe[\s\S]*stellarchinese[\s\S]*jiuzhe[\s\S]*ithome[\s\S]*chinawriter[\s\S]*digitaling[\s\S]*php\.cn/, 'meme voice notes record web sources for meme-guide knowledge');
 assert.match(chatMemeNotes, /00s retro web nostalgia[\s\S]*886[\s\S]*踩踩[\s\S]*火钳刘明/, 'meme voice notes organize retro catchphrase categories');
 assert.doesNotMatch(`${chatWithXinbao}\n${chatPersona}\n${chatMemeNotes}`, /\u8dd1\u5802/, 'chat voice knowledge removes the disallowed catchphrase everywhere public');
+assert.match(internetSlang2026, /Internet Slang 2026[\s\S]*controlled phrase bank[\s\S]*Sentence and abstract-expression memes[\s\S]*AI as companion/, 'English 2026 slang page documents controlled use categories');
+assert.match(internetSlang2026, /LingoAce[\s\S]*WuKong Education[\s\S]*QianGua Data[\s\S]*RedNoteMeme[\s\S]*Stellar Chinese/, 'English 2026 slang page cites current public slang sources');
+assert.match(internetSlang2026Zh, /2026热梗[\s\S]*先准确，再有趣[\s\S]*句式梗与抽象表达[\s\S]*AI人格[\s\S]*之前已经从聊天语气中移除的旧词继续保持不用/, 'Chinese 2026 slang page documents current slang categories and omitted older phrasing');
+assert.match(internetSlang2026Zh, /LingoAce[\s\S]*悟空教育[\s\S]*千瓜数据[\s\S]*RedNoteMeme[\s\S]*Stellar Chinese/, 'Chinese 2026 slang page cites current public slang sources');
 assert.doesNotMatch(chatEnvExample, /sk-[A-Za-z0-9_-]{12,}/, 'env.example contains no real-looking API key');
 assert.match(packageJson.scripts?.['cf:deploy'] || '', /wrangler deploy --config cloudflare\/wrangler\.toml/, 'package scripts include Cloudflare Worker deployment');
 assert.match(packageJson.scripts?.['cf:dev'] || '', /wrangler dev --config cloudflare\/wrangler\.toml/, 'package scripts include local Cloudflare Worker dev');
