@@ -40,7 +40,7 @@ links:
 summary: "香港中文大学信息工程系博士生；研究方向包括 AI 与网络、分布式 Wasserstein 计算、机器遗忘和合成数据可靠性"
 ---
 
-**乔鑫宝**（英文发表名：**Xinbao Qiao**[^xinbao-qiao-bridge-zh][^qiao-ciao-zh]；生于2000年9月30日，云南西双版纳）是中国博士生，现为[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系博士生。[^xinbao-name-zh] 他的当前研究主要集中于[[AI_and_Networks|AI 与网络]]，尤其关注数据、计算和分布证据分散在网络化参与方中时，学习系统如何训练、评估和保持可靠。其近期博士阶段关注点包括用于协作分布参考的[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]计算；相关研究还与[[Machine_Unlearning|机器遗忘]]、[[Synthetic_Data_and_Model_Collapse|合成数据]]和[[Data_Centric_Machine_Learning|Data Centric ML]]相交。
+**乔鑫宝**（英文发表名：**Xinbao Qiao**[^xinbao-name-zh][^qiao-ciao-zh][^xinbao-qiao-bridge-zh]；生于2000年9月30日，云南西双版纳）是中国博士生，现为[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系博士生。他的当前研究主要集中于[[AI_and_Networks|AI 与网络]]，尤其关注数据、计算和分布证据分散在网络化参与方中时，学习系统如何训练、评估和保持可靠。其近期博士阶段关注点包括用于协作分布参考的[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]计算；相关研究还与[[Machine_Unlearning|机器遗忘]]、[[Synthetic_Data_and_Model_Collapse|合成数据]]和[[Data_Centric_Machine_Learning|Data Centric ML]]相交。
 
 在博士阶段以前，乔鑫宝于[[Zhejiang_University|浙江大学]]获得人工智能硕士学位，并于[[Shandong_University|山东大学]]获得通信工程工学学士学位。他的[[Publications|论文]]包括 ICML、AAAI 与 ICLR 录用或发表的工作。
 

@@ -6,6 +6,7 @@ summary: "Append-only maintenance log for the wiki."
 
 ## 2026-05-06
 
+- Reordered the opening biography footnote references so the Xinbao name-coincidence note appears before the Xinbao Qiao bridge-coincidence note.
 - Updated the visible sidebar so Navigation includes [[Publications]], and the Experience section appears after Education with only [[NUSRI_CQ|NUSRI-CQ]].
 - Added a compact name footnote to [[Xinbao_Qiao]] and [[Qiao_Xinbao_zh]] explaining the "Qiao"/"ciao" nickname relation and the "Mr. Ciao" handle.
 - Added [[Internet_Slang_2026]] and [[Internet_Slang_2026_zh|2026热梗]] as yearly Chat with Xinbao tone references, expanded the meme-style prompt boundaries, and softened the opening greeting so it is playful but still appropriate for an academic homepage.

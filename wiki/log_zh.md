@@ -8,6 +8,7 @@ translation_of: "log"
 
 ## 2026-05-06
 
+- 调整人物主页开头的脚注引用顺序，使 Xinbao 同名脚注出现在 Xinbao Qiao/新寶橋拼写巧合脚注之前。
 - 调整可见左侧栏：Navigation 增加 [[Publications|Publications]]，Experience 放到 Education 后面且只保留 [[NUSRI_CQ|NUSRI-CQ]]。
 - 在 [[Xinbao_Qiao]] 与 [[Qiao_Xinbao_zh]] 增加姓名脚注，说明 “Qiao”/“ciao” 的昵称关联以及 “Mr. Ciao” 这一称呼。
 - 新增 [[Internet_Slang_2026_zh|2026热梗]] 与 [[Internet_Slang_2026|Internet Slang 2026]] 作为 Chat with Xinbao 的年度语气参考，扩充热梗使用边界，并把 AI 打开后的第一句调整为有趣但不失学术主页风度的版本。

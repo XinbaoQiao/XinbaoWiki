@@ -391,9 +391,11 @@ function footnoteDefs(body) {
 
 assert.deepEqual(footnoteDefs(home).sort(), ['cuhk-ie', 'qiao-ciao', 'xinbao-name', 'xinbao-qiao-bridge'].sort(), 'English biography keeps only essential footnotes');
 assert.deepEqual(footnoteDefs(zhHome).sort(), ['cuhk-ie-zh', 'qiao-ciao-zh', 'xinbao-name-zh', 'xinbao-qiao-bridge-zh'].sort(), 'Chinese biography keeps only essential footnotes');
-assert.match(home, /\*\*Xinbao Qiao\*\*\[\^xinbao-qiao-bridge\]\[\^qiao-ciao\]/, 'English biography attaches name footnotes to the romanized name');
+assert.deepEqual(footnoteRefs(home).slice(0, 3), ['xinbao-name', 'qiao-ciao', 'xinbao-qiao-bridge'], 'English biography orders visible name footnotes as Xinbao, Ciao, bridge');
+assert.deepEqual(footnoteRefs(zhHome).slice(0, 3), ['xinbao-name-zh', 'qiao-ciao-zh', 'xinbao-qiao-bridge-zh'], 'Chinese biography orders visible name footnotes as Xinbao, Ciao, bridge');
+assert.match(home, /\*\*Xinbao Qiao\*\*\[\^xinbao-name\]\[\^qiao-ciao\]\[\^xinbao-qiao-bridge\]/, 'English biography attaches the reordered name footnotes to the romanized name');
 assert.match(home, /"喬"[\s\S]*sound of "ciao"[\s\S]*"Mr\. Ciao"[\s\S]*huggingface\.co\/MrCiao/, 'English biography explains the Mr. Ciao nickname');
-assert.match(zhHome, /英文发表名：\*\*Xinbao Qiao\*\*\[\^xinbao-qiao-bridge-zh\]\[\^qiao-ciao-zh\]/, 'Chinese biography attaches name footnotes to the romanized name');
+assert.match(zhHome, /英文发表名：\*\*Xinbao Qiao\*\*\[\^xinbao-name-zh\]\[\^qiao-ciao-zh\]\[\^xinbao-qiao-bridge-zh\]/, 'Chinese biography attaches the reordered name footnotes to the romanized name');
 assert.match(zhHome, /“喬”与“ciao”发音一致[\s\S]*“Mr\. Ciao”[\s\S]*huggingface\.co\/MrCiao/, 'Chinese biography explains the Mr. Ciao nickname');
 assert.match(home, /Xinbao Qiao[\s\S]*新寶橋[\s\S]*pwbgis\.kcg\.gov\.tw[\s\S]*mapcarta\.com\/25634858/, 'English bridge-name footnote cites Taiwan bridge sources');
 assert.match(zhHome, /Xinbao Qiao[\s\S]*新寶橋[\s\S]*pwbgis\.kcg\.gov\.tw[\s\S]*mapcarta\.com\/25634858/, 'Chinese bridge-name footnote cites Taiwan bridge sources');
