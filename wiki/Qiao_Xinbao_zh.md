@@ -1,5 +1,10 @@
 ---
 name: "乔鑫宝"
+aliases:
+  - "Mr. Ciao"
+  - "MrCiao"
+  - "喬"
+  - "ciao"
 born: |
   乔鑫宝 (Xinbao Qiao)
   2000年9月30日 (25岁)
@@ -35,7 +40,7 @@ links:
 summary: "香港中文大学信息工程系博士生；研究方向包括 AI 与网络、分布式 Wasserstein 计算、机器遗忘和合成数据可靠性"
 ---
 
-**乔鑫宝**（英文发表名：**Xinbao Qiao**[^xinbao-qiao-bridge-zh]；生于2000年9月30日，云南西双版纳）是中国博士生，现为[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系博士生。[^xinbao-name-zh] 他的当前研究主要集中于[[AI_and_Networks|AI 与网络]]，尤其关注数据、计算和分布证据分散在网络化参与方中时，学习系统如何训练、评估和保持可靠。其近期博士阶段关注点包括用于协作分布参考的[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]计算；相关研究还与[[Machine_Unlearning|机器遗忘]]、[[Synthetic_Data_and_Model_Collapse|合成数据]]和[[Data_Centric_Machine_Learning|Data Centric ML]]相交。
+**乔鑫宝**（英文发表名：**Xinbao Qiao**[^xinbao-qiao-bridge-zh][^qiao-ciao-zh]；生于2000年9月30日，云南西双版纳）是中国博士生，现为[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系博士生。[^xinbao-name-zh] 他的当前研究主要集中于[[AI_and_Networks|AI 与网络]]，尤其关注数据、计算和分布证据分散在网络化参与方中时，学习系统如何训练、评估和保持可靠。其近期博士阶段关注点包括用于协作分布参考的[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]计算；相关研究还与[[Machine_Unlearning|机器遗忘]]、[[Synthetic_Data_and_Model_Collapse|合成数据]]和[[Data_Centric_Machine_Learning|Data Centric ML]]相交。
 
 在博士阶段以前，乔鑫宝于[[Zhejiang_University|浙江大学]]获得人工智能硕士学位，并于[[Shandong_University|山东大学]]获得通信工程工学学士学位。他的[[Publications|论文]]包括 ICML、AAAI 与 ICLR 录用或发表的工作。
 
@@ -101,5 +106,7 @@ ICML 2026 论文[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sa
 [^xinbao-name-zh]: “Xinbao”这一拼写也用于[圣地亚哥动物园的大熊猫 Xin Bao](https://zoo.sandiegozoo.org/giant-pandas)；动物园将该熊猫名字解释为“precious treasure of prosperity and abundance”。此处为同名脚注，并非传记关联。
 
 [^xinbao-qiao-bridge-zh]: “Xinbao Qiao”作为拼音式拼写，也可对应“新寶橋”（Xinbao Bridge）。高雄市政府工务建设导览记录了[六龟新寶橋](https://pwbgis.kcg.gov.tw/construction/construction.aspx?id=7252)，Mapcarta/GeoNames 列出 [Hsin-pao Number 2 Bridge](https://mapcarta.com/25634858) 的别名“Xinbao Er Qiao”；此处仅为罗马化/拼写巧合，并非传记关联。
+
+[^qiao-ciao-zh]: “乔”的繁体为“喬”。在本 wiki 的昵称语境中，“喬”与“ciao”发音一致，因此也可以称乔鑫宝为“Mr. Ciao”；其公开 Hugging Face 账号也使用 [MrCiao](https://huggingface.co/MrCiao)。
 
 [^cuhk-ie-zh]: 香港中文大学信息工程系在[官方部门介绍](https://www.ie.cuhk.edu.hk/about-the-department/)中将研究范围概括为现实应用中的信息生成、通信、存储与处理；香港中文大学研究院也在工程学院项目列表中列出 [MPhil-PhD in Information Engineering](https://www.gs.cuhk.edu.hk/programmes/engineering)。

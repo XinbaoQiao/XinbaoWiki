@@ -69,6 +69,7 @@ const educationBlock = frontmatterSlice(bio, 'education:', 'links:');
 assert.match(educationBlock, /label: "The Chinese University of Hong Kong"[\s\S]*label: "Zhejiang University"[\s\S]*label: "Shandong University"/, 'English education is reverse chronological');
 assert.match(educationBlock, /label: "Shandong University"\n\s+url: "\/wiki\/Shandong_University\/"\n\s+detail: "\(BEng, 2022\)"/, 'English education links only school name and keeps degree detail separate');
 assert.match(bio, /title: "OpenReview"[\s\S]*https:\/\/openreview\.net\/profile\?id=~Xinbao_Qiao1/, 'contact replaces Website with OpenReview');
+assert.match(bio, /aliases:[\s\S]*"Mr\. Ciao"[\s\S]*"MrCiao"[\s\S]*"Ciao"/, 'English biography aliases include Mr. Ciao');
 
 const zhBio = frontmatter('Qiao_Xinbao_zh.md');
 const zhAffiliation = frontmatterSlice(zhBio, 'affiliation:', 'education:');
@@ -79,6 +80,7 @@ assert.doesNotMatch(zhBio, /^native_name:/m, 'Chinese infobox follows Colarpedia
 assert.doesNotMatch(zhBio, /^birth_place:/m, 'Chinese birthplace is kept in prose rather than the infobox');
 assert.match(zhBio, /born: \|\n\s+乔鑫宝 \(Xinbao Qiao\)\n\s+2000年9月30日 \(25岁\)\n\s+中国云南西双版纳/, 'Chinese Born row is a multiline Colarpedia-style value');
 assert.match(zhBio, /image_caption: "摄于 ICLR 2025，新加坡 EXPO"/, 'Chinese portrait caption identifies ICLR 2025 at Singapore EXPO');
+assert.match(zhBio, /aliases:[\s\S]*"Mr\. Ciao"[\s\S]*"MrCiao"[\s\S]*"喬"[\s\S]*"ciao"/, 'Chinese biography aliases include Mr. Ciao and ciao spelling');
 const zhEducationBlock = frontmatterSlice(zhBio, 'education:', 'links:');
 assert.match(zhEducationBlock, /label: "香港中文大学"[\s\S]*label: "浙江大学"[\s\S]*label: "山东大学"/, 'Chinese education is reverse chronological');
 assert.match(zhEducationBlock, /label: "山东大学"\n\s+url: "\/wiki\/Shandong_University\/"\n\s+detail: "（工学学士，2022）"/, 'Chinese education links only school name and keeps degree detail separate');
@@ -384,10 +386,12 @@ function footnoteDefs(body) {
   return [...body.matchAll(/^\[\^([^\]]+)\]:/gm)].map((match) => match[1]);
 }
 
-assert.deepEqual(footnoteDefs(home).sort(), ['cuhk-ie', 'xinbao-name', 'xinbao-qiao-bridge'].sort(), 'English biography keeps only essential footnotes');
-assert.deepEqual(footnoteDefs(zhHome).sort(), ['cuhk-ie-zh', 'xinbao-name-zh', 'xinbao-qiao-bridge-zh'].sort(), 'Chinese biography keeps only essential footnotes');
-assert.match(home, /\*\*Xinbao Qiao\*\*\[\^xinbao-qiao-bridge\]/, 'English biography attaches the bridge-name footnote to the romanized name');
-assert.match(zhHome, /英文发表名：\*\*Xinbao Qiao\*\*\[\^xinbao-qiao-bridge-zh\]/, 'Chinese biography attaches the bridge-name footnote to the romanized name');
+assert.deepEqual(footnoteDefs(home).sort(), ['cuhk-ie', 'qiao-ciao', 'xinbao-name', 'xinbao-qiao-bridge'].sort(), 'English biography keeps only essential footnotes');
+assert.deepEqual(footnoteDefs(zhHome).sort(), ['cuhk-ie-zh', 'qiao-ciao-zh', 'xinbao-name-zh', 'xinbao-qiao-bridge-zh'].sort(), 'Chinese biography keeps only essential footnotes');
+assert.match(home, /\*\*Xinbao Qiao\*\*\[\^xinbao-qiao-bridge\]\[\^qiao-ciao\]/, 'English biography attaches name footnotes to the romanized name');
+assert.match(home, /"喬"[\s\S]*sound of "ciao"[\s\S]*"Mr\. Ciao"[\s\S]*huggingface\.co\/MrCiao/, 'English biography explains the Mr. Ciao nickname');
+assert.match(zhHome, /英文发表名：\*\*Xinbao Qiao\*\*\[\^xinbao-qiao-bridge-zh\]\[\^qiao-ciao-zh\]/, 'Chinese biography attaches name footnotes to the romanized name');
+assert.match(zhHome, /“喬”与“ciao”发音一致[\s\S]*“Mr\. Ciao”[\s\S]*huggingface\.co\/MrCiao/, 'Chinese biography explains the Mr. Ciao nickname');
 assert.match(home, /Xinbao Qiao[\s\S]*新寶橋[\s\S]*pwbgis\.kcg\.gov\.tw[\s\S]*mapcarta\.com\/25634858/, 'English bridge-name footnote cites Taiwan bridge sources');
 assert.match(zhHome, /Xinbao Qiao[\s\S]*新寶橋[\s\S]*pwbgis\.kcg\.gov\.tw[\s\S]*mapcarta\.com\/25634858/, 'Chinese bridge-name footnote cites Taiwan bridge sources');
 for (const removedNote of ['timeline-note', 'research-scope', 'zju-program', 'sdu-background', 'ai-networks-note']) {

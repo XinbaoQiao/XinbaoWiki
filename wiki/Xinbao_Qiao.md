@@ -1,5 +1,9 @@
 ---
 name: "Xinbao Qiao"
+aliases:
+  - "Mr. Ciao"
+  - "MrCiao"
+  - "Ciao"
 born: |
   September 2000 (age 25)
   Xishuangbanna, Yunnan
@@ -34,7 +38,7 @@ links:
 summary: "PhD student in Information Engineering at The Chinese University of Hong Kong; researcher in AI and networks, distributed Wasserstein computation, machine unlearning, and synthetic-data reliability"
 ---
 
-**Xinbao Qiao**[^xinbao-qiao-bridge] (Chinese: **乔鑫宝**; born September 2000 in Xishuangbanna, Yunnan) is a Chinese PhD student in the Department of Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]].[^xinbao-name] His current research is centered on [[AI_and_Networks|AI and networks]], especially learning and evaluation problems in which data, computation, and distributional evidence are spread across networked parties. A recent doctoral focus is [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenter]] computation for collaborative distributional references. Related work spans [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic data]], and [[Data_Centric_Machine_Learning|data centric ML]].
+**Xinbao Qiao**[^xinbao-qiao-bridge][^qiao-ciao] (Chinese: **乔鑫宝**; born September 2000 in Xishuangbanna, Yunnan) is a Chinese PhD student in the Department of Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]].[^xinbao-name] His current research is centered on [[AI_and_Networks|AI and networks]], especially learning and evaluation problems in which data, computation, and distributional evidence are spread across networked parties. A recent doctoral focus is [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenter]] computation for collaborative distributional references. Related work spans [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic data]], and [[Data_Centric_Machine_Learning|data centric ML]].
 
 Before his doctoral studies, Qiao received a Master of Science in Artificial Intelligence from [[Zhejiang_University|Zhejiang University]] and a Bachelor of Engineering in Communication Engineering from [[Shandong_University|Shandong University]]. His [[Publications]] include accepted or published papers at ICML, AAAI, and ICLR.
 
@@ -102,5 +106,7 @@ The ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|Whe
 [^xinbao-name]: The romanized given name "Xinbao" is also used by the [San Diego Zoo's giant panda Xin Bao](https://zoo.sandiegozoo.org/giant-pandas), whose name the zoo glosses as "precious treasure of prosperity and abundance"; this note records a name coincidence, not a biographical relation.
 
 [^xinbao-qiao-bridge]: As a pinyin-style string, "Xinbao Qiao" also corresponds to "新寶橋" ("Xinbao Bridge"). Kaohsiung City's public-works guide documents [Liugui Xinbao Bridge](https://pwbgis.kcg.gov.tw/construction/construction.aspx?id=7252) as "新寶橋", and Mapcarta/GeoNames lists [Hsin-pao Number 2 Bridge](https://mapcarta.com/25634858) with the alias "Xinbao Er Qiao"; this note records a romanization coincidence, not a biographical relation.
+
+[^qiao-ciao]: Qiao's surname is written "乔" in simplified Chinese and "喬" in traditional Chinese. In this wiki's nickname usage, "喬" is treated as matching the sound of "ciao", which explains the informal nickname "Mr. Ciao" and the public handle [MrCiao](https://huggingface.co/MrCiao).
 
 [^cuhk-ie]: CUHK's Department of Information Engineering describes its scope as information generation, communication, storage, and processing in real-world applications on its [official department page](https://www.ie.cuhk.edu.hk/about-the-department/); the CUHK Graduate School also lists [MPhil-PhD in Information Engineering](https://www.gs.cuhk.edu.hk/programmes/engineering) within Engineering.

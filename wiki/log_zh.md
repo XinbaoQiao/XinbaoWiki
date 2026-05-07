@@ -8,6 +8,7 @@ translation_of: "log"
 
 ## 2026-05-06
 
+- 在 [[Xinbao_Qiao]] 与 [[Qiao_Xinbao_zh]] 增加姓名脚注，说明 “Qiao”/“ciao” 的昵称关联以及 “Mr. Ciao” 这一称呼。
 - 新增 [[Internet_Slang_2026_zh|2026热梗]] 与 [[Internet_Slang_2026|Internet Slang 2026]] 作为 Chat with Xinbao 的年度语气参考，扩充热梗使用边界，并把 AI 打开后的第一句调整为有趣但不失学术主页风度的版本。
 - 围绕 [[AI_and_Networks|AI 与网络]] 更新 CUHK 博士阶段叙述，新增 [[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]] 作为当前博士阶段关注点，并将研究概览整理为更接近 LLM Wiki 的编译式研究图谱。
 

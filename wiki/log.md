@@ -6,6 +6,7 @@ summary: "Append-only maintenance log for the wiki."
 
 ## 2026-05-06
 
+- Added a compact name footnote to [[Xinbao_Qiao]] and [[Qiao_Xinbao_zh]] explaining the "Qiao"/"ciao" nickname relation and the "Mr. Ciao" handle.
 - Added [[Internet_Slang_2026]] and [[Internet_Slang_2026_zh|2026热梗]] as yearly Chat with Xinbao tone references, expanded the meme-style prompt boundaries, and softened the opening greeting so it is playful but still appropriate for an academic homepage.
 - Updated the CUHK doctoral-stage narrative around [[AI_and_Networks|AI and networks]], added [[Distributed_Wasserstein_Barycenter]] as the current Wasserstein barycenter focus, and reorganized research overview pages toward a compiled LLM-wiki-style map.
 - Added `Chat with Xinbao`, a same-site AI assistant entry beside the search bar, with a server-only Next.js API route, Yunwu model proxying, Upstash-backed rate limits, and deployment/security documentation.
