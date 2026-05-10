@@ -6,6 +6,7 @@ summary: "Append-only maintenance log for the wiki."
 
 ## 2026-05-06
 
+- Polished the English and Chinese biography pages with tighter opening prose, clearer doctoral-stage wording, and less repetition between research experience and project summaries.
 - Reordered the opening biography footnote references so the Xinbao name-coincidence note appears before the Xinbao Qiao bridge-coincidence note.
 - Updated the visible sidebar so Navigation includes [[Publications]], and the Experience section appears after Education with only [[NUSRI_CQ|NUSRI-CQ]].
 - Added a compact name footnote to [[Xinbao_Qiao]] and [[Qiao_Xinbao_zh]] explaining the "Qiao"/"ciao" nickname relation and the "Mr. Ciao" handle.

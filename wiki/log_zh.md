@@ -8,6 +8,7 @@ translation_of: "log"
 
 ## 2026-05-06
 
+- 润色中英文人物主页，压缩开头表述，明确博士阶段措辞，并减少研究经历与学术项目之间的重复。
 - 调整人物主页开头的脚注引用顺序，使 Xinbao 同名脚注出现在 Xinbao Qiao/新寶橋拼写巧合脚注之前。
 - 调整可见左侧栏：Navigation 增加 [[Publications|Publications]]，Experience 放到 Education 后面且只保留 [[NUSRI_CQ|NUSRI-CQ]]。
 - 在 [[Xinbao_Qiao]] 与 [[Qiao_Xinbao_zh]] 增加姓名脚注，说明 “Qiao”/“ciao” 的昵称关联以及 “Mr. Ciao” 这一称呼。

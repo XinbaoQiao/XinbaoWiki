@@ -38,15 +38,15 @@ links:
 summary: "PhD student in Information Engineering at The Chinese University of Hong Kong; researcher in AI and networks, distributed Wasserstein computation, machine unlearning, and synthetic-data reliability"
 ---
 
-**Xinbao Qiao**[^xinbao-name][^qiao-ciao][^xinbao-qiao-bridge] (Chinese: **乔鑫宝**; born September 2000 in Xishuangbanna, Yunnan) is a Chinese PhD student in the Department of Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]]. His current research is centered on [[AI_and_Networks|AI and networks]], especially learning and evaluation problems in which data, computation, and distributional evidence are spread across networked parties. A recent doctoral focus is [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenter]] computation for collaborative distributional references. Related work spans [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic data]], and [[Data_Centric_Machine_Learning|data centric ML]].
+**Xinbao Qiao**[^xinbao-name][^qiao-ciao][^xinbao-qiao-bridge] (Chinese: **乔鑫宝**; born September 2000 in Xishuangbanna, Yunnan) is a Chinese PhD student in the Department of Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]]. His research is centered on [[AI_and_Networks|AI and networks]], especially learning and evaluation problems in which data, computation, and distributional evidence are distributed across networked parties. His recent doctoral focus is [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenter]] computation for shared distributional references in collaborative settings. Related work spans [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic data]], and [[Data_Centric_Machine_Learning|data-centric ML]].
 
-Before his doctoral studies, Qiao received a Master of Science in Artificial Intelligence from [[Zhejiang_University|Zhejiang University]] and a Bachelor of Engineering in Communication Engineering from [[Shandong_University|Shandong University]]. His [[Publications]] include accepted or published papers at ICML, AAAI, and ICLR.
+Qiao previously received a Master of Science in Artificial Intelligence from [[Zhejiang_University|Zhejiang University]] and a Bachelor of Engineering in Communication Engineering from [[Shandong_University|Shandong University]]. His [[Publications]] include accepted or published papers at ICML, AAAI, and ICLR.
 
 ## Education
 
-Qiao is enrolled as a PhD student in Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]] in Fall 2026. His PhD advisor is [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]].[^cuhk-ie]
+Qiao is a PhD student in Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]], advised by [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]].[^cuhk-ie]
 
-From 2022 to 2025 he studied Artificial Intelligence at [[Zhejiang_University|Zhejiang University]], where his master's transcript records a major GPA of 90/100 and a rank of 3/25. His master's research was advised by [[Meng_Zhang|Meng Zhang]].
+From 2022 to 2025, he studied Artificial Intelligence at [[Zhejiang_University|Zhejiang University]], where his master's transcript records a major GPA of 90/100 and a rank of 3/25. His master's research was advised by [[Meng_Zhang|Meng Zhang]].
 
 Qiao received a Bachelor of Engineering in Communication Engineering from [[Shandong_University|Shandong University]] in 2022.
 
@@ -54,31 +54,31 @@ Qiao received a Bachelor of Engineering in Communication Engineering from [[Shan
 
 ### Data-centric machine learning at Zhejiang University (2023-2025)
 
-From March 2023 to December 2025, Qiao worked on data-centric machine learning systems at [[Zhejiang_University|Zhejiang University]] under the supervision of [[Meng_Zhang|Meng Zhang]]. The work centered on data influence attribution, machine unlearning, and the trade-offs among fairness, robustness, privacy, and utility.
+From March 2023 to December 2025, Qiao worked on data-centric machine learning systems at [[Zhejiang_University|Zhejiang University]] under the supervision of [[Meng_Zhang|Meng Zhang]]. This work centered on data influence attribution, machine unlearning, and trade-offs among fairness, robustness, privacy, and utility.
 
 This period includes work on [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]], [[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]], and [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]].
 
 ### Trustworthy LLM systems at NUSRI-CQ (2025)
 
-From June 2025 to December 2025, Qiao worked as a full-time research intern at [[NUSRI_CQ|NUSRI-CQ]]. The research focused on trustworthy large language model systems and synthetic-data evaluation, including distributed Wasserstein methods for studying recursive synthetic-data training.
+From June to December 2025, Qiao worked as a full-time research intern at [[NUSRI_CQ|NUSRI-CQ]]. The research focused on trustworthy LLM systems and synthetic-data evaluation, including distributed Wasserstein methods for studying recursive synthetic-data training.
 
 ### The Chinese University of Hong Kong (2026-present)
 
-Qiao is a PhD student in Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]], advised by [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]. His doctoral stage is organized around [[AI_and_Networks|AI and networks]]: how learning systems should be trained, evaluated, and maintained when data and computation are distributed rather than pooled.
+At [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]], Qiao's doctoral work is organized around [[AI_and_Networks|AI and networks]]: how learning systems can be trained, evaluated, and maintained when data and computation are distributed rather than pooled.
 
 Within this stage, his recent work has focused on distributed computation for [[Distributed_Wasserstein_Barycenter|Wasserstein barycenters]]. The topic connects optimal-transport geometry to networked AI: each party may hold only a local empirical distribution, while the learning system needs a shared distributional reference for evaluation, sample scoring, or synthetic-data verification. The emphasis is therefore not only on a model architecture, but also on the information flow that makes a reliable global view possible.
 
 ## Academic projects
 
-In addition to the biographical education and affiliation record, Qiao's wiki organizes his research output as standalone project-style articles.
+The wiki separates Qiao's biographical timeline from project-style research articles.
 
 ### AI and networks (2024-present)
 
-Qiao's current primary line, [[AI_and_Networks|AI and networks]], studies how learning systems behave when data and computation are distributed across devices, institutions, or networked infrastructure. The line is used in this wiki as a compiled research map rather than a single-paper label: it links decentralized learning, communication-aware evaluation, [[Data_Silos|data silos]], [[Collaborative_Evaluation|collaborative evaluation]], and [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenters]]. Within this line, the collaborative evaluation setting in [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] examines model reliability under siloed access and local sample-selection bias.
+Qiao's current primary line, [[AI_and_Networks|AI and networks]], studies learning systems whose behavior depends on communication, locality, or networked infrastructure. In this wiki, the topic functions as a compiled research map rather than a single-paper label: it links decentralized learning, communication-aware evaluation, [[Data_Silos|data silos]], [[Collaborative_Evaluation|collaborative evaluation]], and [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenters]]. Within this line, [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] examines model reliability under siloed access and local sample-selection bias.
 
 ### Machine unlearning (2023-2026)
 
-Qiao's machine unlearning work studies how trained models can be updated after data-removal or correction requests. The line includes [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]], which targets certified deletion without explicit Hessian inversion; [[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]], which studies exact and low-latency unlearning for tree ensembles; and [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]], which treats non-binary removal weights as a mechanism for fairness and robustness correction.
+Qiao's machine unlearning work studies how trained models can be updated after data-removal or correction requests. The line includes [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]], which targets certified deletion without explicit Hessian inversion; [[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]], which studies exact and low-latency unlearning for tree ensembles; and [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]], which uses non-binary removal weights for fairness and robustness correction.
 
 ### Synthetic-data model collapse (2025-2026)
 
