@@ -60,7 +60,7 @@ This period includes work on [[Hessian_Free_Online_Certified_Unlearning|Hessian-
 
 ### Trustworthy LLM systems at NUSRI-CQ (2025)
 
-From June to December 2025, Qiao worked as a full-time research intern at [[NUSRI_CQ|NUSRI-CQ]]. The research focused on trustworthy LLM systems and synthetic-data evaluation, including distributed Wasserstein methods for studying recursive synthetic-data training.
+From June to December 2025, Qiao worked as a full-time research intern at [[NUSRI_CQ|NUSRI-CQ]]. The research focused on trustworthy LLM systems and synthetic-data evaluation, including distributed Wasserstein methods for studying low-resource recursive synthetic-data training.
 
 ### The Chinese University of Hong Kong (2026-present)
 
@@ -74,7 +74,7 @@ The wiki separates Qiao's biographical timeline from project-style research arti
 
 ### AI and networks (2024-present)
 
-Qiao's current primary line, [[AI_and_Networks|AI and networks]], studies learning systems whose behavior depends on communication, locality, or networked infrastructure. In this wiki, the topic functions as a compiled research map rather than a single-paper label: it links decentralized learning, communication-aware evaluation, [[Data_Silos|data silos]], [[Collaborative_Evaluation|collaborative evaluation]], and [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenters]]. Within this line, [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] examines model reliability under siloed access and local sample-selection bias.
+Qiao's current primary line, [[AI_and_Networks|AI and networks]], studies learning systems whose behavior depends on communication, locality, or networked infrastructure. In this wiki, the topic functions as a compiled research map rather than a single-paper label: it links decentralized learning, communication-aware evaluation, [[Data_Silos|data silos]], [[Collaborative_Evaluation|collaborative evaluation]], and [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenters]]. Within this line, [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] examines why low-resource communities and institutions with fragmented data coverage are especially vulnerable to model collapse under local sample-selection bias.
 
 ### Machine unlearning (2023-2026)
 
@@ -82,7 +82,7 @@ Qiao's machine unlearning work studies how trained models can be updated after d
 
 ### Synthetic-data model collapse (2025-2026)
 
-The ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] studies recursive synthetic-data training under local sample-selection bias. The project connects [[Synthetic_Data_and_Model_Collapse]], [[Sample_Selection_Bias]], [[Data_Silos]], [[Collaborative_Evaluation]], and [[Wasserstein_Geometry]].
+The ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] studies recursive synthetic-data training under low-resource verification and local sample-selection bias. The project connects [[Synthetic_Data_and_Model_Collapse]], [[Sample_Selection_Bias]], [[Data_Silos]], [[Collaborative_Evaluation]], and [[Wasserstein_Geometry]], with particular emphasis on how local filters can prune globally relevant tail modes.
 
 ## See also
 

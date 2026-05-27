@@ -33,7 +33,7 @@ translation_of: "NUSRI_CQ"
 
 ## 与乔鑫宝的关系
 
-NUSRI-CQ 阶段在本 wiki 中与 [[Synthetic_Data_and_Model_Collapse|合成数据]]、[[Collaborative_Evaluation|协作评估]] 和 [[Wasserstein_Geometry|Wasserstein 几何]] 相关。它为 ICML 2026 论文 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 提供了直接研究语境，尤其是多方如何在不暴露全部本地数据的条件下诊断数据生成失效。
+NUSRI-CQ 阶段在本 wiki 中与 [[Synthetic_Data_and_Model_Collapse|合成数据]]、[[Collaborative_Evaluation|协作评估]] 和 [[Wasserstein_Geometry|Wasserstein 几何]] 相关。它为 ICML 2026 论文 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 提供了直接研究语境，尤其是低资源分布式参与方如何在不暴露全部本地数据的条件下诊断数据生成失效。
 
 ## 参见
 
@@ -46,4 +46,3 @@ NUSRI-CQ 阶段在本 wiki 中与 [[Synthetic_Data_and_Model_Collapse|合成数�
 [^nusri-intro]: NUSRI-CQ 英文[研究院介绍](https://en.nusricq.cn/about/yjyjj)描述其为研究、孵化、教育和培训平台，关注产学研融合。
 
 [^nus-news]: [NUS News](https://news.nus.edu.sg/news-reports/nus-signs-agreement-establish-nusricq)在 2018 年报道 NUS 与重庆两江新区签署协议建立 NUSRI@CQ。
-

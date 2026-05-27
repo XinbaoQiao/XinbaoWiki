@@ -14,7 +14,7 @@ translation_of: "Synthetic_Data"
 
 ## 与乔鑫宝工作的关系
 
-乔鑫宝的 ICML 2026 工作研究选择偏差和数据孤岛条件下的合成数据。核心问题并非数据是否由模型生成，而是生成数据是否嵌入了重复训练循环。当每一代都从前一代有偏选择的输出中学习时，合成分布可能偏离原始分布。该项目连接 [[Data_Selection|数据选择]]、[[Model_Collapse|模型坍缩]] 和 [[Collaborative_Evaluation|协作评估]]。
+乔鑫宝的 ICML 2026 工作研究选择偏差、低资源验证和数据孤岛条件下的合成数据。核心问题并非数据是否由模型生成，而是生成数据是否嵌入了重复训练循环。当每一代都从前一代有偏选择的输出中学习时，合成分布可能偏离原始分布，低资源社区尤其容易遭遇尾部模式损失。该项目连接 [[Data_Selection|数据选择]]、[[Model_Collapse|模型坍缩]] 和 [[Collaborative_Evaluation|协作评估]]。
 
 ## 参见
 
@@ -22,4 +22,3 @@ translation_of: "Synthetic_Data"
 - [[Recursive_Synthetic_Data_Training|递归合成数据训练]]
 - [[Sample_Selection_Bias|样本选择偏差]]
 - [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]]
-

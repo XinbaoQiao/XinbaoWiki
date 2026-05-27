@@ -14,7 +14,7 @@ translation_of: "Data_Selection"
 
 ## 与乔鑫宝工作的关系
 
-数据选择出现在 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 中：有偏的本地选择会加剧递归合成数据训练的分布退化。在机器遗忘论文中，选择又以删除或重加权的形式出现。
+数据选择出现在 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 中：有偏的本地选择会加剧递归合成数据训练的分布退化，并使低资源社区更容易发生尾部模式损失。在机器遗忘论文中，选择又以删除或重加权的形式出现。
 
 ## 参见
 

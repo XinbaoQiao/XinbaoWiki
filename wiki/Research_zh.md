@@ -22,7 +22,7 @@ translation_of: "Research"
 
 ## 合成数据
 
-[[Synthetic_Data_and_Model_Collapse|合成数据]] 研究递归合成数据训练、[[Data_Selection|数据选择]]、[[Sample_Selection_Bias|样本选择偏差]]、[[Model_Collapse|模型坍缩]]，以及 [[Data_Silos|数据孤岛]] 中的协作缓解。中心论文是 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]]。
+[[Synthetic_Data_and_Model_Collapse|合成数据]] 研究递归合成数据训练、[[Data_Selection|数据选择]]、[[Sample_Selection_Bias|样本选择偏差]]、[[Model_Collapse|模型坍缩]]，以及低资源 [[Data_Silos|数据孤岛]] 中的协作缓解。中心论文是 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]]，其核心表述是：当真实数据覆盖稀缺或碎片化时，模型坍缩风险尤其高。
 
 ## 数据中心 ML 与可信 AI
 

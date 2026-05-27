@@ -12,7 +12,7 @@ The page links [[Data_Centric_Machine_Learning|Data Centric ML]] to both [[AI_an
 
 ## Connection to Qiao's work
 
-Data selection appears in [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]], where biased local selection can worsen recursive synthetic-data training. In the unlearning papers, selection reappears as removal or reweighting: the model is changed by changing which data count.
+Data selection appears in [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]], where biased local selection can worsen recursive synthetic-data training and make low-resource communities more vulnerable to tail-mode loss. In the unlearning papers, selection reappears as removal or reweighting: the model is changed by changing which data count.
 
 ## See also
 

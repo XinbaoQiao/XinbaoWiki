@@ -12,7 +12,7 @@ This page supports the [[Synthetic_Data_and_Model_Collapse|Synthetic Data]], [[C
 
 ## Connection to Qiao's work
 
-The ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] uses collaborative Wasserstein-style signals to reason about model collapse under selection bias. The later doctoral focus on [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenters]] keeps the same geometry but shifts attention toward computation: how a shared distributional reference can be obtained from several local measures. In this wiki, Wasserstein geometry is therefore not a general math detour. It is the background for how Qiao's AI-and-networks line diagnoses distributional change when the data are distributed and direct global inspection is unavailable.
+The ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] uses collaborative Wasserstein-style signals to reason about model collapse under low-resource selection bias. The later doctoral focus on [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenters]] keeps the same geometry but shifts attention toward computation: how a shared distributional reference can be obtained from several local measures. In this wiki, Wasserstein geometry is therefore not a general math detour. It is the background for how Qiao's AI-and-networks line diagnoses distributional change when the data are distributed and direct global inspection is unavailable.
 
 ## See also
 

@@ -62,7 +62,7 @@ summary: "香港中文大学信息工程系博士生；研究方向包括 AI 与
 
 ### 新加坡国立大学重庆研究院的可信大模型系统研究（2025）
 
-2025年6月至12月，乔鑫宝在[[NUSRI_CQ|新加坡国立大学重庆研究院]]担任全职研究实习生。研究内容包括可信 LLM 系统和合成数据评估，尤其关注用于递归合成数据训练分析的分布式 Wasserstein 方法。
+2025年6月至12月，乔鑫宝在[[NUSRI_CQ|新加坡国立大学重庆研究院]]担任全职研究实习生。研究内容包括可信 LLM 系统和合成数据评估，尤其关注用于低资源递归合成数据训练分析的分布式 Wasserstein 方法。
 
 ### 香港中文大学博士阶段（2026至今）
 
@@ -76,7 +76,7 @@ summary: "香港中文大学信息工程系博士生；研究方向包括 AI 与
 
 ### AI 与网络（2024至今）
 
-乔鑫宝当前的主要研究主线是[[AI_and_Networks|AI 与网络]]，关注学习系统如何受到通信、局部性和网络基础设施的影响。在本 wiki 中，该主线不是单篇论文标签，而是一个持续编译的研究图谱：它连接去中心化学习、通信感知评估、[[Data_Silos|数据孤岛]]、[[Collaborative_Evaluation|协作评估]]和[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]。在这一主线下，[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]]研究了数据孤岛访问和局部样本选择偏差下的模型可靠性。
+乔鑫宝当前的主要研究主线是[[AI_and_Networks|AI 与网络]]，关注学习系统如何受到通信、局部性和网络基础设施的影响。在本 wiki 中，该主线不是单篇论文标签，而是一个持续编译的研究图谱：它连接去中心化学习、通信感知评估、[[Data_Silos|数据孤岛]]、[[Collaborative_Evaluation|协作评估]]和[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]。在这一主线下，[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]]研究低资源社区和数据覆盖碎片化机构为什么更容易在局部样本选择偏差下发生模型坍缩。
 
 ### 机器遗忘（2023-2026）
 
@@ -84,7 +84,7 @@ summary: "香港中文大学信息工程系博士生；研究方向包括 AI 与
 
 ### 合成数据模型坍塌（2025-2026）
 
-ICML 2026 论文[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]]研究局部样本选择偏差下的递归合成数据训练。该项目连接[[Synthetic_Data_and_Model_Collapse|合成数据与模型坍塌]]、[[Sample_Selection_Bias|样本选择偏差]]、[[Data_Silos|数据孤岛]]、[[Collaborative_Evaluation|协作评估]]和[[Wasserstein_Geometry|Wasserstein 几何]]。
+ICML 2026 论文[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]]研究低资源验证和局部样本选择偏差下的递归合成数据训练。该项目连接[[Synthetic_Data_and_Model_Collapse|合成数据与模型坍塌]]、[[Sample_Selection_Bias|样本选择偏差]]、[[Data_Silos|数据孤岛]]、[[Collaborative_Evaluation|协作评估]]和[[Wasserstein_Geometry|Wasserstein 几何]]，重点强调本地过滤如何剪掉对全局分布重要的尾部模式。
 
 ## 参见
 

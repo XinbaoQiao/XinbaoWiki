@@ -31,7 +31,7 @@ $$
 
 ## 与乔鑫宝工作的关系
 
-乔鑫宝的 ICML 2026 工作 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 已经使用协作 Wasserstein 风格信号分析数据孤岛下的合成数据失效。当前关于分布式 Wasserstein barycenter 的博士阶段关注点延续了这一方向，但进一步转向基础设施层面：当证据被切分在网络中时，如何计算可靠参考分布，而不是默认先汇总评估数据。
+乔鑫宝的 ICML 2026 工作 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 已经使用协作 Wasserstein 风格信号分析低资源数据孤岛下的合成数据失效。当前关于分布式 Wasserstein barycenter 的博士阶段关注点延续了这一方向，但进一步转向基础设施层面：当证据被切分在网络中时，如何计算可靠参考分布，而不是默认先汇总评估数据。
 
 该问题连接 [[AI_and_Networks|AI 与网络]]，因为计算对象会被通信模式塑造；也连接 [[Synthetic_Data_and_Model_Collapse|合成数据]]，因为递归生成需要分布检查；同时连接 [[Data_Centric_Machine_Learning|数据中心 ML]]，因为 barycenter 可以成为跨参与方判断数据或样本重要性的工具。
 

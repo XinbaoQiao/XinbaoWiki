@@ -14,7 +14,7 @@ translation_of: "Recursive_Synthetic_Data_Training"
 
 ## 与乔鑫宝工作的关系
 
-[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 研究局部样本选择偏差下的递归训练。该设置与 [[AI_and_Networks|AI 与网络]] 尤其相关，因为数据过程是分布式的：不同参与方看到不同数据、选择不同样本，并且只共享有限信号。递归合成数据训练因此成为跨孤岛可靠性问题，而不仅是生成模型问题。
+[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 研究局部样本选择偏差下的递归训练。该设置与 [[AI_and_Networks|AI 与网络]] 尤其相关，因为数据过程是分布式且常常低资源的：不同参与方看到不同数据、选择不同样本，并且只共享有限信号。递归合成数据训练因此成为跨孤岛可靠性问题，而不仅是生成模型问题。
 
 ## 参见
 
@@ -24,4 +24,3 @@ translation_of: "Recursive_Synthetic_Data_Training"
 - [[Data_Silos|数据孤岛]]
 
 [^recursive]: 2024 年 Nature 论文 “AI models collapse when trained on recursively generated data” 使递归生成数据导致模型坍缩的表述广为人知。
-

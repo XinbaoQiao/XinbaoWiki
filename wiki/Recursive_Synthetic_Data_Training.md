@@ -12,7 +12,7 @@ This page explains the process behind [[Model_Collapse|model collapse]]. It is d
 
 ## Connection to Qiao's work
 
-[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] studies recursive training under local sample-selection bias. The paper's setting is especially relevant to [[AI_and_Networks|AI and networks]] because the data process is distributed: parties may see different data, select different samples, and only share limited signals. Recursive synthetic-data training therefore becomes a cross-silo reliability problem, not only a generative-model problem.
+[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] studies recursive training under local sample-selection bias. The paper's setting is especially relevant to [[AI_and_Networks|AI and networks]] because the data process is distributed and often low-resource: parties may see different data, select different samples, and only share limited signals. Recursive synthetic-data training therefore becomes a cross-silo reliability problem, not only a generative-model problem.
 
 ## See also
 

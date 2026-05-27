@@ -4,6 +4,11 @@ occupation: "Maintenance log"
 summary: "Append-only maintenance log for the wiki."
 ---
 
+## 2026-05-27
+
+- Updated the model-collapse publication page and linked research-topic pages from the revised manuscript, emphasizing low-resource verification regimes, fragmented real-data coverage, and tail-mode pruning in low-resource communities.
+- Refreshed [[Xinbao_Qiao]], [[Publications]], [[Research]], [[Projects]], related concept pages, and `CV.tex` so the ICML 2026 paper is described through the newer low-resource-community framing.
+
 ## 2026-05-06
 
 - Polished the English and Chinese biography pages with tighter opening prose, clearer doctoral-stage wording, and less repetition between research experience and project summaries.

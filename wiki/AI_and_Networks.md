@@ -10,7 +10,7 @@ summary: "Primary research topic for Qiao Xinbao, covering AI systems under netw
 
 ## Introduction
 
-In this wiki, AI and Networks is not a separate application label but the organizing frame for research in which learning is shaped by where data live, how information moves, and which parties can evaluate a model. The topic therefore includes decentralized learning, distributed computing, data pruning, collaborative evaluation, and synthetic-data verification under siloed access.
+In this wiki, AI and Networks is not a separate application label but the organizing frame for research in which learning is shaped by where data live, how information moves, and which parties can evaluate a model. The topic therefore includes decentralized learning, distributed computing, data pruning, collaborative evaluation, and synthetic-data verification under low-resource or siloed access.
 
 ## Role in this wiki
 
@@ -28,7 +28,7 @@ In the CUHK doctoral stage, Qiao's recent focus within this topic is distributed
 
 ## Connection to Qiao's work
 
-The ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] belongs here because it studies collaborative verification under siloed access. The current Wasserstein-barycenter focus continues that thread by treating a reference distribution as something that may need to be computed across a network rather than assumed to exist centrally. Earlier work in [[Machine_Unlearning|machine unlearning]] contributes the same systems instinct: algorithms are evaluated not only by accuracy, but also by latency, communication, and the cost of changing data after training.
+The ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] belongs here because it studies collaborative verification when low-resource parties only hold fragmented local evidence. The current Wasserstein-barycenter focus continues that thread by treating a reference distribution as something that may need to be computed across a network rather than assumed to exist centrally. Earlier work in [[Machine_Unlearning|machine unlearning]] contributes the same systems instinct: algorithms are evaluated not only by accuracy, but also by latency, communication, and the cost of changing data after training.
 
 ## See also
 

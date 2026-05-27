@@ -31,7 +31,7 @@ Public NUS material describes NUSRI-CQ as a joint effort between the National Un
 
 ## Connection to Qiao
 
-The NUSRI-CQ period is associated in this wiki with [[Synthetic_Data_and_Model_Collapse|synthetic data]], [[Collaborative_Evaluation|collaborative evaluation]], and [[Wasserstein_Geometry|Wasserstein geometry]]. It provides the immediate research context for the ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]], especially the question of how distributed parties can diagnose data-generation failure without exposing all local data.
+The NUSRI-CQ period is associated in this wiki with [[Synthetic_Data_and_Model_Collapse|synthetic data]], [[Collaborative_Evaluation|collaborative evaluation]], and [[Wasserstein_Geometry|Wasserstein geometry]]. It provides the immediate research context for the ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]], especially the question of how low-resource distributed parties can diagnose data-generation failure without exposing all local data.
 
 ## See also
 

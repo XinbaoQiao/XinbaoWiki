@@ -20,7 +20,7 @@ The common thread is **data-process reliability under networked constraints**: h
 
 ## Synthetic data
 
-[[Synthetic_Data_and_Model_Collapse|Synthetic Data]] studies recursive synthetic-data training, [[Data_Selection]], [[Sample_Selection_Bias]], [[Model_Collapse]], and collaborative mitigation in [[Data_Silos]]. The central paper is [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]].
+[[Synthetic_Data_and_Model_Collapse|Synthetic Data]] studies recursive synthetic-data training, [[Data_Selection]], [[Sample_Selection_Bias]], [[Model_Collapse]], and collaborative mitigation in low-resource [[Data_Silos|data silos]]. The central paper is [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]], which frames model collapse as especially risky when real-data coverage is scarce or fragmented.
 
 ## Data centric ML and trustworthy AI
 

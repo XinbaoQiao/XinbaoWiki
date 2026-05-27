@@ -22,8 +22,8 @@ translation_of: "Projects"
 
 ### 协作评估
 
-[[Collaborative_Evaluation|协作评估]] 研究不交换原始数据的验证。它在 ICML 2026 模型坍缩工作中用于以多方 Wasserstein 几何代理替代单一有偏验证器。
+[[Collaborative_Evaluation|协作评估]] 研究不交换原始数据的验证。它在 ICML 2026 模型坍缩工作中用于以多方 Wasserstein 几何代理替代单一低资源、有偏验证器。
 
 ### 合成数据
 
-[[Synthetic_Data_and_Model_Collapse|合成数据]] 追问生成数据何时能够安全替代或增强真实数据，以及递归训练何时放大偏差或侵蚀多样性。主论文页是 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]]。
+[[Synthetic_Data_and_Model_Collapse|合成数据]] 追问生成数据何时能够安全替代或增强真实数据，以及递归训练何时放大偏差或侵蚀多样性。当前重点是低资源社区：当真实数据覆盖碎片化时，本地过滤更容易剪掉有效尾部模式。主论文页是 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]]。

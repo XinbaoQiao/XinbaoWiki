@@ -14,7 +14,7 @@ translation_of: "Wasserstein_Geometry"
 
 ## 与乔鑫宝工作的关系
 
-ICML 2026 论文 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 使用协作 Wasserstein 风格信号分析选择偏差下的模型坍缩。后续博士阶段关于 [[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]] 的关注保留同一几何语言，但把重点转向计算：如何从多个局部测度得到共享的分布参考。在本 wiki 中，Wasserstein 几何不是一般数学旁支，而是乔鑫宝 AI 与网络研究线在分布式、不可全局直接检查条件下诊断分布变化的背景工具。
+ICML 2026 论文 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 使用协作 Wasserstein 风格信号分析低资源选择偏差下的模型坍缩。后续博士阶段关于 [[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]] 的关注保留同一几何语言，但把重点转向计算：如何从多个局部测度得到共享的分布参考。在本 wiki 中，Wasserstein 几何不是一般数学旁支，而是乔鑫宝 AI 与网络研究线在分布式、不可全局直接检查条件下诊断分布变化的背景工具。
 
 ## 参见
 

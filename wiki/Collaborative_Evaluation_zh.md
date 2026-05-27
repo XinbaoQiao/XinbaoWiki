@@ -10,11 +10,11 @@ translation_of: "Collaborative_Evaluation"
 
 ## 在本 wiki 中的作用
 
-本页连接 [[Data_Silos|数据孤岛]]、[[Wasserstein_Geometry|Wasserstein 几何]] 和 [[AI_and_Networks|AI 与网络]]。中心化基准假设所有相关数据都能汇集并标注在一个地方；协作评估则追问：在局部且可能有偏的信号中，各方能共同推断出什么。
+本页连接 [[Data_Silos|数据孤岛]]、[[Wasserstein_Geometry|Wasserstein 几何]] 和 [[AI_and_Networks|AI 与网络]]。中心化基准假设所有相关数据都能汇集并标注在一个地方；协作评估则追问：在局部且可能有偏的信号中，各方能共同推断出什么，尤其是当部分参与方处于低资源条件下时。
 
 ## 与乔鑫宝工作的关系
 
-在 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 中，协作评估用于分析原始数据分布被切分在多个孤岛中时，递归合成数据训练为何会失败。该项目使用 Wasserstein 风格的分布代理，把生成行为与多方本地证据进行比较。这体现了乔鑫宝的系统视角：可靠 AI 不只取决于模型如何训练，也取决于证据如何共享。
+在 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 中，协作评估用于分析原始数据分布被切分在多个低资源孤岛中时，递归合成数据训练为何会失败。该项目使用 Wasserstein 风格的分布代理，把生成行为与多方证据进行比较。这体现了乔鑫宝的系统视角：可靠 AI 不只取决于模型如何训练，也取决于证据如何共享。
 
 ## 参见
 
@@ -22,4 +22,3 @@ translation_of: "Collaborative_Evaluation"
 - [[Data_Silos|数据孤岛]]
 - [[Wasserstein_Geometry|Wasserstein 几何]]
 - [[Synthetic_Data_and_Model_Collapse|合成数据]]
-

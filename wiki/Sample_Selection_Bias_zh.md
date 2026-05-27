@@ -10,11 +10,11 @@ translation_of: "Sample_Selection_Bias"
 
 ## 在本 wiki 中的作用
 
-本页解释 [[Synthetic_Data_and_Model_Collapse|合成数据]] 失效背后的机制。选择偏差不只是“数据集有问题”的标签，而是一个过程：一旦某个子集被偏好，缺失模式获得的样本会更少，模型生成它们的概率会下降，下一轮数据也会进一步变窄。在网络化设置中，不同参与方的偏差还可能不同，使诊断更难。
+本页解释 [[Synthetic_Data_and_Model_Collapse|合成数据]] 失效背后的机制。选择偏差不只是“数据集有问题”的标签，而是一个过程：一旦某个子集被偏好，缺失模式获得的样本会更少，模型生成它们的概率会下降，下一轮数据也会进一步变窄。在低资源网络化设置中，这一机制会更尖锐，因为稀有模式在选择开始前就可能代表不足。
 
 ## 与乔鑫宝工作的关系
 
-ICML 2026 论文 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 直接把该概念放入标题。论文研究局部选择行为如何在递归合成数据训练中促成坍缩，以及协作信号如何诊断分布漂移。本页因此是乔鑫宝合成数据研究线最直接的背景条目之一。
+ICML 2026 论文 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 直接把该概念放入标题。论文研究局部选择行为如何在递归合成数据训练中促成坍缩，尤其关注低资源验证者只看到碎片化本地证据时的失效。本页因此是乔鑫宝合成数据研究线最直接的背景条目之一。
 
 ## 参见
 
@@ -22,4 +22,3 @@ ICML 2026 论文 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本
 - [[Data_Selection|数据选择]]
 - [[Model_Collapse|模型坍缩]]
 - [[Data_Silos|数据孤岛]]
-

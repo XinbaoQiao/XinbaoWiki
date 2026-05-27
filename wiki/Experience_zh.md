@@ -30,6 +30,6 @@ translation_of: "Experience"
 
 **全职研究实习生**，2025-06 至 2025-12。导师：Pang Yan, James，[[NUSRI_CQ|NUSRI-CQ]]。
 
-该研究线关注可信模型行为和合成数据评估，包括在真实数据有限时用于合成数据评估的分布式 Wasserstein 方法。
+该研究线关注可信模型行为和合成数据评估，包括在真实数据有限或碎片化时用于低资源合成数据评估的分布式 Wasserstein 方法。
 
 相关页面：[[LLM_Reliability|大语言模型可靠性]]、[[Synthetic_Data_and_Model_Collapse|合成数据]] 和 [[Wasserstein_Geometry|Wasserstein 几何]]。

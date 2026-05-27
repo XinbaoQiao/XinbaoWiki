@@ -8,11 +8,11 @@ summary: "Concept page for evaluating models or data processes across multiple p
 
 ## Role in this wiki
 
-This page connects [[Data_Silos|data silos]] to [[Wasserstein_Geometry|Wasserstein geometry]] and [[AI_and_Networks|AI and networks]]. It explains why evaluation itself can be a networked problem. A centralized benchmark assumes that all relevant data can be gathered and labeled in one place. Collaborative evaluation instead asks what can be inferred from partial, possibly biased local signals.
+This page connects [[Data_Silos|data silos]] to [[Wasserstein_Geometry|Wasserstein geometry]] and [[AI_and_Networks|AI and networks]]. It explains why evaluation itself can be a networked problem. A centralized benchmark assumes that all relevant data can be gathered and labeled in one place. Collaborative evaluation instead asks what can be inferred from partial, possibly biased local signals, especially when some parties operate in low-resource conditions.
 
 ## Connection to Qiao's work
 
-In [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]], collaborative evaluation is used to reason about recursive synthetic-data failure when the original data distribution is split across silos. The project uses distributional proxies, including Wasserstein-style geometry, to compare generated behavior against local evidence. This connects Qiao's synthetic-data work to his broader systems interest: reliable AI often depends on how evidence is shared, not only on how a model is trained.
+In [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]], collaborative evaluation is used to reason about recursive synthetic-data failure when the original data distribution is split across low-resource silos. The project uses distributional proxies, including Wasserstein-style geometry, to compare generated behavior against multi-party evidence. This connects Qiao's synthetic-data work to his broader systems interest: reliable AI often depends on how evidence is shared, not only on how a model is trained.
 
 ## See also
 

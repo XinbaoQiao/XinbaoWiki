@@ -29,7 +29,7 @@ The page also follows the LLM-wiki pattern used by Xinbaopedia: instead of leavi
 
 ## Connection to Qiao's work
 
-Qiao's ICML 2026 work on [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|sample-selection bias and model collapse]] already uses collaborative Wasserstein-style signals to reason about synthetic-data failure under siloed access. The current doctoral focus on distributed Wasserstein barycenters continues that direction at the infrastructure level. It asks how a reliable reference distribution can be computed when the evidence is split across the network, rather than assuming that evaluation data can be pooled first.
+Qiao's ICML 2026 work on [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|sample-selection bias and model collapse]] already uses collaborative Wasserstein-style signals to reason about synthetic-data failure under low-resource siloed access. The current doctoral focus on distributed Wasserstein barycenters continues that direction at the infrastructure level. It asks how a reliable reference distribution can be computed when the evidence is split across the network, rather than assuming that evaluation data can be pooled first.
 
 This connects to [[AI_and_Networks|AI and networks]] because the computational object is shaped by the communication pattern. It connects to [[Synthetic_Data_and_Model_Collapse|Synthetic Data]] because recursive generation needs distributional checks. It also connects to [[Data_Centric_Machine_Learning|Data Centric ML]] because the barycenter can become a tool for deciding which data or samples matter across parties.
 

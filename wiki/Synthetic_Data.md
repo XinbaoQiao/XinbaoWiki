@@ -12,7 +12,7 @@ This page gives the narrow concept definition, while [[Synthetic_Data_and_Model_
 
 ## Connection to Qiao's work
 
-Qiao's ICML 2026 work studies synthetic data under selection bias and siloed access. The core concern is not merely that data are generated, but that generation is embedded inside a repeated training loop. When each generation learns from biased selections of earlier outputs, the synthetic distribution can drift away from the original. The project connects synthetic data to [[Data_Selection|data selection]], [[Model_Collapse|model collapse]], and [[Collaborative_Evaluation|collaborative evaluation]].
+Qiao's ICML 2026 work studies synthetic data under selection bias, low-resource verification, and siloed access. The core concern is not merely that data are generated, but that generation is embedded inside a repeated training loop. When each generation learns from biased selections of earlier outputs, the synthetic distribution can drift away from the original, with low-resource communities especially exposed to tail-mode loss. The project connects synthetic data to [[Data_Selection|data selection]], [[Model_Collapse|model collapse]], and [[Collaborative_Evaluation|collaborative evaluation]].
 
 ## See also
 

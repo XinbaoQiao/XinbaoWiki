@@ -8,11 +8,11 @@ summary: "Concept page for degenerative distributional drift in recursive model 
 
 ## Role in this wiki
 
-The page provides the failure concept for the broader [[Synthetic_Data_and_Model_Collapse|Synthetic Data]] topic. It is written separately because "synthetic data" is not automatically bad: the failure depends on how generated data are selected, mixed, and reused. Model collapse is therefore the negative endpoint that motivates careful data governance and collaborative verification.
+The page provides the failure concept for the broader [[Synthetic_Data_and_Model_Collapse|Synthetic Data]] topic. It is written separately because "synthetic data" is not automatically bad: the failure depends on how generated data are selected, mixed, and reused. Model collapse is therefore the negative endpoint that motivates careful data governance and collaborative verification. The low-resource framing is important here: if tail regions are poorly covered from the beginning, collapse may arrive earlier and affect underrepresented content more severely.
 
 ## Connection to Qiao's work
 
-Qiao's ICML 2026 paper studies when sample-selection bias precipitates collapse. The work is connected to [[Wasserstein_Geometry|Wasserstein geometry]] because distributional distances can provide signals about drift, and to [[Data_Silos|data silos]] because no single party may have the full distribution. In the biography, model collapse is part of Qiao's broader reliability agenda: data processes can silently degrade models even when the model architecture remains unchanged.
+Qiao's ICML 2026 paper studies when sample-selection bias precipitates collapse in low-resource verification regimes. The work is connected to [[Wasserstein_Geometry|Wasserstein geometry]] because distributional distances can provide signals about drift, and to [[Data_Silos|data silos]] because no single party may have the full distribution. In the biography, model collapse is part of Qiao's broader reliability agenda: data processes can silently degrade models even when the model architecture remains unchanged.
 
 ## See also
 

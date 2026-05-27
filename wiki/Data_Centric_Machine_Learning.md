@@ -29,7 +29,7 @@ This page is the conceptual bridge between Qiao's older machine-unlearning work 
 
 ## Connection to Qiao's work
 
-In Qiao's publication record, data-centric ML appears in several forms. In unlearning, the data operation is removal or reweighting after training. In model-collapse work, the operation is selection of real or synthetic examples before recursive training. The common question is whether a learning system can identify which data matter, which data harm reliability, and which data can be safely ignored under realistic cost constraints.
+In Qiao's publication record, data-centric ML appears in several forms. In unlearning, the data operation is removal or reweighting after training. In model-collapse work, the operation is selection of real or synthetic examples before recursive training, with low-resource verification exposing how local filters can mistake rare valid modes for low-quality samples. The common question is whether a learning system can identify which data matter, which data harm reliability, and which data can be safely ignored under realistic cost constraints.
 
 ## See also
 
