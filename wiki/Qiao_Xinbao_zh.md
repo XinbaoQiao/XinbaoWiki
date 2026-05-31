@@ -40,13 +40,13 @@ links:
 summary: "香港中文大学信息工程系博士生；研究方向包括 AI 与网络、分布式 Wasserstein 计算、机器遗忘和合成数据可靠性"
 ---
 
-**乔鑫宝**（英文发表名：**Xinbao Qiao**[^xinbao-name-zh][^qiao-ciao-zh][^xinbao-qiao-bridge-zh]；生于2000年9月30日，云南西双版纳）是中国博士生，现为[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系博士生。他的研究主要集中于[[AI_and_Networks|AI 与网络]]，尤其关注数据、计算和分布证据分散在网络化参与方中时，学习系统如何训练、评估和保持可靠。其近期博士阶段关注点包括用于协作分布参考的[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]计算；相关研究还与[[Machine_Unlearning|机器遗忘]]、[[Synthetic_Data_and_Model_Collapse|合成数据]]和[[Data_Centric_Machine_Learning|Data Centric ML]]相交。
+**乔鑫宝**（英文发表名：**Xinbao Qiao**[^xinbao-name-zh][^qiao-ciao-zh][^xinbao-qiao-bridge-zh]；生于2000年9月30日，云南西双版纳）是中国博士生，现为[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系博士生。他的研究位于[[AI_and_Networks|AI 与网络]]、数据中心机器学习和可信 AI 的交叉处。贯穿这些工作的核心问题是：当数据、计算和分布证据分散在机构、客户端或设备之间，而不能被简单集中汇总时，学习系统应如何训练、评估和更新。
 
-在博士阶段以前，乔鑫宝于[[Zhejiang_University|浙江大学]]获得人工智能硕士学位，并于[[Shandong_University|山东大学]]获得通信工程工学学士学位。他的[[Publications|论文]]包括 ICML、AAAI 与 ICLR 录用或发表的工作。
+其当前博士阶段关注用于协作分布参考的[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]计算；相关研究还覆盖[[Machine_Unlearning|机器遗忘]]、[[Synthetic_Data_and_Model_Collapse|合成数据可靠性]]和[[Data_Centric_Machine_Learning|Data Centric ML]]。在博士阶段以前，乔鑫宝于[[Zhejiang_University|浙江大学]]获得人工智能硕士学位，并于[[Shandong_University|山东大学]]获得通信工程工学学士学位。他的[[Publications|论文]]包括 ICML、AAAI 与 ICLR 录用或发表的工作。
 
 ## 教育经历
 
-乔鑫宝目前在[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系攻读博士学位，导师为[[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]。[^cuhk-ie-zh]
+乔鑫宝目前在[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系攻读博士学位，导师为[[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]。[^cuhk-ie-zh] 其博士阶段工作围绕分布式证据、网络化计算和可靠 AI 评估展开。
 
 2022年至2025年，他在[[Zhejiang_University|浙江大学]]攻读人工智能硕士学位，硕士阶段专业 GPA 为 90/100，排名 3/25；硕士导师为[[Meng_Zhang|Meng Zhang]]。
 
@@ -56,35 +56,35 @@ summary: "香港中文大学信息工程系博士生；研究方向包括 AI 与
 
 ### 浙江大学的数据中心机器学习研究（2023-2025）
 
-2023年3月至2025年12月，乔鑫宝在[[Zhejiang_University|浙江大学]]、[[Meng_Zhang|Meng Zhang]]指导下开展数据中心机器学习系统研究。相关工作围绕数据影响归因、机器遗忘，以及公平性、鲁棒性、隐私和效用之间的权衡展开。
+2023年3月至2025年12月，乔鑫宝在[[Zhejiang_University|浙江大学]]、[[Meng_Zhang|Meng Zhang]]指导下开展数据中心机器学习系统研究。这一阶段围绕数据影响归因、机器遗忘，以及公平性、鲁棒性、隐私和效用之间的权衡展开。
 
 这一时期的代表工作包括[[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]]、[[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]] 和 [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]]。
 
 ### 新加坡国立大学重庆研究院的可信大模型系统研究（2025）
 
-2025年6月至12月，乔鑫宝在[[NUSRI_CQ|新加坡国立大学重庆研究院]]担任全职研究实习生。研究内容包括可信 LLM 系统和合成数据评估，尤其关注用于低资源递归合成数据训练分析的分布式 Wasserstein 方法。
+2025年6月至12月，乔鑫宝在[[NUSRI_CQ|新加坡国立大学重庆研究院]]担任全职研究实习生。研究内容包括可信 LLM 系统和合成数据评估，尤其关注真实数据覆盖有限或碎片化时的低资源递归合成数据训练。
 
 ### 香港中文大学博士阶段（2026至今）
 
-在[[The_Chinese_University_of_Hong_Kong|香港中文大学]]阶段，乔鑫宝的博士研究以[[AI_and_Networks|AI 与网络]]为组织主线，关注数据和计算不能被简单汇总时，学习系统如何被训练、评估和维护。
+在[[The_Chinese_University_of_Hong_Kong|香港中文大学]]阶段，乔鑫宝的博士研究延续分布式证据这一主线，并将其放入[[AI_and_Networks|AI 与网络]]框架：当数据和计算不能被简单汇总时，学习系统如何被训练、评估和维护。
 
 这一阶段近期关注[[Distributed_Wasserstein_Barycenter|Wasserstein barycenter 的分布式计算]]。该问题把最优传输几何与网络化 AI 连接起来：每个参与方可能只持有局部经验分布，而学习系统仍需要共享的分布参考，用于评估、样本打分或合成数据验证。因此，研究重点不仅是模型结构，也包括使可靠全局视图成为可能的信息流动方式。
 
 ## 学术项目
 
-本 wiki 将乔鑫宝的传记时间线与项目式研究条目分开组织。
+下列项目段落按研究问题而非机构归类，用于概括主要技术线索；前一节则保留按时间排列的研究经历。
 
 ### AI 与网络（2024至今）
 
-乔鑫宝当前的主要研究主线是[[AI_and_Networks|AI 与网络]]，关注学习系统如何受到通信、局部性和网络基础设施的影响。在本 wiki 中，该主线不是单篇论文标签，而是一个持续编译的研究图谱：它连接去中心化学习、通信感知评估、[[Data_Silos|数据孤岛]]、[[Collaborative_Evaluation|协作评估]]和[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]。在这一主线下，[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]]研究低资源社区和数据覆盖碎片化机构为什么更容易在局部样本选择偏差下发生模型坍缩。
+乔鑫宝当前的主要研究主线是[[AI_and_Networks|AI 与网络]]，关注学习系统如何受到通信、局部性和网络基础设施的影响。这里的“网络”不仅指物理通信网络，也包括 AI 系统周围的机构和计算结构：证据存在哪里、如何流动，以及哪些参与方能够评估模型。该主线连接去中心化学习、通信感知评估、[[Data_Silos|数据孤岛]]、[[Collaborative_Evaluation|协作评估]]和[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]。在这一主线下，[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]]研究低资源社区和数据覆盖碎片化机构为什么更容易在局部样本选择偏差下发生模型坍缩。
 
 ### 机器遗忘（2023-2026）
 
-乔鑫宝的机器遗忘研究关注模型在数据删除或纠正请求之后如何被高效更新。该主线包括无需显式 Hessian 求逆的[[Hessian_Free_Online_Certified_Unlearning|在线认证遗忘]]、面向随机森林的高效遗忘框架[[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]]，以及使用连续删除权重进行公平性和鲁棒性修正的[[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]]。
+乔鑫宝的机器遗忘研究关注模型在数据删除或纠正请求之后如何被高效更新。这一主线包括无需显式 Hessian 求逆的[[Hessian_Free_Online_Certified_Unlearning|在线认证遗忘]]、面向随机森林的高效遗忘框架[[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]]，以及使用连续删除权重进行公平性和鲁棒性修正的[[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]]。
 
 ### 合成数据模型坍塌（2025-2026）
 
-ICML 2026 论文[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]]研究低资源验证和局部样本选择偏差下的递归合成数据训练。该项目连接[[Synthetic_Data_and_Model_Collapse|合成数据与模型坍塌]]、[[Sample_Selection_Bias|样本选择偏差]]、[[Data_Silos|数据孤岛]]、[[Collaborative_Evaluation|协作评估]]和[[Wasserstein_Geometry|Wasserstein 几何]]，重点强调本地过滤如何剪掉对全局分布重要的尾部模式。
+ICML 2026 论文[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]]研究低资源验证和局部样本选择偏差下的递归合成数据训练。该项目连接[[Synthetic_Data_and_Model_Collapse|合成数据与模型坍塌]]、[[Sample_Selection_Bias|样本选择偏差]]、[[Data_Silos|数据孤岛]]、[[Collaborative_Evaluation|协作评估]]和[[Wasserstein_Geometry|Wasserstein 几何]]。其核心机制是：本地验证器可能把稀有但有效的样本误判为低质量生成，从而剪掉对全局分布重要的尾部模式，并使低资源社区更容易发生模型坍缩。
 
 ## 参见
 

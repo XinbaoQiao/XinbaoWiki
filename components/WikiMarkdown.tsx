@@ -1,4 +1,5 @@
 import ReactMarkdown from 'react-markdown';
+import { Fragment, type ReactNode } from 'react';
 import rehypeKatex from 'rehype-katex';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
@@ -17,6 +18,23 @@ function editLink(sourceHref?: string) {
       <a href={sourceHref} target="_blank" rel="noreferrer">edit</a>
     </span>
   );
+}
+
+function renderTableLineBreaks(children: ReactNode): ReactNode {
+  if (typeof children === 'string') {
+    const parts = children.split(/(<br\s*\/?>)/i);
+    if (parts.length === 1) return children;
+    return parts.map((part, index) => {
+      if (/^<br\s*\/?>$/i.test(part)) return <br key={index} />;
+      return <Fragment key={index}>{part}</Fragment>;
+    });
+  }
+  if (Array.isArray(children)) {
+    return children.map((child, index) => (
+      <Fragment key={index}>{renderTableLineBreaks(child)}</Fragment>
+    ));
+  }
+  return children;
 }
 
 export function WikiMarkdown({ markdown, sourceHref }: Props) {
@@ -52,6 +70,9 @@ export function WikiMarkdown({ markdown, sourceHref }: Props) {
           },
           h3({ children }) {
             return <h3>{children}{editLink(sourceHref)}</h3>;
+          },
+          td({ children }) {
+            return <td>{renderTableLineBreaks(children)}</td>;
           }
         }}
       >

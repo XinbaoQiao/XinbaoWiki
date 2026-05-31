@@ -4,6 +4,11 @@ occupation: "Maintenance log"
 summary: "Append-only maintenance log for the wiki."
 ---
 
+## 2026-05-31
+
+- Polished [[Xinbao_Qiao]] and [[Qiao_Xinbao_zh]] so the opening reads as a compact research profile, the research-experience section remains chronological, and the academic-project section is framed as problem clusters rather than repeated biography.
+- Reformatted the accepted-paper table in [[Publications]] so each publication cell separates title, authors, and summary onto distinct lines.
+
 ## 2026-05-27
 
 - Updated the model-collapse publication page and linked research-topic pages from the revised manuscript, emphasizing low-resource verification regimes, fragmented real-data coverage, and tail-mode pruning in low-resource communities.
