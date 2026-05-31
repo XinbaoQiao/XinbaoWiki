@@ -823,6 +823,16 @@ a.external::after {
   white-space: nowrap;
 }
 
+.wiki-page[data-page-slug="Publications"] .wiki-body td:first-child em,
+.wiki-page[data-page-slug="Publications_zh"] .wiki-body td:first-child em {
+  display: inline-block;
+  margin-top: 2px;
+  color: var(--wiki-text-soft);
+  font-size: 12px;
+  font-style: normal;
+  line-height: 1.45;
+}
+
 .wiki-main code {
   padding: 1px 4px;
   border: 1px solid var(--wiki-border-light);

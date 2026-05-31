@@ -11,6 +11,7 @@ summary: "Append-only maintenance log for the wiki."
 - Reformatted the accepted-paper venue/status column so conference name, dates, and location render on separate lines.
 - Widened the venue/status column on [[Publications]] so the header and short venue lines do not wrap unexpectedly.
 - Tightened the [[Publications]] venue/status column to a compact fixed width just wider than the header.
+- Styled accepted-paper summaries in [[Publications]] as muted annotation lines to distinguish them from titles and authors.
 
 ## 2026-05-27
 

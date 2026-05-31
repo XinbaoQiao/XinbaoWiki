@@ -10,10 +10,10 @@ This page is the curated publication index. Each paper has a dedicated wiki page
 
 | Publication | Venue and status |
 |---|---|
-| **[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]]**.<br />**Xinbao Qiao**, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, Yan Pang.<br />Low-resource verification regimes can turn local sample selection into persistent tail pruning; collaborative Wasserstein proxy verification mitigates the collapse. | ICML 2026,<br />6-11 July 2026,<br />Seoul. |
-| **[[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]]**.<br />**Xinbao Qiao**, Ningning Ding, Yushi Cheng, Meng Zhang.<br />Soft-weighted corrective unlearning for non-binary fairness and robustness interventions. | AAAI 2026,<br />20-27 January 2026,<br />Singapore. |
-| **[[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]]**.<br />**Xinbao Qiao**, Meng Zhang, Ming Tang, Ermin Wei.<br />Certified unlearning without explicit Hessian inversion; efficient removal through recollected statistics. | ICLR 2025,<br />24-28 April 2025,<br />Singapore. |
-| **[[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]]**.<br />Shurong Wang, Zhuoyang Shen, **Xinbao Qiao**, Tongning Zhang, Meng Zhang.<br />Exact and efficient random-forest unlearning in dynamic environments. | ICLR 2025,<br />24-28 April 2025,<br />Singapore. |
+| **[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]]**.<br />**Xinbao Qiao**, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, Yan Pang.<br />*Low-resource verification regimes can turn local sample selection into persistent tail pruning; collaborative Wasserstein proxy verification mitigates the collapse.* | ICML 2026,<br />6-11 July 2026,<br />Seoul. |
+| **[[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]]**.<br />**Xinbao Qiao**, Ningning Ding, Yushi Cheng, Meng Zhang.<br />*Soft-weighted corrective unlearning for non-binary fairness and robustness interventions.* | AAAI 2026,<br />20-27 January 2026,<br />Singapore. |
+| **[[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]]**.<br />**Xinbao Qiao**, Meng Zhang, Ming Tang, Ermin Wei.<br />*Certified unlearning without explicit Hessian inversion; efficient removal through recollected statistics.* | ICLR 2025,<br />24-28 April 2025,<br />Singapore. |
+| **[[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]]**.<br />Shurong Wang, Zhuoyang Shen, **Xinbao Qiao**, Tongning Zhang, Meng Zhang.<br />*Exact and efficient random-forest unlearning in dynamic environments.* | ICLR 2025,<br />24-28 April 2025,<br />Singapore. |
 
 ## Topic index
 
