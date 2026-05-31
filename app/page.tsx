@@ -6,7 +6,7 @@ export default function HomePage() {
   const page = getWikiPageBySlug('Xinbao_Qiao');
   if (!page) return <article className="wiki-page"><h1>Missing biography</h1></article>;
   return (
-    <article className="wiki-page">
+    <article className="wiki-page" data-page-slug={page.slug}>
       <h1 className="wiki-title">
         {page.title}
         <span className="edit-link">

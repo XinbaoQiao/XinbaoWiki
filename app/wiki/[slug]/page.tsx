@@ -22,7 +22,7 @@ export default async function WikiPage({ params }: Props) {
   const sourceHref = `https://github.com/XinbaoQiao/XinbaoWiki/edit/main/wiki/${encodeURIComponent(page.fileName)}`;
   const language = isChineseSlug(page.slug) ? 'zh' : 'en';
   return (
-    <article className="wiki-page">
+    <article className="wiki-page" data-page-slug={page.slug}>
       <h1 className="wiki-title">
         {page.title}
         <span className="edit-link">
