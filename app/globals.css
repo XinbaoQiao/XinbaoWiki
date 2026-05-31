@@ -812,22 +812,14 @@ a.external::after {
 
 .wiki-page[data-page-slug="Publications"] .wiki-body table,
 .wiki-page[data-page-slug="Publications_zh"] .wiki-body table {
-  table-layout: fixed;
-}
-
-.wiki-page[data-page-slug="Publications"] .wiki-body th:first-child,
-.wiki-page[data-page-slug="Publications"] .wiki-body td:first-child,
-.wiki-page[data-page-slug="Publications_zh"] .wiki-body th:first-child,
-.wiki-page[data-page-slug="Publications_zh"] .wiki-body td:first-child {
-  width: 64%;
+  table-layout: auto;
 }
 
 .wiki-page[data-page-slug="Publications"] .wiki-body th:nth-child(2),
 .wiki-page[data-page-slug="Publications"] .wiki-body td:nth-child(2),
 .wiki-page[data-page-slug="Publications_zh"] .wiki-body th:nth-child(2),
 .wiki-page[data-page-slug="Publications_zh"] .wiki-body td:nth-child(2) {
-  width: 36%;
-  min-width: 190px;
+  width: 154px;
   white-space: nowrap;
 }
 
