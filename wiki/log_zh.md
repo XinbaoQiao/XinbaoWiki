@@ -14,6 +14,7 @@ translation_of: "log"
 - 加宽 [[Publications|论文索引]] 的会议与状态列，避免表头和短会议信息被意外折行。
 - 将 [[Publications|论文索引]] 的会议与状态列收紧为略宽于表头的紧凑固定宽度。
 - 将 [[Publications|论文索引]] 中已录用论文的简介行样式调整为灰色注释式文本，使其与标题和作者行区分。
+- 将 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 在论文表中的简介压缩为只保留尾部剪枝这句话。
 
 ## 2026-05-27
 

@@ -12,7 +12,7 @@ translation_of: "Publications"
 
 | 论文 | 会议与状态 |
 |---|---|
-| **[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]]**。<br />**乔鑫宝**、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌、Yan Pang。<br />*研究低资源验证场景如何把本地样本选择变成持续尾部剪枝，并用协作 Wasserstein 代理验证缓解坍缩。* | ICML 2026，<br />2026年7月6日至11日，<br />首尔。 |
+| **[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]]**。<br />**乔鑫宝**、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌、Yan Pang。<br />*研究低资源验证机制如何把局部样本选择变成持续的尾部剪枝。* | ICML 2026，<br />2026年7月6日至11日，<br />首尔。 |
 | **[[Soft_Weighted_Machine_Unlearning|超越二元擦除：用于公平性与鲁棒性的软加权遗忘]]**。<br />**乔鑫宝**、Ningning Ding、Yushi Cheng、张萌。<br />*研究面向非二元公平性与鲁棒性干预的软加权修正遗忘。* | AAAI 2026，<br />2026年1月20日至27日，<br />新加坡。 |
 | **[[Hessian_Free_Online_Certified_Unlearning|无 Hessian 在线认证遗忘]]**。<br />**乔鑫宝**、张萌、Ming Tang、Ermin Wei。<br />*研究不显式求逆 Hessian 的认证遗忘，以及基于轨迹统计的高效删除。* | ICLR 2025，<br />2025年4月24日至28日，<br />新加坡。 |
 | **[[DynFrs|DynFrs：随机森林机器遗忘高效框架]]**。<br />Shurong Wang、Zhuoyang Shen、**乔鑫宝**、Tongning Zhang、张萌。<br />*研究动态环境中随机森林的精确高效遗忘。* | ICLR 2025，<br />2025年4月24日至28日，<br />新加坡。 |

@@ -12,6 +12,7 @@ summary: "Append-only maintenance log for the wiki."
 - Widened the venue/status column on [[Publications]] so the header and short venue lines do not wrap unexpectedly.
 - Tightened the [[Publications]] venue/status column to a compact fixed width just wider than the header.
 - Styled accepted-paper summaries in [[Publications]] as muted annotation lines to distinguish them from titles and authors.
+- Shortened the accepted-paper summary for [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]] to keep only the tail-pruning statement in the publication table.
 
 ## 2026-05-27
 
