@@ -16,6 +16,10 @@ year: 2026
 status: "accepted"
 publication_type: "Conference paper"
 links:
+  - label: "OpenReview"
+    url: "https://openreview.net/forum?id=FFXvnzM254"
+  - label: "Code"
+    url: "https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse"
   - label: "ICML 2026 conference"
     url: "https://icml.cc/Conferences/2026"
 summary: "ICML 2026 paper on low-resource verification regimes, sample-selection bias, model collapse, and collaborative Wasserstein-geometry proxies."

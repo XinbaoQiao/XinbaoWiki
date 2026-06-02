@@ -16,6 +16,10 @@ year: 2026
 status: "accepted"
 publication_type: "会议论文"
 links:
+  - label: "OpenReview"
+    url: "https://openreview.net/forum?id=FFXvnzM254"
+  - label: "Code"
+    url: "https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse"
   - label: "ICML 2026 conference"
     url: "https://icml.cc/Conferences/2026"
 summary: "ICML 2026 论文，研究低资源验证场景、样本选择偏差、模型坍缩与协作 Wasserstein 几何代理。"

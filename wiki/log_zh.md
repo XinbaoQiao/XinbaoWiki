@@ -8,6 +8,7 @@ translation_of: "log"
 
 ## 2026-05-31
 
+- 为 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 补充 OpenReview 和代码链接。
 - 润色 [[Xinbao_Qiao|英文主页]] 与 [[Qiao_Xinbao_zh|中文主页]]，将开头整理为紧凑研究画像，保留研究经历的时间线结构，并把学术项目段落改为按问题簇组织，减少与传记经历的重复。
 - 调整 [[Publications|论文索引]] 中已录用论文表格，使每篇论文的标题、作者和简介分行显示。
 - 调整 [[Publications|论文索引]] 中已录用论文的会议与状态列，使会议名称、日期和地点分行显示。

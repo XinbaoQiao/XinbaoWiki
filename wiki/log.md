@@ -6,6 +6,7 @@ summary: "Append-only maintenance log for the wiki."
 
 ## 2026-05-31
 
+- Added OpenReview and code links to [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]].
 - Polished [[Xinbao_Qiao]] and [[Qiao_Xinbao_zh]] so the opening reads as a compact research profile, the research-experience section remains chronological, and the academic-project section is framed as problem clusters rather than repeated biography.
 - Reformatted the accepted-paper table in [[Publications]] so each publication cell separates title, authors, and summary onto distinct lines.
 - Reformatted the accepted-paper venue/status column so conference name, dates, and location render on separate lines.
