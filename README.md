@@ -1,90 +1,133 @@
 # Xinbaopedia
 
-Xinbaopedia is a personal academic wiki and homepage for Xinbao Qiao. It presents biographical, research, publication, project, and study notes in a Wikipedia-inspired interface while keeping `wiki/*.md` as the canonical content source.
+> A Wikipedia-inspired personal academic wiki for Xinbao Qiao.
 
-Production site: <https://xinbaopedia.top>
+Xinbaopedia is a public-facing academic homepage, research archive, and living wiki. It collects Xinbao Qiao's biography, research interests, publications, projects, education, experience, and related study notes in one searchable site.
 
-## What This Repository Contains
+Visit the site: <https://xinbaopedia.top>
 
-- A Next.js 15 and React 19 application for rendering wiki pages.
-- English and Chinese Markdown articles under `wiki/`.
-- Wiki-link preprocessing for `[[WikiLink]]` references.
-- Search, language switching, article tabs, and infobox components.
-- `Chat with Xinbao`, a same-site conversational assistant backed by server-only routes.
-- Optional Cloudflare Worker proxy configuration under `cloudflare/`.
+---
 
-Rendered pages, build output, caches, logs, and deployment artifacts are not knowledge sources. Update the Markdown source files first, then rebuild and redeploy the application.
+## What It Is
 
-## Project Layout
+Xinbaopedia is designed as a small academic knowledge base rather than a conventional personal homepage. Instead of placing every detail on a single profile page, it organizes information into connected wiki articles:
+
+| Area | What It Covers |
+| --- | --- |
+| Profile | Academic biography, affiliations, education, and contact information. |
+| Research | Topics such as data-centric machine learning, trustworthy AI, distributed learning, unlearning, and model collapse. |
+| Publications | Paper pages with summaries, venues, figures, posters, and related topic links. |
+| Projects | Research prototypes, collaboration notes, and selected implementation records. |
+| Notes | Supporting pages for concepts, institutions, skills, and reading trails. |
+
+The result is a homepage that can grow like a knowledge graph. A visitor can start from the biography, jump into a paper, follow a research topic, and return through related pages without losing context.
+
+## Highlights
+
+- **Wikipedia-style reading experience**: article pages, infoboxes, internal links, side navigation, and neutral academic prose.
+- **Bilingual content**: English and Chinese pages are maintained side by side for major entries.
+- **Searchable knowledge base**: the site includes a searchable index across visible wiki pages.
+- **Research-first organization**: papers are connected to broader research topics instead of being listed as isolated entries.
+- **Living archive**: the repository can keep long-term records of projects, notes, resources, and publication updates.
+- **Chat with Xinbao**: the site includes a lightweight conversational assistant grounded in public wiki content.
+- **Production-ready publishing**: the main site is deployed on Vercel, with an optional Cloudflare Worker proxy documented for edge access.
+
+## Content Philosophy
+
+The wiki aims to be factual, scoped, and maintainable.
+
+- Main pages should use third-person, neutral, academic prose.
+- Biographical claims should be concrete and not overstate uncertain information.
+- Research pages should explain context, motivation, and connections between work.
+- Paper pages should be linked back to relevant research-topic pages.
+- Generated pages, build artifacts, logs, caches, and deployment outputs are not treated as source material.
+
+The canonical content lives in `wiki/*.md`. If a public page needs to change, the Markdown source should change first.
+
+## How The Site Is Organized
 
 ```text
-app/                    Next.js pages, layout, and API routes
-components/             Wiki UI and chat components
-lib/                    Wiki parsing, search index, and chat helpers
-wiki/                   Canonical Markdown content
-public/                 Static images, PDFs, icons, and paper assets
-scripts/                Wiki validation scripts
-chat with xinbao/       Chat assistant notes and environment template
-cloudflare/             Optional Worker proxy
+wiki/                   Source articles for the public wiki
+public/                 Images, PDF files, icons, and paper figures
+app/                    Site pages and server endpoints
+components/             Visual building blocks for the wiki interface
+lib/                    Shared helpers for wiki rendering and chat behavior
+scripts/                Content checks and wiki validation tools
+chat with xinbao/       Notes and templates for the chat assistant
+cloudflare/             Optional Cloudflare Worker proxy
 ```
 
-## Stack
+## Main Features
 
-- Next.js 15
-- React 19
-- TypeScript
-- `react-markdown`, `remark-gfm`, `remark-math`, and `rehype-katex`
-- `gray-matter` frontmatter parsing
-- Upstash Redis and a server-side LLM endpoint for `Chat with Xinbao`
-- Vercel production deployment
+### Connected Wiki Pages
 
-## Local Development
+Articles can reference each other with wiki-style links. This keeps the site navigable as more research topics, papers, and project pages are added.
 
-Install dependencies and start the development server:
+### Bilingual Entries
 
-```bash
-npm install
-npm run dev
-```
+Many pages have English and Chinese versions. The language switcher lets readers move between paired entries when both versions exist.
 
-Open <http://localhost:3000>.
+### Academic Infoboxes
 
-## Validation
+Profile, institution, project, and paper pages can show structured information in compact infoboxes. This gives visitors a quick summary before they read the full article.
 
-Run the full local check before publishing any source or content change:
+### Search And Navigation
 
-```bash
-npm run check
-npm run build
-```
+The top search bar indexes public wiki pages so visitors can find topics, papers, people, institutions, and concepts quickly.
 
-`npm run check` runs TypeScript, wiki-link linting, and wiki data tests. `npm run build` validates that the Next.js application can render all generated routes.
+### Chat With Xinbao
 
-## Editing Wiki Content
+The chat assistant answers questions about public site content, such as research directions, publications, projects, academic background, and contact information. It is intended as a lightweight guide to the wiki, not as a replacement for the source pages.
 
-Edit the relevant file under `wiki/`. Keep prose third-person, neutral, concise, and factual. Use frontmatter for page metadata and `[[WikiLink]]` for internal references.
+## Publishing Flow
 
-When adding or changing paper pages, also update the relevant research-topic pages and keep index/log pages aligned:
+The production site is published through Vercel under the `xinbaopedia` scope.
+
+The usual publishing process is:
+
+1. Update the relevant source files, usually under `wiki/` or `README.md`.
+2. Run the repository checks:
+
+   ```bash
+   npm run check
+   npm run build
+   ```
+
+3. Commit the reviewed source changes.
+4. Push the commit to `origin main`.
+5. Deploy production on Vercel.
+6. Verify the homepage and at least one changed page on <https://xinbaopedia.top>.
+
+The optional Cloudflare Worker proxy is documented in `cloudflare/README.md`.
+
+## Editing Guidance
+
+When editing wiki content:
+
+- Write for readers first, not for the build system.
+- Keep the public tone academic, neutral, and concise.
+- Prefer a short main explanation plus links to deeper pages.
+- Connect new paper pages to relevant topic pages.
+- Keep English and Chinese paired pages aligned when both exist.
+- Update index and log pages when adding major new entries.
+
+Useful high-level pages include:
 
 - `wiki/index.md`
 - `wiki/index_zh.md`
+- `wiki/Research.md`
+- `wiki/Research_zh.md`
+- `wiki/Publications.md`
+- `wiki/Publications_zh.md`
 - `wiki/log.md`
 - `wiki/log_zh.md`
 
-## Chat with Xinbao
+## Built With
 
-The chat feature lives in:
+Xinbaopedia is built as a modern web application with Next.js, React, TypeScript, Markdown rendering, and Vercel deployment. The implementation details are intentionally kept behind the reading experience: visitors should see a clear academic wiki, while maintainers can still update the site through structured Markdown files.
 
-- `components/ChatWithXinbao.tsx`
-- `app/api/chat-with-xinbao/route.ts`
-- `app/api/chat-with-xinbao/questions/route.ts`
-- `lib/chat-with-xinbao.ts`
-- `chat with xinbao/`
+Runtime credentials and private service tokens should stay in deployment environment variables. They should never be committed to this repository.
 
-Runtime credentials belong in deployment environment variables, never in tracked files. See `chat with xinbao/env.example` for the expected variable names.
+---
 
-## Deployment
-
-The primary deployment target is Vercel. After validation passes, commit the relevant tracked source changes, push to `origin main`, deploy production, and verify the homepage plus at least one changed page on <https://xinbaopedia.top>.
-
-The Cloudflare Worker proxy is optional and documented in `cloudflare/README.md`.
+Xinbaopedia is a personal academic project. It is stylistically inspired by Wikipedia but is not affiliated with the Wikimedia Foundation.
