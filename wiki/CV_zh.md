@@ -15,24 +15,24 @@ translation_of: "CV"
 
 ## 研究兴趣
 
-- Data-centric machine learning；AI for Networks；Networks for AI。
+- 可信机器学习，包括可解释性、隐私、安全和鲁棒性。
+- AI 与网络的交叉方向，包括 AI for communication 和 communication for AI。
 
 ## 论文
 
 见 [[Publications|论文]]。CV 列出已录用、已公开和在审的机器遗忘、去中心化学习、合成数据模型坍缩、联邦学习与 LLM 可靠性工作。
 
-- **When Sample Selection Bias Precipitates Model Collapse**。**乔鑫宝**、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌、Yan Pang。**ICML 2026**。
-- **Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**。**乔鑫宝**、Ningning Ding、Yushi Cheng、张萌。**AAAI 2026**。
-- **Hessian-Free Online Certified Unlearning**。**乔鑫宝**、张萌、Ming Tang、Ermin Wei。**ICLR 2025**。
-- **DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**。Shurong Wang、Zhuoyang Shen、**乔鑫宝**、Tongning Zhang、张萌。**ICLR 2025**。
-- **Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification for Pretrained Model**。**乔鑫宝**、Wenjing Yan、Ying-Jun Angela Zhang。**NeurIPS 2026** 在审。
-- **Illusory Pattern Perception Drives Spurious Inference in Large Language Models**。Peihua Mai、Zhuoyan Shao、**乔鑫宝**、张萌、Xinyue Zhou、Yan Pang。**NeurIPS 2026** 在审。
+- **When Sample Selection Bias Precipitates Model Collapse**。**乔鑫宝**、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌、Yan Pang。ICML 2026。
+- **Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**。**乔鑫宝**、Ningning Ding、Yushi Cheng、张萌。AAAI 2026。
+- **Hessian-Free Online Certified Unlearning**。**乔鑫宝**、张萌、Ming Tang、Ermin Wei。ICLR 2025。
+- **DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**。Shurong Wang、Zhuoyang Shen、**乔鑫宝**、Tongning Zhang、张萌。ICLR 2025。
+- **Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification for Pretrained Model**。**乔鑫宝**、Wenjing Yan、Ying-Jun Angela Zhang。**在审**，NeurIPS 2026。
+- **Illusory Pattern Perception Drives Spurious Inference in Large Language Models**。Peihua Mai、Zhuoyan Shao、**乔鑫宝**、张萌、Xinyue Zhou、Yan Pang。**在审**，NeurIPS 2026。
 
 ## 研究经历
 
-- **AI 与网络博士研究**，2026年至今，导师 [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]，机构 [[The_Chinese_University_of_Hong_Kong|香港中文大学]]。主题包括数据中心 ML、AI for Networks、Networks for AI、去中心化学习和通信感知模型可靠性。
-- **数据中心 ML 系统研究**，2023-03 至 2025-12，导师 [[Meng_Zhang|张萌]]，机构 [[Zhejiang_University|浙江大学]]。主题包括数据影响归因、机器遗忘，以及公平性、鲁棒性、隐私和效用之间的权衡。
-- **可信模型系统研究**，2025-06 至 2025-12，全职研究实习，导师 Yan Pang，机构 [[NUSRI_CQ|NUSRI-CQ]]。主题包括模型可靠性和合成数据评估的分布式 Wasserstein 方法。
+- **Research on Data-Centric ML Systems**，2023-03 至 2025-12，导师 Prof. [[Meng_Zhang|Meng Zhang]]，机构 [[Zhejiang_University|浙江大学]]。主题包括数据影响归因、可信人工智能中的权衡，以及云边协同人-空间健康系统。
+- **Research on Trustworthy LLM systems**，2025-06 至 2025-12，全职研究实习，导师 PANG Yan, James，机构 National University of Singapore。主题包括 LLM 的错觉模式感知和合成数据评估。
 
 ## 技能
 
