@@ -15,7 +15,7 @@ translation_of: "CV"
 
 ## 研究兴趣
 
-- 可信机器学习，包括可解释性、隐私、安全和鲁棒性。
+- AI 模型中数据的生命周期管理，重点关注数据在生成、使用和删除过程中产生的理论方法和实际问题。
 - AI 与网络的交叉方向，包括 AI for communication 和 communication for AI。
 
 ## 论文
