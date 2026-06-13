@@ -23,7 +23,7 @@ This page records CV-derived facts in wiki form. The PDF version is available at
 
 ## Skills
 
-See [[Skills]]. The CV lists Python, MATLAB, LaTeX, Markdown, C/C++, Linux, Java, TensorFlow, PyTorch, SQL, Git, Docker, and Linux-based research workflows.
+See [[Skills]]. The CV lists Python, MATLAB, LaTeX, and Markdown as advanced skills; C/C++, Linux, and Java; and frameworks and tools including TensorFlow, PyTorch, SQL, Git, Linux, and Docker.
 
 ## Publications
 
@@ -41,7 +41,7 @@ See [[Publications]]. The CV lists accepted, published, and under-review work in
 - **DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**.\
   Shurong Wang, Zhuoyang Shen, **Xinbao Qiao**, Tongning Zhang, Meng Zhang.\
   Thirteenth International Conference on Learning Representations, ICLR, 2025.
-- **Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification for Pretrained Model**.\
+- **Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification**.\
   **Xinbao Qiao**, Wenjing Yan, Ying-Jun Angela Zhang.\
   Under review.
 - **Illusory Pattern Perception Drives Spurious Inference in Large Language Models**.\

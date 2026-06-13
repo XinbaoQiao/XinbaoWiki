@@ -25,7 +25,7 @@ translation_of: "CV"
 
 ## 技能
 
-见 [[Skills|技能]]。CV 列出 Python、MATLAB、LaTeX、Markdown、C/C++、Linux、Java、TensorFlow、PyTorch、SQL、Git、Docker 和基于 Linux 的研究工作流。
+见 [[Skills|技能]]。CV 列出 Python、MATLAB、LaTeX 和 Markdown 为 advanced 技能；C/C++、Linux、Java；以及 TensorFlow、PyTorch、SQL、Git、Linux、Docker 等框架与工具。
 
 ## 论文
 
@@ -43,7 +43,7 @@ translation_of: "CV"
 - **DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**。\
   Shurong Wang、Zhuoyang Shen、**乔鑫宝**、Tongning Zhang、张萌。\
   Thirteenth International Conference on Learning Representations, ICLR, 2025。
-- **Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification for Pretrained Model**。\
+- **Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification**。\
   **乔鑫宝**、Wenjing Yan、Ying-Jun Angela Zhang。\
   Under review.
 - **Illusory Pattern Perception Drives Spurious Inference in Large Language Models**。\
