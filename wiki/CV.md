@@ -20,12 +20,12 @@ This page records CV-derived facts in wiki form. The PDF version is available at
 
 See [[Publications]]. The CV lists accepted, published, and under-review work in machine unlearning, decentralized learning, synthetic-data model collapse, federated learning, and LLM reliability.
 
-- **When Sample Selection Bias Precipitates Model Collapse**. **Xinbao Qiao**, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, Yan Pang. ICML 2026.
-- **Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**. **Xinbao Qiao**, Ningning Ding, Yushi Cheng, Meng Zhang. AAAI 2026.
-- **Hessian-Free Online Certified Unlearning**. **Xinbao Qiao**, Meng Zhang, Ming Tang, Ermin Wei. ICLR 2025.
-- **DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**. Shurong Wang, Zhuoyang Shen, **Xinbao Qiao**, Tongning Zhang, Meng Zhang. ICLR 2025.
-- **Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification for Pretrained Model**. **Xinbao Qiao**, Wenjing Yan, Ying-Jun Angela Zhang. **Under review**, NeurIPS 2026.
-- **Illusory Pattern Perception Drives Spurious Inference in Large Language Models**. Peihua Mai, Zhuoyan Shao, **Xinbao Qiao**, Meng Zhang, Xinyue Zhou, Yan Pang. **Under review**, NeurIPS 2026.
+- **When Sample Selection Bias Precipitates Model Collapse**.<br />**Xinbao Qiao**, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, Yan Pang.<br />Forty-Third International Conference on Machine Learning, ICML, 2026.
+- **Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**.<br />**Xinbao Qiao**, Ningning Ding, Yushi Cheng, Meng Zhang.<br />Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026.
+- **Hessian-Free Online Certified Unlearning**.<br />**Xinbao Qiao**, Meng Zhang, Ming Tang, Ermin Wei.<br />Thirteenth International Conference on Learning Representations, ICLR, 2025.
+- **DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**.<br />Shurong Wang, Zhuoyang Shen, **Xinbao Qiao**, Tongning Zhang, Meng Zhang.<br />Thirteenth International Conference on Learning Representations, ICLR, 2025.
+- **Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification for Pretrained Model**.<br />**Xinbao Qiao**, Wenjing Yan, Ying-Jun Angela Zhang.<br />**Under review**. Fortieth Conference on Neural Information Processing Systems, NeurIPS, 2026.
+- **Illusory Pattern Perception Drives Spurious Inference in Large Language Models**.<br />Peihua Mai, Zhuoyan Shao, **Xinbao Qiao**, Meng Zhang, Xinyue Zhou, Yan Pang.<br />**Under review**. Fortieth Conference on Neural Information Processing Systems, NeurIPS, 2026.
 
 ## Research experience
 

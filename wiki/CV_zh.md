@@ -22,12 +22,12 @@ translation_of: "CV"
 
 见 [[Publications|论文]]。CV 列出已录用、已公开和在审的机器遗忘、去中心化学习、合成数据模型坍缩、联邦学习与 LLM 可靠性工作。
 
-- **When Sample Selection Bias Precipitates Model Collapse**。**乔鑫宝**、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌、Yan Pang。ICML 2026。
-- **Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**。**乔鑫宝**、Ningning Ding、Yushi Cheng、张萌。AAAI 2026。
-- **Hessian-Free Online Certified Unlearning**。**乔鑫宝**、张萌、Ming Tang、Ermin Wei。ICLR 2025。
-- **DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**。Shurong Wang、Zhuoyang Shen、**乔鑫宝**、Tongning Zhang、张萌。ICLR 2025。
-- **Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification for Pretrained Model**。**乔鑫宝**、Wenjing Yan、Ying-Jun Angela Zhang。**在审**，NeurIPS 2026。
-- **Illusory Pattern Perception Drives Spurious Inference in Large Language Models**。Peihua Mai、Zhuoyan Shao、**乔鑫宝**、张萌、Xinyue Zhou、Yan Pang。**在审**，NeurIPS 2026。
+- **When Sample Selection Bias Precipitates Model Collapse**。<br />**乔鑫宝**、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌、Yan Pang。<br />Forty-Third International Conference on Machine Learning, ICML, 2026。
+- **Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**。<br />**乔鑫宝**、Ningning Ding、Yushi Cheng、张萌。<br />Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026。
+- **Hessian-Free Online Certified Unlearning**。<br />**乔鑫宝**、张萌、Ming Tang、Ermin Wei。<br />Thirteenth International Conference on Learning Representations, ICLR, 2025。
+- **DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**。<br />Shurong Wang、Zhuoyang Shen、**乔鑫宝**、Tongning Zhang、张萌。<br />Thirteenth International Conference on Learning Representations, ICLR, 2025。
+- **Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification for Pretrained Model**。<br />**乔鑫宝**、Wenjing Yan、Ying-Jun Angela Zhang。<br />**在审**。Fortieth Conference on Neural Information Processing Systems, NeurIPS, 2026。
+- **Illusory Pattern Perception Drives Spurious Inference in Large Language Models**。<br />Peihua Mai、Zhuoyan Shao、**乔鑫宝**、张萌、Xinyue Zhou、Yan Pang。<br />**在审**。Fortieth Conference on Neural Information Processing Systems, NeurIPS, 2026。
 
 ## 研究经历
 
