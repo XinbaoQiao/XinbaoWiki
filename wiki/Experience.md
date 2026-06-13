@@ -12,7 +12,7 @@ summary: "Research experience and affiliations."
 
 **PhD student**, 2026-present. Advisor: [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]], [[The_Chinese_University_of_Hong_Kong]].
 
-Qiao's current doctoral work is centered on [[AI_and_Networks|AI and networks]]. The research asks how learning systems should operate when data, computation, and evaluation signals are distributed across clients, institutions, or networked infrastructure. A recent focus is [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenter]] computation: constructing shared distributional references from local empirical measures without assuming that all raw data can be pooled.
+Qiao's current doctoral work is centered on [[Data_Centric_Machine_Learning|data-centric ML]] and [[AI_and_Networks|AI and networks]], including AI for Networks and Networks for AI. The research asks how learning systems should operate when data, computation, and evaluation signals are distributed across clients, institutions, or networked infrastructure. [[Distributed_Wasserstein_Barycenter|Distributed Wasserstein barycenter]] computation remains one related method for constructing shared distributional references without assuming that all raw data can be pooled.
 
 Related pages: [[AI_and_Networks]], [[Distributed_Learning]], [[Wasserstein_Geometry]], [[Distributed_Wasserstein_Barycenter]], and [[Collaborative_Evaluation]].
 

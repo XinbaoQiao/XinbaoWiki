@@ -1,7 +1,7 @@
 ---
 name: "分布式 Wasserstein Barycenter"
 occupation: "研究概念"
-summary: "解释乔鑫宝当前博士阶段关于从分布式局部测度计算 Wasserstein barycenter 的关注点。"
+summary: "解释乔鑫宝关于从分布式局部测度计算 Wasserstein barycenter 的相关工作。"
 aliases:
   - "分布式 Wasserstein barycenter"
   - "Wasserstein barycenter"
@@ -10,7 +10,7 @@ language: "zh"
 translation_of: "Distributed_Wasserstein_Barycenter"
 ---
 
-**分布式 Wasserstein Barycenter** 是 [[Xinbao_Qiao|乔鑫宝]] 当前博士阶段在 [[AI_and_Networks|AI 与网络]] 方向下的关注点之一。Wasserstein barycenter 是在最优传输距离下对多个输入分布进行概括的概率测度。在分布式设置中，输入测度由不同参与方持有，因此问题不仅是统计问题，也是网络化计算问题：系统需要在通信和数据访问约束下计算或近似共同参考分布。[^barycenter]
+**分布式 Wasserstein Barycenter** 是 [[Xinbao_Qiao|乔鑫宝]] 在 [[AI_and_Networks|AI 与网络]] 和 [[Data_Centric_Machine_Learning|数据中心 ML]] 方向下的相关概念页。Wasserstein barycenter 是在最优传输距离下对多个输入分布进行概括的概率测度。在分布式设置中，输入测度由不同参与方持有，因此问题不仅是统计问题，也是网络化计算问题：系统需要在通信和数据访问约束下计算或近似共同参考分布。[^barycenter]
 
 ## 定义
 
@@ -31,7 +31,7 @@ $$
 
 ## 与乔鑫宝工作的关系
 
-乔鑫宝的 ICML 2026 工作 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 已经使用协作 Wasserstein 风格信号分析低资源数据孤岛下的合成数据失效。当前关于分布式 Wasserstein barycenter 的博士阶段关注点延续了这一方向，但进一步转向基础设施层面：当证据被切分在网络中时，如何计算可靠参考分布，而不是默认先汇总评估数据。
+乔鑫宝的 ICML 2026 工作 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 已经使用协作 Wasserstein 风格信号分析低资源数据孤岛下的合成数据失效。分布式 Wasserstein barycenter 在基础设施层面延续这一方向：当证据被切分在网络中时，如何计算可靠参考分布，而不是默认先汇总评估数据。
 
 该问题连接 [[AI_and_Networks|AI 与网络]]，因为计算对象会被通信模式塑造；也连接 [[Synthetic_Data_and_Model_Collapse|合成数据]]，因为递归生成需要分布检查；同时连接 [[Data_Centric_Machine_Learning|数据中心 ML]]，因为 barycenter 可以成为跨参与方判断数据或样本重要性的工具。
 

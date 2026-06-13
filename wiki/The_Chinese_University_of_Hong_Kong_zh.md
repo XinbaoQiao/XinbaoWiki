@@ -11,7 +11,7 @@ school: "工程学院"
 department: "信息工程系"
 dates: "2026年至今"
 place: "香港沙田"
-focus: "AI 与网络；分布式 Wasserstein 计算；可信数据中心学习"
+focus: "数据中心 ML；AI for Networks；Networks for AI；可信 AI"
 links:
   - label: "信息工程系"
     url: "https://www.ie.cuhk.edu.hk/"
@@ -26,7 +26,7 @@ translation_of: "The_Chinese_University_of_Hong_Kong"
 
 ## 项目
 
-乔鑫宝当前项目为 CUHK 工程学院的信息工程博士，导师为 [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]。CUHK 信息工程 MPhil-PhD 项目面向通信、网络、信息处理与安全等基础和应用研究。[^cuhk-grad] 该项目背景与乔鑫宝当前 [[AI_and_Networks|AI 与网络]] 方向一致：学习算法与通信约束、去中心化数据访问、分布式计算和跨孤岛评估被放在一起研究。
+乔鑫宝当前项目为 CUHK 工程学院的信息工程博士，导师为 [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]。CUHK 信息工程 MPhil-PhD 项目面向通信、网络、信息处理与安全等基础和应用研究。[^cuhk-grad] 该项目背景与乔鑫宝当前[[Data_Centric_Machine_Learning|数据中心 ML]]和 [[AI_and_Networks|AI 与网络]]方向一致：学习算法与通信约束、去中心化数据访问、分布式计算和跨孤岛评估被放在一起研究。
 
 ## 学术背景
 
@@ -34,7 +34,7 @@ CUHK 信息工程系成立于 1989 年，并在官方介绍中称其为香港首
 
 ## 与乔鑫宝的关系
 
-乔鑫宝的 CUHK 阶段开始于其硕士阶段的 [[Data_Centric_Machine_Learning|数据中心 ML]] 与 [[Machine_Unlearning|机器遗忘]] 工作之后。在 [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]] 指导下，博士阶段的重心转向网络化 AI 系统：[[Distributed_Wasserstein_Barycenter|Wasserstein barycenter 的分布式计算]]、高效去中心化学习、跨 [[Data_Silos|数据孤岛]] 协作评估，以及训练数据被选择、删除或合成时出现的可靠性问题。因此，主页 infobox 中 Affiliation 只列 CUHK 当前机构，而过去机构放在教育与经历中。
+乔鑫宝的 CUHK 阶段开始于其硕士阶段的 [[Data_Centric_Machine_Learning|数据中心 ML]] 与 [[Machine_Unlearning|机器遗忘]] 工作之后。在 [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]] 指导下，博士阶段强调数据中心 ML、AI for Networks 与 Networks for AI：高效去中心化学习、跨 [[Data_Silos|数据孤岛]] 协作评估、通信感知可靠性，以及[[Distributed_Wasserstein_Barycenter|Wasserstein barycenter]]计算等分布式方法。因此，主页 infobox 中 Affiliation 只列 CUHK 当前机构，而过去机构放在教育与经历中。
 
 ## 参见
 

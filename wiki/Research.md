@@ -4,15 +4,19 @@ occupation: "Research overview"
 summary: "Research overview for Qiao Xinbao."
 ---
 
-This page summarizes the main research directions in Qiao Xinbao's academic wiki. It functions as a compiled map of linked topic pages rather than a static list of interests. The current center of gravity is [[AI_and_Networks|AI and networks]].
+This page summarizes the main research directions in Qiao Xinbao's academic wiki. It functions as a compiled map of linked topic pages rather than a static list of interests. The current center of gravity is [[Data_Centric_Machine_Learning|data-centric ML]] and the two-way [[AI_and_Networks|AI-and-networks]] problem.
 
 ## Research thesis
 
-The common thread is **data-process reliability under networked constraints**: how to design learning algorithms when data are selected, removed, synthesized, siloed, biased, privacy-constrained, or communication-constrained. The work is primarily positioned in AI and networks, machine unlearning, synthetic data, and data centric ML. Following the wiki pattern, each concept page records a stable local synthesis and points outward to papers, institutions, and adjacent methods, so later updates can revise the map rather than restart from raw notes.
+Qiao's work primarily studies lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are generated, used, and deleted. The related work aims to improve the reliability, interpretability, and controllability of AI models in heterogeneous, computation-constrained, and communication-constrained environments.
+
+1. In data generation, it studies synthetic data and its effects on quality, privacy, and generalization.
+2. In data use, it focuses on data modeling, collaborative optimization, and system design in distributed/federated learning, AI for Networks, and Networks for AI.
+3. In data deletion, it studies machine unlearning and data influence evaluation, exploring how to preserve model performance while protecting privacy and satisfying deletion requests.
 
 ## AI and networks
 
-[[AI_and_Networks]] covers the intersection of AI with networking and communication systems: AI for communication, communication for AI, decentralized learning, data pruning, and collaborative evaluation. In the current CUHK doctoral stage, this line includes distributed computing for [[Distributed_Wasserstein_Barycenter|Wasserstein barycenters]], where multiple local distributions are combined into a shared distributional reference without treating raw-data pooling as the default assumption.
+[[AI_and_Networks]] covers the intersection of AI with networking and communication systems: AI for Networks, Networks for AI, decentralized learning, data pruning, and collaborative evaluation. In the current CUHK doctoral stage, this line is paired with [[Data_Centric_Machine_Learning|data-centric ML]] and includes distributed tools such as [[Distributed_Wasserstein_Barycenter|Wasserstein barycenters]], where multiple local distributions can be combined into a shared distributional reference without treating raw-data pooling as the default assumption.
 
 ## Machine unlearning
 

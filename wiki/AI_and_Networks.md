@@ -6,11 +6,11 @@ occupation: "Research topic"
 summary: "Primary research topic for Qiao Xinbao, covering AI systems under networked data and communication constraints."
 ---
 
-**AI and Networks** is the primary research topic currently emphasized in [[Xinbao_Qiao|Xinbao Qiao]]'s wiki. The term is used here in a deliberately broad but bounded sense: it covers AI methods for networked settings, and learning algorithms whose behavior depends on communication, decentralization, edge devices, institutional data silos, or cross-party evaluation.[^sources]
+**AI and Networks** is the primary research topic currently emphasized in [[Xinbao_Qiao|Xinbao Qiao]]'s wiki. The term is used here in a deliberately broad but bounded sense: it covers AI for Networks, Networks for AI, and learning algorithms whose behavior depends on communication, decentralization, edge devices, institutional data silos, or cross-party evaluation.[^sources]
 
 ## Introduction
 
-In this wiki, AI and Networks is not a separate application label but the organizing frame for research in which learning is shaped by where data live, how information moves, and which parties can evaluate a model. The topic therefore includes decentralized learning, distributed computing, data pruning, collaborative evaluation, and synthetic-data verification under low-resource or siloed access.
+In this wiki, AI and Networks is not a separate application label but the organizing frame for research in which learning is shaped by where data live, how information moves, and which parties can evaluate a model. The topic therefore includes AI-assisted networked systems, network support for AI systems, decentralized learning, distributed computing, data pruning, collaborative evaluation, and synthetic-data verification under low-resource or siloed access.
 
 ## Role in this wiki
 
@@ -18,7 +18,7 @@ This page is the top-level hub for research in which model performance is shaped
 
 ## Current doctoral focus
 
-In the CUHK doctoral stage, Qiao's recent focus within this topic is distributed computation for [[Distributed_Wasserstein_Barycenter|Wasserstein barycenters]]. The problem is a natural fit for AI and networks: each participant can hold a local empirical distribution, while the system needs a collective distributional reference for comparison, verification, or control. This places the emphasis on algorithms that respect communication and data-access constraints, not only on centralized statistical objectives.
+In the CUHK doctoral stage, Qiao's recent work within this topic centers on [[Data_Centric_Machine_Learning|data-centric ML]], AI for Networks, and Networks for AI. The emphasis is on learning systems whose data and evaluation evidence are shaped by communication, network infrastructure, and decentralized access, rather than on centralized statistical objectives alone.
 
 ## Publications
 
@@ -28,7 +28,7 @@ In the CUHK doctoral stage, Qiao's recent focus within this topic is distributed
 
 ## Connection to Qiao's work
 
-The ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] belongs here because it studies collaborative verification when low-resource parties only hold fragmented local evidence. The current Wasserstein-barycenter focus continues that thread by treating a reference distribution as something that may need to be computed across a network rather than assumed to exist centrally. Earlier work in [[Machine_Unlearning|machine unlearning]] contributes the same systems instinct: algorithms are evaluated not only by accuracy, but also by latency, communication, and the cost of changing data after training.
+The ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] belongs here because it studies collaborative verification when low-resource parties only hold fragmented local evidence. Distributed [[Distributed_Wasserstein_Barycenter|Wasserstein barycenter]] methods remain one technical route for treating a reference distribution as something computed across a network rather than assumed to exist centrally. Earlier work in [[Machine_Unlearning|machine unlearning]] contributes the same systems instinct: algorithms are evaluated not only by accuracy, but also by latency, communication, and the cost of changing data after training.
 
 ## See also
 

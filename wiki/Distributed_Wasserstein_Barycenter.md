@@ -1,14 +1,14 @@
 ---
 name: "Distributed Wasserstein Barycenter"
 occupation: "Research concept"
-summary: "Concept page for Qiao's current doctoral focus on computing Wasserstein barycenters from distributed local measures."
+summary: "Concept page for Qiao's work on computing Wasserstein barycenters from distributed local measures."
 aliases:
   - "Distributed Wasserstein barycenters"
   - "Wasserstein barycenter"
   - "Distributed OT barycenter"
 ---
 
-**Distributed Wasserstein Barycenter** is the concept page for [[Xinbao_Qiao|Xinbao Qiao]]'s current doctoral focus within [[AI_and_Networks|AI and networks]]. A Wasserstein barycenter is a probability measure that summarizes several input distributions under an optimal-transport distance. In a distributed setting, the input measures are held by different parties, so the problem is not only statistical but also networked: the system must compute or approximate a common reference while respecting communication and data-access constraints.[^barycenter]
+**Distributed Wasserstein Barycenter** is a concept page for [[Xinbao_Qiao|Xinbao Qiao]]'s work within [[AI_and_Networks|AI and networks]] and [[Data_Centric_Machine_Learning|data-centric ML]]. A Wasserstein barycenter is a probability measure that summarizes several input distributions under an optimal-transport distance. In a distributed setting, the input measures are held by different parties, so the problem is not only statistical but also networked: the system must compute or approximate a common reference while respecting communication and data-access constraints.[^barycenter]
 
 ## Definition
 
@@ -29,7 +29,7 @@ The page also follows the LLM-wiki pattern used by Xinbaopedia: instead of leavi
 
 ## Connection to Qiao's work
 
-Qiao's ICML 2026 work on [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|sample-selection bias and model collapse]] already uses collaborative Wasserstein-style signals to reason about synthetic-data failure under low-resource siloed access. The current doctoral focus on distributed Wasserstein barycenters continues that direction at the infrastructure level. It asks how a reliable reference distribution can be computed when the evidence is split across the network, rather than assuming that evaluation data can be pooled first.
+Qiao's ICML 2026 work on [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|sample-selection bias and model collapse]] already uses collaborative Wasserstein-style signals to reason about synthetic-data failure under low-resource siloed access. Distributed Wasserstein barycenters continue that direction at the infrastructure level by asking how a reliable reference distribution can be computed when the evidence is split across the network, rather than assuming that evaluation data can be pooled first.
 
 This connects to [[AI_and_Networks|AI and networks]] because the computational object is shaped by the communication pattern. It connects to [[Synthetic_Data_and_Model_Collapse|Synthetic Data]] because recursive generation needs distributional checks. It also connects to [[Data_Centric_Machine_Learning|Data Centric ML]] because the barycenter can become a tool for deciding which data or samples matter across parties.
 

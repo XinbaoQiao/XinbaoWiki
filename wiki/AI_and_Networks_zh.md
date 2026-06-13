@@ -12,7 +12,7 @@ translation_of: "AI_and_Networks"
 
 ## 引言
 
-在本 wiki 中，AI 与网络不是一个单独应用场景，而是一个组织研究脉络的框架。它关注学习过程如何被数据分布、通信成本、边缘设备、去中心化协作和跨机构评估所塑造。相关问题包括分布式计算、去中心化学习中的数据剪枝、低资源或数据孤岛中的协作评估，以及合成数据在有限访问条件下的验证。
+在本 wiki 中，AI 与网络不是一个单独应用场景，而是一个组织研究脉络的框架。它关注学习过程如何被数据分布、通信成本、边缘设备、去中心化协作和跨机构评估所塑造。相关问题包括 AI for Networks、Networks for AI、分布式计算、去中心化学习中的数据剪枝、低资源或数据孤岛中的协作评估，以及合成数据在有限访问条件下的验证。
 
 ## 在本 wiki 中的作用
 
@@ -20,7 +20,7 @@ translation_of: "AI_and_Networks"
 
 ## 当前博士阶段关注点
 
-在 CUHK 博士阶段，乔鑫宝近期在该方向下关注[[Distributed_Wasserstein_Barycenter|Wasserstein barycenter 的分布式计算]]。这一问题适合放在 AI 与网络框架下：每个参与方可能只持有局部经验分布，而系统需要一个集体分布参考来进行比较、验证或控制。因此，重点不仅是中心化统计目标，也包括满足通信与数据访问约束的算法。
+在 CUHK 博士阶段，乔鑫宝近期在该方向下关注[[Data_Centric_Machine_Learning|数据中心 ML]]、AI for Networks 和 Networks for AI。重点是数据与评估证据受到通信、网络基础设施和去中心化访问塑造的学习系统，而不只是中心化统计目标。
 
 ## 论文
 
@@ -30,7 +30,7 @@ translation_of: "AI_and_Networks"
 
 ## 与乔鑫宝工作的关系
 
-[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 把问题放在合成数据与数据孤岛中，研究低资源参与方只有碎片化本地证据时，单个本地验证者如何造成递归训练分布变窄。当前 Wasserstein barycenter 关注点延续了这一脉络：参考分布不是默认集中存在的对象，而可能需要跨网络计算出来。早期 [[Machine_Unlearning|机器遗忘]] 工作也体现同一系统视角：算法不仅要准确，还要在删除、更新、通信和延迟成本上可用。
+[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 把问题放在合成数据与数据孤岛中，研究低资源参与方只有碎片化本地证据时，单个本地验证者如何造成递归训练分布变窄。分布式 [[Distributed_Wasserstein_Barycenter|Wasserstein barycenter]] 方法仍是这一脉络中的技术路径之一：参考分布不是默认集中存在的对象，而可能需要跨网络计算出来。早期 [[Machine_Unlearning|机器遗忘]] 工作也体现同一系统视角：算法不仅要准确，还要在删除、更新、通信和延迟成本上可用。
 
 ## 参见
 

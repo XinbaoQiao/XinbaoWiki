@@ -1,4 +1,9 @@
 *.hdoc
 *.token
 .secrets
+docs/
+.npm-cache
+node_modules
+.next
+.latex-build
 tsconfig.tsbuildinfo

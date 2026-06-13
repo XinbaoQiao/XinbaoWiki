@@ -35,12 +35,16 @@ links:
   - title: "GitHub"
     label: "XinbaoQiao"
     url: "https://github.com/XinbaoQiao"
-summary: "PhD student in Information Engineering at The Chinese University of Hong Kong; researcher in AI and networks, distributed Wasserstein computation, machine unlearning, and synthetic-data reliability"
+summary: "PhD student in Information Engineering at The Chinese University of Hong Kong; researcher in data-centric ML, AI for Networks, Networks for AI, machine unlearning, and synthetic-data reliability"
 ---
 
-**Xinbao Qiao**[^xinbao-name][^qiao-ciao][^xinbao-qiao-bridge] (Chinese: **乔鑫宝**; born September 2000 in Xishuangbanna, Yunnan) is a Chinese PhD student in the Department of Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]]. His research lies at the intersection of [[AI_and_Networks|AI and networks]], data-centric machine learning, and trustworthy AI. The common question is how learning systems should be trained, evaluated, or updated when data, computation, and distributional evidence are distributed across institutions, clients, or devices rather than pooled centrally.
+**Xinbao Qiao**[^xinbao-name][^qiao-ciao][^xinbao-qiao-bridge] (Chinese: **乔鑫宝**; born September 2000 in Xishuangbanna, Yunnan) is a Chinese PhD student in the Department of Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]]. His research primarily studies lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are generated, used, and deleted. His recent work aims to improve the reliability, interpretability, and controllability of AI models in heterogeneous, computation-constrained, and communication-constrained environments.
 
-His current doctoral work focuses on [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenter]] computation for shared distributional references in collaborative settings. Related work spans [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic-data reliability]], and [[Data_Centric_Machine_Learning|data-centric ML]]. Qiao previously received a Master of Science in Artificial Intelligence from [[Zhejiang_University|Zhejiang University]] and a Bachelor of Engineering in Communication Engineering from [[Shandong_University|Shandong University]]. His [[Publications]] include accepted or published papers at ICML, AAAI, and ICLR.
+1. In data generation, he studies synthetic data and its effects on quality, privacy, and generalization.
+2. In data use, he focuses on data modeling, collaborative optimization, and system design in distributed learning, AI for Networks, and Networks for AI.
+3. In data deletion, he studies machine unlearning and data influence evaluation, exploring how to preserve model performance while protecting privacy and satisfying deletion requests.
+
+These directions connect [[Data_Centric_Machine_Learning|data-centric ML]], [[AI_and_Networks|AI and networks]], [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic-data reliability]], and [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenter]] methods for collaborative distributional references. Qiao previously received a Master of Science in Artificial Intelligence from [[Zhejiang_University|Zhejiang University]] and a Bachelor of Engineering in Communication Engineering from [[Shandong_University|Shandong University]]. His [[Publications]] include accepted or published papers at ICML, AAAI, and ICLR.
 
 ## Education
 
@@ -66,7 +70,7 @@ From June to December 2025, Qiao worked as a full-time research intern at [[NUSR
 
 At [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]], Qiao's doctoral work extends the same distributed-evidence thread into [[AI_and_Networks|AI and networks]]: how learning systems can be trained, evaluated, and maintained when data and computation are distributed rather than pooled.
 
-Within this stage, his recent work has focused on distributed computation for [[Distributed_Wasserstein_Barycenter|Wasserstein barycenters]]. The topic connects optimal-transport geometry to networked AI: each party may hold only a local empirical distribution, while the learning system needs a shared distributional reference for evaluation, sample scoring, or synthetic-data verification. The emphasis is therefore not only on a model architecture, but also on the information flow that makes a reliable global view possible.
+Within this stage, his recent work centers on [[Data_Centric_Machine_Learning|data-centric ML]] and the two-way [[AI_and_Networks|AI-and-networks]] problem: using AI to support networked systems, and using communication and network infrastructure to support AI systems. Distributed computation for [[Distributed_Wasserstein_Barycenter|Wasserstein barycenters]] remains one related method for building shared distributional references under decentralized data access.
 
 ## Academic projects
 
@@ -74,7 +78,7 @@ The project sections below group Qiao's work by research problem rather than by 
 
 ### AI and networks (2024-present)
 
-Qiao's current primary line, [[AI_and_Networks|AI and networks]], studies learning systems whose behavior depends on communication, locality, or networked infrastructure. In this usage, "networks" includes the institutional and computational structure around AI systems: where evidence is stored, how it moves, and which parties can evaluate it. The topic links decentralized learning, communication-aware evaluation, [[Data_Silos|data silos]], [[Collaborative_Evaluation|collaborative evaluation]], and [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenters]]. Within this line, [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] examines why low-resource communities and institutions with fragmented data coverage are especially vulnerable to model collapse under local sample-selection bias.
+Qiao's current primary line, [[AI_and_Networks|AI and networks]], studies learning systems whose behavior depends on communication, locality, or networked infrastructure. In this usage, "networks" includes both AI for Networks and Networks for AI: where evidence is stored, how it moves, and which parties can evaluate or maintain a model. The topic links decentralized learning, communication-aware evaluation, [[Data_Silos|data silos]], [[Collaborative_Evaluation|collaborative evaluation]], [[Data_Centric_Machine_Learning|data-centric ML]], and [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenters]]. Within this line, [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] examines why low-resource communities and institutions with fragmented data coverage are especially vulnerable to model collapse under local sample-selection bias.
 
 ### Machine unlearning (2023-2026)
 

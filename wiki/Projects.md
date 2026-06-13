@@ -8,11 +8,11 @@ summary: "Research projects and project clusters."
 
 ### AI and networks
 
-[[AI_and_Networks]] is the current primary project cluster. It includes data pruning for decentralized learning, communication-aware evaluation, cross-silo reliability, and distributed computation for Wasserstein-style distributional references.
+[[AI_and_Networks]] is the current primary project cluster. It includes AI for Networks, Networks for AI, data pruning for decentralized learning, communication-aware evaluation, cross-silo reliability, and distributed computation for Wasserstein-style distributional references.
 
 ### Distributed Wasserstein barycenters
 
-[[Distributed_Wasserstein_Barycenter|Distributed Wasserstein barycenter]] is the current doctoral focus within the AI-and-networks cluster. It asks how multiple parties can compute or approximate a shared distributional reference from local empirical measures, with applications to collaborative evaluation, sample scoring, and synthetic-data verification.
+[[Distributed_Wasserstein_Barycenter|Distributed Wasserstein barycenter]] is a technical project within the AI-and-networks cluster. It asks how multiple parties can compute or approximate a shared distributional reference from local empirical measures, with applications to collaborative evaluation, sample scoring, and synthetic-data verification.
 
 ### Machine unlearning
 

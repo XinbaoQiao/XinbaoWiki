@@ -4,6 +4,12 @@ occupation: "Maintenance log"
 summary: "Append-only maintenance log for the wiki."
 ---
 
+## 2026-06-13
+
+- Updated [[Xinbao_Qiao]], [[Qiao_Xinbao_zh]], [[Research]], [[Projects]], [[Experience]], [[CV]], and related topic pages so Qiao's recent work is framed around data lifecycle management in AI models, [[Data_Centric_Machine_Learning|data-centric ML]], AI for Networks, and Networks for AI, while keeping [[Distributed_Wasserstein_Barycenter]] as a related method rather than the sole current focus.
+- Expanded [[Xinbao_Qiao]] and [[Qiao_Xinbao_zh]] with a three-part data lifecycle summary covering data generation, data use, and data deletion.
+- Added two NeurIPS 2026 under-review entries to the CV publication list and regenerated the public CV PDF.
+
 ## 2026-05-31
 
 - Added OpenReview and code links to [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]].
