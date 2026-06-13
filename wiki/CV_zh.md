@@ -15,8 +15,7 @@ translation_of: "CV"
 
 ## 研究兴趣
 
-- 数据中心 ML、AI for Networks 与 Networks for AI：分布式计算、通信感知学习和协作评估。
-- 可信机器学习：可解释性、隐私、安全、鲁棒性和合成数据可靠性。
+- Data-centric machine learning；AI for Networks；Networks for AI。
 
 ## 论文
 

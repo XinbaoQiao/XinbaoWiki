@@ -13,8 +13,7 @@ This page records CV-derived facts in wiki form. The PDF version is available at
 
 ## Research interests
 
-- Data-centric ML, AI for Networks, and Networks for AI: distributed computation, communication-aware learning, and collaborative evaluation.
-- Trustworthy machine learning: interpretability, privacy, security, robustness, and synthetic-data reliability.
+- Data-centric machine learning; AI for Networks; Networks for AI.
 
 ## Publications
 
