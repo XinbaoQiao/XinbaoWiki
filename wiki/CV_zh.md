@@ -18,6 +18,15 @@ translation_of: "CV"
 - AI 模型中数据的生命周期管理，重点关注数据在生成、使用和删除过程中产生的理论方法和实际问题。
 - AI 与网络的交叉方向，包括 AI for communication 和 communication for AI。
 
+## 研究经历
+
+- **Research on Data-Centric ML Systems**，2023-03 至 2025-12，导师 Prof. [[Meng_Zhang|Meng Zhang]]，机构 [[Zhejiang_University|浙江大学]]。主题包括数据影响归因、可信人工智能中的权衡，以及云边协同人-空间健康系统。
+- **Research on Trustworthy LLM systems**，2025-06 至 2025-12，全职研究实习，导师 PANG Yan, James，机构 National University of Singapore。主题包括 LLM 的错觉模式感知和合成数据评估。
+
+## 技能
+
+见 [[Skills|技能]]。CV 列出 Python、MATLAB、LaTeX、Markdown、C/C++、Linux、Java、TensorFlow、PyTorch、SQL、Git、Docker 和基于 Linux 的研究工作流。
+
 ## 论文
 
 见 [[Publications|论文]]。CV 列出已录用、已公开和在审的机器遗忘、去中心化学习、合成数据模型坍缩、联邦学习与 LLM 可靠性工作。
@@ -40,12 +49,3 @@ translation_of: "CV"
 - **Illusory Pattern Perception Drives Spurious Inference in Large Language Models**。\
   Peihua Mai、Zhuoyan Shao、**乔鑫宝**、张萌、Xinyue Zhou、Yan Pang。\
   Under review.
-
-## 研究经历
-
-- **Research on Data-Centric ML Systems**，2023-03 至 2025-12，导师 Prof. [[Meng_Zhang|Meng Zhang]]，机构 [[Zhejiang_University|浙江大学]]。主题包括数据影响归因、可信人工智能中的权衡，以及云边协同人-空间健康系统。
-- **Research on Trustworthy LLM systems**，2025-06 至 2025-12，全职研究实习，导师 PANG Yan, James，机构 National University of Singapore。主题包括 LLM 的错觉模式感知和合成数据评估。
-
-## 技能
-
-见 [[Skills|技能]]。CV 列出 Python、MATLAB、LaTeX、Markdown、C/C++、Linux、Java、TensorFlow、PyTorch、SQL、Git、Docker 和基于 Linux 的研究工作流。
