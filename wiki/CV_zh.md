@@ -22,8 +22,12 @@ translation_of: "CV"
 
 见 [[Publications|论文]]。CV 列出已录用、已公开和在审的机器遗忘、去中心化学习、合成数据模型坍缩、联邦学习与 LLM 可靠性工作。
 
-- **Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification for Pretrained Model**。**乔鑫宝**、Wenjing Yan、Ying-Jun Angela Zhang。NeurIPS 2026 在审。
-- **Illusory Pattern Perception Drives Spurious Inference in Large Language Models**。Peihua Mai、Zhuoyan Shao、**乔鑫宝**、张萌、Xinyue Zhou、Yan Pang。NeurIPS 2026 在审。
+- **When Sample Selection Bias Precipitates Model Collapse**。**乔鑫宝**、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌、Yan Pang。**ICML 2026**。
+- **Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**。**乔鑫宝**、Ningning Ding、Yushi Cheng、张萌。**AAAI 2026**。
+- **Hessian-Free Online Certified Unlearning**。**乔鑫宝**、张萌、Ming Tang、Ermin Wei。**ICLR 2025**。
+- **DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**。Shurong Wang、Zhuoyang Shen、**乔鑫宝**、Tongning Zhang、张萌。**ICLR 2025**。
+- **Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification for Pretrained Model**。**乔鑫宝**、Wenjing Yan、Ying-Jun Angela Zhang。**NeurIPS 2026** 在审。
+- **Illusory Pattern Perception Drives Spurious Inference in Large Language Models**。Peihua Mai、Zhuoyan Shao、**乔鑫宝**、张萌、Xinyue Zhou、Yan Pang。**NeurIPS 2026** 在审。
 
 ## 研究经历
 
