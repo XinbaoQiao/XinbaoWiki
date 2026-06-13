@@ -13,7 +13,7 @@ This page records CV-derived facts in wiki form. The PDF version is available at
 
 ## Research interests
 
-- lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are generated, used, and deleted.
+- Lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are generated, used, and deleted.
 - The intersection of AI with network, including AI for communication and communication for AI.
 
 ## Publications

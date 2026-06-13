@@ -1,137 +1,281 @@
-\documentclass[a4paper,11pt]{article}
+\documentclass[a4paper,12pt]{article}
 
-\usepackage[empty]{fullpage}
-\usepackage{geometry}
+% Package imports
+\usepackage{latexsym}
 \usepackage{xcolor}
-\usepackage{enumitem}
+\usepackage{float}
+\usepackage{ragged2e}
+\usepackage[empty]{fullpage}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{tabularx}
 \usepackage{titlesec}
-\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{marvosym}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{graphicx}
 \usepackage[T1]{fontenc}
 
+% Color definitions
 \definecolor{darkblue}{RGB}{0,0,139}
-\geometry{left=1.4cm, top=1.0cm, right=1.4cm, bottom=1.2cm}
+
+% Page layout
+\setlength{\multicolsep}{0pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\geometry{left=1.4cm, top=0.3cm, right=1.2cm, bottom=1cm}
+\setlength{\footskip}{5pt}
+
+% Hyperlink setup
+\usepackage[hidelinks]{hyperref}
 \hypersetup{
-  colorlinks=true,
-  linkcolor=darkblue,
-  urlcolor=darkblue
+    colorlinks=true,
+    linkcolor=darkblue,
+    filecolor=darkblue,
+    urlcolor=darkblue,
 }
+
+% Custom box settings
+\usepackage[most]{tcolorbox}
+\tcbset{
+    frame code={},
+    center title,
+    left=0pt,
+    right=0pt,
+    top=0pt,
+    bottom=0pt,
+    colback=gray!20,
+    colframe=white,
+    width=\dimexpr\textwidth\relax,
+    enlarge left by=-2mm,
+    boxsep=4pt,
+    arc=0pt,outer arc=0pt,
+}
+
+% URL style
 \urlstyle{same}
 
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{2pt}
-\setlist[itemize]{leftmargin=*, itemsep=1pt, topsep=2pt}
-\setlist[enumerate]{leftmargin=*, itemsep=3pt, topsep=2pt}
+% Text alignment
+\raggedright
+\setlength{\tabcolsep}{0in}
 
-\titleformat{\section}
-  {\large\scshape\raggedright}
-  {}
-  {0em}
-  {}
-  [\titlerule]
-\titlespacing*{\section}{0pt}{8pt}{5pt}
+% Section formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
 
-\newcommand{\entry}[4]{
-  \textbf{#1}\hfill{\small #2}\\
-  \textit{#3}\hfill{\small #4}
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item{
+    \textbf{#1}{\hspace{0.5mm}#2 \vspace{-0.5mm}}
+  }
 }
 
+\newcommand{\resumePOR}[3]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1}\hspace{0.3mm}#2 & \textit{\small{#3}}
+    \end{tabular*}
+    \vspace{-2mm}
+}
+
+\newcommand{\resumeSubheading}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#4}} \\
+        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeProject}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#3}} \\
+        \footnotesize{\textit{#2}} & \footnotesize{#4}
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand{\labelitemii}{$\vcenter{\hbox{\tiny$\circ$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm]}
+\newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm,itemsep=0.5mm]}
+
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{2mm}}
+\newcommand{\resumeHeadingSkillEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\cvsection}[1]{%
+\vspace{2mm}
+\begin{tcolorbox}
+    \textbf{\large #1}
+\end{tcolorbox}
+    \vspace{-4mm}
+}
+
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+
+% Commands for icon sizing and positioning
+\newcommand{\socialicon}[1]{\raisebox{-0.05em}{\resizebox{!}{1em}{#1}}}
+\newcommand{\ieeeicon}[1]{\raisebox{-0.3em}{\resizebox{!}{1.3em}{#1}}}
+
+% Font options
+\newcommand{\headerfonti}{\fontfamily{phv}\selectfont}
+\newcommand{\headerfontii}{\fontfamily{ptm}\selectfont}
+\newcommand{\headerfontiii}{\fontfamily{ppl}\selectfont}
+\newcommand{\headerfontiv}{\fontfamily{pbk}\selectfont}
+\newcommand{\headerfontv}{\fontfamily{pag}\selectfont}
+\newcommand{\headerfontvi}{\fontfamily{cmss}\selectfont}
+\newcommand{\headerfontvii}{\fontfamily{qhv}\selectfont}
+\newcommand{\headerfontviii}{\fontfamily{qpl}\selectfont}
+\newcommand{\headerfontix}{\fontfamily{qtm}\selectfont}
+\newcommand{\headerfontx}{\fontfamily{bch}\selectfont}
+
 \begin{document}
+\headerfontiii
+
+% Header
+\vspace{-5cm}
 \begin{center}
-  {\LARGE \textbf{Xinbao Qiao}}\\
-  \vspace{2pt}
-  \href{mailto:xinbaoqiao@cuhk.edu.hk}{xinbaoqiao@cuhk.edu.hk}
-  \quad|\quad
-  \href{https://xinbaopedia.top/}{Homepage}
-  \quad|\quad
-  \href{https://github.com/XinbaoQiao}{GitHub}
-  \quad|\quad
-  \href{https://scholar.google.com/citations?user=nhC_OfEAAAAJ\&hl=en}{Google Scholar}
+    {\Huge\textbf{Xinbao Qiao}}
+\end{center}
+\vspace{-3.5mm}
+
+\begin{center}
+    \small{
+    \href{mailto:xinbaoqiao@cuhk.edu.hk}{xinbaoqiao@cuhk.edu.hk}
+    | \href{https://xinbaopedia.top/}{Homepage}
+    | \href{https://github.com/XinbaoQiao}{GitHub}
+    | \href{https://scholar.google.com/citations?user=nhC_OfEAAAAJ\&hl=en}{Google Scholar}
+    }
 \end{center}
 
-\section*{Education}
-\entry{The Chinese University of Hong Kong}{Hong Kong}
-{PhD student in Information Engineering}{2026--present}
+\vspace{-6mm}
 
-\vspace{3pt}
-\entry{Zhejiang University}{Zhejiang}
-{M.Sc. in Artificial Intelligence}{2022--2025}
-\begin{itemize}
-  \item Major GPA: 90/100; rank: 3/25.
-  \item Selected coursework: AI Algorithms and Systems (100), Secure Artificial Intelligence (97).
-\end{itemize}
+\section{\textbf{Education}}
+\vspace{-0.4mm}
+\resumeSubHeadingListStart
 
-\entry{Shandong University}{Shandong}
-{B.Eng. in Communication Engineering}{2018--2022}
-\begin{itemize}
-  \item Major GPA: 82.47/100.
-  \item Third-class Academic Award, 2018--2019.
-\end{itemize}
+\resumeSubheading
+{The Chinese University of Hong Kong}{Hong Kong}
+{PhD student in Information Engineering}{2026 - present}
 
-\section*{Research Interests}
-\begin{itemize}
-  \item lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are generated, used, and deleted.
-  \item The intersection of AI with network, including AI for communication, communication for AI.
-\end{itemize}
+\vspace{-1.5mm}
 
-\section*{Publications}
+\resumeSubheading
+{Zhejiang University}{Zhejiang}
+{Master in Artificial Intelligence}{09/2022 - 12/2025}
+\resumeItemListStart
+\item Relevant courses: AI Algorithms and Systems (100), Secure Artificial Intelligence (97)
+\item Major GPA: 90/100 (Rank: 3/25)
+\resumeItemListEnd
+
+\vspace{-1.5mm}
+
+\resumeSubheading
+{Shandong University}{Shandong}
+{Bachelor in Communication Engineering}{09/2018 - 07/2022}
+\resumeItemListStart
+\item Major GPA: 82.47/100; Award: Third-class Academic Award 2018-2019
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+\vspace{-7mm}
+
+\section{\textbf{Research Interests}}
+\vspace{1mm}
+      \resumeItemListStart
+        \item Lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are generated, used, and deleted.
+
+        \item The intersection of AI with network, including AI for communication, communication for AI.
+
+      \resumeItemListEnd
+
+\vspace{-3mm}
+
+\section{\textbf{Publications} \hfill}
 \vspace{0.4mm}
 \small{
-\begin{enumerate}[leftmargin=*, labelsep=0.5em, align=left, itemindent=0.5em, parsep=0.3mm, label={\textbf{[\arabic*]}}]
-  \item \textbf{When Sample Selection Bias Precipitates Model Collapse}.
+\begin{enumerate}[leftmargin=*, labelsep=0.5em, align=left, itemindent=0.5em,parsep=0.3mm, label={\textbf{[\arabic*]}}]
+\item \textbf{When Sample Selection Bias Precipitates Model Collapse}
 
-  \textbf{Xinbao Qiao}, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, Yan Pang.\\
-  \textit{Forty-Third International Conference on Machine Learning, ICML, 2026}.
+\textbf{Xinbao Qiao}, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, Yan Pang.\\
+Forty-Third International Conference on Machine Learning, ICML, 2026.
 
-  \item \textbf{Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness}.
+\item \textbf{Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness}
 
-  \textbf{Xinbao Qiao}, Ningning Ding, Yushi Cheng, Meng Zhang.\\
-  \textit{Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026}.
+\textbf{Xinbao Qiao}, Ningning Ding, Yushi Cheng, Meng Zhang.\\
+Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026.
 
-  \item \textbf{Hessian-Free Online Certified Unlearning}.
+\item \textbf{Hessian-Free Online Certified Unlearning}
 
-  \textbf{Xinbao Qiao}, Meng Zhang, Ming Tang, Ermin Wei.\\
-  \textit{Thirteenth International Conference on Learning Representations, ICLR, 2025}.
+\textbf{Xinbao Qiao}, Meng Zhang, Ming Tang, Ermin Wei.\\
+Thirteenth International Conference on Learning Representations, ICLR, 2025.
 
-  \item \textbf{DynFrs: An Efficient Framework for Machine Unlearning in Random Forest}.
+\item \textbf{DynFrs: An Efficient Framework for Machine Unlearning in Random Forest}
 
-  Shurong Wang, Zhuoyang Shen, \textbf{Xinbao Qiao}, Tongning Zhang, Meng Zhang.\\
-  \textit{Thirteenth International Conference on Learning Representations, ICLR, 2025}.
+Shurong Wang, Zhuoyang Shen, \textbf{Xinbao Qiao}, Tongning Zhang, Meng Zhang.\\
+Thirteenth International Conference on Learning Representations, ICLR, 2025.
 
-  \item \textbf{Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification for Pretrained Model}.
+\item \textbf{Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification for Pretrained Model}
 
-  \textbf{Xinbao Qiao}, Wenjing Yan, Ying-Jun Angela Zhang.\\
-  Under review.
+\textbf{Xinbao Qiao}, Wenjing Yan, Ying-Jun Angela Zhang.\\
+Under review.
 
-  \item \textbf{Illusory Pattern Perception Drives Spurious Inference in Large Language Models}.
+\item \textbf{Illusory Pattern Perception Drives Spurious Inference in Large Language Models}
 
-  Peihua Mai, Zhuoyan Shao, \textbf{Xinbao Qiao}, Meng Zhang, Xinyue Zhou, Yan Pang.\\
-  Under review.
+Peihua Mai, Zhuoyan Shao, \textbf{Xinbao Qiao}, Meng Zhang, Xinyue Zhou, Yan Pang.\\
+Under review.
 
-  \item \textbf{Learn What Matters: Data Pruning for Efficient Decentralized Learning}.
+\item \textbf{Learn What Matters: Data Pruning for Efficient Decentralized Learning}
 
-  \textbf{Xinbao Qiao}, Xunhao Jiang, Zuozhu Liu, Peng Sun, Meng Zhang.\\
-  Under review.
+\textbf{Xinbao Qiao}, Xunhao Jiang, Zuozhu Liu, Peng Sun, Meng Zhang.\\
+Under review.
+
 \end{enumerate}
 }
 
-\section*{Research Experience}
-\entry{Research on Data-Centric ML Systems}{}
-{Advisor: Prof. Meng Zhang, Zhejiang University}{M.Eng. Student, 03/2023 - 12/2025}
-\begin{itemize}
-  \item \textbf{Data Influence Attribution.} Developed theoretically guaranteed approaches to quantify and analyze the influence of data on learning models, and designed unlearning techniques to remove these influences.
-  \item \textbf{Trade-offs in Trustworthy Artificial Intelligence.} Investigated and developed data-centric methodologies to balance fairness, robustness, privacy, and utility in machine learning systems.
-  \item \textbf{Cloud-Edge Collaborative Human-Space Healthcare.} Architected cloud-edge collaborative frameworks for real-time multimodal data monitoring of human health using video, audio, and sensor signals.
-\end{itemize}
+\vspace{-5mm}
+\section{\textbf{Research Experience}}
+\vspace{-0.4mm}
+  \resumeSubHeadingListStart
+  \resumeSubheading
+      {{Research on Data-Centric ML Systems}}{}
+      {Advisor: Prof. Meng Zhang, Zhejiang University}{\textbf{M.Eng. Student, 03/2023 - 12/2025}}
+      \resumeItemListStart
+        \item \textbf{Data Influence Attribution.} Developed theoretically guaranteed approaches to quantify and analyze the influence of data on learning models, and designed unlearning techniques to remove these influences.
+        \item \textbf{Trade-offs in Trustworthy Artificial Intelligence.} Investigated and developed data-centric methodologies to balance fairness, robustness, privacy, and utility in machine learning systems.
+        \item \textbf{Cloud-Edge Collaborative Human-Space Healthcare.} Architected cloud-edge collaborative frameworks for real-time multimodal data monitoring of human health using video, audio, and sensor signals.
+      \resumeItemListEnd
+      \vspace{-2mm}
+  \resumeSubheading
+      {{Research on Trustworthy LLM systems}}{}
+      {Advisor: PANG Yan, James, National University of Singapore}{\textbf{Full-time Research Intern}, 06/2025 - 12/2025}
+      \resumeItemListStart
+       \item \textbf{Illusory Pattern Perception in LLMs.} Examined whether LLMs exhibit illusory pattern perception, a known human cognitive bias, and offered an interpretable framework to account for LLM behavior.
+       \item \textbf{Synthetic Data Evaluation.} Developed a distributed Wasserstein collaborative algorithm, providing a private Wasserstein methodology for synthetic data evaluation when real data is limited.
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
 
-\entry{Research on Trustworthy LLM systems}{}
-{Advisor: PANG Yan, James, National University of Singapore}{Full-time Research Intern, 06/2025 - 12/2025}
-\begin{itemize}
-  \item \textbf{Illusory Pattern Perception in LLMs.} Examined whether LLMs exhibit illusory pattern perception, a known human cognitive bias, and offered an interpretable framework to account for LLM behavior.
-  \item \textbf{Synthetic Data Evaluation.} Developed a distributed Wasserstein collaborative algorithm, providing a private Wasserstein methodology for synthetic data evaluation when real data is limited.
-\end{itemize}
-
-\section*{Skills}
-\textbf{Programming}: Python, PyTorch, TensorFlow, MATLAB, C/C++, SQL, Linux, Docker, Git, \LaTeX.\\
-\textbf{Languages}: Mandarin Chinese (native), English.
-
+\vspace{-7.5mm}
+\section{\textbf{Skills}}
+\vspace{-0.4mm}
+ \resumeHeadingSkillStart
+  \resumeSubItem{Programming:}
+    {Python, PyTorch, TensorFlow, MATLAB, C/C++, SQL, Linux, Docker, Git, and \LaTeX.}
+  \resumeSubItem{Language:}
+    {Mandarin Chinese (native), English}
+ \resumeHeadingSkillEnd
 \end{document}
