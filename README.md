@@ -30,7 +30,7 @@ The result is a homepage that can grow like a knowledge graph. A visitor can sta
 - **Research-first organization**: papers are connected to broader research topics instead of being listed as isolated entries.
 - **Living archive**: the repository can keep long-term records of projects, notes, resources, and publication updates.
 - **Chat with Xinbao**: the site includes a lightweight conversational assistant grounded in public wiki content.
-- **Production-ready publishing**: the main site is deployed on Vercel, with an optional Cloudflare Worker proxy documented for edge access.
+- **Production-ready publishing**: the main site is deployed on Vercel at <https://xinbaopedia.top>.
 
 ## Content Philosophy
 
@@ -54,7 +54,6 @@ components/             Visual building blocks for the wiki interface
 lib/                    Shared helpers for wiki rendering and chat behavior
 scripts/                Content checks and wiki validation tools
 chat with xinbao/       Notes and templates for the chat assistant
-cloudflare/             Optional Cloudflare Worker proxy
 ```
 
 ## Main Features
@@ -97,8 +96,6 @@ The usual publishing process is:
 4. Push the commit to `origin main`.
 5. Deploy production on Vercel.
 6. Verify the homepage and at least one changed page on <https://xinbaopedia.top>.
-
-The optional Cloudflare Worker proxy is documented in `cloudflare/README.md`.
 
 ## Editing Guidance
 

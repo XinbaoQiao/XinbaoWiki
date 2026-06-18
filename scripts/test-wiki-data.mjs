@@ -20,6 +20,10 @@ function assertFile(file) {
   assert.ok(fs.existsSync(path.join(root, file)), `${file} exists`);
 }
 
+function assertNoPath(file) {
+  assert.ok(!fs.existsSync(path.join(root, file)), `${file} is not part of the Vercel-only deployment`);
+}
+
 for (const file of ['Xinbao_Qiao.md', 'Qiao_Xinbao_zh.md', 'index.md', 'log.md', 'CV.md', 'Meng_Zhang.md', 'Angela_Yingjun_Zhang.md', 'Internet_Slang_2026.md']) {
   assertFile(`wiki/${file}`);
 }
@@ -117,9 +121,7 @@ assertFile('chat with xinbao/README.md');
 assertFile('chat with xinbao/env.example');
 assertFile('chat with xinbao/persona-prompt.md');
 assertFile('chat with xinbao/meme-voice-notes.md');
-assertFile('cloudflare/wrangler.toml');
-assertFile('cloudflare/xinbaopedia-proxy-worker.js');
-assertFile('cloudflare/README.md');
+assertNoPath('cloudflare');
 assertFile('public/xinbaopedia-icon.svg');
 const siteIcon = fs.readFileSync(path.join(root, 'public/xinbaopedia-icon.svg'), 'utf8');
 const languageToggle = fs.readFileSync(path.join(root, 'components/LanguageToggle.tsx'), 'utf8');
@@ -135,9 +137,6 @@ const chatPersona = fs.readFileSync(path.join(root, 'chat with xinbao/persona-pr
 const chatMemeNotes = fs.readFileSync(path.join(root, 'chat with xinbao/meme-voice-notes.md'), 'utf8');
 const internetSlang2026 = read('Internet_Slang_2026.md');
 const internetSlang2026Zh = read('Internet_Slang_2026_zh.md');
-const cloudflareWorker = fs.readFileSync(path.join(root, 'cloudflare/xinbaopedia-proxy-worker.js'), 'utf8');
-const cloudflareWrangler = fs.readFileSync(path.join(root, 'cloudflare/wrangler.toml'), 'utf8');
-const cloudflareReadme = fs.readFileSync(path.join(root, 'cloudflare/README.md'), 'utf8');
 const questionLogFunction = chatRoute.match(/async function recordQuestionLog[\s\S]*?\n}\n\nfunction withXinbaoSignature/)?.[0] || '';
 assert.match(siteIcon, /r="30"/, 'site icon fills the favicon canvas with a larger wiki mark');
 assert.match(siteIcon, /font-size="34"/, 'site icon enlarges the X glyph for small favicon rendering');
@@ -317,23 +316,22 @@ assert.match(internetSlang2026, /LingoAce[\s\S]*WuKong Education[\s\S]*QianGua D
 assert.match(internetSlang2026Zh, /2026热梗[\s\S]*先准确，再有趣[\s\S]*句式梗与抽象表达[\s\S]*AI人格[\s\S]*之前已经从聊天语气中移除的旧词继续保持不用/, 'Chinese 2026 slang page documents current slang categories and omitted older phrasing');
 assert.match(internetSlang2026Zh, /LingoAce[\s\S]*悟空教育[\s\S]*千瓜数据[\s\S]*RedNoteMeme[\s\S]*Stellar Chinese/, 'Chinese 2026 slang page cites current public slang sources');
 assert.doesNotMatch(chatEnvExample, /sk-[A-Za-z0-9_-]{12,}/, 'env.example contains no real-looking API key');
-assert.match(packageJson.scripts?.['cf:deploy'] || '', /wrangler deploy --config cloudflare\/wrangler\.toml/, 'package scripts include Cloudflare Worker deployment');
-assert.match(packageJson.scripts?.['cf:dev'] || '', /wrangler dev --config cloudflare\/wrangler\.toml/, 'package scripts include local Cloudflare Worker dev');
-assert.match(cloudflareWrangler, /name = "xinbaopedia-proxy"/, 'Cloudflare config names the proxy worker');
-assert.match(cloudflareWrangler, /main = "xinbaopedia-proxy-worker\.js"/, 'Cloudflare config points to the proxy worker entry');
-assert.match(cloudflareWrangler, /workers_dev = true/, 'Cloudflare config explicitly enables the workers.dev route');
-assert.match(cloudflareWrangler, /preview_urls = true/, 'Cloudflare config explicitly enables preview URLs');
-assert.match(cloudflareWrangler, /ORIGIN = "https:\/\/xinbaopedia\.vercel\.app"/, 'Cloudflare config proxies the production Vercel origin');
-assert.match(cloudflareWorker, /const DEFAULT_ORIGIN = 'https:\/\/xinbaopedia\.vercel\.app';/, 'Cloudflare worker has a safe default origin');
-assert.match(cloudflareWorker, /url\.pathname\.startsWith\('\/api\/'\)/, 'Cloudflare worker avoids caching API routes');
-assert.match(cloudflareWorker, /cacheEverything: true/, 'Cloudflare worker can cache static assets at the edge');
-assert.match(cloudflareWorker, /headers\.set\('Location'/, 'Cloudflare worker rewrites origin redirects back to the edge host');
-assert.match(cloudflareWorker, /X-Xinbaopedia-Edge/, 'Cloudflare worker marks proxied responses for verification');
-assert.match(cloudflareReadme, /custom domain[\s\S]*Cloudflare Workers/, 'Cloudflare guide documents custom-domain routing');
-assert.match(cloudflareReadme, /https:\/\/xinbaopedia-proxy\.xinbaopedia\.workers\.dev/, 'Cloudflare guide records the current workers.dev endpoint');
-assert.match(cloudflareReadme, /CLOUDFLARE_API_TOKEN[\s\S]*CLOUDFLARE_ACCOUNT_ID/, 'Cloudflare guide documents required deployment environment variables');
-assert.match(cloudflareReadme, /ICP|mainland China|China Network/i, 'Cloudflare guide notes mainland-China reliability limits');
-assert.doesNotMatch(`${cloudflareWorker}\n${cloudflareWrangler}\n${cloudflareReadme}`, /sk-[A-Za-z0-9_-]{12,}|vcp_[A-Za-z0-9]+|UPSTASH_REDIS_REST_TOKEN=.*[A-Za-z0-9]/, 'Cloudflare files contain no real provider tokens');
+assert.ok(!('cf:deploy' in (packageJson.scripts || {})), 'package scripts do not include the retired Cloudflare Worker deployment');
+assert.ok(!('cf:dev' in (packageJson.scripts || {})), 'package scripts do not include the retired Cloudflare Worker dev server');
+const retiredProxyPattern = new RegExp(
+  [
+    ['xinbaopedia', 'vercel', 'app'].join('\\.'),
+    ['workers', 'dev'].join('\\.'),
+    'wrangler',
+    'Cloudflare Worker'
+  ].join('|'),
+  'i'
+);
+assert.doesNotMatch(
+  `${JSON.stringify(packageJson)}\n${fs.readFileSync(path.join(root, 'README.md'), 'utf8')}`,
+  retiredProxyPattern,
+  'public project metadata describes the Vercel-only production path'
+);
 
 const sidebar = fs.readFileSync(path.join(root, 'components/Sidebar.tsx'), 'utf8');
 assert.doesNotMatch(sidebar, /Notable works/, 'sidebar no longer uses Notable works');

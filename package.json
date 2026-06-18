@@ -10,9 +10,7 @@
     "lint:wiki": "node scripts/lint-wikilinks.mjs",
     "test:wiki": "node scripts/test-wiki-data.mjs",
     "typecheck": "tsc --noEmit",
-    "check": "npm run typecheck && npm run lint:wiki && npm run test:wiki",
-    "cf:dev": "npm exec --package=wrangler -- wrangler dev --config cloudflare/wrangler.toml",
-    "cf:deploy": "npm exec --package=wrangler -- wrangler deploy --config cloudflare/wrangler.toml"
+    "check": "npm run typecheck && npm run lint:wiki && npm run test:wiki"
   },
   "dependencies": {
     "@upstash/redis": "^1.38.0",
