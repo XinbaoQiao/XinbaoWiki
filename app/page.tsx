@@ -57,7 +57,6 @@ function entry(slug: string) {
 
 export default function HomePage() {
   const searchIndex = getSearchIndex();
-  const biography = getWikiPageBySlug('Xinbao_Qiao');
   const englishCount = searchIndex.filter((item) => item.language === 'en').length;
   const chineseCount = searchIndex.filter((item) => item.language === 'zh').length;
 
@@ -78,12 +77,13 @@ export default function HomePage() {
           <div className="wiki-portal-brand">
             <img
               className="wiki-portal-emblem"
-              src={pathWithBasePath('/xinbaopedia-icon.svg')}
+              src={pathWithBasePath('/xinbaopedia-icon.png')}
               alt=""
               aria-hidden="true"
             />
             <h1 id="portal-title">Xinbaopedia</h1>
-            <p className="wiki-portal-tagline">The academic wiki of Xinbao Qiao</p>
+            <p className="wiki-portal-owner">Xinbao Qiao</p>
+            <p className="wiki-portal-fields">AI for Networks · Data-centric Machine Learning · Federated Learning</p>
           </div>
         </div>
         <div className="wiki-portal-search">
@@ -92,22 +92,6 @@ export default function HomePage() {
         <p className="wiki-portal-count">
           {englishCount} English entries · {chineseCount} Chinese entries
         </p>
-      </section>
-
-      <section className="wiki-portal-featured" aria-labelledby="featured-entry-title">
-        <a className="wiki-portal-featured-media" href={wikiHref('Xinbao_Qiao')} aria-label="Open Xinbao Qiao article">
-          <img src={pathWithBasePath('/images/Portrait.png')} alt="Xinbao Qiao" />
-        </a>
-        <div>
-          <p className="wiki-portal-kicker">Featured entry</p>
-          <h2 id="featured-entry-title">{biography?.title || 'Xinbao Qiao'}</h2>
-          {biography?.summary && <p>{biography.summary}</p>}
-        </div>
-        <ul className="wiki-portal-actions" aria-label="Featured entry links">
-          <li><a href={wikiHref('Xinbao_Qiao')}>Read English article</a></li>
-          <li><a href={wikiHref('Qiao_Xinbao_zh')}>阅读中文条目</a></li>
-          <li><a href={wikiHref('Publications')}>View publications</a></li>
-        </ul>
       </section>
 
       <section className="wiki-portal-directory" aria-labelledby="directory-title">

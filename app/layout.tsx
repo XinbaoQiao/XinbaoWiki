@@ -11,7 +11,7 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'Xinbaopedia',
   description: 'Personal academic wiki homepage for Qiao Xinbao / Xinbao Qiao.',
-  icons: { icon: pathWithBasePath('/xinbaopedia-icon.svg') }
+  icons: { icon: pathWithBasePath('/xinbaopedia-icon.png') }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
