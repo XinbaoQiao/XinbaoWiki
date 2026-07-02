@@ -7,6 +7,7 @@ import type { SearchIndexItem } from '@/lib/wiki';
 
 type Props = {
   items: SearchIndexItem[];
+  hideOnPortal?: boolean;
   showChat?: boolean;
   variant?: 'topbar' | 'portal';
 };
@@ -80,7 +81,11 @@ function resultExcerpt(item: SearchIndexItem, terms: string[]) {
   return start > 0 ? `... ${excerpt}` : excerpt;
 }
 
-export function WikiSearch({ items, showChat = true, variant = 'topbar' }: Props) {
+function isPortalPath(pathname: string | null) {
+  return !decodeURIComponent(pathname || '').split('/').includes('wiki');
+}
+
+export function WikiSearch({ items, hideOnPortal = false, showChat = true, variant = 'topbar' }: Props) {
   const pathname = usePathname();
   const listboxId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
@@ -121,6 +126,8 @@ export function WikiSearch({ items, showChat = true, variant = 'topbar' }: Props
     if (!item) return;
     window.location.assign(item.href);
   }
+
+  if (hideOnPortal && isPortalPath(pathname)) return null;
 
   const rootClassName = [
     'wiki-search',

@@ -30,7 +30,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
               <span className="wiki-logo-subtitle">The Academic Wiki</span>
             </a>
             <LanguageToggle />
-            <WikiSearch items={searchIndex} />
+            <WikiSearch items={searchIndex} hideOnPortal />
           </div>
         </header>
         <ArticleTabs />
