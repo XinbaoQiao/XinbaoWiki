@@ -1,4 +1,4 @@
-import { WikiSearch } from '@/components/WikiSearch';
+import { HomepagePortal } from '@/components/HomepagePortal';
 import { getSearchIndex, getWikiPageBySlug, pathWithBasePath } from '@/lib/wiki';
 
 const languageEntries = [
@@ -8,57 +8,88 @@ const languageEntries = [
 
 const directorySections = [
   {
-    title: 'Research topics',
+    title: { en: 'Research topics', zh: '研究主题' },
     groups: [
       {
-        label: 'Core research',
-        links: ['Research', 'AI_and_Networks', 'Data_Centric_Machine_Learning']
+        label: { en: 'Core research', zh: '核心研究' },
+        links: {
+          en: ['Research', 'AI_and_Networks', 'Data_Centric_Machine_Learning'],
+          zh: ['Research_zh', 'AI_and_Networks_zh', 'Data_Centric_Machine_Learning_zh']
+        }
       },
       {
-        label: 'Methods and geometry',
-        links: ['Machine_Unlearning', 'Distributed_Wasserstein_Barycenter', 'Influence_Functions']
+        label: { en: 'Methods and geometry', zh: '方法与几何' },
+        links: {
+          en: ['Machine_Unlearning', 'Distributed_Wasserstein_Barycenter', 'Influence_Functions'],
+          zh: ['Machine_Unlearning_zh', 'Distributed_Wasserstein_Barycenter_zh', 'Influence_Functions_zh']
+        }
       },
       {
-        label: 'Reliability and trust',
-        links: ['Synthetic_Data_and_Model_Collapse', 'Fairness_and_Robustness', 'LLM_Reliability']
+        label: { en: 'Reliability and trust', zh: '可靠性与可信' },
+        links: {
+          en: ['Synthetic_Data_and_Model_Collapse', 'Fairness_and_Robustness', 'LLM_Reliability'],
+          zh: ['Synthetic_Data_and_Model_Collapse_zh', 'Fairness_and_Robustness_zh', 'LLM_Reliability_zh']
+        }
       }
     ]
   },
   {
-    title: 'Publications and projects',
+    title: { en: 'Publications and projects', zh: '论文与项目' },
     groups: [
       {
-        label: 'Indexes',
-        links: ['Publications', 'Projects']
+        label: { en: 'Indexes', zh: '索引' },
+        links: {
+          en: ['Publications', 'Projects'],
+          zh: ['Publications_zh', 'Projects_zh']
+        }
       },
       {
-        label: 'Selected publications',
-        links: [
-          'Hessian_Free_Online_Certified_Unlearning',
-          'Soft_Weighted_Machine_Unlearning',
-          'When_Sample_Selection_Bias_Precipitates_Model_Collapse'
-        ]
+        label: { en: 'Selected publications', zh: '代表论文' },
+        links: {
+          en: [
+            'Hessian_Free_Online_Certified_Unlearning',
+            'Soft_Weighted_Machine_Unlearning',
+            'When_Sample_Selection_Bias_Precipitates_Model_Collapse'
+          ],
+          zh: [
+            'Hessian_Free_Online_Certified_Unlearning_zh',
+            'Soft_Weighted_Machine_Unlearning_zh',
+            'When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh'
+          ]
+        }
       },
       {
-        label: 'Project pages',
-        links: ['DynFrs', 'Collaborative_Evaluation', 'Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning']
+        label: { en: 'Project pages', zh: '项目页面' },
+        links: {
+          en: ['DynFrs', 'Collaborative_Evaluation', 'Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning'],
+          zh: ['DynFrs_zh', 'Collaborative_Evaluation_zh', 'Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning_zh']
+        }
       }
     ]
   },
   {
-    title: 'Affiliations',
+    title: { en: 'Affiliations', zh: '学术经历与关系' },
     groups: [
       {
-        label: 'Profile',
-        links: ['CV', 'Education', 'Experience']
+        label: { en: 'Profile', zh: '个人资料' },
+        links: {
+          en: ['CV', 'Education', 'Experience'],
+          zh: ['CV_zh', 'Education_zh', 'Experience_zh']
+        }
       },
       {
-        label: 'Institutions',
-        links: ['The_Chinese_University_of_Hong_Kong', 'Zhejiang_University', 'Shandong_University', 'NUSRI_CQ']
+        label: { en: 'Institutions', zh: '机构' },
+        links: {
+          en: ['The_Chinese_University_of_Hong_Kong', 'Zhejiang_University', 'Shandong_University', 'NUSRI_CQ'],
+          zh: ['The_Chinese_University_of_Hong_Kong_zh', 'Zhejiang_University_zh', 'Shandong_University_zh', 'NUSRI_CQ_zh']
+        }
       },
       {
-        label: 'Academic network',
-        links: ['Angela_Yingjun_Zhang', 'Meng_Zhang']
+        label: { en: 'Academic network', zh: '学术网络' },
+        links: {
+          en: ['Angela_Yingjun_Zhang', 'Meng_Zhang'],
+          zh: ['Angela_Yingjun_Zhang_zh', 'Meng_Zhang_zh']
+        }
       }
     ]
   }
@@ -79,65 +110,27 @@ function entry(slug: string) {
 
 export default function HomePage() {
   const searchIndex = getSearchIndex();
+  const portalLanguageEntries = languageEntries.map((item) => ({
+    detail: item.detail,
+    href: wikiHref(item.slug),
+    label: item.label
+  }));
+  const portalDirectorySections = directorySections.map((section) => ({
+    title: section.title,
+    groups: section.groups.map((group) => ({
+      label: group.label,
+      links: {
+        en: group.links.en.map(entry),
+        zh: group.links.zh.map(entry)
+      }
+    }))
+  }));
 
   return (
-    <article className="wiki-portal" data-page-slug="Xinbao_Qiao">
-      <section className="wiki-portal-hero" aria-labelledby="portal-title">
-        <div className="wiki-portal-masthead">
-          <div className="wiki-portal-brand">
-            <img
-              className="wiki-portal-emblem"
-              src={pathWithBasePath('/xinbaopedia-icon.png')}
-              alt=""
-              aria-hidden="true"
-            />
-            <h1 className="wiki-portal-name" id="portal-title">Xinbao Qiao</h1>
-          </div>
-        </div>
-        <div className="wiki-portal-search">
-          <WikiSearch items={searchIndex} showLanguageSelect variant="portal" />
-        </div>
-        <nav className="wiki-portal-editions" aria-label="Primary academic entries">
-          {languageEntries.map((item) => (
-            <a className="wiki-portal-edition" href={wikiHref(item.slug)} key={item.slug}>
-              <strong>{item.label}</strong>
-              <span>{item.detail}</span>
-            </a>
-          ))}
-        </nav>
-      </section>
-
-      <details className="wiki-portal-directory" open>
-        <summary>
-          <span>Browse Xinbaopedia</span>
-        </summary>
-        <div className="wiki-portal-grid">
-          {directorySections.map((section) => {
-            const sectionId = `portal-${section.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
-            return (
-              <section className="wiki-portal-block" aria-labelledby={sectionId} key={section.title}>
-                <h3 id={sectionId}>{section.title}</h3>
-                {section.groups.map((group) => (
-                  <div className="wiki-portal-group" key={group.label}>
-                    <p className="wiki-portal-group-label">{group.label}</p>
-                    <ul>
-                      {group.links.map((slug) => {
-                        const item = entry(slug);
-                        return (
-                          <li key={slug}>
-                            <a href={item.href}>{item.title}</a>
-                            {item.summary && <span>{item.summary}</span>}
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </div>
-                ))}
-              </section>
-            );
-          })}
-        </div>
-      </details>
-    </article>
+    <HomepagePortal
+      directorySections={portalDirectorySections}
+      languageEntries={portalLanguageEntries}
+      searchIndex={searchIndex}
+    />
   );
 }

@@ -8,12 +8,14 @@ import type { SearchIndexItem } from '@/lib/wiki';
 type Props = {
   items: SearchIndexItem[];
   hideOnPortal?: boolean;
+  language?: SearchLanguage;
+  onLanguageChange?: (language: SearchLanguage) => void;
   showChat?: boolean;
   showLanguageSelect?: boolean;
   variant?: 'topbar' | 'portal';
 };
 
-type SearchLanguage = 'en' | 'zh';
+export type SearchLanguage = 'en' | 'zh';
 type SearchResult = SearchIndexItem & { score: number };
 type PreparedSearchItem = SearchIndexItem & {
   normalizedAliases: string[];
@@ -90,6 +92,8 @@ function isPortalPath(pathname: string | null) {
 export function WikiSearch({
   items,
   hideOnPortal = false,
+  language,
+  onLanguageChange,
   showChat = true,
   showLanguageSelect = false,
   variant = 'topbar'
@@ -103,7 +107,7 @@ export function WikiSearch({
 
   const preferredLanguage: SearchLanguage = pathname?.includes('_zh') || pathname?.includes('/Qiao_Xinbao_zh/') ? 'zh' : 'en';
   const [selectedLanguage, setSelectedLanguage] = useState<SearchLanguage>(preferredLanguage);
-  const activeLanguage = showLanguageSelect ? selectedLanguage : preferredLanguage;
+  const activeLanguage = showLanguageSelect ? (language ?? selectedLanguage) : preferredLanguage;
   const preparedItems = useMemo(() => items.map(prepareItem), [items]);
   const languageItems = useMemo(
     () => preparedItems.filter((item) => item.language === activeLanguage),
@@ -125,8 +129,8 @@ export function WikiSearch({
   }, [normalizedQuery]);
 
   useEffect(() => {
-    if (!showLanguageSelect) setSelectedLanguage(preferredLanguage);
-  }, [preferredLanguage, showLanguageSelect]);
+    if (language === undefined) setSelectedLanguage(preferredLanguage);
+  }, [language, preferredLanguage]);
 
   useEffect(() => {
     function onPointerDown(event: PointerEvent) {
@@ -197,7 +201,9 @@ export function WikiSearch({
               aria-label="Search language"
               className="wiki-search-language-select"
               onChange={(event) => {
-                setSelectedLanguage(event.target.value === 'zh' ? 'zh' : 'en');
+                const nextLanguage = event.target.value === 'zh' ? 'zh' : 'en';
+                setSelectedLanguage(nextLanguage);
+                onLanguageChange?.(nextLanguage);
                 setOpen(false);
               }}
               value={activeLanguage}

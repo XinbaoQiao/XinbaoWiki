@@ -94,10 +94,6 @@ a.external::after {
   padding: 9px 24px 8px;
 }
 
-.wiki-topbar-inner:has(> .wiki-logo:only-child) {
-  justify-content: center;
-}
-
 .wiki-logo {
   display: inline-grid;
   min-width: 148px;
@@ -365,8 +361,8 @@ a.external::after {
   height: 30px;
   flex: 0 0 30px;
   border: 1px solid var(--wiki-border);
-  border-radius: 0;
-  background: #ffffff;
+  border-radius: 4px;
+  background: var(--wiki-bg-alt);
   color: var(--wiki-link);
   cursor: pointer;
   font-family: var(--font-sans);
@@ -378,7 +374,7 @@ a.external::after {
 .chat-xinbao-trigger:hover,
 .chat-xinbao-trigger:focus {
   border-color: #36c;
-  background: #eaecf0;
+  background: #eef3ff;
   outline: 0;
 }
 
@@ -389,11 +385,13 @@ a.external::after {
   z-index: 80;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto auto;
-  width: min(390px, calc(100vw - 32px));
-  max-height: min(620px, calc(100vh - 48px));
-  border: 1px solid var(--wiki-border);
+  overflow: hidden;
+  width: min(420px, calc(100vw - 32px));
+  max-height: min(660px, calc(100vh - 48px));
+  border: 1px solid var(--wiki-border-light);
+  border-radius: 8px;
   background: var(--wiki-bg);
-  box-shadow: 0 16px 38px rgba(32, 33, 34, .22);
+  box-shadow: 0 18px 48px rgba(32, 33, 34, .2);
   color: var(--wiki-text);
   font-family: var(--font-sans);
   animation: chat-xinbao-open .16s ease-out;
@@ -403,17 +401,17 @@ a.external::after {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 12px;
-  padding: 10px 12px;
+  gap: 14px;
+  padding: 14px 16px 12px;
   border-bottom: 1px solid var(--wiki-border-light);
-  background: var(--wiki-bg-chrome);
+  background: #ffffff;
 }
 
 .chat-xinbao-header h2 {
   margin: 0;
   color: var(--wiki-text);
   font-family: var(--font-serif);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 400;
   line-height: 1.2;
 }
@@ -433,8 +431,8 @@ a.external::after {
 .chat-xinbao-actions button,
 .chat-xinbao-composer button,
 .chat-xinbao-minimized {
-  border: 1px solid var(--wiki-border);
-  border-radius: 0;
+  border: 1px solid var(--wiki-border-light);
+  border-radius: 4px;
   background: #ffffff;
   color: var(--wiki-link);
   cursor: pointer;
@@ -442,33 +440,38 @@ a.external::after {
 }
 
 .chat-xinbao-actions button {
-  width: 26px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   padding: 0;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1;
 }
 
 .chat-xinbao-actions button:hover,
-.chat-xinbao-composer button:hover,
 .chat-xinbao-minimized:hover {
-  background: #eaecf0;
+  background: var(--wiki-bg-alt);
+}
+
+.chat-xinbao-composer button:hover {
+  border-color: #2a4b8d;
+  background: #2a4b8d;
 }
 
 .chat-xinbao-messages {
   overflow-y: auto;
-  min-height: 210px;
-  max-height: 390px;
-  padding: 12px;
-  background: #ffffff;
+  min-height: 230px;
+  max-height: 420px;
+  padding: 14px;
+  background: var(--wiki-bg-alt);
 }
 
 .chat-xinbao-message {
   width: fit-content;
   max-width: 88%;
-  margin: 0 0 9px;
-  padding: 8px 10px;
+  margin: 0 0 10px;
+  padding: 9px 11px;
   border: 1px solid var(--wiki-border-light);
+  border-radius: 8px;
   color: var(--wiki-text);
   font-size: 13px;
   line-height: 1.45;
@@ -476,14 +479,14 @@ a.external::after {
 }
 
 .chat-xinbao-message.assistant {
-  background: var(--wiki-bg-alt);
+  background: #ffffff;
   white-space: normal;
 }
 
 .chat-xinbao-message.user {
   margin-left: auto;
   border-color: #a3b8e6;
-  background: #f0f4ff;
+  background: #eef3ff;
   white-space: pre-wrap;
 }
 
@@ -542,7 +545,8 @@ a.external::after {
   gap: 4px;
   padding: 7px 9px;
   border: 1px solid var(--wiki-border-light);
-  background: var(--wiki-bg-alt);
+  border-radius: 8px;
+  background: #ffffff;
   color: var(--wiki-text-soft);
   font-size: 12px;
 }
@@ -573,19 +577,19 @@ a.external::after {
 }
 
 .chat-xinbao-composer {
-  padding: 10px 12px 12px;
+  padding: 12px 14px 14px;
   border-top: 1px solid var(--wiki-border-light);
-  background: var(--wiki-bg-chrome);
+  background: #ffffff;
 }
 
 .chat-xinbao-composer textarea {
   width: 100%;
-  min-height: 72px;
+  min-height: 78px;
   max-height: 150px;
   resize: vertical;
-  padding: 8px;
-  border: 1px solid var(--wiki-border);
-  border-radius: 0;
+  padding: 9px 10px;
+  border: 1px solid var(--wiki-border-light);
+  border-radius: 6px;
   background: #ffffff;
   color: var(--wiki-text);
   font-family: var(--font-sans);
@@ -611,7 +615,10 @@ a.external::after {
 
 .chat-xinbao-composer button {
   min-width: 62px;
-  padding: 5px 11px;
+  padding: 6px 12px;
+  border-color: #36c;
+  background: #36c;
+  color: #ffffff;
   font-size: 12px;
   font-weight: 700;
 }
@@ -628,7 +635,7 @@ a.external::after {
   bottom: 24px;
   z-index: 80;
   padding: 8px 12px;
-  box-shadow: 0 8px 22px rgba(32, 33, 34, .18);
+  box-shadow: 0 10px 26px rgba(32, 33, 34, .18);
   font-size: 12px;
   font-weight: 700;
 }
@@ -746,10 +753,15 @@ a.external::after {
 .wiki-shell:has(.wiki-portal) {
   display: block;
   max-width: 1080px;
-  padding-top: 18px;
+  padding-top: 24px;
 }
 
 .wiki-shell:has(.wiki-portal) .wiki-sidebar {
+  display: none;
+}
+
+body:has(.wiki-portal) .wiki-footer,
+body:has(.wiki-portal) .wiki-topbar {
   display: none;
 }
 
@@ -1058,7 +1070,7 @@ a.external::after {
 
 .wiki-portal-hero {
   max-width: 760px;
-  margin: 12px auto 26px;
+  margin: 0 auto 26px;
   text-align: center;
 }
 
@@ -1073,21 +1085,11 @@ a.external::after {
   text-align: center;
 }
 
-.wiki-portal-emblem {
-  display: block;
-  width: 108px;
-  height: 108px;
-  margin: 0 auto 8px;
-  border: 1px solid #eaecf0;
-  border-radius: 25px;
-  background: #020817;
-}
-
 .wiki-portal-name {
   margin: 0;
   color: #243142;
   font-family: var(--font-signature);
-  font-size: 78px;
+  font-size: 86px;
   font-style: normal;
   font-weight: 400;
   line-height: .95;
@@ -1335,12 +1337,6 @@ a.external::after {
 
   .wiki-portal-masthead {
     margin-bottom: 14px;
-  }
-
-  .wiki-portal-emblem {
-    width: 92px;
-    height: 92px;
-    border-radius: 22px;
   }
 
   .wiki-portal-name {
