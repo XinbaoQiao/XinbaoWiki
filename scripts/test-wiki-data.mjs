@@ -154,7 +154,10 @@ assert.match(layout, /<ArticleTabs \/>/, 'article tools stay isolated in the top
 assert.match(layout, /import \{ WikiSearch \} from '@\/components\/WikiSearch';/, 'layout imports the interactive wiki search component');
 assert.match(layout, /import \{ getSearchIndex, pathWithBasePath \} from '@\/lib\/wiki';/, 'layout imports the static search index builder');
 assert.match(layout, /const searchIndex = getSearchIndex\(\);/, 'layout builds the search index server-side');
-assert.match(layout, /<WikiSearch items=\{searchIndex\} \/>/, 'layout replaces the inert search form with WikiSearch');
+assert.match(layout, /<WikiSearch items=\{searchIndex\} hideOnPortal \/>/, 'layout keeps topbar search on article pages without duplicating the portal search');
+assert.match(languageToggle, /if \(!decodeURIComponent\(pathname\)\.split\('\/'\)\.includes\('wiki'\)\) return null;/, 'language toggle hides on the portal homepage where language editions are shown in the masthead');
+assert.match(wikiSearch, /hideOnPortal\?: boolean;/, 'search component exposes a homepage suppression prop for the topbar instance');
+assert.match(wikiSearch, /if \(hideOnPortal && isPortalPath\(pathname\)\) return null;/, 'topbar search can hide on the portal homepage');
 assert.doesNotMatch(wikiPageTsx, /Qiao Xinbao Academic Wiki/, 'article metadata no longer uses old Academic Wiki suffix');
 assert.match(wikiPageTsx, /\$\{page\.title\} \| Xinbaopedia/, 'article metadata uses Xinbaopedia as the site name');
 for (const dependency of ['remark-math', 'rehype-katex', 'katex']) {
@@ -501,10 +504,16 @@ assert.match(styles, /\.wiki-logo \{[\s\S]*display: inline-grid;[\s\S]*min-width
 assert.match(styles, /\.wiki-logo:hover \{[\s\S]*text-decoration: none;[\s\S]*\}/, 'topbar logo hover does not underline the two-line wordmark');
 assert.match(styles, /\.wiki-logo-word \{[\s\S]*font-family: var\(--font-serif\);[\s\S]*font-size: 23px;[\s\S]*\}/, 'topbar wordmark uses the wiki serif face');
 assert.match(styles, /\.wiki-logo-subtitle \{[\s\S]*font-family: var\(--font-sans\);[\s\S]*text-transform: uppercase;[\s\S]*\}/, 'topbar subtitle uses a small uppercase sans style');
-assert.match(styles, /\.wiki-portal-hero \{[\s\S]*max-width: 760px;[\s\S]*text-align: center;[\s\S]*\}/, 'homepage has a centered Wikipedia-style portal hero');
+assert.match(styles, /\.wiki-topbar-inner:has\(> \.wiki-logo:only-child\) \{[\s\S]*justify-content: center;[\s\S]*\}/, 'homepage-only topbar centers the wordmark after duplicate controls are hidden');
+assert.match(styles, /\.wiki-portal-hero \{[\s\S]*max-width: 920px;[\s\S]*text-align: center;[\s\S]*\}/, 'homepage has a centered Wikipedia-style portal hero');
+assert.match(styles, /\.wiki-portal-masthead \{[\s\S]*grid-template-columns: minmax\(150px, 1fr\) auto minmax\(150px, 1fr\);[\s\S]*\}/, 'homepage masthead places language editions around the wordmark');
+assert.match(styles, /\.wiki-portal-brand \{[\s\S]*grid-column: 2;[\s\S]*\}/, 'homepage brand occupies the center masthead column');
+assert.match(styles, /\.wiki-portal-featured-media img \{[\s\S]*aspect-ratio: 1;[\s\S]*object-fit: cover;[\s\S]*\}/, 'featured entry uses a stable square portrait thumbnail');
 assert.match(styles, /\.wiki-search-portal input \{[\s\S]*height: 44px;[\s\S]*font-size: 16px;[\s\S]*\}/, 'homepage search input is larger than the topbar search');
 assert.match(styles, /\.wiki-portal-grid \{[\s\S]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);[\s\S]*\}/, 'homepage browse directory uses a three-column desktop layout');
 assert.match(styles, /\.wiki-shell:has\(\.wiki-portal\) \.wiki-sidebar \{[\s\S]*display: none;[\s\S]*\}/, 'homepage hides the article sidebar');
+assert.match(homePage, /className="wiki-portal-masthead"/, 'homepage uses a masthead for primary language editions');
+assert.match(homePage, /className="wiki-portal-featured-media"[\s\S]*\/images\/Portrait\.png/, 'homepage featured entry links a real portrait thumbnail');
 assert.match(homePage, /<WikiSearch items=\{searchIndex\} showChat=\{false\} variant="portal" \/>/, 'homepage uses the large portal search without the chat trigger');
 const sidebarLinkStyle = styles.match(/\.wiki-sidebar a \{([\s\S]*?)\}/);
 assert.ok(sidebarLinkStyle, 'sidebar link style block exists');

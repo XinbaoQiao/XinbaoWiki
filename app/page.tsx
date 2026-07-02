@@ -2,8 +2,8 @@ import { WikiSearch } from '@/components/WikiSearch';
 import { getSearchIndex, getWikiPageBySlug, pathWithBasePath } from '@/lib/wiki';
 
 const languageEntries = [
-  { label: 'English', slug: 'Xinbao_Qiao', detail: 'Academic biography and research overview' },
-  { label: '中文', slug: 'Qiao_Xinbao_zh', detail: '个人学术条目与研究概览' }
+  { label: 'English', slug: 'Xinbao_Qiao', detail: 'Academic biography and research overview', side: 'left' },
+  { label: '中文', slug: 'Qiao_Xinbao_zh', detail: '个人学术条目与研究概览', side: 'right' }
 ];
 
 const directorySections = [
@@ -64,31 +64,40 @@ export default function HomePage() {
   return (
     <article className="wiki-portal" data-page-slug="Xinbao_Qiao">
       <section className="wiki-portal-hero" aria-labelledby="portal-title">
-        <img
-          className="wiki-portal-emblem"
-          src={pathWithBasePath('/xinbaopedia-icon.svg')}
-          alt=""
-          aria-hidden="true"
-        />
-        <h1 id="portal-title">Xinbaopedia</h1>
-        <p className="wiki-portal-tagline">The academic wiki of Xinbao Qiao</p>
+        <div className="wiki-portal-masthead" aria-label="Primary language editions">
+          {languageEntries.map((item) => (
+            <a
+              className={`wiki-portal-language wiki-portal-language-${item.side}`}
+              href={wikiHref(item.slug)}
+              key={item.slug}
+            >
+              <strong>{item.label}</strong>
+              <span>{item.detail}</span>
+            </a>
+          ))}
+          <div className="wiki-portal-brand">
+            <img
+              className="wiki-portal-emblem"
+              src={pathWithBasePath('/xinbaopedia-icon.svg')}
+              alt=""
+              aria-hidden="true"
+            />
+            <h1 id="portal-title">Xinbaopedia</h1>
+            <p className="wiki-portal-tagline">The academic wiki of Xinbao Qiao</p>
+          </div>
+        </div>
         <div className="wiki-portal-search">
           <WikiSearch items={searchIndex} showChat={false} variant="portal" />
         </div>
         <p className="wiki-portal-count">
           {englishCount} English entries · {chineseCount} Chinese entries
         </p>
-        <div className="wiki-portal-languages" aria-label="Primary languages">
-          {languageEntries.map((item) => (
-            <a className="wiki-portal-language" href={wikiHref(item.slug)} key={item.slug}>
-              <strong>{item.label}</strong>
-              <span>{item.detail}</span>
-            </a>
-          ))}
-        </div>
       </section>
 
       <section className="wiki-portal-featured" aria-labelledby="featured-entry-title">
+        <a className="wiki-portal-featured-media" href={wikiHref('Xinbao_Qiao')} aria-label="Open Xinbao Qiao article">
+          <img src={pathWithBasePath('/images/Portrait.png')} alt="Xinbao Qiao" />
+        </a>
         <div>
           <p className="wiki-portal-kicker">Featured entry</p>
           <h2 id="featured-entry-title">{biography?.title || 'Xinbao Qiao'}</h2>

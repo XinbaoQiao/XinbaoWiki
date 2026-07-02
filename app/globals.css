@@ -90,6 +90,10 @@ a.external::after {
   padding: 9px 24px 8px;
 }
 
+.wiki-topbar-inner:has(> .wiki-logo:only-child) {
+  justify-content: center;
+}
+
 .wiki-logo {
   display: inline-grid;
   min-width: 148px;
@@ -1012,8 +1016,23 @@ a.external::after {
 }
 
 .wiki-portal-hero {
-  max-width: 760px;
-  margin: 14px auto 30px;
+  max-width: 920px;
+  margin: 18px auto 34px;
+  text-align: center;
+}
+
+.wiki-portal-masthead {
+  display: grid;
+  grid-template-columns: minmax(150px, 1fr) auto minmax(150px, 1fr);
+  align-items: center;
+  column-gap: 28px;
+  margin: 0 auto 18px;
+}
+
+.wiki-portal-brand {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 280px;
   text-align: center;
 }
 
@@ -1047,39 +1066,47 @@ a.external::after {
 }
 
 .wiki-portal-count {
-  margin: 10px 0 12px;
+  margin: 10px 0 0;
   color: var(--wiki-text-soft);
   font-size: 12px;
   line-height: 1.3;
 }
 
-.wiki-portal-languages {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-  max-width: 560px;
-  margin: 0 auto;
-}
-
 .wiki-portal-language {
+  max-width: 210px;
   display: block;
-  padding: 9px 8px 10px;
-  border-top: 1px solid var(--wiki-border-light);
-  border-bottom: 1px solid var(--wiki-border-light);
+  padding: 8px 0;
   text-align: center;
   text-decoration: none;
 }
 
+.wiki-portal-language-left {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: end;
+  text-align: right;
+}
+
+.wiki-portal-language-right {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: start;
+  text-align: left;
+}
+
 .wiki-portal-language:hover {
-  background: var(--wiki-bg-alt);
   text-decoration: none;
 }
 
 .wiki-portal-language strong {
   display: block;
   color: var(--wiki-link);
-  font-size: 17px;
+  font-size: 18px;
   line-height: 1.25;
+}
+
+.wiki-portal-language:hover strong {
+  text-decoration: underline;
 }
 
 .wiki-portal-language span {
@@ -1092,12 +1119,33 @@ a.external::after {
 
 .wiki-portal-featured {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 210px;
-  gap: 28px;
+  grid-template-columns: 118px minmax(0, 1fr) 210px;
+  gap: 22px;
+  align-items: start;
   margin: 0 0 30px;
   padding: 14px 0 16px;
   border-top: 1px solid var(--wiki-border);
   border-bottom: 1px solid var(--wiki-border-light);
+}
+
+.wiki-portal-featured-media {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.wiki-portal-featured-media:hover {
+  text-decoration: none;
+}
+
+.wiki-portal-featured-media img {
+  display: block;
+  width: 118px;
+  max-width: 100%;
+  aspect-ratio: 1;
+  border: 1px solid var(--wiki-border-light);
+  background: var(--wiki-bg-alt);
+  object-fit: cover;
 }
 
 .wiki-portal-kicker {
@@ -1230,6 +1278,15 @@ a.external::after {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 22px;
   }
+
+  .wiki-portal-masthead {
+    grid-template-columns: minmax(120px, 1fr) auto minmax(120px, 1fr);
+    column-gap: 18px;
+  }
+
+  .wiki-portal-language {
+    max-width: 180px;
+  }
 }
 
 @media (max-width: 720px) {
@@ -1285,6 +1342,34 @@ a.external::after {
     margin-top: 4px;
   }
 
+  .wiki-portal-masthead {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px 16px;
+    margin-bottom: 16px;
+  }
+
+  .wiki-portal-brand {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    min-width: 0;
+  }
+
+  .wiki-portal-language-left,
+  .wiki-portal-language-right {
+    grid-row: 2;
+    justify-self: stretch;
+    max-width: none;
+    text-align: center;
+  }
+
+  .wiki-portal-language-left {
+    grid-column: 1;
+  }
+
+  .wiki-portal-language-right {
+    grid-column: 2;
+  }
+
   .wiki-portal-emblem {
     width: 84px;
     height: 84px;
@@ -1307,19 +1392,18 @@ a.external::after {
     font-size: 14px;
   }
 
-  .wiki-portal-languages,
   .wiki-portal-featured,
   .wiki-portal-grid {
     grid-template-columns: 1fr;
   }
 
-  .wiki-portal-languages {
-    gap: 10px;
-  }
-
   .wiki-portal-featured {
     gap: 14px;
     margin-bottom: 24px;
+  }
+
+  .wiki-portal-featured-media img {
+    width: 96px;
   }
 
   .wiki-portal-actions {

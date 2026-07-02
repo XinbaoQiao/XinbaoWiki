@@ -30,7 +30,10 @@ function englishSlug(slug: string) {
 }
 
 export function LanguageToggle() {
-  const slug = activeSlug(usePathname() || '');
+  const pathname = usePathname() || '';
+  if (!decodeURIComponent(pathname).split('/').includes('wiki')) return null;
+
+  const slug = activeSlug(pathname);
   const isChinesePage = isChineseSlug(slug);
   const targetSlug = isChinesePage ? englishSlug(slug) : chineseSlug(slug);
   const href = `/wiki/${encodeURIComponent(targetSlug)}/`;
