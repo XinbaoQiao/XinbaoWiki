@@ -24,10 +24,10 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
           <div className="wiki-topbar-inner">
             <a
               className="wiki-logo"
-              href={pathWithBasePath('/wiki/Xinbao_Qiao/')}
-              style={{ textDecoration: 'none' }}
+              href={pathWithBasePath('/')}
             >
-              Xinbaopedia
+              <span className="wiki-logo-word">Xinbaopedia</span>
+              <span className="wiki-logo-subtitle">The Academic Wiki</span>
             </a>
             <LanguageToggle />
             <WikiSearch items={searchIndex} />

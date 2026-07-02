@@ -1,11 +1,15 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { ChatWithXinbao } from '@/components/ChatWithXinbao';
 import type { SearchIndexItem } from '@/lib/wiki';
 
-type Props = { items: SearchIndexItem[] };
+type Props = {
+  items: SearchIndexItem[];
+  showChat?: boolean;
+  variant?: 'topbar' | 'portal';
+};
 
 type SearchResult = SearchIndexItem & { score: number };
 type PreparedSearchItem = SearchIndexItem & {
@@ -76,8 +80,9 @@ function resultExcerpt(item: SearchIndexItem, terms: string[]) {
   return start > 0 ? `... ${excerpt}` : excerpt;
 }
 
-export function WikiSearch({ items }: Props) {
+export function WikiSearch({ items, showChat = true, variant = 'topbar' }: Props) {
   const pathname = usePathname();
+  const listboxId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
@@ -117,9 +122,15 @@ export function WikiSearch({ items }: Props) {
     window.location.assign(item.href);
   }
 
+  const rootClassName = [
+    'wiki-search',
+    `wiki-search-${variant}`,
+    showChat ? '' : 'wiki-search-no-chat'
+  ].filter(Boolean).join(' ');
+
   return (
-    <div className="wiki-search" role="search" ref={rootRef}>
-      <ChatWithXinbao language={preferredLanguage} />
+    <div className={rootClassName} role="search" ref={rootRef}>
+      {showChat && <ChatWithXinbao language={preferredLanguage} />}
       <form
         className="wiki-search-form"
         onSubmit={(event) => {
@@ -127,41 +138,44 @@ export function WikiSearch({ items }: Props) {
           goTo(results[active] || results[0]);
         }}
       >
-        <input
-          aria-autocomplete="list"
-          aria-controls="wiki-search-results"
-          aria-expanded={open && normalizedQuery ? 'true' : 'false'}
-          aria-label="Search Xinbaopedia"
-          autoComplete="off"
-          onChange={(event) => {
-            setQuery(event.target.value);
-            setOpen(true);
-          }}
-          onFocus={() => setOpen(true)}
-          onKeyDown={(event) => {
-            if (event.key === 'Escape') {
-              setOpen(false);
-              return;
-            }
-            if (!results.length) return;
-            if (event.key === 'ArrowDown') {
-              event.preventDefault();
+        <div className="wiki-search-fields">
+          <input
+            aria-autocomplete="list"
+            aria-controls={listboxId}
+            aria-expanded={open && normalizedQuery ? 'true' : 'false'}
+            aria-label="Search Xinbaopedia"
+            autoComplete="off"
+            onChange={(event) => {
+              setQuery(event.target.value);
               setOpen(true);
-              setActive((index) => (index + 1) % results.length);
-            }
-            if (event.key === 'ArrowUp') {
-              event.preventDefault();
-              setOpen(true);
-              setActive((index) => (index - 1 + results.length) % results.length);
-            }
-          }}
-          placeholder="Search Xinbaopedia"
-          type="search"
-          value={query}
-        />
+            }}
+            onFocus={() => setOpen(true)}
+            onKeyDown={(event) => {
+              if (event.key === 'Escape') {
+                setOpen(false);
+                return;
+              }
+              if (!results.length) return;
+              if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                setOpen(true);
+                setActive((index) => (index + 1) % results.length);
+              }
+              if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                setOpen(true);
+                setActive((index) => (index - 1 + results.length) % results.length);
+              }
+            }}
+            placeholder="Search Xinbaopedia"
+            type="search"
+            value={query}
+          />
+          <button className="wiki-search-submit" type="submit">Search</button>
+        </div>
       </form>
       {open && normalizedQuery && (
-        <div className="wiki-search-panel" id="wiki-search-results" role="listbox">
+        <div className="wiki-search-panel" id={listboxId} role="listbox">
           {results.length ? (
             results.map((item, index) => (
               <a
