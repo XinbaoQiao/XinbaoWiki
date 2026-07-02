@@ -10,6 +10,7 @@ translation_of: "CV"
 
 ## 教育经历
 
+- **香港中文大学**，信息工程博士生，2026 年至今。导师为 [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]。研究方向包括数据中心 ML，以及 AI 与网络的交叉，包括 AI for Networks 和 Networks for AI。
 - **浙江大学**，人工智能硕士，2022-09 至 2025-12。专业 GPA：90/100；排名 3/25。相关课程包括 AI Algorithms and Systems 与 Secure Artificial Intelligence。
 - **山东大学**，通信工程工学学士，2018-09 至 2022-07。专业 GPA：82.47/100。2018-2019 年获三等奖学金。
 
@@ -20,12 +21,9 @@ translation_of: "CV"
 
 ## 研究经历
 
+- **香港中文大学博士阶段研究**，2026 年至今，导师 [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]。主题包括数据中心 ML、AI 与网络协同设计，以及在不汇聚原始数据条件下构造共享分布参考的分布式 Wasserstein barycenter 方法。
 - **Research on Data-Centric ML Systems**，2023-03 至 2025-12，导师 Prof. [[Meng_Zhang|Meng Zhang]]，机构 [[Zhejiang_University|浙江大学]]。主题包括数据影响归因、可信人工智能中的权衡，以及云边协同人-空间健康系统。
 - **Research on Trustworthy LLM systems**，2025-06 至 2025-12，全职研究实习，导师 PANG Yan, James，机构 National University of Singapore。主题包括 LLM 的错觉模式感知和合成数据评估。
-
-## 技能
-
-见 [[Skills|技能]]。CV 列出 Python、MATLAB、LaTeX 和 Markdown 为 advanced 技能；C/C++、Linux、Java；以及 TensorFlow、PyTorch、SQL、Git、Linux、Docker 等框架与工具。
 
 ## 论文
 

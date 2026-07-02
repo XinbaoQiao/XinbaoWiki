@@ -44,6 +44,28 @@ The wiki aims to be factual, scoped, and maintainable.
 
 The canonical content lives in `wiki/*.md`. If a public page needs to change, the Markdown source should change first.
 
+## Content Maintenance Backend
+
+The maintenance model follows two ideas from current agent-readable wiki work:
+
+- **LLM Wiki lifecycle**: source pages should not be a loose pile of notes. The repository keeps a generated graph, backlink map, hidden-page filtering, and quality warnings so weak spots are visible before publishing.
+- **Open Knowledge Format style**: wiki pages remain ordinary Markdown with YAML frontmatter. The site accepts the existing `name`/`summary` schema and also understands OKF-style `title`, `description`, `type`, `tags`, `resource`, and `timestamp` fields.
+
+Run the deterministic maintainer after content changes:
+
+```bash
+npm run maintain:wiki
+```
+
+It regenerates:
+
+| File | Purpose |
+| --- | --- |
+| `wiki/pages.json` | Public, hidden-filtered page catalog for content consumers. |
+| `wiki/graph.json` | Nodes, wikilink edges, backlinks, type/language counts, and maintenance warnings. |
+
+`npm run check` verifies that those generated files are fresh. This makes the upkeep loop explicit: edit Markdown, regenerate the content indexes, review warnings, then build and publish.
+
 ## How The Site Is Organized
 
 ```text
@@ -107,6 +129,7 @@ When editing wiki content:
 - Connect new paper pages to relevant topic pages.
 - Keep English and Chinese paired pages aligned when both exist.
 - Update index and log pages when adding major new entries.
+- Run `npm run maintain:wiki` so the page catalog and graph reflect the current source pages.
 
 Useful high-level pages include:
 

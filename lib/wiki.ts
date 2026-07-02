@@ -6,6 +6,8 @@ export type LinkItem = { label: string; url: string; detail?: string; title?: st
 
 export type WikiFrontmatter = {
   name?: string;
+  title?: string;
+  description?: string;
   native_name?: string;
   born?: string | null;
   birth_place?: string | null;
@@ -31,6 +33,10 @@ export type WikiFrontmatter = {
   status?: string;
   publication_type?: string;
   categories?: string[];
+  tags?: string[];
+  resource?: string;
+  timestamp?: string;
+  okf_version?: string;
   links?: LinkItem[];
   summary?: string;
   aliases?: string[];
@@ -55,6 +61,7 @@ export type SearchIndexItem = {
   language: 'en' | 'zh';
   type: string;
   aliases: string[];
+  tags: string[];
   text: string;
 };
 
@@ -115,6 +122,31 @@ export function toEnglishSlug(slug: string) {
   return slug.endsWith('_zh') ? slug.slice(0, -3) : slug;
 }
 
+export function wikiPageTitle(data: WikiFrontmatter, slug: string) {
+  const name = typeof data.name === 'string' ? data.name.trim() : '';
+  const title = typeof data.title === 'string' ? data.title.trim() : '';
+  return name || title || slug.replaceAll('_', ' ');
+}
+
+export function wikiPageSummary(data: WikiFrontmatter) {
+  const summary = typeof data.summary === 'string' ? data.summary.trim() : '';
+  const description = typeof data.description === 'string' ? data.description.trim() : '';
+  return summary || description;
+}
+
+export function wikiConceptType(data: WikiFrontmatter, slug: string) {
+  if (typeof data.type === 'string' && data.type.trim()) return data.type.trim();
+  if (typeof data.occupation === 'string' && data.occupation.trim()) return data.occupation.trim();
+  if (Array.isArray(data.occupation)) {
+    const first = data.occupation.find((item) => typeof item === 'string' && item.trim());
+    if (typeof first === 'string') return first.trim();
+  }
+  if (Array.isArray(data.authors) || data.venue || data.publication_type) return 'publication';
+  if (slug === 'index' || slug === 'index_zh') return 'index';
+  if (slug === 'log' || slug === 'log_zh') return 'update log';
+  return 'article';
+}
+
 export function getWikiPageBySlug(slug: string): WikiPage | null {
   const decoded = decodeURIComponent(slug);
   const resolved = resolveSlug(decoded);
@@ -124,8 +156,8 @@ export function getWikiPageBySlug(slug: string): WikiPage | null {
   const raw = fs.readFileSync(filePath, 'utf8');
   const parsed = matter(raw);
   const data = parsed.data as WikiFrontmatter;
-  const title = typeof data.name === 'string' && data.name.trim() ? data.name : resolved.replaceAll('_', ' ');
-  const summary = typeof data.summary === 'string' ? data.summary : '';
+  const title = wikiPageTitle(data, resolved);
+  const summary = wikiPageSummary(data);
   return { slug: resolved, title, summary, data, content: parsed.content.trim(), fileName };
 }
 
@@ -156,11 +188,13 @@ export function getSearchIndex(): SearchIndexItem[] {
     .filter((page) => page.data.hidden !== true)
     .map((page) => {
       const aliases = Array.isArray(page.data.aliases) ? page.data.aliases.filter((alias): alias is string => typeof alias === 'string') : [];
+      const tags = Array.isArray(page.data.tags) ? page.data.tags.filter((tag): tag is string => typeof tag === 'string') : [];
       const frontmatterText = asSearchStrings({
         occupation: page.data.occupation,
         affiliation: page.data.affiliation,
         education: page.data.education,
-        type: page.data.type,
+        type: wikiConceptType(page.data, page.slug),
+        tags,
         authors: page.data.authors,
         venue: page.data.venue,
         location: page.data.location,
@@ -181,8 +215,9 @@ export function getSearchIndex(): SearchIndexItem[] {
         title: page.title,
         summary: page.summary,
         language: isChineseSlug(page.slug) ? 'zh' : 'en',
-        type: typeof page.data.type === 'string' ? page.data.type : 'article',
+        type: wikiConceptType(page.data, page.slug),
         aliases,
+        tags,
         text: text.slice(0, 8000)
       };
     });

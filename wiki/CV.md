@@ -8,6 +8,7 @@ This page records CV-derived facts in wiki form. The PDF version is available at
 
 ## Education
 
+- **The Chinese University of Hong Kong**, PhD student in Information Engineering, 2026-present. Advised by [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]. Research areas include data-centric ML and AI with networks, including AI for Networks and Networks for AI.
 - **Zhejiang University**, M.Sc. in Artificial Intelligence, 2022-09 to 2025-12. Major GPA: 90/100; rank 3/25. Relevant courses include AI Algorithms and Systems and Secure Artificial Intelligence.
 - **Shandong University**, B.Eng. in Communication Engineering, 2018-09 to 2022-07. Major GPA: 82.47/100. Awarded a third-class academic award in 2018-2019.
 
@@ -18,12 +19,9 @@ This page records CV-derived facts in wiki form. The PDF version is available at
 
 ## Research experience
 
+- **Doctoral Research at The Chinese University of Hong Kong**, 2026-present, advised by [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]. Topics include data-centric ML, AI-network co-design, and distributed Wasserstein barycenter methods for shared distributional references without pooling raw data.
 - **Research on Data-Centric ML Systems**, 03/2023 to 12/2025, advised by Prof. [[Meng_Zhang|Meng Zhang]] at [[Zhejiang_University]]. Topics include data influence attribution, trade-offs in trustworthy artificial intelligence, and cloud-edge collaborative human-space healthcare.
 - **Research on Trustworthy LLM systems**, 06/2025 to 12/2025, full-time research intern advised by PANG Yan, James at the National University of Singapore. Topics include illusory pattern perception in LLMs and synthetic data evaluation.
-
-## Skills
-
-See [[Skills]]. The CV lists Python, MATLAB, LaTeX, and Markdown as advanced skills; C/C++, Linux, and Java; and frameworks and tools including TensorFlow, PyTorch, SQL, Git, Linux, and Docker.
 
 ## Publications
 

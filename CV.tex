@@ -1,281 +1,185 @@
-\documentclass[a4paper,12pt]{article}
+% Build: latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=.latex-build CV.tex
+\documentclass[a4paper,10pt]{article}
 
-% Package imports
-\usepackage{latexsym}
+\usepackage[letterspace=18]{microtype}
+\usepackage[a4paper,left=0.46in,right=0.46in,top=0.36in,bottom=0.44in]{geometry}
 \usepackage{xcolor}
-\usepackage{float}
-\usepackage{ragged2e}
-\usepackage[empty]{fullpage}
-\usepackage{wrapfig}
-\usepackage{lipsum}
 \usepackage{tabularx}
-\usepackage{titlesec}
-\usepackage{geometry}
-\usepackage{marvosym}
-\usepackage{verbatim}
 \usepackage{enumitem}
+\usepackage{hyperref}
 \usepackage{fancyhdr}
-\usepackage{multicol}
-\usepackage{graphicx}
-\usepackage[T1]{fontenc}
+\usepackage{iftex}
+\usepackage{marvosym}
+\usepackage{pifont}
 
-% Color definitions
-\definecolor{darkblue}{RGB}{0,0,139}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{tgheros}
+  \renewcommand{\familydefault}{\sfdefault}
+\else
+  \usepackage{fontspec}
+  \setmainfont{Noto Sans}
+  \setsansfont{Noto Sans}
+\fi
 
-% Page layout
-\setlength{\multicolsep}{0pt}
-\pagestyle{fancy}
-\fancyhf{}
-\fancyfoot{}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
-\geometry{left=1.4cm, top=0.3cm, right=1.2cm, bottom=1cm}
-\setlength{\footskip}{5pt}
+\definecolor{cvblack}{HTML}{111111}
+\definecolor{cvtext}{HTML}{5E5E5E}
+\definecolor{cvmuted}{HTML}{777777}
+\definecolor{cvrule}{HTML}{3F3F3F}
+\definecolor{cvblue}{HTML}{5C8DC4}
 
-% Hyperlink setup
-\usepackage[hidelinks]{hyperref}
 \hypersetup{
-    colorlinks=true,
-    linkcolor=darkblue,
-    filecolor=darkblue,
-    urlcolor=darkblue,
+  colorlinks=true,
+  urlcolor=cvblue,
+  linkcolor=cvblue
 }
-
-% Custom box settings
-\usepackage[most]{tcolorbox}
-\tcbset{
-    frame code={},
-    center title,
-    left=0pt,
-    right=0pt,
-    top=0pt,
-    bottom=0pt,
-    colback=gray!20,
-    colframe=white,
-    width=\dimexpr\textwidth\relax,
-    enlarge left by=-2mm,
-    boxsep=4pt,
-    arc=0pt,outer arc=0pt,
-}
-
-% URL style
 \urlstyle{same}
 
-% Text alignment
-\raggedright
-\setlength{\tabcolsep}{0in}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[L]{\textcolor{cvmuted}{\fontsize{7.6}{8}\selectfont\MakeUppercase{July 2, 2026}}}
+\fancyfoot[R]{\textcolor{cvmuted}{\fontsize{7.6}{8}\selectfont 1}}
+\setlength{\footskip}{13pt}
+\setlength{\parindent}{0pt}
+\setlength{\tabcolsep}{0pt}
 
-% Section formatting
-\titleformat{\section}{
-  \vspace{-4pt}\scshape\raggedright\large
-}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
-
-% Custom commands
-\newcommand{\resumeItem}[2]{
-  \item{
-    \textbf{#1}{\hspace{0.5mm}#2 \vspace{-0.5mm}}
-  }
+\newcommand{\cvname}[1]{%
+  \begin{center}
+    {\fontsize{24.8}{28}\selectfont\color{cvblack}#1}
+  \end{center}
+  \vspace{-3pt}
 }
 
-\newcommand{\resumePOR}[3]{
-\vspace{0.5mm}\item
-    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
-        \textbf{#1}\hspace{0.3mm}#2 & \textit{\small{#3}}
-    \end{tabular*}
-    \vspace{-2mm}
+\newcommand{\contactsep}{\hspace{0.55em}{\color{cvblack}\vrule height 1.1ex width 0.45pt}\hspace{0.55em}}
+\newcommand{\blackhref}[2]{\href{#1}{\textcolor{cvblack}{#2}}}
+\newcommand{\contactline}{%
+  \begin{center}
+    {\fontsize{8.4}{10}\selectfont\bfseries\color{cvblack}
+    \Letter\ \blackhref{mailto:xinbaoqiao@cuhk.edu.hk}{xinbaoqiao@cuhk.edu.hk}
+    \contactsep \Mundus\ \blackhref{https://xinbaopedia.top/}{xinbaopedia.top}
+    \contactsep \ding{108}\ \blackhref{https://github.com/XinbaoQiao}{github.com/XinbaoQiao}
+    \contactsep \ding{72}\ \blackhref{https://scholar.google.com/citations?user=nhC_OfEAAAAJ\&hl=en}{Google Scholar}}
+  \end{center}
+  \vspace{5pt}
 }
 
-\newcommand{\resumeSubheading}[4]{
-\vspace{0.5mm}\item
-    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
-        \textbf{#1} & \textit{\footnotesize{#4}} \\
-        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
-    \end{tabular*}
-    \vspace{-2.4mm}
-}
-
-\newcommand{\resumeProject}[4]{
-\vspace{0.5mm}\item
-    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
-        \textbf{#1} & \textit{\footnotesize{#3}} \\
-        \footnotesize{\textit{#2}} & \footnotesize{#4}
-    \end{tabular*}
-    \vspace{-2.4mm}
-}
-
-\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
-
-\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
-\renewcommand{\labelitemii}{$\vcenter{\hbox{\tiny$\circ$}}$}
-
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm]}
-\newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
-\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm,itemsep=0.5mm]}
-
-\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{2mm}}
-\newcommand{\resumeHeadingSkillEnd}{\end{itemize}\vspace{-2mm}}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-2mm}}
 \newcommand{\cvsection}[1]{%
-\vspace{2mm}
-\begin{tcolorbox}
-    \textbf{\large #1}
-\end{tcolorbox}
-    \vspace{-4mm}
+  \vspace{4.3pt}
+  {\fontsize{17.3}{18.5}\selectfont\bfseries\color{cvblack}#1}%
+  \hspace{4.2pt}{\color{cvrule}\leaders\hrule height 0.42pt\hfill}\par
+  \vspace{2.1pt}
 }
 
-\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
-\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
-\newcolumntype{C}{>{\centering\arraybackslash}X}%
+\newcommand{\entrytitle}[1]{{\fontsize{10.5}{11.4}\selectfont\bfseries\color{cvtext}#1}}
+\newcommand{\entrybody}[1]{{\fontsize{9.35}{10.55}\selectfont\color{cvtext}#1}}
+\newcommand{\entryright}[1]{{\fontsize{8.85}{10}\selectfont\itshape\color{cvmuted}#1}}
+\newcommand{\linkish}[1]{{\color{cvblue}#1}}
+\newcommand{\datesep}{\ensuremath{\sim}}
 
-% Commands for icon sizing and positioning
-\newcommand{\socialicon}[1]{\raisebox{-0.05em}{\resizebox{!}{1em}{#1}}}
-\newcommand{\ieeeicon}[1]{\raisebox{-0.3em}{\resizebox{!}{1.3em}{#1}}}
+\newcommand{\cvrow}[3]{%
+  \begin{tabularx}{\linewidth}{@{}X r@{}}
+    #1 & #2
+  \end{tabularx}
+  #3
+}
 
-% Font options
-\newcommand{\headerfonti}{\fontfamily{phv}\selectfont}
-\newcommand{\headerfontii}{\fontfamily{ptm}\selectfont}
-\newcommand{\headerfontiii}{\fontfamily{ppl}\selectfont}
-\newcommand{\headerfontiv}{\fontfamily{pbk}\selectfont}
-\newcommand{\headerfontv}{\fontfamily{pag}\selectfont}
-\newcommand{\headerfontvi}{\fontfamily{cmss}\selectfont}
-\newcommand{\headerfontvii}{\fontfamily{qhv}\selectfont}
-\newcommand{\headerfontviii}{\fontfamily{qpl}\selectfont}
-\newcommand{\headerfontix}{\fontfamily{qtm}\selectfont}
-\newcommand{\headerfontx}{\fontfamily{bch}\selectfont}
+\newcommand{\detail}[2]{%
+  \hspace{13.5pt}{\fontsize{9.05}{10.35}\selectfont\bfseries\color{cvblack}#1}\hspace{8pt}%
+  {\fontsize{9.05}{10.35}\selectfont\color{cvtext}#2}\par
+}
+
+\newenvironment{tightitems}{%
+  \begin{itemize}[
+    leftmargin=13.5pt,
+    label={\raisebox{0.18ex}{\fontsize{5}{5}\selectfont$\bullet$}},
+    itemsep=0.55pt,
+    topsep=1.2pt,
+    parsep=0pt,
+    partopsep=0pt
+  ]
+  \fontsize{9.18}{10.45}\selectfont\color{cvtext}
+}{\end{itemize}}
+
+\newcommand{\pubentry}[4]{%
+  \item \begin{tabularx}{\linewidth}{@{}X r@{}}
+    {\fontsize{8.9}{9.85}\selectfont\bfseries\color{cvtext}#1} &
+    {\fontsize{8.55}{9.7}\selectfont\itshape\color{cvmuted}#4}
+  \end{tabularx}
+  {\fontsize{8.2}{9.2}\selectfont\color{cvmuted}#2}\par
+  {\fontsize{8.15}{9.15}\selectfont\color{cvblue}#3}\par
+  \vspace{0.75pt}
+}
 
 \begin{document}
-\headerfontiii
+\color{cvtext}
+\cvname{Xinbao Qiao}
+\contactline
 
-% Header
-\vspace{-5cm}
-\begin{center}
-    {\Huge\textbf{Xinbao Qiao}}
-\end{center}
-\vspace{-3.5mm}
+\cvsection{Education}
+\cvrow{\entrytitle{The Chinese University of Hong Kong}\hspace{5pt}\entrybody{Ph.D. student in Information Engineering. Advised by \linkish{Angela Yingjun Zhang}.}}{\entryright{Hong Kong. 2026 - present}}{}
+\detail{Research Areas}{Data-centric ML and AI with networks, including AI for Networks and Networks for AI.}
+\cvrow{\entrytitle{Zhejiang University}\hspace{5pt}\entrybody{M.Sc. in Artificial Intelligence. Advised by \linkish{Meng Zhang}.}}{\entryright{Zhejiang. Sep 2022 \datesep{} Dec 2025}}{}
+\detail{GPA and Coursework}{Major GPA 90/100 (rank 3/25). AI Algorithms and Systems (100); Secure Artificial Intelligence (97).}
+\cvrow{\entrytitle{Shandong University}\hspace{5pt}\entrybody{B.Eng. in Communication Engineering.}}{\entryright{Shandong. Sep 2018 \datesep{} Jul 2022}}{}
+\detail{GPA and Award}{Major GPA 82.47/100. Third-class Academic Award, 2018-2019.}
 
-\begin{center}
-    \small{
-    \href{mailto:xinbaoqiao@cuhk.edu.hk}{xinbaoqiao@cuhk.edu.hk}
-    | \href{https://xinbaopedia.top/}{Homepage}
-    | \href{https://github.com/XinbaoQiao}{GitHub}
-    | \href{https://scholar.google.com/citations?user=nhC_OfEAAAAJ\&hl=en}{Google Scholar}
-    }
-\end{center}
+\cvsection{Experience}
+\cvrow{\entrytitle{Doctoral Research @ The Chinese University of Hong Kong}}{\entryright{Hong Kong. 2026 - present}}{}
+\begin{tightitems}
+  \item Study data-centric ML and AI-network co-design where data, computation, and evaluation signals are distributed across clients, institutions, or networked infrastructure.
+  \item Investigate distributed Wasserstein barycenter methods for constructing shared distributional references without pooling raw data.
+\end{tightitems}
+\cvrow{\entrytitle{Research on Data-Centric ML Systems @ Zhejiang University}}{\entryright{M.Eng. Student. Mar 2023 \datesep{} Dec 2025}}{}
+\begin{tightitems}
+  \item Developed theoretically grounded approaches for data influence attribution and certified machine unlearning.
+  \item Studied data-centric trade-offs across fairness, robustness, privacy, and utility in trustworthy AI systems.
+  \item Architected cloud-edge collaborative human-space healthcare frameworks for real-time multimodal monitoring.
+\end{tightitems}
+\cvrow{\entrytitle{Research on Trustworthy LLM Systems @ NUSRI CQ}}{\entryright{Full-time Research Intern. Jun 2025 \datesep{} Dec 2025}}{}
+\begin{tightitems}
+  \item Examined illusory pattern perception in LLMs and proposed an interpretable framework for spurious inference behavior.
+  \item Developed Wasserstein-based methods for synthetic-data evaluation under limited or fragmented real-data access.
+\end{tightitems}
 
-\vspace{-6mm}
-
-\section{\textbf{Education}}
-\vspace{-0.4mm}
-\resumeSubHeadingListStart
-
-\resumeSubheading
-{The Chinese University of Hong Kong}{Hong Kong}
-{PhD student in Information Engineering}{2026 - present}
-
-\vspace{-1.5mm}
-
-\resumeSubheading
-{Zhejiang University}{Zhejiang}
-{Master in Artificial Intelligence}{09/2022 - 12/2025}
-\resumeItemListStart
-\item Relevant courses: AI Algorithms and Systems (100), Secure Artificial Intelligence (97)
-\item Major GPA: 90/100 (Rank: 3/25)
-\resumeItemListEnd
-
-\vspace{-1.5mm}
-
-\resumeSubheading
-{Shandong University}{Shandong}
-{Bachelor in Communication Engineering}{09/2018 - 07/2022}
-\resumeItemListStart
-\item Major GPA: 82.47/100
-\item Award: Third-class Academic Award 2018-2019
-\resumeItemListEnd
-
-\resumeSubHeadingListEnd
-\vspace{-7mm}
-
-\section{\textbf{Research Interests}}
-\vspace{1mm}
-      \resumeItemListStart
-        \item Lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are generated, used, and deleted.
-
-        \item The intersection of AI with network, including AI for communication, communication for AI.
-
-      \resumeItemListEnd
-
-\vspace{-3mm}
-\section{\textbf{Research Experience}}
-\vspace{-0.4mm}
-  \resumeSubHeadingListStart
-  \resumeSubheading
-      {{Research on Data-Centric ML Systems}}{}
-      {Advisor: Prof. Meng Zhang, Zhejiang University}{\textbf{M.Eng. Student, 03/2023 - 12/2025}}
-      \resumeItemListStart
-        \item \textbf{Data Influence Attribution.} Developed theoretically guaranteed approaches to quantify and analyze the influence of data on learning models, and designed unlearning techniques to remove these influences.
-        \item \textbf{Trade-offs in Trustworthy Artificial Intelligence.} Investigated and developed data-centric methodologies to balance fairness, robustness, privacy, and utility in machine learning systems.
-        \item \textbf{Cloud-Edge Collaborative Human-Space Healthcare.} Architected cloud-edge collaborative frameworks for real-time multimodal data monitoring of human health using video, audio, and sensor signals.
-      \resumeItemListEnd
-      \vspace{-2mm}
-  \resumeSubheading
-      {{Research on Trustworthy LLM systems}}{}
-      {Advisor: PANG Yan, James, National University of Singapore}{\textbf{Full-time Research Intern}, 06/2025 - 12/2025}
-      \resumeItemListStart
-       \item \textbf{Illusory Pattern Perception in LLMs.} Examined whether LLMs exhibit illusory pattern perception, a known human cognitive bias, and offered an interpretable framework to account for LLM behavior.
-       \item \textbf{Synthetic Data Evaluation.} Developed Wasserstein-based methods for evaluating synthetic data under limited real-data access, with emphasis on distributed evidence aggregation and low-resource validation.
-      \resumeItemListEnd
-  \resumeSubHeadingListEnd
-
-\vspace{-7.5mm}
-\section{\textbf{Skills}}
-\vspace{-0.4mm}
- \resumeHeadingSkillStart
-  \resumeSubItem{Technical Skills:}
-    { Python (advanced), MATLAB (advanced), \LaTeX{} (advanced), Markdown (advanced), C/C++, Linux, Java, and Frameworks \& Tools: \{TensorFlow, PyTorch, SQL, Git, Linux, Docker\}, etc.}
-  \resumeSubItem{Language:}
-    { Mandarin Chinese (native), English}
- \resumeHeadingSkillEnd
-
-\vspace{-2mm}
-\section{\textbf{Publications} \hfill}
-\vspace{0.4mm}
-\small{
-\begin{enumerate}[leftmargin=*, labelsep=0.5em, align=left, itemindent=0.5em,parsep=0.3mm, label={\textbf{[\arabic*]}}]
-\item \textbf{When Sample Selection Bias Precipitates Model Collapse}
-
-\textbf{Xinbao Qiao}, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, Yan Pang.\\
-Forty-Third International Conference on Machine Learning, ICML, 2026.
-
-\item \textbf{Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness}
-
-\textbf{Xinbao Qiao}, Ningning Ding, Yushi Cheng, Meng Zhang.\\
-Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026.
-
-\item \textbf{Hessian-Free Online Certified Unlearning}
-
-\textbf{Xinbao Qiao}, Meng Zhang, Ming Tang, Ermin Wei.\\
-Thirteenth International Conference on Learning Representations, ICLR, 2025.
-
-\item \textbf{DynFrs: An Efficient Framework for Machine Unlearning in Random Forest}
-
-Shurong Wang, Zhuoyang Shen, \textbf{Xinbao Qiao}, Tongning Zhang, Meng Zhang.\\
-Thirteenth International Conference on Learning Representations, ICLR, 2025.
-
-\item \textbf{Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification}
-
-\textbf{Xinbao Qiao}, Wenjing Yan, Ying-Jun Angela Zhang.\\
-Under review.
-
-\item \textbf{Illusory Pattern Perception Drives Spurious Inference in Large Language Models}
-
-Peihua Mai, Zhuoyan Shao, \textbf{Xinbao Qiao}, Meng Zhang, Xinyue Zhou, Yan Pang.\\
-Under review.
-
-\item \textbf{Learn What Matters: Data Pruning for Efficient Decentralized Learning}
-
-\textbf{Xinbao Qiao}, Xunhao Jiang, Zuozhu Liu, Peng Sun, Meng Zhang.\\
-Under review.
-
+\cvsection{Selected Publications}
+{\fontsize{8.4}{9.5}\selectfont\color{cvmuted}Accepted and published papers are listed before under-review manuscripts.}
+\vspace{-2pt}
+\begin{enumerate}[
+  leftmargin=18pt,
+  label=\arabic*.,
+  labelsep=5pt,
+  itemsep=1.0pt,
+  topsep=1.2pt,
+  parsep=0pt,
+  partopsep=0pt
+]
+\pubentry{When Sample Selection Bias Precipitates Model Collapse}
+{\textbf{Xinbao Qiao}, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, Yan Pang}
+{Low-resource verification can turn local sample selection into persistent tail pruning.}
+{ICML, 2026.}
+\pubentry{Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness}
+{\textbf{Xinbao Qiao}, Ningning Ding, Yushi Cheng, Meng Zhang}
+{Soft-weighted corrective unlearning for non-binary fairness and robustness interventions.}
+{AAAI, 2026.}
+\pubentry{Hessian-Free Online Certified Unlearning}
+{\textbf{Xinbao Qiao}, Meng Zhang, Ming Tang, Ermin Wei}
+{Certified unlearning without explicit Hessian inversion through recollected statistics.}
+{ICLR, 2025.}
+\pubentry{DynFrs: An Efficient Framework for Machine Unlearning in Random Forest}
+{Shurong Wang, Zhuoyang Shen, \textbf{Xinbao Qiao}, Tongning Zhang, Meng Zhang}
+{Exact and efficient random-forest unlearning in dynamic environments.}
+{ICLR, 2025.}
+\pubentry{Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification}
+{\textbf{Xinbao Qiao}, Wenjing Yan, Ying-Jun Angela Zhang}
+{Barycentric multi-prototype classification for federated representation geometry.}
+{Under review.}
+\pubentry{Illusory Pattern Perception Drives Spurious Inference in Large Language Models}
+{Peihua Mai, Zhuoyan Shao, \textbf{Xinbao Qiao}, Meng Zhang, Xinyue Zhou, Yan Pang}
+{Analysis of spurious pattern perception and interpretable behavior in LLMs.}
+{Under review.}
 \end{enumerate}
-}
+
 \end{document}

@@ -1,1 +1,693 @@
-{"pages":[{"slug":"Xinbao_Qiao","title":"Qiao Xinbao"},{"slug":"Qiao_Xinbao_zh","title":"乔鑫宝"},{"slug":"CV","title":"Curriculum Vitae"},{"slug":"Research","title":"Research"},{"slug":"Publications","title":"Publications"},{"slug":"Projects","title":"Projects"},{"slug":"Education","title":"Education"},{"slug":"Experience","title":"Experience"},{"slug":"Skills","title":"Skills"},{"slug":"When_Sample_Selection_Bias_Precipitates_Model_Collapse","title":"When Sample Selection Bias Precipitates Model Collapse"},{"slug":"Soft_Weighted_Machine_Unlearning","title":"Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness"},{"slug":"Hessian_Free_Online_Certified_Unlearning","title":"Hessian-Free Online Certified Unlearning"},{"slug":"DynFrs","title":"DynFrs: An Efficient Framework for Machine Unlearning in Random Forest"},{"slug":"AI_and_Networks","title":"AI and Networks"},{"slug":"Machine_Unlearning","title":"Machine Unlearning"},{"slug":"Synthetic_Data_and_Model_Collapse","title":"Synthetic Data"},{"slug":"Data_Centric_Machine_Learning","title":"Data Centric ML"},{"slug":"Trustworthy_AI","title":"Trustworthy AI"},{"slug":"Distributed_Learning","title":"Distributed Learning"},{"slug":"LLM_Reliability","title":"LLM Reliability"},{"slug":"Interpretability","title":"Interpretability"},{"slug":"index","title":"Index"},{"slug":"log","title":"Log"}]}
+{
+  "schemaVersion": 2,
+  "pages": [
+    {
+      "slug": "AI_and_Networks",
+      "title": "AI and Networks",
+      "summary": "Primary research topic for Qiao Xinbao, covering AI systems under networked data and communication constraints.",
+      "language": "en",
+      "type": "Research topic",
+      "tags": []
+    },
+    {
+      "slug": "Angela_Yingjun_Zhang",
+      "title": "Angela Yingjun Zhang",
+      "summary": "CUHK Information Engineering professor and doctoral advisor of Xinbao Qiao.",
+      "language": "en",
+      "type": "Academic advisor",
+      "tags": []
+    },
+    {
+      "slug": "Soft_Weighted_Machine_Unlearning",
+      "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
+      "summary": "AAAI 2026 paper on soft-weighted unlearning for fairness and robustness correction.",
+      "language": "en",
+      "type": "publication",
+      "tags": []
+    },
+    {
+      "slug": "Certified_Data_Removal",
+      "title": "Certified Data Removal",
+      "summary": "Concept page for deletion guarantees in machine unlearning.",
+      "language": "en",
+      "type": "Research concept",
+      "tags": []
+    },
+    {
+      "slug": "Collaborative_Evaluation",
+      "title": "Collaborative Evaluation",
+      "summary": "Concept page for evaluating models or data processes across multiple parties.",
+      "language": "en",
+      "type": "Research concept",
+      "tags": []
+    },
+    {
+      "slug": "CV",
+      "title": "Curriculum Vitae",
+      "summary": "Structured CV summary for Qiao Xinbao.",
+      "language": "en",
+      "type": "CV summary",
+      "tags": []
+    },
+    {
+      "slug": "Data_Centric_Machine_Learning",
+      "title": "Data Centric ML",
+      "summary": "Research topic focused on data quality, selection, valuation, correction, and governance.",
+      "language": "en",
+      "type": "Research topic",
+      "tags": []
+    },
+    {
+      "slug": "Data_Selection",
+      "title": "Data Selection",
+      "summary": "Concept page for choosing training or evaluation data under reliability constraints.",
+      "language": "en",
+      "type": "Research concept",
+      "tags": []
+    },
+    {
+      "slug": "Data_Silos",
+      "title": "Data Silos",
+      "summary": "Concept page for learning and evaluation when data are distributed across separate holders.",
+      "language": "en",
+      "type": "Research concept",
+      "tags": []
+    },
+    {
+      "slug": "Distributed_Learning",
+      "title": "Distributed Learning",
+      "summary": "Concept page for learning with decentralized data, computation, or communication.",
+      "language": "en",
+      "type": "Research concept",
+      "tags": []
+    },
+    {
+      "slug": "Distributed_Wasserstein_Barycenter",
+      "title": "Distributed Wasserstein Barycenter",
+      "summary": "Concept page for Qiao's work on computing Wasserstein barycenters from distributed local measures.",
+      "language": "en",
+      "type": "Research concept",
+      "tags": []
+    },
+    {
+      "slug": "DynFrs",
+      "title": "DynFrs: An Efficient Framework for Machine Unlearning in Random Forest",
+      "summary": "ICLR 2025 paper on efficient machine unlearning for random forests.",
+      "language": "en",
+      "type": "publication",
+      "tags": []
+    },
+    {
+      "slug": "Education",
+      "title": "Education",
+      "summary": "Education timeline for Qiao Xinbao.",
+      "language": "en",
+      "type": "Education timeline",
+      "tags": []
+    },
+    {
+      "slug": "Experience",
+      "title": "Experience",
+      "summary": "Research experience and affiliations.",
+      "language": "en",
+      "type": "Research experience",
+      "tags": []
+    },
+    {
+      "slug": "Fairness_and_Robustness",
+      "title": "Fairness and Robustness",
+      "summary": "Concept page for fairness and robustness as data-centric correction objectives.",
+      "language": "en",
+      "type": "Research concept",
+      "tags": []
+    },
+    {
+      "slug": "Hessian_Free_Online_Certified_Unlearning",
+      "title": "Hessian-Free Online Certified Unlearning",
+      "summary": "ICLR 2025 paper on efficient Hessian-free certified machine unlearning.",
+      "language": "en",
+      "type": "publication",
+      "tags": []
+    },
+    {
+      "slug": "index",
+      "title": "Index",
+      "summary": "Index of wiki pages.",
+      "language": "en",
+      "type": "Wiki index",
+      "tags": []
+    },
+    {
+      "slug": "Influence_Functions",
+      "title": "Influence Functions",
+      "summary": "Concept page for estimating how training examples affect learned models.",
+      "language": "en",
+      "type": "Research concept",
+      "tags": []
+    },
+    {
+      "slug": "Internet_Slang_2026",
+      "title": "Internet Slang 2026",
+      "summary": "A yearly, source-linked slang and meme-note page used to keep Chat with Xinbao playful without weakening factual answers.",
+      "language": "en",
+      "type": "style guide",
+      "tags": []
+    },
+    {
+      "slug": "Interpretability",
+      "title": "Interpretability",
+      "summary": "Concept page for explaining model behavior and data influence.",
+      "language": "en",
+      "type": "Research concept",
+      "tags": []
+    },
+    {
+      "slug": "LLM_Reliability",
+      "title": "LLM Reliability",
+      "summary": "Concept page for reliability issues in large language model systems.",
+      "language": "en",
+      "type": "Research concept",
+      "tags": []
+    },
+    {
+      "slug": "log",
+      "title": "Log",
+      "summary": "Append-only maintenance log for the wiki.",
+      "language": "en",
+      "type": "Maintenance log",
+      "tags": []
+    },
+    {
+      "slug": "Machine_Unlearning",
+      "title": "Machine Unlearning",
+      "summary": "Research topic on removing or correcting data influence from trained models.",
+      "language": "en",
+      "type": "Research topic",
+      "tags": []
+    },
+    {
+      "slug": "Meng_Zhang",
+      "title": "Meng Zhang",
+      "summary": "Zhejiang University faculty member and master's advisor of Xinbao Qiao.",
+      "language": "en",
+      "type": "Academic advisor",
+      "tags": []
+    },
+    {
+      "slug": "Model_Collapse",
+      "title": "Model Collapse",
+      "summary": "Concept page for degenerative distributional drift in recursive model training.",
+      "language": "en",
+      "type": "Research concept",
+      "tags": []
+    },
+    {
+      "slug": "NUSRI_CQ",
+      "title": "NUSRI-CQ",
+      "summary": "Research internship institution of Xinbao Qiao.",
+      "language": "en",
+      "type": "Research institute",
+      "tags": []
+    },
+    {
+      "slug": "Old_Homepage_Resources",
+      "title": "Old Homepage Resources",
+      "summary": "Record of the single preserved image from the earlier GitHub homepage.",
+      "language": "en",
+      "type": "Resource inventory",
+      "tags": []
+    },
+    {
+      "slug": "Projects",
+      "title": "Projects",
+      "summary": "Research projects and project clusters.",
+      "language": "en",
+      "type": "Project overview",
+      "tags": []
+    },
+    {
+      "slug": "Publications",
+      "title": "Publications",
+      "summary": "Publication list for Qiao Xinbao.",
+      "language": "en",
+      "type": "Publication list",
+      "tags": []
+    },
+    {
+      "slug": "Random_Forest",
+      "title": "Random Forest",
+      "summary": "Concept page for random forests as the model class studied in DynFrs.",
+      "language": "en",
+      "type": "Model family",
+      "tags": []
+    },
+    {
+      "slug": "Recursive_Synthetic_Data_Training",
+      "title": "Recursive Synthetic Data Training",
+      "summary": "Concept page for training models repeatedly on data generated by earlier models.",
+      "language": "en",
+      "type": "Research concept",
+      "tags": []
+    },
+    {
+      "slug": "Research",
+      "title": "Research",
+      "summary": "Research overview for Qiao Xinbao.",
+      "language": "en",
+      "type": "Research overview",
+      "tags": []
+    },
+    {
+      "slug": "Sample_Selection_Bias",
+      "title": "Sample Selection Bias",
+      "summary": "Concept page for distributional bias introduced by non-representative sample choice.",
+      "language": "en",
+      "type": "Research concept",
+      "tags": []
+    },
+    {
+      "slug": "Shandong_University",
+      "title": "Shandong University",
+      "summary": "Undergraduate institution of Xinbao Qiao.",
+      "language": "en",
+      "type": "Public research university",
+      "tags": []
+    },
+    {
+      "slug": "Skills",
+      "title": "Skills",
+      "summary": "Technical skills listed in Qiao Xinbao's CV.",
+      "language": "en",
+      "type": "Technical skills",
+      "tags": []
+    },
+    {
+      "slug": "Synthetic_Data",
+      "title": "Synthetic Data",
+      "summary": "Concept page for generated data used in training, evaluation, or privacy-preserving collaboration.",
+      "language": "en",
+      "type": "Research concept",
+      "tags": []
+    },
+    {
+      "slug": "Synthetic_Data_and_Model_Collapse",
+      "title": "Synthetic Data",
+      "summary": "Research topic on synthetic data, recursive training, low-resource verification, selection bias, and model collapse.",
+      "language": "en",
+      "type": "Research topic",
+      "tags": []
+    },
+    {
+      "slug": "The_Chinese_University_of_Hong_Kong",
+      "title": "The Chinese University of Hong Kong",
+      "summary": "Current doctoral institution of Xinbao Qiao.",
+      "language": "en",
+      "type": "Public research university",
+      "tags": []
+    },
+    {
+      "slug": "Trustworthy_AI",
+      "title": "Trustworthy AI",
+      "summary": "Research topic covering reliability, deletion, fairness, robustness, interpretability, and evaluation.",
+      "language": "en",
+      "type": "Research topic",
+      "tags": []
+    },
+    {
+      "slug": "Wasserstein_Geometry",
+      "title": "Wasserstein Geometry",
+      "summary": "Concept page for distributional comparison using optimal-transport geometry.",
+      "language": "en",
+      "type": "Research concept",
+      "tags": []
+    },
+    {
+      "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
+      "title": "When Sample Selection Bias Precipitates Model Collapse",
+      "summary": "ICML 2026 paper on low-resource verification regimes, sample-selection bias, model collapse, and collaborative Wasserstein-geometry proxies.",
+      "language": "en",
+      "type": "publication",
+      "tags": []
+    },
+    {
+      "slug": "Xinbao_Qiao",
+      "title": "Xinbao Qiao",
+      "summary": "PhD student in Information Engineering at The Chinese University of Hong Kong; researcher in data-centric ML, AI for Networks, Networks for AI, machine unlearning, and synthetic-data reliability",
+      "language": "en",
+      "type": "PhD student",
+      "tags": []
+    },
+    {
+      "slug": "Zhejiang_University",
+      "title": "Zhejiang University",
+      "summary": "Master's institution of Xinbao Qiao.",
+      "language": "en",
+      "type": "Public research university",
+      "tags": []
+    },
+    {
+      "slug": "Internet_Slang_2026_zh",
+      "title": "2026热梗",
+      "summary": "用于维护 Chat with Xinbao 语气的年度热梗资料页：有梗，但不牺牲事实性。",
+      "language": "zh",
+      "type": "style guide",
+      "tags": []
+    },
+    {
+      "slug": "AI_and_Networks_zh",
+      "title": "AI 与网络",
+      "summary": "乔鑫宝当前主要研究专题，涵盖网络化数据与通信约束下的 AI 系统。",
+      "language": "zh",
+      "type": "研究专题",
+      "tags": []
+    },
+    {
+      "slug": "Angela_Yingjun_Zhang_zh",
+      "title": "Angela Yingjun Zhang",
+      "summary": "香港中文大学信息工程系教授，乔鑫宝博士导师。",
+      "language": "zh",
+      "type": "Academic advisor",
+      "tags": []
+    },
+    {
+      "slug": "DynFrs_zh",
+      "title": "DynFrs：随机森林机器遗忘高效框架",
+      "summary": "ICLR 2025 论文，研究随机森林中的高效机器遗忘。",
+      "language": "zh",
+      "type": "publication",
+      "tags": []
+    },
+    {
+      "slug": "NUSRI_CQ_zh",
+      "title": "NUSRI-CQ",
+      "summary": "乔鑫宝研究实习阶段所在机构。",
+      "language": "zh",
+      "type": "研究院",
+      "tags": []
+    },
+    {
+      "slug": "Wasserstein_Geometry_zh",
+      "title": "Wasserstein 几何",
+      "summary": "解释使用最优传输几何进行分布比较的概念页。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": []
+    },
+    {
+      "slug": "Qiao_Xinbao_zh",
+      "title": "乔鑫宝",
+      "summary": "香港中文大学信息工程系博士生；研究方向包括数据中心 ML、AI for Networks、Networks for AI、机器遗忘和合成数据可靠性",
+      "language": "zh",
+      "type": "博士生",
+      "tags": []
+    },
+    {
+      "slug": "Fairness_and_Robustness_zh",
+      "title": "公平性与鲁棒性",
+      "summary": "解释公平性与鲁棒性作为数据中心修正目标的概念页。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": []
+    },
+    {
+      "slug": "Distributed_Wasserstein_Barycenter_zh",
+      "title": "分布式 Wasserstein Barycenter",
+      "summary": "解释乔鑫宝关于从分布式局部测度计算 Wasserstein barycenter 的相关工作。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": []
+    },
+    {
+      "slug": "Distributed_Learning_zh",
+      "title": "分布式学习",
+      "summary": "解释数据、计算或通信去中心化条件下的学习问题。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": []
+    },
+    {
+      "slug": "Collaborative_Evaluation_zh",
+      "title": "协作评估",
+      "summary": "解释多方共同评估模型或数据过程的概念页。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": []
+    },
+    {
+      "slug": "Trustworthy_AI_zh",
+      "title": "可信 AI",
+      "summary": "覆盖可靠性、删除、公平性、鲁棒性、可解释性和评估的研究专题。",
+      "language": "zh",
+      "type": "研究专题",
+      "tags": []
+    },
+    {
+      "slug": "Interpretability_zh",
+      "title": "可解释性",
+      "summary": "解释模型行为和数据影响的概念页。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": []
+    },
+    {
+      "slug": "Synthetic_Data_and_Model_Collapse_zh",
+      "title": "合成数据",
+      "summary": "关于合成数据、递归训练、低资源验证、选择偏差和模型坍缩的研究专题。",
+      "language": "zh",
+      "type": "研究专题",
+      "tags": []
+    },
+    {
+      "slug": "Synthetic_Data_zh",
+      "title": "合成数据（概念）",
+      "summary": "解释用于训练、评估或隐私友好协作的生成数据。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": []
+    },
+    {
+      "slug": "LLM_Reliability_zh",
+      "title": "大语言模型可靠性",
+      "summary": "解释大语言模型系统可靠性问题的概念页。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": []
+    },
+    {
+      "slug": "Shandong_University_zh",
+      "title": "山东大学",
+      "summary": "乔鑫宝本科阶段所在机构。",
+      "language": "zh",
+      "type": "公立研究型大学",
+      "tags": []
+    },
+    {
+      "slug": "Meng_Zhang_zh",
+      "title": "张萌",
+      "summary": "浙江大学教师，乔鑫宝硕士导师。",
+      "language": "zh",
+      "type": "Academic advisor",
+      "tags": []
+    },
+    {
+      "slug": "Influence_Functions_zh",
+      "title": "影响函数",
+      "summary": "解释估计训练样本如何影响学习模型的概念页。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": []
+    },
+    {
+      "slug": "Skills_zh",
+      "title": "技能",
+      "summary": "乔鑫宝 CV 中列出的技术技能。",
+      "language": "zh",
+      "type": "技术技能",
+      "tags": []
+    },
+    {
+      "slug": "Education_zh",
+      "title": "教育经历",
+      "summary": "乔鑫宝的教育时间线。",
+      "language": "zh",
+      "type": "教育时间线",
+      "tags": []
+    },
+    {
+      "slug": "Data_Centric_Machine_Learning_zh",
+      "title": "数据中心 ML",
+      "summary": "关注数据质量、选择、估值、修正和治理的研究专题。",
+      "language": "zh",
+      "type": "研究专题",
+      "tags": []
+    },
+    {
+      "slug": "Data_Silos_zh",
+      "title": "数据孤岛",
+      "summary": "解释数据分布在不同持有者之间时的学习与评估问题。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": []
+    },
+    {
+      "slug": "Data_Selection_zh",
+      "title": "数据选择",
+      "summary": "解释在可靠性约束下选择训练或评估数据的概念页。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": []
+    },
+    {
+      "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
+      "title": "无 Hessian 在线认证遗忘",
+      "summary": "ICLR 2025 论文，研究无显式 Hessian 求逆的高效认证机器遗忘。",
+      "language": "zh",
+      "type": "publication",
+      "tags": []
+    },
+    {
+      "slug": "log_zh",
+      "title": "日志",
+      "summary": "Wiki 的追加式维护日志。",
+      "language": "zh",
+      "type": "维护日志",
+      "tags": []
+    },
+    {
+      "slug": "Old_Homepage_Resources_zh",
+      "title": "旧主页资源",
+      "summary": "记录从旧 GitHub 主页保留的一张图片。",
+      "language": "zh",
+      "type": "资源记录",
+      "tags": []
+    },
+    {
+      "slug": "Machine_Unlearning_zh",
+      "title": "机器遗忘",
+      "summary": "研究如何从已训练模型中删除、降低或纠正数据影响。",
+      "language": "zh",
+      "type": "研究专题",
+      "tags": []
+    },
+    {
+      "slug": "Sample_Selection_Bias_zh",
+      "title": "样本选择偏差",
+      "summary": "解释非代表性样本选择引入的分布偏差。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": []
+    },
+    {
+      "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
+      "title": "样本选择偏差何以促成模型坍缩",
+      "summary": "ICML 2026 论文，研究低资源验证场景、样本选择偏差、模型坍缩与协作 Wasserstein 几何代理。",
+      "language": "zh",
+      "type": "publication",
+      "tags": []
+    },
+    {
+      "slug": "Model_Collapse_zh",
+      "title": "模型坍缩",
+      "summary": "解释递归模型训练中退化性分布漂移的概念页。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": []
+    },
+    {
+      "slug": "Zhejiang_University_zh",
+      "title": "浙江大学",
+      "summary": "乔鑫宝硕士阶段所在机构。",
+      "language": "zh",
+      "type": "公立研究型大学",
+      "tags": []
+    },
+    {
+      "slug": "Research_zh",
+      "title": "研究",
+      "summary": "乔鑫宝学术 wiki 的研究概览。",
+      "language": "zh",
+      "type": "研究概览",
+      "tags": []
+    },
+    {
+      "slug": "Experience_zh",
+      "title": "研究经历",
+      "summary": "研究经历与机构关系。",
+      "language": "zh",
+      "type": "研究经历",
+      "tags": []
+    },
+    {
+      "slug": "CV_zh",
+      "title": "简历",
+      "summary": "乔鑫宝的结构化 CV 摘要。",
+      "language": "zh",
+      "type": "CV 摘要",
+      "tags": []
+    },
+    {
+      "slug": "index_zh",
+      "title": "索引",
+      "summary": "Wiki 页面索引。",
+      "language": "zh",
+      "type": "Wiki 索引",
+      "tags": []
+    },
+    {
+      "slug": "Certified_Data_Removal_zh",
+      "title": "认证数据删除",
+      "summary": "解释机器遗忘中删除保证的概念页。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": []
+    },
+    {
+      "slug": "Publications_zh",
+      "title": "论文",
+      "summary": "乔鑫宝的论文索引。",
+      "language": "zh",
+      "type": "论文列表",
+      "tags": []
+    },
+    {
+      "slug": "Soft_Weighted_Machine_Unlearning_zh",
+      "title": "超越二元擦除：用于公平性与鲁棒性的软加权遗忘",
+      "summary": "AAAI 2026 论文，研究用于公平性与鲁棒性修正的软加权机器遗忘。",
+      "language": "zh",
+      "type": "publication",
+      "tags": []
+    },
+    {
+      "slug": "Recursive_Synthetic_Data_Training_zh",
+      "title": "递归合成数据训练",
+      "summary": "解释模型反复使用早期模型生成数据进行训练的过程。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": []
+    },
+    {
+      "slug": "Random_Forest_zh",
+      "title": "随机森林",
+      "summary": "解释 DynFrs 所研究的随机森林模型类别。",
+      "language": "zh",
+      "type": "模型族",
+      "tags": []
+    },
+    {
+      "slug": "Projects_zh",
+      "title": "项目",
+      "summary": "研究项目与项目簇。",
+      "language": "zh",
+      "type": "项目概览",
+      "tags": []
+    },
+    {
+      "slug": "The_Chinese_University_of_Hong_Kong_zh",
+      "title": "香港中文大学",
+      "summary": "乔鑫宝当前博士阶段所在机构。",
+      "language": "zh",
+      "type": "公立研究型大学",
+      "tags": []
+    }
+  ]
+}
