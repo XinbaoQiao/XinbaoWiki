@@ -148,9 +148,9 @@ assert.doesNotMatch(siteIcon, /r="24"|font-size="25"/, 'site icon no longer uses
 assert.match(layout, /title: 'Xinbaopedia'/, 'site metadata title is Xinbaopedia');
 assert.match(layout, /icons: \{ icon: pathWithBasePath\('\/xinbaopedia-icon\.svg'\) \}/, 'site metadata exposes a base-path-aware wiki-style icon');
 assert.match(layout, /import 'katex\/dist\/katex\.min\.css';/, 'layout imports KaTeX CSS for rendered formulas');
-assert.doesNotMatch(layout, /wiki-logo-mark|<img className=/, 'topbar follows Colarpedia with a text-only wordmark');
-assert.match(layout, /className="wiki-logo"[\s\S]*style=\{\{ textDecoration: 'none' \}\}[\s\S]*Xinbaopedia/, 'topbar wordmark mirrors Colarpedia link styling');
-assert.match(layout, /<ArticleTabs \/>/, 'article tools are isolated like Colarpedia WikiTopBar');
+assert.doesNotMatch(layout, /wiki-logo-mark|<img className=/, 'topbar uses a text-only wordmark');
+assert.match(layout, /className="wiki-logo"[\s\S]*href=\{pathWithBasePath\('\/'\)\}[\s\S]*wiki-logo-word[\s\S]*Xinbaopedia[\s\S]*wiki-logo-subtitle[\s\S]*The Academic Wiki/, 'topbar wordmark links to the Wikipedia-style portal homepage');
+assert.match(layout, /<ArticleTabs \/>/, 'article tools stay isolated in the top-level layout');
 assert.match(layout, /import \{ WikiSearch \} from '@\/components\/WikiSearch';/, 'layout imports the interactive wiki search component');
 assert.match(layout, /import \{ getSearchIndex, pathWithBasePath \} from '@\/lib\/wiki';/, 'layout imports the static search index builder');
 assert.match(layout, /const searchIndex = getSearchIndex\(\);/, 'layout builds the search index server-side');
@@ -485,7 +485,8 @@ assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers
 
 const infobox = fs.readFileSync(path.join(root, 'components/Infobox.tsx'), 'utf8');
 const styles = fs.readFileSync(path.join(root, 'app/globals.css'), 'utf8');
-assert.doesNotMatch(styles, /\.wiki-logo-mark|\.wiki-logo:hover/, 'topbar CSS does not keep custom logo-image styling');
+const homePage = fs.readFileSync(path.join(root, 'app/page.tsx'), 'utf8');
+assert.doesNotMatch(styles, /\.wiki-logo-mark/, 'topbar CSS does not keep custom logo-image styling');
 assert.match(styles, /\.wiki-body p:has\(> img:only-child\) \{[\s\S]*display: flow-root;[\s\S]*text-align: center;[\s\S]*\}/, 'article image paragraphs avoid floated infobox overlap without adding a large clear gap');
 assert.doesNotMatch(styles, /\.wiki-body p:has\(> img:only-child\) \{[\s\S]*clear: both;[\s\S]*\}/, 'article image paragraphs do not force images below floated infoboxes');
 assert.match(styles, /\.wiki-body img \{[\s\S]*max-width: min\(100%, 520px\);[\s\S]*max-height: 380px;[\s\S]*object-fit: contain;[\s\S]*\}/, 'article images use a medium paper-figure size');
@@ -496,10 +497,18 @@ assert.match(styles, /\.wiki-search-panel \{[\s\S]*position: absolute;[\s\S]*max
 assert.match(styles, /\.wiki-search-result \{[\s\S]*display: grid;[\s\S]*grid-template-columns: 1fr auto;[\s\S]*\}/, 'search result rows use a compact two-column layout');
 assert.match(styles, /\.wiki-search-result:hover,[\s\S]*\.wiki-search-result\[aria-selected="true"\] \{[\s\S]*background: #eaecf0;[\s\S]*\}/, 'search result hover and keyboard active states are visible');
 assert.match(styles, /\.chat-xinbao-message \.katex-display \{[\s\S]*overflow-x: auto;[\s\S]*\}/, 'chat markdown formulas can scroll inside message bubbles');
-assert.match(styles, /\.wiki-logo \{\n\s+font-family: var\(--font-serif\);\n\s+font-size: 22px;\n\s+font-weight: 400;\n\s+color: var\(--wiki-text\);\n\}/, 'topbar logo CSS matches Colarpedia text wordmark');
+assert.match(styles, /\.wiki-logo \{[\s\S]*display: inline-grid;[\s\S]*min-width: 148px;[\s\S]*text-decoration: none;[\s\S]*\}/, 'topbar logo CSS uses a compact Wikipedia-style wordmark container');
+assert.match(styles, /\.wiki-logo:hover \{[\s\S]*text-decoration: none;[\s\S]*\}/, 'topbar logo hover does not underline the two-line wordmark');
+assert.match(styles, /\.wiki-logo-word \{[\s\S]*font-family: var\(--font-serif\);[\s\S]*font-size: 23px;[\s\S]*\}/, 'topbar wordmark uses the wiki serif face');
+assert.match(styles, /\.wiki-logo-subtitle \{[\s\S]*font-family: var\(--font-sans\);[\s\S]*text-transform: uppercase;[\s\S]*\}/, 'topbar subtitle uses a small uppercase sans style');
+assert.match(styles, /\.wiki-portal-hero \{[\s\S]*max-width: 760px;[\s\S]*text-align: center;[\s\S]*\}/, 'homepage has a centered Wikipedia-style portal hero');
+assert.match(styles, /\.wiki-search-portal input \{[\s\S]*height: 44px;[\s\S]*font-size: 16px;[\s\S]*\}/, 'homepage search input is larger than the topbar search');
+assert.match(styles, /\.wiki-portal-grid \{[\s\S]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);[\s\S]*\}/, 'homepage browse directory uses a three-column desktop layout');
+assert.match(styles, /\.wiki-shell:has\(\.wiki-portal\) \.wiki-sidebar \{[\s\S]*display: none;[\s\S]*\}/, 'homepage hides the article sidebar');
+assert.match(homePage, /<WikiSearch items=\{searchIndex\} showChat=\{false\} variant="portal" \/>/, 'homepage uses the large portal search without the chat trigger');
 const sidebarLinkStyle = styles.match(/\.wiki-sidebar a \{([\s\S]*?)\}/);
 assert.ok(sidebarLinkStyle, 'sidebar link style block exists');
-assert.doesNotMatch(sidebarLinkStyle[1], /white-space: nowrap;/, 'sidebar link CSS follows Colarpedia without custom nowrap styling');
+assert.doesNotMatch(sidebarLinkStyle[1], /white-space: nowrap;/, 'sidebar link CSS avoids custom nowrap styling');
 assert.match(infobox, /location: 'Conference location'/, 'infobox labels conference location');
 assert.match(infobox, /department: 'Department'/, 'infobox supports institution department rows');
 assert.match(infobox, /dates: 'Dates'/, 'infobox supports institution date rows');
@@ -686,7 +695,7 @@ const cvTex = fs.readFileSync(path.join(root, 'CV.tex'), 'utf8');
 assert.match(cvTex, /xinbaoqiao@cuhk\.edu\.hk/, 'CV uses current CUHK email');
 assert.doesNotMatch(cvTex, /xinbaoqiao@zju\.edu\.cn/, 'CV removes old Zhejiang email');
 assert.match(cvTex, /The Chinese University of Hong Kong/, 'CV includes current PhD affiliation');
-assert.match(cvTex, /When Sample Selection Bias Precipitates Model Collapse[\s\S]*ICML, 2026/, 'CV updates model-collapse paper status');
+assert.match(cvTex, /When[\s\S]*Sample Selection Bias[\s\S]*Model Collapse[\s\S]*ICML,? 2026/, 'CV updates model-collapse paper status');
 assert.doesNotMatch(cvTex, /withheld\s+LLM\s+manuscript/i, 'CV omits withheld manuscript notes');
 
 const publicImages = fs.readdirSync(path.join(root, 'public/images')).filter((file) => /\.(png|jpe?g|gif|webp|svg|ico)$/i.test(file));

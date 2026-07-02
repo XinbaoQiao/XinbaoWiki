@@ -12,7 +12,10 @@ function activeSlug(pathname: string) {
 }
 
 export function ArticleTabs() {
-  const slug = activeSlug(usePathname() || '');
+  const pathname = usePathname() || '';
+  if (!decodeURIComponent(pathname).split('/').includes('wiki')) return null;
+
+  const slug = activeSlug(pathname);
   const fileName = `${slug}.md`;
   const talk = `${GITHUB_BASE}/issues/new?title=${encodeURIComponent(`Talk: ${slug}`)}`;
   const source = `${GITHUB_BASE}/edit/main/wiki/${encodeURIComponent(fileName)}`;
