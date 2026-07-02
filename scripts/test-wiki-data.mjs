@@ -273,8 +273,10 @@ assert.match(wikiLib, /hidden\?: boolean/, 'wiki frontmatter supports hidden pag
 assert.match(wikiLib, /\.filter\(\(page\) => page\.data\.hidden !== true\)/, 'search index excludes hidden pages');
 assert.match(wikiPageTsx, /isChineseSlug\(page\.slug\)/, 'wiki page detects Chinese article slugs');
 assert.match(wikiPageTsx, /preprocessWikiLinks\(page\.content, \{ language \}\)/, 'wiki page passes language into wikilink preprocessing');
+assert.match(wikiPageTsx, /<Infobox data=\{page\.data\} language=\{language\} \/>/, 'wiki page passes route language into the infobox chrome');
 assert.match(wikiSearch, /'use client';/, 'wiki search is a client component');
 assert.match(wikiSearch, /import \{ ChatWithXinbao \} from '@\/components\/ChatWithXinbao';/, 'wiki search imports Chat with Xinbao');
+assert.match(wikiSearch, /const searchCopy = \{[\s\S]*en: \{[\s\S]*submit: 'Search'[\s\S]*zh: \{[\s\S]*submit: '搜索'/, 'wiki search localizes its visible search chrome');
 assert.match(wikiSearch, /showLanguageSelect\?: boolean;/, 'wiki search can expose an inline language selector');
 assert.match(wikiSearch, /language\?: SearchLanguage;/, 'wiki search accepts an externally controlled language');
 assert.match(wikiSearch, /onLanguageChange\?: \(language: SearchLanguage\) => void;/, 'wiki search can notify the portal when the selected language changes');
@@ -291,6 +293,9 @@ assert.match(wikiSearch, /role="listbox"/, 'wiki search renders accessible resul
 assert.match(wikiSearch, /window\.location\.assign\(item\.href\)/, 'wiki search submit navigates to the selected result');
 assert.match(articleTabs, /usePathname/, 'article tools derive the active page from the current route');
 assert.match(articleTabs, /href="#"/, 'active Article tab uses the Colarpedia inert article link');
+assert.match(articleTabs, /article: 'Article'[\s\S]*article: '条目'/, 'article tools localize the active article label');
+assert.match(articleTabs, /source: 'View source'[\s\S]*source: '查看源代码'/, 'article tools localize the source label');
+assert.match(articleTabs, /history: 'History'[\s\S]*history: '历史'/, 'article tools localize the history label');
 assert.match(articleTabs, /issues\/new\?title=/, 'Talk links directly to GitHub new issue creation');
 assert.match(articleTabs, /Talk: \$\{slug\}/, 'Talk issue title is page-specific');
 assert.match(articleTabs, /edit\/main\/wiki\/\$\{encodeURIComponent\(fileName\)\}/, 'View source edits the current markdown page');
@@ -434,21 +439,24 @@ assert.doesNotMatch(
 
 const sidebar = fs.readFileSync(path.join(root, 'components/Sidebar.tsx'), 'utf8');
 assert.doesNotMatch(sidebar, /Notable works/, 'sidebar no longer uses Notable works');
-assert.match(sidebar, /<aside className="wiki-sidebar" aria-label="Navigation">/, 'sidebar matches Colarpedia aside structure and aria label');
+assert.match(sidebar, /'use client';/, 'sidebar can read the current route language');
+assert.match(sidebar, /usePathname/, 'sidebar derives language from the current route');
+assert.match(sidebar, /<aside className="wiki-sidebar" aria-label=\{sectionLabels\.navigation\[language\]\}>/, 'sidebar localizes the navigation aria label');
 assert.doesNotMatch(sidebar, /function NavSection|className="nav-section"|<section className="nav-section">/, 'sidebar uses flat Colarpedia h4 plus ul blocks');
 assert.match(sidebar, /const navigation = \['Xinbao_Qiao', 'Publications'\]/, 'sidebar navigation includes the main page and Publications');
-assert.match(sidebar, /'Xinbao_Qiao': 'Main page'/, 'sidebar keeps the homepage label compact');
-assert.match(sidebar, /<h4>Navigation<\/h4>[\s\S]*<h4>Research topics<\/h4>[\s\S]*<h4>Education<\/h4>[\s\S]*<h4>Experience<\/h4>[\s\S]*<h4>Contribute<\/h4>/, 'sidebar places Experience after Education');
+assert.match(sidebar, /Xinbao_Qiao: \{ en: 'Main page', zh: '主页' \}/, 'sidebar keeps the homepage label compact and localized');
+assert.match(sidebar, /navigation: \{ en: 'Navigation', zh: '导航' \}[\s\S]*researchTopics: \{ en: 'Research topics', zh: '研究主题' \}[\s\S]*education: \{ en: 'Education', zh: '教育经历' \}[\s\S]*experience: \{ en: 'Experience', zh: '研究经历' \}[\s\S]*contribute: \{ en: 'Contribute', zh: '链接' \}/, 'sidebar places Experience after Education and localizes section headings');
 assert.doesNotMatch(sidebar, /Source repository/, 'sidebar contribute links avoid the source repository label');
 assert.doesNotMatch(sidebar, /OpenReview profile/, 'sidebar contribute avoids non-Colarpedia sidebar labels');
-assert.match(sidebar, /LinkedIn[\s\S]*Email the author/, 'sidebar contribute mirrors Colarpedia with LinkedIn before email');
+assert.match(sidebar, /LinkedIn[\s\S]*sectionLabels\.email\[language\]/, 'sidebar contribute mirrors Colarpedia with LinkedIn before email');
 assert.doesNotMatch(sidebar, /className="external" href="mailto:/, 'email link is not styled as an external link');
 for (const shortLabel of ['CUHK', 'NUSRI-CQ', 'ZJU', 'SDU']) {
-  assert.match(sidebar, new RegExp(`'[^']+': '${shortLabel}'`), `sidebar uses short label ${shortLabel}`);
+  assert.match(sidebar, new RegExp(`en: '${shortLabel}'`), `sidebar uses short label ${shortLabel}`);
 }
-assert.match(sidebar, /'AI_and_Networks': 'AI and Networks'/, 'sidebar labels AI and Networks as a short topic');
-assert.match(sidebar, /'Synthetic_Data_and_Model_Collapse': 'Synthetic Data'/, 'sidebar shortens synthetic-data topic');
-assert.match(sidebar, /'Data_Centric_Machine_Learning': 'Data Centric ML'/, 'sidebar shortens data-centric topic');
+assert.match(sidebar, /AI_and_Networks: \{ en: 'AI and Networks', zh: 'AI 与网络' \}/, 'sidebar labels AI and Networks as a short topic');
+assert.match(sidebar, /Synthetic_Data_and_Model_Collapse: \{ en: 'Synthetic Data', zh: '合成数据' \}/, 'sidebar shortens synthetic-data topic');
+assert.match(sidebar, /Data_Centric_Machine_Learning: \{ en: 'Data Centric ML', zh: '数据中心 ML' \}/, 'sidebar shortens data-centric topic');
+assert.match(sidebar, /function localizedSlug\(slug: string, language: SidebarLanguage\)/, 'sidebar builds localized article links');
 assert.match(sidebar, /const education = \['The_Chinese_University_of_Hong_Kong', 'Zhejiang_University', 'Shandong_University'\]/, 'sidebar education is reverse chronological');
 assert.match(sidebar, /const experience = \['NUSRI_CQ'\]/, 'sidebar experience keeps only NUSRI-CQ');
 assert.doesNotMatch(sidebar, /Synthetic Data and Model Collapse/, 'sidebar avoids long research-topic labels');
@@ -588,7 +596,7 @@ assert.match(styles, /\.wiki-portal-name \{[\s\S]*font-family: var\(--font-signa
 assert.doesNotMatch(styles, /\.wiki-portal-emblem/, 'homepage no longer styles an in-page portal icon');
 assert.match(styles, /\.wiki-search-portal input \{[\s\S]*height: 44px;[\s\S]*font-size: 16px;[\s\S]*\}/, 'homepage search input is larger than the topbar search');
 assert.match(styles, /\.wiki-search-portal \.wiki-search-language-select \{[\s\S]*width: 112px;[\s\S]*height: 44px;[\s\S]*\}/, 'homepage search includes a language selector');
-assert.match(styles, /\.wiki-search-portal \.chat-xinbao-trigger \{[\s\S]*width: 44px;[\s\S]*height: 44px;[\s\S]*\}/, 'homepage search keeps the Chat with Xinbao trigger visible');
+assert.doesNotMatch(styles, /\.wiki-search-portal \.chat-xinbao-trigger/, 'homepage uses the shared Chat with Xinbao trigger template instead of a portal-specific one');
 assert.match(styles, /\.chat-xinbao-shell \{[\s\S]*border-radius: 8px;[\s\S]*box-shadow: 0 18px 48px[\s\S]*\}/, 'Chat with Xinbao opens as a polished rounded floating panel');
 assert.match(styles, /\.chat-xinbao-message \{[\s\S]*border-radius: 8px;[\s\S]*\}/, 'Chat with Xinbao message bubbles have a cleaner shape');
 assert.match(styles, /\.chat-xinbao-composer button \{[\s\S]*background: #36c;[\s\S]*color: #ffffff;[\s\S]*\}/, 'Chat with Xinbao send button uses the wiki accent as a clear action');
@@ -617,6 +625,11 @@ const sidebarLinkStyle = styles.match(/\.wiki-sidebar a \{([\s\S]*?)\}/);
 assert.ok(sidebarLinkStyle, 'sidebar link style block exists');
 assert.doesNotMatch(sidebarLinkStyle[1], /white-space: nowrap;/, 'sidebar link CSS avoids custom nowrap styling');
 assert.match(infobox, /location: 'Conference location'/, 'infobox labels conference location');
+assert.match(infobox, /type InfoboxLanguage = 'en' \| 'zh'/, 'infobox supports explicit route language');
+assert.match(infobox, /rowLabels = language === 'zh' \? zhLabels : labels/, 'infobox chooses row labels from the route language');
+assert.match(infobox, /occupation: '职业'[\s\S]*education: '教育经历'/, 'infobox includes Chinese labels for occupation and education');
+assert.match(infobox, /item\.url\.startsWith\('mailto:'\) \? \(language === 'zh' \? '邮箱' : 'Email'\)/, 'infobox localizes the email row label');
+assert.match(infobox, /toChineseSlug\(slug\)[\s\S]*toEnglishSlug\(slug\)/, 'infobox localizes internal wiki links in frontmatter rows');
 assert.match(infobox, /department: 'Department'/, 'infobox supports institution department rows');
 assert.match(infobox, /dates: 'Dates'/, 'infobox supports institution date rows');
 assert.match(infobox, /place: 'Location'/, 'infobox supports institution location rows');

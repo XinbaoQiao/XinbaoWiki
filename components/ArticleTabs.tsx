@@ -3,6 +3,28 @@
 import { usePathname } from 'next/navigation';
 
 const GITHUB_BASE = 'https://github.com/XinbaoQiao/XinbaoWiki';
+const labels = {
+  en: {
+    aria: 'Article tools',
+    article: 'Article',
+    talk: 'Talk',
+    talkTitle: 'Open a GitHub issue to discuss this page',
+    source: 'View source',
+    sourceTitle: 'Edit this page on GitHub',
+    history: 'History',
+    historyTitle: "View this page's commit history"
+  },
+  zh: {
+    aria: '条目工具',
+    article: '条目',
+    talk: '讨论',
+    talkTitle: '在 GitHub 上讨论此页面',
+    source: '查看源代码',
+    sourceTitle: '在 GitHub 上编辑此页面',
+    history: '历史',
+    historyTitle: '查看此页面的提交历史'
+  }
+};
 
 function activeSlug(pathname: string) {
   const decoded = decodeURIComponent(pathname);
@@ -11,46 +33,52 @@ function activeSlug(pathname: string) {
   return wikiIndex >= 0 && parts[wikiIndex + 1] ? parts[wikiIndex + 1] : 'Xinbao_Qiao';
 }
 
+function isChineseSlug(slug: string) {
+  return slug === 'Qiao_Xinbao_zh' || slug.endsWith('_zh');
+}
+
 export function ArticleTabs() {
   const pathname = usePathname() || '';
   if (!decodeURIComponent(pathname).split('/').includes('wiki')) return null;
 
   const slug = activeSlug(pathname);
+  const language = isChineseSlug(slug) ? 'zh' : 'en';
+  const copy = labels[language];
   const fileName = `${slug}.md`;
   const talk = `${GITHUB_BASE}/issues/new?title=${encodeURIComponent(`Talk: ${slug}`)}`;
   const source = `${GITHUB_BASE}/edit/main/wiki/${encodeURIComponent(fileName)}`;
   const history = `${GITHUB_BASE}/commits/main/wiki/${encodeURIComponent(fileName)}`;
 
   return (
-    <nav className="wiki-tabs" aria-label="Article tools">
+    <nav className="wiki-tabs" aria-label={copy.aria}>
       <div className="wiki-tabs-inner">
-        <a href="#" className="active">Article</a>
+        <a href="#" className="active">{copy.article}</a>
         <a
           className="external"
           href={talk}
           target="_blank"
           rel="noreferrer"
-          title="Open a GitHub issue to discuss this page"
+          title={copy.talkTitle}
         >
-          Talk
+          {copy.talk}
         </a>
         <a
           className="external"
           href={source}
           target="_blank"
           rel="noreferrer"
-          title="Edit this page on GitHub"
+          title={copy.sourceTitle}
         >
-          View source
+          {copy.source}
         </a>
         <a
           className="external"
           href={history}
           target="_blank"
           rel="noreferrer"
-          title="View this page's commit history on GitHub"
+          title={copy.historyTitle}
         >
-          History
+          {copy.history}
         </a>
       </div>
     </nav>

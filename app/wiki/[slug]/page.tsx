@@ -30,7 +30,7 @@ export default async function WikiPage({ params }: Props) {
         </span>
       </h1>
       {page.summary && <p className="wiki-title-sub">{page.summary}</p>}
-      <Infobox data={page.data} />
+      <Infobox data={page.data} language={language} />
       <WikiMarkdown sourceHref={sourceHref} markdown={preprocessWikiLinks(page.content, { language })} />
     </article>
   );

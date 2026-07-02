@@ -24,6 +24,23 @@ type PreparedSearchItem = SearchIndexItem & {
   normalizedTitle: string;
 };
 
+const searchCopy = {
+  en: {
+    empty: 'No matching pages',
+    inputAria: 'Search Xinbaopedia',
+    languageAria: 'Search language',
+    placeholder: 'Search Xinbaopedia',
+    submit: 'Search'
+  },
+  zh: {
+    empty: '没有匹配页面',
+    inputAria: '搜索 Xinbaopedia',
+    languageAria: '搜索语言',
+    placeholder: '搜索 Xinbaopedia',
+    submit: '搜索'
+  }
+};
+
 function normalize(value: string) {
   return value
     .toLocaleLowerCase()
@@ -146,6 +163,7 @@ export function WikiSearch({
   }
 
   if (hideOnPortal && isPortalPath(pathname)) return null;
+  const copy = searchCopy[activeLanguage];
 
   const rootClassName = [
     'wiki-search',
@@ -168,7 +186,7 @@ export function WikiSearch({
             aria-autocomplete="list"
             aria-controls={listboxId}
             aria-expanded={open && normalizedQuery ? 'true' : 'false'}
-            aria-label="Search Xinbaopedia"
+            aria-label={copy.inputAria}
             autoComplete="off"
             onChange={(event) => {
               setQuery(event.target.value);
@@ -192,13 +210,13 @@ export function WikiSearch({
                 setActive((index) => (index - 1 + results.length) % results.length);
               }
             }}
-            placeholder="Search Xinbaopedia"
+            placeholder={copy.placeholder}
             type="search"
             value={query}
           />
           {showLanguageSelect && (
             <select
-              aria-label="Search language"
+              aria-label={copy.languageAria}
               className="wiki-search-language-select"
               onChange={(event) => {
                 const nextLanguage = event.target.value === 'zh' ? 'zh' : 'en';
@@ -212,7 +230,7 @@ export function WikiSearch({
               <option value="zh">中文</option>
             </select>
           )}
-          <button className="wiki-search-submit" type="submit">Search</button>
+          <button className="wiki-search-submit" type="submit">{copy.submit}</button>
         </div>
       </form>
       {open && normalizedQuery && (
@@ -236,7 +254,7 @@ export function WikiSearch({
               </a>
             ))
           ) : (
-            <div className="wiki-search-empty">No matching pages</div>
+            <div className="wiki-search-empty">{copy.empty}</div>
           )}
         </div>
       )}

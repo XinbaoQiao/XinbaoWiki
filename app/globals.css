@@ -340,13 +340,6 @@ a.external::after {
   font-size: 14px;
 }
 
-.wiki-search-portal .chat-xinbao-trigger {
-  width: 44px;
-  height: 44px;
-  flex-basis: 44px;
-  font-size: 13px;
-}
-
 .wiki-search-portal .wiki-search-panel {
   top: calc(100% + 6px);
   max-height: min(440px, 58vh);
@@ -1361,12 +1354,6 @@ body:has(.wiki-portal) .wiki-topbar {
     width: 86px;
     padding-left: 8px;
     font-size: 12px;
-  }
-
-  .wiki-search-portal .chat-xinbao-trigger {
-    width: 40px;
-    height: 40px;
-    flex-basis: 40px;
   }
 
   .wiki-portal-editions {

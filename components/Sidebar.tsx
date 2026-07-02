@@ -1,63 +1,112 @@
-import { pathWithBasePath } from '@/lib/wiki';
+'use client';
+
+import { usePathname } from 'next/navigation';
 
 const navigation = ['Xinbao_Qiao', 'Publications'];
 const researchTopics = ['AI_and_Networks', 'Machine_Unlearning', 'Synthetic_Data_and_Model_Collapse', 'Data_Centric_Machine_Learning'];
 const experience = ['NUSRI_CQ'];
 const education = ['The_Chinese_University_of_Hong_Kong', 'Zhejiang_University', 'Shandong_University'];
 
-const navLabels: Record<string, string> = {
-  'Xinbao_Qiao': 'Main page',
-  'AI_and_Networks': 'AI and Networks',
-  'Machine_Unlearning': 'Machine Unlearning',
-  'Synthetic_Data_and_Model_Collapse': 'Synthetic Data',
-  'Data_Centric_Machine_Learning': 'Data Centric ML',
-  'The_Chinese_University_of_Hong_Kong': 'CUHK',
-  'NUSRI_CQ': 'NUSRI-CQ',
-  'Zhejiang_University': 'ZJU',
-  'Shandong_University': 'SDU'
+type SidebarLanguage = 'en' | 'zh';
+type LocalizedText = Record<SidebarLanguage, string>;
+
+const sectionLabels = {
+  navigation: { en: 'Navigation', zh: '导航' },
+  researchTopics: { en: 'Research topics', zh: '研究主题' },
+  education: { en: 'Education', zh: '教育经历' },
+  experience: { en: 'Experience', zh: '研究经历' },
+  contribute: { en: 'Contribute', zh: '链接' },
+  email: { en: 'Email the author', zh: '发送邮件' }
+} satisfies Record<string, LocalizedText>;
+
+const navLabels: Record<string, LocalizedText> = {
+  Xinbao_Qiao: { en: 'Main page', zh: '主页' },
+  Publications: { en: 'Publications', zh: '论文' },
+  AI_and_Networks: { en: 'AI and Networks', zh: 'AI 与网络' },
+  Machine_Unlearning: { en: 'Machine Unlearning', zh: '机器遗忘' },
+  Synthetic_Data_and_Model_Collapse: { en: 'Synthetic Data', zh: '合成数据' },
+  Data_Centric_Machine_Learning: { en: 'Data Centric ML', zh: '数据中心 ML' },
+  The_Chinese_University_of_Hong_Kong: { en: 'CUHK', zh: '香港中文大学' },
+  NUSRI_CQ: { en: 'NUSRI-CQ', zh: 'NUSRI-CQ' },
+  Zhejiang_University: { en: 'ZJU', zh: '浙江大学' },
+  Shandong_University: { en: 'SDU', zh: '山东大学' }
 };
 
-function wikiHref(slug: string) {
-  return pathWithBasePath(`/wiki/${encodeURIComponent(slug)}/`);
+function withBasePath(pathname: string) {
+  const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
+  return basePath ? `${basePath}${pathname}` : pathname;
 }
 
-function label(slug: string) {
-  if (navLabels[slug]) return navLabels[slug];
+function isChineseSlug(slug: string) {
+  return slug === 'Qiao_Xinbao_zh' || slug.endsWith('_zh');
+}
+
+function activeSlug(pathname: string) {
+  const decoded = decodeURIComponent(pathname);
+  const parts = decoded.replace(/\/+$/, '').split('/').filter(Boolean);
+  const wikiIndex = parts.lastIndexOf('wiki');
+  return wikiIndex >= 0 && parts[wikiIndex + 1] ? parts[wikiIndex + 1] : 'Xinbao_Qiao';
+}
+
+function chineseSlug(slug: string) {
+  if (slug === 'Xinbao_Qiao') return 'Qiao_Xinbao_zh';
+  if (isChineseSlug(slug)) return slug;
+  return `${slug}_zh`;
+}
+
+function englishSlug(slug: string) {
+  if (slug === 'Qiao_Xinbao_zh') return 'Xinbao_Qiao';
+  return slug.endsWith('_zh') ? slug.slice(0, -3) : slug;
+}
+
+function localizedSlug(slug: string, language: SidebarLanguage) {
+  return language === 'zh' ? chineseSlug(slug) : englishSlug(slug);
+}
+
+function wikiHref(slug: string, language: SidebarLanguage) {
+  return withBasePath(`/wiki/${encodeURIComponent(localizedSlug(slug, language))}/`);
+}
+
+function label(slug: string, language: SidebarLanguage) {
+  if (navLabels[slug]) return navLabels[slug][language];
   return slug.replaceAll('_', ' ');
 }
 
 export function Sidebar() {
+  const pathname = usePathname() || '';
+  const language: SidebarLanguage = isChineseSlug(activeSlug(pathname)) ? 'zh' : 'en';
+
   return (
-    <aside className="wiki-sidebar" aria-label="Navigation">
-      <h4>Navigation</h4>
+    <aside className="wiki-sidebar" aria-label={sectionLabels.navigation[language]}>
+      <h4>{sectionLabels.navigation[language]}</h4>
       <ul>
         {navigation.map((item) => (
-          <li key={item}><a href={wikiHref(item)}>{label(item)}</a></li>
+          <li key={item}><a href={wikiHref(item, language)}>{label(item, language)}</a></li>
         ))}
       </ul>
 
-      <h4>Research topics</h4>
+      <h4>{sectionLabels.researchTopics[language]}</h4>
       <ul>
         {researchTopics.map((item) => (
-          <li key={item}><a href={wikiHref(item)}>{label(item)}</a></li>
+          <li key={item}><a href={wikiHref(item, language)}>{label(item, language)}</a></li>
         ))}
       </ul>
 
-      <h4>Education</h4>
+      <h4>{sectionLabels.education[language]}</h4>
       <ul>
         {education.map((item) => (
-          <li key={item}><a href={wikiHref(item)}>{label(item)}</a></li>
+          <li key={item}><a href={wikiHref(item, language)}>{label(item, language)}</a></li>
         ))}
       </ul>
 
-      <h4>Experience</h4>
+      <h4>{sectionLabels.experience[language]}</h4>
       <ul>
         {experience.map((item) => (
-          <li key={item}><a href={wikiHref(item)}>{label(item)}</a></li>
+          <li key={item}><a href={wikiHref(item, language)}>{label(item, language)}</a></li>
         ))}
       </ul>
 
-      <h4>Contribute</h4>
+      <h4>{sectionLabels.contribute[language]}</h4>
       <ul>
         <li>
           <a
@@ -69,7 +118,7 @@ export function Sidebar() {
             LinkedIn
           </a>
         </li>
-        <li><a href="mailto:xinbaoqiao@cuhk.edu.hk">Email the author</a></li>
+        <li><a href="mailto:xinbaoqiao@cuhk.edu.hk">{sectionLabels.email[language]}</a></li>
       </ul>
     </aside>
   );
