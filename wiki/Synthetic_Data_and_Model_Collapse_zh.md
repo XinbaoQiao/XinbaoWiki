@@ -17,6 +17,10 @@ aliases:
 occupation: 研究专题
 image: /topics/synthetic-data.png
 image_caption: 合成数据主题图
+relations:
+  - type: depends-on
+    target: Synthetic_Data
+    label: 概念基础
 translation_of: Synthetic_Data_and_Model_Collapse
 ---
 **合成数据** 是本 wiki 对乔鑫宝关于生成数据、递归训练和模型坍缩研究的简短专题名。完整研究簇还包括 [[Recursive_Synthetic_Data_Training|递归合成数据训练]]、[[Data_Selection|数据选择]]、[[Sample_Selection_Bias|样本选择偏差]]、[[Model_Collapse|模型坍缩]]、[[Data_Silos|数据孤岛]] 和 [[Wasserstein_Geometry|Wasserstein 几何]]。[^collapse]

@@ -29,3 +29,9 @@ occupation: Technical skills
 ## Research workflow
 
 The site is designed so future updates can be made by editing markdown pages under `wiki/`, rather than rebuilding the entire homepage manually.
+
+## See also
+
+- [[CV]]
+- [[Research]]
+- [[Xinbao_Qiao]]

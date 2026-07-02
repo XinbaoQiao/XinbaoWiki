@@ -1,6 +1,6 @@
 ---
 type: Research concept
-title: Synthetic Data
+title: Synthetic Data (concept)
 description: >-
   Concept page for generated data used in training, evaluation, or
   privacy-preserving collaboration.

@@ -1,6 +1,6 @@
 ---
 type: Research concept
-title: Synthetic Data
+title: Synthetic Data (concept)
 description: >-
   Concept page for generated data used in training, evaluation, or
   privacy-preserving collaboration.
@@ -11,7 +11,7 @@ tags:
   - research-concept
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
-name: Synthetic Data
+name: Synthetic Data (concept)
 summary: >-
   Concept page for generated data used in training, evaluation, or
   privacy-preserving collaboration.

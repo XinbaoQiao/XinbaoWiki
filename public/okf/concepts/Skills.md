@@ -33,3 +33,9 @@ source_path: wiki/Skills.md
 ## Research workflow
 
 The site is designed so future updates can be made by editing markdown pages under `wiki/`, rather than rebuilding the entire homepage manually.
+
+## See also
+
+- [CV](./CV.md)
+- [Research](./Research.md)
+- [Xinbao Qiao](./Xinbao_Qiao.md)

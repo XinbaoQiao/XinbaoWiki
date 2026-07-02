@@ -33,3 +33,9 @@ source_path: wiki/Skills_zh.md
 ## 研究工作流
 
 该站点设计为通过编辑 wiki/ 下的 markdown 页面完成未来更新，而不是每次手动重建整个主页。
+
+## 参见
+
+- [CV](./CV_zh.md)
+- [研究](./Research_zh.md)
+- [乔鑫宝](./Qiao_Xinbao_zh.md)

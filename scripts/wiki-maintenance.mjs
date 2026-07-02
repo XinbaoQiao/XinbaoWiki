@@ -26,14 +26,17 @@ const write = args.has('--write') || standardize;
 const check = args.has('--check') || !write;
 
 const OKF_VERSION = '0.1';
-const SOURCE_SCHEMA_VERSION = 3;
-const GRAPH_SCHEMA_VERSION = 2;
+const SOURCE_SCHEMA_VERSION = 4;
+const GRAPH_SCHEMA_VERSION = 3;
 const PAGE_INDEX_SCHEMA_VERSION = 3;
-const OKF_EXPORT_SCHEMA_VERSION = 1;
+const OKF_EXPORT_SCHEMA_VERSION = 2;
 const FALLBACK_TIMESTAMP = '1970-01-01T00:00:00Z';
 
 const RESERVED_SLUGS = new Set(['index', 'index_zh', 'log', 'log_zh']);
 const HOME_SLUGS = new Set(['Xinbao_Qiao', 'Qiao_Xinbao_zh', 'index', 'index_zh', 'log', 'log_zh']);
+const BODY_RELATIONS = new Set(['wikilink', 'markdown-link']);
+const STRUCTURED_RELATIONS = new Set(['related', 'uses', 'depends-on', 'supersedes', 'contradicts', 'derived-from', 'cites']);
+const SUPPORTED_RELATIONS = new Set([...BODY_RELATIONS, ...STRUCTURED_RELATIONS]);
 
 const FIELD_ORDER = [
   'type',
@@ -71,6 +74,7 @@ const FIELD_ORDER = [
   'publication_type',
   'categories',
   'resource',
+  'relations',
   'links'
 ];
 
@@ -158,8 +162,16 @@ function asStringArray(value) {
   return value.filter((item) => typeof item === 'string' && item.trim()).map((item) => item.trim());
 }
 
+function asObject(value) {
+  return value && typeof value === 'object' && !Array.isArray(value) ? value : null;
+}
+
 function uniqueStrings(values) {
   return [...new Set(values.filter((item) => typeof item === 'string' && item.trim()).map((item) => item.trim()))];
+}
+
+function normalizeRelationType(value) {
+  return asString(value).toLowerCase().replace(/[_\s]+/g, '-');
 }
 
 function pageTitle(slug, data) {
@@ -314,6 +326,46 @@ function wikiMarkdownTarget(href) {
   return '';
 }
 
+function structuredRelationEdges(page, slugSet, errors) {
+  if (page.data.relations === undefined) return [];
+  if (!Array.isArray(page.data.relations)) {
+    errors.push(`${page.file}: relations must be a list of {type, target, label?} objects`);
+    return [];
+  }
+
+  const edges = [];
+  for (const [index, rawRelation] of page.data.relations.entries()) {
+    const relationObject = asObject(rawRelation);
+    if (!relationObject) {
+      errors.push(`${page.file}: relations[${index}] must be an object`);
+      continue;
+    }
+
+    const relation = normalizeRelationType(relationObject.type || relationObject.relation);
+    if (!STRUCTURED_RELATIONS.has(relation)) {
+      errors.push(`${page.file}: relations[${index}] has unsupported type "${relation || '(empty)'}"`);
+      continue;
+    }
+
+    const targetValue = asString(relationObject.target || relationObject.to);
+    const target = resolveWikiTarget(page, targetValue, slugSet);
+    if (!targetValue || !target || !slugSet.has(target)) {
+      errors.push(`${page.file}: relations[${index}] missing target ${targetValue || '(empty)'}`);
+      continue;
+    }
+
+    edges.push({
+      from: page.slug,
+      label: asString(relationObject.label || relationObject.description),
+      relation,
+      source: 'frontmatter',
+      to: target
+    });
+  }
+
+  return edges;
+}
+
 function lifecycleFor(page) {
   const status = asString(page.data.status).toLowerCase();
   const type = page.type.toLowerCase();
@@ -423,6 +475,7 @@ function collect() {
         from: page.slug,
         label: match[2]?.trim() || '',
         relation: 'wikilink',
+        source: 'body',
         to: target
       });
     }
@@ -436,11 +489,17 @@ function collect() {
         if (!slugSet.has(slug)) errors.push(`${page.file}: missing markdown wiki target (${href})`);
         else {
           outgoing.add(slug);
-          edges.push({ from: page.slug, label: '', relation: 'markdown-link', to: slug });
+          edges.push({ from: page.slug, label: '', relation: 'markdown-link', source: 'body', to: slug });
         }
       } else if (!publicAssetExists(href)) {
         errors.push(`${page.file}: missing public asset (${href})`);
       }
+    }
+
+    page.structuredRelations = structuredRelationEdges(page, slugSet, errors);
+    for (const edge of page.structuredRelations) {
+      outgoing.add(edge.to);
+      edges.push(edge);
     }
 
     nodeMap.set(page.slug, {
@@ -450,6 +509,7 @@ function collect() {
       language: page.language,
       lifecycle: page.lifecycle,
       outgoing: [...outgoing].sort((a, b) => a.localeCompare(b)),
+      relationTypes: uniqueStrings(edges.filter((edge) => edge.from === page.slug).map((edge) => edge.relation)).sort((a, b) => a.localeCompare(b)),
       slug: page.slug,
       summary: page.summary,
       tags: page.tags,
@@ -558,7 +618,7 @@ function createMaintenanceSchema(graph) {
       canonicalDirectory: 'wiki',
       conceptFiles: 'wiki/*.md',
       requiredFrontmatter: ['type', 'title', 'description', 'tags', 'timestamp'],
-      recommendedFrontmatter: ['resource', 'aliases', 'links', 'summary', 'hidden', 'language'],
+      recommendedFrontmatter: ['resource', 'aliases', 'links', 'summary', 'hidden', 'language', 'relations'],
       reservedSiteSlugs: [...RESERVED_SLUGS].sort()
     },
     lifecycle: {
@@ -567,14 +627,17 @@ function createMaintenanceSchema(graph) {
       statuses: ['active', 'confirmed', 'private']
     },
     relations: {
-      supported: ['wikilink', 'markdown-link'],
-      future: ['uses', 'depends-on', 'supersedes', 'contradicts', 'derived-from', 'cites']
+      frontmatterShape: [{ type: 'depends-on', target: 'Synthetic_Data', label: 'optional human note' }],
+      supported: [...SUPPORTED_RELATIONS].sort(),
+      structured: [...STRUCTURED_RELATIONS].sort()
     },
     qualityGates: [
       'Every source markdown file must parse as YAML frontmatter plus markdown body.',
       'Every source concept must have explicit OKF-compatible type/title/description/tags/timestamp.',
+      'Every check run must finish with zero warnings; use --allow-warnings only for local diagnosis.',
       'Hidden pages must be excluded from public page indexes and public OKF bundle exports.',
       'Internal WikiLinks and markdown links must resolve.',
+      'Structured frontmatter relations must use a supported relation type and resolve to a source page.',
       'Generated graph, page index, schema, and OKF export must be fresh.'
     ],
     generatedArtifacts: [
@@ -593,7 +656,7 @@ function createMaintenanceSchema(graph) {
   };
 }
 
-function okfFrontmatter(page) {
+function okfFrontmatter(page, slugSet) {
   const data = {
     type: page.type,
     title: page.title,
@@ -606,6 +669,14 @@ function okfFrontmatter(page) {
   };
   if (asString(page.data.resource)) data.resource = asString(page.data.resource);
   if (page.aliases.length) data.aliases = page.aliases;
+  const relations = (page.structuredRelations || [])
+    .filter((edge) => slugSet.has(edge.to))
+    .map((edge) => {
+      const relation = { type: edge.relation, target: edge.to };
+      if (edge.label) relation.label = edge.label;
+      return relation;
+    });
+  if (relations.length) data.relations = relations;
   return orderFrontmatter(data);
 }
 
@@ -620,7 +691,7 @@ function convertWikiLinksToOkf(markdown, page, slugSet) {
 
 function createOkfConceptMarkdown(page, slugSet) {
   const body = convertWikiLinksToOkf(page.content, page, slugSet);
-  return matter.stringify(`${body}\n`, okfFrontmatter(page));
+  return matter.stringify(`${body}\n`, okfFrontmatter(page, slugSet));
 }
 
 function createOkfIndex(index) {
@@ -810,6 +881,9 @@ if (result.warnings.length) {
   console.warn(`Wiki maintenance warnings: ${result.warnings.length}`);
   for (const warning of result.warnings.slice(0, 20)) console.warn(`- ${warning}`);
   if (result.warnings.length > 20) console.warn(`- ... ${result.warnings.length - 20} more warnings`);
+  if (check && !args.has('--allow-warnings')) {
+    fail('Wiki maintenance warnings are treated as check failures; fix them or run with --allow-warnings for local diagnosis.');
+  }
 }
 
 console.log(JSON.stringify(summary, null, 2));

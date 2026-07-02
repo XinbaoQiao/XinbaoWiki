@@ -12,6 +12,10 @@ timestamp: '2026-05-27T17:56:27+08:00'
 language: zh
 aliases:
   - Synthetic Data and Model Collapse
+relations:
+  - type: depends-on
+    target: Synthetic_Data_zh
+    label: 概念基础
 lifecycle:
   status: active
   confidence: 0.9

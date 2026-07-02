@@ -19,3 +19,9 @@ This page records the media policy for the wiki. The public site intentionally u
 - Portrait: `images/Portrait.png`
 
 Paper figures, posters, favicons, and secondary portraits are not displayed in the wiki framework. Publication pages are written as article text and source links rather than visual galleries.
+
+## See also
+
+- [[Xinbao_Qiao]]
+- [[Publications]]
+- [[Projects]]

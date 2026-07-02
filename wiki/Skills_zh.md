@@ -31,3 +31,9 @@ translation_of: Skills
 ## 研究工作流
 
 该站点设计为通过编辑 wiki/ 下的 markdown 页面完成未来更新，而不是每次手动重建整个主页。
+
+## 参见
+
+- [[CV|CV]]
+- [[Research|研究]]
+- [[Xinbao_Qiao|乔鑫宝]]

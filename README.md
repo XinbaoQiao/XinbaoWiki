@@ -56,6 +56,17 @@ The maintenance model combines the LLM Wiki v2 lesson that the schema is the pro
 | `tags` | Cross-cutting categories for future tag views and retrieval. |
 | `timestamp` | Last meaningful source timestamp. |
 
+Pages may also declare structured relations in frontmatter when a link should carry semantic meaning beyond a body wikilink:
+
+```yaml
+relations:
+  - type: depends-on
+    target: Synthetic_Data
+    label: concept foundation
+```
+
+Supported structured relation types are `related`, `uses`, `depends-on`, `supersedes`, `contradicts`, `derived-from`, and `cites`. Body links are still collected automatically as `wikilink` and `markdown-link` relations.
+
 Run the deterministic maintainer after content changes:
 
 ```bash
@@ -71,9 +82,9 @@ It standardizes source frontmatter and regenerates:
 | `wiki/maintenance-schema.json` | Machine-readable maintenance contract: required fields, quality gates, lifecycle policy, and generated artifact list. |
 | `public/okf/` | Public OKF v0.1-compatible bundle with `index.md`, `log.md`, `manifest.json`, JSON indexes, graph, schema, and one Markdown concept per public page. |
 
-`npm run check` verifies that source concepts are standardized, generated files are fresh, hidden pages are excluded from public indexes and OKF exports, and the graph still resolves internal links. This makes the upkeep loop explicit: edit Markdown, run `npm run maintain:wiki`, review warnings, then build and publish.
+`npm run check` verifies that source concepts are standardized, generated files are fresh, hidden pages are excluded from public indexes and OKF exports, the graph still resolves internal links, structured relations point to real pages, and the maintenance report has zero warnings. This makes the upkeep loop explicit: edit Markdown, run `npm run maintain:wiki`, review the generated graph, then build and publish. For local diagnosis only, `node scripts/wiki-maintenance.mjs --check --allow-warnings` reports warnings without failing the command.
 
-The current lifecycle layer is concept-level. It records active/confirmed/private status, confidence, review cadence, and retention policy in generated graph and OKF exports. This leaves room for later claim-level confidence, supersession, richer relation types, hybrid search, and automated crystallization without changing how normal content edits are made.
+The current lifecycle layer is concept-level. It records active/confirmed/private status, confidence, review cadence, and retention policy in generated graph and OKF exports. Structured relations now provide a stable entry point for future claim-level confidence, supersession, richer citation edges, hybrid search, and automated crystallization without changing how normal content edits are made.
 
 ## How The Site Is Organized
 

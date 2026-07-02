@@ -505,21 +505,6 @@
       "timestamp": "2026-05-05T00:55:59+08:00"
     },
     {
-      "slug": "Synthetic_Data",
-      "title": "Synthetic Data",
-      "summary": "Concept page for generated data used in training, evaluation, or privacy-preserving collaboration.",
-      "language": "en",
-      "type": "Research concept",
-      "tags": [
-        "en",
-        "research",
-        "concept",
-        "research-concept",
-        "synthetic-data"
-      ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
-    },
-    {
       "slug": "Synthetic_Data_and_Model_Collapse",
       "title": "Synthetic Data",
       "summary": "Research topic on synthetic data, recursive training, low-resource verification, selection bias, and model collapse.",
@@ -530,6 +515,21 @@
         "research",
         "topic",
         "research-topic",
+        "synthetic-data"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00"
+    },
+    {
+      "slug": "Synthetic_Data",
+      "title": "Synthetic Data (concept)",
+      "summary": "Concept page for generated data used in training, evaluation, or privacy-preserving collaboration.",
+      "language": "en",
+      "type": "Research concept",
+      "tags": [
+        "en",
+        "research",
+        "concept",
+        "research-concept",
         "synthetic-data"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00"

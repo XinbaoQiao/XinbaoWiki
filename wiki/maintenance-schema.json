@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "okfVersion": "0.1",
   "purpose": "Schema contract for maintaining Xinbaopedia as an agent-readable academic wiki.",
   "source": {
@@ -18,7 +18,8 @@
       "links",
       "summary",
       "hidden",
-      "language"
+      "language",
+      "relations"
     ],
     "reservedSiteSlugs": [
       "index",
@@ -42,24 +43,41 @@
     ]
   },
   "relations": {
-    "supported": [
-      "wikilink",
-      "markdown-link"
+    "frontmatterShape": [
+      {
+        "type": "depends-on",
+        "target": "Synthetic_Data",
+        "label": "optional human note"
+      }
     ],
-    "future": [
-      "uses",
-      "depends-on",
-      "supersedes",
+    "supported": [
+      "cites",
       "contradicts",
+      "depends-on",
       "derived-from",
-      "cites"
+      "markdown-link",
+      "related",
+      "supersedes",
+      "uses",
+      "wikilink"
+    ],
+    "structured": [
+      "cites",
+      "contradicts",
+      "depends-on",
+      "derived-from",
+      "related",
+      "supersedes",
+      "uses"
     ]
   },
   "qualityGates": [
     "Every source markdown file must parse as YAML frontmatter plus markdown body.",
     "Every source concept must have explicit OKF-compatible type/title/description/tags/timestamp.",
+    "Every check run must finish with zero warnings; use --allow-warnings only for local diagnosis.",
     "Hidden pages must be excluded from public page indexes and public OKF bundle exports.",
     "Internal WikiLinks and markdown links must resolve.",
+    "Structured frontmatter relations must use a supported relation type and resolve to a source page.",
     "Generated graph, page index, schema, and OKF export must be fresh."
   ],
   "generatedArtifacts": [

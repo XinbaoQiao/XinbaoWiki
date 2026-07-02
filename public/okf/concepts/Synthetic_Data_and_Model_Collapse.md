@@ -14,6 +14,10 @@ timestamp: '2026-05-27T17:56:27+08:00'
 language: en
 aliases:
   - Synthetic Data and Model Collapse
+relations:
+  - type: depends-on
+    target: Synthetic_Data
+    label: concept foundation
 lifecycle:
   status: active
   confidence: 0.9

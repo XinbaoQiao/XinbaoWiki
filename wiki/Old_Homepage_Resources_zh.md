@@ -21,3 +21,9 @@ translation_of: Old_Homepage_Resources
 - 个人照片：images/Portrait.png
 
 论文图、poster、favicon 和第二张个人照片不属于主页框架中的“人物照片”。论文页使用正文、公式、来源链接和论文图，而不是视觉图库。
+
+## 参见
+
+- [[Xinbao_Qiao|乔鑫宝]]
+- [[Publications|论文列表]]
+- [[Projects|项目概览]]

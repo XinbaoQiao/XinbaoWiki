@@ -156,6 +156,7 @@ const okfPageIndex = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/page
 const okfGraph = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/graph.json'), 'utf8'));
 const okfSchema = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/schema.json'), 'utf8'));
 const okfHome = matter(fs.readFileSync(path.join(root, 'public/okf/concepts/Xinbao_Qiao.md'), 'utf8'));
+const okfSyntheticTopic = matter(fs.readFileSync(path.join(root, 'public/okf/concepts/Synthetic_Data_and_Model_Collapse.md'), 'utf8'));
 const chatReadme = fs.readFileSync(path.join(root, 'chat with xinbao/README.md'), 'utf8');
 const chatEnvExample = fs.readFileSync(path.join(root, 'chat with xinbao/env.example'), 'utf8');
 const chatPersona = fs.readFileSync(path.join(root, 'chat with xinbao/persona-prompt.md'), 'utf8');
@@ -193,14 +194,22 @@ assert.equal(pageIndex.okfVersion, '0.1', 'wiki page index declares the OKF targ
 assert.ok(pageIndex.pages.length >= 80, 'generated page index includes the visible wiki corpus');
 assert.ok(pageIndex.pages.some((page) => page.slug === 'Xinbao_Qiao' && page.type), 'generated page index includes typed home-page metadata');
 assert.ok(!pageIndex.pages.some((page) => page.slug === 'Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning'), 'generated page index excludes hidden manuscripts');
-assert.equal(wikiGraph.schemaVersion, 2, 'wiki graph uses the generated content-maintenance schema');
+assert.equal(wikiGraph.schemaVersion, 3, 'wiki graph uses the generated content-maintenance schema');
 assert.equal(wikiGraph.okfVersion, '0.1', 'wiki graph declares the OKF target version');
 assert.ok(wikiGraph.nodes.length >= 80, 'wiki graph includes the markdown corpus');
 assert.ok(wikiGraph.edges.length >= 100, 'wiki graph captures internal wiki relationships');
 assert.ok(wikiGraph.nodes.some((node) => node.slug === 'Projects' && node.backlinks.includes('index')), 'wiki graph records backlinks');
 assert.ok(wikiGraph.nodes.some((node) => node.slug === 'Xinbao_Qiao' && node.type), 'wiki graph records derived concept types');
+assert.equal(wikiGraph.stats.warnings, 0, 'wiki graph has no publish-time maintenance warnings');
+assert.deepEqual(wikiGraph.warnings, [], 'wiki graph warning list is empty after hardening');
+assert.ok(wikiGraph.edges.some((edge) => edge.from === 'Synthetic_Data_and_Model_Collapse' && edge.relation === 'depends-on' && edge.source === 'frontmatter' && edge.to === 'Synthetic_Data'), 'wiki graph includes structured frontmatter relations');
+assert.ok(wikiGraph.nodes.some((node) => node.slug === 'Synthetic_Data_and_Model_Collapse' && node.relationTypes.includes('depends-on')), 'wiki graph nodes summarize structured relation types');
+assert.equal(maintenanceSchema.schemaVersion, 4, 'maintenance schema records the source contract version');
 assert.equal(maintenanceSchema.okfVersion, '0.1', 'maintenance schema records the OKF target version');
 assert.deepEqual(maintenanceSchema.source.requiredFrontmatter, ['type', 'title', 'description', 'tags', 'timestamp'], 'maintenance schema locks the source frontmatter contract');
+assert.ok(maintenanceSchema.source.recommendedFrontmatter.includes('relations'), 'maintenance schema documents structured relation frontmatter');
+assert.ok(maintenanceSchema.relations.structured.includes('depends-on'), 'maintenance schema documents supported structured relations');
+assert.ok(maintenanceSchema.qualityGates.some((gate) => gate.includes('zero warnings')), 'maintenance schema documents warning-free checks');
 assert.ok(maintenanceSchema.generatedArtifacts.includes('public/okf/concepts/*.md'), 'maintenance schema documents the public OKF concept export');
 assert.equal(okfManifest.okfVersion, '0.1', 'public OKF manifest declares OKF v0.1');
 assert.equal(okfManifest.bundle.publicPages, pageIndex.pages.length, 'public OKF manifest page count matches generated index');
@@ -219,12 +228,14 @@ for (const edge of okfGraph.edges) {
   assert.ok(publicOkfSlugs.has(edge.from) && publicOkfSlugs.has(edge.to), 'public OKF edges only connect public nodes');
 }
 assert.equal(okfSchema.okfVersion, '0.1', 'public OKF schema mirrors the maintenance schema');
+assert.equal(okfSchema.schemaVersion, 4, 'public OKF schema mirrors the source contract version');
 assert.equal(okfHome.data.type, 'PhD student', 'public OKF concept keeps a required type');
 assert.equal(okfHome.data.title, 'Xinbao Qiao', 'public OKF concept keeps a required title');
 assert.ok(okfHome.data.description, 'public OKF concept keeps a required description');
 assert.ok(Array.isArray(okfHome.data.tags) && okfHome.data.tags.length > 0, 'public OKF concept keeps required tags');
 assert.ok(okfHome.data.timestamp, 'public OKF concept keeps a timestamp');
 assert.ok(okfHome.data.lifecycle?.confidence > 0, 'public OKF concept includes LLM Wiki lifecycle metadata');
+assert.ok(okfSyntheticTopic.data.relations.some((relation) => relation.type === 'depends-on' && relation.target === 'Synthetic_Data'), 'public OKF concept exports structured relations');
 assert.doesNotMatch(fs.readFileSync(path.join(root, 'public/okf/index.md'), 'utf8'), /^---/m, 'public OKF reserved index has no frontmatter');
 assert.doesNotMatch(fs.readFileSync(path.join(root, 'public/okf/log.md'), 'utf8'), /^---/m, 'public OKF reserved log has no frontmatter');
 
