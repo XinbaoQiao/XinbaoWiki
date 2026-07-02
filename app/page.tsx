@@ -9,35 +9,57 @@ const languageEntries = [
 const directorySections = [
   {
     title: 'Research topics',
-    links: [
-      'AI_and_Networks',
-      'Data_Centric_Machine_Learning',
-      'Machine_Unlearning',
-      'Synthetic_Data_and_Model_Collapse',
-      'Distributed_Wasserstein_Barycenter',
-      'Fairness_and_Robustness'
+    groups: [
+      {
+        label: 'Core research',
+        links: ['Research', 'AI_and_Networks', 'Data_Centric_Machine_Learning']
+      },
+      {
+        label: 'Methods and geometry',
+        links: ['Machine_Unlearning', 'Distributed_Wasserstein_Barycenter', 'Influence_Functions']
+      },
+      {
+        label: 'Reliability and trust',
+        links: ['Synthetic_Data_and_Model_Collapse', 'Fairness_and_Robustness', 'LLM_Reliability']
+      }
     ]
   },
   {
     title: 'Publications and projects',
-    links: [
-      'Publications',
-      'Projects',
-      'Hessian_Free_Online_Certified_Unlearning',
-      'Soft_Weighted_Machine_Unlearning',
-      'DynFrs',
-      'When_Sample_Selection_Bias_Precipitates_Model_Collapse'
+    groups: [
+      {
+        label: 'Indexes',
+        links: ['Publications', 'Projects']
+      },
+      {
+        label: 'Selected publications',
+        links: [
+          'Hessian_Free_Online_Certified_Unlearning',
+          'Soft_Weighted_Machine_Unlearning',
+          'When_Sample_Selection_Bias_Precipitates_Model_Collapse'
+        ]
+      },
+      {
+        label: 'Project pages',
+        links: ['DynFrs', 'Collaborative_Evaluation', 'Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning']
+      }
     ]
   },
   {
     title: 'Affiliations',
-    links: [
-      'The_Chinese_University_of_Hong_Kong',
-      'Zhejiang_University',
-      'Shandong_University',
-      'NUSRI_CQ',
-      'Angela_Yingjun_Zhang',
-      'Meng_Zhang'
+    groups: [
+      {
+        label: 'Profile',
+        links: ['CV', 'Education', 'Experience']
+      },
+      {
+        label: 'Institutions',
+        links: ['The_Chinese_University_of_Hong_Kong', 'Zhejiang_University', 'Shandong_University', 'NUSRI_CQ']
+      },
+      {
+        label: 'Academic network',
+        links: ['Angela_Yingjun_Zhang', 'Meng_Zhang']
+      }
     ]
   }
 ];
@@ -85,7 +107,7 @@ export default function HomePage() {
         </nav>
       </section>
 
-      <details className="wiki-portal-directory">
+      <details className="wiki-portal-directory" open>
         <summary>
           <span>Browse Xinbaopedia</span>
         </summary>
@@ -95,17 +117,22 @@ export default function HomePage() {
             return (
               <section className="wiki-portal-block" aria-labelledby={sectionId} key={section.title}>
                 <h3 id={sectionId}>{section.title}</h3>
-                <ul>
-                  {section.links.map((slug) => {
-                    const item = entry(slug);
-                    return (
-                      <li key={slug}>
-                        <a href={item.href}>{item.title}</a>
-                        {item.summary && <span>{item.summary}</span>}
-                      </li>
-                    );
-                  })}
-                </ul>
+                {section.groups.map((group) => (
+                  <div className="wiki-portal-group" key={group.label}>
+                    <p className="wiki-portal-group-label">{group.label}</p>
+                    <ul>
+                      {group.links.map((slug) => {
+                        const item = entry(slug);
+                        return (
+                          <li key={slug}>
+                            <a href={item.href}>{item.title}</a>
+                            {item.summary && <span>{item.summary}</span>}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                ))}
               </section>
             );
           })}

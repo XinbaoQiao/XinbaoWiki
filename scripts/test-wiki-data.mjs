@@ -587,6 +587,8 @@ assert.match(styles, /\.wiki-search-portal \.wiki-search-language-select \{[\s\S
 assert.match(styles, /\.wiki-search-portal \.chat-xinbao-trigger \{[\s\S]*width: 44px;[\s\S]*height: 44px;[\s\S]*\}/, 'homepage search keeps the Chat with Xinbao trigger visible');
 assert.match(styles, /\.wiki-portal-editions \{[\s\S]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);[\s\S]*\}/, 'homepage moves profile language entries below the search');
 assert.match(styles, /\.wiki-portal-directory summary \{[\s\S]*display: flex;[\s\S]*cursor: pointer;[\s\S]*\}/, 'homepage browse directory is collapsible');
+assert.doesNotMatch(styles, /\.wiki-portal-directory summary::before|\.wiki-portal-directory summary::after/, 'homepage browse heading avoids decorative horizontal rules');
+assert.match(styles, /\.wiki-portal-group-label \{[\s\S]*font-size: 11px;[\s\S]*text-transform: uppercase;[\s\S]*\}/, 'homepage browse links are grouped with compact taxonomy labels');
 assert.match(styles, /\.wiki-portal-grid \{[\s\S]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);[\s\S]*\}/, 'homepage browse directory uses a three-column desktop layout');
 assert.match(styles, /\.wiki-shell:has\(\.wiki-portal\) \.wiki-sidebar \{[\s\S]*display: none;[\s\S]*\}/, 'homepage hides the article sidebar');
 assert.match(homePage, /className="wiki-portal-masthead"/, 'homepage uses a masthead for primary language editions');
@@ -594,7 +596,10 @@ assert.match(homePage, /\/xinbaopedia-icon\.png/, 'homepage uses the new PNG sit
 assert.match(homePage, /className="wiki-portal-name"[\s\S]*Xinbao Qiao/, 'homepage uses Xinbao Qiao as the central portal name');
 assert.match(homePage, /Academic biography and research overview[\s\S]*个人学术条目与研究概览/, 'homepage keeps primary English and Chinese profile links below the search');
 assert.match(homePage, /<WikiSearch items=\{searchIndex\} showLanguageSelect variant="portal" \/>/, 'homepage uses the large portal search with chat and language selector');
-assert.match(homePage, /<details className="wiki-portal-directory">[\s\S]*<summary>[\s\S]*Browse Xinbaopedia/, 'homepage browse directory can collapse');
+assert.match(homePage, /<details className="wiki-portal-directory" open>[\s\S]*<summary>[\s\S]*Browse Xinbaopedia/, 'homepage browse directory is open by default while remaining collapsible');
+assert.match(homePage, /Core research[\s\S]*Methods and geometry[\s\S]*Reliability and trust/, 'homepage research topics are organized into a readable taxonomy');
+assert.match(homePage, /Indexes[\s\S]*Selected publications[\s\S]*Project pages/, 'homepage publication and project links are organized into a readable taxonomy');
+assert.match(homePage, /Profile[\s\S]*Institutions[\s\S]*Academic network/, 'homepage affiliation links are organized into a readable taxonomy');
 assert.doesNotMatch(homePage, /AI for Networks · Data-centric Machine Learning · Federated Learning|English entries|Chinese entries|Featured entry|wiki-portal-featured|\/images\/Portrait\.png|The academic wiki of Xinbao Qiao|showChat=\{false\}/, 'homepage removes the research-field line, entry count, featured block, portrait, old tagline, and chat suppression');
 const sidebarLinkStyle = styles.match(/\.wiki-sidebar a \{([\s\S]*?)\}/);
 assert.ok(sidebarLinkStyle, 'sidebar link style block exists');
