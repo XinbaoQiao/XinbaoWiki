@@ -1,43 +1,57 @@
 ---
-name: "Xinbao Qiao"
+type: PhD student
+title: Xinbao Qiao
+description: >-
+  PhD student in Information Engineering at The Chinese University of Hong Kong;
+  researcher in data-centric ML, AI for Networks, Networks for AI, machine
+  unlearning, and synthetic-data reliability
+tags:
+  - en
+  - person
+  - biography
+  - phd-student
+timestamp: '2026-06-13T20:46:02+08:00'
+name: Xinbao Qiao
+summary: >-
+  PhD student in Information Engineering at The Chinese University of Hong Kong;
+  researcher in data-centric ML, AI for Networks, Networks for AI, machine
+  unlearning, and synthetic-data reliability
 aliases:
-  - "Mr. Ciao"
-  - "MrCiao"
-  - "Ciao"
+  - Mr. Ciao
+  - MrCiao
+  - Ciao
+occupation:
+  - PhD student
 born: |
   September 2000 (age 25)
   Xishuangbanna, Yunnan
-nationality: "Chinese"
-residence: "Hong Kong"
-image: "/images/Portrait.png"
-image_caption: "Photograph taken at Singapore EXPO, 2025"
-occupation:
-  - "PhD student"
+residence: Hong Kong
 affiliation:
-  - label: "Department of Information Engineering, The Chinese University of Hong Kong"
-    url: "/wiki/The_Chinese_University_of_Hong_Kong/"
+  - label: 'Department of Information Engineering, The Chinese University of Hong Kong'
+    url: /wiki/The_Chinese_University_of_Hong_Kong/
 education:
-  - label: "The Chinese University of Hong Kong"
-    url: "/wiki/The_Chinese_University_of_Hong_Kong/"
-    detail: "(PhD, ongoing)"
-  - label: "Zhejiang University"
-    url: "/wiki/Zhejiang_University/"
-    detail: "(MSc, 2025)"
-  - label: "Shandong University"
-    url: "/wiki/Shandong_University/"
-    detail: "(BEng, 2022)"
+  - label: The Chinese University of Hong Kong
+    url: /wiki/The_Chinese_University_of_Hong_Kong/
+    detail: '(PhD, ongoing)'
+  - label: Zhejiang University
+    url: /wiki/Zhejiang_University/
+    detail: '(MSc, 2025)'
+  - label: Shandong University
+    url: /wiki/Shandong_University/
+    detail: '(BEng, 2022)'
+image: /images/Portrait.png
+image_caption: 'Photograph taken at Singapore EXPO, 2025'
 links:
-  - label: "xinbaoqiao@cuhk.edu.hk"
-    url: "mailto:xinbaoqiao@cuhk.edu.hk"
-  - title: "OpenReview"
-    label: "Xinbao Qiao"
-    url: "https://openreview.net/profile?id=~Xinbao_Qiao1"
-  - title: "GitHub"
-    label: "XinbaoQiao"
-    url: "https://github.com/XinbaoQiao"
-summary: "PhD student in Information Engineering at The Chinese University of Hong Kong; researcher in data-centric ML, AI for Networks, Networks for AI, machine unlearning, and synthetic-data reliability"
+  - label: xinbaoqiao@cuhk.edu.hk
+    url: 'mailto:xinbaoqiao@cuhk.edu.hk'
+  - title: OpenReview
+    label: Xinbao Qiao
+    url: 'https://openreview.net/profile?id=~Xinbao_Qiao1'
+  - title: GitHub
+    label: XinbaoQiao
+    url: 'https://github.com/XinbaoQiao'
+nationality: Chinese
 ---
-
 **Xinbao Qiao**[^xinbao-name][^qiao-ciao][^xinbao-qiao-bridge] (Chinese: **乔鑫宝**; born September 2000 in Xishuangbanna, Yunnan) is a Chinese PhD student in the Department of Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]]. His research primarily studies lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are generated, used, and deleted. His recent work aims to improve the reliability, interpretability, and controllability of AI models in heterogeneous, computation-constrained, and communication-constrained environments.
 
 1. In data generation, he studies synthetic data and its effects on quality, privacy, and generalization.

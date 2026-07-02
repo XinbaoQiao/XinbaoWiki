@@ -1,19 +1,26 @@
 ---
-name: "Angela Yingjun Zhang"
-type: "Academic advisor"
+type: Academic advisor
+title: Angela Yingjun Zhang
+description: CUHK Information Engineering professor and doctoral advisor of Xinbao Qiao.
+tags:
+  - en
+  - person
+  - advisor
+  - academic-advisor
+timestamp: '2026-05-05T21:15:18+08:00'
+name: Angela Yingjun Zhang
+summary: CUHK Information Engineering professor and doctoral advisor of Xinbao Qiao.
 occupation:
-  - "Professor"
-  - "IEEE Fellow"
+  - Professor
+  - IEEE Fellow
 affiliation:
-  - label: "Department of Information Engineering, The Chinese University of Hong Kong"
-    url: "/wiki/The_Chinese_University_of_Hong_Kong/"
-focus: "Optimization and learning in 5G and 6G wireless communication systems"
+  - label: 'Department of Information Engineering, The Chinese University of Hong Kong'
+    url: /wiki/The_Chinese_University_of_Hong_Kong/
+focus: Optimization and learning in 5G and 6G wireless communication systems
 links:
-  - label: "Official CUHK profile"
-    url: "https://staff.ie.cuhk.edu.hk/~yjzhang/"
-summary: "CUHK Information Engineering professor and doctoral advisor of Xinbao Qiao."
+  - label: Official CUHK profile
+    url: 'https://staff.ie.cuhk.edu.hk/~yjzhang/'
 ---
-
 **Angela Yingjun Zhang** is a Professor in the Department of Information Engineering at The Chinese University of Hong Kong and an IEEE Fellow.[^cuhk-profile] Her official homepage places her work in wireless communications and networking, with emphasis on optimization and learning in 5G and 6G wireless communication systems.[^cuhk-about]
 
 ## Biography

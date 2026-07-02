@@ -9,7 +9,7 @@
     "export": "next build",
     "lint:wiki": "node scripts/lint-wikilinks.mjs",
     "lint:content": "node scripts/wiki-maintenance.mjs --check",
-    "maintain:wiki": "node scripts/wiki-maintenance.mjs --write",
+    "maintain:wiki": "node scripts/wiki-maintenance.mjs --standardize --write",
     "test:wiki": "node scripts/test-wiki-data.mjs",
     "typecheck": "tsc --noEmit",
     "check": "npm run typecheck && npm run lint:wiki && npm run lint:content && npm run test:wiki"

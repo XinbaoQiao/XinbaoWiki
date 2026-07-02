@@ -1,45 +1,53 @@
 ---
-name: "乔鑫宝"
+type: 博士生
+title: 乔鑫宝
+description: 香港中文大学信息工程系博士生；研究方向包括数据中心 ML、AI for Networks、Networks for AI、机器遗忘和合成数据可靠性
+tags:
+  - zh
+  - person
+  - biography
+  - 博士生
+timestamp: '2026-06-13T20:46:02+08:00'
+name: 乔鑫宝
+summary: 香港中文大学信息工程系博士生；研究方向包括数据中心 ML、AI for Networks、Networks for AI、机器遗忘和合成数据可靠性
 aliases:
-  - "Mr. Ciao"
-  - "MrCiao"
-  - "喬"
-  - "ciao"
+  - Mr. Ciao
+  - MrCiao
+  - 喬
+  - ciao
+occupation:
+  - 博士生
 born: |
   乔鑫宝 (Xinbao Qiao)
   2000年9月30日 (25岁)
   中国云南西双版纳
-nationality: "中国"
-residence: "香港"
-image: "/images/Portrait.png"
-image_caption: "摄于 ICLR 2025，新加坡 EXPO"
-occupation:
-  - "博士生"
+residence: 香港
 affiliation:
-  - label: "香港中文大学信息工程系"
-    url: "/wiki/The_Chinese_University_of_Hong_Kong/"
+  - label: 香港中文大学信息工程系
+    url: /wiki/The_Chinese_University_of_Hong_Kong/
 education:
-  - label: "香港中文大学"
-    url: "/wiki/The_Chinese_University_of_Hong_Kong/"
-    detail: "（博士，在读）"
-  - label: "浙江大学"
-    url: "/wiki/Zhejiang_University/"
-    detail: "（理学硕士，2025）"
-  - label: "山东大学"
-    url: "/wiki/Shandong_University/"
-    detail: "（工学学士，2022）"
+  - label: 香港中文大学
+    url: /wiki/The_Chinese_University_of_Hong_Kong/
+    detail: （博士，在读）
+  - label: 浙江大学
+    url: /wiki/Zhejiang_University/
+    detail: （理学硕士，2025）
+  - label: 山东大学
+    url: /wiki/Shandong_University/
+    detail: （工学学士，2022）
+image: /images/Portrait.png
+image_caption: 摄于 ICLR 2025，新加坡 EXPO
 links:
-  - label: "xinbaoqiao@cuhk.edu.hk"
-    url: "mailto:xinbaoqiao@cuhk.edu.hk"
-  - title: "OpenReview"
-    label: "Xinbao Qiao"
-    url: "https://openreview.net/profile?id=~Xinbao_Qiao1"
-  - title: "GitHub"
-    label: "XinbaoQiao"
-    url: "https://github.com/XinbaoQiao"
-summary: "香港中文大学信息工程系博士生；研究方向包括数据中心 ML、AI for Networks、Networks for AI、机器遗忘和合成数据可靠性"
+  - label: xinbaoqiao@cuhk.edu.hk
+    url: 'mailto:xinbaoqiao@cuhk.edu.hk'
+  - title: OpenReview
+    label: Xinbao Qiao
+    url: 'https://openreview.net/profile?id=~Xinbao_Qiao1'
+  - title: GitHub
+    label: XinbaoQiao
+    url: 'https://github.com/XinbaoQiao'
+nationality: 中国
 ---
-
 **乔鑫宝**（英文发表名：**Xinbao Qiao**[^xinbao-name-zh][^qiao-ciao-zh][^xinbao-qiao-bridge-zh]；生于2000年9月30日，云南西双版纳）是中国博士生，现为[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系博士生。他的研究主要围绕 AI 模型中数据的全生命周期管理展开，关注数据从生成、使用到删除过程中的理论方法与实际问题。近期工作致力于提升 AI 模型在异质、计算和通信受限环境下的可靠性、可解释性与可控性。
 
 1. 在数据生成方面，研究合成数据及其质量、隐私与泛化影响；

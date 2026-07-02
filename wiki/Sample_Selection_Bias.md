@@ -1,9 +1,21 @@
 ---
-name: "Sample Selection Bias"
-occupation: "Research concept"
-summary: "Concept page for distributional bias introduced by non-representative sample choice."
+type: Research concept
+title: Sample Selection Bias
+description: >-
+  Concept page for distributional bias introduced by non-representative sample
+  choice.
+tags:
+  - en
+  - research
+  - concept
+  - research-concept
+timestamp: '2026-05-27T17:56:27+08:00'
+name: Sample Selection Bias
+summary: >-
+  Concept page for distributional bias introduced by non-representative sample
+  choice.
+occupation: Research concept
 ---
-
 **Sample Selection Bias** occurs when the data chosen for training or evaluation are not representative of the population or target distribution the model is expected to handle. In this wiki the concept is important because selection bias can compound when a model is repeatedly trained on generated or locally filtered data.
 
 ## Role in this wiki

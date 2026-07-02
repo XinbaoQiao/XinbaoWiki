@@ -1,29 +1,37 @@
 ---
-name: "DynFrs：随机森林机器遗忘高效框架"
-type: "publication"
+type: publication
+title: DynFrs：随机森林机器遗忘高效框架
+description: ICLR 2025 论文，研究随机森林中的高效机器遗忘。
+tags:
+  - zh
+  - publication
+  - paper
+  - iclr-2025-poster
+  - iclr-2025
+timestamp: '2026-05-05T23:25:14+08:00'
+name: DynFrs：随机森林机器遗忘高效框架
+language: zh
+summary: ICLR 2025 论文，研究随机森林中的高效机器遗忘。
 authors:
-  - "Shurong Wang"
-  - "Zhuoyang Shen"
-  - "Xinbao Qiao"
-  - "Tongning Zhang"
-  - "Meng Zhang"
-venue: "ICLR 2025"
-location: "Singapore EXPO, Singapore"
+  - Shurong Wang
+  - Zhuoyang Shen
+  - Xinbao Qiao
+  - Tongning Zhang
+  - Meng Zhang
+venue: ICLR 2025
+location: 'Singapore EXPO, Singapore'
 year: 2025
-status: "ICLR 2025 poster"
-publication_type: "会议论文"
+status: ICLR 2025 poster
+publication_type: 会议论文
 links:
-  - label: "OpenReview"
-    url: "https://openreview.net/forum?id=nsCOeCLR8e"
-  - label: "arXiv"
-    url: "https://arxiv.org/abs/2410.01588"
-  - label: "Code"
-    url: "https://github.com/shurongwang/DynFrs"
-summary: "ICLR 2025 论文，研究随机森林中的高效机器遗忘。"
-language: "zh"
-translation_of: "DynFrs"
+  - label: OpenReview
+    url: 'https://openreview.net/forum?id=nsCOeCLR8e'
+  - label: arXiv
+    url: 'https://arxiv.org/abs/2410.01588'
+  - label: Code
+    url: 'https://github.com/shurongwang/DynFrs'
+translation_of: DynFrs
 ---
-
 **DynFrs：随机森林机器遗忘高效框架** 是 Shurong Wang、Zhuoyang Shen、**[[Xinbao_Qiao|乔鑫宝]]**、Tongning Zhang 和张萌的 ICLR 2025 会议论文。该工作面向动态在线更新下随机森林模型的精确、高效数据删除。
 
 ## 概述

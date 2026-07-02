@@ -1,11 +1,19 @@
 ---
-name: "论文"
-occupation: "论文列表"
-summary: "乔鑫宝的论文索引。"
-language: "zh"
-translation_of: "Publications"
+type: 论文列表
+title: 论文
+description: 乔鑫宝的论文索引。
+tags:
+  - zh
+  - publication
+  - index
+  - 论文列表
+timestamp: '2026-06-01T22:04:00+08:00'
+name: 论文
+language: zh
+summary: 乔鑫宝的论文索引。
+occupation: 论文列表
+translation_of: Publications
 ---
-
 本页是乔鑫宝论文的整理索引。每篇论文都有独立 wiki 页面，并被放入相应研究专题；论文不应作为孤立条目存在。
 
 ## 已录用论文

@@ -1,11 +1,19 @@
 ---
-name: "随机森林"
-occupation: "模型族"
-summary: "解释 DynFrs 所研究的随机森林模型类别。"
-language: "zh"
-translation_of: "Random_Forest"
+type: 模型族
+title: 随机森林
+description: 解释 DynFrs 所研究的随机森林模型类别。
+tags:
+  - zh
+  - research
+  - model
+  - 模型族
+timestamp: '2026-05-05T23:25:14+08:00'
+name: 随机森林
+language: zh
+summary: 解释 DynFrs 所研究的随机森林模型类别。
+occupation: 模型族
+translation_of: Random_Forest
 ---
-
 **随机森林** 是由多棵决策树组成的集成模型，训练中通常对样本、特征或划分候选引入随机性。它在表格数据上表现强、相对稳健，并且比许多神经模型更容易检查。[^breiman]
 
 ## 在本 wiki 中的作用
@@ -24,4 +32,3 @@ DynFrs 研究动态环境下随机森林的机器遗忘。论文核心设计使�
 - [[Data_Centric_Machine_Learning|数据中心 ML]]
 
 [^breiman]: Leo Breiman 2001 年发表在 Machine Learning 的 “Random Forests” 是该模型族的标准参考。
-

@@ -1,24 +1,31 @@
 ---
-name: "NUSRI-CQ"
-image: "/institutions/nusri-cq-logo.svg"
-image_caption: "Logo of NUS (Chongqing) Research Institute"
-type: "Research institute"
+type: Research institute
+title: NUSRI-CQ
+description: Research internship institution of Xinbao Qiao.
+tags:
+  - en
+  - institution
+  - research
+  - research-institute
+timestamp: '2026-05-27T17:56:27+08:00'
+name: NUSRI-CQ
+summary: Research internship institution of Xinbao Qiao.
 person:
-  label: "Xinbao Qiao"
-  url: "/wiki/Xinbao_Qiao/"
-program: "Full-time research internship"
-school: "National University of Singapore overseas research platform"
-dates: "June 2025-December 2025"
-place: "Chongqing, China"
-focus: "Trustworthy LLM systems; synthetic-data evaluation"
+  label: Xinbao Qiao
+  url: /wiki/Xinbao_Qiao/
+program: Full-time research internship
+school: National University of Singapore overseas research platform
+dates: June 2025-December 2025
+place: 'Chongqing, China'
+focus: Trustworthy LLM systems; synthetic-data evaluation
+image: /institutions/nusri-cq-logo.svg
+image_caption: Logo of NUS (Chongqing) Research Institute
 links:
-  - label: "NUSRI-CQ"
-    url: "https://en.nusricq.cn/"
-  - label: "Vision and Mission"
-    url: "https://en.nusricq.cn/about/yjysm"
-summary: "Research internship institution of Xinbao Qiao."
+  - label: NUSRI-CQ
+    url: 'https://en.nusricq.cn/'
+  - label: Vision and Mission
+    url: 'https://en.nusricq.cn/about/yjysm'
 ---
-
 **NUSRI-CQ** refers to the NUS (Chongqing) Research Institute, where [[Xinbao_Qiao|Xinbao Qiao]] worked as a full-time research intern from June to December 2025. In this wiki the article records the institute as a research-experience node rather than a degree-granting institution in Qiao's education list. It sits between the [[Zhejiang_University|Zhejiang University]] master's phase and the [[The_Chinese_University_of_Hong_Kong|CUHK]] doctoral phase.
 
 ## Program

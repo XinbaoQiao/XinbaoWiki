@@ -1,11 +1,19 @@
 ---
-name: "索引"
-occupation: "Wiki 索引"
-summary: "Wiki 页面索引。"
-language: "zh"
-translation_of: "index"
+type: Wiki 索引
+title: 索引
+description: Wiki 页面索引。
+tags:
+  - zh
+  - index
+  - navigation
+  - wiki-索引
+timestamp: '2026-05-07T17:34:07+08:00'
+name: 索引
+language: zh
+summary: Wiki 页面索引。
+occupation: Wiki 索引
+translation_of: index
 ---
-
 ## 传记与 CV
 
 - [[Qiao_Xinbao_zh|乔鑫宝]]

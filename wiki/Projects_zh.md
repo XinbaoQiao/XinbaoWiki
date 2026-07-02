@@ -1,11 +1,19 @@
 ---
-name: "项目"
-occupation: "项目概览"
-summary: "研究项目与项目簇。"
-language: "zh"
-translation_of: "Projects"
+type: 项目概览
+title: 项目
+description: 研究项目与项目簇。
+tags:
+  - zh
+  - project
+  - overview
+  - 项目概览
+timestamp: '2026-06-13T20:46:02+08:00'
+name: 项目
+language: zh
+summary: 研究项目与项目簇。
+occupation: 项目概览
+translation_of: Projects
 ---
-
 ## 研究项目簇
 
 ### AI 与网络

@@ -1,9 +1,17 @@
 ---
-name: "Collaborative Evaluation"
-occupation: "Research concept"
-summary: "Concept page for evaluating models or data processes across multiple parties."
+type: Research concept
+title: Collaborative Evaluation
+description: Concept page for evaluating models or data processes across multiple parties.
+tags:
+  - en
+  - research
+  - concept
+  - research-concept
+timestamp: '2026-05-27T17:56:27+08:00'
+name: Collaborative Evaluation
+summary: Concept page for evaluating models or data processes across multiple parties.
+occupation: Research concept
 ---
-
 **Collaborative Evaluation** refers to evaluation procedures in which multiple parties contribute evidence about model behavior, data quality, or distributional drift. In this wiki the concept is used mainly for cross-silo settings, where each participant has local observations but no participant has complete access to the global distribution.
 
 ## Role in this wiki

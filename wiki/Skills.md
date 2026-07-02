@@ -1,9 +1,17 @@
 ---
-name: "Skills"
-occupation: "Technical skills"
-summary: "Technical skills listed in Qiao Xinbao's CV."
+type: Technical skills
+title: Skills
+description: Technical skills listed in Qiao Xinbao's CV.
+tags:
+  - en
+  - skills
+  - profile
+  - technical-skills
+timestamp: '2026-05-05T00:55:59+08:00'
+name: Skills
+summary: Technical skills listed in Qiao Xinbao's CV.
+occupation: Technical skills
 ---
-
 ## Programming and research tools
 
 - Python: advanced.

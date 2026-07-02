@@ -1,11 +1,20 @@
 ---
-name: "大语言模型可靠性"
-occupation: "研究概念"
-summary: "解释大语言模型系统可靠性问题的概念页。"
-language: "zh"
-translation_of: "LLM_Reliability"
+type: 研究概念
+title: 大语言模型可靠性
+description: 解释大语言模型系统可靠性问题的概念页。
+tags:
+  - zh
+  - research
+  - concept
+  - 研究概念
+  - llm
+timestamp: '2026-05-05T23:25:14+08:00'
+name: 大语言模型可靠性
+language: zh
+summary: 解释大语言模型系统可靠性问题的概念页。
+occupation: 研究概念
+translation_of: LLM_Reliability
 ---
-
 **大语言模型可靠性** 关注大语言模型系统在真实使用中是否一致、安全且可信。在本 wiki 中，该概念与合成数据、评估和可信系统相连，而不是作为单独的产品开发路线。
 
 ## 在本 wiki 中的作用
@@ -22,4 +31,3 @@ translation_of: "LLM_Reliability"
 - [[Synthetic_Data_and_Model_Collapse|合成数据]]
 - [[Collaborative_Evaluation|协作评估]]
 - [[Trustworthy_AI|可信 AI]]
-

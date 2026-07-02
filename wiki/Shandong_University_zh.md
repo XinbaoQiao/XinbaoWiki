@@ -1,26 +1,33 @@
 ---
-name: "山东大学"
-image: "/institutions/shandong-university-logo.png"
-image_caption: "山东大学校徽与校名"
-type: "公立研究型大学"
+type: 公立研究型大学
+title: 山东大学
+description: 乔鑫宝本科阶段所在机构。
+tags:
+  - zh
+  - institution
+  - education
+  - 公立研究型大学
+timestamp: '2026-05-05T23:25:14+08:00'
+name: 山东大学
+language: zh
+summary: 乔鑫宝本科阶段所在机构。
 person:
-  label: "乔鑫宝"
-  url: "/wiki/Qiao_Xinbao_zh/"
-program: "通信工程工学学士"
-school: "本科工程教育"
-dates: "2018-2022"
-place: "中国山东"
-focus: "通信工程；信号与网络基础"
+  label: 乔鑫宝
+  url: /wiki/Qiao_Xinbao_zh/
+program: 通信工程工学学士
+school: 本科工程教育
+dates: 2018-2022
+place: 中国山东
+focus: 通信工程；信号与网络基础
+image: /institutions/shandong-university-logo.png
+image_caption: 山东大学校徽与校名
 links:
-  - label: "Shandong University"
-    url: "https://www.en.sdu.edu.cn/"
-  - label: "About Shandong University"
-    url: "https://www.en.sdu.edu.cn/About.htm"
-summary: "乔鑫宝本科阶段所在机构。"
-language: "zh"
-translation_of: "Shandong_University"
+  - label: Shandong University
+    url: 'https://www.en.sdu.edu.cn/'
+  - label: About Shandong University
+    url: 'https://www.en.sdu.edu.cn/About.htm'
+translation_of: Shandong_University
 ---
-
 **山东大学**（**SDU**）是 [[Xinbao_Qiao|乔鑫宝]] 本科阶段所在机构；他于 2022 年获得通信工程工学学士学位。在本 wiki 结构中，山东大学是乔鑫宝高等教育记录中的第一个正式学术阶段，并为后来 [[AI_and_Networks|AI 与网络]] 兴趣提供工程基础。[^sdu-about]
 
 ## 项目
@@ -44,4 +51,3 @@ translation_of: "Shandong_University"
 - [[Zhejiang_University|浙江大学]]
 
 [^sdu-about]: 山东大学英文 [About 页面](https://en.sdu.edu.cn/About.htm)介绍其为历史悠久、学科广泛的重点综合性大学，并在校史中追溯至 1901 年的山东大学堂。
-

@@ -1,11 +1,19 @@
 ---
-name: "协作评估"
-occupation: "研究概念"
-summary: "解释多方共同评估模型或数据过程的概念页。"
-language: "zh"
-translation_of: "Collaborative_Evaluation"
+type: 研究概念
+title: 协作评估
+description: 解释多方共同评估模型或数据过程的概念页。
+tags:
+  - zh
+  - research
+  - concept
+  - 研究概念
+timestamp: '2026-05-27T17:56:27+08:00'
+name: 协作评估
+language: zh
+summary: 解释多方共同评估模型或数据过程的概念页。
+occupation: 研究概念
+translation_of: Collaborative_Evaluation
 ---
-
 **协作评估** 指多个参与方共同提供关于模型行为、数据质量或分布漂移的证据。在本 wiki 中，它主要用于跨数据孤岛设置：每个参与者只有本地观测，没有任何一方完整掌握全局分布。
 
 ## 在本 wiki 中的作用

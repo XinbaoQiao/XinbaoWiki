@@ -1,0 +1,47 @@
+---
+type: 研究概览
+title: 研究
+description: 乔鑫宝学术 wiki 的研究概览。
+tags:
+  - zh
+  - research
+  - overview
+  - 研究概览
+timestamp: '2026-06-13T20:46:02+08:00'
+language: zh
+lifecycle:
+  status: active
+  confidence: 0.9
+  review: periodic
+  retention: semantic memory
+source_path: wiki/Research_zh.md
+---
+本页总结乔鑫宝学术 wiki 中的主要研究方向。它不是静态兴趣列表，而是由多个相互链接的专题页编译出的研究图谱。当前重心是[数据中心 ML](./Data_Centric_Machine_Learning_zh.md)和双向的 [AI 与网络](./AI_and_Networks_zh.md)问题。
+
+## 研究主线
+
+乔鑫宝主要围绕 AI 模型中数据的全生命周期管理开展研究，关注数据从生成、使用到删除过程中的理论方法与实际问题。相关工作致力于提升 AI 模型在异质、计算和通信受限环境下的可靠性、可解释性与可控性。
+
+1. 在数据生成方面，研究合成数据及其质量、隐私与泛化影响；
+2. 在数据使用方面，关注分布式/联邦学习、AI for Networks 与 Networks for AI 等场景下的数据建模、协同优化与系统设计；
+3. 在数据删除方面，研究机器遗忘与数据影响评估，探索如何在保护隐私和满足删除需求的同时维持模型性能。
+
+## AI 与网络
+
+[AI 与网络](./AI_and_Networks_zh.md) 覆盖 AI 与网络通信系统的交叉：AI for Networks、Networks for AI、去中心化学习、数据剪枝和协作评估。在当前 CUHK 博士阶段，这条主线与[数据中心 ML](./Data_Centric_Machine_Learning_zh.md)相结合，并包括[Wasserstein barycenter 的分布式计算](./Distributed_Wasserstein_Barycenter_zh.md)等工具，即在不默认汇总原始数据的前提下，把多方局部分布组合成共享的分布参考。
+
+## 机器遗忘
+
+[机器遗忘](./Machine_Unlearning_zh.md) 研究删除请求后的认证数据删除和低成本更新机制。相关页面包括 [无 Hessian 在线认证遗忘](./Hessian_Free_Online_Certified_Unlearning_zh.md)、[超越二元擦除](./Soft_Weighted_Machine_Unlearning_zh.md)、[DynFrs](./DynFrs_zh.md)、[影响函数](./Influence_Functions_zh.md) 和 [认证数据删除](./Certified_Data_Removal_zh.md)。
+
+## 合成数据
+
+[合成数据](./Synthetic_Data_and_Model_Collapse_zh.md) 研究递归合成数据训练、[数据选择](./Data_Selection_zh.md)、[样本选择偏差](./Sample_Selection_Bias_zh.md)、[模型坍缩](./Model_Collapse_zh.md)，以及低资源 [数据孤岛](./Data_Silos_zh.md) 中的协作缓解。中心论文是 [样本选择偏差何以促成模型坍缩](./When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md)，其核心表述是：当真实数据覆盖稀缺或碎片化时，模型坍缩风险尤其高。
+
+## 数据中心 ML 与可信 AI
+
+[数据中心 ML](./Data_Centric_Machine_Learning_zh.md) 覆盖数据选择、估值、过滤和评估。[可信 AI](./Trustworthy_AI_zh.md) 连接机器遗忘、公平性、鲁棒性、隐私、安全、可解释性和可靠性。
+
+## 几何与分布式学习
+
+[Wasserstein 几何](./Wasserstein_Geometry_zh.md)、[分布式 Wasserstein barycenter](./Distributed_Wasserstein_Barycenter_zh.md) 与 [分布式学习](./Distributed_Learning_zh.md) 为协作评估、最优传输代理、去中心化数据访问，以及网络化 AI 系统中的分布参考提供工具。

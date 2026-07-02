@@ -1,13 +1,26 @@
 ---
-name: "Distributed Wasserstein Barycenter"
-occupation: "Research concept"
-summary: "Concept page for Qiao's work on computing Wasserstein barycenters from distributed local measures."
+type: Research concept
+title: Distributed Wasserstein Barycenter
+description: >-
+  Concept page for Qiao's work on computing Wasserstein barycenters from
+  distributed local measures.
+tags:
+  - en
+  - research
+  - concept
+  - research-concept
+  - wasserstein
+timestamp: '2026-06-13T20:46:02+08:00'
+name: Distributed Wasserstein Barycenter
+summary: >-
+  Concept page for Qiao's work on computing Wasserstein barycenters from
+  distributed local measures.
 aliases:
-  - "Distributed Wasserstein barycenters"
-  - "Wasserstein barycenter"
-  - "Distributed OT barycenter"
+  - Distributed Wasserstein barycenters
+  - Wasserstein barycenter
+  - Distributed OT barycenter
+occupation: Research concept
 ---
-
 **Distributed Wasserstein Barycenter** is a concept page for [[Xinbao_Qiao|Xinbao Qiao]]'s work within [[AI_and_Networks|AI and networks]] and [[Data_Centric_Machine_Learning|data-centric ML]]. A Wasserstein barycenter is a probability measure that summarizes several input distributions under an optimal-transport distance. In a distributed setting, the input measures are held by different parties, so the problem is not only statistical but also networked: the system must compute or approximate a common reference while respecting communication and data-access constraints.[^barycenter]
 
 ## Definition

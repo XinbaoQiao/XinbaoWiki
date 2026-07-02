@@ -1,11 +1,20 @@
 ---
-name: "Machine Unlearning"
-image: "/topics/machine-unlearning.png"
-image_caption: "Machine unlearning topic diagram"
-occupation: "Research topic"
-summary: "Research topic on removing or correcting data influence from trained models."
+type: Research topic
+title: Machine Unlearning
+description: Research topic on removing or correcting data influence from trained models.
+tags:
+  - en
+  - research
+  - topic
+  - research-topic
+  - machine-unlearning
+timestamp: '2026-05-05T22:09:30+08:00'
+name: Machine Unlearning
+summary: Research topic on removing or correcting data influence from trained models.
+occupation: Research topic
+image: /topics/machine-unlearning.png
+image_caption: Machine unlearning topic diagram
 ---
-
 **Machine Unlearning** studies how to remove, reduce, or correct the effect of selected training data after a model has already been trained. In this wiki it is treated as both a privacy topic and a data-centric systems topic: an unlearning method must say what it removes, how faithfully it approximates retraining, and how much computation or latency is saved.[^unlearning]
 
 ## Introduction

@@ -1,9 +1,21 @@
 ---
-name: "Trustworthy AI"
-occupation: "Research topic"
-summary: "Research topic covering reliability, deletion, fairness, robustness, interpretability, and evaluation."
+type: Research topic
+title: Trustworthy AI
+description: >-
+  Research topic covering reliability, deletion, fairness, robustness,
+  interpretability, and evaluation.
+tags:
+  - en
+  - research
+  - topic
+  - research-topic
+timestamp: '2026-05-05T20:55:21+08:00'
+name: Trustworthy AI
+summary: >-
+  Research topic covering reliability, deletion, fairness, robustness,
+  interpretability, and evaluation.
+occupation: Research topic
 ---
-
 **Trustworthy AI** is the broadest reliability label in Qiao's wiki. It covers model behavior that can be audited, corrected, updated, or evaluated under realistic constraints. The page is deliberately broad, but the biography keeps the main research labels shorter: [[AI_and_Networks|AI and networks]], [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic data]], and [[Data_Centric_Machine_Learning|Data Centric ML]].
 
 ## Role in this wiki

@@ -1,24 +1,31 @@
 ---
-name: "Shandong University"
-image: "/institutions/shandong-university-logo.png"
-image_caption: "Seal and lettering of Shandong University"
-type: "Public research university"
+type: Public research university
+title: Shandong University
+description: Undergraduate institution of Xinbao Qiao.
+tags:
+  - en
+  - institution
+  - education
+  - public-research-university
+timestamp: '2026-05-05T20:55:21+08:00'
+name: Shandong University
+summary: Undergraduate institution of Xinbao Qiao.
 person:
-  label: "Xinbao Qiao"
-  url: "/wiki/Xinbao_Qiao/"
-program: "Bachelor of Engineering in Communication Engineering"
-school: "Undergraduate engineering study"
-dates: "2018-2022"
-place: "Shandong, China"
-focus: "Communication engineering; signal and network foundations"
+  label: Xinbao Qiao
+  url: /wiki/Xinbao_Qiao/
+program: Bachelor of Engineering in Communication Engineering
+school: Undergraduate engineering study
+dates: 2018-2022
+place: 'Shandong, China'
+focus: Communication engineering; signal and network foundations
+image: /institutions/shandong-university-logo.png
+image_caption: Seal and lettering of Shandong University
 links:
-  - label: "Shandong University"
-    url: "https://www.en.sdu.edu.cn/"
-  - label: "About Shandong University"
-    url: "https://www.en.sdu.edu.cn/About.htm"
-summary: "Undergraduate institution of Xinbao Qiao."
+  - label: Shandong University
+    url: 'https://www.en.sdu.edu.cn/'
+  - label: About Shandong University
+    url: 'https://www.en.sdu.edu.cn/About.htm'
 ---
-
 **Shandong University** (**SDU**) was [[Xinbao_Qiao|Xinbao Qiao]]'s undergraduate institution, where he received a Bachelor of Engineering in Communication Engineering in 2022. In the structure of this wiki, SDU is the first formal academic stage in Qiao's higher-education record and supplies the engineering background behind his later interest in [[AI_and_Networks|AI and networks]].[^sdu-about]
 
 ## Program

@@ -1,28 +1,38 @@
 ---
-name: "超越二元擦除：用于公平性与鲁棒性的软加权遗忘"
-type: "publication"
+type: publication
+title: 超越二元擦除：用于公平性与鲁棒性的软加权遗忘
+description: AAAI 2026 论文，研究用于公平性与鲁棒性修正的软加权机器遗忘。
+tags:
+  - zh
+  - publication
+  - paper
+  - accepted
+  - aaai-2026
+  - machine-unlearning
+timestamp: '2026-05-05T23:25:14+08:00'
+name: 超越二元擦除：用于公平性与鲁棒性的软加权遗忘
+language: zh
+summary: AAAI 2026 论文，研究用于公平性与鲁棒性修正的软加权机器遗忘。
 authors:
-  - "Xinbao Qiao"
-  - "Ningning Ding"
-  - "Yushi Cheng"
-  - "Meng Zhang"
-venue: "AAAI 2026"
-location: "Singapore EXPO, Singapore"
+  - Xinbao Qiao
+  - Ningning Ding
+  - Yushi Cheng
+  - Meng Zhang
+venue: AAAI 2026
+location: 'Singapore EXPO, Singapore'
 year: 2026
-status: "accepted"
-publication_type: "会议论文"
+status: accepted
+publication_type: 会议论文
 links:
-  - label: "arXiv"
-    url: "https://arxiv.org/abs/2505.18783"
-  - label: "Code"
-    url: "https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning"
-  - label: "AAAI 2026 lecture page"
-    url: "https://underline.io/lecture/139759-beyond-binary-erasure-soft-weighted-unlearning-for-fairness-and-robustness"
-summary: "AAAI 2026 论文，研究用于公平性与鲁棒性修正的软加权机器遗忘。"
-language: "zh"
-translation_of: "Soft_Weighted_Machine_Unlearning"
+  - label: arXiv
+    url: 'https://arxiv.org/abs/2505.18783'
+  - label: Code
+    url: 'https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning'
+  - label: AAAI 2026 lecture page
+    url: >-
+      https://underline.io/lecture/139759-beyond-binary-erasure-soft-weighted-unlearning-for-fairness-and-robustness
+translation_of: Soft_Weighted_Machine_Unlearning
 ---
-
 **超越二元擦除：用于公平性与鲁棒性的软加权遗忘** 是 **[[Xinbao_Qiao|乔鑫宝]]**、Ningning Ding、Yushi Cheng 和张萌的 AAAI 2026 会议论文。它把机器遗忘重新表述为连续修正问题，而不是只能执行二元擦除。
 
 ## 概述
@@ -88,4 +98,3 @@ $$
 ## 定位
 
 该工作属于 [[Machine_Unlearning|机器遗忘]]、[[Fairness_and_Robustness|公平性与鲁棒性]]、[[Influence_Functions|影响函数]] 和 [[Trustworthy_AI|可信 AI]]。它补充了 [[Hessian_Free_Online_Certified_Unlearning|无 Hessian 在线认证遗忘]]：问题从隐私删除转向细粒度模型修正。
-

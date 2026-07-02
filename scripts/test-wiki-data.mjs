@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
+import matter from 'gray-matter';
 
 const root = process.cwd();
 const wikiDir = path.join(root, 'wiki');
@@ -14,6 +15,10 @@ function frontmatter(file) {
   const match = raw.match(/^---\n([\s\S]*?)\n---/);
   assert.ok(match, `${file} has YAML frontmatter`);
   return match[1];
+}
+
+function frontmatterData(file) {
+  return matter(read(file)).data;
 }
 
 function assertFile(file) {
@@ -42,10 +47,11 @@ for (const file of [
   'log_zh.md'
 ]) {
   assertFile(`wiki/${file}`);
-  assert.match(frontmatter(file), /language: "zh"/, `${file} marks the Chinese language`);
+  assert.equal(frontmatterData(file).language, 'zh', `${file} marks the Chinese language`);
 }
 
 const bio = frontmatter('Xinbao_Qiao.md');
+const bioData = frontmatterData('Xinbao_Qiao.md');
 for (const field of ['name:', 'residence:', 'occupation:', 'education:', 'links:']) {
   assert.ok(bio.includes(field), `Xinbao_Qiao.md frontmatter includes ${field}`);
 }
@@ -67,15 +73,16 @@ assert.doesNotMatch(bio, /^native_name:/m, 'English infobox follows Colarpedia b
 assert.doesNotMatch(bio, /^birth_place:/m, 'birthplace is kept in prose rather than the infobox');
 assert.match(bio, /born: \|\n\s+September 2000 \(age 25\)\n\s+Xishuangbanna, Yunnan\n/, 'English Born row uses the requested month-and-place format');
 assert.doesNotMatch(bio, /30 September 2000|Xishuangbanna, Yunnan, China/, 'English Born row omits day and country');
-assert.match(bio, /occupation:\n\s+- "PhD student"/, 'occupation uses PhD student');
-assert.match(bio, /image_caption: "Photograph taken at Singapore EXPO, 2025"/, 'English portrait caption identifies Singapore EXPO and year');
+assert.deepEqual(bioData.occupation, ['PhD student'], 'occupation uses PhD student');
+assert.equal(bioData.image_caption, 'Photograph taken at Singapore EXPO, 2025', 'English portrait caption identifies Singapore EXPO and year');
 const educationBlock = frontmatterSlice(bio, 'education:', 'links:');
-assert.match(educationBlock, /label: "The Chinese University of Hong Kong"[\s\S]*label: "Zhejiang University"[\s\S]*label: "Shandong University"/, 'English education is reverse chronological');
-assert.match(educationBlock, /label: "Shandong University"\n\s+url: "\/wiki\/Shandong_University\/"\n\s+detail: "\(BEng, 2022\)"/, 'English education links only school name and keeps degree detail separate');
-assert.match(bio, /title: "OpenReview"[\s\S]*https:\/\/openreview\.net\/profile\?id=~Xinbao_Qiao1/, 'contact replaces Website with OpenReview');
-assert.match(bio, /aliases:[\s\S]*"Mr\. Ciao"[\s\S]*"MrCiao"[\s\S]*"Ciao"/, 'English biography aliases include Mr. Ciao');
+assert.deepEqual(bioData.education.map((item) => item.label), ['The Chinese University of Hong Kong', 'Zhejiang University', 'Shandong University'], 'English education is reverse chronological');
+assert.deepEqual(bioData.education.at(-1), { label: 'Shandong University', url: '/wiki/Shandong_University/', detail: '(BEng, 2022)' }, 'English education links only school name and keeps degree detail separate');
+assert.ok(bioData.links.some((link) => link.title === 'OpenReview' && link.url === 'https://openreview.net/profile?id=~Xinbao_Qiao1'), 'contact replaces Website with OpenReview');
+assert.ok(['Mr. Ciao', 'MrCiao', 'Ciao'].every((alias) => bioData.aliases.includes(alias)), 'English biography aliases include Mr. Ciao');
 
 const zhBio = frontmatter('Qiao_Xinbao_zh.md');
+const zhBioData = frontmatterData('Qiao_Xinbao_zh.md');
 const zhAffiliation = frontmatterSlice(zhBio, 'affiliation:', 'education:');
 assert.match(zhAffiliation, /香港中文大学/, 'Chinese affiliation lists current institution');
 assert.match(zhAffiliation, /信息工程系/, 'Chinese affiliation includes current department');
@@ -83,11 +90,11 @@ assert.doesNotMatch(zhAffiliation, /新加坡国立大学重庆研究院/, 'Chin
 assert.doesNotMatch(zhBio, /^native_name:/m, 'Chinese infobox follows Colarpedia by folding English name into Born');
 assert.doesNotMatch(zhBio, /^birth_place:/m, 'Chinese birthplace is kept in prose rather than the infobox');
 assert.match(zhBio, /born: \|\n\s+乔鑫宝 \(Xinbao Qiao\)\n\s+2000年9月30日 \(25岁\)\n\s+中国云南西双版纳/, 'Chinese Born row is a multiline Colarpedia-style value');
-assert.match(zhBio, /image_caption: "摄于 ICLR 2025，新加坡 EXPO"/, 'Chinese portrait caption identifies ICLR 2025 at Singapore EXPO');
-assert.match(zhBio, /aliases:[\s\S]*"Mr\. Ciao"[\s\S]*"MrCiao"[\s\S]*"喬"[\s\S]*"ciao"/, 'Chinese biography aliases include Mr. Ciao and ciao spelling');
+assert.equal(zhBioData.image_caption, '摄于 ICLR 2025，新加坡 EXPO', 'Chinese portrait caption identifies ICLR 2025 at Singapore EXPO');
+assert.ok(['Mr. Ciao', 'MrCiao', '喬', 'ciao'].every((alias) => zhBioData.aliases.includes(alias)), 'Chinese biography aliases include Mr. Ciao and ciao spelling');
 const zhEducationBlock = frontmatterSlice(zhBio, 'education:', 'links:');
-assert.match(zhEducationBlock, /label: "香港中文大学"[\s\S]*label: "浙江大学"[\s\S]*label: "山东大学"/, 'Chinese education is reverse chronological');
-assert.match(zhEducationBlock, /label: "山东大学"\n\s+url: "\/wiki\/Shandong_University\/"\n\s+detail: "（工学学士，2022）"/, 'Chinese education links only school name and keeps degree detail separate');
+assert.deepEqual(zhBioData.education.map((item) => item.label), ['香港中文大学', '浙江大学', '山东大学'], 'Chinese education is reverse chronological');
+assert.deepEqual(zhBioData.education.at(-1), { label: '山东大学', url: '/wiki/Shandong_University/', detail: '（工学学士，2022）' }, 'Chinese education links only school name and keeps degree detail separate');
 
 assert.match(home, /\[\[Publications\]\]/, 'home article links to Publications');
 assert.match(home, /\[\[Research\]\]/, 'home article links to Research');
@@ -102,7 +109,7 @@ assert.match(read('CV.md'), /\/files\/XinbaoQiao_CV\.pdf/, 'CV page links to loc
 
 const contactCount = (home.match(/mailto:/g) || []).length;
 assert.equal(contactCount, 1, 'home infobox contact exposes one email address');
-assert.match(bio, /title: "GitHub"[\s\S]*https:\/\/github\.com\/XinbaoQiao/, 'contact includes GitHub');
+assert.ok(bioData.links.some((link) => link.title === 'GitHub' && link.url === 'https://github.com/XinbaoQiao'), 'contact includes GitHub');
 
 const layout = fs.readFileSync(path.join(root, 'app/layout.tsx'), 'utf8');
 const wikiPageTsx = fs.readFileSync(path.join(root, 'app/wiki/[slug]/page.tsx'), 'utf8');
@@ -123,6 +130,14 @@ assertFile('chat with xinbao/persona-prompt.md');
 assertFile('chat with xinbao/meme-voice-notes.md');
 assertFile('scripts/wiki-maintenance.mjs');
 assertFile('wiki/graph.json');
+assertFile('wiki/maintenance-schema.json');
+assertFile('public/okf/index.md');
+assertFile('public/okf/log.md');
+assertFile('public/okf/manifest.json');
+assertFile('public/okf/pages.json');
+assertFile('public/okf/graph.json');
+assertFile('public/okf/schema.json');
+assertFile('public/okf/concepts/Xinbao_Qiao.md');
 assertNoPath('cloudflare');
 assertFile('public/xinbaopedia-icon.svg');
 const siteIcon = fs.readFileSync(path.join(root, 'public/xinbaopedia-icon.svg'), 'utf8');
@@ -135,6 +150,12 @@ const chatQuestionsRoute = fs.readFileSync(path.join(root, 'app/api/chat-with-xi
 const chatKnowledge = fs.readFileSync(path.join(root, 'lib/chat-with-xinbao.ts'), 'utf8');
 const pageIndex = JSON.parse(fs.readFileSync(path.join(wikiDir, 'pages.json'), 'utf8'));
 const wikiGraph = JSON.parse(fs.readFileSync(path.join(wikiDir, 'graph.json'), 'utf8'));
+const maintenanceSchema = JSON.parse(fs.readFileSync(path.join(wikiDir, 'maintenance-schema.json'), 'utf8'));
+const okfManifest = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/manifest.json'), 'utf8'));
+const okfPageIndex = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/pages.json'), 'utf8'));
+const okfGraph = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/graph.json'), 'utf8'));
+const okfSchema = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/schema.json'), 'utf8'));
+const okfHome = matter(fs.readFileSync(path.join(root, 'public/okf/concepts/Xinbao_Qiao.md'), 'utf8'));
 const chatReadme = fs.readFileSync(path.join(root, 'chat with xinbao/README.md'), 'utf8');
 const chatEnvExample = fs.readFileSync(path.join(root, 'chat with xinbao/env.example'), 'utf8');
 const chatPersona = fs.readFileSync(path.join(root, 'chat with xinbao/persona-prompt.md'), 'utf8');
@@ -161,18 +182,57 @@ for (const dependency of ['remark-math', 'rehype-katex', 'katex']) {
   assert.ok(packageJson.dependencies?.[dependency], `package.json includes ${dependency}`);
 }
 assert.ok(packageJson.dependencies?.['@upstash/redis'], 'package.json includes Upstash Redis for server-side rate limits');
-assert.equal(packageJson.scripts?.['maintain:wiki'], 'node scripts/wiki-maintenance.mjs --write', 'package.json exposes a deterministic wiki maintenance writer');
+assert.equal(packageJson.scripts?.['maintain:wiki'], 'node scripts/wiki-maintenance.mjs --standardize --write', 'package.json exposes a deterministic wiki maintenance writer');
 assert.equal(packageJson.scripts?.['lint:content'], 'node scripts/wiki-maintenance.mjs --check', 'package.json exposes a deterministic content maintenance check');
 assert.match(packageJson.scripts?.check || '', /lint:content/, 'repository check includes the content maintenance check');
-assert.equal(pageIndex.schemaVersion, 2, 'wiki page index uses the generated content-maintenance schema');
+assert.equal(pageIndex.schemaVersion, 3, 'wiki page index uses the generated content-maintenance schema');
+assert.equal(pageIndex.okfVersion, '0.1', 'wiki page index declares the OKF target version');
 assert.ok(pageIndex.pages.length >= 80, 'generated page index includes the visible wiki corpus');
 assert.ok(pageIndex.pages.some((page) => page.slug === 'Xinbao_Qiao' && page.type), 'generated page index includes typed home-page metadata');
 assert.ok(!pageIndex.pages.some((page) => page.slug === 'Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning'), 'generated page index excludes hidden manuscripts');
-assert.equal(wikiGraph.schemaVersion, 1, 'wiki graph uses the generated content-maintenance schema');
+assert.equal(wikiGraph.schemaVersion, 2, 'wiki graph uses the generated content-maintenance schema');
+assert.equal(wikiGraph.okfVersion, '0.1', 'wiki graph declares the OKF target version');
 assert.ok(wikiGraph.nodes.length >= 80, 'wiki graph includes the markdown corpus');
 assert.ok(wikiGraph.edges.length >= 100, 'wiki graph captures internal wiki relationships');
 assert.ok(wikiGraph.nodes.some((node) => node.slug === 'Projects' && node.backlinks.includes('index')), 'wiki graph records backlinks');
 assert.ok(wikiGraph.nodes.some((node) => node.slug === 'Xinbao_Qiao' && node.type), 'wiki graph records derived concept types');
+assert.equal(maintenanceSchema.okfVersion, '0.1', 'maintenance schema records the OKF target version');
+assert.deepEqual(maintenanceSchema.source.requiredFrontmatter, ['type', 'title', 'description', 'tags', 'timestamp'], 'maintenance schema locks the source frontmatter contract');
+assert.ok(maintenanceSchema.generatedArtifacts.includes('public/okf/concepts/*.md'), 'maintenance schema documents the public OKF concept export');
+assert.equal(okfManifest.okfVersion, '0.1', 'public OKF manifest declares OKF v0.1');
+assert.equal(okfManifest.bundle.publicPages, pageIndex.pages.length, 'public OKF manifest page count matches generated index');
+assert.equal(okfManifest.bundle.hiddenPagesExcluded, 2, 'public OKF manifest records hidden-page exclusion');
+assert.equal(okfPageIndex.pages.length, pageIndex.pages.length, 'public OKF page index mirrors the public source index');
+assert.equal(okfGraph.nodes.length, pageIndex.pages.length, 'public OKF graph excludes hidden source pages');
+const publicOkfSlugs = new Set(okfGraph.nodes.map((node) => node.slug));
+for (const hiddenSlug of wikiGraph.nodes.filter((node) => node.hidden).map((node) => node.slug)) {
+  assert.ok(!JSON.stringify(okfGraph).includes(hiddenSlug), `public OKF graph excludes hidden slug ${hiddenSlug}`);
+}
+for (const node of okfGraph.nodes) {
+  assert.ok(node.outgoing.every((slug) => publicOkfSlugs.has(slug)), `${node.slug} public outgoing links only target public nodes`);
+  assert.ok(node.backlinks.every((slug) => publicOkfSlugs.has(slug)), `${node.slug} public backlinks only target public nodes`);
+}
+for (const edge of okfGraph.edges) {
+  assert.ok(publicOkfSlugs.has(edge.from) && publicOkfSlugs.has(edge.to), 'public OKF edges only connect public nodes');
+}
+assert.equal(okfSchema.okfVersion, '0.1', 'public OKF schema mirrors the maintenance schema');
+assert.equal(okfHome.data.type, 'PhD student', 'public OKF concept keeps a required type');
+assert.equal(okfHome.data.title, 'Xinbao Qiao', 'public OKF concept keeps a required title');
+assert.ok(okfHome.data.description, 'public OKF concept keeps a required description');
+assert.ok(Array.isArray(okfHome.data.tags) && okfHome.data.tags.length > 0, 'public OKF concept keeps required tags');
+assert.ok(okfHome.data.timestamp, 'public OKF concept keeps a timestamp');
+assert.ok(okfHome.data.lifecycle?.confidence > 0, 'public OKF concept includes LLM Wiki lifecycle metadata');
+assert.doesNotMatch(fs.readFileSync(path.join(root, 'public/okf/index.md'), 'utf8'), /^---/m, 'public OKF reserved index has no frontmatter');
+assert.doesNotMatch(fs.readFileSync(path.join(root, 'public/okf/log.md'), 'utf8'), /^---/m, 'public OKF reserved log has no frontmatter');
+
+for (const file of fs.readdirSync(wikiDir).filter((file) => file.endsWith('.md'))) {
+  const data = frontmatterData(file);
+  assert.ok(data.type, `${file} has explicit OKF type`);
+  assert.ok(data.title, `${file} has explicit OKF title`);
+  assert.ok(data.description, `${file} has explicit OKF description`);
+  assert.ok(Array.isArray(data.tags) && data.tags.length > 0, `${file} has OKF tags`);
+  assert.ok(data.timestamp, `${file} has OKF timestamp`);
+}
 assert.doesNotMatch(nextConfig, /output:\s*['"]export['"]/, 'Next config no longer forces static export');
 assert.match(wikiMarkdownTsx, /import remarkMath from 'remark-math';/, 'Markdown renderer imports remark-math');
 assert.match(wikiMarkdownTsx, /import rehypeKatex from 'rehype-katex';/, 'Markdown renderer imports rehype-katex');
@@ -462,8 +522,8 @@ assert.match(angelaZhang, /\[\[Xinbao_Qiao\|Xinbao Qiao\]\]/, 'Angela Yingjun Zh
 
 const learnPageFm = frontmatter('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning.md');
 assert.doesNotMatch(learnPageFm, /^categories:/m, 'under-review manuscript infobox omits categories');
-assert.match(learnPageFm, /^hidden: true$/m, 'under-review manuscript is hidden from public indexes for now');
-assert.match(frontmatter('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning_zh.md'), /^hidden: true$/m, 'Chinese under-review manuscript is hidden from public indexes for now');
+assert.equal(frontmatterData('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning.md').hidden, true, 'under-review manuscript is hidden from public indexes for now');
+assert.equal(frontmatterData('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning_zh.md').hidden, true, 'Chinese under-review manuscript is hidden from public indexes for now');
 
 const hiddenManuscriptPattern = /Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters/;
 const publicMarkdownFiles = fs.readdirSync(wikiDir)
@@ -610,12 +670,12 @@ const researchTopicImages = new Map([
 
 for (const page of researchTopicPages) {
   const body = read(page);
-  const fm = frontmatter(page);
+  const data = frontmatterData(page);
   const image = researchTopicImages.get(page);
   assert.ok(image, `${page} has a topic image mapping`);
-  assert.match(fm, new RegExp(`^image: "${image}"$`, 'm'), `${page} uses a custom topic illustration`);
-  assert.match(fm, /^image_caption: ".*topic diagram.*"$/m, `${page} captions the topic illustration`);
-  assert.doesNotMatch(fm, /institutions|university|emblem|logo/i, `${page} does not reuse school imagery`);
+  assert.equal(data.image, image, `${page} uses a custom topic illustration`);
+  assert.match(data.image_caption, /topic diagram/, `${page} captions the topic illustration`);
+  assert.doesNotMatch(`${data.image}\n${data.image_caption}`, /institutions|university|emblem|logo/i, `${page} does not reuse school imagery`);
   assertSectionOrder(page, ['## Introduction', '## Role in this wiki', '## Publications', "## Connection to Qiao's work", '## See also']);
   assert.match(body, /\| Paper \| Venue\/status \|/, `${page} uses the shared publications table heading`);
   assert.doesNotMatch(body, /Central paper|Central publication/i, `${page} avoids inconsistent central-paper phrasing`);

@@ -1,27 +1,34 @@
 ---
-name: "香港中文大学"
-image: "/institutions/cuhk-emblem.svg"
-image_caption: "香港中文大学校徽"
-type: "公立研究型大学"
+type: 公立研究型大学
+title: 香港中文大学
+description: 乔鑫宝当前博士阶段所在机构。
+tags:
+  - zh
+  - institution
+  - education
+  - 公立研究型大学
+timestamp: '2026-06-13T20:46:02+08:00'
+name: 香港中文大学
+language: zh
+summary: 乔鑫宝当前博士阶段所在机构。
 person:
-  label: "乔鑫宝"
-  url: "/wiki/Qiao_Xinbao_zh/"
-program: "信息工程博士"
-school: "工程学院"
-department: "信息工程系"
-dates: "2026年至今"
-place: "香港沙田"
-focus: "数据中心 ML；AI for Networks；Networks for AI；可信 AI"
+  label: 乔鑫宝
+  url: /wiki/Qiao_Xinbao_zh/
+program: 信息工程博士
+school: 工程学院
+department: 信息工程系
+dates: 2026年至今
+place: 香港沙田
+focus: 数据中心 ML；AI for Networks；Networks for AI；可信 AI
+image: /institutions/cuhk-emblem.svg
+image_caption: 香港中文大学校徽
 links:
-  - label: "信息工程系"
-    url: "https://www.ie.cuhk.edu.hk/"
-  - label: "信息工程 MPhil-PhD"
-    url: "https://www.gs.cuhk.edu.hk/admissions/programme/engineering"
-summary: "乔鑫宝当前博士阶段所在机构。"
-language: "zh"
-translation_of: "The_Chinese_University_of_Hong_Kong"
+  - label: 信息工程系
+    url: 'https://www.ie.cuhk.edu.hk/'
+  - label: 信息工程 MPhil-PhD
+    url: 'https://www.gs.cuhk.edu.hk/admissions/programme/engineering'
+translation_of: The_Chinese_University_of_Hong_Kong
 ---
-
 **香港中文大学**（**CUHK**）是 [[Xinbao_Qiao|乔鑫宝]] 当前博士阶段所在机构；乔鑫宝隶属于其信息工程系。在本 wiki 中，CUHK 页面是机构背景页，而非完整大学史条目：它记录该校为何与乔鑫宝研究传记相关、信息工程项目如何框定当前研究，以及博士阶段与此前 [[Zhejiang_University|浙江大学]] 和 [[Shandong_University|山东大学]] 训练之间的关系。[^cuhk-intro]
 
 ## 项目

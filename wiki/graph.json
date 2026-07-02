@@ -1,11 +1,18 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
+  "okfVersion": "0.1",
   "nodes": [
     {
       "aliases": [],
       "file": "AI_and_Networks.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "Collaborative_Evaluation",
         "Data_Centric_Machine_Learning",
@@ -19,7 +26,14 @@
       ],
       "slug": "AI_and_Networks",
       "summary": "Primary research topic for Qiao Xinbao, covering AI systems under networked data and communication constraints.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "topic",
+        "research-topic",
+        "ai-and-networks"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "AI and Networks",
       "type": "Research topic",
       "backlinks": [
@@ -56,6 +70,12 @@
       "file": "AI_and_Networks_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -69,7 +89,14 @@
       ],
       "slug": "AI_and_Networks_zh",
       "summary": "乔鑫宝当前主要研究专题，涵盖网络化数据与通信约束下的 AI 系统。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "topic",
+        "研究专题",
+        "ai-and-networks"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "AI 与网络",
       "type": "研究专题",
       "backlinks": [
@@ -105,6 +132,12 @@
       "file": "Angela_Yingjun_Zhang.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Distributed_Learning",
@@ -113,7 +146,13 @@
       ],
       "slug": "Angela_Yingjun_Zhang",
       "summary": "CUHK Information Engineering professor and doctoral advisor of Xinbao Qiao.",
-      "tags": [],
+      "tags": [
+        "en",
+        "person",
+        "advisor",
+        "academic-advisor"
+      ],
+      "timestamp": "2026-05-05T21:15:18+08:00",
       "title": "Angela Yingjun Zhang",
       "type": "Academic advisor",
       "backlinks": [
@@ -131,6 +170,12 @@
       "file": "Angela_Yingjun_Zhang_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Distributed_Learning_zh",
@@ -139,7 +184,13 @@
       ],
       "slug": "Angela_Yingjun_Zhang_zh",
       "summary": "香港中文大学信息工程系教授，乔鑫宝博士导师。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "person",
+        "advisor",
+        "academic-advisor"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "Angela Yingjun Zhang",
       "type": "Academic advisor",
       "backlinks": [
@@ -156,6 +207,12 @@
       "file": "Certified_Data_Removal.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Hessian_Free_Online_Certified_Unlearning",
@@ -165,7 +222,14 @@
       ],
       "slug": "Certified_Data_Removal",
       "summary": "Concept page for deletion guarantees in machine unlearning.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "concept",
+        "research-concept",
+        "machine-unlearning"
+      ],
+      "timestamp": "2026-05-05T19:52:29+08:00",
       "title": "Certified Data Removal",
       "type": "Research concept",
       "backlinks": [
@@ -182,6 +246,12 @@
       "file": "Certified_Data_Removal_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
@@ -191,7 +261,14 @@
       ],
       "slug": "Certified_Data_Removal_zh",
       "summary": "解释机器遗忘中删除保证的概念页。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念",
+        "machine-unlearning"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "认证数据删除",
       "type": "研究概念",
       "backlinks": [
@@ -208,6 +285,12 @@
       "file": "Collaborative_Evaluation.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Data_Silos",
@@ -217,7 +300,13 @@
       ],
       "slug": "Collaborative_Evaluation",
       "summary": "Concept page for evaluating models or data processes across multiple parties.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "concept",
+        "research-concept"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Collaborative Evaluation",
       "type": "Research concept",
       "backlinks": [
@@ -244,6 +333,12 @@
       "file": "Collaborative_Evaluation_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Silos_zh",
@@ -253,7 +348,13 @@
       ],
       "slug": "Collaborative_Evaluation_zh",
       "summary": "解释多方共同评估模型或数据过程的概念页。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "协作评估",
       "type": "研究概念",
       "backlinks": [
@@ -280,6 +381,12 @@
       "file": "CV.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "Angela_Yingjun_Zhang",
         "Meng_Zhang",
@@ -288,7 +395,13 @@
       ],
       "slug": "CV",
       "summary": "Structured CV summary for Qiao Xinbao.",
-      "tags": [],
+      "tags": [
+        "en",
+        "cv",
+        "profile",
+        "cv-summary"
+      ],
+      "timestamp": "2026-07-02T19:37:18+08:00",
       "title": "Curriculum Vitae",
       "type": "CV summary",
       "backlinks": [
@@ -303,6 +416,12 @@
       "file": "CV_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "Angela_Yingjun_Zhang_zh",
         "Meng_Zhang_zh",
@@ -311,7 +430,13 @@
       ],
       "slug": "CV_zh",
       "summary": "乔鑫宝的结构化 CV 摘要。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "cv",
+        "profile",
+        "cv-摘要"
+      ],
+      "timestamp": "2026-07-02T19:37:18+08:00",
       "title": "简历",
       "type": "CV 摘要",
       "backlinks": [
@@ -328,6 +453,12 @@
       "file": "Data_Centric_Machine_Learning.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Collaborative_Evaluation",
@@ -343,7 +474,13 @@
       ],
       "slug": "Data_Centric_Machine_Learning",
       "summary": "Research topic focused on data quality, selection, valuation, correction, and governance.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "topic",
+        "research-topic"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Data Centric ML",
       "type": "Research topic",
       "backlinks": [
@@ -375,6 +512,12 @@
       "file": "Data_Centric_Machine_Learning_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Collaborative_Evaluation_zh",
@@ -390,7 +533,13 @@
       ],
       "slug": "Data_Centric_Machine_Learning_zh",
       "summary": "关注数据质量、选择、估值、修正和治理的研究专题。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "topic",
+        "研究专题"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "数据中心 ML",
       "type": "研究专题",
       "backlinks": [
@@ -420,6 +569,12 @@
       "file": "Data_Selection.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Data_Centric_Machine_Learning",
@@ -431,7 +586,13 @@
       ],
       "slug": "Data_Selection",
       "summary": "Concept page for choosing training or evaluation data under reliability constraints.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "concept",
+        "research-concept"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Data Selection",
       "type": "Research concept",
       "backlinks": [
@@ -452,6 +613,12 @@
       "file": "Data_Selection_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -463,7 +630,13 @@
       ],
       "slug": "Data_Selection_zh",
       "summary": "解释在可靠性约束下选择训练或评估数据的概念页。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "数据选择",
       "type": "研究概念",
       "backlinks": [
@@ -484,6 +657,12 @@
       "file": "Data_Silos.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Collaborative_Evaluation",
@@ -493,7 +672,13 @@
       ],
       "slug": "Data_Silos",
       "summary": "Concept page for learning and evaluation when data are distributed across separate holders.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "concept",
+        "research-concept"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Data Silos",
       "type": "Research concept",
       "backlinks": [
@@ -519,6 +704,12 @@
       "file": "Data_Silos_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Collaborative_Evaluation_zh",
@@ -528,7 +719,13 @@
       ],
       "slug": "Data_Silos_zh",
       "summary": "解释数据分布在不同持有者之间时的学习与评估问题。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "数据孤岛",
       "type": "研究概念",
       "backlinks": [
@@ -554,6 +751,12 @@
       "file": "Distributed_Learning.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Data_Selection",
@@ -561,7 +764,13 @@
       ],
       "slug": "Distributed_Learning",
       "summary": "Concept page for learning with decentralized data, computation, or communication.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "concept",
+        "research-concept"
+      ],
+      "timestamp": "2026-05-06T06:22:22+08:00",
       "title": "Distributed Learning",
       "type": "Research concept",
       "backlinks": [
@@ -583,6 +792,12 @@
       "file": "Distributed_Learning_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Selection_zh",
@@ -590,7 +805,13 @@
       ],
       "slug": "Distributed_Learning_zh",
       "summary": "解释数据、计算或通信去中心化条件下的学习问题。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念"
+      ],
+      "timestamp": "2026-05-06T06:22:22+08:00",
       "title": "分布式学习",
       "type": "研究概念",
       "backlinks": [
@@ -616,6 +837,12 @@
       "file": "Distributed_Wasserstein_Barycenter.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Collaborative_Evaluation",
@@ -629,7 +856,14 @@
       ],
       "slug": "Distributed_Wasserstein_Barycenter",
       "summary": "Concept page for Qiao's work on computing Wasserstein barycenters from distributed local measures.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "concept",
+        "research-concept",
+        "wasserstein"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Distributed Wasserstein Barycenter",
       "type": "Research concept",
       "backlinks": [
@@ -653,6 +887,12 @@
       "file": "Distributed_Wasserstein_Barycenter_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Collaborative_Evaluation_zh",
@@ -666,7 +906,14 @@
       ],
       "slug": "Distributed_Wasserstein_Barycenter_zh",
       "summary": "解释乔鑫宝关于从分布式局部测度计算 Wasserstein barycenter 的相关工作。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念",
+        "wasserstein"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "分布式 Wasserstein Barycenter",
       "type": "研究概念",
       "backlinks": [
@@ -686,6 +933,12 @@
       "file": "DynFrs.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "Hessian_Free_Online_Certified_Unlearning",
         "Machine_Unlearning",
@@ -695,7 +948,14 @@
       ],
       "slug": "DynFrs",
       "summary": "ICLR 2025 paper on efficient machine unlearning for random forests.",
-      "tags": [],
+      "tags": [
+        "en",
+        "publication",
+        "paper",
+        "iclr-2025-poster",
+        "iclr-2025"
+      ],
+      "timestamp": "2026-05-05T21:39:01+08:00",
       "title": "DynFrs: An Efficient Framework for Machine Unlearning in Random Forest",
       "type": "publication",
       "backlinks": [
@@ -717,6 +977,12 @@
       "file": "DynFrs_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "Hessian_Free_Online_Certified_Unlearning_zh",
         "Machine_Unlearning_zh",
@@ -726,7 +992,14 @@
       ],
       "slug": "DynFrs_zh",
       "summary": "ICLR 2025 论文，研究随机森林中的高效机器遗忘。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "publication",
+        "paper",
+        "iclr-2025-poster",
+        "iclr-2025"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "DynFrs：随机森林机器遗忘高效框架",
       "type": "publication",
       "backlinks": [
@@ -747,6 +1020,12 @@
       "file": "Education.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "Angela_Yingjun_Zhang",
         "Meng_Zhang",
@@ -756,7 +1035,13 @@
       ],
       "slug": "Education",
       "summary": "Education timeline for Qiao Xinbao.",
-      "tags": [],
+      "tags": [
+        "en",
+        "education",
+        "profile",
+        "education-timeline"
+      ],
+      "timestamp": "2026-05-06T23:05:52+08:00",
       "title": "Education",
       "type": "Education timeline",
       "backlinks": [
@@ -771,6 +1056,12 @@
       "file": "Education_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "Angela_Yingjun_Zhang_zh",
         "Meng_Zhang_zh",
@@ -780,7 +1071,13 @@
       ],
       "slug": "Education_zh",
       "summary": "乔鑫宝的教育时间线。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "education",
+        "profile",
+        "教育时间线"
+      ],
+      "timestamp": "2026-05-06T23:05:52+08:00",
       "title": "教育经历",
       "type": "教育时间线",
       "backlinks": [
@@ -794,6 +1091,12 @@
       "file": "Experience.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -815,7 +1118,13 @@
       ],
       "slug": "Experience",
       "summary": "Research experience and affiliations.",
-      "tags": [],
+      "tags": [
+        "en",
+        "experience",
+        "profile",
+        "research-experience"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Experience",
       "type": "Research experience",
       "backlinks": [
@@ -830,6 +1139,12 @@
       "file": "Experience_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Angela_Yingjun_Zhang_zh",
@@ -851,7 +1166,13 @@
       ],
       "slug": "Experience_zh",
       "summary": "研究经历与机构关系。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "experience",
+        "profile",
+        "研究经历"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "研究经历",
       "type": "研究经历",
       "backlinks": [
@@ -866,6 +1187,12 @@
       "file": "Fairness_and_Robustness.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "Data_Centric_Machine_Learning",
         "Influence_Functions",
@@ -875,7 +1202,13 @@
       ],
       "slug": "Fairness_and_Robustness",
       "summary": "Concept page for fairness and robustness as data-centric correction objectives.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "concept",
+        "research-concept"
+      ],
+      "timestamp": "2026-05-05T20:55:21+08:00",
       "title": "Fairness and Robustness",
       "type": "Research concept",
       "backlinks": [
@@ -891,6 +1224,12 @@
       "file": "Fairness_and_Robustness_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "Data_Centric_Machine_Learning_zh",
         "Influence_Functions_zh",
@@ -900,7 +1239,13 @@
       ],
       "slug": "Fairness_and_Robustness_zh",
       "summary": "解释公平性与鲁棒性作为数据中心修正目标的概念页。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "公平性与鲁棒性",
       "type": "研究概念",
       "backlinks": [
@@ -916,6 +1261,12 @@
       "file": "Hessian_Free_Online_Certified_Unlearning.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "Certified_Data_Removal",
         "DynFrs",
@@ -925,7 +1276,14 @@
       ],
       "slug": "Hessian_Free_Online_Certified_Unlearning",
       "summary": "ICLR 2025 paper on efficient Hessian-free certified machine unlearning.",
-      "tags": [],
+      "tags": [
+        "en",
+        "publication",
+        "paper",
+        "iclr-2025-poster",
+        "iclr-2025"
+      ],
+      "timestamp": "2026-05-05T21:39:01+08:00",
       "title": "Hessian-Free Online Certified Unlearning",
       "type": "publication",
       "backlinks": [
@@ -951,6 +1309,12 @@
       "file": "Hessian_Free_Online_Certified_Unlearning_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "Certified_Data_Removal_zh",
         "DynFrs_zh",
@@ -960,7 +1324,14 @@
       ],
       "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
       "summary": "ICLR 2025 论文，研究无显式 Hessian 求逆的高效认证机器遗忘。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "publication",
+        "paper",
+        "iclr-2025-poster",
+        "iclr-2025"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "无 Hessian 在线认证遗忘",
       "type": "publication",
       "backlinks": [
@@ -985,6 +1356,12 @@
       "file": "index.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -1031,7 +1408,13 @@
       ],
       "slug": "index",
       "summary": "Index of wiki pages.",
-      "tags": [],
+      "tags": [
+        "en",
+        "index",
+        "navigation",
+        "wiki-index"
+      ],
+      "timestamp": "2026-05-07T17:34:07+08:00",
       "title": "Index",
       "type": "Wiki index",
       "backlinks": []
@@ -1041,6 +1424,12 @@
       "file": "index_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Angela_Yingjun_Zhang_zh",
@@ -1086,7 +1475,13 @@
       ],
       "slug": "index_zh",
       "summary": "Wiki 页面索引。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "index",
+        "navigation",
+        "wiki-索引"
+      ],
+      "timestamp": "2026-05-07T17:34:07+08:00",
       "title": "索引",
       "type": "Wiki 索引",
       "backlinks": []
@@ -1096,6 +1491,12 @@
       "file": "Influence_Functions.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "Data_Centric_Machine_Learning",
         "Data_Selection",
@@ -1106,7 +1507,13 @@
       ],
       "slug": "Influence_Functions",
       "summary": "Concept page for estimating how training examples affect learned models.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "concept",
+        "research-concept"
+      ],
+      "timestamp": "2026-05-05T19:52:29+08:00",
       "title": "Influence Functions",
       "type": "Research concept",
       "backlinks": [
@@ -1125,6 +1532,12 @@
       "file": "Influence_Functions_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "Data_Centric_Machine_Learning_zh",
         "Data_Selection_zh",
@@ -1135,7 +1548,13 @@
       ],
       "slug": "Influence_Functions_zh",
       "summary": "解释估计训练样本如何影响学习模型的概念页。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "影响函数",
       "type": "研究概念",
       "backlinks": [
@@ -1159,6 +1578,12 @@
       "file": "Internet_Slang_2026.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks",
         "CV",
@@ -1166,7 +1591,13 @@
       ],
       "slug": "Internet_Slang_2026",
       "summary": "A yearly, source-linked slang and meme-note page used to keep Chat with Xinbao playful without weakening factual answers.",
-      "tags": [],
+      "tags": [
+        "en",
+        "style",
+        "guide",
+        "style-guide"
+      ],
+      "timestamp": "2026-05-07T17:34:07+08:00",
       "title": "Internet Slang 2026",
       "type": "style guide",
       "backlinks": [
@@ -1185,6 +1616,12 @@
       "file": "Internet_Slang_2026_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "CV_zh",
@@ -1192,7 +1629,13 @@
       ],
       "slug": "Internet_Slang_2026_zh",
       "summary": "用于维护 Chat with Xinbao 语气的年度热梗资料页：有梗，但不牺牲事实性。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "style",
+        "guide",
+        "style-guide"
+      ],
+      "timestamp": "2026-05-07T17:34:07+08:00",
       "title": "2026热梗",
       "type": "style guide",
       "backlinks": [
@@ -1206,6 +1649,12 @@
       "file": "Interpretability.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "Data_Centric_Machine_Learning",
         "Hessian_Free_Online_Certified_Unlearning",
@@ -1216,7 +1665,14 @@
       ],
       "slug": "Interpretability",
       "summary": "Concept page for explaining model behavior and data influence.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "concept",
+        "research-concept",
+        "llm"
+      ],
+      "timestamp": "2026-05-05T20:55:21+08:00",
       "title": "Interpretability",
       "type": "Research concept",
       "backlinks": [
@@ -1229,6 +1685,12 @@
       "file": "Interpretability_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "Data_Centric_Machine_Learning_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
@@ -1239,7 +1701,14 @@
       ],
       "slug": "Interpretability_zh",
       "summary": "解释模型行为和数据影响的概念页。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念",
+        "llm"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "可解释性",
       "type": "研究概念",
       "backlinks": [
@@ -1251,6 +1720,12 @@
       "file": "Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning.md",
       "hidden": true,
       "language": "en",
+      "lifecycle": {
+        "status": "private",
+        "confidence": 0.55,
+        "review": "manual before publication",
+        "retention": "exclude from public bundle until explicitly unhidden"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Data_Centric_Machine_Learning",
@@ -1259,7 +1734,14 @@
       ],
       "slug": "Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning",
       "summary": "Manuscript on data pruning for efficient decentralized learning.",
-      "tags": [],
+      "tags": [
+        "en",
+        "publication",
+        "paper",
+        "under-review",
+        "private"
+      ],
+      "timestamp": "2026-05-06T06:22:22+08:00",
       "title": "Learn What Matters: Data Pruning for Efficient Decentralized Learning",
       "type": "publication",
       "backlinks": []
@@ -1269,6 +1751,12 @@
       "file": "Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning_zh.md",
       "hidden": true,
       "language": "zh",
+      "lifecycle": {
+        "status": "private",
+        "confidence": 0.55,
+        "review": "manual before publication",
+        "retention": "exclude from public bundle until explicitly unhidden"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -1277,7 +1765,14 @@
       ],
       "slug": "Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning_zh",
       "summary": "关于高效去中心化学习中数据剪枝的在审手稿。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "publication",
+        "paper",
+        "under-review",
+        "private"
+      ],
+      "timestamp": "2026-05-06T06:22:22+08:00",
       "title": "Learn What Matters：高效去中心化学习的数据剪枝",
       "type": "publication",
       "backlinks": []
@@ -1287,6 +1782,12 @@
       "file": "LLM_Reliability.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "Collaborative_Evaluation",
         "NUSRI_CQ",
@@ -1295,7 +1796,14 @@
       ],
       "slug": "LLM_Reliability",
       "summary": "Concept page for reliability issues in large language model systems.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "concept",
+        "research-concept",
+        "llm"
+      ],
+      "timestamp": "2026-05-05T20:55:21+08:00",
       "title": "LLM Reliability",
       "type": "Research concept",
       "backlinks": [
@@ -1309,6 +1817,12 @@
       "file": "LLM_Reliability_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "NUSRI_CQ_zh",
@@ -1317,7 +1831,14 @@
       ],
       "slug": "LLM_Reliability_zh",
       "summary": "解释大语言模型系统可靠性问题的概念页。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念",
+        "llm"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "大语言模型可靠性",
       "type": "研究概念",
       "backlinks": [
@@ -1331,6 +1852,12 @@
       "file": "log.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -1357,7 +1884,13 @@
       ],
       "slug": "log",
       "summary": "Append-only maintenance log for the wiki.",
-      "tags": [],
+      "tags": [
+        "en",
+        "maintenance",
+        "log",
+        "maintenance-log"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Log",
       "type": "Maintenance log",
       "backlinks": [
@@ -1369,6 +1902,12 @@
       "file": "log_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "CV_zh",
@@ -1385,7 +1924,13 @@
       ],
       "slug": "log_zh",
       "summary": "Wiki 的追加式维护日志。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "maintenance",
+        "log",
+        "维护日志"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "日志",
       "type": "维护日志",
       "backlinks": [
@@ -1397,6 +1942,12 @@
       "file": "Machine_Unlearning.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "Certified_Data_Removal",
         "Data_Centric_Machine_Learning",
@@ -1411,7 +1962,14 @@
       ],
       "slug": "Machine_Unlearning",
       "summary": "Research topic on removing or correcting data influence from trained models.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "topic",
+        "research-topic",
+        "machine-unlearning"
+      ],
+      "timestamp": "2026-05-05T22:09:30+08:00",
       "title": "Machine Unlearning",
       "type": "Research topic",
       "backlinks": [
@@ -1444,6 +2002,12 @@
       "file": "Machine_Unlearning_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "Certified_Data_Removal_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -1458,7 +2022,14 @@
       ],
       "slug": "Machine_Unlearning_zh",
       "summary": "研究如何从已训练模型中删除、降低或纠正数据影响。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "topic",
+        "研究专题",
+        "machine-unlearning"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "机器遗忘",
       "type": "研究专题",
       "backlinks": [
@@ -1490,6 +2061,12 @@
       "file": "Meng_Zhang.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Data_Centric_Machine_Learning",
@@ -1502,7 +2079,13 @@
       ],
       "slug": "Meng_Zhang",
       "summary": "Zhejiang University faculty member and master's advisor of Xinbao Qiao.",
-      "tags": [],
+      "tags": [
+        "en",
+        "person",
+        "advisor",
+        "academic-advisor"
+      ],
+      "timestamp": "2026-05-05T21:15:18+08:00",
       "title": "Meng Zhang",
       "type": "Academic advisor",
       "backlinks": [
@@ -1520,6 +2103,12 @@
       "file": "Meng_Zhang_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -1532,7 +2121,13 @@
       ],
       "slug": "Meng_Zhang_zh",
       "summary": "浙江大学教师，乔鑫宝硕士导师。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "person",
+        "advisor",
+        "academic-advisor"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "张萌",
       "type": "Academic advisor",
       "backlinks": [
@@ -1549,6 +2144,12 @@
       "file": "Model_Collapse.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "Collaborative_Evaluation",
         "Data_Silos",
@@ -1560,7 +2161,14 @@
       ],
       "slug": "Model_Collapse",
       "summary": "Concept page for degenerative distributional drift in recursive model training.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "concept",
+        "research-concept",
+        "synthetic-data"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Model Collapse",
       "type": "Research concept",
       "backlinks": [
@@ -1579,6 +2187,12 @@
       "file": "Model_Collapse_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "Data_Silos_zh",
@@ -1590,7 +2204,14 @@
       ],
       "slug": "Model_Collapse_zh",
       "summary": "解释递归模型训练中退化性分布漂移的概念页。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念",
+        "synthetic-data"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "模型坍缩",
       "type": "研究概念",
       "backlinks": [
@@ -1609,6 +2230,12 @@
       "file": "NUSRI_CQ.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "Collaborative_Evaluation",
         "Experience",
@@ -1621,7 +2248,13 @@
       ],
       "slug": "NUSRI_CQ",
       "summary": "Research internship institution of Xinbao Qiao.",
-      "tags": [],
+      "tags": [
+        "en",
+        "institution",
+        "research",
+        "research-institute"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "NUSRI-CQ",
       "type": "Research institute",
       "backlinks": [
@@ -1637,6 +2270,12 @@
       "file": "NUSRI_CQ_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "Experience_zh",
@@ -1649,7 +2288,13 @@
       ],
       "slug": "NUSRI_CQ_zh",
       "summary": "乔鑫宝研究实习阶段所在机构。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "institution",
+        "research",
+        "研究院"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "NUSRI-CQ",
       "type": "研究院",
       "backlinks": [
@@ -1665,10 +2310,22 @@
       "file": "Old_Homepage_Resources.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [],
       "slug": "Old_Homepage_Resources",
       "summary": "Record of the single preserved image from the earlier GitHub homepage.",
-      "tags": [],
+      "tags": [
+        "en",
+        "resource",
+        "archive",
+        "resource-inventory"
+      ],
+      "timestamp": "2026-05-05T01:10:50+08:00",
       "title": "Old Homepage Resources",
       "type": "Resource inventory",
       "backlinks": [
@@ -1680,10 +2337,22 @@
       "file": "Old_Homepage_Resources_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [],
       "slug": "Old_Homepage_Resources_zh",
       "summary": "记录从旧 GitHub 主页保留的一张图片。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "resource",
+        "archive",
+        "资源记录"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "旧主页资源",
       "type": "资源记录",
       "backlinks": [
@@ -1695,6 +2364,12 @@
       "file": "Projects.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Collaborative_Evaluation",
@@ -1708,7 +2383,13 @@
       ],
       "slug": "Projects",
       "summary": "Research projects and project clusters.",
-      "tags": [],
+      "tags": [
+        "en",
+        "project",
+        "overview",
+        "project-overview"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Projects",
       "type": "Project overview",
       "backlinks": [
@@ -1722,6 +2403,12 @@
       "file": "Projects_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Collaborative_Evaluation_zh",
@@ -1735,7 +2422,13 @@
       ],
       "slug": "Projects_zh",
       "summary": "研究项目与项目簇。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "project",
+        "overview",
+        "项目概览"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "项目",
       "type": "项目概览",
       "backlinks": [
@@ -1749,6 +2442,12 @@
       "file": "Publications.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Data_Centric_Machine_Learning",
@@ -1763,7 +2462,13 @@
       ],
       "slug": "Publications",
       "summary": "Publication list for Qiao Xinbao.",
-      "tags": [],
+      "tags": [
+        "en",
+        "publication",
+        "index",
+        "publication-list"
+      ],
+      "timestamp": "2026-06-01T22:00:31+08:00",
       "title": "Publications",
       "type": "Publication list",
       "backlinks": [
@@ -1779,6 +2484,12 @@
       "file": "Publications_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -1793,7 +2504,13 @@
       ],
       "slug": "Publications_zh",
       "summary": "乔鑫宝的论文索引。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "publication",
+        "index",
+        "论文列表"
+      ],
+      "timestamp": "2026-06-01T22:04:00+08:00",
       "title": "论文",
       "type": "论文列表",
       "backlinks": [
@@ -1814,6 +2531,12 @@
       "file": "Qiao_Xinbao_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Angela_Yingjun_Zhang_zh",
@@ -1842,7 +2565,13 @@
       ],
       "slug": "Qiao_Xinbao_zh",
       "summary": "香港中文大学信息工程系博士生；研究方向包括数据中心 ML、AI for Networks、Networks for AI、机器遗忘和合成数据可靠性",
-      "tags": [],
+      "tags": [
+        "zh",
+        "person",
+        "biography",
+        "博士生"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "乔鑫宝",
       "type": "博士生",
       "backlinks": [
@@ -1868,6 +2597,12 @@
       "file": "Random_Forest.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Certified_Data_Removal",
@@ -1877,7 +2612,13 @@
       ],
       "slug": "Random_Forest",
       "summary": "Concept page for random forests as the model class studied in DynFrs.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "model",
+        "model-family"
+      ],
+      "timestamp": "2026-05-05T19:52:29+08:00",
       "title": "Random Forest",
       "type": "Model family",
       "backlinks": [
@@ -1891,6 +2632,12 @@
       "file": "Random_Forest_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Certified_Data_Removal_zh",
@@ -1900,7 +2647,13 @@
       ],
       "slug": "Random_Forest_zh",
       "summary": "解释 DynFrs 所研究的随机森林模型类别。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "model",
+        "模型族"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "随机森林",
       "type": "模型族",
       "backlinks": [
@@ -1914,6 +2667,12 @@
       "file": "Recursive_Synthetic_Data_Training.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Data_Silos",
@@ -1924,7 +2683,14 @@
       ],
       "slug": "Recursive_Synthetic_Data_Training",
       "summary": "Concept page for training models repeatedly on data generated by earlier models.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "concept",
+        "research-concept",
+        "synthetic-data"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Recursive Synthetic Data Training",
       "type": "Research concept",
       "backlinks": [
@@ -1940,6 +2706,12 @@
       "file": "Recursive_Synthetic_Data_Training_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Silos_zh",
@@ -1950,7 +2722,14 @@
       ],
       "slug": "Recursive_Synthetic_Data_Training_zh",
       "summary": "解释模型反复使用早期模型生成数据进行训练的过程。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念",
+        "synthetic-data"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "递归合成数据训练",
       "type": "研究概念",
       "backlinks": [
@@ -1966,6 +2745,12 @@
       "file": "Research.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Certified_Data_Removal",
@@ -1988,7 +2773,13 @@
       ],
       "slug": "Research",
       "summary": "Research overview for Qiao Xinbao.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "overview",
+        "research-overview"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Research",
       "type": "Research overview",
       "backlinks": [
@@ -2002,6 +2793,12 @@
       "file": "Research_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Certified_Data_Removal_zh",
@@ -2024,7 +2821,13 @@
       ],
       "slug": "Research_zh",
       "summary": "乔鑫宝学术 wiki 的研究概览。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "overview",
+        "研究概览"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "研究",
       "type": "研究概览",
       "backlinks": [
@@ -2038,6 +2841,12 @@
       "file": "Sample_Selection_Bias.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Data_Selection",
@@ -2048,7 +2857,13 @@
       ],
       "slug": "Sample_Selection_Bias",
       "summary": "Concept page for distributional bias introduced by non-representative sample choice.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "concept",
+        "research-concept"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Sample Selection Bias",
       "type": "Research concept",
       "backlinks": [
@@ -2070,6 +2885,12 @@
       "file": "Sample_Selection_Bias_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "Data_Selection_zh",
         "Data_Silos_zh",
@@ -2079,7 +2900,13 @@
       ],
       "slug": "Sample_Selection_Bias_zh",
       "summary": "解释非代表性样本选择引入的分布偏差。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "样本选择偏差",
       "type": "研究概念",
       "backlinks": [
@@ -2101,6 +2928,12 @@
       "file": "Shandong_University.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Data_Silos",
@@ -2112,7 +2945,13 @@
       ],
       "slug": "Shandong_University",
       "summary": "Undergraduate institution of Xinbao Qiao.",
-      "tags": [],
+      "tags": [
+        "en",
+        "institution",
+        "education",
+        "public-research-university"
+      ],
+      "timestamp": "2026-05-05T20:55:21+08:00",
       "title": "Shandong University",
       "type": "Public research university",
       "backlinks": [
@@ -2128,6 +2967,12 @@
       "file": "Shandong_University_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Silos_zh",
@@ -2139,7 +2984,13 @@
       ],
       "slug": "Shandong_University_zh",
       "summary": "乔鑫宝本科阶段所在机构。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "institution",
+        "education",
+        "公立研究型大学"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "山东大学",
       "type": "公立研究型大学",
       "backlinks": [
@@ -2154,10 +3005,22 @@
       "file": "Skills.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [],
       "slug": "Skills",
       "summary": "Technical skills listed in Qiao Xinbao's CV.",
-      "tags": [],
+      "tags": [
+        "en",
+        "skills",
+        "profile",
+        "technical-skills"
+      ],
+      "timestamp": "2026-05-05T00:55:59+08:00",
       "title": "Skills",
       "type": "Technical skills",
       "backlinks": [
@@ -2169,10 +3032,22 @@
       "file": "Skills_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [],
       "slug": "Skills_zh",
       "summary": "乔鑫宝 CV 中列出的技术技能。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "skills",
+        "profile",
+        "技术技能"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "技能",
       "type": "技术技能",
       "backlinks": [
@@ -2184,6 +3059,12 @@
       "file": "Soft_Weighted_Machine_Unlearning.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "confirmed",
+        "confidence": 0.95,
+        "review": "on venue/status change",
+        "retention": "long-lived semantic memory"
+      },
       "outgoing": [
         "Fairness_and_Robustness",
         "Hessian_Free_Online_Certified_Unlearning",
@@ -2194,7 +3075,15 @@
       ],
       "slug": "Soft_Weighted_Machine_Unlearning",
       "summary": "AAAI 2026 paper on soft-weighted unlearning for fairness and robustness correction.",
-      "tags": [],
+      "tags": [
+        "en",
+        "publication",
+        "paper",
+        "accepted",
+        "aaai-2026",
+        "machine-unlearning"
+      ],
+      "timestamp": "2026-05-05T21:39:01+08:00",
       "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
       "type": "publication",
       "backlinks": [
@@ -2218,6 +3107,12 @@
       "file": "Soft_Weighted_Machine_Unlearning_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "confirmed",
+        "confidence": 0.95,
+        "review": "on venue/status change",
+        "retention": "long-lived semantic memory"
+      },
       "outgoing": [
         "Fairness_and_Robustness_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
@@ -2228,7 +3123,15 @@
       ],
       "slug": "Soft_Weighted_Machine_Unlearning_zh",
       "summary": "AAAI 2026 论文，研究用于公平性与鲁棒性修正的软加权机器遗忘。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "publication",
+        "paper",
+        "accepted",
+        "aaai-2026",
+        "machine-unlearning"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "超越二元擦除：用于公平性与鲁棒性的软加权遗忘",
       "type": "publication",
       "backlinks": [
@@ -2251,6 +3154,12 @@
       "file": "Synthetic_Data.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "Collaborative_Evaluation",
         "Data_Selection",
@@ -2262,7 +3171,14 @@
       ],
       "slug": "Synthetic_Data",
       "summary": "Concept page for generated data used in training, evaluation, or privacy-preserving collaboration.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "concept",
+        "research-concept",
+        "synthetic-data"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Synthetic Data",
       "type": "Research concept",
       "backlinks": [
@@ -2281,6 +3197,12 @@
       "file": "Synthetic_Data_and_Model_Collapse.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Collaborative_Evaluation",
@@ -2295,7 +3217,14 @@
       ],
       "slug": "Synthetic_Data_and_Model_Collapse",
       "summary": "Research topic on synthetic data, recursive training, low-resource verification, selection bias, and model collapse.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "topic",
+        "research-topic",
+        "synthetic-data"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Synthetic Data",
       "type": "Research topic",
       "backlinks": [
@@ -2327,6 +3256,12 @@
       "file": "Synthetic_Data_and_Model_Collapse_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Collaborative_Evaluation_zh",
@@ -2341,7 +3276,14 @@
       ],
       "slug": "Synthetic_Data_and_Model_Collapse_zh",
       "summary": "关于合成数据、递归训练、低资源验证、选择偏差和模型坍缩的研究专题。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "topic",
+        "研究专题",
+        "synthetic-data"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "合成数据",
       "type": "研究专题",
       "backlinks": [
@@ -2370,6 +3312,12 @@
       "file": "Synthetic_Data_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "Data_Selection_zh",
@@ -2381,7 +3329,14 @@
       ],
       "slug": "Synthetic_Data_zh",
       "summary": "解释用于训练、评估或隐私友好协作的生成数据。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念",
+        "synthetic-data"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "合成数据（概念）",
       "type": "研究概念",
       "backlinks": [
@@ -2398,6 +3353,12 @@
       "file": "The_Chinese_University_of_Hong_Kong.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -2413,7 +3374,13 @@
       ],
       "slug": "The_Chinese_University_of_Hong_Kong",
       "summary": "Current doctoral institution of Xinbao Qiao.",
-      "tags": [],
+      "tags": [
+        "en",
+        "institution",
+        "education",
+        "public-research-university"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "The Chinese University of Hong Kong",
       "type": "Public research university",
       "backlinks": [
@@ -2432,6 +3399,12 @@
       "file": "The_Chinese_University_of_Hong_Kong_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Angela_Yingjun_Zhang_zh",
@@ -2447,7 +3420,13 @@
       ],
       "slug": "The_Chinese_University_of_Hong_Kong_zh",
       "summary": "乔鑫宝当前博士阶段所在机构。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "institution",
+        "education",
+        "公立研究型大学"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "香港中文大学",
       "type": "公立研究型大学",
       "backlinks": [
@@ -2465,6 +3444,12 @@
       "file": "Trustworthy_AI.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Collaborative_Evaluation",
@@ -2477,7 +3462,13 @@
       ],
       "slug": "Trustworthy_AI",
       "summary": "Research topic covering reliability, deletion, fairness, robustness, interpretability, and evaluation.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "topic",
+        "research-topic"
+      ],
+      "timestamp": "2026-05-05T20:55:21+08:00",
       "title": "Trustworthy AI",
       "type": "Research topic",
       "backlinks": [
@@ -2500,6 +3491,12 @@
       "file": "Trustworthy_AI_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Collaborative_Evaluation_zh",
@@ -2512,7 +3509,13 @@
       ],
       "slug": "Trustworthy_AI_zh",
       "summary": "覆盖可靠性、删除、公平性、鲁棒性、可解释性和评估的研究专题。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "topic",
+        "研究专题"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "可信 AI",
       "type": "研究专题",
       "backlinks": [
@@ -2535,6 +3538,12 @@
       "file": "Wasserstein_Geometry.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "Collaborative_Evaluation",
         "Data_Silos",
@@ -2545,7 +3554,14 @@
       ],
       "slug": "Wasserstein_Geometry",
       "summary": "Concept page for distributional comparison using optimal-transport geometry.",
-      "tags": [],
+      "tags": [
+        "en",
+        "research",
+        "concept",
+        "research-concept",
+        "wasserstein"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Wasserstein Geometry",
       "type": "Research concept",
       "backlinks": [
@@ -2567,6 +3583,12 @@
       "file": "Wasserstein_Geometry_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings"
+      },
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "Data_Silos_zh",
@@ -2577,7 +3599,14 @@
       ],
       "slug": "Wasserstein_Geometry_zh",
       "summary": "解释使用最优传输几何进行分布比较的概念页。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念",
+        "wasserstein"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Wasserstein 几何",
       "type": "研究概念",
       "backlinks": [
@@ -2599,6 +3628,12 @@
       "file": "When_Sample_Selection_Bias_Precipitates_Model_Collapse.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "confirmed",
+        "confidence": 0.95,
+        "review": "on venue/status change",
+        "retention": "long-lived semantic memory"
+      },
       "outgoing": [
         "Collaborative_Evaluation",
         "Data_Selection",
@@ -2613,7 +3648,15 @@
       ],
       "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
       "summary": "ICML 2026 paper on low-resource verification regimes, sample-selection bias, model collapse, and collaborative Wasserstein-geometry proxies.",
-      "tags": [],
+      "tags": [
+        "en",
+        "publication",
+        "paper",
+        "accepted",
+        "icml-2026",
+        "synthetic-data"
+      ],
+      "timestamp": "2026-06-02T22:56:50+08:00",
       "title": "When Sample Selection Bias Precipitates Model Collapse",
       "type": "publication",
       "backlinks": [
@@ -2643,6 +3686,12 @@
       "file": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "confirmed",
+        "confidence": 0.95,
+        "review": "on venue/status change",
+        "retention": "long-lived semantic memory"
+      },
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "Data_Selection_zh",
@@ -2657,7 +3706,15 @@
       ],
       "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
       "summary": "ICML 2026 论文，研究低资源验证场景、样本选择偏差、模型坍缩与协作 Wasserstein 几何代理。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "publication",
+        "paper",
+        "accepted",
+        "icml-2026",
+        "synthetic-data"
+      ],
+      "timestamp": "2026-06-02T22:56:50+08:00",
       "title": "样本选择偏差何以促成模型坍缩",
       "type": "publication",
       "backlinks": [
@@ -2691,6 +3748,12 @@
       "file": "Xinbao_Qiao.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -2719,7 +3782,13 @@
       ],
       "slug": "Xinbao_Qiao",
       "summary": "PhD student in Information Engineering at The Chinese University of Hong Kong; researcher in data-centric ML, AI for Networks, Networks for AI, machine unlearning, and synthetic-data reliability",
-      "tags": [],
+      "tags": [
+        "en",
+        "person",
+        "biography",
+        "phd-student"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Xinbao Qiao",
       "type": "PhD student",
       "backlinks": [
@@ -2744,6 +3813,12 @@
       "file": "Zhejiang_University.md",
       "hidden": false,
       "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks",
         "Data_Centric_Machine_Learning",
@@ -2756,7 +3831,13 @@
       ],
       "slug": "Zhejiang_University",
       "summary": "Master's institution of Xinbao Qiao.",
-      "tags": [],
+      "tags": [
+        "en",
+        "institution",
+        "education",
+        "public-research-university"
+      ],
+      "timestamp": "2026-05-05T21:15:18+08:00",
       "title": "Zhejiang University",
       "type": "Public research university",
       "backlinks": [
@@ -2777,6 +3858,12 @@
       "file": "Zhejiang_University_zh.md",
       "hidden": false,
       "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory"
+      },
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -2789,7 +3876,13 @@
       ],
       "slug": "Zhejiang_University_zh",
       "summary": "乔鑫宝硕士阶段所在机构。",
-      "tags": [],
+      "tags": [
+        "zh",
+        "institution",
+        "education",
+        "公立研究型大学"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "浙江大学",
       "type": "公立研究型大学",
       "backlinks": [

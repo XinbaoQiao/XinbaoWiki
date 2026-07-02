@@ -1,15 +1,24 @@
 ---
-name: "分布式 Wasserstein Barycenter"
-occupation: "研究概念"
-summary: "解释乔鑫宝关于从分布式局部测度计算 Wasserstein barycenter 的相关工作。"
+type: 研究概念
+title: 分布式 Wasserstein Barycenter
+description: 解释乔鑫宝关于从分布式局部测度计算 Wasserstein barycenter 的相关工作。
+tags:
+  - zh
+  - research
+  - concept
+  - 研究概念
+  - wasserstein
+timestamp: '2026-06-13T20:46:02+08:00'
+name: 分布式 Wasserstein Barycenter
+language: zh
+summary: 解释乔鑫宝关于从分布式局部测度计算 Wasserstein barycenter 的相关工作。
 aliases:
-  - "分布式 Wasserstein barycenter"
-  - "Wasserstein barycenter"
-  - "分布式最优传输 barycenter"
-language: "zh"
-translation_of: "Distributed_Wasserstein_Barycenter"
+  - 分布式 Wasserstein barycenter
+  - Wasserstein barycenter
+  - 分布式最优传输 barycenter
+occupation: 研究概念
+translation_of: Distributed_Wasserstein_Barycenter
 ---
-
 **分布式 Wasserstein Barycenter** 是 [[Xinbao_Qiao|乔鑫宝]] 在 [[AI_and_Networks|AI 与网络]] 和 [[Data_Centric_Machine_Learning|数据中心 ML]] 方向下的相关概念页。Wasserstein barycenter 是在最优传输距离下对多个输入分布进行概括的概率测度。在分布式设置中，输入测度由不同参与方持有，因此问题不仅是统计问题，也是网络化计算问题：系统需要在通信和数据访问约束下计算或近似共同参考分布。[^barycenter]
 
 ## 定义

@@ -1,9 +1,18 @@
 ---
-name: "Certified Data Removal"
-occupation: "Research concept"
-summary: "Concept page for deletion guarantees in machine unlearning."
+type: Research concept
+title: Certified Data Removal
+description: Concept page for deletion guarantees in machine unlearning.
+tags:
+  - en
+  - research
+  - concept
+  - research-concept
+  - machine-unlearning
+timestamp: '2026-05-05T19:52:29+08:00'
+name: Certified Data Removal
+summary: Concept page for deletion guarantees in machine unlearning.
+occupation: Research concept
 ---
-
 **Certified Data Removal** refers to machine-learning methods that provide an explicit guarantee about the effect of removing data from a trained model. In this wiki the concept is used mainly to explain the mathematical side of [[Machine_Unlearning|machine unlearning]], where the goal is not only to update a model quickly, but to bound how close the updated model is to a model retrained without the deleted data.[^certified]
 
 ## Role in this wiki

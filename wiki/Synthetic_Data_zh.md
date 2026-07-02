@@ -1,11 +1,20 @@
 ---
-name: "合成数据（概念）"
-occupation: "研究概念"
-summary: "解释用于训练、评估或隐私友好协作的生成数据。"
-language: "zh"
-translation_of: "Synthetic_Data"
+type: 研究概念
+title: 合成数据（概念）
+description: 解释用于训练、评估或隐私友好协作的生成数据。
+tags:
+  - zh
+  - research
+  - concept
+  - 研究概念
+  - synthetic-data
+timestamp: '2026-05-27T17:56:27+08:00'
+name: 合成数据（概念）
+language: zh
+summary: 解释用于训练、评估或隐私友好协作的生成数据。
+occupation: 研究概念
+translation_of: Synthetic_Data
 ---
-
 **合成数据** 指被用来替代、补充或代理真实数据的生成样本。在机器学习中，合成数据可以扩大覆盖面、降低标注成本、保护隐私，或在真实数据稀缺时支持评估；但如果缺乏真实数据锚点并被递归复用，也会引入失效模式。
 
 ## 在本 wiki 中的作用

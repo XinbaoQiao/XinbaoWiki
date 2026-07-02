@@ -1,21 +1,28 @@
 ---
-name: "Angela Yingjun Zhang"
-type: "Academic advisor"
+type: Academic advisor
+title: Angela Yingjun Zhang
+description: 香港中文大学信息工程系教授，乔鑫宝博士导师。
+tags:
+  - zh
+  - person
+  - advisor
+  - academic-advisor
+timestamp: '2026-05-05T23:25:14+08:00'
+name: Angela Yingjun Zhang
+language: zh
+summary: 香港中文大学信息工程系教授，乔鑫宝博士导师。
 occupation:
-  - "Professor"
-  - "IEEE Fellow"
+  - Professor
+  - IEEE Fellow
 affiliation:
-  - label: "香港中文大学信息工程系"
-    url: "/wiki/The_Chinese_University_of_Hong_Kong/"
-focus: "5G/6G 无线通信系统中的优化与学习"
+  - label: 香港中文大学信息工程系
+    url: /wiki/The_Chinese_University_of_Hong_Kong/
+focus: 5G/6G 无线通信系统中的优化与学习
 links:
-  - label: "CUHK 个人主页"
-    url: "https://staff.ie.cuhk.edu.hk/~yjzhang/"
-summary: "香港中文大学信息工程系教授，乔鑫宝博士导师。"
-language: "zh"
-translation_of: "Angela_Yingjun_Zhang"
+  - label: CUHK 个人主页
+    url: 'https://staff.ie.cuhk.edu.hk/~yjzhang/'
+translation_of: Angela_Yingjun_Zhang
 ---
-
 **Angela Yingjun Zhang** 是香港中文大学信息工程系教授，IEEE Fellow。[^cuhk-profile] 其官方主页将研究置于无线通信与网络方向，重点包括 5G/6G 无线通信系统中的优化与学习。[^cuhk-about]
 
 ## 传记
@@ -40,4 +47,3 @@ Zhang 是 [[Xinbao_Qiao|乔鑫宝]] 在 CUHK 的博士导师。该导师关系�
 [^cuhk-profile]: Angela Yingjun Zhang 的 [CUHK 官方主页](https://staff.ie.cuhk.edu.hk/~yjzhang/)列出其为香港中文大学信息工程系教授和 IEEE Fellow。
 
 [^cuhk-about]: 其 [About](https://staff.ie.cuhk.edu.hk/~yjzhang/About.html) 与 [Research](https://staff.ie.cuhk.edu.hk/~yjzhang/Research.html) 页面介绍了 5G/6G 无线通信系统优化与学习等研究主题。
-

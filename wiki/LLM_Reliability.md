@@ -1,9 +1,18 @@
 ---
-name: "LLM Reliability"
-occupation: "Research concept"
-summary: "Concept page for reliability issues in large language model systems."
+type: Research concept
+title: LLM Reliability
+description: Concept page for reliability issues in large language model systems.
+tags:
+  - en
+  - research
+  - concept
+  - research-concept
+  - llm
+timestamp: '2026-05-05T20:55:21+08:00'
+name: LLM Reliability
+summary: Concept page for reliability issues in large language model systems.
+occupation: Research concept
 ---
-
 **LLM Reliability** concerns whether large language model systems behave consistently, safely, and truthfully under realistic use. In this wiki the term is connected to synthetic data, evaluation, and trustworthy systems rather than to a separate product-building track.
 
 ## Role in this wiki

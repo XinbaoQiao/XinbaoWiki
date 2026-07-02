@@ -1,26 +1,33 @@
 ---
-name: "NUSRI-CQ"
-image: "/institutions/nusri-cq-logo.svg"
-image_caption: "NUS（重庆）研究院标志"
-type: "研究院"
+type: 研究院
+title: NUSRI-CQ
+description: 乔鑫宝研究实习阶段所在机构。
+tags:
+  - zh
+  - institution
+  - research
+  - 研究院
+timestamp: '2026-05-27T17:56:27+08:00'
+name: NUSRI-CQ
+language: zh
+summary: 乔鑫宝研究实习阶段所在机构。
 person:
-  label: "乔鑫宝"
-  url: "/wiki/Qiao_Xinbao_zh/"
-program: "全职研究实习"
-school: "新加坡国立大学海外研究平台"
-dates: "2025年6月-2025年12月"
-place: "中国重庆"
-focus: "可信 LLM 系统；合成数据评估"
+  label: 乔鑫宝
+  url: /wiki/Qiao_Xinbao_zh/
+program: 全职研究实习
+school: 新加坡国立大学海外研究平台
+dates: 2025年6月-2025年12月
+place: 中国重庆
+focus: 可信 LLM 系统；合成数据评估
+image: /institutions/nusri-cq-logo.svg
+image_caption: NUS（重庆）研究院标志
 links:
-  - label: "NUSRI-CQ"
-    url: "https://en.nusricq.cn/"
-  - label: "Vision and Mission"
-    url: "https://en.nusricq.cn/about/yjysm"
-summary: "乔鑫宝研究实习阶段所在机构。"
-language: "zh"
-translation_of: "NUSRI_CQ"
+  - label: NUSRI-CQ
+    url: 'https://en.nusricq.cn/'
+  - label: Vision and Mission
+    url: 'https://en.nusricq.cn/about/yjysm'
+translation_of: NUSRI_CQ
 ---
-
 **NUSRI-CQ** 指 NUS（重庆）研究院，[[Xinbao_Qiao|乔鑫宝]] 于 2025 年 6 月至 12 月在此担任全职研究实习生。在本 wiki 中，该页是研究经历节点，而不是教育经历中的授位机构；它位于 [[Zhejiang_University|浙江大学]] 硕士阶段与 [[The_Chinese_University_of_Hong_Kong|香港中文大学]] 博士阶段之间。
 
 ## 项目

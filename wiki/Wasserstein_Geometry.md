@@ -1,9 +1,18 @@
 ---
-name: "Wasserstein Geometry"
-occupation: "Research concept"
-summary: "Concept page for distributional comparison using optimal-transport geometry."
+type: Research concept
+title: Wasserstein Geometry
+description: Concept page for distributional comparison using optimal-transport geometry.
+tags:
+  - en
+  - research
+  - concept
+  - research-concept
+  - wasserstein
+timestamp: '2026-05-27T17:56:27+08:00'
+name: Wasserstein Geometry
+summary: Concept page for distributional comparison using optimal-transport geometry.
+occupation: Research concept
 ---
-
 **Wasserstein Geometry** refers to the use of optimal-transport distances and related geometric ideas to compare probability distributions. Unlike pointwise metrics, Wasserstein distances account for the cost of moving probability mass from one distribution to another, which makes them useful for reasoning about distribution shift and generated data.[^ot]
 
 ## Role in this wiki

@@ -1,9 +1,22 @@
 ---
-name: "Synthetic Data"
-occupation: "Research concept"
-summary: "Concept page for generated data used in training, evaluation, or privacy-preserving collaboration."
+type: Research concept
+title: Synthetic Data
+description: >-
+  Concept page for generated data used in training, evaluation, or
+  privacy-preserving collaboration.
+tags:
+  - en
+  - research
+  - concept
+  - research-concept
+  - synthetic-data
+timestamp: '2026-05-27T17:56:27+08:00'
+name: Synthetic Data
+summary: >-
+  Concept page for generated data used in training, evaluation, or
+  privacy-preserving collaboration.
+occupation: Research concept
 ---
-
 **Synthetic Data** refers to generated examples that are used in place of, alongside, or as a proxy for real data. In machine learning, synthetic data can expand coverage, reduce annotation cost, protect privacy, or enable evaluation when real data are scarce. It can also introduce failure modes when generated samples are recursively reused without enough real-data anchoring.
 
 ## Role in this wiki

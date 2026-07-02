@@ -1,26 +1,40 @@
 ---
-name: "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness"
-type: "publication"
+type: publication
+title: 'Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness'
+description: >-
+  AAAI 2026 paper on soft-weighted unlearning for fairness and robustness
+  correction.
+tags:
+  - en
+  - publication
+  - paper
+  - accepted
+  - aaai-2026
+  - machine-unlearning
+timestamp: '2026-05-05T21:39:01+08:00'
+name: 'Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness'
+summary: >-
+  AAAI 2026 paper on soft-weighted unlearning for fairness and robustness
+  correction.
 authors:
-  - "Xinbao Qiao"
-  - "Ningning Ding"
-  - "Yushi Cheng"
-  - "Meng Zhang"
-venue: "AAAI 2026"
-location: "Singapore EXPO, Singapore"
+  - Xinbao Qiao
+  - Ningning Ding
+  - Yushi Cheng
+  - Meng Zhang
+venue: AAAI 2026
+location: 'Singapore EXPO, Singapore'
 year: 2026
-status: "accepted"
-publication_type: "Conference paper"
+status: accepted
+publication_type: Conference paper
 links:
-  - label: "arXiv"
-    url: "https://arxiv.org/abs/2505.18783"
-  - label: "Code"
-    url: "https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning"
-  - label: "AAAI 2026 lecture page"
-    url: "https://underline.io/lecture/139759-beyond-binary-erasure-soft-weighted-unlearning-for-fairness-and-robustness"
-summary: "AAAI 2026 paper on soft-weighted unlearning for fairness and robustness correction."
+  - label: arXiv
+    url: 'https://arxiv.org/abs/2505.18783'
+  - label: Code
+    url: 'https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning'
+  - label: AAAI 2026 lecture page
+    url: >-
+      https://underline.io/lecture/139759-beyond-binary-erasure-soft-weighted-unlearning-for-fairness-and-robustness
 ---
-
 **Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness** is an AAAI 2026 conference paper by **[[Xinbao_Qiao|Xinbao Qiao]]**, Ningning Ding, Yushi Cheng, and Meng Zhang. It reframes unlearning as a continuous correction problem rather than only a binary erasure operation.
 
 ## Overview

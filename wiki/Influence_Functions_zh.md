@@ -1,11 +1,19 @@
 ---
-name: "影响函数"
-occupation: "研究概念"
-summary: "解释估计训练样本如何影响学习模型的概念页。"
-language: "zh"
-translation_of: "Influence_Functions"
+type: 研究概念
+title: 影响函数
+description: 解释估计训练样本如何影响学习模型的概念页。
+tags:
+  - zh
+  - research
+  - concept
+  - 研究概念
+timestamp: '2026-05-05T23:25:14+08:00'
+name: 影响函数
+language: zh
+summary: 解释估计训练样本如何影响学习模型的概念页。
+occupation: 研究概念
+translation_of: Influence_Functions
 ---
-
 **影响函数** 是估计某个训练样本如何影响拟合模型或下游预测的分析工具。在现代机器学习中，它经常作为近似方法使用：与其在每次改变样本后重新训练，不如通过梯度和曲率信息估计影响。[^influence]
 
 ## 在本 wiki 中的作用
@@ -24,4 +32,3 @@ translation_of: "Influence_Functions"
 - [[Hessian_Free_Online_Certified_Unlearning|无 Hessian 在线认证遗忘]]
 
 [^influence]: Koh 和 Liang 的 “Understanding Black-box Predictions via Influence Functions”（ICML 2017）把经典影响函数思想重新引入现代机器学习预测解释。
-

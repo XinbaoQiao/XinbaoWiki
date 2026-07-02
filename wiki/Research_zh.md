@@ -1,11 +1,19 @@
 ---
-name: "研究"
-occupation: "研究概览"
-summary: "乔鑫宝学术 wiki 的研究概览。"
-language: "zh"
-translation_of: "Research"
+type: 研究概览
+title: 研究
+description: 乔鑫宝学术 wiki 的研究概览。
+tags:
+  - zh
+  - research
+  - overview
+  - 研究概览
+timestamp: '2026-06-13T20:46:02+08:00'
+name: 研究
+language: zh
+summary: 乔鑫宝学术 wiki 的研究概览。
+occupation: 研究概览
+translation_of: Research
 ---
-
 本页总结乔鑫宝学术 wiki 中的主要研究方向。它不是静态兴趣列表，而是由多个相互链接的专题页编译出的研究图谱。当前重心是[[Data_Centric_Machine_Learning|数据中心 ML]]和双向的 [[AI_and_Networks|AI 与网络]]问题。
 
 ## 研究主线

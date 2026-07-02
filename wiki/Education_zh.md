@@ -1,11 +1,19 @@
 ---
-name: "教育经历"
-occupation: "教育时间线"
-summary: "乔鑫宝的教育时间线。"
-language: "zh"
-translation_of: "Education"
+type: 教育时间线
+title: 教育经历
+description: 乔鑫宝的教育时间线。
+tags:
+  - zh
+  - education
+  - profile
+  - 教育时间线
+timestamp: '2026-05-06T23:05:52+08:00'
+name: 教育经历
+language: zh
+summary: 乔鑫宝的教育时间线。
+occupation: 教育时间线
+translation_of: Education
 ---
-
 ## 时间线
 
 - **2026年至今**：[[The_Chinese_University_of_Hong_Kong|香港中文大学]] 信息工程博士生，导师 [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]。

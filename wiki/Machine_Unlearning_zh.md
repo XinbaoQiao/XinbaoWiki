@@ -1,13 +1,22 @@
 ---
-name: "机器遗忘"
-image: "/topics/machine-unlearning.png"
-image_caption: "机器遗忘主题图"
-occupation: "研究专题"
-summary: "研究如何从已训练模型中删除、降低或纠正数据影响。"
-language: "zh"
-translation_of: "Machine_Unlearning"
+type: 研究专题
+title: 机器遗忘
+description: 研究如何从已训练模型中删除、降低或纠正数据影响。
+tags:
+  - zh
+  - research
+  - topic
+  - 研究专题
+  - machine-unlearning
+timestamp: '2026-05-05T23:25:14+08:00'
+name: 机器遗忘
+language: zh
+summary: 研究如何从已训练模型中删除、降低或纠正数据影响。
+occupation: 研究专题
+image: /topics/machine-unlearning.png
+image_caption: 机器遗忘主题图
+translation_of: Machine_Unlearning
 ---
-
 **机器遗忘** 研究模型训练完成后，如何删除、降低或纠正特定训练数据对模型的影响。在本 wiki 中，它既是隐私问题，也是数据中心系统问题：一个遗忘算法需要说明删除了什么、与重新训练的结果有多接近，以及节省了多少计算和延迟成本。[^unlearning]
 
 ## 引言
@@ -39,4 +48,3 @@ translation_of: "Machine_Unlearning"
 - [[Publications|论文]]
 
 [^unlearning]: 机器遗忘领域的常见起点包括 Bourtoule 等人在 IEEE S&P 2021 的 “Machine Unlearning”，该文提出用分片、隔离、切片和聚合训练作为删除数据的一种实用途径。
-

@@ -1,15 +1,23 @@
 ---
-name: "数据中心 ML"
-image: "/topics/data-centric-ml.png"
-image_caption: "数据中心 ML 主题图"
+type: 研究专题
+title: 数据中心 ML
+description: 关注数据质量、选择、估值、修正和治理的研究专题。
+tags:
+  - zh
+  - research
+  - topic
+  - 研究专题
+timestamp: '2026-05-27T17:56:27+08:00'
+name: 数据中心 ML
+language: zh
+summary: 关注数据质量、选择、估值、修正和治理的研究专题。
 aliases:
-  - "Data-Centric Machine Learning"
-occupation: "研究专题"
-summary: "关注数据质量、选择、估值、修正和治理的研究专题。"
-language: "zh"
-translation_of: "Data_Centric_Machine_Learning"
+  - Data-Centric Machine Learning
+occupation: 研究专题
+image: /topics/data-centric-ml.png
+image_caption: 数据中心 ML 主题图
+translation_of: Data_Centric_Machine_Learning
 ---
-
 **数据中心 ML** 是本 wiki 对 data-centric machine learning 的简称。它指的是把数据变化本身作为一阶干预对象的研究，而不仅仅通过修改模型结构来提升性能。相关操作包括选择、剪枝、加权、删除、合成和跨方评估。
 
 ## 引言

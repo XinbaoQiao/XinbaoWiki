@@ -1,9 +1,17 @@
 ---
-name: "Experience"
-occupation: "Research experience"
-summary: "Research experience and affiliations."
+type: Research experience
+title: Experience
+description: Research experience and affiliations.
+tags:
+  - en
+  - experience
+  - profile
+  - research-experience
+timestamp: '2026-06-13T20:46:02+08:00'
+name: Experience
+summary: Research experience and affiliations.
+occupation: Research experience
 ---
-
 ## Current affiliation
 
 - PhD student, Department of Information Engineering, [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]], advised by [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]].

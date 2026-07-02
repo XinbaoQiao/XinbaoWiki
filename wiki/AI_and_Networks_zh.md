@@ -1,13 +1,22 @@
 ---
-name: "AI 与网络"
-image: "/topics/ai-and-networks.png"
-image_caption: "AI 与网络主题图"
-occupation: "研究专题"
-summary: "乔鑫宝当前主要研究专题，涵盖网络化数据与通信约束下的 AI 系统。"
-language: "zh"
-translation_of: "AI_and_Networks"
+type: 研究专题
+title: AI 与网络
+description: 乔鑫宝当前主要研究专题，涵盖网络化数据与通信约束下的 AI 系统。
+tags:
+  - zh
+  - research
+  - topic
+  - 研究专题
+  - ai-and-networks
+timestamp: '2026-06-13T20:46:02+08:00'
+name: AI 与网络
+language: zh
+summary: 乔鑫宝当前主要研究专题，涵盖网络化数据与通信约束下的 AI 系统。
+occupation: 研究专题
+image: /topics/ai-and-networks.png
+image_caption: AI 与网络主题图
+translation_of: AI_and_Networks
 ---
-
 **AI 与网络** 是本 wiki 中描述 [[Xinbao_Qiao|乔鑫宝]] 当前研究重心的总括性标签。这里的“网络”并不只指通信网络本身，也包括数据所在位置、信息如何流动、哪些机构可以评估模型，以及学习系统在通信、隐私和数据孤岛约束下如何保持可靠。[^sources]
 
 ## 引言
