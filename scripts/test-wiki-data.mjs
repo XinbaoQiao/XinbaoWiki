@@ -608,6 +608,8 @@ assert.match(infobox, /location: 'Conference location'/, 'infobox labels confere
 assert.match(infobox, /department: 'Department'/, 'infobox supports institution department rows');
 assert.match(infobox, /dates: 'Dates'/, 'infobox supports institution date rows');
 assert.match(infobox, /place: 'Location'/, 'infobox supports institution location rows');
+assert.match(infobox, /function sameInfoboxText/, 'infobox can compare visible row values');
+assert.match(infobox, /key !== 'type' \|\| !sameInfoboxText\(data\.type, data\.occupation\)/, 'infobox suppresses Type when it duplicates Occupation');
 assert.doesNotMatch(infobox, /categories: 'Categories'/, 'infobox does not label categories');
 assert.doesNotMatch(infobox, /'categories'/, 'infobox does not render categories rows');
 assert.doesNotMatch(infobox, /<ul className="infobox-list">/, 'infobox avoids nested list indentation in standard rows');

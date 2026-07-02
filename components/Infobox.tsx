@@ -82,6 +82,22 @@ function empty(value: unknown) {
   return value === null || value === undefined || (typeof value === 'string' && !value.trim()) || (Array.isArray(value) && value.length === 0);
 }
 
+function infoboxTextValues(value: unknown): string[] {
+  if (empty(value)) return [];
+  if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') return [String(value)];
+  if (Array.isArray(value)) return value.flatMap(infoboxTextValues);
+  return [];
+}
+
+function normalizeInfoboxText(value: string) {
+  return value.replace(/\s+/g, ' ').trim().toLocaleLowerCase();
+}
+
+function sameInfoboxText(left: unknown, right: unknown) {
+  const rightValues = new Set(infoboxTextValues(right).map(normalizeInfoboxText).filter(Boolean));
+  return infoboxTextValues(left).map(normalizeInfoboxText).some((value) => rightValues.has(value));
+}
+
 function isLink(value: unknown): value is LinkItem {
   return typeof value === 'object' && value !== null && 'label' in value && 'url' in value;
 }
@@ -147,7 +163,7 @@ export function Infobox({ data }: Props) {
   const caption = typeof data.image_caption === 'string' ? data.image_caption : '';
   const rowLabels = data.language === 'zh' ? zhLabels : labels;
   const rows = order
-    .filter((key) => !empty(data[key]))
+    .filter((key) => !empty(data[key]) && (key !== 'type' || !sameInfoboxText(data.type, data.occupation)))
     .map((key) => (
       <tr key={key}>
         <th>{rowLabels[key] || labels[key] || key.replaceAll('_', ' ')}</th>
