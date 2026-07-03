@@ -9,7 +9,7 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 const scope = 'xinbaopedia';
 const project = 'xinbaopedia';
 const productionUrl = 'https://xinbaopedia.top';
-const vercelCliPackage = 'vercel@50.28.0';
+const vercelCliPackage = 'vercel@54.18.7';
 
 function fail(message) {
   console.error(`deploy-production: ${message}`);
@@ -62,8 +62,8 @@ function run(command, args, env) {
   });
 }
 
-function vercelArgs(command, token, args = []) {
-  return ['--yes', vercelCliPackage, command, ...args, '--token', token];
+function vercelArgs(command, args = []) {
+  return ['--yes', vercelCliPackage, command, ...args];
 }
 
 function readPackageScripts() {
@@ -132,8 +132,8 @@ async function main() {
   const env = sanitizeEnv();
   env.VERCEL_TOKEN = token;
 
-  await run('npx', vercelArgs('link', token, ['--yes', '--project', project, '--scope', scope]), env);
-  await run('npx', vercelArgs('deploy', token, ['--prod', '--yes', '--scope', scope]), env);
+  await run('npx', vercelArgs('link', ['--yes', '--project', project, '--scope', scope]), env);
+  await run('npx', vercelArgs('deploy', ['--prod', '--yes', '--scope', scope]), env);
   await runSmoke(env);
 }
 
