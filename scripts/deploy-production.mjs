@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 import { spawn } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, rmSync } from 'node:fs';
+import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -9,7 +10,8 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 const scope = 'xinbaopedia';
 const project = 'xinbaopedia';
 const productionUrl = 'https://xinbaopedia.top';
-const vercelCliPackage = 'vercel@54.18.7';
+const vercelCliVersion = '54.18.7';
+const vercelCliPackage = `vercel@${vercelCliVersion}`;
 
 function fail(message) {
   console.error(`deploy-production: ${message}`);
@@ -62,8 +64,57 @@ function run(command, args, env) {
   });
 }
 
+function vercelBinName() {
+  return process.platform === 'win32' ? 'vercel.cmd' : 'vercel';
+}
+
 function vercelArgs(command, args = []) {
-  return ['--yes', vercelCliPackage, command, ...args];
+  return [command, ...args];
+}
+
+function packageVersion(packageJsonPath) {
+  try {
+    const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
+    return packageJson.version;
+  } catch {
+    return null;
+  }
+}
+
+function resolveCachedVercelBin() {
+  const localBin = join(root, 'node_modules', '.bin', vercelBinName());
+  const localPackageJson = join(root, 'node_modules', 'vercel', 'package.json');
+  if (existsSync(localBin) && packageVersion(localPackageJson) === vercelCliVersion) {
+    return localBin;
+  }
+
+  const cacheRoot = process.env.npm_config_cache || join(homedir(), '.npm');
+  const npxRoot = join(cacheRoot, '_npx');
+  if (!existsSync(npxRoot)) {
+    return null;
+  }
+
+  for (const entry of readdirSync(npxRoot, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    const packageRoot = join(npxRoot, entry.name, 'node_modules', 'vercel');
+    const packageJsonPath = join(packageRoot, 'package.json');
+    if (packageVersion(packageJsonPath) !== vercelCliVersion) continue;
+    const binPath = join(npxRoot, entry.name, 'node_modules', '.bin', vercelBinName());
+    if (existsSync(binPath)) return binPath;
+  }
+
+  return null;
+}
+
+function requireVercelCommand() {
+  const command = resolveCachedVercelBin();
+  if (command) return command;
+  fail(`Vercel CLI ${vercelCliPackage} is not available in node_modules or the npm _npx cache; warm the cache with npm exec --package ${vercelCliPackage} -- vercel whoami`);
+}
+
+function cleanupGeneratedEnvFile(hadLocalEnv) {
+  if (hadLocalEnv) return;
+  rmSync(join(root, '.env.local'), { force: true });
 }
 
 function readPackageScripts() {
@@ -131,10 +182,16 @@ async function main() {
 
   const env = sanitizeEnv();
   env.VERCEL_TOKEN = token;
+  const vercelCommand = requireVercelCommand();
+  const hadLocalEnv = existsSync(join(root, '.env.local'));
 
-  await run('npx', vercelArgs('link', ['--yes', '--project', project, '--scope', scope]), env);
-  await run('npx', vercelArgs('deploy', ['--prod', '--yes', '--scope', scope]), env);
-  await runSmoke(env);
+  try {
+    await run(vercelCommand, vercelArgs('link', ['--yes', '--project', project, '--scope', scope]), env);
+    await run(vercelCommand, vercelArgs('deploy', ['--prod', '--yes', '--scope', scope]), env);
+    await runSmoke(env);
+  } finally {
+    cleanupGeneratedEnvFile(hadLocalEnv);
+  }
 }
 
 main().catch((error) => {

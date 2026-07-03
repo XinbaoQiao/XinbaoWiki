@@ -11,7 +11,7 @@ export VERCEL_TOKEN=...
 node scripts/deploy-production.mjs
 ```
 
-The wrapper does not accept tokens as command-line arguments. It reads `VERCEL_TOKEN` from the environment, passes it only through the child process environment, runs `vercel link --yes --project xinbaopedia --scope xinbaopedia`, then runs `vercel deploy --prod --yes --scope xinbaopedia`. The wrapper pins a Vercel CLI version that supports `VERCEL_TOKEN`; older 50.x CLI builds require `--token` and should not be used here.
+The wrapper does not accept tokens as command-line arguments. It reads `VERCEL_TOKEN` from the environment, passes it only through the child process environment, resolves a pinned local Vercel CLI binary, runs `vercel link --yes --project xinbaopedia --scope xinbaopedia`, then runs `vercel deploy --prod --yes --scope xinbaopedia`. The wrapper pins a Vercel CLI version that supports `VERCEL_TOKEN`; older 50.x CLI builds require `--token` and should not be used here.
 
 ## Clean CLI-generated local files
 
