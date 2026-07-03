@@ -29,8 +29,6 @@ publication_type: Conference paper
 links:
   - label: arXiv
     url: 'https://arxiv.org/abs/2505.18783'
-  - label: Code
-    url: 'https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning'
   - label: AAAI 2026 lecture page
     url: >-
       https://underline.io/lecture/139759-beyond-binary-erasure-soft-weighted-unlearning-for-fairness-and-robustness

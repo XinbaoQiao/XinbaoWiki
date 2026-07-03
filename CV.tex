@@ -7,7 +7,6 @@
 \usepackage{graphicx}
 \usepackage{tabularx}
 \usepackage{array}
-\usepackage{enumitem}
 \usepackage{hyperref}
 \usepackage{fancyhdr}
 \usepackage{fontspec}
@@ -108,7 +107,7 @@
     \contactsep \contactSolidIcon{cvblack}{F015}\hspace{2.0pt}\blackhref{https://xinbaopedia.top/}{xinbaopedia.top}
     \contactsep \contactBrandIcon{cvblack}{F09B}\hspace{2.0pt}\blackhref{https://github.com/XinbaoQiao}{GitHub}
     \contactsep \contactBrandIcon{cvblack}{F08C}\hspace{2.0pt}\blackhref{https://www.linkedin.com/in/xinbaoqiao/}{LinkedIn}
-    \contactsep \contactSolidIcon{cvblack}{F19D}\hspace{2.0pt}\blackhref{https://scholar.google.com/citations?user=nhC_OfEAAAAJ\&hl=en}{Google Scholar}}\par}
+    \contactsep \contactSolidIcon{cvblack}{F19D}\hspace{2.0pt}\blackhref{https://scholar.google.com/citations?view_op=search_authors\&mauthors=Xinbao+Qiao}{Google Scholar}}\par}
   \vspace{7.3pt}
 }
 
@@ -126,6 +125,7 @@
 \newcommand{\linkish}[2]{\href{#1}{\textcolor{cvblue}{#2}}}
 \newcommand{\datesep}{\ensuremath{\sim}}
 \newcommand{\cvbullet}{{\fontsize{8.97}{9.45}\selectfont\ensuremath{\cdot}}}
+\newcommand{\paperlabel}[1]{{\fontsize{9.96}{10.65}\selectfont\color{cvtext}#1}}
 \newcommand{\cvrow}[3]{%
   \noindent\begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{1.70in}@{}}
     #1 & #2
@@ -145,29 +145,34 @@
   \vspace{-1.85pt}
 }
 \newcommand{\paperitem}[2]{%
-  \noindent\begin{tabularx}{\linewidth}{@{\hspace{8.49pt}}X>{\raggedleft\arraybackslash}p{0.72in}@{}}
-    {\fontsize{8.55}{9.05}\selectfont\color{cvtext}\hangindent=9.98pt\hangafter=1\noindent\cvbullet\hspace{2.30pt}#2} &
-    {\fontsize{8.35}{8.9}\selectfont\color{cvtext}#1}
-  \end{tabularx}\vspace{-1.15pt}
+  \noindent\begin{tabularx}{\linewidth}{@{\hspace{8.49pt}}>{\raggedright\arraybackslash}p{3.40pt}@{\hspace{1.23pt}}>{\sourceLight\fontsize{9.96}{12.22}\selectfont\color{cvtext}\arraybackslash}X>{\raggedleft\arraybackslash}p{0.75in}@{}}
+    \cvbullet & #2 & \paperlabel{#1}
+  \end{tabularx}\vspace{-7.10pt}
 }
 \newcommand{\servicerowicon}[3]{%
-  \noindent\begin{tabularx}{\linewidth}{@{\hspace{11.5pt}}>{\centering\arraybackslash}p{0.26in}@{\hspace{14.0pt}}X@{}}
-    {\raisebox{-0.55pt}{\fontsize{7.75}{8.05}\selectfont #1}} &
+  \noindent\begin{tabularx}{\linewidth}{@{\hspace{11.5pt}}>{\centering\arraybackslash}m{0.26in}@{\hspace{12.7pt}}>{\arraybackslash}X@{}}
+    {\raisebox{-1.35pt}{\fontsize{7.35}{7.85}\selectfont #1}} &
     {\fontsize{8.55}{9.05}\selectfont\bfseries\color{cvtext}#2}%
     {\fontsize{8.55}{9.05}\selectfont\color{cvtext}, #3}
-  \end{tabularx}\vspace{-7.75pt}
+  \end{tabularx}\vspace{-7.95pt}
 }
 \newcommand{\plinksep}{\hspace{2.3pt}}
 \newcommand{\pubright}[2]{{\fontsize{7.05}{7.55}\selectfont #1}\hspace{6.0pt}{\sourceLight\mdseries\fontsize{8.05}{8.55}\selectfont\itshape\color{cvtext}#2}}
 \newcommand{\red}[1]{\textcolor{cvred}{#1}}
+\newcommand{\pubnote}[1]{%
+  \noindent\hspace*{27.35pt}\parbox[t]{0.84\linewidth}{\fontsize{7.45}{8.05}\selectfont\color{cvmuted}#1}\par
+}
+\newcounter{pubnum}
 \newcommand{\pubentry}[5]{%
-  \item \begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{1.72in}@{}}
+  \stepcounter{pubnum}%
+  \noindent\begin{tabularx}{\linewidth}{@{\hspace{14.85pt}}r@{\hspace{5.00pt}}X>{\raggedleft\arraybackslash}p{1.72in}@{}}
+    \raisebox{-8.37pt}[0pt][0pt]{\fontsize{8.42}{8.9}\selectfont\color{cvtext}\thepubnum.} &
     {\fontsize{8.42}{8.9}\selectfont\bfseries\color{cvtext}#1} &
-    \pubright{#4}{#5}
-  \end{tabularx}\vspace{-1.0pt}
-  {\sourceLight\fontsize{7.72}{8.12}\selectfont\color{cvauthor}#2}\par\vspace{-1.15pt}
-  {\sourceLight\fontsize{7.72}{8.12}\selectfont\color{cvblue}#3}\par
-  \vspace{-1.55pt}
+    \raisebox{-8.37pt}[0pt][0pt]{\pubright{#4}{#5}}
+  \end{tabularx}\vspace{-3.25pt}
+  \noindent\hspace*{27.27pt}\parbox[t]{\dimexpr\linewidth-27.27pt\relax}{\sourceLight\fontsize{7.72}{8.12}\selectfont\color{cvauthor}#2}\par\vspace{-1.15pt}
+  \noindent\hspace*{27.27pt}\parbox[t]{\dimexpr\linewidth-27.27pt\relax}{\sourceLight\fontsize{7.72}{8.12}\selectfont\color{cvblue}#3}\par
+  \vspace{-7.95pt}
 }
 
 \begin{document}
@@ -201,9 +206,9 @@
 \vspace{13.0pt}
 
 \cvsection{Selected Publications}
-\hspace{27.35pt}{\fontsize{7.45}{8.05}\selectfont\color{cvmuted}Asterisks (*) denote co-first authorship. Accepted papers are listed before under-review manuscripts.}
+\pubnote{Asterisks (*) denote co-first authorship. Accepted papers are listed before under-review manuscripts.}
 \vspace{-5.0pt}
-\begin{enumerate}[leftmargin=27.5pt,label=\arabic*.,labelsep=5pt,itemsep=-4.75pt,topsep=0.35pt,parsep=0pt,partopsep=0pt]
+\setcounter{pubnum}{0}
 \pubentry{When \red{Sample Selection Bias} Precipitates \red{Model Collapse}}
 {\textbf{Xinbao Qiao}, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, Yan Pang}
 {Low-resource verification can turn local sample selection into persistent tail pruning.}
@@ -234,6 +239,5 @@
 {Analysis of spurious pattern perception and interpretable behavior in LLMs.}
 {\iconlink{https://xinbaopedia.top/wiki/LLM_Reliability/}{\iconhome{cvblue}}}
 {Under review.}
-\end{enumerate}
 
 \end{document}
