@@ -277,10 +277,11 @@ assert.match(newWikiPageScript, /translation_of/, 'new wiki page helper supports
 assert.match(newWikiPageScript, /wiki\/\$\{slug\}\.md already exists; use --force/, 'new wiki page helper refuses to overwrite existing pages by default');
 const deployProductionScript = fs.readFileSync(path.join(root, 'scripts/deploy-production.mjs'), 'utf8');
 assert.match(deployProductionScript, /const vercelCliPackage = 'vercel@50\.28\.0';/, 'deployment wrapper pins the Vercel CLI version');
-assert.match(deployProductionScript, /createTemporaryVercelConfig\(token\)/, 'deployment wrapper creates a temporary Vercel auth config');
-assert.match(deployProductionScript, /writeFileSync\(join\(configDir, 'auth\.json'\),/, 'deployment wrapper stores the token in a temporary auth file rather than argv');
-assert.match(deployProductionScript, /'--global-config', vercelConfigDir/, 'deployment wrapper points Vercel CLI at the temporary auth config');
-assert.match(deployProductionScript, /finally \{[\s\S]*cleanupTemporaryVercelConfig\(vercelConfigDir\);[\s\S]*\}/, 'deployment wrapper removes temporary auth state after deployment attempts');
+assert.match(deployProductionScript, /VERCEL_TOKEN is required in the environment/, 'deployment wrapper requires the token through the environment');
+assert.match(deployProductionScript, /function redactArgs\(args, env\)/, 'deployment wrapper redacts token values from wrapper error messages');
+assert.match(deployProductionScript, /'<redacted-token>'/, 'deployment wrapper uses a stable token redaction marker');
+assert.match(deployProductionScript, /function vercelArgs\(command, token, args = \[\]\)/, 'deployment wrapper centralizes Vercel CLI token argument construction');
+assert.match(deployProductionScript, /'--token', token/, 'deployment wrapper passes Vercel CLI the token only from the environment-backed wrapper');
 assert.match(deployProductionScript, /'--project', project, '--scope', scope/, 'deployment wrapper links the explicit Vercel project and scope');
 assert.match(deployProductionScript, /SITE_URL: productionUrl/, 'deployment wrapper passes the canonical production URL to smoke checks');
 assert.doesNotMatch(deployProductionScript, /vercel@latest/, 'deployment wrapper avoids floating Vercel CLI versions');
