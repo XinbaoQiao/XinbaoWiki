@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { spawn } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -32,11 +32,6 @@ function sanitizeEnv() {
   return env;
 }
 
-function redactArgs(args, env) {
-  const token = env.VERCEL_TOKEN;
-  return args.map((arg) => (token && arg === token ? '<redacted-token>' : arg));
-}
-
 function run(command, args, env) {
   return new Promise((resolve, reject) => {
     const child = spawn(command, args, {
@@ -48,13 +43,12 @@ function run(command, args, env) {
 
     child.on('error', reject);
     child.on('exit', (code, signal) => {
-      const displayArgs = redactArgs(args, env);
       if (signal) {
-        reject(new Error(`${command} ${displayArgs.join(' ')} exited by signal ${signal}`));
+        reject(new Error(`${command} ${args.join(' ')} exited by signal ${signal}`));
         return;
       }
       if (code !== 0) {
-        reject(new Error(`${command} ${displayArgs.join(' ')} exited with code ${code}`));
+        reject(new Error(`${command} ${args.join(' ')} exited with code ${code}`));
         return;
       }
       resolve();
@@ -62,8 +56,17 @@ function run(command, args, env) {
   });
 }
 
-function vercelArgs(command, token, args = []) {
-  return ['--yes', vercelCliPackage, command, ...args, '--token', token];
+function createTemporaryVercelConfig(token) {
+  const configDir = mkdtempSync(join(root, '.vercel-auth-'));
+  mkdirSync(configDir, { recursive: true, mode: 0o700 });
+  writeFileSync(join(configDir, 'config.json'), `${JSON.stringify({ credStorage: 'file' }, null, 2)}\n`, { mode: 0o600 });
+  writeFileSync(join(configDir, 'auth.json'), `${JSON.stringify({ token }, null, 2)}\n`, { mode: 0o600 });
+  return configDir;
+}
+
+function cleanupTemporaryVercelConfig(configDir) {
+  if (!configDir) return;
+  rmSync(configDir, { recursive: true, force: true });
 }
 
 function readPackageScripts() {
@@ -130,11 +133,15 @@ async function main() {
   }
 
   const env = sanitizeEnv();
-  env.VERCEL_TOKEN = token;
+  const vercelConfigDir = createTemporaryVercelConfig(token);
 
-  await run('npx', vercelArgs('link', token, ['--yes', '--project', project, '--scope', scope]), env);
-  await run('npx', vercelArgs('deploy', token, ['--prod', '--yes', '--scope', scope]), env);
-  await runSmoke(env);
+  try {
+    await run('npx', ['--yes', vercelCliPackage, '--global-config', vercelConfigDir, 'link', '--yes', '--project', project, '--scope', scope], env);
+    await run('npx', ['--yes', vercelCliPackage, '--global-config', vercelConfigDir, 'deploy', '--prod', '--yes', '--scope', scope], env);
+    await runSmoke(env);
+  } finally {
+    cleanupTemporaryVercelConfig(vercelConfigDir);
+  }
 }
 
 main().catch((error) => {
