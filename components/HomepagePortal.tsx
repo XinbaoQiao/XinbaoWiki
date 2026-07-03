@@ -41,8 +41,18 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
   const [browseOpen, setBrowseOpen] = useState(true);
   const collapsibleSections = { browse: browseOpen };
   const allSectionsClosed = Object.values(collapsibleSections).every((open) => !open);
+  const expandAllSections = () => {
+    setBrowseOpen(true);
+  };
   const collapseAllSections = () => {
     setBrowseOpen(false);
+  };
+  const toggleAllSections = () => {
+    if (allSectionsClosed) {
+      expandAllSections();
+      return;
+    }
+    collapseAllSections();
   };
   const portalClassName = ['wiki-portal', allSectionsClosed ? 'wiki-portal-collapsed' : ''].filter(Boolean).join(' ');
 
@@ -56,9 +66,9 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
                 type="button"
                 aria-controls="portal-directory"
                 aria-expanded={!allSectionsClosed}
-                aria-label="Collapse homepage sections"
+                aria-label={allSectionsClosed ? 'Expand homepage sections' : 'Collapse homepage sections'}
                 className="wiki-portal-name-button"
-                onClick={collapseAllSections}
+                onClick={toggleAllSections}
                 onDoubleClick={collapseAllSections}
               >
                 Xinbao Qiao
