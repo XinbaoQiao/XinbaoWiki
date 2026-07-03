@@ -16,7 +16,7 @@
     "verify:publish": "node scripts/verify-publish-set.mjs",
     "smoke:production": "node scripts/smoke-production.mjs",
     "deploy:production": "node scripts/deploy-production.mjs",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "node scripts/prepare-typecheck.mjs && tsc --noEmit",
     "check": "npm run typecheck && npm run lint:wiki && npm run lint:content && npm run lint:okf && npm run test:wiki"
   },
   "dependencies": {
