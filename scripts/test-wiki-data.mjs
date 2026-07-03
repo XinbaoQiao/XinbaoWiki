@@ -642,6 +642,7 @@ assert.match(styles, /\.wiki-tabs-inner \{[\s\S]*padding: 0 24px 0 calc\(24px \+
 assert.match(styles, /\.wiki-shell \{[\s\S]*grid-template-columns: var\(--sidebar-width\) minmax\(0, var\(--content-width\)\);[\s\S]*gap: 24px;[\s\S]*\}/, 'article shell uses a fixed navigation column and constrained readable article column');
 assert.match(styles, /\.wiki-sidebar \{[\s\S]*position: sticky;[\s\S]*top: 14px;[\s\S]*\}/, 'article navigation stays available in a Wikipedia-style left rail');
 assert.match(styles, /\.wiki-page \{[\s\S]*overflow-wrap: break-word;[\s\S]*\}/, 'article pages protect long labels and links from breaking the layout');
+assert.match(styles, /\.wiki-main:has\(\.wiki-portal\) \{[\s\S]*grid-column: 1 \/ -1;[\s\S]*max-width: 100%;[\s\S]*\}/, 'homepage main content spans the hidden sidebar grid column');
 assert.match(styles, /\.wiki-main table \{[\s\S]*max-width: 100%;[\s\S]*\}/, 'article tables stay constrained inside the article column');
 assert.match(styles, /\.wiki-body p:has\(> img:only-child\) \{[\s\S]*display: flow-root;[\s\S]*text-align: center;[\s\S]*\}/, 'article image paragraphs avoid floated infobox overlap without adding a large clear gap');
 assert.doesNotMatch(styles, /\.wiki-body p:has\(> img:only-child\) \{[\s\S]*clear: both;[\s\S]*\}/, 'article image paragraphs do not force images below floated infoboxes');
@@ -661,6 +662,8 @@ assert.match(styles, /body:has\(\.wiki-portal\) \.wiki-footer,[\s\S]*body:has\(\
 assert.match(styles, /\.wiki-portal-hero \{[\s\S]*max-width: 760px;[\s\S]*text-align: center;[\s\S]*\}/, 'homepage has a centered compact Wikipedia-style portal hero');
 assert.match(styles, /--font-signature: "Alex Brush"/, 'homepage signature typography uses Alex Brush');
 assert.match(styles, /\.wiki-portal-name \{[\s\S]*font-family: var\(--font-signature\);[\s\S]*font-size: 86px;[\s\S]*\}/, 'homepage starts directly with Xinbao Qiao in the Alex Brush signature face');
+assert.match(styles, /\.wiki-portal-name-button \{[\s\S]*appearance: none;[\s\S]*font: inherit;[\s\S]*cursor: pointer;[\s\S]*user-select: none;[\s\S]*\}/, 'homepage signature name has a semantic button target without changing the signature typography');
+assert.match(styles, /\.wiki-portal-name-button:focus-visible \{[\s\S]*outline: 2px solid #36c;[\s\S]*\}/, 'homepage signature control has a visible keyboard focus state');
 assert.doesNotMatch(styles, /\.wiki-portal-emblem/, 'homepage no longer styles an in-page portal icon');
 assert.match(styles, /\.wiki-search-portal input \{[\s\S]*height: 44px;[\s\S]*font-size: 16px;[\s\S]*\}/, 'homepage search input is larger than the topbar search');
 assert.match(styles, /\.wiki-search-portal \.wiki-search-language-select \{[\s\S]*width: 112px;[\s\S]*height: 44px;[\s\S]*\}/, 'homepage search includes a language selector');
@@ -686,7 +689,8 @@ assert.match(homepagePortal, /<WikiSearch[\s\S]*language=\{language\}[\s\S]*onLa
 assert.match(homepagePortal, /const browseLabels[\s\S]*en: 'Browse Xinbaopedia'[\s\S]*zh: '浏览 Xinbaopedia'/, 'homepage Browse heading has English and Chinese labels');
 assert.match(homepagePortal, /const \[browseOpen, setBrowseOpen\] = useState\(true\);/, 'homepage browse directory is open by default');
 assert.match(homepagePortal, /const collapsibleSections = \{ browse: browseOpen \};[\s\S]*const allSectionsClosed = Object\.values\(collapsibleSections\)\.every\(\(open\) => !open\);[\s\S]*wiki-portal-collapsed/, 'homepage computes a reusable all-collapsibles-closed state');
-assert.match(homepagePortal, /<details[\s\S]*className="wiki-portal-directory"[\s\S]*onToggle=\{\(event\) => setBrowseOpen\(event\.currentTarget\.open\)\}[\s\S]*open=\{browseOpen\}[\s\S]*browseLabels\[language\]/, 'homepage browse directory follows the active language and drives collapsed-state layout');
+assert.match(homepagePortal, /const collapseAllSections = \(\) => \{[\s\S]*setBrowseOpen\(false\);[\s\S]*\};[\s\S]*className="wiki-portal-name-button"[\s\S]*onDoubleClick=\{collapseAllSections\}/, 'homepage double-clicking the signature name collapses all current collapsible sections');
+assert.match(homepagePortal, /<details[\s\S]*className="wiki-portal-directory"[\s\S]*id="portal-directory"[\s\S]*onToggle=\{\(event\) => setBrowseOpen\(event\.currentTarget\.open\)\}[\s\S]*open=\{browseOpen\}[\s\S]*browseLabels\[language\]/, 'homepage browse directory follows the active language and drives collapsed-state layout');
 assert.match(homePage, /Core research[\s\S]*Methods and geometry[\s\S]*Reliability and trust/, 'homepage research topics are organized into a readable taxonomy');
 assert.match(homePage, /核心研究[\s\S]*方法与几何[\s\S]*可靠性与可信/, 'homepage research taxonomy has Chinese labels');
 assert.match(homePage, /Indexes[\s\S]*Selected publications[\s\S]*Project pages/, 'homepage publication and project links are organized into a readable taxonomy');

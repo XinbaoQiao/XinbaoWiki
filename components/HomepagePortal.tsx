@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, type KeyboardEvent } from 'react';
 import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
 import type { SearchIndexItem } from '@/lib/wiki';
 
@@ -41,6 +41,15 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
   const [browseOpen, setBrowseOpen] = useState(true);
   const collapsibleSections = { browse: browseOpen };
   const allSectionsClosed = Object.values(collapsibleSections).every((open) => !open);
+  const collapseAllSections = () => {
+    setBrowseOpen(false);
+  };
+  const handleSignatureKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      collapseAllSections();
+    }
+  };
   const portalClassName = ['wiki-portal', allSectionsClosed ? 'wiki-portal-collapsed' : ''].filter(Boolean).join(' ');
 
   return (
@@ -48,7 +57,19 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
       <section className="wiki-portal-hero" aria-labelledby="portal-title">
         <div className="wiki-portal-masthead">
           <div className="wiki-portal-brand">
-            <h1 className="wiki-portal-name" id="portal-title">Xinbao Qiao</h1>
+            <h1 className="wiki-portal-name" id="portal-title">
+              <button
+                type="button"
+                aria-controls="portal-directory"
+                aria-expanded={!allSectionsClosed}
+                aria-label="Collapse homepage sections"
+                className="wiki-portal-name-button"
+                onDoubleClick={collapseAllSections}
+                onKeyDown={handleSignatureKeyDown}
+              >
+                Xinbao Qiao
+              </button>
+            </h1>
           </div>
         </div>
         <div className="wiki-portal-search">
@@ -72,6 +93,7 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
 
       <details
         className="wiki-portal-directory"
+        id="portal-directory"
         onToggle={(event) => setBrowseOpen(event.currentTarget.open)}
         open={browseOpen}
       >
