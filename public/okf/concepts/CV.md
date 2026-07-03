@@ -46,7 +46,7 @@ This page records CV-derived facts in wiki form. The PDF version is available at
 
 ## Open-source contributions and services
 
-- **Research code releases**: maintains public code for accepted papers on certified unlearning, soft-weighted unlearning, and sample-selection model collapse.
+- **Research code releases**: maintains public code for accepted papers on certified unlearning and sample-selection model collapse.
 - **Xinbaopedia**: maintains a public academic homepage and wiki-style research archive with paper pages, figures, CV, and project notes.
 - **Peer-reviewing**: reviewer for ICML 2026, NeurIPS 2025 and 2026, ICLR 2025, AAAI 2025 and 2026, and IEEE Transactions on Neural Networks and Learning Systems (TNNLS).
 

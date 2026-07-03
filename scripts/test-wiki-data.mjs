@@ -919,6 +919,11 @@ assert.doesNotMatch(cvTex, /xinbaoqiao@zju\.edu\.cn/, 'CV removes old Zhejiang e
 assert.match(cvTex, /The Chinese University of Hong Kong/, 'CV includes current PhD affiliation');
 assert.match(cvTex, /When[\s\S]*Sample Selection Bias[\s\S]*Model Collapse[\s\S]*ICML,? 2026/, 'CV updates model-collapse paper status');
 assert.doesNotMatch(cvTex, /withheld\s+LLM\s+manuscript/i, 'CV omits withheld manuscript notes');
+assert.doesNotMatch(cvTex, /Soft-Weighted-Machine-Unlearning|github\.com\/XinbaoQiao\/Soft-Weighted/, 'CV PDF source does not link to a broken Soft-Weighted GitHub repository');
+assert.doesNotMatch(read('CV.md'), /public code for accepted papers on certified unlearning, soft-weighted unlearning/i, 'English CV page does not claim a public Soft-Weighted code release');
+assert.doesNotMatch(read('CV_zh.md'), /公开代码，包括认证遗忘、软加权机器遗忘/, 'Chinese CV page does not claim a public Soft-Weighted code release');
+assert.doesNotMatch(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8'), /public code for accepted papers on certified unlearning, soft-weighted unlearning/i, 'English OKF CV concept does not claim a public Soft-Weighted code release');
+assert.doesNotMatch(fs.readFileSync(path.join(root, 'public/okf/concepts/CV_zh.md'), 'utf8'), /公开代码，包括认证遗忘、软加权机器遗忘/, 'Chinese OKF CV concept does not claim a public Soft-Weighted code release');
 const cvTexUris = sortedUrls([...cvTex.matchAll(/\\(?:blackhref|linkish|iconlink)\{([^{}]+)\}/g)].map((match) => match[1]));
 const cvPdfUriOutput = execFileSync('mutool', ['show', 'public/files/XinbaoQiao_CV.pdf', 'grep', 'URI'], { cwd: root, encoding: 'utf8' });
 const cvPdfUris = sortedUrls([...cvPdfUriOutput.matchAll(/\/URI\(([^)]*)\)/g)].map((match) => match[1]));

@@ -44,7 +44,7 @@ translation_of: CV
 
 ## 开源贡献与学术服务
 
-- **Research code releases**：维护已录用论文的公开代码，包括认证遗忘、软加权机器遗忘和样本选择偏差导致模型坍缩等方向。
+- **Research code releases**：维护已录用论文的公开代码，包括认证遗忘和样本选择偏差导致模型坍缩等方向。
 - **Xinbaopedia**：维护公开学术主页和 wiki 式研究档案，包括论文页面、图表、CV 与项目记录。
 - **Peer-reviewing**：担任 ICML 2026、NeurIPS 2025 和 2026、ICLR 2025、AAAI 2025 和 2026，以及 IEEE Transactions on Neural Networks and Learning Systems (TNNLS) 等顶级会议和期刊的审稿人。
 
