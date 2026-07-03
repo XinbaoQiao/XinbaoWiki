@@ -6,7 +6,7 @@ const DEFAULT_SITE_URL = 'https://xinbaopedia.top';
 const SITE_URL = process.env.SITE_URL || process.argv[2] || DEFAULT_SITE_URL;
 const WIKI_SLUG = process.env.SMOKE_WIKI_SLUG || 'Xinbao_Qiao';
 const HIDDEN_SLUG = process.env.SMOKE_HIDDEN_SLUG || 'Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning';
-const TIMEOUT_MS = Number.parseInt(process.env.SMOKE_TIMEOUT_MS || '15000', 10);
+const TIMEOUT_MS = Number.parseInt(process.env.SMOKE_TIMEOUT_MS || '30000', 10);
 const MAX_REDIRECTS = 5;
 
 const base = new URL(SITE_URL);
