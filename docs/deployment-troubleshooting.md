@@ -11,7 +11,7 @@ export VERCEL_TOKEN=...
 node scripts/deploy-production.mjs
 ```
 
-The wrapper does not accept tokens as command-line arguments. It reads `VERCEL_TOKEN` from the environment, redacts the token from wrapper error messages, runs `vercel link --yes --project xinbaopedia --scope xinbaopedia`, then runs `vercel deploy --prod --yes --scope xinbaopedia`. The Vercel CLI requires `--token` internally for non-interactive CI-style authentication, so callers should use only the environment-variable wrapper entry point.
+The wrapper does not accept tokens as command-line arguments. It writes the token into a temporary ignored `.vercel-auth-*` config directory, passes that directory to a pinned Vercel CLI with `--global-config`, runs `vercel link --yes --project xinbaopedia --scope xinbaopedia`, then runs `vercel deploy --prod --yes --scope xinbaopedia`. The temporary auth directory is deleted in a `finally` block after success or failure.
 
 ## Clean CLI-generated local files
 
