@@ -129,7 +129,7 @@
 \newcommand{\cvrow}[3]{%
   \noindent\begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{1.70in}@{}}
     #1 & #2
-  \end{tabularx}\vspace{-7.15pt}\par
+  \end{tabularx}\vspace{-9.45pt}\par
   #3
 }
 \newcommand{\cvrowshortdate}[3]{%
@@ -148,11 +148,11 @@
   \noindent\begin{tabularx}{\linewidth}{@{\hspace{8.49pt}}X>{\raggedleft\arraybackslash}p{0.72in}@{}}
     {\fontsize{8.55}{9.05}\selectfont\color{cvtext}\hangindent=9.98pt\hangafter=1\noindent\cvbullet\hspace{2.30pt}#2} &
     {\fontsize{8.35}{8.9}\selectfont\color{cvtext}#1}
-  \end{tabularx}\vspace{6.0pt}
+  \end{tabularx}\vspace{-1.15pt}
 }
 \newcommand{\servicerowicon}[3]{%
   \noindent\begin{tabularx}{\linewidth}{@{\hspace{11.5pt}}>{\centering\arraybackslash}p{0.26in}@{\hspace{14.0pt}}X@{}}
-    {\fontsize{8.05}{8.05}\selectfont #1} &
+    {\raisebox{-0.55pt}{\fontsize{7.75}{8.05}\selectfont #1}} &
     {\fontsize{8.55}{9.05}\selectfont\bfseries\color{cvtext}#2}%
     {\fontsize{8.55}{9.05}\selectfont\color{cvtext}, #3}
   \end{tabularx}\vspace{-7.75pt}
@@ -176,10 +176,10 @@
 \contactline
 
 \cvsection{Education}
-\cvrowshortdate{\entrytitle{The Chinese University of Hong Kong}\hspace{5pt}\entrybodytight{Ph.D., Information Engineering. Advisor: \linkish{https://www.ie.cuhk.edu.hk/people/angelazhang}{Angela Yingjun Zhang}.}}{\entryrighttight{Hong Kong. 2026\datesep{}present}}{}
+\cvrowshortdate{\entrytitle{The Chinese University of Hong Kong}\hspace{5pt}\entrybodytight{Ph.D., Information Engineering. Advisor: \linkish{https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/}{Angela Yingjun Zhang}.}}{\entryrighttight{Hong Kong. 2026\datesep{}present}}{}
 \detail{Research Areas}{My research primarily studies lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are generated, used, and deleted.}
 \detail{Teaching}{AI Algorithms and Systems. Secure Artificial Intelligence.}
-\cvrow{\entrytitle{Zhejiang University}\hspace{5pt}\entrybody{M.Sc. in Artificial Intelligence. Advised by \linkish{https://person.zju.edu.cn/en/0098021}{Meng Zhang}.}}{\entryright{Zhejiang. Sep 2022 \datesep{} Dec 2025}}{}
+\cvrow{\entrytitle{Zhejiang University}\hspace{5pt}\entrybody{M.Sc. in Artificial Intelligence. Advised by \linkish{https://person.zju.edu.cn/mengzhang}{Meng Zhang}.}}{\entryright{Zhejiang. Sep 2022 \datesep{} Dec 2025}}{}
 \cvrow{\entrytitle{Shandong University}\hspace{5pt}\entrybody{B.Eng. in Communication Engineering.}}{\entryright{Shandong. Sep 2018 \datesep{} Jul 2022}}{}
 \vspace{29.03pt}
 
@@ -203,7 +203,7 @@
 \cvsection{Selected Publications}
 \hspace{27.35pt}{\fontsize{7.45}{8.05}\selectfont\color{cvmuted}Asterisks (*) denote co-first authorship. Accepted papers are listed before under-review manuscripts.}
 \vspace{-5.0pt}
-\begin{enumerate}[leftmargin=17pt,label=\arabic*.,labelsep=5pt,itemsep=-0.45pt,topsep=0.35pt,parsep=0pt,partopsep=0pt]
+\begin{enumerate}[leftmargin=27.5pt,label=\arabic*.,labelsep=5pt,itemsep=-4.75pt,topsep=0.35pt,parsep=0pt,partopsep=0pt]
 \pubentry{When \red{Sample Selection Bias} Precipitates \red{Model Collapse}}
 {\textbf{Xinbao Qiao}, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, Yan Pang}
 {Low-resource verification can turn local sample selection into persistent tail pruning.}
