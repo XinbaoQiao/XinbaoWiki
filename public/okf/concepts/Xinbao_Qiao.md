@@ -73,6 +73,10 @@ Qiao's machine unlearning work studies how trained models can be updated after d
 
 The ICML 2026 paper [When Sample Selection Bias Precipitates Model Collapse](./When_Sample_Selection_Bias_Precipitates_Model_Collapse.md) studies recursive synthetic-data training under low-resource verification and local sample-selection bias. The project connects [Synthetic Data and Model Collapse](./Synthetic_Data_and_Model_Collapse.md), [Sample Selection Bias](./Sample_Selection_Bias.md), [Data Silos](./Data_Silos.md), [Collaborative Evaluation](./Collaborative_Evaluation.md), and [Wasserstein Geometry](./Wasserstein_Geometry.md). Its central mechanism is that a local verifier can treat rare but valid samples as low-quality generations, pruning globally relevant tail modes and making low-resource communities more exposed to collapse.
 
+## Community service
+
+Qiao has served as a reviewer for leading conferences and journals, including ICML 2026, NeurIPS 2025 and 2026, ICLR 2025, AAAI 2025 and 2026, and IEEE Transactions on Neural Networks and Learning Systems (TNNLS).
+
 ## See also
 
 - [Research](./Research.md)

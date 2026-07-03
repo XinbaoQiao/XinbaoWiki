@@ -18,11 +18,20 @@ source_path: wiki/CV.md
 ---
 This page records CV-derived facts in wiki form. The PDF version is available at [XinbaoQiao_CV.pdf](/files/XinbaoQiao_CV.pdf).
 
+## Contact
+
+- Phone: [+852-70141618](tel:+85270141618)
+- Email: [xinbaoqiao@cuhk.edu.hk](mailto:xinbaoqiao@cuhk.edu.hk)
+- Homepage: [xinbaopedia.top](https://xinbaopedia.top/)
+- GitHub: [GitHub](https://github.com/XinbaoQiao)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/xinbaoqiao/)
+- Google Scholar: [Google Scholar](https://scholar.google.com/citations?user=nhC_OfEAAAAJ&hl=en)
+
 ## Education
 
-- **The Chinese University of Hong Kong**, PhD student in Information Engineering, 2026-present. Advised by [Angela Yingjun Zhang](./Angela_Yingjun_Zhang.md). Research areas include data-centric ML and AI with networks, including AI for Networks and Networks for AI.
-- **Zhejiang University**, M.Sc. in Artificial Intelligence, 2022-09 to 2025-12. Major GPA: 90/100; rank 3/25. Relevant courses include AI Algorithms and Systems and Secure Artificial Intelligence.
-- **Shandong University**, B.Eng. in Communication Engineering, 2018-09 to 2022-07. Major GPA: 82.47/100. Awarded a third-class academic award in 2018-2019.
+- **The Chinese University of Hong Kong**, PhD student in Information Engineering, 2026-present. Advised by [Angela Yingjun Zhang](./Angela_Yingjun_Zhang.md).
+- **Zhejiang University**, M.Sc. in Artificial Intelligence, 2022-09 to 2025-12. Teaching and coursework entries include AI Algorithms and Systems and Secure Artificial Intelligence.
+- **Shandong University**, B.Eng. in Communication Engineering, 2018-09 to 2022-07.
 
 ## Research interests
 
@@ -31,29 +40,35 @@ This page records CV-derived facts in wiki form. The PDF version is available at
 
 ## Research experience
 
-- **Doctoral Research at The Chinese University of Hong Kong**, 2026-present, advised by [Angela Yingjun Zhang](./Angela_Yingjun_Zhang.md). Topics include data-centric ML, AI-network co-design, and distributed Wasserstein barycenter methods for shared distributional references without pooling raw data.
-- **Research on Data-Centric ML Systems**, 03/2023 to 12/2025, advised by Prof. [Meng Zhang](./Meng_Zhang.md) at [Zhejiang University](./Zhejiang_University.md). Topics include data influence attribution, trade-offs in trustworthy artificial intelligence, and cloud-edge collaborative human-space healthcare.
-- **Research on Trustworthy LLM systems**, 06/2025 to 12/2025, full-time research intern advised by PANG Yan, James at the National University of Singapore. Topics include illusory pattern perception in LLMs and synthetic data evaluation.
+- **Doctoral Research at The Chinese University of Hong Kong**, 2026-present, advised by [Angela Yingjun Zhang](./Angela_Yingjun_Zhang.md). Topics include data-centric ML, AI-network co-design, and distributed Wasserstein barycenter methods for shared distributional references without pooling raw data (Paper #5).
+- **Research on Data-Centric ML Systems**, 03/2023 to 12/2025, advised by Prof. [Meng Zhang](./Meng_Zhang.md) at [Zhejiang University](./Zhejiang_University.md). Topics include soft-weighted unlearning, Hessian-free certified unlearning, exact random-forest unlearning, and broader trade-offs in trustworthy artificial intelligence (Papers #2-#4).
+- **Research on Trustworthy LLM systems**, 06/2025 to 12/2025, full-time research intern advised by PANG Yan, James at the National University of Singapore. Topics include low-resource synthetic-data evaluation and illusory pattern perception in LLMs (Papers #1 and #6).
+
+## Open-source contributions and services
+
+- **Research code releases**: maintains public code for accepted papers on certified unlearning, soft-weighted unlearning, and sample-selection model collapse.
+- **Xinbaopedia**: maintains a public academic homepage and wiki-style research archive with paper pages, figures, CV, and project notes.
+- **Peer-reviewing**: reviewer for ICML 2026, NeurIPS 2025 and 2026, ICLR 2025, AAAI 2025 and 2026, and IEEE Transactions on Neural Networks and Learning Systems (TNNLS).
 
 ## Publications
 
 See [Publications](./Publications.md). The CV lists accepted, published, and under-review work in machine unlearning, decentralized learning, synthetic-data model collapse, federated learning, and LLM reliability.
 
-- **When Sample Selection Bias Precipitates Model Collapse**.\
+- **Paper #1: When Sample Selection Bias Precipitates Model Collapse**.\
   **Xinbao Qiao**, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, Yan Pang.\
-  Forty-Third International Conference on Machine Learning, ICML, 2026.
-- **Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**.\
+  Forty-Third International Conference on Machine Learning, ICML, 2026. Links: [OpenReview](https://openreview.net/forum?id=FFXvnzM254), [Code](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse), [ICML 2026](https://icml.cc/Conferences/2026).
+- **Paper #2: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**.\
   **Xinbao Qiao**, Ningning Ding, Yushi Cheng, Meng Zhang.\
-  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026.
-- **Hessian-Free Online Certified Unlearning**.\
+  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026. Links: [arXiv](https://arxiv.org/abs/2505.18783), [Code](https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning), [AAAI lecture page](https://underline.io/lecture/139759-beyond-binary-erasure-soft-weighted-unlearning-for-fairness-and-robustness).
+- **Paper #3: Hessian-Free Online Certified Unlearning**.\
   **Xinbao Qiao**, Meng Zhang, Ming Tang, Ermin Wei.\
-  Thirteenth International Conference on Learning Representations, ICLR, 2025.
-- **DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**.\
+  Thirteenth International Conference on Learning Representations, ICLR, 2025. Links: [OpenReview](https://openreview.net/forum?id=C3TrHWanh5), [arXiv](https://arxiv.org/abs/2404.01712), [Code](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning).
+- **Paper #4: DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**.\
   Shurong Wang, Zhuoyang Shen, **Xinbao Qiao**, Tongning Zhang, Meng Zhang.\
-  Thirteenth International Conference on Learning Representations, ICLR, 2025.
-- **Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification**.\
+  Thirteenth International Conference on Learning Representations, ICLR, 2025. Links: [OpenReview](https://openreview.net/forum?id=nsCOeCLR8e), [arXiv](https://arxiv.org/abs/2410.01588), [Code](https://github.com/shurongwang/DynFrs).
+- **Paper #5: Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification**.\
   **Xinbao Qiao**, Wenjing Yan, Ying-Jun Angela Zhang.\
   Under review.
-- **Illusory Pattern Perception Drives Spurious Inference in Large Language Models**.\
+- **Paper #6: Illusory Pattern Perception Drives Spurious Inference in Large Language Models**.\
   Peihua Mai, Zhuoyan Shao, **Xinbao Qiao**, Meng Zhang, Xinyue Zhou, Yan Pang.\
   Under review.

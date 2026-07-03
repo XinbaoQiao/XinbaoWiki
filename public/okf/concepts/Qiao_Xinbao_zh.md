@@ -71,6 +71,10 @@ source_path: wiki/Qiao_Xinbao_zh.md
 
 ICML 2026 论文[When Sample Selection Bias Precipitates Model Collapse](./When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md)研究低资源验证和局部样本选择偏差下的递归合成数据训练。该项目连接[合成数据与模型坍塌](./Synthetic_Data_and_Model_Collapse_zh.md)、[样本选择偏差](./Sample_Selection_Bias_zh.md)、[数据孤岛](./Data_Silos_zh.md)、[协作评估](./Collaborative_Evaluation_zh.md)和[Wasserstein 几何](./Wasserstein_Geometry_zh.md)。其核心机制是：本地验证器可能把稀有但有效的样本误判为低质量生成，从而剪掉对全局分布重要的尾部模式，并使低资源社区更容易发生模型坍缩。
 
+## 社区服务
+
+乔鑫宝担任 ICML 2026、NeurIPS 2025 和 2026、ICLR 2025、AAAI 2025 和 2026，以及 IEEE Transactions on Neural Networks and Learning Systems (TNNLS) 等顶级会议和期刊的审稿人。
+
 ## 参见
 
 - [English version](./Qiao_Xinbao_zh.md)
