@@ -13,6 +13,7 @@ const blockedPathPatterns = [
   { pattern: /(^|\/)node_modules(?:\/|$)/, reason: 'dependency cache' },
   { pattern: /(^|\/)\.next(?:\/|$)/, reason: 'Next.js build cache' },
   { pattern: /(^|\/)\.vercel(?:\/|$)/, reason: 'Vercel local state' },
+  { pattern: /(^|\/)\.vercel-auth[^/]*(?:\/|$)/, reason: 'temporary Vercel auth state' },
   { pattern: /(^|\/)\.npm-cache(?:\/|$)/, reason: 'npm cache' },
   { pattern: /(^|\/)\.omx(?:\/|$)/, reason: 'local runtime metadata' },
   { pattern: /(^|\/)(?:cache|logs?|outputs?|tmp|temp)(?:\/|$)/, reason: 'runtime artifact path' },

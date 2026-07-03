@@ -11,6 +11,7 @@ docs/
 node_modules/
 .next/
 .vercel/
+.vercel-auth-*/
 .latex-build/
 .cache/
 cache/

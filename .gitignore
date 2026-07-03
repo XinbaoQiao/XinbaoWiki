@@ -8,6 +8,7 @@ tsconfig.tsbuildinfo
 
 # Vercel local state
 .vercel/
+.vercel-auth-*/
 
 # Environment and local secrets
 .env*

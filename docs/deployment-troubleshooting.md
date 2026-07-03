@@ -11,14 +11,14 @@ export VERCEL_TOKEN=...
 node scripts/deploy-production.mjs
 ```
 
-The wrapper does not accept tokens as command-line arguments. It passes the token to a pinned Vercel CLI through the environment, runs `vercel link --yes --project xinbaopedia --scope xinbaopedia`, then runs `vercel deploy --prod --yes --scope xinbaopedia`.
+The wrapper does not accept tokens as command-line arguments. It writes the token into a temporary ignored `.vercel-auth-*` config directory, passes that directory to a pinned Vercel CLI with `--global-config`, runs `vercel link --yes --project xinbaopedia --scope xinbaopedia`, then runs `vercel deploy --prod --yes --scope xinbaopedia`. The temporary auth directory is deleted in a `finally` block after success or failure.
 
 ## Clean CLI-generated local files
 
 The Vercel CLI and npm can create local files that must not be committed:
 
 ```sh
-rm -rf .vercel .npm-cache
+rm -rf .vercel .vercel-auth-* .npm-cache
 rm -f .env.local
 ```
 

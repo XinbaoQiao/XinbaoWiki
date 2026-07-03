@@ -277,9 +277,19 @@ assert.match(newWikiPageScript, /translation_of/, 'new wiki page helper supports
 assert.match(newWikiPageScript, /wiki\/\$\{slug\}\.md already exists; use --force/, 'new wiki page helper refuses to overwrite existing pages by default');
 const deployProductionScript = fs.readFileSync(path.join(root, 'scripts/deploy-production.mjs'), 'utf8');
 assert.match(deployProductionScript, /const vercelCliPackage = 'vercel@50\.28\.0';/, 'deployment wrapper pins the Vercel CLI version');
+assert.match(deployProductionScript, /createTemporaryVercelConfig\(token\)/, 'deployment wrapper creates a temporary Vercel auth config');
+assert.match(deployProductionScript, /writeFileSync\(join\(configDir, 'auth\.json'\),/, 'deployment wrapper stores the token in a temporary auth file rather than argv');
+assert.match(deployProductionScript, /'--global-config', vercelConfigDir/, 'deployment wrapper points Vercel CLI at the temporary auth config');
+assert.match(deployProductionScript, /finally \{[\s\S]*cleanupTemporaryVercelConfig\(vercelConfigDir\);[\s\S]*\}/, 'deployment wrapper removes temporary auth state after deployment attempts');
 assert.match(deployProductionScript, /'--project', project, '--scope', scope/, 'deployment wrapper links the explicit Vercel project and scope');
 assert.match(deployProductionScript, /SITE_URL: productionUrl/, 'deployment wrapper passes the canonical production URL to smoke checks');
 assert.doesNotMatch(deployProductionScript, /vercel@latest/, 'deployment wrapper avoids floating Vercel CLI versions');
+const gitignore = fs.readFileSync(path.join(root, '.gitignore'), 'utf8');
+const vercelignore = fs.readFileSync(path.join(root, '.vercelignore'), 'utf8');
+const verifyPublishSet = fs.readFileSync(path.join(root, 'scripts/verify-publish-set.mjs'), 'utf8');
+assert.match(gitignore, /\.vercel-auth-\*\//, 'gitignore excludes temporary Vercel auth directories');
+assert.match(vercelignore, /\.vercel-auth-\*\//, 'vercelignore excludes temporary Vercel auth directories');
+assert.match(verifyPublishSet, /temporary Vercel auth state/, 'publish-set checker blocks temporary Vercel auth directories if staged');
 
 for (const file of fs.readdirSync(wikiDir).filter((file) => file.endsWith('.md'))) {
   const data = frontmatterData(file);
