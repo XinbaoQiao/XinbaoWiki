@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
 import matter from 'gray-matter';
 
 const root = process.cwd();
@@ -27,6 +28,10 @@ function assertFile(file) {
 
 function assertNoPath(file) {
   assert.ok(!fs.existsSync(path.join(root, file)), `${file} is not part of the Vercel-only deployment`);
+}
+
+function sortedUrls(urls) {
+  return urls.map((url) => url.replaceAll('\\&', '&')).sort();
 }
 
 for (const file of ['Xinbao_Qiao.md', 'Qiao_Xinbao_zh.md', 'index.md', 'log.md', 'CV.md', 'Meng_Zhang.md', 'Angela_Yingjun_Zhang.md', 'Internet_Slang_2026.md']) {
@@ -898,6 +903,10 @@ assert.doesNotMatch(cvTex, /xinbaoqiao@zju\.edu\.cn/, 'CV removes old Zhejiang e
 assert.match(cvTex, /The Chinese University of Hong Kong/, 'CV includes current PhD affiliation');
 assert.match(cvTex, /When[\s\S]*Sample Selection Bias[\s\S]*Model Collapse[\s\S]*ICML,? 2026/, 'CV updates model-collapse paper status');
 assert.doesNotMatch(cvTex, /withheld\s+LLM\s+manuscript/i, 'CV omits withheld manuscript notes');
+const cvTexUris = sortedUrls([...cvTex.matchAll(/\\(?:blackhref|linkish|iconlink)\{([^{}]+)\}/g)].map((match) => match[1]));
+const cvPdfUriOutput = execFileSync('mutool', ['show', 'public/files/XinbaoQiao_CV.pdf', 'grep', 'URI'], { cwd: root, encoding: 'utf8' });
+const cvPdfUris = sortedUrls([...cvPdfUriOutput.matchAll(/\/URI\(([^)]*)\)/g)].map((match) => match[1]));
+assert.deepEqual(cvPdfUris, cvTexUris, 'CV PDF URI annotations match CV.tex hyperlink targets');
 
 const publicImages = fs.readdirSync(path.join(root, 'public/images')).filter((file) => /\.(png|jpe?g|gif|webp|svg|ico)$/i.test(file));
 assert.deepEqual(publicImages, ['Portrait.png'], 'public site uses exactly one image');
