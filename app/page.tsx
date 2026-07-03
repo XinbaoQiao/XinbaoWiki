@@ -61,8 +61,8 @@ const directorySections = [
       {
         label: { en: 'Project pages', zh: '项目页面' },
         links: {
-          en: ['DynFrs', 'Collaborative_Evaluation', 'Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning'],
-          zh: ['DynFrs_zh', 'Collaborative_Evaluation_zh', 'Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning_zh']
+          en: ['DynFrs', 'Collaborative_Evaluation'],
+          zh: ['DynFrs_zh', 'Collaborative_Evaluation_zh']
         }
       }
     ]
@@ -101,10 +101,13 @@ function wikiHref(slug: string) {
 
 function entry(slug: string) {
   const page = getWikiPageBySlug(slug);
+  if (!page) {
+    throw new Error(`Homepage directory slug must resolve to a public wiki page: ${slug}`);
+  }
   return {
     href: wikiHref(slug),
-    summary: page?.summary || '',
-    title: page?.title || slug.replaceAll('_', ' ')
+    summary: page.summary,
+    title: page.title
   };
 }
 

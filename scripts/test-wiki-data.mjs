@@ -280,7 +280,9 @@ const newWikiPageScript = fs.readFileSync(path.join(root, 'scripts/new-wiki-page
 assert.match(newWikiPageScript, /--slug <Slug> --title <Title> --type <Type> --language en\|zh --description <Text>/, 'new wiki page helper documents the required template arguments');
 assert.match(newWikiPageScript, /translation_of/, 'new wiki page helper supports translation_of frontmatter');
 assert.match(newWikiPageScript, /wiki\/\$\{slug\}\.md already exists; use --force/, 'new wiki page helper refuses to overwrite existing pages by default');
+const ciWorkflow = fs.readFileSync(path.join(root, '.github/workflows/ci.yml'), 'utf8');
 const deployProductionScript = fs.readFileSync(path.join(root, 'scripts/deploy-production.mjs'), 'utf8');
+assert.match(ciWorkflow, /apt-get install -y --no-install-recommends mupdf-tools/, 'CI installs mutool for CV PDF URI parity checks');
 assert.match(deployProductionScript, /const vercelCliVersion = '54\.18\.7';/, 'deployment wrapper pins a Vercel CLI version with VERCEL_TOKEN env support');
 assert.match(deployProductionScript, /VERCEL_TOKEN is required in the environment/, 'deployment wrapper requires the token through the environment');
 assert.match(deployProductionScript, /function redactArgs\(args, env\)/, 'deployment wrapper redacts token values from wrapper error messages');
@@ -359,6 +361,10 @@ assert.doesNotMatch(wikiSearch, /item\.language === preferredLanguage\) score \+
 assert.match(wikiSearch, /onKeyDown/, 'wiki search supports keyboard navigation');
 assert.match(wikiSearch, /role="listbox"/, 'wiki search renders accessible result listbox');
 assert.match(wikiSearch, /window\.location\.assign\(item\.href\)/, 'wiki search submit navigates to the selected result');
+assert.match(chatWithXinbao, /import \{ createPortal \} from 'react-dom';/, 'Chat with Xinbao uses a React portal for the floating panel');
+assert.match(chatWithXinbao, /const \[mounted, setMounted\] = useState\(false\);[\s\S]*useEffect\(\(\) => \{[\s\S]*setMounted\(true\);[\s\S]*\}, \[\]\);/, 'Chat with Xinbao waits for the client before accessing document.body');
+assert.match(chatWithXinbao, /const chatLayer = \([\s\S]*chat-xinbao-minimized[\s\S]*chat-xinbao-shell[\s\S]*\);/, 'Chat with Xinbao keeps the minimized and expanded panels in one shared layer');
+assert.match(chatWithXinbao, /\{mounted && createPortal\(chatLayer, document\.body\)\}/, 'Chat with Xinbao renders the floating layer outside search and homepage transform containers');
 assert.match(articleTabs, /usePathname/, 'article tools derive the active page from the current route');
 assert.match(articleTabs, /href="#"/, 'active Article tab uses the Colarpedia inert article link');
 assert.match(articleTabs, /article: 'Article'[\s\S]*article: '条目'/, 'article tools localize the active article label');
@@ -687,6 +693,9 @@ assert.match(styles, /\.wiki-portal-group-label \{[\s\S]*font-size: 11px;[\s\S]*
 assert.match(styles, /\.wiki-portal-grid \{[\s\S]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);[\s\S]*\}/, 'homepage browse directory uses a three-column desktop layout');
 assert.match(styles, /\.wiki-shell:has\(\.wiki-portal\) \.wiki-sidebar \{[\s\S]*display: none;[\s\S]*\}/, 'homepage hides the article sidebar');
 assert.match(homePage, /import \{ HomepagePortal \} from '@\/components\/HomepagePortal';/, 'homepage delegates interactive portal state to a client component');
+assert.doesNotMatch(homePage, hiddenManuscriptPattern, 'homepage directory does not expose the hidden under-review manuscript');
+assert.match(homePage, /if \(!page\) \{[\s\S]*throw new Error\(`Homepage directory slug must resolve to a public wiki page: \$\{slug\}`\);[\s\S]*\}/, 'homepage directory refuses missing or hidden wiki pages instead of generating fallback links');
+assert.doesNotMatch(homePage, /slug\.replaceAll\('_', ' '\)/, 'homepage directory does not fall back to slug text for missing pages');
 assert.doesNotMatch(homePage, /wiki-portal-emblem|\/xinbaopedia-icon\.png/, 'homepage no longer renders the in-page icon');
 assert.match(homepagePortal, /className="wiki-portal-name"[\s\S]*Xinbao Qiao/, 'homepage uses Xinbao Qiao as the central portal name');
 assert.match(homePage, /Academic biography and research overview[\s\S]*个人学术条目与研究概览/, 'homepage keeps primary English and Chinese profile links below the search');

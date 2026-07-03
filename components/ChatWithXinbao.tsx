@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
+import { createPortal } from 'react-dom';
 import rehypeKatex from 'rehype-katex';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
@@ -132,7 +133,12 @@ export function ChatWithXinbao({ language }: Props) {
   const [error, setError] = useState('');
   const [remaining, setRemaining] = useState<number | null>(null);
   const [limit, setLimit] = useState(10);
+  const [mounted, setMounted] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     setMessages((current) => {
@@ -224,19 +230,8 @@ export function ChatWithXinbao({ language }: Props) {
     }
   }
 
-  return (
+  const chatLayer = (
     <>
-      <button
-        aria-label={strings.ariaOpen}
-        className="chat-xinbao-trigger"
-        onClick={() => {
-          setOpen(true);
-          setMinimized(false);
-        }}
-        type="button"
-      >
-        <span aria-hidden="true">AI</span>
-      </button>
       {open && minimized && (
         <button
           aria-label={strings.restore}
@@ -310,6 +305,23 @@ export function ChatWithXinbao({ language }: Props) {
           </form>
         </section>
       )}
+    </>
+  );
+
+  return (
+    <>
+      <button
+        aria-label={strings.ariaOpen}
+        className="chat-xinbao-trigger"
+        onClick={() => {
+          setOpen(true);
+          setMinimized(false);
+        }}
+        type="button"
+      >
+        <span aria-hidden="true">AI</span>
+      </button>
+      {mounted && createPortal(chatLayer, document.body)}
     </>
   );
 }
