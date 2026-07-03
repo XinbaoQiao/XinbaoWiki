@@ -90,6 +90,10 @@ summary: "香港中文大学信息工程系博士生；研究方向包括数据�
 
 ICML 2026 论文[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]]研究低资源验证和局部样本选择偏差下的递归合成数据训练。该项目连接[[Synthetic_Data_and_Model_Collapse|合成数据与模型坍塌]]、[[Sample_Selection_Bias|样本选择偏差]]、[[Data_Silos|数据孤岛]]、[[Collaborative_Evaluation|协作评估]]和[[Wasserstein_Geometry|Wasserstein 几何]]。其核心机制是：本地验证器可能把稀有但有效的样本误判为低质量生成，从而剪掉对全局分布重要的尾部模式，并使低资源社区更容易发生模型坍缩。
 
+## 社区服务
+
+乔鑫宝担任 ICML 2026、NeurIPS 2025 和 2026、ICLR 2025、AAAI 2025 和 2026，以及 IEEE Transactions on Neural Networks and Learning Systems (TNNLS) 等顶级会议和期刊的审稿人。
+
 ## 参见
 
 - [[Xinbao_Qiao|English version]]

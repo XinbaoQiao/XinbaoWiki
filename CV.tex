@@ -1,116 +1,173 @@
-% Build: latexmk -pdf -interaction=nonstopmode -halt-on-error -outdir=.latex-build CV.tex
+% Build: latexmk -lualatex -interaction=nonstopmode -halt-on-error -outdir=.latex-build CV.tex
 \documentclass[a4paper,10pt]{article}
 
-\usepackage[letterspace=18]{microtype}
-\usepackage[a4paper,left=0.46in,right=0.46in,top=0.36in,bottom=0.44in]{geometry}
+\usepackage[letterspace=15]{microtype}
+\usepackage[a4paper,left=34.016pt,right=34.016pt,top=0.28in,bottom=0.30in]{geometry}
 \usepackage{xcolor}
+\usepackage{graphicx}
 \usepackage{tabularx}
+\usepackage{array}
 \usepackage{enumitem}
 \usepackage{hyperref}
 \usepackage{fancyhdr}
-\usepackage{iftex}
-\usepackage{marvosym}
-\usepackage{pifont}
+\usepackage{fontspec}
+\usepackage{unicode-math}
 
-\ifPDFTeX
-  \usepackage[T1]{fontenc}
-  \usepackage[utf8]{inputenc}
-  \usepackage{tgheros}
-  \renewcommand{\familydefault}{\sfdefault}
-\else
-  \usepackage{fontspec}
-  \setmainfont{Noto Sans}
-  \setsansfont{Noto Sans}
-\fi
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont[
+  Path=assets/cv-fonts/,
+  Extension=.otf,
+  UprightFont=*-Regular,
+  BoldFont=*-Bold,
+  ItalicFont=*-It,
+  BoldItalicFont=*-BoldIt
+]{SourceSansPro}
+\setsansfont[
+  Path=assets/cv-fonts/,
+  Extension=.otf,
+  UprightFont=*-Regular,
+  BoldFont=*-Bold,
+  ItalicFont=*-It,
+  BoldItalicFont=*-BoldIt
+]{SourceSansPro}
+\newfontfamily{\sourceLight}[
+  Path=assets/cv-fonts/,
+  Extension=.otf,
+  UprightFont=*-Light,
+  BoldFont=*-Bold,
+  ItalicFont=*-LightIt,
+  BoldItalicFont=*-BoldIt
+]{SourceSansPro}
+\newfontfamily{\sourceSemibold}[
+  Path=assets/cv-fonts/,
+  Extension=.otf,
+  UprightFont=*-Semibold,
+  BoldFont=*-Bold,
+  ItalicFont=*-SemiboldIt,
+  BoldItalicFont=*-BoldIt
+]{SourceSansPro}
+\newfontfamily{\roboto}[
+  Path=assets/cv-fonts/,
+  Extension=.ttf,
+  UprightFont=*-Regular,
+  BoldFont=*-Bold,
+  ItalicFont=*-Italic,
+  BoldItalicFont=*-BoldItalic
+]{Roboto}
+\newfontfamily{\faSolid}[Path=assets/cv-fonts/]{fa-solid-900.ttf}
+\newfontfamily{\faBrands}[Path=assets/cv-fonts/]{fa-brands-400.ttf}
+\setmathfont{Latin Modern Math}
 
-\definecolor{cvblack}{HTML}{111111}
-\definecolor{cvtext}{HTML}{5E5E5E}
-\definecolor{cvmuted}{HTML}{777777}
-\definecolor{cvrule}{HTML}{3F3F3F}
-\definecolor{cvblue}{HTML}{5C8DC4}
+\definecolor{cvblack}{HTML}{0D0D0D}
+\definecolor{cvtext}{HTML}{575757}
+\definecolor{cvmuted}{HTML}{858585}
+\definecolor{cvauthor}{HTML}{C6C6C6}
+\definecolor{cvrule}{HTML}{666666}
+\definecolor{cvblue}{HTML}{5B8FC1}
+\definecolor{cvred}{HTML}{B92C24}
 
-\hypersetup{
-  colorlinks=true,
-  urlcolor=cvblue,
-  linkcolor=cvblue
-}
+\hypersetup{colorlinks=true,urlcolor=cvblue,linkcolor=cvblue}
 \urlstyle{same}
 
 \pagestyle{fancy}
 \fancyhf{}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
-\fancyfoot[L]{\textcolor{cvmuted}{\fontsize{7.6}{8}\selectfont\MakeUppercase{July 2, 2026}}}
-\fancyfoot[R]{\textcolor{cvmuted}{\fontsize{7.6}{8}\selectfont 1}}
-\setlength{\footskip}{13pt}
+\fancyfoot[L]{\textcolor{cvmuted}{\fontsize{7.3}{8}\selectfont\MakeUppercase{July 2, 2026}}}
+\fancyfoot[R]{\textcolor{cvmuted}{\fontsize{7.3}{8}\selectfont 1}}
+\setlength{\footskip}{12.0pt}
 \setlength{\parindent}{0pt}
 \setlength{\tabcolsep}{0pt}
+\setlength{\parskip}{0pt}
 
 \newcommand{\cvname}[1]{%
-  \begin{center}
-    {\fontsize{24.8}{28}\selectfont\color{cvblack}#1}
-  \end{center}
-  \vspace{-3pt}
+  {\centering{\roboto\fontsize{19.93}{22.0}\selectfont\color{cvblack}#1}\par}
+  \vspace{5.8pt}
 }
-
-\newcommand{\contactsep}{\hspace{0.55em}{\color{cvblack}\vrule height 1.1ex width 0.45pt}\hspace{0.55em}}
+\newcommand{\contactsep}{\hspace{0.55em}{\color{cvblack}\textbar}\hspace{0.55em}}
 \newcommand{\blackhref}[2]{\href{#1}{\textcolor{cvblack}{#2}}}
+\newcommand{\faSolidIcon}[1]{{\faSolid\char"#1\relax}}
+\newcommand{\faBrandIcon}[1]{{\faBrands\char"#1\relax}}
+\newcommand{\iconphone}[1]{\textcolor{#1}{\faSolidIcon{F095}}}
+\newcommand{\iconmail}[1]{\textcolor{#1}{\faSolidIcon{F0E0}}}
+\newcommand{\iconhome}[1]{\textcolor{#1}{\faSolidIcon{F015}}}
+\newcommand{\icongithub}[1]{\textcolor{#1}{\faBrandIcon{F09B}}}
+\newcommand{\iconlinkedin}[1]{\textcolor{#1}{\faBrandIcon{F08C}}}
+\newcommand{\iconscholar}[1]{\textcolor{#1}{\faSolidIcon{F19D}}}
+\newcommand{\iconpdf}[1]{\textcolor{#1}{\faSolidIcon{F1C1}}}
+\newcommand{\iconarxiv}[1]{\textcolor{#1}{\faSolidIcon{F187}}}
+\newcommand{\iconplay}[1]{\textcolor{#1}{\faSolidIcon{F144}}}
+\newcommand{\iconlink}[2]{\href{#1}{#2}}
+\newcommand{\contactSolidIcon}[2]{\textcolor{#1}{\raisebox{0.85pt}{\scalebox{0.78}{{\faSolid\char"#2\relax}}}}}
+\newcommand{\contactBrandIcon}[2]{\textcolor{#1}{\raisebox{0.85pt}{\scalebox{0.78}{{\faBrands\char"#2\relax}}}}}
 \newcommand{\contactline}{%
-  \begin{center}
-    {\fontsize{8.4}{10}\selectfont\bfseries\color{cvblack}
-    \Letter\ \blackhref{mailto:xinbaoqiao@cuhk.edu.hk}{xinbaoqiao@cuhk.edu.hk}
-    \contactsep \Mundus\ \blackhref{https://xinbaopedia.top/}{xinbaopedia.top}
-    \contactsep \ding{108}\ \blackhref{https://github.com/XinbaoQiao}{github.com/XinbaoQiao}
-    \contactsep \ding{72}\ \blackhref{https://scholar.google.com/citations?user=nhC_OfEAAAAJ\&hl=en}{Google Scholar}}
-  \end{center}
-  \vspace{5pt}
+  {\centering
+    {\roboto\fontsize{6.78}{8.0}\selectfont\color{cvblack}
+    \contactSolidIcon{cvblack}{F10B}\hspace{2.0pt}\blackhref{tel:+85270141618}{+852-70141618}
+    \contactsep \contactSolidIcon{cvblack}{F0E0}\hspace{2.0pt}\blackhref{mailto:xinbaoqiao@cuhk.edu.hk}{xinbaoqiao@cuhk.edu.hk}
+    \contactsep \contactSolidIcon{cvblack}{F015}\hspace{2.0pt}\blackhref{https://xinbaopedia.top/}{xinbaopedia.top}
+    \contactsep \contactBrandIcon{cvblack}{F09B}\hspace{2.0pt}\blackhref{https://github.com/XinbaoQiao}{GitHub}
+    \contactsep \contactBrandIcon{cvblack}{F08C}\hspace{2.0pt}\blackhref{https://www.linkedin.com/in/xinbaoqiao/}{LinkedIn}
+    \contactsep \contactSolidIcon{cvblack}{F19D}\hspace{2.0pt}\blackhref{https://scholar.google.com/citations?user=nhC_OfEAAAAJ\&hl=en}{Google Scholar}}\par}
+  \vspace{7.3pt}
 }
 
 \newcommand{\cvsection}[1]{%
-  \vspace{4.3pt}
-  {\fontsize{17.3}{18.5}\selectfont\bfseries\color{cvblack}#1}%
-  \hspace{4.2pt}{\color{cvrule}\leaders\hrule height 0.42pt\hfill}\par
-  \vspace{2.1pt}
+  \vspace{1.9pt}
+  {\fontsize{15.94}{16.8}\selectfont\bfseries\color{cvblack}#1}%
+  \hspace{4.0pt}{\color{cvrule}\leaders\hrule height 0.45pt\hfill}\par
+  \vspace{-3.20pt}
 }
-
-\newcommand{\entrytitle}[1]{{\fontsize{10.5}{11.4}\selectfont\bfseries\color{cvtext}#1}}
-\newcommand{\entrybody}[1]{{\fontsize{9.35}{10.55}\selectfont\color{cvtext}#1}}
-\newcommand{\entryright}[1]{{\fontsize{8.85}{10}\selectfont\itshape\color{cvmuted}#1}}
-\newcommand{\linkish}[1]{{\color{cvblue}#1}}
+\newcommand{\entrytitle}[1]{{\fontsize{10.96}{11.45}\selectfont\bfseries\color{cvtext}#1}}
+\newcommand{\entrybody}[1]{{\fontsize{8.97}{9.45}\selectfont\color{cvtext}#1}}
+\newcommand{\entrybodytight}[1]{{\fontsize{8.97}{9.45}\selectfont\color{cvtext}#1}}
+\newcommand{\entryright}[1]{{\sourceLight\fontsize{8.97}{9.45}\selectfont\itshape\color{cvmuted}#1}}
+\newcommand{\entryrighttight}[1]{{\sourceLight\fontsize{8.97}{9.45}\selectfont\itshape\color{cvmuted}#1}}
+\newcommand{\linkish}[2]{\href{#1}{\textcolor{cvblue}{#2}}}
 \newcommand{\datesep}{\ensuremath{\sim}}
-
+\newcommand{\cvbullet}{{\fontsize{8.97}{9.45}\selectfont\ensuremath{\cdot}}}
 \newcommand{\cvrow}[3]{%
-  \begin{tabularx}{\linewidth}{@{}X r@{}}
+  \noindent\begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{1.70in}@{}}
     #1 & #2
-  \end{tabularx}
+  \end{tabularx}\vspace{-7.15pt}\par
   #3
 }
-
-\newcommand{\detail}[2]{%
-  \hspace{13.5pt}{\fontsize{9.05}{10.35}\selectfont\bfseries\color{cvblack}#1}\hspace{8pt}%
-  {\fontsize{9.05}{10.35}\selectfont\color{cvtext}#2}\par
+\newcommand{\cvrowshortdate}[3]{%
+  \noindent\begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{1.30in}@{}}
+    #1 & #2
+  \end{tabularx}\vspace{2.45pt}\par
+  #3
 }
-
-\newenvironment{tightitems}{%
-  \begin{itemize}[
-    leftmargin=13.5pt,
-    label={\raisebox{0.18ex}{\fontsize{5}{5}\selectfont$\bullet$}},
-    itemsep=0.55pt,
-    topsep=1.2pt,
-    parsep=0pt,
-    partopsep=0pt
-  ]
-  \fontsize{9.18}{10.45}\selectfont\color{cvtext}
-}{\end{itemize}}
-
-\newcommand{\pubentry}[4]{%
-  \item \begin{tabularx}{\linewidth}{@{}X r@{}}
-    {\fontsize{8.9}{9.85}\selectfont\bfseries\color{cvtext}#1} &
-    {\fontsize{8.55}{9.7}\selectfont\itshape\color{cvmuted}#4}
-  \end{tabularx}
-  {\fontsize{8.2}{9.2}\selectfont\color{cvmuted}#2}\par
-  {\fontsize{8.15}{9.15}\selectfont\color{cvblue}#3}\par
-  \vspace{0.75pt}
+\newcommand{\detail}[2]{%
+  {\leftskip=9.56pt
+   \sourceLight\fontsize{9.96}{12.22}\selectfont\color{cvtext}%
+   {\sourceSemibold\color{cvblack}#1}\hspace{8.35pt}#2\par}%
+  \vspace{-1.85pt}
+}
+\newcommand{\paperitem}[2]{%
+  \noindent\begin{tabularx}{\linewidth}{@{\hspace{8.49pt}}X>{\raggedleft\arraybackslash}p{0.72in}@{}}
+    {\fontsize{8.55}{9.05}\selectfont\color{cvtext}\hangindent=9.98pt\hangafter=1\noindent\cvbullet\hspace{2.30pt}#2} &
+    {\fontsize{8.35}{8.9}\selectfont\color{cvtext}#1}
+  \end{tabularx}\vspace{6.0pt}
+}
+\newcommand{\servicerowicon}[3]{%
+  \noindent\begin{tabularx}{\linewidth}{@{\hspace{11.5pt}}>{\centering\arraybackslash}p{0.26in}@{\hspace{14.0pt}}X@{}}
+    {\fontsize{8.05}{8.05}\selectfont #1} &
+    {\fontsize{8.55}{9.05}\selectfont\bfseries\color{cvtext}#2}%
+    {\fontsize{8.55}{9.05}\selectfont\color{cvtext}, #3}
+  \end{tabularx}\vspace{-7.75pt}
+}
+\newcommand{\plinksep}{\hspace{2.3pt}}
+\newcommand{\pubright}[2]{{\fontsize{7.05}{7.55}\selectfont #1}\hspace{6.0pt}{\sourceLight\mdseries\fontsize{8.05}{8.55}\selectfont\itshape\color{cvtext}#2}}
+\newcommand{\red}[1]{\textcolor{cvred}{#1}}
+\newcommand{\pubentry}[5]{%
+  \item \begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{1.72in}@{}}
+    {\fontsize{8.42}{8.9}\selectfont\bfseries\color{cvtext}#1} &
+    \pubright{#4}{#5}
+  \end{tabularx}\vspace{-1.0pt}
+  {\sourceLight\fontsize{7.72}{8.12}\selectfont\color{cvauthor}#2}\par\vspace{-1.15pt}
+  {\sourceLight\fontsize{7.72}{8.12}\selectfont\color{cvblue}#3}\par
+  \vspace{-1.55pt}
 }
 
 \begin{document}
@@ -119,66 +176,63 @@
 \contactline
 
 \cvsection{Education}
-\cvrow{\entrytitle{The Chinese University of Hong Kong}\hspace{5pt}\entrybody{Ph.D. student in Information Engineering. Advised by \linkish{Angela Yingjun Zhang}.}}{\entryright{Hong Kong. 2026 - present}}{}
-\detail{Research Areas}{Data-centric ML and AI with networks, including AI for Networks and Networks for AI.}
-\cvrow{\entrytitle{Zhejiang University}\hspace{5pt}\entrybody{M.Sc. in Artificial Intelligence. Advised by \linkish{Meng Zhang}.}}{\entryright{Zhejiang. Sep 2022 \datesep{} Dec 2025}}{}
-\detail{GPA and Coursework}{Major GPA 90/100 (rank 3/25). AI Algorithms and Systems (100); Secure Artificial Intelligence (97).}
+\cvrowshortdate{\entrytitle{The Chinese University of Hong Kong}\hspace{5pt}\entrybodytight{Ph.D., Information Engineering. Advisor: \linkish{https://www.ie.cuhk.edu.hk/people/angelazhang}{Angela Yingjun Zhang}.}}{\entryrighttight{Hong Kong. 2026\datesep{}present}}{}
+\detail{Research Areas}{My research primarily studies lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are generated, used, and deleted.}
+\detail{Teaching}{AI Algorithms and Systems. Secure Artificial Intelligence.}
+\cvrow{\entrytitle{Zhejiang University}\hspace{5pt}\entrybody{M.Sc. in Artificial Intelligence. Advised by \linkish{https://person.zju.edu.cn/en/0098021}{Meng Zhang}.}}{\entryright{Zhejiang. Sep 2022 \datesep{} Dec 2025}}{}
 \cvrow{\entrytitle{Shandong University}\hspace{5pt}\entrybody{B.Eng. in Communication Engineering.}}{\entryright{Shandong. Sep 2018 \datesep{} Jul 2022}}{}
-\detail{GPA and Award}{Major GPA 82.47/100. Third-class Academic Award, 2018-2019.}
+\vspace{29.03pt}
 
 \cvsection{Experience}
-\cvrow{\entrytitle{Doctoral Research @ The Chinese University of Hong Kong}}{\entryright{Hong Kong. 2026 - present}}{}
-\begin{tightitems}
-  \item Study data-centric ML and AI-network co-design where data, computation, and evaluation signals are distributed across clients, institutions, or networked infrastructure.
-  \item Investigate distributed Wasserstein barycenter methods for constructing shared distributional references without pooling raw data.
-\end{tightitems}
-\cvrow{\entrytitle{Research on Data-Centric ML Systems @ Zhejiang University}}{\entryright{M.Eng. Student. Mar 2023 \datesep{} Dec 2025}}{}
-\begin{tightitems}
-  \item Developed theoretically grounded approaches for data influence attribution and certified machine unlearning.
-  \item Studied data-centric trade-offs across fairness, robustness, privacy, and utility in trustworthy AI systems.
-  \item Architected cloud-edge collaborative human-space healthcare frameworks for real-time multimodal monitoring.
-\end{tightitems}
-\cvrow{\entrytitle{Research on Trustworthy LLM Systems @ NUSRI CQ}}{\entryright{Full-time Research Intern. Jun 2025 \datesep{} Dec 2025}}{}
-\begin{tightitems}
-  \item Examined illusory pattern perception in LLMs and proposed an interpretable framework for spurious inference behavior.
-  \item Developed Wasserstein-based methods for synthetic-data evaluation under limited or fragmented real-data access.
-\end{tightitems}
+\cvrow{\entrytitle{Doctoral Research @ The Chinese University of Hong Kong}}{\entryright{Hong Kong. 2026 \datesep{} present}}{}
+\paperitem{Paper \#5}{Study data-centric ML and AI-network co-design, including distributed Wasserstein barycenter methods for shared references without pooling raw data.}
+\cvrow{\entrytitle{Research on Data-Centric ML Systems @ Zhejiang University}}{\entryright{Zhejiang. Mar 2023 \datesep{} Dec 2025}}{}
+\paperitem{Paper \#2}{Developed soft-weighted unlearning methods that continuously correct data influence for fairness and robustness without binary erasure.}
+\paperitem{Paper \#3}{Designed Hessian-free online certified unlearning methods using recollected trajectory statistics instead of explicit Hessian inversion, supporting online deletion requests without second-order solves.}
+\paperitem{Paper \#4}{Studied exact and efficient random-forest unlearning in dynamic online environments, preserving predictive utility under incremental data updates.}
+\cvrow{\entrytitle{Research on Trustworthy LLM Systems @ NUSRI CQ}}{\entryright{Chongqing. Jun 2025 \datesep{} Dec 2025}}{}
+\paperitem{Paper \#1}{Analyzed low-resource sample selection in recursive synthetic-data training and proposed collaborative Wasserstein evaluation proxies.}
+\paperitem{Paper \#6}{Examined illusory pattern perception in LLMs and developed an interpretable framework for spurious inference behavior and misleading responses.}
+
+\cvsection{Open-Source Contributions and Services}
+\servicerowicon{\iconlink{https://github.com/XinbaoQiao}{\icongithub{cvblue}}}{Research code releases}{public code for certified unlearning, soft-weighted unlearning, and model-collapse work.}
+\servicerowicon{\iconlink{https://xinbaopedia.top/}{\iconhome{cvblue}}}{Xinbaopedia}{public academic homepage and wiki-style research archive with papers, figures, CV, and project notes.}
+\servicerowicon{\iconscholar{cvblue}}{Peer-Reviewing}{reviewer for ICML 2026, NeurIPS 2025 and 2026, ICLR 2025, AAAI 2025 and 2026, and IEEE TNNLS.}
+\vspace{13.0pt}
 
 \cvsection{Selected Publications}
-{\fontsize{8.4}{9.5}\selectfont\color{cvmuted}Accepted and published papers are listed before under-review manuscripts.}
-\vspace{-2pt}
-\begin{enumerate}[
-  leftmargin=18pt,
-  label=\arabic*.,
-  labelsep=5pt,
-  itemsep=1.0pt,
-  topsep=1.2pt,
-  parsep=0pt,
-  partopsep=0pt
-]
-\pubentry{When Sample Selection Bias Precipitates Model Collapse}
+\hspace{27.35pt}{\fontsize{7.45}{8.05}\selectfont\color{cvmuted}Asterisks (*) denote co-first authorship. Accepted papers are listed before under-review manuscripts.}
+\vspace{-5.0pt}
+\begin{enumerate}[leftmargin=17pt,label=\arabic*.,labelsep=5pt,itemsep=-0.45pt,topsep=0.35pt,parsep=0pt,partopsep=0pt]
+\pubentry{When \red{Sample Selection Bias} Precipitates \red{Model Collapse}}
 {\textbf{Xinbao Qiao}, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, Yan Pang}
 {Low-resource verification can turn local sample selection into persistent tail pruning.}
-{ICML, 2026.}
-\pubentry{Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness}
+{\iconlink{https://openreview.net/forum?id=FFXvnzM254}{\iconpdf{cvblue}}\plinksep\iconlink{https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse}{\icongithub{cvblue}}\plinksep\iconlink{https://icml.cc/Conferences/2026}{\iconhome{cvblue}}}
+{ICML 2026.}
+\pubentry{Beyond Binary Erasure: \red{Soft-Weighted Unlearning} for Fairness and Robustness}
 {\textbf{Xinbao Qiao}, Ningning Ding, Yushi Cheng, Meng Zhang}
 {Soft-weighted corrective unlearning for non-binary fairness and robustness interventions.}
-{AAAI, 2026.}
-\pubentry{Hessian-Free Online Certified Unlearning}
+{\iconlink{https://arxiv.org/abs/2505.18783}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning}{\icongithub{cvblue}}\plinksep\iconlink{https://underline.io/lecture/139759-beyond-binary-erasure-soft-weighted-unlearning-for-fairness-and-robustness}{\iconplay{cvblue}}}
+{AAAI 2026.}
+\pubentry{\red{Hessian-Free} Online Certified Unlearning}
 {\textbf{Xinbao Qiao}, Meng Zhang, Ming Tang, Ermin Wei}
 {Certified unlearning without explicit Hessian inversion through recollected statistics.}
-{ICLR, 2025.}
-\pubentry{DynFrs: An Efficient Framework for Machine Unlearning in Random Forest}
+{\iconlink{https://openreview.net/forum?id=C3TrHWanh5}{\iconpdf{cvblue}}\plinksep\iconlink{https://arxiv.org/abs/2404.01712}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning}{\icongithub{cvblue}}}
+{ICLR 2025.}
+\pubentry{\red{DynFrs}: An Efficient Framework for Machine Unlearning in Random Forest}
 {Shurong Wang, Zhuoyang Shen, \textbf{Xinbao Qiao}, Tongning Zhang, Meng Zhang}
 {Exact and efficient random-forest unlearning in dynamic environments.}
-{ICLR, 2025.}
-\pubentry{Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification}
+{\iconlink{https://openreview.net/forum?id=nsCOeCLR8e}{\iconpdf{cvblue}}\plinksep\iconlink{https://arxiv.org/abs/2410.01588}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/shurongwang/DynFrs}{\icongithub{cvblue}}}
+{ICLR 2025.}
+\pubentry{\red{Federated Learning as Optimal Transport}: Barycentric Multi-Prototype Classification}
 {\textbf{Xinbao Qiao}, Wenjing Yan, Ying-Jun Angela Zhang}
 {Barycentric multi-prototype classification for federated representation geometry.}
+{}
 {Under review.}
-\pubentry{Illusory Pattern Perception Drives Spurious Inference in Large Language Models}
+\pubentry{\red{Illusory Pattern Perception} Drives Spurious Inference in Large Language Models}
 {Peihua Mai, Zhuoyan Shao, \textbf{Xinbao Qiao}, Meng Zhang, Xinyue Zhou, Yan Pang}
 {Analysis of spurious pattern perception and interpretable behavior in LLMs.}
+{}
 {Under review.}
 \end{enumerate}
 
