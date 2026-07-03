@@ -84,6 +84,17 @@ It standardizes source frontmatter and regenerates:
 
 `npm run check` verifies that source concepts are standardized, generated files are fresh, hidden pages are excluded from public indexes and OKF exports, the graph still resolves internal links, structured relations point to real pages, and the maintenance report has zero warnings. This makes the upkeep loop explicit: edit Markdown, run `npm run maintain:wiki`, review the generated graph, then build and publish. For local diagnosis only, `node scripts/wiki-maintenance.mjs --check --allow-warnings` reports warnings without failing the command.
 
+Common maintenance commands:
+
+| Command | Purpose |
+| --- | --- |
+| `npm run new:wiki -- --slug Example_Page --title "Example Page" --type article --language en --description "Short summary."` | Create a standardized source-page template without overwriting existing pages. |
+| `npm run maintain:wiki` | Standardize source frontmatter and regenerate the page index, graph, schema, quality reports, and public OKF bundle. |
+| `npm run lint:okf` | Validate the public OKF bundle, including required frontmatter, graph references, structured relation targets, and hidden-page exclusion. |
+| `npm run verify:publish` | Check the tracked/staged publish set for secrets, local absolute paths, caches, and runtime artifacts before committing. |
+| `SITE_URL=https://xinbaopedia.top npm run smoke:production` | Smoke-test the deployed homepage, a representative wiki page, OKF endpoints, quality report, and hidden-page route behavior. |
+| `VERCEL_TOKEN=... npm run deploy:production` | Link the local checkout to the `xinbaopedia` Vercel project, deploy production, and run the production smoke check. |
+
 The current lifecycle layer is concept-level. It records active/confirmed/private status, confidence, review cadence, and retention policy in generated graph and OKF exports. Structured relations now provide a stable entry point for future claim-level confidence, supersession, richer citation edges, hybrid search, and automated crystallization without changing how normal content edits are made.
 
 ## How The Site Is Organized

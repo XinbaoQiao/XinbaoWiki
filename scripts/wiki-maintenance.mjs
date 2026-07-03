@@ -17,6 +17,8 @@ const okfManifestPath = path.join(okfDir, 'manifest.json');
 const okfPageIndexPath = path.join(okfDir, 'pages.json');
 const okfGraphPath = path.join(okfDir, 'graph.json');
 const okfSchemaPath = path.join(okfDir, 'schema.json');
+const qualityReportPath = path.join(wikiDir, 'quality-report.json');
+const okfQualityReportPath = path.join(okfDir, 'quality-report.json');
 const okfIndexPath = path.join(okfDir, 'index.md');
 const okfLogPath = path.join(okfDir, 'log.md');
 
@@ -418,6 +420,7 @@ function parsePage(file) {
     summary: pageSummary(data),
     tags: asStringArray(data.tags),
     title: pageTitle(slug, data),
+    translationOf: asString(data.translation_of),
     type: conceptType(slug, data)
   };
   page.lifecycle = lifecycleFor(page);
@@ -538,14 +541,52 @@ function collect() {
     if (node.outgoing.length === 0) warnings.push(`${node.file}: no outgoing wiki links`);
   }
 
+  const pageBySlug = new Map(pages.map((page) => [page.slug, page]));
+  const missingTranslationPairs = [];
+  const translationWarnings = [];
   for (const node of nodes) {
     if (node.hidden || RESERVED_SLUGS.has(node.slug)) continue;
+    const page = pageBySlug.get(node.slug);
     if (node.language === 'en') {
       const expected = chineseCounterpart(node.slug);
-      if (!slugSet.has(expected)) warnings.push(`${node.file}: missing Chinese counterpart ${expected}.md`);
+      if (!slugSet.has(expected)) {
+        const warning = `${node.file}: missing Chinese counterpart ${expected}.md`;
+        warnings.push(warning);
+        translationWarnings.push(warning);
+        missingTranslationPairs.push({
+          source: node.slug,
+          expected,
+          missingLanguage: 'zh',
+          reason: 'derived counterpart slug is missing'
+        });
+      }
     } else {
-      const expected = englishCounterpart(node.slug);
-      if (!slugSet.has(expected)) warnings.push(`${node.file}: missing English counterpart ${expected}.md`);
+      const expected = page?.translationOf || englishCounterpart(node.slug);
+      if (!slugSet.has(expected)) {
+        const warning = `${node.file}: missing English counterpart ${expected}.md`;
+        warnings.push(warning);
+        translationWarnings.push(warning);
+        missingTranslationPairs.push({
+          source: node.slug,
+          expected,
+          missingLanguage: 'en',
+          reason: page?.translationOf ? 'translation_of target is missing' : 'derived counterpart slug is missing'
+        });
+      } else {
+        const derived = englishCounterpart(node.slug);
+        if (page?.translationOf && page.translationOf !== derived) {
+          const warning = `${node.file}: translation_of ${page.translationOf} does not match derived counterpart ${derived}`;
+          warnings.push(warning);
+          translationWarnings.push(warning);
+          missingTranslationPairs.push({
+            source: node.slug,
+            expected: derived,
+            actual: page.translationOf,
+            missingLanguage: 'en',
+            reason: 'translation_of does not match the slug-derived counterpart'
+          });
+        }
+      }
     }
   }
 
@@ -556,6 +597,12 @@ function collect() {
   }
   for (const [key, filesForTitle] of duplicateTitles.entries()) {
     if (filesForTitle.length > 1) warnings.push(`duplicate visible title ${key}: ${filesForTitle.join(', ')}`);
+  }
+
+  const structuredRelationCounts = {};
+  for (const relation of STRUCTURED_RELATIONS) structuredRelationCounts[relation] = 0;
+  for (const edge of edges) {
+    if (STRUCTURED_RELATIONS.has(edge.relation)) structuredRelationCounts[edge.relation] += 1;
   }
 
   const publicPages = nodes
@@ -594,6 +641,15 @@ function collect() {
     warnings: warnings.sort((a, b) => a.localeCompare(b))
   };
 
+  const qualityReport = createQualityReport({
+    duplicateTitles,
+    graph,
+    missingTranslationPairs,
+    publicMode: false,
+    structuredRelationCounts,
+    translationWarnings
+  });
+
   const index = {
     schemaVersion: PAGE_INDEX_SCHEMA_VERSION,
     okfVersion: OKF_VERSION,
@@ -604,9 +660,59 @@ function collect() {
   };
 
   const schema = createMaintenanceSchema(graph);
-  const okf = createOkfBundle({ files, graph, index, pages, schema, sourceDigest: sourceHash(files) });
+  const okf = createOkfBundle({ files, graph, index, pages, qualityReport, schema, sourceDigest: sourceHash(files) });
 
-  return { errors, graph, index, okf, schema, warnings };
+  return { errors, graph, index, okf, qualityReport, schema, warnings };
+}
+
+function createQualityReport({ duplicateTitles, graph, missingTranslationPairs, publicMode, structuredRelationCounts, translationWarnings }) {
+  const visibleNodes = graph.nodes.filter((node) => !node.hidden);
+  const ignoredConnectivitySlugs = new Set([...HOME_SLUGS]);
+  const orphanPages = visibleNodes
+    .filter((node) => !ignoredConnectivitySlugs.has(node.slug) && node.backlinks.length === 0)
+    .map((node) => ({ slug: node.slug, file: node.file, title: node.title, language: node.language }));
+  const noOutgoingPages = visibleNodes
+    .filter((node) => !ignoredConnectivitySlugs.has(node.slug) && node.outgoing.length === 0)
+    .map((node) => ({ slug: node.slug, file: node.file, title: node.title, language: node.language }));
+  const duplicateTitleGroups = [...duplicateTitles.entries()]
+    .filter(([, files]) => files.length > 1)
+    .map(([key, files]) => ({ key, files }))
+    .sort((a, b) => a.key.localeCompare(b.key));
+  const hiddenNodes = graph.nodes
+    .filter((node) => node.hidden)
+    .map((node) => ({ slug: node.slug, file: node.file, title: node.title, language: node.language }))
+    .sort((a, b) => a.slug.localeCompare(b.slug));
+
+  return {
+    schemaVersion: 1,
+    okfVersion: OKF_VERSION,
+    counts: {
+      pages: graph.stats.pages,
+      publicPages: graph.stats.publicPages,
+      hiddenPages: graph.stats.hiddenPages,
+      edges: graph.stats.relations,
+      warnings: publicMode ? 0 : graph.stats.warnings,
+      languages: graph.stats.languages,
+      types: graph.stats.types
+    },
+    warnings: publicMode ? [] : graph.warnings,
+    hiddenPages: publicMode
+      ? { count: hiddenNodes.length, pages: [], redacted: true }
+      : { count: hiddenNodes.length, pages: hiddenNodes },
+    duplicateTitleGroups,
+    orphanPages,
+    noOutgoingPages,
+    missingTranslationPairs: publicMode
+      ? missingTranslationPairs.filter((pair) => graph.nodes.some((node) => node.slug === pair.source && !node.hidden))
+      : missingTranslationPairs,
+    translationConsistency: {
+      warnings: publicMode ? [] : translationWarnings.sort((a, b) => a.localeCompare(b)),
+      missingPairs: publicMode
+        ? missingTranslationPairs.filter((pair) => graph.nodes.some((node) => node.slug === pair.source && !node.hidden))
+        : missingTranslationPairs
+    },
+    structuredRelationCounts: Object.fromEntries(Object.entries(structuredRelationCounts).sort(([a], [b]) => a.localeCompare(b)))
+  };
 }
 
 function createMaintenanceSchema(graph) {
@@ -735,7 +841,7 @@ function createOkfLog(pages) {
   return stableMarkdown(`# Xinbaopedia OKF Update Log\n\n${body}`);
 }
 
-function createOkfBundle({ files, graph, index, pages, schema, sourceDigest }) {
+function createOkfBundle({ files, graph, index, pages, qualityReport, schema, sourceDigest }) {
   const publicPages = pages.filter((page) => !page.hidden);
   const publicSlugSet = new Set(publicPages.map((page) => page.slug));
   const conceptFiles = {};
@@ -762,6 +868,20 @@ function createOkfBundle({ files, graph, index, pages, schema, sourceDigest }) {
     publicPages: publicGraph.nodes.length,
     relations: publicGraph.edges.length,
     warnings: publicGraph.warnings.length
+  };
+  const publicQualityReport = createQualityReport({
+    duplicateTitles: new Map(),
+    graph: publicGraph,
+    missingTranslationPairs: qualityReport.missingTranslationPairs,
+    publicMode: true,
+    structuredRelationCounts: qualityReport.structuredRelationCounts,
+    translationWarnings: qualityReport.translationConsistency.warnings
+  });
+  publicQualityReport.counts.hiddenPages = qualityReport.hiddenPages.count;
+  publicQualityReport.hiddenPages = {
+    count: qualityReport.hiddenPages.count,
+    pages: [],
+    redacted: true
   };
 
   const manifest = {
@@ -796,6 +916,7 @@ function createOkfBundle({ files, graph, index, pages, schema, sourceDigest }) {
     logMarkdown: createOkfLog(pages),
     manifest,
     pages: index,
+    qualityReport: publicQualityReport,
     schema
   };
 }
@@ -817,6 +938,7 @@ function writeOkfBundle(okf) {
   fs.writeFileSync(okfManifestPath, stableJson(okf.manifest));
   fs.writeFileSync(okfPageIndexPath, stableJson(okf.pages));
   fs.writeFileSync(okfGraphPath, stableJson(okf.graph));
+  fs.writeFileSync(okfQualityReportPath, stableJson(okf.qualityReport));
   fs.writeFileSync(okfSchemaPath, stableJson(okf.schema));
   for (const [file, content] of Object.entries(okf.conceptFiles)) {
     fs.writeFileSync(path.join(okfConceptDir, file), content);
@@ -829,6 +951,7 @@ function assertOkfBundleFresh(okf) {
   assertFresh(okfManifestPath, stableJson(okf.manifest));
   assertFresh(okfPageIndexPath, stableJson(okf.pages));
   assertFresh(okfGraphPath, stableJson(okf.graph));
+  assertFresh(okfQualityReportPath, stableJson(okf.qualityReport));
   assertFresh(okfSchemaPath, stableJson(okf.schema));
   for (const [file, content] of Object.entries(okf.conceptFiles)) {
     assertFresh(path.join(okfConceptDir, file), content);
@@ -847,11 +970,13 @@ if (standardize) {
 const result = collect();
 const nextIndex = stableJson(result.index);
 const nextGraph = stableJson(result.graph);
+const nextQualityReport = stableJson(result.qualityReport);
 const nextSchema = stableJson(result.schema);
 
 if (write) {
   fs.writeFileSync(pageIndexPath, nextIndex);
   fs.writeFileSync(graphPath, nextGraph);
+  fs.writeFileSync(qualityReportPath, nextQualityReport);
   fs.writeFileSync(schemaPath, nextSchema);
   writeOkfBundle(result.okf);
 }
@@ -859,6 +984,7 @@ if (write) {
 if (check) {
   assertFresh(pageIndexPath, nextIndex);
   assertFresh(graphPath, nextGraph);
+  assertFresh(qualityReportPath, nextQualityReport);
   assertFresh(schemaPath, nextSchema);
   assertOkfBundleFresh(result.okf);
 }
@@ -872,8 +998,10 @@ const summary = {
   okf: {
     concepts: Object.keys(result.okf.conceptFiles).length,
     hiddenPagesExcluded: result.graph.stats.hiddenPages,
-    path: 'public/okf'
+    path: 'public/okf',
+    qualityReport: 'public/okf/quality-report.json'
   },
+  qualityReport: 'wiki/quality-report.json',
   warnings: result.warnings.length
 };
 

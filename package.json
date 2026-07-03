@@ -8,11 +8,16 @@
     "build": "next build",
     "export": "next build",
     "lint:wiki": "node scripts/lint-wikilinks.mjs",
+    "lint:okf": "node scripts/okf-conformance.mjs",
     "lint:content": "node scripts/wiki-maintenance.mjs --check",
     "maintain:wiki": "node scripts/wiki-maintenance.mjs --standardize --write",
+    "new:wiki": "node scripts/new-wiki-page.mjs",
     "test:wiki": "node scripts/test-wiki-data.mjs",
+    "verify:publish": "node scripts/verify-publish-set.mjs",
+    "smoke:production": "node scripts/smoke-production.mjs",
+    "deploy:production": "node scripts/deploy-production.mjs",
     "typecheck": "tsc --noEmit",
-    "check": "npm run typecheck && npm run lint:wiki && npm run lint:content && npm run test:wiki"
+    "check": "npm run typecheck && npm run lint:wiki && npm run lint:content && npm run lint:okf && npm run test:wiki"
   },
   "dependencies": {
     "@upstash/redis": "^1.38.0",

@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+
+# Next.js and TypeScript build artifacts
+.next/
+out/
+tsconfig.tsbuildinfo
+
+# Vercel local state
+.vercel/
+
+# Environment and local secrets
+.env*
+.secrets/
+*.token
+*.pem
+*.key
+
+# Local package/cache state
+.npm-cache/
+.cache/
+cache/
+
+# Worktree and runtime artifacts
+.omx/
+.turbo/
+coverage/
+logs/
+log/
+output/
+outputs/
+tmp/
+temp/
+*.log
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

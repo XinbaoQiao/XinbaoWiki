@@ -66,6 +66,8 @@ export type SearchIndexItem = {
 };
 
 const WIKI_DIR = path.join(process.cwd(), 'wiki');
+type WikiSlugOptions = { includeHidden?: boolean };
+type WikiPageOptions = { includeHidden?: boolean };
 
 export function getBasePath() {
   const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] || '';
@@ -86,8 +88,20 @@ function files() {
   return fs.readdirSync(WIKI_DIR).filter((file) => file.endsWith('.md')).sort();
 }
 
-export function getAllWikiSlugs() {
-  return files().map((file) => file.replace(/\.md$/, ''));
+function isHiddenWikiFile(fileName: string) {
+  const filePath = path.join(WIKI_DIR, fileName);
+  const raw = fs.readFileSync(filePath, 'utf8');
+  return (matter(raw).data as WikiFrontmatter).hidden === true;
+}
+
+export function getAllWikiSlugs(options: WikiSlugOptions = {}) {
+  const allSlugs = files().map((file) => file.replace(/\.md$/, ''));
+  if (options.includeHidden) return allSlugs;
+  return allSlugs.filter((slug) => !isHiddenWikiFile(`${slug}.md`));
+}
+
+export function getPublicWikiSlugs() {
+  return getAllWikiSlugs();
 }
 
 function normalizeSlug(slug: string) {
@@ -147,7 +161,7 @@ export function wikiConceptType(data: WikiFrontmatter, slug: string) {
   return 'article';
 }
 
-export function getWikiPageBySlug(slug: string): WikiPage | null {
+export function getWikiPageBySlug(slug: string, options: WikiPageOptions = {}): WikiPage | null {
   const decoded = decodeURIComponent(slug);
   const resolved = resolveSlug(decoded);
   const fileName = `${resolved}.md`;
@@ -156,6 +170,7 @@ export function getWikiPageBySlug(slug: string): WikiPage | null {
   const raw = fs.readFileSync(filePath, 'utf8');
   const parsed = matter(raw);
   const data = parsed.data as WikiFrontmatter;
+  if (data.hidden === true && !options.includeHidden) return null;
   const title = wikiPageTitle(data, resolved);
   const summary = wikiPageSummary(data);
   return { slug: resolved, title, summary, data, content: parsed.content.trim(), fileName };

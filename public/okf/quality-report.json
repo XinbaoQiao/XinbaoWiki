@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "okfVersion": "0.1",
+  "counts": {
+    "pages": 86,
+    "publicPages": 86,
+    "hiddenPages": 2,
+    "edges": 1030,
+    "warnings": 0,
+    "languages": {
+      "en": 44,
+      "zh": 44
+    },
+    "types": {
+      "Academic advisor": 4,
+      "CV summary": 1,
+      "CV 摘要": 1,
+      "Education timeline": 1,
+      "Maintenance log": 1,
+      "Model family": 1,
+      "PhD student": 1,
+      "Project overview": 1,
+      "Public research university": 3,
+      "publication": 10,
+      "Publication list": 1,
+      "Research concept": 15,
+      "Research experience": 1,
+      "Research institute": 1,
+      "Research overview": 1,
+      "Research topic": 5,
+      "Resource inventory": 1,
+      "style guide": 2,
+      "Technical skills": 1,
+      "Wiki index": 1,
+      "Wiki 索引": 1,
+      "公立研究型大学": 3,
+      "博士生": 1,
+      "技术技能": 1,
+      "教育时间线": 1,
+      "模型族": 1,
+      "研究专题": 5,
+      "研究概念": 15,
+      "研究概览": 1,
+      "研究经历": 1,
+      "研究院": 1,
+      "维护日志": 1,
+      "论文列表": 1,
+      "资源记录": 1,
+      "项目概览": 1
+    }
+  },
+  "warnings": [],
+  "hiddenPages": {
+    "count": 2,
+    "pages": [],
+    "redacted": true
+  },
+  "duplicateTitleGroups": [],
+  "orphanPages": [],
+  "noOutgoingPages": [],
+  "missingTranslationPairs": [],
+  "translationConsistency": {
+    "warnings": [],
+    "missingPairs": []
+  },
+  "structuredRelationCounts": {
+    "cites": 0,
+    "contradicts": 0,
+    "depends-on": 2,
+    "derived-from": 0,
+    "related": 0,
+    "supersedes": 0,
+    "uses": 0
+  }
+}

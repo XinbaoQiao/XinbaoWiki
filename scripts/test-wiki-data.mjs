@@ -129,13 +129,16 @@ assertFile('chat with xinbao/env.example');
 assertFile('chat with xinbao/persona-prompt.md');
 assertFile('chat with xinbao/meme-voice-notes.md');
 assertFile('scripts/wiki-maintenance.mjs');
+assertFile('scripts/new-wiki-page.mjs');
 assertFile('wiki/graph.json');
+assertFile('wiki/quality-report.json');
 assertFile('wiki/maintenance-schema.json');
 assertFile('public/okf/index.md');
 assertFile('public/okf/log.md');
 assertFile('public/okf/manifest.json');
 assertFile('public/okf/pages.json');
 assertFile('public/okf/graph.json');
+assertFile('public/okf/quality-report.json');
 assertFile('public/okf/schema.json');
 assertFile('public/okf/concepts/Xinbao_Qiao.md');
 assertNoPath('cloudflare');
@@ -151,10 +154,12 @@ const chatQuestionsRoute = fs.readFileSync(path.join(root, 'app/api/chat-with-xi
 const chatKnowledge = fs.readFileSync(path.join(root, 'lib/chat-with-xinbao.ts'), 'utf8');
 const pageIndex = JSON.parse(fs.readFileSync(path.join(wikiDir, 'pages.json'), 'utf8'));
 const wikiGraph = JSON.parse(fs.readFileSync(path.join(wikiDir, 'graph.json'), 'utf8'));
+const wikiQualityReport = JSON.parse(fs.readFileSync(path.join(wikiDir, 'quality-report.json'), 'utf8'));
 const maintenanceSchema = JSON.parse(fs.readFileSync(path.join(wikiDir, 'maintenance-schema.json'), 'utf8'));
 const okfManifest = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/manifest.json'), 'utf8'));
 const okfPageIndex = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/pages.json'), 'utf8'));
 const okfGraph = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/graph.json'), 'utf8'));
+const okfQualityReport = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/quality-report.json'), 'utf8'));
 const okfSchema = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/schema.json'), 'utf8'));
 const okfHome = matter(fs.readFileSync(path.join(root, 'public/okf/concepts/Xinbao_Qiao.md'), 'utf8'));
 const okfSyntheticTopic = matter(fs.readFileSync(path.join(root, 'public/okf/concepts/Synthetic_Data_and_Model_Collapse.md'), 'utf8'));
@@ -188,7 +193,13 @@ for (const dependency of ['remark-math', 'rehype-katex', 'katex']) {
 assert.ok(packageJson.dependencies?.['@upstash/redis'], 'package.json includes Upstash Redis for server-side rate limits');
 assert.equal(packageJson.scripts?.['maintain:wiki'], 'node scripts/wiki-maintenance.mjs --standardize --write', 'package.json exposes a deterministic wiki maintenance writer');
 assert.equal(packageJson.scripts?.['lint:content'], 'node scripts/wiki-maintenance.mjs --check', 'package.json exposes a deterministic content maintenance check');
+assert.equal(packageJson.scripts?.['lint:okf'], 'node scripts/okf-conformance.mjs', 'package.json exposes a deterministic OKF conformance check');
+assert.equal(packageJson.scripts?.['new:wiki'], 'node scripts/new-wiki-page.mjs', 'package.json exposes a reusable source-page template helper');
+assert.equal(packageJson.scripts?.['verify:publish'], 'node scripts/verify-publish-set.mjs', 'package.json exposes a publish-set safety check');
+assert.equal(packageJson.scripts?.['smoke:production'], 'node scripts/smoke-production.mjs', 'package.json exposes a production smoke check');
+assert.equal(packageJson.scripts?.['deploy:production'], 'node scripts/deploy-production.mjs', 'package.json exposes a token-safe Vercel production deployment wrapper');
 assert.match(packageJson.scripts?.check || '', /lint:content/, 'repository check includes the content maintenance check');
+assert.match(packageJson.scripts?.check || '', /lint:okf/, 'repository check includes the OKF conformance check');
 assert.equal(pageIndex.schemaVersion, 3, 'wiki page index uses the generated content-maintenance schema');
 assert.equal(pageIndex.okfVersion, '0.1', 'wiki page index declares the OKF target version');
 assert.ok(pageIndex.pages.length >= 80, 'generated page index includes the visible wiki corpus');
@@ -204,6 +215,19 @@ assert.equal(wikiGraph.stats.warnings, 0, 'wiki graph has no publish-time mainte
 assert.deepEqual(wikiGraph.warnings, [], 'wiki graph warning list is empty after hardening');
 assert.ok(wikiGraph.edges.some((edge) => edge.from === 'Synthetic_Data_and_Model_Collapse' && edge.relation === 'depends-on' && edge.source === 'frontmatter' && edge.to === 'Synthetic_Data'), 'wiki graph includes structured frontmatter relations');
 assert.ok(wikiGraph.nodes.some((node) => node.slug === 'Synthetic_Data_and_Model_Collapse' && node.relationTypes.includes('depends-on')), 'wiki graph nodes summarize structured relation types');
+assert.equal(wikiQualityReport.schemaVersion, 1, 'wiki quality report declares its schema version');
+assert.equal(wikiQualityReport.okfVersion, '0.1', 'wiki quality report declares the OKF target version');
+assert.equal(wikiQualityReport.counts.pages, wikiGraph.stats.pages, 'wiki quality report page count matches the graph');
+assert.equal(wikiQualityReport.counts.warnings, 0, 'wiki quality report keeps the current corpus warning-free');
+assert.deepEqual(wikiQualityReport.warnings, [], 'wiki quality report keeps an explicit empty warning list');
+assert.equal(wikiQualityReport.hiddenPages.count, 2, 'wiki quality report counts hidden pages');
+assert.equal(wikiQualityReport.hiddenPages.pages.length, 2, 'wiki quality report lists source hidden pages');
+assert.deepEqual(wikiQualityReport.duplicateTitleGroups, [], 'wiki quality report lists duplicate-title groups even when empty');
+assert.deepEqual(wikiQualityReport.orphanPages, [], 'wiki quality report lists orphan pages even when empty');
+assert.deepEqual(wikiQualityReport.noOutgoingPages, [], 'wiki quality report lists no-outgoing pages even when empty');
+assert.deepEqual(wikiQualityReport.missingTranslationPairs, [], 'wiki quality report lists missing translation pairs even when empty');
+assert.deepEqual(wikiQualityReport.translationConsistency.warnings, [], 'translation consistency has no current warnings');
+assert.equal(wikiQualityReport.structuredRelationCounts['depends-on'], 2, 'wiki quality report counts structured depends-on relations');
 assert.equal(maintenanceSchema.schemaVersion, 4, 'maintenance schema records the source contract version');
 assert.equal(maintenanceSchema.okfVersion, '0.1', 'maintenance schema records the OKF target version');
 assert.deepEqual(maintenanceSchema.source.requiredFrontmatter, ['type', 'title', 'description', 'tags', 'timestamp'], 'maintenance schema locks the source frontmatter contract');
@@ -216,6 +240,14 @@ assert.equal(okfManifest.bundle.publicPages, pageIndex.pages.length, 'public OKF
 assert.equal(okfManifest.bundle.hiddenPagesExcluded, 2, 'public OKF manifest records hidden-page exclusion');
 assert.equal(okfPageIndex.pages.length, pageIndex.pages.length, 'public OKF page index mirrors the public source index');
 assert.equal(okfGraph.nodes.length, pageIndex.pages.length, 'public OKF graph excludes hidden source pages');
+assert.equal(okfQualityReport.schemaVersion, 1, 'public OKF quality report declares its schema version');
+assert.equal(okfQualityReport.okfVersion, '0.1', 'public OKF quality report declares the OKF target version');
+assert.equal(okfQualityReport.counts.pages, okfGraph.nodes.length, 'public OKF quality report page count matches public graph');
+assert.equal(okfQualityReport.counts.warnings, 0, 'public OKF quality report is warning-free');
+assert.deepEqual(okfQualityReport.warnings, [], 'public OKF quality report keeps an explicit empty warning list');
+assert.deepEqual(okfQualityReport.hiddenPages.pages, [], 'public OKF quality report does not expose hidden page slugs');
+assert.deepEqual(okfQualityReport.missingTranslationPairs, [], 'public OKF quality report lists missing translation pairs even when empty');
+assert.equal(okfQualityReport.structuredRelationCounts['depends-on'], wikiQualityReport.structuredRelationCounts['depends-on'], 'public OKF quality report keeps structured relation counts');
 const publicOkfSlugs = new Set(okfGraph.nodes.map((node) => node.slug));
 for (const hiddenSlug of wikiGraph.nodes.filter((node) => node.hidden).map((node) => node.slug)) {
   assert.ok(!JSON.stringify(okfGraph).includes(hiddenSlug), `public OKF graph excludes hidden slug ${hiddenSlug}`);
@@ -238,6 +270,16 @@ assert.ok(okfHome.data.lifecycle?.confidence > 0, 'public OKF concept includes L
 assert.ok(okfSyntheticTopic.data.relations.some((relation) => relation.type === 'depends-on' && relation.target === 'Synthetic_Data'), 'public OKF concept exports structured relations');
 assert.doesNotMatch(fs.readFileSync(path.join(root, 'public/okf/index.md'), 'utf8'), /^---/m, 'public OKF reserved index has no frontmatter');
 assert.doesNotMatch(fs.readFileSync(path.join(root, 'public/okf/log.md'), 'utf8'), /^---/m, 'public OKF reserved log has no frontmatter');
+
+const newWikiPageScript = fs.readFileSync(path.join(root, 'scripts/new-wiki-page.mjs'), 'utf8');
+assert.match(newWikiPageScript, /--slug <Slug> --title <Title> --type <Type> --language en\|zh --description <Text>/, 'new wiki page helper documents the required template arguments');
+assert.match(newWikiPageScript, /translation_of/, 'new wiki page helper supports translation_of frontmatter');
+assert.match(newWikiPageScript, /wiki\/\$\{slug\}\.md already exists; use --force/, 'new wiki page helper refuses to overwrite existing pages by default');
+const deployProductionScript = fs.readFileSync(path.join(root, 'scripts/deploy-production.mjs'), 'utf8');
+assert.match(deployProductionScript, /const vercelCliPackage = 'vercel@50\.28\.0';/, 'deployment wrapper pins the Vercel CLI version');
+assert.match(deployProductionScript, /'--project', project, '--scope', scope/, 'deployment wrapper links the explicit Vercel project and scope');
+assert.match(deployProductionScript, /SITE_URL: productionUrl/, 'deployment wrapper passes the canonical production URL to smoke checks');
+assert.doesNotMatch(deployProductionScript, /vercel@latest/, 'deployment wrapper avoids floating Vercel CLI versions');
 
 for (const file of fs.readdirSync(wikiDir).filter((file) => file.endsWith('.md'))) {
   const data = frontmatterData(file);
@@ -264,6 +306,9 @@ assert.match(wikiLib, /export function toChineseSlug/, 'wiki library maps Englis
 assert.match(wikiLib, /export function wikiPageTitle/, 'wiki library exposes the content-maintenance title resolver');
 assert.match(wikiLib, /export function wikiPageSummary/, 'wiki library exposes the OKF-compatible summary resolver');
 assert.match(wikiLib, /export function wikiConceptType/, 'wiki library exposes the OKF-compatible concept-type resolver');
+assert.match(wikiLib, /type WikiPageOptions = \{ includeHidden\?: boolean \};/, 'wiki library keeps hidden-page access explicit for maintenance callers');
+assert.match(wikiLib, /export function getPublicWikiSlugs\(\)/, 'wiki library exposes public wiki slugs for production routes');
+assert.match(wikiLib, /if \(data\.hidden === true && !options\.includeHidden\) return null;/, 'wiki page loader blocks hidden pages by default');
 assert.match(wikiLib, /preprocessWikiLinks\(markdown: string, options: \{ language\?: 'en' \| 'zh' \}/, 'wikilink preprocessing is language-aware');
 assert.match(wikiLib, /export type SearchIndexItem/, 'wiki library exposes a typed static search index item');
 assert.match(wikiLib, /export function getSearchIndex\(\): SearchIndexItem\[\]/, 'wiki library builds a static search index from markdown pages');
@@ -271,6 +316,9 @@ assert.match(wikiLib, /plainText\(page\.content\)/, 'search index uses markdown 
 assert.match(wikiLib, /tags: string\[\]/, 'search index exposes page tags for downstream content consumers');
 assert.match(wikiLib, /hidden\?: boolean/, 'wiki frontmatter supports hidden pages');
 assert.match(wikiLib, /\.filter\(\(page\) => page\.data\.hidden !== true\)/, 'search index excludes hidden pages');
+assert.match(wikiPageTsx, /getPublicWikiSlugs\(\)\.map/, 'wiki route statically generates only public wiki pages');
+assert.doesNotMatch(wikiPageTsx, /getAllWikiSlugs\(\)\.map/, 'wiki route does not statically generate hidden source pages');
+assert.match(wikiPageTsx, /dynamicParams = true/, 'wiki route lets non-generated slugs reach explicit notFound handling');
 assert.match(wikiPageTsx, /isChineseSlug\(page\.slug\)/, 'wiki page detects Chinese article slugs');
 assert.match(wikiPageTsx, /preprocessWikiLinks\(page\.content, \{ language \}\)/, 'wiki page passes language into wikilink preprocessing');
 assert.match(wikiPageTsx, /<Infobox data=\{page\.data\} language=\{language\} \/>/, 'wiki page passes route language into the infobox chrome');
