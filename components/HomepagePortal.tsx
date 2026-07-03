@@ -38,9 +38,13 @@ const entriesLabel: LocalizedText = {
 
 export function HomepagePortal({ directorySections, languageEntries, searchIndex }: Props) {
   const [language, setLanguage] = useState<SearchLanguage>('en');
+  const [browseOpen, setBrowseOpen] = useState(true);
+  const collapsibleSections = { browse: browseOpen };
+  const allSectionsClosed = Object.values(collapsibleSections).every((open) => !open);
+  const portalClassName = ['wiki-portal', allSectionsClosed ? 'wiki-portal-collapsed' : ''].filter(Boolean).join(' ');
 
   return (
-    <article className="wiki-portal" data-page-slug="Xinbao_Qiao">
+    <article className={portalClassName} data-page-slug="Xinbao_Qiao">
       <section className="wiki-portal-hero" aria-labelledby="portal-title">
         <div className="wiki-portal-masthead">
           <div className="wiki-portal-brand">
@@ -66,7 +70,11 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
         </nav>
       </section>
 
-      <details className="wiki-portal-directory" open>
+      <details
+        className="wiki-portal-directory"
+        onToggle={(event) => setBrowseOpen(event.currentTarget.open)}
+        open={browseOpen}
+      >
         <summary>
           <span>{browseLabels[language]}</span>
         </summary>
