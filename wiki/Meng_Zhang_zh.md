@@ -1,21 +1,28 @@
 ---
-name: "张萌"
-type: "Academic advisor"
+type: Academic advisor
+title: 张萌
+description: 浙江大学教师，乔鑫宝硕士导师。
+tags:
+  - zh
+  - person
+  - advisor
+  - academic-advisor
+timestamp: '2026-05-05T23:25:14+08:00'
+name: 张萌
+language: zh
+summary: 浙江大学教师，乔鑫宝硕士导师。
 occupation:
-  - "研究员/助理教授"
-  - "博士生导师"
+  - 研究员/助理教授
+  - 博士生导师
 affiliation:
-  - label: "浙江大学 ZJU-UIUC Institute"
-    url: "/wiki/Zhejiang_University/"
-focus: "无线与计算机网络；边缘智能；网络经济学；智能 IoT"
+  - label: 浙江大学 ZJU-UIUC Institute
+    url: /wiki/Zhejiang_University/
+focus: 无线与计算机网络；边缘智能；网络经济学；智能 IoT
 links:
-  - label: "浙江大学个人主页"
-    url: "https://person.zju.edu.cn/mengzhang"
-summary: "浙江大学教师，乔鑫宝硕士导师。"
-language: "zh"
-translation_of: "Meng_Zhang"
+  - label: 浙江大学个人主页
+    url: 'https://person.zju.edu.cn/mengzhang'
+translation_of: Meng_Zhang
 ---
-
 **张萌** 是浙江大学 ZJU-UIUC Institute 的研究员/助理教授。浙江大学官方个人主页列出其为浙江大学-伊利诺伊大学厄巴纳香槟校区联合学院博士生导师。[^zju-profile]
 
 ## 传记
@@ -38,4 +45,3 @@ translation_of: "Meng_Zhang"
 - [[Data_Centric_Machine_Learning|数据中心 ML]]
 
 [^zju-profile]: 浙江大学 [张萌个人主页](https://person.zju.edu.cn/mengzhang)列出了本文使用的职务、单位、邮箱和研究方向。
-

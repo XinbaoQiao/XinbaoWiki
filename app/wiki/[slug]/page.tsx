@@ -2,12 +2,12 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Infobox } from '@/components/Infobox';
 import { WikiMarkdown } from '@/components/WikiMarkdown';
-import { getAllWikiSlugs, getWikiPageBySlug, isChineseSlug, preprocessWikiLinks } from '@/lib/wiki';
+import { getPublicWikiSlugs, getWikiPageBySlug, isChineseSlug, preprocessWikiLinks } from '@/lib/wiki';
 
-export const dynamicParams = false;
+export const dynamicParams = true;
 type Props = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() { return getAllWikiSlugs().map((slug) => ({ slug })); }
+export function generateStaticParams() { return getPublicWikiSlugs().map((slug) => ({ slug })); }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
@@ -30,7 +30,7 @@ export default async function WikiPage({ params }: Props) {
         </span>
       </h1>
       {page.summary && <p className="wiki-title-sub">{page.summary}</p>}
-      <Infobox data={page.data} />
+      <Infobox data={page.data} language={language} />
       <WikiMarkdown sourceHref={sourceHref} markdown={preprocessWikiLinks(page.content, { language })} />
     </article>
   );

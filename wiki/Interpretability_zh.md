@@ -1,11 +1,20 @@
 ---
-name: "可解释性"
-occupation: "研究概念"
-summary: "解释模型行为和数据影响的概念页。"
-language: "zh"
-translation_of: "Interpretability"
+type: 研究概念
+title: 可解释性
+description: 解释模型行为和数据影响的概念页。
+tags:
+  - zh
+  - research
+  - concept
+  - 研究概念
+  - llm
+timestamp: '2026-05-05T23:25:14+08:00'
+name: 可解释性
+language: zh
+summary: 解释模型行为和数据影响的概念页。
+occupation: 研究概念
+translation_of: Interpretability
 ---
-
 **可解释性** 指帮助人理解模型为何产生某种行为的方法。在本 wiki 中，重点比整个可解释性领域更窄，主要关注数据影响、错误诊断，以及支持可信决策的解释。
 
 ## 在本 wiki 中的作用
@@ -22,4 +31,3 @@ translation_of: "Interpretability"
 - [[Trustworthy_AI|可信 AI]]
 - [[Machine_Unlearning|机器遗忘]]
 - [[Data_Centric_Machine_Learning|数据中心 ML]]
-

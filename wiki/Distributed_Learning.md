@@ -1,9 +1,21 @@
 ---
-name: "Distributed Learning"
-occupation: "Research concept"
-summary: "Concept page for learning with decentralized data, computation, or communication."
+type: Research concept
+title: Distributed Learning
+description: >-
+  Concept page for learning with decentralized data, computation, or
+  communication.
+tags:
+  - en
+  - research
+  - concept
+  - research-concept
+timestamp: '2026-05-06T06:22:22+08:00'
+name: Distributed Learning
+summary: >-
+  Concept page for learning with decentralized data, computation, or
+  communication.
+occupation: Research concept
 ---
-
 **Distributed Learning** covers learning settings in which data, computation, or optimization steps are spread across multiple clients, devices, institutions, or workers. In this wiki the term includes decentralized and federated-style learning problems, but it is used descriptively rather than as a commitment to one protocol.[^fed]
 
 ## Role in this wiki

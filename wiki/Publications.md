@@ -1,9 +1,17 @@
 ---
-name: "Publications"
-occupation: "Publication list"
-summary: "Publication list for Qiao Xinbao."
+type: Publication list
+title: Publications
+description: Publication list for Qiao Xinbao.
+tags:
+  - en
+  - publication
+  - index
+  - publication-list
+timestamp: '2026-06-01T22:00:31+08:00'
+name: Publications
+summary: Publication list for Qiao Xinbao.
+occupation: Publication list
 ---
-
 This page is the curated publication index. Each paper has a dedicated wiki page and is also assigned to research-topic pages; papers should not be left as isolated entries.
 
 ## Peer-reviewed and accepted papers

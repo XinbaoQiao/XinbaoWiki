@@ -1,11 +1,19 @@
 ---
-name: "简历"
-occupation: "CV 摘要"
-summary: "乔鑫宝的结构化 CV 摘要。"
-language: "zh"
-translation_of: "CV"
+type: CV 摘要
+title: 简历
+description: 乔鑫宝的结构化 CV 摘要。
+tags:
+  - zh
+  - cv
+  - profile
+  - cv-摘要
+timestamp: '2026-07-02T19:37:18+08:00'
+name: 简历
+language: zh
+summary: 乔鑫宝的结构化 CV 摘要。
+occupation: CV 摘要
+translation_of: CV
 ---
-
 本页以 wiki 形式记录 CV 中的事实。PDF 版本见 [XinbaoQiao_CV.pdf](/files/XinbaoQiao_CV.pdf)。
 
 ## 联系方式

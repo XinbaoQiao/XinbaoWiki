@@ -1,20 +1,28 @@
 ---
-name: "Learn What Matters: Data Pruning for Efficient Decentralized Learning"
-type: "publication"
-authors:
-  - "Xinbao Qiao"
-  - "Xunhao Jiang"
-  - "Zuozhu Liu"
-  - "Peng Sun"
-  - "Meng Zhang"
-venue: "under review"
-year: 2025
-status: "under review"
-publication_type: "Journal manuscript"
+type: publication
+title: 'Learn What Matters: Data Pruning for Efficient Decentralized Learning'
+description: Manuscript on data pruning for efficient decentralized learning.
+tags:
+  - en
+  - publication
+  - paper
+  - under-review
+  - private
+timestamp: '2026-05-06T06:22:22+08:00'
+name: 'Learn What Matters: Data Pruning for Efficient Decentralized Learning'
+summary: Manuscript on data pruning for efficient decentralized learning.
 hidden: true
-summary: "Manuscript on data pruning for efficient decentralized learning."
+authors:
+  - Xinbao Qiao
+  - Xunhao Jiang
+  - Zuozhu Liu
+  - Peng Sun
+  - Meng Zhang
+venue: under review
+year: 2025
+status: under review
+publication_type: Journal manuscript
 ---
-
 **Learn What Matters: Data Pruning for Efficient Decentralized Learning** is an active manuscript by **Xinbao Qiao** and collaborators, listed in Qiao Xinbao's CV.
 
 ## Status

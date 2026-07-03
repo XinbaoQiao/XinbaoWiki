@@ -1,28 +1,36 @@
 ---
-name: "无 Hessian 在线认证遗忘"
-type: "publication"
+type: publication
+title: 无 Hessian 在线认证遗忘
+description: ICLR 2025 论文，研究无显式 Hessian 求逆的高效认证机器遗忘。
+tags:
+  - zh
+  - publication
+  - paper
+  - iclr-2025-poster
+  - iclr-2025
+timestamp: '2026-05-05T23:25:14+08:00'
+name: 无 Hessian 在线认证遗忘
+language: zh
+summary: ICLR 2025 论文，研究无显式 Hessian 求逆的高效认证机器遗忘。
 authors:
-  - "Xinbao Qiao"
-  - "Meng Zhang"
-  - "Ming Tang"
-  - "Ermin Wei"
-venue: "ICLR 2025"
-location: "Singapore EXPO, Singapore"
+  - Xinbao Qiao
+  - Meng Zhang
+  - Ming Tang
+  - Ermin Wei
+venue: ICLR 2025
+location: 'Singapore EXPO, Singapore'
 year: 2025
-status: "ICLR 2025 poster"
-publication_type: "会议论文"
+status: ICLR 2025 poster
+publication_type: 会议论文
 links:
-  - label: "OpenReview"
-    url: "https://openreview.net/forum?id=C3TrHWanh5"
-  - label: "arXiv"
-    url: "https://arxiv.org/abs/2404.01712"
-  - label: "Code"
-    url: "https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning"
-summary: "ICLR 2025 论文，研究无显式 Hessian 求逆的高效认证机器遗忘。"
-language: "zh"
-translation_of: "Hessian_Free_Online_Certified_Unlearning"
+  - label: OpenReview
+    url: 'https://openreview.net/forum?id=C3TrHWanh5'
+  - label: arXiv
+    url: 'https://arxiv.org/abs/2404.01712'
+  - label: Code
+    url: 'https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning'
+translation_of: Hessian_Free_Online_Certified_Unlearning
 ---
-
 **无 Hessian 在线认证遗忘** 是 **[[Xinbao_Qiao|乔鑫宝]]**、张萌、Ming Tang 和 Ermin Wei 的 ICLR 2025 会议论文。论文提出一种认证机器遗忘过程，面向显式存储或求逆 Hessian 代价过高的模型。
 
 ## 概述
@@ -74,4 +82,3 @@ $$
 ## 定位
 
 该工作属于 [[Machine_Unlearning|机器遗忘]]、[[Certified_Data_Removal|认证数据删除]] 和 [[Trustworthy_AI|可信 AI]]。在乔鑫宝的论文记录中，它是可微模型方向的遗忘工作；[[DynFrs|DynFrs]] 则是树模型方向的精确遗忘工作。
-

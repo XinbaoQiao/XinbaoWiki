@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
+import matter from 'gray-matter';
 
 const root = process.cwd();
 const wikiDir = path.join(root, 'wiki');
@@ -14,6 +15,10 @@ function frontmatter(file) {
   const match = raw.match(/^---\n([\s\S]*?)\n---/);
   assert.ok(match, `${file} has YAML frontmatter`);
   return match[1];
+}
+
+function frontmatterData(file) {
+  return matter(read(file)).data;
 }
 
 function assertFile(file) {
@@ -42,10 +47,11 @@ for (const file of [
   'log_zh.md'
 ]) {
   assertFile(`wiki/${file}`);
-  assert.match(frontmatter(file), /language: "zh"/, `${file} marks the Chinese language`);
+  assert.equal(frontmatterData(file).language, 'zh', `${file} marks the Chinese language`);
 }
 
 const bio = frontmatter('Xinbao_Qiao.md');
+const bioData = frontmatterData('Xinbao_Qiao.md');
 for (const field of ['name:', 'residence:', 'occupation:', 'education:', 'links:']) {
   assert.ok(bio.includes(field), `Xinbao_Qiao.md frontmatter includes ${field}`);
 }
@@ -67,15 +73,16 @@ assert.doesNotMatch(bio, /^native_name:/m, 'English infobox follows Colarpedia b
 assert.doesNotMatch(bio, /^birth_place:/m, 'birthplace is kept in prose rather than the infobox');
 assert.match(bio, /born: \|\n\s+September 2000 \(age 25\)\n\s+Xishuangbanna, Yunnan\n/, 'English Born row uses the requested month-and-place format');
 assert.doesNotMatch(bio, /30 September 2000|Xishuangbanna, Yunnan, China/, 'English Born row omits day and country');
-assert.match(bio, /occupation:\n\s+- "PhD student"/, 'occupation uses PhD student');
-assert.match(bio, /image_caption: "Photograph taken at Singapore EXPO, 2025"/, 'English portrait caption identifies Singapore EXPO and year');
+assert.deepEqual(bioData.occupation, ['PhD student'], 'occupation uses PhD student');
+assert.equal(bioData.image_caption, 'Photograph taken at Singapore EXPO, 2025', 'English portrait caption identifies Singapore EXPO and year');
 const educationBlock = frontmatterSlice(bio, 'education:', 'links:');
-assert.match(educationBlock, /label: "The Chinese University of Hong Kong"[\s\S]*label: "Zhejiang University"[\s\S]*label: "Shandong University"/, 'English education is reverse chronological');
-assert.match(educationBlock, /label: "Shandong University"\n\s+url: "\/wiki\/Shandong_University\/"\n\s+detail: "\(BEng, 2022\)"/, 'English education links only school name and keeps degree detail separate');
-assert.match(bio, /title: "OpenReview"[\s\S]*https:\/\/openreview\.net\/profile\?id=~Xinbao_Qiao1/, 'contact replaces Website with OpenReview');
-assert.match(bio, /aliases:[\s\S]*"Mr\. Ciao"[\s\S]*"MrCiao"[\s\S]*"Ciao"/, 'English biography aliases include Mr. Ciao');
+assert.deepEqual(bioData.education.map((item) => item.label), ['The Chinese University of Hong Kong', 'Zhejiang University', 'Shandong University'], 'English education is reverse chronological');
+assert.deepEqual(bioData.education.at(-1), { label: 'Shandong University', url: '/wiki/Shandong_University/', detail: '(BEng, 2022)' }, 'English education links only school name and keeps degree detail separate');
+assert.ok(bioData.links.some((link) => link.title === 'OpenReview' && link.url === 'https://openreview.net/profile?id=~Xinbao_Qiao1'), 'contact replaces Website with OpenReview');
+assert.ok(['Mr. Ciao', 'MrCiao', 'Ciao'].every((alias) => bioData.aliases.includes(alias)), 'English biography aliases include Mr. Ciao');
 
 const zhBio = frontmatter('Qiao_Xinbao_zh.md');
+const zhBioData = frontmatterData('Qiao_Xinbao_zh.md');
 const zhAffiliation = frontmatterSlice(zhBio, 'affiliation:', 'education:');
 assert.match(zhAffiliation, /香港中文大学/, 'Chinese affiliation lists current institution');
 assert.match(zhAffiliation, /信息工程系/, 'Chinese affiliation includes current department');
@@ -83,11 +90,11 @@ assert.doesNotMatch(zhAffiliation, /新加坡国立大学重庆研究院/, 'Chin
 assert.doesNotMatch(zhBio, /^native_name:/m, 'Chinese infobox follows Colarpedia by folding English name into Born');
 assert.doesNotMatch(zhBio, /^birth_place:/m, 'Chinese birthplace is kept in prose rather than the infobox');
 assert.match(zhBio, /born: \|\n\s+乔鑫宝 \(Xinbao Qiao\)\n\s+2000年9月30日 \(25岁\)\n\s+中国云南西双版纳/, 'Chinese Born row is a multiline Colarpedia-style value');
-assert.match(zhBio, /image_caption: "摄于 ICLR 2025，新加坡 EXPO"/, 'Chinese portrait caption identifies ICLR 2025 at Singapore EXPO');
-assert.match(zhBio, /aliases:[\s\S]*"Mr\. Ciao"[\s\S]*"MrCiao"[\s\S]*"喬"[\s\S]*"ciao"/, 'Chinese biography aliases include Mr. Ciao and ciao spelling');
+assert.equal(zhBioData.image_caption, '摄于 ICLR 2025，新加坡 EXPO', 'Chinese portrait caption identifies ICLR 2025 at Singapore EXPO');
+assert.ok(['Mr. Ciao', 'MrCiao', '喬', 'ciao'].every((alias) => zhBioData.aliases.includes(alias)), 'Chinese biography aliases include Mr. Ciao and ciao spelling');
 const zhEducationBlock = frontmatterSlice(zhBio, 'education:', 'links:');
-assert.match(zhEducationBlock, /label: "香港中文大学"[\s\S]*label: "浙江大学"[\s\S]*label: "山东大学"/, 'Chinese education is reverse chronological');
-assert.match(zhEducationBlock, /label: "山东大学"\n\s+url: "\/wiki\/Shandong_University\/"\n\s+detail: "（工学学士，2022）"/, 'Chinese education links only school name and keeps degree detail separate');
+assert.deepEqual(zhBioData.education.map((item) => item.label), ['香港中文大学', '浙江大学', '山东大学'], 'Chinese education is reverse chronological');
+assert.deepEqual(zhBioData.education.at(-1), { label: '山东大学', url: '/wiki/Shandong_University/', detail: '（工学学士，2022）' }, 'Chinese education links only school name and keeps degree detail separate');
 
 assert.match(home, /\[\[Publications\]\]/, 'home article links to Publications');
 assert.match(home, /\[\[Research\]\]/, 'home article links to Research');
@@ -102,7 +109,7 @@ assert.match(read('CV.md'), /\/files\/XinbaoQiao_CV\.pdf/, 'CV page links to loc
 
 const contactCount = (home.match(/mailto:/g) || []).length;
 assert.equal(contactCount, 1, 'home infobox contact exposes one email address');
-assert.match(bio, /title: "GitHub"[\s\S]*https:\/\/github\.com\/XinbaoQiao/, 'contact includes GitHub');
+assert.ok(bioData.links.some((link) => link.title === 'GitHub' && link.url === 'https://github.com/XinbaoQiao'), 'contact includes GitHub');
 
 const layout = fs.readFileSync(path.join(root, 'app/layout.tsx'), 'utf8');
 const wikiPageTsx = fs.readFileSync(path.join(root, 'app/wiki/[slug]/page.tsx'), 'utf8');
@@ -122,10 +129,22 @@ assertFile('chat with xinbao/env.example');
 assertFile('chat with xinbao/persona-prompt.md');
 assertFile('chat with xinbao/meme-voice-notes.md');
 assertFile('scripts/wiki-maintenance.mjs');
+assertFile('scripts/new-wiki-page.mjs');
 assertFile('wiki/graph.json');
+assertFile('wiki/quality-report.json');
+assertFile('wiki/maintenance-schema.json');
+assertFile('public/okf/index.md');
+assertFile('public/okf/log.md');
+assertFile('public/okf/manifest.json');
+assertFile('public/okf/pages.json');
+assertFile('public/okf/graph.json');
+assertFile('public/okf/quality-report.json');
+assertFile('public/okf/schema.json');
+assertFile('public/okf/concepts/Xinbao_Qiao.md');
 assertNoPath('cloudflare');
-assertFile('public/xinbaopedia-icon.svg');
-const siteIcon = fs.readFileSync(path.join(root, 'public/xinbaopedia-icon.svg'), 'utf8');
+assertFile('public/xinbaopedia-icon.png');
+assertNoPath('public/xinbaopedia-icon.svg');
+const siteIcon = fs.readFileSync(path.join(root, 'public/xinbaopedia-icon.png'));
 const languageToggle = fs.readFileSync(path.join(root, 'components/LanguageToggle.tsx'), 'utf8');
 const articleTabs = fs.readFileSync(path.join(root, 'components/ArticleTabs.tsx'), 'utf8');
 const wikiSearch = fs.readFileSync(path.join(root, 'components/WikiSearch.tsx'), 'utf8');
@@ -135,6 +154,15 @@ const chatQuestionsRoute = fs.readFileSync(path.join(root, 'app/api/chat-with-xi
 const chatKnowledge = fs.readFileSync(path.join(root, 'lib/chat-with-xinbao.ts'), 'utf8');
 const pageIndex = JSON.parse(fs.readFileSync(path.join(wikiDir, 'pages.json'), 'utf8'));
 const wikiGraph = JSON.parse(fs.readFileSync(path.join(wikiDir, 'graph.json'), 'utf8'));
+const wikiQualityReport = JSON.parse(fs.readFileSync(path.join(wikiDir, 'quality-report.json'), 'utf8'));
+const maintenanceSchema = JSON.parse(fs.readFileSync(path.join(wikiDir, 'maintenance-schema.json'), 'utf8'));
+const okfManifest = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/manifest.json'), 'utf8'));
+const okfPageIndex = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/pages.json'), 'utf8'));
+const okfGraph = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/graph.json'), 'utf8'));
+const okfQualityReport = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/quality-report.json'), 'utf8'));
+const okfSchema = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/schema.json'), 'utf8'));
+const okfHome = matter(fs.readFileSync(path.join(root, 'public/okf/concepts/Xinbao_Qiao.md'), 'utf8'));
+const okfSyntheticTopic = matter(fs.readFileSync(path.join(root, 'public/okf/concepts/Synthetic_Data_and_Model_Collapse.md'), 'utf8'));
 const chatReadme = fs.readFileSync(path.join(root, 'chat with xinbao/README.md'), 'utf8');
 const chatEnvExample = fs.readFileSync(path.join(root, 'chat with xinbao/env.example'), 'utf8');
 const chatPersona = fs.readFileSync(path.join(root, 'chat with xinbao/persona-prompt.md'), 'utf8');
@@ -142,11 +170,10 @@ const chatMemeNotes = fs.readFileSync(path.join(root, 'chat with xinbao/meme-voi
 const internetSlang2026 = read('Internet_Slang_2026.md');
 const internetSlang2026Zh = read('Internet_Slang_2026_zh.md');
 const questionLogFunction = chatRoute.match(/async function recordQuestionLog[\s\S]*?\n}\n\nfunction withXinbaoSignature/)?.[0] || '';
-assert.match(siteIcon, /r="30"/, 'site icon fills the favicon canvas with a larger wiki mark');
-assert.match(siteIcon, /font-size="34"/, 'site icon enlarges the X glyph for small favicon rendering');
-assert.doesNotMatch(siteIcon, /r="24"|font-size="25"/, 'site icon no longer uses the undersized original mark');
+assert.equal(siteIcon.toString('ascii', 1, 4), 'PNG', 'site icon uses the new PNG app-style mark');
+assert.ok(siteIcon.length > 100000, 'site icon keeps enough raster detail for portal and favicon rendering');
 assert.match(layout, /title: 'Xinbaopedia'/, 'site metadata title is Xinbaopedia');
-assert.match(layout, /icons: \{ icon: pathWithBasePath\('\/xinbaopedia-icon\.svg'\) \}/, 'site metadata exposes a base-path-aware wiki-style icon');
+assert.match(layout, /icons: \{ icon: pathWithBasePath\('\/xinbaopedia-icon\.png'\) \}/, 'site metadata exposes the base-path-aware PNG site icon');
 assert.match(layout, /import 'katex\/dist\/katex\.min\.css';/, 'layout imports KaTeX CSS for rendered formulas');
 assert.doesNotMatch(layout, /wiki-logo-mark|<img className=/, 'topbar uses a text-only wordmark');
 assert.match(layout, /className="wiki-logo"[\s\S]*href=\{pathWithBasePath\('\/'\)\}[\s\S]*wiki-logo-word[\s\S]*Xinbaopedia[\s\S]*wiki-logo-subtitle[\s\S]*The Academic Wiki/, 'topbar wordmark links to the Wikipedia-style portal homepage');
@@ -164,18 +191,114 @@ for (const dependency of ['remark-math', 'rehype-katex', 'katex']) {
   assert.ok(packageJson.dependencies?.[dependency], `package.json includes ${dependency}`);
 }
 assert.ok(packageJson.dependencies?.['@upstash/redis'], 'package.json includes Upstash Redis for server-side rate limits');
-assert.equal(packageJson.scripts?.['maintain:wiki'], 'node scripts/wiki-maintenance.mjs --write', 'package.json exposes a deterministic wiki maintenance writer');
+assert.equal(packageJson.scripts?.['maintain:wiki'], 'node scripts/wiki-maintenance.mjs --standardize --write', 'package.json exposes a deterministic wiki maintenance writer');
 assert.equal(packageJson.scripts?.['lint:content'], 'node scripts/wiki-maintenance.mjs --check', 'package.json exposes a deterministic content maintenance check');
+assert.equal(packageJson.scripts?.['lint:okf'], 'node scripts/okf-conformance.mjs', 'package.json exposes a deterministic OKF conformance check');
+assert.equal(packageJson.scripts?.['new:wiki'], 'node scripts/new-wiki-page.mjs', 'package.json exposes a reusable source-page template helper');
+assert.equal(packageJson.scripts?.['verify:publish'], 'node scripts/verify-publish-set.mjs', 'package.json exposes a publish-set safety check');
+assert.equal(packageJson.scripts?.['smoke:production'], 'node scripts/smoke-production.mjs', 'package.json exposes a production smoke check');
+assert.equal(packageJson.scripts?.['deploy:production'], 'node scripts/deploy-production.mjs', 'package.json exposes a token-safe Vercel production deployment wrapper');
 assert.match(packageJson.scripts?.check || '', /lint:content/, 'repository check includes the content maintenance check');
-assert.equal(pageIndex.schemaVersion, 2, 'wiki page index uses the generated content-maintenance schema');
+assert.match(packageJson.scripts?.check || '', /lint:okf/, 'repository check includes the OKF conformance check');
+assert.equal(pageIndex.schemaVersion, 3, 'wiki page index uses the generated content-maintenance schema');
+assert.equal(pageIndex.okfVersion, '0.1', 'wiki page index declares the OKF target version');
 assert.ok(pageIndex.pages.length >= 80, 'generated page index includes the visible wiki corpus');
 assert.ok(pageIndex.pages.some((page) => page.slug === 'Xinbao_Qiao' && page.type), 'generated page index includes typed home-page metadata');
 assert.ok(!pageIndex.pages.some((page) => page.slug === 'Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning'), 'generated page index excludes hidden manuscripts');
-assert.equal(wikiGraph.schemaVersion, 1, 'wiki graph uses the generated content-maintenance schema');
+assert.equal(wikiGraph.schemaVersion, 3, 'wiki graph uses the generated content-maintenance schema');
+assert.equal(wikiGraph.okfVersion, '0.1', 'wiki graph declares the OKF target version');
 assert.ok(wikiGraph.nodes.length >= 80, 'wiki graph includes the markdown corpus');
 assert.ok(wikiGraph.edges.length >= 100, 'wiki graph captures internal wiki relationships');
 assert.ok(wikiGraph.nodes.some((node) => node.slug === 'Projects' && node.backlinks.includes('index')), 'wiki graph records backlinks');
 assert.ok(wikiGraph.nodes.some((node) => node.slug === 'Xinbao_Qiao' && node.type), 'wiki graph records derived concept types');
+assert.equal(wikiGraph.stats.warnings, 0, 'wiki graph has no publish-time maintenance warnings');
+assert.deepEqual(wikiGraph.warnings, [], 'wiki graph warning list is empty after hardening');
+assert.ok(wikiGraph.edges.some((edge) => edge.from === 'Synthetic_Data_and_Model_Collapse' && edge.relation === 'depends-on' && edge.source === 'frontmatter' && edge.to === 'Synthetic_Data'), 'wiki graph includes structured frontmatter relations');
+assert.ok(wikiGraph.nodes.some((node) => node.slug === 'Synthetic_Data_and_Model_Collapse' && node.relationTypes.includes('depends-on')), 'wiki graph nodes summarize structured relation types');
+assert.equal(wikiQualityReport.schemaVersion, 1, 'wiki quality report declares its schema version');
+assert.equal(wikiQualityReport.okfVersion, '0.1', 'wiki quality report declares the OKF target version');
+assert.equal(wikiQualityReport.counts.pages, wikiGraph.stats.pages, 'wiki quality report page count matches the graph');
+assert.equal(wikiQualityReport.counts.warnings, 0, 'wiki quality report keeps the current corpus warning-free');
+assert.deepEqual(wikiQualityReport.warnings, [], 'wiki quality report keeps an explicit empty warning list');
+assert.equal(wikiQualityReport.hiddenPages.count, 2, 'wiki quality report counts hidden pages');
+assert.equal(wikiQualityReport.hiddenPages.pages.length, 2, 'wiki quality report lists source hidden pages');
+assert.deepEqual(wikiQualityReport.duplicateTitleGroups, [], 'wiki quality report lists duplicate-title groups even when empty');
+assert.deepEqual(wikiQualityReport.orphanPages, [], 'wiki quality report lists orphan pages even when empty');
+assert.deepEqual(wikiQualityReport.noOutgoingPages, [], 'wiki quality report lists no-outgoing pages even when empty');
+assert.deepEqual(wikiQualityReport.missingTranslationPairs, [], 'wiki quality report lists missing translation pairs even when empty');
+assert.deepEqual(wikiQualityReport.translationConsistency.warnings, [], 'translation consistency has no current warnings');
+assert.equal(wikiQualityReport.structuredRelationCounts['depends-on'], 2, 'wiki quality report counts structured depends-on relations');
+assert.equal(maintenanceSchema.schemaVersion, 4, 'maintenance schema records the source contract version');
+assert.equal(maintenanceSchema.okfVersion, '0.1', 'maintenance schema records the OKF target version');
+assert.deepEqual(maintenanceSchema.source.requiredFrontmatter, ['type', 'title', 'description', 'tags', 'timestamp'], 'maintenance schema locks the source frontmatter contract');
+assert.ok(maintenanceSchema.source.recommendedFrontmatter.includes('relations'), 'maintenance schema documents structured relation frontmatter');
+assert.ok(maintenanceSchema.relations.structured.includes('depends-on'), 'maintenance schema documents supported structured relations');
+assert.ok(maintenanceSchema.qualityGates.some((gate) => gate.includes('zero warnings')), 'maintenance schema documents warning-free checks');
+assert.ok(maintenanceSchema.generatedArtifacts.includes('public/okf/concepts/*.md'), 'maintenance schema documents the public OKF concept export');
+assert.equal(okfManifest.okfVersion, '0.1', 'public OKF manifest declares OKF v0.1');
+assert.equal(okfManifest.bundle.publicPages, pageIndex.pages.length, 'public OKF manifest page count matches generated index');
+assert.equal(okfManifest.bundle.hiddenPagesExcluded, 2, 'public OKF manifest records hidden-page exclusion');
+assert.equal(okfPageIndex.pages.length, pageIndex.pages.length, 'public OKF page index mirrors the public source index');
+assert.equal(okfGraph.nodes.length, pageIndex.pages.length, 'public OKF graph excludes hidden source pages');
+assert.equal(okfQualityReport.schemaVersion, 1, 'public OKF quality report declares its schema version');
+assert.equal(okfQualityReport.okfVersion, '0.1', 'public OKF quality report declares the OKF target version');
+assert.equal(okfQualityReport.counts.pages, okfGraph.nodes.length, 'public OKF quality report page count matches public graph');
+assert.equal(okfQualityReport.counts.warnings, 0, 'public OKF quality report is warning-free');
+assert.deepEqual(okfQualityReport.warnings, [], 'public OKF quality report keeps an explicit empty warning list');
+assert.deepEqual(okfQualityReport.hiddenPages.pages, [], 'public OKF quality report does not expose hidden page slugs');
+assert.deepEqual(okfQualityReport.missingTranslationPairs, [], 'public OKF quality report lists missing translation pairs even when empty');
+assert.equal(okfQualityReport.structuredRelationCounts['depends-on'], wikiQualityReport.structuredRelationCounts['depends-on'], 'public OKF quality report keeps structured relation counts');
+const publicOkfSlugs = new Set(okfGraph.nodes.map((node) => node.slug));
+for (const hiddenSlug of wikiGraph.nodes.filter((node) => node.hidden).map((node) => node.slug)) {
+  assert.ok(!JSON.stringify(okfGraph).includes(hiddenSlug), `public OKF graph excludes hidden slug ${hiddenSlug}`);
+}
+for (const node of okfGraph.nodes) {
+  assert.ok(node.outgoing.every((slug) => publicOkfSlugs.has(slug)), `${node.slug} public outgoing links only target public nodes`);
+  assert.ok(node.backlinks.every((slug) => publicOkfSlugs.has(slug)), `${node.slug} public backlinks only target public nodes`);
+}
+for (const edge of okfGraph.edges) {
+  assert.ok(publicOkfSlugs.has(edge.from) && publicOkfSlugs.has(edge.to), 'public OKF edges only connect public nodes');
+}
+assert.equal(okfSchema.okfVersion, '0.1', 'public OKF schema mirrors the maintenance schema');
+assert.equal(okfSchema.schemaVersion, 4, 'public OKF schema mirrors the source contract version');
+assert.equal(okfHome.data.type, 'PhD student', 'public OKF concept keeps a required type');
+assert.equal(okfHome.data.title, 'Xinbao Qiao', 'public OKF concept keeps a required title');
+assert.ok(okfHome.data.description, 'public OKF concept keeps a required description');
+assert.ok(Array.isArray(okfHome.data.tags) && okfHome.data.tags.length > 0, 'public OKF concept keeps required tags');
+assert.ok(okfHome.data.timestamp, 'public OKF concept keeps a timestamp');
+assert.ok(okfHome.data.lifecycle?.confidence > 0, 'public OKF concept includes LLM Wiki lifecycle metadata');
+assert.ok(okfSyntheticTopic.data.relations.some((relation) => relation.type === 'depends-on' && relation.target === 'Synthetic_Data'), 'public OKF concept exports structured relations');
+assert.doesNotMatch(fs.readFileSync(path.join(root, 'public/okf/index.md'), 'utf8'), /^---/m, 'public OKF reserved index has no frontmatter');
+assert.doesNotMatch(fs.readFileSync(path.join(root, 'public/okf/log.md'), 'utf8'), /^---/m, 'public OKF reserved log has no frontmatter');
+
+const newWikiPageScript = fs.readFileSync(path.join(root, 'scripts/new-wiki-page.mjs'), 'utf8');
+assert.match(newWikiPageScript, /--slug <Slug> --title <Title> --type <Type> --language en\|zh --description <Text>/, 'new wiki page helper documents the required template arguments');
+assert.match(newWikiPageScript, /translation_of/, 'new wiki page helper supports translation_of frontmatter');
+assert.match(newWikiPageScript, /wiki\/\$\{slug\}\.md already exists; use --force/, 'new wiki page helper refuses to overwrite existing pages by default');
+const deployProductionScript = fs.readFileSync(path.join(root, 'scripts/deploy-production.mjs'), 'utf8');
+assert.match(deployProductionScript, /const vercelCliPackage = 'vercel@50\.28\.0';/, 'deployment wrapper pins the Vercel CLI version');
+assert.match(deployProductionScript, /createTemporaryVercelConfig\(token\)/, 'deployment wrapper creates a temporary Vercel auth config');
+assert.match(deployProductionScript, /writeFileSync\(join\(configDir, 'auth\.json'\),/, 'deployment wrapper stores the token in a temporary auth file rather than argv');
+assert.match(deployProductionScript, /'--global-config', vercelConfigDir/, 'deployment wrapper points Vercel CLI at the temporary auth config');
+assert.match(deployProductionScript, /finally \{[\s\S]*cleanupTemporaryVercelConfig\(vercelConfigDir\);[\s\S]*\}/, 'deployment wrapper removes temporary auth state after deployment attempts');
+assert.match(deployProductionScript, /'--project', project, '--scope', scope/, 'deployment wrapper links the explicit Vercel project and scope');
+assert.match(deployProductionScript, /SITE_URL: productionUrl/, 'deployment wrapper passes the canonical production URL to smoke checks');
+assert.doesNotMatch(deployProductionScript, /vercel@latest/, 'deployment wrapper avoids floating Vercel CLI versions');
+const gitignore = fs.readFileSync(path.join(root, '.gitignore'), 'utf8');
+const vercelignore = fs.readFileSync(path.join(root, '.vercelignore'), 'utf8');
+const verifyPublishSet = fs.readFileSync(path.join(root, 'scripts/verify-publish-set.mjs'), 'utf8');
+assert.match(gitignore, /\.vercel-auth-\*\//, 'gitignore excludes temporary Vercel auth directories');
+assert.match(vercelignore, /\.vercel-auth-\*\//, 'vercelignore excludes temporary Vercel auth directories');
+assert.match(verifyPublishSet, /temporary Vercel auth state/, 'publish-set checker blocks temporary Vercel auth directories if staged');
+
+for (const file of fs.readdirSync(wikiDir).filter((file) => file.endsWith('.md'))) {
+  const data = frontmatterData(file);
+  assert.ok(data.type, `${file} has explicit OKF type`);
+  assert.ok(data.title, `${file} has explicit OKF title`);
+  assert.ok(data.description, `${file} has explicit OKF description`);
+  assert.ok(Array.isArray(data.tags) && data.tags.length > 0, `${file} has OKF tags`);
+  assert.ok(data.timestamp, `${file} has OKF timestamp`);
+}
 assert.doesNotMatch(nextConfig, /output:\s*['"]export['"]/, 'Next config no longer forces static export');
 assert.match(wikiMarkdownTsx, /import remarkMath from 'remark-math';/, 'Markdown renderer imports remark-math');
 assert.match(wikiMarkdownTsx, /import rehypeKatex from 'rehype-katex';/, 'Markdown renderer imports rehype-katex');
@@ -193,6 +316,9 @@ assert.match(wikiLib, /export function toChineseSlug/, 'wiki library maps Englis
 assert.match(wikiLib, /export function wikiPageTitle/, 'wiki library exposes the content-maintenance title resolver');
 assert.match(wikiLib, /export function wikiPageSummary/, 'wiki library exposes the OKF-compatible summary resolver');
 assert.match(wikiLib, /export function wikiConceptType/, 'wiki library exposes the OKF-compatible concept-type resolver');
+assert.match(wikiLib, /type WikiPageOptions = \{ includeHidden\?: boolean \};/, 'wiki library keeps hidden-page access explicit for maintenance callers');
+assert.match(wikiLib, /export function getPublicWikiSlugs\(\)/, 'wiki library exposes public wiki slugs for production routes');
+assert.match(wikiLib, /if \(data\.hidden === true && !options\.includeHidden\) return null;/, 'wiki page loader blocks hidden pages by default');
 assert.match(wikiLib, /preprocessWikiLinks\(markdown: string, options: \{ language\?: 'en' \| 'zh' \}/, 'wikilink preprocessing is language-aware');
 assert.match(wikiLib, /export type SearchIndexItem/, 'wiki library exposes a typed static search index item');
 assert.match(wikiLib, /export function getSearchIndex\(\): SearchIndexItem\[\]/, 'wiki library builds a static search index from markdown pages');
@@ -200,21 +326,34 @@ assert.match(wikiLib, /plainText\(page\.content\)/, 'search index uses markdown 
 assert.match(wikiLib, /tags: string\[\]/, 'search index exposes page tags for downstream content consumers');
 assert.match(wikiLib, /hidden\?: boolean/, 'wiki frontmatter supports hidden pages');
 assert.match(wikiLib, /\.filter\(\(page\) => page\.data\.hidden !== true\)/, 'search index excludes hidden pages');
+assert.match(wikiPageTsx, /getPublicWikiSlugs\(\)\.map/, 'wiki route statically generates only public wiki pages');
+assert.doesNotMatch(wikiPageTsx, /getAllWikiSlugs\(\)\.map/, 'wiki route does not statically generate hidden source pages');
+assert.match(wikiPageTsx, /dynamicParams = true/, 'wiki route lets non-generated slugs reach explicit notFound handling');
 assert.match(wikiPageTsx, /isChineseSlug\(page\.slug\)/, 'wiki page detects Chinese article slugs');
 assert.match(wikiPageTsx, /preprocessWikiLinks\(page\.content, \{ language \}\)/, 'wiki page passes language into wikilink preprocessing');
+assert.match(wikiPageTsx, /<Infobox data=\{page\.data\} language=\{language\} \/>/, 'wiki page passes route language into the infobox chrome');
 assert.match(wikiSearch, /'use client';/, 'wiki search is a client component');
 assert.match(wikiSearch, /import \{ ChatWithXinbao \} from '@\/components\/ChatWithXinbao';/, 'wiki search imports Chat with Xinbao');
-assert.match(wikiSearch, /<ChatWithXinbao language=\{preferredLanguage\} \/>[\s\S]*<form/, 'chat icon renders before the search form');
+assert.match(wikiSearch, /const searchCopy = \{[\s\S]*en: \{[\s\S]*submit: 'Search'[\s\S]*zh: \{[\s\S]*submit: '搜索'/, 'wiki search localizes its visible search chrome');
+assert.match(wikiSearch, /showLanguageSelect\?: boolean;/, 'wiki search can expose an inline language selector');
+assert.match(wikiSearch, /language\?: SearchLanguage;/, 'wiki search accepts an externally controlled language');
+assert.match(wikiSearch, /onLanguageChange\?: \(language: SearchLanguage\) => void;/, 'wiki search can notify the portal when the selected language changes');
+assert.match(wikiSearch, /const activeLanguage = showLanguageSelect \? \(language \?\? selectedLanguage\) : preferredLanguage;/, 'wiki search lets the portal language selector control result language');
+assert.match(wikiSearch, /<ChatWithXinbao language=\{activeLanguage\} \/>[\s\S]*<form/, 'chat icon renders before the search form and follows the active language');
+assert.match(wikiSearch, /className="wiki-search-language-select"/, 'wiki search renders the portal language selector');
 assert.match(wikiSearch, /useMemo/, 'wiki search memoizes query scoring');
 assert.match(wikiSearch, /scoreItem/, 'wiki search has a ranking function');
 assert.match(wikiSearch, /usePathname/, 'wiki search can detect the current page language');
-assert.match(wikiSearch, /preparedItems\.filter\(\(item\) => item\.language === preferredLanguage\)/, 'wiki search only returns results from the current page language');
+assert.match(wikiSearch, /preparedItems\.filter\(\(item\) => item\.language === activeLanguage\)/, 'wiki search only returns results from the active page or selected language');
 assert.doesNotMatch(wikiSearch, /item\.language === preferredLanguage\) score \+=/, 'wiki search no longer mixes languages by language-score boosting');
 assert.match(wikiSearch, /onKeyDown/, 'wiki search supports keyboard navigation');
 assert.match(wikiSearch, /role="listbox"/, 'wiki search renders accessible result listbox');
 assert.match(wikiSearch, /window\.location\.assign\(item\.href\)/, 'wiki search submit navigates to the selected result');
 assert.match(articleTabs, /usePathname/, 'article tools derive the active page from the current route');
 assert.match(articleTabs, /href="#"/, 'active Article tab uses the Colarpedia inert article link');
+assert.match(articleTabs, /article: 'Article'[\s\S]*article: '条目'/, 'article tools localize the active article label');
+assert.match(articleTabs, /source: 'View source'[\s\S]*source: '查看源代码'/, 'article tools localize the source label');
+assert.match(articleTabs, /history: 'History'[\s\S]*history: '历史'/, 'article tools localize the history label');
 assert.match(articleTabs, /issues\/new\?title=/, 'Talk links directly to GitHub new issue creation');
 assert.match(articleTabs, /Talk: \$\{slug\}/, 'Talk issue title is page-specific');
 assert.match(articleTabs, /edit\/main\/wiki\/\$\{encodeURIComponent\(fileName\)\}/, 'View source edits the current markdown page');
@@ -358,21 +497,24 @@ assert.doesNotMatch(
 
 const sidebar = fs.readFileSync(path.join(root, 'components/Sidebar.tsx'), 'utf8');
 assert.doesNotMatch(sidebar, /Notable works/, 'sidebar no longer uses Notable works');
-assert.match(sidebar, /<aside className="wiki-sidebar" aria-label="Navigation">/, 'sidebar matches Colarpedia aside structure and aria label');
+assert.match(sidebar, /'use client';/, 'sidebar can read the current route language');
+assert.match(sidebar, /usePathname/, 'sidebar derives language from the current route');
+assert.match(sidebar, /<aside className="wiki-sidebar" aria-label=\{sectionLabels\.navigation\[language\]\}>/, 'sidebar localizes the navigation aria label');
 assert.doesNotMatch(sidebar, /function NavSection|className="nav-section"|<section className="nav-section">/, 'sidebar uses flat Colarpedia h4 plus ul blocks');
 assert.match(sidebar, /const navigation = \['Xinbao_Qiao', 'Publications'\]/, 'sidebar navigation includes the main page and Publications');
-assert.match(sidebar, /'Xinbao_Qiao': 'Main page'/, 'sidebar keeps the homepage label compact');
-assert.match(sidebar, /<h4>Navigation<\/h4>[\s\S]*<h4>Research topics<\/h4>[\s\S]*<h4>Education<\/h4>[\s\S]*<h4>Experience<\/h4>[\s\S]*<h4>Contribute<\/h4>/, 'sidebar places Experience after Education');
+assert.match(sidebar, /Xinbao_Qiao: \{ en: 'Main page', zh: '主页' \}/, 'sidebar keeps the homepage label compact and localized');
+assert.match(sidebar, /navigation: \{ en: 'Navigation', zh: '导航' \}[\s\S]*researchTopics: \{ en: 'Research topics', zh: '研究主题' \}[\s\S]*education: \{ en: 'Education', zh: '教育经历' \}[\s\S]*experience: \{ en: 'Experience', zh: '研究经历' \}[\s\S]*contribute: \{ en: 'Contribute', zh: '链接' \}/, 'sidebar places Experience after Education and localizes section headings');
 assert.doesNotMatch(sidebar, /Source repository/, 'sidebar contribute links avoid the source repository label');
 assert.doesNotMatch(sidebar, /OpenReview profile/, 'sidebar contribute avoids non-Colarpedia sidebar labels');
-assert.match(sidebar, /LinkedIn[\s\S]*Email the author/, 'sidebar contribute mirrors Colarpedia with LinkedIn before email');
+assert.match(sidebar, /LinkedIn[\s\S]*sectionLabels\.email\[language\]/, 'sidebar contribute mirrors Colarpedia with LinkedIn before email');
 assert.doesNotMatch(sidebar, /className="external" href="mailto:/, 'email link is not styled as an external link');
 for (const shortLabel of ['CUHK', 'NUSRI-CQ', 'ZJU', 'SDU']) {
-  assert.match(sidebar, new RegExp(`'[^']+': '${shortLabel}'`), `sidebar uses short label ${shortLabel}`);
+  assert.match(sidebar, new RegExp(`en: '${shortLabel}'`), `sidebar uses short label ${shortLabel}`);
 }
-assert.match(sidebar, /'AI_and_Networks': 'AI and Networks'/, 'sidebar labels AI and Networks as a short topic');
-assert.match(sidebar, /'Synthetic_Data_and_Model_Collapse': 'Synthetic Data'/, 'sidebar shortens synthetic-data topic');
-assert.match(sidebar, /'Data_Centric_Machine_Learning': 'Data Centric ML'/, 'sidebar shortens data-centric topic');
+assert.match(sidebar, /AI_and_Networks: \{ en: 'AI and Networks', zh: 'AI 与网络' \}/, 'sidebar labels AI and Networks as a short topic');
+assert.match(sidebar, /Synthetic_Data_and_Model_Collapse: \{ en: 'Synthetic Data', zh: '合成数据' \}/, 'sidebar shortens synthetic-data topic');
+assert.match(sidebar, /Data_Centric_Machine_Learning: \{ en: 'Data Centric ML', zh: '数据中心 ML' \}/, 'sidebar shortens data-centric topic');
+assert.match(sidebar, /function localizedSlug\(slug: string, language: SidebarLanguage\)/, 'sidebar builds localized article links');
 assert.match(sidebar, /const education = \['The_Chinese_University_of_Hong_Kong', 'Zhejiang_University', 'Shandong_University'\]/, 'sidebar education is reverse chronological');
 assert.match(sidebar, /const experience = \['NUSRI_CQ'\]/, 'sidebar experience keeps only NUSRI-CQ');
 assert.doesNotMatch(sidebar, /Synthetic Data and Model Collapse/, 'sidebar avoids long research-topic labels');
@@ -465,8 +607,8 @@ assert.match(angelaZhang, /\[\[Xinbao_Qiao\|Xinbao Qiao\]\]/, 'Angela Yingjun Zh
 
 const learnPageFm = frontmatter('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning.md');
 assert.doesNotMatch(learnPageFm, /^categories:/m, 'under-review manuscript infobox omits categories');
-assert.match(learnPageFm, /^hidden: true$/m, 'under-review manuscript is hidden from public indexes for now');
-assert.match(frontmatter('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning_zh.md'), /^hidden: true$/m, 'Chinese under-review manuscript is hidden from public indexes for now');
+assert.equal(frontmatterData('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning.md').hidden, true, 'under-review manuscript is hidden from public indexes for now');
+assert.equal(frontmatterData('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning_zh.md').hidden, true, 'Chinese under-review manuscript is hidden from public indexes for now');
 
 const hiddenManuscriptPattern = /Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning|Learn What Matters/;
 const publicMarkdownFiles = fs.readdirSync(wikiDir)
@@ -489,7 +631,13 @@ assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers
 const infobox = fs.readFileSync(path.join(root, 'components/Infobox.tsx'), 'utf8');
 const styles = fs.readFileSync(path.join(root, 'app/globals.css'), 'utf8');
 const homePage = fs.readFileSync(path.join(root, 'app/page.tsx'), 'utf8');
+const homepagePortal = fs.readFileSync(path.join(root, 'components/HomepagePortal.tsx'), 'utf8');
 assert.doesNotMatch(styles, /\.wiki-logo-mark/, 'topbar CSS does not keep custom logo-image styling');
+assert.match(styles, /\.wiki-tabs-inner \{[\s\S]*padding: 0 24px 0 calc\(24px \+ var\(--sidebar-width\) \+ 24px\);[\s\S]*\}/, 'article tabs align with the main article column after the sidebar');
+assert.match(styles, /\.wiki-shell \{[\s\S]*grid-template-columns: var\(--sidebar-width\) minmax\(0, var\(--content-width\)\);[\s\S]*gap: 24px;[\s\S]*\}/, 'article shell uses a fixed navigation column and constrained readable article column');
+assert.match(styles, /\.wiki-sidebar \{[\s\S]*position: sticky;[\s\S]*top: 14px;[\s\S]*\}/, 'article navigation stays available in a Wikipedia-style left rail');
+assert.match(styles, /\.wiki-page \{[\s\S]*overflow-wrap: break-word;[\s\S]*\}/, 'article pages protect long labels and links from breaking the layout');
+assert.match(styles, /\.wiki-main table \{[\s\S]*max-width: 100%;[\s\S]*\}/, 'article tables stay constrained inside the article column');
 assert.match(styles, /\.wiki-body p:has\(> img:only-child\) \{[\s\S]*display: flow-root;[\s\S]*text-align: center;[\s\S]*\}/, 'article image paragraphs avoid floated infobox overlap without adding a large clear gap');
 assert.doesNotMatch(styles, /\.wiki-body p:has\(> img:only-child\) \{[\s\S]*clear: both;[\s\S]*\}/, 'article image paragraphs do not force images below floated infoboxes');
 assert.match(styles, /\.wiki-body img \{[\s\S]*max-width: min\(100%, 520px\);[\s\S]*max-height: 380px;[\s\S]*object-fit: contain;[\s\S]*\}/, 'article images use a medium paper-figure size');
@@ -504,24 +652,58 @@ assert.match(styles, /\.wiki-logo \{[\s\S]*display: inline-grid;[\s\S]*min-width
 assert.match(styles, /\.wiki-logo:hover \{[\s\S]*text-decoration: none;[\s\S]*\}/, 'topbar logo hover does not underline the two-line wordmark');
 assert.match(styles, /\.wiki-logo-word \{[\s\S]*font-family: var\(--font-serif\);[\s\S]*font-size: 23px;[\s\S]*\}/, 'topbar wordmark uses the wiki serif face');
 assert.match(styles, /\.wiki-logo-subtitle \{[\s\S]*font-family: var\(--font-sans\);[\s\S]*text-transform: uppercase;[\s\S]*\}/, 'topbar subtitle uses a small uppercase sans style');
-assert.match(styles, /\.wiki-topbar-inner:has\(> \.wiki-logo:only-child\) \{[\s\S]*justify-content: center;[\s\S]*\}/, 'homepage-only topbar centers the wordmark after duplicate controls are hidden');
-assert.match(styles, /\.wiki-portal-hero \{[\s\S]*max-width: 920px;[\s\S]*text-align: center;[\s\S]*\}/, 'homepage has a centered Wikipedia-style portal hero');
-assert.match(styles, /\.wiki-portal-masthead \{[\s\S]*grid-template-columns: minmax\(150px, 1fr\) auto minmax\(150px, 1fr\);[\s\S]*\}/, 'homepage masthead places language editions around the wordmark');
-assert.match(styles, /\.wiki-portal-brand \{[\s\S]*grid-column: 2;[\s\S]*\}/, 'homepage brand occupies the center masthead column');
-assert.match(styles, /\.wiki-portal-featured-media img \{[\s\S]*aspect-ratio: 1;[\s\S]*object-fit: cover;[\s\S]*\}/, 'featured entry uses a stable square portrait thumbnail');
+assert.match(styles, /body:has\(\.wiki-portal\) \.wiki-footer,[\s\S]*body:has\(\.wiki-portal\) \.wiki-topbar \{[\s\S]*display: none;[\s\S]*\}/, 'homepage hides the global topbar and footer chrome');
+assert.match(styles, /\.wiki-portal-hero \{[\s\S]*max-width: 760px;[\s\S]*text-align: center;[\s\S]*\}/, 'homepage has a centered compact Wikipedia-style portal hero');
+assert.match(styles, /--font-signature: "Alex Brush"/, 'homepage signature typography uses Alex Brush');
+assert.match(styles, /\.wiki-portal-name \{[\s\S]*font-family: var\(--font-signature\);[\s\S]*font-size: 86px;[\s\S]*\}/, 'homepage starts directly with Xinbao Qiao in the Alex Brush signature face');
+assert.doesNotMatch(styles, /\.wiki-portal-emblem/, 'homepage no longer styles an in-page portal icon');
 assert.match(styles, /\.wiki-search-portal input \{[\s\S]*height: 44px;[\s\S]*font-size: 16px;[\s\S]*\}/, 'homepage search input is larger than the topbar search');
+assert.match(styles, /\.wiki-search-portal \.wiki-search-language-select \{[\s\S]*width: 112px;[\s\S]*height: 44px;[\s\S]*\}/, 'homepage search includes a language selector');
+assert.doesNotMatch(styles, /\.wiki-search-portal \.chat-xinbao-trigger/, 'homepage uses the shared Chat with Xinbao trigger template instead of a portal-specific one');
+assert.match(styles, /\.chat-xinbao-shell \{[\s\S]*border-radius: 8px;[\s\S]*box-shadow: 0 18px 48px[\s\S]*\}/, 'Chat with Xinbao opens as a polished rounded floating panel');
+assert.match(styles, /\.chat-xinbao-message \{[\s\S]*border-radius: 8px;[\s\S]*\}/, 'Chat with Xinbao message bubbles have a cleaner shape');
+assert.match(styles, /\.chat-xinbao-composer button \{[\s\S]*background: #36c;[\s\S]*color: #ffffff;[\s\S]*\}/, 'Chat with Xinbao send button uses the wiki accent as a clear action');
+assert.match(styles, /\.wiki-portal-editions \{[\s\S]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);[\s\S]*\}/, 'homepage moves profile language entries below the search');
+assert.match(styles, /\.wiki-portal-directory summary \{[\s\S]*display: flex;[\s\S]*cursor: pointer;[\s\S]*\}/, 'homepage browse directory is collapsible');
+assert.doesNotMatch(styles, /\.wiki-portal-directory summary::before|\.wiki-portal-directory summary::after/, 'homepage browse heading avoids decorative horizontal rules');
+assert.match(styles, /\.wiki-shell:has\(\.wiki-portal\) \{[\s\S]*min-height: 100svh;[\s\S]*transition: padding \.24s ease;[\s\S]*\}/, 'homepage portal shell has a viewport-aware animated layout container');
+assert.match(styles, /\.wiki-shell:has\(\.wiki-portal-collapsed\) \{[\s\S]*place-items: center;[\s\S]*\}/, 'homepage centers the portal when every collapsible section is closed');
+assert.match(styles, /\.wiki-portal-collapsed \{[\s\S]*animation: wiki-portal-recenter \.26s ease-out;[\s\S]*transform: translateY\(-2vh\);[\s\S]*\}/, 'homepage collapsed state animates the portal toward the page center');
+assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.wiki-portal-collapsed[\s\S]*animation: none;[\s\S]*\.wiki-portal-collapsed \{[\s\S]*transform: none;[\s\S]*\}[\s\S]*\}/, 'homepage collapsed-state animation honors reduced-motion settings');
+assert.match(styles, /\.wiki-portal-group-label \{[\s\S]*font-size: 11px;[\s\S]*text-transform: uppercase;[\s\S]*\}/, 'homepage browse links are grouped with compact taxonomy labels');
 assert.match(styles, /\.wiki-portal-grid \{[\s\S]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);[\s\S]*\}/, 'homepage browse directory uses a three-column desktop layout');
 assert.match(styles, /\.wiki-shell:has\(\.wiki-portal\) \.wiki-sidebar \{[\s\S]*display: none;[\s\S]*\}/, 'homepage hides the article sidebar');
-assert.match(homePage, /className="wiki-portal-masthead"/, 'homepage uses a masthead for primary language editions');
-assert.match(homePage, /className="wiki-portal-featured-media"[\s\S]*\/images\/Portrait\.png/, 'homepage featured entry links a real portrait thumbnail');
-assert.match(homePage, /<WikiSearch items=\{searchIndex\} showChat=\{false\} variant="portal" \/>/, 'homepage uses the large portal search without the chat trigger');
+assert.match(homePage, /import \{ HomepagePortal \} from '@\/components\/HomepagePortal';/, 'homepage delegates interactive portal state to a client component');
+assert.doesNotMatch(homePage, /wiki-portal-emblem|\/xinbaopedia-icon\.png/, 'homepage no longer renders the in-page icon');
+assert.match(homepagePortal, /className="wiki-portal-name"[\s\S]*Xinbao Qiao/, 'homepage uses Xinbao Qiao as the central portal name');
+assert.match(homePage, /Academic biography and research overview[\s\S]*个人学术条目与研究概览/, 'homepage keeps primary English and Chinese profile links below the search');
+assert.match(homepagePortal, /<WikiSearch[\s\S]*language=\{language\}[\s\S]*onLanguageChange=\{setLanguage\}[\s\S]*showLanguageSelect[\s\S]*variant="portal"/, 'homepage search controls the portal language state');
+assert.match(homepagePortal, /const browseLabels[\s\S]*en: 'Browse Xinbaopedia'[\s\S]*zh: '浏览 Xinbaopedia'/, 'homepage Browse heading has English and Chinese labels');
+assert.match(homepagePortal, /const \[browseOpen, setBrowseOpen\] = useState\(true\);/, 'homepage browse directory is open by default');
+assert.match(homepagePortal, /const collapsibleSections = \{ browse: browseOpen \};[\s\S]*const allSectionsClosed = Object\.values\(collapsibleSections\)\.every\(\(open\) => !open\);[\s\S]*wiki-portal-collapsed/, 'homepage computes a reusable all-collapsibles-closed state');
+assert.match(homepagePortal, /<details[\s\S]*className="wiki-portal-directory"[\s\S]*onToggle=\{\(event\) => setBrowseOpen\(event\.currentTarget\.open\)\}[\s\S]*open=\{browseOpen\}[\s\S]*browseLabels\[language\]/, 'homepage browse directory follows the active language and drives collapsed-state layout');
+assert.match(homePage, /Core research[\s\S]*Methods and geometry[\s\S]*Reliability and trust/, 'homepage research topics are organized into a readable taxonomy');
+assert.match(homePage, /核心研究[\s\S]*方法与几何[\s\S]*可靠性与可信/, 'homepage research taxonomy has Chinese labels');
+assert.match(homePage, /Indexes[\s\S]*Selected publications[\s\S]*Project pages/, 'homepage publication and project links are organized into a readable taxonomy');
+assert.match(homePage, /索引[\s\S]*代表论文[\s\S]*项目页面/, 'homepage publication and project taxonomy has Chinese labels');
+assert.match(homePage, /Profile[\s\S]*Institutions[\s\S]*Academic network/, 'homepage affiliation links are organized into a readable taxonomy');
+assert.match(homePage, /个人资料[\s\S]*机构[\s\S]*学术网络/, 'homepage affiliation taxonomy has Chinese labels');
+assert.match(homepagePortal, /section\.title\[language\][\s\S]*group\.label\[language\][\s\S]*group\.links\[language\]/, 'homepage Browse category labels and links switch with the selected language');
+assert.doesNotMatch(homePage, /AI for Networks · Data-centric Machine Learning · Federated Learning|English entries|Chinese entries|Featured entry|wiki-portal-featured|\/images\/Portrait\.png|The academic wiki of Xinbao Qiao|showChat=\{false\}/, 'homepage removes the research-field line, entry count, featured block, portrait, old tagline, and chat suppression');
 const sidebarLinkStyle = styles.match(/\.wiki-sidebar a \{([\s\S]*?)\}/);
 assert.ok(sidebarLinkStyle, 'sidebar link style block exists');
 assert.doesNotMatch(sidebarLinkStyle[1], /white-space: nowrap;/, 'sidebar link CSS avoids custom nowrap styling');
 assert.match(infobox, /location: 'Conference location'/, 'infobox labels conference location');
+assert.match(infobox, /type InfoboxLanguage = 'en' \| 'zh'/, 'infobox supports explicit route language');
+assert.match(infobox, /rowLabels = language === 'zh' \? zhLabels : labels/, 'infobox chooses row labels from the route language');
+assert.match(infobox, /occupation: '职业'[\s\S]*education: '教育经历'/, 'infobox includes Chinese labels for occupation and education');
+assert.match(infobox, /item\.url\.startsWith\('mailto:'\) \? \(language === 'zh' \? '邮箱' : 'Email'\)/, 'infobox localizes the email row label');
+assert.match(infobox, /toChineseSlug\(slug\)[\s\S]*toEnglishSlug\(slug\)/, 'infobox localizes internal wiki links in frontmatter rows');
 assert.match(infobox, /department: 'Department'/, 'infobox supports institution department rows');
 assert.match(infobox, /dates: 'Dates'/, 'infobox supports institution date rows');
 assert.match(infobox, /place: 'Location'/, 'infobox supports institution location rows');
+assert.match(infobox, /function sameInfoboxText/, 'infobox can compare visible row values');
+assert.match(infobox, /key !== 'type' \|\| !sameInfoboxText\(data\.type, data\.occupation\)/, 'infobox suppresses Type when it duplicates Occupation');
 assert.doesNotMatch(infobox, /categories: 'Categories'/, 'infobox does not label categories');
 assert.doesNotMatch(infobox, /'categories'/, 'infobox does not render categories rows');
 assert.doesNotMatch(infobox, /<ul className="infobox-list">/, 'infobox avoids nested list indentation in standard rows');
@@ -628,12 +810,12 @@ const researchTopicImages = new Map([
 
 for (const page of researchTopicPages) {
   const body = read(page);
-  const fm = frontmatter(page);
+  const data = frontmatterData(page);
   const image = researchTopicImages.get(page);
   assert.ok(image, `${page} has a topic image mapping`);
-  assert.match(fm, new RegExp(`^image: "${image}"$`, 'm'), `${page} uses a custom topic illustration`);
-  assert.match(fm, /^image_caption: ".*topic diagram.*"$/m, `${page} captions the topic illustration`);
-  assert.doesNotMatch(fm, /institutions|university|emblem|logo/i, `${page} does not reuse school imagery`);
+  assert.equal(data.image, image, `${page} uses a custom topic illustration`);
+  assert.match(data.image_caption, /topic diagram/, `${page} captions the topic illustration`);
+  assert.doesNotMatch(`${data.image}\n${data.image_caption}`, /institutions|university|emblem|logo/i, `${page} does not reuse school imagery`);
   assertSectionOrder(page, ['## Introduction', '## Role in this wiki', '## Publications', "## Connection to Qiao's work", '## See also']);
   assert.match(body, /\| Paper \| Venue\/status \|/, `${page} uses the shared publications table heading`);
   assert.doesNotMatch(body, /Central paper|Central publication/i, `${page} avoids inconsistent central-paper phrasing`);

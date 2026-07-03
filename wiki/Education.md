@@ -1,9 +1,17 @@
 ---
-name: "Education"
-occupation: "Education timeline"
-summary: "Education timeline for Qiao Xinbao."
+type: Education timeline
+title: Education
+description: Education timeline for Qiao Xinbao.
+tags:
+  - en
+  - education
+  - profile
+  - education-timeline
+timestamp: '2026-05-06T23:05:52+08:00'
+name: Education
+summary: Education timeline for Qiao Xinbao.
+occupation: Education timeline
 ---
-
 ## Timeline
 
 - **2026-present**: PhD student in Information Engineering, [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]], advised by [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]].

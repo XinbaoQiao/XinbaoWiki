@@ -1,0 +1,100 @@
+---
+type: PhD student
+title: Xinbao Qiao
+description: >-
+  PhD student in Information Engineering at The Chinese University of Hong Kong;
+  researcher in data-centric ML, AI for Networks, Networks for AI, machine
+  unlearning, and synthetic-data reliability
+tags:
+  - en
+  - person
+  - biography
+  - phd-student
+timestamp: '2026-06-13T20:46:02+08:00'
+language: en
+aliases:
+  - Mr. Ciao
+  - MrCiao
+  - Ciao
+lifecycle:
+  status: active
+  confidence: 0.9
+  review: periodic
+  retention: semantic memory
+source_path: wiki/Xinbao_Qiao.md
+---
+**Xinbao Qiao**[^xinbao-name][^qiao-ciao][^xinbao-qiao-bridge] (Chinese: **乔鑫宝**; born September 2000 in Xishuangbanna, Yunnan) is a Chinese PhD student in the Department of Information Engineering at [The Chinese University of Hong Kong](./The_Chinese_University_of_Hong_Kong.md). His research primarily studies lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are generated, used, and deleted. His recent work aims to improve the reliability, interpretability, and controllability of AI models in heterogeneous, computation-constrained, and communication-constrained environments.
+
+1. In data generation, he studies synthetic data and its effects on quality, privacy, and generalization.
+2. In data use, he focuses on data modeling, collaborative optimization, and system design in distributed learning, AI for Networks, and Networks for AI.
+3. In data deletion, he studies machine unlearning and data influence evaluation, exploring how to preserve model performance while protecting privacy and satisfying deletion requests.
+
+These directions connect [data-centric ML](./Data_Centric_Machine_Learning.md), [AI and networks](./AI_and_Networks.md), [machine unlearning](./Machine_Unlearning.md), [synthetic-data reliability](./Synthetic_Data_and_Model_Collapse.md), and [distributed Wasserstein barycenter](./Distributed_Wasserstein_Barycenter.md) methods for collaborative distributional references. Qiao previously received a Master of Science in Artificial Intelligence from [Zhejiang University](./Zhejiang_University.md) and a Bachelor of Engineering in Communication Engineering from [Shandong University](./Shandong_University.md). His [Publications](./Publications.md) include accepted or published papers at ICML, AAAI, and ICLR.
+
+## Education
+
+Qiao is a PhD student in Information Engineering at [The Chinese University of Hong Kong](./The_Chinese_University_of_Hong_Kong.md), advised by [Angela Yingjun Zhang](./Angela_Yingjun_Zhang.md).[^cuhk-ie] His doctoral-stage work is organized around distributed evidence, networked computation, and reliable AI evaluation.
+
+From 2022 to 2025, he studied Artificial Intelligence at [Zhejiang University](./Zhejiang_University.md), where his master's transcript records a major GPA of 90/100 and a rank of 3/25. His master's research was advised by [Meng Zhang](./Meng_Zhang.md).
+
+Qiao received a Bachelor of Engineering in Communication Engineering from [Shandong University](./Shandong_University.md) in 2022.
+
+## Research experience
+
+### Data-centric machine learning at Zhejiang University (2023-2025)
+
+From March 2023 to December 2025, Qiao worked on data-centric machine learning systems at [Zhejiang University](./Zhejiang_University.md) under the supervision of [Meng Zhang](./Meng_Zhang.md). This period centered on data influence attribution, machine unlearning, and trade-offs among fairness, robustness, privacy, and utility.
+
+This period includes work on [Hessian-Free Online Certified Unlearning](./Hessian_Free_Online_Certified_Unlearning.md), [DynFrs: An Efficient Framework for Machine Unlearning in Random Forest](./DynFrs.md), and [Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness](./Soft_Weighted_Machine_Unlearning.md).
+
+### Trustworthy LLM systems at NUSRI-CQ (2025)
+
+From June to December 2025, Qiao worked as a full-time research intern at [NUSRI-CQ](./NUSRI_CQ.md). The research focused on trustworthy LLM systems and synthetic-data evaluation, especially low-resource recursive training where real-data coverage is limited or fragmented.
+
+### The Chinese University of Hong Kong (2026-present)
+
+At [The Chinese University of Hong Kong](./The_Chinese_University_of_Hong_Kong.md), Qiao's doctoral work extends the same distributed-evidence thread into [AI and networks](./AI_and_Networks.md): how learning systems can be trained, evaluated, and maintained when data and computation are distributed rather than pooled.
+
+Within this stage, his recent work centers on [data-centric ML](./Data_Centric_Machine_Learning.md) and the two-way [AI-and-networks](./AI_and_Networks.md) problem: using AI to support networked systems, and using communication and network infrastructure to support AI systems. Distributed computation for [Wasserstein barycenters](./Distributed_Wasserstein_Barycenter.md) remains one related method for building shared distributional references under decentralized data access.
+
+## Academic projects
+
+The project sections below group Qiao's work by research problem rather than by institution. They are meant to summarize the main technical threads while the preceding section records the chronological research timeline.
+
+### AI and networks (2024-present)
+
+Qiao's current primary line, [AI and networks](./AI_and_Networks.md), studies learning systems whose behavior depends on communication, locality, or networked infrastructure. In this usage, "networks" includes both AI for Networks and Networks for AI: where evidence is stored, how it moves, and which parties can evaluate or maintain a model. The topic links decentralized learning, communication-aware evaluation, [data silos](./Data_Silos.md), [collaborative evaluation](./Collaborative_Evaluation.md), [data-centric ML](./Data_Centric_Machine_Learning.md), and [distributed Wasserstein barycenters](./Distributed_Wasserstein_Barycenter.md). Within this line, [When Sample Selection Bias Precipitates Model Collapse](./When_Sample_Selection_Bias_Precipitates_Model_Collapse.md) examines why low-resource communities and institutions with fragmented data coverage are especially vulnerable to model collapse under local sample-selection bias.
+
+### Machine unlearning (2023-2026)
+
+Qiao's machine unlearning work studies how trained models can be updated after data-removal or correction requests. This line includes [Hessian-Free Online Certified Unlearning](./Hessian_Free_Online_Certified_Unlearning.md), which targets certified deletion without explicit Hessian inversion; [DynFrs: An Efficient Framework for Machine Unlearning in Random Forest](./DynFrs.md), which studies exact and low-latency unlearning for tree ensembles; and [Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness](./Soft_Weighted_Machine_Unlearning.md), which uses non-binary removal weights for fairness and robustness correction.
+
+### Synthetic-data model collapse (2025-2026)
+
+The ICML 2026 paper [When Sample Selection Bias Precipitates Model Collapse](./When_Sample_Selection_Bias_Precipitates_Model_Collapse.md) studies recursive synthetic-data training under low-resource verification and local sample-selection bias. The project connects [Synthetic Data and Model Collapse](./Synthetic_Data_and_Model_Collapse.md), [Sample Selection Bias](./Sample_Selection_Bias.md), [Data Silos](./Data_Silos.md), [Collaborative Evaluation](./Collaborative_Evaluation.md), and [Wasserstein Geometry](./Wasserstein_Geometry.md). Its central mechanism is that a local verifier can treat rare but valid samples as low-quality generations, pruning globally relevant tail modes and making low-resource communities more exposed to collapse.
+
+## See also
+
+- [Research](./Research.md)
+- [Publications](./Publications.md)
+- [Projects](./Projects.md)
+- [CV](./CV.md)
+- [Education](./Education.md)
+
+## External links
+
+- [Google Scholar](https://scholar.google.com/citations?user=nhC_OfEAAAAJ&hl=en)
+- [LinkedIn](https://www.linkedin.com/in/xinbaoqiao/)
+- [GitHub](https://github.com/XinbaoQiao)
+- [OpenReview](https://openreview.net/profile?id=~Xinbao_Qiao1)
+- [ORCID](https://orcid.org/0009-0007-8359-7701)
+- [DBLP](https://dblp.uni-trier.de/pid/374/6619.html)
+- [Hugging Face](https://huggingface.co/MrCiao)
+
+[^xinbao-name]: The romanized given name "Xinbao" is also used by the [San Diego Zoo's giant panda Xin Bao](https://zoo.sandiegozoo.org/giant-pandas), whose name the zoo glosses as "precious treasure of prosperity and abundance"; this note records a name coincidence, not a biographical relation.
+
+[^xinbao-qiao-bridge]: As a pinyin-style string, "Xinbao Qiao" also corresponds to "新寶橋" ("Xinbao Bridge"). Kaohsiung City's public-works guide documents [Liugui Xinbao Bridge](https://pwbgis.kcg.gov.tw/construction/construction.aspx?id=7252) as "新寶橋", and Mapcarta/GeoNames lists [Hsin-pao Number 2 Bridge](https://mapcarta.com/25634858) with the alias "Xinbao Er Qiao"; this note records a romanization coincidence, not a biographical relation.
+
+[^qiao-ciao]: Qiao's surname is written "乔" in simplified Chinese and "喬" in traditional Chinese. In this wiki's nickname usage, "喬" is treated as matching the sound of "ciao", which explains the informal nickname "Mr. Ciao" and the public handle [MrCiao](https://huggingface.co/MrCiao).
+
+[^cuhk-ie]: CUHK's Department of Information Engineering describes its scope as information generation, communication, storage, and processing in real-world applications on its [official department page](https://www.ie.cuhk.edu.hk/about-the-department/); the CUHK Graduate School also lists [MPhil-PhD in Information Engineering](https://www.gs.cuhk.edu.hk/programmes/engineering) within Engineering.

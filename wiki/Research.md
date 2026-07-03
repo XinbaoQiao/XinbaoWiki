@@ -1,9 +1,17 @@
 ---
-name: "Research"
-occupation: "Research overview"
-summary: "Research overview for Qiao Xinbao."
+type: Research overview
+title: Research
+description: Research overview for Qiao Xinbao.
+tags:
+  - en
+  - research
+  - overview
+  - research-overview
+timestamp: '2026-06-13T20:46:02+08:00'
+name: Research
+summary: Research overview for Qiao Xinbao.
+occupation: Research overview
 ---
-
 This page summarizes the main research directions in Qiao Xinbao's academic wiki. It functions as a compiled map of linked topic pages rather than a static list of interests. The current center of gravity is [[Data_Centric_Machine_Learning|data-centric ML]] and the two-way [[AI_and_Networks|AI-and-networks]] problem.
 
 ## Research thesis

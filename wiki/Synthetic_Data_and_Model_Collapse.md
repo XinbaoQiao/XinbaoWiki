@@ -1,13 +1,30 @@
 ---
-name: "Synthetic Data"
-image: "/topics/synthetic-data.png"
-image_caption: "Synthetic data topic diagram"
+type: Research topic
+title: Synthetic Data
+description: >-
+  Research topic on synthetic data, recursive training, low-resource
+  verification, selection bias, and model collapse.
+tags:
+  - en
+  - research
+  - topic
+  - research-topic
+  - synthetic-data
+timestamp: '2026-05-27T17:56:27+08:00'
+name: Synthetic Data
+summary: >-
+  Research topic on synthetic data, recursive training, low-resource
+  verification, selection bias, and model collapse.
 aliases:
-  - "Synthetic Data and Model Collapse"
-occupation: "Research topic"
-summary: "Research topic on synthetic data, recursive training, low-resource verification, selection bias, and model collapse."
+  - Synthetic Data and Model Collapse
+occupation: Research topic
+image: /topics/synthetic-data.png
+image_caption: Synthetic data topic diagram
+relations:
+  - type: depends-on
+    target: Synthetic_Data
+    label: concept foundation
 ---
-
 **Synthetic Data** is the short research-topic label for Qiao's work on generated data, recursive training, and model collapse. The full cluster remains broader than the label: it includes [[Recursive_Synthetic_Data_Training|recursive synthetic-data training]], [[Data_Selection|data selection]], [[Sample_Selection_Bias|sample selection bias]], [[Model_Collapse|model collapse]], [[Data_Silos|data silos]], and [[Wasserstein_Geometry|Wasserstein geometry]].[^collapse]
 
 ## Introduction

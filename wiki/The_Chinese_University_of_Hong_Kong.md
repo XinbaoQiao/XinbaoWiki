@@ -1,25 +1,32 @@
 ---
-name: "The Chinese University of Hong Kong"
-image: "/institutions/cuhk-emblem.svg"
-image_caption: "Emblem of The Chinese University of Hong Kong"
-type: "Public research university"
+type: Public research university
+title: The Chinese University of Hong Kong
+description: Current doctoral institution of Xinbao Qiao.
+tags:
+  - en
+  - institution
+  - education
+  - public-research-university
+timestamp: '2026-06-13T20:46:02+08:00'
+name: The Chinese University of Hong Kong
+summary: Current doctoral institution of Xinbao Qiao.
 person:
-  label: "Xinbao Qiao"
-  url: "/wiki/Xinbao_Qiao/"
-program: "PhD in Information Engineering"
-school: "Faculty of Engineering"
-department: "Department of Information Engineering"
-dates: "2026-present"
-place: "Sha Tin, Hong Kong"
-focus: "Data-centric ML; AI for Networks; Networks for AI; trustworthy AI"
+  label: Xinbao Qiao
+  url: /wiki/Xinbao_Qiao/
+program: PhD in Information Engineering
+school: Faculty of Engineering
+department: Department of Information Engineering
+dates: 2026-present
+place: 'Sha Tin, Hong Kong'
+focus: Data-centric ML; AI for Networks; Networks for AI; trustworthy AI
+image: /institutions/cuhk-emblem.svg
+image_caption: Emblem of The Chinese University of Hong Kong
 links:
-  - label: "Department of Information Engineering"
-    url: "https://www.ie.cuhk.edu.hk/"
-  - label: "MPhil-PhD in Information Engineering"
-    url: "https://www.gs.cuhk.edu.hk/admissions/programme/engineering"
-summary: "Current doctoral institution of Xinbao Qiao."
+  - label: Department of Information Engineering
+    url: 'https://www.ie.cuhk.edu.hk/'
+  - label: MPhil-PhD in Information Engineering
+    url: 'https://www.gs.cuhk.edu.hk/admissions/programme/engineering'
 ---
-
 **The Chinese University of Hong Kong** (**CUHK**) is the current doctoral institution of [[Xinbao_Qiao|Xinbao Qiao]], who is affiliated with its Department of Information Engineering. In this wiki the CUHK page functions as an institutional context page rather than a general encyclopedia article: it records why the university matters to Qiao's research biography, how the information-engineering program frames his current work, and where the doctoral phase sits in relation to earlier training at [[Zhejiang_University|Zhejiang University]] and [[Shandong_University|Shandong University]].[^cuhk-intro]
 
 ## Program

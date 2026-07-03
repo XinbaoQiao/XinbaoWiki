@@ -1,9 +1,17 @@
 ---
-name: "Log"
-occupation: "Maintenance log"
-summary: "Append-only maintenance log for the wiki."
+type: Maintenance log
+title: Log
+description: Append-only maintenance log for the wiki.
+tags:
+  - en
+  - maintenance
+  - log
+  - maintenance-log
+timestamp: '2026-06-13T20:46:02+08:00'
+name: Log
+summary: Append-only maintenance log for the wiki.
+occupation: Maintenance log
 ---
-
 ## 2026-06-13
 
 - Updated [[Xinbao_Qiao]], [[Qiao_Xinbao_zh]], [[Research]], [[Projects]], [[Experience]], [[CV]], and related topic pages so Qiao's recent work is framed around data lifecycle management in AI models, [[Data_Centric_Machine_Learning|data-centric ML]], AI for Networks, and Networks for AI, while keeping [[Distributed_Wasserstein_Barycenter]] as a related method rather than the sole current focus.

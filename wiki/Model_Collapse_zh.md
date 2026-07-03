@@ -1,11 +1,20 @@
 ---
-name: "模型坍缩"
-occupation: "研究概念"
-summary: "解释递归模型训练中退化性分布漂移的概念页。"
-language: "zh"
-translation_of: "Model_Collapse"
+type: 研究概念
+title: 模型坍缩
+description: 解释递归模型训练中退化性分布漂移的概念页。
+tags:
+  - zh
+  - research
+  - concept
+  - 研究概念
+  - synthetic-data
+timestamp: '2026-05-27T17:56:27+08:00'
+name: 模型坍缩
+language: zh
+summary: 解释递归模型训练中退化性分布漂移的概念页。
+occupation: 研究概念
+translation_of: Model_Collapse
 ---
-
 **模型坍缩** 是模型在递归使用生成或有偏数据训练时，逐渐丢失原始数据分布信息的退化过程。坍缩可以表现为模式丢失、多样性下降、类别比例扭曲或样本质量随代际恶化。[^collapse]
 
 ## 在本 wiki 中的作用

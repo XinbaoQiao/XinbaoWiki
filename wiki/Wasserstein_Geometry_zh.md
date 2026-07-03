@@ -1,11 +1,20 @@
 ---
-name: "Wasserstein 几何"
-occupation: "研究概念"
-summary: "解释使用最优传输几何进行分布比较的概念页。"
-language: "zh"
-translation_of: "Wasserstein_Geometry"
+type: 研究概念
+title: Wasserstein 几何
+description: 解释使用最优传输几何进行分布比较的概念页。
+tags:
+  - zh
+  - research
+  - concept
+  - 研究概念
+  - wasserstein
+timestamp: '2026-05-27T17:56:27+08:00'
+name: Wasserstein 几何
+language: zh
+summary: 解释使用最优传输几何进行分布比较的概念页。
+occupation: 研究概念
+translation_of: Wasserstein_Geometry
 ---
-
 **Wasserstein 几何** 指使用最优传输距离及相关几何思想比较概率分布。与逐点指标不同，Wasserstein 距离考虑把概率质量从一个分布移动到另一个分布的代价，因此适合描述分布偏移和生成数据。[^ot]
 
 ## 在本 wiki 中的作用

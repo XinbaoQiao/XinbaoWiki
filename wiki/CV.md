@@ -1,9 +1,17 @@
 ---
-name: "Curriculum Vitae"
-occupation: "CV summary"
-summary: "Structured CV summary for Qiao Xinbao."
+type: CV summary
+title: Curriculum Vitae
+description: Structured CV summary for Qiao Xinbao.
+tags:
+  - en
+  - cv
+  - profile
+  - cv-summary
+timestamp: '2026-07-02T19:37:18+08:00'
+name: Curriculum Vitae
+summary: Structured CV summary for Qiao Xinbao.
+occupation: CV summary
 ---
-
 This page records CV-derived facts in wiki form. The PDF version is available at [XinbaoQiao_CV.pdf](/files/XinbaoQiao_CV.pdf).
 
 ## Contact

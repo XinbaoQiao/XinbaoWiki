@@ -1,11 +1,19 @@
 ---
-name: "公平性与鲁棒性"
-occupation: "研究概念"
-summary: "解释公平性与鲁棒性作为数据中心修正目标的概念页。"
-language: "zh"
-translation_of: "Fairness_and_Robustness"
+type: 研究概念
+title: 公平性与鲁棒性
+description: 解释公平性与鲁棒性作为数据中心修正目标的概念页。
+tags:
+  - zh
+  - research
+  - concept
+  - 研究概念
+timestamp: '2026-05-05T23:25:14+08:00'
+name: 公平性与鲁棒性
+language: zh
+summary: 解释公平性与鲁棒性作为数据中心修正目标的概念页。
+occupation: 研究概念
+translation_of: Fairness_and_Robustness
 ---
-
 **公平性与鲁棒性** 在本 wiki 中被视为可通过数据或数据权重修正的可靠性目标。公平性关注不同群体之间系统性的表现或待遇差异；鲁棒性关注模型在扰动、腐败、对抗输入或分布偏移下的稳定性。
 
 ## 在本 wiki 中的作用
@@ -22,4 +30,3 @@ translation_of: "Fairness_and_Robustness"
 - [[Machine_Unlearning|机器遗忘]]
 - [[Trustworthy_AI|可信 AI]]
 - [[Influence_Functions|影响函数]]
-

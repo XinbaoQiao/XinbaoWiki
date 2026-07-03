@@ -1,11 +1,19 @@
 ---
-name: "样本选择偏差"
-occupation: "研究概念"
-summary: "解释非代表性样本选择引入的分布偏差。"
-language: "zh"
-translation_of: "Sample_Selection_Bias"
+type: 研究概念
+title: 样本选择偏差
+description: 解释非代表性样本选择引入的分布偏差。
+tags:
+  - zh
+  - research
+  - concept
+  - 研究概念
+timestamp: '2026-05-27T17:56:27+08:00'
+name: 样本选择偏差
+language: zh
+summary: 解释非代表性样本选择引入的分布偏差。
+occupation: 研究概念
+translation_of: Sample_Selection_Bias
 ---
-
 **样本选择偏差** 发生在被选用于训练或评估的数据不能代表模型应处理的人群或目标分布时。在本 wiki 中，该概念很重要，因为当模型反复训练在生成数据或本地过滤数据上时，选择偏差会逐代累积。
 
 ## 在本 wiki 中的作用

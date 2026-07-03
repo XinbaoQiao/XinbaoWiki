@@ -1,26 +1,33 @@
 ---
-name: "浙江大学"
-image: "/institutions/zhejiang-university-logo.png"
-image_caption: "浙江大学校徽"
-type: "公立研究型大学"
+type: 公立研究型大学
+title: 浙江大学
+description: 乔鑫宝硕士阶段所在机构。
+tags:
+  - zh
+  - institution
+  - education
+  - 公立研究型大学
+timestamp: '2026-05-05T23:25:14+08:00'
+name: 浙江大学
+language: zh
+summary: 乔鑫宝硕士阶段所在机构。
 person:
-  label: "乔鑫宝"
-  url: "/wiki/Qiao_Xinbao_zh/"
-program: "人工智能硕士"
-school: "人工智能方向研究生阶段"
-dates: "2022-2025"
-place: "中国浙江杭州"
-focus: "数据中心 ML；机器遗忘"
+  label: 乔鑫宝
+  url: /wiki/Qiao_Xinbao_zh/
+program: 人工智能硕士
+school: 人工智能方向研究生阶段
+dates: 2022-2025
+place: 中国浙江杭州
+focus: 数据中心 ML；机器遗忘
+image: /institutions/zhejiang-university-logo.png
+image_caption: 浙江大学校徽
 links:
-  - label: "Zhejiang University"
-    url: "https://www.zju.edu.cn/english/"
-  - label: "About Zhejiang University"
-    url: "https://www.zju.edu.cn/english/_t874/about/list.htm"
-summary: "乔鑫宝硕士阶段所在机构。"
-language: "zh"
-translation_of: "Zhejiang_University"
+  - label: Zhejiang University
+    url: 'https://www.zju.edu.cn/english/'
+  - label: About Zhejiang University
+    url: 'https://www.zju.edu.cn/english/_t874/about/list.htm'
+translation_of: Zhejiang_University
 ---
-
 **浙江大学**（**ZJU**）是 [[Xinbao_Qiao|乔鑫宝]] 2022 至 2025 年的硕士阶段所在机构。在本 wiki 中，该条目记录机器遗忘、数据影响分析与 [[Data_Centric_Machine_Learning|数据中心 ML]] 工作形成的机构背景。它不是完整校史，而是解释浙江大学阶段在乔鑫宝学术时间线中的位置。
 
 ## 项目
@@ -45,4 +52,3 @@ translation_of: "Zhejiang_University"
 - [[Soft_Weighted_Machine_Unlearning|超越二元擦除]]
 
 [^zju-about]: 浙江大学英文 [About 页面](https://www.zju.edu.cn/english/_t874/about/list.htm)将其历史源头追溯至 1897 年，并介绍其为位于杭州的综合性研究大学。
-

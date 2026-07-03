@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 4,
+  "okfVersion": "0.1",
+  "purpose": "Schema contract for maintaining Xinbaopedia as an agent-readable academic wiki.",
+  "source": {
+    "canonicalDirectory": "wiki",
+    "conceptFiles": "wiki/*.md",
+    "requiredFrontmatter": [
+      "type",
+      "title",
+      "description",
+      "tags",
+      "timestamp"
+    ],
+    "recommendedFrontmatter": [
+      "resource",
+      "aliases",
+      "links",
+      "summary",
+      "hidden",
+      "language",
+      "relations"
+    ],
+    "reservedSiteSlugs": [
+      "index",
+      "index_zh",
+      "log",
+      "log_zh"
+    ]
+  },
+  "lifecycle": {
+    "conceptLevelFields": [
+      "status",
+      "confidence",
+      "review",
+      "retention"
+    ],
+    "policy": "Concept-level lifecycle metadata is generated into graph and OKF exports. Claim-level confidence can be added later without changing the source contract.",
+    "statuses": [
+      "active",
+      "confirmed",
+      "private"
+    ]
+  },
+  "relations": {
+    "frontmatterShape": [
+      {
+        "type": "depends-on",
+        "target": "Synthetic_Data",
+        "label": "optional human note"
+      }
+    ],
+    "supported": [
+      "cites",
+      "contradicts",
+      "depends-on",
+      "derived-from",
+      "markdown-link",
+      "related",
+      "supersedes",
+      "uses",
+      "wikilink"
+    ],
+    "structured": [
+      "cites",
+      "contradicts",
+      "depends-on",
+      "derived-from",
+      "related",
+      "supersedes",
+      "uses"
+    ]
+  },
+  "qualityGates": [
+    "Every source markdown file must parse as YAML frontmatter plus markdown body.",
+    "Every source concept must have explicit OKF-compatible type/title/description/tags/timestamp.",
+    "Every check run must finish with zero warnings; use --allow-warnings only for local diagnosis.",
+    "Hidden pages must be excluded from public page indexes and public OKF bundle exports.",
+    "Internal WikiLinks and markdown links must resolve.",
+    "Structured frontmatter relations must use a supported relation type and resolve to a source page.",
+    "Generated graph, page index, schema, and OKF export must be fresh."
+  ],
+  "generatedArtifacts": [
+    "wiki/pages.json",
+    "wiki/graph.json",
+    "wiki/maintenance-schema.json",
+    "public/okf/index.md",
+    "public/okf/log.md",
+    "public/okf/manifest.json",
+    "public/okf/pages.json",
+    "public/okf/graph.json",
+    "public/okf/schema.json",
+    "public/okf/concepts/*.md"
+  ],
+  "currentTypeCounts": {
+    "Academic advisor": 4,
+    "CV summary": 1,
+    "CV 摘要": 1,
+    "Education timeline": 1,
+    "Maintenance log": 1,
+    "Model family": 1,
+    "PhD student": 1,
+    "Project overview": 1,
+    "Public research university": 3,
+    "publication": 10,
+    "Publication list": 1,
+    "Research concept": 15,
+    "Research experience": 1,
+    "Research institute": 1,
+    "Research overview": 1,
+    "Research topic": 5,
+    "Resource inventory": 1,
+    "style guide": 2,
+    "Technical skills": 1,
+    "Wiki index": 1,
+    "Wiki 索引": 1,
+    "公立研究型大学": 3,
+    "博士生": 1,
+    "技术技能": 1,
+    "教育时间线": 1,
+    "模型族": 1,
+    "研究专题": 5,
+    "研究概念": 15,
+    "研究概览": 1,
+    "研究经历": 1,
+    "研究院": 1,
+    "维护日志": 1,
+    "论文列表": 1,
+    "资源记录": 1,
+    "项目概览": 1
+  }
+}

@@ -1,11 +1,19 @@
 ---
-name: "数据孤岛"
-occupation: "研究概念"
-summary: "解释数据分布在不同持有者之间时的学习与评估问题。"
-language: "zh"
-translation_of: "Data_Silos"
+type: 研究概念
+title: 数据孤岛
+description: 解释数据分布在不同持有者之间时的学习与评估问题。
+tags:
+  - zh
+  - research
+  - concept
+  - 研究概念
+timestamp: '2026-05-27T17:56:27+08:00'
+name: 数据孤岛
+language: zh
+summary: 解释数据分布在不同持有者之间时的学习与评估问题。
+occupation: 研究概念
+translation_of: Data_Silos
 ---
-
 **数据孤岛** 是组织、法律、技术或地理隔离造成的状态，使所有训练数据无法被汇集到一个地方。在本 wiki 中，该词指各自只持有目标分布局部视角的机构、设备或客户端。
 
 ## 在本 wiki 中的作用

@@ -1,9 +1,17 @@
 ---
-name: "Projects"
-occupation: "Project overview"
-summary: "Research projects and project clusters."
+type: Project overview
+title: Projects
+description: Research projects and project clusters.
+tags:
+  - en
+  - project
+  - overview
+  - project-overview
+timestamp: '2026-06-13T20:46:02+08:00'
+name: Projects
+summary: Research projects and project clusters.
+occupation: Project overview
 ---
-
 ## Research project clusters
 
 ### AI and networks

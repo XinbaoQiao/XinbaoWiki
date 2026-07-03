@@ -1,9 +1,17 @@
 ---
-name: "Influence Functions"
-occupation: "Research concept"
-summary: "Concept page for estimating how training examples affect learned models."
+type: Research concept
+title: Influence Functions
+description: Concept page for estimating how training examples affect learned models.
+tags:
+  - en
+  - research
+  - concept
+  - research-concept
+timestamp: '2026-05-05T19:52:29+08:00'
+name: Influence Functions
+summary: Concept page for estimating how training examples affect learned models.
+occupation: Research concept
 ---
-
 **Influence Functions** are analytical tools for estimating how a training point affects a fitted model or a downstream prediction. In modern machine learning they are often used as approximations: instead of retraining after changing one point, the method estimates the effect through gradients and curvature information.[^influence]
 
 ## Role in this wiki

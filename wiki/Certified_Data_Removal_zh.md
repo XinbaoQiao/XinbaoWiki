@@ -1,11 +1,20 @@
 ---
-name: "认证数据删除"
-occupation: "研究概念"
-summary: "解释机器遗忘中删除保证的概念页。"
-language: "zh"
-translation_of: "Certified_Data_Removal"
+type: 研究概念
+title: 认证数据删除
+description: 解释机器遗忘中删除保证的概念页。
+tags:
+  - zh
+  - research
+  - concept
+  - 研究概念
+  - machine-unlearning
+timestamp: '2026-05-05T23:25:14+08:00'
+name: 认证数据删除
+language: zh
+summary: 解释机器遗忘中删除保证的概念页。
+occupation: 研究概念
+translation_of: Certified_Data_Removal
 ---
-
 **认证数据删除** 指机器学习方法对“删除某些数据后模型应如何变化”给出明确可检验保证。在本 wiki 中，它主要用于解释 [[Machine_Unlearning|机器遗忘]] 的数学侧面：目标不仅是快速更新模型，还要约束更新模型与“真正不含被删数据重新训练模型”之间的差距。[^certified]
 
 ## 在本 wiki 中的作用
@@ -24,4 +33,3 @@ translation_of: "Certified_Data_Removal"
 - [[Trustworthy_AI|可信 AI]]
 
 [^certified]: Guo 等人在 ICML 2020 的 “Certified Data Removal from Machine Learning Models” 是将删除视为认证式近似重新训练的代表性参考之一。
-

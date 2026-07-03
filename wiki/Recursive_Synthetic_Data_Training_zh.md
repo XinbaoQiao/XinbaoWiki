@@ -1,11 +1,20 @@
 ---
-name: "递归合成数据训练"
-occupation: "研究概念"
-summary: "解释模型反复使用早期模型生成数据进行训练的过程。"
-language: "zh"
-translation_of: "Recursive_Synthetic_Data_Training"
+type: 研究概念
+title: 递归合成数据训练
+description: 解释模型反复使用早期模型生成数据进行训练的过程。
+tags:
+  - zh
+  - research
+  - concept
+  - 研究概念
+  - synthetic-data
+timestamp: '2026-05-27T17:56:27+08:00'
+name: 递归合成数据训练
+language: zh
+summary: 解释模型反复使用早期模型生成数据进行训练的过程。
+occupation: 研究概念
+translation_of: Recursive_Synthetic_Data_Training
 ---
-
 **递归合成数据训练** 是指某一代模型生成的数据进入后一代模型训练集的过程。它可能是有意设计的，例如自训练或合成数据自举；也可能是偶然发生的，例如生成内容进入未来训练语料。[^recursive]
 
 ## 在本 wiki 中的作用

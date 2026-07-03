@@ -1,11 +1,19 @@
 ---
-name: "技能"
-occupation: "技术技能"
-summary: "乔鑫宝 CV 中列出的技术技能。"
-language: "zh"
-translation_of: "Skills"
+type: 技术技能
+title: 技能
+description: 乔鑫宝 CV 中列出的技术技能。
+tags:
+  - zh
+  - skills
+  - profile
+  - 技术技能
+timestamp: '2026-05-05T23:25:14+08:00'
+name: 技能
+language: zh
+summary: 乔鑫宝 CV 中列出的技术技能。
+occupation: 技术技能
+translation_of: Skills
 ---
-
 ## 编程与研究工具
 
 - Python：advanced。
@@ -24,3 +32,8 @@ translation_of: "Skills"
 
 该站点设计为通过编辑 wiki/ 下的 markdown 页面完成未来更新，而不是每次手动重建整个主页。
 
+## 参见
+
+- [[CV|CV]]
+- [[Research|研究]]
+- [[Xinbao_Qiao|乔鑫宝]]

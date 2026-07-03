@@ -1,13 +1,25 @@
 ---
-name: "Data Centric ML"
-image: "/topics/data-centric-ml.png"
-image_caption: "Data centric ML topic diagram"
+type: Research topic
+title: Data Centric ML
+description: >-
+  Research topic focused on data quality, selection, valuation, correction, and
+  governance.
+tags:
+  - en
+  - research
+  - topic
+  - research-topic
+timestamp: '2026-05-27T17:56:27+08:00'
+name: Data Centric ML
+summary: >-
+  Research topic focused on data quality, selection, valuation, correction, and
+  governance.
 aliases:
-  - "Data-Centric Machine Learning"
-occupation: "Research topic"
-summary: "Research topic focused on data quality, selection, valuation, correction, and governance."
+  - Data-Centric Machine Learning
+occupation: Research topic
+image: /topics/data-centric-ml.png
+image_caption: Data centric ML topic diagram
 ---
-
 **Data Centric ML** is the short label used in this wiki for data-centric machine learning. It refers to research where changes to data, rather than only changes to model architecture, are treated as first-order interventions. The relevant operations include selection, pruning, weighting, deletion, synthesis, and cross-party evaluation.
 
 ## Introduction

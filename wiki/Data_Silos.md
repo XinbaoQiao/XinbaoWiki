@@ -1,9 +1,21 @@
 ---
-name: "Data Silos"
-occupation: "Research concept"
-summary: "Concept page for learning and evaluation when data are distributed across separate holders."
+type: Research concept
+title: Data Silos
+description: >-
+  Concept page for learning and evaluation when data are distributed across
+  separate holders.
+tags:
+  - en
+  - research
+  - concept
+  - research-concept
+timestamp: '2026-05-27T17:56:27+08:00'
+name: Data Silos
+summary: >-
+  Concept page for learning and evaluation when data are distributed across
+  separate holders.
+occupation: Research concept
 ---
-
 **Data Silos** are organizational, legal, technical, or geographic separations that prevent all training data from being pooled in one place. In this wiki the term is used for institutions, devices, or clients that each hold only a partial view of the target distribution.
 
 ## Role in this wiki

@@ -1,11 +1,19 @@
 ---
-name: "可信 AI"
-occupation: "研究专题"
-summary: "覆盖可靠性、删除、公平性、鲁棒性、可解释性和评估的研究专题。"
-language: "zh"
-translation_of: "Trustworthy_AI"
+type: 研究专题
+title: 可信 AI
+description: 覆盖可靠性、删除、公平性、鲁棒性、可解释性和评估的研究专题。
+tags:
+  - zh
+  - research
+  - topic
+  - 研究专题
+timestamp: '2026-05-05T23:25:14+08:00'
+name: 可信 AI
+language: zh
+summary: 覆盖可靠性、删除、公平性、鲁棒性、可解释性和评估的研究专题。
+occupation: 研究专题
+translation_of: Trustworthy_AI
 ---
-
 **可信 AI** 是本 wiki 中最宽的可靠性标签。它覆盖在现实约束下可以被审计、修正、更新或评估的模型行为。主页为了简洁使用更短的研究标签：[[AI_and_Networks|AI 与网络]]、[[Machine_Unlearning|机器遗忘]]、[[Synthetic_Data_and_Model_Collapse|合成数据]] 和 [[Data_Centric_Machine_Learning|数据中心 ML]]。
 
 ## 在本 wiki 中的作用
@@ -23,4 +31,3 @@ translation_of: "Trustworthy_AI"
 - [[AI_and_Networks|AI 与网络]]
 - [[Fairness_and_Robustness|公平性与鲁棒性]]
 - [[Interpretability|可解释性]]
-

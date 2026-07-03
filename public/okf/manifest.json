@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 2,
+  "okfVersion": "0.1",
+  "name": "Xinbaopedia public knowledge bundle",
+  "description": "Public, agent-readable OKF export of Xinbao Qiao academic wiki content.",
+  "source": {
+    "directory": "wiki",
+    "files": 88,
+    "contentHash": "886b828a012dc9c8a256f0bc5975b708fb28f407b66a7651338afbd3ac676a8c"
+  },
+  "bundle": {
+    "root": "public/okf",
+    "concepts": "concepts/*.md",
+    "hiddenPagesExcluded": 2,
+    "publicPages": 86
+  },
+  "maintenance": {
+    "command": "npm run maintain:wiki",
+    "check": "npm run lint:content",
+    "schema": "schema.json",
+    "graph": "graph.json",
+    "pages": "pages.json"
+  }
+}

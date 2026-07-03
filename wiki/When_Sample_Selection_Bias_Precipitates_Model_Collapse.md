@@ -1,30 +1,44 @@
 ---
-name: "When Sample Selection Bias Precipitates Model Collapse"
-type: "publication"
-occupation: "ICML 2026 paper"
+type: publication
+title: When Sample Selection Bias Precipitates Model Collapse
+description: >-
+  ICML 2026 paper on low-resource verification regimes, sample-selection bias,
+  model collapse, and collaborative Wasserstein-geometry proxies.
+tags:
+  - en
+  - publication
+  - paper
+  - accepted
+  - icml-2026
+  - synthetic-data
+timestamp: '2026-06-02T22:56:50+08:00'
+name: When Sample Selection Bias Precipitates Model Collapse
+summary: >-
+  ICML 2026 paper on low-resource verification regimes, sample-selection bias,
+  model collapse, and collaborative Wasserstein-geometry proxies.
+occupation: ICML 2026 paper
 authors:
-  - "Xinbao Qiao"
-  - "Xianglong Du"
-  - "Wei Liu"
-  - "Jingqi Zhang"
-  - "Peihua Mai"
-  - "Meng Zhang"
-  - "Yan Pang"
-venue: "ICML 2026"
-location: "COEX Convention & Exhibition Center, Seoul, South Korea"
+  - Xinbao Qiao
+  - Xianglong Du
+  - Wei Liu
+  - Jingqi Zhang
+  - Peihua Mai
+  - Meng Zhang
+  - Yan Pang
+venue: ICML 2026
+location: 'COEX Convention & Exhibition Center, Seoul, South Korea'
 year: 2026
-status: "accepted"
-publication_type: "Conference paper"
+status: accepted
+publication_type: Conference paper
 links:
-  - label: "OpenReview"
-    url: "https://openreview.net/forum?id=FFXvnzM254"
-  - label: "Code"
-    url: "https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse"
-  - label: "ICML 2026 conference"
-    url: "https://icml.cc/Conferences/2026"
-summary: "ICML 2026 paper on low-resource verification regimes, sample-selection bias, model collapse, and collaborative Wasserstein-geometry proxies."
+  - label: OpenReview
+    url: 'https://openreview.net/forum?id=FFXvnzM254'
+  - label: Code
+    url: >-
+      https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse
+  - label: ICML 2026 conference
+    url: 'https://icml.cc/Conferences/2026'
 ---
-
 **When Sample Selection Bias Precipitates Model Collapse** is an ICML 2026 conference paper by **[[Xinbao_Qiao|Xinbao Qiao]]**, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, and Yan Pang. It examines how low-resource verification regimes in data silos can turn sample selection from a safeguard against model collapse into a mechanism that accelerates it, and how collaborative distributional proxies can reduce that failure mode.
 
 ![Teaser: local selection bias narrows recursive synthetic data, while collaborative Wasserstein verification preserves diversity](/papers/model-collapse/teaser.png)

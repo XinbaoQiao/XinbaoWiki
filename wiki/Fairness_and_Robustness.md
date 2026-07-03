@@ -1,9 +1,21 @@
 ---
-name: "Fairness and Robustness"
-occupation: "Research concept"
-summary: "Concept page for fairness and robustness as data-centric correction objectives."
+type: Research concept
+title: Fairness and Robustness
+description: >-
+  Concept page for fairness and robustness as data-centric correction
+  objectives.
+tags:
+  - en
+  - research
+  - concept
+  - research-concept
+timestamp: '2026-05-05T20:55:21+08:00'
+name: Fairness and Robustness
+summary: >-
+  Concept page for fairness and robustness as data-centric correction
+  objectives.
+occupation: Research concept
 ---
-
 **Fairness and Robustness** are treated in this wiki as reliability objectives that can sometimes be improved by changing the training data or their weights. Fairness concerns systematic performance or treatment differences across groups, while robustness concerns stability under perturbations, corruptions, adversarial inputs, or distribution shift.
 
 ## Role in this wiki

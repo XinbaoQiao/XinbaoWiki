@@ -8,16 +8,37 @@ import type { SearchIndexItem } from '@/lib/wiki';
 type Props = {
   items: SearchIndexItem[];
   hideOnPortal?: boolean;
+  language?: SearchLanguage;
+  onLanguageChange?: (language: SearchLanguage) => void;
   showChat?: boolean;
+  showLanguageSelect?: boolean;
   variant?: 'topbar' | 'portal';
 };
 
+export type SearchLanguage = 'en' | 'zh';
 type SearchResult = SearchIndexItem & { score: number };
 type PreparedSearchItem = SearchIndexItem & {
   normalizedAliases: string[];
   normalizedSummary: string;
   normalizedText: string;
   normalizedTitle: string;
+};
+
+const searchCopy = {
+  en: {
+    empty: 'No matching pages',
+    inputAria: 'Search Xinbaopedia',
+    languageAria: 'Search language',
+    placeholder: 'Search Xinbaopedia',
+    submit: 'Search'
+  },
+  zh: {
+    empty: '没有匹配页面',
+    inputAria: '搜索 Xinbaopedia',
+    languageAria: '搜索语言',
+    placeholder: '搜索 Xinbaopedia',
+    submit: '搜索'
+  }
 };
 
 function normalize(value: string) {
@@ -85,7 +106,15 @@ function isPortalPath(pathname: string | null) {
   return !decodeURIComponent(pathname || '').split('/').includes('wiki');
 }
 
-export function WikiSearch({ items, hideOnPortal = false, showChat = true, variant = 'topbar' }: Props) {
+export function WikiSearch({
+  items,
+  hideOnPortal = false,
+  language,
+  onLanguageChange,
+  showChat = true,
+  showLanguageSelect = false,
+  variant = 'topbar'
+}: Props) {
   const pathname = usePathname();
   const listboxId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
@@ -93,11 +122,13 @@ export function WikiSearch({ items, hideOnPortal = false, showChat = true, varia
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
 
-  const preferredLanguage = pathname?.includes('_zh') || pathname?.includes('/Qiao_Xinbao_zh/') ? 'zh' : 'en';
+  const preferredLanguage: SearchLanguage = pathname?.includes('_zh') || pathname?.includes('/Qiao_Xinbao_zh/') ? 'zh' : 'en';
+  const [selectedLanguage, setSelectedLanguage] = useState<SearchLanguage>(preferredLanguage);
+  const activeLanguage = showLanguageSelect ? (language ?? selectedLanguage) : preferredLanguage;
   const preparedItems = useMemo(() => items.map(prepareItem), [items]);
   const languageItems = useMemo(
-    () => preparedItems.filter((item) => item.language === preferredLanguage),
-    [preparedItems, preferredLanguage]
+    () => preparedItems.filter((item) => item.language === activeLanguage),
+    [activeLanguage, preparedItems]
   );
   const normalizedQuery = normalize(query);
   const terms = useMemo(() => queryTerms(query), [query]);
@@ -115,6 +146,10 @@ export function WikiSearch({ items, hideOnPortal = false, showChat = true, varia
   }, [normalizedQuery]);
 
   useEffect(() => {
+    if (language === undefined) setSelectedLanguage(preferredLanguage);
+  }, [language, preferredLanguage]);
+
+  useEffect(() => {
     function onPointerDown(event: PointerEvent) {
       if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
     }
@@ -128,6 +163,7 @@ export function WikiSearch({ items, hideOnPortal = false, showChat = true, varia
   }
 
   if (hideOnPortal && isPortalPath(pathname)) return null;
+  const copy = searchCopy[activeLanguage];
 
   const rootClassName = [
     'wiki-search',
@@ -137,7 +173,7 @@ export function WikiSearch({ items, hideOnPortal = false, showChat = true, varia
 
   return (
     <div className={rootClassName} role="search" ref={rootRef}>
-      {showChat && <ChatWithXinbao language={preferredLanguage} />}
+      {showChat && <ChatWithXinbao language={activeLanguage} />}
       <form
         className="wiki-search-form"
         onSubmit={(event) => {
@@ -150,7 +186,7 @@ export function WikiSearch({ items, hideOnPortal = false, showChat = true, varia
             aria-autocomplete="list"
             aria-controls={listboxId}
             aria-expanded={open && normalizedQuery ? 'true' : 'false'}
-            aria-label="Search Xinbaopedia"
+            aria-label={copy.inputAria}
             autoComplete="off"
             onChange={(event) => {
               setQuery(event.target.value);
@@ -174,11 +210,27 @@ export function WikiSearch({ items, hideOnPortal = false, showChat = true, varia
                 setActive((index) => (index - 1 + results.length) % results.length);
               }
             }}
-            placeholder="Search Xinbaopedia"
+            placeholder={copy.placeholder}
             type="search"
             value={query}
           />
-          <button className="wiki-search-submit" type="submit">Search</button>
+          {showLanguageSelect && (
+            <select
+              aria-label={copy.languageAria}
+              className="wiki-search-language-select"
+              onChange={(event) => {
+                const nextLanguage = event.target.value === 'zh' ? 'zh' : 'en';
+                setSelectedLanguage(nextLanguage);
+                onLanguageChange?.(nextLanguage);
+                setOpen(false);
+              }}
+              value={activeLanguage}
+            >
+              <option value="en">English</option>
+              <option value="zh">中文</option>
+            </select>
+          )}
+          <button className="wiki-search-submit" type="submit">{copy.submit}</button>
         </div>
       </form>
       {open && normalizedQuery && (
@@ -202,7 +254,7 @@ export function WikiSearch({ items, hideOnPortal = false, showChat = true, varia
               </a>
             ))
           ) : (
-            <div className="wiki-search-empty">No matching pages</div>
+            <div className="wiki-search-empty">{copy.empty}</div>
           )}
         </div>
       )}

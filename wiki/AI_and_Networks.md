@@ -1,11 +1,24 @@
 ---
-name: "AI and Networks"
-image: "/topics/ai-and-networks.png"
-image_caption: "AI and networks topic diagram"
-occupation: "Research topic"
-summary: "Primary research topic for Qiao Xinbao, covering AI systems under networked data and communication constraints."
+type: Research topic
+title: AI and Networks
+description: >-
+  Primary research topic for Qiao Xinbao, covering AI systems under networked
+  data and communication constraints.
+tags:
+  - en
+  - research
+  - topic
+  - research-topic
+  - ai-and-networks
+timestamp: '2026-06-13T20:46:02+08:00'
+name: AI and Networks
+summary: >-
+  Primary research topic for Qiao Xinbao, covering AI systems under networked
+  data and communication constraints.
+occupation: Research topic
+image: /topics/ai-and-networks.png
+image_caption: AI and networks topic diagram
 ---
-
 **AI and Networks** is the primary research topic currently emphasized in [[Xinbao_Qiao|Xinbao Qiao]]'s wiki. The term is used here in a deliberately broad but bounded sense: it covers AI for Networks, Networks for AI, and learning algorithms whose behavior depends on communication, decentralization, edge devices, institutional data silos, or cross-party evaluation.[^sources]
 
 ## Introduction

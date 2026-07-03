@@ -1,22 +1,30 @@
 ---
-name: "Learn What Matters：高效去中心化学习的数据剪枝"
-type: "publication"
-authors:
-  - "Xinbao Qiao"
-  - "Xunhao Jiang"
-  - "Zuozhu Liu"
-  - "Peng Sun"
-  - "Meng Zhang"
-venue: "under review"
-year: 2025
-status: "under review"
-publication_type: "Journal manuscript"
+type: publication
+title: Learn What Matters：高效去中心化学习的数据剪枝
+description: 关于高效去中心化学习中数据剪枝的在审手稿。
+tags:
+  - zh
+  - publication
+  - paper
+  - under-review
+  - private
+timestamp: '2026-05-06T06:22:22+08:00'
+name: Learn What Matters：高效去中心化学习的数据剪枝
+language: zh
+summary: 关于高效去中心化学习中数据剪枝的在审手稿。
 hidden: true
-summary: "关于高效去中心化学习中数据剪枝的在审手稿。"
-language: "zh"
-translation_of: "Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning"
+authors:
+  - Xinbao Qiao
+  - Xunhao Jiang
+  - Zuozhu Liu
+  - Peng Sun
+  - Meng Zhang
+venue: under review
+year: 2025
+status: under review
+publication_type: Journal manuscript
+translation_of: Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning
 ---
-
 **Learn What Matters：高效去中心化学习的数据剪枝** 是 **乔鑫宝** 及合作者的活跃手稿，列于乔鑫宝的 CV。
 
 ## 状态

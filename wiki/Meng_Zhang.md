@@ -1,19 +1,28 @@
 ---
-name: "Meng Zhang"
-type: "Academic advisor"
+type: Academic advisor
+title: Meng Zhang
+description: Zhejiang University faculty member and master's advisor of Xinbao Qiao.
+tags:
+  - en
+  - person
+  - advisor
+  - academic-advisor
+timestamp: '2026-05-05T21:15:18+08:00'
+name: Meng Zhang
+summary: Zhejiang University faculty member and master's advisor of Xinbao Qiao.
 occupation:
-  - "Researcher/Assistant Professor"
-  - "Doctoral supervisor"
+  - Researcher/Assistant Professor
+  - Doctoral supervisor
 affiliation:
-  - label: "ZJU-UIUC Institute, Zhejiang University"
-    url: "/wiki/Zhejiang_University/"
-focus: "Wireless and computer networks; edge intelligence; network economics; intelligent IoT"
+  - label: 'ZJU-UIUC Institute, Zhejiang University'
+    url: /wiki/Zhejiang_University/
+focus: >-
+  Wireless and computer networks; edge intelligence; network economics;
+  intelligent IoT
 links:
-  - label: "Official ZJU profile"
-    url: "https://person.zju.edu.cn/mengzhang"
-summary: "Zhejiang University faculty member and master's advisor of Xinbao Qiao."
+  - label: Official ZJU profile
+    url: 'https://person.zju.edu.cn/mengzhang'
 ---
-
 **Meng Zhang** is a researcher and assistant professor at the ZJU-UIUC Institute, Zhejiang University. Zhejiang University's official personal profile lists him as a doctoral supervisor in the Zhejiang University-University of Illinois Urbana-Champaign Institute and International Joint College.[^zju-profile]
 
 ## Biography

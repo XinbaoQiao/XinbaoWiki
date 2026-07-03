@@ -1,11 +1,19 @@
 ---
-name: "分布式学习"
-occupation: "研究概念"
-summary: "解释数据、计算或通信去中心化条件下的学习问题。"
-language: "zh"
-translation_of: "Distributed_Learning"
+type: 研究概念
+title: 分布式学习
+description: 解释数据、计算或通信去中心化条件下的学习问题。
+tags:
+  - zh
+  - research
+  - concept
+  - 研究概念
+timestamp: '2026-05-06T06:22:22+08:00'
+name: 分布式学习
+language: zh
+summary: 解释数据、计算或通信去中心化条件下的学习问题。
+occupation: 研究概念
+translation_of: Distributed_Learning
 ---
-
 **分布式学习** 覆盖数据、计算或优化步骤分散在多个客户端、设备、机构或工作节点上的学习设置。在本 wiki 中，它包括去中心化和联邦式问题，但作为描述性概念使用，并不限定于某一种协议。[^fed]
 
 ## 在本 wiki 中的作用

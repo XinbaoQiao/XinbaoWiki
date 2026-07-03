@@ -1,9 +1,21 @@
 ---
-name: "Data Selection"
-occupation: "Research concept"
-summary: "Concept page for choosing training or evaluation data under reliability constraints."
+type: Research concept
+title: Data Selection
+description: >-
+  Concept page for choosing training or evaluation data under reliability
+  constraints.
+tags:
+  - en
+  - research
+  - concept
+  - research-concept
+timestamp: '2026-05-27T17:56:27+08:00'
+name: Data Selection
+summary: >-
+  Concept page for choosing training or evaluation data under reliability
+  constraints.
+occupation: Research concept
 ---
-
 **Data Selection** is the process of choosing which examples are used for training, pruning, evaluation, or synthetic-data reuse. In this wiki it is treated as a central data-centric operation: selection can reduce cost and improve quality, but biased selection can also distort a model's view of the target distribution.
 
 ## Role in this wiki

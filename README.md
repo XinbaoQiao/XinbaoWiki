@@ -46,10 +46,26 @@ The canonical content lives in `wiki/*.md`. If a public page needs to change, th
 
 ## Content Maintenance Backend
 
-The maintenance model follows two ideas from current agent-readable wiki work:
+The maintenance model combines the LLM Wiki v2 lesson that the schema is the product with the Open Knowledge Format principle that knowledge should stay human-readable, parseable, and portable. The canonical source remains `wiki/*.md`, but every source page is now treated as a concept with explicit frontmatter:
 
-- **LLM Wiki lifecycle**: source pages should not be a loose pile of notes. The repository keeps a generated graph, backlink map, hidden-page filtering, and quality warnings so weak spots are visible before publishing.
-- **Open Knowledge Format style**: wiki pages remain ordinary Markdown with YAML frontmatter. The site accepts the existing `name`/`summary` schema and also understands OKF-style `title`, `description`, `type`, `tags`, `resource`, and `timestamp` fields.
+| Field | Purpose |
+| --- | --- |
+| `type` | Required concept type for routing, filtering, and presentation. |
+| `title` | Stable display title for humans and agents. |
+| `description` | One-sentence summary used by indexes, search, and previews. |
+| `tags` | Cross-cutting categories for future tag views and retrieval. |
+| `timestamp` | Last meaningful source timestamp. |
+
+Pages may also declare structured relations in frontmatter when a link should carry semantic meaning beyond a body wikilink:
+
+```yaml
+relations:
+  - type: depends-on
+    target: Synthetic_Data
+    label: concept foundation
+```
+
+Supported structured relation types are `related`, `uses`, `depends-on`, `supersedes`, `contradicts`, `derived-from`, and `cites`. Body links are still collected automatically as `wikilink` and `markdown-link` relations.
 
 Run the deterministic maintainer after content changes:
 
@@ -57,20 +73,36 @@ Run the deterministic maintainer after content changes:
 npm run maintain:wiki
 ```
 
-It regenerates:
+It standardizes source frontmatter and regenerates:
 
 | File | Purpose |
 | --- | --- |
 | `wiki/pages.json` | Public, hidden-filtered page catalog for content consumers. |
-| `wiki/graph.json` | Nodes, wikilink edges, backlinks, type/language counts, and maintenance warnings. |
+| `wiki/graph.json` | Nodes, wikilink edges, backlinks, lifecycle metadata, type/language counts, and maintenance warnings. |
+| `wiki/maintenance-schema.json` | Machine-readable maintenance contract: required fields, quality gates, lifecycle policy, and generated artifact list. |
+| `public/okf/` | Public OKF v0.1-compatible bundle with `index.md`, `log.md`, `manifest.json`, JSON indexes, graph, schema, and one Markdown concept per public page. |
 
-`npm run check` verifies that those generated files are fresh. This makes the upkeep loop explicit: edit Markdown, regenerate the content indexes, review warnings, then build and publish.
+`npm run check` verifies that source concepts are standardized, generated files are fresh, hidden pages are excluded from public indexes and OKF exports, the graph still resolves internal links, structured relations point to real pages, and the maintenance report has zero warnings. This makes the upkeep loop explicit: edit Markdown, run `npm run maintain:wiki`, review the generated graph, then build and publish. For local diagnosis only, `node scripts/wiki-maintenance.mjs --check --allow-warnings` reports warnings without failing the command.
+
+Common maintenance commands:
+
+| Command | Purpose |
+| --- | --- |
+| `npm run new:wiki -- --slug Example_Page --title "Example Page" --type article --language en --description "Short summary."` | Create a standardized source-page template without overwriting existing pages. |
+| `npm run maintain:wiki` | Standardize source frontmatter and regenerate the page index, graph, schema, quality reports, and public OKF bundle. |
+| `npm run lint:okf` | Validate the public OKF bundle, including required frontmatter, graph references, structured relation targets, and hidden-page exclusion. |
+| `npm run verify:publish` | Check the tracked/staged publish set for secrets, local absolute paths, caches, and runtime artifacts before committing. |
+| `SITE_URL=https://xinbaopedia.top npm run smoke:production` | Smoke-test the deployed homepage, a representative wiki page, OKF endpoints, quality report, and hidden-page route behavior. |
+| `VERCEL_TOKEN=... npm run deploy:production` | Link the local checkout to the `xinbaopedia` Vercel project, deploy production, and run the production smoke check. |
+
+The current lifecycle layer is concept-level. It records active/confirmed/private status, confidence, review cadence, and retention policy in generated graph and OKF exports. Structured relations now provide a stable entry point for future claim-level confidence, supersession, richer citation edges, hybrid search, and automated crystallization without changing how normal content edits are made.
 
 ## How The Site Is Organized
 
 ```text
 wiki/                   Source articles for the public wiki
 public/                 Images, PDF files, icons, and paper figures
+public/okf/             Public agent-readable OKF bundle generated from wiki/*.md
 app/                    Site pages and server endpoints
 components/             Visual building blocks for the wiki interface
 lib/                    Shared helpers for wiki rendering and chat behavior
@@ -129,7 +161,7 @@ When editing wiki content:
 - Connect new paper pages to relevant topic pages.
 - Keep English and Chinese paired pages aligned when both exist.
 - Update index and log pages when adding major new entries.
-- Run `npm run maintain:wiki` so the page catalog and graph reflect the current source pages.
+- Run `npm run maintain:wiki` so source frontmatter, the page catalog, the graph, the maintenance schema, and the public OKF bundle reflect the current source pages.
 
 Useful high-level pages include:
 

@@ -1,9 +1,17 @@
 ---
-name: "Random Forest"
-occupation: "Model family"
-summary: "Concept page for random forests as the model class studied in DynFrs."
+type: Model family
+title: Random Forest
+description: Concept page for random forests as the model class studied in DynFrs.
+tags:
+  - en
+  - research
+  - model
+  - model-family
+timestamp: '2026-05-05T19:52:29+08:00'
+name: Random Forest
+summary: Concept page for random forests as the model class studied in DynFrs.
+occupation: Model family
 ---
-
 **Random Forest** refers to an ensemble of decision trees trained with randomization over samples, features, or split choices. The method is widely used because it is strong on tabular data, relatively robust, and easier to inspect than many neural models.[^breiman]
 
 ## Role in this wiki

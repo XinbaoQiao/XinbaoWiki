@@ -1,9 +1,18 @@
 ---
-name: "Interpretability"
-occupation: "Research concept"
-summary: "Concept page for explaining model behavior and data influence."
+type: Research concept
+title: Interpretability
+description: Concept page for explaining model behavior and data influence.
+tags:
+  - en
+  - research
+  - concept
+  - research-concept
+  - llm
+timestamp: '2026-05-05T20:55:21+08:00'
+name: Interpretability
+summary: Concept page for explaining model behavior and data influence.
+occupation: Research concept
 ---
-
 **Interpretability** refers to methods that help people understand why a model behaves the way it does. In this wiki the emphasis is narrower than the whole interpretability field: it focuses on data influence, error diagnosis, and explanations that support trustworthiness decisions.
 
 ## Role in this wiki

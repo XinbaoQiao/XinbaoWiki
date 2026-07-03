@@ -1,9 +1,17 @@
 ---
-name: "Index"
-occupation: "Wiki index"
-summary: "Index of wiki pages."
+type: Wiki index
+title: Index
+description: Index of wiki pages.
+tags:
+  - en
+  - index
+  - navigation
+  - wiki-index
+timestamp: '2026-05-07T17:34:07+08:00'
+name: Index
+summary: Index of wiki pages.
+occupation: Wiki index
 ---
-
 ## Biography and CV
 
 - [[Xinbao_Qiao|Qiao Xinbao]]

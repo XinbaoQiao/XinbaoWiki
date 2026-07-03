@@ -1,11 +1,19 @@
 ---
-name: "日志"
-occupation: "维护日志"
-summary: "Wiki 的追加式维护日志。"
-language: "zh"
-translation_of: "log"
+type: 维护日志
+title: 日志
+description: Wiki 的追加式维护日志。
+tags:
+  - zh
+  - maintenance
+  - log
+  - 维护日志
+timestamp: '2026-06-13T20:46:02+08:00'
+name: 日志
+language: zh
+summary: Wiki 的追加式维护日志。
+occupation: 维护日志
+translation_of: log
 ---
-
 ## 2026-06-13
 
 - 更新 [[Xinbao_Qiao|人物主页]]、[[Qiao_Xinbao_zh|中文主页]]、[[Research|研究概览]]、[[Projects|项目页]]、[[Experience|研究经历]]、[[CV|简历]] 及相关专题页，将近期工作表述为围绕 AI 模型中的数据全生命周期管理、[[Data_Centric_Machine_Learning|数据中心 ML]]、AI for Networks 与 Networks for AI 展开，同时保留 [[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]] 作为相关方法，而不是唯一当前重点。

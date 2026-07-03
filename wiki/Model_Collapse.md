@@ -1,9 +1,22 @@
 ---
-name: "Model Collapse"
-occupation: "Research concept"
-summary: "Concept page for degenerative distributional drift in recursive model training."
+type: Research concept
+title: Model Collapse
+description: >-
+  Concept page for degenerative distributional drift in recursive model
+  training.
+tags:
+  - en
+  - research
+  - concept
+  - research-concept
+  - synthetic-data
+timestamp: '2026-05-27T17:56:27+08:00'
+name: Model Collapse
+summary: >-
+  Concept page for degenerative distributional drift in recursive model
+  training.
+occupation: Research concept
 ---
-
 **Model Collapse** is a degenerative process in which a model trained recursively on generated or biased data loses information about the original data distribution. Collapse can appear as mode loss, reduced diversity, distorted class proportions, or worsening sample quality over generations.[^collapse]
 
 ## Role in this wiki

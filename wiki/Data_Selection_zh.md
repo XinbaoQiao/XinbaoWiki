@@ -1,11 +1,19 @@
 ---
-name: "数据选择"
-occupation: "研究概念"
-summary: "解释在可靠性约束下选择训练或评估数据的概念页。"
-language: "zh"
-translation_of: "Data_Selection"
+type: 研究概念
+title: 数据选择
+description: 解释在可靠性约束下选择训练或评估数据的概念页。
+tags:
+  - zh
+  - research
+  - concept
+  - 研究概念
+timestamp: '2026-05-27T17:56:27+08:00'
+name: 数据选择
+language: zh
+summary: 解释在可靠性约束下选择训练或评估数据的概念页。
+occupation: 研究概念
+translation_of: Data_Selection
 ---
-
 **数据选择** 是为训练、剪枝、评估或合成数据复用选择样本的过程。在本 wiki 中，它是核心的数据中心操作：选择可以降低成本、提升质量，但有偏选择也会扭曲模型对目标分布的理解。
 
 ## 在本 wiki 中的作用

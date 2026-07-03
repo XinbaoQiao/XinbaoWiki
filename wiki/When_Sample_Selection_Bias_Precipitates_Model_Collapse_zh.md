@@ -1,32 +1,42 @@
 ---
-name: "样本选择偏差何以促成模型坍缩"
-type: "publication"
-occupation: "ICML 2026 paper"
+type: publication
+title: 样本选择偏差何以促成模型坍缩
+description: ICML 2026 论文，研究低资源验证场景、样本选择偏差、模型坍缩与协作 Wasserstein 几何代理。
+tags:
+  - zh
+  - publication
+  - paper
+  - accepted
+  - icml-2026
+  - synthetic-data
+timestamp: '2026-06-02T22:56:50+08:00'
+name: 样本选择偏差何以促成模型坍缩
+language: zh
+summary: ICML 2026 论文，研究低资源验证场景、样本选择偏差、模型坍缩与协作 Wasserstein 几何代理。
+occupation: ICML 2026 paper
 authors:
-  - "Xinbao Qiao"
-  - "Xianglong Du"
-  - "Wei Liu"
-  - "Jingqi Zhang"
-  - "Peihua Mai"
-  - "Meng Zhang"
-  - "Yan Pang"
-venue: "ICML 2026"
-location: "COEX Convention & Exhibition Center, Seoul, South Korea"
+  - Xinbao Qiao
+  - Xianglong Du
+  - Wei Liu
+  - Jingqi Zhang
+  - Peihua Mai
+  - Meng Zhang
+  - Yan Pang
+venue: ICML 2026
+location: 'COEX Convention & Exhibition Center, Seoul, South Korea'
 year: 2026
-status: "accepted"
-publication_type: "会议论文"
+status: accepted
+publication_type: 会议论文
 links:
-  - label: "OpenReview"
-    url: "https://openreview.net/forum?id=FFXvnzM254"
-  - label: "Code"
-    url: "https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse"
-  - label: "ICML 2026 conference"
-    url: "https://icml.cc/Conferences/2026"
-summary: "ICML 2026 论文，研究低资源验证场景、样本选择偏差、模型坍缩与协作 Wasserstein 几何代理。"
-language: "zh"
-translation_of: "When_Sample_Selection_Bias_Precipitates_Model_Collapse"
+  - label: OpenReview
+    url: 'https://openreview.net/forum?id=FFXvnzM254'
+  - label: Code
+    url: >-
+      https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse
+  - label: ICML 2026 conference
+    url: 'https://icml.cc/Conferences/2026'
+translation_of: When_Sample_Selection_Bias_Precipitates_Model_Collapse
 ---
-
 **样本选择偏差何以促成模型坍缩** 是 **[[Xinbao_Qiao|乔鑫宝]]**、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌和 Yan Pang 的 ICML 2026 会议论文。论文研究数据孤岛中的低资源验证场景如何把样本选择从模型坍缩的防护机制转化为加速坍缩的机制，以及协作分布代理如何缓解该失效模式。
 
 ![局部选择偏差会收窄递归合成数据；协作 Wasserstein 验证有助于保持多样性](/papers/model-collapse/teaser.png)

@@ -1,11 +1,19 @@
 ---
-name: "研究经历"
-occupation: "研究经历"
-summary: "研究经历与机构关系。"
-language: "zh"
-translation_of: "Experience"
+type: 研究经历
+title: 研究经历
+description: 研究经历与机构关系。
+tags:
+  - zh
+  - experience
+  - profile
+  - 研究经历
+timestamp: '2026-06-13T20:46:02+08:00'
+name: 研究经历
+language: zh
+summary: 研究经历与机构关系。
+occupation: 研究经历
+translation_of: Experience
 ---
-
 ## 当前机构
 
 - [[The_Chinese_University_of_Hong_Kong|香港中文大学]] 信息工程系博士生，导师 [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]。
