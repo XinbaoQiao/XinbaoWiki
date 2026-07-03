@@ -110,7 +110,9 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
             const sectionId = `portal-${section.title.en.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
             return (
               <section className="wiki-portal-block" aria-labelledby={sectionId} key={section.title.en}>
-                <h3 id={sectionId}>{sectionTitle}</h3>
+                <h3 id={sectionId}>
+                  <span>{sectionTitle}</span>
+                </h3>
                 {section.groups.map((group) => (
                   <div className="wiki-portal-group" key={group.label.en}>
                     <p className="wiki-portal-group-label">{group.label[language]}</p>

@@ -1249,7 +1249,6 @@ body:has(.wiki-portal) .wiki-topbar {
 }
 
 .wiki-portal-grid {
-  counter-reset: portal-section;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: start;
@@ -1274,36 +1273,33 @@ body:has(.wiki-portal) .wiki-topbar {
 }
 
 .wiki-portal-block h3 {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  display: grid;
+  justify-items: start;
+  gap: 5px;
   margin: 0 0 10px;
-  padding-bottom: 7px;
+  padding-bottom: 8px;
   border-bottom: 1px solid #eaecf0;
-  color: var(--wiki-text);
+  color: color-mix(in srgb, var(--portal-section-accent) 42%, var(--wiki-text));
   font-family: var(--font-serif);
-  font-size: 19px;
-  font-weight: 400;
-  line-height: 1.25;
+  font-size: 20px;
+  font-style: italic;
+  font-variant-caps: small-caps;
+  font-weight: 500;
+  line-height: 1.18;
 }
 
-.wiki-portal-block h3::before {
-  counter-increment: portal-section;
-  content: counter(portal-section, decimal-leading-zero);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 20px;
-  flex: 0 0 28px;
-  border: 1px solid var(--portal-section-accent);
-  border-radius: 2px;
-  background: var(--wiki-bg-alt);
-  color: var(--portal-section-accent);
-  font-family: var(--font-sans);
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 1;
+.wiki-portal-block h3 span {
+  display: inline-block;
+  transform: skewX(-3deg);
+  transform-origin: left center;
+}
+
+.wiki-portal-block h3::after {
+  content: "";
+  display: block;
+  width: 38px;
+  height: 2px;
+  background: var(--portal-section-accent);
 }
 
 .wiki-portal-group {
