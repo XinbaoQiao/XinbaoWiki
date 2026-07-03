@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, type KeyboardEvent } from 'react';
+import { useState } from 'react';
 import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
 import type { SearchIndexItem } from '@/lib/wiki';
 
@@ -44,12 +44,6 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
   const collapseAllSections = () => {
     setBrowseOpen(false);
   };
-  const handleSignatureKeyDown = (event: KeyboardEvent<HTMLButtonElement>) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      collapseAllSections();
-    }
-  };
   const portalClassName = ['wiki-portal', allSectionsClosed ? 'wiki-portal-collapsed' : ''].filter(Boolean).join(' ');
 
   return (
@@ -64,8 +58,8 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
                 aria-expanded={!allSectionsClosed}
                 aria-label="Collapse homepage sections"
                 className="wiki-portal-name-button"
+                onClick={collapseAllSections}
                 onDoubleClick={collapseAllSections}
-                onKeyDown={handleSignatureKeyDown}
               >
                 Xinbao Qiao
               </button>
