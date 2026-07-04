@@ -78,8 +78,6 @@ $$
 
 诊断实验也支持方法动机：leave-one-out 和影响式分析显示，对目标指标有害的样本并不总是对效用有害。因此，“删除或保留”的二元规则对修正驱动遗忘而言过于粗糙。
 
-![软加权机器遗忘实验摘要](/papers/soft-weighted/sec-5-1-1.png)
-
 ## 定位
 
 该工作属于 [机器遗忘](./Machine_Unlearning_zh.md)、[公平性与鲁棒性](./Fairness_and_Robustness_zh.md)、[影响函数](./Influence_Functions_zh.md) 和 [可信 AI](./Trustworthy_AI_zh.md)。它补充了 [无 Hessian 在线认证遗忘](./Hessian_Free_Online_Certified_Unlearning_zh.md)：问题从隐私删除转向细粒度模型修正。

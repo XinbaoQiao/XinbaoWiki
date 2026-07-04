@@ -20,7 +20,7 @@ translation_of: Old_Homepage_Resources
 
 - 个人照片：images/Portrait.png
 
-论文图、poster、favicon 和第二张个人照片不属于主页框架中的“人物照片”。论文页使用正文、公式、来源链接和论文图，而不是视觉图库。
+论文页不作为视觉图库使用。每个公开论文页最多保留一张整体示意图，并在有 poster 时保留一张 poster。详细结果曲线、消融图和次级实验图不进入公开 wiki 展示。
 
 ## 参见
 

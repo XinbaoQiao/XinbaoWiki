@@ -636,14 +636,26 @@ for (const page of publicMarkdownFiles) {
 }
 assert.doesNotMatch(fs.readFileSync(path.join(wikiDir, 'pages.json'), 'utf8'), hiddenManuscriptPattern, 'manual page index does not surface the hidden under-review manuscript');
 
-assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /!\[[^\]]+\]\(\/papers\/model-collapse\/fid-trends-combined\.png\)/, 'model-collapse paper page displays a figure');
 assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /!\[[^\]]+\]\(\/papers\/model-collapse\/teaser\.png\)/, 'model-collapse paper page displays a local teaser figure');
 assert.match(read('Hessian_Free_Online_Certified_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/hessian-free\/ours\.png\)/, 'Hessian-free paper page displays a figure');
-assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/soft-weighted\/sec-5-1-1\.png\)/, 'soft-weighted paper page displays a figure');
 assert.match(read('DynFrs.md'), /!\[[^\]]+\]\(\/papers\/dynfrs\/lazy-tags\.png\)/, 'DynFrs paper page displays a figure');
 assert.match(read('Hessian_Free_Online_Certified_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/hessian-free\/poster\.png\)/, 'Hessian-free paper page includes poster image');
 assert.match(read('DynFrs.md'), /!\[[^\]]+\]\(\/papers\/dynfrs\/poster\.png\)/, 'DynFrs paper page includes poster image');
 assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/soft-weighted\/framework\.png\)/, 'soft-weighted paper page includes framework image');
+for (const [page, expectedCount] of Object.entries({
+  'When_Sample_Selection_Bias_Precipitates_Model_Collapse.md': 1,
+  'When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md': 1,
+  'Hessian_Free_Online_Certified_Unlearning.md': 2,
+  'Hessian_Free_Online_Certified_Unlearning_zh.md': 2,
+  'DynFrs.md': 2,
+  'DynFrs_zh.md': 2,
+  'Soft_Weighted_Machine_Unlearning.md': 1,
+  'Soft_Weighted_Machine_Unlearning_zh.md': 1,
+})) {
+  const images = [...read(page).matchAll(/!\[[^\]]+\]\(([^)]+)\)/g)].map((match) => match[1]);
+  assert.equal(images.length, expectedCount, `${page} keeps only overview and poster-class publication images`);
+  assert.ok(images.every((image) => !/fid-trends-combined|class-proportions-trend|barycenter-methodology|mia-tradeoff|sec-5-1-1/.test(image)), `${page} omits detailed result-gallery images`);
+}
 
 const infobox = fs.readFileSync(path.join(root, 'components/Infobox.tsx'), 'utf8');
 const styles = fs.readFileSync(path.join(root, 'app/globals.css'), 'utf8');
@@ -959,18 +971,22 @@ for (const file of [
   'public/topics/data-centric-ml.png',
   'public/files/XinbaoQiao_CV.pdf',
   'public/papers/model-collapse/teaser.png',
-  'public/papers/model-collapse/fid-trends-combined.png',
-  'public/papers/model-collapse/barycenter-methodology.png',
-  'public/papers/model-collapse/class-proportions-trend.png',
   'public/papers/hessian-free/ours.png',
-  'public/papers/hessian-free/mia-tradeoff.png',
   'public/papers/hessian-free/poster.png',
-  'public/papers/soft-weighted/sec-5-1-1.png',
   'public/papers/soft-weighted/framework.png',
   'public/papers/dynfrs/lazy-tags.png',
   'public/papers/dynfrs/poster.png'
 ]) {
   assertFile(file);
+}
+for (const removedImage of [
+  'public/papers/model-collapse/fid-trends-combined.png',
+  'public/papers/model-collapse/barycenter-methodology.png',
+  'public/papers/model-collapse/class-proportions-trend.png',
+  'public/papers/hessian-free/mia-tradeoff.png',
+  'public/papers/soft-weighted/sec-5-1-1.png',
+]) {
+  assert.ok(!fs.existsSync(path.join(root, removedImage)), `${removedImage} is removed from the publication image set`);
 }
 
 console.log('Wiki data tests passed.');

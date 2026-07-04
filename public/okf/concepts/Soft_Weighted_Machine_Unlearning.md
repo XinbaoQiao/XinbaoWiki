@@ -82,8 +82,6 @@ The experiments evaluate fairness and robustness settings across tabular, image,
 
 The diagnostic experiments also support the premise of the method: leave-one-out and influence-based analyses show that samples harmful to a target metric are not uniformly harmful to utility. This explains why the binary "remove or keep" rule is too coarse for correction-driven unlearning.
 
-![Soft-weighted unlearning experiment summary](/papers/soft-weighted/sec-5-1-1.png)
-
 ## Placement
 
 This work belongs to [Machine Unlearning](./Machine_Unlearning.md), [Fairness and Robustness](./Fairness_and_Robustness.md), [Influence Functions](./Influence_Functions.md), and [Trustworthy AI](./Trustworthy_AI.md). It complements [Hessian-Free Online Certified Unlearning](./Hessian_Free_Online_Certified_Unlearning.md) by shifting the problem from certified privacy deletion to fine-grained model correction.

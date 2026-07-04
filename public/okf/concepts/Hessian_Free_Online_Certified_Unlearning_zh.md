@@ -63,8 +63,6 @@ $$
 
 论文还包含 membership inference 分析，强调认证遗忘不能只看近似重新训练和模型效用，也应检查多次模型发布下的隐私泄漏风险。
 
-![无 Hessian 遗忘中的成员推断与效用权衡](/papers/hessian-free/mia-tradeoff.png)
-
 ## 定位
 
 该工作属于 [机器遗忘](./Machine_Unlearning_zh.md)、[认证数据删除](./Certified_Data_Removal_zh.md) 和 [可信 AI](./Trustworthy_AI_zh.md)。在乔鑫宝的论文记录中，它是可微模型方向的遗忘工作；[DynFrs](./DynFrs_zh.md) 则是树模型方向的精确遗忘工作。

@@ -58,8 +58,6 @@ translation_of: When_Sample_Selection_Bias_Precipitates_Model_Collapse
 
 两个方案都使用 Wasserstein-gradient-based sample scoring，使合成样本由多方分布参考评估，而不是由一个有偏孤岛评估。
 
-![协作 Wasserstein barycenter 方法](/papers/model-collapse/barycenter-methodology.png)
-
 ## 关键公式
 
 论文理论连接局部选择、多样性衰减和 Wasserstein 代价。设 $R_t$ 为被选中的 top-$\alpha$ 区域，$D_t$ 为第 $t$ 代过滤后的合成分布，$D^\star$ 为目标分布。
@@ -103,10 +101,6 @@ $$
 手稿报告了 CIFAR-10、STL-10 和 CelebA 上的 DDPM 风格递归图像生成实验。基线包括 Random selection、K-means、CenterMatch 和 CovMatch。在非 IID 或本地偏斜参考下，本地选择基线可能落后于随机选择；协作方案则能更好保持样本质量和模式覆盖。
 
 核心结论是：低资源场景并不是高资源场景的简单缩小版。当真实数据覆盖稀缺或碎片化时，尾部模式本来就难以观测；本地参考选择会把稀有但有效的样本误认为低质量生成，从而系统性压制目标分布中代表不足的区域。附录中的 topic-local LLM 验证实验从语义角度支持了同一机制：用狭窄本地主题进行过滤，可能削弱 held-out 主题覆盖，而不是保护它。
-
-![递归合成数据训练下的 FID 趋势](/papers/model-collapse/fid-trends-combined.png)
-
-![递归选择下的类别比例趋势](/papers/model-collapse/class-proportions-trend.png)
 
 ## 定位
 

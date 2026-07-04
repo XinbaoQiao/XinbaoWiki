@@ -22,7 +22,7 @@ This page records the media policy for the wiki. The public site intentionally u
 
 - Portrait: `images/Portrait.png`
 
-Paper figures, posters, favicons, and secondary portraits are not displayed in the wiki framework. Publication pages are written as article text and source links rather than visual galleries.
+Publication pages are not visual galleries. Each public paper page may keep at most an overview schematic and, when available, a poster. Detailed result plots, ablation figures, and secondary experiment images are excluded from the public wiki display.
 
 ## See also
 

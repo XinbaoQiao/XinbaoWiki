@@ -41,8 +41,6 @@ Two schemes are described:
 
 Both schemes use Wasserstein-gradient-based sample scoring, so the synthetic pool is evaluated against a multi-party distributional reference rather than one biased silo.
 
-![Collaborative Wasserstein barycenter methodology](/papers/model-collapse/barycenter-methodology.png)
-
 ## Key formula
 
 The paper's theory links local selection, diversity decay, and Wasserstein cost. In the following summary, $R_t$ is the selected top-$\alpha$ region, $D_t$ is the filtered synthetic distribution at generation $t$, and $D^\star$ is the target distribution.
@@ -86,10 +84,6 @@ The formulas explain the paper's main mechanism: biased selection can make the r
 The manuscript reports DDPM-style recursive image-generation experiments on CIFAR-10, STL-10, and CelebA. Baselines include Random selection, K-means, CenterMatch, and CovMatch. Under non-IID or locally skewed references, local-selection baselines can fall behind random selection, while the collaborative schemes better preserve both sample quality and mode coverage.
 
 The main lesson is that low-resource regimes are not merely smaller versions of high-resource settings. When real-data coverage is scarce or fragmented, tail modes may already be difficult to observe. Local-reference selection can then confuse rare but valid samples with low-quality generations, systematically suppressing underrepresented regions of the target distribution. An appendix experiment with a topic-local LLM verifier makes the same point semantically: filtering against a narrow local topic can reduce held-out topic coverage rather than protect it.
-
-![FID trends under recursive synthetic-data training](/papers/model-collapse/fid-trends-combined.png)
-
-![Class-proportion trends under recursive selection](/papers/model-collapse/class-proportions-trend.png)
 
 ## Placement
 

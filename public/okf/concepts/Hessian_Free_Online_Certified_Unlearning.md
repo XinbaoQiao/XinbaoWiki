@@ -65,8 +65,6 @@ The paper reports millisecond-level unlearning execution and orders-of-magnitude
 
 The experiments also include membership-inference analysis. The reported trade-off is that certified unlearning should be evaluated not only for approximation-to-retraining and utility, but also for privacy leakage under repeated model releases.
 
-![Membership-inference and utility trade-off for Hessian-free unlearning](/papers/hessian-free/mia-tradeoff.png)
-
 ## Placement
 
 This work belongs to [Machine Unlearning](./Machine_Unlearning.md), [Certified Data Removal](./Certified_Data_Removal.md), and [Trustworthy AI](./Trustworthy_AI.md). Within Qiao's publication record, it is the differentiable-model counterpart to [DynFrs: An Efficient Framework for Machine Unlearning in Random Forest](./DynFrs.md), which studies exact unlearning for tree ensembles.
