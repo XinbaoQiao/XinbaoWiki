@@ -39,13 +39,15 @@ links:
   - label: ICML 2026 conference
     url: 'https://icml.cc/Conferences/2026'
 ---
-**When Sample Selection Bias Precipitates Model Collapse** is an ICML 2026 conference paper by **[[Xinbao_Qiao|Xinbao Qiao]]**, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, and Yan Pang. It examines how low-resource verification regimes in data silos can turn sample selection from a safeguard against model collapse into a mechanism that accelerates it, and how collaborative distributional proxies can reduce that failure mode.
+**When Sample Selection Bias Precipitates Model Collapse** is an ICML 2026 conference paper by **[[Xinbao_Qiao|Xinbao Qiao]]**, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, and Yan Pang. It studies a failure mode in recursive synthetic-data training: a verifier with only local, low-resource evidence can mistake rare but valid samples for low-quality generations, causing sample selection to amplify model collapse rather than prevent it. The paper frames collaborative Wasserstein-geometry proxies as a way to evaluate synthetic samples against a broader distributional reference without pooling raw data.
+
+![ICML 2026 poster for When Sample Selection Bias Precipitates Model Collapse](/papers/model-collapse/poster.png)
 
 ![Teaser: local selection bias narrows recursive synthetic data, while collaborative Wasserstein verification preserves diversity](/papers/model-collapse/teaser.png)
 
 ## Overview
 
-The paper studies [[Model_Collapse|model collapse]] in recursive synthetic-data training. Prior work often treats data selection as a stabilizing tool: a verifier filters generated samples so that only high-quality synthetic data are reused for training. This paper makes the verifier the object of analysis. When the verifier sees only a small, fragmented, and biased slice of the target distribution, selection can repeatedly reward samples near that local slice and remove globally relevant tail modes that future generators need.
+The paper studies [[Model_Collapse|model collapse]] in recursive synthetic-data training. Prior work often treats data selection as a stabilizing tool: a verifier filters generated samples so that only high-quality synthetic data are reused for training. This paper makes the verifier itself the object of analysis. When the verifier sees only a small, fragmented, and biased slice of the target distribution, selection can repeatedly reward samples near that local slice and remove globally relevant tail modes that future generators need.
 
 The motivating setting is a low-resource data-silo environment. A hospital consortium, bank, or proprietary institution may evaluate synthetic samples against its own limited reference data because raw data cannot be pooled. Selection then becomes a confirmation-bias mechanism: samples close to the local view are retained, while rare but valid modes are pruned away. The updated framing emphasizes why low-resource communities are especially vulnerable: tail regions are already weakly represented before synthetic augmentation begins, so local filtering can turn scarcity into persistent coverage loss.
 

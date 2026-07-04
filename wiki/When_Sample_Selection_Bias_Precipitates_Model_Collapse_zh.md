@@ -37,7 +37,9 @@ links:
     url: 'https://icml.cc/Conferences/2026'
 translation_of: When_Sample_Selection_Bias_Precipitates_Model_Collapse
 ---
-**样本选择偏差何以促成模型坍缩** 是 **[[Xinbao_Qiao|乔鑫宝]]**、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌和 Yan Pang 的 ICML 2026 会议论文。论文研究数据孤岛中的低资源验证场景如何把样本选择从模型坍缩的防护机制转化为加速坍缩的机制，以及协作分布代理如何缓解该失效模式。
+**样本选择偏差何以促成模型坍缩** 是 **[[Xinbao_Qiao|乔鑫宝]]**、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌和 Yan Pang 的 ICML 2026 会议论文。论文研究递归合成数据训练中的一种失效模式：当验证器只拥有本地、低资源证据时，它可能把稀有但有效的样本误判为低质量生成，使样本选择放大而不是抑制模型坍缩。论文把协作 Wasserstein 几何代理作为一种无需汇集原始数据的更宽分布参考。
+
+![样本选择偏差何以促成模型坍缩 ICML 2026 poster](/papers/model-collapse/poster.png)
 
 ![局部选择偏差会收窄递归合成数据；协作 Wasserstein 验证有助于保持多样性](/papers/model-collapse/teaser.png)
 

@@ -886,6 +886,18 @@ body:has(.wiki-portal) .wiki-topbar {
   line-height: 1.18;
 }
 
+.wiki-page[data-page-type="publication"] .wiki-title {
+  overflow-x: auto;
+  white-space: nowrap;
+  font-size: 1.56em;
+  line-height: 1.22;
+  scrollbar-width: none;
+}
+
+.wiki-page[data-page-type="publication"] .wiki-title::-webkit-scrollbar {
+  display: none;
+}
+
 .wiki-title-sub {
   margin: 3px 0 17px;
   color: var(--wiki-text-soft);
@@ -1537,6 +1549,10 @@ body:has(.wiki-portal) .wiki-topbar {
 
   .wiki-title {
     font-size: 1.6em;
+  }
+
+  .wiki-page[data-page-type="publication"] .wiki-title {
+    font-size: 1.08em;
   }
 
   .wiki-main h2 {

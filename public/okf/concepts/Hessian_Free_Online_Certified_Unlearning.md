@@ -17,7 +17,9 @@ lifecycle:
   retention: semantic memory
 source_path: wiki/Hessian_Free_Online_Certified_Unlearning.md
 ---
-**Hessian-Free Online Certified Unlearning** is an ICLR 2025 conference paper by **[Xinbao Qiao](./Xinbao_Qiao.md)**, Meng Zhang, Ming Tang, and Ermin Wei. The paper develops a certified unlearning procedure for models where explicit Hessian storage or inversion would be too costly.
+**Hessian-Free Online Certified Unlearning** is an ICLR 2025 conference paper by **[Xinbao Qiao](./Xinbao_Qiao.md)**, Meng Zhang, Ming Tang, and Ermin Wei. The paper develops a certified unlearning procedure for stochastic training pipelines where explicit Hessian storage, inversion, or repeated retraining would be too costly. Its main contribution is to turn deletion into an online vector update after a trajectory-based precomputation stage.
+
+![ICLR 2025 poster for Hessian-Free Online Certified Unlearning](/papers/hessian-free/poster.png)
 
 ## Overview
 
@@ -30,10 +32,6 @@ The paper's central move is to treat training as a trajectory rather than only a
 The method recollects an approximator for each training point through affine stochastic recursion. The recursion tracks the discrepancy between the model trained on the full dataset and the counterfactual model retrained without a requested sample. Because the update can be computed through Hessian-vector products, the algorithm avoids materializing the full Hessian matrix while retaining a certificate-style approximation guarantee.
 
 Once the recollected vectors have been computed, online deletion becomes additive: a batch of deletion requests is handled by summing the stored per-sample approximators and applying a vector update to the current model.
-
-![Hessian-free online certified unlearning workflow](/papers/hessian-free/ours.png)
-
-![ICLR 2025 poster for Hessian-Free Online Certified Unlearning](/papers/hessian-free/poster.png)
 
 ## Key formula
 

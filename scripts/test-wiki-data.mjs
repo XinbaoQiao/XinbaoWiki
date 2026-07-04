@@ -364,6 +364,7 @@ assert.doesNotMatch(wikiPageTsx, /getAllWikiSlugs\(\)\.map/, 'wiki route does no
 assert.match(wikiPageTsx, /dynamicParams = true/, 'wiki route lets non-generated slugs reach explicit notFound handling');
 assert.match(wikiPageTsx, /isChineseSlug\(page\.slug\)/, 'wiki page detects Chinese article slugs');
 assert.match(wikiPageTsx, /preprocessWikiLinks\(page\.content, \{ language \}\)/, 'wiki page passes language into wikilink preprocessing');
+assert.match(wikiPageTsx, /data-page-type=\{pageType\}/, 'wiki page exposes the OKF concept type for page-specific styling');
 assert.match(wikiPageTsx, /<Infobox data=\{page\.data\} language=\{language\} \/>/, 'wiki page passes route language into the infobox chrome');
 assert.match(wikiSearch, /'use client';/, 'wiki search is a client component');
 assert.match(wikiSearch, /import \{ ChatWithXinbao \} from '@\/components\/ChatWithXinbao';/, 'wiki search imports Chat with Xinbao');
@@ -657,25 +658,29 @@ for (const page of publicMarkdownFiles) {
 }
 assert.doesNotMatch(fs.readFileSync(path.join(wikiDir, 'pages.json'), 'utf8'), hiddenManuscriptPattern, 'manual page index does not surface the hidden under-review manuscript');
 
+const publicationImages = (page) => [...read(page).matchAll(/!\[[^\]]+\]\(([^)]+)\)/g)].map((match) => match[1]);
+assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /!\[[^\]]+\]\(\/papers\/model-collapse\/poster\.png\)/, 'model-collapse paper page includes poster image');
 assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /!\[[^\]]+\]\(\/papers\/model-collapse\/teaser\.png\)/, 'model-collapse paper page displays a local teaser figure');
-assert.match(read('Hessian_Free_Online_Certified_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/hessian-free\/ours\.png\)/, 'Hessian-free paper page displays a figure');
 assert.match(read('DynFrs.md'), /!\[[^\]]+\]\(\/papers\/dynfrs\/lazy-tags\.png\)/, 'DynFrs paper page displays a figure');
 assert.match(read('Hessian_Free_Online_Certified_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/hessian-free\/poster\.png\)/, 'Hessian-free paper page includes poster image');
 assert.match(read('DynFrs.md'), /!\[[^\]]+\]\(\/papers\/dynfrs\/poster\.png\)/, 'DynFrs paper page includes poster image');
 assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/soft-weighted\/framework\.png\)/, 'soft-weighted paper page includes framework image');
+assert.deepEqual(publicationImages('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), ['/papers/model-collapse/poster.png', '/papers/model-collapse/teaser.png'], 'model-collapse paper places the poster before the overview teaser');
+assert.deepEqual(publicationImages('Hessian_Free_Online_Certified_Unlearning.md'), ['/papers/hessian-free/poster.png'], 'Hessian-free paper removes the experimental curve and keeps only the poster');
+assert.deepEqual(publicationImages('DynFrs.md'), ['/papers/dynfrs/poster.png', '/papers/dynfrs/lazy-tags.png'], 'DynFrs paper places the poster before the method schematic');
 for (const [page, expectedCount] of Object.entries({
-  'When_Sample_Selection_Bias_Precipitates_Model_Collapse.md': 1,
-  'When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md': 1,
-  'Hessian_Free_Online_Certified_Unlearning.md': 2,
-  'Hessian_Free_Online_Certified_Unlearning_zh.md': 2,
+  'When_Sample_Selection_Bias_Precipitates_Model_Collapse.md': 2,
+  'When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md': 2,
+  'Hessian_Free_Online_Certified_Unlearning.md': 1,
+  'Hessian_Free_Online_Certified_Unlearning_zh.md': 1,
   'DynFrs.md': 2,
   'DynFrs_zh.md': 2,
   'Soft_Weighted_Machine_Unlearning.md': 1,
   'Soft_Weighted_Machine_Unlearning_zh.md': 1,
 })) {
-  const images = [...read(page).matchAll(/!\[[^\]]+\]\(([^)]+)\)/g)].map((match) => match[1]);
+  const images = publicationImages(page);
   assert.equal(images.length, expectedCount, `${page} keeps only overview and poster-class publication images`);
-  assert.ok(images.every((image) => !/fid-trends-combined|class-proportions-trend|barycenter-methodology|mia-tradeoff|sec-5-1-1/.test(image)), `${page} omits detailed result-gallery images`);
+  assert.ok(images.every((image) => !/fid-trends-combined|class-proportions-trend|barycenter-methodology|mia-tradeoff|sec-5-1-1|hessian-free\/ours/.test(image)), `${page} omits detailed result-gallery images`);
 }
 
 const infobox = fs.readFileSync(path.join(root, 'components/Infobox.tsx'), 'utf8');
@@ -688,6 +693,8 @@ assert.match(styles, /\.wiki-shell \{[\s\S]*grid-template-columns: var\(--sideba
 assert.match(styles, /\.wiki-sidebar \{[\s\S]*position: sticky;[\s\S]*top: 14px;[\s\S]*\}/, 'article navigation stays available in a Wikipedia-style left rail');
 assert.match(styles, /\.wiki-page \{[\s\S]*overflow-wrap: break-word;[\s\S]*\}/, 'article pages protect long labels and links from breaking the layout');
 assert.match(styles, /\.wiki-main:has\(\.wiki-portal\) \{[\s\S]*grid-column: 1 \/ -1;[\s\S]*max-width: 100%;[\s\S]*\}/, 'homepage main content spans the hidden sidebar grid column');
+assert.match(styles, /\.wiki-page\[data-page-type="publication"\] \.wiki-title \{[\s\S]*white-space: nowrap;[\s\S]*font-size: 1\.56em;[\s\S]*\}/, 'publication article titles stay on one line on desktop');
+assert.match(styles, /\.wiki-page\[data-page-type="publication"\] \.wiki-title \{[\s\S]*font-size: 1\.08em;[\s\S]*\}/, 'publication article titles use a compact single-line size on mobile');
 assert.match(styles, /\.wiki-main table \{[\s\S]*max-width: 100%;[\s\S]*\}/, 'article tables stay constrained inside the article column');
 assert.match(styles, /\.wiki-body p:has\(> img:only-child\) \{[\s\S]*display: flow-root;[\s\S]*text-align: center;[\s\S]*\}/, 'article image paragraphs avoid floated infobox overlap without adding a large clear gap');
 assert.doesNotMatch(styles, /\.wiki-body p:has\(> img:only-child\) \{[\s\S]*clear: both;[\s\S]*\}/, 'article image paragraphs do not force images below floated infoboxes');
@@ -991,8 +998,8 @@ for (const file of [
   'public/topics/synthetic-data.png',
   'public/topics/data-centric-ml.png',
   'public/files/XinbaoQiao_CV.pdf',
+  'public/papers/model-collapse/poster.png',
   'public/papers/model-collapse/teaser.png',
-  'public/papers/hessian-free/ours.png',
   'public/papers/hessian-free/poster.png',
   'public/papers/soft-weighted/framework.png',
   'public/papers/dynfrs/lazy-tags.png',
@@ -1005,6 +1012,7 @@ for (const removedImage of [
   'public/papers/model-collapse/barycenter-methodology.png',
   'public/papers/model-collapse/class-proportions-trend.png',
   'public/papers/hessian-free/mia-tradeoff.png',
+  'public/papers/hessian-free/ours.png',
   'public/papers/soft-weighted/sec-5-1-1.png',
 ]) {
   assert.ok(!fs.existsSync(path.join(root, removedImage)), `${removedImage} is removed from the publication image set`);

@@ -20,7 +20,7 @@ lifecycle:
   retention: long-lived semantic memory
 source_path: wiki/Soft_Weighted_Machine_Unlearning.md
 ---
-**Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness** is an AAAI 2026 conference paper by **[Xinbao Qiao](./Xinbao_Qiao.md)**, Ningning Ding, Yushi Cheng, and Meng Zhang. It reframes unlearning as a continuous correction problem rather than only a binary erasure operation.
+**Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness** is an AAAI 2026 conference paper by **[Xinbao Qiao](./Xinbao_Qiao.md)**, Ningning Ding, Yushi Cheng, and Meng Zhang. It reframes unlearning as a continuous data-influence correction problem rather than only a binary erase-or-keep operation. The paper asks how much influence each sample should retain when the goal is to improve fairness or robustness without paying unnecessary utility loss.
 
 ## Overview
 

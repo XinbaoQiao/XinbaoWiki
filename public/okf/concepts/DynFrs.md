@@ -17,7 +17,9 @@ lifecycle:
   retention: semantic memory
 source_path: wiki/DynFrs.md
 ---
-**DynFrs: An Efficient Framework for Machine Unlearning in Random Forest** is an ICLR 2025 conference paper by Shurong Wang, Zhuoyang Shen, **[Xinbao Qiao](./Xinbao_Qiao.md)**, Tongning Zhang, and Meng Zhang. The work targets exact and efficient data removal for random-forest models under dynamic online updates.
+**DynFrs: An Efficient Framework for Machine Unlearning in Random Forest** is an ICLR 2025 conference paper by Shurong Wang, Zhuoyang Shen, **[Xinbao Qiao](./Xinbao_Qiao.md)**, Tongning Zhang, and Meng Zhang. The work treats random-forest unlearning as a dynamic data-structure problem: it seeks exact distributional equivalence to retraining while keeping online deletion, insertion, and query latency low.
+
+![ICLR 2025 poster for DynFrs](/papers/dynfrs/poster.png)
 
 ## Overview
 
@@ -34,8 +36,6 @@ DynFrs combines three mechanisms:
 - **ERT**, an Extremely Randomized Tree base learner, chosen because randomized split candidates make the structure less sensitive to local sample changes.
 
 ![DynFrs lazy-tag strategy](/papers/dynfrs/lazy-tags.png)
-
-![ICLR 2025 poster for DynFrs](/papers/dynfrs/poster.png)
 
 ## Key formula
 

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Infobox } from '@/components/Infobox';
 import { WikiMarkdown } from '@/components/WikiMarkdown';
-import { getPublicWikiSlugs, getWikiPageBySlug, isChineseSlug, preprocessWikiLinks } from '@/lib/wiki';
+import { getPublicWikiSlugs, getWikiPageBySlug, isChineseSlug, preprocessWikiLinks, wikiConceptType } from '@/lib/wiki';
 
 export const dynamicParams = true;
 type Props = { params: Promise<{ slug: string }> };
@@ -21,8 +21,9 @@ export default async function WikiPage({ params }: Props) {
   if (!page) notFound();
   const sourceHref = `https://github.com/XinbaoQiao/XinbaoWiki/edit/main/wiki/${encodeURIComponent(page.fileName)}`;
   const language = isChineseSlug(page.slug) ? 'zh' : 'en';
+  const pageType = wikiConceptType(page.data, page.slug);
   return (
-    <article className="wiki-page" data-page-slug={page.slug}>
+    <article className="wiki-page" data-page-slug={page.slug} data-page-type={pageType}>
       <h1 className="wiki-title">
         {page.title}
         <span className="edit-link">

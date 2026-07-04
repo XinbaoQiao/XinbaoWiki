@@ -17,7 +17,9 @@ lifecycle:
   retention: semantic memory
 source_path: wiki/DynFrs_zh.md
 ---
-**DynFrs：随机森林机器遗忘高效框架** 是 Shurong Wang、Zhuoyang Shen、**[乔鑫宝](./Qiao_Xinbao_zh.md)**、Tongning Zhang 和张萌的 ICLR 2025 会议论文。该工作面向动态在线更新下随机森林模型的精确、高效数据删除。
+**DynFrs：随机森林机器遗忘高效框架** 是 Shurong Wang、Zhuoyang Shen、**[乔鑫宝](./Qiao_Xinbao_zh.md)**、Tongning Zhang 和张萌的 ICLR 2025 会议论文。该工作把随机森林遗忘视为动态数据结构问题：在保持与重新训练分布等价的同时，降低在线删除、插入和查询延迟。
+
+![DynFrs ICLR 2025 poster](/papers/dynfrs/poster.png)
 
 ## 概述
 
@@ -34,8 +36,6 @@ DynFrs 结合三种机制：
 - **ERT**：使用 Extremely Randomized Tree 作为基学习器，使随机划分候选降低结构对局部样本变化的敏感性。
 
 ![DynFrs lazy-tag 策略](/papers/dynfrs/lazy-tags.png)
-
-![DynFrs ICLR 2025 poster](/papers/dynfrs/poster.png)
 
 ## 关键公式
 

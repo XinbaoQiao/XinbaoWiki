@@ -31,7 +31,9 @@ links:
     url: 'https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning'
 translation_of: Hessian_Free_Online_Certified_Unlearning
 ---
-**无 Hessian 在线认证遗忘** 是 **[[Xinbao_Qiao|乔鑫宝]]**、张萌、Ming Tang 和 Ermin Wei 的 ICLR 2025 会议论文。论文提出一种认证机器遗忘过程，面向显式存储或求逆 Hessian 代价过高的模型。
+**无 Hessian 在线认证遗忘** 是 **[[Xinbao_Qiao|乔鑫宝]]**、张萌、Ming Tang 和 Ermin Wei 的 ICLR 2025 会议论文。论文提出一种面向随机训练流程的认证机器遗忘方法，目标是在显式存储 Hessian、求逆 Hessian 或反复重新训练代价过高时，仍能把删除请求转化为在线向量更新。
+
+![无 Hessian 在线认证遗忘 ICLR 2025 poster](/papers/hessian-free/poster.png)
 
 ## 概述
 
@@ -44,10 +46,6 @@ translation_of: Hessian_Free_Online_Certified_Unlearning
 方法通过仿射随机递推为每个训练点 recollect 一个近似向量。该向量跟踪完整数据训练模型与删除某样本后反事实模型之间的差异。由于更新可以通过 Hessian-vector product 计算，算法无需显式物化 Hessian，同时保留认证式近似保证。
 
 预计算完成后，在线删除具有加性结构：一批删除请求可以通过求和已存储的逐样本近似向量，并对当前模型施加一次向量更新来处理。
-
-![无 Hessian 在线认证遗忘流程](/papers/hessian-free/ours.png)
-
-![无 Hessian 在线认证遗忘 ICLR 2025 poster](/papers/hessian-free/poster.png)
 
 ## 关键公式
 
