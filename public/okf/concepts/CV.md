@@ -39,9 +39,9 @@ This page records CV-derived facts in wiki form. A resume version is available a
 
 ## Research experience
 
-- **Doctoral Research at The Chinese University of Hong Kong**, 2026-present, advised by [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/). Topics include data-centric ML, AI-network co-design, and distributed Wasserstein barycenter methods for shared distributional references without pooling raw data (Paper #5).
-- **Research on Data-Centric ML Systems**, 03/2023 to 12/2025, advised by Prof. [Meng Zhang](https://person.zju.edu.cn/mengzhang) at [Zhejiang University](./Zhejiang_University.md). Topics include soft-weighted unlearning, Hessian-free certified unlearning, exact random-forest unlearning, and broader trade-offs in trustworthy artificial intelligence (Papers #2-#4).
-- **Research on Trustworthy LLM systems**, 06/2025 to 12/2025, full-time research intern advised by PANG Yan, James at the National University of Singapore. Topics include low-resource synthetic-data evaluation and illusory pattern perception in LLMs (Papers #1 and #6).
+- **Doctoral Research at The Chinese University of Hong Kong**, 2026-present, advised by [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/). Work investigates data-centric ML and AI-network co-design, using distributed Wasserstein barycenters to build shared references without pooling raw data (Paper #5).
+- **Research on Data-Centric ML Systems**, 03/2023 to 12/2025, advised by Prof. [Meng Zhang](https://person.zju.edu.cn/mengzhang) at [Zhejiang University](./Zhejiang_University.md). Work developed soft-weighted unlearning, Hessian-free certified unlearning, and efficient random-forest unlearning for trustworthy data deletion and model updates (Papers #2-#4).
+- **Research on Trustworthy LLM systems**, 06/2025 to 12/2025, full-time research intern advised by PANG Yan, James at the National University of Singapore. Work studied recursive synthetic-data training under low-resource sample selection bias and illusory pattern perception in LLMs (Papers #1 and #6).
 
 ## Open-Source Contributions and Services
 

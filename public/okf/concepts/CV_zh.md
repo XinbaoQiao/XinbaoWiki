@@ -39,9 +39,9 @@ source_path: wiki/CV_zh.md
 
 ## 研究经历
 
-- **香港中文大学博士阶段研究**，2026 年至今，导师 [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/)。主题包括数据中心 ML、AI 与网络协同设计，以及在不汇聚原始数据条件下构造共享分布参考的分布式 Wasserstein barycenter 方法（Paper #5）。
-- **Research on Data-Centric ML Systems**，2023-03 至 2025-12，导师 Prof. [Meng Zhang](https://person.zju.edu.cn/mengzhang)，机构 [浙江大学](./Zhejiang_University_zh.md)。主题包括软加权机器遗忘、无 Hessian 认证遗忘、随机森林精确遗忘，以及可信人工智能中的权衡（Papers #2-#4）。
-- **Research on Trustworthy LLM systems**，2025-06 至 2025-12，全职研究实习，导师 PANG Yan, James，机构 National University of Singapore。主题包括低资源合成数据评估和 LLM 的错觉模式感知（Papers #1 与 #6）。
+- **香港中文大学博士阶段研究**，2026 年至今，导师 [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/)。研究数据中心 ML 与 AI-网络协同设计，使用分布式 Wasserstein barycenter 在不汇聚原始数据的条件下构造共享参考（Paper #5）。
+- **Research on Data-Centric ML Systems**，2023-03 至 2025-12，导师 Prof. [Meng Zhang](https://person.zju.edu.cn/mengzhang)，机构 [浙江大学](./Zhejiang_University_zh.md)。研究软加权机器遗忘、无 Hessian 认证遗忘和高效随机森林遗忘，用于可信的数据删除和模型更新（Papers #2-#4）。
+- **Research on Trustworthy LLM systems**，2025-06 至 2025-12，全职研究实习，导师 PANG Yan, James，机构 National University of Singapore。研究低资源样本选择偏差下的递归合成数据训练，以及 LLM 的错觉模式感知问题（Papers #1 与 #6）。
 
 ## 开源贡献与学术服务
 
