@@ -129,6 +129,7 @@
 \setlength{\experienceBulletWidth}{4.70pt}
 \newcommand{\cvbullet}{\textcolor{cvblack}{\raisebox{-0.08pt}{\fontsize{8.97}{9.45}\selectfont\textperiodcentered}}}
 \newcommand{\paperlabel}[1]{{\fontsize{9.96}{10.65}\selectfont\color{cvtext}#1}}
+\newcommand{\paperlabelcell}[1]{\raisebox{-5.75pt}[0pt][0pt]{\paperlabel{#1}}}
 \newcommand{\cvrow}[3]{%
   \noindent\begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{1.70in}@{}}
     #1 & #2
@@ -154,14 +155,16 @@
 }
 \newcommand{\paperitem}[2]{%
   \noindent\hspace*{\experienceLeftPad}%
-  \begin{tabularx}{\dimexpr\linewidth-\experienceLeftPad\relax}{@{}>{\sourceLight\fontsize{9.96}{12.22}\selectfont\color{cvtext}\arraybackslash}X>{\raggedleft\arraybackslash}p{0.75in}@{}}
-    {\leavevmode\llap{\makebox[\experienceBulletWidth][l]{\cvbullet}}#2} & \paperlabel{#1}
-  \end{tabularx}\vspace{-8.25pt}
+  \begin{tabularx}{\dimexpr\linewidth-\experienceLeftPad\relax}{@{}>{\sourceLight\fontsize{9.96}{12.22}\selectfont\raggedright\hyphenpenalty=10000\exhyphenpenalty=10000\emergencystretch=1em\color{cvtext}\arraybackslash}X>{\raggedleft\arraybackslash}p{0.75in}@{}}
+    {\leavevmode\llap{\makebox[\experienceBulletWidth][l]{\cvbullet}}#2} & \paperlabelcell{#1}
+  \end{tabularx}\vspace{-6.55pt}
 }
 \newcommand{\stagebrief}[1]{%
-  {\leftskip=\experienceLeftPad
-   \sourceLight\fontsize{8.92}{9.95}\selectfont\color{cvtext}#1\par}%
-  \vspace{-3.45pt}
+  \noindent\hspace*{\experienceLeftPad}%
+  \parbox[t]{\dimexpr\linewidth-\experienceLeftPad\relax}{%
+    \sourceLight\fontsize{9.96}{12.22}\selectfont\raggedright\hyphenpenalty=10000\exhyphenpenalty=10000\emergencystretch=1em\color{cvtext}#1%
+  }\par%
+  \vspace{-5.90pt}
 }
 \newcommand{\serviceicon}[1]{\raisebox{-0.55pt}{\fontsize{6.75}{7.05}\selectfont #1}}
 \newcommand{\servicerowicon}[3]{%
@@ -212,17 +215,17 @@
 
 \cvsection{Experience}
 \cvrowstage{\entrytitle{Doctoral Research @ The Chinese University of Hong Kong}}{\entryright{Hong Kong. 2026 \datesep{} present}}
-\stagebrief{Federated representation learning through optimal-transport prototypes in networked AI systems.}
-\paperitem{Paper \#5}{Barycentric multi-prototype classification for federated representation geometry.}
+\stagebrief{Investigate data lifecycle management in distributed AI systems, connecting data generation, use, and deletion with federated representation geometry.}
+\paperitem{Paper \#5}{Proposed an optimal-transport view of federated learning and a barycentric multi-prototype classifier for communication-constrained representation geometry.}
 \cvrowstage{\entrytitle{Research on Data-Centric ML Systems @ Zhejiang University}}{\entryright{Zhejiang. Mar 2023 \datesep{} Dec 2025}}
-\stagebrief{Machine unlearning for non-binary erasure, online certified deletion, and dynamic random forests.}
-\paperitem{Paper \#2}{Soft-weighted unlearning for fairness and robustness beyond binary erasure.}
-\paperitem{Paper \#3}{Hessian-free online certified unlearning based on recollected trajectory statistics.}
-\paperitem{Paper \#4}{Efficient random-forest unlearning in dynamic online environments.}
+\stagebrief{Built unlearning methods for data deletion across continuous influence weights, certified online updates, and dynamic tree ensembles.}
+\paperitem{Paper \#2}{Introduced soft-weighted unlearning for continuous influence weights, supporting fairness and robustness interventions beyond binary erasure.}
+\paperitem{Paper \#3}{Developed Hessian-free online certified unlearning with recollected trajectory statistics, avoiding explicit Hessian inversion for streaming deletion requests.}
+\paperitem{Paper \#4}{Built an exact and efficient random-forest unlearning framework for dynamic online environments, updating affected tree statistics instead of retraining.}
 \cvrowstage{\entrytitle{Research on Trustworthy LLM Systems @ NUSRI CQ}}{\entryright{Chongqing. Jun 2025 \datesep{} Dec 2025}}
-\stagebrief{Reliability analysis for recursive synthetic-data training and LLM inference behavior.}
-\paperitem{Paper \#1}{Sample selection bias precipitating model collapse in recursive synthetic-data training.}
-\paperitem{Paper \#6}{Illusory pattern perception driving spurious inference in large language models.}
+\stagebrief{Analyzed reliability failures that emerge when models train on recursively selected synthetic data or infer spurious patterns from prompts.}
+\paperitem{Paper \#1}{Showed that sample selection during recursive synthetic-data training can prune tail samples under low-resource verification and precipitate model collapse.}
+\paperitem{Paper \#6}{Analyzed illusory pattern perception as a mechanism for spurious LLM inference when perceived patterns override evidence-grounded reasoning.}
 
 \vspace{9.0pt}
 \cvsection{Open-Source Contributions and Services}

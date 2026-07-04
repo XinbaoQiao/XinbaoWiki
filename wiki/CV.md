@@ -35,15 +35,15 @@ This page records CV-derived facts in wiki form. A resume version is available a
 
 ## Research experience
 
-- **Doctoral Research at The Chinese University of Hong Kong**, 2026-present, advised by [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/). Work centers on federated representation learning through optimal-transport prototypes in networked AI systems.
-  - Paper #5: barycentric multi-prototype classification for federated representation geometry.
-- **Research on Data-Centric ML Systems**, 03/2023 to 12/2025, advised by Prof. [Meng Zhang](https://person.zju.edu.cn/mengzhang) at [[Zhejiang_University]]. Work centers on machine unlearning for non-binary erasure, online certified deletion, and dynamic random forests.
-  - Paper #2: soft-weighted unlearning for fairness and robustness beyond binary erasure.
-  - Paper #3: Hessian-free online certified unlearning based on recollected trajectory statistics.
-  - Paper #4: efficient random-forest unlearning in dynamic online environments.
-- **Research on Trustworthy LLM systems**, 06/2025 to 12/2025, full-time research intern advised by PANG Yan, James at the National University of Singapore. Work centers on reliability analysis for recursive synthetic-data training and LLM inference behavior.
-  - Paper #1: sample selection bias precipitating model collapse in recursive synthetic-data training.
-  - Paper #6: illusory pattern perception driving spurious inference in large language models.
+- **Doctoral Research at The Chinese University of Hong Kong**, 2026-present, advised by [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/). Investigates data lifecycle management in distributed AI systems, connecting data generation, use, and deletion with federated representation geometry.
+  - Paper #5: proposed an optimal-transport view of federated learning and a barycentric multi-prototype classifier for communication-constrained representation geometry.
+- **Research on Data-Centric ML Systems**, 03/2023 to 12/2025, advised by Prof. [Meng Zhang](https://person.zju.edu.cn/mengzhang) at [[Zhejiang_University]]. Built unlearning methods for data deletion across continuous influence weights, certified online updates, and dynamic tree ensembles.
+  - Paper #2: introduced soft-weighted unlearning for continuous influence weights, supporting fairness and robustness interventions beyond binary erasure.
+  - Paper #3: developed Hessian-free online certified unlearning with recollected trajectory statistics, avoiding explicit Hessian inversion for streaming deletion requests.
+  - Paper #4: built an exact and efficient random-forest unlearning framework for dynamic online environments, updating affected tree statistics instead of retraining.
+- **Research on Trustworthy LLM systems**, 06/2025 to 12/2025, full-time research intern advised by PANG Yan, James at the National University of Singapore. Analyzed reliability failures that emerge when models train on recursively selected synthetic data or infer spurious patterns from prompts.
+  - Paper #1: showed that sample selection during recursive synthetic-data training can prune tail samples under low-resource verification and precipitate model collapse.
+  - Paper #6: analyzed illusory pattern perception as a mechanism for spurious LLM inference when perceived patterns override evidence-grounded reasoning.
 
 ## Open-Source Contributions and Services
 

@@ -39,15 +39,15 @@ source_path: wiki/CV_zh.md
 
 ## 研究经历
 
-- **香港中文大学博士阶段研究**，2026 年至今，导师 [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/)。研究网络化 AI 系统中的联邦表示学习和最优传输原型。
-  - Paper #5：用于联邦表示几何的 barycentric multi-prototype classification。
-- **Research on Data-Centric ML Systems**，2023-03 至 2025-12，导师 Prof. [Meng Zhang](https://person.zju.edu.cn/mengzhang)，机构 [浙江大学](./Zhejiang_University_zh.md)。研究非二元删除、在线认证删除和动态随机森林中的机器遗忘问题。
-  - Paper #2：面向公平性和鲁棒性的 soft-weighted unlearning。
-  - Paper #3：基于 recollected trajectory statistics 的无 Hessian 在线认证遗忘。
-  - Paper #4：动态在线环境中的高效随机森林遗忘。
-- **Research on Trustworthy LLM systems**，2025-06 至 2025-12，全职研究实习，导师 PANG Yan, James，机构 National University of Singapore。研究递归合成数据训练和 LLM 推理行为中的可靠性问题。
-  - Paper #1：递归合成数据训练中的样本选择偏差与模型坍缩。
-  - Paper #6：大语言模型中的错觉模式感知与虚假推理。
+- **香港中文大学博士阶段研究**，2026 年至今，导师 [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/)。研究分布式 AI 系统中的数据生命周期管理，将数据生成、使用和删除问题与联邦表示几何联系起来。
+  - Paper #5：提出联邦学习的最优传输视角，并构建面向通信受限表示几何的 barycentric multi-prototype classifier。
+- **Research on Data-Centric ML Systems**，2023-03 至 2025-12，导师 Prof. [Meng Zhang](https://person.zju.edu.cn/mengzhang)，机构 [浙江大学](./Zhejiang_University_zh.md)。构建面向数据删除的机器遗忘方法，覆盖连续影响权重、在线认证更新和动态树集成模型。
+  - Paper #2：提出面向连续影响权重的 soft-weighted unlearning，支持超越二元删除的公平性和鲁棒性干预。
+  - Paper #3：提出基于 recollected trajectory statistics 的无 Hessian 在线认证遗忘，避免显式 Hessian 求逆并支持流式删除请求。
+  - Paper #4：构建用于动态在线环境的精确高效随机森林遗忘框架，通过更新受影响的树统计量替代重训。
+- **Research on Trustworthy LLM systems**，2025-06 至 2025-12，全职研究实习，导师 PANG Yan, James，机构 National University of Singapore。分析模型在递归选择的合成数据上训练，或从提示中推断虚假模式时出现的可靠性失效。
+  - Paper #1：说明递归合成数据训练中的样本选择如何在低资源验证下剪除尾部样本并诱发模型坍缩。
+  - Paper #6：分析错觉模式感知如何成为 LLM 虚假推理机制，尤其是感知到的模式压过基于证据的推理时。
 
 ## 开源贡献与学术服务
 
