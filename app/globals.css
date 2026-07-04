@@ -1275,29 +1275,29 @@ body:has(.wiki-portal) .wiki-topbar {
 .wiki-portal-block h3 {
   display: grid;
   justify-items: start;
-  gap: 5px;
-  margin: 0 0 10px;
+  gap: 6px;
+  margin: 0 0 12px;
   padding-bottom: 8px;
   border-bottom: 1px solid #eaecf0;
-  color: color-mix(in srgb, var(--portal-section-accent) 42%, var(--wiki-text));
-  font-family: var(--font-serif);
-  font-size: 20px;
-  font-style: italic;
-  font-variant-caps: small-caps;
-  font-weight: 500;
-  line-height: 1.18;
+  color: var(--wiki-text);
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.25;
 }
 
 .wiki-portal-block h3 span {
   display: inline-block;
-  transform: skewX(-3deg);
-  transform-origin: left center;
+  padding-bottom: 1px;
+  color: color-mix(in srgb, var(--portal-section-accent) 26%, var(--wiki-text));
 }
 
 .wiki-portal-block h3::after {
   content: "";
   display: block;
-  width: 38px;
+  width: 46px;
   height: 2px;
   background: var(--portal-section-accent);
 }
