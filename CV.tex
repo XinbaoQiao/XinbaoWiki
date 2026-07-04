@@ -97,12 +97,12 @@
 \newcommand{\iconarxiv}[1]{\textcolor{#1}{\faSolidIcon{F187}}}
 \newcommand{\iconplay}[1]{\textcolor{#1}{\faSolidIcon{F144}}}
 \newcommand{\iconlink}[2]{\href{#1}{#2}}
-\newcommand{\contactSolidIcon}[2]{\textcolor{#1}{\raisebox{0.85pt}{\scalebox{0.78}{{\faSolid\char"#2\relax}}}}}
-\newcommand{\contactBrandIcon}[2]{\textcolor{#1}{\raisebox{0.85pt}{\scalebox{0.78}{{\faBrands\char"#2\relax}}}}}
+\newcommand{\contactSolidIcon}[2]{\textcolor{#1}{\raisebox{0.18pt}{\scalebox{0.84}{{\faSolid\char"#2\relax}}}}}
+\newcommand{\contactBrandIcon}[2]{\textcolor{#1}{\raisebox{0.18pt}{\scalebox{0.84}{{\faBrands\char"#2\relax}}}}}
 \newcommand{\contactline}{%
   {\centering
     {\roboto\fontsize{6.78}{8.0}\selectfont\color{cvblack}
-    \contactSolidIcon{cvblack}{F10B}\hspace{2.0pt}\blackhref{tel:+85270141618}{+852-70141618}
+    \contactSolidIcon{cvblack}{F095}\hspace{2.0pt}\blackhref{tel:+85270141618}{+852-70141618}
     \contactsep \contactSolidIcon{cvblack}{F0E0}\hspace{2.0pt}\blackhref{mailto:xinbaoqiao@cuhk.edu.hk}{xinbaoqiao@cuhk.edu.hk}
     \contactsep \contactSolidIcon{cvblack}{F015}\hspace{2.0pt}\blackhref{https://xinbaopedia.top/}{xinbaopedia.top}
     \contactsep \contactBrandIcon{cvblack}{F09B}\hspace{2.0pt}\blackhref{https://github.com/XinbaoQiao}{GitHub}
@@ -124,7 +124,11 @@
 \newcommand{\entryrighttight}[1]{{\sourceLight\fontsize{8.97}{9.45}\selectfont\itshape\color{cvmuted}#1}}
 \newcommand{\linkish}[2]{\href{#1}{\textcolor{cvblue}{#2}}}
 \newcommand{\datesep}{\ensuremath{\sim}}
-\newcommand{\cvbullet}{{\fontsize{8.97}{9.45}\selectfont\ensuremath{\cdot}}}
+\newlength{\experienceLeftPad}
+\setlength{\experienceLeftPad}{13.19pt}
+\newlength{\experienceBulletWidth}
+\setlength{\experienceBulletWidth}{4.70pt}
+\newcommand{\cvbullet}{\textcolor{cvblack}{\raisebox{-0.08pt}{\fontsize{8.97}{9.45}\selectfont\textperiodcentered}}}
 \newcommand{\paperlabel}[1]{{\fontsize{9.96}{10.65}\selectfont\color{cvtext}#1}}
 \newcommand{\cvrow}[3]{%
   \noindent\begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{1.70in}@{}}
@@ -145,16 +149,19 @@
   \vspace{-1.85pt}
 }
 \newcommand{\paperitem}[2]{%
-  \noindent\begin{tabularx}{\linewidth}{@{\hspace{8.49pt}}>{\raggedright\arraybackslash}p{3.40pt}@{\hspace{1.23pt}}>{\sourceLight\fontsize{9.96}{12.22}\selectfont\color{cvtext}\arraybackslash}X>{\raggedleft\arraybackslash}p{0.75in}@{}}
-    \cvbullet & #2 & \paperlabel{#1}
-  \end{tabularx}\vspace{-7.10pt}
+  \noindent\hspace*{\experienceLeftPad}%
+  \begin{tabularx}{\dimexpr\linewidth-\experienceLeftPad\relax}{@{}>{\sourceLight\fontsize{9.96}{12.22}\selectfont\color{cvtext}\arraybackslash}X>{\raggedleft\arraybackslash}p{0.75in}@{}}
+    {\leavevmode\llap{\makebox[\experienceBulletWidth][l]{\cvbullet}}#2} & \paperlabel{#1}
+  \end{tabularx}\vspace{-8.25pt}
 }
 \newcommand{\servicerowicon}[3]{%
-  \noindent\begin{tabularx}{\linewidth}{@{\hspace{11.5pt}}>{\centering\arraybackslash}m{0.26in}@{\hspace{12.7pt}}>{\arraybackslash}X@{}}
-    {\raisebox{-1.35pt}{\fontsize{7.35}{7.85}\selectfont #1}} &
-    {\fontsize{8.55}{9.05}\selectfont\bfseries\color{cvtext}#2}%
-    {\fontsize{8.55}{9.05}\selectfont\color{cvtext}, #3}
-  \end{tabularx}\vspace{-7.95pt}
+  \noindent\hspace*{\experienceLeftPad}%
+  \makebox[5.35pt][l]{\raisebox{-0.55pt}[0pt][0pt]{\fontsize{6.45}{6.80}\selectfont #1}}%
+  \hspace*{4.85pt}%
+  \parbox[t]{\dimexpr\linewidth-\experienceLeftPad-5.35pt-4.85pt\relax}{%
+    {\fontsize{8.55}{9.05}\selectfont\bfseries\color{cvtext}\strut #2}%
+    {\fontsize{8.55}{9.05}\selectfont\color{cvtext}, #3}}%
+  \par\vspace{-2.70pt}
 }
 \newcommand{\plinksep}{\hspace{2.3pt}}
 \newcommand{\pubright}[2]{{\fontsize{7.05}{7.55}\selectfont #1}\hspace{6.0pt}{\sourceLight\mdseries\fontsize{8.05}{8.55}\selectfont\itshape\color{cvtext}#2}}
@@ -165,10 +172,10 @@
 \newcounter{pubnum}
 \newcommand{\pubentry}[5]{%
   \stepcounter{pubnum}%
-  \noindent\begin{tabularx}{\linewidth}{@{\hspace{14.85pt}}r@{\hspace{5.00pt}}X>{\raggedleft\arraybackslash}p{1.72in}@{}}
-    \raisebox{-8.37pt}[0pt][0pt]{\fontsize{8.42}{8.9}\selectfont\color{cvtext}\thepubnum.} &
+  \noindent\begin{tabularx}{\linewidth}{@{\hspace{14.85pt}}>{\raggedleft\arraybackslash}p{7.42pt}@{\hspace{3.20pt}}X>{\raggedleft\arraybackslash}p{1.72in}@{}}
+    {\fontsize{8.42}{8.9}\selectfont\color{cvtext}\thepubnum.} &
     {\fontsize{8.42}{8.9}\selectfont\bfseries\color{cvtext}#1} &
-    \raisebox{-8.37pt}[0pt][0pt]{\pubright{#4}{#5}}
+    {\pubright{#4}{#5}}
   \end{tabularx}\vspace{-3.25pt}
   \noindent\hspace*{27.27pt}\parbox[t]{\dimexpr\linewidth-27.27pt\relax}{\sourceLight\fontsize{7.72}{8.12}\selectfont\color{cvauthor}#2}\par\vspace{-1.15pt}
   \noindent\hspace*{27.27pt}\parbox[t]{\dimexpr\linewidth-27.27pt\relax}{\sourceLight\fontsize{7.72}{8.12}\selectfont\color{cvblue}#3}\par
@@ -186,7 +193,7 @@
 \detail{Teaching}{AI Algorithms and Systems. Secure Artificial Intelligence.}
 \cvrow{\entrytitle{Zhejiang University}\hspace{5pt}\entrybody{M.Sc. in Artificial Intelligence. Advised by \linkish{https://person.zju.edu.cn/mengzhang}{Meng Zhang}.}}{\entryright{Zhejiang. Sep 2022 \datesep{} Dec 2025}}{}
 \cvrow{\entrytitle{Shandong University}\hspace{5pt}\entrybody{B.Eng. in Communication Engineering.}}{\entryright{Shandong. Sep 2018 \datesep{} Jul 2022}}{}
-\vspace{29.03pt}
+\vspace{17.0pt}
 
 \cvsection{Experience}
 \cvrow{\entrytitle{Doctoral Research @ The Chinese University of Hong Kong}}{\entryright{Hong Kong. 2026 \datesep{} present}}{}
@@ -199,11 +206,12 @@
 \paperitem{Paper \#1}{Analyzed low-resource sample selection in recursive synthetic-data training and proposed collaborative Wasserstein evaluation proxies.}
 \paperitem{Paper \#6}{Examined illusory pattern perception in LLMs and developed an interpretable framework for spurious inference behavior and misleading responses.}
 
+\vspace{9.0pt}
 \cvsection{Open-Source Contributions and Services}
-\servicerowicon{\iconlink{https://github.com/XinbaoQiao}{\icongithub{cvblue}}}{Research code releases}{public code for certified unlearning and model-collapse work.}
+\servicerowicon{\iconlink{https://github.com/XinbaoQiao}{\icongithub{cvblue}}}{Research code releases}{public code for certified unlearning, soft-weighted unlearning, and model-collapse work.}
 \servicerowicon{\iconlink{https://xinbaopedia.top/}{\iconhome{cvblue}}}{Xinbaopedia}{public academic homepage and wiki-style research archive with papers, figures, CV, and project notes.}
 \servicerowicon{\iconscholar{cvblue}}{Peer-Reviewing}{reviewer for ICML 2026, NeurIPS 2025 and 2026, ICLR 2025, AAAI 2025 and 2026, and IEEE TNNLS.}
-\vspace{13.0pt}
+\vspace{7.5pt}
 
 \cvsection{Selected Publications}
 \pubnote{Asterisks (*) denote co-first authorship. Accepted papers are listed before under-review manuscripts.}
@@ -217,7 +225,7 @@
 \pubentry{Beyond Binary Erasure: \red{Soft-Weighted Unlearning} for Fairness and Robustness}
 {\textbf{Xinbao Qiao}, Ningning Ding, Yushi Cheng, Meng Zhang}
 {Soft-weighted corrective unlearning for non-binary fairness and robustness interventions.}
-{\iconlink{https://arxiv.org/abs/2505.18783}{\iconarxiv{cvblue}}\plinksep\iconlink{https://underline.io/lecture/139759-beyond-binary-erasure-soft-weighted-unlearning-for-fairness-and-robustness}{\iconplay{cvblue}}\plinksep\iconlink{https://aaai.org/conference/aaai/aaai-26/}{\iconhome{cvblue}}}
+{\iconlink{https://arxiv.org/abs/2505.18783}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning}{\icongithub{cvblue}}\plinksep\iconlink{https://underline.io/lecture/139759-beyond-binary-erasure-soft-weighted-unlearning-for-fairness-and-robustness}{\iconplay{cvblue}}\plinksep\iconlink{https://aaai.org/conference/aaai/aaai-26/}{\iconhome{cvblue}}}
 {AAAI 2026.}
 \pubentry{\red{Hessian-Free} Online Certified Unlearning}
 {\textbf{Xinbao Qiao}, Meng Zhang, Ming Tang, Ermin Wei}

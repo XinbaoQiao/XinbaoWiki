@@ -21,11 +21,11 @@ This page records CV-derived facts in wiki form. A resume version is available a
 - Homepage: [xinbaopedia.top](https://xinbaopedia.top/)
 - GitHub: [GitHub](https://github.com/XinbaoQiao)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/xinbaoqiao/)
-- Google Scholar: [Google Scholar](https://scholar.google.com/citations?user=nhC_OfEAAAAJ&hl=en)
+- Google Scholar: [Google Scholar](https://scholar.google.com/citations?view_op=search_authors&mauthors=Xinbao+Qiao)
 
 ## Education
 
-- **The Chinese University of Hong Kong**, PhD student in Information Engineering, 2026-present. Advised by [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]].
+- **The Chinese University of Hong Kong**, PhD student in Information Engineering, 2026-present. Advised by [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/).
 - **Zhejiang University**, M.Sc. in Artificial Intelligence, 2022-09 to 2025-12. Teaching and coursework entries include AI Algorithms and Systems and Secure Artificial Intelligence.
 - **Shandong University**, B.Eng. in Communication Engineering, 2018-09 to 2022-07.
 
@@ -36,13 +36,13 @@ This page records CV-derived facts in wiki form. A resume version is available a
 
 ## Research experience
 
-- **Doctoral Research at The Chinese University of Hong Kong**, 2026-present, advised by [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]. Topics include data-centric ML, AI-network co-design, and distributed Wasserstein barycenter methods for shared distributional references without pooling raw data (Paper #5).
-- **Research on Data-Centric ML Systems**, 03/2023 to 12/2025, advised by Prof. [[Meng_Zhang|Meng Zhang]] at [[Zhejiang_University]]. Topics include soft-weighted unlearning, Hessian-free certified unlearning, exact random-forest unlearning, and broader trade-offs in trustworthy artificial intelligence (Papers #2-#4).
+- **Doctoral Research at The Chinese University of Hong Kong**, 2026-present, advised by [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/). Topics include data-centric ML, AI-network co-design, and distributed Wasserstein barycenter methods for shared distributional references without pooling raw data (Paper #5).
+- **Research on Data-Centric ML Systems**, 03/2023 to 12/2025, advised by Prof. [Meng Zhang](https://person.zju.edu.cn/mengzhang) at [[Zhejiang_University]]. Topics include soft-weighted unlearning, Hessian-free certified unlearning, exact random-forest unlearning, and broader trade-offs in trustworthy artificial intelligence (Papers #2-#4).
 - **Research on Trustworthy LLM systems**, 06/2025 to 12/2025, full-time research intern advised by PANG Yan, James at the National University of Singapore. Topics include low-resource synthetic-data evaluation and illusory pattern perception in LLMs (Papers #1 and #6).
 
-## Open-source contributions and services
+## Open-Source Contributions and Services
 
-- **Research code releases**: maintains public code for accepted papers on certified unlearning and sample-selection model collapse.
+- **Research code releases**: maintains public code for accepted papers on certified unlearning, soft-weighted unlearning, and sample-selection model collapse.
 - **Xinbaopedia**: maintains a public academic homepage and wiki-style research archive with paper pages, figures, CV, and project notes.
 - **Peer-reviewing**: reviewer for ICML 2026, NeurIPS 2025 and 2026, ICLR 2025, AAAI 2025 and 2026, and IEEE Transactions on Neural Networks and Learning Systems (TNNLS).
 
@@ -55,7 +55,7 @@ See [[Publications]]. The CV lists accepted, published, and under-review work in
   Forty-Third International Conference on Machine Learning, ICML, 2026. Links: [OpenReview](https://openreview.net/forum?id=FFXvnzM254), [Code](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse), [ICML 2026](https://icml.cc/Conferences/2026).
 - **Paper #2: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**.\
   **Xinbao Qiao**, Ningning Ding, Yushi Cheng, Meng Zhang.\
-  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026. Links: [arXiv](https://arxiv.org/abs/2505.18783), [AAAI lecture page](https://underline.io/lecture/139759-beyond-binary-erasure-soft-weighted-unlearning-for-fairness-and-robustness).
+  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026. Links: [arXiv](https://arxiv.org/abs/2505.18783), [Code](https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning), [AAAI lecture page](https://underline.io/lecture/139759-beyond-binary-erasure-soft-weighted-unlearning-for-fairness-and-robustness), [AAAI 2026](https://aaai.org/conference/aaai/aaai-26/).
 - **Paper #3: Hessian-Free Online Certified Unlearning**.\
   **Xinbao Qiao**, Meng Zhang, Ming Tang, Ermin Wei.\
   Thirteenth International Conference on Learning Representations, ICLR, 2025. Links: [OpenReview](https://openreview.net/forum?id=C3TrHWanh5), [arXiv](https://arxiv.org/abs/2404.01712), [Code](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning).

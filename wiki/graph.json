@@ -165,7 +165,6 @@
       "title": "Angela Yingjun Zhang",
       "type": "Academic advisor",
       "backlinks": [
-        "CV",
         "Education",
         "Experience",
         "index",
@@ -206,7 +205,6 @@
       "title": "Angela Yingjun Zhang",
       "type": "Academic advisor",
       "backlinks": [
-        "CV_zh",
         "Education_zh",
         "Experience_zh",
         "index_zh",
@@ -412,8 +410,6 @@
         "retention": "semantic memory"
       },
       "outgoing": [
-        "Angela_Yingjun_Zhang",
-        "Meng_Zhang",
         "Publications",
         "Zhejiang_University"
       ],
@@ -451,8 +447,6 @@
         "retention": "semantic memory"
       },
       "outgoing": [
-        "Angela_Yingjun_Zhang_zh",
-        "Meng_Zhang_zh",
         "Publications_zh",
         "Zhejiang_University_zh"
       ],
@@ -2232,7 +2226,6 @@
       "title": "Meng Zhang",
       "type": "Academic advisor",
       "backlinks": [
-        "CV",
         "Education",
         "Experience",
         "index",
@@ -2277,7 +2270,6 @@
       "title": "张萌",
       "type": "Academic advisor",
       "backlinks": [
-        "CV_zh",
         "Education_zh",
         "Experience_zh",
         "index_zh",
@@ -4727,27 +4719,6 @@
     },
     {
       "from": "CV_zh",
-      "label": "Angela Yingjun Zhang",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Angela_Yingjun_Zhang_zh"
-    },
-    {
-      "from": "CV_zh",
-      "label": "Angela Yingjun Zhang",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Angela_Yingjun_Zhang_zh"
-    },
-    {
-      "from": "CV_zh",
-      "label": "Meng Zhang",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Meng_Zhang_zh"
-    },
-    {
-      "from": "CV_zh",
       "label": "论文",
       "relation": "wikilink",
       "source": "body",
@@ -4759,27 +4730,6 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Zhejiang_University_zh"
-    },
-    {
-      "from": "CV",
-      "label": "Angela Yingjun Zhang",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Angela_Yingjun_Zhang"
-    },
-    {
-      "from": "CV",
-      "label": "Angela Yingjun Zhang",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Angela_Yingjun_Zhang"
-    },
-    {
-      "from": "CV",
-      "label": "Meng Zhang",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Meng_Zhang"
     },
     {
       "from": "CV",
@@ -11468,7 +11418,7 @@
     },
     "pages": 88,
     "publicPages": 86,
-    "relations": 1038,
+    "relations": 1032,
     "types": {
       "Academic advisor": 4,
       "CV summary": 1,
