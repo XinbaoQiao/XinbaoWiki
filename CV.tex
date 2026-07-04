@@ -155,13 +155,11 @@
   \end{tabularx}\vspace{-8.25pt}
 }
 \newcommand{\servicerowicon}[3]{%
-  \noindent\hspace*{\experienceLeftPad}%
-  \makebox[5.35pt][l]{\raisebox{-0.55pt}[0pt][0pt]{\fontsize{6.45}{6.80}\selectfont #1}}%
-  \hspace*{4.85pt}%
-  \parbox[t]{\dimexpr\linewidth-\experienceLeftPad-5.35pt-4.85pt\relax}{%
-    {\fontsize{8.55}{9.05}\selectfont\bfseries\color{cvtext}\strut #2}%
-    {\fontsize{8.55}{9.05}\selectfont\color{cvtext}, #3}}%
-  \par\vspace{-2.70pt}
+  {\leftskip=\experienceLeftPad
+   \fontsize{8.55}{9.05}\selectfont\color{cvtext}%
+   \raisebox{-0.20pt}{\fontsize{6.75}{7.05}\selectfont #1}%
+   \hspace{3.90pt}{\bfseries #2}, #3\par}%
+  \vspace{-2.95pt}
 }
 \newcommand{\plinksep}{\hspace{2.3pt}}
 \newcommand{\pubright}[2]{{\fontsize{7.05}{7.55}\selectfont #1}\hspace{6.0pt}{\sourceLight\mdseries\fontsize{8.05}{8.55}\selectfont\itshape\color{cvtext}#2}}
@@ -208,10 +206,11 @@
 
 \vspace{9.0pt}
 \cvsection{Open-Source Contributions and Services}
+\vspace{6.6pt}
 \servicerowicon{\iconlink{https://github.com/XinbaoQiao}{\icongithub{cvblue}}}{Research code releases}{public code for certified unlearning, soft-weighted unlearning, and model-collapse work.}
 \servicerowicon{\iconlink{https://xinbaopedia.top/}{\iconhome{cvblue}}}{Xinbaopedia}{public academic homepage and wiki-style research archive with papers, figures, CV, and project notes.}
 \servicerowicon{\iconscholar{cvblue}}{Peer-Reviewing}{reviewer for ICML 2026, NeurIPS 2025 and 2026, ICLR 2025, AAAI 2025 and 2026, and IEEE TNNLS.}
-\vspace{7.5pt}
+\vspace{3.0pt}
 
 \cvsection{Selected Publications}
 \pubnote{Asterisks (*) denote co-first authorship. Accepted papers are listed before under-review manuscripts.}
