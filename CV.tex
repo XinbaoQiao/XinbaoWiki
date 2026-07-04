@@ -159,10 +159,14 @@
    \fontsize{8.55}{9.05}\selectfont\color{cvtext}%
    \raisebox{-0.20pt}{\fontsize{6.75}{7.05}\selectfont #1}%
    \hspace{3.90pt}{\bfseries #2}, #3\par}%
-  \vspace{-2.95pt}
+  \vspace{0.35pt}
 }
 \newcommand{\plinksep}{\hspace{2.3pt}}
-\newcommand{\pubright}[2]{{\fontsize{7.05}{7.55}\selectfont #1}\hspace{6.0pt}{\sourceLight\mdseries\fontsize{8.05}{8.55}\selectfont\itshape\color{cvtext}#2}}
+\newcommand{\pubright}[2]{%
+  {\fontsize{7.05}{7.55}\selectfont #1}%
+  \if\relax\detokenize{#1}\relax\else\hspace{6.0pt}\fi
+  {\sourceLight\mdseries\fontsize{8.05}{8.55}\selectfont\itshape\color{cvtext}#2}%
+}
 \newcommand{\red}[1]{\textcolor{cvred}{#1}}
 \newcommand{\pubnote}[1]{%
   \noindent\hspace*{27.35pt}\parbox[t]{0.84\linewidth}{\fontsize{7.45}{8.05}\selectfont\color{cvmuted}#1}\par
@@ -175,9 +179,9 @@
     {\fontsize{8.42}{8.9}\selectfont\bfseries\color{cvtext}#1} &
     {\pubright{#4}{#5}}
   \end{tabularx}\vspace{-3.25pt}
-  \noindent\hspace*{27.27pt}\parbox[t]{\dimexpr\linewidth-27.27pt\relax}{\sourceLight\fontsize{7.72}{8.12}\selectfont\color{cvauthor}#2}\par\vspace{-1.15pt}
+  \noindent\hspace*{27.27pt}\parbox[t]{\dimexpr\linewidth-27.27pt\relax}{\sourceLight\fontsize{7.72}{8.12}\selectfont\color{cvauthor}#2}\par\vspace{-0.35pt}
   \noindent\hspace*{27.27pt}\parbox[t]{\dimexpr\linewidth-27.27pt\relax}{\sourceLight\fontsize{7.72}{8.12}\selectfont\color{cvblue}#3}\par
-  \vspace{-7.95pt}
+  \vspace{-5.80pt}
 }
 
 \begin{document}
@@ -210,7 +214,7 @@
 \servicerowicon{\iconlink{https://github.com/XinbaoQiao}{\icongithub{cvblue}}}{Research code releases}{public code for certified unlearning, soft-weighted unlearning, and model-collapse work.}
 \servicerowicon{\iconlink{https://xinbaopedia.top/}{\iconhome{cvblue}}}{Xinbaopedia}{public academic homepage and wiki-style research archive with papers, figures, CV, and project notes.}
 \servicerowicon{\iconscholar{cvblue}}{Peer-Reviewing}{reviewer for ICML 2026, NeurIPS 2025 and 2026, ICLR 2025, AAAI 2025 and 2026, and IEEE TNNLS.}
-\vspace{3.0pt}
+\vspace{5.0pt}
 
 \cvsection{Selected Publications}
 \pubnote{Asterisks (*) denote co-first authorship. Accepted papers are listed before under-review manuscripts.}
@@ -219,32 +223,32 @@
 \pubentry{When \red{Sample Selection Bias} Precipitates \red{Model Collapse}}
 {\textbf{Xinbao Qiao}, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, Yan Pang}
 {Low-resource verification can turn local sample selection into persistent tail pruning.}
-{\iconlink{https://openreview.net/forum?id=FFXvnzM254}{\iconpdf{cvblue}}\plinksep\iconlink{https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse}{\icongithub{cvblue}}\plinksep\iconlink{https://icml.cc/Conferences/2026}{\iconhome{cvblue}}}
+{\iconlink{https://openreview.net/forum?id=FFXvnzM254}{\iconpdf{cvblue}}\plinksep\iconlink{https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse}{\icongithub{cvblue}}}
 {ICML 2026.}
 \pubentry{Beyond Binary Erasure: \red{Soft-Weighted Unlearning} for Fairness and Robustness}
 {\textbf{Xinbao Qiao}, Ningning Ding, Yushi Cheng, Meng Zhang}
 {Soft-weighted corrective unlearning for non-binary fairness and robustness interventions.}
-{\iconlink{https://arxiv.org/abs/2505.18783}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning}{\icongithub{cvblue}}\plinksep\iconlink{https://underline.io/lecture/139759-beyond-binary-erasure-soft-weighted-unlearning-for-fairness-and-robustness}{\iconplay{cvblue}}\plinksep\iconlink{https://aaai.org/conference/aaai/aaai-26/}{\iconhome{cvblue}}}
+{\iconlink{https://arxiv.org/abs/2505.18783}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning}{\icongithub{cvblue}}}
 {AAAI 2026.}
 \pubentry{\red{Hessian-Free} Online Certified Unlearning}
 {\textbf{Xinbao Qiao}, Meng Zhang, Ming Tang, Ermin Wei}
 {Certified unlearning without explicit Hessian inversion through recollected statistics.}
-{\iconlink{https://openreview.net/forum?id=C3TrHWanh5}{\iconpdf{cvblue}}\plinksep\iconlink{https://arxiv.org/abs/2404.01712}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning}{\icongithub{cvblue}}\plinksep\iconlink{https://iclr.cc/Conferences/2025}{\iconhome{cvblue}}}
+{\iconlink{https://openreview.net/forum?id=C3TrHWanh5}{\iconpdf{cvblue}}\plinksep\iconlink{https://arxiv.org/abs/2404.01712}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning}{\icongithub{cvblue}}}
 {ICLR 2025.}
 \pubentry{\red{DynFrs}: An Efficient Framework for Machine Unlearning in Random Forest}
 {Shurong Wang, Zhuoyang Shen, \textbf{Xinbao Qiao}, Tongning Zhang, Meng Zhang}
 {Exact and efficient random-forest unlearning in dynamic environments.}
-{\iconlink{https://openreview.net/forum?id=nsCOeCLR8e}{\iconpdf{cvblue}}\plinksep\iconlink{https://arxiv.org/abs/2410.01588}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/shurongwang/DynFrs}{\icongithub{cvblue}}\plinksep\iconlink{https://iclr.cc/Conferences/2025}{\iconhome{cvblue}}}
+{\iconlink{https://openreview.net/forum?id=nsCOeCLR8e}{\iconpdf{cvblue}}\plinksep\iconlink{https://arxiv.org/abs/2410.01588}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/shurongwang/DynFrs}{\icongithub{cvblue}}}
 {ICLR 2025.}
 \pubentry{\red{Federated Learning as Optimal Transport}: Barycentric Multi-Prototype Classification}
 {\textbf{Xinbao Qiao}, Wenjing Yan, Ying-Jun Angela Zhang}
 {Barycentric multi-prototype classification for federated representation geometry.}
-{\iconlink{https://xinbaopedia.top/wiki/Distributed_Wasserstein_Barycenter/}{\iconhome{cvblue}}}
+{}
 {Under review.}
 \pubentry{\red{Illusory Pattern Perception} Drives Spurious Inference in Large Language Models}
 {Peihua Mai, Zhuoyan Shao, \textbf{Xinbao Qiao}, Meng Zhang, Xinyue Zhou, Yan Pang}
 {Analysis of spurious pattern perception and interpretable behavior in LLMs.}
-{\iconlink{https://xinbaopedia.top/wiki/LLM_Reliability/}{\iconhome{cvblue}}}
+{}
 {Under review.}
 
 \end{document}

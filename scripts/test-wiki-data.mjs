@@ -924,8 +924,9 @@ assert.match(cvTex, /The Chinese University of Hong Kong/, 'CV includes current 
 assert.match(cvTex, /When[\s\S]*Sample Selection Bias[\s\S]*Model Collapse[\s\S]*ICML,? 2026/, 'CV updates model-collapse paper status');
 assert.doesNotMatch(cvTex, /withheld\s+LLM\s+manuscript/i, 'CV omits withheld manuscript notes');
 assert.match(cvTex, /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'CV PDF source links Paper #2 code');
-assert.match(cvTex, /aaai\.org\/conference\/aaai\/aaai-26\//, 'CV PDF source links the AAAI 2026 homepage for Paper #2');
 assert.match(cvTex, /scholar\.google\.com\/citations\?view_op=search_authors\\&mauthors=Xinbao\+Qiao/, 'CV PDF source links Google Scholar without exposing the author ID');
+const cvPublicationBlock = cvTex.slice(cvTex.indexOf('\\cvsection{Selected Publications}'));
+assert.doesNotMatch(cvPublicationBlock, /icml\.cc|iclr\.cc|aaai\.org|underline\.io|Distributed_Wasserstein_Barycenter|LLM_Reliability/, 'CV publication icons only link arXiv, GitHub, or OpenReview pages');
 assert.match(read('CV.md'), /\[resume\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English CV page labels the PDF link as resume');
 assert.match(read('CV_zh.md'), /\[resume\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese CV page labels the PDF link as resume');
 assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8'), /\[resume\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English OKF CV concept labels the PDF link as resume');
