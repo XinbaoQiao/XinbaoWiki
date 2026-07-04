@@ -162,6 +162,18 @@ for (const iconPath of themedSiteIcons) {
   assert.equal(themedIcon.toString('ascii', 1, 4), 'PNG', `${iconPath} is a PNG favicon candidate`);
   assert.ok(themedIcon.length > 100000, `${iconPath} keeps enough raster detail for browser favicon rendering`);
 }
+const themedSiteWordmarks = [
+  'public/site-logos/wordmark/xinbao-qiao-blue.png',
+  'public/site-logos/wordmark/xinbao-qiao-gold.png',
+  'public/site-logos/wordmark/xinbao-qiao-green.png',
+  'public/site-logos/wordmark/xinbao-qiao-charcoal.png'
+];
+for (const logoPath of themedSiteWordmarks) {
+  assertFile(logoPath);
+  const logo = fs.readFileSync(path.join(root, logoPath));
+  assert.equal(logo.toString('ascii', 1, 4), 'PNG', `${logoPath} is a PNG wordmark from the logo pack`);
+  assert.ok(logo.length > 50000 && logo.length < 160000, `${logoPath} is trimmed for homepage use instead of publishing the full source artwork`);
+}
 const languageToggle = fs.readFileSync(path.join(root, 'components/LanguageToggle.tsx'), 'utf8');
 const articleTabs = fs.readFileSync(path.join(root, 'components/ArticleTabs.tsx'), 'utf8');
 const wikiSearch = fs.readFileSync(path.join(root, 'components/WikiSearch.tsx'), 'utf8');
@@ -190,6 +202,7 @@ const questionLogFunction = chatRoute.match(/async function recordQuestionLog[\s
 assert.equal(siteIcon.toString('ascii', 1, 4), 'PNG', 'site icon uses the new PNG app-style mark');
 assert.ok(siteIcon.length > 100000, 'site icon keeps enough raster detail for portal and favicon rendering');
 assert.match(layout, /title: 'Xinbaopedia'/, 'site metadata title is Xinbaopedia');
+assert.match(layout, /text: pathWithBasePath\('\/xinbaopedia-icon\.png'\)/, 'layout keeps a text-theme favicon fallback');
 assert.match(layout, /const sitePaletteIcons = \{[\s\S]*blue: pathWithBasePath\('\/site-icons\/xinbaopedia-blue\.png'\)[\s\S]*gold: pathWithBasePath\('\/site-icons\/xinbaopedia-gold\.png'\)[\s\S]*green: pathWithBasePath\('\/site-icons\/xinbaopedia-green\.png'\)[\s\S]*charcoal: pathWithBasePath\('\/site-icons\/xinbaopedia-charcoal\.png'\)[\s\S]*\}/, 'layout defines the base-path-aware themed favicon set');
 assert.match(layout, /icons: \{ icon: sitePaletteIcons\.blue \}/, 'site metadata defaults to the morning-blue favicon before client-side time selection');
 assert.match(layout, /import \{ LanguageToggle, SitePalette \} from '@\/components\/LanguageToggle';/, 'layout imports the shared site palette controller');
@@ -203,11 +216,16 @@ assert.match(layout, /import \{ getSearchIndex, pathWithBasePath \} from '@\/lib
 assert.match(layout, /const searchIndex = getSearchIndex\(\);/, 'layout builds the search index server-side');
 assert.match(layout, /<WikiSearch items=\{searchIndex\} hideOnPortal \/>/, 'layout keeps topbar search on article pages without duplicating the portal search');
 assert.match(languageToggle, /if \(!decodeURIComponent\(pathname\)\.split\('\/'\)\.includes\('wiki'\)\) return null;/, 'language toggle hides on the portal homepage where language editions are shown in the masthead');
-assert.match(languageToggle, /function sitePaletteForLocalTime\(date = new Date\(\)\): SitePaletteName \{[\s\S]*hour >= 5 && hour < 10[\s\S]*return 'blue'[\s\S]*hour >= 10 && hour < 16[\s\S]*return 'gold'[\s\S]*hour >= 16 && hour < 20[\s\S]*return 'green'[\s\S]*return 'charcoal'[\s\S]*\}/, 'site palette maps local time to morning, midday, evening, and night themes');
+assert.match(languageToggle, /type SitePaletteName = 'text' \| 'blue' \| 'gold' \| 'green' \| 'charcoal';/, 'site palette includes a manual text wordmark theme alongside color logo themes');
+assert.match(languageToggle, /\{ color: '#202122', mode: 'text', title: 'Text wordmark theme' \}/, 'site palette exposes a text theme swatch');
+assert.match(languageToggle, /function sitePaletteForLocalTime\(date = new Date\(\)\): Exclude<SitePaletteName, 'text'> \{[\s\S]*hour >= 5 && hour < 10[\s\S]*return 'blue'[\s\S]*hour >= 10 && hour < 16[\s\S]*return 'gold'[\s\S]*hour >= 16 && hour < 20[\s\S]*return 'green'[\s\S]*return 'charcoal'[\s\S]*\}/, 'site palette maps local time only to color logo themes');
 assert.match(languageToggle, /window\.localStorage\.getItem\(sitePaletteStorageKey\)/, 'site palette restores a manual color override from local storage');
 assert.match(languageToggle, /document\.documentElement\.dataset\.sitePalette = palette;/, 'site palette exposes the active color as an html data attribute');
+assert.match(languageToggle, /document\.documentElement\.dataset\.sitePaletteMode = mode;/, 'site palette preserves whether the visible palette came from auto or manual mode');
 assert.match(languageToggle, /updateSiteFavicon\(icons\[palette\]\);/, 'site palette updates the browser favicon when the active palette changes');
 assert.match(languageToggle, /window\.setInterval\(applyPalette, 5 \* 60 \* 1000\)/, 'site palette periodically refreshes auto mode as local time changes');
+assert.match(languageToggle, /const active = mode === option\.mode;/, 'site palette marks only the chosen mode as active');
+assert.doesNotMatch(languageToggle, /activePalette|activePalette === option\.mode/, 'site palette no longer double-highlights Auto and the current time color');
 assert.match(languageToggle, /className="site-palette-switcher"/, 'site palette keeps manual color swatches as a fallback control');
 assert.match(wikiSearch, /hideOnPortal\?: boolean;/, 'search component exposes a homepage suppression prop for the topbar instance');
 assert.match(wikiSearch, /if \(hideOnPortal && isPortalPath\(pathname\)\) return null;/, 'topbar search can hide on the portal homepage');
@@ -722,6 +740,11 @@ assert.match(styles, /\.wiki-portal-hero \{[\s\S]*max-width: 760px;[\s\S]*text-a
 assert.match(styles, /--font-signature: "Alex Brush"/, 'homepage signature typography uses Alex Brush');
 assert.match(styles, /\.wiki-portal-name \{[\s\S]*font-family: var\(--font-signature\);[\s\S]*font-size: 86px;[\s\S]*\}/, 'homepage starts directly with Xinbao Qiao in the Alex Brush signature face');
 assert.match(styles, /\.wiki-portal-name-button \{[\s\S]*appearance: none;[\s\S]*font: inherit;[\s\S]*cursor: pointer;[\s\S]*user-select: none;[\s\S]*\}/, 'homepage signature name has a semantic button target without changing the signature typography');
+assert.match(styles, /\.site-palette-text \{[\s\S]*linear-gradient\(135deg,[\s\S]*#202122[\s\S]*\}/, 'site palette switcher includes a compact text-theme swatch');
+assert.match(styles, /\.wiki-portal-name-logo \{[\s\S]*display: none;[\s\S]*width: min\(620px, 86vw\);[\s\S]*object-fit: contain;[\s\S]*\}/, 'homepage logo wordmarks are constrained before being shown by the active theme');
+assert.match(styles, /html\[data-site-palette="blue"\] \.wiki-portal-name-logo-blue,[\s\S]*html\[data-site-palette="gold"\] \.wiki-portal-name-logo-gold,[\s\S]*html\[data-site-palette="green"\] \.wiki-portal-name-logo-green,[\s\S]*html\[data-site-palette="charcoal"\] \.wiki-portal-name-logo-charcoal \{[\s\S]*display: block;[\s\S]*\}/, 'homepage shows the matching logo-pack wordmark for each color theme');
+assert.match(styles, /@keyframes wiki-name-write \{[\s\S]*clip-path: inset\(0 100% 0 0\);[\s\S]*clip-path: inset\(0\);[\s\S]*\}/, 'homepage name uses a left-to-right writing-style reveal animation');
+assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.wiki-portal-name-text,[\s\S]*\.wiki-portal-name-logo,[\s\S]*\.wiki-portal-collapsed \{[\s\S]*animation: none;[\s\S]*\}/, 'homepage name reveal animation honors reduced-motion settings');
 assert.match(styles, /\.wiki-portal-name-button:focus-visible \{[\s\S]*outline: 2px solid #36c;[\s\S]*\}/, 'homepage signature control has a visible keyboard focus state');
 assert.doesNotMatch(styles, /\.wiki-portal-emblem/, 'homepage no longer styles an in-page portal icon');
 assert.match(styles, /\.wiki-search-portal input \{[\s\S]*height: 44px;[\s\S]*font-size: 16px;[\s\S]*\}/, 'homepage search input is larger than the topbar search');
@@ -755,6 +778,8 @@ assert.match(homePage, /if \(!page\) \{[\s\S]*throw new Error\(`Homepage directo
 assert.doesNotMatch(homePage, /slug\.replaceAll\('_', ' '\)/, 'homepage directory does not fall back to slug text for missing pages');
 assert.doesNotMatch(homePage, /wiki-portal-emblem|\/xinbaopedia-icon\.png/, 'homepage no longer renders the in-page icon');
 assert.match(homepagePortal, /className="wiki-portal-name"[\s\S]*Xinbao Qiao/, 'homepage uses Xinbao Qiao as the central portal name');
+assert.match(homepagePortal, /wiki-portal-name-text[\s\S]*Xinbao Qiao[\s\S]*wiki-portal-name-logos/, 'homepage keeps the pure text signature as a first-class theme');
+assert.match(homepagePortal, /\/site-logos\/wordmark\/xinbao-qiao-blue\.png[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-gold\.png[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-green\.png[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-charcoal\.png/, 'homepage uses the trimmed logo-pack wordmarks for color themes');
 assert.match(homePage, /Academic biography and research overview[\s\S]*个人学术条目与研究概览/, 'homepage keeps primary English and Chinese profile links below the search');
 assert.match(homepagePortal, /<WikiSearch[\s\S]*language=\{language\}[\s\S]*onLanguageChange=\{setLanguage\}[\s\S]*showLanguageSelect[\s\S]*variant="portal"/, 'homepage search controls the portal language state');
 assert.match(homepagePortal, /const browseLabels[\s\S]*en: 'Browse Xinbaopedia'[\s\S]*zh: '浏览 Xinbaopedia'/, 'homepage Browse heading has English and Chinese labels');
@@ -1004,6 +1029,10 @@ for (const file of [
   'public/topics/machine-unlearning.png',
   'public/topics/synthetic-data.png',
   'public/topics/data-centric-ml.png',
+  'public/site-logos/wordmark/xinbao-qiao-blue.png',
+  'public/site-logos/wordmark/xinbao-qiao-gold.png',
+  'public/site-logos/wordmark/xinbao-qiao-green.png',
+  'public/site-logos/wordmark/xinbao-qiao-charcoal.png',
   'public/files/XinbaoQiao_CV.pdf',
   'public/papers/model-collapse/poster.png',
   'public/papers/model-collapse/teaser.png',

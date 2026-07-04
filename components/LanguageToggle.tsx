@@ -47,7 +47,7 @@ export function LanguageToggle() {
   );
 }
 
-type SitePaletteName = 'blue' | 'gold' | 'green' | 'charcoal';
+type SitePaletteName = 'text' | 'blue' | 'gold' | 'green' | 'charcoal';
 type SitePaletteMode = SitePaletteName | 'auto';
 
 type SitePaletteOption = {
@@ -64,6 +64,7 @@ const sitePaletteStorageKey = 'xinbaopedia-palette-mode';
 
 const sitePaletteOptions: SitePaletteOption[] = [
   { color: '#36c', mode: 'auto', title: 'Auto theme by local time' },
+  { color: '#202122', mode: 'text', title: 'Text wordmark theme' },
   { color: '#2b5f94', mode: 'blue', title: 'Morning blue theme' },
   { color: '#b8871b', mode: 'gold', title: 'Midday gold theme' },
   { color: '#2a7f62', mode: 'green', title: 'Evening green theme' },
@@ -71,10 +72,10 @@ const sitePaletteOptions: SitePaletteOption[] = [
 ];
 
 function isSitePaletteMode(value: string | null): value is SitePaletteMode {
-  return value === 'auto' || value === 'blue' || value === 'gold' || value === 'green' || value === 'charcoal';
+  return value === 'auto' || value === 'text' || value === 'blue' || value === 'gold' || value === 'green' || value === 'charcoal';
 }
 
-function sitePaletteForLocalTime(date = new Date()): SitePaletteName {
+function sitePaletteForLocalTime(date = new Date()): Exclude<SitePaletteName, 'text'> {
   const hour = date.getHours();
 
   if (hour >= 5 && hour < 10) return 'blue';
@@ -105,7 +106,6 @@ function updateSiteFavicon(href: string) {
 
 export function SitePalette({ icons }: SitePaletteProps) {
   const [mode, setMode] = useState<SitePaletteMode>('auto');
-  const [activePalette, setActivePalette] = useState<SitePaletteName>('blue');
 
   useEffect(() => {
     const savedMode = window.localStorage.getItem(sitePaletteStorageKey);
@@ -120,7 +120,7 @@ export function SitePalette({ icons }: SitePaletteProps) {
       const palette = mode === 'auto' ? sitePaletteForLocalTime() : mode;
 
       document.documentElement.dataset.sitePalette = palette;
-      setActivePalette(palette);
+      document.documentElement.dataset.sitePaletteMode = mode;
       updateSiteFavicon(icons[palette]);
     };
 
@@ -145,14 +145,14 @@ export function SitePalette({ icons }: SitePaletteProps) {
     <div className="site-palette-switcher" aria-label="Site color theme">
       {sitePaletteOptions.map((option) => {
         const pressed = mode === option.mode;
-        const active = option.mode === 'auto' ? mode === 'auto' : activePalette === option.mode;
+        const active = mode === option.mode;
         const style = { '--site-palette-swatch': option.color } as CSSProperties;
 
         return (
           <button
             aria-label={option.title}
             aria-pressed={pressed}
-            className={['site-palette-button', active ? 'is-active' : '', option.mode === 'auto' ? 'site-palette-auto' : '']
+            className={['site-palette-button', active ? 'is-active' : '', option.mode === 'auto' ? 'site-palette-auto' : '', option.mode === 'text' ? 'site-palette-text' : '']
               .filter(Boolean)
               .join(' ')}
             key={option.mode}
