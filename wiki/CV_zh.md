@@ -14,7 +14,7 @@ summary: 乔鑫宝的结构化 CV 摘要。
 occupation: CV 摘要
 translation_of: CV
 ---
-本页以 wiki 形式记录 CV 中的事实。PDF 版本见 [XinbaoQiao_CV.pdf](/files/XinbaoQiao_CV.pdf)。
+本页以 wiki 形式记录 CV 中的事实。简历版本见 [resume](/files/XinbaoQiao_CV.pdf)。
 
 ## 联系方式
 

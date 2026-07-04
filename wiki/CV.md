@@ -12,7 +12,7 @@ name: Curriculum Vitae
 summary: Structured CV summary for Qiao Xinbao.
 occupation: CV summary
 ---
-This page records CV-derived facts in wiki form. The PDF version is available at [XinbaoQiao_CV.pdf](/files/XinbaoQiao_CV.pdf).
+This page records CV-derived facts in wiki form. A resume version is available as [resume](/files/XinbaoQiao_CV.pdf).
 
 ## Contact
 

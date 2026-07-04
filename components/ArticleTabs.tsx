@@ -10,7 +10,7 @@ const labels = {
     talk: 'Talk',
     talkTitle: 'Open a GitHub issue to discuss this page',
     source: 'View source',
-    sourceTitle: 'Edit this page on GitHub',
+    sourceTitle: 'View the source repository on GitHub',
     history: 'History',
     historyTitle: "View this page's commit history"
   },
@@ -20,7 +20,7 @@ const labels = {
     talk: '讨论',
     talkTitle: '在 GitHub 上讨论此页面',
     source: '查看源代码',
-    sourceTitle: '在 GitHub 上编辑此页面',
+    sourceTitle: '在 GitHub 上查看源码仓库',
     history: '历史',
     historyTitle: '查看此页面的提交历史'
   }
@@ -46,7 +46,7 @@ export function ArticleTabs() {
   const copy = labels[language];
   const fileName = `${slug}.md`;
   const talk = `${GITHUB_BASE}/issues/new?title=${encodeURIComponent(`Talk: ${slug}`)}`;
-  const source = `${GITHUB_BASE}/edit/main/wiki/${encodeURIComponent(fileName)}`;
+  const source = GITHUB_BASE;
   const history = `${GITHUB_BASE}/commits/main/wiki/${encodeURIComponent(fileName)}`;
 
   return (

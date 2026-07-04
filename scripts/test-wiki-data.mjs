@@ -372,7 +372,8 @@ assert.match(articleTabs, /source: 'View source'[\s\S]*source: '查看源代码'
 assert.match(articleTabs, /history: 'History'[\s\S]*history: '历史'/, 'article tools localize the history label');
 assert.match(articleTabs, /issues\/new\?title=/, 'Talk links directly to GitHub new issue creation');
 assert.match(articleTabs, /Talk: \$\{slug\}/, 'Talk issue title is page-specific');
-assert.match(articleTabs, /edit\/main\/wiki\/\$\{encodeURIComponent\(fileName\)\}/, 'View source edits the current markdown page');
+assert.match(articleTabs, /const source = GITHUB_BASE;/, 'View source opens the repository root');
+assert.doesNotMatch(articleTabs, /const source = `\$\{GITHUB_BASE\}\/edit\/main\/wiki\//, 'View source no longer opens a page-specific edit URL');
 assert.match(articleTabs, /commits\/main\/wiki\/\$\{encodeURIComponent\(fileName\)\}/, 'History opens the current markdown page commits');
 
 assert.match(chatWithXinbao, /'use client';/, 'Chat with Xinbao is a client component');
@@ -922,6 +923,12 @@ assert.match(cvTex, /The Chinese University of Hong Kong/, 'CV includes current 
 assert.match(cvTex, /When[\s\S]*Sample Selection Bias[\s\S]*Model Collapse[\s\S]*ICML,? 2026/, 'CV updates model-collapse paper status');
 assert.doesNotMatch(cvTex, /withheld\s+LLM\s+manuscript/i, 'CV omits withheld manuscript notes');
 assert.doesNotMatch(cvTex, /Soft-Weighted-Machine-Unlearning|github\.com\/XinbaoQiao\/Soft-Weighted/, 'CV PDF source does not link to a broken Soft-Weighted GitHub repository');
+assert.match(read('CV.md'), /\[resume\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English CV page labels the PDF link as resume');
+assert.match(read('CV_zh.md'), /\[resume\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese CV page labels the PDF link as resume');
+assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8'), /\[resume\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English OKF CV concept labels the PDF link as resume');
+assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV_zh.md'), 'utf8'), /\[resume\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese OKF CV concept labels the PDF link as resume');
+assert.doesNotMatch(read('CV.md'), /\[XinbaoQiao_CV\.pdf\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English CV page avoids exposing the PDF filename as link text');
+assert.doesNotMatch(read('CV_zh.md'), /\[XinbaoQiao_CV\.pdf\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese CV page avoids exposing the PDF filename as link text');
 assert.doesNotMatch(read('CV.md'), /public code for accepted papers on certified unlearning, soft-weighted unlearning/i, 'English CV page does not claim a public Soft-Weighted code release');
 assert.doesNotMatch(read('CV_zh.md'), /公开代码，包括认证遗忘、软加权机器遗忘/, 'Chinese CV page does not claim a public Soft-Weighted code release');
 assert.doesNotMatch(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8'), /public code for accepted papers on certified unlearning, soft-weighted unlearning/i, 'English OKF CV concept does not claim a public Soft-Weighted code release');
