@@ -63,12 +63,12 @@ type SitePaletteProps = {
 const sitePaletteStorageKey = 'xinbaopedia-palette-mode';
 
 const sitePaletteOptions: SitePaletteOption[] = [
-  { color: '#36c', mode: 'auto', title: 'Auto theme by local time' },
   { color: '#202122', mode: 'text', title: 'Text wordmark theme' },
   { color: '#2b5f94', mode: 'blue', title: 'Morning blue theme' },
   { color: '#b8871b', mode: 'gold', title: 'Midday gold theme' },
   { color: '#2a7f62', mode: 'green', title: 'Evening green theme' },
-  { color: '#2f3437', mode: 'charcoal', title: 'Night charcoal theme' }
+  { color: '#2f3437', mode: 'charcoal', title: 'Night charcoal theme' },
+  { color: '#36c', mode: 'auto', title: 'Auto theme by local time' }
 ];
 
 function isSitePaletteMode(value: string | null): value is SitePaletteMode {

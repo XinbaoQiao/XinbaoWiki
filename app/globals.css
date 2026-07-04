@@ -1240,7 +1240,7 @@ body:has(.wiki-portal) .wiki-topbar {
   margin: 0;
   color: var(--site-theme-heading);
   font-family: var(--font-signature);
-  font-size: 86px;
+  font-size: 124px;
   font-style: normal;
   font-weight: 400;
   line-height: .95;
@@ -1251,7 +1251,8 @@ body:has(.wiki-portal) .wiki-topbar {
   display: inline-grid;
   align-items: center;
   justify-items: center;
-  max-width: min(760px, 90vw);
+  width: min(620px, 86vw);
+  aspect-ratio: 4 / 1;
   margin: 0;
   padding: 0;
   border: 0;
@@ -1272,6 +1273,9 @@ body:has(.wiki-portal) .wiki-topbar {
 
 .wiki-portal-name-text {
   display: inline-block;
+  max-width: 100%;
+  line-height: .95;
+  white-space: nowrap;
 }
 
 .wiki-portal-name-logos {
@@ -1280,9 +1284,9 @@ body:has(.wiki-portal) .wiki-topbar {
 
 .wiki-portal-name-logo {
   display: none;
-  width: min(620px, 86vw);
+  width: 100%;
   aspect-ratio: 4 / 1;
-  height: auto;
+  height: 100%;
   border: 0;
   background: transparent;
   box-shadow: none;
@@ -1641,15 +1645,15 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
   }
 
   .wiki-portal-name {
-    font-size: 56px;
+    font-size: 84px;
   }
 
   .wiki-portal-name-button {
-    max-width: min(620px, 92vw);
+    width: min(420px, 88vw);
   }
 
   .wiki-portal-name-logo {
-    width: min(420px, 88vw);
+    width: 100%;
   }
 
   .wiki-portal-search {
@@ -1684,6 +1688,18 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
 
   .wiki-portal-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .wiki-portal-name {
+    font-size: 72px;
+  }
+}
+
+@media (max-width: 360px) {
+  .wiki-portal-name {
+    font-size: 64px;
   }
 }
 
