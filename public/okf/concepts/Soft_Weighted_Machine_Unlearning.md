@@ -22,6 +22,8 @@ source_path: wiki/Soft_Weighted_Machine_Unlearning.md
 ---
 **Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness** is an AAAI 2026 conference paper by **[Xinbao Qiao](./Xinbao_Qiao.md)**, Ningning Ding, Yushi Cheng, and Meng Zhang. It reframes unlearning as a continuous data-influence correction problem rather than only a binary erase-or-keep operation. The paper asks how much influence each sample should retain when the goal is to improve fairness or robustness without paying unnecessary utility loss.
 
+![AAAI 2026 poster for Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness](/papers/soft-weighted/poster.png)
+
 ## Overview
 
 The paper studies a mismatch between privacy-driven unlearning and correction-driven unlearning. In a right-to-be-forgotten setting, binary deletion is natural: a sample is either retained or removed. In fairness and robustness correction, however, the goal is often to reduce harmful influence without discarding useful signal.
@@ -32,13 +34,13 @@ The paper names the resulting failure mode **over-unlearning**: hard deletion ca
 
 The method replaces binary deletion weights with continuous sample weights. It first estimates each sample's influence on both the target metric and utility, then solves a convex quadratic program for a tailored weight vector. The resulting weights are plugged into influence-function-style unlearning or related correction methods, so harmful samples can be downweighted without being treated as equally removable.
 
-![Soft-weighted unlearning framework](/papers/soft-weighted/framework.png)
-
 The three-stage workflow is:
 
 1. estimate each sample's influence on fairness or robustness and on utility;
 2. solve for continuous weights that improve the target metric while constraining utility loss;
 3. apply a weighted model correction instead of deleting a fixed top-k set.
+
+![Soft-weighted unlearning framework](/papers/soft-weighted/framework.png)
 
 ## Key formula
 

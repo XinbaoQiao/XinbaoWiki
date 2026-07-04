@@ -22,13 +22,13 @@ source_path: wiki/When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md
 
 ![样本选择偏差何以促成模型坍缩 ICML 2026 poster](/papers/model-collapse/poster.png)
 
-![局部选择偏差会收窄递归合成数据；协作 Wasserstein 验证有助于保持多样性](/papers/model-collapse/teaser.png)
-
 ## 概述
 
 论文研究递归合成数据训练中的 [模型坍缩](./Model_Collapse_zh.md)。已有工作常把数据选择视为稳定工具：验证器过滤生成样本，只让高质量合成数据进入下一轮训练。本文反过来把验证器本身作为分析对象。当验证器只看到目标分布中小规模、碎片化且有偏的局部切片时，选择会反复奖励靠近本地视角的样本，并删除未来生成器所需的全局相关尾部模式。
 
 动机设置是低资源数据孤岛。医疗联合体、银行或专有机构可能因为原始数据不能汇集，只能使用自身有限参考数据评估合成样本。选择因此变成一种确认偏差机制：接近本地视角的样本被保留，而稀有但有效的模式被剪掉。新版论文尤其强调低资源社区更脆弱：尾部区域在合成数据增强开始前就已经代表不足，本地过滤会把数据稀缺放大为持续性的覆盖损失。
+
+![局部选择偏差会收窄递归合成数据；协作 Wasserstein 验证有助于保持多样性](/papers/model-collapse/teaser.png)
 
 ## 方法
 
