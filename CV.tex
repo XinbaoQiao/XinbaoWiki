@@ -59,9 +59,10 @@
 
 \definecolor{cvblack}{HTML}{0D0D0D}
 \definecolor{cvtext}{HTML}{575757}
+\definecolor{cvexptext}{HTML}{2F2F2F}
 \definecolor{cvmuted}{HTML}{858585}
 \definecolor{cvauthor}{HTML}{C6C6C6}
-\definecolor{cvrule}{HTML}{666666}
+\definecolor{cvrule}{HTML}{4C4C4C}
 \definecolor{cvblue}{HTML}{5B8FC1}
 \definecolor{cvred}{HTML}{B92C24}
 
@@ -113,7 +114,7 @@
 \newcommand{\cvsection}[1]{%
   \vspace{1.9pt}
   {\fontsize{15.94}{16.8}\selectfont\bfseries\color{cvblack}#1}%
-  \hspace{4.0pt}{\color{cvrule}\leaders\hrule height 0.45pt\hfill}\par
+  \hspace{4.0pt}{\color{cvrule}\leaders\hrule height 0.76pt\hfill}\par
   \vspace{-3.20pt}
 }
 \newcommand{\entrytitle}[1]{{\fontsize{10.96}{11.45}\selectfont\bfseries\color{cvtext}#1}}
@@ -128,7 +129,7 @@
 \newlength{\experienceBulletWidth}
 \setlength{\experienceBulletWidth}{4.70pt}
 \newcommand{\cvbullet}{\textcolor{cvblack}{\raisebox{-0.08pt}{\fontsize{8.97}{9.45}\selectfont\textperiodcentered}}}
-\newcommand{\paperlabel}[1]{{\fontsize{9.96}{10.65}\selectfont\color{cvtext}#1}}
+\newcommand{\paperlabel}[1]{{\fontsize{9.96}{10.65}\selectfont\color{cvexptext}#1}}
 \newcommand{\paperlabelcell}[1]{\raisebox{-5.75pt}[0pt][0pt]{\paperlabel{#1}}}
 \newcommand{\cvrow}[3]{%
   \noindent\begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{1.70in}@{}}
@@ -155,14 +156,14 @@
 }
 \newcommand{\paperitem}[2]{%
   \noindent\hspace*{\experienceLeftPad}%
-  \begin{tabularx}{\dimexpr\linewidth-\experienceLeftPad\relax}{@{}>{\sourceLight\fontsize{9.96}{12.22}\selectfont\raggedright\hyphenpenalty=10000\exhyphenpenalty=10000\emergencystretch=1em\color{cvtext}\arraybackslash}X>{\raggedleft\arraybackslash}p{0.75in}@{}}
+  \begin{tabularx}{\dimexpr\linewidth-\experienceLeftPad\relax}{@{}>{\fontsize{9.96}{12.22}\selectfont\raggedright\hyphenpenalty=10000\exhyphenpenalty=10000\emergencystretch=1em\color{cvexptext}\arraybackslash}X>{\raggedleft\arraybackslash}p{0.75in}@{}}
     {\leavevmode\llap{\makebox[\experienceBulletWidth][l]{\cvbullet}}#2} & \paperlabelcell{#1}
   \end{tabularx}\vspace{-6.55pt}
 }
 \newcommand{\stagebrief}[1]{%
   \noindent\hspace*{\experienceLeftPad}%
   \parbox[t]{\dimexpr\linewidth-\experienceLeftPad\relax}{%
-    \sourceLight\fontsize{9.96}{12.22}\selectfont\raggedright\hyphenpenalty=10000\exhyphenpenalty=10000\emergencystretch=1em\color{cvtext}#1%
+    \fontsize{9.96}{12.22}\selectfont\raggedright\hyphenpenalty=10000\exhyphenpenalty=10000\emergencystretch=1em\color{cvexptext}#1%
   }\par%
   \vspace{-5.90pt}
 }
