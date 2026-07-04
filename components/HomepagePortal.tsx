@@ -77,7 +77,7 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
                     alt=""
                     className="wiki-portal-name-logo wiki-portal-name-logo-blue"
                     decoding="async"
-                    height={176}
+                    height={190}
                     src="/site-logos/wordmark/xinbao-qiao-blue.png"
                     width={760}
                   />
@@ -85,7 +85,7 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
                     alt=""
                     className="wiki-portal-name-logo wiki-portal-name-logo-gold"
                     decoding="async"
-                    height={179}
+                    height={190}
                     src="/site-logos/wordmark/xinbao-qiao-gold.png"
                     width={760}
                   />
@@ -93,7 +93,7 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
                     alt=""
                     className="wiki-portal-name-logo wiki-portal-name-logo-green"
                     decoding="async"
-                    height={181}
+                    height={190}
                     src="/site-logos/wordmark/xinbao-qiao-green.png"
                     width={760}
                   />
@@ -101,7 +101,7 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
                     alt=""
                     className="wiki-portal-name-logo wiki-portal-name-logo-charcoal"
                     decoding="async"
-                    height={167}
+                    height={190}
                     src="/site-logos/wordmark/xinbao-qiao-charcoal.png"
                     width={760}
                   />

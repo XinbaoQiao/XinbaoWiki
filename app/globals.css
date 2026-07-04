@@ -1281,8 +1281,11 @@ body:has(.wiki-portal) .wiki-topbar {
 .wiki-portal-name-logo {
   display: none;
   width: min(620px, 86vw);
+  aspect-ratio: 4 / 1;
   height: auto;
-  max-height: 146px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
   object-fit: contain;
 }
 
@@ -1301,9 +1304,7 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
 }
 
 .wiki-portal-name-button:focus-visible {
-  outline: 2px solid #36c;
-  outline-offset: 6px;
-  border-radius: 6px;
+  outline: 0;
 }
 
 .wiki-portal-search {
@@ -1649,7 +1650,6 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
 
   .wiki-portal-name-logo {
     width: min(420px, 88vw);
-    max-height: 100px;
   }
 
   .wiki-portal-search {

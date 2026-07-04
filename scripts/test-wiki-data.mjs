@@ -34,6 +34,14 @@ function sortedUrls(urls) {
   return urls.map((url) => url.replaceAll('\\&', '&')).sort();
 }
 
+function pngDimensions(buffer) {
+  assert.equal(buffer.toString('ascii', 1, 4), 'PNG', 'asset is a PNG image');
+  return {
+    width: buffer.readUInt32BE(16),
+    height: buffer.readUInt32BE(20),
+  };
+}
+
 for (const file of ['Xinbao_Qiao.md', 'Qiao_Xinbao_zh.md', 'index.md', 'log.md', 'CV.md', 'Meng_Zhang.md', 'Angela_Yingjun_Zhang.md', 'Internet_Slang_2026.md']) {
   assertFile(`wiki/${file}`);
 }
@@ -171,7 +179,7 @@ const themedSiteWordmarks = [
 for (const logoPath of themedSiteWordmarks) {
   assertFile(logoPath);
   const logo = fs.readFileSync(path.join(root, logoPath));
-  assert.equal(logo.toString('ascii', 1, 4), 'PNG', `${logoPath} is a PNG wordmark from the logo pack`);
+  assert.deepEqual(pngDimensions(logo), { width: 760, height: 190 }, `${logoPath} uses the shared transparent homepage wordmark canvas`);
   assert.ok(logo.length > 50000 && logo.length < 160000, `${logoPath} is trimmed for homepage use instead of publishing the full source artwork`);
 }
 const languageToggle = fs.readFileSync(path.join(root, 'components/LanguageToggle.tsx'), 'utf8');
@@ -741,11 +749,14 @@ assert.match(styles, /--font-signature: "Alex Brush"/, 'homepage signature typog
 assert.match(styles, /\.wiki-portal-name \{[\s\S]*font-family: var\(--font-signature\);[\s\S]*font-size: 86px;[\s\S]*\}/, 'homepage starts directly with Xinbao Qiao in the Alex Brush signature face');
 assert.match(styles, /\.wiki-portal-name-button \{[\s\S]*appearance: none;[\s\S]*font: inherit;[\s\S]*cursor: pointer;[\s\S]*user-select: none;[\s\S]*\}/, 'homepage signature name has a semantic button target without changing the signature typography');
 assert.match(styles, /\.site-palette-text \{[\s\S]*linear-gradient\(135deg,[\s\S]*#202122[\s\S]*\}/, 'site palette switcher includes a compact text-theme swatch');
-assert.match(styles, /\.wiki-portal-name-logo \{[\s\S]*display: none;[\s\S]*width: min\(620px, 86vw\);[\s\S]*object-fit: contain;[\s\S]*\}/, 'homepage logo wordmarks are constrained before being shown by the active theme');
+assert.match(styles, /\.wiki-portal-name-logo \{[\s\S]*display: none;[\s\S]*width: min\(620px, 86vw\);[\s\S]*aspect-ratio: 4 \/ 1;[\s\S]*border: 0;[\s\S]*background: transparent;[\s\S]*box-shadow: none;[\s\S]*object-fit: contain;[\s\S]*\}/, 'homepage logo wordmarks share one borderless display box before being shown by the active theme');
 assert.match(styles, /html\[data-site-palette="blue"\] \.wiki-portal-name-logo-blue,[\s\S]*html\[data-site-palette="gold"\] \.wiki-portal-name-logo-gold,[\s\S]*html\[data-site-palette="green"\] \.wiki-portal-name-logo-green,[\s\S]*html\[data-site-palette="charcoal"\] \.wiki-portal-name-logo-charcoal \{[\s\S]*display: block;[\s\S]*\}/, 'homepage shows the matching logo-pack wordmark for each color theme');
 assert.match(styles, /@keyframes wiki-name-write \{[\s\S]*clip-path: inset\(0 100% 0 0\);[\s\S]*clip-path: inset\(0\);[\s\S]*\}/, 'homepage name uses a left-to-right writing-style reveal animation');
 assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.wiki-portal-name-text,[\s\S]*\.wiki-portal-name-logo,[\s\S]*\.wiki-portal-collapsed \{[\s\S]*animation: none;[\s\S]*\}/, 'homepage name reveal animation honors reduced-motion settings');
-assert.match(styles, /\.wiki-portal-name-button:focus-visible \{[\s\S]*outline: 2px solid #36c;[\s\S]*\}/, 'homepage signature control has a visible keyboard focus state');
+const signatureFocusStyle = styles.match(/\.wiki-portal-name-button:focus-visible \{([\s\S]*?)\}/);
+assert.ok(signatureFocusStyle, 'homepage signature focus style block exists');
+assert.match(signatureFocusStyle[1], /outline: 0;/, 'homepage signature control does not draw a border around the wordmark');
+assert.doesNotMatch(signatureFocusStyle[1], /outline-offset|border-radius|box-shadow/, 'homepage signature focus state avoids border-like chrome');
 assert.doesNotMatch(styles, /\.wiki-portal-emblem/, 'homepage no longer styles an in-page portal icon');
 assert.match(styles, /\.wiki-search-portal input \{[\s\S]*height: 44px;[\s\S]*font-size: 16px;[\s\S]*\}/, 'homepage search input is larger than the topbar search');
 assert.match(styles, /\.wiki-search-portal \.wiki-search-language-select \{[\s\S]*width: 112px;[\s\S]*height: 44px;[\s\S]*\}/, 'homepage search includes a language selector');
@@ -780,6 +791,8 @@ assert.doesNotMatch(homePage, /wiki-portal-emblem|\/xinbaopedia-icon\.png/, 'hom
 assert.match(homepagePortal, /className="wiki-portal-name"[\s\S]*Xinbao Qiao/, 'homepage uses Xinbao Qiao as the central portal name');
 assert.match(homepagePortal, /wiki-portal-name-text[\s\S]*Xinbao Qiao[\s\S]*wiki-portal-name-logos/, 'homepage keeps the pure text signature as a first-class theme');
 assert.match(homepagePortal, /\/site-logos\/wordmark\/xinbao-qiao-blue\.png[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-gold\.png[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-green\.png[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-charcoal\.png/, 'homepage uses the trimmed logo-pack wordmarks for color themes');
+assert.equal((homepagePortal.match(/height=\{190\}/g) || []).length, 4, 'homepage logo wordmarks use one intrinsic height');
+assert.doesNotMatch(homepagePortal, /height=\{(?:167|176|179|181)\}/, 'homepage logo wordmarks do not keep mismatched source heights');
 assert.match(homePage, /Academic biography and research overview[\s\S]*个人学术条目与研究概览/, 'homepage keeps primary English and Chinese profile links below the search');
 assert.match(homepagePortal, /<WikiSearch[\s\S]*language=\{language\}[\s\S]*onLanguageChange=\{setLanguage\}[\s\S]*showLanguageSelect[\s\S]*variant="portal"/, 'homepage search controls the portal language state');
 assert.match(homepagePortal, /const browseLabels[\s\S]*en: 'Browse Xinbaopedia'[\s\S]*zh: '浏览 Xinbaopedia'/, 'homepage Browse heading has English and Chinese labels');
