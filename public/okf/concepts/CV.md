@@ -35,8 +35,7 @@ This page records CV-derived facts in wiki form. A resume version is available a
 
 ## Research interests
 
-- Lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are generated, used, and deleted.
-- The intersection of AI with network, including AI for communication and communication for AI.
+- Qiao's research primarily studies lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are generated, used, and deleted. His recent work aims to improve the reliability, interpretability, and controllability of AI models in heterogeneous, computation-constrained, and communication-constrained environments.
 
 ## Research experience
 
