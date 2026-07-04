@@ -150,6 +150,18 @@ assertNoPath('cloudflare');
 assertFile('public/xinbaopedia-icon.png');
 assertNoPath('public/xinbaopedia-icon.svg');
 const siteIcon = fs.readFileSync(path.join(root, 'public/xinbaopedia-icon.png'));
+const themedSiteIcons = [
+  'public/site-icons/xinbaopedia-blue.png',
+  'public/site-icons/xinbaopedia-gold.png',
+  'public/site-icons/xinbaopedia-green.png',
+  'public/site-icons/xinbaopedia-charcoal.png'
+];
+for (const iconPath of themedSiteIcons) {
+  assertFile(iconPath);
+  const themedIcon = fs.readFileSync(path.join(root, iconPath));
+  assert.equal(themedIcon.toString('ascii', 1, 4), 'PNG', `${iconPath} is a PNG favicon candidate`);
+  assert.ok(themedIcon.length > 100000, `${iconPath} keeps enough raster detail for browser favicon rendering`);
+}
 const languageToggle = fs.readFileSync(path.join(root, 'components/LanguageToggle.tsx'), 'utf8');
 const articleTabs = fs.readFileSync(path.join(root, 'components/ArticleTabs.tsx'), 'utf8');
 const wikiSearch = fs.readFileSync(path.join(root, 'components/WikiSearch.tsx'), 'utf8');
@@ -178,7 +190,10 @@ const questionLogFunction = chatRoute.match(/async function recordQuestionLog[\s
 assert.equal(siteIcon.toString('ascii', 1, 4), 'PNG', 'site icon uses the new PNG app-style mark');
 assert.ok(siteIcon.length > 100000, 'site icon keeps enough raster detail for portal and favicon rendering');
 assert.match(layout, /title: 'Xinbaopedia'/, 'site metadata title is Xinbaopedia');
-assert.match(layout, /icons: \{ icon: pathWithBasePath\('\/xinbaopedia-icon\.png'\) \}/, 'site metadata exposes the base-path-aware PNG site icon');
+assert.match(layout, /const sitePaletteIcons = \{[\s\S]*blue: pathWithBasePath\('\/site-icons\/xinbaopedia-blue\.png'\)[\s\S]*gold: pathWithBasePath\('\/site-icons\/xinbaopedia-gold\.png'\)[\s\S]*green: pathWithBasePath\('\/site-icons\/xinbaopedia-green\.png'\)[\s\S]*charcoal: pathWithBasePath\('\/site-icons\/xinbaopedia-charcoal\.png'\)[\s\S]*\}/, 'layout defines the base-path-aware themed favicon set');
+assert.match(layout, /icons: \{ icon: sitePaletteIcons\.blue \}/, 'site metadata defaults to the morning-blue favicon before client-side time selection');
+assert.match(layout, /import \{ LanguageToggle, SitePalette \} from '@\/components\/LanguageToggle';/, 'layout imports the shared site palette controller');
+assert.match(layout, /<SitePalette icons=\{sitePaletteIcons\} \/>/, 'layout mounts the site palette controller once for every page');
 assert.match(layout, /import 'katex\/dist\/katex\.min\.css';/, 'layout imports KaTeX CSS for rendered formulas');
 assert.doesNotMatch(layout, /wiki-logo-mark|<img className=/, 'topbar uses a text-only wordmark');
 assert.match(layout, /className="wiki-logo"[\s\S]*href=\{pathWithBasePath\('\/'\)\}[\s\S]*wiki-logo-word[\s\S]*Xinbaopedia[\s\S]*wiki-logo-subtitle[\s\S]*The Academic Wiki/, 'topbar wordmark links to the Wikipedia-style portal homepage');
@@ -188,6 +203,12 @@ assert.match(layout, /import \{ getSearchIndex, pathWithBasePath \} from '@\/lib
 assert.match(layout, /const searchIndex = getSearchIndex\(\);/, 'layout builds the search index server-side');
 assert.match(layout, /<WikiSearch items=\{searchIndex\} hideOnPortal \/>/, 'layout keeps topbar search on article pages without duplicating the portal search');
 assert.match(languageToggle, /if \(!decodeURIComponent\(pathname\)\.split\('\/'\)\.includes\('wiki'\)\) return null;/, 'language toggle hides on the portal homepage where language editions are shown in the masthead');
+assert.match(languageToggle, /function sitePaletteForLocalTime\(date = new Date\(\)\): SitePaletteName \{[\s\S]*hour >= 5 && hour < 10[\s\S]*return 'blue'[\s\S]*hour >= 10 && hour < 16[\s\S]*return 'gold'[\s\S]*hour >= 16 && hour < 20[\s\S]*return 'green'[\s\S]*return 'charcoal'[\s\S]*\}/, 'site palette maps local time to morning, midday, evening, and night themes');
+assert.match(languageToggle, /window\.localStorage\.getItem\(sitePaletteStorageKey\)/, 'site palette restores a manual color override from local storage');
+assert.match(languageToggle, /document\.documentElement\.dataset\.sitePalette = palette;/, 'site palette exposes the active color as an html data attribute');
+assert.match(languageToggle, /updateSiteFavicon\(icons\[palette\]\);/, 'site palette updates the browser favicon when the active palette changes');
+assert.match(languageToggle, /window\.setInterval\(applyPalette, 5 \* 60 \* 1000\)/, 'site palette periodically refreshes auto mode as local time changes');
+assert.match(languageToggle, /className="site-palette-switcher"/, 'site palette keeps manual color swatches as a fallback control');
 assert.match(wikiSearch, /hideOnPortal\?: boolean;/, 'search component exposes a homepage suppression prop for the topbar instance');
 assert.match(wikiSearch, /if \(hideOnPortal && isPortalPath\(pathname\)\) return null;/, 'topbar search can hide on the portal homepage');
 assert.doesNotMatch(wikiPageTsx, /Qiao Xinbao Academic Wiki/, 'article metadata no longer uses old Academic Wiki suffix');

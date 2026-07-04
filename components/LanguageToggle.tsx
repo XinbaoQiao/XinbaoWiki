@@ -1,5 +1,7 @@
 'use client';
 
+import type { CSSProperties } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 function withBasePath(pathname: string) {
@@ -42,5 +44,127 @@ export function LanguageToggle() {
     <a className="lang-toggle" href={withBasePath(href)}>
       {isChinesePage ? 'English' : '中文'}
     </a>
+  );
+}
+
+type SitePaletteName = 'blue' | 'gold' | 'green' | 'charcoal';
+type SitePaletteMode = SitePaletteName | 'auto';
+
+type SitePaletteOption = {
+  color: string;
+  mode: SitePaletteMode;
+  title: string;
+};
+
+type SitePaletteProps = {
+  icons: Record<SitePaletteName, string>;
+};
+
+const sitePaletteStorageKey = 'xinbaopedia-palette-mode';
+
+const sitePaletteOptions: SitePaletteOption[] = [
+  { color: '#36c', mode: 'auto', title: 'Auto theme by local time' },
+  { color: '#2b5f94', mode: 'blue', title: 'Morning blue theme' },
+  { color: '#b8871b', mode: 'gold', title: 'Midday gold theme' },
+  { color: '#2a7f62', mode: 'green', title: 'Evening green theme' },
+  { color: '#2f3437', mode: 'charcoal', title: 'Night charcoal theme' }
+];
+
+function isSitePaletteMode(value: string | null): value is SitePaletteMode {
+  return value === 'auto' || value === 'blue' || value === 'gold' || value === 'green' || value === 'charcoal';
+}
+
+function sitePaletteForLocalTime(date = new Date()): SitePaletteName {
+  const hour = date.getHours();
+
+  if (hour >= 5 && hour < 10) return 'blue';
+  if (hour >= 10 && hour < 16) return 'gold';
+  if (hour >= 16 && hour < 20) return 'green';
+  return 'charcoal';
+}
+
+function updateSiteFavicon(href: string) {
+  const selector = 'link[data-site-favicon="true"]';
+  let link = document.querySelector<HTMLLinkElement>(selector);
+
+  if (!link) {
+    link = document.querySelector<HTMLLinkElement>('link[rel~="icon"]');
+  }
+
+  if (!link) {
+    link = document.createElement('link');
+    document.head.appendChild(link);
+  }
+
+  link.dataset.siteFavicon = 'true';
+  link.rel = 'icon';
+  link.type = 'image/png';
+  link.sizes = '512x512';
+  link.href = href;
+}
+
+export function SitePalette({ icons }: SitePaletteProps) {
+  const [mode, setMode] = useState<SitePaletteMode>('auto');
+  const [activePalette, setActivePalette] = useState<SitePaletteName>('blue');
+
+  useEffect(() => {
+    const savedMode = window.localStorage.getItem(sitePaletteStorageKey);
+
+    if (isSitePaletteMode(savedMode)) {
+      setMode(savedMode);
+    }
+  }, []);
+
+  useEffect(() => {
+    const applyPalette = () => {
+      const palette = mode === 'auto' ? sitePaletteForLocalTime() : mode;
+
+      document.documentElement.dataset.sitePalette = palette;
+      setActivePalette(palette);
+      updateSiteFavicon(icons[palette]);
+    };
+
+    applyPalette();
+
+    const intervalId = window.setInterval(applyPalette, 5 * 60 * 1000);
+    return () => window.clearInterval(intervalId);
+  }, [icons, mode]);
+
+  const chooseMode = (nextMode: SitePaletteMode) => {
+    setMode(nextMode);
+
+    if (nextMode === 'auto') {
+      window.localStorage.removeItem(sitePaletteStorageKey);
+      return;
+    }
+
+    window.localStorage.setItem(sitePaletteStorageKey, nextMode);
+  };
+
+  return (
+    <div className="site-palette-switcher" aria-label="Site color theme">
+      {sitePaletteOptions.map((option) => {
+        const pressed = mode === option.mode;
+        const active = option.mode === 'auto' ? mode === 'auto' : activePalette === option.mode;
+        const style = { '--site-palette-swatch': option.color } as CSSProperties;
+
+        return (
+          <button
+            aria-label={option.title}
+            aria-pressed={pressed}
+            className={['site-palette-button', active ? 'is-active' : '', option.mode === 'auto' ? 'site-palette-auto' : '']
+              .filter(Boolean)
+              .join(' ')}
+            key={option.mode}
+            onClick={() => chooseMode(option.mode)}
+            style={style}
+            title={option.title}
+            type="button"
+          >
+            <span className="sr-only">{option.title}</span>
+          </button>
+        );
+      })}
+    </div>
   );
 }

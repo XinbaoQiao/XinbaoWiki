@@ -1,17 +1,24 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { ArticleTabs } from '@/components/ArticleTabs';
-import { LanguageToggle } from '@/components/LanguageToggle';
+import { LanguageToggle, SitePalette } from '@/components/LanguageToggle';
 import { Sidebar } from '@/components/Sidebar';
 import { WikiSearch } from '@/components/WikiSearch';
 import { getSearchIndex, pathWithBasePath } from '@/lib/wiki';
 import 'katex/dist/katex.min.css';
 import './globals.css';
 
+const sitePaletteIcons = {
+  blue: pathWithBasePath('/site-icons/xinbaopedia-blue.png'),
+  gold: pathWithBasePath('/site-icons/xinbaopedia-gold.png'),
+  green: pathWithBasePath('/site-icons/xinbaopedia-green.png'),
+  charcoal: pathWithBasePath('/site-icons/xinbaopedia-charcoal.png')
+};
+
 export const metadata: Metadata = {
   title: 'Xinbaopedia',
   description: 'Personal academic wiki homepage for Qiao Xinbao / Xinbao Qiao.',
-  icons: { icon: pathWithBasePath('/xinbaopedia-icon.png') }
+  icons: { icon: sitePaletteIcons.blue }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
@@ -20,6 +27,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html lang="en">
       <body>
+        <SitePalette icons={sitePaletteIcons} />
         <header className="wiki-topbar">
           <div className="wiki-topbar-inner">
             <a
