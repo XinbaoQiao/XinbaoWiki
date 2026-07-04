@@ -26,7 +26,7 @@ This page records CV-derived facts in wiki form. A resume version is available a
 ## Education
 
 - **The Chinese University of Hong Kong**, PhD student in Information Engineering, 2026-present. Advised by [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/).
-- **Zhejiang University**, M.Sc. in Artificial Intelligence, 2022-09 to 2025-12. Teaching and coursework entries include AI Algorithms and Systems and Secure Artificial Intelligence.
+- **Zhejiang University**, M.Sc. in Artificial Intelligence, 2022-09 to 2025-12.
 - **Shandong University**, B.Eng. in Communication Engineering, 2018-09 to 2022-07.
 
 ## Research interests
