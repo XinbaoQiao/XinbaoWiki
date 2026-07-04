@@ -39,9 +39,15 @@ This page records CV-derived facts in wiki form. A resume version is available a
 
 ## Research experience
 
-- **Doctoral Research at The Chinese University of Hong Kong**, 2026-present, advised by [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/). Work investigates data-centric ML and AI-network co-design, using distributed Wasserstein barycenters to build shared references without pooling raw data (Paper #5).
-- **Research on Data-Centric ML Systems**, 03/2023 to 12/2025, advised by Prof. [Meng Zhang](https://person.zju.edu.cn/mengzhang) at [Zhejiang University](./Zhejiang_University.md). Work developed soft-weighted unlearning, Hessian-free certified unlearning, and efficient random-forest unlearning for trustworthy data deletion and model updates (Papers #2-#4).
-- **Research on Trustworthy LLM systems**, 06/2025 to 12/2025, full-time research intern advised by PANG Yan, James at the National University of Singapore. Work studied recursive synthetic-data training under low-resource sample selection bias and illusory pattern perception in LLMs (Papers #1 and #6).
+- **Doctoral Research at The Chinese University of Hong Kong**, 2026-present, advised by [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/). Work centers on federated representation learning through optimal-transport prototypes in networked AI systems.
+  - Paper #5: barycentric multi-prototype classification for federated representation geometry.
+- **Research on Data-Centric ML Systems**, 03/2023 to 12/2025, advised by Prof. [Meng Zhang](https://person.zju.edu.cn/mengzhang) at [Zhejiang University](./Zhejiang_University.md). Work centers on machine unlearning for non-binary erasure, online certified deletion, and dynamic random forests.
+  - Paper #2: soft-weighted unlearning for fairness and robustness beyond binary erasure.
+  - Paper #3: Hessian-free online certified unlearning based on recollected trajectory statistics.
+  - Paper #4: efficient random-forest unlearning in dynamic online environments.
+- **Research on Trustworthy LLM systems**, 06/2025 to 12/2025, full-time research intern advised by PANG Yan, James at the National University of Singapore. Work centers on reliability analysis for recursive synthetic-data training and LLM inference behavior.
+  - Paper #1: sample selection bias precipitating model collapse in recursive synthetic-data training.
+  - Paper #6: illusory pattern perception driving spurious inference in large language models.
 
 ## Open-Source Contributions and Services
 
@@ -55,16 +61,16 @@ See [Publications](./Publications.md). The CV lists accepted, published, and und
 
 - **Paper #1: When Sample Selection Bias Precipitates Model Collapse**.\
   **Xinbao Qiao**, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, Yan Pang.\
-  Forty-Third International Conference on Machine Learning, ICML, 2026. Links: [OpenReview](https://openreview.net/forum?id=FFXvnzM254), [Code](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse), [ICML 2026](https://icml.cc/Conferences/2026).
+  Forty-Third International Conference on Machine Learning, ICML, 2026. Links: [OpenReview](https://openreview.net/forum?id=FFXvnzM254), [GitHub](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse).
 - **Paper #2: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**.\
   **Xinbao Qiao**, Ningning Ding, Yushi Cheng, Meng Zhang.\
-  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026. Links: [arXiv](https://arxiv.org/abs/2505.18783), [Code](https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning), [AAAI lecture page](https://underline.io/lecture/139759-beyond-binary-erasure-soft-weighted-unlearning-for-fairness-and-robustness), [AAAI 2026](https://aaai.org/conference/aaai/aaai-26/).
+  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026. Links: [arXiv](https://arxiv.org/abs/2505.18783), [GitHub](https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning).
 - **Paper #3: Hessian-Free Online Certified Unlearning**.\
   **Xinbao Qiao**, Meng Zhang, Ming Tang, Ermin Wei.\
-  Thirteenth International Conference on Learning Representations, ICLR, 2025. Links: [OpenReview](https://openreview.net/forum?id=C3TrHWanh5), [arXiv](https://arxiv.org/abs/2404.01712), [Code](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning).
+  Thirteenth International Conference on Learning Representations, ICLR, 2025. Links: [OpenReview](https://openreview.net/forum?id=C3TrHWanh5), [arXiv](https://arxiv.org/abs/2404.01712), [GitHub](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning).
 - **Paper #4: DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**.\
   Shurong Wang, Zhuoyang Shen, **Xinbao Qiao**, Tongning Zhang, Meng Zhang.\
-  Thirteenth International Conference on Learning Representations, ICLR, 2025. Links: [OpenReview](https://openreview.net/forum?id=nsCOeCLR8e), [arXiv](https://arxiv.org/abs/2410.01588), [Code](https://github.com/shurongwang/DynFrs).
+  Thirteenth International Conference on Learning Representations, ICLR, 2025. Links: [OpenReview](https://openreview.net/forum?id=nsCOeCLR8e), [arXiv](https://arxiv.org/abs/2410.01588), [GitHub](https://github.com/shurongwang/DynFrs).
 - **Paper #5: Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification**.\
   **Xinbao Qiao**, Wenjing Yan, Ying-Jun Angela Zhang.\
   Under review.

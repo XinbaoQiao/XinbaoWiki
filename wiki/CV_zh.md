@@ -37,9 +37,15 @@ translation_of: CV
 
 ## 研究经历
 
-- **香港中文大学博士阶段研究**，2026 年至今，导师 [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/)。研究数据中心 ML 与 AI-网络协同设计，使用分布式 Wasserstein barycenter 在不汇聚原始数据的条件下构造共享参考（Paper #5）。
-- **Research on Data-Centric ML Systems**，2023-03 至 2025-12，导师 Prof. [Meng Zhang](https://person.zju.edu.cn/mengzhang)，机构 [[Zhejiang_University|浙江大学]]。研究软加权机器遗忘、无 Hessian 认证遗忘和高效随机森林遗忘，用于可信的数据删除和模型更新（Papers #2-#4）。
-- **Research on Trustworthy LLM systems**，2025-06 至 2025-12，全职研究实习，导师 PANG Yan, James，机构 National University of Singapore。研究低资源样本选择偏差下的递归合成数据训练，以及 LLM 的错觉模式感知问题（Papers #1 与 #6）。
+- **香港中文大学博士阶段研究**，2026 年至今，导师 [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/)。研究网络化 AI 系统中的联邦表示学习和最优传输原型。
+  - Paper #5：用于联邦表示几何的 barycentric multi-prototype classification。
+- **Research on Data-Centric ML Systems**，2023-03 至 2025-12，导师 Prof. [Meng Zhang](https://person.zju.edu.cn/mengzhang)，机构 [[Zhejiang_University|浙江大学]]。研究非二元删除、在线认证删除和动态随机森林中的机器遗忘问题。
+  - Paper #2：面向公平性和鲁棒性的 soft-weighted unlearning。
+  - Paper #3：基于 recollected trajectory statistics 的无 Hessian 在线认证遗忘。
+  - Paper #4：动态在线环境中的高效随机森林遗忘。
+- **Research on Trustworthy LLM systems**，2025-06 至 2025-12，全职研究实习，导师 PANG Yan, James，机构 National University of Singapore。研究递归合成数据训练和 LLM 推理行为中的可靠性问题。
+  - Paper #1：递归合成数据训练中的样本选择偏差与模型坍缩。
+  - Paper #6：大语言模型中的错觉模式感知与虚假推理。
 
 ## 开源贡献与学术服务
 
@@ -53,16 +59,16 @@ translation_of: CV
 
 - **Paper #1: When Sample Selection Bias Precipitates Model Collapse**。\
   **乔鑫宝**、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌、Yan Pang。\
-  Forty-Third International Conference on Machine Learning, ICML, 2026。链接：[OpenReview](https://openreview.net/forum?id=FFXvnzM254)、[Code](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse)、[ICML 2026](https://icml.cc/Conferences/2026)。
+  Forty-Third International Conference on Machine Learning, ICML, 2026。链接：[OpenReview](https://openreview.net/forum?id=FFXvnzM254)、[GitHub](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse)。
 - **Paper #2: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**。\
   **乔鑫宝**、Ningning Ding、Yushi Cheng、张萌。\
-  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026。链接：[arXiv](https://arxiv.org/abs/2505.18783)、[Code](https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning)、[AAAI lecture page](https://underline.io/lecture/139759-beyond-binary-erasure-soft-weighted-unlearning-for-fairness-and-robustness)、[AAAI 2026](https://aaai.org/conference/aaai/aaai-26/)。
+  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026。链接：[arXiv](https://arxiv.org/abs/2505.18783)、[GitHub](https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning)。
 - **Paper #3: Hessian-Free Online Certified Unlearning**。\
   **乔鑫宝**、张萌、Ming Tang、Ermin Wei。\
-  Thirteenth International Conference on Learning Representations, ICLR, 2025。链接：[OpenReview](https://openreview.net/forum?id=C3TrHWanh5)、[arXiv](https://arxiv.org/abs/2404.01712)、[Code](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning)。
+  Thirteenth International Conference on Learning Representations, ICLR, 2025。链接：[OpenReview](https://openreview.net/forum?id=C3TrHWanh5)、[arXiv](https://arxiv.org/abs/2404.01712)、[GitHub](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning)。
 - **Paper #4: DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**。\
   Shurong Wang、Zhuoyang Shen、**乔鑫宝**、Tongning Zhang、张萌。\
-  Thirteenth International Conference on Learning Representations, ICLR, 2025。链接：[OpenReview](https://openreview.net/forum?id=nsCOeCLR8e)、[arXiv](https://arxiv.org/abs/2410.01588)、[Code](https://github.com/shurongwang/DynFrs)。
+  Thirteenth International Conference on Learning Representations, ICLR, 2025。链接：[OpenReview](https://openreview.net/forum?id=nsCOeCLR8e)、[arXiv](https://arxiv.org/abs/2410.01588)、[GitHub](https://github.com/shurongwang/DynFrs)。
 - **Paper #5: Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification**。\
   **乔鑫宝**、Wenjing Yan、Ying-Jun Angela Zhang。\
   Under review.

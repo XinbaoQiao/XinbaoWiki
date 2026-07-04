@@ -93,9 +93,8 @@
 \newcommand{\icongithub}[1]{\textcolor{#1}{\faBrandIcon{F09B}}}
 \newcommand{\iconlinkedin}[1]{\textcolor{#1}{\faBrandIcon{F08C}}}
 \newcommand{\iconscholar}[1]{\textcolor{#1}{\faSolidIcon{F19D}}}
-\newcommand{\iconpdf}[1]{\textcolor{#1}{\faSolidIcon{F1C1}}}
+\newcommand{\iconopenreview}[1]{\textcolor{#1}{\faSolidIcon{F4AD}}}
 \newcommand{\iconarxiv}[1]{\textcolor{#1}{\faSolidIcon{F187}}}
-\newcommand{\iconplay}[1]{\textcolor{#1}{\faSolidIcon{F144}}}
 \newcommand{\iconlink}[2]{\href{#1}{#2}}
 \newcommand{\contactSolidIcon}[2]{\textcolor{#1}{\raisebox{0.18pt}{\scalebox{0.84}{{\faSolid\char"#2\relax}}}}}
 \newcommand{\contactBrandIcon}[2]{\textcolor{#1}{\raisebox{0.18pt}{\scalebox{0.84}{{\faBrands\char"#2\relax}}}}}
@@ -136,6 +135,11 @@
   \end{tabularx}\vspace{-9.45pt}\par
   #3
 }
+\newcommand{\cvrowstage}[2]{%
+  \noindent\begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{1.70in}@{}}
+    #1 & #2
+  \end{tabularx}\vspace{-2.30pt}\par
+}
 \newcommand{\cvrowshortdate}[3]{%
   \noindent\begin{tabularx}{\linewidth}{@{}X>{\raggedleft\arraybackslash}p{1.30in}@{}}
     #1 & #2
@@ -154,18 +158,28 @@
     {\leavevmode\llap{\makebox[\experienceBulletWidth][l]{\cvbullet}}#2} & \paperlabel{#1}
   \end{tabularx}\vspace{-8.25pt}
 }
+\newcommand{\stagebrief}[1]{%
+  {\leftskip=\experienceLeftPad
+   \sourceLight\fontsize{8.92}{9.95}\selectfont\color{cvtext}#1\par}%
+  \vspace{-3.45pt}
+}
+\newcommand{\serviceicon}[1]{\raisebox{-0.55pt}{\fontsize{6.75}{7.05}\selectfont #1}}
 \newcommand{\servicerowicon}[3]{%
   {\leftskip=\experienceLeftPad
    \fontsize{8.55}{9.05}\selectfont\color{cvtext}%
-   \raisebox{-0.20pt}{\fontsize{6.75}{7.05}\selectfont #1}%
+   \serviceicon{#1}%
    \hspace{3.90pt}{\bfseries #2}, #3\par}%
   \vspace{0.35pt}
 }
 \newcommand{\plinksep}{\hspace{2.3pt}}
+\newcommand{\pubiconbox}[1]{\raisebox{-0.45pt}[0pt][0pt]{\fontsize{7.05}{7.55}\selectfont #1}}
 \newcommand{\pubright}[2]{%
-  {\fontsize{7.05}{7.55}\selectfont #1}%
-  \if\relax\detokenize{#1}\relax\else\hspace{6.0pt}\fi
-  {\sourceLight\mdseries\fontsize{8.05}{8.55}\selectfont\itshape\color{cvtext}#2}%
+  \raisebox{-7.95pt}[0pt][0pt]{%
+    \makebox[\linewidth][r]{%
+      \if\relax\detokenize{#1}\relax\else{\pubiconbox{#1}}\hspace{6.0pt}\fi
+      {\sourceLight\mdseries\fontsize{8.05}{8.55}\selectfont\itshape\color{cvtext}#2}%
+    }%
+  }%
 }
 \newcommand{\red}[1]{\textcolor{cvred}{#1}}
 \newcommand{\pubnote}[1]{%
@@ -197,15 +211,18 @@
 \vspace{17.0pt}
 
 \cvsection{Experience}
-\cvrow{\entrytitle{Doctoral Research @ The Chinese University of Hong Kong}}{\entryright{Hong Kong. 2026 \datesep{} present}}{}
-\paperitem{Paper \#5}{Investigate data-centric ML and AI-network co-design, using distributed Wasserstein barycenters to build shared references without pooling raw data.}
-\cvrow{\entrytitle{Research on Data-Centric ML Systems @ Zhejiang University}}{\entryright{Zhejiang. Mar 2023 \datesep{} Dec 2025}}{}
-\paperitem{Paper \#2}{Proposed soft-weighted unlearning to modulate data influence continuously, improving fairness and robustness beyond binary erasure.}
-\paperitem{Paper \#3}{Built Hessian-free certified unlearning with recollected trajectory statistics, enabling online deletions without explicit Hessian inversion.}
-\paperitem{Paper \#4}{Designed efficient random-forest unlearning for dynamic data streams, preserving utility under incremental updates.}
-\cvrow{\entrytitle{Research on Trustworthy LLM Systems @ NUSRI CQ}}{\entryright{Chongqing. Jun 2025 \datesep{} Dec 2025}}{}
-\paperitem{Paper \#1}{Analyzed recursive synthetic-data training under low-resource sample selection bias and introduced collaborative Wasserstein evaluation proxies.}
-\paperitem{Paper \#6}{Studied illusory pattern perception in LLMs, connecting spurious inference behavior to interpretable model responses.}
+\cvrowstage{\entrytitle{Doctoral Research @ The Chinese University of Hong Kong}}{\entryright{Hong Kong. 2026 \datesep{} present}}
+\stagebrief{Federated representation learning through optimal-transport prototypes in networked AI systems.}
+\paperitem{Paper \#5}{Barycentric multi-prototype classification for federated representation geometry.}
+\cvrowstage{\entrytitle{Research on Data-Centric ML Systems @ Zhejiang University}}{\entryright{Zhejiang. Mar 2023 \datesep{} Dec 2025}}
+\stagebrief{Machine unlearning for non-binary erasure, online certified deletion, and dynamic random forests.}
+\paperitem{Paper \#2}{Soft-weighted unlearning for fairness and robustness beyond binary erasure.}
+\paperitem{Paper \#3}{Hessian-free online certified unlearning based on recollected trajectory statistics.}
+\paperitem{Paper \#4}{Efficient random-forest unlearning in dynamic online environments.}
+\cvrowstage{\entrytitle{Research on Trustworthy LLM Systems @ NUSRI CQ}}{\entryright{Chongqing. Jun 2025 \datesep{} Dec 2025}}
+\stagebrief{Reliability analysis for recursive synthetic-data training and LLM inference behavior.}
+\paperitem{Paper \#1}{Sample selection bias precipitating model collapse in recursive synthetic-data training.}
+\paperitem{Paper \#6}{Illusory pattern perception driving spurious inference in large language models.}
 
 \vspace{9.0pt}
 \cvsection{Open-Source Contributions and Services}
@@ -222,7 +239,7 @@
 \pubentry{When \red{Sample Selection Bias} Precipitates \red{Model Collapse}}
 {\textbf{Xinbao Qiao}, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, Yan Pang}
 {Low-resource verification can turn local sample selection into persistent tail pruning.}
-{\iconlink{https://openreview.net/forum?id=FFXvnzM254}{\iconpdf{cvblue}}\plinksep\iconlink{https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse}{\icongithub{cvblue}}}
+{\iconlink{https://openreview.net/forum?id=FFXvnzM254}{\iconopenreview{cvblue}}\plinksep\iconlink{https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse}{\icongithub{cvblue}}}
 {ICML 2026.}
 \pubentry{Beyond Binary Erasure: \red{Soft-Weighted Unlearning} for Fairness and Robustness}
 {\textbf{Xinbao Qiao}, Ningning Ding, Yushi Cheng, Meng Zhang}
@@ -232,12 +249,12 @@
 \pubentry{\red{Hessian-Free} Online Certified Unlearning}
 {\textbf{Xinbao Qiao}, Meng Zhang, Ming Tang, Ermin Wei}
 {Certified unlearning without explicit Hessian inversion through recollected statistics.}
-{\iconlink{https://openreview.net/forum?id=C3TrHWanh5}{\iconpdf{cvblue}}\plinksep\iconlink{https://arxiv.org/abs/2404.01712}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning}{\icongithub{cvblue}}}
+{\iconlink{https://openreview.net/forum?id=C3TrHWanh5}{\iconopenreview{cvblue}}\plinksep\iconlink{https://arxiv.org/abs/2404.01712}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning}{\icongithub{cvblue}}}
 {ICLR 2025.}
 \pubentry{\red{DynFrs}: An Efficient Framework for Machine Unlearning in Random Forest}
 {Shurong Wang, Zhuoyang Shen, \textbf{Xinbao Qiao}, Tongning Zhang, Meng Zhang}
 {Exact and efficient random-forest unlearning in dynamic environments.}
-{\iconlink{https://openreview.net/forum?id=nsCOeCLR8e}{\iconpdf{cvblue}}\plinksep\iconlink{https://arxiv.org/abs/2410.01588}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/shurongwang/DynFrs}{\icongithub{cvblue}}}
+{\iconlink{https://openreview.net/forum?id=nsCOeCLR8e}{\iconopenreview{cvblue}}\plinksep\iconlink{https://arxiv.org/abs/2410.01588}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/shurongwang/DynFrs}{\icongithub{cvblue}}}
 {ICLR 2025.}
 \pubentry{\red{Federated Learning as Optimal Transport}: Barycentric Multi-Prototype Classification}
 {\textbf{Xinbao Qiao}, Wenjing Yan, Ying-Jun Angela Zhang}
