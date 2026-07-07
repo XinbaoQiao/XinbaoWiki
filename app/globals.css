@@ -1279,12 +1279,25 @@ body:has(.wiki-portal) .wiki-topbar {
 }
 
 .wiki-portal-name-text {
-  animation: wiki-name-write 1.35s cubic-bezier(.21, .8, .22, 1) .1s both;
+  --signature-ink: var(--site-theme-heading);
+  animation: wiki-name-write 1.65s cubic-bezier(.33, 0, .2, 1) .12s both;
   transform-origin: left center;
   display: inline-block;
   max-width: 100%;
+  color: var(--signature-ink);
   line-height: .95;
   white-space: nowrap;
+}
+
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .wiki-portal-name-text {
+    background-image: linear-gradient(90deg, var(--signature-ink), var(--signature-ink));
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 }
 
 .wiki-portal-search {
@@ -1386,16 +1399,16 @@ body:has(.wiki-portal) .wiki-topbar {
 
 @keyframes wiki-name-write {
   from {
-    clip-path: inset(0 100% 0 0);
-    opacity: .55;
+    background-size: 0% 100%;
+    opacity: .72;
   }
 
-  58% {
+  52% {
     opacity: 1;
   }
 
   to {
-    clip-path: inset(0);
+    background-size: 100% 100%;
     opacity: 1;
   }
 }
