@@ -181,6 +181,8 @@ for (const logoPath of themedSiteWordmarks) {
   const logo = fs.readFileSync(path.join(root, logoPath));
   assert.deepEqual(pngDimensions(logo), { width: 760, height: 190 }, `${logoPath} uses the shared transparent homepage wordmark canvas`);
   assert.ok(logo.length > 20000 && logo.length < 80000, `${logoPath} is a compact flattened homepage wordmark instead of publishing the full source artwork`);
+  const alphaBounds = execFileSync('convert', [logoPath, '-alpha', 'extract', '-trim', '-format', '%wx%h+%X+%Y', 'info:'], { cwd: root, encoding: 'utf8' });
+  assert.equal(alphaBounds, '633x150++63++20', `${logoPath} uses the flat logo mask without the decorative outline`);
   const flattenedColorCount = Number(execFileSync('convert', [logoPath, '-alpha', 'off', '-format', '%k', 'info:'], { cwd: root, encoding: 'utf8' }));
   assert.equal(flattenedColorCount, 1, `${logoPath} uses one visible RGB color so the exported wordmark has no separate outline color`);
 }
