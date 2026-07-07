@@ -180,7 +180,9 @@ for (const logoPath of themedSiteWordmarks) {
   assertFile(logoPath);
   const logo = fs.readFileSync(path.join(root, logoPath));
   assert.deepEqual(pngDimensions(logo), { width: 760, height: 190 }, `${logoPath} uses the shared transparent homepage wordmark canvas`);
-  assert.ok(logo.length > 50000 && logo.length < 160000, `${logoPath} is trimmed for homepage use instead of publishing the full source artwork`);
+  assert.ok(logo.length > 20000 && logo.length < 80000, `${logoPath} is a compact flattened homepage wordmark instead of publishing the full source artwork`);
+  const flattenedColorCount = Number(execFileSync('convert', [logoPath, '-alpha', 'off', '-format', '%k', 'info:'], { cwd: root, encoding: 'utf8' }));
+  assert.equal(flattenedColorCount, 1, `${logoPath} uses one visible RGB color so the exported wordmark has no separate outline color`);
 }
 const languageToggle = fs.readFileSync(path.join(root, 'components/LanguageToggle.tsx'), 'utf8');
 const articleTabs = fs.readFileSync(path.join(root, 'components/ArticleTabs.tsx'), 'utf8');
@@ -755,6 +757,7 @@ assert.match(styles, /\.wiki-portal-name-logo \{[\s\S]*display: none;[\s\S]*widt
 assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.wiki-portal-name \{[\s\S]*font-size: 84px;[\s\S]*\}[\s\S]*\.wiki-portal-name-button \{[\s\S]*width: min\(420px, 88vw\);[\s\S]*\}/, 'homepage keeps text and logo wordmark sizes aligned on mobile');
 assert.match(styles, /@media \(max-width: 420px\) \{[\s\S]*\.wiki-portal-name \{[\s\S]*font-size: 72px;[\s\S]*\}[\s\S]*\}[\s\S]*@media \(max-width: 360px\) \{[\s\S]*\.wiki-portal-name \{[\s\S]*font-size: 64px;[\s\S]*\}/, 'homepage pure text signature has fixed small-screen sizes to avoid overflow');
 assert.match(styles, /html\[data-site-palette="blue"\] \.wiki-portal-name-logo-blue,[\s\S]*html\[data-site-palette="gold"\] \.wiki-portal-name-logo-gold,[\s\S]*html\[data-site-palette="green"\] \.wiki-portal-name-logo-green,[\s\S]*html\[data-site-palette="charcoal"\] \.wiki-portal-name-logo-charcoal \{[\s\S]*display: block;[\s\S]*\}/, 'homepage shows the matching logo-pack wordmark for each color theme');
+assert.match(styles, /\.wiki-portal-name-text,[\s\S]*\.wiki-portal-name-logo \{[\s\S]*animation: wiki-name-write 1\.35s cubic-bezier\(\.21, \.8, \.22, 1\) \.1s both;[\s\S]*\}/, 'homepage name reveal uses a slower handwriting-like animation speed');
 assert.match(styles, /@keyframes wiki-name-write \{[\s\S]*clip-path: inset\(0 100% 0 0\);[\s\S]*clip-path: inset\(0\);[\s\S]*\}/, 'homepage name uses a left-to-right writing-style reveal animation');
 assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.wiki-portal-name-text,[\s\S]*\.wiki-portal-name-logo,[\s\S]*\.wiki-portal-collapsed \{[\s\S]*animation: none;[\s\S]*\}/, 'homepage name reveal animation honors reduced-motion settings');
 const signatureFocusStyle = styles.match(/\.wiki-portal-name-button:focus-visible \{([\s\S]*?)\}/);

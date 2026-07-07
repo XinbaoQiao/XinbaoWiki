@@ -1267,7 +1267,7 @@ body:has(.wiki-portal) .wiki-topbar {
 .wiki-portal-name-text,
 .wiki-portal-name-logo {
   grid-area: 1 / 1;
-  animation: wiki-name-write .95s cubic-bezier(.21, .8, .22, 1) .1s both;
+  animation: wiki-name-write 1.35s cubic-bezier(.21, .8, .22, 1) .1s both;
   transform-origin: left center;
 }
 
