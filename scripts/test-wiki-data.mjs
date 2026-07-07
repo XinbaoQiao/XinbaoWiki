@@ -179,12 +179,12 @@ const themedSiteWordmarks = [
 for (const logoPath of themedSiteWordmarks) {
   assertFile(logoPath);
   const logo = fs.readFileSync(path.join(root, logoPath));
-  assert.deepEqual(pngDimensions(logo), { width: 760, height: 190 }, `${logoPath} uses the shared transparent homepage wordmark canvas`);
-  assert.ok(logo.length > 20000 && logo.length < 80000, `${logoPath} is a compact flattened homepage wordmark instead of publishing the full source artwork`);
+  assert.deepEqual(pngDimensions(logo), { width: 641, height: 158 }, `${logoPath} is cropped to the visible homepage wordmark instead of keeping the rectangular source canvas`);
+  assert.ok(logo.length > 20000 && logo.length < 50000, `${logoPath} is a compact flattened homepage wordmark instead of publishing the full source artwork`);
   const alphaBounds = execFileSync('convert', [logoPath, '-alpha', 'extract', '-trim', '-format', '%wx%h+%X+%Y', 'info:'], { cwd: root, encoding: 'utf8' });
-  assert.equal(alphaBounds, '633x150++63++20', `${logoPath} uses the flat logo mask without the decorative outline`);
-  const flattenedColorCount = Number(execFileSync('convert', [logoPath, '-alpha', 'off', '-format', '%k', 'info:'], { cwd: root, encoding: 'utf8' }));
-  assert.equal(flattenedColorCount, 1, `${logoPath} uses one visible RGB color so the exported wordmark has no separate outline color`);
+  assert.equal(alphaBounds, '633x150++4++4', `${logoPath} keeps only a small transparent guard around the visible logo`);
+  const visibleColorCount = Number(execFileSync('convert', [logoPath, '-trim', '+repage', '-alpha', 'off', '-format', '%k', 'info:'], { cwd: root, encoding: 'utf8' }));
+  assert.ok(visibleColorCount <= 2, `${logoPath} uses a flat visible logo color without a separate decorative outline`);
 }
 const languageToggle = fs.readFileSync(path.join(root, 'components/LanguageToggle.tsx'), 'utf8');
 const articleTabs = fs.readFileSync(path.join(root, 'components/ArticleTabs.tsx'), 'utf8');
@@ -752,10 +752,13 @@ assert.match(styles, /body:has\(\.wiki-portal\) \.wiki-footer,[\s\S]*body:has\(\
 assert.match(styles, /\.wiki-portal-hero \{[\s\S]*max-width: 760px;[\s\S]*text-align: center;[\s\S]*\}/, 'homepage has a centered compact Wikipedia-style portal hero');
 assert.match(styles, /--font-signature: "Alex Brush"/, 'homepage signature typography uses Alex Brush');
 assert.match(styles, /\.wiki-portal-name \{[\s\S]*font-family: var\(--font-signature\);[\s\S]*font-size: 124px;[\s\S]*\}/, 'homepage starts directly with a logo-sized Xinbao Qiao in the Alex Brush signature face');
-assert.match(styles, /\.wiki-portal-name-button \{[\s\S]*appearance: none;[\s\S]*-webkit-appearance: none;[\s\S]*display: inline-block;[\s\S]*max-width: min\(620px, 86vw\);[\s\S]*font: inherit;[\s\S]*cursor: pointer;[\s\S]*user-select: none;[\s\S]*-webkit-tap-highlight-color: transparent;[\s\S]*\}/, 'homepage signature name uses pure text without native button chrome or a fixed image box');
+assert.match(styles, /\.wiki-portal-name-button \{[\s\S]*appearance: none;[\s\S]*-webkit-appearance: none;[\s\S]*display: inline-grid;[\s\S]*place-items: center;[\s\S]*max-width: min\(620px, 86vw\);[\s\S]*font: inherit;[\s\S]*cursor: pointer;[\s\S]*user-select: none;[\s\S]*-webkit-tap-highlight-color: transparent;[\s\S]*\}/, 'homepage signature name removes native button chrome while centering the themed logo or text');
 assert.match(styles, /\.wiki-portal-name-text \{[\s\S]*max-width: 100%;[\s\S]*line-height: \.95;[\s\S]*white-space: nowrap;[\s\S]*\}/, 'homepage pure text signature stays centered inside the shared wordmark box');
 assert.match(styles, /\.site-palette-text \{[\s\S]*linear-gradient\(135deg,[\s\S]*#202122[\s\S]*\}/, 'site palette switcher includes a compact text-theme swatch');
-assert.doesNotMatch(styles, /wiki-portal-name-logo|wiki-portal-name-logos|html\[data-site-palette="blue"\] \.wiki-portal-name-text/, 'homepage no longer has an image wordmark display box that can draw a rectangle');
+assert.match(styles, /\.wiki-portal-name-logo \{[\s\S]*display: none;[\s\S]*width: 100%;[\s\S]*height: auto;[\s\S]*max-height: 124px;[\s\S]*object-fit: contain;[\s\S]*\}/, 'homepage themed logo images use responsive cropped image sizing');
+assert.match(styles, /\.wiki-main \.wiki-portal-name-logo \{[\s\S]*border: 0;[\s\S]*outline: 0;[\s\S]*background: transparent;[\s\S]*box-shadow: none;[\s\S]*margin: 0;[\s\S]*\}/, 'homepage themed logo images override article image borders and background');
+assert.match(styles, /html\[data-site-palette="blue"\] \.wiki-portal-name-text,[\s\S]*html\[data-site-palette="charcoal"\] \.wiki-portal-name-text \{[\s\S]*display: none;[\s\S]*\}/, 'homepage hides the pure text name when a color logo theme is active');
+assert.match(styles, /html\[data-site-palette="blue"\] \.wiki-portal-name-logo-blue,[\s\S]*html\[data-site-palette="gold"\] \.wiki-portal-name-logo-gold,[\s\S]*html\[data-site-palette="green"\] \.wiki-portal-name-logo-green,[\s\S]*html\[data-site-palette="charcoal"\] \.wiki-portal-name-logo-charcoal \{[\s\S]*display: block;[\s\S]*\}/, 'homepage displays the matching color logo for each theme');
 const signatureInteractionStyle = styles.match(/\.wiki-portal-name-button:hover,[\s\S]*\.wiki-portal-name-button:active \{([\s\S]*?)\}/);
 assert.ok(signatureInteractionStyle, 'homepage signature interaction style block exists');
 assert.match(signatureInteractionStyle[1], /border: 0;[\s\S]*outline: 0;[\s\S]*background: transparent;[\s\S]*box-shadow: none;/, 'homepage signature button removes the long rectangular browser frame in every interaction state');
@@ -800,9 +803,10 @@ assert.doesNotMatch(homePage, /slug\.replaceAll\('_', ' '\)/, 'homepage director
 assert.doesNotMatch(homePage, /wiki-portal-emblem|\/xinbaopedia-icon\.png/, 'homepage no longer renders the in-page icon');
 assert.match(homepagePortal, /className="wiki-portal-name"[\s\S]*Xinbao Qiao/, 'homepage uses Xinbao Qiao as the central portal name');
 assert.match(homepagePortal, /wiki-portal-name-text[\s\S]*Xinbao Qiao/, 'homepage keeps the pure text signature as the central name');
-assert.doesNotMatch(homepagePortal, /wiki-portal-name-logos|wiki-portal-name-logo|<img|\/site-logos\/wordmark|height=\{190\}/, 'homepage does not render image wordmarks or their rectangular image canvas');
 assert.match(homePage, /Academic biography and research overview[\s\S]*个人学术条目与研究概览/, 'homepage keeps primary English and Chinese profile links below the search');
 assert.match(homepagePortal, /<WikiSearch[\s\S]*language=\{language\}[\s\S]*onLanguageChange=\{setLanguage\}[\s\S]*showLanguageSelect[\s\S]*variant="portal"/, 'homepage search controls the portal language state');
+assert.match(homepagePortal, /wiki-portal-name-logos[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-blue\.png[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-gold\.png[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-green\.png[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-charcoal\.png/, 'homepage renders the themed Xinbao Qiao logo images for color themes');
+assert.doesNotMatch(homepagePortal, /height=\{190\}|width=\{760\}/, 'homepage no longer renders the old rectangular logo canvas dimensions');
 assert.match(homepagePortal, /const browseLabels[\s\S]*en: 'Browse Xinbaopedia'[\s\S]*zh: '浏览 Xinbaopedia'/, 'homepage Browse heading has English and Chinese labels');
 assert.match(homepagePortal, /const \[browseOpen, setBrowseOpen\] = useState\(true\);/, 'homepage browse directory is open by default');
 assert.match(homepagePortal, /const collapsibleSections = \{ browse: browseOpen \};[\s\S]*const allSectionsClosed = Object\.values\(collapsibleSections\)\.every\(\(open\) => !open\);[\s\S]*wiki-portal-collapsed/, 'homepage computes a reusable all-collapsibles-closed state');

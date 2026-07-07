@@ -71,6 +71,40 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
                 onClick={toggleAllSections}
                 onDoubleClick={collapseAllSections}
               >
+                <span className="wiki-portal-name-logos" aria-hidden="true">
+                  <img
+                    alt=""
+                    className="wiki-portal-name-logo wiki-portal-name-logo-blue"
+                    decoding="async"
+                    height={158}
+                    src="/site-logos/wordmark/xinbao-qiao-blue.png"
+                    width={641}
+                  />
+                  <img
+                    alt=""
+                    className="wiki-portal-name-logo wiki-portal-name-logo-gold"
+                    decoding="async"
+                    height={158}
+                    src="/site-logos/wordmark/xinbao-qiao-gold.png"
+                    width={641}
+                  />
+                  <img
+                    alt=""
+                    className="wiki-portal-name-logo wiki-portal-name-logo-green"
+                    decoding="async"
+                    height={158}
+                    src="/site-logos/wordmark/xinbao-qiao-green.png"
+                    width={641}
+                  />
+                  <img
+                    alt=""
+                    className="wiki-portal-name-logo wiki-portal-name-logo-charcoal"
+                    decoding="async"
+                    height={158}
+                    src="/site-logos/wordmark/xinbao-qiao-charcoal.png"
+                    width={641}
+                  />
+                </span>
                 <span className="wiki-portal-name-text">Xinbao Qiao</span>
               </button>
             </h1>

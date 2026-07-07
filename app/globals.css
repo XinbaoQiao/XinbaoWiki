@@ -1249,7 +1249,8 @@ body:has(.wiki-portal) .wiki-topbar {
 .wiki-portal-name-button {
   appearance: none;
   -webkit-appearance: none;
-  display: inline-block;
+  display: inline-grid;
+  place-items: center;
   max-width: min(620px, 86vw);
   margin: 0;
   padding: 0;
@@ -1278,8 +1279,37 @@ body:has(.wiki-portal) .wiki-topbar {
   border: 0;
 }
 
+.wiki-portal-name-logos,
+.wiki-portal-name-logo {
+  grid-area: 1 / 1;
+}
+
+.wiki-portal-name-logos {
+  display: none;
+  width: min(620px, 86vw);
+  max-width: 100%;
+  line-height: 0;
+}
+
+.wiki-portal-name-logo {
+  display: none;
+  width: 100%;
+  height: auto;
+  max-height: 124px;
+  object-fit: contain;
+}
+
+.wiki-main .wiki-portal-name-logo {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  box-shadow: none;
+  margin: 0;
+}
+
 .wiki-portal-name-text {
   --signature-ink: var(--site-theme-heading);
+  grid-area: 1 / 1;
   animation: wiki-name-write 1.65s cubic-bezier(.33, 0, .2, 1) .12s both;
   transform-origin: left center;
   display: inline-block;
@@ -1298,6 +1328,28 @@ body:has(.wiki-portal) .wiki-topbar {
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+}
+
+html[data-site-palette="blue"] .wiki-portal-name-text,
+html[data-site-palette="gold"] .wiki-portal-name-text,
+html[data-site-palette="green"] .wiki-portal-name-text,
+html[data-site-palette="charcoal"] .wiki-portal-name-text {
+  display: none;
+}
+
+html[data-site-palette="blue"] .wiki-portal-name-logos,
+html[data-site-palette="gold"] .wiki-portal-name-logos,
+html[data-site-palette="green"] .wiki-portal-name-logos,
+html[data-site-palette="charcoal"] .wiki-portal-name-logos {
+  display: block;
+  animation: wiki-logo-arrive 1.05s cubic-bezier(.23, 1, .32, 1) .08s both;
+}
+
+html[data-site-palette="blue"] .wiki-portal-name-logo-blue,
+html[data-site-palette="gold"] .wiki-portal-name-logo-gold,
+html[data-site-palette="green"] .wiki-portal-name-logo-green,
+html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
+  display: block;
 }
 
 .wiki-portal-search {
@@ -1410,6 +1462,18 @@ body:has(.wiki-portal) .wiki-topbar {
   to {
     background-size: 100% 100%;
     opacity: 1;
+  }
+}
+
+@keyframes wiki-logo-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
