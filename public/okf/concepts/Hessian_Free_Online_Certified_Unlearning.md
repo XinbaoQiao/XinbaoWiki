@@ -33,29 +33,12 @@ The method recollects an approximator for each training point through affine sto
 
 Once the recollected vectors have been computed, online deletion becomes additive: a batch of deletion requests is handled by summing the stored per-sample approximators and applying a vector update to the current model.
 
-## Key formula
+## Key takeaways
 
-The page uses a compact notation for the core update. Here $a^{-u}_{E,B}$ denotes the recollected trajectory approximator for deleting sample $u$, and $\widehat{H}$ denotes the accumulated Hessian-vector-product operator along the later training trajectory.
-
-The stored approximator has the form:
-
-$$
-a^{-u}_{E,B}
-\approx
-\sum_{e=0}^{E}
-\frac{\eta_{e,b(u)}}{\lvert B_{e,b(u)}\rvert}
-\widehat{H}_{E,B-1\rightarrow e,b(u)+1}
-\nabla \ell(w_{e,b(u)};u).
-$$
-
-For a deletion set $U$, the online unlearning update is additive:
-
-$$
-\bar{w}^{-U}_{E,B}
-=w_{E,B}+\sum_{u\in U}a^{-u}_{E,B}.
-$$
-
-The additivity result is the operational reason the online stage is cheap: after precomputation, a deletion request does not require solving a new linear system or inverting a Hessian.
+- **Unlearning needs an operational model, not only a legal ideal.** The paper treats a deletion request as a concrete systems event that must be handled without full retraining or storing massive second-order objects.
+- **The training trajectory contains reusable deletion information.** Instead of asking the final model alone to explain every future removal, the method preserves enough trajectory-level information to make later updates cheap.
+- **Certification and efficiency should be designed together.** The contribution is not simply faster unlearning; it is a way to keep a certificate-style link to retraining while avoiding Hessian materialization.
+- **The broader lesson is lifecycle readiness.** Models intended for regulated or user-facing environments should be built with future removal requests in mind, not patched after deployment.
 
 ## Results
 

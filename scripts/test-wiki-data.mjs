@@ -646,6 +646,13 @@ const acceptedPublicationPages = [
   'DynFrs.md'
 ];
 
+const acceptedPublicationChinesePages = [
+  'When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md',
+  'Soft_Weighted_Machine_Unlearning_zh.md',
+  'Hessian_Free_Online_Certified_Unlearning_zh.md',
+  'DynFrs_zh.md'
+];
+
 for (const page of acceptedPublicationPages) {
   const fm = frontmatter(page);
   const body = read(page);
@@ -653,12 +660,28 @@ for (const page of acceptedPublicationPages) {
   assert.doesNotMatch(fm, /^categories:/m, `${page} publication infobox omits categories`);
   assert.match(fm, /^location:/m, `${page} publication infobox includes conference location`);
   assert.doesNotMatch(fm, /owner-provided|author notification|published on OpenReview|presentation listed|arXiv submitted/i, `${page} publication status row stays concise`);
-  for (const section of ['## Overview', '## Method', '## Key formula', '## Results', '## Placement']) {
+  for (const section of ['## Overview', '## Method', '## Key takeaways', '## Results', '## Placement']) {
     assert.match(body, new RegExp(`^${section}$`, 'm'), `${page} has ${section}`);
   }
+  assert.doesNotMatch(body, /^## Key formula$/m, `${page} replaces formula exposition with insight-oriented takeaways`);
   assert.doesNotMatch(body, /```text\n[\s\S]*?```/, `${page} uses rendered math instead of text code formulas`);
   assert.doesNotMatch(body, /\\\(|\\\)/, `${page} uses dollar-delimited inline math compatible with remark-math`);
-  assert.match(body, /\$\$[\s\S]*?\$\$/, `${page} includes display math syntax`);
+  assert.match(body, /^- \*\*[^*]+\*\* /m, `${page} states bold, scannable takeaway claims`);
+}
+
+for (const page of acceptedPublicationChinesePages) {
+  const fm = frontmatter(page);
+  const body = read(page);
+  assert.doesNotMatch(fm, /^categories:/m, `${page} publication infobox omits categories`);
+  assert.match(fm, /^location:/m, `${page} publication infobox includes conference location`);
+  assert.doesNotMatch(fm, /owner-provided|author notification|published on OpenReview|presentation listed|arXiv submitted/i, `${page} publication status row stays concise`);
+  for (const section of ['## 概述', '## 方法', '## 关键启示', '## 结果', '## 定位']) {
+    assert.match(body, new RegExp(`^${section}$`, 'm'), `${page} has ${section}`);
+  }
+  assert.doesNotMatch(body, /^## 关键公式$/m, `${page} replaces formula exposition with insight-oriented takeaways`);
+  assert.doesNotMatch(body, /```text\n[\s\S]*?```/, `${page} avoids text code formulas`);
+  assert.doesNotMatch(body, /\\\(|\\\)/, `${page} uses dollar-delimited inline math compatible with remark-math`);
+  assert.match(body, /^- \*\*[^*]+\*\* /m, `${page} states bold, scannable takeaway claims`);
 }
 
 assert.match(read('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning.md'), /\*\*Xinbao Qiao\*\*/, 'under-review publication page bolds Xinbao Qiao in the author context');
@@ -1003,10 +1026,14 @@ const allMarkdown = fs.readdirSync(wikiDir)
   .join('\n');
 const allChineseMarkdown = chinesePageFiles.map((file) => read(file)).join('\n');
 assert.doesNotMatch(allChineseMarkdown, /ZXQ|XQ0|当_ 抽样|软件_ Weightd|学习什么 内容|首尔首尔|大赦国际|高山模型|秋奥|\[\[\[/, 'Chinese markdown pages avoid broken machine-translation artifacts');
-assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md'), /\\operatorname\{TN\}/, 'Chinese model-collapse page preserves rendered formula syntax');
-assert.match(read('Hessian_Free_Online_Certified_Unlearning_zh.md'), /\\widehat\{H\}/, 'Chinese Hessian-free page preserves rendered formula syntax');
-assert.match(read('DynFrs_zh.md'), /\\lceil qT\\rceil/, 'Chinese DynFrs page preserves rendered formula syntax');
-assert.match(read('Soft_Weighted_Machine_Unlearning_zh.md'), /\\epsilon\^\\star/, 'Chinese soft-weighted page preserves rendered formula syntax');
+assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /Data filtering is not automatically protective/, 'model-collapse page presents a high-level filtering takeaway');
+assert.match(read('Hessian_Free_Online_Certified_Unlearning.md'), /Unlearning needs an operational model/, 'Hessian-free page presents a high-level lifecycle takeaway');
+assert.match(read('DynFrs.md'), /Exact unlearning can be a data-structure problem/, 'DynFrs page presents a high-level data-structure takeaway');
+assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /Not every correction should be a deletion/, 'soft-weighted page presents a high-level correction takeaway');
+assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md'), /尾部覆盖/, 'Chinese model-collapse page presents a high-level tail-coverage takeaway');
+assert.match(read('Hessian_Free_Online_Certified_Unlearning_zh.md'), /模型生命周期准备/, 'Chinese Hessian-free page presents a high-level lifecycle takeaway');
+assert.match(read('DynFrs_zh.md'), /数据结构问题/, 'Chinese DynFrs page presents a high-level data-structure takeaway');
+assert.match(read('Soft_Weighted_Machine_Unlearning_zh.md'), /数据影响应当像旋钮/, 'Chinese soft-weighted page presents a high-level influence-control takeaway');
 assert.doesNotMatch(allMarkdown, /backup\/old-homepage/, 'wiki no longer depends on backup-branch image URLs');
 assert.doesNotMatch(allMarkdown, /withheld\s+LLM\s+manuscript/i, 'withheld manuscript notes are not public content');
 

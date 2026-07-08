@@ -42,41 +42,12 @@ The three-stage workflow is:
 
 ![Soft-weighted unlearning framework](/papers/soft-weighted/framework.png)
 
-## Key formula
+## Key takeaways
 
-The paper's optimization can be summarized as a constrained reweighting problem. $I_{\mathrm{metric}}(z_i)$ denotes a sample's influence on the fairness or robustness objective, and $I_{\mathrm{util}}(z_i)$ denotes its influence on utility.
-
-The soft deletion weights solve a regularized correction problem:
-
-$$
-\epsilon^\star
-=
-\arg\min_{\epsilon}
-\sum_i \epsilon_i I_{\mathrm{metric}}(z_i)
-+\lambda\lVert\epsilon\rVert_2^2
-$$
-
-subject to:
-
-$$
-\sum_i \epsilon_i I_{\mathrm{metric}}(z_i)\le -\Delta,
-\qquad
-\sum_i \epsilon_i I_{\mathrm{util}}(z_i)\le 0,
-\qquad
-0\le \epsilon_i\le 1 .
-$$
-
-The resulting model correction follows an influence-function update:
-
-$$
-\theta_{\mathrm{soft}}
-=
-\widehat{\theta}
--H_{\widehat{\theta}}^{-1}
-\sum_i \epsilon_i^\star\nabla_\theta \ell(z_i;\widehat{\theta}) .
-$$
-
-The constraints distinguish this approach from hard top-k deletion: the target metric must improve, but the update is not allowed to pay for that improvement through avoidable utility degradation.
+- **Not every correction should be a deletion.** The paper separates privacy-style removal from fairness or robustness repair, where the goal is often to reduce harmful influence without discarding useful signal.
+- **Binary unlearning can overreact.** Hard removal treats all selected samples as equally removable, even when some of them contain information the model still needs.
+- **Influence should be treated as a dial, not a switch.** Soft weights let the maintenance process ask how much each sample should matter after correction, rather than whether it should disappear entirely.
+- **The broader lesson is that unlearning can be a model-improvement interface.** Deletion machinery can support fairness and robustness interventions when it is designed as calibrated influence control.
 
 ## Results
 

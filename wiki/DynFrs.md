@@ -50,42 +50,12 @@ DynFrs combines three mechanisms:
 
 ![DynFrs lazy-tag strategy](/papers/dynfrs/lazy-tags.png)
 
-## Key formula
+## Key takeaways
 
-The framework reduces the number of trees touched by each sample and amortizes tree repair over later queries. The following summary keeps the notation used in the paper: $T$ is the forest size, $q<1$ is the occurrence factor, and $k=\lceil qT\rceil$.
-
-The OCC rule limits how many trees contain each sample:
-
-$$
-k=\lceil qT\rceil,
-\qquad
-\Pr\!\left[z_i\in S^{(t)}\right]
-=\frac{k}{T}\approx q .
-$$
-
-The resulting training-time scaling is:
-
-$$
-\mathcal{T}_{\mathrm{train}}
-=O(qT d_{\max}pn\log s).
-$$
-
-The expected unlearning speedup from OCC($q$) is summarized as:
-
-$$
-\mathbb{E}\!\left[\frac{N_{\mathrm{naive}}}{N_{\mathrm{occ}}}\right]
-\approx \frac{1}{q^2}.
-$$
-
-Exact unlearning is stated as distributional equivalence between unlearning and retraining without the removed sample:
-
-$$
-\mathcal{A}^{-}(\mathcal{A}(S),S,z)
-\overset{d}{=}
-\mathcal{A}(S\setminus\{z\}).
-$$
-
-The lazy-tag mechanism then turns a potentially large subtree retraining operation into path-level reconstruction only when a future query reaches the tagged node.
+- **Exact unlearning can be a data-structure problem.** For random forests, the central challenge is not gradient correction but how to organize tree membership and repair work so that deletion remains equivalent to retraining.
+- **Latency matters as much as final correctness.** A theoretically clean unlearning rule is incomplete if every request blocks prediction or forces broad reconstruction.
+- **Randomization can make models easier to maintain.** By controlling where samples appear and delaying unnecessary subtree work, the framework turns randomness into a maintenance tool rather than only a modeling choice.
+- **The broader message is that classical models also need lifecycle design.** Even non-neural models used in sensitive domains need update paths for deletion, insertion, and continued service.
 
 ## Results
 

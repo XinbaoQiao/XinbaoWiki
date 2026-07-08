@@ -62,43 +62,12 @@ Two schemes are described:
 
 Both schemes use Wasserstein-gradient-based sample scoring, so the synthetic pool is evaluated against a multi-party distributional reference rather than one biased silo.
 
-## Key formula
+## Key takeaways
 
-The paper's theory links local selection, diversity decay, and Wasserstein cost. In the following summary, $R_t$ is the selected top-$\alpha$ region, $D_t$ is the filtered synthetic distribution at generation $t$, and $D^\star$ is the target distribution.
-
-Local verifier selection is summarized as truncated sampling:
-
-$$
-X_{i,t}\sim \operatorname{TN}(\mu_{t-1},\Sigma_{t-1},R_t),
-\qquad
-\Pr(X\in R_t)=\alpha .
-$$
-
-The resulting diversity decay can be expressed through the covariance trace:
-
-$$
-\frac{\operatorname{Tr}(\Sigma_t)}{\operatorname{Tr}(\Sigma_0)}
-\asymp C\,t^{-\lambda_{\min}(\Psi_\infty)} .
-$$
-
-A Wasserstein generalization bound then relates model risk under the target distribution to the filtered distribution:
-
-$$
-\mathcal{R}_{D^\star}(h_t)
-\le
-\mathcal{R}_{D_t}(h_t)
-+2L\epsilon\,W_p(D_t,D^\star)+\delta .
-$$
-
-The collaborative scoring rule can be viewed through a dual potential $f^\star$:
-
-$$
-S(x_i)
-= f^\star(x_i)
--\frac{1}{N-1}\sum_{j\ne i} f^\star(x_j).
-$$
-
-The formulas explain the paper's main mechanism: biased selection can make the retained distribution increasingly narrow, while collaborative Wasserstein proxies try to reduce the discrepancy between filtered synthetic data and the global target distribution.
+- **Data filtering is not automatically protective.** In low-resource settings, a verifier can become a bottleneck: it may reward samples that look familiar to its local reference set and suppress rare but valid modes.
+- **Model collapse can be a governance problem, not only a generation problem.** The paper shifts attention from the generator alone to the selection process that decides which synthetic data are allowed to shape future training rounds.
+- **More data diversity may require shared evaluation, not shared raw data.** Collaborative Wasserstein proxies are used as a way to give each silo a broader distributional reference while preserving the institutional boundary around raw examples.
+- **The practical warning is about tail coverage.** For underrepresented communities or low-resource domains, a narrow verifier can turn existing scarcity into a self-reinforcing loss of coverage.
 
 ## Results
 

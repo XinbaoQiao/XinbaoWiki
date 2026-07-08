@@ -60,43 +60,12 @@ translation_of: When_Sample_Selection_Bias_Precipitates_Model_Collapse
 
 两个方案都使用 Wasserstein-gradient-based sample scoring，使合成样本由多方分布参考评估，而不是由一个有偏孤岛评估。
 
-## 关键公式
+## 关键启示
 
-论文理论连接局部选择、多样性衰减和 Wasserstein 代价。设 $R_t$ 为被选中的 top-$\alpha$ 区域，$D_t$ 为第 $t$ 代过滤后的合成分布，$D^\star$ 为目标分布。
-
-本地验证器选择可概括为截断采样：
-
-$$
-X_{i,t}\sim \operatorname{TN}(\mu_{t-1},\Sigma_{t-1},R_t),
-\qquad
-\Pr(X\in R_t)=\alpha .
-$$
-
-由此导致的多样性衰减可通过协方差迹表示：
-
-$$
-\frac{\operatorname{Tr}(\Sigma_t)}{\operatorname{Tr}(\Sigma_0)}
-\asymp C\,t^{-\lambda_{\min}(\Psi_\infty)} .
-$$
-
-Wasserstein 泛化界将目标分布风险与过滤分布联系起来：
-
-$$
-\mathcal{R}_{D^\star}(h_t)
-\le
-\mathcal{R}_{D_t}(h_t)
-+2L\epsilon\,W_p(D_t,D^\star)+\delta .
-$$
-
-协作评分规则可通过对偶势函数 $f^\star$ 理解：
-
-$$
-S(x_i)
-= f^\star(x_i)
--\frac{1}{N-1}\sum_{j\ne i} f^\star(x_j).
-$$
-
-这些公式说明论文的主要机制：有偏选择会让保留分布越来越窄，而协作 Wasserstein 代理试图减少过滤合成数据与全局目标分布之间的差距。
+- **数据筛选并不天然保护模型。** 在低资源场景中，验证器可能成为瓶颈：它倾向奖励看起来接近本地参考集的样本，并压制稀有但有效的模式。
+- **模型坍缩也可能是治理问题，而不只是生成问题。** 论文把注意力从生成器本身转向选择过程：哪些合成数据被允许进入下一轮训练，决定了后续数据流的形状。
+- **更好的多样性不一定需要共享原始数据，而可能需要共享评估视角。** 协作 Wasserstein 代理提供了更宽的分布参考，同时保留各机构对原始样本的边界。
+- **最重要的实践警示是尾部覆盖。** 对代表不足的群体或低资源领域而言，狭窄验证器会把原本的数据稀缺放大为持续的覆盖损失。
 
 ## 结果
 

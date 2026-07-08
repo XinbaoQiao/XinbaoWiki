@@ -40,39 +40,12 @@ source_path: wiki/Soft_Weighted_Machine_Unlearning_zh.md
 
 ![软加权机器遗忘框架](/papers/soft-weighted/framework.png)
 
-## 关键公式
+## 关键启示
 
-设 $I_{\mathrm{metric}}(z_i)$ 表示样本对公平性或鲁棒性目标的影响，$I_{\mathrm{util}}(z_i)$ 表示其对效用的影响。软删除权重可通过正则化修正问题得到：
-
-$$
-\epsilon^\star
-=
-\arg\min_{\epsilon}
-\sum_i \epsilon_i I_{\mathrm{metric}}(z_i)
-+\lambda\lVert\epsilon\rVert_2^2
-$$
-
-并满足：
-
-$$
-\sum_i \epsilon_i I_{\mathrm{metric}}(z_i)\le -\Delta,
-\qquad
-\sum_i \epsilon_i I_{\mathrm{util}}(z_i)\le 0,
-\qquad
-0\le \epsilon_i\le 1 .
-$$
-
-随后模型修正采用影响函数更新：
-
-$$
-\theta_{\mathrm{soft}}
-=
-\widehat{\theta}
--H_{\widehat{\theta}}^{-1}
-\sum_i \epsilon_i^\star\nabla_\theta \ell(z_i;\widehat{\theta}) .
-$$
-
-这些约束把该方法与硬 top-k 删除区分开：目标指标必须改善，但不能用不必要的效用退化来换取改善。
+- **并非所有修正都应该表现为删除。** 论文区分了隐私式移除与公平性、鲁棒性修正：后者往往需要降低有害影响，同时保留仍然有用的信号。
+- **二元遗忘可能反应过度。** 硬删除把所有被选中的样本都当作同样可移除，即使其中一部分仍包含模型需要的信息。
+- **数据影响应当像旋钮，而不是开关。** 软权重让维护过程回答“每个样本之后还应有多少影响”，而不是只回答“是否完全消失”。
+- **更宏观的启示是机器遗忘也可以成为模型改进接口。** 当删除机制被设计成校准式影响控制时，它可以支持公平性和鲁棒性干预。
 
 ## 结果
 
