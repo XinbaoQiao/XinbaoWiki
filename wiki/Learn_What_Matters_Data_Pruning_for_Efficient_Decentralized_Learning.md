@@ -35,4 +35,4 @@ The manuscript belongs to [[AI_and_Networks]], [[Distributed_Learning]], [[Data_
 
 ## Update workflow
 
-When the manuscript becomes public or a source package is provided, this page should be expanded with the same structure used by the accepted paper pages: overview, method, key formula, results, and placement.
+When the manuscript becomes public or a source package is provided, this page should be expanded with the same structure used by the accepted paper pages: overview, method, key takeaways, results, and placement. The takeaways should emphasize high-level lessons about decentralized learning and data value rather than formula-level details.

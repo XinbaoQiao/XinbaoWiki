@@ -8,6 +8,8 @@ Writing style:
 - Use third-person, neutral, objective, Wikipedia-style academic prose.
 - Keep biographical claims factual and scoped.
 - Prefer concise main text plus footnotes for side context.
+- Write homepage, research-topic, project, and publication introductions at a high level. They should give readers portable insight about why the work matters, what risk or design lesson it reveals, and how it fits Qiao's broader research arc, rather than foregrounding formulas, implementation details, or experiment minutiae.
+- Every public publication page should include a `Key takeaways` section, with the Chinese counterpart using `关键启示`. Takeaways should be macro-level claims that a reader can remember and reuse. Use technical formulas only when they are necessary for factual accuracy, and do not use a formula section as the main explanatory surface.
 
 Validation:
 - Before publishing any completed implementation or content edit, run:
