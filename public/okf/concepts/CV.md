@@ -16,7 +16,7 @@ lifecycle:
   retention: semantic memory
 source_path: wiki/CV.md
 ---
-This page records CV-derived facts in wiki form. A resume version is available as [resume](/files/XinbaoQiao_CV.pdf).
+This page records CV-derived facts in wiki form. A résumé version is available as [résumé](/files/XinbaoQiao_CV.pdf).
 
 ## Contact
 
@@ -53,7 +53,7 @@ This page records CV-derived facts in wiki form. A resume version is available a
 
 - **Research code releases**: maintains public code for accepted papers on certified unlearning, soft-weighted unlearning, and sample-selection model collapse.
 - **Xinbaopedia**: maintains a public academic homepage and wiki-style research archive with paper pages, figures, CV, and project notes.
-- **Peer-reviewing**: reviewer for ICML 2026, NeurIPS 2025 and 2026, ICLR 2025, AAAI 2025 and 2026, and IEEE Transactions on Neural Networks and Learning Systems (TNNLS).
+- **Peer-reviewing**: reviewer for ICML 2026, NeurIPS 2025 and 2026, ICLR 2025, AAAI 2025 and 2026, and IEEE TNNLS.
 
 ## Publications
 

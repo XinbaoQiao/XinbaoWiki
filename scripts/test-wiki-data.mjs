@@ -1051,10 +1051,10 @@ assert.match(cvTex, /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/,
 assert.match(cvTex, /scholar\.google\.com\/citations\?view_op=search_authors\\&mauthors=Xinbao\+Qiao/, 'CV PDF source links Google Scholar without exposing the author ID');
 const cvPublicationBlock = cvTex.slice(cvTex.indexOf('\\cvsection{Selected Publications}'));
 assert.doesNotMatch(cvPublicationBlock, /icml\.cc|iclr\.cc|aaai\.org|underline\.io|Distributed_Wasserstein_Barycenter|LLM_Reliability/, 'CV publication icons only link arXiv, GitHub, or OpenReview pages');
-assert.match(read('CV.md'), /\[resume\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English CV page labels the PDF link as resume');
-assert.match(read('CV_zh.md'), /\[resume\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese CV page labels the PDF link as resume');
-assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8'), /\[resume\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English OKF CV concept labels the PDF link as resume');
-assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV_zh.md'), 'utf8'), /\[resume\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese OKF CV concept labels the PDF link as resume');
+assert.match(read('CV.md'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English CV page labels the PDF link as résumé');
+assert.match(read('CV_zh.md'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese CV page labels the PDF link as résumé');
+assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English OKF CV concept labels the PDF link as résumé');
+assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV_zh.md'), 'utf8'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese OKF CV concept labels the PDF link as résumé');
 assert.doesNotMatch(read('CV.md'), /\[XinbaoQiao_CV\.pdf\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English CV page avoids exposing the PDF filename as link text');
 assert.doesNotMatch(read('CV_zh.md'), /\[XinbaoQiao_CV\.pdf\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese CV page avoids exposing the PDF filename as link text');
 assert.match(read('CV.md'), /Soft-Weighted-Machine-Unlearning/, 'English CV page links Paper #2 code');
