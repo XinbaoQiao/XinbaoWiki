@@ -1,7 +1,7 @@
 ---
 type: Wiki index
 title: Index
-description: Index of wiki pages.
+description: Navigation index for public Xinbaopedia pages.
 tags:
   - en
   - index
@@ -20,7 +20,7 @@ source_path: wiki/index.md
 
 - [Qiao Xinbao](./Xinbao_Qiao.md)
 - [CV](./CV.md)
-- [乔鑫宝](./Xinbao_Qiao.md)
+- [乔鑫宝](./Qiao_Xinbao_zh.md)
 - [Education](./Education.md)
 - [Experience](./Experience.md)
 - [Skills](./Skills.md)

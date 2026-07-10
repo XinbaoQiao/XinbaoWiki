@@ -1,7 +1,7 @@
 ---
 type: 研究概览
 title: 研究
-description: 乔鑫宝学术 wiki 的研究概览。
+description: 乔鑫宝研究方向与相关专题页面概览。
 tags:
   - zh
   - research
@@ -10,7 +10,7 @@ tags:
 timestamp: '2026-06-13T20:46:02+08:00'
 name: 研究
 language: zh
-summary: 乔鑫宝学术 wiki 的研究概览。
+summary: 乔鑫宝研究方向与相关专题页面概览。
 occupation: 研究概览
 translation_of: Research
 ---

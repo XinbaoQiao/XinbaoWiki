@@ -1,7 +1,7 @@
 ---
 type: 研究概览
 title: 研究
-description: 乔鑫宝学术 wiki 的研究概览。
+description: 乔鑫宝研究方向与相关专题页面概览。
 tags:
   - zh
   - research

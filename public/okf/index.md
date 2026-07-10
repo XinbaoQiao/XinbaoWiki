@@ -21,11 +21,11 @@ This bundle exposes the public Xinbaopedia wiki as Markdown concepts with OKF v0
 
 ### CV summary
 
-- [Curriculum Vitae](concepts/CV.md) - Structured CV summary for Qiao Xinbao.
+- [Curriculum Vitae](concepts/CV.md) - Academic CV summary for Xinbao Qiao.
 
 ### CV 摘要
 
-- [简历](concepts/CV_zh.md) - 乔鑫宝的结构化 CV 摘要。
+- [简历](concepts/CV_zh.md) - 乔鑫宝的学术简历摘要。
 
 ### Education timeline
 
@@ -96,7 +96,7 @@ This bundle exposes the public Xinbaopedia wiki as Markdown concepts with OKF v0
 
 ### Research overview
 
-- [Research](concepts/Research.md) - Research overview for Qiao Xinbao.
+- [Research](concepts/Research.md) - Overview of Xinbao Qiao's research directions and linked topic pages.
 
 ### Research topic
 
@@ -121,11 +121,11 @@ This bundle exposes the public Xinbaopedia wiki as Markdown concepts with OKF v0
 
 ### Wiki index
 
-- [Index](concepts/index.md) - Index of wiki pages.
+- [Index](concepts/index.md) - Navigation index for public Xinbaopedia pages.
 
 ### Wiki 索引
 
-- [索引](concepts/index_zh.md) - Wiki 页面索引。
+- [索引](concepts/index_zh.md) - Xinbaopedia 公开页面导航索引。
 
 ### 公立研究型大学
 
@@ -177,7 +177,7 @@ This bundle exposes the public Xinbaopedia wiki as Markdown concepts with OKF v0
 
 ### 研究概览
 
-- [研究](concepts/Research_zh.md) - 乔鑫宝学术 wiki 的研究概览。
+- [研究](concepts/Research_zh.md) - 乔鑫宝研究方向与相关专题页面概览。
 
 ### 研究经历
 

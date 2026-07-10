@@ -36,6 +36,11 @@ const entriesLabel: LocalizedText = {
   zh: '主要学术条目'
 };
 
+function withBasePath(pathname: string) {
+  const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
+  return basePath ? `${basePath}${pathname}` : pathname;
+}
+
 export function HomepagePortal({ directorySections, languageEntries, searchIndex }: Props) {
   const [language, setLanguage] = useState<SearchLanguage>('en');
   const [browseOpen, setBrowseOpen] = useState(true);
@@ -77,7 +82,7 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
                     className="wiki-portal-name-logo wiki-portal-name-logo-blue"
                     decoding="async"
                     height={158}
-                    src="/site-logos/wordmark/xinbao-qiao-blue.png"
+                    src={withBasePath('/site-logos/wordmark/xinbao-qiao-blue.png')}
                     width={641}
                   />
                   <img
@@ -85,7 +90,7 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
                     className="wiki-portal-name-logo wiki-portal-name-logo-gold"
                     decoding="async"
                     height={158}
-                    src="/site-logos/wordmark/xinbao-qiao-gold.png"
+                    src={withBasePath('/site-logos/wordmark/xinbao-qiao-gold.png')}
                     width={641}
                   />
                   <img
@@ -93,7 +98,7 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
                     className="wiki-portal-name-logo wiki-portal-name-logo-green"
                     decoding="async"
                     height={158}
-                    src="/site-logos/wordmark/xinbao-qiao-green.png"
+                    src={withBasePath('/site-logos/wordmark/xinbao-qiao-green.png')}
                     width={641}
                   />
                   <img
@@ -101,7 +106,7 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
                     className="wiki-portal-name-logo wiki-portal-name-logo-charcoal"
                     decoding="async"
                     height={158}
-                    src="/site-logos/wordmark/xinbao-qiao-charcoal.png"
+                    src={withBasePath('/site-logos/wordmark/xinbao-qiao-charcoal.png')}
                     width={641}
                   />
                 </span>

@@ -18,14 +18,14 @@ source_path: wiki/log.md
 ---
 ## 2026-06-13
 
-- Updated [Xinbao Qiao](./Xinbao_Qiao.md), [Qiao Xinbao zh](./Xinbao_Qiao.md), [Research](./Research.md), [Projects](./Projects.md), [Experience](./Experience.md), [CV](./CV.md), and related topic pages so Qiao's recent work is framed around data lifecycle management in AI models, [data-centric ML](./Data_Centric_Machine_Learning.md), AI for Networks, and Networks for AI, while keeping [Distributed Wasserstein Barycenter](./Distributed_Wasserstein_Barycenter.md) as a related method rather than the sole current focus.
-- Expanded [Xinbao Qiao](./Xinbao_Qiao.md) and [Qiao Xinbao zh](./Xinbao_Qiao.md) with a three-part data lifecycle summary covering data generation, data use, and data deletion.
+- Updated [Xinbao Qiao](./Xinbao_Qiao.md), [Qiao Xinbao zh](./Qiao_Xinbao_zh.md), [Research](./Research.md), [Projects](./Projects.md), [Experience](./Experience.md), [CV](./CV.md), and related topic pages so Qiao's recent work is framed around data lifecycle management in AI models, [data-centric ML](./Data_Centric_Machine_Learning.md), AI for Networks, and Networks for AI, while keeping [Distributed Wasserstein Barycenter](./Distributed_Wasserstein_Barycenter.md) as a related method rather than the sole current focus.
+- Expanded [Xinbao Qiao](./Xinbao_Qiao.md) and [Qiao Xinbao zh](./Qiao_Xinbao_zh.md) with a three-part data lifecycle summary covering data generation, data use, and data deletion.
 - Added two NeurIPS 2026 under-review entries to the CV publication list and regenerated the public CV PDF.
 
 ## 2026-05-31
 
 - Added OpenReview and code links to [When Sample Selection Bias Precipitates Model Collapse](./When_Sample_Selection_Bias_Precipitates_Model_Collapse.md).
-- Polished [Xinbao Qiao](./Xinbao_Qiao.md) and [Qiao Xinbao zh](./Xinbao_Qiao.md) so the opening reads as a compact research profile, the research-experience section remains chronological, and the academic-project section is framed as problem clusters rather than repeated biography.
+- Polished [Xinbao Qiao](./Xinbao_Qiao.md) and [Qiao Xinbao zh](./Qiao_Xinbao_zh.md) so the opening reads as a compact research profile, the research-experience section remains chronological, and the academic-project section is framed as problem clusters rather than repeated biography.
 - Reformatted the accepted-paper table in [Publications](./Publications.md) so each publication cell separates title, authors, and summary onto distinct lines.
 - Reformatted the accepted-paper venue/status column so conference name, dates, and location render on separate lines.
 - Widened the venue/status column on [Publications](./Publications.md) so the header and short venue lines do not wrap unexpectedly.
@@ -43,8 +43,8 @@ source_path: wiki/log.md
 - Polished the English and Chinese biography pages with tighter opening prose, clearer doctoral-stage wording, and less repetition between research experience and project summaries.
 - Reordered the opening biography footnote references so the Xinbao name-coincidence note appears before the Xinbao Qiao bridge-coincidence note.
 - Updated the visible sidebar so Navigation includes [Publications](./Publications.md), and the Experience section appears after Education with only [NUSRI-CQ](./NUSRI_CQ.md).
-- Added a compact name footnote to [Xinbao Qiao](./Xinbao_Qiao.md) and [Qiao Xinbao zh](./Xinbao_Qiao.md) explaining the "Qiao"/"ciao" nickname relation and the "Mr. Ciao" handle.
-- Added [Internet Slang 2026](./Internet_Slang_2026.md) and [2026热梗](./Internet_Slang_2026.md) as yearly Chat with Xinbao tone references, expanded the meme-style prompt boundaries, and softened the opening greeting so it is playful but still appropriate for an academic homepage.
+- Added a compact name footnote to [Xinbao Qiao](./Xinbao_Qiao.md) and [Qiao Xinbao zh](./Qiao_Xinbao_zh.md) explaining the "Qiao"/"ciao" nickname relation and the "Mr. Ciao" handle.
+- Added [Internet Slang 2026](./Internet_Slang_2026.md) and [2026热梗](./Internet_Slang_2026_zh.md) as yearly Chat with Xinbao tone references, expanded the meme-style prompt boundaries, and softened the opening greeting so it is playful but still appropriate for an academic homepage.
 - Updated the CUHK doctoral-stage narrative around [AI and networks](./AI_and_Networks.md), added [Distributed Wasserstein Barycenter](./Distributed_Wasserstein_Barycenter.md) as the current Wasserstein barycenter focus, and reorganized research overview pages toward a compiled LLM-wiki-style map.
 - Added `Chat with Xinbao`, a same-site AI assistant entry beside the search bar, with a server-only Next.js API route, Yunwu model proxying, Upstash-backed rate limits, and deployment/security documentation.
 - Restricted the top search dropdown to the active page language, so English pages return English wiki entries and Chinese pages return Chinese wiki entries.
@@ -69,11 +69,11 @@ source_path: wiki/log.md
 - Standardized the four Research topics pages with Introduction, Role in this wiki, Publications, Connection to Qiao's work, and See also sections; publication tables now include conference timing, arXiv timing, or ongoing status.
 - Expanded institution pages for [The Chinese University of Hong Kong](./The_Chinese_University_of_Hong_Kong.md), [Zhejiang University](./Zhejiang_University.md), [Shandong University](./Shandong_University.md), and [NUSRI CQ](./NUSRI_CQ.md) with logos, program context, Qiao-specific connections, and explanatory footnotes.
 - Expanded linked research-topic pages, including [AI and Networks](./AI_and_Networks.md), [Machine Unlearning](./Machine_Unlearning.md), [Synthetic Data](./Synthetic_Data_and_Model_Collapse.md), and [Data Centric ML](./Data_Centric_Machine_Learning.md), so topic links open into standalone wiki articles rather than brief placeholders.
-- Updated [Xinbao Qiao](./Xinbao_Qiao.md) and [Qiao Xinbao zh](./Xinbao_Qiao.md) so the current occupation is PhD student, affiliation is the Department of Information Engineering at CUHK, birthplace appears in prose rather than the infobox, and education is ordered from newest to oldest.
+- Updated [Xinbao Qiao](./Xinbao_Qiao.md) and [Qiao Xinbao zh](./Qiao_Xinbao_zh.md) so the current occupation is PhD student, affiliation is the Department of Information Engineering at CUHK, birthplace appears in prose rather than the infobox, and education is ordered from newest to oldest.
 - Recentered the wiki's research framing around [AI and Networks](./AI_and_Networks.md) and shortened sidebar topic labels to compact wiki-style names.
 - Rewrote the accepted paper pages with consistent overview, method, formula, results, and placement sections.
 - Replaced publication infobox categories with conference locations for ICLR 2025, AAAI 2026, and ICML 2026 entries.
-- Added wiki-style footnotes to [Xinbao Qiao](./Xinbao_Qiao.md) and [Qiao Xinbao zh](./Xinbao_Qiao.md), and removed unused References sections.
+- Added wiki-style footnotes to [Xinbao Qiao](./Xinbao_Qiao.md) and [Qiao Xinbao zh](./Qiao_Xinbao_zh.md), and removed unused References sections.
 - Added compressed ICLR 2025 poster images for [Hessian-Free Online Certified Unlearning](./Hessian_Free_Online_Certified_Unlearning.md) and [DynFrs: An Efficient Framework for Machine Unlearning in Random Forest](./DynFrs.md), plus the soft-weighted unlearning framework figure.
 - Rebuilt the local `XinbaoWiki` project as a Next.js 15 static-export wiki using `react-markdown` and `gray-matter`.
 - Updated the page framework toward the Colarpedia/Wikipedia layout: left navigation sections, article tabs, right-side infobox, source/history links, and encyclopedia-style body typography.
@@ -81,7 +81,7 @@ source_path: wiki/log.md
 - Linked the local CV PDF from [CV](./CV.md) and refreshed [Xinbao Qiao](./Xinbao_Qiao.md), [Publications](./Publications.md), and the main publication pages with date/status notes.
 - Added `scripts/test-wiki-data.mjs` and wired it into `npm run check` to guard required pages, local assets, CV links, and backup URL removal.
 - Tightened the page framework to match Colarpedia class names and structure, and reduced displayed media to one portrait image.
-- Added [乔鑫宝](./Xinbao_Qiao.md) as the Chinese version, moved Talk to GitHub Issues, simplified Contact to one email address, renamed the sidebar's publication list to research topics, and rewrote [Xinbao Qiao](./Xinbao_Qiao.md) around chronological research experience and academic-project sections.
+- Added [乔鑫宝](./Qiao_Xinbao_zh.md) as the Chinese version, moved Talk to GitHub Issues, simplified Contact to one email address, renamed the sidebar's publication list to research topics, and rewrote [Xinbao Qiao](./Xinbao_Qiao.md) around chronological research experience and academic-project sections.
 - Removed a temporarily withheld manuscript from [Publications](./Publications.md) and the public index.
 - Updated the infobox framework so Affiliation lists only the current institution, Education links only the school name with degree details on the next line, Contact includes OpenReview and GitHub, and the portrait caption records Singapore.
 - Made the language toggle route-aware so the Chinese article links back to the English article; pointed Talk to GitHub new issue creation and History to GitHub commits.

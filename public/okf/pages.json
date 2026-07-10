@@ -79,7 +79,7 @@
     {
       "slug": "CV",
       "title": "Curriculum Vitae",
-      "summary": "Structured CV summary for Qiao Xinbao.",
+      "summary": "Academic CV summary for Xinbao Qiao.",
       "language": "en",
       "type": "CV summary",
       "tags": [
@@ -236,7 +236,7 @@
     {
       "slug": "index",
       "title": "Index",
-      "summary": "Index of wiki pages.",
+      "summary": "Navigation index for public Xinbaopedia pages.",
       "language": "en",
       "type": "Wiki index",
       "tags": [
@@ -451,7 +451,7 @@
     {
       "slug": "Research",
       "title": "Research",
-      "summary": "Research overview for Qiao Xinbao.",
+      "summary": "Overview of Xinbao Qiao's research directions and linked topic pages.",
       "language": "en",
       "type": "Research overview",
       "tags": [
@@ -1085,7 +1085,7 @@
     {
       "slug": "Research_zh",
       "title": "研究",
-      "summary": "乔鑫宝学术 wiki 的研究概览。",
+      "summary": "乔鑫宝研究方向与相关专题页面概览。",
       "language": "zh",
       "type": "研究概览",
       "tags": [
@@ -1113,7 +1113,7 @@
     {
       "slug": "CV_zh",
       "title": "简历",
-      "summary": "乔鑫宝的结构化 CV 摘要。",
+      "summary": "乔鑫宝的学术简历摘要。",
       "language": "zh",
       "type": "CV 摘要",
       "tags": [
@@ -1127,7 +1127,7 @@
     {
       "slug": "index_zh",
       "title": "索引",
-      "summary": "Wiki 页面索引。",
+      "summary": "Xinbaopedia 公开页面导航索引。",
       "language": "zh",
       "type": "Wiki 索引",
       "tags": [

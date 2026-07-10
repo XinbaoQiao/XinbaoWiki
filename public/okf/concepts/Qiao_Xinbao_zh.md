@@ -73,11 +73,12 @@ ICML 2026 论文[When Sample Selection Bias Precipitates Model Collapse](./When_
 
 ## 学术服务
 
-乔鑫宝担任 ICML 2026、NeurIPS 2025 和 2026、ICLR 2025、AAAI 2025 和 2026，以及 IEEE TNNLS 等顶级会议和期刊的审稿人。
+- **2026 年**：担任 ICML、NeurIPS 和 AAAI 审稿人。
+- **2025 年**：担任 NeurIPS、ICLR、AAAI 和 IEEE TNNLS 审稿人。
 
 ## 参见
 
-- [English version](./Qiao_Xinbao_zh.md)
+- [English version](./Xinbao_Qiao.md)
 - [Research](./Research_zh.md)
 - [Publications](./Publications_zh.md)
 - [Projects](./Projects_zh.md)

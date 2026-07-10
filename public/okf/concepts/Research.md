@@ -1,7 +1,7 @@
 ---
 type: Research overview
 title: Research
-description: Research overview for Qiao Xinbao.
+description: Overview of Xinbao Qiao's research directions and linked topic pages.
 tags:
   - en
   - research

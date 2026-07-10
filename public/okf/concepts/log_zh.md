@@ -18,14 +18,14 @@ source_path: wiki/log_zh.md
 ---
 ## 2026-06-13
 
-- 更新 [人物主页](./Qiao_Xinbao_zh.md)、[中文主页](./Qiao_Xinbao_zh.md)、[研究概览](./Research_zh.md)、[项目页](./Projects_zh.md)、[研究经历](./Experience_zh.md)、[简历](./CV_zh.md) 及相关专题页，将近期工作表述为围绕 AI 模型中的数据全生命周期管理、[数据中心 ML](./Data_Centric_Machine_Learning_zh.md)、AI for Networks 与 Networks for AI 展开，同时保留 [分布式 Wasserstein barycenter](./Distributed_Wasserstein_Barycenter_zh.md) 作为相关方法，而不是唯一当前重点。
-- 在 [英文主页](./Qiao_Xinbao_zh.md) 与 [中文主页](./Qiao_Xinbao_zh.md) 中补充“数据生成、数据使用、数据删除”三部分数据生命周期概述。
+- 更新 [英文人物主页](./Xinbao_Qiao.md)、[中文主页](./Qiao_Xinbao_zh.md)、[研究概览](./Research_zh.md)、[项目页](./Projects_zh.md)、[研究经历](./Experience_zh.md)、[简历](./CV_zh.md) 及相关专题页，将近期工作表述为围绕 AI 模型中的数据全生命周期管理、[数据中心 ML](./Data_Centric_Machine_Learning_zh.md)、AI for Networks 与 Networks for AI 展开，同时保留 [分布式 Wasserstein barycenter](./Distributed_Wasserstein_Barycenter_zh.md) 作为相关方法，而不是唯一当前重点。
+- 在 [英文主页](./Xinbao_Qiao.md) 与 [中文主页](./Qiao_Xinbao_zh.md) 中补充“数据生成、数据使用、数据删除”三部分数据生命周期概述。
 - 在 CV 论文列表中新增两篇 NeurIPS 2026 在审条目，并重新生成公开 CV PDF。
 
 ## 2026-05-31
 
 - 为 [样本选择偏差何以促成模型坍缩](./When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md) 补充 OpenReview 和代码链接。
-- 润色 [英文主页](./Qiao_Xinbao_zh.md) 与 [中文主页](./Qiao_Xinbao_zh.md)，将开头整理为紧凑研究画像，保留研究经历的时间线结构，并把学术项目段落改为按问题簇组织，减少与传记经历的重复。
+- 润色 [英文主页](./Xinbao_Qiao.md) 与 [中文主页](./Qiao_Xinbao_zh.md)，将开头整理为紧凑研究画像，保留研究经历的时间线结构，并把学术项目段落改为按问题簇组织，减少与传记经历的重复。
 - 调整 [论文索引](./Publications_zh.md) 中已录用论文表格，使每篇论文的标题、作者和简介分行显示。
 - 调整 [论文索引](./Publications_zh.md) 中已录用论文的会议与状态列，使会议名称、日期和地点分行显示。
 - 加宽 [论文索引](./Publications_zh.md) 的会议与状态列，避免表头和短会议信息被意外折行。
@@ -43,7 +43,7 @@ source_path: wiki/log_zh.md
 - 润色中英文人物主页，压缩开头表述，明确博士阶段措辞，并减少研究经历与学术项目之间的重复。
 - 调整人物主页开头的脚注引用顺序，使 Xinbao 同名脚注出现在 Xinbao Qiao/新寶橋拼写巧合脚注之前。
 - 调整可见左侧栏：Navigation 增加 [Publications](./Publications_zh.md)，Experience 放到 Education 后面且只保留 [NUSRI-CQ](./NUSRI_CQ_zh.md)。
-- 在 [Xinbao Qiao](./Qiao_Xinbao_zh.md) 与 [Qiao Xinbao zh](./Qiao_Xinbao_zh.md) 增加姓名脚注，说明 “Qiao”/“ciao” 的昵称关联以及 “Mr. Ciao” 这一称呼。
+- 在 [英文人物主页](./Xinbao_Qiao.md) 与 [中文主页](./Qiao_Xinbao_zh.md) 增加姓名脚注，说明 “Qiao”/“ciao” 的昵称关联以及 “Mr. Ciao” 这一称呼。
 - 新增 [2026热梗](./Internet_Slang_2026_zh.md) 与 [Internet Slang 2026](./Internet_Slang_2026_zh.md) 作为 Chat with Xinbao 的年度语气参考，扩充热梗使用边界，并把 AI 打开后的第一句调整为有趣但不失学术主页风度的版本。
 - 围绕 [AI 与网络](./AI_and_Networks_zh.md) 更新 CUHK 博士阶段叙述，新增 [分布式 Wasserstein barycenter](./Distributed_Wasserstein_Barycenter_zh.md) 作为当前博士阶段关注点，并将研究概览整理为更接近 LLM Wiki 的编译式研究图谱。
 

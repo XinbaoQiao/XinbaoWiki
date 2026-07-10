@@ -172,6 +172,15 @@ function uniqueStrings(values) {
   return [...new Set(values.filter((item) => typeof item === 'string' && item.trim()).map((item) => item.trim()))];
 }
 
+function countBy(items, keyFn) {
+  const counts = {};
+  for (const item of items) {
+    const key = keyFn(item);
+    counts[key] = (counts[key] || 0) + 1;
+  }
+  return Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a.localeCompare(b)));
+}
+
 function normalizeRelationType(value) {
   return asString(value).toLowerCase().replace(/[_\s]+/g, '-');
 }
@@ -298,9 +307,21 @@ function resolveSlug(target, slugSet) {
   return normalized;
 }
 
-function resolveWikiTarget(sourcePage, target, slugSet) {
+function hasExplicitEnglishLabel(label) {
+  return /English|英文/i.test(asString(label));
+}
+
+function shouldPreserveResolvedTarget(sourcePage, target, resolved, label) {
+  const normalizedTarget = normalizeSlug(stripTargetSuffix(target));
+  if (sourcePage.language === 'en' && isChineseSlug(resolved) && isChineseSlug(normalizedTarget)) return true;
+  if (sourcePage.language === 'zh' && !isChineseSlug(resolved) && hasExplicitEnglishLabel(label)) return true;
+  return false;
+}
+
+function resolveWikiTarget(sourcePage, target, slugSet, label = '') {
   const resolved = resolveSlug(target, slugSet);
   if (!resolved || !slugSet.has(resolved)) return resolved;
+  if (shouldPreserveResolvedTarget(sourcePage, target, resolved, label)) return resolved;
   if (sourcePage.language === 'zh' && !isChineseSlug(resolved)) {
     const localized = chineseCounterpart(resolved);
     if (slugSet.has(localized)) return localized;
@@ -350,7 +371,7 @@ function structuredRelationEdges(page, slugSet, errors) {
     }
 
     const targetValue = asString(relationObject.target || relationObject.to);
-    const target = resolveWikiTarget(page, targetValue, slugSet);
+      const target = resolveWikiTarget(page, targetValue, slugSet, relationObject.label || relationObject.description);
     if (!targetValue || !target || !slugSet.has(target)) {
       errors.push(`${page.file}: relations[${index}] missing target ${targetValue || '(empty)'}`);
       continue;
@@ -468,7 +489,7 @@ function collect() {
 
     const outgoing = new Set();
     for (const match of page.content.matchAll(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g)) {
-      const target = resolveWikiTarget(page, match[1], slugSet);
+      const target = resolveWikiTarget(page, match[1], slugSet, match[2] || '');
       if (!target || !slugSet.has(target)) {
         errors.push(`${page.file}: missing WikiLink target [[${match[1].trim()}]]`);
         continue;
@@ -485,7 +506,7 @@ function collect() {
 
     for (const match of page.content.matchAll(/!?\[[^\]]*]\(([^)]+)\)/g)) {
       const href = match[1].trim();
-      if (/^(https?:|mailto:|#)/.test(href)) continue;
+      if (/^(https?:|mailto:|tel:|#)/.test(href)) continue;
       const target = wikiMarkdownTarget(href);
       if (target) {
         const slug = resolveSlug(target, slugSet);
@@ -788,7 +809,7 @@ function okfFrontmatter(page, slugSet) {
 
 function convertWikiLinksToOkf(markdown, page, slugSet) {
   return markdown.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (_match, target, label) => {
-    const resolved = resolveWikiTarget(page, target, slugSet);
+    const resolved = resolveWikiTarget(page, target, slugSet, label || '');
     const text = label || String(target).replaceAll('_', ' ');
     if (!resolved || !slugSet.has(resolved)) return `[${text}](./${normalizeSlug(target)}.md)`;
     return `[${text}](./${resolved}.md)`;
@@ -864,9 +885,11 @@ function createOkfBundle({ files, graph, index, pages, qualityReport, schema, so
   publicGraph.stats = {
     ...graph.stats,
     hiddenPages: 0,
+    languages: countBy(publicGraph.nodes, (node) => node.language),
     pages: publicGraph.nodes.length,
     publicPages: publicGraph.nodes.length,
     relations: publicGraph.edges.length,
+    types: countBy(publicGraph.nodes, (node) => node.type),
     warnings: publicGraph.warnings.length
   };
   const publicQualityReport = createQualityReport({

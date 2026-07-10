@@ -1,4 +1,4 @@
-import ReactMarkdown from 'react-markdown';
+import ReactMarkdown, { defaultUrlTransform } from 'react-markdown';
 import { Fragment, type ReactNode } from 'react';
 import rehypeKatex from 'rehype-katex';
 import remarkGfm from 'remark-gfm';
@@ -9,6 +9,11 @@ type Props = { markdown: string; sourceHref?: string };
 
 function external(href: string) {
   return /^https?:\/\//.test(href) || href.startsWith('mailto:');
+}
+
+function wikiUrlTransform(value: string) {
+  if (/^tel:/i.test(value)) return value;
+  return defaultUrlTransform(value);
 }
 
 function editLink(sourceHref?: string) {
@@ -43,9 +48,10 @@ export function WikiMarkdown({ markdown, sourceHref }: Props) {
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkMath]}
         rehypePlugins={[rehypeKatex]}
+        urlTransform={wikiUrlTransform}
         components={{
           a({ href, children }) {
-            const safe = pathWithBasePath(href || '#');
+            const safe = href ? pathWithBasePath(href) : '#';
             const missing = safe.includes('missing=1');
             const ext = external(safe);
             const className = [missing ? 'redlink' : '', ext ? 'external' : ''].filter(Boolean).join(' ') || undefined;

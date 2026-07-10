@@ -417,7 +417,7 @@
         "wikilink"
       ],
       "slug": "CV",
-      "summary": "Structured CV summary for Qiao Xinbao.",
+      "summary": "Academic CV summary for Xinbao Qiao.",
       "tags": [
         "en",
         "cv",
@@ -447,6 +447,7 @@
         "retention": "semantic memory"
       },
       "outgoing": [
+        "NUSRI_CQ_zh",
         "Publications_zh",
         "Zhejiang_University_zh"
       ],
@@ -454,7 +455,7 @@
         "wikilink"
       ],
       "slug": "CV_zh",
-      "summary": "乔鑫宝的结构化 CV 摘要。",
+      "summary": "乔鑫宝的学术简历摘要。",
       "tags": [
         "zh",
         "cv",
@@ -1476,6 +1477,7 @@
         "Old_Homepage_Resources",
         "Projects",
         "Publications",
+        "Qiao_Xinbao_zh",
         "Random_Forest",
         "Recursive_Synthetic_Data_Training",
         "Research",
@@ -1496,7 +1498,7 @@
         "wikilink"
       ],
       "slug": "index",
-      "summary": "Index of wiki pages.",
+      "summary": "Navigation index for public Xinbaopedia pages.",
       "tags": [
         "en",
         "index",
@@ -1566,7 +1568,7 @@
         "wikilink"
       ],
       "slug": "index_zh",
-      "summary": "Wiki 页面索引。",
+      "summary": "Xinbaopedia 公开页面导航索引。",
       "tags": [
         "zh",
         "index",
@@ -1685,7 +1687,7 @@
       "outgoing": [
         "AI_and_Networks",
         "CV",
-        "Internet_Slang_2026"
+        "Internet_Slang_2026_zh"
       ],
       "relationTypes": [
         "wikilink"
@@ -1703,7 +1705,6 @@
       "type": "style guide",
       "backlinks": [
         "index",
-        "Internet_Slang_2026",
         "log"
       ]
     },
@@ -1744,7 +1745,9 @@
       "type": "style guide",
       "backlinks": [
         "index_zh",
+        "Internet_Slang_2026",
         "Internet_Slang_2026_zh",
+        "log",
         "log_zh"
       ]
     },
@@ -1990,11 +1993,13 @@
         "Experience",
         "Hessian_Free_Online_Certified_Unlearning",
         "Internet_Slang_2026",
+        "Internet_Slang_2026_zh",
         "Machine_Unlearning",
         "Meng_Zhang",
         "NUSRI_CQ",
         "Projects",
         "Publications",
+        "Qiao_Xinbao_zh",
         "Research",
         "Shandong_University",
         "Soft_Weighted_Machine_Unlearning",
@@ -2045,7 +2050,8 @@
         "Publications_zh",
         "Qiao_Xinbao_zh",
         "Research_zh",
-        "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh"
+        "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
+        "Xinbao_Qiao"
       ],
       "relationTypes": [
         "wikilink"
@@ -2448,6 +2454,7 @@
       "title": "NUSRI-CQ",
       "type": "研究院",
       "backlinks": [
+        "CV_zh",
         "Experience_zh",
         "index_zh",
         "LLM_Reliability_zh",
@@ -2732,7 +2739,6 @@
         "NUSRI_CQ_zh",
         "Projects_zh",
         "Publications_zh",
-        "Qiao_Xinbao_zh",
         "Research_zh",
         "Sample_Selection_Bias_zh",
         "Shandong_University_zh",
@@ -2741,6 +2747,7 @@
         "The_Chinese_University_of_Hong_Kong_zh",
         "Wasserstein_Geometry_zh",
         "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
+        "Xinbao_Qiao",
         "Zhejiang_University_zh"
       ],
       "relationTypes": [
@@ -2763,12 +2770,13 @@
         "Distributed_Wasserstein_Barycenter_zh",
         "DynFrs_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
+        "index",
         "index_zh",
+        "log",
         "log_zh",
         "Meng_Zhang_zh",
         "NUSRI_CQ_zh",
         "Old_Homepage_Resources_zh",
-        "Qiao_Xinbao_zh",
         "Shandong_University_zh",
         "Skills_zh",
         "Soft_Weighted_Machine_Unlearning_zh",
@@ -2972,7 +2980,7 @@
         "wikilink"
       ],
       "slug": "Research",
-      "summary": "Research overview for Qiao Xinbao.",
+      "summary": "Overview of Xinbao Qiao's research directions and linked topic pages.",
       "tags": [
         "en",
         "research",
@@ -3024,7 +3032,7 @@
         "wikilink"
       ],
       "slug": "Research_zh",
-      "summary": "乔鑫宝学术 wiki 的研究概览。",
+      "summary": "乔鑫宝研究方向与相关专题页面概览。",
       "tags": [
         "zh",
         "research",
@@ -4077,9 +4085,11 @@
         "Hessian_Free_Online_Certified_Unlearning",
         "index",
         "log",
+        "log_zh",
         "Meng_Zhang",
         "NUSRI_CQ",
         "Old_Homepage_Resources",
+        "Qiao_Xinbao_zh",
         "Shandong_University",
         "Skills",
         "Soft_Weighted_Machine_Unlearning",
@@ -4716,6 +4726,13 @@
       "relation": "wikilink",
       "source": "body",
       "to": "When_Sample_Selection_Bias_Precipitates_Model_Collapse"
+    },
+    {
+      "from": "CV_zh",
+      "label": "新加坡国立大学重庆研究院（NUSRI-CQ）",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "NUSRI_CQ_zh"
     },
     {
       "from": "CV_zh",
@@ -6602,6 +6619,13 @@
     },
     {
       "from": "index",
+      "label": "乔鑫宝",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Qiao_Xinbao_zh"
+    },
+    {
+      "from": "index",
       "label": "",
       "relation": "wikilink",
       "source": "body",
@@ -6694,13 +6718,6 @@
     {
       "from": "index",
       "label": "Qiao Xinbao",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Xinbao_Qiao"
-    },
-    {
-      "from": "index",
-      "label": "乔鑫宝",
       "relation": "wikilink",
       "source": "body",
       "to": "Xinbao_Qiao"
@@ -6864,7 +6881,7 @@
       "label": "2026热梗",
       "relation": "wikilink",
       "source": "body",
-      "to": "Internet_Slang_2026"
+      "to": "Internet_Slang_2026_zh"
     },
     {
       "from": "Interpretability_zh",
@@ -7260,13 +7277,6 @@
     },
     {
       "from": "log_zh",
-      "label": "人物主页",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Qiao_Xinbao_zh"
-    },
-    {
-      "from": "log_zh",
       "label": "中文主页",
       "relation": "wikilink",
       "source": "body",
@@ -7274,21 +7284,7 @@
     },
     {
       "from": "log_zh",
-      "label": "英文主页",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Qiao_Xinbao_zh"
-    },
-    {
-      "from": "log_zh",
       "label": "中文主页",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Qiao_Xinbao_zh"
-    },
-    {
-      "from": "log_zh",
-      "label": "英文主页",
       "relation": "wikilink",
       "source": "body",
       "to": "Qiao_Xinbao_zh"
@@ -7309,14 +7305,7 @@
     },
     {
       "from": "log_zh",
-      "label": "",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Qiao_Xinbao_zh"
-    },
-    {
-      "from": "log_zh",
-      "label": "",
+      "label": "中文主页",
       "relation": "wikilink",
       "source": "body",
       "to": "Qiao_Xinbao_zh"
@@ -7348,6 +7337,34 @@
       "relation": "wikilink",
       "source": "body",
       "to": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh"
+    },
+    {
+      "from": "log_zh",
+      "label": "英文人物主页",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Xinbao_Qiao"
+    },
+    {
+      "from": "log_zh",
+      "label": "英文主页",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Xinbao_Qiao"
+    },
+    {
+      "from": "log_zh",
+      "label": "英文主页",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Xinbao_Qiao"
+    },
+    {
+      "from": "log_zh",
+      "label": "英文人物主页",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Xinbao_Qiao"
     },
     {
       "from": "log",
@@ -7449,14 +7466,14 @@
     },
     {
       "from": "log",
-      "label": "",
+      "label": "2026热梗",
       "relation": "wikilink",
       "source": "body",
-      "to": "Internet_Slang_2026"
+      "to": "Internet_Slang_2026_zh"
     },
     {
       "from": "log",
-      "label": "2026热梗",
+      "label": "",
       "relation": "wikilink",
       "source": "body",
       "to": "Internet_Slang_2026"
@@ -7558,6 +7575,55 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Publications"
+    },
+    {
+      "from": "log",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Qiao_Xinbao_zh"
+    },
+    {
+      "from": "log",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Qiao_Xinbao_zh"
+    },
+    {
+      "from": "log",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Qiao_Xinbao_zh"
+    },
+    {
+      "from": "log",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Qiao_Xinbao_zh"
+    },
+    {
+      "from": "log",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Qiao_Xinbao_zh"
+    },
+    {
+      "from": "log",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Qiao_Xinbao_zh"
+    },
+    {
+      "from": "log",
+      "label": "乔鑫宝",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Qiao_Xinbao_zh"
     },
     {
       "from": "log",
@@ -7688,55 +7754,6 @@
     {
       "from": "log",
       "label": "",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Xinbao_Qiao"
-    },
-    {
-      "from": "log",
-      "label": "",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Xinbao_Qiao"
-    },
-    {
-      "from": "log",
-      "label": "",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Xinbao_Qiao"
-    },
-    {
-      "from": "log",
-      "label": "",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Xinbao_Qiao"
-    },
-    {
-      "from": "log",
-      "label": "",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Xinbao_Qiao"
-    },
-    {
-      "from": "log",
-      "label": "",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Xinbao_Qiao"
-    },
-    {
-      "from": "log",
-      "label": "",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Xinbao_Qiao"
-    },
-    {
-      "from": "log",
-      "label": "乔鑫宝",
       "relation": "wikilink",
       "source": "body",
       "to": "Xinbao_Qiao"
@@ -8856,13 +8873,6 @@
     },
     {
       "from": "Qiao_Xinbao_zh",
-      "label": "English version",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Qiao_Xinbao_zh"
-    },
-    {
-      "from": "Qiao_Xinbao_zh",
       "label": "",
       "relation": "wikilink",
       "source": "body",
@@ -8958,6 +8968,13 @@
       "relation": "wikilink",
       "source": "body",
       "to": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh"
+    },
+    {
+      "from": "Qiao_Xinbao_zh",
+      "label": "English version",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Xinbao_Qiao"
     },
     {
       "from": "Qiao_Xinbao_zh",
@@ -11418,7 +11435,7 @@
     },
     "pages": 88,
     "publicPages": 86,
-    "relations": 1032,
+    "relations": 1033,
     "types": {
       "Academic advisor": 4,
       "CV summary": 1,

@@ -23,6 +23,7 @@ tsconfig.tsbuildinfo
 cache/
 
 # Worktree and runtime artifacts
+agent_progress.md
 .omx/
 .turbo/
 coverage/

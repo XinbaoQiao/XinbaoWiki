@@ -5,11 +5,11 @@
     "pages": 86,
     "publicPages": 86,
     "hiddenPages": 2,
-    "edges": 1024,
+    "edges": 1025,
     "warnings": 0,
     "languages": {
-      "en": 44,
-      "zh": 44
+      "en": 43,
+      "zh": 43
     },
     "types": {
       "Academic advisor": 4,
@@ -21,7 +21,7 @@
       "PhD student": 1,
       "Project overview": 1,
       "Public research university": 3,
-      "publication": 10,
+      "publication": 8,
       "Publication list": 1,
       "Research concept": 15,
       "Research experience": 1,

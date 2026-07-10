@@ -104,7 +104,8 @@ The ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|Whe
 
 ## Academic service
 
-Qiao has served as a reviewer for leading conferences and journals, including ICML 2026, NeurIPS 2025 and 2026, ICLR 2025, AAAI 2025 and 2026, and IEEE TNNLS.
+- **2026**: reviewer for ICML, NeurIPS, and AAAI.
+- **2025**: reviewer for NeurIPS, ICLR, AAAI, and IEEE TNNLS.
 
 ## See also
 

@@ -16,7 +16,7 @@ translation_of: log
 ---
 ## 2026-06-13
 
-- 更新 [[Xinbao_Qiao|人物主页]]、[[Qiao_Xinbao_zh|中文主页]]、[[Research|研究概览]]、[[Projects|项目页]]、[[Experience|研究经历]]、[[CV|简历]] 及相关专题页，将近期工作表述为围绕 AI 模型中的数据全生命周期管理、[[Data_Centric_Machine_Learning|数据中心 ML]]、AI for Networks 与 Networks for AI 展开，同时保留 [[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]] 作为相关方法，而不是唯一当前重点。
+- 更新 [[Xinbao_Qiao|英文人物主页]]、[[Qiao_Xinbao_zh|中文主页]]、[[Research|研究概览]]、[[Projects|项目页]]、[[Experience|研究经历]]、[[CV|简历]] 及相关专题页，将近期工作表述为围绕 AI 模型中的数据全生命周期管理、[[Data_Centric_Machine_Learning|数据中心 ML]]、AI for Networks 与 Networks for AI 展开，同时保留 [[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]] 作为相关方法，而不是唯一当前重点。
 - 在 [[Xinbao_Qiao|英文主页]] 与 [[Qiao_Xinbao_zh|中文主页]] 中补充“数据生成、数据使用、数据删除”三部分数据生命周期概述。
 - 在 CV 论文列表中新增两篇 NeurIPS 2026 在审条目，并重新生成公开 CV PDF。
 
@@ -41,7 +41,7 @@ translation_of: log
 - 润色中英文人物主页，压缩开头表述，明确博士阶段措辞，并减少研究经历与学术项目之间的重复。
 - 调整人物主页开头的脚注引用顺序，使 Xinbao 同名脚注出现在 Xinbao Qiao/新寶橋拼写巧合脚注之前。
 - 调整可见左侧栏：Navigation 增加 [[Publications|Publications]]，Experience 放到 Education 后面且只保留 [[NUSRI_CQ|NUSRI-CQ]]。
-- 在 [[Xinbao_Qiao]] 与 [[Qiao_Xinbao_zh]] 增加姓名脚注，说明 “Qiao”/“ciao” 的昵称关联以及 “Mr. Ciao” 这一称呼。
+- 在 [[Xinbao_Qiao|英文人物主页]] 与 [[Qiao_Xinbao_zh|中文主页]] 增加姓名脚注，说明 “Qiao”/“ciao” 的昵称关联以及 “Mr. Ciao” 这一称呼。
 - 新增 [[Internet_Slang_2026_zh|2026热梗]] 与 [[Internet_Slang_2026|Internet Slang 2026]] 作为 Chat with Xinbao 的年度语气参考，扩充热梗使用边界，并把 AI 打开后的第一句调整为有趣但不失学术主页风度的版本。
 - 围绕 [[AI_and_Networks|AI 与网络]] 更新 CUHK 博士阶段叙述，新增 [[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]] 作为当前博士阶段关注点，并将研究概览整理为更接近 LLM Wiki 的编译式研究图谱。
 

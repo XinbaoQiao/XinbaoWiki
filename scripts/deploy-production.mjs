@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { spawn } from 'node:child_process';
+import { execFileSync, spawn } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
@@ -62,6 +62,25 @@ function run(command, args, env) {
       resolve();
     });
   });
+}
+
+function git(args) {
+  return execFileSync('git', args, {
+    cwd: root,
+    encoding: 'utf8',
+    stdio: ['ignore', 'pipe', 'pipe'],
+  });
+}
+
+function requireCleanDeploymentTree() {
+  const status = git(['status', '-sb']).trim();
+  const porcelain = git(['status', '--porcelain']).trim();
+  if (porcelain) {
+    fail('working tree must be clean before production deploy; commit, stash, or ignore local changes first');
+  }
+  if (/\[(?:ahead|behind|ahead \d+, behind|behind \d+, ahead)/.test(status)) {
+    fail(`local branch must match its upstream before production deploy: ${status.split('\n')[0]}`);
+  }
 }
 
 function vercelBinName() {
@@ -186,6 +205,7 @@ async function main() {
   const hadLocalEnv = existsSync(join(root, '.env.local'));
 
   try {
+    requireCleanDeploymentTree();
     await run(vercelCommand, vercelArgs('link', ['--yes', '--project', project, '--scope', scope]), env);
     await run(vercelCommand, vercelArgs('deploy', ['--prod', '--yes', '--scope', scope]), env);
     await runSmoke(env);

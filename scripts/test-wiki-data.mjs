@@ -204,6 +204,9 @@ const okfQualityReport = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/
 const okfSchema = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/schema.json'), 'utf8'));
 const okfHome = matter(fs.readFileSync(path.join(root, 'public/okf/concepts/Xinbao_Qiao.md'), 'utf8'));
 const okfSyntheticTopic = matter(fs.readFileSync(path.join(root, 'public/okf/concepts/Synthetic_Data_and_Model_Collapse.md'), 'utf8'));
+const okfConceptLog = fs.readFileSync(path.join(root, 'public/okf/concepts/log.md'), 'utf8');
+const okfConceptLogZh = fs.readFileSync(path.join(root, 'public/okf/concepts/log_zh.md'), 'utf8');
+const okfConceptHomeZh = fs.readFileSync(path.join(root, 'public/okf/concepts/Qiao_Xinbao_zh.md'), 'utf8');
 const chatReadme = fs.readFileSync(path.join(root, 'chat with xinbao/README.md'), 'utf8');
 const chatEnvExample = fs.readFileSync(path.join(root, 'chat with xinbao/env.example'), 'utf8');
 const chatPersona = fs.readFileSync(path.join(root, 'chat with xinbao/persona-prompt.md'), 'utf8');
@@ -297,9 +300,19 @@ assert.equal(okfManifest.bundle.publicPages, pageIndex.pages.length, 'public OKF
 assert.equal(okfManifest.bundle.hiddenPagesExcluded, 2, 'public OKF manifest records hidden-page exclusion');
 assert.equal(okfPageIndex.pages.length, pageIndex.pages.length, 'public OKF page index mirrors the public source index');
 assert.equal(okfGraph.nodes.length, pageIndex.pages.length, 'public OKF graph excludes hidden source pages');
+const okfLanguageCounts = Object.fromEntries(
+  Object.entries(okfGraph.nodes.reduce((counts, node) => ({ ...counts, [node.language]: (counts[node.language] || 0) + 1 }), {})).sort(([a], [b]) => a.localeCompare(b))
+);
+const okfTypeCounts = Object.fromEntries(
+  Object.entries(okfGraph.nodes.reduce((counts, node) => ({ ...counts, [node.type]: (counts[node.type] || 0) + 1 }), {})).sort(([a], [b]) => a.localeCompare(b))
+);
+assert.deepEqual(okfGraph.stats.languages, okfLanguageCounts, 'public OKF graph language counts are recomputed after hidden-page exclusion');
+assert.deepEqual(okfGraph.stats.types, okfTypeCounts, 'public OKF graph type counts are recomputed after hidden-page exclusion');
 assert.equal(okfQualityReport.schemaVersion, 1, 'public OKF quality report declares its schema version');
 assert.equal(okfQualityReport.okfVersion, '0.1', 'public OKF quality report declares the OKF target version');
 assert.equal(okfQualityReport.counts.pages, okfGraph.nodes.length, 'public OKF quality report page count matches public graph');
+assert.deepEqual(okfQualityReport.counts.languages, okfLanguageCounts, 'public OKF quality report language counts match the public graph');
+assert.deepEqual(okfQualityReport.counts.types, okfTypeCounts, 'public OKF quality report type counts match the public graph');
 assert.equal(okfQualityReport.counts.warnings, 0, 'public OKF quality report is warning-free');
 assert.deepEqual(okfQualityReport.warnings, [], 'public OKF quality report keeps an explicit empty warning list');
 assert.deepEqual(okfQualityReport.hiddenPages.pages, [], 'public OKF quality report does not expose hidden page slugs');
@@ -325,6 +338,11 @@ assert.ok(Array.isArray(okfHome.data.tags) && okfHome.data.tags.length > 0, 'pub
 assert.ok(okfHome.data.timestamp, 'public OKF concept keeps a timestamp');
 assert.ok(okfHome.data.lifecycle?.confidence > 0, 'public OKF concept includes LLM Wiki lifecycle metadata');
 assert.ok(okfSyntheticTopic.data.relations.some((relation) => relation.type === 'depends-on' && relation.target === 'Synthetic_Data'), 'public OKF concept exports structured relations');
+assert.match(okfConceptLog, /\[Qiao Xinbao zh\]\(\.\/Qiao_Xinbao_zh\.md\)/, 'English OKF log preserves explicit Chinese homepage links');
+assert.doesNotMatch(okfConceptLog, /\[Qiao Xinbao zh\]\(\.\/Xinbao_Qiao\.md\)/, 'English OKF log does not collapse explicit Chinese links back to English');
+assert.match(okfConceptLogZh, /\[英文人物主页\]\(\.\/Xinbao_Qiao\.md\)/, 'Chinese OKF log preserves explicit English homepage links when the label says English');
+assert.match(okfConceptHomeZh, /\[English version\]\(\.\/Xinbao_Qiao\.md\)/, 'Chinese OKF biography preserves its explicit English-version link');
+assert.doesNotMatch(okfConceptHomeZh, /\[English version\]\(\.\/Qiao_Xinbao_zh\.md\)/, 'Chinese OKF biography does not self-link the English-version entry');
 assert.doesNotMatch(fs.readFileSync(path.join(root, 'public/okf/index.md'), 'utf8'), /^---/m, 'public OKF reserved index has no frontmatter');
 assert.doesNotMatch(fs.readFileSync(path.join(root, 'public/okf/log.md'), 'utf8'), /^---/m, 'public OKF reserved log has no frontmatter');
 
@@ -334,7 +352,7 @@ assert.match(newWikiPageScript, /translation_of/, 'new wiki page helper supports
 assert.match(newWikiPageScript, /wiki\/\$\{slug\}\.md already exists; use --force/, 'new wiki page helper refuses to overwrite existing pages by default');
 const ciWorkflow = fs.readFileSync(path.join(root, '.github/workflows/ci.yml'), 'utf8');
 const deployProductionScript = fs.readFileSync(path.join(root, 'scripts/deploy-production.mjs'), 'utf8');
-assert.match(ciWorkflow, /apt-get install -y --no-install-recommends mupdf-tools/, 'CI installs mutool for CV PDF URI parity checks');
+assert.match(ciWorkflow, /apt-get install -y --no-install-recommends imagemagick mupdf-tools/, 'CI installs ImageMagick and mutool for image and CV PDF checks');
 assert.match(deployProductionScript, /const vercelCliVersion = '54\.18\.7';/, 'deployment wrapper pins a Vercel CLI version with VERCEL_TOKEN env support');
 assert.match(deployProductionScript, /VERCEL_TOKEN is required in the environment/, 'deployment wrapper requires the token through the environment');
 assert.match(deployProductionScript, /function redactArgs\(args, env\)/, 'deployment wrapper redacts token values from wrapper error messages');
@@ -344,6 +362,9 @@ assert.match(deployProductionScript, /function vercelArgs\(command, args = \[\]\
 assert.match(deployProductionScript, /function resolveCachedVercelBin\(\)/, 'deployment wrapper resolves a local Vercel CLI binary before deploying');
 assert.match(deployProductionScript, /node_modules', '\.bin', vercelBinName\(\)/, 'deployment wrapper prefers the project-local Vercel CLI binary');
 assert.match(deployProductionScript, /'_npx'/, 'deployment wrapper can reuse an existing npm npx cache without invoking npx during deploy');
+assert.match(deployProductionScript, /function requireCleanDeploymentTree\(\)/, 'deployment wrapper checks the local git state before production deploy');
+assert.match(deployProductionScript, /working tree must be clean before production deploy/, 'deployment wrapper refuses dirty production deploys');
+assert.match(deployProductionScript, /local branch must match its upstream before production deploy/, 'deployment wrapper refuses ahead or behind production deploys');
 assert.doesNotMatch(deployProductionScript, /['"]--token['"], token/, 'deployment wrapper does not put the token on the Vercel CLI command line');
 assert.match(deployProductionScript, /'--project', project, '--scope', scope/, 'deployment wrapper links the explicit Vercel project and scope');
 assert.match(deployProductionScript, /SITE_URL: productionUrl/, 'deployment wrapper passes the canonical production URL to smoke checks');
@@ -353,7 +374,11 @@ const vercelignore = fs.readFileSync(path.join(root, '.vercelignore'), 'utf8');
 const verifyPublishSet = fs.readFileSync(path.join(root, 'scripts/verify-publish-set.mjs'), 'utf8');
 assert.match(gitignore, /\.vercel-auth-\*\//, 'gitignore excludes temporary Vercel auth directories');
 assert.match(vercelignore, /\.vercel-auth-\*\//, 'vercelignore excludes temporary Vercel auth directories');
+assert.match(gitignore, /agent_progress\.md/, 'gitignore keeps the local agent ledger out of commits by default');
+assert.match(vercelignore, /AGENTS\.md[\s\S]*CLAUDE\.md[\s\S]*agent_progress\.md[\s\S]*CV\.tex[\s\S]*assets\//, 'vercelignore excludes agent guidance, local ledger, and CV source assets from deploy uploads');
 assert.match(verifyPublishSet, /temporary Vercel auth state/, 'publish-set checker blocks temporary Vercel auth directories if staged');
+assert.match(verifyPublishSet, /function untrackedFiles\(\)/, 'publish-set checker includes untracked files that are not ignored');
+assert.match(verifyPublishSet, /ls-files', '--others', '--exclude-standard'/, 'publish-set checker asks git for untracked publishable files');
 
 for (const file of fs.readdirSync(wikiDir).filter((file) => file.endsWith('.md'))) {
   const data = frontmatterData(file);
@@ -366,6 +391,10 @@ for (const file of fs.readdirSync(wikiDir).filter((file) => file.endsWith('.md')
 assert.doesNotMatch(nextConfig, /output:\s*['"]export['"]/, 'Next config no longer forces static export');
 assert.match(wikiMarkdownTsx, /import remarkMath from 'remark-math';/, 'Markdown renderer imports remark-math');
 assert.match(wikiMarkdownTsx, /import rehypeKatex from 'rehype-katex';/, 'Markdown renderer imports rehype-katex');
+assert.match(wikiMarkdownTsx, /defaultUrlTransform/, 'Markdown renderer uses react-markdown URL sanitation explicitly');
+assert.match(wikiMarkdownTsx, /function wikiUrlTransform\(value: string\)/, 'Markdown renderer centralizes URL protocol handling');
+assert.match(wikiMarkdownTsx, /\^tel:/, 'Markdown renderer preserves telephone links instead of rewriting them to #');
+assert.match(wikiMarkdownTsx, /urlTransform=\{wikiUrlTransform\}/, 'Markdown renderer passes the custom URL transform to ReactMarkdown');
 assert.match(wikiMarkdownTsx, /remarkPlugins=\{\[remarkGfm, remarkMath\]\}/, 'Markdown renderer enables GFM and math parsing');
 assert.match(wikiMarkdownTsx, /rehypePlugins=\{\[rehypeKatex\]\}/, 'Markdown renderer renders math through KaTeX');
 assert.match(languageToggle, /usePathname/, 'language toggle is route-aware');
@@ -382,8 +411,15 @@ assert.match(wikiLib, /export function wikiPageSummary/, 'wiki library exposes t
 assert.match(wikiLib, /export function wikiConceptType/, 'wiki library exposes the OKF-compatible concept-type resolver');
 assert.match(wikiLib, /type WikiPageOptions = \{ includeHidden\?: boolean \};/, 'wiki library keeps hidden-page access explicit for maintenance callers');
 assert.match(wikiLib, /export function getPublicWikiSlugs\(\)/, 'wiki library exposes public wiki slugs for production routes');
+assert.match(wikiLib, /const WIKI_SLUG_PATTERN = \/\^\[A-Za-z0-9_\\-\\u4e00-\\u9fff\]\+\$\/u;/, 'wiki library constrains route slugs to file-safe concept names');
+assert.match(wikiLib, /export function isSafeWikiSlug\(slug: string\)/, 'wiki library exposes slug validation for route and link safety checks');
+assert.match(wikiLib, /function wikiFilePath\(slug: string\)/, 'wiki library resolves wiki paths through one bounded helper');
+assert.match(wikiLib, /path\.resolve\(WIKI_DIR, `\$\{slug\}\.md`\)/, 'wiki library resolves page files before reading them');
+assert.match(wikiLib, /catch \{\s*return null;\s*\}/, 'wiki page loader rejects malformed encoded slugs');
 assert.match(wikiLib, /if \(data\.hidden === true && !options\.includeHidden\) return null;/, 'wiki page loader blocks hidden pages by default');
 assert.match(wikiLib, /preprocessWikiLinks\(markdown: string, options: \{ language\?: 'en' \| 'zh' \}/, 'wikilink preprocessing is language-aware');
+assert.match(wikiLib, /function shouldPreserveResolvedTarget\(target: string, resolved: string, language: 'en' \| 'zh', label: string\)/, 'wikilink preprocessing can preserve explicit cross-language targets');
+assert.match(wikiLib, /hasExplicitEnglishLabel\(label\)/, 'wikilink preprocessing preserves English links on Chinese pages when the label explicitly says English');
 assert.match(wikiLib, /export type SearchIndexItem/, 'wiki library exposes a typed static search index item');
 assert.match(wikiLib, /export function getSearchIndex\(\): SearchIndexItem\[\]/, 'wiki library builds a static search index from markdown pages');
 assert.match(wikiLib, /plainText\(page\.content\)/, 'search index uses markdown body text, not only frontmatter');
@@ -449,10 +485,11 @@ assert.match(chatWithXinbao, /Questions may be logged to improve answers\./, 'ch
 assert.match(chatWithXinbao, /问题可能会被记录，用于改进回答。/, 'chat client discloses Chinese question logging');
 assert.match(chatWithXinbao, /Xinbao AI is temporarily unavailable\. Please try again later\./, 'chat client uses a generic model-error message');
 assert.match(chatWithXinbao, /language: Language/, 'chat client localizes UI from current wiki language');
-assert.match(chatWithXinbao, /distilled/, 'chat client introduces itself as a distilled academic skill');
-assert.match(chatWithXinbao, /来踩踩[\s\S]*蒸馏出来的数字分身 skill[\s\S]*资料稳[\s\S]*轻微有梗[\s\S]*讲清楚喵~/, 'chat client Chinese greeting is playful but restrained');
-assert.match(chatWithXinbao, /Xinbao AI is on the way[\s\S]*Checking Xinbaopedia notes[\s\S]*Almost there/, 'chat client includes varied English typing messages');
-assert.match(chatWithXinbao, /Xinbao AI 正在赶来的路上[\s\S]*家人们，答案正在路上[\s\S]*886 还早[\s\S]*来踩踩[\s\S]*正在切换到资料稳模式/, 'chat client includes varied Chinese typing messages');
+assert.match(chatWithXinbao, /Xinbaopedia chat assistant[\s\S]*CV\/résumé[\s\S]*short, grounded[\s\S]*wiki does not have enough evidence/, 'chat client English greeting is natural, action-oriented, and evidence-bounded');
+assert.match(chatWithXinbao, /想快速了解乔鑫宝[\s\S]*研究方向、论文、项目、简历和联系方式[\s\S]*说人话[\s\S]*不硬编/, 'chat client Chinese greeting is natural, action-oriented, and evidence-bounded');
+assert.doesNotMatch(chatWithXinbao, /digital-proxy skill distilled|蒸馏出来的数字分身 skill|哈基米 energy|讲清楚喵~/, 'chat client no longer uses forced technical persona language in the opening experience');
+assert.match(chatWithXinbao, /Checking Xinbaopedia notes[\s\S]*Looking through public pages[\s\S]*Almost there/, 'chat client includes varied English typing messages');
+assert.match(chatWithXinbao, /正在查公开资料[\s\S]*正在整理相关页面[\s\S]*先看资料，不硬编[\s\S]*马上整理好/, 'chat client includes natural Chinese typing messages');
 assert.match(chatWithXinbao, /function randomTypingMessage[\s\S]*Math\.random\(\)[\s\S]*setTypingMessage\(randomTypingMessage\(strings\.typing\)\)/, 'chat client randomly selects one typing message per request');
 assert.doesNotMatch(chatWithXinbao, /YUNWU_API_KEY|UPSTASH_REDIS_REST_TOKEN|api\.yunwu|Bearer/, 'chat client contains no backend key names or provider endpoint');
 assert.match(chatRoute, /runtime = 'nodejs'/, 'chat API route uses the Node runtime');
@@ -505,12 +542,13 @@ assert.match(chatKnowledge, /project\.md/, 'chat knowledge builder can prioritiz
 assert.match(chatKnowledge, /wiki'\)/, 'chat knowledge builder reads the local wiki directory');
 assert.match(chatKnowledge, /Xinbao_Qiao[\s\S]*Qiao_Xinbao_zh[\s\S]*Projects[\s\S]*Research[\s\S]*Publications[\s\S]*CV[\s\S]*Internet_Slang_2026/, 'chat knowledge builder prioritizes homepage, projects, research, publications, CV, and yearly slang pages');
 assert.doesNotMatch(chatKnowledge, /Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning/, 'chat knowledge builder does not prioritize the hidden under-review manuscript');
-assert.match(chatKnowledge, /digital proxy/, 'persona identifies the assistant as a digital proxy');
-assert.match(chatKnowledge, /academic skill[\s\S]*distilled/, 'persona can introduce the assistant as a distilled academic skill');
+assert.match(chatKnowledge, /academic homepage chat assistant/, 'persona identifies the assistant as a homepage chat assistant');
+assert.match(chatKnowledge, /do not call yourself a distilled skill or digital persona in normal greetings/, 'persona prevents forced technical identity labels in normal greetings');
+assert.match(chatKnowledge, /English self-introductions[\s\S]*Xinbaopedia chat assistant[\s\S]*wiki does not have enough evidence/, 'persona documents a natural English self-introduction');
 assert.match(chatKnowledge, /Accepted user questions may be logged server-side/, 'persona transparently explains question logging when asked');
 assert.match(chatKnowledge, /chat history, raw IPs, system prompts, and API keys are not stored/, 'persona documents what question logging must not claim to store');
-assert.match(chatKnowledge, /顷刻炼化[\s\S]*数字分身 skill[\s\S]*恐怖如斯/, 'persona can introduce itself with the requested playful Chinese phrasing');
-assert.match(chatKnowledge, /家人们[\s\S]*跟他爆了[\s\S]*直接拿捏[\s\S]*包的[\s\S]*先别急[\s\S]*不硬编/s, 'persona supports a small Chinese meme-style expression pool without encouraging unsupported claims');
+assert.match(chatKnowledge, /想快速了解乔鑫宝可以直接问我[\s\S]*我会尽量说人话[\s\S]*先看资料不硬编/, 'persona supports natural Chinese opening phrasing without encouraging unsupported claims');
+assert.match(chatKnowledge, /家人们[\s\S]*先别急[\s\S]*这题我会[\s\S]*有一说一[\s\S]*包的[\s\S]*主打一个资料准[\s\S]*不硬编/s, 'persona supports a small Chinese casual expression pool without encouraging unsupported claims');
 assert.match(chatKnowledge, /Modern meme-guide voice[\s\S]*情绪价值[\s\S]*City不City[\s\S]*YYDS[\s\S]*我去不早说[\s\S]*不讲不讲[\s\S]*尊嘟假嘟[\s\S]*退一万步讲/, 'persona supports current meme-guide catchphrases');
 assert.match(chatKnowledge, /2026 sentence-template and abstract voice[\s\S]*我将辞职在家研究[\s\S]*此人的 X 恐怕在我之上[\s\S]*有点抽象[\s\S]*source-grounded answer within one sentence/, 'persona supports bounded 2026 sentence-template and abstract voice');
 assert.match(chatKnowledge, /Reusable casual sentence templates[\s\S]*家人们谁懂啊[\s\S]*主打一个 X[\s\S]*含金量还在上升/, 'persona supports reusable meme sentence templates');
@@ -529,7 +567,8 @@ for (const envName of ['YUNWU_API_KEY', 'YUNWU_API_BASE_URL', 'UPSTASH_REDIS_RES
 assert.match(chatPersona, /You are Chat with Xinbao/, 'persona prompt template documents assistant identity');
 assert.match(chatPersona, /XINBAO_CHAT_VOICE_STYLE/, 'persona prompt template documents the private voice style layer');
 assert.match(chatPersona, /Accepted user questions may be logged server-side/, 'persona prompt template documents question logging transparency');
-assert.match(chatPersona, /do not repeat one fixed meme[\s\S]*家人们[\s\S]*跟他爆了[\s\S]*顷刻炼化[\s\S]*轻微有梗[\s\S]*never use memes to cover missing evidence/, 'persona prompt template documents varied meme-style wording with factual boundaries');
+assert.match(chatPersona, /homepage chat assistant[\s\S]*not claim to be the real Xinbao Qiao[\s\S]*do not call yourself a distilled skill or digital persona/, 'persona prompt template documents homepage-assistant identity with technical-label boundaries');
+assert.match(chatPersona, /do not repeat one fixed meme[\s\S]*想快速了解乔鑫宝可以直接问我[\s\S]*我会尽量说人话[\s\S]*主打一个资料准[\s\S]*never use memes to cover missing evidence/, 'persona prompt template documents natural casual wording with factual boundaries');
 assert.match(chatPersona, /Modern meme-guide voice[\s\S]*情绪价值[\s\S]*City不City[\s\S]*YYDS[\s\S]*爱你老己[\s\S]*做完你的做你的/, 'persona prompt template documents current meme-guide wording');
 assert.match(chatPersona, /2026 sentence-template and abstract voice[\s\S]*我将辞职在家研究[\s\S]*听君一席话如听一席话[\s\S]*不按套路但按 source notes/, 'persona prompt template documents 2026 sentence-template and abstract wording');
 assert.match(chatPersona, /Reusable casual sentence templates[\s\S]*退一万步讲[\s\S]*尊嘟假嘟[\s\S]*source-grounded content only/, 'persona prompt template documents meme sentence-template boundaries');
@@ -545,8 +584,10 @@ assert.match(chatMemeNotes, /00s retro web nostalgia[\s\S]*886[\s\S]*踩踩[\s\S
 assert.doesNotMatch(`${chatWithXinbao}\n${chatPersona}\n${chatMemeNotes}`, /\u8dd1\u5802/, 'chat voice knowledge removes the disallowed catchphrase everywhere public');
 assert.match(internetSlang2026, /Internet Slang 2026[\s\S]*controlled phrase bank[\s\S]*Sentence and abstract-expression memes[\s\S]*AI as companion/, 'English 2026 slang page documents controlled use categories');
 assert.match(internetSlang2026, /LingoAce[\s\S]*WuKong Education[\s\S]*QianGua Data[\s\S]*RedNoteMeme[\s\S]*Stellar Chinese/, 'English 2026 slang page cites current public slang sources');
+assert.match(internetSlang2026, /human homepage assistant[\s\S]*not a technical identity label[\s\S]*CV\/résumé[\s\S]*avoid `distilled skill`, `digital proxy`/, 'English 2026 slang page keeps greeting rules natural and action-oriented');
 assert.match(internetSlang2026Zh, /2026热梗[\s\S]*先准确，再有趣[\s\S]*句式梗与抽象表达[\s\S]*AI人格[\s\S]*之前已经从聊天语气中移除的旧词继续保持不用/, 'Chinese 2026 slang page documents current slang categories and omitted older phrasing');
 assert.match(internetSlang2026Zh, /LingoAce[\s\S]*悟空教育[\s\S]*千瓜数据[\s\S]*RedNoteMeme[\s\S]*Stellar Chinese/, 'Chinese 2026 slang page cites current public slang sources');
+assert.match(internetSlang2026Zh, /像主页问答助手的自然开场[\s\S]*不确定的地方不硬编[\s\S]*想快速了解乔鑫宝/, 'Chinese 2026 slang page keeps greeting rules natural and action-oriented');
 assert.doesNotMatch(chatEnvExample, /sk-[A-Za-z0-9_-]{12,}/, 'env.example contains no real-looking API key');
 assert.ok(!('cf:deploy' in (packageJson.scripts || {})), 'package scripts do not include the retired Cloudflare Worker deployment');
 assert.ok(!('cf:dev' in (packageJson.scripts || {})), 'package scripts do not include the retired Cloudflare Worker dev server');
@@ -828,6 +869,8 @@ assert.match(homepagePortal, /className="wiki-portal-name"[\s\S]*Xinbao Qiao/, '
 assert.match(homepagePortal, /wiki-portal-name-text[\s\S]*Xinbao Qiao/, 'homepage keeps the pure text signature as the central name');
 assert.match(homePage, /Academic biography and research overview[\s\S]*个人学术条目与研究概览/, 'homepage keeps primary English and Chinese profile links below the search');
 assert.match(homepagePortal, /<WikiSearch[\s\S]*language=\{language\}[\s\S]*onLanguageChange=\{setLanguage\}[\s\S]*showLanguageSelect[\s\S]*variant="portal"/, 'homepage search controls the portal language state');
+assert.match(homepagePortal, /function withBasePath\(pathname: string\)/, 'homepage portal keeps static logo assets base-path aware');
+assert.match(homepagePortal, /src=\{withBasePath\('\/site-logos\/wordmark\/xinbao-qiao-blue\.png'\)\}/, 'homepage blue wordmark image is base-path aware');
 assert.match(homepagePortal, /wiki-portal-name-logos[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-blue\.png[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-gold\.png[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-green\.png[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-charcoal\.png/, 'homepage renders the themed Xinbao Qiao logo images for color themes');
 assert.doesNotMatch(homepagePortal, /height=\{190\}|width=\{760\}/, 'homepage no longer renders the old rectangular logo canvas dimensions');
 assert.match(homepagePortal, /const browseLabels[\s\S]*en: 'Browse Xinbaopedia'[\s\S]*zh: '浏览 Xinbaopedia'/, 'homepage Browse heading has English and Chinese labels');
@@ -1025,6 +1068,13 @@ const allMarkdown = fs.readdirSync(wikiDir)
   .map((file) => read(file))
   .join('\n');
 const allChineseMarkdown = chinesePageFiles.map((file) => read(file)).join('\n');
+const allPublicText = `${allMarkdown}\n${homePage}\n${homepagePortal}\n${fs.readFileSync(path.join(root, 'public/okf/index.md'), 'utf8')}\n${JSON.stringify(okfPageIndex)}`;
+assert.doesNotMatch(allPublicText, /Community Service|community service|社区服务/, 'public homepage and wiki content use academic service, not community service');
+assert.doesNotMatch(allPublicText, /Transactions on Neural Networks and Learning Systems/, 'public content keeps reviewer venue labels abbreviated as IEEE TNNLS');
+assert.match(allPublicText, /IEEE TNNLS/, 'public content retains the abbreviated IEEE TNNLS reviewer label');
+assert.match(read('Xinbao_Qiao.md'), /## Academic service[\s\S]*- \*\*2026\*\*: reviewer for ICML, NeurIPS, and AAAI\.[\s\S]*- \*\*2025\*\*: reviewer for NeurIPS, ICLR, AAAI, and IEEE TNNLS\./, 'English homepage lists academic service by year');
+assert.match(read('Qiao_Xinbao_zh.md'), /## 学术服务[\s\S]*- \*\*2026 年\*\*：担任 ICML、NeurIPS 和 AAAI 审稿人。[\s\S]*- \*\*2025 年\*\*：担任 NeurIPS、ICLR、AAAI 和 IEEE TNNLS 审稿人。/, 'Chinese homepage lists academic service by year');
+assert.doesNotMatch(allPublicText, /reviewer for ICML 2026, NeurIPS 2025 and 2026|担任 ICML 2026、NeurIPS 2025 和 2026/, 'public content no longer compresses academic service into one mixed-year sentence');
 assert.doesNotMatch(allChineseMarkdown, /ZXQ|XQ0|当_ 抽样|软件_ Weightd|学习什么 内容|首尔首尔|大赦国际|高山模型|秋奥|\[\[\[/, 'Chinese markdown pages avoid broken machine-translation artifacts');
 assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /Data filtering is not automatically protective/, 'model-collapse page presents a high-level filtering takeaway');
 assert.match(read('Hessian_Free_Online_Certified_Unlearning.md'), /Unlearning needs an operational model/, 'Hessian-free page presents a high-level lifecycle takeaway');
@@ -1045,6 +1095,10 @@ const cvTex = fs.readFileSync(path.join(root, 'CV.tex'), 'utf8');
 assert.match(cvTex, /xinbaoqiao@cuhk\.edu\.hk/, 'CV uses current CUHK email');
 assert.doesNotMatch(cvTex, /xinbaoqiao@zju\.edu\.cn/, 'CV removes old Zhejiang email');
 assert.match(cvTex, /The Chinese University of Hong Kong/, 'CV includes current PhD affiliation');
+assert.match(cvTex, /Open-Source Contributions and Academic Service/, 'CV PDF source labels service as academic service');
+assert.doesNotMatch(cvTex, /Open-Source Contributions and Services|Peer-Reviewing/, 'CV PDF source avoids vague service and peer-reviewing labels');
+assert.match(cvTex, /Academic service, 2026\}\{reviewer for ICML, NeurIPS, and AAAI\.\}/, 'CV PDF source lists 2026 academic service by year');
+assert.match(cvTex, /Academic service, 2025\}\{reviewer for NeurIPS, ICLR, AAAI, and IEEE TNNLS\.\}/, 'CV PDF source lists 2025 academic service by year');
 assert.match(cvTex, /When[\s\S]*Sample Selection Bias[\s\S]*Model Collapse[\s\S]*ICML,? 2026/, 'CV updates model-collapse paper status');
 assert.doesNotMatch(cvTex, /withheld\s+LLM\s+manuscript/i, 'CV omits withheld manuscript notes');
 assert.match(cvTex, /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'CV PDF source links Paper #2 code');
@@ -1055,6 +1109,12 @@ assert.match(read('CV.md'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Engl
 assert.match(read('CV_zh.md'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese CV page labels the PDF link as résumé');
 assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English OKF CV concept labels the PDF link as résumé');
 assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV_zh.md'), 'utf8'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese OKF CV concept labels the PDF link as résumé');
+assert.match(read('CV.md'), /Open-Source Contributions and Academic Service/, 'English CV labels reviewing as academic service');
+assert.doesNotMatch(read('CV.md'), /Open-Source Contributions and Services/, 'English CV no longer uses vague service wording');
+assert.match(read('CV_zh.md'), /研究代码发布[\s\S]*学术审稿/, 'Chinese CV localizes contribution and reviewing labels');
+assert.match(read('CV.md'), /\*\*Academic service, 2026\*\*: reviewer for ICML, NeurIPS, and AAAI\.[\s\S]*\*\*Academic service, 2025\*\*: reviewer for NeurIPS, ICLR, AAAI, and IEEE TNNLS\./, 'English CV lists academic service by year');
+assert.match(read('CV_zh.md'), /\*\*学术审稿，2026 年\*\*：担任 ICML、NeurIPS 和 AAAI 审稿人。[\s\S]*\*\*学术审稿，2025 年\*\*：担任 NeurIPS、ICLR、AAAI 和 IEEE TNNLS 审稿人。/, 'Chinese CV lists academic service by year');
+assert.doesNotMatch(read('CV_zh.md'), /Research on Data-Centric ML Systems|Research on Trustworthy LLM systems|Research code releases|Peer-reviewing/, 'Chinese CV avoids English section labels inside the Chinese summary');
 assert.doesNotMatch(read('CV.md'), /\[XinbaoQiao_CV\.pdf\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English CV page avoids exposing the PDF filename as link text');
 assert.doesNotMatch(read('CV_zh.md'), /\[XinbaoQiao_CV\.pdf\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese CV page avoids exposing the PDF filename as link text');
 assert.match(read('CV.md'), /Soft-Weighted-Machine-Unlearning/, 'English CV page links Paper #2 code');

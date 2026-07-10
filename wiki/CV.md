@@ -1,7 +1,7 @@
 ---
 type: CV summary
 title: Curriculum Vitae
-description: Structured CV summary for Qiao Xinbao.
+description: Academic CV summary for Xinbao Qiao.
 tags:
   - en
   - cv
@@ -9,10 +9,10 @@ tags:
   - cv-summary
 timestamp: '2026-07-02T19:37:18+08:00'
 name: Curriculum Vitae
-summary: Structured CV summary for Qiao Xinbao.
+summary: Academic CV summary for Xinbao Qiao.
 occupation: CV summary
 ---
-This page records CV-derived facts in wiki form. A résumé version is available as [résumé](/files/XinbaoQiao_CV.pdf).
+This page summarizes Xinbao Qiao's academic CV for wiki readers. A downloadable résumé is available as [résumé](/files/XinbaoQiao_CV.pdf).
 
 ## Contact
 
@@ -45,11 +45,12 @@ This page records CV-derived facts in wiki form. A résumé version is available
   - Paper #1: showed that sample selection during recursive synthetic-data training can prune tail samples under low-resource verification and precipitate model collapse.
   - Paper #6: analyzed illusory pattern perception as a mechanism for spurious LLM inference when perceived patterns override evidence-grounded reasoning.
 
-## Open-Source Contributions and Services
+## Open-Source Contributions and Academic Service
 
 - **Research code releases**: maintains public code for accepted papers on certified unlearning, soft-weighted unlearning, and sample-selection model collapse.
 - **Xinbaopedia**: maintains a public academic homepage and wiki-style research archive with paper pages, figures, CV, and project notes.
-- **Peer-reviewing**: reviewer for ICML 2026, NeurIPS 2025 and 2026, ICLR 2025, AAAI 2025 and 2026, and IEEE TNNLS.
+- **Academic service, 2026**: reviewer for ICML, NeurIPS, and AAAI.
+- **Academic service, 2025**: reviewer for NeurIPS, ICLR, AAAI, and IEEE TNNLS.
 
 ## Publications
 

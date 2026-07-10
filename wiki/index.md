@@ -1,7 +1,7 @@
 ---
 type: Wiki index
 title: Index
-description: Index of wiki pages.
+description: Navigation index for public Xinbaopedia pages.
 tags:
   - en
   - index
@@ -9,7 +9,7 @@ tags:
   - wiki-index
 timestamp: '2026-05-07T17:34:07+08:00'
 name: Index
-summary: Index of wiki pages.
+summary: Navigation index for public Xinbaopedia pages.
 occupation: Wiki index
 ---
 ## Biography and CV

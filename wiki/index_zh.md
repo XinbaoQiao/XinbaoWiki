@@ -1,7 +1,7 @@
 ---
 type: Wiki 索引
 title: 索引
-description: Wiki 页面索引。
+description: Xinbaopedia 公开页面导航索引。
 tags:
   - zh
   - index
@@ -10,7 +10,7 @@ tags:
 timestamp: '2026-05-07T17:34:07+08:00'
 name: 索引
 language: zh
-summary: Wiki 页面索引。
+summary: Xinbaopedia 公开页面导航索引。
 occupation: Wiki 索引
 translation_of: index
 ---

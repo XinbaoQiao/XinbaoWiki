@@ -56,7 +56,7 @@ Use these logs to identify repeated questions and then improve grounded answers 
 
 ## Voice updates
 
-Public meme and slang notes are maintained as yearly wiki pages. The 2026 phrase bank lives in `wiki/Internet_Slang_2026.md` and `wiki/Internet_Slang_2026_zh.md`; it is included only as tone guidance, not as a factual source about Xinbao Qiao. Keep greetings playful but restrained, and keep research answers fact-first.
+Public meme and slang notes are maintained as yearly wiki pages. The 2026 phrase bank lives in `wiki/Internet_Slang_2026.md` and `wiki/Internet_Slang_2026_zh.md`; it is included only as tone guidance, not as a factual source about Xinbao Qiao. Keep greetings natural, action-oriented, and fact-first; light casual phrasing is optional, not the identity of the assistant.
 
 ## Vercel deployment
 

@@ -1,4 +1,9 @@
 *.hdoc
+AGENTS.md
+CLAUDE.md
+agent_progress.md
+CV.tex
+assets/
 *.token
 *.pem
 *.key

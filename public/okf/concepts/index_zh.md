@@ -1,7 +1,7 @@
 ---
 type: Wiki 索引
 title: 索引
-description: Wiki 页面索引。
+description: Xinbaopedia 公开页面导航索引。
 tags:
   - zh
   - index

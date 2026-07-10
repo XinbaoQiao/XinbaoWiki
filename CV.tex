@@ -73,7 +73,7 @@
 \fancyhf{}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
-\fancyfoot[L]{\textcolor{cvmuted}{\fontsize{7.3}{8}\selectfont\MakeUppercase{July 2, 2026}}}
+\fancyfoot[L]{\textcolor{cvmuted}{\fontsize{7.3}{8}\selectfont\MakeUppercase{July 9, 2026}}}
 \fancyfoot[R]{\textcolor{cvmuted}{\fontsize{7.3}{8}\selectfont 1}}
 \setlength{\footskip}{12.0pt}
 \setlength{\parindent}{0pt}
@@ -156,18 +156,18 @@
 }
 \newcommand{\paperitem}[2]{%
   \noindent\hspace*{\experienceLeftPad}%
-  \begin{tabularx}{\dimexpr\linewidth-\experienceLeftPad\relax}{@{}>{\fontsize{9.96}{12.22}\selectfont\raggedright\hyphenpenalty=10000\exhyphenpenalty=10000\emergencystretch=1em\color{cvexptext}\arraybackslash}X>{\raggedleft\arraybackslash}p{0.75in}@{}}
+  \begin{tabularx}{\dimexpr\linewidth-\experienceLeftPad\relax}{@{}>{\fontsize{9.96}{12.22}\selectfont\raggedright\hyphenpenalty=10000\exhyphenpenalty=10000\emergencystretch=1em\color{cvtext}\arraybackslash}X>{\raggedleft\arraybackslash}p{0.66in}@{}}
     {\leavevmode\llap{\makebox[\experienceBulletWidth][l]{\cvbullet}}#2} & \paperlabelcell{#1}
   \end{tabularx}\vspace{-6.55pt}
 }
 \newcommand{\stagebrief}[1]{%
   \noindent\hspace*{\experienceLeftPad}%
   \parbox[t]{\dimexpr\linewidth-\experienceLeftPad\relax}{%
-    \fontsize{9.96}{12.22}\selectfont\raggedright\hyphenpenalty=10000\exhyphenpenalty=10000\emergencystretch=1em\color{cvexptext}#1%
+    \fontsize{9.96}{12.22}\selectfont\raggedright\hyphenpenalty=10000\exhyphenpenalty=10000\emergencystretch=1em\color{cvtext}#1%
   }\par%
   \vspace{-5.90pt}
 }
-\newcommand{\serviceicon}[1]{\raisebox{-0.55pt}{\fontsize{6.75}{7.05}\selectfont #1}}
+\newcommand{\serviceicon}[1]{\raisebox{0.05pt}{\fontsize{7.00}{7.05}\selectfont #1}}
 \newcommand{\servicerowicon}[3]{%
   {\leftskip=\experienceLeftPad
    \fontsize{8.55}{9.05}\selectfont\color{cvtext}%
@@ -216,24 +216,25 @@
 
 \cvsection{Experience}
 \cvrowstage{\entrytitle{Doctoral Research @ The Chinese University of Hong Kong}}{\entryright{Hong Kong. 2026 \datesep{} present}}
-\stagebrief{Investigate data lifecycle management in distributed AI systems, connecting data generation, use, and deletion with federated representation geometry.}
-\paperitem{Paper \#5}{Proposed an optimal-transport view of federated learning and a barycentric multi-prototype classifier for communication-constrained representation geometry.}
+\stagebrief{Investigates data lifecycle management in distributed AI across generation, use, deletion, and federated learning.}
+\paperitem{Paper \#5}{Proposed optimal-transport federated learning with barycentric multi-prototype classification.}
 \cvrowstage{\entrytitle{Research on Data-Centric ML Systems @ Zhejiang University}}{\entryright{Zhejiang. Mar 2023 \datesep{} Dec 2025}}
-\stagebrief{Built unlearning methods for data deletion across continuous influence weights, certified online updates, and dynamic tree ensembles.}
-\paperitem{Paper \#2}{Introduced soft-weighted unlearning for continuous influence weights, supporting fairness and robustness interventions beyond binary erasure.}
-\paperitem{Paper \#3}{Developed Hessian-free online certified unlearning with recollected trajectory statistics, avoiding explicit Hessian inversion for streaming deletion requests.}
-\paperitem{Paper \#4}{Built an exact and efficient random-forest unlearning framework for dynamic online environments, updating affected tree statistics instead of retraining.}
+\stagebrief{Developed data-deletion methods for continuous influence control, certified online removal, and dynamic tree ensembles.}
+\paperitem{Paper \#2}{Extended machine unlearning beyond binary erasure through continuous example weights, enabling targeted fairness and robustness interventions.}
+\paperitem{Paper \#3}{Built Hessian-free online certified unlearning with recollected trajectory statistics, replacing explicit Hessian inversion for streaming deletion requests.}
+\paperitem{Paper \#4}{Built exact dynamic random-forest unlearning through affected-tree updates, avoiding full retraining.}
 \cvrowstage{\entrytitle{Research on Trustworthy LLM Systems @ NUSRI CQ}}{\entryright{Chongqing. Jun 2025 \datesep{} Dec 2025}}
-\stagebrief{Analyzed reliability failures that emerge when models train on recursively selected synthetic data or infer spurious patterns from prompts.}
-\paperitem{Paper \#1}{Showed that sample selection during recursive synthetic-data training can prune tail samples under low-resource verification and precipitate model collapse.}
-\paperitem{Paper \#6}{Analyzed illusory pattern perception as a mechanism for spurious LLM inference when perceived patterns override evidence-grounded reasoning.}
+\stagebrief{Analyzed LLM reliability failures caused by synthetic-data feedback loops and prompt patterns that trigger spurious inference.}
+\paperitem{Paper \#1}{Showed how low-resource verification amplifies sample-selection bias in recursive synthetic-data training, persistently pruning tail data and precipitating model collapse.}
+\paperitem{Paper \#6}{Linked illusory pattern perception to spurious LLM inference when perceived prompt patterns override evidence.}
 
 \vspace{9.0pt}
-\cvsection{Open-Source Contributions and Services}
+\cvsection{Open-Source Contributions and Academic Service}
 \vspace{6.6pt}
 \servicerowicon{\iconlink{https://github.com/XinbaoQiao}{\icongithub{cvblue}}}{Research code releases}{public code for certified unlearning, soft-weighted unlearning, and model-collapse work.}
 \servicerowicon{\iconlink{https://xinbaopedia.top/}{\iconhome{cvblue}}}{Xinbaopedia}{public academic homepage and wiki-style research archive with papers, figures, CV, and project notes.}
-\servicerowicon{\iconscholar{cvblue}}{Peer-Reviewing}{reviewer for ICML 2026, NeurIPS 2025 and 2026, ICLR 2025, AAAI 2025 and 2026, and IEEE TNNLS.}
+\servicerowicon{\iconscholar{cvblue}}{Academic service, 2026}{reviewer for ICML, NeurIPS, and AAAI.}
+\servicerowicon{\iconscholar{cvblue}}{Academic service, 2025}{reviewer for NeurIPS, ICLR, AAAI, and IEEE TNNLS.}
 \vspace{5.0pt}
 
 \cvsection{Selected Publications}
@@ -242,32 +243,32 @@
 \setcounter{pubnum}{0}
 \pubentry{When \red{Sample Selection Bias} Precipitates \red{Model Collapse}}
 {\textbf{Xinbao Qiao}, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, Yan Pang}
-{Low-resource verification can turn local sample selection into persistent tail pruning.}
+{Shows how low-resource verification turns selection bias into persistent tail pruning and model collapse.}
 {\iconlink{https://openreview.net/forum?id=FFXvnzM254}{\iconopenreview{cvblue}}\plinksep\iconlink{https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse}{\icongithub{cvblue}}}
 {ICML 2026.}
 \pubentry{Beyond Binary Erasure: \red{Soft-Weighted Unlearning} for Fairness and Robustness}
 {\textbf{Xinbao Qiao}, Ningning Ding, Yushi Cheng, Meng Zhang}
-{Soft-weighted corrective unlearning for non-binary fairness and robustness interventions.}
+{Generalizes binary deletion into continuous influence control for targeted fairness and robustness interventions.}
 {\iconlink{https://arxiv.org/abs/2505.18783}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning}{\icongithub{cvblue}}}
 {AAAI 2026.}
 \pubentry{\red{Hessian-Free} Online Certified Unlearning}
 {\textbf{Xinbao Qiao}, Meng Zhang, Ming Tang, Ermin Wei}
-{Certified unlearning without explicit Hessian inversion through recollected statistics.}
+{Replaces explicit Hessian inversion with recollected trajectory statistics for scalable certified deletion.}
 {\iconlink{https://openreview.net/forum?id=C3TrHWanh5}{\iconopenreview{cvblue}}\plinksep\iconlink{https://arxiv.org/abs/2404.01712}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning}{\icongithub{cvblue}}}
 {ICLR 2025.}
 \pubentry{\red{DynFrs}: An Efficient Framework for Machine Unlearning in Random Forest}
 {Shurong Wang, Zhuoyang Shen, \textbf{Xinbao Qiao}, Tongning Zhang, Meng Zhang}
-{Exact and efficient random-forest unlearning in dynamic environments.}
+{Updates affected tree statistics to deliver exact random-forest unlearning in dynamic environments.}
 {\iconlink{https://openreview.net/forum?id=nsCOeCLR8e}{\iconopenreview{cvblue}}\plinksep\iconlink{https://arxiv.org/abs/2410.01588}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/shurongwang/DynFrs}{\icongithub{cvblue}}}
 {ICLR 2025.}
 \pubentry{\red{Federated Learning as Optimal Transport}: Barycentric Multi-Prototype Classification}
 {\textbf{Xinbao Qiao}, Wenjing Yan, Ying-Jun Angela Zhang}
-{Barycentric multi-prototype classification for federated representation geometry.}
+{Frames federated learning as optimal transport with barycentric multi-prototype classification under communication constraints.}
 {}
 {Under review.}
 \pubentry{\red{Illusory Pattern Perception} Drives Spurious Inference in Large Language Models}
 {Peihua Mai, Zhuoyan Shao, \textbf{Xinbao Qiao}, Meng Zhang, Xinyue Zhou, Yan Pang}
-{Analysis of spurious pattern perception and interpretable behavior in LLMs.}
+{Links perceived prompt regularities to spurious LLM inference and interpretable failure behavior.}
 {}
 {Under review.}
 

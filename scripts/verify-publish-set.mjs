@@ -53,6 +53,10 @@ function stagedFiles() {
   return splitNul(git(['diff', '--cached', '--name-only', '-z', '--diff-filter=ACMR']));
 }
 
+function untrackedFiles() {
+  return splitNul(git(['ls-files', '--others', '--exclude-standard', '-z']));
+}
+
 function isBinary(buffer) {
   return buffer.includes(0);
 }
@@ -106,7 +110,10 @@ function checkContent(file, content, source, issues) {
 }
 
 function main() {
-  const files = new Set([...trackedFiles(), ...stagedFiles()]);
+  const tracked = trackedFiles();
+  const stagedList = stagedFiles();
+  const untracked = untrackedFiles();
+  const files = new Set([...tracked, ...stagedList, ...untracked]);
   const staged = new Set(stagedFiles());
   const issues = [];
 
@@ -126,7 +133,7 @@ function main() {
     process.exit(1);
   }
 
-  console.log(`verify-publish-set: checked ${files.size} tracked/staged files; no blocked secrets, caches, or local absolute paths found`);
+  console.log(`verify-publish-set: checked ${tracked.length} tracked, ${stagedList.length} staged, and ${untracked.length} untracked publishable files; no blocked secrets, caches, or local absolute paths found`);
 }
 
 main();

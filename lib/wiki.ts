@@ -66,6 +66,8 @@ export type SearchIndexItem = {
 };
 
 const WIKI_DIR = path.join(process.cwd(), 'wiki');
+const WIKI_ROOT = path.resolve(WIKI_DIR);
+const WIKI_SLUG_PATTERN = /^[A-Za-z0-9_\-\u4e00-\u9fff]+$/u;
 type WikiSlugOptions = { includeHidden?: boolean };
 type WikiPageOptions = { includeHidden?: boolean };
 
@@ -105,20 +107,36 @@ export function getPublicWikiSlugs() {
 }
 
 function normalizeSlug(slug: string) {
-  return slug.trim().replace(/\s+/g, '_');
+  return slug.trim().replace(/\s+/g, '_').replace(/\.md$/i, '');
+}
+
+export function isSafeWikiSlug(slug: string) {
+  return WIKI_SLUG_PATTERN.test(slug);
+}
+
+function wikiFilePath(slug: string) {
+  if (!isSafeWikiSlug(slug)) return null;
+  const filePath = path.resolve(WIKI_DIR, `${slug}.md`);
+  if (filePath !== path.join(WIKI_ROOT, `${slug}.md`)) return null;
+  return filePath;
 }
 
 function resolveSlug(target: string) {
-  const trimmed = target.trim();
-  const exact = path.join(WIKI_DIR, `${trimmed}.md`);
-  if (fs.existsSync(exact)) return trimmed;
+  const trimmed = normalizeSlug(target);
+  if (!trimmed || !isSafeWikiSlug(trimmed)) return '';
+  const exact = wikiFilePath(trimmed);
+  if (exact && fs.existsSync(exact)) return trimmed;
   const normalized = normalizeSlug(trimmed);
-  if (fs.existsSync(path.join(WIKI_DIR, `${normalized}.md`))) return normalized;
+  if (!normalized || !isSafeWikiSlug(normalized)) return '';
+  const normalizedPath = wikiFilePath(normalized);
+  if (normalizedPath && fs.existsSync(normalizedPath)) return normalized;
   return normalized;
 }
 
 function pageExists(slug: string) {
-  return fs.existsSync(path.join(WIKI_DIR, `${resolveSlug(slug)}.md`));
+  const resolved = resolveSlug(slug);
+  const filePath = resolved ? wikiFilePath(resolved) : null;
+  return Boolean(filePath && fs.existsSync(filePath));
 }
 
 export function isChineseSlug(slug: string) {
@@ -162,10 +180,17 @@ export function wikiConceptType(data: WikiFrontmatter, slug: string) {
 }
 
 export function getWikiPageBySlug(slug: string, options: WikiPageOptions = {}): WikiPage | null {
-  const decoded = decodeURIComponent(slug);
+  let decoded = '';
+  try {
+    decoded = decodeURIComponent(slug);
+  } catch {
+    return null;
+  }
   const resolved = resolveSlug(decoded);
+  if (!resolved) return null;
   const fileName = `${resolved}.md`;
-  const filePath = path.join(WIKI_DIR, fileName);
+  const filePath = wikiFilePath(resolved);
+  if (!filePath) return null;
   if (!fs.existsSync(filePath)) return null;
   const raw = fs.readFileSync(filePath, 'utf8');
   const parsed = matter(raw);
@@ -238,9 +263,23 @@ export function getSearchIndex(): SearchIndexItem[] {
     });
 }
 
-function hrefFor(target: string, language: 'en' | 'zh' = 'en') {
+function hasExplicitEnglishLabel(label: string) {
+  return /English|英文/i.test(label);
+}
+
+function shouldPreserveResolvedTarget(target: string, resolved: string, language: 'en' | 'zh', label: string) {
+  const normalizedTarget = normalizeSlug(target);
+  if (language === 'en' && isChineseSlug(resolved) && isChineseSlug(normalizedTarget)) return true;
+  if (language === 'zh' && !isChineseSlug(resolved) && hasExplicitEnglishLabel(label)) return true;
+  return false;
+}
+
+function hrefFor(target: string, language: 'en' | 'zh' = 'en', label = '') {
   const slug = resolveSlug(target);
-  const localizedSlug = language === 'zh' ? toChineseSlug(slug) : toEnglishSlug(slug);
+  if (!slug) return `/wiki/${encodeURIComponent('Invalid_Page')}/?missing=1`;
+  const localizedSlug = shouldPreserveResolvedTarget(target, slug, language, label)
+    ? slug
+    : language === 'zh' ? toChineseSlug(slug) : toEnglishSlug(slug);
   const hrefSlug = pageExists(localizedSlug) ? localizedSlug : slug;
   const encoded = encodeURIComponent(hrefSlug);
   return pageExists(hrefSlug) ? `/wiki/${encoded}/` : `/wiki/${encoded}/?missing=1`;
@@ -250,6 +289,6 @@ export function preprocessWikiLinks(markdown: string, options: { language?: 'en'
   const language = options.language || 'en';
   return markdown.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (_match, target, label) => {
     const text = label || String(target).replaceAll('_', ' ');
-    return `[${text}](${hrefFor(target, language)})`;
+    return `[${text}](${hrefFor(target, language, label || '')})`;
   });
 }
