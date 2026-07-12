@@ -83,7 +83,7 @@ The ICML 2026 paper [When Sample Selection Bias Precipitates Model Collapse](./W
 - [Research](./Research.md)
 - [Publications](./Publications.md)
 - [Projects](./Projects.md)
-- [Résumé](./CV.md)
+- [résumé](./CV.md)
 - [Education](./Education.md)
 
 ## External links

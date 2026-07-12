@@ -112,7 +112,7 @@ The ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|Whe
 - [[Research]]
 - [[Publications]]
 - [[Projects]]
-- [[CV|Résumé]]
+- [[CV|résumé]]
 - [[Education]]
 
 ## External links

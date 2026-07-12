@@ -109,7 +109,7 @@ ICML 2026 论文[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sa
 - [[Research]]
 - [[Publications]]
 - [[Projects]]
-- [[CV]]
+- [[CV_zh|résumé]]
 
 ## 外部链接
 

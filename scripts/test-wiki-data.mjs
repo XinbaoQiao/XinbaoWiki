@@ -118,6 +118,8 @@ assert.doesNotMatch(home, /30 September 2000/, 'home article omits exact birth d
 assert.match(zhHome, /2000年9月30日/, 'Chinese page includes birth date');
 assert.match(zhHome, /\[\[Angela_Yingjun_Zhang\|Angela Yingjun Zhang\]\]/, 'Chinese home article links to the PhD advisor page');
 assert.match(zhHome, /\[\[Meng_Zhang\|Meng Zhang\]\]/, 'Chinese home article links to the master advisor page');
+assert.match(home, /## See also[\s\S]*\[\[CV\|résumé\]\]/, 'English homepage See also labels the CV link as résumé');
+assert.match(zhHome, /## 参见[\s\S]*\[\[CV_zh\|résumé\]\]/, 'Chinese homepage uses 参见 and labels the CV link as résumé');
 assert.match(read('CV.md'), /\/files\/XinbaoQiao_CV\.pdf/, 'CV page links to local PDF');
 
 const contactCount = (home.match(/mailto:/g) || []).length;
