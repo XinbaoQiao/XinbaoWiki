@@ -30,6 +30,8 @@ publication_type: 会议论文
 links:
   - label: OpenReview
     url: 'https://openreview.net/forum?id=FFXvnzM254'
+  - label: arXiv
+    url: 'https://arxiv.org/abs/2606.13732'
   - label: Code
     url: >-
       https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse

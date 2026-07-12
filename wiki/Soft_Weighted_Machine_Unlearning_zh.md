@@ -26,9 +26,10 @@ publication_type: 会议论文
 links:
   - label: arXiv
     url: 'https://arxiv.org/abs/2505.18783'
-  - label: AAAI 2026 lecture page
-    url: >-
-      https://underline.io/lecture/139759-beyond-binary-erasure-soft-weighted-unlearning-for-fairness-and-robustness
+  - label: AAAI article
+    url: 'https://ojs.aaai.org/index.php/AAAI/article/view/39681'
+  - label: Code
+    url: 'https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning'
 translation_of: Soft_Weighted_Machine_Unlearning
 ---
 **超越二元擦除：用于公平性与鲁棒性的软加权遗忘** 是 **[[Xinbao_Qiao|乔鑫宝]]**、Ningning Ding、Yushi Cheng 和张萌的 AAAI 2026 会议论文。它把机器遗忘重新表述为连续的数据影响修正问题，而不是只能执行“删除或保留”的二元操作。论文关注的是在改善公平性或鲁棒性时，每个样本应保留多少影响，才能避免不必要的效用损失。

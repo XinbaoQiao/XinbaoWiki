@@ -60,10 +60,10 @@ translation_of: CV
 
 - **Paper #1: When Sample Selection Bias Precipitates Model Collapse**。\
   **乔鑫宝**、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌、Yan Pang。\
-  Forty-Third International Conference on Machine Learning, ICML, 2026。链接：[OpenReview](https://openreview.net/forum?id=FFXvnzM254)、[GitHub](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse)。
+  Forty-Third International Conference on Machine Learning, ICML, 2026。链接：[OpenReview](https://openreview.net/forum?id=FFXvnzM254)、[arXiv](https://arxiv.org/abs/2606.13732)、[GitHub](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse)。
 - **Paper #2: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**。\
   **乔鑫宝**、Ningning Ding、Yushi Cheng、张萌。\
-  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026。链接：[arXiv](https://arxiv.org/abs/2505.18783)、[GitHub](https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning)。
+  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026。链接：[arXiv](https://arxiv.org/abs/2505.18783)、[AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681)、[GitHub](https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning)。
 - **Paper #3: Hessian-Free Online Certified Unlearning**。\
   **乔鑫宝**、张萌、Ming Tang、Ermin Wei。\
   Thirteenth International Conference on Learning Representations, ICLR, 2025。链接：[OpenReview](https://openreview.net/forum?id=C3TrHWanh5)、[arXiv](https://arxiv.org/abs/2404.01712)、[GitHub](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning)。
