@@ -124,8 +124,8 @@ assert.match(zhHome, /人工智能工学硕士/, 'Chinese homepage describes the
 assert.doesNotMatch(zhHome, /理学硕士/, 'Chinese homepage avoids the incorrect ZJU 理学硕士 wording');
 assert.match(zhHome, /\[\[Angela_Yingjun_Zhang\|Angela Yingjun Zhang\]\]/, 'Chinese home article links to the PhD advisor page');
 assert.match(zhHome, /\[\[Meng_Zhang\|Meng Zhang\]\]/, 'Chinese home article links to the master advisor page');
-assert.match(home, /## See also[\s\S]*\[\[CV\|résumé\]\]/, 'English homepage See also labels the CV link as résumé');
-assert.match(zhHome, /## 参见[\s\S]*\[\[CV_zh\|résumé\]\]/, 'Chinese homepage uses 参见 and labels the CV link as résumé');
+assert.match(home, /## See also[\s\S]*\[\[CV\|Résumé\]\]/, 'English homepage See also labels the CV link as Résumé');
+assert.match(zhHome, /## 参见[\s\S]*\[\[CV_zh\|Résumé\]\]/, 'Chinese homepage uses 参见 and labels the CV link as Résumé');
 assert.match(read('CV.md'), /\/files\/XinbaoQiao_CV\.pdf/, 'CV page links to local PDF');
 
 const contactCount = (home.match(/mailto:/g) || []).length;
@@ -677,7 +677,8 @@ assert.deepEqual(footnoteRefs(home).slice(0, 3), ['xinbao-name', 'qiao-ciao', 'x
 assert.deepEqual(footnoteRefs(zhHome).slice(0, 3), ['xinbao-name-zh', 'qiao-ciao-zh', 'xinbao-qiao-bridge-zh'], 'Chinese biography orders visible name footnotes as Xinbao, Ciao, bridge');
 assert.match(home, /\*\*Xinbao Qiao\*\*\[\^xinbao-name\]\[\^qiao-ciao\]\[\^xinbao-qiao-bridge\]/, 'English biography attaches the reordered name footnotes to the romanized name');
 assert.match(home, /"喬"[\s\S]*sound of "ciao"[\s\S]*"Mr\. Ciao"[\s\S]*huggingface\.co\/MrCiao/, 'English biography explains the Mr. Ciao nickname');
-assert.match(zhHome, /英文发表名：\*\*Xinbao Qiao\*\*\[\^xinbao-name-zh\]\[\^qiao-ciao-zh\]\[\^xinbao-qiao-bridge-zh\]/, 'Chinese biography attaches the reordered name footnotes to the romanized name');
+assert.match(zhHome, /英文名：\*\*Xinbao Qiao\*\*\[\^xinbao-name-zh\]\[\^qiao-ciao-zh\]\[\^xinbao-qiao-bridge-zh\]/, 'Chinese biography identifies and annotates the English name');
+assert.doesNotMatch(zhHome, /英文发表名/, 'Chinese biography avoids implying a separate publication-only name');
 assert.match(zhHome, /“喬”与“ciao”发音一致[\s\S]*“Mr\. Ciao”[\s\S]*huggingface\.co\/MrCiao/, 'Chinese biography explains the Mr. Ciao nickname');
 assert.match(home, /Xinbao Qiao[\s\S]*新寶橋[\s\S]*pwbgis\.kcg\.gov\.tw[\s\S]*mapcarta\.com\/25634858/, 'English bridge-name footnote cites Taiwan bridge sources');
 assert.match(zhHome, /Xinbao Qiao[\s\S]*新寶橋[\s\S]*pwbgis\.kcg\.gov\.tw[\s\S]*mapcarta\.com\/25634858/, 'Chinese bridge-name footnote cites Taiwan bridge sources');

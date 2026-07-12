@@ -8601,7 +8601,7 @@
     },
     {
       "from": "Qiao_Xinbao_zh",
-      "label": "résumé",
+      "label": "Résumé",
       "relation": "wikilink",
       "source": "body",
       "to": "CV_zh"
@@ -10827,7 +10827,7 @@
     },
     {
       "from": "Xinbao_Qiao",
-      "label": "résumé",
+      "label": "Résumé",
       "relation": "wikilink",
       "source": "body",
       "to": "CV"

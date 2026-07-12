@@ -21,7 +21,7 @@ lifecycle:
   retention: semantic memory
 source_path: wiki/Qiao_Xinbao_zh.md
 ---
-**乔鑫宝**（英文发表名：**Xinbao Qiao**[^xinbao-name-zh][^qiao-ciao-zh][^xinbao-qiao-bridge-zh]；生于2000年9月30日，云南西双版纳）是中国博士生，现为[香港中文大学](./The_Chinese_University_of_Hong_Kong_zh.md)信息工程系博士生。他的研究主要围绕 AI 模型中数据的全生命周期管理展开，关注数据从生成、使用到删除过程中的理论方法与实际问题。近期工作致力于提升 AI 模型在异质、计算和通信受限环境下的可靠性、可解释性与可控性。
+**乔鑫宝**（英文名：**Xinbao Qiao**[^xinbao-name-zh][^qiao-ciao-zh][^xinbao-qiao-bridge-zh]；生于2000年9月30日，云南西双版纳）是中国博士生，现为[香港中文大学](./The_Chinese_University_of_Hong_Kong_zh.md)信息工程系博士生。他的研究主要围绕 AI 模型中数据的全生命周期管理展开，关注数据从生成、使用到删除过程中的理论方法与实际问题。近期工作致力于提升 AI 模型在异质、计算和通信受限环境下的可靠性、可解释性与可控性。
 
 1. 在数据生成方面，研究合成数据及其质量、隐私与泛化影响；
 2. 在数据使用方面，关注分布式学习、AI for Networks 与 Networks for AI 等场景下的数据建模、协同优化与系统设计；
@@ -82,7 +82,7 @@ ICML 2026 论文[When Sample Selection Bias Precipitates Model Collapse](./When_
 - [Research](./Research_zh.md)
 - [Publications](./Publications_zh.md)
 - [Projects](./Projects_zh.md)
-- [résumé](./CV_zh.md)
+- [Résumé](./CV_zh.md)
 
 ## 外部链接
 
