@@ -30,7 +30,7 @@ source_path: wiki/CV_zh.md
 ## 教育经历
 
 - **香港中文大学**，信息工程博士生，2026 年至今。导师为 [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/)。
-- **浙江大学**，人工智能硕士，2022-09 至 2025-12。
+- **浙江大学**，人工智能工学硕士，2022-09 至 2025-12。
 - **山东大学**，通信工程工学学士，2018-09 至 2022-07。
 
 ## 研究兴趣

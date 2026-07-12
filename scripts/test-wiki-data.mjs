@@ -91,6 +91,7 @@ assert.equal(bioData.image_caption, 'Photograph taken at Singapore EXPO, 2025', 
 const educationBlock = frontmatterSlice(bio, 'education:', 'links:');
 assert.deepEqual(bioData.education.map((item) => item.label), ['The Chinese University of Hong Kong', 'Zhejiang University', 'Shandong University'], 'English education is reverse chronological');
 assert.deepEqual(bioData.education.at(-1), { label: 'Shandong University', url: '/wiki/Shandong_University/', detail: '(BEng, 2022)' }, 'English education links only school name and keeps degree detail separate');
+assert.ok(bioData.education.some((item) => item.label === 'Zhejiang University' && item.detail === '(MEng, 2025)'), 'English biography records the ZJU degree as MEng');
 assert.ok(bioData.links.some((link) => link.title === 'OpenReview' && link.url === 'https://openreview.net/profile?id=~Xinbao_Qiao1'), 'contact replaces Website with OpenReview');
 assert.ok(['Mr. Ciao', 'MrCiao', 'Ciao'].every((alias) => bioData.aliases.includes(alias)), 'English biography aliases include Mr. Ciao');
 
@@ -108,6 +109,7 @@ assert.ok(['Mr. Ciao', 'MrCiao', '喬', 'ciao'].every((alias) => zhBioData.alias
 const zhEducationBlock = frontmatterSlice(zhBio, 'education:', 'links:');
 assert.deepEqual(zhBioData.education.map((item) => item.label), ['香港中文大学', '浙江大学', '山东大学'], 'Chinese education is reverse chronological');
 assert.deepEqual(zhBioData.education.at(-1), { label: '山东大学', url: '/wiki/Shandong_University/', detail: '（工学学士，2022）' }, 'Chinese education links only school name and keeps degree detail separate');
+assert.ok(zhBioData.education.some((item) => item.label === '浙江大学' && item.detail === '（工学硕士，2025）'), 'Chinese biography records the ZJU degree as 工学硕士');
 
 assert.match(home, /\[\[Publications\]\]/, 'home article links to Publications');
 assert.match(home, /\[\[Research\]\]/, 'home article links to Research');
@@ -115,7 +117,11 @@ assert.match(home, /\[\[Angela_Yingjun_Zhang\|Angela Yingjun Zhang\]\]/, 'home a
 assert.match(home, /\[\[Meng_Zhang\|Meng Zhang\]\]/, 'home article links to the master advisor page');
 assert.match(home, /born September 2000 in Xishuangbanna, Yunnan/, 'home article uses month-level birth date');
 assert.doesNotMatch(home, /30 September 2000/, 'home article omits exact birth day');
+assert.match(home, /Master of Engineering in Artificial Intelligence/, 'English homepage describes the ZJU AI degree as Master of Engineering');
+assert.doesNotMatch(home, /Master of Science in Artificial Intelligence/, 'English homepage avoids the incorrect ZJU Master of Science wording');
 assert.match(zhHome, /2000年9月30日/, 'Chinese page includes birth date');
+assert.match(zhHome, /人工智能工学硕士/, 'Chinese homepage describes the ZJU AI degree as 工学硕士');
+assert.doesNotMatch(zhHome, /理学硕士/, 'Chinese homepage avoids the incorrect ZJU 理学硕士 wording');
 assert.match(zhHome, /\[\[Angela_Yingjun_Zhang\|Angela Yingjun Zhang\]\]/, 'Chinese home article links to the PhD advisor page');
 assert.match(zhHome, /\[\[Meng_Zhang\|Meng Zhang\]\]/, 'Chinese home article links to the master advisor page');
 assert.match(home, /## See also[\s\S]*\[\[CV\|résumé\]\]/, 'English homepage See also labels the CV link as résumé');
@@ -1097,6 +1103,8 @@ const cvTex = fs.readFileSync(path.join(root, 'CV.tex'), 'utf8');
 assert.match(cvTex, /xinbaoqiao@cuhk\.edu\.hk/, 'CV uses current CUHK email');
 assert.doesNotMatch(cvTex, /xinbaoqiao@zju\.edu\.cn/, 'CV removes old Zhejiang email');
 assert.match(cvTex, /The Chinese University of Hong Kong/, 'CV includes current PhD affiliation');
+assert.match(cvTex, /M\.Eng\. in Artificial Intelligence/, 'CV PDF source records the ZJU AI degree as M.Eng.');
+assert.doesNotMatch(cvTex, /M\.Sc\. in Artificial Intelligence/, 'CV PDF source avoids the incorrect ZJU M.Sc. wording');
 assert.match(cvTex, /Open-Source Contributions and Academic Service/, 'CV PDF source labels service as academic service');
 assert.doesNotMatch(cvTex, /Open-Source Contributions and Services|Peer-Reviewing/, 'CV PDF source avoids vague service and peer-reviewing labels');
 assert.match(cvTex, /Academic service, 2026\}\{reviewer for ICML, NeurIPS, and AAAI\.\}/, 'CV PDF source lists 2026 academic service by year');
@@ -1111,6 +1119,8 @@ const cvPublicationBlock = cvTex.slice(cvTex.indexOf('\\cvsection{Selected Publi
 assert.doesNotMatch(cvPublicationBlock, /icml\.cc|iclr\.cc|underline\.io|Distributed_Wasserstein_Barycenter|LLM_Reliability/, 'CV publication icons only link arXiv, GitHub, OpenReview, or official paper pages');
 assert.match(read('CV.md'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English CV page labels the PDF link as résumé');
 assert.match(read('CV_zh.md'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese CV page labels the PDF link as résumé');
+assert.match(read('CV.md'), /M\.Eng\. in Artificial Intelligence/, 'English CV page records the ZJU AI degree as M.Eng.');
+assert.match(read('CV_zh.md'), /人工智能工学硕士/, 'Chinese CV page records the ZJU AI degree as 工学硕士');
 assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English OKF CV concept labels the PDF link as résumé');
 assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV_zh.md'), 'utf8'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese OKF CV concept labels the PDF link as résumé');
 assert.match(read('CV.md'), /Open-Source Contributions and Academic Service/, 'English CV labels reviewing as academic service');

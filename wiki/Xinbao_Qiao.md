@@ -35,7 +35,7 @@ education:
     detail: '(PhD, ongoing)'
   - label: Zhejiang University
     url: /wiki/Zhejiang_University/
-    detail: '(MSc, 2025)'
+    detail: '(MEng, 2025)'
   - label: Shandong University
     url: /wiki/Shandong_University/
     detail: '(BEng, 2022)'
@@ -58,7 +58,7 @@ nationality: Chinese
 2. In data use, he focuses on data modeling, collaborative optimization, and system design in distributed learning, AI for Networks, and Networks for AI.
 3. In data deletion, he studies machine unlearning and data influence evaluation, exploring how to preserve model performance while protecting privacy and satisfying deletion requests.
 
-These directions connect [[Data_Centric_Machine_Learning|data-centric ML]], [[AI_and_Networks|AI and networks]], [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic-data reliability]], and [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenter]] methods for collaborative distributional references. Qiao previously received a Master of Science in Artificial Intelligence from [[Zhejiang_University|Zhejiang University]] and a Bachelor of Engineering in Communication Engineering from [[Shandong_University|Shandong University]]. His [[Publications]] include accepted or published papers at ICML, AAAI, and ICLR.
+These directions connect [[Data_Centric_Machine_Learning|data-centric ML]], [[AI_and_Networks|AI and networks]], [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic-data reliability]], and [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenter]] methods for collaborative distributional references. Qiao previously received a Master of Engineering in Artificial Intelligence from [[Zhejiang_University|Zhejiang University]] and a Bachelor of Engineering in Communication Engineering from [[Shandong_University|Shandong University]]. His [[Publications]] include accepted or published papers at ICML, AAAI, and ICLR.
 
 ## Education
 

@@ -19,7 +19,7 @@ source_path: wiki/Education.md
 ## Timeline
 
 - **2026-present**: PhD student in Information Engineering, [The Chinese University of Hong Kong](./The_Chinese_University_of_Hong_Kong.md), advised by [Angela Yingjun Zhang](./Angela_Yingjun_Zhang.md).
-- **2022-2025**: M.Sc. in Artificial Intelligence, [Zhejiang University](./Zhejiang_University.md), advised by [Meng Zhang](./Meng_Zhang.md). Major GPA: 90/100; rank 3/25.
+- **2022-2025**: M.Eng. in Artificial Intelligence, [Zhejiang University](./Zhejiang_University.md), advised by [Meng Zhang](./Meng_Zhang.md). Major GPA: 90/100; rank 3/25.
 - **2018-2022**: B.Eng. in Communication Engineering, [Shandong University](./Shandong_University.md). Major GPA: 82.47/100. Third-class Academic Award, 2018-2019.
 
 ## Coursework noted in CV

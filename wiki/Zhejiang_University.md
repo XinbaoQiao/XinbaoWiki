@@ -13,7 +13,7 @@ summary: Master's institution of Xinbao Qiao.
 person:
   label: Xinbao Qiao
   url: /wiki/Xinbao_Qiao/
-program: Master of Science in Artificial Intelligence
+program: Master of Engineering in Artificial Intelligence
 school: Graduate study in artificial intelligence
 dates: 2022-2025
 place: 'Hangzhou, Zhejiang, China'
@@ -30,7 +30,7 @@ links:
 
 ## Program
 
-Qiao studied Artificial Intelligence at Zhejiang University and received a master's degree in 2025. His master's research was advised by [[Meng_Zhang|Meng Zhang]]. His biography records a major GPA of 90/100 and a rank of 3/25. The ZJU period is the main bridge between his undergraduate communication-engineering background and his later doctoral focus on [[AI_and_Networks|AI and networks]]: the work moved from general AI systems toward data operations that directly affect model behavior.
+Qiao studied Artificial Intelligence at Zhejiang University and received a Master of Engineering degree in 2025. His master's research was advised by [[Meng_Zhang|Meng Zhang]]. His biography records a major GPA of 90/100 and a rank of 3/25. The ZJU period is the main bridge between his undergraduate communication-engineering background and his later doctoral focus on [[AI_and_Networks|AI and networks]]: the work moved from general AI systems toward data operations that directly affect model behavior.
 
 ## Academic context
 

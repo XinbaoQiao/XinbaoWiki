@@ -31,7 +31,7 @@ education:
     detail: （博士，在读）
   - label: 浙江大学
     url: /wiki/Zhejiang_University/
-    detail: （理学硕士，2025）
+    detail: （工学硕士，2025）
   - label: 山东大学
     url: /wiki/Shandong_University/
     detail: （工学学士，2022）
@@ -54,13 +54,13 @@ nationality: 中国
 2. 在数据使用方面，关注分布式学习、AI for Networks 与 Networks for AI 等场景下的数据建模、协同优化与系统设计；
 3. 在数据删除方面，研究机器遗忘与数据影响评估，探索如何在保护隐私和满足删除需求的同时维持模型性能。
 
-这些方向连接[[Data_Centric_Machine_Learning|数据中心 ML]]、[[AI_and_Networks|AI 与网络]]、[[Machine_Unlearning|机器遗忘]]、[[Synthetic_Data_and_Model_Collapse|合成数据可靠性]]，以及用于协作分布参考的[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]方法。在博士阶段以前，乔鑫宝于[[Zhejiang_University|浙江大学]]获得人工智能硕士学位，并于[[Shandong_University|山东大学]]获得通信工程工学学士学位。他的[[Publications|论文]]包括 ICML、AAAI 与 ICLR 录用或发表的工作。
+这些方向连接[[Data_Centric_Machine_Learning|数据中心 ML]]、[[AI_and_Networks|AI 与网络]]、[[Machine_Unlearning|机器遗忘]]、[[Synthetic_Data_and_Model_Collapse|合成数据可靠性]]，以及用于协作分布参考的[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]方法。在博士阶段以前，乔鑫宝于[[Zhejiang_University|浙江大学]]获得人工智能工学硕士学位，并于[[Shandong_University|山东大学]]获得通信工程工学学士学位。他的[[Publications|论文]]包括 ICML、AAAI 与 ICLR 录用或发表的工作。
 
 ## 教育经历
 
 乔鑫宝目前在[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系攻读博士学位，导师为[[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]。[^cuhk-ie-zh] 其博士阶段工作围绕分布式证据、网络化计算和可靠 AI 评估展开。
 
-2022年至2025年，他在[[Zhejiang_University|浙江大学]]攻读人工智能硕士学位，硕士阶段专业 GPA 为 90/100，排名 3/25；硕士导师为[[Meng_Zhang|Meng Zhang]]。
+2022年至2025年，他在[[Zhejiang_University|浙江大学]]攻读人工智能工学硕士学位，硕士阶段专业 GPA 为 90/100，排名 3/25；硕士导师为[[Meng_Zhang|Meng Zhang]]。
 
 乔鑫宝于2022年获得[[Shandong_University|山东大学]]通信工程工学学士学位。
 

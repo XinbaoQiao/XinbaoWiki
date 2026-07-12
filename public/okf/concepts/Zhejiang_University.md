@@ -20,7 +20,7 @@ source_path: wiki/Zhejiang_University.md
 
 ## Program
 
-Qiao studied Artificial Intelligence at Zhejiang University and received a master's degree in 2025. His master's research was advised by [Meng Zhang](./Meng_Zhang.md). His biography records a major GPA of 90/100 and a rank of 3/25. The ZJU period is the main bridge between his undergraduate communication-engineering background and his later doctoral focus on [AI and networks](./AI_and_Networks.md): the work moved from general AI systems toward data operations that directly affect model behavior.
+Qiao studied Artificial Intelligence at Zhejiang University and received a Master of Engineering degree in 2025. His master's research was advised by [Meng Zhang](./Meng_Zhang.md). His biography records a major GPA of 90/100 and a rank of 3/25. The ZJU period is the main bridge between his undergraduate communication-engineering background and his later doctoral focus on [AI and networks](./AI_and_Networks.md): the work moved from general AI systems toward data operations that directly affect model behavior.
 
 ## Academic context
 
