@@ -1396,21 +1396,28 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
 }
 
 .wiki-portal-disclosures {
+  --portal-search-width: 690px;
   --portal-search-leading-width: 50px;
   --portal-search-submit-width: 96px;
   display: grid;
   gap: 8px;
   width: 100%;
-  max-width: 690px;
+  max-width: 920px;
   margin: 16px auto 0;
 }
 
 .wiki-portal-timeline {
   position: relative;
   overflow: hidden;
-  width: calc(100% - var(--portal-search-leading-width) - var(--portal-search-submit-width));
-  margin-right: var(--portal-search-submit-width);
-  margin-left: var(--portal-search-leading-width);
+  width: min(
+    calc(var(--portal-search-width) - var(--portal-search-leading-width) - var(--portal-search-submit-width)),
+    calc(100% - var(--portal-search-leading-width) - var(--portal-search-submit-width))
+  );
+  margin-right: auto;
+  margin-left: max(
+    var(--portal-search-leading-width),
+    calc((100% - var(--portal-search-width)) / 2 + var(--portal-search-leading-width))
+  );
   border: 1px solid var(--wiki-border-light);
   border-left: 4px solid var(--site-theme-accent);
   border-radius: 2px;

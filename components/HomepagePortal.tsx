@@ -54,18 +54,7 @@ const updateLabels = {
   }
 } satisfies Record<SearchLanguage, { title: string; window: string }>;
 
-const milestoneLabels = {
-  en: {
-    count: '5 milestones',
-    title: 'Milestones'
-  },
-  zh: {
-    count: '5 项里程碑',
-    title: '里程碑'
-  }
-} satisfies Record<SearchLanguage, { count: string; title: string }>;
-
-const milestoneEntries: Record<SearchLanguage, NewsEntry[]> = {
+const updateEntries: Record<SearchLanguage, NewsEntry[]> = {
   en: [
     {
       date: 'Apr 2026',
@@ -101,6 +90,27 @@ const milestoneEntries: Record<SearchLanguage, NewsEntry[]> = {
       detail: '“Hessian-Free Online Certified Unlearning” and “DynFrs”.',
       href: '/wiki/Publications/',
       title: 'Two ICLR 2025 papers accepted'
+    },
+    {
+      date: 'Mar 2023',
+      dateTime: '2023-03',
+      detail: 'Machine unlearning and data-influence research at Zhejiang University.',
+      href: '/wiki/Experience/',
+      title: 'Started data-centric ML research'
+    },
+    {
+      date: 'Sep 2022',
+      dateTime: '2022-09',
+      detail: 'M.Eng. in Artificial Intelligence, Zhejiang University.',
+      href: '/wiki/Education/',
+      title: 'Started master’s degree'
+    },
+    {
+      date: 'Jul 2022',
+      dateTime: '2022-07',
+      detail: 'B.Eng. in Communication Engineering, Shandong University.',
+      href: '/wiki/Shandong_University/',
+      title: 'Completed bachelor’s degree'
     }
   ],
   zh: [
@@ -138,37 +148,7 @@ const milestoneEntries: Record<SearchLanguage, NewsEntry[]> = {
       detail: '《Hessian-Free Online Certified Unlearning》和《DynFrs》。',
       href: '/wiki/Publications_zh/',
       title: '两篇 ICLR 2025 论文录用'
-    }
-  ]
-};
-
-const updateEntries: Record<SearchLanguage, NewsEntry[]> = {
-  en: [
-    ...milestoneEntries.en,
-    {
-      date: 'Mar 2023',
-      dateTime: '2023-03',
-      detail: 'Machine unlearning and data-influence research at Zhejiang University.',
-      href: '/wiki/Experience/',
-      title: 'Started data-centric ML research'
     },
-    {
-      date: 'Sep 2022',
-      dateTime: '2022-09',
-      detail: 'M.Eng. in Artificial Intelligence, Zhejiang University.',
-      href: '/wiki/Education/',
-      title: 'Started master’s degree'
-    },
-    {
-      date: 'Jul 2022',
-      dateTime: '2022-07',
-      detail: 'B.Eng. in Communication Engineering, Shandong University.',
-      href: '/wiki/Shandong_University/',
-      title: 'Completed bachelor’s degree'
-    }
-  ],
-  zh: [
-    ...milestoneEntries.zh,
     {
       date: '2023年3月',
       dateTime: '2023-03',
@@ -202,18 +182,15 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
   const [language, setLanguage] = useState<SearchLanguage>('en');
   const [browseOpen, setBrowseOpen] = useState(false);
   const [newsOpen, setNewsOpen] = useState(false);
-  const [milestonesOpen, setMilestonesOpen] = useState(false);
   const updatesWindowRef = useRef<HTMLDivElement>(null);
-  const collapsibleSections = { browse: browseOpen, milestones: milestonesOpen, news: newsOpen };
+  const collapsibleSections = { browse: browseOpen, news: newsOpen };
   const allSectionsClosed = Object.values(collapsibleSections).every((open) => !open);
   const expandAllSections = () => {
     setBrowseOpen(true);
-    setMilestonesOpen(true);
     setNewsOpen(true);
   };
   const collapseAllSections = () => {
     setBrowseOpen(false);
-    setMilestonesOpen(false);
     setNewsOpen(false);
   };
   const toggleAllSections = () => {
@@ -260,7 +237,7 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
             <h1 className="wiki-portal-name" id="portal-title">
               <button
                 type="button"
-                aria-controls="portal-news portal-milestones portal-directory"
+                aria-controls="portal-news portal-directory"
                 aria-expanded={!allSectionsClosed}
                 aria-label={allSectionsClosed ? 'Expand homepage sections' : 'Collapse homepage sections'}
                 className="wiki-portal-name-button"
@@ -368,35 +345,6 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
               ))}
             </ol>
           </div>
-        </details>
-
-        <details
-          className="wiki-portal-milestones wiki-portal-timeline"
-          id="portal-milestones"
-          open={milestonesOpen}
-        >
-          <summary
-            onClick={(event) => {
-              event.preventDefault();
-              setMilestonesOpen((open) => !open);
-            }}
-          >
-            <span className="wiki-portal-timeline-heading">
-              <strong>{milestoneLabels[language].title}</strong>
-              <em>{milestoneLabels[language].count}</em>
-            </span>
-          </summary>
-          <ol className="wiki-portal-news-list wiki-portal-milestone-list">
-            {milestoneEntries[language].map((item) => (
-              <li key={`${item.dateTime}-${item.title}`}>
-                <time dateTime={item.dateTime}>{item.date}</time>
-                <div>
-                  <a href={withBasePath(item.href)}>{item.title}</a>
-                  <p>{item.detail}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
         </details>
 
         <details
