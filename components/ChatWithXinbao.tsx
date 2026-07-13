@@ -19,6 +19,7 @@ const openLabels: Record<Language, string> = {
 export function ChatWithXinbao({ language }: Props) {
   const [hasOpened, setHasOpened] = useState(false);
   const [open, setOpen] = useState(false);
+  const [restoreRequest, setRestoreRequest] = useState(0);
 
   return (
     <>
@@ -28,6 +29,7 @@ export function ChatWithXinbao({ language }: Props) {
         onClick={() => {
           setHasOpened(true);
           setOpen(true);
+          setRestoreRequest((current) => current + 1);
         }}
         type="button"
       >
@@ -38,6 +40,7 @@ export function ChatWithXinbao({ language }: Props) {
           language={language}
           onClose={() => setOpen(false)}
           open={open}
+          restoreRequest={restoreRequest}
         />
       )}
     </>

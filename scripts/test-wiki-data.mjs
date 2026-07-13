@@ -499,8 +499,10 @@ assert.match(wikiSearch, /role="listbox"/, 'wiki search renders accessible resul
 assert.match(wikiSearch, /window\.location\.assign\(item\.href\)/, 'wiki search submit navigates to the selected result');
 assert.match(chatWithXinbao, /dynamic\([\s\S]*ChatWithXinbaoPanel[\s\S]*ssr: false/, 'Chat with Xinbao dynamically loads its heavy panel on the client');
 assert.match(chatWithXinbao, /const \[hasOpened, setHasOpened\] = useState\(false\)/, 'Chat with Xinbao does not mount the heavy panel before the first user click');
+assert.match(chatWithXinbao, /const \[restoreRequest, setRestoreRequest\] = useState\(0\)[\s\S]*setRestoreRequest\(\(current\) => current \+ 1\)[\s\S]*restoreRequest=\{restoreRequest\}/, 'every AI trigger click sends a fresh restore request to the existing chat panel');
 assert.match(chatWithXinbaoPanel, /import \{ createPortal \} from 'react-dom';/, 'Chat with Xinbao uses a React portal for the floating panel');
 assert.match(chatWithXinbaoPanel, /const \[mounted, setMounted\] = useState\(false\);[\s\S]*useEffect\(\(\) => \{[\s\S]*setMounted\(true\);[\s\S]*\}, \[\]\);/, 'Chat with Xinbao waits for the client before accessing document.body');
+assert.match(chatWithXinbaoPanel, /if \(open\) setMinimized\(false\);[\s\S]*\}, \[open, restoreRequest\]\);/, 'chat panel restores from minimized state when either chat entry point requests it');
 assert.match(chatWithXinbaoPanel, /return createPortal\([\s\S]*chat-xinbao-minimized[\s\S]*chat-xinbao-shell[\s\S]*document\.body/, 'Chat with Xinbao keeps the minimized and expanded panels in one shared portal layer');
 assert.match(articleTabs, /usePathname/, 'article tools derive the active page from the current route');
 assert.match(articleTabs, /href="#"/, 'active Article tab uses the Colarpedia inert article link');
@@ -896,8 +898,11 @@ assert.match(styles, /@media \(max-width: 420px\) \{[\s\S]*\.wiki-portal-name \{
 assert.match(styles, /\.wiki-portal-name-text \{[\s\S]*animation: wiki-name-write 2\.4s cubic-bezier\(\.33, 0, \.2, 1\) \.12s both;[\s\S]*color: var\(--signature-ink\);[\s\S]*\}/, 'homepage name reveal uses a deliberately slower handwriting-like animation speed without image chrome');
 assert.match(styles, /@supports \(\(background-clip: text\) or \(-webkit-background-clip: text\)\) \{[\s\S]*\.wiki-portal-name-text \{[\s\S]*background-size: 100% 100%;[\s\S]*-webkit-background-clip: text;[\s\S]*background-clip: text;[\s\S]*-webkit-text-fill-color: transparent;[\s\S]*\}/, 'homepage name uses a text-ink reveal instead of a clipped rectangle');
 assert.match(styles, /@keyframes wiki-name-write \{[\s\S]*background-size: 0% 100%;[\s\S]*background-size: 100% 100%;[\s\S]*\}/, 'homepage name writes left to right by filling text ink');
-assert.doesNotMatch(styles, /\.wiki-portal-name-text \{[\s\S]*clip-path|@keyframes wiki-name-write \{[\s\S]*clip-path/, 'homepage name reveal avoids clip-path rectangles that can look like a border');
-assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.wiki-portal-name-text,[\s\S]*\.wiki-portal-collapsed \{[\s\S]*animation: none;[\s\S]*\}/, 'homepage name reveal animation honors reduced-motion settings');
+assert.doesNotMatch(styles, /\.wiki-portal-name-text\s*\{[^}]*clip-path|@keyframes wiki-name-write\s*\{[^}]*clip-path/, 'homepage pure-text reveal avoids clip-path rectangles that can look like a border');
+assert.match(styles, /html\[data-site-palette="blue"\] \.wiki-portal-name-logos,[\s\S]*animation: wiki-logo-write 2\.4s cubic-bezier\(\.33, 0, \.2, 1\) \.12s both;[\s\S]*transform-origin: left center;/, 'homepage image wordmarks use the same paced left-to-right reveal as the pure text signature');
+assert.match(styles, /@keyframes wiki-logo-write \{[\s\S]*clip-path: inset\(0 100% 0 0\);[\s\S]*clip-path: inset\(0 0 0 0\);[\s\S]*\}/, 'homepage image wordmarks reveal horizontally without rising into place');
+assert.doesNotMatch(styles, /@keyframes wiki-logo-arrive|\.wiki-portal-name-logos\s*\{[^}]*translateY\(/, 'homepage image wordmarks no longer use the previous upward-arrival animation');
+assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.wiki-portal-name-logos,[\s\S]*\.wiki-portal-name-text,[\s\S]*\.wiki-portal-collapsed \{[\s\S]*animation: none;[\s\S]*\}/, 'homepage text and image name reveals honor reduced-motion settings');
 assert.doesNotMatch(styles, /\.wiki-portal-emblem/, 'homepage no longer styles an in-page portal icon');
 assert.match(styles, /\.wiki-search-portal input \{[\s\S]*height: 44px;[\s\S]*font-size: 16px;[\s\S]*\}/, 'homepage search input is larger than the topbar search');
 assert.match(styles, /\.wiki-search-portal \.wiki-search-language-select \{[\s\S]*width: 112px;[\s\S]*height: 44px;[\s\S]*\}/, 'homepage search includes a language selector');

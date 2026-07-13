@@ -15,6 +15,7 @@ type Props = {
   language: Language;
   onClose: () => void;
   open: boolean;
+  restoreRequest: number;
 };
 
 const MAX_INPUT_LENGTH = 1000;
@@ -94,7 +95,7 @@ function ChatMessageContent({ message }: { message: Message }) {
   return message.content;
 }
 
-export function ChatWithXinbaoPanel({ language, onClose, open }: Props) {
+export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }: Props) {
   const strings = copy[language];
   const initialMessages = useMemo<Message[]>(() => [{ role: 'assistant', content: strings.greeting }], [strings.greeting]);
   const [minimized, setMinimized] = useState(false);
@@ -114,7 +115,7 @@ export function ChatWithXinbaoPanel({ language, onClose, open }: Props) {
 
   useEffect(() => {
     if (open) setMinimized(false);
-  }, [open]);
+  }, [open, restoreRequest]);
 
   useEffect(() => {
     setMessages((current) => {

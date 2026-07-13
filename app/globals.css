@@ -1342,7 +1342,9 @@ html[data-site-palette="gold"] .wiki-portal-name-logos,
 html[data-site-palette="green"] .wiki-portal-name-logos,
 html[data-site-palette="charcoal"] .wiki-portal-name-logos {
   display: block;
-  animation: wiki-logo-arrive 1.05s cubic-bezier(.23, 1, .32, 1) .08s both;
+  animation: wiki-logo-write 2.4s cubic-bezier(.33, 0, .2, 1) .12s both;
+  transform-origin: left center;
+  will-change: clip-path;
 }
 
 html[data-site-palette="blue"] .wiki-portal-name-logo-blue,
@@ -1680,15 +1682,15 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
   }
 }
 
-@keyframes wiki-logo-arrive {
+@keyframes wiki-logo-write {
   from {
-    opacity: 0;
-    transform: translateY(5px);
+    clip-path: inset(0 100% 0 0);
+    opacity: .72;
   }
 
   to {
+    clip-path: inset(0 0 0 0);
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -1964,6 +1966,7 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
 @media (prefers-reduced-motion: reduce) {
   .chat-xinbao-shell,
   .chat-xinbao-typing i,
+  .wiki-portal-name-logos,
   .wiki-portal-name-text,
   .wiki-portal-collapsed {
     animation: none;
