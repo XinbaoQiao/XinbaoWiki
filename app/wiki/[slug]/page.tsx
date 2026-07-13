@@ -12,7 +12,26 @@ export function generateStaticParams() { return getPublicWikiSlugs().map((slug) 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const page = getWikiPageBySlug(slug);
-  return page ? { title: `${page.title} | Xinbaopedia`, description: page.summary || `Wiki page: ${page.title}` } : { title: 'Page not found' };
+  if (!page) return { title: 'Page not found' };
+  const description = page.summary || `Wiki page: ${page.title}`;
+  const canonical = `/wiki/${encodeURIComponent(page.slug)}/`;
+  return {
+    title: page.title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      type: 'article',
+      url: canonical,
+      title: page.title,
+      description,
+      siteName: 'Xinbaopedia'
+    },
+    twitter: {
+      card: 'summary',
+      title: page.title,
+      description
+    }
+  };
 }
 
 export default async function WikiPage({ params }: Props) {

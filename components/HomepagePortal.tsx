@@ -2,7 +2,6 @@
 
 import { useLayoutEffect, useRef, useState } from 'react';
 import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
-import type { SearchIndexItem } from '@/lib/wiki';
 
 type LocalizedText = Record<SearchLanguage, string>;
 type PortalEntry = { href: string; summary: string; title: string };
@@ -30,7 +29,6 @@ type NewsEntry = {
 type Props = {
   directorySections: PortalSection[];
   languageEntries: LanguageEntry[];
-  searchIndex: SearchIndexItem[];
 };
 
 const browseLabels: LocalizedText = {
@@ -164,7 +162,7 @@ function withBasePath(pathname: string) {
   return basePath ? `${basePath}${pathname}` : pathname;
 }
 
-export function HomepagePortal({ directorySections, languageEntries, searchIndex }: Props) {
+export function HomepagePortal({ directorySections, languageEntries }: Props) {
   const [language, setLanguage] = useState<SearchLanguage>('en');
   const [browseOpen, setBrowseOpen] = useState(false);
   const [newsOpen, setNewsOpen] = useState(false);
@@ -271,7 +269,6 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
         </div>
         <div className="wiki-portal-search">
           <WikiSearch
-            items={searchIndex}
             language={language}
             onLanguageChange={setLanguage}
             showLanguageSelect

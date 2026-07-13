@@ -3,6 +3,9 @@
   "version": "0.3.0",
   "private": true,
   "description": "Personal academic wiki homepage for Xinbao Qiao.",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -23,9 +26,9 @@
     "@upstash/redis": "^1.38.0",
     "gray-matter": "^4.0.3",
     "katex": "^0.16.45",
-    "next": "15",
-    "react": "19",
-    "react-dom": "19",
+    "next": "15.5.20",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
     "react-markdown": "^10.0.0",
     "rehype-katex": "^7.0.1",
     "remark-gfm": "^4.0.0",
@@ -38,6 +41,7 @@
     "typescript": "^5.0.0"
   },
   "overrides": {
+    "js-yaml": "3.15.0",
     "postcss": "^8.5.10"
   }
 }

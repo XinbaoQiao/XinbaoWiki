@@ -258,7 +258,7 @@ export function getSearchIndex(): SearchIndexItem[] {
         type: wikiConceptType(page.data, page.slug),
         aliases,
         tags,
-        text: text.slice(0, 8000)
+        text: text.slice(0, 2400)
       };
     });
 }

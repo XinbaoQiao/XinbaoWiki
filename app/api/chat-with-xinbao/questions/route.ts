@@ -10,6 +10,13 @@ const MAX_EXPORT_LIMIT = 500;
 
 let redisClient: Redis | null = null;
 
+function noStoreJson(body: Record<string, unknown>, status = 200) {
+  return NextResponse.json(body, {
+    status,
+    headers: { 'Cache-Control': 'private, no-store' }
+  });
+}
+
 function getRedis() {
   const url = process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.UPSTASH_REDIS_REST_TOKEN;
@@ -70,12 +77,12 @@ function frequencyItems(raw: unknown[]) {
 
 export async function GET(request: NextRequest) {
   if (!isAuthorized(request)) {
-    return NextResponse.json({ error: 'Unauthorized.' }, { status: 401 });
+    return noStoreJson({ error: 'Unauthorized.' }, 401);
   }
 
   const redis = getRedis();
   if (!redis) {
-    return NextResponse.json({ error: 'Question logging is not configured.' }, { status: 503 });
+    return noStoreJson({ error: 'Question logging is not configured.' }, 503);
   }
 
   const url = new URL(request.url);
@@ -88,13 +95,13 @@ export async function GET(request: NextRequest) {
       rev: true,
       withScores: true
     });
-    return NextResponse.json({ mode, language, limit, items: frequencyItems(raw) });
+    return noStoreJson({ mode, language, limit, items: frequencyItems(raw) });
   }
 
   const dateKey = dateKeyFromRequest(request);
   const key = dateKey ? `xinbao-chat:questions:day:${dateKey}` : QUESTION_LOG_RECENT_KEY;
   const rawItems = await redis.lrange<string>(key, 0, limit - 1);
-  return NextResponse.json({
+  return noStoreJson({
     mode: dateKey ? 'day' : 'recent',
     date: dateKey || null,
     limit,

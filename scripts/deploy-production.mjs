@@ -64,6 +64,38 @@ function run(command, args, env) {
   });
 }
 
+function runCapture(command, args, env) {
+  return new Promise((resolve, reject) => {
+    const child = spawn(command, args, {
+      cwd: root,
+      env,
+      stdio: ['ignore', 'pipe', 'pipe'],
+      shell: process.platform === 'win32',
+    });
+    let stdout = '';
+
+    child.stdout.on('data', (chunk) => {
+      stdout += chunk.toString();
+    });
+    child.stderr.on('data', (chunk) => {
+      process.stderr.write(chunk);
+    });
+    child.on('error', reject);
+    child.on('exit', (code, signal) => {
+      const displayArgs = redactArgs(args, env);
+      if (signal) {
+        reject(new Error(`${command} ${displayArgs.join(' ')} exited by signal ${signal}`));
+        return;
+      }
+      if (code !== 0) {
+        reject(new Error(`${command} ${displayArgs.join(' ')} exited with code ${code}`));
+        return;
+      }
+      resolve(stdout.trim());
+    });
+  });
+}
+
 function git(args) {
   return execFileSync('git', args, {
     cwd: root,
@@ -149,14 +181,14 @@ function readPackageScripts() {
   }
 }
 
-async function runSmoke(env) {
+async function runSmoke(env, siteUrl = productionUrl) {
   const smokeCandidates = [
     join(root, 'scripts', 'smoke-production.mjs'),
     join(root, 'scripts', 'smoke-site.mjs'),
   ];
   for (const scriptPath of smokeCandidates) {
     if (existsSync(scriptPath)) {
-      await run(process.execPath, [scriptPath], { ...env, SITE_URL: productionUrl });
+      await run(process.execPath, [scriptPath], { ...env, SITE_URL: siteUrl });
       return;
     }
   }
@@ -164,13 +196,13 @@ async function runSmoke(env) {
   const scripts = readPackageScripts();
   for (const scriptName of ['smoke:production', 'smoke']) {
     if (scripts[scriptName]) {
-      await run('npm', ['run', scriptName], { ...env, SITE_URL: productionUrl });
+      await run('npm', ['run', scriptName], { ...env, SITE_URL: siteUrl });
       return;
     }
   }
 
-  console.log(`deploy-production: no smoke script found; checking ${productionUrl}`);
-  await checkProductionUrl(productionUrl);
+  console.log(`deploy-production: no smoke script found; checking ${siteUrl}`);
+  await checkProductionUrl(siteUrl);
 }
 
 function checkProductionUrl(url) {
@@ -207,8 +239,18 @@ async function main() {
   try {
     requireCleanDeploymentTree();
     await run(vercelCommand, vercelArgs('link', ['--yes', '--project', project, '--scope', scope]), env);
-    await run(vercelCommand, vercelArgs('deploy', ['--prod', '--yes', '--scope', scope]), env);
-    await runSmoke(env);
+    const stagedUrl = await runCapture(
+      vercelCommand,
+      vercelArgs('deploy', ['--prod', '--skip-domain', '--yes', '--scope', scope]),
+      env
+    );
+    if (!/^https:\/\/[^\s]+\.vercel\.app\/?$/.test(stagedUrl)) {
+      fail(`Vercel did not return a valid staged deployment URL: ${stagedUrl || '<empty>'}`);
+    }
+    console.log(`deploy-production: staged deployment ready at ${stagedUrl}`);
+    await runSmoke(env, stagedUrl);
+    await run(vercelCommand, vercelArgs('promote', [stagedUrl, '--yes', '--scope', scope]), env);
+    await runSmoke(env, productionUrl);
   } finally {
     cleanupGeneratedEnvFile(hadLocalEnv);
   }

@@ -1,5 +1,5 @@
 import { HomepagePortal } from '@/components/HomepagePortal';
-import { getSearchIndex, getWikiPageBySlug, pathWithBasePath } from '@/lib/wiki';
+import { getWikiPageBySlug, pathWithBasePath } from '@/lib/wiki';
 
 const languageEntries = [
   { label: 'English', slug: 'Xinbao_Qiao', detail: 'Academic biography and research overview' },
@@ -112,7 +112,6 @@ function entry(slug: string) {
 }
 
 export default function HomePage() {
-  const searchIndex = getSearchIndex();
   const portalLanguageEntries = languageEntries.map((item) => ({
     detail: item.detail,
     href: wikiHref(item.slug),
@@ -133,7 +132,6 @@ export default function HomePage() {
     <HomepagePortal
       directorySections={portalDirectorySections}
       languageEntries={portalLanguageEntries}
-      searchIndex={searchIndex}
     />
   );
 }

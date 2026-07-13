@@ -4,7 +4,7 @@ import { ArticleTabs } from '@/components/ArticleTabs';
 import { LanguageToggle, SitePalette } from '@/components/LanguageToggle';
 import { Sidebar } from '@/components/Sidebar';
 import { WikiSearch } from '@/components/WikiSearch';
-import { getSearchIndex, pathWithBasePath } from '@/lib/wiki';
+import { pathWithBasePath } from '@/lib/wiki';
 import 'katex/dist/katex.min.css';
 import './globals.css';
 
@@ -17,14 +17,29 @@ const sitePaletteIcons = {
 };
 
 export const metadata: Metadata = {
-  title: 'Xinbaopedia',
+  metadataBase: new URL('https://xinbaopedia.top'),
+  title: {
+    default: 'Xinbaopedia',
+    template: '%s | Xinbaopedia'
+  },
   description: 'Personal academic wiki homepage for Qiao Xinbao / Xinbao Qiao.',
-  icons: { icon: sitePaletteIcons.blue }
+  alternates: { canonical: '/' },
+  icons: { icon: sitePaletteIcons.blue },
+  openGraph: {
+    type: 'website',
+    url: '/',
+    siteName: 'Xinbaopedia',
+    title: 'Xinbaopedia',
+    description: 'Personal academic wiki homepage for Qiao Xinbao / Xinbao Qiao.'
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Xinbaopedia',
+    description: 'Personal academic wiki homepage for Qiao Xinbao / Xinbao Qiao.'
+  }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
-  const searchIndex = getSearchIndex();
-
   return (
     <html lang="en">
       <body>
@@ -39,7 +54,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
               <span className="wiki-logo-subtitle">The Academic Wiki</span>
             </a>
             <LanguageToggle />
-            <WikiSearch items={searchIndex} hideOnPortal />
+            <WikiSearch hideOnPortal />
           </div>
         </header>
         <ArticleTabs />

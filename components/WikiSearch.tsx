@@ -1,12 +1,11 @@
 'use client';
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { ChatWithXinbao } from '@/components/ChatWithXinbao';
 import type { SearchIndexItem } from '@/lib/wiki';
 
 type Props = {
-  items: SearchIndexItem[];
   hideOnPortal?: boolean;
   language?: SearchLanguage;
   onLanguageChange?: (language: SearchLanguage) => void;
@@ -27,6 +26,8 @@ type PreparedSearchItem = SearchIndexItem & {
 const searchCopy = {
   en: {
     empty: 'No matching pages',
+    loading: 'Loading search index...',
+    unavailable: 'Search is temporarily unavailable',
     inputAria: 'Search Xinbaopedia',
     languageAria: 'Search language',
     placeholder: 'Search Xinbaopedia',
@@ -34,12 +35,36 @@ const searchCopy = {
   },
   zh: {
     empty: '没有匹配页面',
+    loading: '正在加载搜索索引……',
+    unavailable: '搜索暂时不可用',
     inputAria: '搜索 Xinbaopedia',
     languageAria: '搜索语言',
     placeholder: '搜索 Xinbaopedia',
     submit: '搜索'
   }
 };
+
+let searchIndexPromise: Promise<SearchIndexItem[]> | null = null;
+
+function searchIndexEndpoint() {
+  const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
+  return `${basePath}/search-index.json`;
+}
+
+function fetchSearchIndex() {
+  searchIndexPromise ??= fetch(searchIndexEndpoint(), { cache: 'force-cache' })
+    .then(async (response) => {
+      if (!response.ok) throw new Error(`Search index request failed with ${response.status}`);
+      const payload = await response.json() as unknown;
+      if (!Array.isArray(payload)) throw new Error('Search index response is not an array');
+      return payload as SearchIndexItem[];
+    })
+    .catch((error) => {
+      searchIndexPromise = null;
+      throw error;
+    });
+  return searchIndexPromise;
+}
 
 function normalize(value: string) {
   return value
@@ -107,7 +132,6 @@ function isPortalPath(pathname: string | null) {
 }
 
 export function WikiSearch({
-  items,
   hideOnPortal = false,
   language,
   onLanguageChange,
@@ -121,6 +145,8 @@ export function WikiSearch({
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
+  const [items, setItems] = useState<SearchIndexItem[]>([]);
+  const [loadState, setLoadState] = useState<'idle' | 'loading' | 'ready' | 'error'>('idle');
 
   const preferredLanguage: SearchLanguage = pathname?.includes('_zh') || pathname?.includes('/Qiao_Xinbao_zh/') ? 'zh' : 'en';
   const [selectedLanguage, setSelectedLanguage] = useState<SearchLanguage>(preferredLanguage);
@@ -140,6 +166,17 @@ export function WikiSearch({
       .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title))
       .slice(0, 8);
   }, [languageItems, normalizedQuery, terms]);
+
+  const loadItems = useCallback(async () => {
+    if (loadState === 'loading' || loadState === 'ready') return;
+    setLoadState('loading');
+    try {
+      setItems(await fetchSearchIndex());
+      setLoadState('ready');
+    } catch {
+      setLoadState('error');
+    }
+  }, [loadState]);
 
   useEffect(() => {
     setActive(0);
@@ -191,8 +228,12 @@ export function WikiSearch({
             onChange={(event) => {
               setQuery(event.target.value);
               setOpen(true);
+              void loadItems();
             }}
-            onFocus={() => setOpen(true)}
+            onFocus={() => {
+              setOpen(true);
+              void loadItems();
+            }}
             onKeyDown={(event) => {
               if (event.key === 'Escape') {
                 setOpen(false);
@@ -235,7 +276,11 @@ export function WikiSearch({
       </form>
       {open && normalizedQuery && (
         <div className="wiki-search-panel" id={listboxId} role="listbox">
-          {results.length ? (
+          {loadState === 'loading' ? (
+            <div className="wiki-search-empty" role="status">{copy.loading}</div>
+          ) : loadState === 'error' ? (
+            <div className="wiki-search-empty" role="status">{copy.unavailable}</div>
+          ) : results.length ? (
             results.map((item, index) => (
               <a
                 aria-selected={index === active}

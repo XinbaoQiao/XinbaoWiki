@@ -1,6 +1,6 @@
 import crypto from 'node:crypto';
 import { Redis } from '@upstash/redis';
-import { NextRequest, NextResponse } from 'next/server';
+import { after, NextRequest, NextResponse } from 'next/server';
 import { getXinbaoChatSystemPrompt } from '@/lib/chat-with-xinbao';
 
 export const runtime = 'nodejs';
@@ -56,6 +56,7 @@ function jsonResponse(
   cookie?: { visitorId: string; shouldSet: boolean }
 ) {
   const response = NextResponse.json(body, { status });
+  response.headers.set('Cache-Control', 'private, no-store');
   if (cookie?.shouldSet) {
     response.cookies.set(COOKIE_NAME, cookie.visitorId, {
       httpOnly: true,
@@ -143,13 +144,39 @@ async function readDailyUsage(redis: Redis, keys: string[]) {
   return Math.max(0, ...values.map((value) => Number(value) || 0));
 }
 
-async function incrementDailyUsage(redis: Redis, keys: string[], ttl: number) {
-  const counts = await Promise.all(keys.map(async (key) => {
-    const count = await redis.incr(key);
-    if (count === 1) await redis.expire(key, ttl);
-    return count;
-  }));
-  return Math.max(...counts);
+async function reserveDailyUsage(redis: Redis, keys: string[], ttl: number) {
+  return redis.eval<[number, number], number>(
+    `local highest = 0
+for _, key in ipairs(KEYS) do
+  local value = tonumber(redis.call('GET', key) or '0')
+  if value > highest then highest = value end
+end
+if highest >= tonumber(ARGV[2]) then return tonumber(ARGV[2]) + 1 end
+for _, key in ipairs(KEYS) do
+  local value = redis.call('INCR', key)
+  if value == 1 then redis.call('EXPIRE', key, tonumber(ARGV[1])) end
+  if value > highest then highest = value end
+end
+return highest`,
+    keys,
+    [ttl, DAILY_LIMIT]
+  );
+}
+
+async function releaseDailyUsage(redis: Redis, keys: string[]) {
+  await redis.eval<[], number>(
+    `for _, key in ipairs(KEYS) do
+  local value = tonumber(redis.call('GET', key) or '0')
+  if value > 0 then redis.call('DECR', key) end
+end
+return 1`,
+    keys,
+    []
+  );
+}
+
+async function refundDailyUsage(redis: Redis, keys: string[]) {
+  await releaseDailyUsage(redis, keys).catch(() => logServerIssue('daily quota refund failed'));
 }
 
 function inferLanguage(request: NextRequest): 'en' | 'zh' {
@@ -205,7 +232,7 @@ async function recordQuestionLog(
   redis: Redis,
   identity: RequestIdentity,
   message: string,
-  request: NextRequest,
+  pagePath: string,
   dateKey: string,
   language: 'en' | 'zh'
 ) {
@@ -217,7 +244,7 @@ async function recordQuestionLog(
     message: message.slice(0, QUESTION_LOG_MESSAGE_LENGTH),
     normalized: normalizeQuestion(message),
     messageLength: message.length,
-    pagePath: sanitizeRefererPath(request),
+    pagePath,
     visitorHash: identity.visitorHash,
     browserHash: identity.browserHash,
     ipHash: identity.ipHash
@@ -228,13 +255,15 @@ async function recordQuestionLog(
   const retentionTtl = 60 * 60 * 24 * QUESTION_LOG_RETENTION_DAYS;
 
   try {
-    await Promise.all([
-      redis.lpush(QUESTION_LOG_RECENT_KEY, payload),
-      redis.ltrim(QUESTION_LOG_RECENT_KEY, 0, QUESTION_LOG_MAX_RECENT - 1),
-      redis.lpush(dayKey, payload),
-      redis.expire(dayKey, retentionTtl),
-      redis.zincrby(frequencyKey, 1, entry.normalized)
-    ]);
+    const pipeline = redis.pipeline();
+    pipeline.lpush(QUESTION_LOG_RECENT_KEY, payload);
+    pipeline.ltrim(QUESTION_LOG_RECENT_KEY, 0, QUESTION_LOG_MAX_RECENT - 1);
+    pipeline.expire(QUESTION_LOG_RECENT_KEY, retentionTtl);
+    pipeline.lpush(dayKey, payload);
+    pipeline.expire(dayKey, retentionTtl);
+    pipeline.zincrby(frequencyKey, 1, entry.normalized);
+    pipeline.expire(frequencyKey, retentionTtl);
+    await pipeline.exec();
   } catch {
     logServerIssue('question log write failed');
   }
@@ -327,7 +356,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const dailyCount = await incrementDailyUsage(redis, dailyKeys, quotaTtl);
+  const dailyCount = await reserveDailyUsage(redis, dailyKeys, quotaTtl);
   if (dailyCount > DAILY_LIMIT) {
     return jsonResponse({ error: DAILY_LIMIT_MESSAGE, remaining: 0, limit: DAILY_LIMIT }, 429, visitorCookie);
   }
@@ -336,7 +365,8 @@ export async function POST(request: NextRequest) {
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
   const baseUrl = (process.env.YUNWU_API_BASE_URL || DEFAULT_BASE_URL).replace(/\/$/, '');
   const language = inferLanguage(request);
-  await recordQuestionLog(redis, identity, message, request, dateKey, language);
+  const pagePath = sanitizeRefererPath(request);
+  after(() => recordQuestionLog(redis, identity, message, pagePath, dateKey, language));
 
   try {
     const response = await fetch(`${baseUrl}/chat/completions`, {
@@ -362,6 +392,7 @@ export async function POST(request: NextRequest) {
 
     if (!response.ok) {
       logServerIssue('model response status', response.status);
+      await refundDailyUsage(redis, dailyKeys);
       return genericUnavailable(visitorCookie);
     }
 
@@ -369,6 +400,7 @@ export async function POST(request: NextRequest) {
     const reply = data.choices?.[0]?.message?.content;
     if (typeof reply !== 'string' || !reply.trim()) {
       logServerIssue('empty model reply');
+      await refundDailyUsage(redis, dailyKeys);
       return genericUnavailable(visitorCookie);
     }
 
@@ -379,6 +411,7 @@ export async function POST(request: NextRequest) {
     );
   } catch (error) {
     logServerIssue(error instanceof DOMException && error.name === 'AbortError' ? 'model timeout' : 'model request failed');
+    await refundDailyUsage(redis, dailyKeys);
     return genericUnavailable(visitorCookie);
   } finally {
     clearTimeout(timeout);
