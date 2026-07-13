@@ -1396,18 +1396,21 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
 }
 
 .wiki-portal-disclosures {
+  --portal-search-leading-width: 50px;
+  --portal-search-submit-width: 96px;
   display: grid;
   gap: 8px;
   width: 100%;
-  max-width: 920px;
+  max-width: 690px;
   margin: 16px auto 0;
 }
 
 .wiki-portal-news {
   position: relative;
   overflow: hidden;
-  width: min(100%, 620px);
-  margin: 0 auto;
+  width: calc(100% - var(--portal-search-leading-width) - var(--portal-search-submit-width));
+  margin-right: var(--portal-search-submit-width);
+  margin-left: var(--portal-search-leading-width);
   border: 1px solid var(--wiki-border-light);
   border-left: 4px solid var(--site-theme-accent);
   border-radius: 2px;
@@ -1476,17 +1479,17 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
   display: grid;
   grid-template-columns: 1fr;
   margin: 0;
-  padding: 0 16px 8px;
+  padding: 0 12px 4px;
   border-top: 1px solid color-mix(in srgb, var(--site-theme-accent) 14%, var(--wiki-border-light));
   list-style: none;
 }
 
 .wiki-portal-news-list li {
   display: grid;
-  grid-template-columns: 90px minmax(0, 1fr);
-  align-items: baseline;
-  gap: 14px;
-  padding: 11px 0;
+  grid-template-columns: 80px minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+  padding: 7px 0;
   border-bottom: 1px solid color-mix(in srgb, var(--site-theme-accent) 10%, var(--wiki-border-light));
 }
 
@@ -1495,25 +1498,29 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
 }
 
 .wiki-portal-news-list time {
+  padding-top: 2px;
   color: var(--site-theme-accent);
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0;
-  line-height: 1.45;
+  line-height: 1.35;
 }
 
 .wiki-portal-news-list a {
+  display: block;
   font-size: 14px;
   font-weight: 700;
-  line-height: 1.45;
+  line-height: 1.35;
+  text-wrap: balance;
 }
 
 .wiki-portal-news-list p {
-  margin: 3px 0 0;
+  margin: 1px 0 0;
   color: var(--wiki-text-soft);
   font-size: 12.5px;
-  line-height: 1.5;
+  line-height: 1.4;
+  text-wrap: balance;
 }
 
 .wiki-portal-block ul {
@@ -1843,6 +1850,11 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
 
   .wiki-portal-grid {
     grid-template-columns: 1fr;
+  }
+
+  .wiki-portal-news {
+    width: 100%;
+    margin-inline: 0;
   }
 
   .wiki-portal-news-list {

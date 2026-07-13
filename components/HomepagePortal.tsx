@@ -59,35 +59,35 @@ const newsEntries: Record<SearchLanguage, NewsEntry[]> = {
     {
       date: 'Apr 2026',
       dateTime: '2026-04',
-      detail: '“When Sample Selection Bias Precipitates Model Collapse” was accepted to ICML 2026.',
+      detail: '“When Sample Selection Bias Precipitates Model Collapse”.',
       href: '/wiki/When_Sample_Selection_Bias_Precipitates_Model_Collapse/',
       title: 'ICML 2026 paper accepted'
     },
     {
       date: 'Dec 2025',
       dateTime: '2025-12',
-      detail: 'Completed the M.Eng. in Artificial Intelligence at Zhejiang University.',
+      detail: 'M.Eng. in Artificial Intelligence, Zhejiang University.',
       href: '/wiki/Zhejiang_University/',
       title: 'Completed master’s degree'
     },
     {
       date: 'Nov 2025',
       dateTime: '2025-11',
-      detail: '“Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness” was accepted to AAAI 2026.',
+      detail: '“Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness”.',
       href: '/wiki/Soft_Weighted_Machine_Unlearning/',
       title: 'AAAI 2026 paper accepted'
     },
     {
       date: 'Jun 2025',
       dateTime: '2025-06',
-      detail: 'Started a six-month full-time research internship on trustworthy LLM systems at NUSRI-CQ.',
+      detail: 'Six-month full-time research internship on trustworthy LLMs at NUSRI-CQ.',
       href: '/wiki/NUSRI_CQ/',
       title: 'Started full-time research internship'
     },
     {
       date: 'Jan 2025',
       dateTime: '2025-01',
-      detail: '“Hessian-Free Online Certified Unlearning” and “DynFrs” were both accepted to ICLR 2025.',
+      detail: '“Hessian-Free Online Certified Unlearning” and “DynFrs”.',
       href: '/wiki/Publications/',
       title: 'Two ICLR 2025 papers accepted'
     }
@@ -96,35 +96,35 @@ const newsEntries: Record<SearchLanguage, NewsEntry[]> = {
     {
       date: '2026年4月',
       dateTime: '2026-04',
-      detail: '论文《When Sample Selection Bias Precipitates Model Collapse》被 ICML 2026 录用。',
+      detail: '《When Sample Selection Bias Precipitates Model Collapse》。',
       href: '/wiki/When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh/',
       title: 'ICML 2026 论文录用'
     },
     {
       date: '2025年12月',
       dateTime: '2025-12',
-      detail: '完成浙江大学人工智能工学硕士阶段。',
+      detail: '浙江大学人工智能工学硕士。',
       href: '/wiki/Zhejiang_University_zh/',
       title: '完成硕士学位'
     },
     {
       date: '2025年11月',
       dateTime: '2025-11',
-      detail: '论文《Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness》被 AAAI 2026 录用。',
+      detail: '《Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness》。',
       href: '/wiki/Soft_Weighted_Machine_Unlearning_zh/',
       title: 'AAAI 2026 论文录用'
     },
     {
       date: '2025年6月',
       dateTime: '2025-06',
-      detail: '在 NUSRI-CQ 开始为期六个月的可信大模型系统全职研究实习。',
+      detail: '在 NUSRI-CQ 开展为期六个月的可信大模型全职研究实习。',
       href: '/wiki/NUSRI_CQ_zh/',
       title: '开始全职研究实习'
     },
     {
       date: '2025年1月',
       dateTime: '2025-01',
-      detail: '《Hessian-Free Online Certified Unlearning》和《DynFrs》同时被 ICLR 2025 录用。',
+      detail: '《Hessian-Free Online Certified Unlearning》和《DynFrs》。',
       href: '/wiki/Publications_zh/',
       title: '两篇 ICLR 2025 论文录用'
     }
