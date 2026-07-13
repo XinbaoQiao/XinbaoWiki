@@ -123,6 +123,16 @@ function vercelArgs(command, args = []) {
   return [command, ...args];
 }
 
+function deploymentUrlFromOutput(output) {
+  try {
+    const parsed = JSON.parse(output);
+    if (typeof parsed?.deployment?.url === 'string') return parsed.deployment.url;
+  } catch {
+    // Interactive Vercel CLI output is a plain deployment URL rather than JSON.
+  }
+  return output.match(/https:\/\/[^\s"']+\.vercel\.app\/?/)?.[0] || '';
+}
+
 function packageVersion(packageJsonPath) {
   try {
     const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8'));
@@ -239,13 +249,14 @@ async function main() {
   try {
     requireCleanDeploymentTree();
     await run(vercelCommand, vercelArgs('link', ['--yes', '--project', project, '--scope', scope]), env);
-    const stagedUrl = await runCapture(
+    const deploymentOutput = await runCapture(
       vercelCommand,
       vercelArgs('deploy', ['--prod', '--skip-domain', '--yes', '--scope', scope]),
       env
     );
+    const stagedUrl = deploymentUrlFromOutput(deploymentOutput);
     if (!/^https:\/\/[^\s]+\.vercel\.app\/?$/.test(stagedUrl)) {
-      fail(`Vercel did not return a valid staged deployment URL: ${stagedUrl || '<empty>'}`);
+      throw new Error('Vercel did not return a valid staged deployment URL');
     }
     console.log(`deploy-production: staged deployment ready at ${stagedUrl}`);
     await runSmoke(env, stagedUrl);

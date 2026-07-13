@@ -380,6 +380,7 @@ assert.match(deployProductionScript, /function redactArgs\(args, env\)/, 'deploy
 assert.match(deployProductionScript, /'<redacted-token>'/, 'deployment wrapper uses a stable token redaction marker');
 assert.match(deployProductionScript, /env\.VERCEL_TOKEN = token/, 'deployment wrapper passes the token only through the child process environment');
 assert.match(deployProductionScript, /function vercelArgs\(command, args = \[\]\)/, 'deployment wrapper centralizes Vercel CLI argument construction');
+assert.match(deployProductionScript, /function deploymentUrlFromOutput\(output\)[\s\S]*JSON\.parse\(output\)[\s\S]*parsed\?\.deployment\?\.url[\s\S]*\.vercel\\\.app/, 'deployment wrapper accepts both JSON agent output and plain Vercel deployment URLs');
 assert.match(deployProductionScript, /function resolveCachedVercelBin\(\)/, 'deployment wrapper resolves a local Vercel CLI binary before deploying');
 assert.match(deployProductionScript, /node_modules', '\.bin', vercelBinName\(\)/, 'deployment wrapper prefers the project-local Vercel CLI binary');
 assert.match(deployProductionScript, /'_npx'/, 'deployment wrapper can reuse an existing npm npx cache without invoking npx during deploy');
@@ -390,6 +391,7 @@ assert.doesNotMatch(deployProductionScript, /['"]--token['"], token/, 'deploymen
 assert.match(deployProductionScript, /'--project', project, '--scope', scope/, 'deployment wrapper links the explicit Vercel project and scope');
 assert.match(deployProductionScript, /'--prod', '--skip-domain'/, 'deployment wrapper stages a production build without changing the canonical domain');
 assert.match(deployProductionScript, /runSmoke\(env, stagedUrl\)/, 'deployment wrapper smoke-tests the staged deployment before promotion');
+assert.match(deployProductionScript, /throw new Error\('Vercel did not return a valid staged deployment URL'\)/, 'deployment wrapper preserves finally cleanup when staged URL parsing fails');
 assert.match(deployProductionScript, /vercelArgs\('promote', \[stagedUrl, '--yes', '--scope', scope\]\)/, 'deployment wrapper promotes only a verified staged deployment');
 assert.match(deployProductionScript, /runSmoke\(env, productionUrl\)/, 'deployment wrapper verifies the canonical domain after promotion');
 assert.doesNotMatch(deployProductionScript, /vercel@latest/, 'deployment wrapper avoids floating Vercel CLI versions');
