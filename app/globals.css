@@ -1405,7 +1405,7 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
   margin: 16px auto 0;
 }
 
-.wiki-portal-news {
+.wiki-portal-timeline {
   position: relative;
   overflow: hidden;
   width: calc(100% - var(--portal-search-leading-width) - var(--portal-search-submit-width));
@@ -1420,32 +1420,32 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
   transition: border-color .18s ease, background-color .18s ease;
 }
 
-.wiki-portal-news:hover,
-.wiki-portal-news:focus-within {
+.wiki-portal-timeline:hover,
+.wiki-portal-timeline:focus-within {
   border-color: var(--site-theme-accent);
   background: color-mix(in srgb, var(--site-theme-accent) 5%, var(--wiki-bg-alt));
 }
 
-.wiki-portal-news summary {
+.wiki-portal-timeline summary {
   display: block;
   padding: 11px 48px 11px 16px;
   cursor: pointer;
   list-style: none;
 }
 
-.wiki-portal-news summary::-webkit-details-marker {
+.wiki-portal-timeline summary::-webkit-details-marker {
   display: none;
 }
 
-.wiki-portal-news summary > span {
+.wiki-portal-timeline-heading {
   display: flex;
   align-items: baseline;
   gap: 10px;
 }
 
-.wiki-portal-news summary > span::after {
+.wiki-portal-timeline-heading::after {
   position: absolute;
-  top: 50%;
+  top: 21px;
   right: 14px;
   color: var(--site-theme-accent);
   content: "▸";
@@ -1455,11 +1455,11 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
   transform: translateY(-50%);
 }
 
-.wiki-portal-news[open] summary > span::after {
+.wiki-portal-timeline[open] .wiki-portal-timeline-heading::after {
   content: "▾";
 }
 
-.wiki-portal-news summary strong {
+.wiki-portal-timeline summary strong {
   color: var(--site-theme-heading);
   font-family: var(--font-serif);
   font-size: 17px;
@@ -1467,12 +1467,66 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
   line-height: 1.22;
 }
 
-.wiki-portal-news summary em {
+.wiki-portal-timeline summary em {
   margin-left: auto;
   color: var(--wiki-text-soft);
   font-size: 11.5px;
   font-style: normal;
   line-height: 1.35;
+}
+
+.wiki-portal-news-preview {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid color-mix(in srgb, var(--site-theme-accent) 14%, var(--wiki-border-light));
+}
+
+.wiki-portal-news-preview time {
+  padding-top: 2px;
+  color: var(--site-theme-accent);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.wiki-portal-news-preview b,
+.wiki-portal-news-preview small {
+  display: block;
+  text-wrap: balance;
+}
+
+.wiki-portal-news-preview b {
+  color: var(--wiki-link);
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.wiki-portal-news-preview small {
+  margin-top: 1px;
+  color: var(--wiki-text-soft);
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.wiki-portal-news[open] .wiki-portal-news-preview {
+  display: none;
+}
+
+.wiki-portal-updates-window {
+  height: var(--portal-updates-window-height, 316px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.wiki-portal-updates-window:focus-visible {
+  outline: 2px solid var(--wiki-accent);
+  outline-offset: -2px;
 }
 
 .wiki-portal-news-list {
@@ -1852,7 +1906,7 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
     grid-template-columns: 1fr;
   }
 
-  .wiki-portal-news {
+  .wiki-portal-timeline {
     width: 100%;
     margin-inline: 0;
   }
@@ -1885,7 +1939,7 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
   .wiki-portal,
   .wiki-portal-directory,
   .wiki-portal-disclosures,
-  .wiki-portal-news,
+  .wiki-portal-timeline,
   .site-palette-switcher,
   .wiki-shell:has(.wiki-portal) {
     transition: none;

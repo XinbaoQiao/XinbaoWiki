@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
 import type { SearchIndexItem } from '@/lib/wiki';
 
@@ -43,18 +43,29 @@ const entriesLabel: LocalizedText = {
   zh: '主要学术条目'
 };
 
-const newsLabels = {
+const updateLabels = {
+  en: {
+    title: 'Latest Updates',
+    window: 'Scrollable latest updates'
+  },
+  zh: {
+    title: '最新动态',
+    window: '可滚动的最新动态'
+  }
+} satisfies Record<SearchLanguage, { title: string; window: string }>;
+
+const milestoneLabels = {
   en: {
     count: '5 milestones',
-    title: 'Latest Updates'
+    title: 'Milestones'
   },
   zh: {
     count: '5 项里程碑',
-    title: '最新动态'
+    title: '里程碑'
   }
 } satisfies Record<SearchLanguage, { count: string; title: string }>;
 
-const newsEntries: Record<SearchLanguage, NewsEntry[]> = {
+const milestoneEntries: Record<SearchLanguage, NewsEntry[]> = {
   en: [
     {
       date: 'Apr 2026',
@@ -131,6 +142,57 @@ const newsEntries: Record<SearchLanguage, NewsEntry[]> = {
   ]
 };
 
+const updateEntries: Record<SearchLanguage, NewsEntry[]> = {
+  en: [
+    ...milestoneEntries.en,
+    {
+      date: 'Mar 2023',
+      dateTime: '2023-03',
+      detail: 'Machine unlearning and data-influence research at Zhejiang University.',
+      href: '/wiki/Experience/',
+      title: 'Started data-centric ML research'
+    },
+    {
+      date: 'Sep 2022',
+      dateTime: '2022-09',
+      detail: 'M.Eng. in Artificial Intelligence, Zhejiang University.',
+      href: '/wiki/Education/',
+      title: 'Started master’s degree'
+    },
+    {
+      date: 'Jul 2022',
+      dateTime: '2022-07',
+      detail: 'B.Eng. in Communication Engineering, Shandong University.',
+      href: '/wiki/Shandong_University/',
+      title: 'Completed bachelor’s degree'
+    }
+  ],
+  zh: [
+    ...milestoneEntries.zh,
+    {
+      date: '2023年3月',
+      dateTime: '2023-03',
+      detail: '在浙江大学开展机器遗忘与数据影响研究。',
+      href: '/wiki/Experience_zh/',
+      title: '开始数据中心机器学习研究'
+    },
+    {
+      date: '2022年9月',
+      dateTime: '2022-09',
+      detail: '浙江大学人工智能工学硕士阶段。',
+      href: '/wiki/Education_zh/',
+      title: '开始硕士阶段'
+    },
+    {
+      date: '2022年7月',
+      dateTime: '2022-07',
+      detail: '山东大学通信工程工学学士。',
+      href: '/wiki/Shandong_University_zh/',
+      title: '完成本科学位'
+    }
+  ]
+};
+
 function withBasePath(pathname: string) {
   const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
   return basePath ? `${basePath}${pathname}` : pathname;
@@ -140,14 +202,18 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
   const [language, setLanguage] = useState<SearchLanguage>('en');
   const [browseOpen, setBrowseOpen] = useState(false);
   const [newsOpen, setNewsOpen] = useState(false);
-  const collapsibleSections = { browse: browseOpen, news: newsOpen };
+  const [milestonesOpen, setMilestonesOpen] = useState(false);
+  const updatesWindowRef = useRef<HTMLDivElement>(null);
+  const collapsibleSections = { browse: browseOpen, milestones: milestonesOpen, news: newsOpen };
   const allSectionsClosed = Object.values(collapsibleSections).every((open) => !open);
   const expandAllSections = () => {
     setBrowseOpen(true);
+    setMilestonesOpen(true);
     setNewsOpen(true);
   };
   const collapseAllSections = () => {
     setBrowseOpen(false);
+    setMilestonesOpen(false);
     setNewsOpen(false);
   };
   const toggleAllSections = () => {
@@ -158,6 +224,33 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
     collapseAllSections();
   };
   const portalClassName = ['wiki-portal', allSectionsClosed ? 'wiki-portal-collapsed' : ''].filter(Boolean).join(' ');
+  const latestUpdate = updateEntries[language][0];
+
+  useLayoutEffect(() => {
+    const viewport = updatesWindowRef.current;
+    if (!viewport || !newsOpen) return;
+    const list = viewport.querySelector('ol');
+    if (!list) return;
+    const visibleItems = Array.from(list.children).slice(0, 5) as HTMLElement[];
+    if (!visibleItems.length) return;
+
+    const measureWindow = () => {
+      const lastItem = visibleItems.at(-1);
+      if (!lastItem) return;
+      const height = lastItem.getBoundingClientRect().bottom - list.getBoundingClientRect().top;
+      viewport.style.setProperty('--portal-updates-window-height', `${Math.ceil(height)}px`);
+    };
+
+    viewport.scrollTop = 0;
+    const resizeObserver = new ResizeObserver(measureWindow);
+    visibleItems.forEach((item) => resizeObserver.observe(item));
+    window.addEventListener('resize', measureWindow);
+    measureWindow();
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', measureWindow);
+    };
+  }, [language, newsOpen]);
 
   return (
     <article className={portalClassName} data-page-slug="Xinbao_Qiao">
@@ -167,7 +260,7 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
             <h1 className="wiki-portal-name" id="portal-title">
               <button
                 type="button"
-                aria-controls="portal-news portal-directory"
+                aria-controls="portal-news portal-milestones portal-directory"
                 aria-expanded={!allSectionsClosed}
                 aria-label={allSectionsClosed ? 'Expand homepage sections' : 'Collapse homepage sections'}
                 className="wiki-portal-name-button"
@@ -234,7 +327,7 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
 
       <div className="wiki-portal-disclosures">
         <details
-          className="wiki-portal-news"
+          className="wiki-portal-news wiki-portal-timeline"
           id="portal-news"
           open={newsOpen}
         >
@@ -244,13 +337,57 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
               setNewsOpen((open) => !open);
             }}
           >
-            <span>
-              <strong>{newsLabels[language].title}</strong>
-              <em>{newsLabels[language].count}</em>
+            <span className="wiki-portal-timeline-heading">
+              <strong>{updateLabels[language].title}</strong>
+              <em>{updateEntries[language].length} {language === 'zh' ? '条动态' : 'updates'}</em>
+            </span>
+            <span className="wiki-portal-news-preview">
+              <time dateTime={latestUpdate.dateTime}>{latestUpdate.date}</time>
+              <span>
+                <b>{latestUpdate.title}</b>
+                <small>{latestUpdate.detail}</small>
+              </span>
             </span>
           </summary>
-          <ol className="wiki-portal-news-list">
-            {newsEntries[language].slice(0, 6).map((item) => (
+          <div
+            aria-label={updateLabels[language].window}
+            className="wiki-portal-updates-window"
+            ref={updatesWindowRef}
+            role="region"
+            tabIndex={0}
+          >
+            <ol className="wiki-portal-news-list">
+              {updateEntries[language].map((item) => (
+                <li key={`${item.dateTime}-${item.title}`}>
+                  <time dateTime={item.dateTime}>{item.date}</time>
+                  <div>
+                    <a href={withBasePath(item.href)}>{item.title}</a>
+                    <p>{item.detail}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </details>
+
+        <details
+          className="wiki-portal-milestones wiki-portal-timeline"
+          id="portal-milestones"
+          open={milestonesOpen}
+        >
+          <summary
+            onClick={(event) => {
+              event.preventDefault();
+              setMilestonesOpen((open) => !open);
+            }}
+          >
+            <span className="wiki-portal-timeline-heading">
+              <strong>{milestoneLabels[language].title}</strong>
+              <em>{milestoneLabels[language].count}</em>
+            </span>
+          </summary>
+          <ol className="wiki-portal-news-list wiki-portal-milestone-list">
+            {milestoneEntries[language].map((item) => (
               <li key={`${item.dateTime}-${item.title}`}>
                 <time dateTime={item.dateTime}>{item.date}</time>
                 <div>
