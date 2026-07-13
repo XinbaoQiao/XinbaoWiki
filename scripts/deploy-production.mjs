@@ -12,6 +12,14 @@ const project = 'xinbaopedia';
 const productionUrl = 'https://xinbaopedia.top';
 const vercelCliVersion = '54.18.7';
 const vercelCliPackage = `vercel@${vercelCliVersion}`;
+const proxyEnvKeys = [
+  'http_proxy',
+  'https_proxy',
+  'HTTP_PROXY',
+  'HTTPS_PROXY',
+  'all_proxy',
+  'ALL_PROXY',
+];
 
 function fail(message) {
   console.error(`deploy-production: ${message}`);
@@ -20,16 +28,16 @@ function fail(message) {
 
 function sanitizeEnv() {
   const env = { ...process.env };
-  for (const key of [
-    'http_proxy',
-    'https_proxy',
-    'HTTP_PROXY',
-    'HTTPS_PROXY',
-    'all_proxy',
-    'ALL_PROXY',
-    'NODE_TLS_REJECT_UNAUTHORIZED',
-  ]) {
+  for (const key of [...proxyEnvKeys, 'NODE_TLS_REJECT_UNAUTHORIZED']) {
     delete env[key];
+  }
+  return env;
+}
+
+function configuredProxyEnv(baseEnv) {
+  const env = { ...baseEnv };
+  for (const key of proxyEnvKeys) {
+    if (process.env[key]) env[key] = process.env[key];
   }
   return env;
 }
@@ -226,16 +234,29 @@ async function runStagedSmoke(vercelCommand, env, stagedUrl) {
   ];
 
   for (const check of checks) {
-    const body = await runCapture(
-      vercelCommand,
-      vercelArgs('curl', [
-        check.path,
-        '--deployment', stagedUrl,
-        '--yes',
-        '--', '--silent', '--show-error', '--max-time', '30',
-      ]),
-      env
-    );
+    let body;
+    let lastError;
+    for (let attempt = 1; attempt <= 2; attempt += 1) {
+      try {
+        body = await runCapture(
+          vercelCommand,
+          vercelArgs('curl', [
+            check.path,
+            '--deployment', stagedUrl,
+            '--yes',
+            '--', '--silent', '--show-error', '--max-time', '30',
+          ]),
+          env
+        );
+        break;
+      } catch (error) {
+        lastError = error;
+        if (attempt < 2) {
+          console.warn(`deploy-production: retrying staged smoke for ${check.path}`);
+        }
+      }
+    }
+    if (body === undefined) throw lastError;
     for (const pattern of check.patterns) {
       if (!pattern.test(body)) {
         throw new Error(`staged smoke failed for ${check.path}: missing ${pattern}`);
@@ -273,6 +294,7 @@ async function main() {
 
   const env = sanitizeEnv();
   env.VERCEL_TOKEN = token;
+  const smokeEnv = configuredProxyEnv(env);
   const vercelCommand = requireVercelCommand();
   const hadLocalEnv = existsSync(join(root, '.env.local'));
   const cleanupOnSignal = (exitCode) => {
@@ -295,7 +317,7 @@ async function main() {
       throw new Error('Vercel did not return a valid staged deployment URL');
     }
     console.log(`deploy-production: staged deployment ready at ${stagedUrl}`);
-    await runStagedSmoke(vercelCommand, env, stagedUrl);
+    await runStagedSmoke(vercelCommand, smokeEnv, stagedUrl);
     await run(vercelCommand, vercelArgs('promote', [stagedUrl, '--yes', '--scope', scope]), env);
     await runSmoke(env, productionUrl);
   } finally {
