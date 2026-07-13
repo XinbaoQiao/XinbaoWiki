@@ -43,7 +43,7 @@ function withBasePath(pathname: string) {
 
 export function HomepagePortal({ directorySections, languageEntries, searchIndex }: Props) {
   const [language, setLanguage] = useState<SearchLanguage>('en');
-  const [browseOpen, setBrowseOpen] = useState(true);
+  const [browseOpen, setBrowseOpen] = useState(false);
   const collapsibleSections = { browse: browseOpen };
   const allSectionsClosed = Object.values(collapsibleSections).every((open) => !open);
   const expandAllSections = () => {
