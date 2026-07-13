@@ -392,8 +392,10 @@ assert.match(deployProductionScript, /'--project', project, '--scope', scope/, '
 assert.match(deployProductionScript, /'--prod', '--skip-domain'/, 'deployment wrapper stages a production build without changing the canonical domain');
 assert.match(deployProductionScript, /function runStagedSmoke[\s\S]*vercelArgs\('curl'/, 'deployment wrapper uses authenticated Vercel curl for protected staged deployments');
 assert.match(deployProductionScript, /\/robots\.txt[\s\S]*\/sitemap\.xml[\s\S]*\/search-index\.json[\s\S]*\/api\/chat-with-xinbao\//, 'staged smoke covers metadata, search, and chat routes');
+assert.match(deployProductionScript, /'--silent', '--show-error', '--max-time', '30'/, 'each staged smoke request has a bounded network timeout');
 assert.match(deployProductionScript, /runStagedSmoke\(vercelCommand, env, stagedUrl\)/, 'deployment wrapper smoke-tests the protected staged deployment before promotion');
 assert.match(deployProductionScript, /throw new Error\('Vercel did not return a valid staged deployment URL'\)/, 'deployment wrapper preserves finally cleanup when staged URL parsing fails');
+assert.match(deployProductionScript, /process\.once\('SIGINT'[\s\S]*cleanupOnSignal\(130\)[\s\S]*process\.once\('SIGTERM'[\s\S]*cleanupOnSignal\(143\)/, 'deployment wrapper removes generated env state when interrupted');
 assert.match(deployProductionScript, /vercelArgs\('promote', \[stagedUrl, '--yes', '--scope', scope\]\)/, 'deployment wrapper promotes only a verified staged deployment');
 assert.match(deployProductionScript, /runSmoke\(env, productionUrl\)/, 'deployment wrapper verifies the canonical domain after promotion');
 assert.doesNotMatch(deployProductionScript, /vercel@latest/, 'deployment wrapper avoids floating Vercel CLI versions');

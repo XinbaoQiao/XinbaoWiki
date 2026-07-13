@@ -228,7 +228,12 @@ async function runStagedSmoke(vercelCommand, env, stagedUrl) {
   for (const check of checks) {
     const body = await runCapture(
       vercelCommand,
-      vercelArgs('curl', [check.path, '--deployment', stagedUrl, '--yes']),
+      vercelArgs('curl', [
+        check.path,
+        '--deployment', stagedUrl,
+        '--yes',
+        '--', '--silent', '--show-error', '--max-time', '30',
+      ]),
       env
     );
     for (const pattern of check.patterns) {
@@ -270,6 +275,12 @@ async function main() {
   env.VERCEL_TOKEN = token;
   const vercelCommand = requireVercelCommand();
   const hadLocalEnv = existsSync(join(root, '.env.local'));
+  const cleanupOnSignal = (exitCode) => {
+    cleanupGeneratedEnvFile(hadLocalEnv);
+    process.exit(exitCode);
+  };
+  process.once('SIGINT', () => cleanupOnSignal(130));
+  process.once('SIGTERM', () => cleanupOnSignal(143));
 
   try {
     requireCleanDeploymentTree();
