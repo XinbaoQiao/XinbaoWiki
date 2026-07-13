@@ -27,7 +27,7 @@ translation_of: CV
 
 ## 教育经历
 
-- **香港中文大学**，信息工程博士生，2026 年至今。导师为 [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/)。
+- **香港中文大学**，信息工程博士生，2026 年至今。导师为 [张颖珺](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/)。
 - **浙江大学**，人工智能工学硕士，2022-09 至 2025-12。
 - **山东大学**，通信工程工学学士，2018-09 至 2022-07。
 
@@ -37,7 +37,7 @@ translation_of: CV
 
 ## 研究经历
 
-- **香港中文大学博士阶段研究**，2026 年至今，导师 [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/)。研究分布式 AI 系统中的数据生命周期管理，将数据生成、使用和删除问题与联邦表示几何联系起来。
+- **香港中文大学博士阶段研究**，2026 年至今，导师 [张颖珺](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/)。研究分布式 AI 系统中的数据生命周期管理，将数据生成、使用和删除问题与联邦表示几何联系起来。
   - Paper #5：提出联邦学习的最优传输视角，并构建面向通信受限表示几何的 barycentric multi-prototype classifier。
 - **数据中心机器学习系统研究**，2023-03 至 2025-12，导师 [张萌](https://person.zju.edu.cn/mengzhang) 教授，机构 [[Zhejiang_University|浙江大学]]。构建面向数据删除的机器遗忘方法，覆盖连续影响权重、在线认证更新和动态树集成模型。
   - Paper #2：提出面向连续影响权重的 soft-weighted unlearning，支持超越二元删除的公平性和鲁棒性干预。

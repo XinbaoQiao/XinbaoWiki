@@ -122,7 +122,7 @@ assert.doesNotMatch(home, /Master of Science in Artificial Intelligence/, 'Engli
 assert.match(zhHome, /2000年9月30日/, 'Chinese page includes birth date');
 assert.match(zhHome, /人工智能工学硕士/, 'Chinese homepage describes the ZJU AI degree as 工学硕士');
 assert.doesNotMatch(zhHome, /理学硕士/, 'Chinese homepage avoids the incorrect ZJU 理学硕士 wording');
-assert.match(zhHome, /\[\[Angela_Yingjun_Zhang\|Angela Yingjun Zhang\]\]/, 'Chinese home article links to the PhD advisor page');
+assert.match(zhHome, /\[\[Angela_Yingjun_Zhang\|张颖珺\]\]/, 'Chinese home article uses the advisor\'s Chinese name');
 assert.match(zhHome, /\[\[Meng_Zhang\|Meng Zhang\]\]/, 'Chinese home article links to the master advisor page');
 assert.match(home, /## See also[\s\S]*\[\[CV\|Résumé\]\]/, 'English homepage See also labels the CV link as Résumé');
 assert.match(zhHome, /## 参见[\s\S]*\[\[CV_zh\|Résumé\]\]/, 'Chinese homepage uses 参见 and labels the CV link as Résumé');
@@ -738,6 +738,7 @@ assert.match(read('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_L
 
 const mengZhang = read('Meng_Zhang.md');
 const angelaZhang = read('Angela_Yingjun_Zhang.md');
+const angelaZhangZh = read('Angela_Yingjun_Zhang_zh.md');
 assert.match(mengZhang, /https:\/\/person\.zju\.edu\.cn\/mengzhang/, 'Meng Zhang page cites the official ZJU profile');
 assert.match(mengZhang, /ZJU-UIUC Institute/, 'Meng Zhang page identifies the ZJU-UIUC Institute affiliation');
 assert.match(mengZhang, /wireless and computer networks[\s\S]*edge intelligence[\s\S]*network economics[\s\S]*intelligent IoT/i, 'Meng Zhang page summarizes official research areas');
@@ -747,6 +748,13 @@ assert.match(angelaZhang, /Professor[\s\S]*Department of Information Engineering
 assert.match(angelaZhang, /IEEE Fellow/, 'Angela Yingjun Zhang page records IEEE Fellow status');
 assert.match(angelaZhang, /5G and 6G/, 'Angela Yingjun Zhang page summarizes official research interests');
 assert.match(angelaZhang, /\[\[Xinbao_Qiao\|Xinbao Qiao\]\]/, 'Angela Yingjun Zhang page connects to Qiao');
+assert.equal(frontmatterData('Angela_Yingjun_Zhang_zh.md').title, '张颖珺', 'Chinese advisor page uses Zhang Yingjun\'s Chinese name as its title');
+assert.equal(frontmatterData('Angela_Yingjun_Zhang_zh.md').name, '张颖珺', 'Chinese advisor infobox uses Zhang Yingjun\'s Chinese name');
+assert.match(angelaZhangZh, /\*\*张颖珺\*\*是香港中文大学信息工程系教授/, 'Chinese advisor biography uses 张颖珺 in prose');
+for (const page of ['Qiao_Xinbao_zh.md', 'Education_zh.md', 'Experience_zh.md', 'CV_zh.md', 'The_Chinese_University_of_Hong_Kong_zh.md', 'index_zh.md']) {
+  assert.doesNotMatch(read(page), /Angela Yingjun Zhang/, `${page} does not expose the English advisor name in Chinese prose`);
+  assert.match(read(page), /张颖珺/, `${page} uses the advisor's Chinese name`);
+}
 
 const learnPageFm = frontmatter('Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning.md');
 assert.doesNotMatch(learnPageFm, /^categories:/m, 'under-review manuscript infobox omits categories');

@@ -16,11 +16,11 @@ translation_of: Experience
 ---
 ## 当前机构
 
-- [[The_Chinese_University_of_Hong_Kong|香港中文大学]] 信息工程系博士生，导师 [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]。
+- [[The_Chinese_University_of_Hong_Kong|香港中文大学]] 信息工程系博士生，导师 [[Angela_Yingjun_Zhang|张颖珺]]。
 
 ## AI 与网络博士研究
 
-**博士生**，2026年至今。导师：[[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]，[[The_Chinese_University_of_Hong_Kong|香港中文大学]]。
+**博士生**，2026年至今。导师：[[Angela_Yingjun_Zhang|张颖珺]]，[[The_Chinese_University_of_Hong_Kong|香港中文大学]]。
 
 乔鑫宝当前博士研究以[[Data_Centric_Machine_Learning|数据中心 ML]]和[[AI_and_Networks|AI 与网络]]为核心，包括 AI for Networks 与 Networks for AI。研究关注数据、计算和评估信号分散在客户端、机构或网络基础设施中时，学习系统应如何运行。[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]计算仍是其中一个相关方法，用于在不假设原始数据可以集中汇总的情况下构造共享分布参考。
 

@@ -15,9 +15,9 @@ This bundle exposes the public Xinbaopedia wiki as Markdown concepts with OKF v0
 ### Academic advisor
 
 - [Angela Yingjun Zhang](concepts/Angela_Yingjun_Zhang.md) - CUHK Information Engineering professor and doctoral advisor of Xinbao Qiao.
-- [Angela Yingjun Zhang](concepts/Angela_Yingjun_Zhang_zh.md) - 香港中文大学信息工程系教授，乔鑫宝博士导师。
 - [Meng Zhang](concepts/Meng_Zhang.md) - Zhejiang University faculty member and master's advisor of Xinbao Qiao.
 - [张萌](concepts/Meng_Zhang_zh.md) - 浙江大学教师，乔鑫宝硕士导师。
+- [张颖珺](concepts/Angela_Yingjun_Zhang_zh.md) - 香港中文大学信息工程系教授，乔鑫宝博士导师。
 
 ### CV summary
 

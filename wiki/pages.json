@@ -651,20 +651,6 @@
       "timestamp": "2026-06-13T20:46:02+08:00"
     },
     {
-      "slug": "Angela_Yingjun_Zhang_zh",
-      "title": "Angela Yingjun Zhang",
-      "summary": "香港中文大学信息工程系教授，乔鑫宝博士导师。",
-      "language": "zh",
-      "type": "Academic advisor",
-      "tags": [
-        "zh",
-        "person",
-        "advisor",
-        "academic-advisor"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00"
-    },
-    {
       "slug": "DynFrs_zh",
       "title": "DynFrs：随机森林机器遗忘高效框架",
       "summary": "ICLR 2025 论文，研究随机森林中的高效机器遗忘。",
@@ -871,6 +857,20 @@
       "slug": "Meng_Zhang_zh",
       "title": "张萌",
       "summary": "浙江大学教师，乔鑫宝硕士导师。",
+      "language": "zh",
+      "type": "Academic advisor",
+      "tags": [
+        "zh",
+        "person",
+        "advisor",
+        "academic-advisor"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00"
+    },
+    {
+      "slug": "Angela_Yingjun_Zhang_zh",
+      "title": "张颖珺",
+      "summary": "香港中文大学信息工程系教授，乔鑫宝博士导师。",
       "language": "zh",
       "type": "Academic advisor",
       "tags": [

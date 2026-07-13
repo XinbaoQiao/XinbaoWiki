@@ -58,7 +58,7 @@ nationality: 中国
 
 ## 教育经历
 
-乔鑫宝目前在[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系攻读博士学位，导师为[[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]。[^cuhk-ie-zh] 其博士阶段工作围绕分布式证据、网络化计算和可靠 AI 评估展开。
+乔鑫宝目前在[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系攻读博士学位，导师为[[Angela_Yingjun_Zhang|张颖珺]]。[^cuhk-ie-zh] 其博士阶段工作围绕分布式证据、网络化计算和可靠 AI 评估展开。
 
 2022年至2025年，他在[[Zhejiang_University|浙江大学]]攻读人工智能工学硕士学位，硕士阶段专业 GPA 为 90/100，排名 3/25；硕士导师为[[Meng_Zhang|Meng Zhang]]。
 

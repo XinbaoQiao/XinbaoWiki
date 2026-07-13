@@ -20,7 +20,7 @@ source_path: wiki/The_Chinese_University_of_Hong_Kong_zh.md
 
 ## 项目
 
-乔鑫宝当前项目为 CUHK 工程学院的信息工程博士，导师为 [Angela Yingjun Zhang](./Angela_Yingjun_Zhang_zh.md)。CUHK 信息工程 MPhil-PhD 项目面向通信、网络、信息处理与安全等基础和应用研究。[^cuhk-grad] 该项目背景与乔鑫宝当前[数据中心 ML](./Data_Centric_Machine_Learning_zh.md)和 [AI 与网络](./AI_and_Networks_zh.md)方向一致：学习算法与通信约束、去中心化数据访问、分布式计算和跨孤岛评估被放在一起研究。
+乔鑫宝当前项目为 CUHK 工程学院的信息工程博士，导师为 [张颖珺](./Angela_Yingjun_Zhang_zh.md)。CUHK 信息工程 MPhil-PhD 项目面向通信、网络、信息处理与安全等基础和应用研究。[^cuhk-grad] 该项目背景与乔鑫宝当前[数据中心 ML](./Data_Centric_Machine_Learning_zh.md)和 [AI 与网络](./AI_and_Networks_zh.md)方向一致：学习算法与通信约束、去中心化数据访问、分布式计算和跨孤岛评估被放在一起研究。
 
 ## 学术背景
 
@@ -28,12 +28,12 @@ CUHK 信息工程系成立于 1989 年，并在官方介绍中称其为香港首
 
 ## 与乔鑫宝的关系
 
-乔鑫宝的 CUHK 阶段开始于其硕士阶段的 [数据中心 ML](./Data_Centric_Machine_Learning_zh.md) 与 [机器遗忘](./Machine_Unlearning_zh.md) 工作之后。在 [Angela Yingjun Zhang](./Angela_Yingjun_Zhang_zh.md) 指导下，博士阶段强调数据中心 ML、AI for Networks 与 Networks for AI：高效去中心化学习、跨 [数据孤岛](./Data_Silos_zh.md) 协作评估、通信感知可靠性，以及[Wasserstein barycenter](./Distributed_Wasserstein_Barycenter_zh.md)计算等分布式方法。因此，主页 infobox 中 Affiliation 只列 CUHK 当前机构，而过去机构放在教育与经历中。
+乔鑫宝的 CUHK 阶段开始于其硕士阶段的 [数据中心 ML](./Data_Centric_Machine_Learning_zh.md) 与 [机器遗忘](./Machine_Unlearning_zh.md) 工作之后。在 [张颖珺](./Angela_Yingjun_Zhang_zh.md) 指导下，博士阶段强调数据中心 ML、AI for Networks 与 Networks for AI：高效去中心化学习、跨 [数据孤岛](./Data_Silos_zh.md) 协作评估、通信感知可靠性，以及[Wasserstein barycenter](./Distributed_Wasserstein_Barycenter_zh.md)计算等分布式方法。因此，主页 infobox 中 Affiliation 只列 CUHK 当前机构，而过去机构放在教育与经历中。
 
 ## 参见
 
 - [乔鑫宝](./Qiao_Xinbao_zh.md)
-- [Angela Yingjun Zhang](./Angela_Yingjun_Zhang_zh.md)
+- [张颖珺](./Angela_Yingjun_Zhang_zh.md)
 - [AI 与网络](./AI_and_Networks_zh.md)
 - [教育经历](./Education_zh.md)
 - [研究经历](./Experience_zh.md)

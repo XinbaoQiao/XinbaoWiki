@@ -33,7 +33,7 @@ translation_of: index
 
 ## 导师
 
-- [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]]
+- [[Angela_Yingjun_Zhang|张颖珺]]
 - [[Meng_Zhang|张萌]]
 
 ## 研究专题

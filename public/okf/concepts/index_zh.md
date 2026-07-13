@@ -35,7 +35,7 @@ source_path: wiki/index_zh.md
 
 ## 导师
 
-- [Angela Yingjun Zhang](./Angela_Yingjun_Zhang_zh.md)
+- [张颖珺](./Angela_Yingjun_Zhang_zh.md)
 - [张萌](./Meng_Zhang_zh.md)
 
 ## 研究专题

@@ -1,6 +1,6 @@
 ---
 type: Academic advisor
-title: Angela Yingjun Zhang
+title: 张颖珺
 description: 香港中文大学信息工程系教授，乔鑫宝博士导师。
 tags:
   - zh
@@ -8,7 +8,7 @@ tags:
   - advisor
   - academic-advisor
 timestamp: '2026-05-05T23:25:14+08:00'
-name: Angela Yingjun Zhang
+name: 张颖珺
 language: zh
 summary: 香港中文大学信息工程系教授，乔鑫宝博士导师。
 occupation:
@@ -23,11 +23,11 @@ links:
     url: 'https://staff.ie.cuhk.edu.hk/~yjzhang/'
 translation_of: Angela_Yingjun_Zhang
 ---
-**Angela Yingjun Zhang** 是香港中文大学信息工程系教授，IEEE Fellow。[^cuhk-profile] 其官方主页将研究置于无线通信与网络方向，重点包括 5G/6G 无线通信系统中的优化与学习。[^cuhk-about]
+**张颖珺**是香港中文大学信息工程系教授，IEEE Fellow。[^cuhk-profile] 其官方主页将研究置于无线通信与网络方向，重点包括 5G/6G 无线通信系统中的优化与学习。[^cuhk-about]
 
 ## 传记
 
-Zhang 是 [[The_Chinese_University_of_Hong_Kong|香港中文大学]] 信息工程系教师。其官方简介记录她于 2004 年获得香港科技大学电子与计算机工程系博士学位，并为 IEEE 和 IET Fellow。页面还记录其在 IEEE 通信相关会议和期刊中的服务角色。
+张颖珺是[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系教师。其官方简介记录她于 2004 年获得香港科技大学电子与计算机工程系博士学位，并为 IEEE 和 IET Fellow。页面还记录其在 IEEE 通信相关会议和期刊中的服务角色。
 
 ## 研究
 
@@ -35,7 +35,7 @@ Zhang 是 [[The_Chinese_University_of_Hong_Kong|香港中文大学]] 信息工�
 
 ## 与乔鑫宝的关系
 
-Zhang 是 [[Xinbao_Qiao|乔鑫宝]] 在 CUHK 的博士导师。该导师关系用于传记中连接乔鑫宝早期数据中心机器学习工作与博士阶段网络化 AI 系统、去中心化学习和通信感知可靠性方向。
+张颖珺是[[Xinbao_Qiao|乔鑫宝]]在 CUHK 的博士导师。该导师关系用于传记中连接乔鑫宝早期数据中心机器学习工作与博士阶段网络化 AI 系统、去中心化学习和通信感知可靠性方向。
 
 ## 参见
 
@@ -44,6 +44,6 @@ Zhang 是 [[Xinbao_Qiao|乔鑫宝]] 在 CUHK 的博士导师。该导师关系�
 - [[AI_and_Networks|AI 与网络]]
 - [[Distributed_Learning|分布式学习]]
 
-[^cuhk-profile]: Angela Yingjun Zhang 的 [CUHK 官方主页](https://staff.ie.cuhk.edu.hk/~yjzhang/)列出其为香港中文大学信息工程系教授和 IEEE Fellow。
+[^cuhk-profile]: 张颖珺的 [CUHK 官方主页](https://staff.ie.cuhk.edu.hk/~yjzhang/)列出其为香港中文大学信息工程系教授和 IEEE Fellow。
 
 [^cuhk-about]: 其 [About](https://staff.ie.cuhk.edu.hk/~yjzhang/About.html) 与 [Research](https://staff.ie.cuhk.edu.hk/~yjzhang/Research.html) 页面介绍了 5G/6G 无线通信系统优化与学习等研究主题。
