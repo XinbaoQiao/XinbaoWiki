@@ -19,6 +19,12 @@ type LanguageEntry = {
   href: string;
   label: string;
 };
+type NewsEntry = {
+  date: string;
+  detail: string;
+  href: string;
+  title: string;
+};
 
 type Props = {
   directorySections: PortalSection[];
@@ -36,18 +42,97 @@ const entriesLabel: LocalizedText = {
   zh: '主要学术条目'
 };
 
-const atlasLabels = {
+const newsLabels = {
   en: {
-    detail: 'Follow the ideas, papers, and institutions shaping the research journey.',
-    eyebrow: 'New interactive feature',
-    title: 'Explore the Research Atlas'
+    count: '6 updates',
+    eyebrow: 'Latest updates',
+    title: 'News from Xinbaopedia'
   },
   zh: {
-    detail: '沿研究主线探索关键思想、论文与机构之间的联系。',
-    eyebrow: '全新交互功能',
-    title: '探索研究图谱'
+    count: '6 条动态',
+    eyebrow: '最新消息',
+    title: 'Xinbaopedia 最新动态'
   }
-} satisfies Record<SearchLanguage, { detail: string; eyebrow: string; title: string }>;
+} satisfies Record<SearchLanguage, { count: string; eyebrow: string; title: string }>;
+
+const newsEntries: Record<SearchLanguage, NewsEntry[]> = {
+  en: [
+    {
+      date: '2026',
+      detail: 'Work on selection bias and model collapse was accepted to ICML 2026.',
+      href: '/wiki/When_Sample_Selection_Bias_Precipitates_Model_Collapse/',
+      title: 'ICML 2026 paper accepted'
+    },
+    {
+      date: '2026',
+      detail: 'Soft-weighted unlearning for fairness and robustness was accepted to AAAI 2026.',
+      href: '/wiki/Soft_Weighted_Machine_Unlearning/',
+      title: 'AAAI 2026 paper accepted'
+    },
+    {
+      date: '2026',
+      detail: 'Started doctoral study in Information Engineering at The Chinese University of Hong Kong.',
+      href: '/wiki/The_Chinese_University_of_Hong_Kong/',
+      title: 'Joined CUHK as a PhD student'
+    },
+    {
+      date: '2025',
+      detail: 'Two machine-unlearning papers appeared at ICLR 2025.',
+      href: '/wiki/Publications/',
+      title: 'Two papers at ICLR 2025'
+    },
+    {
+      date: '2025–2026',
+      detail: 'Code is publicly available for accepted work on certified unlearning, soft-weighted unlearning, and model collapse.',
+      href: '/wiki/CV/',
+      title: 'Research code released'
+    },
+    {
+      date: '2026',
+      detail: 'Serving as a reviewer for ICML, NeurIPS, and AAAI.',
+      href: '/wiki/CV/',
+      title: 'Academic service'
+    }
+  ],
+  zh: [
+    {
+      date: '2026',
+      detail: '关于样本选择偏差与模型坍缩的工作被 ICML 2026 录用。',
+      href: '/wiki/When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh/',
+      title: 'ICML 2026 论文录用'
+    },
+    {
+      date: '2026',
+      detail: '面向公平性与鲁棒性的软加权机器遗忘工作被 AAAI 2026 录用。',
+      href: '/wiki/Soft_Weighted_Machine_Unlearning_zh/',
+      title: 'AAAI 2026 论文录用'
+    },
+    {
+      date: '2026',
+      detail: '开始在香港中文大学信息工程学系攻读博士学位。',
+      href: '/wiki/The_Chinese_University_of_Hong_Kong_zh/',
+      title: '加入香港中文大学攻读博士'
+    },
+    {
+      date: '2025',
+      detail: '两篇机器遗忘论文发表于 ICLR 2025。',
+      href: '/wiki/Publications_zh/',
+      title: '两篇论文入选 ICLR 2025'
+    },
+    {
+      date: '2025–2026',
+      detail: '认证遗忘、软加权遗忘和模型坍缩等已录用工作均已公开代码。',
+      href: '/wiki/CV_zh/',
+      title: '研究代码公开'
+    },
+    {
+      date: '2026',
+      detail: '担任 ICML、NeurIPS 和 AAAI 审稿人。',
+      href: '/wiki/CV_zh/',
+      title: '学术服务'
+    }
+  ]
+};
 
 function withBasePath(pathname: string) {
   const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
@@ -57,13 +142,16 @@ function withBasePath(pathname: string) {
 export function HomepagePortal({ directorySections, languageEntries, searchIndex }: Props) {
   const [language, setLanguage] = useState<SearchLanguage>('en');
   const [browseOpen, setBrowseOpen] = useState(false);
-  const collapsibleSections = { browse: browseOpen };
+  const [newsOpen, setNewsOpen] = useState(false);
+  const collapsibleSections = { browse: browseOpen, news: newsOpen };
   const allSectionsClosed = Object.values(collapsibleSections).every((open) => !open);
   const expandAllSections = () => {
     setBrowseOpen(true);
+    setNewsOpen(true);
   };
   const collapseAllSections = () => {
     setBrowseOpen(false);
+    setNewsOpen(false);
   };
   const toggleAllSections = () => {
     if (allSectionsClosed) {
@@ -82,7 +170,7 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
             <h1 className="wiki-portal-name" id="portal-title">
               <button
                 type="button"
-                aria-controls="portal-directory"
+                aria-controls="portal-news portal-directory"
                 aria-expanded={!allSectionsClosed}
                 aria-label={allSectionsClosed ? 'Expand homepage sections' : 'Collapse homepage sections'}
                 className="wiki-portal-name-button"
@@ -145,50 +233,80 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
             </a>
           ))}
         </nav>
-        <a className="wiki-portal-atlas" href={withBasePath('/atlas')}>
-          <span>{atlasLabels[language].eyebrow}</span>
-          <strong>{atlasLabels[language].title}</strong>
-          <small>{atlasLabels[language].detail}</small>
-          <b aria-hidden="true">↗</b>
-        </a>
       </section>
 
-      <details
-        className="wiki-portal-directory"
-        id="portal-directory"
-        onToggle={(event) => setBrowseOpen(event.currentTarget.open)}
-        open={browseOpen}
-      >
-        <summary>
-          <span>{browseLabels[language]}</span>
-        </summary>
-        <div className="wiki-portal-grid">
-          {directorySections.map((section) => {
-            const sectionTitle = section.title[language];
-            const sectionId = `portal-${section.title.en.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
-            return (
-              <section className="wiki-portal-block" aria-labelledby={sectionId} key={section.title.en}>
-                <h3 id={sectionId}>
-                  <span>{sectionTitle}</span>
-                </h3>
-                {section.groups.map((group) => (
-                  <div className="wiki-portal-group" key={group.label.en}>
-                    <p className="wiki-portal-group-label">{group.label[language]}</p>
-                    <ul>
-                      {group.links[language].map((item) => (
-                        <li key={item.href}>
-                          <a href={item.href}>{item.title}</a>
-                          {item.summary && <span>{item.summary}</span>}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </section>
-            );
-          })}
-        </div>
-      </details>
+      <div className="wiki-portal-disclosures">
+        <details
+          className="wiki-portal-news"
+          id="portal-news"
+          open={newsOpen}
+        >
+          <summary
+            onClick={(event) => {
+              event.preventDefault();
+              setNewsOpen((open) => !open);
+            }}
+          >
+            <span>
+              <small>{newsLabels[language].eyebrow}</small>
+              <strong>{newsLabels[language].title}</strong>
+              <em>{newsLabels[language].count}</em>
+            </span>
+          </summary>
+          <ol className="wiki-portal-news-list">
+            {newsEntries[language].slice(0, 6).map((item) => (
+              <li key={`${item.date}-${item.title}`}>
+                <time>{item.date}</time>
+                <div>
+                  <a href={withBasePath(item.href)}>{item.title}</a>
+                  <p>{item.detail}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </details>
+
+        <details
+          className="wiki-portal-directory"
+          id="portal-directory"
+          open={browseOpen}
+        >
+          <summary
+            onClick={(event) => {
+              event.preventDefault();
+              setBrowseOpen((open) => !open);
+            }}
+          >
+            <span>{browseLabels[language]}</span>
+          </summary>
+          <div className="wiki-portal-grid">
+            {directorySections.map((section) => {
+              const sectionTitle = section.title[language];
+              const sectionId = `portal-${section.title.en.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+              return (
+                <section className="wiki-portal-block" aria-labelledby={sectionId} key={section.title.en}>
+                  <h3 id={sectionId}>
+                    <span>{sectionTitle}</span>
+                  </h3>
+                  {section.groups.map((group) => (
+                    <div className="wiki-portal-group" key={group.label.en}>
+                      <p className="wiki-portal-group-label">{group.label[language]}</p>
+                      <ul>
+                        {group.links[language].map((item) => (
+                          <li key={item.href}>
+                            <a href={item.href}>{item.title}</a>
+                            {item.summary && <span>{item.summary}</span>}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </section>
+              );
+            })}
+          </div>
+        </details>
+      </div>
     </article>
   );
 }

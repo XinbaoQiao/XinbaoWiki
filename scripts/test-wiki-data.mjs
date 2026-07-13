@@ -46,9 +46,9 @@ for (const file of ['Xinbao_Qiao.md', 'Qiao_Xinbao_zh.md', 'index.md', 'log.md',
   assertFile(`wiki/${file}`);
 }
 assertFile('CV.tex');
-assertFile('app/atlas/page.tsx');
-assertFile('components/ResearchAtlas.tsx');
-assertFile('lib/research-atlas.ts');
+assert.ok(!fs.existsSync(path.join(root, 'app/atlas/page.tsx')), 'retired Research Atlas route is removed');
+assert.ok(!fs.existsSync(path.join(root, 'components/ResearchAtlas.tsx')), 'retired Research Atlas component is removed');
+assert.ok(!fs.existsSync(path.join(root, 'lib/research-atlas.ts')), 'retired Research Atlas data source is removed');
 
 const chinesePageFiles = fs.readdirSync(wikiDir).filter((file) => file.endsWith('_zh.md'));
 assert.ok(chinesePageFiles.length >= 40, 'wiki includes static Chinese versions for the article set');
@@ -624,8 +624,7 @@ assert.match(sidebar, /usePathname/, 'sidebar derives language from the current 
 assert.match(sidebar, /<aside className="wiki-sidebar" aria-label=\{sectionLabels\.navigation\[language\]\}>/, 'sidebar localizes the navigation aria label');
 assert.doesNotMatch(sidebar, /function NavSection|className="nav-section"|<section className="nav-section">/, 'sidebar uses flat Colarpedia h4 plus ul blocks');
 assert.match(sidebar, /const navigation = \['Xinbao_Qiao', 'Publications'\]/, 'sidebar navigation includes the main page and Publications');
-assert.match(sidebar, /const atlasLabel: LocalizedText = \{ en: 'Research Atlas', zh: '研究图谱' \}/, 'sidebar gives the Atlas a bilingual label');
-assert.match(sidebar, /href=\{withBasePath\('\/atlas'\)\}>\{atlasLabel\[language\]\}/, 'sidebar exposes the Research Atlas as a base-path-aware route');
+assert.doesNotMatch(sidebar, /Research Atlas|研究图谱|\/atlas/, 'sidebar removes the retired Research Atlas entry');
 assert.match(sidebar, /Xinbao_Qiao: \{ en: 'Main page', zh: '主页' \}/, 'sidebar keeps the homepage label compact and localized');
 assert.match(sidebar, /navigation: \{ en: 'Navigation', zh: '导航' \}[\s\S]*researchTopics: \{ en: 'Research topics', zh: '研究主题' \}[\s\S]*education: \{ en: 'Education', zh: '教育经历' \}[\s\S]*experience: \{ en: 'Experience', zh: '研究经历' \}[\s\S]*contribute: \{ en: 'Contribute', zh: '链接' \}/, 'sidebar places Experience after Education and localizes section headings');
 assert.doesNotMatch(sidebar, /Source repository/, 'sidebar contribute links avoid the source repository label');
@@ -811,32 +810,7 @@ const infobox = fs.readFileSync(path.join(root, 'components/Infobox.tsx'), 'utf8
 const styles = fs.readFileSync(path.join(root, 'app/globals.css'), 'utf8');
 const homePage = fs.readFileSync(path.join(root, 'app/page.tsx'), 'utf8');
 const homepagePortal = fs.readFileSync(path.join(root, 'components/HomepagePortal.tsx'), 'utf8');
-const atlasPage = fs.readFileSync(path.join(root, 'app/atlas/page.tsx'), 'utf8');
-const atlasComponent = fs.readFileSync(path.join(root, 'components/ResearchAtlas.tsx'), 'utf8');
-const atlasDataSource = fs.readFileSync(path.join(root, 'lib/research-atlas.ts'), 'utf8');
-const graphData = JSON.parse(fs.readFileSync(path.join(root, 'wiki/graph.json'), 'utf8'));
-const atlasSlugs = [...atlasDataSource.matchAll(/\n\s+slug: '([^']+)'/g)].map((match) => match[1]);
-assert.equal(atlasSlugs.length, 16, 'Research Atlas curates exactly 16 readable waypoints');
-assert.equal(new Set(atlasSlugs).size, 16, 'Research Atlas waypoint slugs are unique');
-for (const slug of atlasSlugs) {
-  for (const localizedSlug of [slug, `${slug}_zh`]) {
-    const node = graphData.nodes.find((candidate) => candidate.slug === localizedSlug);
-    assert.ok(node && node.hidden === false, `Research Atlas waypoint ${localizedSlug} resolves to a public graph node`);
-  }
-}
-assert.doesNotMatch(atlasDataSource, hiddenManuscriptPattern, 'Research Atlas excludes the hidden under-review manuscript');
-assert.match(atlasDataSource, /const stageBlueprints[\s\S]*id: 'foundations'[\s\S]*id: 'data-lifecycle'[\s\S]*id: 'reliability'[\s\S]*id: 'networked-ai'/, 'Research Atlas follows four ordered research chapters');
-assert.match(atlasDataSource, /import graph from '@\/wiki\/graph\.json'/, 'Research Atlas derives titles, summaries, and page counts from the generated wiki graph');
-assert.match(atlasDataSource, /if \(!node \|\| node\.hidden \|\| node\.language !== language\)[\s\S]*throw new Error/, 'Research Atlas refuses missing, hidden, or cross-language waypoints');
-assert.match(atlasPage, /title: 'Research Atlas \| Xinbaopedia'[\s\S]*<ResearchAtlas data=\{getResearchAtlasData\(\)\}/, 'Research Atlas route provides metadata and build-time graph data');
-assert.match(atlasComponent, /const \[language, setLanguage\] = useState<AtlasLanguage>\('en'\)[\s\S]*const \[stageIndex, setStageIndex\] = useState\(0\)[\s\S]*const \[nodeIndex, setNodeIndex\] = useState\(0\)/, 'Research Atlas keeps explicit language, chapter, and waypoint state');
-assert.match(atlasComponent, /aria-current=\{active \? 'step' : undefined\}[\s\S]*aria-pressed=\{selected\}[\s\S]*aria-live="polite"/, 'Research Atlas exposes selected chapters, waypoints, and live details to assistive technology');
-assert.match(atlasComponent, /setLanguage\(option\)[\s\S]*labels\.kinds[\s\S]*activeNode\.href/, 'Research Atlas switches bilingual copy and localized evidence links');
-assert.match(styles, /\.wiki-shell:has\(\.research-atlas\) \{[\s\S]*display: block;[\s\S]*max-width: 1320px;[\s\S]*\}/, 'Research Atlas receives a wide dedicated layout');
-assert.match(styles, /\.research-atlas-panel \{[\s\S]*border-radius: 16px;[\s\S]*radial-gradient[\s\S]*linear-gradient[\s\S]*\}/, 'Research Atlas uses the luminous dark map panel');
-assert.match(styles, /\.research-atlas-map \{[\s\S]*grid-template-columns: repeat\(4, minmax\(0, 1fr\)\);[\s\S]*\}/, 'Research Atlas shows four desktop chapter columns');
-assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.research-atlas-map \{[\s\S]*grid-template-columns: 1fr;[\s\S]*\}/, 'Research Atlas collapses to one chapter column on mobile');
-assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.research-atlas-node,[\s\S]*\.research-atlas-stage,[\s\S]*animation: none;[\s\S]*\}/, 'Research Atlas honors reduced-motion preferences');
+assert.doesNotMatch(styles, /research-atlas|wiki-portal-atlas/, 'retired Research Atlas styles are removed');
 assert.doesNotMatch(styles, /\.wiki-logo-mark/, 'topbar CSS does not keep custom logo-image styling');
 assert.match(styles, /\.wiki-tabs-inner \{[\s\S]*padding: 0 24px 0 calc\(24px \+ var\(--sidebar-width\) \+ 24px\);[\s\S]*\}/, 'article tabs align with the main article column after the sidebar');
 assert.match(styles, /\.wiki-shell \{[\s\S]*grid-template-columns: var\(--sidebar-width\) minmax\(0, var\(--content-width\)\);[\s\S]*gap: 24px;[\s\S]*\}/, 'article shell uses a fixed navigation column and constrained readable article column');
@@ -926,14 +900,23 @@ assert.match(homepagePortal, /src=\{withBasePath\('\/site-logos\/wordmark\/xinba
 assert.match(homepagePortal, /wiki-portal-name-logos[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-blue\.png[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-gold\.png[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-green\.png[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-charcoal\.png/, 'homepage renders the themed Xinbao Qiao logo images for color themes');
 assert.doesNotMatch(homepagePortal, /height=\{190\}|width=\{760\}/, 'homepage no longer renders the old rectangular logo canvas dimensions');
 assert.match(homepagePortal, /const browseLabels[\s\S]*en: 'Browse Xinbaopedia'[\s\S]*zh: '浏览 Xinbaopedia'/, 'homepage Browse heading has English and Chinese labels');
-assert.match(homepagePortal, /const atlasLabels[\s\S]*Explore the Research Atlas[\s\S]*探索研究图谱[\s\S]*className="wiki-portal-atlas"[\s\S]*withBasePath\('\/atlas'\)/, 'homepage exposes a bilingual base-path-aware Research Atlas entry');
-assert.match(styles, /\.wiki-portal-atlas \{[\s\S]*radial-gradient[\s\S]*box-shadow:[\s\S]*\}/, 'homepage Research Atlas entry has a distinct highlighted treatment');
+assert.doesNotMatch(homepagePortal, /Research Atlas|研究图谱|\/atlas/, 'homepage removes the retired Research Atlas entry');
+assert.match(homepagePortal, /const newsLabels[\s\S]*6 updates[\s\S]*News from Xinbaopedia[\s\S]*6 条动态[\s\S]*Xinbaopedia 最新动态/, 'homepage news disclosure has bilingual labels and a six-item count');
+assert.match(homepagePortal, /const newsEntries[\s\S]*ICML 2026 paper accepted[\s\S]*AAAI 2026 paper accepted[\s\S]*Joined CUHK as a PhD student[\s\S]*Two papers at ICLR 2025[\s\S]*Research code released[\s\S]*Academic service/, 'homepage news contains six evidence-backed English updates');
+assert.match(homepagePortal, /ICML 2026 论文录用[\s\S]*AAAI 2026 论文录用[\s\S]*加入香港中文大学攻读博士[\s\S]*两篇论文入选 ICLR 2025[\s\S]*研究代码公开[\s\S]*学术服务/, 'homepage news contains the six Chinese counterparts');
+assert.match(homepagePortal, /newsEntries\[language\]\.slice\(0, 6\)\.map/, 'homepage hard-limits the visible news feed to six items');
+assert.match(homepagePortal, /className="wiki-portal-disclosures"[\s\S]*className="wiki-portal-news"[\s\S]*className="wiki-portal-directory"/, 'homepage places News and Browse as sibling disclosure sections');
+assert.match(styles, /\.wiki-portal-news \{[\s\S]*radial-gradient[\s\S]*box-shadow:[\s\S]*\}/, 'homepage News keeps the former highlighted card language');
+assert.match(styles, /\.wiki-portal-news-list \{[\s\S]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);[\s\S]*\}/, 'homepage News uses a compact two-column desktop list');
+assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.wiki-portal-news-list \{[\s\S]*grid-template-columns: 1fr;[\s\S]*\}/, 'homepage News becomes a single column on mobile');
 assert.match(homepagePortal, /const \[browseOpen, setBrowseOpen\] = useState\(false\);/, 'homepage browse directory is collapsed by default');
-assert.match(homepagePortal, /const collapsibleSections = \{ browse: browseOpen \};[\s\S]*const allSectionsClosed = Object\.values\(collapsibleSections\)\.every\(\(open\) => !open\);[\s\S]*wiki-portal-collapsed/, 'homepage computes a reusable all-collapsibles-closed state');
-assert.match(homepagePortal, /const expandAllSections = \(\) => \{[\s\S]*setBrowseOpen\(true\);[\s\S]*\};[\s\S]*const collapseAllSections = \(\) => \{[\s\S]*setBrowseOpen\(false\);[\s\S]*\};[\s\S]*const toggleAllSections = \(\) => \{[\s\S]*if \(allSectionsClosed\) \{[\s\S]*expandAllSections\(\);[\s\S]*return;[\s\S]*\}[\s\S]*collapseAllSections\(\);[\s\S]*\};/, 'homepage signature button can toggle all current collapsible sections');
+assert.match(homepagePortal, /const \[newsOpen, setNewsOpen\] = useState\(false\);/, 'homepage News is collapsed by default');
+assert.match(homepagePortal, /const collapsibleSections = \{ browse: browseOpen, news: newsOpen \};[\s\S]*const allSectionsClosed = Object\.values\(collapsibleSections\)\.every\(\(open\) => !open\);[\s\S]*wiki-portal-collapsed/, 'homepage computes collapsed state across both peer disclosures');
+assert.match(homepagePortal, /const expandAllSections = \(\) => \{[\s\S]*setBrowseOpen\(true\);[\s\S]*setNewsOpen\(true\);[\s\S]*\};[\s\S]*const collapseAllSections = \(\) => \{[\s\S]*setBrowseOpen\(false\);[\s\S]*setNewsOpen\(false\);[\s\S]*\};/, 'homepage signature button expands or collapses News and Browse together');
 assert.match(homepagePortal, /className="wiki-portal-name-button"[\s\S]*onClick=\{toggleAllSections\}[\s\S]*onDoubleClick=\{collapseAllSections\}/, 'homepage signature button click toggles expansion while double-click still collapses');
 assert.doesNotMatch(homepagePortal, /onKeyDown=\{|handleSignatureKeyDown|KeyboardEvent/, 'homepage signature button uses native button activation instead of custom keyboard handling');
-assert.match(homepagePortal, /<details[\s\S]*className="wiki-portal-directory"[\s\S]*id="portal-directory"[\s\S]*onToggle=\{\(event\) => setBrowseOpen\(event\.currentTarget\.open\)\}[\s\S]*open=\{browseOpen\}[\s\S]*browseLabels\[language\]/, 'homepage browse directory follows the active language and drives collapsed-state layout');
+assert.match(homepagePortal, /<details[\s\S]*className="wiki-portal-directory"[\s\S]*id="portal-directory"[\s\S]*open=\{browseOpen\}[\s\S]*<summary[\s\S]*event\.preventDefault\(\);[\s\S]*setBrowseOpen\(\(open\) => !open\);[\s\S]*browseLabels\[language\]/, 'homepage Browse uses native disclosure semantics with race-free controlled state');
+assert.match(homepagePortal, /<details[\s\S]*className="wiki-portal-news"[\s\S]*id="portal-news"[\s\S]*open=\{newsOpen\}[\s\S]*<summary[\s\S]*event\.preventDefault\(\);[\s\S]*setNewsOpen\(\(open\) => !open\);/, 'homepage News uses native disclosure semantics with race-free controlled state');
 assert.match(homePage, /Core research[\s\S]*Methods and geometry[\s\S]*Reliability and trust/, 'homepage research topics are organized into a readable taxonomy');
 assert.match(homePage, /核心研究[\s\S]*方法与几何[\s\S]*可靠性与可信/, 'homepage research taxonomy has Chinese labels');
 assert.match(homePage, /Indexes[\s\S]*Selected publications[\s\S]*Project pages/, 'homepage publication and project links are organized into a readable taxonomy');
