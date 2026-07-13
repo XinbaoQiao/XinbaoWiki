@@ -1406,6 +1406,30 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
   margin: 16px auto 0;
 }
 
+.wiki-portal-disclosures > details {
+  interpolate-size: allow-keywords;
+}
+
+.wiki-portal-disclosures > details::details-content {
+  block-size: 0;
+  content-visibility: hidden;
+  overflow: clip;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    block-size .24s cubic-bezier(.22, 1, .36, 1),
+    content-visibility .24s allow-discrete,
+    opacity .16s ease,
+    transform .24s cubic-bezier(.22, 1, .36, 1);
+}
+
+.wiki-portal-disclosures > details[open]::details-content {
+  block-size: auto;
+  content-visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .wiki-portal-timeline {
   position: relative;
   overflow: hidden;
@@ -1459,11 +1483,12 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
   font-size: 17px;
   font-style: normal;
   font-weight: 800;
-  transform: translateY(-50%);
+  transform: translateY(-50%) rotate(0deg);
+  transition: transform .2s ease;
 }
 
 .wiki-portal-timeline[open] .wiki-portal-timeline-heading::after {
-  content: "▾";
+  transform: translateY(-50%) rotate(90deg);
 }
 
 .wiki-portal-timeline summary strong {
@@ -1623,7 +1648,8 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
   font-size: 19px;
   font-weight: 700;
   line-height: 1;
-  transform: translateY(1px);
+  transform: translateY(1px) rotate(0deg);
+  transition: transform .2s ease;
 }
 
 @keyframes wiki-portal-recenter {
@@ -1667,7 +1693,7 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
 }
 
 .wiki-portal-directory[open] summary span::after {
-  content: "▾";
+  transform: translateY(1px) rotate(90deg);
 }
 
 .wiki-portal-grid {
@@ -1949,6 +1975,12 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
   .wiki-portal-timeline,
   .site-palette-switcher,
   .wiki-shell:has(.wiki-portal) {
+    transition: none;
+  }
+
+  .wiki-portal-disclosures > details::details-content,
+  .wiki-portal-directory summary span::after,
+  .wiki-portal-timeline-heading::after {
     transition: none;
   }
 

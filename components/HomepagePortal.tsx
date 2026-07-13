@@ -92,13 +92,6 @@ const updateEntries: Record<SearchLanguage, NewsEntry[]> = {
       title: 'Two ICLR 2025 papers accepted'
     },
     {
-      date: 'Mar 2023',
-      dateTime: '2023-03',
-      detail: 'Machine unlearning and data-influence research at Zhejiang University.',
-      href: '/wiki/Experience/',
-      title: 'Started data-centric ML research'
-    },
-    {
       date: 'Sep 2022',
       dateTime: '2022-09',
       detail: 'M.Eng. in Artificial Intelligence, Zhejiang University.',
@@ -148,13 +141,6 @@ const updateEntries: Record<SearchLanguage, NewsEntry[]> = {
       detail: '《Hessian-Free Online Certified Unlearning》和《DynFrs》。',
       href: '/wiki/Publications_zh/',
       title: '两篇 ICLR 2025 论文录用'
-    },
-    {
-      date: '2023年3月',
-      dateTime: '2023-03',
-      detail: '在浙江大学开展机器遗忘与数据影响研究。',
-      href: '/wiki/Experience_zh/',
-      title: '开始数据中心机器学习研究'
     },
     {
       date: '2022年9月',
