@@ -215,6 +215,31 @@ async function runSmoke(env, siteUrl = productionUrl) {
   await checkProductionUrl(siteUrl);
 }
 
+async function runStagedSmoke(vercelCommand, env, stagedUrl) {
+  const checks = [
+    { path: '/', patterns: [/Xinbaopedia/i] },
+    { path: '/wiki/Xinbao_Qiao/', patterns: [/Xinbao/i, /wiki-page|Xinbaopedia/i] },
+    { path: '/robots.txt', patterns: [/Sitemap: https:\/\/xinbaopedia\.top\/sitemap\.xml/] },
+    { path: '/sitemap.xml', patterns: [/\/wiki\/Xinbao_Qiao\//] },
+    { path: '/search-index.json', patterns: [/"slug":"Xinbao_Qiao"/] },
+    { path: '/api/chat-with-xinbao/', patterns: [/"limit":10/] },
+  ];
+
+  for (const check of checks) {
+    const body = await runCapture(
+      vercelCommand,
+      vercelArgs('curl', [check.path, '--deployment', stagedUrl, '--yes']),
+      env
+    );
+    for (const pattern of check.patterns) {
+      if (!pattern.test(body)) {
+        throw new Error(`staged smoke failed for ${check.path}: missing ${pattern}`);
+      }
+    }
+  }
+  console.log(`deploy-production: staged smoke passed for ${stagedUrl}`);
+}
+
 function checkProductionUrl(url) {
   return new Promise((resolve, reject) => {
     const request = fetch(url, { redirect: 'follow' });
@@ -259,7 +284,7 @@ async function main() {
       throw new Error('Vercel did not return a valid staged deployment URL');
     }
     console.log(`deploy-production: staged deployment ready at ${stagedUrl}`);
-    await runSmoke(env, stagedUrl);
+    await runStagedSmoke(vercelCommand, env, stagedUrl);
     await run(vercelCommand, vercelArgs('promote', [stagedUrl, '--yes', '--scope', scope]), env);
     await runSmoke(env, productionUrl);
   } finally {
