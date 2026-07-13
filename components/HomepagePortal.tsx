@@ -21,6 +21,7 @@ type LanguageEntry = {
 };
 type NewsEntry = {
   date: string;
+  dateTime: string;
   detail: string;
   href: string;
   title: string;
@@ -44,92 +45,88 @@ const entriesLabel: LocalizedText = {
 
 const newsLabels = {
   en: {
-    count: '6 updates',
-    eyebrow: 'Latest updates',
-    title: 'News from Xinbaopedia'
+    count: '5 milestones',
+    title: 'Latest Updates'
   },
   zh: {
-    count: '6 条动态',
-    eyebrow: '最新消息',
-    title: 'Xinbaopedia 最新动态'
+    count: '5 项里程碑',
+    title: '最新动态'
   }
-} satisfies Record<SearchLanguage, { count: string; eyebrow: string; title: string }>;
+} satisfies Record<SearchLanguage, { count: string; title: string }>;
 
 const newsEntries: Record<SearchLanguage, NewsEntry[]> = {
   en: [
     {
-      date: '2026',
-      detail: 'Work on selection bias and model collapse was accepted to ICML 2026.',
+      date: 'Apr 2026',
+      dateTime: '2026-04',
+      detail: '“When Sample Selection Bias Precipitates Model Collapse” was accepted to ICML 2026.',
       href: '/wiki/When_Sample_Selection_Bias_Precipitates_Model_Collapse/',
       title: 'ICML 2026 paper accepted'
     },
     {
-      date: '2026',
-      detail: 'Soft-weighted unlearning for fairness and robustness was accepted to AAAI 2026.',
+      date: 'Dec 2025',
+      dateTime: '2025-12',
+      detail: 'Completed the M.Eng. in Artificial Intelligence at Zhejiang University.',
+      href: '/wiki/Zhejiang_University/',
+      title: 'Completed master’s degree'
+    },
+    {
+      date: 'Nov 2025',
+      dateTime: '2025-11',
+      detail: '“Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness” was accepted to AAAI 2026.',
       href: '/wiki/Soft_Weighted_Machine_Unlearning/',
       title: 'AAAI 2026 paper accepted'
     },
     {
-      date: '2026',
-      detail: 'Started doctoral study in Information Engineering at The Chinese University of Hong Kong.',
-      href: '/wiki/The_Chinese_University_of_Hong_Kong/',
-      title: 'Joined CUHK as a PhD student'
+      date: 'Jun 2025',
+      dateTime: '2025-06',
+      detail: 'Started a six-month full-time research internship on trustworthy LLM systems at NUSRI-CQ.',
+      href: '/wiki/NUSRI_CQ/',
+      title: 'Started full-time research internship'
     },
     {
-      date: '2025',
-      detail: 'Two machine-unlearning papers appeared at ICLR 2025.',
+      date: 'Jan 2025',
+      dateTime: '2025-01',
+      detail: '“Hessian-Free Online Certified Unlearning” and “DynFrs” were both accepted to ICLR 2025.',
       href: '/wiki/Publications/',
-      title: 'Two papers at ICLR 2025'
-    },
-    {
-      date: '2025–2026',
-      detail: 'Code is publicly available for accepted work on certified unlearning, soft-weighted unlearning, and model collapse.',
-      href: '/wiki/CV/',
-      title: 'Research code released'
-    },
-    {
-      date: '2026',
-      detail: 'Serving as a reviewer for ICML, NeurIPS, and AAAI.',
-      href: '/wiki/CV/',
-      title: 'Academic service'
+      title: 'Two ICLR 2025 papers accepted'
     }
   ],
   zh: [
     {
-      date: '2026',
-      detail: '关于样本选择偏差与模型坍缩的工作被 ICML 2026 录用。',
+      date: '2026年4月',
+      dateTime: '2026-04',
+      detail: '论文《When Sample Selection Bias Precipitates Model Collapse》被 ICML 2026 录用。',
       href: '/wiki/When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh/',
       title: 'ICML 2026 论文录用'
     },
     {
-      date: '2026',
-      detail: '面向公平性与鲁棒性的软加权机器遗忘工作被 AAAI 2026 录用。',
+      date: '2025年12月',
+      dateTime: '2025-12',
+      detail: '完成浙江大学人工智能工学硕士阶段。',
+      href: '/wiki/Zhejiang_University_zh/',
+      title: '完成硕士学位'
+    },
+    {
+      date: '2025年11月',
+      dateTime: '2025-11',
+      detail: '论文《Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness》被 AAAI 2026 录用。',
       href: '/wiki/Soft_Weighted_Machine_Unlearning_zh/',
       title: 'AAAI 2026 论文录用'
     },
     {
-      date: '2026',
-      detail: '开始在香港中文大学信息工程学系攻读博士学位。',
-      href: '/wiki/The_Chinese_University_of_Hong_Kong_zh/',
-      title: '加入香港中文大学攻读博士'
+      date: '2025年6月',
+      dateTime: '2025-06',
+      detail: '在 NUSRI-CQ 开始为期六个月的可信大模型系统全职研究实习。',
+      href: '/wiki/NUSRI_CQ_zh/',
+      title: '开始全职研究实习'
     },
     {
-      date: '2025',
-      detail: '两篇机器遗忘论文发表于 ICLR 2025。',
+      date: '2025年1月',
+      dateTime: '2025-01',
+      detail: '《Hessian-Free Online Certified Unlearning》和《DynFrs》同时被 ICLR 2025 录用。',
       href: '/wiki/Publications_zh/',
-      title: '两篇论文入选 ICLR 2025'
-    },
-    {
-      date: '2025–2026',
-      detail: '认证遗忘、软加权遗忘和模型坍缩等已录用工作均已公开代码。',
-      href: '/wiki/CV_zh/',
-      title: '研究代码公开'
-    },
-    {
-      date: '2026',
-      detail: '担任 ICML、NeurIPS 和 AAAI 审稿人。',
-      href: '/wiki/CV_zh/',
-      title: '学术服务'
+      title: '两篇 ICLR 2025 论文录用'
     }
   ]
 };
@@ -248,15 +245,14 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
             }}
           >
             <span>
-              <small>{newsLabels[language].eyebrow}</small>
               <strong>{newsLabels[language].title}</strong>
               <em>{newsLabels[language].count}</em>
             </span>
           </summary>
           <ol className="wiki-portal-news-list">
             {newsEntries[language].slice(0, 6).map((item) => (
-              <li key={`${item.date}-${item.title}`}>
-                <time>{item.date}</time>
+              <li key={`${item.dateTime}-${item.title}`}>
+                <time dateTime={item.dateTime}>{item.date}</time>
                 <div>
                   <a href={withBasePath(item.href)}>{item.title}</a>
                   <p>{item.detail}</p>
