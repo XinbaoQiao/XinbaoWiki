@@ -36,6 +36,19 @@ const entriesLabel: LocalizedText = {
   zh: '主要学术条目'
 };
 
+const atlasLabels = {
+  en: {
+    detail: 'Follow the ideas, papers, and institutions shaping the research journey.',
+    eyebrow: 'New interactive feature',
+    title: 'Explore the Research Atlas'
+  },
+  zh: {
+    detail: '沿研究主线探索关键思想、论文与机构之间的联系。',
+    eyebrow: '全新交互功能',
+    title: '探索研究图谱'
+  }
+} satisfies Record<SearchLanguage, { detail: string; eyebrow: string; title: string }>;
+
 function withBasePath(pathname: string) {
   const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
   return basePath ? `${basePath}${pathname}` : pathname;
@@ -132,6 +145,12 @@ export function HomepagePortal({ directorySections, languageEntries, searchIndex
             </a>
           ))}
         </nav>
+        <a className="wiki-portal-atlas" href={withBasePath('/atlas')}>
+          <span>{atlasLabels[language].eyebrow}</span>
+          <strong>{atlasLabels[language].title}</strong>
+          <small>{atlasLabels[language].detail}</small>
+          <b aria-hidden="true">↗</b>
+        </a>
       </section>
 
       <details

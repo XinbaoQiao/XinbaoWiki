@@ -32,6 +32,8 @@ const navLabels: Record<string, LocalizedText> = {
   Shandong_University: { en: 'SDU', zh: '山东大学' }
 };
 
+const atlasLabel: LocalizedText = { en: 'Research Atlas', zh: '研究图谱' };
+
 function withBasePath(pathname: string) {
   const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
   return basePath ? `${basePath}${pathname}` : pathname;
@@ -83,6 +85,7 @@ export function Sidebar() {
         {navigation.map((item) => (
           <li key={item}><a href={wikiHref(item, language)}>{label(item, language)}</a></li>
         ))}
+        <li><a href={withBasePath('/atlas')}>{atlasLabel[language]}</a></li>
       </ul>
 
       <h4>{sectionLabels.researchTopics[language]}</h4>

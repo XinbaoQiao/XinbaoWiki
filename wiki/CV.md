@@ -56,21 +56,23 @@ This page summarizes Xinbao Qiao's academic CV for wiki readers. A downloadable 
 
 See [[Publications]]. The CV lists accepted, published, and under-review work in machine unlearning, decentralized learning, synthetic-data model collapse, federated learning, and LLM reliability.
 
+Asterisks (*) denote co-first authorship; daggers (†) denote corresponding authors.
+
 - **Paper #1: When Sample Selection Bias Precipitates Model Collapse**.\
-  **Xinbao Qiao**, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, Yan Pang.\
+  **Xinbao Qiao**†, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang†, Yan Pang†.\
   Forty-Third International Conference on Machine Learning, ICML, 2026. Links: [OpenReview](https://openreview.net/forum?id=FFXvnzM254), [arXiv](https://arxiv.org/abs/2606.13732), [GitHub](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse).
 - **Paper #2: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**.\
-  **Xinbao Qiao**, Ningning Ding, Yushi Cheng, Meng Zhang.\
+  **Xinbao Qiao**, Ningning Ding, Yushi Cheng, Meng Zhang†.\
   Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026. Links: [arXiv](https://arxiv.org/abs/2505.18783), [AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681), [GitHub](https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning).
 - **Paper #3: Hessian-Free Online Certified Unlearning**.\
-  **Xinbao Qiao**, Meng Zhang, Ming Tang, Ermin Wei.\
+  **Xinbao Qiao**, Meng Zhang†, Ming Tang, Ermin Wei.\
   Thirteenth International Conference on Learning Representations, ICLR, 2025. Links: [OpenReview](https://openreview.net/forum?id=C3TrHWanh5), [arXiv](https://arxiv.org/abs/2404.01712), [GitHub](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning).
 - **Paper #4: DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**.\
-  Shurong Wang, Zhuoyang Shen, **Xinbao Qiao**, Tongning Zhang, Meng Zhang.\
+  Shurong Wang, Zhuoyang Shen, **Xinbao Qiao**, Tongning Zhang, Meng Zhang†.\
   Thirteenth International Conference on Learning Representations, ICLR, 2025. Links: [OpenReview](https://openreview.net/forum?id=nsCOeCLR8e), [arXiv](https://arxiv.org/abs/2410.01588), [GitHub](https://github.com/shurongwang/DynFrs).
 - **Paper #5: Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification**.\
-  **Xinbao Qiao**, Wenjing Yan, Ying-Jun Angela Zhang.\
+  **Xinbao Qiao**, Wenjing Yan†, Ying-Jun Angela Zhang.\
   Under review.
 - **Paper #6: Illusory Pattern Perception Drives Spurious Inference in Large Language Models**.\
-  Peihua Mai, Zhuoyan Shao, **Xinbao Qiao**, Meng Zhang, Xinyue Zhou, Yan Pang.\
+  Peihua Mai, Zhuoyan Shao, **Xinbao Qiao**, Meng Zhang, Xinyue Zhou†, Yan Pang†.\
   Under review.

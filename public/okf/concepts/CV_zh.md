@@ -60,21 +60,23 @@ source_path: wiki/CV_zh.md
 
 见 [论文](./Publications_zh.md)。简历列出已录用、已公开和在审的机器遗忘、去中心化学习、合成数据模型坍缩、联邦学习与 LLM 可靠性工作。
 
+星号（*）表示共同第一作者；剑号（†）表示通讯作者。
+
 - **Paper #1: When Sample Selection Bias Precipitates Model Collapse**。\
-  **乔鑫宝**、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌、Yan Pang。\
+  **乔鑫宝**†、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌†、Yan Pang†。\
   Forty-Third International Conference on Machine Learning, ICML, 2026。链接：[OpenReview](https://openreview.net/forum?id=FFXvnzM254)、[arXiv](https://arxiv.org/abs/2606.13732)、[GitHub](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse)。
 - **Paper #2: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**。\
-  **乔鑫宝**、Ningning Ding、Yushi Cheng、张萌。\
+  **乔鑫宝**、Ningning Ding、Yushi Cheng、张萌†。\
   Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026。链接：[arXiv](https://arxiv.org/abs/2505.18783)、[AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681)、[GitHub](https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning)。
 - **Paper #3: Hessian-Free Online Certified Unlearning**。\
-  **乔鑫宝**、张萌、Ming Tang、Ermin Wei。\
+  **乔鑫宝**、张萌†、Ming Tang、Ermin Wei。\
   Thirteenth International Conference on Learning Representations, ICLR, 2025。链接：[OpenReview](https://openreview.net/forum?id=C3TrHWanh5)、[arXiv](https://arxiv.org/abs/2404.01712)、[GitHub](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning)。
 - **Paper #4: DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**。\
-  Shurong Wang、Zhuoyang Shen、**乔鑫宝**、Tongning Zhang、张萌。\
+  Shurong Wang、Zhuoyang Shen、**乔鑫宝**、Tongning Zhang、张萌†。\
   Thirteenth International Conference on Learning Representations, ICLR, 2025。链接：[OpenReview](https://openreview.net/forum?id=nsCOeCLR8e)、[arXiv](https://arxiv.org/abs/2410.01588)、[GitHub](https://github.com/shurongwang/DynFrs)。
 - **Paper #5: Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification**。\
-  **乔鑫宝**、Wenjing Yan、Ying-Jun Angela Zhang。\
+  **乔鑫宝**、Wenjing Yan†、Ying-Jun Angela Zhang。\
   在审。
 - **Paper #6: Illusory Pattern Perception Drives Spurious Inference in Large Language Models**。\
-  Peihua Mai、Zhuoyan Shao、**乔鑫宝**、张萌、Xinyue Zhou、Yan Pang。\
+  Peihua Mai、Zhuoyan Shao、**乔鑫宝**、张萌、Xinyue Zhou†、Yan Pang†。\
   在审。

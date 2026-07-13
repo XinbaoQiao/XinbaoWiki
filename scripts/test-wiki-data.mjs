@@ -46,6 +46,9 @@ for (const file of ['Xinbao_Qiao.md', 'Qiao_Xinbao_zh.md', 'index.md', 'log.md',
   assertFile(`wiki/${file}`);
 }
 assertFile('CV.tex');
+assertFile('app/atlas/page.tsx');
+assertFile('components/ResearchAtlas.tsx');
+assertFile('lib/research-atlas.ts');
 
 const chinesePageFiles = fs.readdirSync(wikiDir).filter((file) => file.endsWith('_zh.md'));
 assert.ok(chinesePageFiles.length >= 40, 'wiki includes static Chinese versions for the article set');
@@ -621,6 +624,8 @@ assert.match(sidebar, /usePathname/, 'sidebar derives language from the current 
 assert.match(sidebar, /<aside className="wiki-sidebar" aria-label=\{sectionLabels\.navigation\[language\]\}>/, 'sidebar localizes the navigation aria label');
 assert.doesNotMatch(sidebar, /function NavSection|className="nav-section"|<section className="nav-section">/, 'sidebar uses flat Colarpedia h4 plus ul blocks');
 assert.match(sidebar, /const navigation = \['Xinbao_Qiao', 'Publications'\]/, 'sidebar navigation includes the main page and Publications');
+assert.match(sidebar, /const atlasLabel: LocalizedText = \{ en: 'Research Atlas', zh: '研究图谱' \}/, 'sidebar gives the Atlas a bilingual label');
+assert.match(sidebar, /href=\{withBasePath\('\/atlas'\)\}>\{atlasLabel\[language\]\}/, 'sidebar exposes the Research Atlas as a base-path-aware route');
 assert.match(sidebar, /Xinbao_Qiao: \{ en: 'Main page', zh: '主页' \}/, 'sidebar keeps the homepage label compact and localized');
 assert.match(sidebar, /navigation: \{ en: 'Navigation', zh: '导航' \}[\s\S]*researchTopics: \{ en: 'Research topics', zh: '研究主题' \}[\s\S]*education: \{ en: 'Education', zh: '教育经历' \}[\s\S]*experience: \{ en: 'Experience', zh: '研究经历' \}[\s\S]*contribute: \{ en: 'Contribute', zh: '链接' \}/, 'sidebar places Experience after Education and localizes section headings');
 assert.doesNotMatch(sidebar, /Source repository/, 'sidebar contribute links avoid the source repository label');
@@ -806,6 +811,32 @@ const infobox = fs.readFileSync(path.join(root, 'components/Infobox.tsx'), 'utf8
 const styles = fs.readFileSync(path.join(root, 'app/globals.css'), 'utf8');
 const homePage = fs.readFileSync(path.join(root, 'app/page.tsx'), 'utf8');
 const homepagePortal = fs.readFileSync(path.join(root, 'components/HomepagePortal.tsx'), 'utf8');
+const atlasPage = fs.readFileSync(path.join(root, 'app/atlas/page.tsx'), 'utf8');
+const atlasComponent = fs.readFileSync(path.join(root, 'components/ResearchAtlas.tsx'), 'utf8');
+const atlasDataSource = fs.readFileSync(path.join(root, 'lib/research-atlas.ts'), 'utf8');
+const graphData = JSON.parse(fs.readFileSync(path.join(root, 'wiki/graph.json'), 'utf8'));
+const atlasSlugs = [...atlasDataSource.matchAll(/\n\s+slug: '([^']+)'/g)].map((match) => match[1]);
+assert.equal(atlasSlugs.length, 16, 'Research Atlas curates exactly 16 readable waypoints');
+assert.equal(new Set(atlasSlugs).size, 16, 'Research Atlas waypoint slugs are unique');
+for (const slug of atlasSlugs) {
+  for (const localizedSlug of [slug, `${slug}_zh`]) {
+    const node = graphData.nodes.find((candidate) => candidate.slug === localizedSlug);
+    assert.ok(node && node.hidden === false, `Research Atlas waypoint ${localizedSlug} resolves to a public graph node`);
+  }
+}
+assert.doesNotMatch(atlasDataSource, hiddenManuscriptPattern, 'Research Atlas excludes the hidden under-review manuscript');
+assert.match(atlasDataSource, /const stageBlueprints[\s\S]*id: 'foundations'[\s\S]*id: 'data-lifecycle'[\s\S]*id: 'reliability'[\s\S]*id: 'networked-ai'/, 'Research Atlas follows four ordered research chapters');
+assert.match(atlasDataSource, /import graph from '@\/wiki\/graph\.json'/, 'Research Atlas derives titles, summaries, and page counts from the generated wiki graph');
+assert.match(atlasDataSource, /if \(!node \|\| node\.hidden \|\| node\.language !== language\)[\s\S]*throw new Error/, 'Research Atlas refuses missing, hidden, or cross-language waypoints');
+assert.match(atlasPage, /title: 'Research Atlas \| Xinbaopedia'[\s\S]*<ResearchAtlas data=\{getResearchAtlasData\(\)\}/, 'Research Atlas route provides metadata and build-time graph data');
+assert.match(atlasComponent, /const \[language, setLanguage\] = useState<AtlasLanguage>\('en'\)[\s\S]*const \[stageIndex, setStageIndex\] = useState\(0\)[\s\S]*const \[nodeIndex, setNodeIndex\] = useState\(0\)/, 'Research Atlas keeps explicit language, chapter, and waypoint state');
+assert.match(atlasComponent, /aria-current=\{active \? 'step' : undefined\}[\s\S]*aria-pressed=\{selected\}[\s\S]*aria-live="polite"/, 'Research Atlas exposes selected chapters, waypoints, and live details to assistive technology');
+assert.match(atlasComponent, /setLanguage\(option\)[\s\S]*labels\.kinds[\s\S]*activeNode\.href/, 'Research Atlas switches bilingual copy and localized evidence links');
+assert.match(styles, /\.wiki-shell:has\(\.research-atlas\) \{[\s\S]*display: block;[\s\S]*max-width: 1320px;[\s\S]*\}/, 'Research Atlas receives a wide dedicated layout');
+assert.match(styles, /\.research-atlas-panel \{[\s\S]*border-radius: 16px;[\s\S]*radial-gradient[\s\S]*linear-gradient[\s\S]*\}/, 'Research Atlas uses the luminous dark map panel');
+assert.match(styles, /\.research-atlas-map \{[\s\S]*grid-template-columns: repeat\(4, minmax\(0, 1fr\)\);[\s\S]*\}/, 'Research Atlas shows four desktop chapter columns');
+assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.research-atlas-map \{[\s\S]*grid-template-columns: 1fr;[\s\S]*\}/, 'Research Atlas collapses to one chapter column on mobile');
+assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.research-atlas-node,[\s\S]*\.research-atlas-stage,[\s\S]*animation: none;[\s\S]*\}/, 'Research Atlas honors reduced-motion preferences');
 assert.doesNotMatch(styles, /\.wiki-logo-mark/, 'topbar CSS does not keep custom logo-image styling');
 assert.match(styles, /\.wiki-tabs-inner \{[\s\S]*padding: 0 24px 0 calc\(24px \+ var\(--sidebar-width\) \+ 24px\);[\s\S]*\}/, 'article tabs align with the main article column after the sidebar');
 assert.match(styles, /\.wiki-shell \{[\s\S]*grid-template-columns: var\(--sidebar-width\) minmax\(0, var\(--content-width\)\);[\s\S]*gap: 24px;[\s\S]*\}/, 'article shell uses a fixed navigation column and constrained readable article column');
@@ -895,6 +926,8 @@ assert.match(homepagePortal, /src=\{withBasePath\('\/site-logos\/wordmark\/xinba
 assert.match(homepagePortal, /wiki-portal-name-logos[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-blue\.png[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-gold\.png[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-green\.png[\s\S]*\/site-logos\/wordmark\/xinbao-qiao-charcoal\.png/, 'homepage renders the themed Xinbao Qiao logo images for color themes');
 assert.doesNotMatch(homepagePortal, /height=\{190\}|width=\{760\}/, 'homepage no longer renders the old rectangular logo canvas dimensions');
 assert.match(homepagePortal, /const browseLabels[\s\S]*en: 'Browse Xinbaopedia'[\s\S]*zh: '浏览 Xinbaopedia'/, 'homepage Browse heading has English and Chinese labels');
+assert.match(homepagePortal, /const atlasLabels[\s\S]*Explore the Research Atlas[\s\S]*探索研究图谱[\s\S]*className="wiki-portal-atlas"[\s\S]*withBasePath\('\/atlas'\)/, 'homepage exposes a bilingual base-path-aware Research Atlas entry');
+assert.match(styles, /\.wiki-portal-atlas \{[\s\S]*radial-gradient[\s\S]*box-shadow:[\s\S]*\}/, 'homepage Research Atlas entry has a distinct highlighted treatment');
 assert.match(homepagePortal, /const \[browseOpen, setBrowseOpen\] = useState\(false\);/, 'homepage browse directory is collapsed by default');
 assert.match(homepagePortal, /const collapsibleSections = \{ browse: browseOpen \};[\s\S]*const allSectionsClosed = Object\.values\(collapsibleSections\)\.every\(\(open\) => !open\);[\s\S]*wiki-portal-collapsed/, 'homepage computes a reusable all-collapsibles-closed state');
 assert.match(homepagePortal, /const expandAllSections = \(\) => \{[\s\S]*setBrowseOpen\(true\);[\s\S]*\};[\s\S]*const collapseAllSections = \(\) => \{[\s\S]*setBrowseOpen\(false\);[\s\S]*\};[\s\S]*const toggleAllSections = \(\) => \{[\s\S]*if \(allSectionsClosed\) \{[\s\S]*expandAllSections\(\);[\s\S]*return;[\s\S]*\}[\s\S]*collapseAllSections\(\);[\s\S]*\};/, 'homepage signature button can toggle all current collapsible sections');
@@ -1127,6 +1160,15 @@ assert.doesNotMatch(cvTex, /withheld\s+LLM\s+manuscript/i, 'CV omits withheld ma
 assert.match(cvTex, /arxiv\.org\/abs\/2606\.13732/, 'CV PDF source links Paper #1 arXiv page');
 assert.match(cvTex, /ojs\.aaai\.org\/index\.php\/AAAI\/article\/view\/39681/, 'CV PDF source links Paper #2 AAAI article page');
 assert.match(cvTex, /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'CV PDF source links Paper #2 code');
+assert.match(cvTex, /\\newcommand\{\\corrauthor\}\{\\textsuperscript\{\\textdagger\}\}/, 'CV defines one consistent corresponding-author dagger macro');
+assert.match(cvTex, /Asterisks \(\*\) denote co-first authorship; daggers \(\\textdagger\) denote corresponding authors\./, 'CV note defines co-first and corresponding-author symbols');
+assert.doesNotMatch(cvTex, /Accepted papers are listed before under-review manuscripts\./, 'CV removes the accepted-paper ordering sentence');
+assert.match(cvTex, /\\textbf\{Xinbao Qiao\}\\corrauthor, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang\\corrauthor, Yan Pang\\corrauthor/, 'CV Paper #1 marks Xinbao Qiao, Meng Zhang, and Yan Pang as corresponding authors');
+assert.match(cvTex, /\\textbf\{Xinbao Qiao\}, Ningning Ding, Yushi Cheng, Meng Zhang\\corrauthor/, 'CV Paper #2 marks Meng Zhang as corresponding author');
+assert.match(cvTex, /\\textbf\{Xinbao Qiao\}, Meng Zhang\\corrauthor, Ming Tang, Ermin Wei/, 'CV Paper #3 marks Meng Zhang as corresponding author');
+assert.match(cvTex, /Shurong Wang, Zhuoyang Shen, \\textbf\{Xinbao Qiao\}, Tongning Zhang, Meng Zhang\\corrauthor/, 'CV Paper #4 marks Meng Zhang as corresponding author');
+assert.match(cvTex, /\\textbf\{Xinbao Qiao\}, Wenjing Yan\\corrauthor, Ying-Jun Angela Zhang/, 'CV Paper #5 marks Wenjing Yan as corresponding author');
+assert.match(cvTex, /Peihua Mai, Zhuoyan Shao, \\textbf\{Xinbao Qiao\}, Meng Zhang, Xinyue Zhou\\corrauthor, Yan Pang\\corrauthor/, 'CV Paper #6 marks Xinyue Zhou and Yan Pang as corresponding authors');
 assert.match(cvTex, /scholar\.google\.com\/citations\?view_op=search_authors\\&mauthors=Xinbao\+Qiao/, 'CV PDF source links Google Scholar without exposing the author ID');
 const cvPublicationBlock = cvTex.slice(cvTex.indexOf('\\cvsection{Selected Publications}'));
 assert.doesNotMatch(cvPublicationBlock, /icml\.cc|iclr\.cc|underline\.io|Distributed_Wasserstein_Barycenter|LLM_Reliability/, 'CV publication icons only link arXiv, GitHub, OpenReview, or official paper pages');
@@ -1134,6 +1176,12 @@ assert.match(read('CV.md'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Engl
 assert.match(read('CV_zh.md'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese CV page labels the PDF link as résumé');
 assert.match(read('CV.md'), /M\.Eng\. in Artificial Intelligence/, 'English CV page records the ZJU AI degree as M.Eng.');
 assert.match(read('CV_zh.md'), /人工智能工学硕士/, 'Chinese CV page records the ZJU AI degree as 工学硕士');
+assert.match(read('CV.md'), /Asterisks \(\*\) denote co-first authorship; daggers \(†\) denote corresponding authors\./, 'English wiki CV explains corresponding-author daggers');
+assert.match(read('CV_zh.md'), /星号（\*）表示共同第一作者；剑号（†）表示通讯作者。/, 'Chinese wiki CV explains corresponding-author daggers');
+assert.match(read('CV.md'), /\*\*Xinbao Qiao\*\*†, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang†, Yan Pang†/, 'English wiki CV marks Paper #1 corresponding authors');
+assert.match(read('CV.md'), /Wenjing Yan†, Ying-Jun Angela Zhang[\s\S]*Xinyue Zhou†, Yan Pang†/, 'English wiki CV marks Papers #5 and #6 corresponding authors');
+assert.match(read('CV_zh.md'), /\*\*乔鑫宝\*\*†、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌†、Yan Pang†/, 'Chinese wiki CV marks Paper #1 corresponding authors');
+assert.match(read('CV_zh.md'), /Wenjing Yan†、Ying-Jun Angela Zhang[\s\S]*Xinyue Zhou†、Yan Pang†/, 'Chinese wiki CV marks Papers #5 and #6 corresponding authors');
 assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English OKF CV concept labels the PDF link as résumé');
 assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV_zh.md'), 'utf8'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese OKF CV concept labels the PDF link as résumé');
 assert.match(read('CV.md'), /Open-Source Contributions and Academic Service/, 'English CV labels reviewing as academic service');
