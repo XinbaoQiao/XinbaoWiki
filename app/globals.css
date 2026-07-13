@@ -1498,8 +1498,6 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
 .wiki-portal-block {
   --portal-section-accent: #36c;
   min-width: 0;
-  padding-top: 10px;
-  border-top: 2px solid var(--portal-section-accent);
 }
 
 .wiki-portal-block:nth-of-type(2) {
@@ -1511,33 +1509,23 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
 }
 
 .wiki-portal-block h3 {
-  display: grid;
-  justify-items: start;
-  gap: 6px;
-  margin: 0 0 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #eaecf0;
+  margin: 0 0 14px;
+  padding: 7px 10px;
+  border-left: 4px solid var(--portal-section-accent);
+  border-bottom: 1px solid color-mix(in srgb, var(--portal-section-accent) 18%, #eaecf0);
+  background: color-mix(in srgb, var(--portal-section-accent) 7%, var(--wiki-bg-alt));
   color: var(--wiki-text);
-  font-family: var(--font-sans);
-  font-size: 20px;
+  font-family: var(--font-serif);
+  font-size: 16px;
   font-style: normal;
-  font-weight: 800;
-  letter-spacing: 0;
-  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: .01em;
+  line-height: 1.35;
 }
 
 .wiki-portal-block h3 span {
-  display: inline-block;
-  padding-bottom: 1px;
-  color: color-mix(in srgb, var(--portal-section-accent) 26%, var(--wiki-text));
-}
-
-.wiki-portal-block h3::after {
-  content: "";
   display: block;
-  width: 46px;
-  height: 2px;
-  background: var(--portal-section-accent);
+  color: color-mix(in srgb, var(--portal-section-accent) 38%, var(--wiki-text));
 }
 
 .wiki-portal-group {
