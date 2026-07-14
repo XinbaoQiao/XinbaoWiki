@@ -44,7 +44,7 @@ source_path: wiki/log_zh.md
 - 调整人物主页开头的脚注引用顺序，使 Xinbao 同名脚注出现在 Xinbao Qiao/新寶橋拼写巧合脚注之前。
 - 调整可见左侧栏：Navigation 增加 [Publications](./Publications_zh.md)，Experience 放到 Education 后面且只保留 [NUSRI-CQ](./NUSRI_CQ_zh.md)。
 - 在 [英文人物主页](./Xinbao_Qiao.md) 与 [中文主页](./Qiao_Xinbao_zh.md) 增加姓名脚注，说明 “Qiao”/“ciao” 的昵称关联以及 “Mr. Ciao” 这一称呼。
-- 新增 [2026热梗](./Internet_Slang_2026_zh.md) 与 [Internet Slang 2026](./Internet_Slang_2026_zh.md) 作为 Chat with Xinbao 的年度语气参考，扩充热梗使用边界，并把 AI 打开后的第一句调整为有趣但不失学术主页风度的版本。
+- 优化 Chat with Xinbao 的开场语与语气边界，同时保持公开 wiki 聚焦于可核对的人物与研究信息。
 - 围绕 [AI 与网络](./AI_and_Networks_zh.md) 更新 CUHK 博士阶段叙述，新增 [分布式 Wasserstein barycenter](./Distributed_Wasserstein_Barycenter_zh.md) 作为当前博士阶段关注点，并将研究概览整理为更接近 LLM Wiki 的编译式研究图谱。
 
 ## 2026-05-05

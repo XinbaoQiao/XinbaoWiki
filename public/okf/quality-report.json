@@ -2,14 +2,14 @@
   "schemaVersion": 1,
   "okfVersion": "0.1",
   "counts": {
-    "pages": 86,
-    "publicPages": 86,
-    "hiddenPages": 2,
-    "edges": 1025,
+    "pages": 84,
+    "publicPages": 84,
+    "hiddenPages": 4,
+    "edges": 1013,
     "warnings": 0,
     "languages": {
-      "en": 43,
-      "zh": 43
+      "en": 42,
+      "zh": 42
     },
     "types": {
       "Academic advisor": 4,
@@ -29,7 +29,6 @@
       "Research overview": 1,
       "Research topic": 5,
       "Resource inventory": 1,
-      "style guide": 2,
       "Technical skills": 1,
       "Wiki index": 1,
       "Wiki 索引": 1,
@@ -51,7 +50,7 @@
   },
   "warnings": [],
   "hiddenPages": {
-    "count": 2,
+    "count": 4,
     "pages": [],
     "redacted": true
   },

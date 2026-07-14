@@ -26,7 +26,6 @@ occupation: Wiki index
 - [[Research]]
 - [[Publications]]
 - [[Projects]]
-- [[Internet_Slang_2026|Internet Slang 2026]]
 - [[Old_Homepage_Resources]]
 - [[log]]
 

@@ -6,13 +6,13 @@
   "source": {
     "directory": "wiki",
     "files": 88,
-    "contentHash": "e72125daf67d0d6d5281cb9940f213045e7f3e7ef2fcbcf634e2b3d2c7e54b98"
+    "contentHash": "4747f4773e4435c86627e5e2634304a93d128b4e0f617e43026c748fcffdd829"
   },
   "bundle": {
     "root": "public/okf",
     "concepts": "concepts/*.md",
-    "hiddenPagesExcluded": 2,
-    "publicPages": 86
+    "hiddenPagesExcluded": 4,
+    "publicPages": 84
   },
   "maintenance": {
     "command": "npm run maintain:wiki",

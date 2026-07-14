@@ -6,6 +6,7 @@ import matter from 'gray-matter';
 
 const root = process.cwd();
 const wikiDir = path.join(root, 'wiki');
+const privateStyleGuideSlugs = ['Internet_Slang_2026', 'Internet_Slang_2026_zh'];
 
 function read(file) {
   return fs.readFileSync(path.join(wikiDir, file), 'utf8');
@@ -230,6 +231,10 @@ const chatReadme = fs.readFileSync(path.join(root, 'chat with xinbao/README.md')
 const chatEnvExample = fs.readFileSync(path.join(root, 'chat with xinbao/env.example'), 'utf8');
 const chatPersona = fs.readFileSync(path.join(root, 'chat with xinbao/persona-prompt.md'), 'utf8');
 const chatMemeNotes = fs.readFileSync(path.join(root, 'chat with xinbao/meme-voice-notes.md'), 'utf8');
+const hiddenSourceSlugs = fs.readdirSync(wikiDir)
+  .filter((file) => file.endsWith('.md') && frontmatterData(file).hidden === true)
+  .map((file) => file.replace(/\.md$/, ''))
+  .sort();
 const internetSlang2026 = read('Internet_Slang_2026.md');
 const internetSlang2026Zh = read('Internet_Slang_2026_zh.md');
 const questionLogFunction = chatRoute.match(/async function recordQuestionLog[\s\S]*?\n}\n\nfunction withXinbaoSignature/)?.[0] || '';
@@ -285,6 +290,18 @@ assert.equal(pageIndex.okfVersion, '0.1', 'wiki page index declares the OKF targ
 assert.ok(pageIndex.pages.length >= 80, 'generated page index includes the visible wiki corpus');
 assert.ok(pageIndex.pages.some((page) => page.slug === 'Xinbao_Qiao' && page.type), 'generated page index includes typed home-page metadata');
 assert.ok(!pageIndex.pages.some((page) => page.slug === 'Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning'), 'generated page index excludes hidden manuscripts');
+for (const slug of privateStyleGuideSlugs) {
+  assert.equal(frontmatterData(`${slug}.md`).hidden, true, `${slug} remains a hidden internal style source`);
+  assert.ok(!pageIndex.pages.some((page) => page.slug === slug), `${slug} is excluded from the public page index`);
+  assert.ok(!okfPageIndex.pages.some((page) => page.slug === slug), `${slug} is excluded from the public OKF page index`);
+  assert.ok(!fs.existsSync(path.join(root, 'public/okf/concepts', `${slug}.md`)), `${slug} has no public OKF concept export`);
+}
+for (const publicNavigationFile of ['index.md', 'index_zh.md', 'log.md', 'log_zh.md']) {
+  const publicNavigation = read(publicNavigationFile);
+  for (const slug of privateStyleGuideSlugs) {
+    assert.ok(!publicNavigation.includes(slug), `${publicNavigationFile} does not reveal hidden style-guide slug ${slug}`);
+  }
+}
 assert.equal(wikiGraph.schemaVersion, 3, 'wiki graph uses the generated content-maintenance schema');
 assert.equal(wikiGraph.okfVersion, '0.1', 'wiki graph declares the OKF target version');
 assert.ok(wikiGraph.nodes.length >= 80, 'wiki graph includes the markdown corpus');
@@ -300,8 +317,8 @@ assert.equal(wikiQualityReport.okfVersion, '0.1', 'wiki quality report declares 
 assert.equal(wikiQualityReport.counts.pages, wikiGraph.stats.pages, 'wiki quality report page count matches the graph');
 assert.equal(wikiQualityReport.counts.warnings, 0, 'wiki quality report keeps the current corpus warning-free');
 assert.deepEqual(wikiQualityReport.warnings, [], 'wiki quality report keeps an explicit empty warning list');
-assert.equal(wikiQualityReport.hiddenPages.count, 2, 'wiki quality report counts hidden pages');
-assert.equal(wikiQualityReport.hiddenPages.pages.length, 2, 'wiki quality report lists source hidden pages');
+assert.equal(wikiQualityReport.hiddenPages.count, hiddenSourceSlugs.length, 'wiki quality report counts hidden pages');
+assert.deepEqual(wikiQualityReport.hiddenPages.pages.map((page) => page.slug).sort(), hiddenSourceSlugs, 'wiki quality report lists source hidden pages');
 assert.deepEqual(wikiQualityReport.duplicateTitleGroups, [], 'wiki quality report lists duplicate-title groups even when empty');
 assert.deepEqual(wikiQualityReport.orphanPages, [], 'wiki quality report lists orphan pages even when empty');
 assert.deepEqual(wikiQualityReport.noOutgoingPages, [], 'wiki quality report lists no-outgoing pages even when empty');
@@ -317,7 +334,7 @@ assert.ok(maintenanceSchema.qualityGates.some((gate) => gate.includes('zero warn
 assert.ok(maintenanceSchema.generatedArtifacts.includes('public/okf/concepts/*.md'), 'maintenance schema documents the public OKF concept export');
 assert.equal(okfManifest.okfVersion, '0.1', 'public OKF manifest declares OKF v0.1');
 assert.equal(okfManifest.bundle.publicPages, pageIndex.pages.length, 'public OKF manifest page count matches generated index');
-assert.equal(okfManifest.bundle.hiddenPagesExcluded, 2, 'public OKF manifest records hidden-page exclusion');
+assert.equal(okfManifest.bundle.hiddenPagesExcluded, hiddenSourceSlugs.length, 'public OKF manifest records hidden-page exclusion');
 assert.equal(okfPageIndex.pages.length, pageIndex.pages.length, 'public OKF page index mirrors the public source index');
 assert.equal(okfGraph.nodes.length, pageIndex.pages.length, 'public OKF graph excludes hidden source pages');
 const okfLanguageCounts = Object.fromEntries(
@@ -598,7 +615,9 @@ assert.doesNotMatch(chatQuestionsRoute, /console\.log|console\.error|YUNWU_API_K
 assert.match(chatKnowledge, /import 'server-only';/, 'chat knowledge builder is server-only');
 assert.match(chatKnowledge, /project\.md/, 'chat knowledge builder can prioritize project.md if it is added later');
 assert.match(chatKnowledge, /wiki'\)/, 'chat knowledge builder reads the local wiki directory');
-assert.match(chatKnowledge, /Xinbao_Qiao[\s\S]*Qiao_Xinbao_zh[\s\S]*Projects[\s\S]*Research[\s\S]*Publications[\s\S]*CV[\s\S]*Internet_Slang_2026/, 'chat knowledge builder prioritizes homepage, projects, research, publications, CV, and yearly slang pages');
+assert.match(chatKnowledge, /Xinbao_Qiao[\s\S]*Qiao_Xinbao_zh[\s\S]*Projects[\s\S]*Research[\s\S]*Publications[\s\S]*CV/, 'chat knowledge builder prioritizes homepage, projects, research, publications, and CV');
+assert.match(chatKnowledge, /const priority = PRIORITY_SLUGS\.filter\(\(slug\) => languageMatches\(slug, language\) && !pageIsHidden\(slug\)\)/, 'chat knowledge excludes hidden pages even if a hidden slug is accidentally prioritized later');
+assert.doesNotMatch(chatKnowledge, /Internet_Slang_2026/, 'chat runtime does not load the hidden phrase-bank pages into factual context');
 assert.doesNotMatch(chatKnowledge, /Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning/, 'chat knowledge builder does not prioritize the hidden under-review manuscript');
 assert.match(chatKnowledge, /academic homepage chat assistant/, 'persona identifies the assistant as a homepage chat assistant');
 assert.match(chatKnowledge, /do not call yourself a distilled skill or digital persona in normal greetings/, 'persona prevents forced technical identity labels in normal greetings');

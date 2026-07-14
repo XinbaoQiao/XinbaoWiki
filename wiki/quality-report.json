@@ -3,9 +3,9 @@
   "okfVersion": "0.1",
   "counts": {
     "pages": 88,
-    "publicPages": 86,
-    "hiddenPages": 2,
-    "edges": 1033,
+    "publicPages": 84,
+    "hiddenPages": 4,
+    "edges": 1027,
     "warnings": 0,
     "languages": {
       "en": 44,
@@ -51,8 +51,20 @@
   },
   "warnings": [],
   "hiddenPages": {
-    "count": 2,
+    "count": 4,
     "pages": [
+      {
+        "slug": "Internet_Slang_2026",
+        "file": "Internet_Slang_2026.md",
+        "title": "Internet Slang 2026",
+        "language": "en"
+      },
+      {
+        "slug": "Internet_Slang_2026_zh",
+        "file": "Internet_Slang_2026_zh.md",
+        "title": "2026热梗",
+        "language": "zh"
+      },
       {
         "slug": "Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning",
         "file": "Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning.md",

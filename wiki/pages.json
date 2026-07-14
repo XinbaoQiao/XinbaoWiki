@@ -262,20 +262,6 @@
       "timestamp": "2026-05-05T19:52:29+08:00"
     },
     {
-      "slug": "Internet_Slang_2026",
-      "title": "Internet Slang 2026",
-      "summary": "A yearly, source-linked slang and meme-note page used to keep Chat with Xinbao playful without weakening factual answers.",
-      "language": "en",
-      "type": "style guide",
-      "tags": [
-        "en",
-        "style",
-        "guide",
-        "style-guide"
-      ],
-      "timestamp": "2026-05-07T17:34:07+08:00"
-    },
-    {
       "slug": "Interpretability",
       "title": "Interpretability",
       "summary": "Concept page for explaining model behavior and data influence.",
@@ -620,20 +606,6 @@
         "public-research-university"
       ],
       "timestamp": "2026-05-05T21:15:18+08:00"
-    },
-    {
-      "slug": "Internet_Slang_2026_zh",
-      "title": "2026热梗",
-      "summary": "用于维护 Chat with Xinbao 语气的年度热梗资料页：有梗，但不牺牲事实性。",
-      "language": "zh",
-      "type": "style guide",
-      "tags": [
-        "zh",
-        "style",
-        "guide",
-        "style-guide"
-      ],
-      "timestamp": "2026-05-07T17:34:07+08:00"
     },
     {
       "slug": "AI_and_Networks_zh",

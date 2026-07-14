@@ -110,11 +110,6 @@ This bundle exposes the public Xinbaopedia wiki as Markdown concepts with OKF v0
 
 - [Old Homepage Resources](concepts/Old_Homepage_Resources.md) - Record of the single preserved image from the earlier GitHub homepage.
 
-### style guide
-
-- [2026热梗](concepts/Internet_Slang_2026_zh.md) - 用于维护 Chat with Xinbao 语气的年度热梗资料页：有梗，但不牺牲事实性。
-- [Internet Slang 2026](concepts/Internet_Slang_2026.md) - A yearly, source-linked slang and meme-note page used to keep Chat with Xinbao playful without weakening factual answers.
-
 ### Technical skills
 
 - [Skills](concepts/Skills.md) - Technical skills listed in Qiao Xinbao's CV.

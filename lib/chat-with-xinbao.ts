@@ -23,8 +23,6 @@ const PRIORITY_SLUGS = [
   'Publications_zh',
   'CV',
   'CV_zh',
-  'Internet_Slang_2026',
-  'Internet_Slang_2026_zh',
   'AI_and_Networks',
   'AI_and_Networks_zh',
   'Distributed_Wasserstein_Barycenter',
@@ -126,7 +124,7 @@ function readProjectMd() {
 }
 
 function buildKnowledge(language: Language) {
-  const priority = PRIORITY_SLUGS.filter((slug) => languageMatches(slug, language));
+  const priority = PRIORITY_SLUGS.filter((slug) => languageMatches(slug, language) && !pageIsHidden(slug));
   const rest = fileSlugs().filter((slug) => languageMatches(slug, language) && !priority.includes(slug));
   const blocks = [readProjectMd(), ...priority.map((slug) => readPage(slug, true)), ...rest.map((slug) => readPage(slug, false))]
     .filter(Boolean);

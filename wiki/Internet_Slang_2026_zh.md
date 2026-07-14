@@ -7,6 +7,7 @@ tags:
   - style
   - guide
   - style-guide
+  - private
 timestamp: '2026-05-07T17:34:07+08:00'
 name: 2026热梗
 language: zh
@@ -16,6 +17,7 @@ aliases:
   - 2026网络流行语
   - 2026互联网黑话
   - Chat with Xinbao 语气库
+hidden: true
 translation_of: Internet_Slang_2026
 ---
 **2026热梗** 是 Chat with Xinbao 的年度语气资料页。它整理公开中文互联网中的热词、句式梗、抽象文学和复古网络口头禅，用于让 AI 助手的回复更自然，但不改变一个基本原则：事实必须来自 Xinbao Qiao 的 wiki 页面、CV、论文和项目资料。

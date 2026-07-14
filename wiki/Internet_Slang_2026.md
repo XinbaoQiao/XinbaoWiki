@@ -9,6 +9,7 @@ tags:
   - style
   - guide
   - style-guide
+  - private
 timestamp: '2026-05-07T17:34:07+08:00'
 name: Internet Slang 2026
 summary: >-
@@ -19,6 +20,7 @@ aliases:
   - 2026 memes
   - 2026 hot phrases
   - 2026热梗
+hidden: true
 ---
 **Internet Slang 2026** is a yearly style note for Chat with Xinbao. It records public Chinese internet-slang trends that can lightly shape the assistant's tone, while keeping factual answers grounded in Xinbao Qiao's wiki pages, CV, publications, and project notes.
 

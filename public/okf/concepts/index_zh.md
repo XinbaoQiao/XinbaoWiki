@@ -29,7 +29,6 @@ source_path: wiki/index_zh.md
 - [研究](./Research_zh.md)
 - [论文](./Publications_zh.md)
 - [项目](./Projects_zh.md)
-- [2026热梗](./Internet_Slang_2026_zh.md)
 - [旧主页资源](./Old_Homepage_Resources_zh.md)
 - [日志](./log_zh.md)
 

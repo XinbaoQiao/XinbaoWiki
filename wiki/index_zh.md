@@ -27,7 +27,6 @@ translation_of: index
 - [[Research|研究]]
 - [[Publications|论文]]
 - [[Projects|项目]]
-- [[Internet_Slang_2026_zh|2026热梗]]
 - [[Old_Homepage_Resources|旧主页资源]]
 - [[log|日志]]
 

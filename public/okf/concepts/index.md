@@ -30,7 +30,6 @@ source_path: wiki/index.md
 - [Research](./Research.md)
 - [Publications](./Publications.md)
 - [Projects](./Projects.md)
-- [Internet Slang 2026](./Internet_Slang_2026.md)
 - [Old Homepage Resources](./Old_Homepage_Resources.md)
 - [log](./log.md)
 

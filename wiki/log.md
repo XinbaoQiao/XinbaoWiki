@@ -40,7 +40,7 @@ occupation: Maintenance log
 - Reordered the opening biography footnote references so the Xinbao name-coincidence note appears before the Xinbao Qiao bridge-coincidence note.
 - Updated the visible sidebar so Navigation includes [[Publications]], and the Experience section appears after Education with only [[NUSRI_CQ|NUSRI-CQ]].
 - Added a compact name footnote to [[Xinbao_Qiao]] and [[Qiao_Xinbao_zh]] explaining the "Qiao"/"ciao" nickname relation and the "Mr. Ciao" handle.
-- Added [[Internet_Slang_2026]] and [[Internet_Slang_2026_zh|2026热梗]] as yearly Chat with Xinbao tone references, expanded the meme-style prompt boundaries, and softened the opening greeting so it is playful but still appropriate for an academic homepage.
+- Refined Chat with Xinbao's opening greeting and tone boundaries while keeping public-facing wiki content focused on factual profile and research material.
 - Updated the CUHK doctoral-stage narrative around [[AI_and_Networks|AI and networks]], added [[Distributed_Wasserstein_Barycenter]] as the current Wasserstein barycenter focus, and reorganized research overview pages toward a compiled LLM-wiki-style map.
 - Added `Chat with Xinbao`, a same-site AI assistant entry beside the search bar, with a server-only Next.js API route, Yunwu model proxying, Upstash-backed rate limits, and deployment/security documentation.
 - Restricted the top search dropdown to the active page language, so English pages return English wiki entries and Chinese pages return Chinese wiki entries.

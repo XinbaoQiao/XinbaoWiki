@@ -50,7 +50,6 @@
         "Distributed_Wasserstein_Barycenter",
         "Experience",
         "index",
-        "Internet_Slang_2026",
         "log",
         "Meng_Zhang",
         "Projects",
@@ -115,7 +114,6 @@
         "Distributed_Wasserstein_Barycenter_zh",
         "Experience_zh",
         "index_zh",
-        "Internet_Slang_2026_zh",
         "log_zh",
         "Meng_Zhang_zh",
         "Projects_zh",
@@ -427,7 +425,6 @@
       "type": "CV summary",
       "backlinks": [
         "index",
-        "Internet_Slang_2026",
         "log",
         "Skills",
         "Xinbao_Qiao"
@@ -465,7 +462,6 @@
       "type": "CV 摘要",
       "backlinks": [
         "index_zh",
-        "Internet_Slang_2026_zh",
         "log_zh",
         "Qiao_Xinbao_zh",
         "Skills_zh"
@@ -1458,7 +1454,6 @@
         "Fairness_and_Robustness",
         "Hessian_Free_Online_Certified_Unlearning",
         "Influence_Functions",
-        "Internet_Slang_2026",
         "Interpretability",
         "LLM_Reliability",
         "log",
@@ -1530,7 +1525,6 @@
         "Fairness_and_Robustness_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
         "Influence_Functions_zh",
-        "Internet_Slang_2026_zh",
         "LLM_Reliability_zh",
         "log_zh",
         "Machine_Unlearning_zh",
@@ -1658,89 +1652,6 @@
         "Machine_Unlearning_zh",
         "Research_zh",
         "Soft_Weighted_Machine_Unlearning_zh"
-      ]
-    },
-    {
-      "aliases": [
-        "2026 internet slang",
-        "2026 memes",
-        "2026 hot phrases",
-        "2026热梗"
-      ],
-      "file": "Internet_Slang_2026.md",
-      "hidden": false,
-      "language": "en",
-      "lifecycle": {
-        "status": "active",
-        "confidence": 0.9,
-        "review": "periodic",
-        "retention": "semantic memory"
-      },
-      "outgoing": [
-        "AI_and_Networks",
-        "CV",
-        "Internet_Slang_2026_zh"
-      ],
-      "relationTypes": [
-        "wikilink"
-      ],
-      "slug": "Internet_Slang_2026",
-      "summary": "A yearly, source-linked slang and meme-note page used to keep Chat with Xinbao playful without weakening factual answers.",
-      "tags": [
-        "en",
-        "style",
-        "guide",
-        "style-guide"
-      ],
-      "timestamp": "2026-05-07T17:34:07+08:00",
-      "title": "Internet Slang 2026",
-      "type": "style guide",
-      "backlinks": [
-        "index",
-        "log"
-      ]
-    },
-    {
-      "aliases": [
-        "2026网络热梗",
-        "2026网络流行语",
-        "2026互联网黑话",
-        "Chat with Xinbao 语气库"
-      ],
-      "file": "Internet_Slang_2026_zh.md",
-      "hidden": false,
-      "language": "zh",
-      "lifecycle": {
-        "status": "active",
-        "confidence": 0.9,
-        "review": "periodic",
-        "retention": "semantic memory"
-      },
-      "outgoing": [
-        "AI_and_Networks_zh",
-        "CV_zh",
-        "Internet_Slang_2026_zh"
-      ],
-      "relationTypes": [
-        "wikilink"
-      ],
-      "slug": "Internet_Slang_2026_zh",
-      "summary": "用于维护 Chat with Xinbao 语气的年度热梗资料页：有梗，但不牺牲事实性。",
-      "tags": [
-        "zh",
-        "style",
-        "guide",
-        "style-guide"
-      ],
-      "timestamp": "2026-05-07T17:34:07+08:00",
-      "title": "2026热梗",
-      "type": "style guide",
-      "backlinks": [
-        "index_zh",
-        "Internet_Slang_2026",
-        "Internet_Slang_2026_zh",
-        "log",
-        "log_zh"
       ]
     },
     {
@@ -1916,8 +1827,6 @@
         "DynFrs",
         "Experience",
         "Hessian_Free_Online_Certified_Unlearning",
-        "Internet_Slang_2026",
-        "Internet_Slang_2026_zh",
         "Machine_Unlearning",
         "Meng_Zhang",
         "NUSRI_CQ",
@@ -1968,7 +1877,6 @@
         "Data_Centric_Machine_Learning_zh",
         "Distributed_Wasserstein_Barycenter_zh",
         "Experience_zh",
-        "Internet_Slang_2026_zh",
         "NUSRI_CQ_zh",
         "Projects_zh",
         "Publications_zh",
@@ -6151,13 +6059,6 @@
     },
     {
       "from": "index_zh",
-      "label": "2026热梗",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Internet_Slang_2026_zh"
-    },
-    {
-      "from": "index_zh",
       "label": "大语言模型可靠性",
       "relation": "wikilink",
       "source": "body",
@@ -6449,13 +6350,6 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Influence_Functions"
-    },
-    {
-      "from": "index",
-      "label": "Internet Slang 2026",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Internet_Slang_2026"
     },
     {
       "from": "index",
@@ -6766,48 +6660,6 @@
       "to": "Soft_Weighted_Machine_Unlearning"
     },
     {
-      "from": "Internet_Slang_2026_zh",
-      "label": "AI 与网络",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "AI_and_Networks_zh"
-    },
-    {
-      "from": "Internet_Slang_2026_zh",
-      "label": "简历",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "CV_zh"
-    },
-    {
-      "from": "Internet_Slang_2026_zh",
-      "label": "Internet Slang 2026",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Internet_Slang_2026_zh"
-    },
-    {
-      "from": "Internet_Slang_2026",
-      "label": "",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "AI_and_Networks"
-    },
-    {
-      "from": "Internet_Slang_2026",
-      "label": "",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "CV"
-    },
-    {
-      "from": "Internet_Slang_2026",
-      "label": "2026热梗",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Internet_Slang_2026_zh"
-    },
-    {
       "from": "Interpretability_zh",
       "label": "数据中心 ML",
       "relation": "wikilink",
@@ -7058,20 +6910,6 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Experience_zh"
-    },
-    {
-      "from": "log_zh",
-      "label": "2026热梗",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Internet_Slang_2026_zh"
-    },
-    {
-      "from": "log_zh",
-      "label": "Internet Slang 2026",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Internet_Slang_2026_zh"
     },
     {
       "from": "log_zh",
@@ -7331,20 +7169,6 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Hessian_Free_Online_Certified_Unlearning"
-    },
-    {
-      "from": "log",
-      "label": "2026热梗",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Internet_Slang_2026_zh"
-    },
-    {
-      "from": "log",
-      "label": "",
-      "relation": "wikilink",
-      "source": "body",
-      "to": "Internet_Slang_2026"
     },
     {
       "from": "log",
@@ -11298,12 +11122,12 @@
   "stats": {
     "hiddenPages": 0,
     "languages": {
-      "en": 43,
-      "zh": 43
+      "en": 42,
+      "zh": 42
     },
-    "pages": 86,
-    "publicPages": 86,
-    "relations": 1025,
+    "pages": 84,
+    "publicPages": 84,
+    "relations": 1013,
     "types": {
       "Academic advisor": 4,
       "CV summary": 1,
@@ -11322,7 +11146,6 @@
       "Research overview": 1,
       "Research topic": 5,
       "Resource inventory": 1,
-      "style guide": 2,
       "Technical skills": 1,
       "Wiki index": 1,
       "Wiki 索引": 1,
