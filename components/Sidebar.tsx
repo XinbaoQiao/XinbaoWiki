@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 const navigation = ['Xinbao_Qiao', 'Publications'];
@@ -16,7 +17,9 @@ const sectionLabels = {
   education: { en: 'Education', zh: '教育经历' },
   experience: { en: 'Experience', zh: '研究经历' },
   contribute: { en: 'Contribute', zh: '链接' },
-  email: { en: 'Email the author', zh: '发送邮件' }
+  email: { en: 'Email the author', zh: '发送邮件' },
+  openNavigation: { en: 'Open navigation', zh: '打开导航' },
+  closeNavigation: { en: 'Close navigation', zh: '关闭导航' }
 } satisfies Record<string, LocalizedText>;
 
 const navLabels: Record<string, LocalizedText> = {
@@ -72,37 +75,34 @@ function label(slug: string, language: SidebarLanguage) {
   return slug.replaceAll('_', ' ');
 }
 
-export function Sidebar() {
-  const pathname = usePathname() || '';
-  const language: SidebarLanguage = isChineseSlug(activeSlug(pathname)) ? 'zh' : 'en';
-
+function SidebarSections({ language, onNavigate }: { language: SidebarLanguage; onNavigate?: () => void }) {
   return (
-    <aside className="wiki-sidebar" aria-label={sectionLabels.navigation[language]}>
+    <div className="wiki-sidebar-content">
       <h4>{sectionLabels.navigation[language]}</h4>
       <ul>
         {navigation.map((item) => (
-          <li key={item}><a href={wikiHref(item, language)}>{label(item, language)}</a></li>
+          <li key={item}><a href={wikiHref(item, language)} onClick={onNavigate}>{label(item, language)}</a></li>
         ))}
       </ul>
 
       <h4>{sectionLabels.researchTopics[language]}</h4>
       <ul>
         {researchTopics.map((item) => (
-          <li key={item}><a href={wikiHref(item, language)}>{label(item, language)}</a></li>
+          <li key={item}><a href={wikiHref(item, language)} onClick={onNavigate}>{label(item, language)}</a></li>
         ))}
       </ul>
 
       <h4>{sectionLabels.education[language]}</h4>
       <ul>
         {education.map((item) => (
-          <li key={item}><a href={wikiHref(item, language)}>{label(item, language)}</a></li>
+          <li key={item}><a href={wikiHref(item, language)} onClick={onNavigate}>{label(item, language)}</a></li>
         ))}
       </ul>
 
       <h4>{sectionLabels.experience[language]}</h4>
       <ul>
         {experience.map((item) => (
-          <li key={item}><a href={wikiHref(item, language)}>{label(item, language)}</a></li>
+          <li key={item}><a href={wikiHref(item, language)} onClick={onNavigate}>{label(item, language)}</a></li>
         ))}
       </ul>
 
@@ -112,14 +112,84 @@ export function Sidebar() {
           <a
             className="external"
             href="https://www.linkedin.com/in/xinbaoqiao/"
+            onClick={onNavigate}
             target="_blank"
             rel="noreferrer"
           >
             LinkedIn
           </a>
         </li>
-        <li><a href="mailto:xinbaoqiao@cuhk.edu.hk">{sectionLabels.email[language]}</a></li>
+        <li><a href="mailto:xinbaoqiao@cuhk.edu.hk" onClick={onNavigate}>{sectionLabels.email[language]}</a></li>
       </ul>
-    </aside>
+    </div>
+  );
+}
+
+export function Sidebar() {
+  const pathname = usePathname() || '';
+  const language: SidebarLanguage = isChineseSlug(activeSlug(pathname)) ? 'zh' : 'en';
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const dialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (mobileOpen && !dialog.open) dialog.showModal();
+    if (!mobileOpen && dialog.open) dialog.close();
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [mobileOpen]);
+
+  return (
+    <>
+      <aside className="wiki-sidebar wiki-sidebar-desktop" aria-label={sectionLabels.navigation[language]}>
+        <SidebarSections language={language} />
+      </aside>
+
+      <button
+        aria-controls="wiki-mobile-navigation"
+        aria-expanded={mobileOpen}
+        aria-label={sectionLabels.openNavigation[language]}
+        className="wiki-mobile-nav-toggle"
+        onClick={() => setMobileOpen(true)}
+        type="button"
+      >
+        <span aria-hidden="true">☰</span>
+        {sectionLabels.navigation[language]}
+      </button>
+
+      <dialog
+        aria-labelledby="wiki-mobile-navigation-title"
+        className="wiki-mobile-nav-dialog"
+        id="wiki-mobile-navigation"
+        onCancel={() => setMobileOpen(false)}
+        onClose={() => setMobileOpen(false)}
+        ref={dialogRef}
+      >
+        <header className="wiki-mobile-nav-header">
+          <strong id="wiki-mobile-navigation-title">{sectionLabels.navigation[language]}</strong>
+          <button
+            aria-label={sectionLabels.closeNavigation[language]}
+            autoFocus
+            onClick={() => setMobileOpen(false)}
+            type="button"
+          >
+            ×
+          </button>
+        </header>
+        <SidebarSections language={language} onNavigate={() => setMobileOpen(false)} />
+      </dialog>
+    </>
   );
 }

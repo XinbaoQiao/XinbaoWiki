@@ -665,7 +665,11 @@ const sidebar = fs.readFileSync(path.join(root, 'components/Sidebar.tsx'), 'utf8
 assert.doesNotMatch(sidebar, /Notable works/, 'sidebar no longer uses Notable works');
 assert.match(sidebar, /'use client';/, 'sidebar can read the current route language');
 assert.match(sidebar, /usePathname/, 'sidebar derives language from the current route');
-assert.match(sidebar, /<aside className="wiki-sidebar" aria-label=\{sectionLabels\.navigation\[language\]\}>/, 'sidebar localizes the navigation aria label');
+assert.match(sidebar, /<aside className="wiki-sidebar wiki-sidebar-desktop" aria-label=\{sectionLabels\.navigation\[language\]\}>/, 'desktop sidebar localizes the navigation aria label');
+assert.match(sidebar, /className="wiki-mobile-nav-toggle"[\s\S]*aria-controls="wiki-mobile-navigation"|aria-controls="wiki-mobile-navigation"[\s\S]*className="wiki-mobile-nav-toggle"/, 'article pages expose a controlled mobile navigation trigger');
+assert.match(sidebar, /<dialog[\s\S]*id="wiki-mobile-navigation"[\s\S]*onCancel=\{\(\) => setMobileOpen\(false\)\}[\s\S]*onClose=\{\(\) => setMobileOpen\(false\)\}/, 'mobile navigation uses a native modal dialog with Escape and close-state handling');
+assert.match(sidebar, /function SidebarSections[\s\S]*<SidebarSections language=\{language\} \/>[\s\S]*<SidebarSections language=\{language\} onNavigate=\{\(\) => setMobileOpen\(false\)\} \/>/, 'desktop and mobile navigation reuse one localized section tree');
+assert.match(sidebar, /document\.body\.style\.overflow = 'hidden'[\s\S]*document\.body\.style\.overflow = previousOverflow/, 'mobile navigation prevents background scrolling and restores it after closing');
 assert.doesNotMatch(sidebar, /function NavSection|className="nav-section"|<section className="nav-section">/, 'sidebar uses flat Colarpedia h4 plus ul blocks');
 assert.match(sidebar, /const navigation = \['Xinbao_Qiao', 'Publications'\]/, 'sidebar navigation includes the main page and Publications');
 assert.doesNotMatch(sidebar, /Research Atlas|研究图谱|\/atlas/, 'sidebar removes the retired Research Atlas entry');
@@ -859,6 +863,8 @@ assert.doesNotMatch(styles, /\.wiki-logo-mark/, 'topbar CSS does not keep custom
 assert.match(styles, /\.wiki-tabs-inner \{[\s\S]*padding: 0 24px 0 calc\(24px \+ var\(--sidebar-width\) \+ 24px\);[\s\S]*\}/, 'article tabs align with the main article column after the sidebar');
 assert.match(styles, /\.wiki-shell \{[\s\S]*grid-template-columns: var\(--sidebar-width\) minmax\(0, var\(--content-width\)\);[\s\S]*gap: 24px;[\s\S]*\}/, 'article shell uses a fixed navigation column and constrained readable article column');
 assert.match(styles, /\.wiki-sidebar \{[\s\S]*position: sticky;[\s\S]*top: 14px;[\s\S]*\}/, 'article navigation stays available in a Wikipedia-style left rail');
+assert.match(styles, /@media \(max-width: 960px\) \{[\s\S]*\.wiki-sidebar-desktop \{[\s\S]*display: none;[\s\S]*\.wiki-mobile-nav-toggle \{[\s\S]*display: inline-flex;[\s\S]*\.wiki-mobile-nav-dialog\[open\] \{[\s\S]*width: min\(82vw, 320px\);[\s\S]*height: 100dvh;/, 'article navigation becomes a compact full-height left-side modal drawer on tablet and mobile widths');
+assert.match(styles, /\.wiki-mobile-nav-dialog::backdrop \{[\s\S]*background: rgba\(32, 33, 34, \.42\);/, 'mobile navigation drawer separates itself from article content with a restrained modal backdrop');
 assert.match(styles, /\.wiki-page \{[\s\S]*overflow-wrap: break-word;[\s\S]*\}/, 'article pages protect long labels and links from breaking the layout');
 assert.match(styles, /\.wiki-main:has\(\.wiki-portal\) \{[\s\S]*grid-column: 1 \/ -1;[\s\S]*max-width: 100%;[\s\S]*\}/, 'homepage main content spans the hidden sidebar grid column');
 assert.match(styles, /\.wiki-page\[data-page-type="publication"\] \.wiki-title \{[\s\S]*white-space: nowrap;[\s\S]*font-size: 1\.56em;[\s\S]*\}/, 'publication article titles stay on one line on desktop');
@@ -961,7 +967,7 @@ assert.match(styles, /\.wiki-portal-disclosures \{[\s\S]*--portal-search-width: 
 assert.match(styles, /\.wiki-portal-disclosures > details \{[\s\S]*interpolate-size: allow-keywords;[\s\S]*\}[\s\S]*\.wiki-portal-disclosures > details::details-content \{[\s\S]*block-size: 0;[\s\S]*opacity: 0;[\s\S]*transition:[\s\S]*block-size \.24s[\s\S]*content-visibility \.24s allow-discrete[\s\S]*opacity \.16s[\s\S]*\}[\s\S]*\.wiki-portal-disclosures > details\[open\]::details-content \{[\s\S]*block-size: auto;[\s\S]*opacity: 1;/, 'homepage disclosures animate their content smoothly in both directions');
 assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.wiki-portal-disclosures > details::details-content,[\s\S]*\.wiki-portal-directory summary span::after,[\s\S]*\.wiki-portal-timeline-heading::after \{[\s\S]*transition: none;/, 'homepage disclosure and indicator animations honor reduced-motion settings');
 assert.match(styles, /\.wiki-portal-timeline \{[\s\S]*width: min\([\s\S]*var\(--portal-search-width\)[\s\S]*margin-left: max\([\s\S]*var\(--portal-search-leading-width\)[\s\S]*border-left: 4px solid var\(--site-theme-accent\);[\s\S]*border-radius: 2px;[\s\S]*background: color-mix/, 'homepage Updates remains aligned to the white search field inside the restored wider Browse container');
-assert.doesNotMatch(styles, /\.wiki-portal-timeline \{[\s\S]*radial-gradient|\.wiki-portal-timeline \{[\s\S]*box-shadow:/, 'homepage timelines avoid wide promotional-card effects');
+assert.doesNotMatch(styles, /\.wiki-portal-timeline \{[^}]*radial-gradient|\.wiki-portal-timeline \{[^}]*box-shadow:/, 'homepage timelines avoid wide promotional-card effects');
 assert.match(styles, /\.wiki-portal-news-preview \{[\s\S]*grid-template-columns: 80px minmax\(0, 1fr\);[\s\S]*margin-top: 8px;[\s\S]*padding-top: 8px;/, 'collapsed Latest Updates previews the newest dated item');
 assert.match(styles, /\.wiki-portal-news\[open\] \.wiki-portal-news-preview \{[\s\S]*display: none;/, 'expanded Latest Updates replaces the preview with the full feed');
 assert.match(styles, /\.wiki-portal-updates-window \{[\s\S]*height: var\(--portal-updates-window-height, 316px\);[\s\S]*overflow-y: auto;[\s\S]*overscroll-behavior: contain;[\s\S]*scrollbar-gutter: stable;/, 'expanded Latest Updates uses a stable scroll window');
@@ -988,7 +994,7 @@ assert.match(homePage, /Profile[\s\S]*Institutions[\s\S]*Academic network/, 'hom
 assert.match(homePage, /个人资料[\s\S]*机构[\s\S]*学术网络/, 'homepage affiliation taxonomy has Chinese labels');
 assert.match(homepagePortal, /section\.title\[language\][\s\S]*group\.label\[language\][\s\S]*group\.links\[language\]/, 'homepage Browse category labels and links switch with the selected language');
 assert.doesNotMatch(homePage, /AI for Networks · Data-centric Machine Learning · Federated Learning|English entries|Chinese entries|Featured entry|wiki-portal-featured|\/images\/Portrait\.png|The academic wiki of Xinbao Qiao|showChat=\{false\}/, 'homepage removes the research-field line, entry count, featured block, portrait, old tagline, and chat suppression');
-const sidebarLinkStyle = styles.match(/\.wiki-sidebar a \{([\s\S]*?)\}/);
+const sidebarLinkStyle = styles.match(/\.wiki-sidebar a,\s*\.wiki-sidebar-content a \{([\s\S]*?)\}/);
 assert.ok(sidebarLinkStyle, 'sidebar link style block exists');
 assert.doesNotMatch(sidebarLinkStyle[1], /white-space: nowrap;/, 'sidebar link CSS avoids custom nowrap styling');
 assert.match(infobox, /location: 'Conference location'/, 'infobox labels conference location');
