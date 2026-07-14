@@ -142,6 +142,7 @@ const wikiMarkdownTsx = fs.readFileSync(path.join(root, 'components/WikiMarkdown
 const wikiLib = fs.readFileSync(path.join(root, 'lib/wiki.ts'), 'utf8');
 const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 const nextConfig = fs.readFileSync(path.join(root, 'next.config.mjs'), 'utf8');
+const indexNowScript = fs.readFileSync(path.join(root, 'scripts/submit-indexnow.mjs'), 'utf8');
 assertFile('components/LanguageToggle.tsx');
 assertFile('components/ArticleTabs.tsx');
 assertFile('components/WikiSearch.tsx');
@@ -159,6 +160,8 @@ assertFile('chat with xinbao/persona-prompt.md');
 assertFile('chat with xinbao/meme-voice-notes.md');
 assertFile('scripts/wiki-maintenance.mjs');
 assertFile('scripts/new-wiki-page.mjs');
+assertFile('scripts/submit-indexnow.mjs');
+assertFile('public/977ab55cdd7bd5149d5143f5be4a88cc.txt');
 assertFile('wiki/graph.json');
 assertFile('wiki/quality-report.json');
 assertFile('wiki/maintenance-schema.json');
@@ -283,6 +286,19 @@ assert.equal(packageJson.scripts?.['new:wiki'], 'node scripts/new-wiki-page.mjs'
 assert.equal(packageJson.scripts?.['verify:publish'], 'node scripts/verify-publish-set.mjs', 'package.json exposes a publish-set safety check');
 assert.equal(packageJson.scripts?.['smoke:production'], 'node scripts/smoke-production.mjs', 'package.json exposes a production smoke check');
 assert.equal(packageJson.scripts?.['deploy:production'], 'node scripts/deploy-production.mjs', 'package.json exposes a token-safe Vercel production deployment wrapper');
+assert.equal(packageJson.scripts?.['submit:indexnow'], 'node scripts/submit-indexnow.mjs', 'package.json exposes the IndexNow deletion-notification helper');
+assert.match(indexNowScript, /https:\/\/api\.indexnow\.org\/indexnow/, 'IndexNow helper uses the canonical multi-engine endpoint');
+assert.match(indexNowScript, /url\.protocol !== 'https:' \|\| url\.hostname !== SITE_HOST/, 'IndexNow helper only submits canonical HTTPS site URLs');
+assert.match(indexNowScript, /public key file does not match the configured IndexNow key/, 'IndexNow helper validates the deployed ownership key before submission');
+assert.match(indexNowScript, /AbortSignal\.timeout\(30_000\)/, 'IndexNow helper bounds network submission time');
+const indexNowDryRun = JSON.parse(execFileSync(process.execPath, [
+  path.join(root, 'scripts/submit-indexnow.mjs'),
+  '--dry-run',
+  'https://xinbaopedia.top/wiki/Internet_Slang_2026_zh/'
+], { encoding: 'utf8' }));
+assert.equal(indexNowDryRun.dryRun, true, 'IndexNow helper supports network-free validation');
+assert.equal(indexNowDryRun.keyLocation, 'https://xinbaopedia.top/977ab55cdd7bd5149d5143f5be4a88cc.txt', 'IndexNow dry run points to the public ownership key');
+assert.deepEqual(indexNowDryRun.urlList, ['https://xinbaopedia.top/wiki/Internet_Slang_2026_zh/'], 'IndexNow dry run preserves the canonical deleted URL');
 assert.match(packageJson.scripts?.check || '', /lint:content/, 'repository check includes the content maintenance check');
 assert.match(packageJson.scripts?.check || '', /lint:okf/, 'repository check includes the OKF conformance check');
 assert.equal(pageIndex.schemaVersion, 3, 'wiki page index uses the generated content-maintenance schema');
