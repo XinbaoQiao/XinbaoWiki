@@ -524,8 +524,8 @@ assert.match(chatWithXinbaoPanel, /message\.role === 'assistant'/, 'chat panel r
 assert.match(chatWithXinbaoPanel, /remarkPlugins=\{\[remarkGfm, remarkMath\]\}/, 'chat panel enables GFM and math parsing for assistant replies');
 assert.match(chatWithXinbaoPanel, /rehypePlugins=\{\[rehypeKatex\]\}/, 'chat panel enables KaTeX output for assistant replies');
 assert.match(chatWithXinbaoPanel, /Chat with Xinbao/, 'chat window uses the required title');
-assert.match(chatWithXinbaoPanel, /Hey, you made it 👋[\s\S]*paper lore[\s\S]*project rabbit hole[\s\S]*Good vibes, real receipts\./, 'chat opens with a memorable internet-native English welcome');
-assert.match(chatWithXinbaoPanel, /嗨，来都来了，先坐会儿 👋[\s\S]*最近又在折腾什么[\s\S]*主打一个：梗可以有，瞎编不可以。/, 'chat opens with a memorable internet-native Chinese welcome');
+assert.match(chatWithXinbaoPanel, /Hey, you made it 👋[\s\S]*paper lore[\s\S]*project rabbit hole[\s\S]*bring the receipts[\s\S]*keep it real/, 'chat opens with a memorable internet-native English welcome');
+assert.match(chatWithXinbaoPanel, /嗨，来都来了，先坐会儿 👋[\s\S]*最近又在折腾什么[\s\S]*有一说一，能查到的我认真说，查不到的咱也不硬编。/, 'chat opens with a memorable internet-native Chinese welcome');
 assert.doesNotMatch(chatWithXinbaoPanel, /Hi, I’m the Xinbaopedia chat assistant|Ask me about Xinbao Qiao’s research|想快速了解乔鑫宝的话，可以直接问我/, 'chat no longer uses the directive-like legacy greetings');
 assert.match(chatWithXinbaoPanel, /MAX_INPUT_LENGTH = 1000/, 'chat client caps input length at 1000 characters');
 assert.match(chatWithXinbaoPanel, /\/api\/chat-with-xinbao/, 'chat client calls only the same-site API route');
@@ -538,8 +538,8 @@ assert.match(chatWithXinbaoPanel, /Questions may be logged to improve answers\./
 assert.match(chatWithXinbaoPanel, /问题可能会被记录，用于改进回答。/, 'chat client discloses Chinese question logging');
 assert.match(chatWithXinbaoPanel, /Xinbao AI is temporarily unavailable\. Please try again later\./, 'chat client uses a generic model-error message');
 assert.match(chatWithXinbaoPanel, /language: Language/, 'chat client localizes UI from current wiki language');
-assert.match(chatWithXinbaoPanel, /paper lore[\s\S]*cooking up lately[\s\S]*real receipts/, 'chat client English greeting is playful, conversational, and evidence-bounded');
-assert.match(chatWithXinbaoPanel, /来都来了[\s\S]*鑫宝最近又在折腾什么[\s\S]*梗可以有，瞎编不可以/, 'chat client Chinese greeting is playful, conversational, and evidence-bounded');
+assert.match(chatWithXinbaoPanel, /paper lore[\s\S]*cooking up lately[\s\S]*bring the receipts[\s\S]*keep it real/, 'chat client English greeting is playful, conversational, and evidence-bounded');
+assert.match(chatWithXinbaoPanel, /来都来了[\s\S]*鑫宝最近又在折腾什么[\s\S]*能查到的我认真说[\s\S]*查不到的咱也不硬编/, 'chat client Chinese greeting is playful, conversational, and evidence-bounded');
 assert.doesNotMatch(chatWithXinbaoPanel, /digital-proxy skill distilled|蒸馏出来的数字分身 skill|哈基米 energy|讲清楚喵~/, 'chat client no longer uses forced technical persona language in the opening experience');
 assert.match(chatWithXinbaoPanel, /Checking Xinbaopedia notes[\s\S]*Looking through public pages[\s\S]*Almost there/, 'chat client includes varied English typing messages');
 assert.match(chatWithXinbaoPanel, /正在查公开资料[\s\S]*正在整理相关页面[\s\S]*先看资料，不硬编[\s\S]*马上整理好/, 'chat client includes natural Chinese typing messages');
@@ -602,10 +602,10 @@ assert.match(chatKnowledge, /Xinbao_Qiao[\s\S]*Qiao_Xinbao_zh[\s\S]*Projects[\s\
 assert.doesNotMatch(chatKnowledge, /Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning/, 'chat knowledge builder does not prioritize the hidden under-review manuscript');
 assert.match(chatKnowledge, /academic homepage chat assistant/, 'persona identifies the assistant as a homepage chat assistant');
 assert.match(chatKnowledge, /do not call yourself a distilled skill or digital persona in normal greetings/, 'persona prevents forced technical identity labels in normal greetings');
-assert.match(chatKnowledge, /English self-introductions[\s\S]*witty human host[\s\S]*paper lore[\s\S]*Good vibes, real receipts/, 'persona documents an internet-native English self-introduction');
+assert.match(chatKnowledge, /English self-introductions[\s\S]*witty human host[\s\S]*paper lore[\s\S]*bring the receipts[\s\S]*keep it real/, 'persona documents an internet-native English self-introduction');
 assert.match(chatKnowledge, /Accepted user questions may be logged server-side/, 'persona transparently explains question logging when asked');
 assert.match(chatKnowledge, /chat history, raw IPs, system prompts, and API keys are not stored/, 'persona documents what question logging must not claim to store');
-assert.match(chatKnowledge, /来都来了[\s\S]*最近又在折腾什么[\s\S]*梗可以有瞎编不可以/, 'persona supports meme-rich Chinese opening phrasing without encouraging unsupported claims');
+assert.match(chatKnowledge, /来都来了[\s\S]*最近又在折腾什么[\s\S]*能查到的认真说[\s\S]*查不到的咱也不硬编/, 'persona supports meme-rich Chinese opening phrasing without encouraging unsupported claims');
 assert.match(chatKnowledge, /家人们[\s\S]*先别急[\s\S]*这题我会[\s\S]*有一说一[\s\S]*包的[\s\S]*主打一个资料准[\s\S]*不硬编/s, 'persona supports a small Chinese casual expression pool without encouraging unsupported claims');
 assert.match(chatKnowledge, /Modern meme-guide voice[\s\S]*情绪价值[\s\S]*City不City[\s\S]*YYDS[\s\S]*我去不早说[\s\S]*不讲不讲[\s\S]*尊嘟假嘟[\s\S]*退一万步讲/, 'persona supports current meme-guide catchphrases');
 assert.match(chatKnowledge, /2026 sentence-template and abstract voice[\s\S]*我将辞职在家研究[\s\S]*此人的 X 恐怕在我之上[\s\S]*有点抽象[\s\S]*source-grounded answer within one sentence/, 'persona supports bounded 2026 sentence-template and abstract voice');
