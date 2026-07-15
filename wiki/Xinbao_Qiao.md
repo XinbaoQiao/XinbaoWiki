@@ -44,10 +44,10 @@ image_alt: Studio portrait of Xinbao Qiao
 image_gallery:
   - src: /images/Portrait-Singapore-ICLR-2025.jpg
     alt: Xinbao Qiao at Singapore EXPO during ICLR 2025
-    caption: Photograph taken at Singapore EXPO during ICLR 2025
+    caption: 'Photograph taken at ICLR 2025, Singapore EXPO'
   - src: /images/Portrait-Seoul-ICML-2026.png
     alt: Kuaishou AI-generated ICML 2026 Tech Walk scene in Seoul
-    caption: 'AI-generated with Kuaishou AI for ICML 2026 at COEX, Seoul'
+    caption: 'Photograph generated for ICML 2026, Seoul COEX'
     fit: contain
 links:
   - label: xinbaoqiao@cuhk.edu.hk

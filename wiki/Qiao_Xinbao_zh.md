@@ -40,10 +40,10 @@ image_alt: 乔鑫宝棚拍肖像
 image_gallery:
   - src: /images/Portrait-Singapore-ICLR-2025.jpg
     alt: 乔鑫宝摄于 ICLR 2025 新加坡 EXPO
-    caption: 摄于 ICLR 2025 新加坡 EXPO
+    caption: 'Photograph taken at ICLR 2025, Singapore EXPO'
   - src: /images/Portrait-Seoul-ICML-2026.png
     alt: 快手 AI 生成的 ICML 2026 首尔 Tech Walk 场景
-    caption: 快手 AI 生成，主题为 ICML 2026 首尔 COEX 会场
+    caption: 'Photograph generated for ICML 2026, Seoul COEX'
     fit: contain
 links:
   - label: xinbaoqiao@cuhk.edu.hk

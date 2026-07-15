@@ -19,6 +19,7 @@ source_path: wiki/log.md
 ## 2026-07-15
 
 - Replaced the single biography portrait with an accessible three-image gallery that always opens on the uncaptioned studio portrait and allows manual switching to ICLR 2025 Singapore and Kuaishou AI-generated ICML 2026 Seoul images.
+- Hid portrait arrows and the image count until fine-pointer hover or keyboard focus, retained always-visible controls for touch input, and standardized both event captions as single-line `Photograph ...` labels.
 
 ## 2026-06-13
 

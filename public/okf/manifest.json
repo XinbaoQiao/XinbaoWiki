@@ -6,7 +6,7 @@
   "source": {
     "directory": "wiki",
     "files": 88,
-    "contentHash": "e489c6f228efa6399f07cc26014716fb6572000a43cef42829af137b878ab714"
+    "contentHash": "d7c89de97dccbe783601273e00143921dae58d40650ef18a5196ca6c387886a5"
   },
   "bundle": {
     "root": "public/okf",

@@ -1038,12 +1038,34 @@ body:has(.wiki-portal) .wiki-topbar {
   line-height: 1.3;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .wiki-portrait-gallery-frame .wiki-portrait-gallery-arrow,
+  .wiki-portrait-gallery-frame .wiki-portrait-gallery-count {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 160ms ease;
+  }
+
+  .wiki-portrait-gallery-frame:hover .wiki-portrait-gallery-arrow,
+  .wiki-portrait-gallery-frame:hover .wiki-portrait-gallery-count,
+  .wiki-portrait-gallery-frame:focus-within .wiki-portrait-gallery-arrow,
+  .wiki-portrait-gallery-frame:focus-within .wiki-portrait-gallery-count {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
 .wiki-infobox-caption {
   margin-top: 6px;
   padding: 0 4px;
   color: var(--wiki-text-soft);
   font-size: 11px;
   line-height: 1.35;
+}
+
+.wiki-portrait-gallery .wiki-infobox-caption {
+  font-size: 10px;
+  white-space: nowrap;
 }
 
 .wiki-infobox table {
@@ -2152,7 +2174,9 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
 
   .wiki-portal-disclosures > details::details-content,
   .wiki-portal-directory summary span::after,
-  .wiki-portal-timeline-heading::after {
+  .wiki-portal-timeline-heading::after,
+  .wiki-portrait-gallery-frame .wiki-portrait-gallery-arrow,
+  .wiki-portrait-gallery-frame .wiki-portrait-gallery-count {
     transition: none;
   }
 

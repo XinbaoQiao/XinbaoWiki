@@ -94,7 +94,8 @@ assert.deepEqual(bioData.occupation, ['PhD student'], 'occupation uses PhD stude
 assert.equal(bioData.image, '/images/Portrait.png', 'English portrait gallery keeps the studio portrait as its default');
 assert.equal(bioData.image_caption, undefined, 'English default portrait has no visible caption');
 assert.deepEqual(bioData.image_gallery.map((item) => item.src), ['/images/Portrait-Singapore-ICLR-2025.jpg', '/images/Portrait-Seoul-ICML-2026.png'], 'English portrait gallery keeps Singapore before Seoul');
-assert.match(bioData.image_gallery[1].caption, /AI-generated with Kuaishou AI.*ICML 2026.*COEX, Seoul/, 'English Seoul caption identifies AI provenance, event, and venue');
+assert.equal(bioData.image_gallery[0].caption, 'Photograph taken at ICLR 2025, Singapore EXPO', 'English Singapore caption uses the photograph-taken format');
+assert.equal(bioData.image_gallery[1].caption, 'Photograph generated for ICML 2026, Seoul COEX', 'English Seoul caption uses the photograph-generated format');
 const educationBlock = frontmatterSlice(bio, 'education:', 'links:');
 assert.deepEqual(bioData.education.map((item) => item.label), ['The Chinese University of Hong Kong', 'Zhejiang University', 'Shandong University'], 'English education is reverse chronological');
 assert.deepEqual(bioData.education.at(-1), { label: 'Shandong University', url: '/wiki/Shandong_University/', detail: '(BEng, 2022)' }, 'English education links only school name and keeps degree detail separate');
@@ -114,7 +115,8 @@ assert.match(zhBio, /born: \|\n\s+乔鑫宝 \(Xinbao Qiao\)\n\s+2000年9月30日
 assert.equal(zhBioData.image, '/images/Portrait.png', 'Chinese portrait gallery keeps the studio portrait as its default');
 assert.equal(zhBioData.image_caption, undefined, 'Chinese default portrait has no visible caption');
 assert.deepEqual(zhBioData.image_gallery.map((item) => item.src), ['/images/Portrait-Singapore-ICLR-2025.jpg', '/images/Portrait-Seoul-ICML-2026.png'], 'Chinese portrait gallery keeps Singapore before Seoul');
-assert.match(zhBioData.image_gallery[1].caption, /快手 AI 生成.*ICML 2026.*首尔 COEX/, 'Chinese Seoul caption identifies AI provenance, event, and venue');
+assert.equal(zhBioData.image_gallery[0].caption, 'Photograph taken at ICLR 2025, Singapore EXPO', 'Chinese page reuses the photograph-taken event label');
+assert.equal(zhBioData.image_gallery[1].caption, 'Photograph generated for ICML 2026, Seoul COEX', 'Chinese page reuses the photograph-generated event label');
 assert.ok(['Mr. Ciao', 'MrCiao', '喬', 'ciao'].every((alias) => zhBioData.aliases.includes(alias)), 'Chinese biography aliases include Mr. Ciao and ciao spelling');
 const zhEducationBlock = frontmatterSlice(zhBio, 'education:', 'links:');
 assert.deepEqual(zhBioData.education.map((item) => item.label), ['香港中文大学', '浙江大学', '山东大学'], 'Chinese education is reverse chronological');
@@ -927,6 +929,8 @@ assert.match(portraitGallery, /\(currentIndex \+ offset \+ items\.length\) % ite
 assert.match(portraitGallery, /aria-label=\{previousLabel\}[\s\S]*aria-label=\{nextLabel\}/, 'portrait gallery exposes localized previous and next button names');
 assert.match(portraitGallery, /aria-live="polite"/, 'portrait gallery announces image changes without interrupting the reader');
 assert.match(styles, /\.wiki-infobox \.wiki-portrait-gallery-frame img \{[\s\S]*height: 330px;[\s\S]*\}/, 'portrait gallery locally overrides article image sizing to hold a stable height while switching');
+assert.match(styles, /@media \(hover: hover\) and \(pointer: fine\) \{[\s\S]*\.wiki-portrait-gallery-frame \.wiki-portrait-gallery-arrow,[\s\S]*opacity: 0;[\s\S]*\.wiki-portrait-gallery-frame:hover \.wiki-portrait-gallery-arrow,[\s\S]*\.wiki-portrait-gallery-frame:focus-within \.wiki-portrait-gallery-arrow,[\s\S]*opacity: 1;/, 'fine-pointer portrait controls reveal on image hover or keyboard focus');
+assert.match(styles, /\.wiki-portrait-gallery \.wiki-infobox-caption \{[\s\S]*white-space: nowrap;[\s\S]*\}/, 'event portrait captions stay on one line');
 assert.match(styles, /\.wiki-search-panel \{[\s\S]*position: absolute;[\s\S]*max-height: min\(420px, 70vh\);[\s\S]*\}/, 'search results render in a bounded dropdown panel');
 assert.match(styles, /\.wiki-search-result \{[\s\S]*display: grid;[\s\S]*grid-template-columns: 1fr auto;[\s\S]*\}/, 'search result rows use a compact two-column layout');
 assert.match(styles, /\.wiki-search-result:hover,[\s\S]*\.wiki-search-result\[aria-selected="true"\] \{[\s\S]*background: #eaecf0;[\s\S]*\}/, 'search result hover and keyboard active states are visible');
@@ -1016,7 +1020,7 @@ assert.doesNotMatch(homepagePortal, /Research code released|研究代码公开|A
 assert.match(homepagePortal, /className="wiki-portal-disclosures"[\s\S]*className="wiki-portal-news wiki-portal-timeline"[\s\S]*className="wiki-portal-directory"/, 'homepage places only Updates and Browse as sibling disclosure sections');
 assert.match(styles, /\.wiki-portal-disclosures \{[\s\S]*--portal-search-width: 690px;[\s\S]*--portal-search-leading-width: 50px;[\s\S]*--portal-search-submit-width: 96px;[\s\S]*max-width: 920px;/, 'homepage restores the original 920px expanded Browse container while retaining search measurements');
 assert.match(styles, /\.wiki-portal-disclosures > details \{[\s\S]*interpolate-size: allow-keywords;[\s\S]*\}[\s\S]*\.wiki-portal-disclosures > details::details-content \{[\s\S]*block-size: 0;[\s\S]*opacity: 0;[\s\S]*transition:[\s\S]*block-size \.24s[\s\S]*content-visibility \.24s allow-discrete[\s\S]*opacity \.16s[\s\S]*\}[\s\S]*\.wiki-portal-disclosures > details\[open\]::details-content \{[\s\S]*block-size: auto;[\s\S]*opacity: 1;/, 'homepage disclosures animate their content smoothly in both directions');
-assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.wiki-portal-disclosures > details::details-content,[\s\S]*\.wiki-portal-directory summary span::after,[\s\S]*\.wiki-portal-timeline-heading::after \{[\s\S]*transition: none;/, 'homepage disclosure and indicator animations honor reduced-motion settings');
+assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.wiki-portal-disclosures > details::details-content,[\s\S]*\.wiki-portal-directory summary span::after,[\s\S]*\.wiki-portal-timeline-heading::after,[\s\S]*\.wiki-portrait-gallery-frame \.wiki-portrait-gallery-arrow,[\s\S]*\.wiki-portrait-gallery-frame \.wiki-portrait-gallery-count \{[\s\S]*transition: none;/, 'homepage disclosure, indicator, and portrait-control animations honor reduced-motion settings');
 assert.match(styles, /\.wiki-portal-timeline \{[\s\S]*width: min\([\s\S]*var\(--portal-search-width\)[\s\S]*margin-left: max\([\s\S]*var\(--portal-search-leading-width\)[\s\S]*border-left: 4px solid var\(--site-theme-accent\);[\s\S]*border-radius: 2px;[\s\S]*background: color-mix/, 'homepage Updates remains aligned to the white search field inside the restored wider Browse container');
 assert.doesNotMatch(styles, /\.wiki-portal-timeline \{[^}]*radial-gradient|\.wiki-portal-timeline \{[^}]*box-shadow:/, 'homepage timelines avoid wide promotional-card effects');
 assert.match(styles, /\.wiki-portal-news-preview \{[\s\S]*grid-template-columns: 80px minmax\(0, 1fr\);[\s\S]*margin-top: 8px;[\s\S]*padding-top: 8px;/, 'collapsed Latest Updates previews the newest dated item');
