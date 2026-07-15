@@ -40,7 +40,15 @@ education:
     url: /wiki/Shandong_University/
     detail: '(BEng, 2022)'
 image: /images/Portrait.png
-image_caption: 'Photograph taken at Singapore EXPO, 2025'
+image_alt: Studio portrait of Xinbao Qiao
+image_gallery:
+  - src: /images/Portrait-Singapore-ICLR-2025.jpg
+    alt: Xinbao Qiao at Singapore EXPO during ICLR 2025
+    caption: Photograph taken at Singapore EXPO during ICLR 2025
+  - src: /images/Portrait-Seoul-ICML-2026.png
+    alt: Kuaishou AI-generated ICML 2026 Tech Walk scene in Seoul
+    caption: 'AI-generated with Kuaishou AI for ICML 2026 at COEX, Seoul'
+    fit: contain
 links:
   - label: xinbaoqiao@cuhk.edu.hk
     url: 'mailto:xinbaoqiao@cuhk.edu.hk'

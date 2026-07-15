@@ -234,6 +234,20 @@
       "timestamp": "2026-05-05T21:39:01+08:00"
     },
     {
+      "slug": "Old_Homepage_Resources",
+      "title": "Homepage Portrait Resources",
+      "summary": "Record of the portrait gallery used by the main biography infobox.",
+      "language": "en",
+      "type": "Resource inventory",
+      "tags": [
+        "en",
+        "resource",
+        "archive",
+        "resource-inventory"
+      ],
+      "timestamp": "2026-05-05T01:10:50+08:00"
+    },
+    {
       "slug": "index",
       "title": "Index",
       "summary": "Navigation index for public Xinbaopedia pages.",
@@ -362,20 +376,6 @@
         "research-institute"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00"
-    },
-    {
-      "slug": "Old_Homepage_Resources",
-      "title": "Old Homepage Resources",
-      "summary": "Record of the single preserved image from the earlier GitHub homepage.",
-      "language": "en",
-      "type": "Resource inventory",
-      "tags": [
-        "en",
-        "resource",
-        "archive",
-        "resource-inventory"
-      ],
-      "timestamp": "2026-05-05T01:10:50+08:00"
     },
     {
       "slug": "Projects",
@@ -665,6 +665,20 @@
         "wasserstein"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00"
+    },
+    {
+      "slug": "Old_Homepage_Resources_zh",
+      "title": "主页肖像资源",
+      "summary": "记录个人主页 infobox 使用的肖像图库。",
+      "language": "zh",
+      "type": "资源记录",
+      "tags": [
+        "zh",
+        "resource",
+        "archive",
+        "资源记录"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00"
     },
     {
       "slug": "Qiao_Xinbao_zh",
@@ -965,20 +979,6 @@
         "维护日志"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00"
-    },
-    {
-      "slug": "Old_Homepage_Resources_zh",
-      "title": "旧主页资源",
-      "summary": "记录从旧 GitHub 主页保留的一张图片。",
-      "language": "zh",
-      "type": "资源记录",
-      "tags": [
-        "zh",
-        "resource",
-        "archive",
-        "资源记录"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00"
     },
     {
       "slug": "Machine_Unlearning_zh",

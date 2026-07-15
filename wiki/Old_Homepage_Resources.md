@@ -1,22 +1,26 @@
 ---
 type: Resource inventory
-title: Old Homepage Resources
-description: Record of the single preserved image from the earlier GitHub homepage.
+title: Homepage Portrait Resources
+description: Record of the portrait gallery used by the main biography infobox.
 tags:
   - en
   - resource
   - archive
   - resource-inventory
 timestamp: '2026-05-05T01:10:50+08:00'
-name: Old Homepage Resources
-summary: Record of the single preserved image from the earlier GitHub homepage.
+name: Homepage Portrait Resources
+summary: Record of the portrait gallery used by the main biography infobox.
 occupation: Resource inventory
 ---
-This page records the media policy for the wiki. The public site intentionally uses a single portrait image in the main biography infobox.
+This page records the media policy for the wiki. The main biography infobox uses a small, manually controlled portrait gallery. It always opens on the uncaptioned studio portrait and does not auto-advance or persist a visitor's selection.
 
-## Retained asset
+## Retained assets
 
-- Portrait: `images/Portrait.png`
+- Default studio portrait: `images/Portrait.png`
+- ICLR 2025 at Singapore EXPO: `images/Portrait-Singapore-ICLR-2025.jpg`
+- Kuaishou AI-generated ICML 2026 Seoul image: `images/Portrait-Seoul-ICML-2026.png`
+
+The event images use factual captions. The Seoul image is explicitly identified as AI-generated.
 
 Publication pages are not visual galleries. Each public paper page may keep at most an overview schematic and, when available, a poster. Detailed result plots, ablation figures, and secondary experiment images are excluded from the public wiki display.
 

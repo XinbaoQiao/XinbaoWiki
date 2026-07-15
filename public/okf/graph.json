@@ -2314,7 +2314,7 @@
         "wikilink"
       ],
       "slug": "Old_Homepage_Resources",
-      "summary": "Record of the single preserved image from the earlier GitHub homepage.",
+      "summary": "Record of the portrait gallery used by the main biography infobox.",
       "tags": [
         "en",
         "resource",
@@ -2322,7 +2322,7 @@
         "resource-inventory"
       ],
       "timestamp": "2026-05-05T01:10:50+08:00",
-      "title": "Old Homepage Resources",
+      "title": "Homepage Portrait Resources",
       "type": "Resource inventory",
       "backlinks": [
         "index"
@@ -2348,7 +2348,7 @@
         "wikilink"
       ],
       "slug": "Old_Homepage_Resources_zh",
-      "summary": "记录从旧 GitHub 主页保留的一张图片。",
+      "summary": "记录个人主页 infobox 使用的肖像图库。",
       "tags": [
         "zh",
         "resource",
@@ -2356,7 +2356,7 @@
         "资源记录"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "title": "旧主页资源",
+      "title": "主页肖像资源",
       "type": "资源记录",
       "backlinks": [
         "index_zh"

@@ -91,7 +91,10 @@ assert.doesNotMatch(bio, /^birth_place:/m, 'birthplace is kept in prose rather t
 assert.match(bio, /born: \|\n\s+September 2000 \(age 25\)\n\s+Xishuangbanna, Yunnan\n/, 'English Born row uses the requested month-and-place format');
 assert.doesNotMatch(bio, /30 September 2000|Xishuangbanna, Yunnan, China/, 'English Born row omits day and country');
 assert.deepEqual(bioData.occupation, ['PhD student'], 'occupation uses PhD student');
-assert.equal(bioData.image_caption, 'Photograph taken at Singapore EXPO, 2025', 'English portrait caption identifies Singapore EXPO and year');
+assert.equal(bioData.image, '/images/Portrait.png', 'English portrait gallery keeps the studio portrait as its default');
+assert.equal(bioData.image_caption, undefined, 'English default portrait has no visible caption');
+assert.deepEqual(bioData.image_gallery.map((item) => item.src), ['/images/Portrait-Singapore-ICLR-2025.jpg', '/images/Portrait-Seoul-ICML-2026.png'], 'English portrait gallery keeps Singapore before Seoul');
+assert.match(bioData.image_gallery[1].caption, /AI-generated with Kuaishou AI.*ICML 2026.*COEX, Seoul/, 'English Seoul caption identifies AI provenance, event, and venue');
 const educationBlock = frontmatterSlice(bio, 'education:', 'links:');
 assert.deepEqual(bioData.education.map((item) => item.label), ['The Chinese University of Hong Kong', 'Zhejiang University', 'Shandong University'], 'English education is reverse chronological');
 assert.deepEqual(bioData.education.at(-1), { label: 'Shandong University', url: '/wiki/Shandong_University/', detail: '(BEng, 2022)' }, 'English education links only school name and keeps degree detail separate');
@@ -108,7 +111,10 @@ assert.doesNotMatch(zhAffiliation, /新加坡国立大学重庆研究院/, 'Chin
 assert.doesNotMatch(zhBio, /^native_name:/m, 'Chinese infobox follows Colarpedia by folding English name into Born');
 assert.doesNotMatch(zhBio, /^birth_place:/m, 'Chinese birthplace is kept in prose rather than the infobox');
 assert.match(zhBio, /born: \|\n\s+乔鑫宝 \(Xinbao Qiao\)\n\s+2000年9月30日 \(25岁\)\n\s+中国云南西双版纳/, 'Chinese Born row is a multiline Colarpedia-style value');
-assert.equal(zhBioData.image_caption, '摄于 ICLR 2025，新加坡 EXPO', 'Chinese portrait caption identifies ICLR 2025 at Singapore EXPO');
+assert.equal(zhBioData.image, '/images/Portrait.png', 'Chinese portrait gallery keeps the studio portrait as its default');
+assert.equal(zhBioData.image_caption, undefined, 'Chinese default portrait has no visible caption');
+assert.deepEqual(zhBioData.image_gallery.map((item) => item.src), ['/images/Portrait-Singapore-ICLR-2025.jpg', '/images/Portrait-Seoul-ICML-2026.png'], 'Chinese portrait gallery keeps Singapore before Seoul');
+assert.match(zhBioData.image_gallery[1].caption, /快手 AI 生成.*ICML 2026.*首尔 COEX/, 'Chinese Seoul caption identifies AI provenance, event, and venue');
 assert.ok(['Mr. Ciao', 'MrCiao', '喬', 'ciao'].every((alias) => zhBioData.aliases.includes(alias)), 'Chinese biography aliases include Mr. Ciao and ciao spelling');
 const zhEducationBlock = frontmatterSlice(zhBio, 'education:', 'links:');
 assert.deepEqual(zhBioData.education.map((item) => item.label), ['香港中文大学', '浙江大学', '山东大学'], 'Chinese education is reverse chronological');
@@ -893,6 +899,7 @@ for (const [page, expectedCount] of Object.entries({
 }
 
 const infobox = fs.readFileSync(path.join(root, 'components/Infobox.tsx'), 'utf8');
+const portraitGallery = fs.readFileSync(path.join(root, 'components/PortraitGallery.tsx'), 'utf8');
 const styles = fs.readFileSync(path.join(root, 'app/globals.css'), 'utf8');
 const homePage = fs.readFileSync(path.join(root, 'app/page.tsx'), 'utf8');
 const homepagePortal = fs.readFileSync(path.join(root, 'components/HomepagePortal.tsx'), 'utf8');
@@ -914,6 +921,12 @@ assert.match(styles, /\.wiki-body img \{[\s\S]*max-width: min\(100%, 520px\);[\s
 assert.match(styles, /\.wiki-body img\[src\$="poster\.png"\] \{[\s\S]*max-width: min\(100%, 720px\);[\s\S]*max-height: 640px;[\s\S]*\}/, 'poster images use a larger article display size');
 assert.match(styles, /\.wiki-body img\[src\$="\.svg"\] \{[\s\S]*max-height: 440px;[\s\S]*\}/, 'SVG article diagrams keep a readable height');
 assert.match(styles, /\.wiki-body \.katex-display \{[\s\S]*overflow-x: auto;[\s\S]*\}/, 'display formulas can scroll horizontally on narrow screens');
+assert.match(infobox, /<PortraitGallery items=\{galleryItems\} language=\{language\} \/>/, 'infobox delegates multi-image biographies to the portrait gallery');
+assert.match(portraitGallery, /useState\(0\)/, 'portrait gallery always initializes to the first image');
+assert.match(portraitGallery, /\(currentIndex \+ offset \+ items\.length\) % items\.length/, 'portrait gallery arrows wrap in both directions');
+assert.match(portraitGallery, /aria-label=\{previousLabel\}[\s\S]*aria-label=\{nextLabel\}/, 'portrait gallery exposes localized previous and next button names');
+assert.match(portraitGallery, /aria-live="polite"/, 'portrait gallery announces image changes without interrupting the reader');
+assert.match(styles, /\.wiki-infobox \.wiki-portrait-gallery-frame img \{[\s\S]*height: 330px;[\s\S]*\}/, 'portrait gallery locally overrides article image sizing to hold a stable height while switching');
 assert.match(styles, /\.wiki-search-panel \{[\s\S]*position: absolute;[\s\S]*max-height: min\(420px, 70vh\);[\s\S]*\}/, 'search results render in a bounded dropdown panel');
 assert.match(styles, /\.wiki-search-result \{[\s\S]*display: grid;[\s\S]*grid-template-columns: 1fr auto;[\s\S]*\}/, 'search result rows use a compact two-column layout');
 assert.match(styles, /\.wiki-search-result:hover,[\s\S]*\.wiki-search-result\[aria-selected="true"\] \{[\s\S]*background: #eaecf0;[\s\S]*\}/, 'search result hover and keyboard active states are visible');
@@ -1301,11 +1314,13 @@ const cvPdfUriOutput = execFileSync('mutool', ['show', 'public/files/XinbaoQiao_
 const cvPdfUris = sortedUrls([...cvPdfUriOutput.matchAll(/\/URI\(([^)]*)\)/g)].map((match) => match[1]));
 assert.deepEqual(cvPdfUris, cvTexUris, 'CV PDF URI annotations match CV.tex hyperlink targets');
 
-const publicImages = fs.readdirSync(path.join(root, 'public/images')).filter((file) => /\.(png|jpe?g|gif|webp|svg|ico)$/i.test(file));
-assert.deepEqual(publicImages, ['Portrait.png'], 'public site uses exactly one image');
+const publicImages = fs.readdirSync(path.join(root, 'public/images')).filter((file) => /\.(png|jpe?g|gif|webp|svg|ico)$/i.test(file)).sort();
+assert.deepEqual(publicImages, ['Portrait-Seoul-ICML-2026.png', 'Portrait-Singapore-ICLR-2025.jpg', 'Portrait.png'], 'public biography uses exactly the three approved portrait-gallery images');
 
 for (const file of [
   'public/images/Portrait.png',
+  'public/images/Portrait-Singapore-ICLR-2025.jpg',
+  'public/images/Portrait-Seoul-ICML-2026.png',
   'public/institutions/cuhk-emblem.svg',
   'public/institutions/zhejiang-university-logo.png',
   'public/institutions/shandong-university-logo.png',

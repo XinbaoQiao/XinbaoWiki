@@ -4,6 +4,14 @@ import matter from 'gray-matter';
 
 export type LinkItem = { label: string; url: string; detail?: string; title?: string };
 
+export type WikiImageItem = {
+  src: string;
+  alt: string;
+  caption?: string;
+  fit?: 'cover' | 'contain';
+  position?: string;
+};
+
 export type WikiFrontmatter = {
   name?: string;
   title?: string;
@@ -24,7 +32,9 @@ export type WikiFrontmatter = {
   focus?: unknown;
   avatar?: string;
   image?: string;
+  image_alt?: string;
   image_caption?: string;
+  image_gallery?: WikiImageItem[];
   type?: string;
   authors?: string[];
   venue?: string;

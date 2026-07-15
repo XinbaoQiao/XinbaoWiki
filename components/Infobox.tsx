@@ -1,5 +1,6 @@
 import { Fragment, type ReactNode } from 'react';
-import type { LinkItem, WikiFrontmatter } from '@/lib/wiki';
+import { PortraitGallery } from '@/components/PortraitGallery';
+import type { LinkItem, WikiFrontmatter, WikiImageItem } from '@/lib/wiki';
 import { pathWithBasePath, toChineseSlug, toEnglishSlug } from '@/lib/wiki';
 
 type InfoboxLanguage = 'en' | 'zh';
@@ -103,6 +104,15 @@ function isLink(value: unknown): value is LinkItem {
   return typeof value === 'object' && value !== null && 'label' in value && 'url' in value;
 }
 
+function isImageItem(value: unknown): value is WikiImageItem {
+  return typeof value === 'object'
+    && value !== null
+    && 'src' in value
+    && typeof value.src === 'string'
+    && 'alt' in value
+    && typeof value.alt === 'string';
+}
+
 function localizeUrl(url: string, language: InfoboxLanguage) {
   const wikiMatch = url.match(/^\/wiki\/([^/?#]+)\/?([?#].*)?$/);
   if (!wikiMatch) return pathWithBasePath(url);
@@ -170,7 +180,17 @@ function render(value: unknown, language: InfoboxLanguage): ReactNode {
 export function Infobox({ data, language = 'en' }: Props) {
   const title = typeof data.name === 'string' ? data.name : 'Infobox';
   const image = typeof data.image === 'string' ? data.image : '';
+  const imageAlt = typeof data.image_alt === 'string' ? data.image_alt : `${title} image`;
   const caption = typeof data.image_caption === 'string' ? data.image_caption : '';
+  const galleryItems: WikiImageItem[] = image
+    ? [
+        { src: pathWithBasePath(image), alt: imageAlt, caption },
+        ...(Array.isArray(data.image_gallery) ? data.image_gallery.filter(isImageItem).map((item) => ({
+          ...item,
+          src: pathWithBasePath(item.src)
+        })) : [])
+      ]
+    : [];
   const rowLabels = language === 'zh' ? zhLabels : labels;
   const rows = order
     .filter((key) => !empty(data[key]) && (key !== 'type' || !sameInfoboxText(data.type, data.occupation)))
@@ -185,9 +205,11 @@ export function Infobox({ data, language = 'en' }: Props) {
   return (
     <aside className="wiki-infobox">
       <div className="wiki-infobox-title">{title}</div>
-      {image && (
+      {galleryItems.length > 1 ? (
+        <PortraitGallery items={galleryItems} language={language} />
+      ) : image && (
         <div className="wiki-infobox-image">
-          <img src={pathWithBasePath(image)} alt={`${title} image`} />
+          <img src={pathWithBasePath(image)} alt={imageAlt} />
           {caption && <div className="wiki-infobox-caption">{caption}</div>}
         </div>
       )}

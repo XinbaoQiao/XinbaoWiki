@@ -12,6 +12,10 @@ name: Log
 summary: Append-only maintenance log for the wiki.
 occupation: Maintenance log
 ---
+## 2026-07-15
+
+- Replaced the single biography portrait with an accessible three-image gallery that always opens on the uncaptioned studio portrait and allows manual switching to ICLR 2025 Singapore and Kuaishou AI-generated ICML 2026 Seoul images.
+
 ## 2026-06-13
 
 - Updated [[Xinbao_Qiao]], [[Qiao_Xinbao_zh]], [[Research]], [[Projects]], [[Experience]], [[CV]], and related topic pages so Qiao's recent work is framed around data lifecycle management in AI models, [[Data_Centric_Machine_Learning|data-centric ML]], AI for Networks, and Networks for AI, while keeping [[Distributed_Wasserstein_Barycenter]] as a related method rather than the sole current focus.

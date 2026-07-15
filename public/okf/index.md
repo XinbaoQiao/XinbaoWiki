@@ -108,7 +108,7 @@ This bundle exposes the public Xinbaopedia wiki as Markdown concepts with OKF v0
 
 ### Resource inventory
 
-- [Old Homepage Resources](concepts/Old_Homepage_Resources.md) - Record of the single preserved image from the earlier GitHub homepage.
+- [Homepage Portrait Resources](concepts/Old_Homepage_Resources.md) - Record of the portrait gallery used by the main biography infobox.
 
 ### Technical skills
 
@@ -192,7 +192,7 @@ This bundle exposes the public Xinbaopedia wiki as Markdown concepts with OKF v0
 
 ### 资源记录
 
-- [旧主页资源](concepts/Old_Homepage_Resources_zh.md) - 记录从旧 GitHub 主页保留的一张图片。
+- [主页肖像资源](concepts/Old_Homepage_Resources_zh.md) - 记录个人主页 infobox 使用的肖像图库。
 
 ### 项目概览
 

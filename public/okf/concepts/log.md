@@ -16,6 +16,10 @@ lifecycle:
   retention: semantic memory
 source_path: wiki/log.md
 ---
+## 2026-07-15
+
+- Replaced the single biography portrait with an accessible three-image gallery that always opens on the uncaptioned studio portrait and allows manual switching to ICLR 2025 Singapore and Kuaishou AI-generated ICML 2026 Seoul images.
+
 ## 2026-06-13
 
 - Updated [Xinbao Qiao](./Xinbao_Qiao.md), [Qiao Xinbao zh](./Qiao_Xinbao_zh.md), [Research](./Research.md), [Projects](./Projects.md), [Experience](./Experience.md), [CV](./CV.md), and related topic pages so Qiao's recent work is framed around data lifecycle management in AI models, [data-centric ML](./Data_Centric_Machine_Learning.md), AI for Networks, and Networks for AI, while keeping [Distributed Wasserstein Barycenter](./Distributed_Wasserstein_Barycenter.md) as a related method rather than the sole current focus.
