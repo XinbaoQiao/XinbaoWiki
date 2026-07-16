@@ -41,6 +41,11 @@ const entriesLabel: LocalizedText = {
   zh: '主要学术条目'
 };
 
+const portalTaglines: LocalizedText = {
+  en: "A connected map of Xinbao Qiao's research, publications, and academic journey.",
+  zh: '连接乔鑫宝的研究方向、论文成果与学术经历。'
+};
+
 const updateLabels = {
   en: {
     title: 'Latest Updates',
@@ -267,6 +272,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
             </h1>
           </div>
         </div>
+        <p className="wiki-portal-tagline">{portalTaglines[language]}</p>
         <div className="wiki-portal-search">
           <WikiSearch
             language={language}

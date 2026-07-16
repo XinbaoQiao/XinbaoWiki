@@ -269,6 +269,7 @@ assert.match(layout, /import \{ WikiSearch \} from '@\/components\/WikiSearch';/
 assert.match(layout, /import \{ pathWithBasePath \} from '@\/lib\/wiki';/, 'layout imports only the base-path helper from the wiki library');
 assert.doesNotMatch(layout, /getSearchIndex|searchIndex/, 'layout does not serialize the full search index into every page');
 assert.match(layout, /<WikiSearch hideOnPortal \/>/, 'layout keeps topbar search on article pages without embedding its data');
+assert.match(layout, /className="wiki-topbar-controls"[\s\S]*<WikiSearch hideOnPortal \/>[\s\S]*<LanguageToggle \/>/, 'topbar groups search and language controls in visual reading order');
 assert.match(languageToggle, /const isWikiPage = decodeURIComponent\(pathname\)\.split\('\/'\)\.includes\('wiki'\);[\s\S]*if \(!isWikiPage\) return null;/, 'language toggle hides on the portal homepage where language editions are shown in the masthead');
 assert.match(languageToggle, /type SitePaletteName = 'text' \| 'blue' \| 'gold' \| 'green' \| 'charcoal';/, 'site palette includes a manual text wordmark theme alongside color logo themes');
 assert.match(languageToggle, /\{ color: '#202122', mode: 'text', title: 'Text wordmark theme' \}/, 'site palette exposes a text theme swatch');
@@ -281,7 +282,7 @@ assert.match(languageToggle, /updateSiteFavicon\(icons\[palette\]\);/, 'site pal
 assert.match(languageToggle, /window\.setInterval\(applyPalette, 5 \* 60 \* 1000\)/, 'site palette periodically refreshes auto mode as local time changes');
 assert.match(languageToggle, /const active = mode === option\.mode;/, 'site palette marks only the chosen mode as active');
 assert.doesNotMatch(languageToggle, /activePalette|activePalette === option\.mode/, 'site palette no longer double-highlights Auto and the current time color');
-assert.match(languageToggle, /className="site-palette-switcher"/, 'site palette keeps manual color swatches as a fallback control');
+assert.match(languageToggle, /className="site-palette-switcher" aria-label="Site color theme" role="group"/, 'site palette keeps accessible manual color swatches as a grouped fallback control');
 assert.match(wikiSearch, /hideOnPortal\?: boolean;/, 'search component exposes a homepage suppression prop for the topbar instance');
 assert.match(wikiSearch, /if \(hideOnPortal && isPortalPath\(pathname\)\) return null;/, 'topbar search can hide on the portal homepage');
 assert.doesNotMatch(wikiPageTsx, /Qiao Xinbao Academic Wiki/, 'article metadata no longer uses old Academic Wiki suffix');
@@ -931,9 +932,10 @@ const homepagePortal = fs.readFileSync(path.join(root, 'components/HomepagePorta
 assert.doesNotMatch(styles, /research-atlas|wiki-portal-atlas/, 'retired Research Atlas styles are removed');
 assert.doesNotMatch(styles, /\.wiki-logo-mark/, 'topbar CSS does not keep custom logo-image styling');
 assert.match(styles, /--content-width: 920px;[\s\S]*--sidebar-width: 192px;[\s\S]*--infobox-width: 300px;[\s\S]*--article-gap: 28px;/, 'article dimensions use the approved shared Wikipedia-style grid tokens');
-assert.match(styles, /\.wiki-topbar-inner \{[\s\S]*grid-template-columns: var\(--sidebar-width\) minmax\(320px, 568px\) 1fr auto;[\s\S]*column-gap: var\(--article-gap\);[\s\S]*\}/, 'desktop masthead aligns its logo and search with the shared article grid');
-assert.match(styles, /\.wiki-search \{[\s\S]*grid-column: 2;[\s\S]*width: 100%;[\s\S]*max-width: none;[\s\S]*\}/, 'desktop search occupies the column beside the wordmark');
-assert.match(styles, /\.lang-toggle \{[\s\S]*grid-column: 4;[\s\S]*\}/, 'desktop language control stays at the far-right edge');
+assert.match(styles, /\.wiki-topbar-inner \{[\s\S]*grid-template-columns: var\(--sidebar-width\) minmax\(0, 1fr\);[\s\S]*column-gap: var\(--article-gap\);[\s\S]*\}/, 'desktop masthead aligns its controls with the shared article grid');
+assert.match(styles, /\.wiki-topbar-controls \{[\s\S]*display: flex;[\s\S]*grid-column: 2;[\s\S]*gap: 8px;[\s\S]*max-width: 640px;[\s\S]*\}/, 'desktop search and language switch share one compact control row');
+assert.match(styles, /\.wiki-search \{[\s\S]*width: 100%;[\s\S]*max-width: none;[\s\S]*\}/, 'desktop search fills the grouped masthead control area');
+assert.match(styles, /\.lang-toggle \{[\s\S]*display: inline-flex;[\s\S]*height: 32px;[\s\S]*\}/, 'desktop language control matches the search height');
 assert.match(styles, /\.wiki-tabs-inner \{[\s\S]*grid-template-columns: var\(--sidebar-width\) minmax\(0, var\(--content-width\)\);[\s\S]*gap: var\(--article-gap\);[\s\S]*padding: 0 24px;[\s\S]*\}/, 'article tabs share the sidebar and article grid instead of relying on padding arithmetic');
 assert.match(styles, /\.wiki-tabs-content \{[\s\S]*grid-column: 2;[\s\S]*min-width: 0;[\s\S]*\}[\s\S]*\.wiki-tabs-actions \{[\s\S]*margin-left: auto;/, 'article actions align to the right edge of the article column');
 assert.match(styles, /\.wiki-tabs a \{[\s\S]*border: 0;[\s\S]*border-bottom: 2px solid transparent;[\s\S]*background: transparent;[\s\S]*\.wiki-tabs a\.active \{[\s\S]*border-bottom-color: var\(--site-theme-accent\);/, 'article tools use a flat active underline instead of boxed tabs');
@@ -978,6 +980,9 @@ assert.match(styles, /\.wiki-portal-name \{[\s\S]*font-family: var\(--font-signa
 assert.match(styles, /\.wiki-portal-name-button \{[\s\S]*appearance: none;[\s\S]*-webkit-appearance: none;[\s\S]*display: inline-grid;[\s\S]*place-items: center;[\s\S]*max-width: min\(620px, 86vw\);[\s\S]*font: inherit;[\s\S]*cursor: pointer;[\s\S]*user-select: none;[\s\S]*-webkit-tap-highlight-color: transparent;[\s\S]*\}/, 'homepage signature name removes native button chrome while centering the themed logo or text');
 assert.match(styles, /\.wiki-portal-name-text \{[\s\S]*max-width: 100%;[\s\S]*line-height: \.95;[\s\S]*white-space: nowrap;[\s\S]*\}/, 'homepage pure text signature stays centered inside the shared wordmark box');
 assert.match(styles, /\.site-palette-text \{[\s\S]*linear-gradient\(135deg,[\s\S]*#202122[\s\S]*\}/, 'site palette switcher includes a compact text-theme swatch');
+assert.match(styles, /@media \(hover: hover\) and \(pointer: fine\) \{[\s\S]*\.site-palette-switcher \{[\s\S]*width: 30px;[\s\S]*\.site-palette-switcher:hover,[\s\S]*\.site-palette-switcher:focus-within \{[\s\S]*width: 150px;/, 'fine-pointer palette collapses to the active swatch and expands on hover or keyboard focus');
+assert.match(styles, /\.site-palette-button\.is-active \{[\s\S]*order: -1;/, 'active palette swatch remains visible in the collapsed state');
+assert.match(homepagePortal, /const portalTaglines: LocalizedText = \{[\s\S]*connected map[\s\S]*连接乔鑫宝的研究方向、论文成果与学术经历/, 'homepage explains its value in concise bilingual language');
 assert.match(styles, /\.wiki-portal-name-logo \{[\s\S]*display: none;[\s\S]*width: 100%;[\s\S]*height: auto;[\s\S]*max-height: 124px;[\s\S]*object-fit: contain;[\s\S]*\}/, 'homepage themed logo images use responsive cropped image sizing');
 assert.match(styles, /\.wiki-main \.wiki-portal-name-logo \{[\s\S]*border: 0;[\s\S]*outline: 0;[\s\S]*background: transparent;[\s\S]*box-shadow: none;[\s\S]*margin: 0;[\s\S]*\}/, 'homepage themed logo images override article image borders and background');
 assert.match(styles, /html\[data-site-palette="blue"\] \.wiki-portal-name-text,[\s\S]*html\[data-site-palette="charcoal"\] \.wiki-portal-name-text \{[\s\S]*display: none;[\s\S]*\}/, 'homepage hides the pure text name when a color logo theme is active');

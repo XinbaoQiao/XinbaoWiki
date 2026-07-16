@@ -45,9 +45,15 @@ export function LanguageToggle() {
 
   const targetSlug = isChinesePage ? englishSlug(slug) : chineseSlug(slug);
   const href = `/wiki/${encodeURIComponent(targetSlug)}/`;
+  const accessibleLabel = isChinesePage ? 'Switch to English' : '切换至中文';
 
   return (
-    <a className="lang-toggle" href={withBasePath(href)}>
+    <a
+      aria-label={accessibleLabel}
+      className="lang-toggle"
+      href={withBasePath(href)}
+      title={accessibleLabel}
+    >
       {isChinesePage ? 'English' : '中文'}
     </a>
   );
@@ -148,7 +154,7 @@ export function SitePalette({ icons }: SitePaletteProps) {
   };
 
   return (
-    <div className="site-palette-switcher" aria-label="Site color theme">
+    <div className="site-palette-switcher" aria-label="Site color theme" role="group">
       {sitePaletteOptions.map((option) => {
         const pressed = mode === option.mode;
         const active = mode === option.mode;

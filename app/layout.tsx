@@ -16,13 +16,15 @@ const sitePaletteIcons = {
   charcoal: pathWithBasePath('/site-icons/xinbaopedia-charcoal.png')
 };
 
+const siteDescription = "Explore Xinbao Qiao's research, publications, and academic journey through a connected bilingual wiki.";
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://xinbaopedia.top'),
   title: {
     default: 'Xinbaopedia',
     template: '%s | Xinbaopedia'
   },
-  description: 'Personal academic wiki homepage for Qiao Xinbao / Xinbao Qiao.',
+  description: siteDescription,
   alternates: { canonical: '/' },
   icons: { icon: sitePaletteIcons.blue },
   openGraph: {
@@ -30,12 +32,12 @@ export const metadata: Metadata = {
     url: '/',
     siteName: 'Xinbaopedia',
     title: 'Xinbaopedia',
-    description: 'Personal academic wiki homepage for Qiao Xinbao / Xinbao Qiao.'
+    description: siteDescription
   },
   twitter: {
     card: 'summary',
     title: 'Xinbaopedia',
-    description: 'Personal academic wiki homepage for Qiao Xinbao / Xinbao Qiao.'
+    description: siteDescription
   }
 };
 
@@ -53,8 +55,10 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
               <span className="wiki-logo-word">Xinbaopedia</span>
               <span className="wiki-logo-subtitle">The Academic Wiki</span>
             </a>
-            <LanguageToggle />
-            <WikiSearch hideOnPortal />
+            <div className="wiki-topbar-controls">
+              <WikiSearch hideOnPortal />
+              <LanguageToggle />
+            </div>
           </div>
         </header>
         <ArticleTabs />
