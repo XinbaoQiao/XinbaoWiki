@@ -1,10 +1,13 @@
 #!/usr/bin/env node
 
-import { execFileSync, spawn } from 'node:child_process';
+import { execFileSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { runExternal } from './lib/external-process.mjs';
+import { stagedSmokeRoutes, withoutProxyEnv } from './lib/network-routes.mjs';
+import { readReleaseState, writeReleaseState } from './lib/release-state.mjs';
 import { biographyReleaseContract } from './release-contract.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -13,34 +16,17 @@ const project = 'xinbaopedia';
 const productionUrl = 'https://xinbaopedia.top';
 const vercelCliVersion = '54.18.7';
 const vercelCliPackage = `vercel@${vercelCliVersion}`;
-const proxyEnvKeys = [
-  'http_proxy',
-  'https_proxy',
-  'HTTP_PROXY',
-  'HTTPS_PROXY',
-  'all_proxy',
-  'ALL_PROXY',
-];
+const timeoutMs = {
+  deploy: 20 * 60_000,
+  link: 2 * 60_000,
+  productionSmoke: 3 * 60_000,
+  promote: 3 * 60_000,
+  stagedRequest: 45_000,
+};
 
 function fail(message) {
   console.error(`deploy-production: ${message}`);
   process.exit(1);
-}
-
-function sanitizeEnv() {
-  const env = { ...process.env };
-  for (const key of [...proxyEnvKeys, 'NODE_TLS_REJECT_UNAUTHORIZED']) {
-    delete env[key];
-  }
-  return env;
-}
-
-function configuredProxyEnv(baseEnv) {
-  const env = { ...baseEnv };
-  for (const key of proxyEnvKeys) {
-    if (process.env[key]) env[key] = process.env[key];
-  }
-  return env;
 }
 
 function redactArgs(args, env) {
@@ -48,61 +34,30 @@ function redactArgs(args, env) {
   return args.map((arg) => (token && arg === token ? '<redacted-token>' : arg));
 }
 
-function run(command, args, env) {
-  return new Promise((resolve, reject) => {
-    const child = spawn(command, args, {
-      cwd: root,
-      env,
-      stdio: 'inherit',
-      shell: process.platform === 'win32',
-    });
+function displayCommand(command, args, env) {
+  return [command, ...redactArgs(args, env)].join(' ');
+}
 
-    child.on('error', reject);
-    child.on('exit', (code, signal) => {
-      const displayArgs = redactArgs(args, env);
-      if (signal) {
-        reject(new Error(`${command} ${displayArgs.join(' ')} exited by signal ${signal}`));
-        return;
-      }
-      if (code !== 0) {
-        reject(new Error(`${command} ${displayArgs.join(' ')} exited with code ${code}`));
-        return;
-      }
-      resolve();
-    });
+async function run(command, args, env, options = {}) {
+  return runExternal(command, args, {
+    capture: false,
+    cwd: root,
+    displayCommand: displayCommand(command, args, env),
+    env,
+    timeoutMs: options.timeoutMs,
   });
 }
 
-function runCapture(command, args, env) {
-  return new Promise((resolve, reject) => {
-    const child = spawn(command, args, {
-      cwd: root,
-      env,
-      stdio: ['ignore', 'pipe', 'pipe'],
-      shell: process.platform === 'win32',
-    });
-    let stdout = '';
-
-    child.stdout.on('data', (chunk) => {
-      stdout += chunk.toString();
-    });
-    child.stderr.on('data', (chunk) => {
-      process.stderr.write(chunk);
-    });
-    child.on('error', reject);
-    child.on('exit', (code, signal) => {
-      const displayArgs = redactArgs(args, env);
-      if (signal) {
-        reject(new Error(`${command} ${displayArgs.join(' ')} exited by signal ${signal}`));
-        return;
-      }
-      if (code !== 0) {
-        reject(new Error(`${command} ${displayArgs.join(' ')} exited with code ${code}`));
-        return;
-      }
-      resolve(stdout.trim());
-    });
+async function runCapture(command, args, env, options = {}) {
+  const result = await runExternal(command, args, {
+    cwd: root,
+    displayCommand: displayCommand(command, args, env),
+    env,
+    maxOutputBytes: options.maxOutputBytes,
+    mirrorStderr: true,
+    timeoutMs: options.timeoutMs,
   });
+  return result.stdout;
 }
 
 function git(args) {
@@ -110,6 +65,7 @@ function git(args) {
     cwd: root,
     encoding: 'utf8',
     stdio: ['ignore', 'pipe', 'pipe'],
+    timeout: 30_000,
   });
 }
 
@@ -207,7 +163,9 @@ async function runSmoke(env, siteUrl = productionUrl) {
   ];
   for (const scriptPath of smokeCandidates) {
     if (existsSync(scriptPath)) {
-      await run(process.execPath, [scriptPath], { ...env, SITE_URL: siteUrl });
+      await run(process.execPath, [scriptPath], { ...env, SITE_URL: siteUrl }, {
+        timeoutMs: timeoutMs.productionSmoke,
+      });
       return;
     }
   }
@@ -215,7 +173,9 @@ async function runSmoke(env, siteUrl = productionUrl) {
   const scripts = readPackageScripts();
   for (const scriptName of ['smoke:production', 'smoke']) {
     if (scripts[scriptName]) {
-      await run('npm', ['run', scriptName], { ...env, SITE_URL: siteUrl });
+      await run('npm', ['run', scriptName], { ...env, SITE_URL: siteUrl }, {
+        timeoutMs: timeoutMs.productionSmoke,
+      });
       return;
     }
   }
@@ -224,7 +184,7 @@ async function runSmoke(env, siteUrl = productionUrl) {
   await checkProductionUrl(siteUrl);
 }
 
-async function runStagedSmoke(vercelCommand, env, stagedUrl) {
+async function runStagedSmoke(vercelCommand, routes, stagedUrl) {
   const checks = [
     { path: '/', patterns: [/Xinbaopedia/i] },
     biographyReleaseContract,
@@ -233,11 +193,12 @@ async function runStagedSmoke(vercelCommand, env, stagedUrl) {
     { path: '/search-index.json', patterns: [/"slug":"Xinbao_Qiao"/] },
     { path: '/api/chat-with-xinbao/', patterns: [/"limit":10/] },
   ];
+  const attempts = [];
 
   for (const check of checks) {
     let body;
-    let lastError;
-    for (let attempt = 1; attempt <= 2; attempt += 1) {
+    const failures = [];
+    for (const route of routes) {
       try {
         body = await runCapture(
           vercelCommand,
@@ -247,58 +208,115 @@ async function runStagedSmoke(vercelCommand, env, stagedUrl) {
             '--yes',
             '--', '--silent', '--show-error', '--max-time', '30',
           ]),
-          env
+          route.env,
+          { timeoutMs: timeoutMs.stagedRequest }
         );
+        attempts.push({ path: check.path, route: route.name, status: 'passed' });
+        console.log(`deploy-production: staged ${check.path} passed via ${route.name}`);
         break;
       } catch (error) {
-        lastError = error;
-        if (attempt < 2) {
-          console.warn(`deploy-production: retrying staged smoke for ${check.path}`);
-        }
+        const kind = error.kind || 'request_error';
+        attempts.push({ kind, path: check.path, route: route.name, status: 'failed' });
+        failures.push(`${route.name}=${kind}`);
+        console.warn(`deploy-production: staged ${check.path} failed via ${route.name}: ${kind}`);
       }
     }
-    if (body === undefined) throw lastError;
+
+    if (body === undefined) {
+      throw new Error(`staged smoke failed for ${check.path} across ${failures.join(', ')}`);
+    }
     for (const pattern of check.patterns) {
       if (!pattern.test(body)) {
-        throw new Error(`staged smoke failed for ${check.path}: missing ${pattern}`);
+        throw new Error(`staged smoke content mismatch for ${check.path}: missing ${pattern}`);
       }
     }
   }
+
   console.log(`deploy-production: staged smoke passed for ${stagedUrl}`);
+  return attempts;
 }
 
-function checkProductionUrl(url) {
-  return new Promise((resolve, reject) => {
-    const request = fetch(url, { redirect: 'follow' });
-    request
-      .then((response) => {
-        if (!response.ok) {
-          reject(new Error(`production check returned HTTP ${response.status}`));
-          return;
-        }
-        console.log(`deploy-production: production check passed with HTTP ${response.status}`);
-        resolve();
-      })
-      .catch(reject);
+async function checkProductionUrl(url) {
+  const response = await fetch(url, {
+    redirect: 'follow',
+    signal: AbortSignal.timeout(30_000),
   });
+  if (!response.ok) {
+    throw new Error(`production check returned HTTP ${response.status}`);
+  }
+  console.log(`deploy-production: production check passed with HTTP ${response.status}`);
+}
+
+function releaseError(error) {
+  return {
+    durationMs: error.durationMs ?? null,
+    kind: error.kind || 'release_error',
+    message: error.message,
+    signal: error.signal ?? null,
+  };
 }
 
 async function main() {
-  if (process.argv.slice(2).some((arg) => arg === '--token' || arg.startsWith('--token='))) {
+  const args = process.argv.slice(2);
+  if (args.some((arg) => arg === '--token' || arg.startsWith('--token='))) {
     fail('do not pass tokens on the command line; set VERCEL_TOKEN in the environment');
   }
 
+  const resume = args.includes('--resume');
   const token = process.env.VERCEL_TOKEN;
   if (!token) {
     fail('VERCEL_TOKEN is required in the environment');
   }
 
-  const env = sanitizeEnv();
+  requireCleanDeploymentTree();
+  const commit = process.env.RELEASE_COMMIT || git(['rev-parse', 'HEAD']).trim();
+  const statePath = process.env.RELEASE_STATE_PATH || join(root, '.codex', 'tmp', 'release-state.json');
+  let state = readReleaseState(statePath);
+  if (resume) {
+    if (!state) fail(`no release state found at ${statePath}`);
+    if (state.commit !== commit) {
+      fail(`release state commit ${state.commit} does not match current commit ${commit}`);
+    }
+  } else {
+    state = { commit, lastSuccessfulPhase: null, phase: 'starting' };
+    writeReleaseState(statePath, state);
+  }
+
+  const checkpoint = (phase, extra = {}) => {
+    state = {
+      ...state,
+      ...extra,
+      commit,
+      error: null,
+      lastSuccessfulPhase: phase,
+      phase,
+    };
+    writeReleaseState(statePath, state);
+  };
+  const checkpointFailure = (error) => {
+    state = {
+      ...state,
+      commit,
+      error: releaseError(error),
+      failedPhase: state.phase,
+      phase: 'failed',
+    };
+    writeReleaseState(statePath, state);
+  };
+
+  const env = withoutProxyEnv(process.env);
   env.VERCEL_TOKEN = token;
-  const stagedSmokeEnv = configuredProxyEnv(env);
+  const routes = stagedSmokeRoutes(env, process.env);
   const vercelCommand = requireVercelCommand();
   const hadLocalEnv = existsSync(join(root, '.env.local'));
   const cleanupOnSignal = (exitCode) => {
+    writeReleaseState(statePath, {
+      ...state,
+      commit,
+      error: { kind: 'signal', message: `release interrupted with exit ${exitCode}` },
+      failedPhase: state.phase,
+      phase: 'failed',
+    });
     cleanupGeneratedEnvFile(hadLocalEnv);
     process.exit(exitCode);
   };
@@ -306,25 +324,73 @@ async function main() {
   process.once('SIGTERM', () => cleanupOnSignal(143));
 
   try {
-    requireCleanDeploymentTree();
-    await run(vercelCommand, vercelArgs('link', ['--yes', '--project', project, '--scope', scope]), env);
-    const deploymentOutput = await runCapture(
-      vercelCommand,
-      vercelArgs('deploy', ['--prod', '--skip-domain', '--yes', '--scope', scope]),
-      env
-    );
-    const stagedUrl = deploymentUrlFromOutput(deploymentOutput);
-    if (!/^https:\/\/[^\s]+\.vercel\.app\/?$/.test(stagedUrl)) {
-      throw new Error('Vercel did not return a valid staged deployment URL');
+    const resumePhase = state.phase === 'failed' ? state.lastSuccessfulPhase : state.phase;
+    if (resume && resumePhase === 'production_verified') {
+      console.log(`deploy-production: release ${commit} is already production verified`);
+      return;
     }
-    console.log(`deploy-production: staged deployment ready at ${stagedUrl}`);
-    await runStagedSmoke(vercelCommand, stagedSmokeEnv, stagedUrl);
-    await run(vercelCommand, vercelArgs('promote', [stagedUrl, '--yes', '--scope', scope]), env);
-    try {
-      await runSmoke(env, productionUrl);
-    } catch (error) {
-      throw new Error(`deployment was promoted to production but verification did not pass: ${error.message}`);
+
+    let stagedUrl = state.deploymentUrl;
+    let phase = resume ? resumePhase : 'starting';
+
+    if (phase === 'starting') {
+      await run(
+        vercelCommand,
+        vercelArgs('link', ['--yes', '--project', project, '--scope', scope]),
+        env,
+        { timeoutMs: timeoutMs.link }
+      );
+      checkpoint('linked');
+      phase = 'linked';
     }
+
+    if (phase === 'linked') {
+      const deploymentOutput = await runCapture(
+        vercelCommand,
+        vercelArgs('deploy', ['--prod', '--skip-domain', '--yes', '--scope', scope]),
+        env,
+        { maxOutputBytes: 8 * 1024 * 1024, timeoutMs: timeoutMs.deploy }
+      );
+      stagedUrl = deploymentUrlFromOutput(deploymentOutput);
+      if (!/^https:\/\/[^\s]+\.vercel\.app\/?$/.test(stagedUrl)) {
+        throw new Error('Vercel did not return a valid staged deployment URL');
+      }
+      checkpoint('staged', { deploymentUrl: stagedUrl });
+      phase = 'staged';
+      console.log(`deploy-production: staged deployment ready at ${stagedUrl}`);
+    } else if (!stagedUrl && !['promoted', 'production_verified'].includes(phase)) {
+      throw new Error(`release cannot resume from ${phase || 'unknown'} without a staged deployment URL`);
+    }
+
+    if (phase === 'staged') {
+      const routeAttempts = await runStagedSmoke(vercelCommand, routes, stagedUrl);
+      checkpoint('staged_verified', { deploymentUrl: stagedUrl, routeAttempts });
+      phase = 'staged_verified';
+    }
+
+    if (phase === 'staged_verified') {
+      await run(
+        vercelCommand,
+        vercelArgs('promote', [stagedUrl, '--yes', '--scope', scope]),
+        env,
+        { timeoutMs: timeoutMs.promote }
+      );
+      checkpoint('promoted', { deploymentUrl: stagedUrl });
+      phase = 'promoted';
+    }
+
+    if (phase === 'promoted') {
+      try {
+        await runSmoke(env, productionUrl);
+      } catch (error) {
+        throw new Error(`deployment was promoted to production but verification did not pass: ${error.message}`);
+      }
+      checkpoint('production_verified', { deploymentUrl: stagedUrl, productionUrl });
+      console.log(`deploy-production: production verified for ${commit}`);
+    }
+  } catch (error) {
+    checkpointFailure(error);
+    throw error;
   } finally {
     cleanupGeneratedEnvFile(hadLocalEnv);
   }

@@ -2,10 +2,13 @@
 
 import assert from 'node:assert/strict';
 import { execFileSync, spawn } from 'node:child_process';
-import { mkdirSync, mkdtempSync, rmSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import http from 'node:http';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { runExternal } from './lib/external-process.mjs';
+import { stagedSmokeRoutes } from './lib/network-routes.mjs';
+import { readReleaseState, writeReleaseState } from './lib/release-state.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 assert.equal(Number.parseInt(process.versions.node, 10), 22, 'release workflow tests execute under Node 22');
@@ -81,6 +84,89 @@ async function testSmokeRetry() {
   }
 }
 
+async function testExternalProcessTimeoutKillsTree() {
+  const tempRoot = join(root, '.codex', 'tmp');
+  mkdirSync(tempRoot, { recursive: true });
+  const temp = mkdtempSync(join(tempRoot, 'process-timeout-test-'));
+  const pidPath = join(temp, 'grandchild.pid');
+  const script = [
+    "const { spawn } = require('node:child_process');",
+    "const { writeFileSync } = require('node:fs');",
+    "const child = spawn(process.execPath, ['-e', 'setInterval(() => {}, 1000)'], { stdio: 'ignore' });",
+    "writeFileSync(process.argv[1], String(child.pid));",
+    "setInterval(() => {}, 1000);",
+  ].join('');
+
+  try {
+    const startedAt = Date.now();
+    await assert.rejects(
+      runExternal(process.execPath, ['-e', script, pidPath], {
+        killGraceMs: 100,
+        timeoutMs: 250,
+      }),
+      (error) => error.kind === 'timeout' && error.timeoutMs === 250
+    );
+    assert.ok(Date.now() - startedAt < 2_000, 'parent timeout bounds the full process tree');
+    assert.ok(existsSync(pidPath), 'timeout fixture recorded its grandchild pid');
+    const grandchildPid = Number.parseInt(readFileSync(pidPath, 'utf8'), 10);
+    await new Promise((resolve) => setTimeout(resolve, 100));
+    assert.throws(() => process.kill(grandchildPid, 0), /ESRCH/, 'timeout kills descendants, not only the direct child');
+  } finally {
+    rmSync(temp, { recursive: true, force: true });
+  }
+}
+
+async function testExternalProcessOutputLimit() {
+  await assert.rejects(
+    runExternal(process.execPath, ['-e', "process.stdout.write('x'.repeat(4096))"], {
+      maxOutputBytes: 1_024,
+      timeoutMs: 2_000,
+    }),
+    (error) => error.kind === 'output_limit' && Buffer.byteLength(error.stdout) === 1_024
+  );
+}
+
+function testNetworkRouteSelection() {
+  const base = { PATH: process.env.PATH };
+  assert.deepEqual(
+    stagedSmokeRoutes(base, {}, 'auto').map((route) => route.name),
+    ['direct'],
+    'staged smoke uses direct access when no proxy is configured'
+  );
+  assert.deepEqual(
+    stagedSmokeRoutes(base, { HTTPS_PROXY: 'http://127.0.0.1:17897' }, 'auto').map((route) => route.name),
+    ['direct', 'proxy'],
+    'staged smoke tries each distinct network route once'
+  );
+  assert.deepEqual(
+    stagedSmokeRoutes(base, { HTTPS_PROXY: 'http://127.0.0.1:17897' }, 'proxy').map((route) => route.name),
+    ['proxy'],
+    'an explicit staged-smoke route is deterministic'
+  );
+}
+
+function testReleaseStateRoundTrip() {
+  const tempRoot = join(root, '.codex', 'tmp');
+  mkdirSync(tempRoot, { recursive: true });
+  const temp = mkdtempSync(join(tempRoot, 'release-state-test-'));
+  const statePath = join(temp, 'release.json');
+  try {
+    writeReleaseState(statePath, {
+      commit: 'abc123',
+      deploymentUrl: 'https://example.vercel.app',
+      lastSuccessfulPhase: 'staged',
+      phase: 'failed',
+    });
+    const state = readReleaseState(statePath);
+    assert.equal(state.schemaVersion, 1);
+    assert.equal(state.commit, 'abc123');
+    assert.equal(state.deploymentUrl, 'https://example.vercel.app');
+    assert.match(state.updatedAt, /^\d{4}-\d{2}-\d{2}T/);
+  } finally {
+    rmSync(temp, { recursive: true, force: true });
+  }
+}
+
 function testStagedControlFileGate() {
   for (const file of ['AGENTS.md', 'CLAUDE.md']) {
     const tempRoot = join(root, '.codex', 'tmp');
@@ -113,5 +199,9 @@ function testStagedControlFileGate() {
 }
 
 await testSmokeRetry();
+await testExternalProcessTimeoutKillsTree();
+await testExternalProcessOutputLimit();
+testNetworkRouteSelection();
+testReleaseStateRoundTrip();
 testStagedControlFileGate();
 console.log('Release workflow tests passed');

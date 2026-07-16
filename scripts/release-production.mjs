@@ -1,30 +1,35 @@
 #!/usr/bin/env node
 
-import { execFileSync } from 'node:child_process';
 import { mkdirSync, readFileSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { runExternal } from './lib/external-process.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const branch = 'main';
-const dryRun = process.argv.includes('--dry-run');
+const args = process.argv.slice(2);
+const dryRun = args.includes('--dry-run');
+const resume = args.includes('--resume');
 
 function fail(message) {
   console.error(`release-production: ${message}`);
   process.exit(1);
 }
 
-function run(command, args, options = {}) {
-  return execFileSync(command, args, {
+async function run(command, commandArgs, options = {}) {
+  const result = await runExternal(command, commandArgs, {
+    capture: options.capture !== false,
     cwd: options.cwd || root,
-    env: process.env,
-    encoding: options.encoding || 'utf8',
-    stdio: options.stdio || ['ignore', 'pipe', 'pipe'],
+    displayCommand: [command, ...commandArgs].join(' '),
+    env: options.env || process.env,
+    mirrorStderr: options.capture !== false,
+    timeoutMs: options.timeoutMs || 60_000,
   });
+  return result.stdout;
 }
 
-function git(args, options = {}) {
-  return run('git', args, options);
+function git(commandArgs, options = {}) {
+  return run('git', commandArgs, options);
 }
 
 function requireDeclaredRuntime() {
@@ -36,58 +41,81 @@ function requireDeclaredRuntime() {
   }
 }
 
-function main() {
+async function main() {
   requireDeclaredRuntime();
-  const currentBranch = git(['branch', '--show-current']).trim();
+  const currentBranch = (await git(['branch', '--show-current'])).trim();
   if (currentBranch !== branch) {
     fail(`production releases must start from ${branch}; current branch is ${currentBranch || 'detached HEAD'}`);
   }
 
-  const staged = git(['diff', '--cached', '--name-only']).trim();
+  const staged = (await git(['diff', '--cached', '--name-only'])).trim();
   if (staged) {
     fail(`commit or unstage pending files before release: ${staged.split('\n').join(', ')}`);
   }
 
-  const head = git(['rev-parse', 'HEAD']).trim();
-  const remoteOutput = git(['ls-remote', '--exit-code', 'origin', `refs/heads/${branch}`]).trim();
+  const head = (await git(['rev-parse', 'HEAD'])).trim();
+  const remoteOutput = (await git(
+    ['ls-remote', '--exit-code', 'origin', `refs/heads/${branch}`],
+    { timeoutMs: 60_000 }
+  )).trim();
   const remoteHead = remoteOutput.split(/\s+/)[0];
   if (head !== remoteHead) {
     fail(`local ${head.slice(0, 12)} does not match origin/${branch} ${remoteHead.slice(0, 12)}; push the intended commit first`);
   }
 
-  const dirty = git(['status', '--porcelain']).trim();
+  const dirty = (await git(['status', '--porcelain'])).trim();
   if (dirty) {
     console.log('release-production: local working-tree changes are excluded; deploying the pushed HEAD commit in an isolated worktree');
   }
 
   const worktree = join(root, '.codex', 'tmp', 'release-worktrees', `${head.slice(0, 12)}-${process.pid}`);
+  const statePath = join(root, '.codex', 'tmp', 'release-state', `${head}.json`);
   mkdirSync(dirname(worktree), { recursive: true });
   let registered = false;
   try {
-    git(['worktree', 'add', '--detach', worktree, head], { stdio: 'inherit' });
+    await git(['worktree', 'add', '--detach', worktree, head], {
+      capture: false,
+      timeoutMs: 60_000,
+    });
     registered = true;
-    run('npm', ['run', 'verify:publish'], { cwd: worktree, stdio: 'inherit' });
+    await run('npm', ['run', 'verify:publish'], {
+      capture: false,
+      cwd: worktree,
+      timeoutMs: 2 * 60_000,
+    });
     if (dryRun) {
       console.log(`release-production: dry run passed for remote commit ${head}`);
     } else {
-      run('npm', ['run', 'deploy:production'], { cwd: worktree, stdio: 'inherit' });
+      const deployArgs = ['run', 'deploy:production'];
+      if (resume) deployArgs.push('--', '--resume');
+      await run('npm', deployArgs, {
+        capture: false,
+        cwd: worktree,
+        env: {
+          ...process.env,
+          RELEASE_COMMIT: head,
+          RELEASE_STATE_PATH: statePath,
+        },
+        timeoutMs: 25 * 60_000,
+      });
       console.log(`release-production: deployed and verified ${head}`);
     }
   } finally {
     if (registered) {
       try {
-        git(['worktree', 'remove', '--force', worktree], { stdio: 'inherit' });
+        await git(['worktree', 'remove', '--force', worktree], {
+          capture: false,
+          timeoutMs: 60_000,
+        });
       } catch (error) {
         console.warn(`release-production: automatic worktree cleanup failed: ${error.message}`);
       }
     }
     rmSync(worktree, { recursive: true, force: true });
-    git(['worktree', 'prune']);
+    await git(['worktree', 'prune']);
   }
 }
 
-try {
-  main();
-} catch (error) {
-  fail(error.stderr?.toString().trim() || error.message);
-}
+main().catch((error) => {
+  fail(error.stderr?.trim() || error.message);
+});

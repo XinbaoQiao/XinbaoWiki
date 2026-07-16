@@ -23,6 +23,7 @@
     "smoke:production": "node scripts/run-with-node22.mjs node scripts/smoke-production.mjs",
     "deploy:production": "node scripts/run-with-node22.mjs node scripts/deploy-production.mjs",
     "release:production": "node scripts/run-with-node22.mjs node scripts/release-production.mjs",
+    "release:resume": "node scripts/run-with-node22.mjs node scripts/release-production.mjs --resume",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "typecheck": "node scripts/prepare-typecheck.mjs && tsc --noEmit",
     "check": "node scripts/run-with-node22.mjs npm run check:node22",
