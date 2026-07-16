@@ -82,31 +82,33 @@ async function testSmokeRetry() {
 }
 
 function testStagedControlFileGate() {
-  const tempRoot = join(root, '.codex', 'tmp');
-  mkdirSync(tempRoot, { recursive: true });
-  const temp = mkdtempSync(join(tempRoot, 'release-test-'));
-  const index = join(temp, 'index');
-  const env = { ...process.env, GIT_INDEX_FILE: index };
-  try {
-    execFileSync('git', ['read-tree', 'HEAD'], { cwd: root, env, stdio: 'ignore' });
-    const blob = execFileSync('git', ['hash-object', '-w', '--stdin'], {
-      cwd: root,
-      encoding: 'utf8',
-      input: '# deliberately staged control-file test\n',
-    }).trim();
-    execFileSync('git', ['update-index', '--add', '--cacheinfo', `100644,${blob},AGENTS.md`], { cwd: root, env, stdio: 'ignore' });
-    const result = execFileSync(process.execPath, ['scripts/verify-publish-set.mjs', '--staged-only'], {
-      cwd: root,
-      env,
-      encoding: 'utf8',
-      stdio: ['ignore', 'pipe', 'pipe'],
-    });
-    assert.fail(`control-file gate unexpectedly passed: ${result}`);
-  } catch (error) {
-    const output = `${error.stdout || ''}${error.stderr || ''}`;
-    assert.match(output, /AGENTS\.md: blocked staged path/, 'staged control-file gate rejects AGENTS.md');
-  } finally {
-    rmSync(temp, { recursive: true, force: true });
+  for (const file of ['AGENTS.md', 'CLAUDE.md']) {
+    const tempRoot = join(root, '.codex', 'tmp');
+    mkdirSync(tempRoot, { recursive: true });
+    const temp = mkdtempSync(join(tempRoot, 'release-test-'));
+    const index = join(temp, 'index');
+    const env = { ...process.env, GIT_INDEX_FILE: index };
+    try {
+      execFileSync('git', ['read-tree', 'HEAD'], { cwd: root, env, stdio: 'ignore' });
+      const blob = execFileSync('git', ['hash-object', '-w', '--stdin'], {
+        cwd: root,
+        encoding: 'utf8',
+        input: '# deliberately staged control-file test\n',
+      }).trim();
+      execFileSync('git', ['update-index', '--add', '--cacheinfo', `100644,${blob},${file}`], { cwd: root, env, stdio: 'ignore' });
+      const result = execFileSync(process.execPath, ['scripts/verify-publish-set.mjs', '--staged-only'], {
+        cwd: root,
+        env,
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'pipe'],
+      });
+      assert.fail(`control-file gate unexpectedly passed: ${result}`);
+    } catch (error) {
+      const output = `${error.stdout || ''}${error.stderr || ''}`;
+      assert.match(output, new RegExp(`${file.replace('.', '\\.')}: blocked staged path`), `staged control-file gate rejects ${file}`);
+    } finally {
+      rmSync(temp, { recursive: true, force: true });
+    }
   }
 }
 

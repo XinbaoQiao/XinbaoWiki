@@ -22,6 +22,7 @@ const blockedPathPatterns = [
 
 const blockedStagedPathPatterns = [
   { pattern: /(^|\/)AGENTS\.md$/, reason: 'agent instruction file requires explicit publication approval' },
+  { pattern: /(^|\/)CLAUDE\.md$/, reason: 'agent instruction file requires explicit publication approval' },
   { pattern: /(^|\/)DESIGN\.md$/, reason: 'local design contract requires explicit publication approval' },
   { pattern: /(^|\/)agent_progress\.md$/, reason: 'local agent ledger' },
   { pattern: /(^|\/)\.codex(?:\/|$)/, reason: 'local Codex state' },

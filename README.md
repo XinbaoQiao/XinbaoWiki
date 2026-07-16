@@ -1,185 +1,95 @@
-# Xinbaopedia
+<div align="center">
+  <img src="public/xinbaopedia-icon.png" width="132" alt="Xinbaopedia" />
 
-> A Wikipedia-inspired personal academic wiki for Xinbao Qiao.
+  # Xinbaopedia
 
-Xinbaopedia is a public-facing academic homepage, research archive, and living wiki. It collects Xinbao Qiao's biography, research interests, publications, projects, education, experience, and related study notes in one searchable site.
+  **One person. A growing map of ideas, papers, and research stories.**
 
-Visit the site: <https://xinbaopedia.top>
+  把个人主页、论文档案和研究脉络，变成一座真正可以探索的学术百科。
 
----
-
-## What It Is
-
-Xinbaopedia is designed as a small academic knowledge base rather than a conventional personal homepage. Instead of placing every detail on a single profile page, it organizes information into connected wiki articles:
-
-| Area | What It Covers |
-| --- | --- |
-| Profile | Academic biography, affiliations, education, and contact information. |
-| Research | Topics such as data-centric machine learning, trustworthy AI, distributed learning, unlearning, and model collapse. |
-| Publications | Paper pages with summaries, venues, figures, posters, and related topic links. |
-| Projects | Research prototypes, collaboration notes, and selected implementation records. |
-| Notes | Supporting pages for concepts, institutions, skills, and reading trails. |
-
-The result is a homepage that can grow like a knowledge graph. A visitor can start from the biography, jump into a paper, follow a research topic, and return through related pages without losing context.
-
-## Highlights
-
-- **Wikipedia-style reading experience**: article pages, infoboxes, internal links, side navigation, and neutral academic prose.
-- **Bilingual content**: English and Chinese pages are maintained side by side for major entries.
-- **Searchable knowledge base**: the site includes a searchable index across visible wiki pages.
-- **Research-first organization**: papers are connected to broader research topics instead of being listed as isolated entries.
-- **Living archive**: the repository can keep long-term records of projects, notes, resources, and publication updates.
-- **Chat with Xinbao**: the site includes a lightweight conversational assistant grounded in public wiki content.
-- **Production-ready publishing**: the main site is deployed on Vercel at <https://xinbaopedia.top>.
-
-## Content Philosophy
-
-The wiki aims to be factual, scoped, and maintainable.
-
-- Main pages should use third-person, neutral, academic prose.
-- Biographical claims should be concrete and not overstate uncertain information.
-- Research pages should explain context, motivation, and connections between work.
-- Paper pages should be linked back to relevant research-topic pages.
-- Generated pages, build artifacts, logs, caches, and deployment outputs are not treated as source material.
-
-The canonical content lives in `wiki/*.md`. If a public page needs to change, the Markdown source should change first.
-
-## Content Maintenance Backend
-
-The maintenance model combines the LLM Wiki v2 lesson that the schema is the product with the Open Knowledge Format principle that knowledge should stay human-readable, parseable, and portable. The canonical source remains `wiki/*.md`, but every source page is now treated as a concept with explicit frontmatter:
-
-| Field | Purpose |
-| --- | --- |
-| `type` | Required concept type for routing, filtering, and presentation. |
-| `title` | Stable display title for humans and agents. |
-| `description` | One-sentence summary used by indexes, search, and previews. |
-| `tags` | Cross-cutting categories for future tag views and retrieval. |
-| `timestamp` | Last meaningful source timestamp. |
-
-Pages may also declare structured relations in frontmatter when a link should carry semantic meaning beyond a body wikilink:
-
-```yaml
-relations:
-  - type: depends-on
-    target: Synthetic_Data
-    label: concept foundation
-```
-
-Supported structured relation types are `related`, `uses`, `depends-on`, `supersedes`, `contradicts`, `derived-from`, and `cites`. Body links are still collected automatically as `wikilink` and `markdown-link` relations.
-
-Run the deterministic maintainer after content changes:
-
-```bash
-npm run maintain:wiki
-```
-
-It standardizes source frontmatter and regenerates:
-
-| File | Purpose |
-| --- | --- |
-| `wiki/pages.json` | Public, hidden-filtered page catalog for content consumers. |
-| `wiki/graph.json` | Nodes, wikilink edges, backlinks, lifecycle metadata, type/language counts, and maintenance warnings. |
-| `wiki/maintenance-schema.json` | Machine-readable maintenance contract: required fields, quality gates, lifecycle policy, and generated artifact list. |
-| `public/okf/` | Public OKF v0.1-compatible bundle with `index.md`, `log.md`, `manifest.json`, JSON indexes, graph, schema, and one Markdown concept per public page. |
-
-`npm run check` verifies that source concepts are standardized, generated files are fresh, hidden pages are excluded from public indexes and OKF exports, the graph still resolves internal links, structured relations point to real pages, and the maintenance report has zero warnings. This makes the upkeep loop explicit: edit Markdown, run `npm run maintain:wiki`, review the generated graph, then build and publish. For local diagnosis only, `node scripts/wiki-maintenance.mjs --check --allow-warnings` reports warnings without failing the command.
-
-Common maintenance commands:
-
-| Command | Purpose |
-| --- | --- |
-| `npm run new:wiki -- --slug Example_Page --title "Example Page" --type article --language en --description "Short summary."` | Create a standardized source-page template without overwriting existing pages. |
-| `npm run maintain:wiki` | Standardize source frontmatter and regenerate the page index, graph, schema, quality reports, and public OKF bundle. |
-| `npm run lint:okf` | Validate the public OKF bundle, including required frontmatter, graph references, structured relation targets, and hidden-page exclusion. |
-| `npm run verify:publish` | Check the tracked/staged publish set for secrets, local absolute paths, caches, and runtime artifacts before committing. |
-| `SITE_URL=https://xinbaopedia.top npm run smoke:production` | Smoke-test the deployed homepage, a representative wiki page, OKF endpoints, quality report, and hidden-page route behavior. |
-| `VERCEL_TOKEN=... npm run deploy:production` | Link the local checkout to the `xinbaopedia` Vercel project, deploy production, and run the production smoke check. |
-
-The current lifecycle layer is concept-level. It records active/confirmed/private status, confidence, review cadence, and retention policy in generated graph and OKF exports. Structured relations now provide a stable entry point for future claim-level confidence, supersession, richer citation edges, hybrid search, and automated crystallization without changing how normal content edits are made.
-
-## How The Site Is Organized
-
-```text
-wiki/                   Source articles for the public wiki
-public/                 Images, PDF files, icons, and paper figures
-public/okf/             Public agent-readable OKF bundle generated from wiki/*.md
-app/                    Site pages and server endpoints
-components/             Visual building blocks for the wiki interface
-lib/                    Shared helpers for wiki rendering and chat behavior
-scripts/                Content checks and wiki validation tools
-chat with xinbao/       Notes and templates for the chat assistant
-```
-
-## Main Features
-
-### Connected Wiki Pages
-
-Articles can reference each other with wiki-style links. This keeps the site navigable as more research topics, papers, and project pages are added.
-
-### Bilingual Entries
-
-Many pages have English and Chinese versions. The language switcher lets readers move between paired entries when both versions exist.
-
-### Academic Infoboxes
-
-Profile, institution, project, and paper pages can show structured information in compact infoboxes. This gives visitors a quick summary before they read the full article.
-
-### Search And Navigation
-
-The top search bar indexes public wiki pages so visitors can find topics, papers, people, institutions, and concepts quickly.
-
-### Chat With Xinbao
-
-The chat assistant answers questions about public site content, such as research directions, publications, projects, academic background, and contact information. It is intended as a lightweight guide to the wiki, not as a replacement for the source pages.
-
-## Publishing Flow
-
-The production site is published through Vercel under the `xinbaopedia` scope.
-
-The usual publishing process is:
-
-1. Update the relevant source files, usually under `wiki/` or `README.md`.
-2. Run the repository checks:
-
-   ```bash
-   npm run check
-   npm run build
-   ```
-
-3. Commit the reviewed source changes.
-4. Push the commit to `origin main`.
-5. Deploy production on Vercel.
-6. Verify the homepage and at least one changed page on <https://xinbaopedia.top>.
-
-## Editing Guidance
-
-When editing wiki content:
-
-- Write for readers first, not for the build system.
-- Keep the public tone academic, neutral, and concise.
-- Prefer a short main explanation plus links to deeper pages.
-- Connect new paper pages to relevant topic pages.
-- Keep English and Chinese paired pages aligned when both exist.
-- Update index and log pages when adding major new entries.
-- Run `npm run maintain:wiki` so source frontmatter, the page catalog, the graph, the maintenance schema, and the public OKF bundle reflect the current source pages.
-
-Useful high-level pages include:
-
-- `wiki/index.md`
-- `wiki/index_zh.md`
-- `wiki/Research.md`
-- `wiki/Research_zh.md`
-- `wiki/Publications.md`
-- `wiki/Publications_zh.md`
-- `wiki/log.md`
-- `wiki/log_zh.md`
-
-## Built With
-
-Xinbaopedia is built as a modern web application with Next.js, React, TypeScript, Markdown rendering, and Vercel deployment. The implementation details are intentionally kept behind the reading experience: visitors should see a clear academic wiki, while maintainers can still update the site through structured Markdown files.
-
-Runtime credentials and private service tokens should stay in deployment environment variables. They should never be committed to this repository.
+  [![Visit Xinbaopedia](https://img.shields.io/badge/Visit-Xinbaopedia-3366cc?style=for-the-badge)](https://xinbaopedia.top)
+  [![English & 中文](https://img.shields.io/badge/Language-English%20%7C%20中文-202122?style=for-the-badge)](https://xinbaopedia.top/wiki/Xinbao_Qiao/)
+  [![Explore the research](https://img.shields.io/badge/Explore-Research-2a7f62?style=for-the-badge)](https://xinbaopedia.top/wiki/Research/)
+</div>
 
 ---
 
-Xinbaopedia is a personal academic project. It is stylistically inspired by Wikipedia but is not affiliated with the Wikimedia Foundation.
+## 不只是另一份在线简历
+
+传统个人主页告诉你一个人“做过什么”。Xinbaopedia 更想回答：**这些工作为什么重要，它们彼此有什么关系，下一步又会走向哪里？**
+
+从一篇论文出发，可以继续走进它背后的研究问题；从一个研究方向出发，可以看到相关项目、合作、经历和成果。这里不是把履历铺成一张长网页，而是把散落的信息连接成一张能读、能搜、能继续追问的知识地图。
+
+> 如果你是合作者、审稿人、学生，或只是对可信人工智能和数据研究感兴趣，这里能让你更快看懂 Xinbao Qiao 正在研究什么，以及这些研究值得关注的原因。
+
+## 你可以在这里看到什么
+
+| | 入口 | 你会得到什么 |
+| --- | --- | --- |
+| 👤 | [认识 Xinbao](https://xinbaopedia.top/wiki/Xinbao_Qiao/) | 学术背景、研究兴趣、教育经历与合作方向，一页快速看懂。 |
+| 🧭 | [探索研究版图](https://xinbaopedia.top/wiki/Research/) | 不只罗列关键词，而是解释不同研究问题如何连成一条主线。 |
+| 📚 | [浏览论文](https://xinbaopedia.top/wiki/Publications/) | 用容易理解的摘要、关键启示和图示快速抓住每项工作的价值。 |
+| 💬 | [Chat with Xinbao](https://xinbaopedia.top) | 不知道从哪里开始？直接提问，让 AI 带你找到相关页面。 |
+| 🌏 | [切换中文](https://xinbaopedia.top/wiki/Qiao_Xinbao_zh/) | 主要内容提供中英文入口，阅读和分享都更自然。 |
+
+## 四条值得沿着走下去的研究线索
+
+<table>
+  <tr>
+    <td width="25%" align="center">
+      <a href="https://xinbaopedia.top/wiki/Data_Centric_Machine_Learning/">
+        <img src="public/topics/data-centric-ml.png" alt="Data-centric machine learning" width="170" />
+        <br /><strong>数据中心机器学习</strong>
+      </a>
+      <br />当数据本身决定模型上限，怎样让它更可靠、更公平、更有用？
+    </td>
+    <td width="25%" align="center">
+      <a href="https://xinbaopedia.top/wiki/Synthetic_Data/">
+        <img src="public/topics/synthetic-data.png" alt="Synthetic data" width="170" />
+        <br /><strong>合成数据</strong>
+      </a>
+      <br />合成数据何时能扩大知识，何时又会让模型走向坍塌？
+    </td>
+    <td width="25%" align="center">
+      <a href="https://xinbaopedia.top/wiki/Machine_Unlearning/">
+        <img src="public/topics/machine-unlearning.png" alt="Machine unlearning" width="170" />
+        <br /><strong>机器遗忘</strong>
+      </a>
+      <br />当数据必须被删除，模型怎样真正忘记，同时保留能力？
+    </td>
+    <td width="25%" align="center">
+      <a href="https://xinbaopedia.top/wiki/AI_and_Networks/">
+        <img src="public/topics/ai-and-networks.png" alt="AI and networks" width="170" />
+        <br /><strong>AI 与网络</strong>
+      </a>
+      <br />在分布式、受限和互联环境中，如何让智能协作得更稳？
+    </td>
+  </tr>
+</table>
+
+## 为什么是“百科”，而不是“主页”
+
+- **看见联系，而不只是列表。** 论文、概念、机构和经历彼此相连，读者可以顺着兴趣自然探索。
+- **先讲意义，再讲术语。** 每个页面尽量回答“问题是什么、为什么值得解决、这项工作带来了什么”。
+- **对第一次来的人友好。** 搜索、侧边导航、信息框和双语入口，让重要信息不需要翻找。
+- **会继续生长。** 新论文、新合作和新想法进入后，会成为知识网络的一部分，而不是被埋在时间线里。
+- **可以直接对话。** Chat with Xinbao 把公开内容变成一个可提问的入口，帮访客快速找到答案和出处。
+
+## 从这里开始
+
+第一次访问，推荐按这条路线走：
+
+1. 先用一分钟阅读 [Xinbao Qiao 的个人条目](https://xinbaopedia.top/wiki/Xinbao_Qiao/)。
+2. 再从 [Research](https://xinbaopedia.top/wiki/Research/) 选择一条感兴趣的研究线索。
+3. 打开一篇论文，看它试图解决什么问题，以及关键启示是什么。
+4. 如果仍有疑问，回到 [首页](https://xinbaopedia.top) 问 Chat with Xinbao。
+
+<div align="center">
+
+### 准备好开始探索了吗？
+
+[**打开 Xinbaopedia →**](https://xinbaopedia.top)
+
+<sub>Wikipedia-inspired, independently built, and not affiliated with the Wikimedia Foundation.</sub>
+
+</div>
