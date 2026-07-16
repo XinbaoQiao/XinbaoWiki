@@ -226,7 +226,18 @@ async function runSmoke(env, siteUrl = productionUrl) {
 async function runStagedSmoke(vercelCommand, env, stagedUrl) {
   const checks = [
     { path: '/', patterns: [/Xinbaopedia/i] },
-    { path: '/wiki/Xinbao_Qiao/', patterns: [/Xinbao/i, /wiki-page|Xinbaopedia/i] },
+    {
+      path: '/wiki/Xinbao_Qiao/',
+      patterns: [
+        /Xinbao/i,
+        /wiki-page|Xinbaopedia/i,
+        /Portrait\.png/,
+        /Portrait-Singapore-ICLR-2025\.jpg/,
+        /Portrait-Seoul-ICML-2026\.png/,
+        /Photograph taken at ICLR 2025, Singapore EXPO/,
+        /Photograph generated for ICML 2026, Seoul COEX/,
+      ],
+    },
     { path: '/robots.txt', patterns: [/Sitemap: https:\/\/xinbaopedia\.top\/sitemap\.xml/] },
     { path: '/sitemap.xml', patterns: [/\/wiki\/Xinbao_Qiao\//] },
     { path: '/search-index.json', patterns: [/"slug":"Xinbao_Qiao"/] },
@@ -319,7 +330,11 @@ async function main() {
     console.log(`deploy-production: staged deployment ready at ${stagedUrl}`);
     await runStagedSmoke(vercelCommand, smokeEnv, stagedUrl);
     await run(vercelCommand, vercelArgs('promote', [stagedUrl, '--yes', '--scope', scope]), env);
-    await runSmoke(env, productionUrl);
+    try {
+      await runSmoke(smokeEnv, productionUrl);
+    } catch (error) {
+      throw new Error(`deployment was promoted to production but verification did not pass: ${error.message}`);
+    }
   } finally {
     cleanupGeneratedEnvFile(hadLocalEnv);
   }

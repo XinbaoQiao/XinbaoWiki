@@ -15,13 +15,17 @@
     "lint:content": "node scripts/wiki-maintenance.mjs --check",
     "maintain:wiki": "node scripts/wiki-maintenance.mjs --standardize --write",
     "new:wiki": "node scripts/new-wiki-page.mjs",
+    "test:release": "node scripts/test-release-workflow.mjs",
     "test:wiki": "node scripts/test-wiki-data.mjs",
     "verify:publish": "node scripts/verify-publish-set.mjs",
+    "verify:staged": "node scripts/verify-publish-set.mjs --staged-only",
     "smoke:production": "node scripts/smoke-production.mjs",
     "deploy:production": "node scripts/deploy-production.mjs",
+    "release:check": "node scripts/release-production.mjs --dry-run",
+    "release:production": "node scripts/release-production.mjs",
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "typecheck": "node scripts/prepare-typecheck.mjs && tsc --noEmit",
-    "check": "npm run typecheck && npm run lint:wiki && npm run lint:content && npm run lint:okf && npm run test:wiki"
+    "check": "npm run typecheck && npm run lint:wiki && npm run lint:content && npm run lint:okf && npm run test:wiki && npm run test:release"
   },
   "dependencies": {
     "@upstash/redis": "^1.38.0",

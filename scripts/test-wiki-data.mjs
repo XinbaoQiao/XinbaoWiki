@@ -413,6 +413,7 @@ assert.match(newWikiPageScript, /translation_of/, 'new wiki page helper supports
 assert.match(newWikiPageScript, /wiki\/\$\{slug\}\.md already exists; use --force/, 'new wiki page helper refuses to overwrite existing pages by default');
 const ciWorkflow = fs.readFileSync(path.join(root, '.github/workflows/ci.yml'), 'utf8');
 const deployProductionScript = fs.readFileSync(path.join(root, 'scripts/deploy-production.mjs'), 'utf8');
+const releaseProductionScript = fs.readFileSync(path.join(root, 'scripts/release-production.mjs'), 'utf8');
 assert.match(ciWorkflow, /apt-get install -y --no-install-recommends imagemagick mupdf-tools/, 'CI installs ImageMagick and mutool for image and CV PDF checks');
 assert.match(ciWorkflow, /npm audit --omit=dev --audit-level=high/, 'CI blocks high-severity production dependency advisories');
 assert.match(deployProductionScript, /const vercelCliVersion = '54\.18\.7';/, 'deployment wrapper pins a Vercel CLI version with VERCEL_TOKEN env support');
@@ -440,8 +441,15 @@ assert.match(deployProductionScript, /const smokeEnv = configuredProxyEnv\(env\)
 assert.match(deployProductionScript, /throw new Error\('Vercel did not return a valid staged deployment URL'\)/, 'deployment wrapper preserves finally cleanup when staged URL parsing fails');
 assert.match(deployProductionScript, /process\.once\('SIGINT'[\s\S]*cleanupOnSignal\(130\)[\s\S]*process\.once\('SIGTERM'[\s\S]*cleanupOnSignal\(143\)/, 'deployment wrapper removes generated env state when interrupted');
 assert.match(deployProductionScript, /vercelArgs\('promote', \[stagedUrl, '--yes', '--scope', scope\]\)/, 'deployment wrapper promotes only a verified staged deployment');
-assert.match(deployProductionScript, /runSmoke\(env, productionUrl\)/, 'deployment wrapper verifies the canonical domain after promotion');
+assert.match(deployProductionScript, /runSmoke\(smokeEnv, productionUrl\)/, 'deployment wrapper verifies the canonical domain with the same smoke environment used before promotion');
+assert.match(deployProductionScript, /deployment was promoted to production but verification did not pass/, 'deployment wrapper distinguishes a post-promotion verification failure from an unchanged production deployment');
+assert.match(deployProductionScript, /Portrait-Singapore-ICLR-2025[\s\S]*Photograph generated for ICML 2026, Seoul COEX/, 'staged smoke verifies the portrait gallery assets and event captions before promotion');
 assert.doesNotMatch(deployProductionScript, /vercel@latest/, 'deployment wrapper avoids floating Vercel CLI versions');
+assert.match(releaseProductionScript, /git\(\['ls-remote', '--exit-code', 'origin'/, 'release wrapper verifies the live remote ref before deploying');
+assert.match(releaseProductionScript, /commit or unstage pending files before release/, 'release wrapper refuses ambiguous staged changes');
+assert.match(releaseProductionScript, /git\(\['worktree', 'add', '--detach'/, 'release wrapper deploys the immutable remote commit in an isolated worktree');
+assert.match(releaseProductionScript, /git\(\['worktree', 'remove', '--force'/, 'release wrapper cleans up its isolated deployment worktree');
+assert.equal(fs.readFileSync(path.join(root, '.nvmrc'), 'utf8').trim(), '22', 'local Node selector matches the package engine');
 const gitignore = fs.readFileSync(path.join(root, '.gitignore'), 'utf8');
 const vercelignore = fs.readFileSync(path.join(root, '.vercelignore'), 'utf8');
 const verifyPublishSet = fs.readFileSync(path.join(root, 'scripts/verify-publish-set.mjs'), 'utf8');

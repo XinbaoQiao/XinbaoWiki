@@ -20,6 +20,17 @@ const blockedPathPatterns = [
   { pattern: /(^|\/).*\.(?:token|pem|key|p12|pfx)$/i, reason: 'credential-like file' },
 ];
 
+const blockedStagedPathPatterns = [
+  { pattern: /(^|\/)AGENTS\.md$/, reason: 'agent instruction file requires explicit publication approval' },
+  { pattern: /(^|\/)DESIGN\.md$/, reason: 'local design contract requires explicit publication approval' },
+  { pattern: /(^|\/)agent_progress\.md$/, reason: 'local agent ledger' },
+  { pattern: /(^|\/)\.codex(?:\/|$)/, reason: 'local Codex state' },
+  { pattern: /(^|\/)\.omx(?:\/|$)/, reason: 'local OMX state' },
+];
+
+const stagedOnly = process.argv.includes('--staged-only');
+const allowControlFiles = process.argv.includes('--allow-control-files');
+
 const blockedContentPatterns = [
   { pattern: /\/data\/qiaoxinbao(?:\/|$)/, reason: 'local absolute path' },
   { pattern: /\/home\/qiaoxinbao(?:\/|$)/, reason: 'local absolute path' },
@@ -98,6 +109,16 @@ function checkPath(file, issues) {
   }
 }
 
+function checkStagedPath(file, issues) {
+  if (allowControlFiles) return;
+  const normalized = normalizePath(file);
+  for (const rule of blockedStagedPathPatterns) {
+    if (rule.pattern.test(normalized)) {
+      issues.push(`${file}: blocked staged path (${rule.reason}; rerun with --allow-control-files only after explicit approval)`);
+    }
+  }
+}
+
 function checkContent(file, content, source, issues) {
   if (content === null) {
     return;
@@ -113,13 +134,18 @@ function main() {
   const tracked = trackedFiles();
   const stagedList = stagedFiles();
   const untracked = untrackedFiles();
-  const files = new Set([...tracked, ...stagedList, ...untracked]);
+  if (stagedOnly && stagedList.length === 0) {
+    console.error('verify-publish-set: no staged files to verify');
+    process.exit(1);
+  }
+  const files = new Set(stagedOnly ? stagedList : [...tracked, ...stagedList, ...untracked]);
   const staged = new Set(stagedFiles());
   const issues = [];
 
   for (const file of [...files].sort()) {
     checkPath(file, issues);
-    checkContent(file, readPublishContent(file), 'working-tree', issues);
+    if (staged.has(file)) checkStagedPath(file, issues);
+    if (!stagedOnly) checkContent(file, readPublishContent(file), 'working-tree', issues);
     if (staged.has(file)) {
       checkContent(file, readStagedContent(file), 'staged', issues);
     }
@@ -133,7 +159,10 @@ function main() {
     process.exit(1);
   }
 
-  console.log(`verify-publish-set: checked ${tracked.length} tracked, ${stagedList.length} staged, and ${untracked.length} untracked publishable files; no blocked secrets, caches, or local absolute paths found`);
+  if (stagedList.length > 0) {
+    console.log(`verify-publish-set: staged publish set: ${stagedList.sort().join(', ')}`);
+  }
+  console.log(`verify-publish-set: checked ${files.size} ${stagedOnly ? 'staged' : 'publishable'} files; no blocked secrets, caches, staged control files, or absolute paths found`);
 }
 
 main();

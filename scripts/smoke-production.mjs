@@ -6,8 +6,20 @@ const DEFAULT_SITE_URL = 'https://xinbaopedia.top';
 const SITE_URL = process.env.SITE_URL || process.argv[2] || DEFAULT_SITE_URL;
 const WIKI_SLUG = process.env.SMOKE_WIKI_SLUG || 'Xinbao_Qiao';
 const HIDDEN_SLUG = process.env.SMOKE_HIDDEN_SLUG || 'Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning';
-const TIMEOUT_MS = Number.parseInt(process.env.SMOKE_TIMEOUT_MS || '30000', 10);
+
+function positiveIntegerEnv(name, fallback) {
+  const value = Number.parseInt(process.env[name] || fallback, 10);
+  if (!Number.isInteger(value) || value <= 0) {
+    throw new Error(`${name} must be a positive integer`);
+  }
+  return value;
+}
+
+const TIMEOUT_MS = positiveIntegerEnv('SMOKE_TIMEOUT_MS', '30000');
+const MAX_ATTEMPTS = positiveIntegerEnv('SMOKE_ATTEMPTS', '3');
+const RETRY_DELAY_MS = positiveIntegerEnv('SMOKE_RETRY_DELAY_MS', '1000');
 const MAX_REDIRECTS = 5;
+const RETRYABLE_STATUS_CODES = new Set([408, 425, 429, 500, 502, 503, 504]);
 
 const base = new URL(SITE_URL);
 
@@ -15,7 +27,7 @@ function joinUrl(pathname) {
   return new URL(pathname, base).toString();
 }
 
-function request(url, redirects = 0) {
+function requestOnce(url, redirects = 0) {
   return new Promise((resolve, reject) => {
     const parsed = new URL(url);
     const client = parsed.protocol === 'http:' ? http : https;
@@ -28,7 +40,7 @@ function request(url, redirects = 0) {
           reject(new Error(`${url}: too many redirects`));
           return;
         }
-        resolve(request(new URL(location, parsed).toString(), redirects + 1));
+        resolve(requestOnce(new URL(location, parsed).toString(), redirects + 1));
         return;
       }
 
@@ -51,6 +63,31 @@ function request(url, redirects = 0) {
     req.on('error', reject);
     req.end();
   });
+}
+
+function wait(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function request(url) {
+  let lastError;
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt += 1) {
+    try {
+      const response = await requestOnce(url);
+      if (!RETRYABLE_STATUS_CODES.has(response.status) || attempt === MAX_ATTEMPTS) {
+        return response;
+      }
+      lastError = new Error(`${url}: retryable HTTP ${response.status}`);
+    } catch (error) {
+      lastError = error;
+      if (attempt === MAX_ATTEMPTS) throw error;
+    }
+
+    const delay = RETRY_DELAY_MS * attempt;
+    console.warn(`Production smoke retry ${attempt + 1}/${MAX_ATTEMPTS} for ${url} after ${lastError.message}`);
+    await wait(delay);
+  }
+  throw lastError;
 }
 
 function assert(condition, message) {
@@ -82,7 +119,15 @@ async function checkText(pathname, label, patterns) {
 
 async function main() {
   await checkText('/', 'homepage', [/Xinbaopedia/i]);
-  await checkText(`/wiki/${encodeURIComponent(WIKI_SLUG)}/`, 'wiki page', [/Xinbao/i, /wiki-page|Xinbaopedia/i]);
+  await checkText(`/wiki/${encodeURIComponent(WIKI_SLUG)}/`, 'wiki page', [
+    /Xinbao/i,
+    /wiki-page|Xinbaopedia/i,
+    /Portrait\.png/,
+    /Portrait-Singapore-ICLR-2025\.jpg/,
+    /Portrait-Seoul-ICML-2026\.png/,
+    /Photograph taken at ICLR 2025, Singapore EXPO/,
+    /Photograph generated for ICML 2026, Seoul COEX/,
+  ]);
 
   const manifest = parseJson(await request(joinUrl('/okf/manifest.json')), 'OKF manifest');
   assert(manifest.okfVersion === '0.1', `OKF manifest: expected okfVersion 0.1, got ${JSON.stringify(manifest.okfVersion)}`);
