@@ -5,6 +5,7 @@ import { existsSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { biographyReleaseContract } from './release-contract.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const scope = 'xinbaopedia';
@@ -226,18 +227,7 @@ async function runSmoke(env, siteUrl = productionUrl) {
 async function runStagedSmoke(vercelCommand, env, stagedUrl) {
   const checks = [
     { path: '/', patterns: [/Xinbaopedia/i] },
-    {
-      path: '/wiki/Xinbao_Qiao/',
-      patterns: [
-        /Xinbao/i,
-        /wiki-page|Xinbaopedia/i,
-        /Portrait\.png/,
-        /Portrait-Singapore-ICLR-2025\.jpg/,
-        /Portrait-Seoul-ICML-2026\.png/,
-        /Photograph taken at ICLR 2025, Singapore EXPO/,
-        /Photograph generated for ICML 2026, Seoul COEX/,
-      ],
-    },
+    biographyReleaseContract,
     { path: '/robots.txt', patterns: [/Sitemap: https:\/\/xinbaopedia\.top\/sitemap\.xml/] },
     { path: '/sitemap.xml', patterns: [/\/wiki\/Xinbao_Qiao\//] },
     { path: '/search-index.json', patterns: [/"slug":"Xinbao_Qiao"/] },
@@ -305,7 +295,7 @@ async function main() {
 
   const env = sanitizeEnv();
   env.VERCEL_TOKEN = token;
-  const smokeEnv = configuredProxyEnv(env);
+  const stagedSmokeEnv = configuredProxyEnv(env);
   const vercelCommand = requireVercelCommand();
   const hadLocalEnv = existsSync(join(root, '.env.local'));
   const cleanupOnSignal = (exitCode) => {
@@ -328,10 +318,10 @@ async function main() {
       throw new Error('Vercel did not return a valid staged deployment URL');
     }
     console.log(`deploy-production: staged deployment ready at ${stagedUrl}`);
-    await runStagedSmoke(vercelCommand, smokeEnv, stagedUrl);
+    await runStagedSmoke(vercelCommand, stagedSmokeEnv, stagedUrl);
     await run(vercelCommand, vercelArgs('promote', [stagedUrl, '--yes', '--scope', scope]), env);
     try {
-      await runSmoke(smokeEnv, productionUrl);
+      await runSmoke(env, productionUrl);
     } catch (error) {
       throw new Error(`deployment was promoted to production but verification did not pass: ${error.message}`);
     }

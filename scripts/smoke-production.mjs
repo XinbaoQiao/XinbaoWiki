@@ -1,6 +1,7 @@
 import http from 'node:http';
 import https from 'node:https';
 import process from 'node:process';
+import { biographyReleaseContract } from './release-contract.mjs';
 
 const DEFAULT_SITE_URL = 'https://xinbaopedia.top';
 const SITE_URL = process.env.SITE_URL || process.argv[2] || DEFAULT_SITE_URL;
@@ -119,15 +120,13 @@ async function checkText(pathname, label, patterns) {
 
 async function main() {
   await checkText('/', 'homepage', [/Xinbaopedia/i]);
-  await checkText(`/wiki/${encodeURIComponent(WIKI_SLUG)}/`, 'wiki page', [
-    /Xinbao/i,
-    /wiki-page|Xinbaopedia/i,
-    /Portrait\.png/,
-    /Portrait-Singapore-ICLR-2025\.jpg/,
-    /Portrait-Seoul-ICML-2026\.png/,
-    /Photograph taken at ICLR 2025, Singapore EXPO/,
-    /Photograph generated for ICML 2026, Seoul COEX/,
-  ]);
+  const wikiPath = WIKI_SLUG === 'Xinbao_Qiao'
+    ? biographyReleaseContract.path
+    : `/wiki/${encodeURIComponent(WIKI_SLUG)}/`;
+  const wikiPatterns = WIKI_SLUG === 'Xinbao_Qiao'
+    ? biographyReleaseContract.patterns
+    : [/Xinbao/i, /wiki-page|Xinbaopedia/i];
+  await checkText(wikiPath, 'wiki page', wikiPatterns);
 
   const manifest = parseJson(await request(joinUrl('/okf/manifest.json')), 'OKF manifest');
   assert(manifest.okfVersion === '0.1', `OKF manifest: expected okfVersion 0.1, got ${JSON.stringify(manifest.okfVersion)}`);

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, rmSync } from 'node:fs';
+import { mkdirSync, readFileSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -27,7 +27,17 @@ function git(args, options = {}) {
   return run('git', args, options);
 }
 
+function warnRuntimeDrift() {
+  const packageJson = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
+  const expectedMajor = Number.parseInt(packageJson.engines?.node, 10);
+  const actualMajor = Number.parseInt(process.versions.node, 10);
+  if (Number.isInteger(expectedMajor) && actualMajor !== expectedMajor) {
+    console.warn(`release-production: Node ${process.versions.node} is active; the project declares Node ${packageJson.engines.node}. Use .nvmrc before the next local validation.`);
+  }
+}
+
 function main() {
+  warnRuntimeDrift();
   const currentBranch = git(['branch', '--show-current']).trim();
   if (currentBranch !== branch) {
     fail(`production releases must start from ${branch}; current branch is ${currentBranch || 'detached HEAD'}`);
