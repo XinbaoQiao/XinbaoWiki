@@ -20,7 +20,7 @@ authors:
   - Wei Liu
   - Jingqi Zhang
   - Peihua Mai
-  - Meng Zhang
+  - 张萌
   - Yan Pang
 venue: ICML 2026
 location: 'COEX Convention & Exhibition Center, Seoul, South Korea'

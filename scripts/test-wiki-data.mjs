@@ -53,6 +53,9 @@ assert.ok(!fs.existsSync(path.join(root, 'lib/research-atlas.ts')), 'retired Res
 
 const chinesePageFiles = fs.readdirSync(wikiDir).filter((file) => file.endsWith('_zh.md'));
 assert.ok(chinesePageFiles.length >= 40, 'wiki includes static Chinese versions for the article set');
+for (const file of chinesePageFiles) {
+  assert.doesNotMatch(read(file), /Meng Zhang/, `${file} uses 张萌 instead of the English name on Chinese pages`);
+}
 for (const file of [
   'AI_and_Networks_zh.md',
   'Machine_Unlearning_zh.md',
@@ -135,7 +138,7 @@ assert.match(zhHome, /2000年9月30日/, 'Chinese page includes birth date');
 assert.match(zhHome, /人工智能工学硕士/, 'Chinese homepage describes the ZJU AI degree as 工学硕士');
 assert.doesNotMatch(zhHome, /理学硕士/, 'Chinese homepage avoids the incorrect ZJU 理学硕士 wording');
 assert.match(zhHome, /\[\[Angela_Yingjun_Zhang\|张颖珺\]\]/, 'Chinese home article uses the advisor\'s Chinese name');
-assert.match(zhHome, /\[\[Meng_Zhang\|Meng Zhang\]\]/, 'Chinese home article links to the master advisor page');
+assert.match(zhHome, /\[\[Meng_Zhang\|张萌\]\]/, 'Chinese home article uses the master advisor\'s Chinese name');
 assert.match(home, /## See also[\s\S]*\[\[CV\|Résumé\]\]/, 'English homepage See also labels the CV link as Résumé');
 assert.match(zhHome, /## 参见[\s\S]*\[\[CV_zh\|Résumé\]\]/, 'Chinese homepage uses 参见 and labels the CV link as Résumé');
 assert.match(read('CV.md'), /\/files\/XinbaoQiao_CV\.pdf/, 'CV page links to local PDF');
@@ -266,7 +269,7 @@ assert.match(layout, /import \{ WikiSearch \} from '@\/components\/WikiSearch';/
 assert.match(layout, /import \{ pathWithBasePath \} from '@\/lib\/wiki';/, 'layout imports only the base-path helper from the wiki library');
 assert.doesNotMatch(layout, /getSearchIndex|searchIndex/, 'layout does not serialize the full search index into every page');
 assert.match(layout, /<WikiSearch hideOnPortal \/>/, 'layout keeps topbar search on article pages without embedding its data');
-assert.match(languageToggle, /if \(!decodeURIComponent\(pathname\)\.split\('\/'\)\.includes\('wiki'\)\) return null;/, 'language toggle hides on the portal homepage where language editions are shown in the masthead');
+assert.match(languageToggle, /const isWikiPage = decodeURIComponent\(pathname\)\.split\('\/'\)\.includes\('wiki'\);[\s\S]*if \(!isWikiPage\) return null;/, 'language toggle hides on the portal homepage where language editions are shown in the masthead');
 assert.match(languageToggle, /type SitePaletteName = 'text' \| 'blue' \| 'gold' \| 'green' \| 'charcoal';/, 'site palette includes a manual text wordmark theme alongside color logo themes');
 assert.match(languageToggle, /\{ color: '#202122', mode: 'text', title: 'Text wordmark theme' \}/, 'site palette exposes a text theme swatch');
 assert.match(languageToggle, /const sitePaletteOptions: SitePaletteOption\[\] = \[[\s\S]*mode: 'text'[\s\S]*mode: 'blue'[\s\S]*mode: 'gold'[\s\S]*mode: 'green'[\s\S]*mode: 'charcoal'[\s\S]*mode: 'auto'[\s\S]*\];/, 'site palette switcher orders the pure text theme first and auto mode last');
@@ -731,6 +734,7 @@ assert.match(sidebar, /className="wiki-mobile-nav-toggle"[\s\S]*aria-controls="w
 assert.match(sidebar, /<dialog[\s\S]*id="wiki-mobile-navigation"[\s\S]*onCancel=\{\(\) => setMobileOpen\(false\)\}[\s\S]*onClose=\{\(\) => setMobileOpen\(false\)\}/, 'mobile navigation uses a native modal dialog with Escape and close-state handling');
 assert.match(sidebar, /function SidebarSections[\s\S]*<SidebarSections language=\{language\} \/>[\s\S]*<SidebarSections language=\{language\} onNavigate=\{\(\) => setMobileOpen\(false\)\} \/>/, 'desktop and mobile navigation reuse one localized section tree');
 assert.match(sidebar, /document\.body\.style\.overflow = 'hidden'[\s\S]*document\.body\.style\.overflow = previousOverflow/, 'mobile navigation prevents background scrolling and restores it after closing');
+assert.match(languageToggle, /document\.documentElement\.lang = isWikiPage && isChinesePage \? 'zh-CN' : 'en'/, 'article routes synchronize the document language with the localized page');
 assert.doesNotMatch(sidebar, /function NavSection|className="nav-section"|<section className="nav-section">/, 'sidebar uses flat Colarpedia h4 plus ul blocks');
 assert.match(sidebar, /const navigation = \['Xinbao_Qiao', 'Publications'\]/, 'sidebar navigation includes the main page and Publications');
 assert.doesNotMatch(sidebar, /Research Atlas|研究图谱|\/atlas/, 'sidebar removes the retired Research Atlas entry');
@@ -923,6 +927,8 @@ const homepagePortal = fs.readFileSync(path.join(root, 'components/HomepagePorta
 assert.doesNotMatch(styles, /research-atlas|wiki-portal-atlas/, 'retired Research Atlas styles are removed');
 assert.doesNotMatch(styles, /\.wiki-logo-mark/, 'topbar CSS does not keep custom logo-image styling');
 assert.match(styles, /\.wiki-tabs-inner \{[\s\S]*padding: 0 24px 0 calc\(24px \+ var\(--sidebar-width\) \+ 24px\);[\s\S]*\}/, 'article tabs align with the main article column after the sidebar');
+assert.match(styles, /\.wiki-tabs a \{[\s\S]*border: 0;[\s\S]*border-bottom: 2px solid transparent;[\s\S]*background: transparent;[\s\S]*\.wiki-tabs a\.active \{[\s\S]*border-bottom-color: var\(--site-theme-accent\);/, 'article tools use a flat active underline instead of boxed tabs');
+assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.wiki-topbar-inner \{[\s\S]*display: grid;[\s\S]*grid-template-columns: minmax\(0, 1fr\) auto;[\s\S]*\.wiki-logo \{[\s\S]*grid-row: 1;[\s\S]*\.lang-toggle \{[\s\S]*grid-row: 1;[\s\S]*\.wiki-search \{[\s\S]*grid-column: 1 \/ -1;[\s\S]*grid-row: 2;/, 'mobile article masthead keeps logo and language together above the full-width search');
 assert.match(styles, /\.wiki-shell \{[\s\S]*grid-template-columns: var\(--sidebar-width\) minmax\(0, var\(--content-width\)\);[\s\S]*gap: 24px;[\s\S]*\}/, 'article shell uses a fixed navigation column and constrained readable article column');
 assert.match(styles, /\.wiki-sidebar \{[\s\S]*position: sticky;[\s\S]*top: 14px;[\s\S]*\}/, 'article navigation stays available in a Wikipedia-style left rail');
 assert.match(styles, /@media \(max-width: 960px\) \{[\s\S]*\.wiki-sidebar-desktop \{[\s\S]*display: none;[\s\S]*\.wiki-mobile-nav-toggle \{[\s\S]*display: inline-flex;[\s\S]*\.wiki-mobile-nav-dialog\[open\] \{[\s\S]*width: min\(82vw, 320px\);[\s\S]*height: 100dvh;/, 'article navigation becomes a compact full-height left-side modal drawer on tablet and mobile widths');

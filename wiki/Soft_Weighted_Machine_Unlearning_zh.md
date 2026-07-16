@@ -17,7 +17,7 @@ authors:
   - Xinbao Qiao
   - Ningning Ding
   - Yushi Cheng
-  - Meng Zhang
+  - 张萌
 venue: AAAI 2026
 location: 'Singapore EXPO, Singapore'
 year: 2026

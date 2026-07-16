@@ -68,7 +68,7 @@ nationality: 中国
 
 乔鑫宝目前在[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系攻读博士学位，导师为[[Angela_Yingjun_Zhang|张颖珺]]。[^cuhk-ie-zh] 其博士阶段工作围绕分布式证据、网络化计算和可靠 AI 评估展开。
 
-2022年至2025年，他在[[Zhejiang_University|浙江大学]]攻读人工智能工学硕士学位，硕士阶段专业 GPA 为 90/100，排名 3/25；硕士导师为[[Meng_Zhang|Meng Zhang]]。
+2022年至2025年，他在[[Zhejiang_University|浙江大学]]攻读人工智能工学硕士学位，硕士阶段专业 GPA 为 90/100，排名 3/25；硕士导师为[[Meng_Zhang|张萌]]。
 
 乔鑫宝于2022年获得[[Shandong_University|山东大学]]通信工程工学学士学位。
 
@@ -76,7 +76,7 @@ nationality: 中国
 
 ### 浙江大学的数据中心机器学习研究（2023-2025）
 
-2023年3月至2025年12月，乔鑫宝在[[Zhejiang_University|浙江大学]]、[[Meng_Zhang|Meng Zhang]]指导下开展数据中心机器学习系统研究。这一阶段围绕数据影响归因、机器遗忘，以及公平性、鲁棒性、隐私和效用之间的权衡展开。
+2023年3月至2025年12月，乔鑫宝在[[Zhejiang_University|浙江大学]]、[[Meng_Zhang|张萌]]指导下开展数据中心机器学习系统研究。这一阶段围绕数据影响归因、机器遗忘，以及公平性、鲁棒性、隐私和效用之间的权衡展开。
 
 这一时期的代表工作包括[[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]]、[[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]] 和 [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]]。
 

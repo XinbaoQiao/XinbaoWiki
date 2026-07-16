@@ -17,7 +17,7 @@ authors:
   - Zhuoyang Shen
   - Xinbao Qiao
   - Tongning Zhang
-  - Meng Zhang
+  - 张萌
 venue: ICLR 2025
 location: 'Singapore EXPO, Singapore'
 year: 2025

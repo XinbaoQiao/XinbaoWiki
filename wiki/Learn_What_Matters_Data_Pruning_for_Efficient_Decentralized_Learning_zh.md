@@ -18,7 +18,7 @@ authors:
   - Xunhao Jiang
   - Zuozhu Liu
   - Peng Sun
-  - Meng Zhang
+  - 张萌
 venue: under review
 year: 2025
 status: under review

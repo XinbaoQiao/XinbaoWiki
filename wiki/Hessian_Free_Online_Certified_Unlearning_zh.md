@@ -14,7 +14,7 @@ language: zh
 summary: ICLR 2025 论文，研究无显式 Hessian 求逆的高效认证机器遗忘。
 authors:
   - Xinbao Qiao
-  - Meng Zhang
+  - 张萌
   - Ming Tang
   - Ermin Wei
 venue: ICLR 2025

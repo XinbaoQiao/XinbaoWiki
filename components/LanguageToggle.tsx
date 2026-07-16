@@ -33,10 +33,16 @@ function englishSlug(slug: string) {
 
 export function LanguageToggle() {
   const pathname = usePathname() || '';
-  if (!decodeURIComponent(pathname).split('/').includes('wiki')) return null;
-
+  const isWikiPage = decodeURIComponent(pathname).split('/').includes('wiki');
   const slug = activeSlug(pathname);
   const isChinesePage = isChineseSlug(slug);
+
+  useEffect(() => {
+    document.documentElement.lang = isWikiPage && isChinesePage ? 'zh-CN' : 'en';
+  }, [isChinesePage, isWikiPage]);
+
+  if (!isWikiPage) return null;
+
   const targetSlug = isChinesePage ? englishSlug(slug) : chineseSlug(slug);
   const href = `/wiki/${encodeURIComponent(targetSlug)}/`;
 
