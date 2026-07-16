@@ -52,34 +52,40 @@ export function ArticleTabs() {
   return (
     <nav className="wiki-tabs" aria-label={copy.aria}>
       <div className="wiki-tabs-inner">
-        <a href="#" className="active">{copy.article}</a>
-        <a
-          className="external"
-          href={talk}
-          target="_blank"
-          rel="noreferrer"
-          title={copy.talkTitle}
-        >
-          {copy.talk}
-        </a>
-        <a
-          className="external"
-          href={source}
-          target="_blank"
-          rel="noreferrer"
-          title={copy.sourceTitle}
-        >
-          {copy.source}
-        </a>
-        <a
-          className="external"
-          href={history}
-          target="_blank"
-          rel="noreferrer"
-          title={copy.historyTitle}
-        >
-          {copy.history}
-        </a>
+        <div className="wiki-tabs-content">
+          <div className="wiki-tabs-primary">
+            <a href="#" className="active">{copy.article}</a>
+            <a
+              className="external"
+              href={talk}
+              target="_blank"
+              rel="noreferrer"
+              title={copy.talkTitle}
+            >
+              {copy.talk}
+            </a>
+          </div>
+          <div className="wiki-tabs-actions">
+            <a
+              className="external"
+              href={source}
+              target="_blank"
+              rel="noreferrer"
+              title={copy.sourceTitle}
+            >
+              {copy.source}
+            </a>
+            <a
+              className="external"
+              href={history}
+              target="_blank"
+              rel="noreferrer"
+              title={copy.historyTitle}
+            >
+              {copy.history}
+            </a>
+          </div>
+        </div>
       </div>
     </nav>
   );

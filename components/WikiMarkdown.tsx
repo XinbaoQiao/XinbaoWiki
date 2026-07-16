@@ -5,7 +5,7 @@ import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import { pathWithBasePath } from '@/lib/wiki';
 
-type Props = { markdown: string; sourceHref?: string };
+type Props = { editLabel: string; markdown: string; sourceHref?: string };
 
 function external(href: string) {
   return /^https?:\/\//.test(href) || href.startsWith('mailto:');
@@ -16,11 +16,11 @@ function wikiUrlTransform(value: string) {
   return defaultUrlTransform(value);
 }
 
-function editLink(sourceHref?: string) {
+function editLink(sourceHref: string | undefined, label: string) {
   if (!sourceHref) return null;
   return (
     <span className="edit-link">
-      <a href={sourceHref} target="_blank" rel="noreferrer">edit</a>
+      <a href={sourceHref} target="_blank" rel="noreferrer">{label}</a>
     </span>
   );
 }
@@ -42,7 +42,7 @@ function renderTableLineBreaks(children: ReactNode): ReactNode {
   return children;
 }
 
-export function WikiMarkdown({ markdown, sourceHref }: Props) {
+export function WikiMarkdown({ editLabel, markdown, sourceHref }: Props) {
   return (
     <div className="wiki-body">
       <ReactMarkdown
@@ -72,10 +72,10 @@ export function WikiMarkdown({ markdown, sourceHref }: Props) {
             return <img src={safeSrc} alt={alt || ''} loading="lazy" />;
           },
           h2({ children }) {
-            return <h2>{children}{editLink(sourceHref)}</h2>;
+            return <h2>{children}{editLink(sourceHref, editLabel)}</h2>;
           },
           h3({ children }) {
-            return <h3>{children}{editLink(sourceHref)}</h3>;
+            return <h3>{children}{editLink(sourceHref, editLabel)}</h3>;
           },
           td({ children }) {
             return <td>{renderTableLineBreaks(children)}</td>;

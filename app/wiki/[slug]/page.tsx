@@ -40,18 +40,19 @@ export default async function WikiPage({ params }: Props) {
   if (!page) notFound();
   const sourceHref = `https://github.com/XinbaoQiao/XinbaoWiki/edit/main/wiki/${encodeURIComponent(page.fileName)}`;
   const language = isChineseSlug(page.slug) ? 'zh' : 'en';
+  const editLabel = language === 'zh' ? '编辑' : 'edit';
   const pageType = wikiConceptType(page.data, page.slug);
   return (
     <article className="wiki-page" data-page-slug={page.slug} data-page-type={pageType}>
       <h1 className="wiki-title">
         {page.title}
         <span className="edit-link">
-          <a href={sourceHref} target="_blank" rel="noreferrer">edit</a>
+          <a href={sourceHref} target="_blank" rel="noreferrer">{editLabel}</a>
         </span>
       </h1>
       {page.summary && <p className="wiki-title-sub">{page.summary}</p>}
       <Infobox data={page.data} language={language} />
-      <WikiMarkdown sourceHref={sourceHref} markdown={preprocessWikiLinks(page.content, { language })} />
+      <WikiMarkdown editLabel={editLabel} sourceHref={sourceHref} markdown={preprocessWikiLinks(page.content, { language })} />
     </article>
   );
 }
