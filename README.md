@@ -7,9 +7,11 @@
 
   把个人主页、论文档案和研究脉络，变成一座真正可以探索的学术百科。
 
-  [![Visit Xinbaopedia](https://img.shields.io/badge/Visit-Xinbaopedia-3366cc?style=for-the-badge)](https://xinbaopedia.top)
-  [![English & 中文](https://img.shields.io/badge/Language-English%20%7C%20中文-202122?style=for-the-badge)](https://xinbaopedia.top/wiki/Xinbao_Qiao/)
-  [![Explore the research](https://img.shields.io/badge/Explore-Research-2a7f62?style=for-the-badge)](https://xinbaopedia.top/wiki/Research/)
+  <p>
+    <a href="https://xinbaopedia.top"><img src="https://img.shields.io/badge/Visit-Xinbaopedia-3366cc?style=for-the-badge" height="28" alt="Visit Xinbaopedia" /></a>
+    <a href="https://xinbaopedia.top/wiki/Xinbao_Qiao/"><img src="https://img.shields.io/badge/Language-English%20%7C%20中文-202122?style=for-the-badge" height="28" alt="English and Chinese" /></a>
+    <a href="https://xinbaopedia.top/wiki/Research/"><img src="https://img.shields.io/badge/Explore-Research-2a7f62?style=for-the-badge" height="28" alt="Explore the research" /></a>
+  </p>
 </div>
 
 ---
@@ -24,46 +26,79 @@
 
 ## 你可以在这里看到什么
 
-| | 入口 | 你会得到什么 |
-| --- | --- | --- |
-| 👤 | [认识 Xinbao](https://xinbaopedia.top/wiki/Xinbao_Qiao/) | 学术背景、研究兴趣、教育经历与合作方向，一页快速看懂。 |
-| 🧭 | [探索研究版图](https://xinbaopedia.top/wiki/Research/) | 不只罗列关键词，而是解释不同研究问题如何连成一条主线。 |
-| 📚 | [浏览论文](https://xinbaopedia.top/wiki/Publications/) | 用容易理解的摘要、关键启示和图示快速抓住每项工作的价值。 |
-| 💬 | [Chat with Xinbao](https://xinbaopedia.top) | 不知道从哪里开始？直接提问，让 AI 带你找到相关页面。 |
-| 🌏 | [切换中文](https://xinbaopedia.top/wiki/Qiao_Xinbao_zh/) | 主要内容提供中英文入口，阅读和分享都更自然。 |
+<table>
+  <thead>
+    <tr>
+      <th width="48" align="center"></th>
+      <th width="190" align="left">入口</th>
+      <th align="left">你会得到什么</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td align="center"><img src="public/site-icons/xinbaopedia-blue.png" width="22" height="22" alt="" /></td>
+      <td><a href="https://xinbaopedia.top/wiki/Xinbao_Qiao/">认识 Xinbao</a></td>
+      <td>学术背景、研究兴趣、教育经历与合作方向，一页快速看懂。</td>
+    </tr>
+    <tr>
+      <td align="center"><img src="public/site-icons/xinbaopedia-green.png" width="22" height="22" alt="" /></td>
+      <td><a href="https://xinbaopedia.top/wiki/Research/">探索研究版图</a></td>
+      <td>不只罗列关键词，而是解释不同研究问题如何连成一条主线。</td>
+    </tr>
+    <tr>
+      <td align="center"><img src="public/site-icons/xinbaopedia-gold.png" width="22" height="22" alt="" /></td>
+      <td><a href="https://xinbaopedia.top/wiki/Publications/">浏览论文</a></td>
+      <td>用容易理解的摘要、关键启示和图示快速抓住每项工作的价值。</td>
+    </tr>
+    <tr>
+      <td align="center"><img src="public/site-icons/xinbaopedia-charcoal.png" width="22" height="22" alt="" /></td>
+      <td><a href="https://xinbaopedia.top">Chat with Xinbao</a></td>
+      <td>不知道从哪里开始？直接提问，让 AI 带你找到相关页面。</td>
+    </tr>
+    <tr>
+      <td align="center"><img src="public/xinbaopedia-icon.png" width="22" height="22" alt="" /></td>
+      <td><a href="https://xinbaopedia.top/wiki/Qiao_Xinbao_zh/">切换中文</a></td>
+      <td>主要内容提供中英文入口，阅读和分享都更自然。</td>
+    </tr>
+  </tbody>
+</table>
 
 ## 四条值得沿着走下去的研究线索
 
 <table>
   <tr>
-    <td width="25%" align="center">
+    <td width="25%" height="112" align="center" valign="middle">
       <a href="https://xinbaopedia.top/wiki/Data_Centric_Machine_Learning/">
-        <img src="public/topics/data-centric-ml.png" alt="Data-centric machine learning" width="170" />
-        <br /><strong>数据中心机器学习</strong>
+        <img src="public/topics/data-centric-ml.png" alt="Data-centric machine learning" height="96" />
       </a>
-      <br />当数据本身决定模型上限，怎样让它更可靠、更公平、更有用？
     </td>
-    <td width="25%" align="center">
+    <td width="25%" height="112" align="center" valign="middle">
       <a href="https://xinbaopedia.top/wiki/Synthetic_Data/">
-        <img src="public/topics/synthetic-data.png" alt="Synthetic data" width="170" />
-        <br /><strong>合成数据</strong>
+        <img src="public/topics/synthetic-data.png" alt="Synthetic data" height="96" />
       </a>
-      <br />合成数据何时能扩大知识，何时又会让模型走向坍塌？
     </td>
-    <td width="25%" align="center">
+    <td width="25%" height="112" align="center" valign="middle">
       <a href="https://xinbaopedia.top/wiki/Machine_Unlearning/">
-        <img src="public/topics/machine-unlearning.png" alt="Machine unlearning" width="170" />
-        <br /><strong>机器遗忘</strong>
+        <img src="public/topics/machine-unlearning.png" alt="Machine unlearning" height="96" />
       </a>
-      <br />当数据必须被删除，模型怎样真正忘记，同时保留能力？
     </td>
-    <td width="25%" align="center">
+    <td width="25%" height="112" align="center" valign="middle">
       <a href="https://xinbaopedia.top/wiki/AI_and_Networks/">
-        <img src="public/topics/ai-and-networks.png" alt="AI and networks" width="170" />
-        <br /><strong>AI 与网络</strong>
+        <img src="public/topics/ai-and-networks.png" alt="AI and networks" height="96" />
       </a>
-      <br />在分布式、受限和互联环境中，如何让智能协作得更稳？
     </td>
+  </tr>
+  <tr>
+    <th width="25%" align="center"><a href="https://xinbaopedia.top/wiki/Data_Centric_Machine_Learning/">数据中心机器学习</a></th>
+    <th width="25%" align="center"><a href="https://xinbaopedia.top/wiki/Synthetic_Data/">合成数据</a></th>
+    <th width="25%" align="center"><a href="https://xinbaopedia.top/wiki/Machine_Unlearning/">机器遗忘</a></th>
+    <th width="25%" align="center"><a href="https://xinbaopedia.top/wiki/AI_and_Networks/">AI 与网络</a></th>
+  </tr>
+  <tr>
+    <td width="25%" align="center" valign="top">当数据本身决定模型上限，怎样让它更可靠、更公平、更有用？</td>
+    <td width="25%" align="center" valign="top">合成数据何时能扩大知识，何时又会让模型走向坍塌？</td>
+    <td width="25%" align="center" valign="top">当数据必须被删除，模型怎样真正忘记，同时保留能力？</td>
+    <td width="25%" align="center" valign="top">在分布式、受限和互联环境中，如何让智能协作得更稳？</td>
   </tr>
 </table>
 
