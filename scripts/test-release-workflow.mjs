@@ -8,6 +8,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
+assert.equal(Number.parseInt(process.versions.node, 10), 22, 'release workflow tests execute under Node 22');
 
 function run(command, args, options = {}) {
   return new Promise((resolve) => {

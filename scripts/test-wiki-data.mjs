@@ -287,13 +287,16 @@ for (const dependency of ['remark-math', 'rehype-katex', 'katex']) {
   assert.ok(packageJson.dependencies?.[dependency], `package.json includes ${dependency}`);
 }
 assert.ok(packageJson.dependencies?.['@upstash/redis'], 'package.json includes Upstash Redis for server-side rate limits');
-assert.equal(packageJson.scripts?.['maintain:wiki'], 'node scripts/wiki-maintenance.mjs --standardize --write', 'package.json exposes a deterministic wiki maintenance writer');
+assert.match(packageJson.scripts?.['maintain:wiki'] || '', /run-with-node22\.mjs node scripts\/wiki-maintenance\.mjs --standardize --write/, 'package.json runs deterministic wiki maintenance under Node 22');
 assert.equal(packageJson.scripts?.['lint:content'], 'node scripts/wiki-maintenance.mjs --check', 'package.json exposes a deterministic content maintenance check');
 assert.equal(packageJson.scripts?.['lint:okf'], 'node scripts/okf-conformance.mjs', 'package.json exposes a deterministic OKF conformance check');
 assert.equal(packageJson.scripts?.['new:wiki'], 'node scripts/new-wiki-page.mjs', 'package.json exposes a reusable source-page template helper');
-assert.equal(packageJson.scripts?.['verify:publish'], 'node scripts/verify-publish-set.mjs', 'package.json exposes a publish-set safety check');
-assert.equal(packageJson.scripts?.['smoke:production'], 'node scripts/smoke-production.mjs', 'package.json exposes a production smoke check');
-assert.equal(packageJson.scripts?.['deploy:production'], 'node scripts/deploy-production.mjs', 'package.json exposes a token-safe Vercel production deployment wrapper');
+assert.match(packageJson.scripts?.['verify:publish'] || '', /run-with-node22\.mjs node scripts\/verify-publish-set\.mjs/, 'package.json runs the publish-set safety check under Node 22');
+assert.match(packageJson.scripts?.['smoke:production'] || '', /run-with-node22\.mjs node scripts\/smoke-production\.mjs/, 'package.json runs production smoke under Node 22');
+assert.match(packageJson.scripts?.['deploy:production'] || '', /run-with-node22\.mjs node scripts\/deploy-production\.mjs/, 'package.json runs the token-safe Vercel deployment wrapper under Node 22');
+assert.equal(packageJson.scripts?.['setup:node22'], 'node scripts/bootstrap-node22.mjs', 'package.json exposes one deterministic project-local Node 22 bootstrap');
+assert.match(packageJson.scripts?.build || '', /run-with-node22\.mjs next build/, 'repository build selects Node 22 automatically');
+assert.match(packageJson.scripts?.['release:production'] || '', /run-with-node22\.mjs node scripts\/release-production\.mjs/, 'production release selects Node 22 automatically');
 assert.equal(packageJson.scripts?.['submit:indexnow'], 'node scripts/submit-indexnow.mjs', 'package.json exposes the IndexNow deletion-notification helper');
 assert.match(indexNowScript, /https:\/\/api\.indexnow\.org\/indexnow/, 'IndexNow helper uses the canonical multi-engine endpoint');
 assert.match(indexNowScript, /url\.protocol !== 'https:' \|\| url\.hostname !== SITE_HOST/, 'IndexNow helper only submits canonical HTTPS site URLs');
@@ -307,8 +310,9 @@ const indexNowDryRun = JSON.parse(execFileSync(process.execPath, [
 assert.equal(indexNowDryRun.dryRun, true, 'IndexNow helper supports network-free validation');
 assert.equal(indexNowDryRun.keyLocation, 'https://xinbaopedia.top/977ab55cdd7bd5149d5143f5be4a88cc.txt', 'IndexNow dry run points to the public ownership key');
 assert.deepEqual(indexNowDryRun.urlList, ['https://xinbaopedia.top/wiki/Internet_Slang_2026_zh/'], 'IndexNow dry run preserves the canonical deleted URL');
-assert.match(packageJson.scripts?.check || '', /lint:content/, 'repository check includes the content maintenance check');
-assert.match(packageJson.scripts?.check || '', /lint:okf/, 'repository check includes the OKF conformance check');
+assert.match(packageJson.scripts?.check || '', /run-with-node22\.mjs npm run check:node22/, 'repository check selects Node 22 automatically');
+assert.match(packageJson.scripts?.['check:node22'] || '', /lint:content/, 'Node 22 repository check includes the content maintenance check');
+assert.match(packageJson.scripts?.['check:node22'] || '', /lint:okf/, 'Node 22 repository check includes the OKF conformance check');
 assert.equal(pageIndex.schemaVersion, 3, 'wiki page index uses the generated content-maintenance schema');
 assert.equal(pageIndex.okfVersion, '0.1', 'wiki page index declares the OKF target version');
 assert.ok(pageIndex.pages.length >= 80, 'generated page index includes the visible wiki corpus');
@@ -451,7 +455,7 @@ assert.match(releaseProductionScript, /git\(\['ls-remote', '--exit-code', 'origi
 assert.match(releaseProductionScript, /commit or unstage pending files before release/, 'release wrapper refuses ambiguous staged changes');
 assert.match(releaseProductionScript, /git\(\['worktree', 'add', '--detach'/, 'release wrapper deploys the immutable remote commit in an isolated worktree');
 assert.match(releaseProductionScript, /git\(\['worktree', 'remove', '--force'/, 'release wrapper cleans up its isolated deployment worktree');
-assert.match(releaseProductionScript, /Node \$\{process\.versions\.node\} is active[\s\S]*Use \.nvmrc/, 'release wrapper reports local Node engine drift without adding another release stage');
+assert.match(releaseProductionScript, /Node \$\{process\.versions\.node\} is active but the project requires[\s\S]*use npm run release:production/, 'release wrapper blocks direct execution under the wrong Node major and points to the automatic selector');
 assert.equal(fs.readFileSync(path.join(root, '.nvmrc'), 'utf8').trim(), '22', 'local Node selector matches the package engine');
 const gitignore = fs.readFileSync(path.join(root, '.gitignore'), 'utf8');
 const vercelignore = fs.readFileSync(path.join(root, '.vercelignore'), 'utf8');

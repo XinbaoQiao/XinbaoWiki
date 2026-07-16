@@ -19,6 +19,7 @@ tsconfig.tsbuildinfo
 
 # Local package/cache state
 .npm-cache/
+.tools/
 .cache/
 cache/
 

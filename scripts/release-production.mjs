@@ -27,17 +27,17 @@ function git(args, options = {}) {
   return run('git', args, options);
 }
 
-function warnRuntimeDrift() {
+function requireDeclaredRuntime() {
   const packageJson = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
   const expectedMajor = Number.parseInt(packageJson.engines?.node, 10);
   const actualMajor = Number.parseInt(process.versions.node, 10);
   if (Number.isInteger(expectedMajor) && actualMajor !== expectedMajor) {
-    console.warn(`release-production: Node ${process.versions.node} is active; the project declares Node ${packageJson.engines.node}. Use .nvmrc before the next local validation.`);
+    fail(`Node ${process.versions.node} is active but the project requires ${packageJson.engines.node}; use npm run release:production so the project Node 22 runtime is selected`);
   }
 }
 
 function main() {
-  warnRuntimeDrift();
+  requireDeclaredRuntime();
   const currentBranch = git(['branch', '--show-current']).trim();
   if (currentBranch !== branch) {
     fail(`production releases must start from ${branch}; current branch is ${currentBranch || 'detached HEAD'}`);
