@@ -8,7 +8,7 @@ import {
   resolveGroundedReplyWithRetry,
   WIKI_CHAT_RESPONSE_POLICY_VERSION,
   type CitationRetryReason,
-  type GroundedValidationFailure,
+  type ProviderValidationFailure,
   type ProviderCompletionAttempt,
   type ProviderUsage
 } from '@/lib/wiki-chat-response';
@@ -18,7 +18,7 @@ export const runtime = 'nodejs';
 
 const MODEL = 'deepseek-v4-flash';
 const DEFAULT_BASE_URL = 'https://api.yunwu.ai/v1';
-const CHAT_BACKEND_VERSION = 'xinbao-chat-api-v5';
+const CHAT_BACKEND_VERSION = 'xinbao-chat-api-v6';
 const DAILY_LIMIT = 10;
 const COOLDOWN_SECONDS = 4;
 const HOURLY_IP_LIMIT = 80;
@@ -85,7 +85,7 @@ type ChatObservation = {
   providerAttempts: number;
   retryReason?: CitationRetryReason;
   retryOutcome: 'not-attempted' | 'succeeded' | 'failed' | 'rate-limited';
-  finalValidationFailure?: GroundedValidationFailure;
+  finalValidationFailure?: ProviderValidationFailure;
   upstreamStatus?: number;
   promptTokens?: number;
   completionTokens?: number;
@@ -560,7 +560,7 @@ export async function POST(request: NextRequest) {
   function observe(
     outcome: ChatObservation['outcome'],
     details: {
-      finalValidationFailure?: GroundedValidationFailure;
+      finalValidationFailure?: ProviderValidationFailure;
       providerAttempts?: number;
       retryOutcome?: ChatObservation['retryOutcome'];
       retryReason?: CitationRetryReason;
@@ -684,7 +684,7 @@ export async function POST(request: NextRequest) {
   async function unavailableAfterProvider(
     outcome: ChatObservation['outcome'],
     details: {
-      finalValidationFailure?: GroundedValidationFailure;
+      finalValidationFailure?: ProviderValidationFailure;
       retryOutcome?: ChatObservation['retryOutcome'];
       retryReason?: CitationRetryReason;
       upstreamStatus?: number;
@@ -712,7 +712,9 @@ export async function POST(request: NextRequest) {
         return unavailableAfterProvider('empty-reply');
       }
       if (conversationalResult.kind === 'invalid-conversational-reply') {
-        return unavailableAfterProvider('invalid-conversational-reply');
+        return unavailableAfterProvider('invalid-conversational-reply', {
+          finalValidationFailure: conversationalResult.finalValidationFailure
+        });
       }
 
       observe('ok-conversational', { providerAttempts, usage: accumulatedUsage });

@@ -1,6 +1,6 @@
 import { Buffer } from 'node:buffer';
 
-export const WIKI_CHAT_RESPONSE_POLICY_VERSION = 'grounded-conversation-v3';
+export const WIKI_CHAT_RESPONSE_POLICY_VERSION = 'grounded-conversation-v4';
 
 export type WikiChatResponseLanguage = 'en' | 'zh';
 
@@ -25,6 +25,8 @@ export type ProviderCompletionAttempt =
 
 export type CitationRetryReason = 'missing-citations' | 'invalid-citation-number';
 export type GroundedValidationFailure = CitationRetryReason | 'protected-output';
+export type ConversationalValidationFailure = 'empty-output' | 'unexpected-citation-marker' | 'protected-output';
+export type ProviderValidationFailure = GroundedValidationFailure | ConversationalValidationFailure;
 
 export type GroundedReplyValidation<T extends CitableWikiSource> =
   | { kind: 'ok'; response: { reply: string; sources: T[] } }
@@ -47,7 +49,7 @@ export type GroundedProviderResult<T extends CitableWikiSource> =
 export type ConversationalProviderResult =
   | { kind: 'ok'; reply: string; providerAttempts: 1; usage?: ProviderUsage }
   | { kind: 'empty'; providerAttempts: 1; usage?: ProviderUsage }
-  | { kind: 'invalid-conversational-reply'; providerAttempts: 1; usage?: ProviderUsage }
+  | { kind: 'invalid-conversational-reply'; finalValidationFailure: ConversationalValidationFailure; providerAttempts: 1; usage?: ProviderUsage }
   | { kind: 'upstream-error'; providerAttempts: 1; status: number };
 
 const PROTECTED_PROMPT_LEAK_PATTERNS = [
@@ -98,7 +100,11 @@ function protectedPromptParts(systemPrompt: string) {
     .flatMap((line) => line.split(/(?<=[.!?。！？])\s+/u))
     .map((segment) => segment.trim())
     .filter((segment) => segment && !isExplicitlyPublicPromptSegment(segment));
-  const privateVoiceLines = privateVoiceSection.split('\n').map((line) => line.trim()).filter(Boolean);
+  const privateVoiceLines = privateVoiceSection
+    .split('\n')
+    .flatMap((line) => line.split(/(?<=[.!?。！？])\s+/u))
+    .map((line) => line.trim())
+    .filter(Boolean);
   return { instructionSection, instructionSegments, privateVoiceLines };
 }
 
@@ -121,6 +127,15 @@ function containsPhraseOverlap(reply: string, phrase: string, minimumWords: numb
     }
   }
   return false;
+}
+
+function containsPrivateVoiceOverlap(value: string, line: string) {
+  const normalizedLine = normalizeForLeakComparison(line);
+  const wordCount = normalizedLine.split(' ').filter(Boolean).length;
+  const compactCharacterCount = normalizedLine.replace(/\s+/g, '').length;
+  const minimumWords = wordCount <= 4 ? 2 : wordCount <= 12 ? 5 : 8;
+  const minimumCharacters = compactCharacterCount <= 12 ? 8 : compactCharacterCount <= 40 ? 16 : 24;
+  return containsPhraseOverlap(value, line, minimumWords, minimumCharacters);
 }
 
 function containsEncodedProtectedMaterial(reply: string, systemPrompt: string, parts: ReturnType<typeof protectedPromptParts>) {
@@ -146,7 +161,7 @@ function containsEncodedProtectedMaterial(reply: string, systemPrompt: string, p
     if (PROTECTED_PROMPT_LEAK_PATTERNS.some((pattern) => pattern.test(decoded))) return true;
     if (PROTECTED_PROMPT_DISCLOSURE_PATTERNS.some((pattern) => pattern.test(decoded))) return true;
     if (parts.instructionSegments.some((segment) => containsPhraseOverlap(decoded, segment, 6, 16))) return true;
-    if (parts.privateVoiceLines.some((line) => containsPhraseOverlap(decoded, line, 2, 8))) return true;
+    if (parts.privateVoiceLines.some((line) => containsPrivateVoiceOverlap(decoded, line))) return true;
   }
 
   const hexCandidates = new Set([
@@ -164,7 +179,7 @@ function containsEncodedProtectedMaterial(reply: string, systemPrompt: string, p
     if (PROTECTED_PROMPT_LEAK_PATTERNS.some((pattern) => pattern.test(decoded))) return true;
     if (PROTECTED_PROMPT_DISCLOSURE_PATTERNS.some((pattern) => pattern.test(decoded))) return true;
     if (parts.instructionSegments.some((segment) => containsPhraseOverlap(decoded, segment, 6, 16))) return true;
-    if (parts.privateVoiceLines.some((line) => containsPhraseOverlap(decoded, line, 2, 8))) return true;
+    if (parts.privateVoiceLines.some((line) => containsPrivateVoiceOverlap(decoded, line))) return true;
   }
   return false;
 }
@@ -175,7 +190,7 @@ function containsProtectedPromptMaterial(reply: string, systemPrompt = '') {
   if (!systemPrompt) return false;
   const parts = protectedPromptParts(systemPrompt);
   if (parts.instructionSegments.some((segment) => containsPhraseOverlap(reply, segment, 6, 16))) return true;
-  if (parts.privateVoiceLines.some((line) => containsPhraseOverlap(reply, line, 2, 8))) return true;
+  if (parts.privateVoiceLines.some((line) => containsPrivateVoiceOverlap(reply, line))) return true;
   return containsEncodedProtectedMaterial(reply, systemPrompt, parts);
 }
 
@@ -290,10 +305,15 @@ export async function resolveConversationalReply({
   const attempt = await requestCompletion(systemPrompt, 0.3, signal);
   if (attempt.kind === 'upstream-error') return { ...attempt, providerAttempts: 1 };
   if (attempt.kind === 'empty') return { kind: 'empty', providerAttempts: 1, usage: attempt.usage };
-  const reply = validateConversationalReply(attempt.reply, systemPrompt);
-  return reply
-    ? { kind: 'ok', reply, providerAttempts: 1, usage: attempt.usage }
-    : { kind: 'invalid-conversational-reply', providerAttempts: 1, usage: attempt.usage };
+  const validation = validateConversationalReplyResult(attempt.reply, systemPrompt);
+  return validation.kind === 'ok'
+    ? { kind: 'ok', reply: validation.reply, providerAttempts: 1, usage: attempt.usage }
+    : {
+        kind: 'invalid-conversational-reply',
+        finalValidationFailure: validation.kind,
+        providerAttempts: 1,
+        usage: attempt.usage
+      };
 }
 
 export function deterministicAbstentionReply(_message: string, language: WikiChatResponseLanguage) {
@@ -302,10 +322,17 @@ export function deterministicAbstentionReply(_message: string, language: WikiCha
     : 'I cannot provide non-public, sensitive, or otherwise protected information; you can ask about public research, papers, projects, academic background, or contact details instead';
 }
 
-export function validateConversationalReply(reply: string, systemPrompt = '') {
+export function validateConversationalReplyResult(reply: string, systemPrompt = '') {
   const compactReply = reply.trim();
-  if (!compactReply || /\[\d+\]/u.test(compactReply) || containsProtectedPromptMaterial(compactReply, systemPrompt)) return null;
-  return compactReply;
+  if (!compactReply) return { kind: 'empty-output' } as const;
+  if (containsProtectedPromptMaterial(compactReply, systemPrompt)) return { kind: 'protected-output' } as const;
+  if (/\[\d+\]/u.test(compactReply)) return { kind: 'unexpected-citation-marker' } as const;
+  return { kind: 'ok', reply: compactReply } as const;
+}
+
+export function validateConversationalReply(reply: string, systemPrompt = '') {
+  const validation = validateConversationalReplyResult(reply, systemPrompt);
+  return validation.kind === 'ok' ? validation.reply : null;
 }
 
 export function validateGroundedReply<T extends CitableWikiSource>(
