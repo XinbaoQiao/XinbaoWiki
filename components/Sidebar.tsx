@@ -75,34 +75,44 @@ function label(slug: string, language: SidebarLanguage) {
   return slug.replaceAll('_', ' ');
 }
 
-function SidebarSections({ language, onNavigate }: { language: SidebarLanguage; onNavigate?: () => void }) {
+function SidebarSections({
+  currentSlug,
+  language,
+  onNavigate
+}: {
+  currentSlug: string;
+  language: SidebarLanguage;
+  onNavigate?: () => void;
+}) {
+  const currentPage = (slug: string) => localizedSlug(slug, language) === currentSlug ? 'page' : undefined;
+
   return (
     <div className="wiki-sidebar-content">
       <h4>{sectionLabels.navigation[language]}</h4>
       <ul>
         {navigation.map((item) => (
-          <li key={item}><a href={wikiHref(item, language)} onClick={onNavigate}>{label(item, language)}</a></li>
+          <li key={item}><a aria-current={currentPage(item)} href={wikiHref(item, language)} onClick={onNavigate}>{label(item, language)}</a></li>
         ))}
       </ul>
 
       <h4>{sectionLabels.researchTopics[language]}</h4>
       <ul>
         {researchTopics.map((item) => (
-          <li key={item}><a href={wikiHref(item, language)} onClick={onNavigate}>{label(item, language)}</a></li>
+          <li key={item}><a aria-current={currentPage(item)} href={wikiHref(item, language)} onClick={onNavigate}>{label(item, language)}</a></li>
         ))}
       </ul>
 
       <h4>{sectionLabels.education[language]}</h4>
       <ul>
         {education.map((item) => (
-          <li key={item}><a href={wikiHref(item, language)} onClick={onNavigate}>{label(item, language)}</a></li>
+          <li key={item}><a aria-current={currentPage(item)} href={wikiHref(item, language)} onClick={onNavigate}>{label(item, language)}</a></li>
         ))}
       </ul>
 
       <h4>{sectionLabels.experience[language]}</h4>
       <ul>
         {experience.map((item) => (
-          <li key={item}><a href={wikiHref(item, language)} onClick={onNavigate}>{label(item, language)}</a></li>
+          <li key={item}><a aria-current={currentPage(item)} href={wikiHref(item, language)} onClick={onNavigate}>{label(item, language)}</a></li>
         ))}
       </ul>
 
@@ -127,7 +137,8 @@ function SidebarSections({ language, onNavigate }: { language: SidebarLanguage; 
 
 export function Sidebar() {
   const pathname = usePathname() || '';
-  const language: SidebarLanguage = isChineseSlug(activeSlug(pathname)) ? 'zh' : 'en';
+  const currentSlug = activeSlug(pathname);
+  const language: SidebarLanguage = isChineseSlug(currentSlug) ? 'zh' : 'en';
   const [mobileOpen, setMobileOpen] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
 
@@ -154,7 +165,7 @@ export function Sidebar() {
   return (
     <>
       <aside className="wiki-sidebar wiki-sidebar-desktop" aria-label={sectionLabels.navigation[language]}>
-        <SidebarSections language={language} />
+        <SidebarSections currentSlug={currentSlug} language={language} />
       </aside>
 
       <button
@@ -188,7 +199,7 @@ export function Sidebar() {
             ×
           </button>
         </header>
-        <SidebarSections language={language} onNavigate={() => setMobileOpen(false)} />
+        <SidebarSections currentSlug={currentSlug} language={language} onNavigate={() => setMobileOpen(false)} />
       </dialog>
     </>
   );

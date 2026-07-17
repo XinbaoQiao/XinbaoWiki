@@ -581,6 +581,7 @@ assert.match(chatWithXinbaoPanel, /if \(open\) setMinimized\(false\);[\s\S]*\}, 
 assert.match(chatWithXinbaoPanel, /return createPortal\([\s\S]*chat-xinbao-minimized[\s\S]*chat-xinbao-shell[\s\S]*document\.body/, 'Chat with Xinbao keeps the minimized and expanded panels in one shared portal layer');
 assert.match(articleTabs, /usePathname/, 'article tools derive the active page from the current route');
 assert.match(articleTabs, /href="#"/, 'active Article tab uses the Colarpedia inert article link');
+assert.match(articleTabs, /<a aria-current="page" href="#" className="active">/, 'active Article tab exposes the current-page state to assistive technology');
 assert.match(articleTabs, /article: 'Article'[\s\S]*article: '条目'/, 'article tools localize the active article label');
 assert.match(articleTabs, /source: 'View source'[\s\S]*source: '查看源代码'/, 'article tools localize the source label');
 assert.match(articleTabs, /history: 'History'[\s\S]*history: '历史'/, 'article tools localize the history label');
@@ -750,7 +751,8 @@ assert.match(sidebar, /usePathname/, 'sidebar derives language from the current 
 assert.match(sidebar, /<aside className="wiki-sidebar wiki-sidebar-desktop" aria-label=\{sectionLabels\.navigation\[language\]\}>/, 'desktop sidebar localizes the navigation aria label');
 assert.match(sidebar, /className="wiki-mobile-nav-toggle"[\s\S]*aria-controls="wiki-mobile-navigation"|aria-controls="wiki-mobile-navigation"[\s\S]*className="wiki-mobile-nav-toggle"/, 'article pages expose a controlled mobile navigation trigger');
 assert.match(sidebar, /<dialog[\s\S]*id="wiki-mobile-navigation"[\s\S]*onCancel=\{\(\) => setMobileOpen\(false\)\}[\s\S]*onClose=\{\(\) => setMobileOpen\(false\)\}/, 'mobile navigation uses a native modal dialog with Escape and close-state handling');
-assert.match(sidebar, /function SidebarSections[\s\S]*<SidebarSections language=\{language\} \/>[\s\S]*<SidebarSections language=\{language\} onNavigate=\{\(\) => setMobileOpen\(false\)\} \/>/, 'desktop and mobile navigation reuse one localized section tree');
+assert.match(sidebar, /function SidebarSections[\s\S]*currentSlug: string;[\s\S]*<SidebarSections currentSlug=\{currentSlug\} language=\{language\} \/>[\s\S]*<SidebarSections currentSlug=\{currentSlug\} language=\{language\} onNavigate=\{\(\) => setMobileOpen\(false\)\} \/>/, 'desktop and mobile navigation reuse one localized section tree with the active slug');
+assert.match(sidebar, /const currentPage = \(slug: string\) => localizedSlug\(slug, language\) === currentSlug \? 'page' : undefined;[\s\S]*aria-current=\{currentPage\(item\)\}/, 'localized sidebar links expose aria-current on the active English or Chinese page');
 assert.match(sidebar, /document\.body\.style\.overflow = 'hidden'[\s\S]*document\.body\.style\.overflow = previousOverflow/, 'mobile navigation prevents background scrolling and restores it after closing');
 assert.match(languageToggle, /document\.documentElement\.lang = isWikiPage && isChinesePage \? 'zh-CN' : 'en'/, 'article routes synchronize the document language with the localized page');
 assert.doesNotMatch(sidebar, /function NavSection|className="nav-section"|<section className="nav-section">/, 'sidebar uses flat Colarpedia h4 plus ul blocks');
@@ -942,6 +944,34 @@ const portraitGallery = fs.readFileSync(path.join(root, 'components/PortraitGall
 const styles = fs.readFileSync(path.join(root, 'app/globals.css'), 'utf8');
 const homePage = fs.readFileSync(path.join(root, 'app/page.tsx'), 'utf8');
 const homepagePortal = fs.readFileSync(path.join(root, 'components/HomepagePortal.tsx'), 'utf8');
+
+function cssRuleBody(source, selector) {
+  const selectorPattern = selector
+    .trim()
+    .split(/\s+/)
+    .map((part) => part.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'))
+    .join('\\s+');
+  const ruleStart = new RegExp('(?:^|[;{}])\\s*' + selectorPattern + '[ \\t]*\\{').exec(source);
+  assert.ok(ruleStart, selector + ' CSS rule exists');
+
+  const openBrace = ruleStart.index + ruleStart[0].lastIndexOf('{');
+  let depth = 1;
+  for (let index = openBrace + 1; index < source.length; index += 1) {
+    if (source[index] === '{') depth += 1;
+    if (source[index] === '}') depth -= 1;
+    if (depth === 0) return source.slice(openBrace + 1, index);
+  }
+
+  assert.fail(selector + ' CSS rule has a closing brace');
+}
+
+function assertCssRule(source, selector, expectedDeclarations, message) {
+  const body = cssRuleBody(source, selector);
+  for (const declaration of expectedDeclarations) {
+    assert.match(body, declaration, message + ' (' + selector + ')');
+  }
+}
+
 const actionInkColors = [...styles.matchAll(/--site-theme-action-ink: (#(?:[0-9a-f]{3}|[0-9a-f]{6}));/gi)].map((match) => match[1]);
 const colorChannels = (hex) => {
   const compact = hex.slice(1);
@@ -963,29 +993,166 @@ for (const color of actionInkColors) {
 }
 const greenTint10 = colorChannels('#2a7f62').map((channel) => channel * .1 + 255 * .9);
 assert.ok(contrastRatio(colorChannels('#236b52'), greenTint10) >= 4.5, 'green action ink remains readable on the deepest shared green hover tint');
+const resolvedPalettes = ['text', 'blue', 'gold', 'rose', 'green', 'violet', 'charcoal'];
+const strongChromeBaseMatch = cssRuleBody(styles, ':root').match(/--wiki-bg-alt: (#(?:[0-9a-f]{3}|[0-9a-f]{6}));/i);
+assert.ok(strongChromeBaseMatch, 'root CSS defines the neutral strong chrome base');
+const strongChromeBase = colorChannels(strongChromeBaseMatch[1]);
+for (const palette of resolvedPalettes) {
+  const paletteBody = cssRuleBody(styles, 'html[data-site-palette="' + palette + '"]');
+  const actionInkMatch = paletteBody.match(/--site-theme-action-ink: (#(?:[0-9a-f]{3}|[0-9a-f]{6}));/i);
+  const accentMatch = paletteBody.match(/--site-theme-accent: (#(?:[0-9a-f]{3}|[0-9a-f]{6}));/i);
+  assert.ok(actionInkMatch, palette + ' palette defines action ink');
+  assert.ok(accentMatch, palette + ' palette defines a decorative accent');
+  const strongChromeSurface = palette === 'text'
+    ? strongChromeBase
+    : colorChannels(accentMatch[1]).map((channel, index) => channel * .08 + strongChromeBase[index] * .92);
+  assert.ok(
+    contrastRatio(colorChannels(actionInkMatch[1]), strongChromeSurface) >= 4.5,
+    palette + ' action ink meets WCAG AA contrast against its resolved strong chrome surface'
+  );
+}
+assertCssRule(styles, ':root', [
+  /--wiki-link: #0645ad;/,
+  /--wiki-link-visited: #0b0080;/,
+  /--wiki-link-red: #ba0000;/,
+  /--site-theme-chrome-border: color-mix\(in srgb, var\(--site-theme-accent\) 24%, var\(--wiki-border-light\)\);/,
+  /--site-theme-chrome-surface: color-mix\(in srgb, var\(--site-theme-accent\) 4%, var\(--wiki-bg\)\);/,
+  /--site-theme-chrome-surface-strong: color-mix\(in srgb, var\(--site-theme-accent\) 8%, var\(--wiki-bg-alt\)\);/
+], 'root CSS keeps semantic links and restrained article chrome tokens');
+assertCssRule(styles, 'a', [/color: var\(--wiki-link\);/], 'global article links retain Wikipedia blue');
+assertCssRule(styles, 'a:visited', [/color: var\(--wiki-link-visited\);/], 'visited article links retain Wikipedia purple');
+assertCssRule(styles, 'a.redlink', [/color: var\(--wiki-link-red\);/], 'missing-page links retain semantic red');
 assert.doesNotMatch(styles, /research-atlas|wiki-portal-atlas/, 'retired Research Atlas styles are removed');
 assert.doesNotMatch(styles, /\.wiki-logo-mark/, 'topbar CSS does not keep custom logo-image styling');
 assert.match(styles, /--content-width: 920px;[\s\S]*--sidebar-width: 192px;[\s\S]*--infobox-width: 300px;[\s\S]*--article-gap: 28px;/, 'article dimensions use the approved shared Wikipedia-style grid tokens');
 assert.match(styles, /\.wiki-topbar-inner \{[\s\S]*grid-template-columns: var\(--sidebar-width\) minmax\(0, 1fr\);[\s\S]*column-gap: var\(--article-gap\);[\s\S]*\}/, 'desktop masthead aligns its controls with the shared article grid');
+assertCssRule(styles, '.wiki-topbar', [
+  /border-bottom: 1px solid var\(--site-theme-chrome-border\);/,
+  /background: var\(--site-theme-chrome-surface\);/
+], 'article masthead uses the resolved shallow theme chrome');
 assert.match(styles, /\.wiki-topbar-controls \{[\s\S]*display: flex;[\s\S]*grid-column: 2;[\s\S]*gap: 8px;[\s\S]*max-width: 640px;[\s\S]*\}/, 'desktop search and language switch share one compact control row');
 assert.match(styles, /\.wiki-search \{[\s\S]*width: 100%;[\s\S]*max-width: none;[\s\S]*\}/, 'desktop search fills the grouped masthead control area');
-assert.match(styles, /\.lang-toggle \{[\s\S]*display: inline-flex;[\s\S]*height: 32px;[\s\S]*\}/, 'desktop language control matches the search height');
+assertCssRule(styles, '.lang-toggle', [
+  /display: inline-flex;/,
+  /height: 32px;/,
+  /border: 1px solid var\(--site-theme-chrome-border\);/,
+  /background: var\(--site-theme-chrome-surface\);/,
+  /color: var\(--site-theme-action-ink\);/
+], 'desktop language control matches the search height and resolved theme');
+assertCssRule(styles, '.lang-toggle:focus-visible', [
+  /outline: 2px solid var\(--site-theme-action-ink\);/,
+  /outline-offset: 2px;/
+], 'language control retains a visible accessible theme focus ring');
 assert.match(styles, /\.wiki-tabs-inner \{[\s\S]*grid-template-columns: var\(--sidebar-width\) minmax\(0, var\(--content-width\)\);[\s\S]*gap: var\(--article-gap\);[\s\S]*padding: 0 24px;[\s\S]*\}/, 'article tabs share the sidebar and article grid instead of relying on padding arithmetic');
 assert.match(styles, /\.wiki-tabs-content \{[\s\S]*grid-column: 2;[\s\S]*min-width: 0;[\s\S]*\}[\s\S]*\.wiki-tabs-actions \{[\s\S]*margin-left: auto;/, 'article actions align to the right edge of the article column');
-assert.match(styles, /\.wiki-tabs a \{[\s\S]*border: 0;[\s\S]*border-bottom: 2px solid transparent;[\s\S]*background: transparent;[\s\S]*\.wiki-tabs a\.active \{[\s\S]*border-bottom-color: var\(--site-theme-accent\);/, 'article tools use a flat active underline instead of boxed tabs');
+assertCssRule(styles, '.wiki-tabs', [
+  /border-bottom: 1px solid var\(--site-theme-chrome-border\);/,
+  /background: var\(--site-theme-chrome-surface\);/
+], 'article tool strip uses shallow resolved theme chrome');
+assertCssRule(styles, '.wiki-tabs a', [
+  /border: 0;/,
+  /border-bottom: 2px solid transparent;/,
+  /background: transparent;/,
+  /color: var\(--wiki-link\);/
+], 'article tool links retain their flat Wikipedia-blue baseline');
+assertCssRule(styles, '.wiki-tabs a.active,\n.wiki-tabs a[aria-current="page"]', [
+  /border-bottom-color: var\(--site-theme-action-ink\);/,
+  /background: var\(--site-theme-chrome-surface-strong\);/,
+  /color: var\(--site-theme-heading\);/
+], 'current article tool uses a flat theme underline and shallow surface');
+assertCssRule(styles, '.wiki-tabs a:focus-visible', [
+  /outline: 2px solid var\(--site-theme-action-ink\);/,
+  /outline-offset: -2px;/
+], 'article tools retain an inset visible theme focus ring');
 assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.wiki-topbar-inner \{[\s\S]*display: grid;[\s\S]*grid-template-columns: minmax\(0, 1fr\) auto;[\s\S]*\.wiki-logo \{[\s\S]*grid-row: 1;[\s\S]*\.lang-toggle \{[\s\S]*grid-row: 1;[\s\S]*\.wiki-search \{[\s\S]*grid-column: 1 \/ -1;[\s\S]*grid-row: 2;/, 'mobile article masthead keeps logo and language together above the full-width search');
 assert.match(styles, /\.wiki-shell \{[\s\S]*grid-template-columns: var\(--sidebar-width\) minmax\(0, var\(--content-width\)\);[\s\S]*gap: var\(--article-gap\);[\s\S]*\}/, 'article shell uses the same fixed navigation column and shared gap as the article tools');
-assert.match(styles, /\.wiki-sidebar \{[\s\S]*position: sticky;[\s\S]*top: 14px;[\s\S]*\}/, 'article navigation stays available in a Wikipedia-style left rail');
+assertCssRule(styles, '.wiki-sidebar', [
+  /position: sticky;/,
+  /top: 14px;/,
+  /border-right: 1px solid var\(--site-theme-chrome-border\);/
+], 'article navigation stays available in a theme-divided Wikipedia-style left rail');
+assertCssRule(styles, '.wiki-sidebar h4,\n.wiki-sidebar-content h4', [
+  /border-bottom: 1px solid var\(--site-theme-chrome-border\);/,
+  /color: var\(--site-theme-action-ink\);/
+], 'article navigation section headings use restrained theme structure and readable action ink');
+assertCssRule(styles, '.wiki-sidebar a,\n.wiki-sidebar-content a', [
+  /color: var\(--wiki-link\);/
+], 'sidebar ordinary links retain Wikipedia blue');
+assertCssRule(styles, '.wiki-sidebar a[aria-current="page"],\n.wiki-sidebar-content a[aria-current="page"]', [
+  /border-left: 3px solid var\(--site-theme-action-ink\);/,
+  /background: var\(--site-theme-chrome-surface-strong\);/,
+  /color: var\(--site-theme-action-ink\);/
+], 'sidebar marks only the current page with the resolved theme');
+assertCssRule(styles, '.wiki-sidebar a:focus-visible,\n.wiki-sidebar-content a:focus-visible', [
+  /outline: 2px solid var\(--site-theme-action-ink\);/
+], 'desktop and drawer navigation links retain a visible theme focus ring');
 assert.match(styles, /@media \(max-width: 960px\) \{[\s\S]*\.wiki-sidebar-desktop \{[\s\S]*display: none;[\s\S]*\.wiki-mobile-nav-toggle \{[\s\S]*display: inline-flex;[\s\S]*\.wiki-mobile-nav-dialog\[open\] \{[\s\S]*width: min\(82vw, 320px\);[\s\S]*height: 100dvh;/, 'article navigation becomes a compact full-height left-side modal drawer on tablet and mobile widths');
 assert.match(styles, /\.wiki-mobile-nav-dialog::backdrop \{[\s\S]*background: rgba\(32, 33, 34, \.42\);/, 'mobile navigation drawer separates itself from article content with a restrained modal backdrop');
+assertCssRule(styles, '.wiki-mobile-nav-dialog[open]', [
+  /border-right: 1px solid var\(--site-theme-chrome-border\);/
+], 'mobile navigation drawer uses the resolved article chrome');
+assertCssRule(styles, '.wiki-mobile-nav-header', [
+  /border-bottom: 1px solid var\(--site-theme-chrome-border\);/,
+  /background: var\(--site-theme-chrome-surface\);/,
+  /color: var\(--site-theme-heading\);/
+], 'mobile navigation header uses the resolved article chrome');
+assertCssRule(styles, '.wiki-mobile-nav-toggle:focus-visible', [
+  /outline: 2px solid var\(--site-theme-action-ink\);/
+], 'mobile navigation trigger uses an accessible resolved-theme focus ring');
+assertCssRule(styles, '.wiki-mobile-nav-header button:focus-visible', [
+  /border-color: var\(--site-theme-action-ink\);/,
+  /outline: 2px solid var\(--site-theme-action-ink\);/
+], 'mobile navigation close control uses an accessible resolved-theme focus ring');
 assert.match(styles, /\.wiki-page \{[\s\S]*overflow-wrap: break-word;[\s\S]*\}/, 'article pages protect long labels and links from breaking the layout');
-assert.match(styles, /\.wiki-infobox \{[\s\S]*width: var\(--infobox-width\);[\s\S]*border: 1px solid var\(--wiki-border\);[\s\S]*\}/, 'article infobox uses the strict shared width and a neutral one-pixel frame');
-assert.match(styles, /\.wiki-infobox th \{[\s\S]*width: 36%;[\s\S]*border-right: 1px solid var\(--wiki-border-light\);[\s\S]*\}/, 'infobox label and value columns retain a crisp vertical divider');
+assertCssRule(styles, '.wiki-infobox', [
+  /width: var\(--infobox-width\);/,
+  /border: 1px solid var\(--site-theme-chrome-border\);/,
+  /border-top: 3px solid var\(--site-theme-accent\);/
+], 'article infobox uses the strict shared width with a restrained resolved-theme frame and top edge');
+assertCssRule(styles, '.wiki-infobox th', [
+  /width: 36%;/,
+  /border-right: 1px solid var\(--site-theme-chrome-border\);/,
+  /background: var\(--site-theme-chrome-surface\);/,
+  /color: var\(--site-theme-heading\);/
+], 'infobox label and value columns retain a crisp theme-aware divider and shallow label tint');
 assert.match(styles, /\.wiki-main:has\(\.wiki-portal\) \{[\s\S]*grid-column: 1 \/ -1;[\s\S]*max-width: 100%;[\s\S]*\}/, 'homepage main content spans the hidden sidebar grid column');
 assert.match(styles, /\.wiki-page\[data-page-type="publication"\] \.wiki-title \{[\s\S]*white-space: nowrap;[\s\S]*font-size: 1\.56em;[\s\S]*\}/, 'publication article titles stay on one line on desktop');
 assert.match(styles, /\.wiki-page\[data-page-type="publication"\] \.wiki-title \{[\s\S]*font-size: 1\.08em;[\s\S]*\}/, 'publication article titles use a compact single-line size on mobile');
-assert.match(styles, /\.wiki-title \{[\s\S]*border-bottom: 1px solid color-mix\(in srgb, var\(--site-theme-accent\) 18%, var\(--wiki-border\)\);[\s\S]*\}[\s\S]*\.wiki-infobox-title \{[\s\S]*background: color-mix\(in srgb, var\(--site-theme-accent\) 5%, var\(--wiki-bg-chrome\)\);[\s\S]*color: var\(--site-theme-heading\);/, 'article title rules and infobox titles receive a restrained theme tint');
-assert.match(styles, /\.wiki-infobox-section \{[\s\S]*background: color-mix\(in srgb, var\(--site-theme-accent\) 5%, var\(--wiki-bg-chrome\)\);[\s\S]*color: var\(--site-theme-heading\);/, 'infobox section labels share the restrained theme tint');
+assertCssRule(styles, '.wiki-title', [
+  /border-bottom: 1px solid var\(--site-theme-chrome-border\);/,
+  /color: var\(--site-theme-heading\);/
+], 'article title uses restrained resolved-theme rules and heading ink');
+assertCssRule(styles, '.wiki-title-sub', [
+  /border-left: 3px solid var\(--site-theme-action-ink\);/,
+  /background: var\(--site-theme-chrome-surface\);/
+], 'article summary uses a shallow resolved-theme surface and action edge');
+assertCssRule(styles, '.wiki-infobox-title', [
+  /border-bottom: 1px solid var\(--site-theme-chrome-border\);/,
+  /background: var\(--site-theme-chrome-surface-strong\);/,
+  /color: var\(--site-theme-heading\);/
+], 'infobox title uses the shared resolved-theme chrome');
+assertCssRule(styles, '.wiki-infobox-section', [
+  /border-top: 1px solid var\(--site-theme-chrome-border\);/,
+  /background: var\(--site-theme-chrome-surface-strong\);/,
+  /color: var\(--site-theme-heading\);/
+], 'infobox section labels share the resolved-theme chrome');
+assertCssRule(styles, '.wiki-main blockquote', [
+  /border-left: 3px solid var\(--site-theme-accent\);/
+], 'article blockquotes use the decorative resolved-theme accent');
+assertCssRule(styles, '.wiki-main th', [
+  /background: var\(--site-theme-chrome-surface-strong\);/,
+  /color: var\(--site-theme-heading\);/
+], 'article table headers use the strong resolved-theme chrome');
+assertCssRule(styles, '.wiki-main .wiki-infobox th', [
+  /background: var\(--site-theme-chrome-surface\);/,
+  /color: var\(--site-theme-heading\);/
+], 'specific infobox label styling wins over the later generic article table header rule');
+assertCssRule(styles, '.wiki-main section[data-footnotes]', [
+  /border-top: 1px solid var\(--site-theme-chrome-border\);/
+], 'footnotes close the article with restrained theme structure');
+assertCssRule(styles, '.wiki-footer', [
+  /border-top: 1px solid var\(--site-theme-chrome-border\);/
+], 'footer closes the article with restrained theme structure');
 assert.match(styles, /\.wiki-main table \{[\s\S]*max-width: 100%;[\s\S]*\}/, 'article tables stay constrained inside the article column');
 assert.match(styles, /\.wiki-body p:has\(> img:only-child\) \{[\s\S]*display: flow-root;[\s\S]*text-align: center;[\s\S]*\}/, 'article image paragraphs avoid floated infobox overlap without adding a large clear gap');
 assert.doesNotMatch(styles, /\.wiki-body p:has\(> img:only-child\) \{[\s\S]*clear: both;[\s\S]*\}/, 'article image paragraphs do not force images below floated infoboxes');
@@ -1021,7 +1188,14 @@ assert.match(styles, /\.wiki-portal-name-text \{[\s\S]*max-width: 100%;[\s\S]*li
 assert.match(styles, /html\[data-site-palette="rose"\] \{[\s\S]*--site-theme-accent: #a44962;[\s\S]*\}[\s\S]*html\[data-site-palette="violet"\] \{[\s\S]*--site-theme-accent: #70518f;[\s\S]*\}/, 'site palette adds distinct rose and violet theme tokens');
 assert.match(styles, /html\[data-site-palette="gold"\] \{[\s\S]*--wiki-accent: #8a5b0d;[\s\S]*--site-theme-action-ink: #8a5b0d;/, 'gold uses a darker action ink than its decorative accent for small-text contrast');
 assert.match(styles, /html\[data-site-palette="green"\] \{[\s\S]*--site-theme-accent: #2a7f62;[\s\S]*--site-theme-action-ink: #236b52;/, 'green uses a darker action ink that remains readable on theme-tinted hover surfaces');
-assert.match(styles, /html\[data-site-palette="text"\] \{[\s\S]*--site-page-bg: #ffffff;[\s\S]*--site-page-bg-end: #ffffff;[\s\S]*--site-theme-heading: #202122;[\s\S]*\}/, 'pure-text mode keeps the page pure white with readable dark signature text');
+assertCssRule(styles, 'html[data-site-palette="text"]', [
+  /--site-page-bg: #ffffff;/,
+  /--site-page-bg-end: #ffffff;/,
+  /--site-theme-heading: #202122;/,
+  /--site-theme-chrome-border: var\(--wiki-border-light\);/,
+  /--site-theme-chrome-surface: var\(--wiki-bg\);/,
+  /--site-theme-chrome-surface-strong: var\(--wiki-bg-alt\);/
+], 'pure-text mode keeps the page and structural surfaces white or neutral with readable dark heading text');
 assert.match(styles, /\.site-palette-text \{[\s\S]*border-color: #a2a9b1;[\s\S]*background: #ffffff;[\s\S]*\}/, 'pure-white text swatch remains visible against the palette surface');
 assert.match(styles, /@media \(hover: hover\) and \(pointer: fine\) \{[\s\S]*\.site-palette-switcher \{[\s\S]*width: 30px;[\s\S]*\.site-palette-switcher:hover,[\s\S]*\.site-palette-switcher:focus-within \{[\s\S]*width: 198px;/, 'fine-pointer palette expands far enough for the text theme, six colors, and auto mode');
 assert.match(styles, /\.site-palette-button\.is-active \{[\s\S]*order: -1;/, 'active palette swatch remains visible in the collapsed state');

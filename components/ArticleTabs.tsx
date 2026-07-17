@@ -54,7 +54,7 @@ export function ArticleTabs() {
       <div className="wiki-tabs-inner">
         <div className="wiki-tabs-content">
           <div className="wiki-tabs-primary">
-            <a href="#" className="active">{copy.article}</a>
+            <a aria-current="page" href="#" className="active">{copy.article}</a>
             <a
               className="external"
               href={talk}
