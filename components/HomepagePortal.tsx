@@ -1,10 +1,11 @@
 'use client';
 
 import type { CSSProperties } from 'react';
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
 
 type LocalizedText = Record<SearchLanguage, string>;
+type PortalPalette = 'text' | 'blue' | 'gold' | 'rose' | 'green' | 'violet' | 'charcoal';
 type PortalEntry = { href: string; summary: string; title: string };
 type PortalGroup = {
   label: LocalizedText;
@@ -42,10 +43,49 @@ const entriesLabel: LocalizedText = {
   zh: '主要学术条目'
 };
 
-const portalTaglines: LocalizedText = {
-  en: "A connected map of Xinbao Qiao's research, publications, and academic journey.",
-  zh: '连接乔鑫宝的研究方向、论文成果与学术经历。'
-};
+const sectionToggleLabels = {
+  en: {
+    collapse: 'Collapse homepage sections',
+    expand: 'Expand homepage sections'
+  },
+  zh: {
+    collapse: '折叠首页板块',
+    expand: '展开首页板块'
+  }
+} satisfies Record<SearchLanguage, { collapse: string; expand: string }>;
+
+const portalPalettes: PortalPalette[] = ['text', 'blue', 'gold', 'rose', 'green', 'violet', 'charcoal'];
+
+const portalTaglines = {
+  text: {
+    en: 'Q is a lens: search the world, question the model.',
+    zh: '以 Q 为镜：探索世界，追问模型。'
+  },
+  blue: {
+    en: 'To see farther, ask better questions.',
+    zh: '想看得更远，先问得更好。'
+  },
+  gold: {
+    en: 'Where curiosity meets evidence, discovery begins.',
+    zh: '好奇与证据相遇，发现由此开始。'
+  },
+  rose: {
+    en: 'Let the machine learn. Keep the question human.',
+    zh: '让机器学习，让问题保有人性。'
+  },
+  green: {
+    en: 'Learn from the world, not just the dataset.',
+    zh: '向世界学习，而不只向数据集学习。'
+  },
+  violet: {
+    en: "A model's limits are not the world's limits.",
+    zh: '模型的边界，不是世界的边界。'
+  },
+  charcoal: {
+    en: 'In models we question; in evidence we trust.',
+    zh: '对模型保持追问，以证据建立信任。'
+  }
+} satisfies Record<PortalPalette, LocalizedText>;
 
 const updateLabels = {
   en: {
@@ -193,6 +233,10 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
   const portalClassName = ['wiki-portal', allSectionsClosed ? 'wiki-portal-collapsed' : ''].filter(Boolean).join(' ');
   const latestUpdate = updateEntries[language][0];
 
+  useEffect(() => {
+    document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
+  }, [language]);
+
   useLayoutEffect(() => {
     const viewport = updatesWindowRef.current;
     if (!viewport || !newsOpen) return;
@@ -229,7 +273,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
                 type="button"
                 aria-controls="portal-news portal-directory"
                 aria-expanded={!allSectionsClosed}
-                aria-label={allSectionsClosed ? 'Expand homepage sections' : 'Collapse homepage sections'}
+                aria-label={allSectionsClosed ? sectionToggleLabels[language].expand : sectionToggleLabels[language].collapse}
                 className="wiki-portal-name-button"
                 onClick={toggleAllSections}
                 onDoubleClick={collapseAllSections}
@@ -279,7 +323,13 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
             </h1>
           </div>
         </div>
-        <p className="wiki-portal-tagline">{portalTaglines[language]}</p>
+        <p aria-atomic="true" aria-live="polite" className="wiki-portal-tagline">
+          {portalPalettes.map((palette) => (
+            <span className={`wiki-portal-tagline-copy wiki-portal-tagline-${palette}`} key={palette}>
+              {portalTaglines[palette][language]}
+            </span>
+          ))}
+        </p>
         <div className="wiki-portal-search">
           <WikiSearch
             language={language}

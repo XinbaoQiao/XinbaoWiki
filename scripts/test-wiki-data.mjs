@@ -942,6 +942,27 @@ const portraitGallery = fs.readFileSync(path.join(root, 'components/PortraitGall
 const styles = fs.readFileSync(path.join(root, 'app/globals.css'), 'utf8');
 const homePage = fs.readFileSync(path.join(root, 'app/page.tsx'), 'utf8');
 const homepagePortal = fs.readFileSync(path.join(root, 'components/HomepagePortal.tsx'), 'utf8');
+const actionInkColors = [...styles.matchAll(/--site-theme-action-ink: (#(?:[0-9a-f]{3}|[0-9a-f]{6}));/gi)].map((match) => match[1]);
+const colorChannels = (hex) => {
+  const compact = hex.slice(1);
+  const expanded = compact.length === 3 ? [...compact].map((channel) => channel.repeat(2)).join('') : compact;
+  return [0, 2, 4].map((index) => Number.parseInt(expanded.slice(index, index + 2), 16));
+};
+const relativeLuminance = (rgb) => {
+  const channels = rgb.map((channel) => channel / 255);
+  const linear = channels.map((channel) => channel <= .04045 ? channel / 12.92 : ((channel + .055) / 1.055) ** 2.4);
+  return .2126 * linear[0] + .7152 * linear[1] + .0722 * linear[2];
+};
+const contrastRatio = (foreground, background) => {
+  const levels = [relativeLuminance(foreground), relativeLuminance(background)].sort((a, b) => a - b);
+  return (levels[1] + .05) / (levels[0] + .05);
+};
+assert.equal(actionInkColors.length, 8, 'root and all seven resolved themes define a semantic action-ink token');
+for (const color of actionInkColors) {
+  assert.ok(contrastRatio(colorChannels(color), [255, 255, 255]) >= 4.5, `${color} action ink meets WCAG AA contrast against white`);
+}
+const greenTint10 = colorChannels('#2a7f62').map((channel) => channel * .1 + 255 * .9);
+assert.ok(contrastRatio(colorChannels('#236b52'), greenTint10) >= 4.5, 'green action ink remains readable on the deepest shared green hover tint');
 assert.doesNotMatch(styles, /research-atlas|wiki-portal-atlas/, 'retired Research Atlas styles are removed');
 assert.doesNotMatch(styles, /\.wiki-logo-mark/, 'topbar CSS does not keep custom logo-image styling');
 assert.match(styles, /--content-width: 920px;[\s\S]*--sidebar-width: 192px;[\s\S]*--infobox-width: 300px;[\s\S]*--article-gap: 28px;/, 'article dimensions use the approved shared Wikipedia-style grid tokens');
@@ -963,6 +984,8 @@ assert.match(styles, /\.wiki-infobox th \{[\s\S]*width: 36%;[\s\S]*border-right:
 assert.match(styles, /\.wiki-main:has\(\.wiki-portal\) \{[\s\S]*grid-column: 1 \/ -1;[\s\S]*max-width: 100%;[\s\S]*\}/, 'homepage main content spans the hidden sidebar grid column');
 assert.match(styles, /\.wiki-page\[data-page-type="publication"\] \.wiki-title \{[\s\S]*white-space: nowrap;[\s\S]*font-size: 1\.56em;[\s\S]*\}/, 'publication article titles stay on one line on desktop');
 assert.match(styles, /\.wiki-page\[data-page-type="publication"\] \.wiki-title \{[\s\S]*font-size: 1\.08em;[\s\S]*\}/, 'publication article titles use a compact single-line size on mobile');
+assert.match(styles, /\.wiki-title \{[\s\S]*border-bottom: 1px solid color-mix\(in srgb, var\(--site-theme-accent\) 18%, var\(--wiki-border\)\);[\s\S]*\}[\s\S]*\.wiki-infobox-title \{[\s\S]*background: color-mix\(in srgb, var\(--site-theme-accent\) 5%, var\(--wiki-bg-chrome\)\);[\s\S]*color: var\(--site-theme-heading\);/, 'article title rules and infobox titles receive a restrained theme tint');
+assert.match(styles, /\.wiki-infobox-section \{[\s\S]*background: color-mix\(in srgb, var\(--site-theme-accent\) 5%, var\(--wiki-bg-chrome\)\);[\s\S]*color: var\(--site-theme-heading\);/, 'infobox section labels share the restrained theme tint');
 assert.match(styles, /\.wiki-main table \{[\s\S]*max-width: 100%;[\s\S]*\}/, 'article tables stay constrained inside the article column');
 assert.match(styles, /\.wiki-body p:has\(> img:only-child\) \{[\s\S]*display: flow-root;[\s\S]*text-align: center;[\s\S]*\}/, 'article image paragraphs avoid floated infobox overlap without adding a large clear gap');
 assert.doesNotMatch(styles, /\.wiki-body p:has\(> img:only-child\) \{[\s\S]*clear: both;[\s\S]*\}/, 'article image paragraphs do not force images below floated infoboxes');
@@ -980,7 +1003,7 @@ assert.match(styles, /@media \(hover: hover\) and \(pointer: fine\) \{[\s\S]*\.w
 assert.match(styles, /\.wiki-portrait-gallery \.wiki-infobox-caption \{[\s\S]*white-space: nowrap;[\s\S]*\}/, 'event portrait captions stay on one line');
 assert.match(styles, /\.wiki-search-panel \{[\s\S]*position: absolute;[\s\S]*max-height: min\(420px, 70vh\);[\s\S]*\}/, 'search results render in a bounded dropdown panel');
 assert.match(styles, /\.wiki-search-result \{[\s\S]*display: grid;[\s\S]*grid-template-columns: 1fr auto;[\s\S]*\}/, 'search result rows use a compact two-column layout');
-assert.match(styles, /\.wiki-search-result:hover,[\s\S]*\.wiki-search-result\[aria-selected="true"\] \{[\s\S]*background: #eaecf0;[\s\S]*\}/, 'search result hover and keyboard active states are visible');
+assert.match(styles, /\.wiki-search-result:hover,[\s\S]*\.wiki-search-result\[aria-selected="true"\] \{[\s\S]*background: color-mix\(in srgb, var\(--site-theme-accent\) 8%, var\(--wiki-bg-alt\)\);[\s\S]*\}/, 'search result hover and keyboard active states use the resolved theme tint');
 assert.match(styles, /\.chat-xinbao-message \.katex-display \{[\s\S]*overflow-x: auto;[\s\S]*\}/, 'chat markdown formulas can scroll inside message bubbles');
 assert.match(styles, /\.wiki-logo \{[\s\S]*display: inline-grid;[\s\S]*min-width: 0;[\s\S]*text-decoration: none;[\s\S]*\}/, 'topbar logo CSS uses the shared sidebar column without an extra fixed-width offset');
 assert.match(styles, /\.wiki-logo:hover \{[\s\S]*text-decoration: none;[\s\S]*\}/, 'topbar logo hover does not underline the two-line wordmark');
@@ -989,16 +1012,37 @@ assert.match(styles, /\.wiki-logo-subtitle \{[\s\S]*font-family: var\(--font-san
 assert.match(styles, /body:has\(\.wiki-portal\) \.wiki-footer,[\s\S]*body:has\(\.wiki-portal\) \.wiki-topbar \{[\s\S]*display: none;[\s\S]*\}/, 'homepage hides the global topbar and footer chrome');
 assert.match(styles, /\.wiki-portal-hero \{[\s\S]*max-width: 760px;[\s\S]*text-align: center;[\s\S]*\}/, 'homepage has a centered compact Wikipedia-style portal hero');
 assert.match(styles, /\.wiki-main \.wiki-portal-tagline \{[\s\S]*width: 100%;[\s\S]*max-width: 620px;[\s\S]*margin: 0 auto 18px;[\s\S]*text-align: center;[\s\S]*\}/, 'homepage tagline overrides generic article paragraphs and shares the hero center line');
+assert.match(styles, /\.wiki-main \.wiki-portal-tagline \{[\s\S]*color: var\(--site-theme-action-ink\);[\s\S]*font-weight: 500;[\s\S]*\}/, 'homepage aphorism uses the accessible resolved theme ink');
+assert.match(styles, /html:not\(\[data-site-palette\]\) \.wiki-portal-tagline-text,[\s\S]*html\[data-site-palette="blue"\] \.wiki-portal-tagline-blue,[\s\S]*html\[data-site-palette="gold"\] \.wiki-portal-tagline-gold,[\s\S]*html\[data-site-palette="rose"\] \.wiki-portal-tagline-rose,[\s\S]*html\[data-site-palette="green"\] \.wiki-portal-tagline-green,[\s\S]*html\[data-site-palette="violet"\] \.wiki-portal-tagline-violet,[\s\S]*html\[data-site-palette="charcoal"\] \.wiki-portal-tagline-charcoal \{[\s\S]*display: inline-block;/, 'exactly the resolved palette aphorism becomes visible while Auto inherits its resolved color');
 assert.match(styles, /--font-signature: "Alex Brush"/, 'homepage signature typography uses Alex Brush');
 assert.match(styles, /\.wiki-portal-name \{[\s\S]*font-family: var\(--font-signature\);[\s\S]*font-size: 124px;[\s\S]*\}/, 'homepage starts directly with a logo-sized Xinbao Qiao in the Alex Brush signature face');
 assert.match(styles, /\.wiki-portal-name-button \{[\s\S]*appearance: none;[\s\S]*-webkit-appearance: none;[\s\S]*display: inline-grid;[\s\S]*place-items: center;[\s\S]*max-width: min\(620px, 86vw\);[\s\S]*font: inherit;[\s\S]*cursor: pointer;[\s\S]*user-select: none;[\s\S]*-webkit-tap-highlight-color: transparent;[\s\S]*\}/, 'homepage signature name removes native button chrome while centering the themed logo or text');
 assert.match(styles, /\.wiki-portal-name-text \{[\s\S]*max-width: 100%;[\s\S]*line-height: \.95;[\s\S]*white-space: nowrap;[\s\S]*\}/, 'homepage pure text signature stays centered inside the shared wordmark box');
 assert.match(styles, /html\[data-site-palette="rose"\] \{[\s\S]*--site-theme-accent: #a44962;[\s\S]*\}[\s\S]*html\[data-site-palette="violet"\] \{[\s\S]*--site-theme-accent: #70518f;[\s\S]*\}/, 'site palette adds distinct rose and violet theme tokens');
+assert.match(styles, /html\[data-site-palette="gold"\] \{[\s\S]*--wiki-accent: #8a5b0d;[\s\S]*--site-theme-action-ink: #8a5b0d;/, 'gold uses a darker action ink than its decorative accent for small-text contrast');
+assert.match(styles, /html\[data-site-palette="green"\] \{[\s\S]*--site-theme-accent: #2a7f62;[\s\S]*--site-theme-action-ink: #236b52;/, 'green uses a darker action ink that remains readable on theme-tinted hover surfaces');
 assert.match(styles, /html\[data-site-palette="text"\] \{[\s\S]*--site-page-bg: #ffffff;[\s\S]*--site-page-bg-end: #ffffff;[\s\S]*--site-theme-heading: #202122;[\s\S]*\}/, 'pure-text mode keeps the page pure white with readable dark signature text');
 assert.match(styles, /\.site-palette-text \{[\s\S]*border-color: #a2a9b1;[\s\S]*background: #ffffff;[\s\S]*\}/, 'pure-white text swatch remains visible against the palette surface');
 assert.match(styles, /@media \(hover: hover\) and \(pointer: fine\) \{[\s\S]*\.site-palette-switcher \{[\s\S]*width: 30px;[\s\S]*\.site-palette-switcher:hover,[\s\S]*\.site-palette-switcher:focus-within \{[\s\S]*width: 198px;/, 'fine-pointer palette expands far enough for the text theme, six colors, and auto mode');
 assert.match(styles, /\.site-palette-button\.is-active \{[\s\S]*order: -1;/, 'active palette swatch remains visible in the collapsed state');
-assert.match(homepagePortal, /const portalTaglines: LocalizedText = \{[\s\S]*connected map[\s\S]*连接乔鑫宝的研究方向、论文成果与学术经历/, 'homepage explains its value in concise bilingual language');
+const expectedPortalTaglines = [
+  ['text', 'Q is a lens: search the world, question the model.', '以 Q 为镜：探索世界，追问模型。'],
+  ['blue', 'To see farther, ask better questions.', '想看得更远，先问得更好。'],
+  ['gold', 'Where curiosity meets evidence, discovery begins.', '好奇与证据相遇，发现由此开始。'],
+  ['rose', 'Let the machine learn. Keep the question human.', '让机器学习，让问题保有人性。'],
+  ['green', 'Learn from the world, not just the dataset.', '向世界学习，而不只向数据集学习。'],
+  ['violet', "A model's limits are not the world's limits.", '模型的边界，不是世界的边界。'],
+  ['charcoal', 'In models we question; in evidence we trust.', '对模型保持追问，以证据建立信任。']
+];
+for (const [palette, english, chinese] of expectedPortalTaglines) {
+  assert.ok(homepagePortal.includes(`${palette}: {`), `homepage defines a ${palette} aphorism`);
+  assert.ok(homepagePortal.includes(english) && homepagePortal.includes(chinese), `${palette} aphorism is bilingual`);
+}
+assert.match(homepagePortal, /const portalPalettes: PortalPalette\[\] = \['text', 'blue', 'gold', 'rose', 'green', 'violet', 'charcoal'\];[\s\S]*satisfies Record<PortalPalette, LocalizedText>/, 'homepage aphorisms cover every resolved manual palette');
+assert.match(homepagePortal, /portalPalettes\.map\(\(palette\) => \([\s\S]*wiki-portal-tagline-\$\{palette\}[\s\S]*portalTaglines\[palette\]\[language\]/, 'homepage renders one CSS-selectable localized aphorism per resolved palette');
+assert.doesNotMatch(homepagePortal, /A connected map of Xinbao Qiao's research/, 'homepage removes the old descriptive sentence from the visible portal');
+assert.match(homepagePortal, /useEffect\(\(\) => \{[\s\S]*document\.documentElement\.lang = language === 'zh' \? 'zh-CN' : 'en';[\s\S]*\}, \[language\]\);/, 'homepage language selection updates the document language for assistive technology');
+assert.match(homepagePortal, /const sectionToggleLabels = \{[\s\S]*Collapse homepage sections[\s\S]*Expand homepage sections[\s\S]*折叠首页板块[\s\S]*展开首页板块[\s\S]*\} satisfies Record<SearchLanguage,[\s\S]*aria-label=\{allSectionsClosed \? sectionToggleLabels\[language\]\.expand : sectionToggleLabels\[language\]\.collapse\}/, 'homepage signature disclosure label follows the selected language');
 assert.match(styles, /\.wiki-portal-name-logo \{[\s\S]*display: none;[\s\S]*width: 100%;[\s\S]*height: auto;[\s\S]*max-height: 124px;[\s\S]*object-fit: contain;[\s\S]*\}/, 'homepage themed logo images use responsive cropped image sizing');
 assert.match(styles, /\.wiki-main \.wiki-portal-name-logo \{[\s\S]*border: 0;[\s\S]*outline: 0;[\s\S]*background: transparent;[\s\S]*box-shadow: none;[\s\S]*margin: 0;[\s\S]*\}/, 'homepage themed logo images override article image borders and background');
 assert.match(styles, /\.wiki-main \.wiki-portal-name-logo-tinted \{[\s\S]*background: var\(--site-theme-accent\);[\s\S]*\}/, 'alpha-masked theme wordmarks restore their color after the generic transparent image override');
@@ -1029,23 +1073,27 @@ assert.match(styles, /\.chat-xinbao-trigger \{[\s\S]*width: var\(--wiki-search-c
 assert.doesNotMatch(styles, /\.wiki-search-portal \.chat-xinbao-trigger/, 'homepage uses the shared Chat with Xinbao trigger template instead of a portal-specific one');
 assert.match(styles, /\.chat-xinbao-shell \{[\s\S]*border-radius: 8px;[\s\S]*box-shadow: 0 18px 48px[\s\S]*\}/, 'Chat with Xinbao opens as a polished rounded floating panel');
 assert.match(styles, /\.chat-xinbao-message \{[\s\S]*border-radius: 8px;[\s\S]*\}/, 'Chat with Xinbao message bubbles have a cleaner shape');
-assert.match(styles, /\.chat-xinbao-composer button \{[\s\S]*background: #36c;[\s\S]*color: #ffffff;[\s\S]*\}/, 'Chat with Xinbao send button uses the wiki accent as a clear action');
+assert.match(styles, /\.chat-xinbao-trigger \{[\s\S]*border: 1px solid var\(--site-theme-accent-border\);[\s\S]*background: color-mix\(in srgb, var\(--site-theme-accent\) 5%, var\(--wiki-bg\)\);[\s\S]*color: var\(--site-theme-action-ink\);/, 'Chat with Xinbao entry follows the resolved theme without becoming a promotional button');
+assert.match(styles, /\.chat-xinbao-message\.user \{[\s\S]*border-color: var\(--site-theme-accent-border\);[\s\S]*background: color-mix\(in srgb, var\(--site-theme-accent\) 8%, var\(--wiki-bg\)\);/, 'Chat with Xinbao user messages use a shallow resolved-theme tint');
+assert.match(styles, /\.chat-xinbao-composer button \{[\s\S]*background: var\(--site-theme-action-ink\);[\s\S]*color: #ffffff;[\s\S]*\}/, 'Chat with Xinbao send button uses the accessible resolved theme action ink');
 assert.match(styles, /\.wiki-portal-editions \{[\s\S]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);[\s\S]*\}/, 'homepage moves profile language entries below the search');
+assert.match(styles, /\.wiki-portal-edition \{[\s\S]*border-top: 2px solid color-mix\(in srgb, var\(--site-theme-accent\) 62%, var\(--wiki-border-light\)\);[\s\S]*background: color-mix\(in srgb, var\(--site-theme-accent\) 3%, var\(--wiki-bg\)\);[\s\S]*\}[\s\S]*\.wiki-portal-edition strong \{[\s\S]*color: var\(--site-theme-action-ink\);/, 'homepage profile entries use restrained theme structure and accessible action text');
+assert.match(styles, /\.wiki-portal-edition:focus-visible \{[\s\S]*outline: 2px solid var\(--site-theme-action-ink\);[\s\S]*outline-offset: 2px;/, 'homepage profile entries retain a clear keyboard focus outline');
 assert.match(styles, /\.wiki-portal-directory summary \{[\s\S]*display: flex;[\s\S]*cursor: pointer;[\s\S]*\}/, 'homepage browse directory is collapsible');
-assert.match(styles, /\.wiki-portal-directory summary span::after \{[\s\S]*content: "▸";[\s\S]*margin-left: 8px;[\s\S]*color: currentColor;[\s\S]*font-size: 19px;[\s\S]*font-weight: 700;[\s\S]*\}/, 'homepage browse disclosure uses a prominent right-pointing triangle when collapsed');
+assert.match(styles, /\.wiki-portal-directory summary span::after \{[\s\S]*content: "▸";[\s\S]*margin-left: 8px;[\s\S]*color: var\(--site-theme-action-ink\);[\s\S]*font-size: 19px;[\s\S]*font-weight: 700;[\s\S]*\}/, 'homepage browse disclosure uses a theme-aware right-pointing triangle when collapsed');
 assert.match(styles, /\.wiki-portal-directory\[open\] summary span::after \{[\s\S]*rotate\(90deg\);[\s\S]*\}/, 'homepage browse disclosure smoothly rotates its triangle downward when expanded');
 assert.doesNotMatch(styles, /\.wiki-portal-directory summary::before|\.wiki-portal-directory summary::after/, 'homepage browse heading avoids decorative horizontal rules');
 assert.match(styles, /\.wiki-shell:has\(\.wiki-portal\) \{[\s\S]*min-height: 100svh;[\s\S]*transition: padding \.24s ease;[\s\S]*\}/, 'homepage portal shell has a viewport-aware animated layout container');
 assert.match(styles, /\.wiki-shell:has\(\.wiki-portal-collapsed\) \{[\s\S]*place-items: center;[\s\S]*\}/, 'homepage centers the portal when every collapsible section is closed');
 assert.match(styles, /\.wiki-portal-collapsed \{[\s\S]*animation: wiki-portal-recenter \.26s ease-out;[\s\S]*transform: translateY\(-2vh\);[\s\S]*\}/, 'homepage collapsed state animates the portal toward the page center');
 assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.wiki-portal-collapsed[\s\S]*animation: none;[\s\S]*\.wiki-portal-collapsed \{[\s\S]*transform: none;[\s\S]*\}[\s\S]*\}/, 'homepage collapsed-state animation honors reduced-motion settings');
-assert.match(styles, /\.wiki-portal-block \{[\s\S]*--portal-section-accent: #36c;[\s\S]*min-width: 0;[\s\S]*\}/, 'homepage browse top-level sections keep the shared taxonomy accent');
+assert.match(styles, /\.wiki-portal-block \{[\s\S]*--portal-section-accent: #36c;[\s\S]*--portal-section-accent-resolved: color-mix\(in srgb, var\(--portal-section-accent\) 72%, var\(--site-theme-accent\)\);[\s\S]*min-width: 0;[\s\S]*\}/, 'homepage browse taxonomy colors blend with the resolved site theme');
 assert.doesNotMatch(styles, /counter-reset: portal-section|counter\(portal-section|decimal-leading-zero|\.wiki-portal-block h3::before/, 'homepage browse top-level headings do not show numbered taxonomy badges');
-assert.match(styles, /\.wiki-portal-block h3 \{[\s\S]*padding: 7px 10px;[\s\S]*border-left: 4px solid var\(--portal-section-accent\);[\s\S]*background: color-mix\(in srgb, var\(--portal-section-accent\) 7%, var\(--wiki-bg-alt\)\);[\s\S]*font-family: var\(--font-serif\);[\s\S]*font-size: 16px;[\s\S]*font-weight: 700;[\s\S]*letter-spacing: \.01em;[\s\S]*\}/, 'homepage browse top-level headings use compact tinted title bands instead of oversized type');
+assert.match(styles, /\.wiki-portal-block h3 \{[\s\S]*padding: 7px 10px;[\s\S]*border-left: 4px solid var\(--portal-section-accent-resolved\);[\s\S]*background: color-mix\(in srgb, var\(--portal-section-accent-resolved\) 7%, var\(--wiki-bg-alt\)\);[\s\S]*font-family: var\(--font-serif\);[\s\S]*font-size: 16px;[\s\S]*font-weight: 700;[\s\S]*letter-spacing: \.01em;[\s\S]*\}/, 'homepage browse top-level headings blend taxonomy identity with the selected theme');
 assert.doesNotMatch(styles, /\.wiki-portal-block h3 \{[\s\S]*font-variant-caps|transform: skewX\(-3deg\)/, 'homepage browse top-level headings avoid forced small caps and skewed text');
-assert.match(styles, /\.wiki-portal-block h3 span \{[\s\S]*display: block;[\s\S]*color: color-mix\(in srgb, var\(--portal-section-accent\) 38%, var\(--wiki-text\)\);[\s\S]*\}/, 'homepage browse title-band text keeps a restrained accent tint');
+assert.match(styles, /\.wiki-portal-block h3 span \{[\s\S]*display: block;[\s\S]*color: color-mix\(in srgb, var\(--portal-section-accent-resolved\) 38%, var\(--wiki-text\)\);[\s\S]*\}/, 'homepage browse title-band text keeps a restrained resolved-theme tint');
 assert.doesNotMatch(styles, /\.wiki-portal-block h3::after/, 'homepage title bands do not retain the old accent underline');
-assert.match(styles, /\.wiki-portal-group-label \{[\s\S]*display: inline-flex;[\s\S]*border-left: 3px solid var\(--portal-section-accent\);[\s\S]*font-size: 11px;[\s\S]*text-transform: uppercase;[\s\S]*\}/, 'homepage browse links are grouped with compact taxonomy labels');
+assert.match(styles, /\.wiki-portal-group-label \{[\s\S]*display: inline-flex;[\s\S]*border-left: 3px solid var\(--portal-section-accent-resolved\);[\s\S]*color: color-mix\(in srgb, var\(--portal-section-accent-resolved\) 62%, var\(--wiki-text\)\);[\s\S]*font-size: 11px;[\s\S]*text-transform: uppercase;[\s\S]*\}/, 'homepage browse links are grouped with compact readable theme-blended taxonomy labels');
 assert.match(styles, /\.wiki-portal-block li > span \{[\s\S]*font-size: 12px;[\s\S]*\}/, 'homepage limits muted summary typography to link summaries');
 assert.doesNotMatch(styles, /\.wiki-portal-block span \{/, 'homepage link-summary typography cannot override top-level heading spans');
 assert.match(styles, /\.wiki-portal-grid \{[\s\S]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);[\s\S]*\}/, 'homepage browse directory uses a three-column desktop layout');
@@ -1078,6 +1126,7 @@ assert.match(homepagePortal, /className="wiki-portal-disclosures"[\s\S]*classNam
 assert.match(styles, /\.wiki-portal-disclosures \{[\s\S]*--portal-search-width: 690px;[\s\S]*--portal-search-leading-width: 50px;[\s\S]*--portal-search-submit-width: 96px;[\s\S]*max-width: 920px;/, 'homepage restores the original 920px expanded Browse container while retaining search measurements');
 assert.match(styles, /\.wiki-portal-disclosures > details \{[\s\S]*interpolate-size: allow-keywords;[\s\S]*\}[\s\S]*\.wiki-portal-disclosures > details::details-content \{[\s\S]*block-size: 0;[\s\S]*opacity: 0;[\s\S]*transition:[\s\S]*block-size \.24s[\s\S]*content-visibility \.24s allow-discrete[\s\S]*opacity \.16s[\s\S]*\}[\s\S]*\.wiki-portal-disclosures > details\[open\]::details-content \{[\s\S]*block-size: auto;[\s\S]*opacity: 1;/, 'homepage disclosures animate their content smoothly in both directions');
 assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.wiki-portal-disclosures > details::details-content,[\s\S]*\.wiki-portal-directory summary span::after,[\s\S]*\.wiki-portal-timeline-heading::after,[\s\S]*\.wiki-portrait-gallery-frame \.wiki-portrait-gallery-arrow,[\s\S]*\.wiki-portrait-gallery-frame \.wiki-portrait-gallery-count \{[\s\S]*transition: none;/, 'homepage disclosure, indicator, and portrait-control animations honor reduced-motion settings');
+assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.wiki-portal-tagline-copy,[\s\S]*animation: none;/, 'theme-linked aphorism changes honor reduced-motion settings');
 assert.match(styles, /\.wiki-portal-timeline \{[\s\S]*width: min\([\s\S]*var\(--portal-search-width\)[\s\S]*margin-left: max\([\s\S]*var\(--portal-search-leading-width\)[\s\S]*border-left: 4px solid var\(--site-theme-accent\);[\s\S]*border-radius: 2px;[\s\S]*background: color-mix/, 'homepage Updates remains aligned to the white search field inside the restored wider Browse container');
 assert.doesNotMatch(styles, /\.wiki-portal-timeline \{[^}]*radial-gradient|\.wiki-portal-timeline \{[^}]*box-shadow:/, 'homepage timelines avoid wide promotional-card effects');
 assert.match(styles, /\.wiki-portal-news-preview \{[\s\S]*grid-template-columns: 80px minmax\(0, 1fr\);[\s\S]*margin-top: 8px;[\s\S]*padding-top: 8px;/, 'collapsed Latest Updates previews the newest dated item');
