@@ -9,6 +9,7 @@ import 'katex/dist/katex.min.css';
 import './globals.css';
 
 const sitePaletteIcons = {
+  text: pathWithBasePath('/xinbaopedia-icon.png'),
   blue: pathWithBasePath('/site-icons/xinbaopedia-blue.png'),
   gold: pathWithBasePath('/site-icons/xinbaopedia-gold.png'),
   rose: pathWithBasePath('/site-icons/xinbaopedia-gold.png'),

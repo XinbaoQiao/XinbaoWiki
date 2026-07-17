@@ -59,7 +59,7 @@ export function LanguageToggle() {
   );
 }
 
-type SitePaletteName = 'blue' | 'gold' | 'rose' | 'green' | 'violet' | 'charcoal';
+type SitePaletteName = 'text' | 'blue' | 'gold' | 'rose' | 'green' | 'violet' | 'charcoal';
 type SitePaletteMode = SitePaletteName | 'auto';
 
 type SitePaletteOption = {
@@ -75,6 +75,7 @@ type SitePaletteProps = {
 const sitePaletteStorageKey = 'xinbaopedia-palette-mode';
 
 const sitePaletteOptions: SitePaletteOption[] = [
+  { color: '#ffffff', mode: 'text', title: 'Pure white text theme' },
   { color: '#2b5f94', mode: 'blue', title: 'Morning blue theme' },
   { color: '#b8871b', mode: 'gold', title: 'Midday gold theme' },
   { color: '#a44962', mode: 'rose', title: 'Scholar rose theme' },
@@ -85,10 +86,10 @@ const sitePaletteOptions: SitePaletteOption[] = [
 ];
 
 function isSitePaletteMode(value: string | null): value is SitePaletteMode {
-  return value === 'auto' || value === 'blue' || value === 'gold' || value === 'rose' || value === 'green' || value === 'violet' || value === 'charcoal';
+  return value === 'auto' || value === 'text' || value === 'blue' || value === 'gold' || value === 'rose' || value === 'green' || value === 'violet' || value === 'charcoal';
 }
 
-function sitePaletteForLocalTime(date = new Date()): SitePaletteName {
+function sitePaletteForLocalTime(date = new Date()): Exclude<SitePaletteName, 'text'> {
   const hour = date.getHours();
 
   if (hour >= 5 && hour < 9) return 'blue';
@@ -167,7 +168,7 @@ export function SitePalette({ icons }: SitePaletteProps) {
           <button
             aria-label={option.title}
             aria-pressed={pressed}
-            className={['site-palette-button', active ? 'is-active' : '', option.mode === 'auto' ? 'site-palette-auto' : '']
+            className={['site-palette-button', active ? 'is-active' : '', option.mode === 'text' ? 'site-palette-text' : '', option.mode === 'auto' ? 'site-palette-auto' : '']
               .filter(Boolean)
               .join(' ')}
             key={option.mode}

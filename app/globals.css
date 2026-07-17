@@ -31,6 +31,16 @@
   --lh-body: 1.58;
 }
 
+html[data-site-palette="text"] {
+  --wiki-accent: #36c;
+  --site-page-bg: #ffffff;
+  --site-page-bg-end: #ffffff;
+  --site-theme-accent: #36c;
+  --site-theme-accent-border: rgba(51, 102, 204, .24);
+  --site-theme-heading: #202122;
+  --site-theme-surface: rgba(255, 255, 255, .96);
+}
+
 html[data-site-palette="blue"] {
   --wiki-accent: #2b5f94;
   --site-page-bg: #f3f8ff;
@@ -177,6 +187,11 @@ a.external::after {
   cursor: pointer;
 }
 
+.site-palette-text {
+  border-color: #a2a9b1;
+  background: #ffffff;
+}
+
 .site-palette-auto {
   background:
     conic-gradient(from 45deg, #2b5f94, #b8871b, #a44962, #2a7f62, #70518f, #2f3437, #2b5f94);
@@ -201,7 +216,7 @@ a.external::after {
 
   .site-palette-switcher:hover,
   .site-palette-switcher:focus-within {
-    width: 174px;
+    width: 198px;
   }
 }
 
