@@ -5,9 +5,21 @@ import { existsSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {
+  reusableDeploymentFromList,
+  validateDeploymentIdentity,
+  validateLinkedProjectIdentity,
+  validateProductionDeploymentIdentity,
+} from './lib/deployment-identity.mjs';
 import { runExternal } from './lib/external-process.mjs';
 import { stagedSmokeRoutes, withoutProxyEnv } from './lib/network-routes.mjs';
-import { readReleaseState, writeReleaseState } from './lib/release-state.mjs';
+import { runReleaseOrchestrator } from './lib/release-orchestrator.mjs';
+import {
+  initializeReleaseState,
+  readReleaseState,
+  releaseFailureState,
+  writeReleaseState,
+} from './lib/release-state.mjs';
 import { biographyReleaseContract } from './release-contract.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -350,6 +362,82 @@ async function runStagedSmoke(vercelCommand, routes, stagedUrl) {
   return attempts;
 }
 
+function readLinkedProjectIdentity() {
+  const projectPath = join(root, '.vercel', 'project.json');
+  let linkedProject;
+  try {
+    linkedProject = JSON.parse(readFileSync(projectPath, 'utf8'));
+  } catch {
+    throw new Error('Vercel link did not create a readable .vercel/project.json');
+  }
+  return validateLinkedProjectIdentity(linkedProject, project);
+}
+
+async function inspectDeploymentIdentity(vercelCommand, env, stagedUrl, commit, linkedIdentity) {
+  const deploymentHost = new URL(stagedUrl).host;
+  const output = await runCapture(
+    vercelCommand,
+    vercelArgs('api', [
+      `/v13/deployments/${encodeURIComponent(deploymentHost)}`,
+      '--raw',
+      '--scope', scope,
+    ]),
+    env,
+    { maxOutputBytes: 8 * 1024 * 1024, timeoutMs: timeoutMs.stagedRequest }
+  );
+  const identity = validateDeploymentIdentity(output, {
+    commit,
+    deploymentUrl: stagedUrl,
+    ...linkedIdentity,
+    project,
+  });
+  console.log(`deploy-production: verified deployment identity ${identity.deploymentId}`);
+  return identity;
+}
+
+async function inspectProductionIdentity(vercelCommand, env, linkedIdentity) {
+  const productionHost = new URL(productionUrl).host;
+  const output = await runCapture(
+    vercelCommand,
+    vercelArgs('api', [
+      `/v13/deployments/${encodeURIComponent(productionHost)}`,
+      '--raw',
+      '--scope', scope,
+    ]),
+    env,
+    { maxOutputBytes: 8 * 1024 * 1024, timeoutMs: timeoutMs.stagedRequest }
+  );
+  return validateProductionDeploymentIdentity(output, {
+    ...linkedIdentity,
+    project,
+  });
+}
+
+async function findReusableDeployment(vercelCommand, env, commit, linkedIdentity) {
+  const query = new URLSearchParams({
+    limit: '20',
+    'meta-gitCommitSha': commit,
+    projectId: linkedIdentity.projectId,
+    target: 'production',
+  });
+  const attempts = 6;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    const output = await runCapture(
+      vercelCommand,
+      vercelArgs('api', [`/v6/deployments?${query}`, '--raw', '--scope', scope]),
+      env,
+      { maxOutputBytes: 8 * 1024 * 1024, timeoutMs: timeoutMs.stagedRequest }
+    );
+    const deployment = reusableDeploymentFromList(output, { commit, project });
+    if (deployment) return deployment;
+    if (attempt < attempts) {
+      console.log(`deploy-production: exact-commit deployment not visible yet; retrying lookup ${attempt + 1}/${attempts}`);
+      await new Promise((resolve) => setTimeout(resolve, 2_000));
+    }
+  }
+  return null;
+}
+
 async function checkProductionUrl(url) {
   const response = await fetch(url, {
     redirect: 'follow',
@@ -385,14 +473,13 @@ async function main() {
   requireCleanDeploymentTree();
   const commit = process.env.RELEASE_COMMIT || git(['rev-parse', 'HEAD']).trim();
   const statePath = process.env.RELEASE_STATE_PATH || join(root, '.codex', 'tmp', 'release-state.json');
-  let state = readReleaseState(statePath);
-  if (resume) {
-    if (!state) fail(`no release state found at ${statePath}`);
-    if (state.commit !== commit) {
-      fail(`release state commit ${state.commit} does not match current commit ${commit}`);
-    }
-  } else {
-    state = { commit, lastSuccessfulPhase: null, phase: 'starting' };
+  let state;
+  try {
+    state = initializeReleaseState(readReleaseState(statePath), { commit, resume });
+  } catch (error) {
+    fail(error.message);
+  }
+  if (!resume) {
     writeReleaseState(statePath, state);
   }
 
@@ -408,13 +495,10 @@ async function main() {
     writeReleaseState(statePath, state);
   };
   const checkpointFailure = (error) => {
-    state = {
-      ...state,
+    state = releaseFailureState(state, {
       commit,
       error: releaseError(error),
-      failedPhase: state.phase,
-      phase: 'failed',
-    };
+    });
     writeReleaseState(statePath, state);
   };
 
@@ -424,13 +508,11 @@ async function main() {
   const vercelCommand = requireVercelCommand();
   const hadLocalEnv = existsSync(join(root, '.env.local'));
   const cleanupOnSignal = (exitCode) => {
-    writeReleaseState(statePath, {
-      ...state,
+    state = releaseFailureState(state, {
       commit,
       error: { kind: 'signal', message: `release interrupted with exit ${exitCode}` },
-      failedPhase: state.phase,
-      phase: 'failed',
     });
+    writeReleaseState(statePath, state);
     cleanupGeneratedEnvFile(hadLocalEnv);
     process.exit(exitCode);
   };
@@ -438,74 +520,70 @@ async function main() {
   process.once('SIGTERM', () => cleanupOnSignal(143));
 
   try {
-    const resumePhase = state.phase === 'failed' ? state.lastSuccessfulPhase : state.phase;
-    if (resume && resumePhase === 'production_verified') {
+    const result = await runReleaseOrchestrator({
+      checkpoint,
+      productionUrl,
+      resume,
+      state,
+      operations: {
+        async link() {
+          await run(
+            vercelCommand,
+            vercelArgs('link', ['--yes', '--project', project, '--scope', scope]),
+            env,
+            { timeoutMs: timeoutMs.link }
+          );
+          return readLinkedProjectIdentity();
+        },
+        async deploy() {
+          const deploymentOutput = await runCapture(
+            vercelCommand,
+            vercelArgs('deploy', [
+              '--prod',
+              '--skip-domain',
+              '--yes',
+              '--project', project,
+              '--scope', scope,
+            ]),
+            env,
+            { maxOutputBytes: 8 * 1024 * 1024, timeoutMs: timeoutMs.deploy }
+          );
+          return deploymentUrlFromOutput(deploymentOutput);
+        },
+        inspect(stagedUrl, linkedIdentity) {
+          return inspectDeploymentIdentity(vercelCommand, env, stagedUrl, commit, linkedIdentity);
+        },
+        findExistingDeployment(linkedIdentity) {
+          return findReusableDeployment(vercelCommand, env, commit, linkedIdentity);
+        },
+        productionIdentity(linkedIdentity) {
+          return inspectProductionIdentity(vercelCommand, env, linkedIdentity);
+        },
+        stagedSmoke(stagedUrl) {
+          return runStagedSmoke(vercelCommand, routes, stagedUrl);
+        },
+        promote(stagedUrl) {
+          return run(
+            vercelCommand,
+            vercelArgs('promote', [stagedUrl, '--yes', '--scope', scope]),
+            env,
+            { timeoutMs: timeoutMs.promote }
+          );
+        },
+        async productionSmoke() {
+          try {
+            await runSmoke(env, productionUrl);
+          } catch (error) {
+            throw new Error(`deployment was promoted to production but verification did not pass: ${error.message}`);
+          }
+        },
+      },
+    });
+    if (result.alreadyVerified) {
       console.log(`deploy-production: release ${commit} is already production verified`);
       return;
     }
-
-    let stagedUrl = state.deploymentUrl;
-    let phase = resume ? resumePhase : 'starting';
-
-    const needsProjectLink = phase === 'starting' || resume;
-    if (needsProjectLink) {
-      await run(
-        vercelCommand,
-        vercelArgs('link', ['--yes', '--project', project, '--scope', scope]),
-        env,
-        { timeoutMs: timeoutMs.link }
-      );
-    }
-
-    if (phase === 'starting') {
-      checkpoint('linked');
-      phase = 'linked';
-    }
-
-    if (phase === 'linked') {
-      const deploymentOutput = await runCapture(
-        vercelCommand,
-        vercelArgs('deploy', ['--prod', '--skip-domain', '--yes', '--scope', scope]),
-        env,
-        { maxOutputBytes: 8 * 1024 * 1024, timeoutMs: timeoutMs.deploy }
-      );
-      stagedUrl = deploymentUrlFromOutput(deploymentOutput);
-      if (!/^https:\/\/[^\s]+\.vercel\.app\/?$/.test(stagedUrl)) {
-        throw new Error('Vercel did not return a valid staged deployment URL');
-      }
-      checkpoint('staged', { deploymentUrl: stagedUrl });
-      phase = 'staged';
-      console.log(`deploy-production: staged deployment ready at ${stagedUrl}`);
-    } else if (!stagedUrl && !['promoted', 'production_verified'].includes(phase)) {
-      throw new Error(`release cannot resume from ${phase || 'unknown'} without a staged deployment URL`);
-    }
-
-    if (phase === 'staged') {
-      const routeAttempts = await runStagedSmoke(vercelCommand, routes, stagedUrl);
-      checkpoint('staged_verified', { deploymentUrl: stagedUrl, routeAttempts });
-      phase = 'staged_verified';
-    }
-
-    if (phase === 'staged_verified') {
-      await run(
-        vercelCommand,
-        vercelArgs('promote', [stagedUrl, '--yes', '--scope', scope]),
-        env,
-        { timeoutMs: timeoutMs.promote }
-      );
-      checkpoint('promoted', { deploymentUrl: stagedUrl });
-      phase = 'promoted';
-    }
-
-    if (phase === 'promoted') {
-      try {
-        await runSmoke(env, productionUrl);
-      } catch (error) {
-        throw new Error(`deployment was promoted to production but verification did not pass: ${error.message}`);
-      }
-      checkpoint('production_verified', { deploymentUrl: stagedUrl, productionUrl });
-      console.log(`deploy-production: production verified for ${commit}`);
-    }
+    console.log(`deploy-production: production verified for ${commit}`);
   } catch (error) {
     checkpointFailure(error);
     throw error;

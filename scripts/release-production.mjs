@@ -4,9 +4,14 @@ import { mkdirSync, readFileSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { runExternal } from './lib/external-process.mjs';
+import {
+  readReleaseState,
+  validateProductionVerifiedRelease,
+} from './lib/release-state.mjs';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const branch = 'main';
+const productionUrl = 'https://xinbaopedia.top';
 const args = process.argv.slice(2);
 const dryRun = args.includes('--dry-run');
 const resume = args.includes('--resume');
@@ -97,6 +102,10 @@ async function main() {
           RELEASE_STATE_PATH: statePath,
         },
         timeoutMs: 25 * 60_000,
+      });
+      validateProductionVerifiedRelease(readReleaseState(statePath), {
+        commit: head,
+        productionUrl,
       });
       console.log(`release-production: deployed and verified ${head}`);
     }

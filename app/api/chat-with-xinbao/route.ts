@@ -583,6 +583,11 @@ export async function POST(request: NextRequest) {
 
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  const systemPrompt = getXinbaoChatSystemPrompt(
+    language,
+    retrieval,
+    responseMode === 'model-grounded' ? 'grounded' : 'conversational'
+  );
 
   try {
     const response = await fetch(`${baseUrl}/chat/completions`, {
@@ -596,11 +601,7 @@ export async function POST(request: NextRequest) {
         messages: [
           {
             role: 'system',
-            content: getXinbaoChatSystemPrompt(
-              language,
-              retrieval,
-              responseMode === 'model-grounded' ? 'grounded' : 'conversational'
-            )
+            content: systemPrompt
           },
           { role: 'user', content: message }
         ],
@@ -629,7 +630,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (responseMode === 'model-conversational') {
-      const conversationalReply = validateConversationalReply(reply);
+      const conversationalReply = validateConversationalReply(reply, systemPrompt);
       if (!conversationalReply) {
         logServerIssue('invalid conversational reply');
         observe('invalid-conversational-reply', { usage: data.usage });
@@ -651,7 +652,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const groundedReply = validateAndCompactCitations(reply, retrieval.sources);
+    const groundedReply = validateAndCompactCitations(reply, retrieval.sources, systemPrompt);
     if (!groundedReply) {
       logServerIssue('invalid model citations');
       observe('invalid-citations', { usage: data.usage });
