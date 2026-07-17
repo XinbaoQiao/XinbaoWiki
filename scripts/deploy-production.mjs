@@ -447,13 +447,17 @@ async function main() {
     let stagedUrl = state.deploymentUrl;
     let phase = resume ? resumePhase : 'starting';
 
-    if (phase === 'starting') {
+    const needsProjectLink = phase === 'starting' || resume;
+    if (needsProjectLink) {
       await run(
         vercelCommand,
         vercelArgs('link', ['--yes', '--project', project, '--scope', scope]),
         env,
         { timeoutMs: timeoutMs.link }
       );
+    }
+
+    if (phase === 'starting') {
       checkpoint('linked');
       phase = 'linked';
     }

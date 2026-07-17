@@ -764,6 +764,7 @@ assert.match(wikiEvaluator, /REQUIRED_EXACT_CASE_IDS[\s\S]*contextStayedOnPage[\
 assert.match(deployProductionScript, /throw new Error\('Vercel did not return a valid staged deployment URL'\)/, 'deployment wrapper preserves finally cleanup when staged URL parsing fails');
 assert.match(deployProductionScript, /process\.once\('SIGINT'[\s\S]*cleanupOnSignal\(130\)[\s\S]*process\.once\('SIGTERM'[\s\S]*cleanupOnSignal\(143\)/, 'deployment wrapper records interrupted state and removes generated env state');
 assert.match(deployProductionScript, /args\.includes\('--resume'\)[\s\S]*readReleaseState\(statePath\)/, 'deployment wrapper can resume an exact-commit release from its durable checkpoint');
+assert.match(deployProductionScript, /const needsProjectLink = phase === 'starting' \|\| resume;[\s\S]*vercelArgs\('link', \['--yes', '--project', project, '--scope', scope\]\)/, 'deployment wrapper relinks the canonical Vercel project before resumed staged checks in a fresh worktree');
 assert.match(deployProductionScript, /if \(phase === 'starting'\)[\s\S]*if \(phase === 'linked'\)[\s\S]*if \(phase === 'staged'\)/, 'deployment wrapper resumes every pre-promotion phase in order');
 assert.match(releaseStateScript, /renameSync\(temporaryPath, path\)/, 'release checkpoints are written atomically');
 assert.match(deployProductionScript, /vercelArgs\('promote', \[stagedUrl, '--yes', '--scope', scope\]\)/, 'deployment wrapper promotes only a verified staged deployment');
