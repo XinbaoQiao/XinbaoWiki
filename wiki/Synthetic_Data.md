@@ -11,6 +11,10 @@ tags:
   - research-concept
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-03T00:03:48+08:00'
+content_hash: 'sha256:bbe93fac97f4c9cdd3408c23951a3082bd7e098256861dfd64ad06fb01970f2a'
+reviewed_at: '2026-07-03T00:03:48+08:00'
+review_due: '2026-12-29'
 name: Synthetic Data (concept)
 summary: >-
   Concept page for generated data used in training, evaluation, or

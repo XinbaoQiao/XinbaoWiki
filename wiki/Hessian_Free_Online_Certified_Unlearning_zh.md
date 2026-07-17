@@ -9,6 +9,10 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-16T20:08:42+08:00'
+content_hash: 'sha256:61f88b28567cc8c89e63a8e28760d7e18e12868069d2aefb90848e7b9a92ba72'
+reviewed_at: '2026-07-16T20:08:42+08:00'
+review_due: '2026-10-14'
 name: 无 Hessian 在线认证遗忘
 language: zh
 summary: ICLR 2025 论文，研究无显式 Hessian 求逆的高效认证机器遗忘。

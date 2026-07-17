@@ -9,6 +9,10 @@ tags:
   - 研究概念
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:2346ed0d127d9a8c6e84bfdf8fa967e3118ad2ae6adc8383c56cf69a8724c12a'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: 递归合成数据训练
 language: zh
 summary: 解释模型反复使用早期模型生成数据进行训练的过程。

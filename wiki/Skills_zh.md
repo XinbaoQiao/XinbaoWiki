@@ -8,6 +8,10 @@ tags:
   - profile
   - 技术技能
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-03T00:03:48+08:00'
+content_hash: 'sha256:75088b353ef9e2295e61ec52e17237ca0b79e5ded268d9a68678dddb7034225a'
+reviewed_at: '2026-07-03T00:03:48+08:00'
+review_due: '2026-12-29'
 name: 技能
 language: zh
 summary: 乔鑫宝 CV 中列出的技术技能。

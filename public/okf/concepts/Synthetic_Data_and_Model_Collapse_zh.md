@@ -9,6 +9,10 @@ tags:
   - 研究专题
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-03T00:03:48+08:00'
+content_hash: 'sha256:745941be243f09bc0462a6ce71bab7a0abce40149496f78bc21002cf2207e5c8'
+reviewed_at: '2026-07-03T00:03:48+08:00'
+review_due: '2026-12-29'
 language: zh
 aliases:
   - Synthetic Data and Model Collapse
@@ -21,6 +25,14 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-03T00:03:48+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Synthetic_Data_and_Model_Collapse_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Synthetic_Data_and_Model_Collapse_zh.md
 ---
 **合成数据** 是本 wiki 对乔鑫宝关于生成数据、递归训练和模型坍缩研究的简短专题名。完整研究簇还包括 [递归合成数据训练](./Recursive_Synthetic_Data_Training_zh.md)、[数据选择](./Data_Selection_zh.md)、[样本选择偏差](./Sample_Selection_Bias_zh.md)、[模型坍缩](./Model_Collapse_zh.md)、[数据孤岛](./Data_Silos_zh.md) 和 [Wasserstein 几何](./Wasserstein_Geometry_zh.md)。[^collapse]

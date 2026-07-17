@@ -9,12 +9,24 @@ tags:
   - 研究专题
   - machine-unlearning
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:55d954af2fcdd71a0b7e0ec05a6645e2e79f1d639b585b8687cd85f236fed742'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Machine_Unlearning_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Machine_Unlearning_zh.md
 ---
 **机器遗忘** 研究模型训练完成后，如何删除、降低或纠正特定训练数据对模型的影响。在本 wiki 中，它既是隐私问题，也是数据中心系统问题：一个遗忘算法需要说明删除了什么、与重新训练的结果有多接近，以及节省了多少计算和延迟成本。[^unlearning]

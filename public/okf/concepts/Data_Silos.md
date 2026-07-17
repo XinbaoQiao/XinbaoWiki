@@ -10,12 +10,24 @@ tags:
   - concept
   - research-concept
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:10fe6fafff148822ceebb3ec9a5727df2d39ea2c6ea4f674732a0fa67752cde6'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Data_Silos'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Data_Silos.md
 ---
 **Data Silos** are organizational, legal, technical, or geographic separations that prevent all training data from being pooled in one place. In this wiki the term is used for institutions, devices, or clients that each hold only a partial view of the target distribution.

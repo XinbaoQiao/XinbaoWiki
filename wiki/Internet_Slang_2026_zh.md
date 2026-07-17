@@ -9,6 +9,10 @@ tags:
   - style-guide
   - private
 timestamp: '2026-05-07T17:34:07+08:00'
+modified: '2026-07-14T23:17:11+08:00'
+content_hash: 'sha256:46307fcb93f697faed6dbcd91446395afe96d03629cfa003d105bbb7f555a0ee'
+reviewed_at: '2026-07-14T23:17:11+08:00'
+review_due: '2027-07-14'
 name: 2026热梗
 language: zh
 summary: 用于维护 Chat with Xinbao 语气的年度热梗资料页：有梗，但不牺牲事实性。

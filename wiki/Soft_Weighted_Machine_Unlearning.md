@@ -12,6 +12,10 @@ tags:
   - aaai-2026
   - machine-unlearning
 timestamp: '2026-05-05T21:39:01+08:00'
+modified: '2026-07-12T20:00:05+08:00'
+content_hash: 'sha256:716cec747164b611174524f9ef173b5027f5d0873107ea5e7158c0676c2134e4'
+reviewed_at: '2026-07-12T20:00:05+08:00'
+review_due: '2027-07-12'
 name: 'Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness'
 summary: >-
   AAAI 2026 paper on soft-weighted unlearning for fairness and robustness

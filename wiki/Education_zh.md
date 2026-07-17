@@ -8,6 +8,10 @@ tags:
   - profile
   - 教育时间线
 timestamp: '2026-05-06T23:05:52+08:00'
+modified: '2026-07-13T20:54:38+08:00'
+content_hash: 'sha256:bdf1f3b0cacbec32e2f7caea98ff23b4ca9d2d94e2f2c1263d9caab69c6c3184'
+reviewed_at: '2026-07-13T20:54:38+08:00'
+review_due: '2027-01-09'
 name: 教育经历
 language: zh
 summary: 乔鑫宝的教育时间线。

@@ -8,6 +8,10 @@ tags:
   - concept
   - 研究概念
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:5a9ef8f0796c6a6e5818894e93c6a2b241c6df834f9d5be05ff03858efaeaf66'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: 数据孤岛
 language: zh
 summary: 解释数据分布在不同持有者之间时的学习与评估问题。

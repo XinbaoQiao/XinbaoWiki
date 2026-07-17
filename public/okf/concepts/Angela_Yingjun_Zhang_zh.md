@@ -8,12 +8,27 @@ tags:
   - advisor
   - academic-advisor
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-13T20:54:38+08:00'
+content_hash: 'sha256:22a803b3c72aafc454d04b3465a3141ddefe539d0cb848d603c789683d6c4a40'
+reviewed_at: '2026-07-13T20:54:38+08:00'
+review_due: '2027-01-09'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-13T20:54:38+08:00'
+  reviewDue: '2027-01-09'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Angela_Yingjun_Zhang_zh'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-05cf85aef2ce8d53
+  - src-938ce85aed5a8a94
+  - src-e105b35a946250a9
 source_path: wiki/Angela_Yingjun_Zhang_zh.md
 ---
 **张颖珺**是香港中文大学信息工程系教授，IEEE Fellow。[^cuhk-profile] 其官方主页将研究置于无线通信与网络方向，重点包括 5G/6G 无线通信系统中的优化与学习。[^cuhk-about]

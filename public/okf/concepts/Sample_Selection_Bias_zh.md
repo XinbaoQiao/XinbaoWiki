@@ -8,12 +8,24 @@ tags:
   - concept
   - 研究概念
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:cc1aca2e7114303a2dad5668cb78a122c92d56ebbae3a31397a995c35a87af59'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Sample_Selection_Bias_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Sample_Selection_Bias_zh.md
 ---
 **样本选择偏差** 发生在被选用于训练或评估的数据不能代表模型应处理的人群或目标分布时。在本 wiki 中，该概念很重要，因为当模型反复训练在生成数据或本地过滤数据上时，选择偏差会逐代累积。

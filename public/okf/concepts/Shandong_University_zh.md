@@ -8,12 +8,27 @@ tags:
   - education
   - 公立研究型大学
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:c57202064e7fe6a89492d9160d3f630ce33ac111149aac58a6d7f4c5fa44718a'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Shandong_University_zh'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-2698bddf338b56e5
+  - src-33f25ef72f5cac0f
+  - src-8207d2b85f96e6cb
 source_path: wiki/Shandong_University_zh.md
 ---
 **山东大学**（**SDU**）是 [乔鑫宝](./Qiao_Xinbao_zh.md) 本科阶段所在机构；他于 2022 年获得通信工程工学学士学位。在本 wiki 结构中，山东大学是乔鑫宝高等教育记录中的第一个正式学术阶段，并为后来 [AI 与网络](./AI_and_Networks_zh.md) 兴趣提供工程基础。[^sdu-about]

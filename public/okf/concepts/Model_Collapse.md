@@ -11,12 +11,24 @@ tags:
   - research-concept
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:7cf354acdcfbd356f0f83c59eb6015020d32759105867a565a32f9e2dec77a80'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Model_Collapse'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Model_Collapse.md
 ---
 **Model Collapse** is a degenerative process in which a model trained recursively on generated or biased data loses information about the original data distribution. Collapse can appear as mode loss, reduced diversity, distorted class proportions, or worsening sample quality over generations.[^collapse]

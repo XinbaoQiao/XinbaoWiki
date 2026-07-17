@@ -1,0 +1,237 @@
+{
+  "schemaVersion": 1,
+  "name": "Xinbaopedia bilingual retrieval and grounding gate",
+  "description": "Offline golden questions for the production wiki retriever. The set tests public biographical facts, research, publications, citations, multi-page synthesis, and evidence-based abstention without calling a model provider.",
+  "topK": 8,
+  "thresholds": {
+    "retrievalRecallAtK": 0.9,
+    "fullCaseRecallAtK": 0.85,
+    "evidencePatternRecall": 0.9,
+    "citationValidity": 1,
+    "answerabilityAccuracy": 1,
+    "abstentionAccuracy": 1,
+    "indexCoverage": 0.98,
+    "publicIndexPurity": 1,
+    "languagePurity": 1
+  },
+  "cases": [
+    {
+      "id": "en-profile-affiliation",
+      "language": "en",
+      "category": "profile",
+      "query": "Who is Xinbao Qiao and where is he currently studying?",
+      "expectedSlugs": ["Xinbao_Qiao"],
+      "evidencePatterns": ["PhD student", "Chinese University of Hong Kong"]
+    },
+    {
+      "id": "en-profile-education",
+      "language": "en",
+      "category": "multi-hop",
+      "query": "Where did Xinbao Qiao complete his bachelor's and master's degrees?",
+      "expectedSlugs": ["Shandong_University", "Zhejiang_University"],
+      "evidencePatterns": ["Shandong University", "Zhejiang University"]
+    },
+    {
+      "id": "en-research-lifecycle",
+      "language": "en",
+      "category": "research",
+      "query": "How does Xinbao Qiao organize his research around the lifecycle of data?",
+      "expectedSlugs": ["Xinbao_Qiao", "Data_Centric_Machine_Learning"],
+      "evidencePatterns": ["data generation", "data deletion"]
+    },
+    {
+      "id": "en-research-ai-networks",
+      "language": "en",
+      "category": "research",
+      "query": "What does AI and networks mean in Xinbao Qiao's research?",
+      "expectedSlugs": ["AI_and_Networks"],
+      "evidencePatterns": ["AI for Networks", "Networks for AI"]
+    },
+    {
+      "id": "en-publication-dynfrs",
+      "language": "en",
+      "category": "publication",
+      "query": "Which Xinbao Qiao paper studies efficient machine unlearning for random forests?",
+      "expectedSlugs": ["DynFrs"],
+      "evidencePatterns": ["random forest", "ICLR 2025"]
+    },
+    {
+      "id": "en-publication-soft-weighted",
+      "language": "en",
+      "category": "publication",
+      "query": "Which paper uses soft-weighted unlearning for fairness and robustness correction?",
+      "expectedSlugs": ["Soft_Weighted_Machine_Unlearning"],
+      "evidencePatterns": ["fairness", "robustness"]
+    },
+    {
+      "id": "en-model-collapse-multihop",
+      "language": "en",
+      "category": "multi-hop",
+      "query": "How are sample-selection bias and Wasserstein geometry connected in the model-collapse work?",
+      "expectedSlugs": [
+        "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
+        "Wasserstein_Geometry"
+      ],
+      "evidencePatterns": ["sample selection bias", "Wasserstein"]
+    },
+    {
+      "id": "en-citation-public-profile",
+      "language": "en",
+      "category": "citation",
+      "query": "Which wiki page provides Xinbao Qiao's public academic profile and external profile links?",
+      "expectedSlugs": ["Xinbao_Qiao"],
+      "evidencePatterns": ["OpenReview", "ORCID"]
+    },
+    {
+      "id": "en-abstain-unsupported-private",
+      "language": "en",
+      "category": "abstention",
+      "query": "What is Xinbao Qiao's passport number?",
+      "expectedAbstain": true,
+      "abstentionMode": "no-evidence",
+      "unsupportedEvidencePatterns": ["passport number", "passport no"]
+    },
+    {
+      "id": "en-abstain-out-of-domain",
+      "language": "en",
+      "category": "abstention",
+      "query": "How should I bake a sourdough loaf?",
+      "expectedAbstain": true,
+      "abstentionMode": "no-retrieval"
+    },
+    {
+      "id": "en-abstain-history-isolation",
+      "language": "en",
+      "category": "abstention",
+      "query": "How should I bake a sourdough loaf?",
+      "priorUserMessages": ["What is Xinbao Qiao's research?"],
+      "expectedAbstain": true,
+      "abstentionMode": "no-retrieval"
+    },
+    {
+      "id": "en-abstain-mixed-out-of-domain",
+      "language": "en",
+      "category": "abstention",
+      "query": "Xinbao Qiao, how should I bake a sourdough loaf?",
+      "expectedAbstain": true,
+      "abstentionMode": "no-retrieval"
+    },
+    {
+      "id": "en-abstain-hidden-page",
+      "language": "en",
+      "category": "abstention",
+      "query": "What does Learn What Matters: Data Pruning for Efficient Decentralized Learning propose?",
+      "expectedAbstain": true,
+      "abstentionMode": "no-retrieval"
+    },
+    {
+      "id": "zh-profile-affiliation",
+      "language": "zh",
+      "category": "profile",
+      "query": "乔鑫宝是谁，目前在哪里读博士？",
+      "expectedSlugs": ["Qiao_Xinbao_zh"],
+      "evidencePatterns": ["博士生", "香港中文大学"]
+    },
+    {
+      "id": "zh-profile-education",
+      "language": "zh",
+      "category": "multi-hop",
+      "query": "乔鑫宝的本科和硕士分别就读于哪些学校？",
+      "expectedSlugs": ["Shandong_University_zh", "Zhejiang_University_zh"],
+      "evidencePatterns": ["山东大学", "浙江大学"]
+    },
+    {
+      "id": "zh-research-lifecycle",
+      "language": "zh",
+      "category": "research",
+      "query": "乔鑫宝如何从数据全生命周期来组织研究方向？",
+      "expectedSlugs": ["Qiao_Xinbao_zh", "Data_Centric_Machine_Learning_zh"],
+      "evidencePatterns": ["数据生成", "数据删除"]
+    },
+    {
+      "id": "zh-research-ai-networks",
+      "language": "zh",
+      "category": "research",
+      "query": "乔鑫宝研究中的 AI 与网络具体包含哪两个方向？",
+      "expectedSlugs": ["AI_and_Networks_zh"],
+      "evidencePatterns": ["AI for Networks", "Networks for AI"]
+    },
+    {
+      "id": "zh-publication-dynfrs",
+      "language": "zh",
+      "category": "publication",
+      "query": "哪篇论文研究随机森林的高效机器遗忘？",
+      "expectedSlugs": ["DynFrs_zh"],
+      "evidencePatterns": ["随机森林", "ICLR 2025"]
+    },
+    {
+      "id": "zh-publication-soft-weighted",
+      "language": "zh",
+      "category": "publication",
+      "query": "哪篇论文用软加权遗忘修正公平性与鲁棒性？",
+      "expectedSlugs": ["Soft_Weighted_Machine_Unlearning_zh"],
+      "evidencePatterns": ["公平性", "鲁棒性"]
+    },
+    {
+      "id": "zh-model-collapse-multihop",
+      "language": "zh",
+      "category": "multi-hop",
+      "query": "样本选择偏差与 Wasserstein 几何如何在模型坍缩研究中联系起来？",
+      "expectedSlugs": [
+        "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
+        "Wasserstein_Geometry_zh"
+      ],
+      "evidencePatterns": ["样本选择偏差", "Wasserstein"]
+    },
+    {
+      "id": "zh-citation-public-profile",
+      "language": "zh",
+      "category": "citation",
+      "query": "哪个百科页面列出了乔鑫宝可核验的公开学术主页链接？",
+      "expectedSlugs": ["Qiao_Xinbao_zh"],
+      "evidencePatterns": ["OpenReview", "ORCID"]
+    },
+    {
+      "id": "zh-abstain-unsupported-private",
+      "language": "zh",
+      "category": "abstention",
+      "query": "乔鑫宝的护照号码是多少？",
+      "expectedAbstain": true,
+      "abstentionMode": "no-evidence",
+      "unsupportedEvidencePatterns": ["护照号码", "护照号"]
+    },
+    {
+      "id": "zh-abstain-out-of-domain",
+      "language": "zh",
+      "category": "abstention",
+      "query": "请教我怎么做一份酸面包。",
+      "expectedAbstain": true,
+      "abstentionMode": "no-retrieval"
+    },
+    {
+      "id": "zh-abstain-history-isolation",
+      "language": "zh",
+      "category": "abstention",
+      "query": "请教我怎么做一份酸面包。",
+      "priorUserMessages": ["乔鑫宝主要研究什么？"],
+      "expectedAbstain": true,
+      "abstentionMode": "no-retrieval"
+    },
+    {
+      "id": "zh-abstain-mixed-out-of-domain",
+      "language": "zh",
+      "category": "abstention",
+      "query": "乔鑫宝，请教我怎么做一份酸面包。",
+      "expectedAbstain": true,
+      "abstentionMode": "no-retrieval"
+    },
+    {
+      "id": "zh-abstain-hidden-page",
+      "language": "zh",
+      "category": "abstention",
+      "query": "Learn What Matters：高效去中心化学习的数据剪枝提出了什么？",
+      "expectedAbstain": true,
+      "abstentionMode": "no-retrieval"
+    }
+  ]
+}

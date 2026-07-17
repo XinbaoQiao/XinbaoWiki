@@ -8,12 +8,30 @@ tags:
   - education
   - 公立研究型大学
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-13T20:54:38+08:00'
+content_hash: 'sha256:cc7ee27875948d4bdac61d09c00a69b27a9675d8b85091248c40ab359ba356e3'
+reviewed_at: '2026-07-13T20:54:38+08:00'
+review_due: '2027-01-09'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-13T20:54:38+08:00'
+  reviewDue: '2027-01-09'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:The_Chinese_University_of_Hong_Kong_zh'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-09fa966eeac1624e
+  - src-5dac6849a598aa84
+  - src-5ffca2a581311c27
+  - src-cecd4e57ea891eee
+  - src-f1b03a6c505acdf9
+  - src-f6cb0623675b4752
 source_path: wiki/The_Chinese_University_of_Hong_Kong_zh.md
 ---
 **香港中文大学**（**CUHK**）是 [乔鑫宝](./Qiao_Xinbao_zh.md) 当前博士阶段所在机构；乔鑫宝隶属于其信息工程系。在本 wiki 中，CUHK 页面是机构背景页，而非完整大学史条目：它记录该校为何与乔鑫宝研究传记相关、信息工程项目如何框定当前研究，以及博士阶段与此前 [浙江大学](./Zhejiang_University_zh.md) 和 [山东大学](./Shandong_University_zh.md) 训练之间的关系。[^cuhk-intro]

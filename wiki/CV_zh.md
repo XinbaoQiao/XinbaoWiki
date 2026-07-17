@@ -8,6 +8,10 @@ tags:
   - profile
   - cv-摘要
 timestamp: '2026-07-02T19:37:18+08:00'
+modified: '2026-07-13T21:35:14+08:00'
+content_hash: 'sha256:28057554411f3276ab5c97ff0c4e3a9228ccbb041256e551471439ea54cff470'
+reviewed_at: '2026-07-13T21:35:14+08:00'
+review_due: '2026-10-11'
 name: 简历
 language: zh
 summary: 乔鑫宝的学术简历摘要。

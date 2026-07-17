@@ -8,12 +8,24 @@ tags:
   - model
   - model-family
 timestamp: '2026-05-05T19:52:29+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:6ef03a3d58778c15b3243793362e42f687b2f20f9c364d1ce25f158e6de0a6b7'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Random_Forest'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Random_Forest.md
 ---
 **Random Forest** refers to an ensemble of decision trees trained with randomization over samples, features, or split choices. The method is widely used because it is strong on tabular data, relatively robust, and easier to inspect than many neural models.[^breiman]

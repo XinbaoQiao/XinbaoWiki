@@ -8,6 +8,10 @@ tags:
   - concept
   - 研究概念
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:4c416cdbc890f68f445c30e75c3233866340c0721cf1b433fd236987d5281868'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: 协作评估
 language: zh
 summary: 解释多方共同评估模型或数据过程的概念页。

@@ -9,12 +9,27 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-16T20:08:42+08:00'
+content_hash: 'sha256:971eed83f902bf36484676a0aeaa392153540246ac822e5e144fa7f9862ad5b0'
+reviewed_at: '2026-07-16T20:08:42+08:00'
+review_due: '2026-10-14'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-16T20:08:42+08:00'
+  reviewDue: '2026-10-14'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:DynFrs_zh'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-19cdc04d387acf77
+  - src-3234eea5652932e1
+  - src-da17eb3884244bd3
 source_path: wiki/DynFrs_zh.md
 ---
 **DynFrs：随机森林机器遗忘高效框架** 是 Shurong Wang、Zhuoyang Shen、**[乔鑫宝](./Qiao_Xinbao_zh.md)**、Tongning Zhang 和张萌的 ICLR 2025 会议论文。该工作把随机森林遗忘视为动态数据结构问题：在保持与重新训练分布等价的同时，降低在线删除、插入和查询延迟。

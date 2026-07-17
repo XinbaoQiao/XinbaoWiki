@@ -11,12 +11,26 @@ tags:
   - research-topic
   - ai-and-networks
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:e29224a6e9ced60652a179982834df6b1aa7fa7cde79ecf1e340d56c4e8508c6'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:AI_and_Networks'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-5ffca2a581311c27
+  - src-766234e11681dad2
 source_path: wiki/AI_and_Networks.md
 ---
 **AI and Networks** is the primary research topic currently emphasized in [Xinbao Qiao](./Xinbao_Qiao.md)'s wiki. The term is used here in a deliberately broad but bounded sense: it covers AI for Networks, Networks for AI, and learning algorithms whose behavior depends on communication, decentralization, edge devices, institutional data silos, or cross-party evaluation.[^sources]

@@ -8,12 +8,24 @@ tags:
   - overview
   - 研究概览
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-11T07:28:06+08:00'
+content_hash: 'sha256:0b3775a6da8240e7a8826285d93d76a8f51202552c6969c4c028ff60fb890bcf'
+reviewed_at: '2026-07-11T07:28:06+08:00'
+review_due: '2026-10-08'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-11T07:28:06+08:00'
+  reviewDue: '2026-10-08'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Research_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Research_zh.md
 ---
 本页总结乔鑫宝学术 wiki 中的主要研究方向。它不是静态兴趣列表，而是由多个相互链接的专题页编译出的研究图谱。当前重心是[数据中心 ML](./Data_Centric_Machine_Learning_zh.md)和双向的 [AI 与网络](./AI_and_Networks_zh.md)问题。

@@ -10,6 +10,10 @@ tags:
   - concept
   - research-concept
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:24005e66c5a5ac72037a20b6868fb1935bc8e292c9fea0810c3a76c85b7c06a8'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: Sample Selection Bias
 summary: >-
   Concept page for distributional bias introduced by non-representative sample

@@ -227,15 +227,24 @@ const sitemapRoute = fs.readFileSync(path.join(root, 'app/sitemap.ts'), 'utf8');
 const chatRoute = fs.readFileSync(path.join(root, 'app/api/chat-with-xinbao/route.ts'), 'utf8');
 const chatQuestionsRoute = fs.readFileSync(path.join(root, 'app/api/chat-with-xinbao/questions/route.ts'), 'utf8');
 const chatKnowledge = fs.readFileSync(path.join(root, 'lib/chat-with-xinbao.ts'), 'utf8');
+const wikiChatResponse = fs.readFileSync(path.join(root, 'lib/wiki-chat-response.ts'), 'utf8');
 const pageIndex = JSON.parse(fs.readFileSync(path.join(wikiDir, 'pages.json'), 'utf8'));
 const wikiGraph = JSON.parse(fs.readFileSync(path.join(wikiDir, 'graph.json'), 'utf8'));
 const wikiQualityReport = JSON.parse(fs.readFileSync(path.join(wikiDir, 'quality-report.json'), 'utf8'));
 const maintenanceSchema = JSON.parse(fs.readFileSync(path.join(wikiDir, 'maintenance-schema.json'), 'utf8'));
+const sourceRegistry = JSON.parse(fs.readFileSync(path.join(wikiDir, 'source-registry.json'), 'utf8'));
 const okfManifest = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/manifest.json'), 'utf8'));
 const okfPageIndex = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/pages.json'), 'utf8'));
 const okfGraph = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/graph.json'), 'utf8'));
 const okfQualityReport = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/quality-report.json'), 'utf8'));
 const okfSchema = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/schema.json'), 'utf8'));
+const okfSources = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/sources.json'), 'utf8'));
+const wikiRetrieval = fs.readFileSync(path.join(root, 'lib/wiki-retrieval.ts'), 'utf8');
+const wikiMaintenance = fs.readFileSync(path.join(root, 'scripts/wiki-maintenance.mjs'), 'utf8');
+const wikiEvaluator = fs.readFileSync(path.join(root, 'scripts/evaluate-wiki-chat.mjs'), 'utf8');
+const wikiChatGolden = JSON.parse(fs.readFileSync(path.join(root, 'evals/wiki-chat-golden.json'), 'utf8'));
+const maintenanceWorkflow = fs.readFileSync(path.join(root, '.github/workflows/maintenance.yml'), 'utf8');
+const smokeProduction = fs.readFileSync(path.join(root, 'scripts/smoke-production.mjs'), 'utf8');
 const okfHome = matter(fs.readFileSync(path.join(root, 'public/okf/concepts/Xinbao_Qiao.md'), 'utf8'));
 const okfSyntheticTopic = matter(fs.readFileSync(path.join(root, 'public/okf/concepts/Synthetic_Data_and_Model_Collapse.md'), 'utf8'));
 const okfConceptLog = fs.readFileSync(path.join(root, 'public/okf/concepts/log.md'), 'utf8');
@@ -319,10 +328,15 @@ assert.deepEqual(indexNowDryRun.urlList, ['https://xinbaopedia.top/wiki/Internet
 assert.match(packageJson.scripts?.check || '', /run-with-node22\.mjs npm run check:node22/, 'repository check selects Node 22 automatically');
 assert.match(packageJson.scripts?.['check:node22'] || '', /lint:content/, 'Node 22 repository check includes the content maintenance check');
 assert.match(packageJson.scripts?.['check:node22'] || '', /lint:okf/, 'Node 22 repository check includes the OKF conformance check');
-assert.equal(pageIndex.schemaVersion, 3, 'wiki page index uses the generated content-maintenance schema');
+assert.match(packageJson.scripts?.['check:node22'] || '', /audit:wiki/, 'Node 22 repository check includes the source and review audit');
+assert.match(packageJson.scripts?.['check:node22'] || '', /eval:wiki-chat/, 'Node 22 repository check includes the production retrieval golden set');
+assert.equal(pageIndex.schemaVersion, 4, 'wiki page index uses the generated content-maintenance schema');
 assert.equal(pageIndex.okfVersion, '0.1', 'wiki page index declares the OKF target version');
 assert.ok(pageIndex.pages.length >= 80, 'generated page index includes the visible wiki corpus');
 assert.ok(pageIndex.pages.some((page) => page.slug === 'Xinbao_Qiao' && page.type), 'generated page index includes typed home-page metadata');
+assert.ok(pageIndex.pages.every((page) => /^sha256:[a-f0-9]{64}$/.test(page.contentHash)), 'every public page has a canonical SHA-256 content hash');
+assert.ok(pageIndex.pages.every((page) => page.modifiedAt && page.reviewedAt && /^\d{4}-\d{2}-\d{2}$/.test(page.reviewDue)), 'every public page has explicit maintenance and review provenance');
+assert.ok(pageIndex.pages.every((page) => page.retrieval?.chunking === 'markdown-heading-v1' && page.retrieval?.documentId === `wiki:${page.slug}`), 'every public page publishes stable retrieval metadata');
 assert.ok(!pageIndex.pages.some((page) => page.slug === 'Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning'), 'generated page index excludes hidden manuscripts');
 for (const slug of privateStyleGuideSlugs) {
   assert.equal(frontmatterData(`${slug}.md`).hidden, true, `${slug} remains a hidden internal style source`);
@@ -336,7 +350,7 @@ for (const publicNavigationFile of ['index.md', 'index_zh.md', 'log.md', 'log_zh
     assert.ok(!publicNavigation.includes(slug), `${publicNavigationFile} does not reveal hidden style-guide slug ${slug}`);
   }
 }
-assert.equal(wikiGraph.schemaVersion, 3, 'wiki graph uses the generated content-maintenance schema');
+assert.equal(wikiGraph.schemaVersion, 4, 'wiki graph uses the generated content-maintenance schema');
 assert.equal(wikiGraph.okfVersion, '0.1', 'wiki graph declares the OKF target version');
 assert.ok(wikiGraph.nodes.length >= 80, 'wiki graph includes the markdown corpus');
 assert.ok(wikiGraph.edges.length >= 100, 'wiki graph captures internal wiki relationships');
@@ -346,7 +360,7 @@ assert.equal(wikiGraph.stats.warnings, 0, 'wiki graph has no publish-time mainte
 assert.deepEqual(wikiGraph.warnings, [], 'wiki graph warning list is empty after hardening');
 assert.ok(wikiGraph.edges.some((edge) => edge.from === 'Synthetic_Data_and_Model_Collapse' && edge.relation === 'depends-on' && edge.source === 'frontmatter' && edge.to === 'Synthetic_Data'), 'wiki graph includes structured frontmatter relations');
 assert.ok(wikiGraph.nodes.some((node) => node.slug === 'Synthetic_Data_and_Model_Collapse' && node.relationTypes.includes('depends-on')), 'wiki graph nodes summarize structured relation types');
-assert.equal(wikiQualityReport.schemaVersion, 1, 'wiki quality report declares its schema version');
+assert.equal(wikiQualityReport.schemaVersion, 2, 'wiki quality report declares its schema version');
 assert.equal(wikiQualityReport.okfVersion, '0.1', 'wiki quality report declares the OKF target version');
 assert.equal(wikiQualityReport.counts.pages, wikiGraph.stats.pages, 'wiki quality report page count matches the graph');
 assert.equal(wikiQualityReport.counts.warnings, 0, 'wiki quality report keeps the current corpus warning-free');
@@ -359,14 +373,39 @@ assert.deepEqual(wikiQualityReport.noOutgoingPages, [], 'wiki quality report lis
 assert.deepEqual(wikiQualityReport.missingTranslationPairs, [], 'wiki quality report lists missing translation pairs even when empty');
 assert.deepEqual(wikiQualityReport.translationConsistency.warnings, [], 'translation consistency has no current warnings');
 assert.equal(wikiQualityReport.structuredRelationCounts['depends-on'], 2, 'wiki quality report counts structured depends-on relations');
-assert.equal(maintenanceSchema.schemaVersion, 4, 'maintenance schema records the source contract version');
+assert.equal(wikiQualityReport.reviewFreshness.pendingReviewPages.length, 0, 'current public pages have no pending initial review');
+assert.equal(wikiQualityReport.reviewFreshness.overduePages.length, 0, 'current public pages are not overdue for review');
+assert.equal(wikiQualityReport.retrievalReadiness.coverage, 1, 'all public pages are retrieval-ready');
+assert.equal(maintenanceSchema.schemaVersion, 5, 'maintenance schema records the source contract version');
 assert.equal(maintenanceSchema.okfVersion, '0.1', 'maintenance schema records the OKF target version');
 assert.deepEqual(maintenanceSchema.source.requiredFrontmatter, ['type', 'title', 'description', 'tags', 'timestamp'], 'maintenance schema locks the source frontmatter contract');
 assert.ok(maintenanceSchema.source.recommendedFrontmatter.includes('relations'), 'maintenance schema documents structured relation frontmatter');
 assert.ok(maintenanceSchema.relations.structured.includes('depends-on'), 'maintenance schema documents supported structured relations');
 assert.ok(maintenanceSchema.qualityGates.some((gate) => gate.includes('zero warnings')), 'maintenance schema documents warning-free checks');
 assert.ok(maintenanceSchema.generatedArtifacts.includes('public/okf/concepts/*.md'), 'maintenance schema documents the public OKF concept export');
+assert.equal(sourceRegistry.schemaVersion, 1, 'canonical source registry declares its schema version');
+assert.equal(okfSources.schemaVersion, 1, 'public source registry declares its schema version');
+assert.ok(sourceRegistry.sources.length >= okfSources.sources.length && okfSources.sources.length > 0, 'public source registry is a non-empty hidden-safe subset');
+for (const source of sourceRegistry.sources) {
+  assert.match(source.id, /^src-[a-f0-9]{16}$/, `${source.id} uses a stable URL-derived identity`);
+  assert.equal(source.hash?.algorithm, 'sha256', `${source.id} declares its hash algorithm`);
+  assert.match(source.hash?.value || '', /^sha256:[a-f0-9]{64}$/, `${source.id} stores a canonical URL digest`);
+  assert.ok(Array.isArray(source.evidence) && source.evidence.length > 0, `${source.id} records page evidence locations`);
+}
+const publicOkfSourceIds = new Set(okfSources.sources.map((source) => source.id));
+const canonicalSourceUrls = new Set(sourceRegistry.sources.map((source) => source.url));
+for (const expectedUrl of [
+  'https://arxiv.org/abs/2505.18783',
+  'https://ojs.aaai.org/index.php/AAAI/article/view/39681',
+  'https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning'
+]) {
+  assert.ok(canonicalSourceUrls.has(expectedUrl), `source registry extracts ${expectedUrl} as an independent URL`);
+}
+assert.ok([...canonicalSourceUrls].every((url) => !url.includes('](') && !/\)%[A-Fa-f0-9]{2}/.test(url)), 'source registry never merges adjacent Markdown or Chinese prose into a URL');
+assert.ok(okfSources.sources.every((source) => source.pages.every((slug) => pageIndex.pages.some((page) => page.slug === slug))), 'public sources only associate with public pages');
+assert.ok(pageIndex.pages.every((page) => page.sourceIds.every((sourceId) => publicOkfSourceIds.has(sourceId))), 'page source IDs resolve in the public registry');
 assert.equal(okfManifest.okfVersion, '0.1', 'public OKF manifest declares OKF v0.1');
+assert.equal(okfManifest.schemaVersion, 3, 'public OKF manifest uses the provenance-aware bundle schema');
 assert.equal(okfManifest.bundle.publicPages, pageIndex.pages.length, 'public OKF manifest page count matches generated index');
 assert.equal(okfManifest.bundle.hiddenPagesExcluded, hiddenSourceSlugs.length, 'public OKF manifest records hidden-page exclusion');
 assert.equal(okfPageIndex.pages.length, pageIndex.pages.length, 'public OKF page index mirrors the public source index');
@@ -379,7 +418,7 @@ const okfTypeCounts = Object.fromEntries(
 );
 assert.deepEqual(okfGraph.stats.languages, okfLanguageCounts, 'public OKF graph language counts are recomputed after hidden-page exclusion');
 assert.deepEqual(okfGraph.stats.types, okfTypeCounts, 'public OKF graph type counts are recomputed after hidden-page exclusion');
-assert.equal(okfQualityReport.schemaVersion, 1, 'public OKF quality report declares its schema version');
+assert.equal(okfQualityReport.schemaVersion, 2, 'public OKF quality report declares its schema version');
 assert.equal(okfQualityReport.okfVersion, '0.1', 'public OKF quality report declares the OKF target version');
 assert.equal(okfQualityReport.counts.pages, okfGraph.nodes.length, 'public OKF quality report page count matches public graph');
 assert.deepEqual(okfQualityReport.counts.languages, okfLanguageCounts, 'public OKF quality report language counts match the public graph');
@@ -401,7 +440,108 @@ for (const edge of okfGraph.edges) {
   assert.ok(publicOkfSlugs.has(edge.from) && publicOkfSlugs.has(edge.to), 'public OKF edges only connect public nodes');
 }
 assert.equal(okfSchema.okfVersion, '0.1', 'public OKF schema mirrors the maintenance schema');
-assert.equal(okfSchema.schemaVersion, 4, 'public OKF schema mirrors the source contract version');
+assert.equal(okfSchema.schemaVersion, 5, 'public OKF schema mirrors the source contract version');
+assert.equal(wikiChatGolden.cases.length, 26, 'retrieval golden set covers 26 bilingual and adversarial cases');
+for (const metric of ['retrievalRecallAtK', 'fullCaseRecallAtK', 'evidencePatternRecall', 'citationValidity', 'answerabilityAccuracy', 'abstentionAccuracy', 'indexCoverage', 'publicIndexPurity', 'languagePurity']) {
+  assert.ok(Number.isFinite(wikiChatGolden.thresholds[metric]), `retrieval golden set enforces ${metric}`);
+}
+assert.deepEqual(wikiChatGolden.thresholds, {
+  retrievalRecallAtK: 0.9,
+  fullCaseRecallAtK: 0.85,
+  evidencePatternRecall: 0.9,
+  citationValidity: 1,
+  answerabilityAccuracy: 1,
+  abstentionAccuracy: 1,
+  indexCoverage: 0.98,
+  publicIndexPurity: 1,
+  languagePurity: 1,
+}, 'retrieval thresholds cannot be weakened below the reviewed release floor');
+for (const id of [
+  'en-abstain-unsupported-private',
+  'en-abstain-out-of-domain',
+  'en-abstain-history-isolation',
+  'en-abstain-mixed-out-of-domain',
+  'en-abstain-hidden-page',
+  'zh-abstain-unsupported-private',
+  'zh-abstain-out-of-domain',
+  'zh-abstain-history-isolation',
+  'zh-abstain-mixed-out-of-domain',
+  'zh-abstain-hidden-page',
+]) {
+  assert.ok(wikiChatGolden.cases.some((testCase) => testCase.id === id), `golden set retains high-risk case ${id}`);
+}
+
+const { evaluateCase } = await import('./evaluate-wiki-chat.mjs');
+const { getWikiRetrievalIndex, retrieveWikiContext } = await import('../lib/wiki-retrieval.ts');
+const {
+  WIKI_CHAT_RESPONSE_POLICY_VERSION,
+  deterministicAbstentionReply,
+  validateAndCompactCitations,
+} = await import('../lib/wiki-chat-response.ts');
+assert.equal(WIKI_CHAT_RESPONSE_POLICY_VERSION, 'grounded-response-v1', 'chat response policy exposes a stable release version');
+const citationSources = [
+  { chunkId: 'Alpha#overview', slug: 'Alpha', title: 'Alpha', section: 'Overview', href: '/wiki/Alpha/#overview' },
+  { chunkId: 'Beta#results', slug: 'Beta', title: 'Beta', section: 'Results', href: '/wiki/Beta/#results' },
+];
+assert.deepEqual(
+  validateAndCompactCitations('Beta first [2], Alpha next [1], Beta again [2]', citationSources),
+  {
+    reply: 'Beta first [1], Alpha next [2], Beta again [1]',
+    sources: [citationSources[1], citationSources[0]],
+  },
+  'chat response policy compacts citation numbers in first-appearance order and returns only cited sources'
+);
+assert.equal(validateAndCompactCitations('An uncited answer', citationSources), null, 'chat response policy rejects model answers without citations');
+assert.equal(validateAndCompactCitations('A forged citation [99]', citationSources), null, 'chat response policy rejects out-of-range citations');
+assert.equal(
+  deterministicAbstentionReply('Hello!', 'en'),
+  'Hi! Ask me about Xinbao Qiao\'s research, papers, projects, or academic background',
+  'English pure greetings receive the deterministic scoped greeting'
+);
+assert.equal(
+  deterministicAbstentionReply('你好！', 'zh'),
+  '嗨！想聊乔鑫宝的研究、论文、项目或学术经历，可以直接问我',
+  'Chinese pure greetings receive the deterministic scoped greeting'
+);
+assert.equal(
+  deterministicAbstentionReply('How should I bake sourdough?', 'en'),
+  'The public Xinbaopedia evidence is not sufficient to answer that; I can help with Xinbao Qiao\'s research, papers, projects, academic background, or public contact information',
+  'English weak-evidence questions receive a deterministic refusal'
+);
+assert.equal(
+  deterministicAbstentionReply('酸面包应该怎么烤？', 'zh'),
+  '现有公开 Xinbaopedia 资料不足以回答这个问题；我可以帮你查乔鑫宝的研究、论文、项目、学术经历或公开联系方式',
+  'Chinese weak-evidence questions receive a deterministic refusal'
+);
+const retrievalIndex = getWikiRetrievalIndex();
+const chunkById = new Map(retrievalIndex.chunks.map((chunk) => [chunk.chunkId, chunk]));
+const publicPages = new Map(okfPageIndex.pages.map((page) => [page.slug, page]));
+const cleanRetrieval = retrieveWikiContext('Who is Xinbao Qiao and where is he currently studying?', { language: 'en', limit: 8 });
+assert.ok(cleanRetrieval.sources.length > 0, 'citation-integrity fixture retrieves at least one source');
+const evaluatorCase = { id: 'integrity-fixture', language: 'en', category: 'citation', query: 'fixture', expectedSlugs: [] };
+assert.deepEqual(evaluateCase(evaluatorCase, cleanRetrieval, publicPages, chunkById).sourceIssues, [], 'production retrieval metadata matches indexed truth');
+const forgedHashRetrieval = structuredClone(cleanRetrieval);
+forgedHashRetrieval.sources[0].contentHash = '0'.repeat(64);
+assert.ok(
+  evaluateCase(evaluatorCase, forgedHashRetrieval, publicPages, chunkById).sourceIssues.some((entry) => entry.issue.includes('contentHash does not match')),
+  'a syntactically valid but forged content hash fails citation integrity'
+);
+const missingChunkRetrieval = structuredClone(cleanRetrieval);
+const originalChunkId = missingChunkRetrieval.sources[0].chunkId;
+const missingChunkId = `${missingChunkRetrieval.sources[0].slug}#forged-chunk`;
+missingChunkRetrieval.sources[0].chunkId = missingChunkId;
+missingChunkRetrieval.context = missingChunkRetrieval.context.replace(`CHUNK_ID: ${originalChunkId}`, `CHUNK_ID: ${missingChunkId}`);
+assert.ok(
+  evaluateCase(evaluatorCase, missingChunkRetrieval, publicPages, chunkById).sourceIssues.some((entry) => entry.issue.includes('absent from the production retrieval index')),
+  'an unknown chunk ID fails citation integrity even when context and source agree'
+);
+for (const hiddenSlug of hiddenSourceSlugs) {
+  assert.ok(!retrievalIndex.chunks.some((chunk) => chunk.slug === hiddenSlug), `retrieval index excludes hidden page ${hiddenSlug}`);
+}
+assert.match(maintenanceWorkflow, /schedule:[\s\S]*workflow_dispatch:/, 'weekly maintenance supports schedule and manual dispatch');
+assert.match(maintenanceWorkflow, /audit-wiki-maintenance\.mjs[\s\S]*evaluate-wiki-chat\.mjs[\s\S]*upload-artifact@v4/, 'weekly maintenance audits sources, evaluates retrieval, and preserves evidence');
+assert.doesNotMatch(maintenanceWorkflow, /maintain:wiki|git commit|git push|deploy:production/, 'weekly maintenance never rewrites content or publishes automatically');
+assert.match(wikiRetrieval, /WIKI_RETRIEVAL_INDEX_VERSION = 'wiki-heading-lexical-v1'/, 'chat retrieval exposes a versioned production algorithm');
 assert.equal(okfHome.data.type, 'PhD student', 'public OKF concept keeps a required type');
 assert.equal(okfHome.data.title, 'Xinbao Qiao', 'public OKF concept keeps a required title');
 assert.ok(okfHome.data.description, 'public OKF concept keeps a required description');
@@ -421,6 +561,73 @@ const newWikiPageScript = fs.readFileSync(path.join(root, 'scripts/new-wiki-page
 assert.match(newWikiPageScript, /--slug <Slug> --title <Title> --type <Type> --language en\|zh --description <Text>/, 'new wiki page helper documents the required template arguments');
 assert.match(newWikiPageScript, /translation_of/, 'new wiki page helper supports translation_of frontmatter');
 assert.match(newWikiPageScript, /wiki\/\$\{slug\}\.md already exists; use --force/, 'new wiki page helper refuses to overwrite existing pages by default');
+assert.doesNotMatch(wikiMaintenance, /validDate\(data\.reviewed_at\) \|\| modified/, 'maintenance never infers editorial review completion from modification time');
+assert.match(newWikiPageScript, /Review is intentionally incomplete/, 'new wiki pages tell maintainers that review provenance is required');
+assert.match(wikiEvaluator, /chunkById\.get\(source\.chunkId\)/, 'citation validation resolves every returned chunk against the production index');
+
+function assertReviewFixtureRejected(name, frontmatterLines, expectedFailure) {
+  const fixtureRoot = path.join(root, '.codex', 'tmp');
+  fs.mkdirSync(fixtureRoot, { recursive: true });
+  const fixture = fs.mkdtempSync(path.join(fixtureRoot, `${name}-`));
+  const fixtureWiki = path.join(fixture, 'wiki');
+  fs.mkdirSync(fixtureWiki, { recursive: true });
+  fs.writeFileSync(path.join(fixtureWiki, 'Fixture.md'), `${frontmatterLines.join('\n')}\n# Fixture\n\nSubstantive fixture content.\n`);
+  try {
+    let output = '';
+    try {
+      execFileSync(process.execPath, [path.join(root, 'scripts/wiki-maintenance.mjs'), '--standardize', '--write'], {
+        cwd: fixture,
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'pipe'],
+      });
+      assert.fail(`${name} unexpectedly passed maintenance`);
+    } catch (error) {
+      output = `${error.stdout || ''}${error.stderr || ''}`;
+    }
+    assert.match(output, expectedFailure, `${name} fails closed with the expected review error`);
+    return matter(fs.readFileSync(path.join(fixtureWiki, 'Fixture.md'), 'utf8')).data;
+  } finally {
+    fs.rmSync(fixture, { recursive: true, force: true });
+  }
+}
+
+const missingReviewData = assertReviewFixtureRejected('missing-review', [
+  '---',
+  "type: 'Research concept'",
+  "title: 'Fixture'",
+  "description: 'Review gate fixture'",
+  'tags:',
+  "  - 'test'",
+  "timestamp: '2026-01-01T00:00:00Z'",
+  '---',
+], /reviewed_at must be a valid timestamp/);
+assert.equal(missingReviewData.reviewed_at, undefined, 'standardization does not auto-create reviewed_at');
+assertReviewFixtureRejected('deleted-hash', [
+  '---',
+  "type: 'Research concept'",
+  "title: 'Fixture'",
+  "description: 'Review gate fixture'",
+  'tags:',
+  "  - 'test'",
+  "timestamp: '2026-01-01T00:00:00Z'",
+  "modified: '2026-01-01T00:00:00Z'",
+  "reviewed_at: '2026-01-01T00:00:00Z'",
+  "review_due: '2026-12-31'",
+  '---',
+], /content changed after reviewed_at/);
+assertReviewFixtureRejected('stale-review-new-revision', [
+  '---',
+  "type: 'Research concept'",
+  "title: 'Fixture'",
+  "description: 'Review gate fixture'",
+  'tags:',
+  "  - 'test'",
+  "timestamp: '2026-01-01T00:00:00Z'",
+  "modified: '2026-01-01T00:00:00Z'",
+  "reviewed_at: '2026-06-01T00:00:00Z'",
+  "review_due: '2026-12-31'",
+  '---',
+], /content changed after reviewed_at/);
 const ciWorkflow = fs.readFileSync(path.join(root, '.github/workflows/ci.yml'), 'utf8');
 const deployProductionScript = fs.readFileSync(path.join(root, 'scripts/deploy-production.mjs'), 'utf8');
 const externalProcessScript = fs.readFileSync(path.join(root, 'scripts/lib/external-process.mjs'), 'utf8');
@@ -454,7 +661,9 @@ assert.match(externalProcessScript, /terminateProcessTree[\s\S]*SIGTERM[\s\S]*SI
 assert.match(externalProcessScript, /kind: 'output_limit'/, 'external process runner bounds captured output');
 assert.match(networkRoutesScript, /return proxy \? \[direct, proxy\] : \[direct\]/, 'staged smoke selects direct and proxy routes explicitly instead of inheriting one global route');
 assert.match(deployProductionScript, /for \(const route of routes\)/, 'staged smoke tries each configured network route at most once');
-assert.match(deployProductionScript, /staged smoke failed for \$\{check\.path\} across/, 'staged smoke reports the exhausted route matrix before blocking promotion');
+assert.match(deployProductionScript, /staged smoke failed for \$\{label\} across/, 'staged smoke reports the exhausted route matrix with a descriptive canary label before blocking promotion');
+assert.match(deployProductionScript, /chat grounded provider canary[\s\S]*method: 'POST'[\s\S]*responseMode[^\n]*model-grounded/, 'staged smoke calls the configured model provider and requires a grounded cited response before promotion');
+assert.match(deployProductionScript, /chat deterministic abstention canary[\s\S]*How should I bake a sourdough loaf[\s\S]*responseMode[^\n]*deterministic-abstention/, 'staged smoke verifies deterministic refusal of unsupported questions before promotion');
 assert.match(deployProductionScript, /throw new Error\('Vercel did not return a valid staged deployment URL'\)/, 'deployment wrapper preserves finally cleanup when staged URL parsing fails');
 assert.match(deployProductionScript, /process\.once\('SIGINT'[\s\S]*cleanupOnSignal\(130\)[\s\S]*process\.once\('SIGTERM'[\s\S]*cleanupOnSignal\(143\)/, 'deployment wrapper records interrupted state and removes generated env state');
 assert.match(deployProductionScript, /args\.includes\('--resume'\)[\s\S]*readReleaseState\(statePath\)/, 'deployment wrapper can resume an exact-commit release from its durable checkpoint');
@@ -598,6 +807,8 @@ assert.match(chatWithXinbaoPanel, /import ReactMarkdown from 'react-markdown';/,
 assert.match(chatWithXinbaoPanel, /import rehypeKatex from 'rehype-katex';/, 'chat panel imports KaTeX rendering for formulas');
 assert.match(chatWithXinbaoPanel, /import remarkMath from 'remark-math';/, 'chat panel imports math parsing for formulas');
 assert.match(chatWithXinbaoPanel, /function ChatMessageContent/, 'chat panel isolates message markdown rendering');
+assert.match(chatWithXinbaoPanel, /function sanitizeSources[\s\S]*source\.href\.startsWith\('\/'\)[\s\S]*source\.href\.includes\('\/wiki\/'\)/, 'chat panel accepts only same-site wiki source links');
+assert.match(chatWithXinbaoPanel, /<ol>[\s\S]*message\.sources\.map[\s\S]*source\.title/, 'chat panel renders numbered sources aligned with model citations');
 assert.match(chatWithXinbaoPanel, /message\.role === 'assistant'/, 'chat panel renders assistant messages as markdown while keeping user messages plain');
 assert.match(chatWithXinbaoPanel, /remarkPlugins=\{\[remarkGfm, remarkMath\]\}/, 'chat panel enables GFM and math parsing for assistant replies');
 assert.match(chatWithXinbaoPanel, /rehypePlugins=\{\[rehypeKatex\]\}/, 'chat panel enables KaTeX output for assistant replies');
@@ -607,13 +818,15 @@ assert.match(chatWithXinbaoPanel, /嗨，来都来了，先坐会儿 👋[\s\S]*
 assert.doesNotMatch(chatWithXinbaoPanel, /Hi, I’m the Xinbaopedia chat assistant|Ask me about Xinbao Qiao’s research|想快速了解乔鑫宝的话，可以直接问我/, 'chat no longer uses the directive-like legacy greetings');
 assert.match(chatWithXinbaoPanel, /MAX_INPUT_LENGTH = 1000/, 'chat client caps input length at 1000 characters');
 assert.match(chatWithXinbaoPanel, /\/api\/chat-with-xinbao/, 'chat client calls only the same-site API route');
+assert.match(chatWithXinbaoPanel, /JSON\.stringify\(\{ message, language \}\)/, 'chat client sends only the current message and selected portal language');
+assert.doesNotMatch(chatWithXinbaoPanel, /JSON\.stringify\(\{ message, history|const history = messages/, 'chat client keeps visible history local instead of transmitting it');
 assert.match(chatWithXinbaoPanel, /method: 'GET'/, 'chat client refreshes quota from the backend when the chat opens');
 assert.match(chatWithXinbaoPanel, /remaining.*limit/s, 'chat client displays remaining daily quota');
 assert.match(chatWithXinbaoPanel, /quotaUnknown: '10 messages\/day'/, 'chat client English quota fallback uses the 10-message daily limit');
 assert.match(chatWithXinbaoPanel, /quotaUnknown: '每天 10 条消息'/, 'chat client Chinese quota fallback uses the 10-message daily limit');
 assert.match(chatWithXinbaoPanel, /useState\(10\)/, 'chat client initializes the quota display to 10');
-assert.match(chatWithXinbaoPanel, /Questions may be logged to improve answers\./, 'chat client discloses English question logging');
-assert.match(chatWithXinbaoPanel, /问题可能会被记录，用于改进回答。/, 'chat client discloses Chinese question logging');
+assert.match(chatWithXinbaoPanel, /Pseudonymous usage metadata \(one-way hashes, not raw messages or IPs\) may be logged to improve answers\./, 'chat client accurately discloses English pseudonymous telemetry');
+assert.match(chatWithXinbaoPanel, /可能记录假名化的使用元数据（单向哈希，不含原始消息或 IP），用于改进回答。/, 'chat client accurately discloses Chinese pseudonymous telemetry');
 assert.match(chatWithXinbaoPanel, /Xinbao AI is temporarily unavailable\. Please try again later\./, 'chat client uses a generic model-error message');
 assert.match(chatWithXinbaoPanel, /language: Language/, 'chat client localizes UI from current wiki language');
 assert.match(chatWithXinbaoPanel, /paper lore[\s\S]*cooking up lately[\s\S]*bring the receipts[\s\S]*keep it real/, 'chat client English greeting is playful, conversational, and evidence-bounded');
@@ -625,6 +838,10 @@ assert.match(chatWithXinbaoPanel, /function randomTypingMessage[\s\S]*Math\.rand
 assert.doesNotMatch(`${chatWithXinbao}\n${chatWithXinbaoPanel}`, /YUNWU_API_KEY|UPSTASH_REDIS_REST_TOKEN|api\.yunwu|Bearer/, 'chat client contains no backend key names or provider endpoint');
 assert.match(chatRoute, /runtime = 'nodejs'/, 'chat API route uses the Node runtime');
 assert.match(chatRoute, /export async function GET\(request: NextRequest\)/, 'chat API exposes a backend quota endpoint');
+assert.match(chatRoute, /diagnostic'\) === 'retrieval'[\s\S]*getWikiRetrievalIndex\(\)[\s\S]*indexedChunks/, 'chat GET exposes a read-only runtime retrieval health check');
+assert.match(chatRoute, /function modelApiConfiguration[\s\S]*modelApiConfigured: modelConfiguration\.ready/, 'chat diagnostic proves the model API configuration is ready without exposing it');
+assert.match(chatRoute, /if \(diagnostic && !modelConfiguration\.ready\)[\s\S]*return genericUnavailable\(visitorCookie\)/, 'chat diagnostic fails closed when the model API configuration is absent');
+assert.match(smokeProduction, /modelApiConfigured === true/, 'production smoke blocks promotion when the model API is not configured');
 assert.match(chatRoute, /MODEL = 'deepseek-v4-flash'/, 'chat API fixes the requested Yunwu model');
 assert.match(chatRoute, /DEFAULT_BASE_URL = 'https:\/\/api\.yunwu\.ai\/v1'/, 'chat API uses the documented Yunwu base URL');
 assert.match(chatRoute, /YUNWU_API_KEY/, 'chat API reads the Yunwu key from server env');
@@ -636,16 +853,31 @@ assert.match(chatRoute, /hashIdentity\(`\$\{ip\}:\$\{userAgent\}`\)/, 'chat API 
 assert.match(chatRoute, /COOLDOWN_SECONDS = 4/, 'chat API enforces the per-visitor cooldown');
 assert.match(chatRoute, /HOURLY_IP_LIMIT = 80/, 'chat API enforces the hourly IP cap');
 assert.match(chatRoute, /MAX_INPUT_LENGTH = 1000/, 'chat API validates input length server-side');
-assert.match(chatRoute, /MAX_HISTORY_MESSAGES = 6/, 'chat API sends at most six history messages');
+assert.doesNotMatch(chatRoute, /MAX_HISTORY_MESSAGES|type ChatRole|type ChatMessage/, 'chat API has no client-history provider path');
 assert.match(chatRoute, /MAX_OUTPUT_TOKENS = 450/, 'chat API caps model output tokens');
 assert.match(chatRoute, /thinking: \{ type: 'disabled' \}/, 'chat API disables model thinking output so the 450-token cap is reserved for the final answer');
 assert.match(chatRoute, /REQUEST_TIMEOUT_MS = 12_000/, 'chat API has a backend timeout');
 assert.match(chatRoute, /QUESTION_LOG_MAX_RECENT = 2_000/, 'chat API caps the retained recent question log');
 assert.match(chatRoute, /QUESTION_LOG_RETENTION_DAYS = 90/, 'chat API expires daily question logs after 90 days');
-assert.match(chatRoute, /function recordQuestionLog[\s\S]*message: message\.slice\(0, QUESTION_LOG_MESSAGE_LENGTH\)/, 'chat API records accepted questions with a bounded message field');
-assert.match(chatRoute, /const pipeline = redis\.pipeline\(\);[\s\S]*pipeline\.lpush\(QUESTION_LOG_RECENT_KEY[\s\S]*pipeline\.ltrim\(QUESTION_LOG_RECENT_KEY[\s\S]*pipeline\.expire\(QUESTION_LOG_RECENT_KEY, retentionTtl\)[\s\S]*pipeline\.zincrby\(frequencyKey[\s\S]*pipeline\.expire\(frequencyKey, retentionTtl\)[\s\S]*pipeline\.exec\(\)/, 'chat API pipelines and expires recent, daily, and frequency question logs');
+assert.match(chatRoute, /function questionFingerprint[\s\S]*hashIdentity\(`question:/, 'chat API converts accepted questions to a salted one-way fingerprint');
+assert.match(questionLogFunction, /questionHash[\s\S]*sourceChunkIds[\s\S]*evidenceScore[\s\S]*shouldAbstain/, 'chat API records retrieval evidence metadata without raw question text');
+assert.doesNotMatch(questionLogFunction, /message:\s*message|normalized:/, 'chat API does not persist raw or normalized question text');
+assert.match(chatRoute, /frequency:\$\{language\}:\$\{dateKey\}[\s\S]*pipeline\.lpush\(dayKey[\s\S]*pipeline\.ltrim\(dayKey[\s\S]*pipeline\.expireat\(dayKey, expiresAt\)[\s\S]*pipeline\.zincrby\(frequencyKey[\s\S]*pipeline\.expireat\(frequencyKey, expiresAt\)[\s\S]*pipeline\.exec\(\)/, 'chat API writes daily question and frequency buckets with fixed absolute expiry');
+assert.doesNotMatch(questionLogFunction, /QUESTION_LOG_RECENT_KEY|retentionTtl|pipeline\.expire\(/, 'question logging cannot extend old entries through a rolling TTL or global recent key');
 assert.match(chatRoute, /sanitizeRefererPath\(request\)/, 'chat API records only a sanitized page path for question logs');
 assert.match(chatRoute, /after\(\(\) => recordQuestionLog/, 'chat API defers question-log writes until after the response lifecycle');
+assert.match(chatRoute, /const language = body\.language \?\? inferLanguage\(request\)/, 'chat API prefers the explicit client language and safely falls back to route inference');
+assert.match(chatRoute, /body\.language === 'en' \|\| body\.language === 'zh'/, 'chat API accepts only the two supported body languages');
+assert.match(chatRoute, /retrieveWikiContext\(message[\s\S]*getXinbaoChatSystemPrompt\(language, retrieval\)/, 'chat API gates retrieval on the current question only');
+assert.doesNotMatch(chatRoute, /retrievalQuery/, 'chat history cannot contaminate the current question evidence gate');
+assert.doesNotMatch(chatRoute, /sanitizeHistory|body\.history|\.\.\.history/, 'chat API never trusts client history or forwards it to the model provider');
+assert.match(chatRoute, /messages: \[[\s\S]*role: 'system', content: getXinbaoChatSystemPrompt\(language, retrieval\)[\s\S]*role: 'user', content: message[\s\S]*\]/, 'provider messages contain only the grounded system prompt and current user question');
+assert.match(chatRoute, /CHAT_BACKEND_VERSION = 'xinbao-chat-api-v3'/, 'chat API exposes the citation-enforced backend version');
+assert.match(chatRoute, /responsePolicyVersion: WIKI_CHAT_RESPONSE_POLICY_VERSION[\s\S]*responseMode[\s\S]*citedChunks/, 'chat API returns versioned response-policy metadata');
+assert.match(chatRoute, /if \(retrieval\.shouldAbstain\)[\s\S]*deterministicAbstentionReply\(message, language\)[\s\S]*sources: \[\][\s\S]*responseMetadata\('deterministic-abstention', 0\)[\s\S]*const controller = new AbortController/, 'chat API refuses weak evidence deterministically before calling the model provider');
+assert.match(chatRoute, /validateAndCompactCitations\(reply, retrieval\.sources\)[\s\S]*if \(!groundedReply\)[\s\S]*refundDailyUsage[\s\S]*sources: groundedReply\.sources[\s\S]*responseMetadata\('model-grounded', groundedReply\.sources\.length\)/, 'chat API rejects invalid model citations and returns only compacted cited sources');
+assert.match(wikiChatResponse, /WIKI_CHAT_RESPONSE_POLICY_VERSION = 'grounded-response-v1'/, 'chat response hard gate has a stable policy version');
+assert.match(chatRoute, /function logChatObservation[\s\S]*retrievedChunks[\s\S]*durationMs[\s\S]*totalTokens/, 'chat API emits privacy-safe reliability and token observations');
 assert.match(chatRoute, /reserveDailyUsage[\s\S]*redis\.eval<[\s\S]*highest >= tonumber\(ARGV\[2\]\) then return tonumber\(ARGV\[2\]\) \+ 1/, 'chat API atomically reserves daily quota and returns a rejection sentinel at the limit');
 assert.match(chatRoute, /refundDailyUsage[\s\S]*model response status[\s\S]*refundDailyUsage[\s\S]*empty model reply[\s\S]*refundDailyUsage/, 'chat API refunds quota when the model request does not produce a usable answer');
 assert.match(chatRoute, /Cache-Control', 'private, no-store'/, 'chat quota and reply responses explicitly disable shared caching');
@@ -655,8 +887,8 @@ assert.match(chatRoute, /sameSite: 'lax'/, 'visitor cookie uses SameSite=Lax');
 assert.match(chatRoute, /Asia\/Tokyo/, 'daily quota keys use Asia/Tokyo date boundaries');
 assert.match(chatRoute, /Daily limit reached\. Please come back tomorrow\./, 'chat API returns the required daily-limit message');
 assert.match(chatRoute, /Xinbao AI is temporarily unavailable\. Please try again later\./, 'chat API returns only the generic model-error message');
-assert.match(chatRoute, /function withXinbaoSignature\(reply: string, language: 'en' \| 'zh'\)/, 'chat API post-processes successful replies with a stable localized signature');
-assert.match(chatRoute, /language: 'en' \| 'zh'/, 'chat API chooses the signature language from the current wiki language');
+assert.match(chatRoute, /type ChatLanguage = 'en' \| 'zh'/, 'chat API constrains all language decisions to the supported languages');
+assert.match(chatRoute, /function withXinbaoSignature\(reply: string, language: ChatLanguage\)/, 'chat API post-processes successful replies with a stable localized signature');
 assert.doesNotMatch(chatRoute, /\\n\\n\$?\{?signature/, 'chat API keeps the meow signature on the same line as the reply');
 assert.match(chatRoute, /\.replace\(\/\[。！？\.!\?\]\+\$\/u/, 'chat API removes terminal punctuation before the meow signature');
 assert.match(chatRoute, /language === 'zh' \? '喵~' : ' meow~'/, 'chat API keeps Chinese suffix attached and adds a space before the English suffix');
@@ -668,32 +900,25 @@ assert.match(chatQuestionsRoute, /runtime = 'nodejs'/, 'question-log export rout
 assert.match(chatQuestionsRoute, /XINBAO_CHAT_ADMIN_TOKEN/, 'question-log export route requires an admin token');
 assert.match(chatQuestionsRoute, /timingSafeEqual/, 'question-log export route compares admin tokens safely');
 assert.match(chatQuestionsRoute, /if \(value && typeof value === 'object'\) return value;/, 'question-log export route accepts Upstash object values as well as JSON strings');
-assert.match(chatQuestionsRoute, /QUESTION_LOG_RECENT_KEY[\s\S]*lrange<string>/, 'question-log export route can read recent question logs');
-assert.match(chatQuestionsRoute, /mode === 'frequency'[\s\S]*zrange<unknown\[]>/, 'question-log export route can read normalized question frequencies');
+assert.match(chatQuestionsRoute, /function recentTokyoDateKeys[\s\S]*QUESTION_LOG_RETENTION_DAYS/, 'question-log export uses a fixed 90-day Tokyo bucket window');
+assert.match(chatQuestionsRoute, /pipeline\.lrange\(`xinbao-chat:questions:day:\$\{recentDateKey\}`[\s\S]*buckets\.flat\(\)\.slice\(0, limit\)/, 'question-log recent export aggregates bounded daily buckets');
+assert.match(chatQuestionsRoute, /mode === 'frequency'[\s\S]*pipeline\.zrange\(`xinbao-chat:questions:frequency:\$\{language\}:\$\{dateKey\}`[\s\S]*const counts = new Map/, 'question-log frequency export aggregates hashed counts across bounded daily buckets');
+assert.match(chatQuestionsRoute, /questionHash: raw\[index\]/, 'question-log frequency export labels one-way hashes explicitly');
 assert.match(chatQuestionsRoute, /MAX_EXPORT_LIMIT = 500/, 'question-log export route caps export size');
 assert.match(chatQuestionsRoute, /Cache-Control': 'private, no-store'/, 'question-log export responses explicitly disable caching');
 assert.doesNotMatch(chatQuestionsRoute, /console\.log|console\.error|YUNWU_API_KEY/, 'question-log export route does not log or reference unrelated model secrets');
 assert.match(chatKnowledge, /import 'server-only';/, 'chat knowledge builder is server-only');
-assert.match(chatKnowledge, /project\.md/, 'chat knowledge builder can prioritize project.md if it is added later');
-assert.match(chatKnowledge, /wiki'\)/, 'chat knowledge builder reads the local wiki directory');
-assert.match(chatKnowledge, /Xinbao_Qiao[\s\S]*Qiao_Xinbao_zh[\s\S]*Projects[\s\S]*Research[\s\S]*Publications[\s\S]*CV/, 'chat knowledge builder prioritizes homepage, projects, research, publications, and CV');
-assert.match(chatKnowledge, /const priority = PRIORITY_SLUGS\.filter\(\(slug\) => languageMatches\(slug, language\) && !pageIsHidden\(slug\)\)/, 'chat knowledge excludes hidden pages even if a hidden slug is accidentally prioritized later');
-assert.doesNotMatch(chatKnowledge, /Internet_Slang_2026/, 'chat runtime does not load the hidden phrase-bank pages into factual context');
-assert.doesNotMatch(chatKnowledge, /Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning/, 'chat knowledge builder does not prioritize the hidden under-review manuscript');
-assert.match(chatKnowledge, /academic homepage chat assistant/, 'persona identifies the assistant as a homepage chat assistant');
-assert.match(chatKnowledge, /do not call yourself a distilled skill or digital persona in normal greetings/, 'persona prevents forced technical identity labels in normal greetings');
-assert.match(chatKnowledge, /English self-introductions[\s\S]*witty human host[\s\S]*paper lore[\s\S]*bring the receipts[\s\S]*keep it real/, 'persona documents an internet-native English self-introduction');
-assert.match(chatKnowledge, /Accepted user questions may be logged server-side/, 'persona transparently explains question logging when asked');
-assert.match(chatKnowledge, /chat history, raw IPs, system prompts, and API keys are not stored/, 'persona documents what question logging must not claim to store');
-assert.match(chatKnowledge, /来都来了[\s\S]*最近又在折腾什么[\s\S]*能查到的认真说[\s\S]*查不到的咱也不硬编/, 'persona supports meme-rich Chinese opening phrasing without encouraging unsupported claims');
-assert.match(chatKnowledge, /家人们[\s\S]*先别急[\s\S]*这题我会[\s\S]*有一说一[\s\S]*包的[\s\S]*主打一个资料准[\s\S]*不硬编/s, 'persona supports a small Chinese casual expression pool without encouraging unsupported claims');
-assert.match(chatKnowledge, /Modern meme-guide voice[\s\S]*情绪价值[\s\S]*City不City[\s\S]*YYDS[\s\S]*我去不早说[\s\S]*不讲不讲[\s\S]*尊嘟假嘟[\s\S]*退一万步讲/, 'persona supports current meme-guide catchphrases');
-assert.match(chatKnowledge, /2026 sentence-template and abstract voice[\s\S]*我将辞职在家研究[\s\S]*此人的 X 恐怕在我之上[\s\S]*有点抽象[\s\S]*source-grounded answer within one sentence/, 'persona supports bounded 2026 sentence-template and abstract voice');
-assert.match(chatKnowledge, /Reusable casual sentence templates[\s\S]*家人们谁懂啊[\s\S]*主打一个 X[\s\S]*含金量还在上升/, 'persona supports reusable meme sentence templates');
-assert.match(chatKnowledge, /00s retro Chinese web voice[\s\S]*886[\s\S]*踩踩[\s\S]*QQ空间 energy/, 'persona supports light 00s retro web catchphrases');
+assert.match(chatKnowledge, /WikiRetrievalResult/, 'chat prompt accepts the production retrieval result contract');
+assert.match(chatKnowledge, /XINBAO_CHAT_PROMPT_VERSION = 'xinbao-grounded-citations-v2'/, 'chat prompt exposes a stable version for observability');
+assert.doesNotMatch(chatKnowledge, /TOTAL_CONTEXT_LIMIT|PRIORITY_SLUGS|cachedKnowledge|buildKnowledge|project\.md/, 'chat prompt no longer stuffs a fixed full-wiki context');
+assert.match(chatKnowledge, /academic-homepage assistant[\s\S]*must not claim to be the real Xinbao Qiao/, 'persona identifies the assistant without impersonation');
+assert.match(chatKnowledge, /paper lore[\s\S]*bring the receipts[\s\S]*keep it real/, 'persona retains a concise internet-native English voice');
+assert.match(chatKnowledge, /来都来了[\s\S]*有一说一[\s\S]*能查到的认真说[\s\S]*查不到的也不硬编/, 'persona retains a concise evidence-bounded Chinese voice');
+assert.match(chatKnowledge, /numbered evidence blocks as \[1\][\s\S]*Never fabricate a citation/, 'persona requires numbered citations for factual answers');
+assert.match(chatKnowledge, /pseudonymous server-side usage metadata[\s\S]*one-way question fingerprint[\s\S]*raw question text[\s\S]*are not stored for new requests[\s\S]*not anonymous data/, 'persona accurately documents pseudonymous telemetry');
 assert.doesNotMatch(chatKnowledge, /\u8dd1\u5802/, 'persona removes the disallowed catchphrase');
 assert.match(chatKnowledge, /must not claim to be the real Xinbao Qiao/, 'persona prevents impersonating Xinbao');
-assert.match(chatKnowledge, /Do not browse, invent, infer private facts/, 'persona constrains answers to local wiki sources');
+assert.match(chatKnowledge, /Do not browse, invent, infer private facts/, 'persona constrains answers to retrieved local wiki evidence');
 assert.match(chatKnowledge, /XINBAO_CHAT_VOICE_STYLE/, 'chat knowledge builder supports a server-only private voice style layer');
 assert.match(chatKnowledge, /private voice notes/, 'persona prevents revealing private voice notes');
 assert.match(chatReadme, /Vercel deployment/, 'chat documentation explains Vercel deployment');
@@ -704,7 +929,7 @@ for (const envName of ['YUNWU_API_KEY', 'YUNWU_API_BASE_URL', 'UPSTASH_REDIS_RES
 }
 assert.match(chatPersona, /You are Chat with Xinbao/, 'persona prompt template documents assistant identity');
 assert.match(chatPersona, /XINBAO_CHAT_VOICE_STYLE/, 'persona prompt template documents the private voice style layer');
-assert.match(chatPersona, /Accepted user questions may be logged server-side/, 'persona prompt template documents question logging transparency');
+assert.match(chatPersona, /pseudonymous server-side metadata[\s\S]*one-way question fingerprint[\s\S]*raw question text[\s\S]*not stored for new requests[\s\S]*not anonymous data/, 'persona prompt template documents pseudonymous logging transparently');
 assert.match(chatPersona, /homepage chat assistant[\s\S]*not claim to be the real Xinbao Qiao[\s\S]*do not call yourself a distilled skill or digital persona/, 'persona prompt template documents homepage-assistant identity with technical-label boundaries');
 assert.match(chatPersona, /do not repeat one fixed meme[\s\S]*想快速了解乔鑫宝可以直接问我[\s\S]*我会尽量说人话[\s\S]*主打一个资料准[\s\S]*never use memes to cover missing evidence/, 'persona prompt template documents natural casual wording with factual boundaries');
 assert.match(chatPersona, /Modern meme-guide voice[\s\S]*情绪价值[\s\S]*City不City[\s\S]*YYDS[\s\S]*爱你老己[\s\S]*做完你的做你的/, 'persona prompt template documents current meme-guide wording');

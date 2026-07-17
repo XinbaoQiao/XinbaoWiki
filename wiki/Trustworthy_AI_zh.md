@@ -8,6 +8,10 @@ tags:
   - topic
   - 研究专题
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:28482b5d209cd82b224f5326fe62ebc4e226b20a176d694553294d64993e7052'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: 可信 AI
 language: zh
 summary: 覆盖可靠性、删除、公平性、鲁棒性、可解释性和评估的研究专题。

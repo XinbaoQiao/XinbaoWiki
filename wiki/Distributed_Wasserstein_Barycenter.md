@@ -11,6 +11,10 @@ tags:
   - research-concept
   - wasserstein
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:ac832217767f95bb3b7abf0e98a1e4ce8a67ad69b99d4d8c880f113d3b2374da'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: Distributed Wasserstein Barycenter
 summary: >-
   Concept page for Qiao's work on computing Wasserstein barycenters from

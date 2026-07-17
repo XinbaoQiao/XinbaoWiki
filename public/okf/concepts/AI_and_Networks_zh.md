@@ -9,12 +9,26 @@ tags:
   - 研究专题
   - ai-and-networks
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:7b32da24e1154e954f16034881a76556c41f899f2b331d02ac50caf8cadf696a'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:AI_and_Networks_zh'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-5ffca2a581311c27
+  - src-766234e11681dad2
 source_path: wiki/AI_and_Networks_zh.md
 ---
 **AI 与网络** 是本 wiki 中描述 [乔鑫宝](./Qiao_Xinbao_zh.md) 当前研究重心的总括性标签。这里的“网络”并不只指通信网络本身，也包括数据所在位置、信息如何流动、哪些机构可以评估模型，以及学习系统在通信、隐私和数据孤岛约束下如何保持可靠。[^sources]

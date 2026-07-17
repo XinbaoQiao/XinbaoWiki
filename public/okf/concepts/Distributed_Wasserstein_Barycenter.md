@@ -11,6 +11,10 @@ tags:
   - research-concept
   - wasserstein
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:ac832217767f95bb3b7abf0e98a1e4ce8a67ad69b99d4d8c880f113d3b2374da'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 aliases:
   - Distributed Wasserstein barycenters
@@ -21,6 +25,16 @@ lifecycle:
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Distributed_Wasserstein_Barycenter'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-0d6548913a8c228f
+  - src-3157a848b3737221
 source_path: wiki/Distributed_Wasserstein_Barycenter.md
 ---
 **Distributed Wasserstein Barycenter** is a concept page for [Xinbao Qiao](./Xinbao_Qiao.md)'s work within [AI and networks](./AI_and_Networks.md) and [data-centric ML](./Data_Centric_Machine_Learning.md). A Wasserstein barycenter is a probability measure that summarizes several input distributions under an optimal-transport distance. In a distributed setting, the input measures are held by different parties, so the problem is not only statistical but also networked: the system must compute or approximate a common reference while respecting communication and data-access constraints.[^barycenter]

@@ -9,12 +9,24 @@ tags:
   - 研究概念
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:2346ed0d127d9a8c6e84bfdf8fa967e3118ad2ae6adc8383c56cf69a8724c12a'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Recursive_Synthetic_Data_Training_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Recursive_Synthetic_Data_Training_zh.md
 ---
 **递归合成数据训练** 是指某一代模型生成的数据进入后一代模型训练集的过程。它可能是有意设计的，例如自训练或合成数据自举；也可能是偶然发生的，例如生成内容进入未来训练语料。[^recursive]

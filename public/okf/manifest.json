@@ -1,24 +1,35 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "okfVersion": "0.1",
+  "profile": {
+    "id": "xinbaopedia-okf-profile",
+    "version": "1.0",
+    "base": "Google Cloud Open Knowledge Format v0.1 draft"
+  },
   "name": "Xinbaopedia public knowledge bundle",
   "description": "Public, agent-readable OKF export of Xinbao Qiao academic wiki content.",
   "source": {
     "directory": "wiki",
     "files": 88,
-    "contentHash": "c0e383c4d60cb1762825cd744ffe007c41c5aa849c13a146d17762c1fdfa606c"
+    "contentHash": "782f7bfc5b66f89a91b3201d98a8d24c58bfbdfd75ab5a84cabc838f526a9bfe",
+    "hashAlgorithm": "sha256"
   },
   "bundle": {
     "root": "public/okf",
     "concepts": "concepts/*.md",
     "hiddenPagesExcluded": 4,
-    "publicPages": 84
+    "publicPages": 84,
+    "sources": 48,
+    "sourceRegistry": "sources.json"
   },
   "maintenance": {
     "command": "npm run maintain:wiki",
     "check": "npm run lint:content",
     "schema": "schema.json",
     "graph": "graph.json",
-    "pages": "pages.json"
+    "pages": "pages.json",
+    "sources": "sources.json",
+    "qualityReport": "quality-report.json",
+    "reviewAsOf": "2026-07-13"
   }
 }

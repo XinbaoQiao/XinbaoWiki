@@ -9,6 +9,10 @@ tags:
   - research-topic
   - machine-unlearning
 timestamp: '2026-05-05T22:09:30+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:236de032e41b9ee4438821b3e08a80a8b44299c35558cb5dab318c3b206da375'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: Machine Unlearning
 summary: Research topic on removing or correcting data influence from trained models.
 occupation: Research topic

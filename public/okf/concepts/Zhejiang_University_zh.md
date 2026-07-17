@@ -8,12 +8,26 @@ tags:
   - education
   - 公立研究型大学
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-12T22:06:12+08:00'
+content_hash: 'sha256:b299fe56a1b40d6af75fd0dec521d43bbcce4f80812f3b644dc326f6d3e759e5'
+reviewed_at: '2026-07-12T22:06:12+08:00'
+review_due: '2027-01-08'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-12T22:06:12+08:00'
+  reviewDue: '2027-01-08'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Zhejiang_University_zh'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-575233d5188384df
+  - src-c051bd6dcf566058
 source_path: wiki/Zhejiang_University_zh.md
 ---
 **浙江大学**（**ZJU**）是 [乔鑫宝](./Qiao_Xinbao_zh.md) 2022 至 2025 年的硕士阶段所在机构。在本 wiki 中，该条目记录机器遗忘、数据影响分析与 [数据中心 ML](./Data_Centric_Machine_Learning_zh.md) 工作形成的机构背景。它不是完整校史，而是解释浙江大学阶段在乔鑫宝学术时间线中的位置。

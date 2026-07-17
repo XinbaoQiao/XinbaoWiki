@@ -8,12 +8,24 @@ tags:
   - navigation
   - wiki-index
 timestamp: '2026-05-07T17:34:07+08:00'
+modified: '2026-07-14T23:17:11+08:00'
+content_hash: 'sha256:47074f3b8b0b101d64f11b2bbedd1bc5de61e0f63ab4c5346376750158f1895e'
+reviewed_at: '2026-07-14T23:17:11+08:00'
+review_due: '2027-07-14'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-14T23:17:11+08:00'
+  reviewDue: '2027-07-14'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:index'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/index.md
 ---
 ## Biography and CV

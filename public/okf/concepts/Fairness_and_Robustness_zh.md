@@ -8,12 +8,24 @@ tags:
   - concept
   - 研究概念
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:c1c485ae574d344b3bab011faced822faebcc7652bbd473cd1d62dd4afe10bcb'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Fairness_and_Robustness_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Fairness_and_Robustness_zh.md
 ---
 **公平性与鲁棒性** 在本 wiki 中被视为可通过数据或数据权重修正的可靠性目标。公平性关注不同群体之间系统性的表现或待遇差异；鲁棒性关注模型在扰动、腐败、对抗输入或分布偏移下的稳定性。

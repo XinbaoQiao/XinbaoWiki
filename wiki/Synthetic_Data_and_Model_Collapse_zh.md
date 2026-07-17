@@ -9,6 +9,10 @@ tags:
   - 研究专题
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-03T00:03:48+08:00'
+content_hash: 'sha256:745941be243f09bc0462a6ce71bab7a0abce40149496f78bc21002cf2207e5c8'
+reviewed_at: '2026-07-03T00:03:48+08:00'
+review_due: '2026-12-29'
 name: 合成数据
 language: zh
 summary: 关于合成数据、递归训练、低资源验证、选择偏差和模型坍缩的研究专题。

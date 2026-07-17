@@ -8,6 +8,10 @@ tags:
   - biography
   - 博士生
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-16T20:08:42+08:00'
+content_hash: 'sha256:a4df4f1394b219dbe68acbff664db416aaa3f0e849cb1ff8ebe5c22273b0ec6a'
+reviewed_at: '2026-07-16T20:08:42+08:00'
+review_due: '2026-10-14'
 name: 乔鑫宝
 summary: 香港中文大学信息工程系博士生；研究方向包括数据中心 ML、AI for Networks、Networks for AI、机器遗忘和合成数据可靠性
 aliases:

@@ -10,6 +10,10 @@ tags:
   - topic
   - research-topic
 timestamp: '2026-05-05T20:55:21+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:de85186a59ada4edf5598f5cdde696fb8984635557fbd8fecf816e4ffa2cffc3'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: Trustworthy AI
 summary: >-
   Research topic covering reliability, deletion, fairness, robustness,

@@ -8,12 +8,24 @@ tags:
   - index
   - 论文列表
 timestamp: '2026-06-01T22:04:00+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:15c34136b6393d0ec3a649ba10bea0676ae1a11c72cf328442f9161e415fa76b'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-09-30'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-09-30'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Publications_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Publications_zh.md
 ---
 本页是乔鑫宝论文的整理索引。每篇论文都有独立 wiki 页面，并被放入相应研究专题；论文不应作为孤立条目存在。

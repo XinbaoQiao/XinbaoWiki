@@ -9,12 +9,27 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T21:39:01+08:00'
+modified: '2026-07-08T13:18:57+08:00'
+content_hash: 'sha256:e6ac063f602e015e12506e44c362a212c8155400bf1007d5aaa5be220af99a47'
+reviewed_at: '2026-07-08T13:18:57+08:00'
+review_due: '2026-10-06'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-08T13:18:57+08:00'
+  reviewDue: '2026-10-06'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:DynFrs'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-19cdc04d387acf77
+  - src-3234eea5652932e1
+  - src-da17eb3884244bd3
 source_path: wiki/DynFrs.md
 ---
 **DynFrs: An Efficient Framework for Machine Unlearning in Random Forest** is an ICLR 2025 conference paper by Shurong Wang, Zhuoyang Shen, **[Xinbao Qiao](./Xinbao_Qiao.md)**, Tongning Zhang, and Meng Zhang. The work treats random-forest unlearning as a dynamic data-structure problem: it seeks exact distributional equivalence to retraining while keeping online deletion, insertion, and query latency low.

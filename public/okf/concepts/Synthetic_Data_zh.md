@@ -9,12 +9,24 @@ tags:
   - 研究概念
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:0be9d0fd4d48f569a4a98be5a8e262abd0f666adf14656d58b7af7e19b57194d'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Synthetic_Data_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Synthetic_Data_zh.md
 ---
 **合成数据** 指被用来替代、补充或代理真实数据的生成样本。在机器学习中，合成数据可以扩大覆盖面、降低标注成本、保护隐私，或在真实数据稀缺时支持评估；但如果缺乏真实数据锚点并被递归复用，也会引入失效模式。

@@ -8,6 +8,10 @@ tags:
   - profile
   - research-experience
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:793c7f17feda70873d1e709248d0bc63d95c7ca89e95f536e4d0609fc81e2b95'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-09-30'
 name: Experience
 summary: Research experience and affiliations.
 occupation: Research experience

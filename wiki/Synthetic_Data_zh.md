@@ -9,6 +9,10 @@ tags:
   - 研究概念
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:0be9d0fd4d48f569a4a98be5a8e262abd0f666adf14656d58b7af7e19b57194d'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: 合成数据（概念）
 language: zh
 summary: 解释用于训练、评估或隐私友好协作的生成数据。

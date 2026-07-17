@@ -10,6 +10,10 @@ tags:
   - icml-2026
   - synthetic-data
 timestamp: '2026-06-02T22:56:50+08:00'
+modified: '2026-07-16T20:08:42+08:00'
+content_hash: 'sha256:09b8d93c182cc7e7940467c8a17797f2744016e10d4aa01ec370c6f5e2abc779'
+reviewed_at: '2026-07-16T20:08:42+08:00'
+review_due: '2027-07-16'
 name: 样本选择偏差何以促成模型坍缩
 language: zh
 summary: ICML 2026 论文，研究低资源验证场景、样本选择偏差、模型坍缩与协作 Wasserstein 几何代理。

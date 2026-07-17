@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
@@ -8,10 +9,38 @@ const wikiDir = path.join(root, 'wiki');
 const okfDir = path.join(root, 'public', 'okf');
 const conceptDir = path.join(okfDir, 'concepts');
 const OKF_VERSION = '0.1';
+const OKF_PROFILE_ID = 'xinbaopedia-okf-profile';
+const HASH_PREFIX = 'sha256:';
 const REQUIRED_FRONTMATTER = ['type', 'title', 'description', 'tags', 'timestamp'];
 const RESERVED_OKF_FILES = ['index.md', 'log.md'];
+const EXPECTED_SCHEMA_VERSIONS = {
+  manifest: 3,
+  pages: 4,
+  graph: 4,
+  quality: 2,
+  schema: 5,
+  sources: 1
+};
 
 const errors = [];
+
+function hashString(value) {
+  return `${HASH_PREFIX}${crypto.createHash('sha256').update(value).digest('hex')}`;
+}
+
+function sortForHash(value) {
+  if (Array.isArray(value)) return value.map((item) => sortForHash(item));
+  if (!value || typeof value !== 'object') return value;
+  return Object.fromEntries(
+    Object.keys(value)
+      .sort((a, b) => a.localeCompare(b))
+      .map((key) => [key, sortForHash(value[key])])
+  );
+}
+
+function expectedSourceId(url) {
+  return `src-${hashString(url).slice(HASH_PREFIX.length, HASH_PREFIX.length + 16)}`;
+}
 
 function report(message) {
   errors.push(message);
@@ -51,6 +80,69 @@ function assertSchemaDoc(relativePath, value) {
   }
 }
 
+function assertProfile(relativePath, value) {
+  if (!value || typeof value !== 'object') return;
+  if (!value.profile || value.profile.id !== OKF_PROFILE_ID || typeof value.profile.version !== 'string') {
+    report(`${relativePath}: missing ${OKF_PROFILE_ID} profile declaration`);
+  }
+}
+
+function assertSourceRegistry(registry, concepts) {
+  if (!registry || typeof registry !== 'object') return;
+  if (!Array.isArray(registry.sources)) {
+    report('public/okf/sources.json: sources must be an array');
+    return;
+  }
+  if (registry.contentHash !== hashString(JSON.stringify(sortForHash(registry.sources)))) {
+    report('public/okf/sources.json: contentHash does not match canonical source entries');
+  }
+  if (!registry.checkPolicy || !Array.isArray(registry.checkPolicy.allowedStatuses)) {
+    report('public/okf/sources.json: checkPolicy.allowedStatuses must be an array');
+  }
+
+  const sourceMap = new Map();
+  for (const source of registry.sources) {
+    if (!source || typeof source !== 'object') {
+      report('public/okf/sources.json: every source must be an object');
+      continue;
+    }
+    if (typeof source.url !== 'string' || !/^https?:\/\//.test(source.url)) {
+      report(`public/okf/sources.json: source ${source.id || '(missing id)'} must use an http(s) URL`);
+      continue;
+    }
+    const expectedId = expectedSourceId(source.url);
+    if (source.id !== expectedId) {
+      report(`public/okf/sources.json: source id ${source.id} does not match canonical URL identity ${expectedId}`);
+    }
+    if (sourceMap.has(source.id)) report(`public/okf/sources.json: duplicate source id ${source.id}`);
+    sourceMap.set(source.id, source);
+    if (source.hash?.algorithm !== 'sha256' || source.hash?.scope !== 'canonical-url' || source.hash?.value !== hashString(source.url)) {
+      report(`public/okf/sources.json: source ${source.id} has an invalid canonical URL hash`);
+    }
+    if (
+      !source.check ||
+      typeof source.check.method !== 'string' ||
+      !registry.checkPolicy?.allowedStatuses?.includes(source.check.status) ||
+      !Number.isInteger(source.check.maxAgeDays) ||
+      source.check.maxAgeDays <= 0
+    ) {
+      report(`public/okf/sources.json: source ${source.id} has an invalid check contract`);
+    }
+    if (!Array.isArray(source.pages) || !Array.isArray(source.evidence)) {
+      report(`public/okf/sources.json: source ${source.id} must declare pages and evidence arrays`);
+      continue;
+    }
+    for (const slug of source.pages) {
+      if (!concepts.has(slug)) report(`public/okf/sources.json: source ${source.id} references non-public page ${slug}`);
+    }
+    const evidenceSlugs = new Set(source.evidence.map((item) => item && item.slug));
+    for (const slug of source.pages) {
+      if (!evidenceSlugs.has(slug)) report(`public/okf/sources.json: source ${source.id} lacks evidence for page ${slug}`);
+    }
+  }
+  return sourceMap;
+}
+
 function slugFromFileName(fileName) {
   return fileName.replace(/\.md$/, '');
 }
@@ -75,6 +167,20 @@ function hasRequiredFrontmatter(fileName, data) {
   }
   if (typeof data.timestamp !== 'string' || !data.timestamp.trim()) {
     report(`public/okf/concepts/${fileName}: timestamp must be a non-empty string`);
+  }
+  for (const field of ['modified', 'reviewed_at', 'review_due']) {
+    if (typeof data[field] !== 'string' || Number.isNaN(Date.parse(data[field]))) {
+      report(`public/okf/concepts/${fileName}: ${field} must be a valid date or timestamp`);
+    }
+  }
+  if (typeof data.content_hash !== 'string' || !/^sha256:[a-f0-9]{64}$/.test(data.content_hash)) {
+    report(`public/okf/concepts/${fileName}: content_hash must be a SHA-256 digest`);
+  }
+  if (!Array.isArray(data.source_ids) || data.source_ids.some((id) => typeof id !== 'string')) {
+    report(`public/okf/concepts/${fileName}: source_ids must be an array of strings`);
+  }
+  if (data.retrieval?.document_id !== `wiki:${slugFromFileName(fileName)}` || data.retrieval?.chunking !== 'markdown-heading-v1') {
+    report(`public/okf/concepts/${fileName}: retrieval metadata must use the stable wiki:<slug> contract`);
   }
 }
 
@@ -222,7 +328,8 @@ function assertHiddenPagesExcluded(hidden, docs, concepts) {
     JSON.stringify(docs.pages),
     JSON.stringify(docs.graph),
     JSON.stringify(docs.quality),
-    JSON.stringify(docs.schema)
+    JSON.stringify(docs.schema),
+    JSON.stringify(docs.sources)
   ].join('\n');
 
   for (const slug of hidden) {
@@ -235,7 +342,7 @@ function assertHiddenPagesExcluded(hidden, docs, concepts) {
   }
 }
 
-function assertQualityReport(quality, graph) {
+function assertQualityReport(quality, graph, sources) {
   if (!quality || typeof quality !== 'object') return;
   if (!quality.counts || typeof quality.counts !== 'object') {
     report('public/okf/quality-report.json: missing counts object');
@@ -260,6 +367,31 @@ function assertQualityReport(quality, graph) {
   }
   if (!quality.structuredRelationCounts || typeof quality.structuredRelationCounts !== 'object') {
     report('public/okf/quality-report.json: structuredRelationCounts must be an object');
+  }
+  for (const field of ['sourceCoverage', 'citationCoverage', 'reviewFreshness', 'typedRelationCoverage', 'retrievalReadiness']) {
+    if (!quality[field] || typeof quality[field] !== 'object') {
+      report(`public/okf/quality-report.json: ${field} must be an object`);
+    }
+  }
+  if (quality.sourceCoverage?.pages !== graph?.nodes?.length) {
+    report('public/okf/quality-report.json: sourceCoverage.pages must match public graph nodes');
+  }
+  if (quality.sourceCoverage?.registeredSources !== sources?.sources?.length) {
+    report('public/okf/quality-report.json: sourceCoverage.registeredSources must match sources.json');
+  }
+  if (!Array.isArray(quality.reviewFreshness?.pendingReviewPages) || quality.reviewFreshness.pendingReviewPages.length !== 0) {
+    report('public/okf/quality-report.json: pendingReviewPages must be empty for a conforming bundle');
+  }
+  if (!Array.isArray(quality.reviewFreshness?.overduePages) || quality.reviewFreshness.overduePages.length !== 0) {
+    report('public/okf/quality-report.json: overduePages must be empty for a conforming bundle');
+  }
+  if (
+    quality.retrievalReadiness?.readyPages !== graph?.nodes?.length ||
+    quality.retrievalReadiness?.coverage !== 1 ||
+    !Array.isArray(quality.retrievalReadiness?.missingMetadataPages) ||
+    quality.retrievalReadiness.missingMetadataPages.length !== 0
+  ) {
+    report('public/okf/quality-report.json: every public page must be retrieval-ready');
   }
 }
 
@@ -295,12 +427,81 @@ function assertPagesMatchConcepts(pages, concepts) {
   }
 }
 
+function assertProvenanceMetadata(pages, graph, concepts, sourceMap) {
+  const pageList = pages && Array.isArray(pages.pages) ? pages.pages : [];
+  const nodeMap = new Map(
+    graph && Array.isArray(graph.nodes)
+      ? graph.nodes.filter((node) => node && typeof node.slug === 'string').map((node) => [node.slug, node])
+      : []
+  );
+  for (const page of pageList) {
+    if (!page || typeof page.slug !== 'string') continue;
+    if (typeof page.contentHash !== 'string' || !/^sha256:[a-f0-9]{64}$/.test(page.contentHash)) {
+      report(`public/okf/pages.json: page ${page.slug} has an invalid contentHash`);
+    }
+    for (const field of ['modifiedAt', 'reviewedAt', 'reviewDue']) {
+      if (typeof page[field] !== 'string' || Number.isNaN(Date.parse(page[field]))) {
+        report(`public/okf/pages.json: page ${page.slug} has an invalid ${field}`);
+      }
+    }
+    if (!Array.isArray(page.sourceIds) || !Array.isArray(page.citationSourceIds) || !Array.isArray(page.footnoteSourceIds)) {
+      report(`public/okf/pages.json: page ${page.slug} must expose source ID arrays`);
+      continue;
+    }
+    for (const id of page.sourceIds) {
+      if (!sourceMap?.has(id)) report(`public/okf/pages.json: page ${page.slug} references unknown source ${id}`);
+    }
+    if (page.retrieval?.documentId !== `wiki:${page.slug}` || page.retrieval?.contentHash !== page.contentHash) {
+      report(`public/okf/pages.json: page ${page.slug} has inconsistent retrieval metadata`);
+    }
+
+    const concept = concepts.get(page.slug);
+    if (concept) {
+      if (concept.data.content_hash !== page.contentHash) {
+        report(`public/okf/concepts/${page.slug}.md: content_hash does not match pages.json`);
+      }
+      if (JSON.stringify(concept.data.source_ids || []) !== JSON.stringify(page.sourceIds)) {
+        report(`public/okf/concepts/${page.slug}.md: source_ids do not match pages.json`);
+      }
+      if (
+        concept.data.modified !== page.modifiedAt ||
+        concept.data.reviewed_at !== page.reviewedAt ||
+        concept.data.review_due !== page.reviewDue
+      ) {
+        report(`public/okf/concepts/${page.slug}.md: review lifecycle does not match pages.json`);
+      }
+    }
+
+    const node = nodeMap.get(page.slug);
+    if (!node) continue;
+    if (
+      node.contentHash !== page.contentHash ||
+      node.modifiedAt !== page.modifiedAt ||
+      node.reviewedAt !== page.reviewedAt ||
+      node.reviewDue !== page.reviewDue ||
+      JSON.stringify(node.sourceIds || []) !== JSON.stringify(page.sourceIds)
+    ) {
+      report(`public/okf/graph.json: node ${page.slug} provenance does not match pages.json`);
+    }
+  }
+
+  for (const [id, source] of sourceMap || []) {
+    for (const slug of source.pages) {
+      const page = pageList.find((item) => item.slug === slug);
+      if (page && !page.sourceIds.includes(id)) {
+        report(`public/okf/sources.json: source ${id} page association is missing from pages.json entry ${slug}`);
+      }
+    }
+  }
+}
+
 const docs = {
   manifest: readJson('public/okf/manifest.json'),
   pages: readJson('public/okf/pages.json'),
   graph: readJson('public/okf/graph.json'),
   quality: readJson('public/okf/quality-report.json'),
-  schema: readJson('public/okf/schema.json')
+  schema: readJson('public/okf/schema.json'),
+  sources: readJson('public/okf/sources.json')
 };
 
 const docPaths = {
@@ -308,22 +509,35 @@ const docPaths = {
   pages: 'public/okf/pages.json',
   graph: 'public/okf/graph.json',
   quality: 'public/okf/quality-report.json',
-  schema: 'public/okf/schema.json'
+  schema: 'public/okf/schema.json',
+  sources: 'public/okf/sources.json'
 };
 
 for (const [name, value] of Object.entries(docs)) {
   assertSchemaDoc(docPaths[name], value);
+  if (value && value.schemaVersion !== EXPECTED_SCHEMA_VERSIONS[name]) {
+    report(`${docPaths[name]}: expected schemaVersion ${EXPECTED_SCHEMA_VERSIONS[name]}, got ${JSON.stringify(value.schemaVersion)}`);
+  }
 }
 
 const concepts = readConcepts();
 const hidden = hiddenSlugs();
+const sourceMap = assertSourceRegistry(docs.sources, concepts);
 
+assertProfile('public/okf/manifest.json', docs.manifest);
+assertProfile('public/okf/schema.json', docs.schema);
+assertProfile('public/okf/sources.json', docs.sources);
 assertReservedOkfFiles();
 assertPagesMatchConcepts(docs.pages, concepts);
 assertPublicNodeReferences(docs.graph);
-assertQualityReport(docs.quality, docs.graph);
+assertQualityReport(docs.quality, docs.graph, docs.sources);
 assertStructuredRelationTargets(concepts);
 assertHiddenPagesExcluded(hidden, docs, concepts);
+assertProvenanceMetadata(docs.pages, docs.graph, concepts, sourceMap);
+
+if (docs.manifest?.bundle?.sourceRegistry !== 'sources.json' || docs.manifest?.bundle?.sources !== docs.sources?.sources?.length) {
+  report('public/okf/manifest.json: source registry metadata does not match sources.json');
+}
 
 if (errors.length > 0) {
   console.error(`OKF conformance failed with ${errors.length} error(s):`);
@@ -331,4 +545,4 @@ if (errors.length > 0) {
   process.exit(1);
 }
 
-console.log(`OKF conformance passed: ${concepts.size} concepts, ${hidden.size} hidden page(s) excluded.`);
+console.log(`OKF v0.1 + Xinbaopedia profile conformance passed: ${concepts.size} concepts, ${sourceMap?.size || 0} sources, ${hidden.size} hidden page(s) excluded.`);

@@ -11,6 +11,10 @@ tags:
   - research-topic
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-03T00:03:48+08:00'
+content_hash: 'sha256:e71393c9d3848004a058ac5c4889a5de233c1a26b86793c00ee99193924a49dc'
+reviewed_at: '2026-07-03T00:03:48+08:00'
+review_due: '2026-12-29'
 name: Synthetic Data
 summary: >-
   Research topic on synthetic data, recursive training, low-resource

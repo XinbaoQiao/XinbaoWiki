@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "okfVersion": "0.1",
   "counts": {
     "pages": 84,
@@ -70,5 +70,1630 @@
     "related": 0,
     "supersedes": 0,
     "uses": 0
+  },
+  "sourceCoverage": {
+    "pages": 84,
+    "pagesWithSources": 30,
+    "pagesWithoutSources": [
+      {
+        "slug": "Certified_Data_Removal",
+        "title": "Certified Data Removal",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Certified_Data_Removal_zh",
+        "title": "认证数据删除",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Collaborative_Evaluation",
+        "title": "Collaborative Evaluation",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Collaborative_Evaluation_zh",
+        "title": "协作评估",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Data_Centric_Machine_Learning",
+        "title": "Data Centric ML",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Data_Centric_Machine_Learning_zh",
+        "title": "数据中心 ML",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Data_Selection",
+        "title": "Data Selection",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Data_Selection_zh",
+        "title": "数据选择",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Data_Silos",
+        "title": "Data Silos",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Data_Silos_zh",
+        "title": "数据孤岛",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Distributed_Learning",
+        "title": "Distributed Learning",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Distributed_Learning_zh",
+        "title": "分布式学习",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Education",
+        "title": "Education",
+        "language": "en",
+        "modifiedAt": "2026-07-12T22:06:12+08:00",
+        "reviewedAt": "2026-07-12T22:06:12+08:00",
+        "reviewDue": "2027-01-08"
+      },
+      {
+        "slug": "Education_zh",
+        "title": "教育经历",
+        "language": "zh",
+        "modifiedAt": "2026-07-13T20:54:38+08:00",
+        "reviewedAt": "2026-07-13T20:54:38+08:00",
+        "reviewDue": "2027-01-09"
+      },
+      {
+        "slug": "Experience",
+        "title": "Experience",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30"
+      },
+      {
+        "slug": "Experience_zh",
+        "title": "研究经历",
+        "language": "zh",
+        "modifiedAt": "2026-07-13T20:54:38+08:00",
+        "reviewedAt": "2026-07-13T20:54:38+08:00",
+        "reviewDue": "2026-10-11"
+      },
+      {
+        "slug": "Fairness_and_Robustness",
+        "title": "Fairness and Robustness",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Fairness_and_Robustness_zh",
+        "title": "公平性与鲁棒性",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "index",
+        "title": "Index",
+        "language": "en",
+        "modifiedAt": "2026-07-14T23:17:11+08:00",
+        "reviewedAt": "2026-07-14T23:17:11+08:00",
+        "reviewDue": "2027-07-14"
+      },
+      {
+        "slug": "index_zh",
+        "title": "索引",
+        "language": "zh",
+        "modifiedAt": "2026-07-14T23:17:11+08:00",
+        "reviewedAt": "2026-07-14T23:17:11+08:00",
+        "reviewDue": "2027-07-14"
+      },
+      {
+        "slug": "Influence_Functions",
+        "title": "Influence Functions",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Influence_Functions_zh",
+        "title": "影响函数",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Interpretability",
+        "title": "Interpretability",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Interpretability_zh",
+        "title": "可解释性",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "LLM_Reliability",
+        "title": "LLM Reliability",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "LLM_Reliability_zh",
+        "title": "大语言模型可靠性",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "log",
+        "title": "Log",
+        "language": "en",
+        "modifiedAt": "2026-07-15T23:04:06+08:00",
+        "reviewedAt": "2026-07-15T23:04:06+08:00",
+        "reviewDue": "2027-07-15"
+      },
+      {
+        "slug": "log_zh",
+        "title": "日志",
+        "language": "zh",
+        "modifiedAt": "2026-07-14T23:17:11+08:00",
+        "reviewedAt": "2026-07-14T23:17:11+08:00",
+        "reviewDue": "2027-07-14"
+      },
+      {
+        "slug": "Machine_Unlearning",
+        "title": "Machine Unlearning",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Machine_Unlearning_zh",
+        "title": "机器遗忘",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Model_Collapse",
+        "title": "Model Collapse",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Model_Collapse_zh",
+        "title": "模型坍缩",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Old_Homepage_Resources",
+        "title": "Homepage Portrait Resources",
+        "language": "en",
+        "modifiedAt": "2026-07-15T22:33:36+08:00",
+        "reviewedAt": "2026-07-15T22:33:36+08:00",
+        "reviewDue": "2027-07-15"
+      },
+      {
+        "slug": "Old_Homepage_Resources_zh",
+        "title": "主页肖像资源",
+        "language": "zh",
+        "modifiedAt": "2026-07-15T22:33:36+08:00",
+        "reviewedAt": "2026-07-15T22:33:36+08:00",
+        "reviewDue": "2027-07-15"
+      },
+      {
+        "slug": "Projects",
+        "title": "Projects",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30"
+      },
+      {
+        "slug": "Projects_zh",
+        "title": "项目",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30"
+      },
+      {
+        "slug": "Publications",
+        "title": "Publications",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30"
+      },
+      {
+        "slug": "Publications_zh",
+        "title": "论文",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30"
+      },
+      {
+        "slug": "Random_Forest",
+        "title": "Random Forest",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Random_Forest_zh",
+        "title": "随机森林",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Recursive_Synthetic_Data_Training",
+        "title": "Recursive Synthetic Data Training",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Recursive_Synthetic_Data_Training_zh",
+        "title": "递归合成数据训练",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Research",
+        "title": "Research",
+        "language": "en",
+        "modifiedAt": "2026-07-11T07:28:06+08:00",
+        "reviewedAt": "2026-07-11T07:28:06+08:00",
+        "reviewDue": "2026-10-08"
+      },
+      {
+        "slug": "Research_zh",
+        "title": "研究",
+        "language": "zh",
+        "modifiedAt": "2026-07-11T07:28:06+08:00",
+        "reviewedAt": "2026-07-11T07:28:06+08:00",
+        "reviewDue": "2026-10-08"
+      },
+      {
+        "slug": "Sample_Selection_Bias",
+        "title": "Sample Selection Bias",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Sample_Selection_Bias_zh",
+        "title": "样本选择偏差",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Skills",
+        "title": "Skills",
+        "language": "en",
+        "modifiedAt": "2026-07-03T00:03:48+08:00",
+        "reviewedAt": "2026-07-03T00:03:48+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Skills_zh",
+        "title": "技能",
+        "language": "zh",
+        "modifiedAt": "2026-07-03T00:03:48+08:00",
+        "reviewedAt": "2026-07-03T00:03:48+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Synthetic_Data",
+        "title": "Synthetic Data (concept)",
+        "language": "en",
+        "modifiedAt": "2026-07-03T00:03:48+08:00",
+        "reviewedAt": "2026-07-03T00:03:48+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Synthetic_Data_and_Model_Collapse",
+        "title": "Synthetic Data",
+        "language": "en",
+        "modifiedAt": "2026-07-03T00:03:48+08:00",
+        "reviewedAt": "2026-07-03T00:03:48+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Synthetic_Data_and_Model_Collapse_zh",
+        "title": "合成数据",
+        "language": "zh",
+        "modifiedAt": "2026-07-03T00:03:48+08:00",
+        "reviewedAt": "2026-07-03T00:03:48+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Synthetic_Data_zh",
+        "title": "合成数据（概念）",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Trustworthy_AI",
+        "title": "Trustworthy AI",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Trustworthy_AI_zh",
+        "title": "可信 AI",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      }
+    ],
+    "coverage": 0.3571,
+    "registeredSources": 48
+  },
+  "citationCoverage": {
+    "pages": 84,
+    "pagesWithBodyCitations": 22,
+    "pagesWithFootnoteCitations": 20,
+    "pagesWithoutBodyCitations": [
+      {
+        "slug": "Certified_Data_Removal",
+        "title": "Certified Data Removal",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Certified_Data_Removal_zh",
+        "title": "认证数据删除",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Collaborative_Evaluation",
+        "title": "Collaborative Evaluation",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Collaborative_Evaluation_zh",
+        "title": "协作评估",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Data_Centric_Machine_Learning",
+        "title": "Data Centric ML",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Data_Centric_Machine_Learning_zh",
+        "title": "数据中心 ML",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Data_Selection",
+        "title": "Data Selection",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Data_Selection_zh",
+        "title": "数据选择",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Data_Silos",
+        "title": "Data Silos",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Data_Silos_zh",
+        "title": "数据孤岛",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Distributed_Learning",
+        "title": "Distributed Learning",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Distributed_Learning_zh",
+        "title": "分布式学习",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "DynFrs",
+        "title": "DynFrs: An Efficient Framework for Machine Unlearning in Random Forest",
+        "language": "en",
+        "modifiedAt": "2026-07-08T13:18:57+08:00",
+        "reviewedAt": "2026-07-08T13:18:57+08:00",
+        "reviewDue": "2026-10-06"
+      },
+      {
+        "slug": "DynFrs_zh",
+        "title": "DynFrs：随机森林机器遗忘高效框架",
+        "language": "zh",
+        "modifiedAt": "2026-07-16T20:08:42+08:00",
+        "reviewedAt": "2026-07-16T20:08:42+08:00",
+        "reviewDue": "2026-10-14"
+      },
+      {
+        "slug": "Education",
+        "title": "Education",
+        "language": "en",
+        "modifiedAt": "2026-07-12T22:06:12+08:00",
+        "reviewedAt": "2026-07-12T22:06:12+08:00",
+        "reviewDue": "2027-01-08"
+      },
+      {
+        "slug": "Education_zh",
+        "title": "教育经历",
+        "language": "zh",
+        "modifiedAt": "2026-07-13T20:54:38+08:00",
+        "reviewedAt": "2026-07-13T20:54:38+08:00",
+        "reviewDue": "2027-01-09"
+      },
+      {
+        "slug": "Experience",
+        "title": "Experience",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30"
+      },
+      {
+        "slug": "Experience_zh",
+        "title": "研究经历",
+        "language": "zh",
+        "modifiedAt": "2026-07-13T20:54:38+08:00",
+        "reviewedAt": "2026-07-13T20:54:38+08:00",
+        "reviewDue": "2026-10-11"
+      },
+      {
+        "slug": "Fairness_and_Robustness",
+        "title": "Fairness and Robustness",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Fairness_and_Robustness_zh",
+        "title": "公平性与鲁棒性",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Hessian_Free_Online_Certified_Unlearning",
+        "title": "Hessian-Free Online Certified Unlearning",
+        "language": "en",
+        "modifiedAt": "2026-07-08T13:18:57+08:00",
+        "reviewedAt": "2026-07-08T13:18:57+08:00",
+        "reviewDue": "2026-10-06"
+      },
+      {
+        "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
+        "title": "无 Hessian 在线认证遗忘",
+        "language": "zh",
+        "modifiedAt": "2026-07-16T20:08:42+08:00",
+        "reviewedAt": "2026-07-16T20:08:42+08:00",
+        "reviewDue": "2026-10-14"
+      },
+      {
+        "slug": "index",
+        "title": "Index",
+        "language": "en",
+        "modifiedAt": "2026-07-14T23:17:11+08:00",
+        "reviewedAt": "2026-07-14T23:17:11+08:00",
+        "reviewDue": "2027-07-14"
+      },
+      {
+        "slug": "index_zh",
+        "title": "索引",
+        "language": "zh",
+        "modifiedAt": "2026-07-14T23:17:11+08:00",
+        "reviewedAt": "2026-07-14T23:17:11+08:00",
+        "reviewDue": "2027-07-14"
+      },
+      {
+        "slug": "Influence_Functions",
+        "title": "Influence Functions",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Influence_Functions_zh",
+        "title": "影响函数",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Interpretability",
+        "title": "Interpretability",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Interpretability_zh",
+        "title": "可解释性",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "LLM_Reliability",
+        "title": "LLM Reliability",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "LLM_Reliability_zh",
+        "title": "大语言模型可靠性",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "log",
+        "title": "Log",
+        "language": "en",
+        "modifiedAt": "2026-07-15T23:04:06+08:00",
+        "reviewedAt": "2026-07-15T23:04:06+08:00",
+        "reviewDue": "2027-07-15"
+      },
+      {
+        "slug": "log_zh",
+        "title": "日志",
+        "language": "zh",
+        "modifiedAt": "2026-07-14T23:17:11+08:00",
+        "reviewedAt": "2026-07-14T23:17:11+08:00",
+        "reviewDue": "2027-07-14"
+      },
+      {
+        "slug": "Machine_Unlearning",
+        "title": "Machine Unlearning",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Machine_Unlearning_zh",
+        "title": "机器遗忘",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Model_Collapse",
+        "title": "Model Collapse",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Model_Collapse_zh",
+        "title": "模型坍缩",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Old_Homepage_Resources",
+        "title": "Homepage Portrait Resources",
+        "language": "en",
+        "modifiedAt": "2026-07-15T22:33:36+08:00",
+        "reviewedAt": "2026-07-15T22:33:36+08:00",
+        "reviewDue": "2027-07-15"
+      },
+      {
+        "slug": "Old_Homepage_Resources_zh",
+        "title": "主页肖像资源",
+        "language": "zh",
+        "modifiedAt": "2026-07-15T22:33:36+08:00",
+        "reviewedAt": "2026-07-15T22:33:36+08:00",
+        "reviewDue": "2027-07-15"
+      },
+      {
+        "slug": "Projects",
+        "title": "Projects",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30"
+      },
+      {
+        "slug": "Projects_zh",
+        "title": "项目",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30"
+      },
+      {
+        "slug": "Publications",
+        "title": "Publications",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30"
+      },
+      {
+        "slug": "Publications_zh",
+        "title": "论文",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30"
+      },
+      {
+        "slug": "Random_Forest",
+        "title": "Random Forest",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Random_Forest_zh",
+        "title": "随机森林",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Recursive_Synthetic_Data_Training",
+        "title": "Recursive Synthetic Data Training",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Recursive_Synthetic_Data_Training_zh",
+        "title": "递归合成数据训练",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Research",
+        "title": "Research",
+        "language": "en",
+        "modifiedAt": "2026-07-11T07:28:06+08:00",
+        "reviewedAt": "2026-07-11T07:28:06+08:00",
+        "reviewDue": "2026-10-08"
+      },
+      {
+        "slug": "Research_zh",
+        "title": "研究",
+        "language": "zh",
+        "modifiedAt": "2026-07-11T07:28:06+08:00",
+        "reviewedAt": "2026-07-11T07:28:06+08:00",
+        "reviewDue": "2026-10-08"
+      },
+      {
+        "slug": "Sample_Selection_Bias",
+        "title": "Sample Selection Bias",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Sample_Selection_Bias_zh",
+        "title": "样本选择偏差",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Skills",
+        "title": "Skills",
+        "language": "en",
+        "modifiedAt": "2026-07-03T00:03:48+08:00",
+        "reviewedAt": "2026-07-03T00:03:48+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Skills_zh",
+        "title": "技能",
+        "language": "zh",
+        "modifiedAt": "2026-07-03T00:03:48+08:00",
+        "reviewedAt": "2026-07-03T00:03:48+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Soft_Weighted_Machine_Unlearning",
+        "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
+        "language": "en",
+        "modifiedAt": "2026-07-12T20:00:05+08:00",
+        "reviewedAt": "2026-07-12T20:00:05+08:00",
+        "reviewDue": "2027-07-12"
+      },
+      {
+        "slug": "Soft_Weighted_Machine_Unlearning_zh",
+        "title": "超越二元擦除：用于公平性与鲁棒性的软加权遗忘",
+        "language": "zh",
+        "modifiedAt": "2026-07-16T20:08:42+08:00",
+        "reviewedAt": "2026-07-16T20:08:42+08:00",
+        "reviewDue": "2027-07-16"
+      },
+      {
+        "slug": "Synthetic_Data",
+        "title": "Synthetic Data (concept)",
+        "language": "en",
+        "modifiedAt": "2026-07-03T00:03:48+08:00",
+        "reviewedAt": "2026-07-03T00:03:48+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Synthetic_Data_and_Model_Collapse",
+        "title": "Synthetic Data",
+        "language": "en",
+        "modifiedAt": "2026-07-03T00:03:48+08:00",
+        "reviewedAt": "2026-07-03T00:03:48+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Synthetic_Data_and_Model_Collapse_zh",
+        "title": "合成数据",
+        "language": "zh",
+        "modifiedAt": "2026-07-03T00:03:48+08:00",
+        "reviewedAt": "2026-07-03T00:03:48+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Synthetic_Data_zh",
+        "title": "合成数据（概念）",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Trustworthy_AI",
+        "title": "Trustworthy AI",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Trustworthy_AI_zh",
+        "title": "可信 AI",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
+        "title": "When Sample Selection Bias Precipitates Model Collapse",
+        "language": "en",
+        "modifiedAt": "2026-07-12T20:00:05+08:00",
+        "reviewedAt": "2026-07-12T20:00:05+08:00",
+        "reviewDue": "2027-07-12"
+      },
+      {
+        "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
+        "title": "样本选择偏差何以促成模型坍缩",
+        "language": "zh",
+        "modifiedAt": "2026-07-16T20:08:42+08:00",
+        "reviewedAt": "2026-07-16T20:08:42+08:00",
+        "reviewDue": "2027-07-16"
+      }
+    ],
+    "coverage": 0.2619,
+    "footnoteCoverage": 0.2381
+  },
+  "reviewFreshness": {
+    "asOf": "2026-07-13",
+    "policy": "review status is recalculated at the start of each UTC week",
+    "currentPages": 84,
+    "overduePages": [],
+    "pendingReviewPages": [],
+    "nextReviewDue": "2026-09-30"
+  },
+  "typedRelationCoverage": {
+    "pages": 84,
+    "pagesWithTypedRelations": 2,
+    "pagesWithoutTypedRelations": [
+      {
+        "slug": "AI_and_Networks",
+        "title": "AI and Networks",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "AI_and_Networks_zh",
+        "title": "AI 与网络",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Angela_Yingjun_Zhang",
+        "title": "Angela Yingjun Zhang",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Angela_Yingjun_Zhang_zh",
+        "title": "张颖珺",
+        "language": "zh",
+        "modifiedAt": "2026-07-13T20:54:38+08:00",
+        "reviewedAt": "2026-07-13T20:54:38+08:00",
+        "reviewDue": "2027-01-09"
+      },
+      {
+        "slug": "Certified_Data_Removal",
+        "title": "Certified Data Removal",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Certified_Data_Removal_zh",
+        "title": "认证数据删除",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Collaborative_Evaluation",
+        "title": "Collaborative Evaluation",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Collaborative_Evaluation_zh",
+        "title": "协作评估",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "CV",
+        "title": "Curriculum Vitae",
+        "language": "en",
+        "modifiedAt": "2026-07-13T21:35:14+08:00",
+        "reviewedAt": "2026-07-13T21:35:14+08:00",
+        "reviewDue": "2026-10-11"
+      },
+      {
+        "slug": "CV_zh",
+        "title": "简历",
+        "language": "zh",
+        "modifiedAt": "2026-07-13T21:35:14+08:00",
+        "reviewedAt": "2026-07-13T21:35:14+08:00",
+        "reviewDue": "2026-10-11"
+      },
+      {
+        "slug": "Data_Centric_Machine_Learning",
+        "title": "Data Centric ML",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Data_Centric_Machine_Learning_zh",
+        "title": "数据中心 ML",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Data_Selection",
+        "title": "Data Selection",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Data_Selection_zh",
+        "title": "数据选择",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Data_Silos",
+        "title": "Data Silos",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Data_Silos_zh",
+        "title": "数据孤岛",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Distributed_Learning",
+        "title": "Distributed Learning",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Distributed_Learning_zh",
+        "title": "分布式学习",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Distributed_Wasserstein_Barycenter",
+        "title": "Distributed Wasserstein Barycenter",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Distributed_Wasserstein_Barycenter_zh",
+        "title": "分布式 Wasserstein Barycenter",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "DynFrs",
+        "title": "DynFrs: An Efficient Framework for Machine Unlearning in Random Forest",
+        "language": "en",
+        "modifiedAt": "2026-07-08T13:18:57+08:00",
+        "reviewedAt": "2026-07-08T13:18:57+08:00",
+        "reviewDue": "2026-10-06"
+      },
+      {
+        "slug": "DynFrs_zh",
+        "title": "DynFrs：随机森林机器遗忘高效框架",
+        "language": "zh",
+        "modifiedAt": "2026-07-16T20:08:42+08:00",
+        "reviewedAt": "2026-07-16T20:08:42+08:00",
+        "reviewDue": "2026-10-14"
+      },
+      {
+        "slug": "Education",
+        "title": "Education",
+        "language": "en",
+        "modifiedAt": "2026-07-12T22:06:12+08:00",
+        "reviewedAt": "2026-07-12T22:06:12+08:00",
+        "reviewDue": "2027-01-08"
+      },
+      {
+        "slug": "Education_zh",
+        "title": "教育经历",
+        "language": "zh",
+        "modifiedAt": "2026-07-13T20:54:38+08:00",
+        "reviewedAt": "2026-07-13T20:54:38+08:00",
+        "reviewDue": "2027-01-09"
+      },
+      {
+        "slug": "Experience",
+        "title": "Experience",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30"
+      },
+      {
+        "slug": "Experience_zh",
+        "title": "研究经历",
+        "language": "zh",
+        "modifiedAt": "2026-07-13T20:54:38+08:00",
+        "reviewedAt": "2026-07-13T20:54:38+08:00",
+        "reviewDue": "2026-10-11"
+      },
+      {
+        "slug": "Fairness_and_Robustness",
+        "title": "Fairness and Robustness",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Fairness_and_Robustness_zh",
+        "title": "公平性与鲁棒性",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Hessian_Free_Online_Certified_Unlearning",
+        "title": "Hessian-Free Online Certified Unlearning",
+        "language": "en",
+        "modifiedAt": "2026-07-08T13:18:57+08:00",
+        "reviewedAt": "2026-07-08T13:18:57+08:00",
+        "reviewDue": "2026-10-06"
+      },
+      {
+        "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
+        "title": "无 Hessian 在线认证遗忘",
+        "language": "zh",
+        "modifiedAt": "2026-07-16T20:08:42+08:00",
+        "reviewedAt": "2026-07-16T20:08:42+08:00",
+        "reviewDue": "2026-10-14"
+      },
+      {
+        "slug": "index",
+        "title": "Index",
+        "language": "en",
+        "modifiedAt": "2026-07-14T23:17:11+08:00",
+        "reviewedAt": "2026-07-14T23:17:11+08:00",
+        "reviewDue": "2027-07-14"
+      },
+      {
+        "slug": "index_zh",
+        "title": "索引",
+        "language": "zh",
+        "modifiedAt": "2026-07-14T23:17:11+08:00",
+        "reviewedAt": "2026-07-14T23:17:11+08:00",
+        "reviewDue": "2027-07-14"
+      },
+      {
+        "slug": "Influence_Functions",
+        "title": "Influence Functions",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Influence_Functions_zh",
+        "title": "影响函数",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Interpretability",
+        "title": "Interpretability",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Interpretability_zh",
+        "title": "可解释性",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "LLM_Reliability",
+        "title": "LLM Reliability",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "LLM_Reliability_zh",
+        "title": "大语言模型可靠性",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "log",
+        "title": "Log",
+        "language": "en",
+        "modifiedAt": "2026-07-15T23:04:06+08:00",
+        "reviewedAt": "2026-07-15T23:04:06+08:00",
+        "reviewDue": "2027-07-15"
+      },
+      {
+        "slug": "log_zh",
+        "title": "日志",
+        "language": "zh",
+        "modifiedAt": "2026-07-14T23:17:11+08:00",
+        "reviewedAt": "2026-07-14T23:17:11+08:00",
+        "reviewDue": "2027-07-14"
+      },
+      {
+        "slug": "Machine_Unlearning",
+        "title": "Machine Unlearning",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Machine_Unlearning_zh",
+        "title": "机器遗忘",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Meng_Zhang",
+        "title": "Meng Zhang",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Meng_Zhang_zh",
+        "title": "张萌",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Model_Collapse",
+        "title": "Model Collapse",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Model_Collapse_zh",
+        "title": "模型坍缩",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "NUSRI_CQ",
+        "title": "NUSRI-CQ",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "NUSRI_CQ_zh",
+        "title": "NUSRI-CQ",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Old_Homepage_Resources",
+        "title": "Homepage Portrait Resources",
+        "language": "en",
+        "modifiedAt": "2026-07-15T22:33:36+08:00",
+        "reviewedAt": "2026-07-15T22:33:36+08:00",
+        "reviewDue": "2027-07-15"
+      },
+      {
+        "slug": "Old_Homepage_Resources_zh",
+        "title": "主页肖像资源",
+        "language": "zh",
+        "modifiedAt": "2026-07-15T22:33:36+08:00",
+        "reviewedAt": "2026-07-15T22:33:36+08:00",
+        "reviewDue": "2027-07-15"
+      },
+      {
+        "slug": "Projects",
+        "title": "Projects",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30"
+      },
+      {
+        "slug": "Projects_zh",
+        "title": "项目",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30"
+      },
+      {
+        "slug": "Publications",
+        "title": "Publications",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30"
+      },
+      {
+        "slug": "Publications_zh",
+        "title": "论文",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30"
+      },
+      {
+        "slug": "Qiao_Xinbao_zh",
+        "title": "乔鑫宝",
+        "language": "zh",
+        "modifiedAt": "2026-07-16T20:08:42+08:00",
+        "reviewedAt": "2026-07-16T20:08:42+08:00",
+        "reviewDue": "2026-10-14"
+      },
+      {
+        "slug": "Random_Forest",
+        "title": "Random Forest",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Random_Forest_zh",
+        "title": "随机森林",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Recursive_Synthetic_Data_Training",
+        "title": "Recursive Synthetic Data Training",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Recursive_Synthetic_Data_Training_zh",
+        "title": "递归合成数据训练",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Research",
+        "title": "Research",
+        "language": "en",
+        "modifiedAt": "2026-07-11T07:28:06+08:00",
+        "reviewedAt": "2026-07-11T07:28:06+08:00",
+        "reviewDue": "2026-10-08"
+      },
+      {
+        "slug": "Research_zh",
+        "title": "研究",
+        "language": "zh",
+        "modifiedAt": "2026-07-11T07:28:06+08:00",
+        "reviewedAt": "2026-07-11T07:28:06+08:00",
+        "reviewDue": "2026-10-08"
+      },
+      {
+        "slug": "Sample_Selection_Bias",
+        "title": "Sample Selection Bias",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Sample_Selection_Bias_zh",
+        "title": "样本选择偏差",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Shandong_University",
+        "title": "Shandong University",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Shandong_University_zh",
+        "title": "山东大学",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Skills",
+        "title": "Skills",
+        "language": "en",
+        "modifiedAt": "2026-07-03T00:03:48+08:00",
+        "reviewedAt": "2026-07-03T00:03:48+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Skills_zh",
+        "title": "技能",
+        "language": "zh",
+        "modifiedAt": "2026-07-03T00:03:48+08:00",
+        "reviewedAt": "2026-07-03T00:03:48+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Soft_Weighted_Machine_Unlearning",
+        "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
+        "language": "en",
+        "modifiedAt": "2026-07-12T20:00:05+08:00",
+        "reviewedAt": "2026-07-12T20:00:05+08:00",
+        "reviewDue": "2027-07-12"
+      },
+      {
+        "slug": "Soft_Weighted_Machine_Unlearning_zh",
+        "title": "超越二元擦除：用于公平性与鲁棒性的软加权遗忘",
+        "language": "zh",
+        "modifiedAt": "2026-07-16T20:08:42+08:00",
+        "reviewedAt": "2026-07-16T20:08:42+08:00",
+        "reviewDue": "2027-07-16"
+      },
+      {
+        "slug": "Synthetic_Data",
+        "title": "Synthetic Data (concept)",
+        "language": "en",
+        "modifiedAt": "2026-07-03T00:03:48+08:00",
+        "reviewedAt": "2026-07-03T00:03:48+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Synthetic_Data_zh",
+        "title": "合成数据（概念）",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "The_Chinese_University_of_Hong_Kong",
+        "title": "The Chinese University of Hong Kong",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "The_Chinese_University_of_Hong_Kong_zh",
+        "title": "香港中文大学",
+        "language": "zh",
+        "modifiedAt": "2026-07-13T20:54:38+08:00",
+        "reviewedAt": "2026-07-13T20:54:38+08:00",
+        "reviewDue": "2027-01-09"
+      },
+      {
+        "slug": "Trustworthy_AI",
+        "title": "Trustworthy AI",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Trustworthy_AI_zh",
+        "title": "可信 AI",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Wasserstein_Geometry",
+        "title": "Wasserstein Geometry",
+        "language": "en",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Wasserstein_Geometry_zh",
+        "title": "Wasserstein 几何",
+        "language": "zh",
+        "modifiedAt": "2026-07-02T20:03:20+08:00",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
+        "title": "When Sample Selection Bias Precipitates Model Collapse",
+        "language": "en",
+        "modifiedAt": "2026-07-12T20:00:05+08:00",
+        "reviewedAt": "2026-07-12T20:00:05+08:00",
+        "reviewDue": "2027-07-12"
+      },
+      {
+        "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
+        "title": "样本选择偏差何以促成模型坍缩",
+        "language": "zh",
+        "modifiedAt": "2026-07-16T20:08:42+08:00",
+        "reviewedAt": "2026-07-16T20:08:42+08:00",
+        "reviewDue": "2027-07-16"
+      },
+      {
+        "slug": "Xinbao_Qiao",
+        "title": "Xinbao Qiao",
+        "language": "en",
+        "modifiedAt": "2026-07-15T23:04:06+08:00",
+        "reviewedAt": "2026-07-15T23:04:06+08:00",
+        "reviewDue": "2026-10-13"
+      },
+      {
+        "slug": "Zhejiang_University",
+        "title": "Zhejiang University",
+        "language": "en",
+        "modifiedAt": "2026-07-12T22:06:12+08:00",
+        "reviewedAt": "2026-07-12T22:06:12+08:00",
+        "reviewDue": "2027-01-08"
+      },
+      {
+        "slug": "Zhejiang_University_zh",
+        "title": "浙江大学",
+        "language": "zh",
+        "modifiedAt": "2026-07-12T22:06:12+08:00",
+        "reviewedAt": "2026-07-12T22:06:12+08:00",
+        "reviewDue": "2027-01-08"
+      }
+    ],
+    "coverage": 0.0238,
+    "structuredEdges": 2,
+    "totalEdges": 1013
+  },
+  "retrievalReadiness": {
+    "pages": 84,
+    "readyPages": 84,
+    "missingMetadataPages": [],
+    "coverage": 1,
+    "contract": "markdown-heading-v1 with stable wiki:<slug> document IDs and content hashes"
   }
 }

@@ -9,12 +9,24 @@ tags:
   - research-concept
   - machine-unlearning
 timestamp: '2026-05-05T19:52:29+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:aa1f00effe5b056f30d3d7f991135fb9e7d563e4eec1d66b6a7413b3875c3c06'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Certified_Data_Removal'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Certified_Data_Removal.md
 ---
 **Certified Data Removal** refers to machine-learning methods that provide an explicit guarantee about the effect of removing data from a trained model. In this wiki the concept is used mainly to explain the mathematical side of [machine unlearning](./Machine_Unlearning.md), where the goal is not only to update a model quickly, but to bound how close the updated model is to a model retrained without the deleted data.[^certified]

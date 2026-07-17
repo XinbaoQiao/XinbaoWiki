@@ -8,6 +8,10 @@ tags:
   - advisor
   - academic-advisor
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-13T20:54:38+08:00'
+content_hash: 'sha256:22a803b3c72aafc454d04b3465a3141ddefe539d0cb848d603c789683d6c4a40'
+reviewed_at: '2026-07-13T20:54:38+08:00'
+review_due: '2027-01-09'
 name: 张颖珺
 language: zh
 summary: 香港中文大学信息工程系教授，乔鑫宝博士导师。

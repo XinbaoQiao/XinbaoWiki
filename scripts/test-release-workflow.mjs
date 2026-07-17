@@ -35,6 +35,8 @@ function json(res, value) {
 
 async function testSmokeRetry() {
   let homepageAttempts = 0;
+  let groundedChatPosts = 0;
+  let abstentionChatPosts = 0;
   const server = http.createServer((req, res) => {
     if (req.url === '/') {
       homepageAttempts += 1;
@@ -62,6 +64,72 @@ async function testSmokeRetry() {
       json(res, { okfVersion: '0.1', schemaVersion: 1, counts: { warnings: 0 }, hiddenPages: { pages: [] } });
       return;
     }
+    if (req.url?.startsWith('/okf/sources')) {
+      json(res, { schemaVersion: 1, sources: [{ id: 'src-test', pages: ['Xinbao_Qiao'] }] });
+      return;
+    }
+    if (req.method === 'GET' && req.url?.startsWith('/api/chat-with-xinbao?diagnostic=retrieval')) {
+      json(res, {
+        remaining: 10,
+        limit: 10,
+        meta: {
+          backendVersion: 'xinbao-chat-api-v3',
+          responsePolicyVersion: 'grounded-response-v1',
+          promptVersion: 'xinbao-grounded-citations-v2',
+          modelApiConfigured: true,
+          indexVersion: 'wiki-heading-lexical-v1:test',
+          indexFingerprint: '0'.repeat(64),
+          indexedChunks: 1
+        }
+      });
+      return;
+    }
+    if (req.method === 'POST' && req.url?.startsWith('/api/chat-with-xinbao')) {
+      const chunks = [];
+      req.setEncoding('utf8');
+      req.on('data', (chunk) => chunks.push(chunk));
+      req.on('end', () => {
+        const payload = JSON.parse(chunks.join(''));
+        if (/sourdough/i.test(payload.message || '')) {
+          abstentionChatPosts += 1;
+          json(res, {
+            reply: 'The public Xinbaopedia evidence is not sufficient to answer that meow~',
+            sources: [],
+            remaining: 9,
+            limit: 10,
+            meta: {
+              backendVersion: 'xinbao-chat-api-v3',
+              responsePolicyVersion: 'grounded-response-v1',
+              responseMode: 'deterministic-abstention',
+              citedChunks: 0,
+              shouldAbstain: true,
+            },
+          });
+          return;
+        }
+        groundedChatPosts += 1;
+        json(res, {
+          reply: 'DynFrs studies efficient random-forest unlearning [1] meow~',
+          sources: [{
+            chunkId: 'DynFrs#overview',
+            slug: 'DynFrs',
+            title: 'DynFrs',
+            section: 'Overview',
+            href: '/wiki/DynFrs/#overview',
+          }],
+          remaining: 9,
+          limit: 10,
+          meta: {
+            backendVersion: 'xinbao-chat-api-v3',
+            responsePolicyVersion: 'grounded-response-v1',
+            responseMode: 'model-grounded',
+            citedChunks: 1,
+            shouldAbstain: false,
+          },
+        });
+      });
+      return;
+    }
     res.statusCode = 404;
     res.end('not found');
   });
@@ -79,6 +147,8 @@ async function testSmokeRetry() {
     assert.equal(result.status, 0, result.stderr || result.stdout);
     assert.match(result.stderr, /Production smoke retry 2\/3/, 'smoke retries a transient HTTP status');
     assert.match(result.stdout, /Production smoke passed/, 'smoke passes after the retry succeeds');
+    assert.equal(groundedChatPosts, 1, 'production smoke sends one grounded chat POST canary');
+    assert.equal(abstentionChatPosts, 1, 'production smoke sends one deterministic-abstention POST canary');
   } finally {
     await new Promise((resolve) => server.close(resolve));
   }
@@ -168,7 +238,11 @@ function testReleaseStateRoundTrip() {
 }
 
 function testStagedControlFileGate() {
-  for (const file of ['AGENTS.md', 'CLAUDE.md']) {
+  for (const { file, expected } of [
+    { file: 'AGENTS.md', expected: 'blocked staged path' },
+    { file: 'CLAUDE.md', expected: 'blocked staged path' },
+    { file: 'artifacts/probe.json', expected: 'blocked path' },
+  ]) {
     const tempRoot = join(root, '.codex', 'tmp');
     mkdirSync(tempRoot, { recursive: true });
     const temp = mkdtempSync(join(tempRoot, 'release-test-'));
@@ -191,7 +265,7 @@ function testStagedControlFileGate() {
       assert.fail(`control-file gate unexpectedly passed: ${result}`);
     } catch (error) {
       const output = `${error.stdout || ''}${error.stderr || ''}`;
-      assert.match(output, new RegExp(`${file.replace('.', '\\.')}: blocked staged path`), `staged control-file gate rejects ${file}`);
+      assert.match(output, new RegExp(`${file.replaceAll('.', '\\.').replaceAll('/', '\\/')}: ${expected}`), `staged publish gate rejects ${file}`);
     } finally {
       rmSync(temp, { recursive: true, force: true });
     }

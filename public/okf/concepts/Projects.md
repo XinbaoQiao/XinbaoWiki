@@ -8,12 +8,24 @@ tags:
   - overview
   - project-overview
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:e58fcad724c37769eb9f4287683d1b6b794bad22d56608bf8bc623163b2a7807'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-09-30'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-09-30'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Projects'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Projects.md
 ---
 ## Research project clusters

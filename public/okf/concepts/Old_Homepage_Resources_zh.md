@@ -8,12 +8,24 @@ tags:
   - archive
   - 资源记录
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-15T22:33:36+08:00'
+content_hash: 'sha256:1e3ab25218bb7c3ba4d95ba53f01a8dc2baca841ce6e7b5e5d17056f3bfcfd44'
+reviewed_at: '2026-07-15T22:33:36+08:00'
+review_due: '2027-07-15'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-15T22:33:36+08:00'
+  reviewDue: '2027-07-15'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Old_Homepage_Resources_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Old_Homepage_Resources_zh.md
 ---
 本页记录 wiki 的媒体策略。个人主页 infobox 使用一组由访客手动控制的小型肖像图库；每次进入页面都以无图注的棚拍肖像为默认图，不自动轮播，也不保存访客上次选择。

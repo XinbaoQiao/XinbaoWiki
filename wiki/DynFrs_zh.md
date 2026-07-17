@@ -9,6 +9,10 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-16T20:08:42+08:00'
+content_hash: 'sha256:971eed83f902bf36484676a0aeaa392153540246ac822e5e144fa7f9862ad5b0'
+reviewed_at: '2026-07-16T20:08:42+08:00'
+review_due: '2026-10-14'
 name: DynFrs：随机森林机器遗忘高效框架
 language: zh
 summary: ICLR 2025 论文，研究随机森林中的高效机器遗忘。

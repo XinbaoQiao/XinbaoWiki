@@ -8,6 +8,10 @@ tags:
   - index
   - publication-list
 timestamp: '2026-06-01T22:00:31+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:5ac4efe9a526d8aa52adbadfa89b918acd748d254225726aad1858be0cd67f51'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-09-30'
 name: Publications
 summary: Publication list for Qiao Xinbao.
 occupation: Publication list

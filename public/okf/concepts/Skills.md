@@ -8,12 +8,24 @@ tags:
   - profile
   - technical-skills
 timestamp: '2026-05-05T00:55:59+08:00'
+modified: '2026-07-03T00:03:48+08:00'
+content_hash: 'sha256:51dfec03a42c135e3d556b543bb9f92d4a9c7b64892db9957a719d12a25eff56'
+reviewed_at: '2026-07-03T00:03:48+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-03T00:03:48+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Skills'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Skills.md
 ---
 ## Programming and research tools

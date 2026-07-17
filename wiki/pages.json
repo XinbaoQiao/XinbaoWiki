@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "okfVersion": "0.1",
   "pages": [
     {
@@ -15,7 +15,43 @@
         "research-topic",
         "ai-and-networks"
       ],
-      "timestamp": "2026-06-13T20:46:02+08:00"
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:e29224a6e9ced60652a179982834df6b1aa7fa7cde79ecf1e340d56c4e8508c6",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [
+        "src-5ffca2a581311c27",
+        "src-766234e11681dad2"
+      ],
+      "citationSourceIds": [
+        "src-5ffca2a581311c27",
+        "src-766234e11681dad2"
+      ],
+      "footnoteSourceIds": [
+        "src-5ffca2a581311c27",
+        "src-766234e11681dad2"
+      ],
+      "retrieval": {
+        "documentId": "wiki:AI_and_Networks",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:e29224a6e9ced60652a179982834df6b1aa7fa7cde79ecf1e340d56c4e8508c6",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Angela_Yingjun_Zhang",
@@ -29,7 +65,46 @@
         "advisor",
         "academic-advisor"
       ],
-      "timestamp": "2026-05-05T21:15:18+08:00"
+      "timestamp": "2026-05-05T21:15:18+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:4d88d219cff179aa32b1e44a28613a8f8dbab0dcfec3c4d20d5d51dc790e7d90",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [
+        "src-05cf85aef2ce8d53",
+        "src-938ce85aed5a8a94",
+        "src-e105b35a946250a9"
+      ],
+      "citationSourceIds": [
+        "src-05cf85aef2ce8d53",
+        "src-938ce85aed5a8a94",
+        "src-e105b35a946250a9"
+      ],
+      "footnoteSourceIds": [
+        "src-05cf85aef2ce8d53",
+        "src-938ce85aed5a8a94",
+        "src-e105b35a946250a9"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Angela_Yingjun_Zhang",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:4d88d219cff179aa32b1e44a28613a8f8dbab0dcfec3c4d20d5d51dc790e7d90",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Soft_Weighted_Machine_Unlearning",
@@ -45,7 +120,38 @@
         "aaai-2026",
         "machine-unlearning"
       ],
-      "timestamp": "2026-05-05T21:39:01+08:00"
+      "timestamp": "2026-05-05T21:39:01+08:00",
+      "modifiedAt": "2026-07-12T20:00:05+08:00",
+      "contentHash": "sha256:716cec747164b611174524f9ef173b5027f5d0873107ea5e7158c0676c2134e4",
+      "reviewedAt": "2026-07-12T20:00:05+08:00",
+      "reviewDue": "2027-07-12",
+      "sourceIds": [
+        "src-0642a11373a83c47",
+        "src-22eeced7ebe7a0c5",
+        "src-53e1199f272a4df4"
+      ],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Soft_Weighted_Machine_Unlearning",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:716cec747164b611174524f9ef173b5027f5d0873107ea5e7158c0676c2134e4",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Certified_Data_Removal",
@@ -60,7 +166,34 @@
         "research-concept",
         "machine-unlearning"
       ],
-      "timestamp": "2026-05-05T19:52:29+08:00"
+      "timestamp": "2026-05-05T19:52:29+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:aa1f00effe5b056f30d3d7f991135fb9e7d563e4eec1d66b6a7413b3875c3c06",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Certified_Data_Removal",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:aa1f00effe5b056f30d3d7f991135fb9e7d563e4eec1d66b6a7413b3875c3c06",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Collaborative_Evaluation",
@@ -74,7 +207,34 @@
         "concept",
         "research-concept"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:8e9faf67f5ee31a4878fb7e692c8d5333fba5a60cbec15e95b72c457891e9436",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Collaborative_Evaluation",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:8e9faf67f5ee31a4878fb7e692c8d5333fba5a60cbec15e95b72c457891e9436",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "CV",
@@ -88,7 +248,72 @@
         "profile",
         "cv-summary"
       ],
-      "timestamp": "2026-07-02T19:37:18+08:00"
+      "timestamp": "2026-07-02T19:37:18+08:00",
+      "modifiedAt": "2026-07-13T21:35:14+08:00",
+      "contentHash": "sha256:b5007348122639a3571ac4d3c9cf928b75dba7755a15f7e14497a9c046590503",
+      "reviewedAt": "2026-07-13T21:35:14+08:00",
+      "reviewDue": "2026-10-11",
+      "sourceIds": [
+        "src-03bf1b2f9af65762",
+        "src-0642a11373a83c47",
+        "src-18fe2e2db0ff8b6a",
+        "src-19cdc04d387acf77",
+        "src-22eeced7ebe7a0c5",
+        "src-3234eea5652932e1",
+        "src-4144e3776ac496d0",
+        "src-53e1199f272a4df4",
+        "src-65d81b8aca549860",
+        "src-688381b8e9d8ad65",
+        "src-716564daa4b6397f",
+        "src-94b169d5c233e588",
+        "src-9b2be44d3f13005a",
+        "src-a0a9b7171dc028d2",
+        "src-b0de54fe614fa11d",
+        "src-cea294f51d3559e8",
+        "src-da17eb3884244bd3",
+        "src-faaafad831fbefc5"
+      ],
+      "citationSourceIds": [
+        "src-03bf1b2f9af65762",
+        "src-0642a11373a83c47",
+        "src-18fe2e2db0ff8b6a",
+        "src-19cdc04d387acf77",
+        "src-22eeced7ebe7a0c5",
+        "src-3234eea5652932e1",
+        "src-4144e3776ac496d0",
+        "src-53e1199f272a4df4",
+        "src-65d81b8aca549860",
+        "src-688381b8e9d8ad65",
+        "src-716564daa4b6397f",
+        "src-94b169d5c233e588",
+        "src-9b2be44d3f13005a",
+        "src-a0a9b7171dc028d2",
+        "src-b0de54fe614fa11d",
+        "src-cea294f51d3559e8",
+        "src-da17eb3884244bd3",
+        "src-faaafad831fbefc5"
+      ],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:CV",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:b5007348122639a3571ac4d3c9cf928b75dba7755a15f7e14497a9c046590503",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Data_Centric_Machine_Learning",
@@ -102,7 +327,34 @@
         "topic",
         "research-topic"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:bcaecd59642ba0d6acba76857a5343801aa5f36e2826a75f8def334627b1de33",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Data_Centric_Machine_Learning",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:bcaecd59642ba0d6acba76857a5343801aa5f36e2826a75f8def334627b1de33",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Data_Selection",
@@ -116,7 +368,34 @@
         "concept",
         "research-concept"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:49f49a19d651a14750d02e8624e31c769fe7be63310cb06cfef96324f5a290b0",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Data_Selection",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:49f49a19d651a14750d02e8624e31c769fe7be63310cb06cfef96324f5a290b0",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Data_Silos",
@@ -130,7 +409,34 @@
         "concept",
         "research-concept"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:10fe6fafff148822ceebb3ec9a5727df2d39ea2c6ea4f674732a0fa67752cde6",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Data_Silos",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:10fe6fafff148822ceebb3ec9a5727df2d39ea2c6ea4f674732a0fa67752cde6",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Distributed_Learning",
@@ -144,7 +450,34 @@
         "concept",
         "research-concept"
       ],
-      "timestamp": "2026-05-06T06:22:22+08:00"
+      "timestamp": "2026-05-06T06:22:22+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:3f633f2dc9b39e451931c33e1d641d68b8ceb3bafb18caa1f4a08b3ce6a2a993",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Distributed_Learning",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:3f633f2dc9b39e451931c33e1d641d68b8ceb3bafb18caa1f4a08b3ce6a2a993",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Distributed_Wasserstein_Barycenter",
@@ -159,7 +492,43 @@
         "research-concept",
         "wasserstein"
       ],
-      "timestamp": "2026-06-13T20:46:02+08:00"
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:ac832217767f95bb3b7abf0e98a1e4ce8a67ad69b99d4d8c880f113d3b2374da",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221"
+      ],
+      "citationSourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221"
+      ],
+      "footnoteSourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Distributed_Wasserstein_Barycenter",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:ac832217767f95bb3b7abf0e98a1e4ce8a67ad69b99d4d8c880f113d3b2374da",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "DynFrs",
@@ -174,7 +543,38 @@
         "iclr-2025-poster",
         "iclr-2025"
       ],
-      "timestamp": "2026-05-05T21:39:01+08:00"
+      "timestamp": "2026-05-05T21:39:01+08:00",
+      "modifiedAt": "2026-07-08T13:18:57+08:00",
+      "contentHash": "sha256:e6ac063f602e015e12506e44c362a212c8155400bf1007d5aaa5be220af99a47",
+      "reviewedAt": "2026-07-08T13:18:57+08:00",
+      "reviewDue": "2026-10-06",
+      "sourceIds": [
+        "src-19cdc04d387acf77",
+        "src-3234eea5652932e1",
+        "src-da17eb3884244bd3"
+      ],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:DynFrs",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:e6ac063f602e015e12506e44c362a212c8155400bf1007d5aaa5be220af99a47",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Education",
@@ -188,7 +588,34 @@
         "profile",
         "education-timeline"
       ],
-      "timestamp": "2026-05-06T23:05:52+08:00"
+      "timestamp": "2026-05-06T23:05:52+08:00",
+      "modifiedAt": "2026-07-12T22:06:12+08:00",
+      "contentHash": "sha256:dfec963a11e63f213f428fcf42ae03d3aa2f38ef6263e5c5466e5e99b417215a",
+      "reviewedAt": "2026-07-12T22:06:12+08:00",
+      "reviewDue": "2027-01-08",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Education",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:dfec963a11e63f213f428fcf42ae03d3aa2f38ef6263e5c5466e5e99b417215a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Experience",
@@ -202,7 +629,34 @@
         "profile",
         "research-experience"
       ],
-      "timestamp": "2026-06-13T20:46:02+08:00"
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:793c7f17feda70873d1e709248d0bc63d95c7ca89e95f536e4d0609fc81e2b95",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-09-30",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Experience",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:793c7f17feda70873d1e709248d0bc63d95c7ca89e95f536e4d0609fc81e2b95",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Fairness_and_Robustness",
@@ -216,7 +670,34 @@
         "concept",
         "research-concept"
       ],
-      "timestamp": "2026-05-05T20:55:21+08:00"
+      "timestamp": "2026-05-05T20:55:21+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:01ec70a2530423cf6b84a82836edb8899ddb896b3b6bf1456e347539aafbb777",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Fairness_and_Robustness",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:01ec70a2530423cf6b84a82836edb8899ddb896b3b6bf1456e347539aafbb777",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Hessian_Free_Online_Certified_Unlearning",
@@ -231,7 +712,38 @@
         "iclr-2025-poster",
         "iclr-2025"
       ],
-      "timestamp": "2026-05-05T21:39:01+08:00"
+      "timestamp": "2026-05-05T21:39:01+08:00",
+      "modifiedAt": "2026-07-08T13:18:57+08:00",
+      "contentHash": "sha256:017f86e5da6b8fec2ff8c7a791fbebe84e2d8dcbaa22316b5d7239f9c4f04884",
+      "reviewedAt": "2026-07-08T13:18:57+08:00",
+      "reviewDue": "2026-10-06",
+      "sourceIds": [
+        "src-65d81b8aca549860",
+        "src-a0a9b7171dc028d2",
+        "src-faaafad831fbefc5"
+      ],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Hessian_Free_Online_Certified_Unlearning",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:017f86e5da6b8fec2ff8c7a791fbebe84e2d8dcbaa22316b5d7239f9c4f04884",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Old_Homepage_Resources",
@@ -245,7 +757,34 @@
         "archive",
         "resource-inventory"
       ],
-      "timestamp": "2026-05-05T01:10:50+08:00"
+      "timestamp": "2026-05-05T01:10:50+08:00",
+      "modifiedAt": "2026-07-15T22:33:36+08:00",
+      "contentHash": "sha256:7e8ced286cf6168956fdc2ba88b64f12248d8f3a6dc6a5cef4af0bff7037982e",
+      "reviewedAt": "2026-07-15T22:33:36+08:00",
+      "reviewDue": "2027-07-15",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Old_Homepage_Resources",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:7e8ced286cf6168956fdc2ba88b64f12248d8f3a6dc6a5cef4af0bff7037982e",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "index",
@@ -259,7 +798,34 @@
         "navigation",
         "wiki-index"
       ],
-      "timestamp": "2026-05-07T17:34:07+08:00"
+      "timestamp": "2026-05-07T17:34:07+08:00",
+      "modifiedAt": "2026-07-14T23:17:11+08:00",
+      "contentHash": "sha256:47074f3b8b0b101d64f11b2bbedd1bc5de61e0f63ab4c5346376750158f1895e",
+      "reviewedAt": "2026-07-14T23:17:11+08:00",
+      "reviewDue": "2027-07-14",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:index",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:47074f3b8b0b101d64f11b2bbedd1bc5de61e0f63ab4c5346376750158f1895e",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Influence_Functions",
@@ -273,7 +839,34 @@
         "concept",
         "research-concept"
       ],
-      "timestamp": "2026-05-05T19:52:29+08:00"
+      "timestamp": "2026-05-05T19:52:29+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:6b90d74a4b42b4f6c28de85fa0e85f92ca8e9988557827d5641e32265639d5f3",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Influence_Functions",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:6b90d74a4b42b4f6c28de85fa0e85f92ca8e9988557827d5641e32265639d5f3",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Interpretability",
@@ -288,7 +881,34 @@
         "research-concept",
         "llm"
       ],
-      "timestamp": "2026-05-05T20:55:21+08:00"
+      "timestamp": "2026-05-05T20:55:21+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:218df98003e2d7abaf687efc0c1417ef55412b77887fc85e5bdb222a572e63cb",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Interpretability",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:218df98003e2d7abaf687efc0c1417ef55412b77887fc85e5bdb222a572e63cb",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "LLM_Reliability",
@@ -303,7 +923,34 @@
         "research-concept",
         "llm"
       ],
-      "timestamp": "2026-05-05T20:55:21+08:00"
+      "timestamp": "2026-05-05T20:55:21+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:9fc884151786e76eff89e42916888985b0242098483f4ab65526f31cda0f2e5b",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:LLM_Reliability",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:9fc884151786e76eff89e42916888985b0242098483f4ab65526f31cda0f2e5b",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "log",
@@ -317,7 +964,34 @@
         "log",
         "maintenance-log"
       ],
-      "timestamp": "2026-06-13T20:46:02+08:00"
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-07-15T23:04:06+08:00",
+      "contentHash": "sha256:a6a05899af8aafad7a0975b9829069a22d573e22a9536742f6e6f8b3f6987755",
+      "reviewedAt": "2026-07-15T23:04:06+08:00",
+      "reviewDue": "2027-07-15",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:log",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:a6a05899af8aafad7a0975b9829069a22d573e22a9536742f6e6f8b3f6987755",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Machine_Unlearning",
@@ -332,7 +1006,34 @@
         "research-topic",
         "machine-unlearning"
       ],
-      "timestamp": "2026-05-05T22:09:30+08:00"
+      "timestamp": "2026-05-05T22:09:30+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:236de032e41b9ee4438821b3e08a80a8b44299c35558cb5dab318c3b206da375",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Machine_Unlearning",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:236de032e41b9ee4438821b3e08a80a8b44299c35558cb5dab318c3b206da375",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Meng_Zhang",
@@ -346,7 +1047,40 @@
         "advisor",
         "academic-advisor"
       ],
-      "timestamp": "2026-05-05T21:15:18+08:00"
+      "timestamp": "2026-05-05T21:15:18+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:e3fc2253d995fdb7047157a92a3b1d378ba60d5b54aef3e7178e8d2431a0ea78",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [
+        "src-716564daa4b6397f"
+      ],
+      "citationSourceIds": [
+        "src-716564daa4b6397f"
+      ],
+      "footnoteSourceIds": [
+        "src-716564daa4b6397f"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Meng_Zhang",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:e3fc2253d995fdb7047157a92a3b1d378ba60d5b54aef3e7178e8d2431a0ea78",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Model_Collapse",
@@ -361,7 +1095,34 @@
         "research-concept",
         "synthetic-data"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:7cf354acdcfbd356f0f83c59eb6015020d32759105867a565a32f9e2dec77a80",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Model_Collapse",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:7cf354acdcfbd356f0f83c59eb6015020d32759105867a565a32f9e2dec77a80",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "NUSRI_CQ",
@@ -375,7 +1136,45 @@
         "research",
         "research-institute"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:864772161c155d4e157103d60fb2b0db13bb3490b5afe3fc460ca19b1cb56e5a",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [
+        "src-17dc8cb17c9da923",
+        "src-5816cdaa92b5e41c",
+        "src-606ddb789d451046",
+        "src-fbead0c8f06eb7bc"
+      ],
+      "citationSourceIds": [
+        "src-17dc8cb17c9da923",
+        "src-606ddb789d451046"
+      ],
+      "footnoteSourceIds": [
+        "src-17dc8cb17c9da923",
+        "src-606ddb789d451046"
+      ],
+      "retrieval": {
+        "documentId": "wiki:NUSRI_CQ",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:864772161c155d4e157103d60fb2b0db13bb3490b5afe3fc460ca19b1cb56e5a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Projects",
@@ -389,7 +1188,34 @@
         "overview",
         "project-overview"
       ],
-      "timestamp": "2026-06-13T20:46:02+08:00"
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:e58fcad724c37769eb9f4287683d1b6b794bad22d56608bf8bc623163b2a7807",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-09-30",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Projects",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:e58fcad724c37769eb9f4287683d1b6b794bad22d56608bf8bc623163b2a7807",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Publications",
@@ -403,7 +1229,34 @@
         "index",
         "publication-list"
       ],
-      "timestamp": "2026-06-01T22:00:31+08:00"
+      "timestamp": "2026-06-01T22:00:31+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:5ac4efe9a526d8aa52adbadfa89b918acd748d254225726aad1858be0cd67f51",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-09-30",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Publications",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:5ac4efe9a526d8aa52adbadfa89b918acd748d254225726aad1858be0cd67f51",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Random_Forest",
@@ -417,7 +1270,34 @@
         "model",
         "model-family"
       ],
-      "timestamp": "2026-05-05T19:52:29+08:00"
+      "timestamp": "2026-05-05T19:52:29+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:6ef03a3d58778c15b3243793362e42f687b2f20f9c364d1ce25f158e6de0a6b7",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Random_Forest",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:6ef03a3d58778c15b3243793362e42f687b2f20f9c364d1ce25f158e6de0a6b7",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Recursive_Synthetic_Data_Training",
@@ -432,7 +1312,34 @@
         "research-concept",
         "synthetic-data"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:2734a90abbd3686a946f0cea17b703481d18fe896f02981c9e0c7cdae4334395",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Recursive_Synthetic_Data_Training",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:2734a90abbd3686a946f0cea17b703481d18fe896f02981c9e0c7cdae4334395",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Research",
@@ -446,7 +1353,34 @@
         "overview",
         "research-overview"
       ],
-      "timestamp": "2026-06-13T20:46:02+08:00"
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-07-11T07:28:06+08:00",
+      "contentHash": "sha256:09e30b38e992c7f3c7c8b32a5bba43801fe9854088306229588b105b24990848",
+      "reviewedAt": "2026-07-11T07:28:06+08:00",
+      "reviewDue": "2026-10-08",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Research",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:09e30b38e992c7f3c7c8b32a5bba43801fe9854088306229588b105b24990848",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Sample_Selection_Bias",
@@ -460,7 +1394,34 @@
         "concept",
         "research-concept"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:24005e66c5a5ac72037a20b6868fb1935bc8e292c9fea0810c3a76c85b7c06a8",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Sample_Selection_Bias",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:24005e66c5a5ac72037a20b6868fb1935bc8e292c9fea0810c3a76c85b7c06a8",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Shandong_University",
@@ -474,7 +1435,42 @@
         "education",
         "public-research-university"
       ],
-      "timestamp": "2026-05-05T20:55:21+08:00"
+      "timestamp": "2026-05-05T20:55:21+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:b64a70b2a82421460cfe1bd75c931785572bf6b49508c8138d2e5866ed32ea8a",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [
+        "src-2698bddf338b56e5",
+        "src-33f25ef72f5cac0f",
+        "src-8207d2b85f96e6cb"
+      ],
+      "citationSourceIds": [
+        "src-8207d2b85f96e6cb"
+      ],
+      "footnoteSourceIds": [
+        "src-8207d2b85f96e6cb"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Shandong_University",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:b64a70b2a82421460cfe1bd75c931785572bf6b49508c8138d2e5866ed32ea8a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Skills",
@@ -488,7 +1484,34 @@
         "profile",
         "technical-skills"
       ],
-      "timestamp": "2026-05-05T00:55:59+08:00"
+      "timestamp": "2026-05-05T00:55:59+08:00",
+      "modifiedAt": "2026-07-03T00:03:48+08:00",
+      "contentHash": "sha256:51dfec03a42c135e3d556b543bb9f92d4a9c7b64892db9957a719d12a25eff56",
+      "reviewedAt": "2026-07-03T00:03:48+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Skills",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:51dfec03a42c135e3d556b543bb9f92d4a9c7b64892db9957a719d12a25eff56",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Synthetic_Data_and_Model_Collapse",
@@ -503,7 +1526,34 @@
         "research-topic",
         "synthetic-data"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-03T00:03:48+08:00",
+      "contentHash": "sha256:e71393c9d3848004a058ac5c4889a5de233c1a26b86793c00ee99193924a49dc",
+      "reviewedAt": "2026-07-03T00:03:48+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Synthetic_Data_and_Model_Collapse",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:e71393c9d3848004a058ac5c4889a5de233c1a26b86793c00ee99193924a49dc",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Synthetic_Data",
@@ -518,7 +1568,34 @@
         "research-concept",
         "synthetic-data"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-03T00:03:48+08:00",
+      "contentHash": "sha256:bbe93fac97f4c9cdd3408c23951a3082bd7e098256861dfd64ad06fb01970f2a",
+      "reviewedAt": "2026-07-03T00:03:48+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Synthetic_Data",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:bbe93fac97f4c9cdd3408c23951a3082bd7e098256861dfd64ad06fb01970f2a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "The_Chinese_University_of_Hong_Kong",
@@ -532,7 +1609,51 @@
         "education",
         "public-research-university"
       ],
-      "timestamp": "2026-06-13T20:46:02+08:00"
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:a27c4d78f158b9564e002f310e7e37f4ac2fa63d951f4b0521f8c330fa042e2a",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [
+        "src-09fa966eeac1624e",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-cecd4e57ea891eee",
+        "src-f1b03a6c505acdf9",
+        "src-f6cb0623675b4752"
+      ],
+      "citationSourceIds": [
+        "src-09fa966eeac1624e",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-f6cb0623675b4752"
+      ],
+      "footnoteSourceIds": [
+        "src-09fa966eeac1624e",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-f6cb0623675b4752"
+      ],
+      "retrieval": {
+        "documentId": "wiki:The_Chinese_University_of_Hong_Kong",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:a27c4d78f158b9564e002f310e7e37f4ac2fa63d951f4b0521f8c330fa042e2a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Trustworthy_AI",
@@ -546,7 +1667,34 @@
         "topic",
         "research-topic"
       ],
-      "timestamp": "2026-05-05T20:55:21+08:00"
+      "timestamp": "2026-05-05T20:55:21+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:de85186a59ada4edf5598f5cdde696fb8984635557fbd8fecf816e4ffa2cffc3",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Trustworthy_AI",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:de85186a59ada4edf5598f5cdde696fb8984635557fbd8fecf816e4ffa2cffc3",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Wasserstein_Geometry",
@@ -561,7 +1709,46 @@
         "research-concept",
         "wasserstein"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:7332b1c94414444afaeadc595058d70d56cc4cbfc7d14d3d55bda2592ed311fe",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221",
+        "src-3b3968d201c7ab67"
+      ],
+      "citationSourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221",
+        "src-3b3968d201c7ab67"
+      ],
+      "footnoteSourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221",
+        "src-3b3968d201c7ab67"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Wasserstein_Geometry",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:7332b1c94414444afaeadc595058d70d56cc4cbfc7d14d3d55bda2592ed311fe",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
@@ -577,7 +1764,39 @@
         "icml-2026",
         "synthetic-data"
       ],
-      "timestamp": "2026-06-02T22:56:50+08:00"
+      "timestamp": "2026-06-02T22:56:50+08:00",
+      "modifiedAt": "2026-07-12T20:00:05+08:00",
+      "contentHash": "sha256:0132752b19a51f653c6b62a66468fb1b3f3dcbd45675f431a2fcd7528fcd38a2",
+      "reviewedAt": "2026-07-12T20:00:05+08:00",
+      "reviewDue": "2027-07-12",
+      "sourceIds": [
+        "src-03bf1b2f9af65762",
+        "src-4144e3776ac496d0",
+        "src-766234e11681dad2",
+        "src-94b169d5c233e588"
+      ],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:When_Sample_Selection_Bias_Precipitates_Model_Collapse",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:0132752b19a51f653c6b62a66468fb1b3f3dcbd45675f431a2fcd7528fcd38a2",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Xinbao_Qiao",
@@ -591,7 +1810,67 @@
         "biography",
         "phd-student"
       ],
-      "timestamp": "2026-06-13T20:46:02+08:00"
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-07-15T23:04:06+08:00",
+      "contentHash": "sha256:ece5d20d0f79a3bd248813fd92f3949416c9d3a78bf0d698e8d8e48c1bfc4e88",
+      "reviewedAt": "2026-07-15T23:04:06+08:00",
+      "reviewDue": "2026-10-13",
+      "sourceIds": [
+        "src-264e39cbec8d2f89",
+        "src-30f33d3201c476ab",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-70ed6a3bfb603732",
+        "src-9b2be44d3f13005a",
+        "src-9d0661fee6814e6f",
+        "src-cea294f51d3559e8",
+        "src-cedf284f61bb39ae",
+        "src-dac65e05df6e888f",
+        "src-e1d67502167d29ad",
+        "src-f6009f51f54778f6"
+      ],
+      "citationSourceIds": [
+        "src-264e39cbec8d2f89",
+        "src-30f33d3201c476ab",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-70ed6a3bfb603732",
+        "src-9b2be44d3f13005a",
+        "src-9d0661fee6814e6f",
+        "src-cea294f51d3559e8",
+        "src-cedf284f61bb39ae",
+        "src-dac65e05df6e888f",
+        "src-e1d67502167d29ad",
+        "src-f6009f51f54778f6"
+      ],
+      "footnoteSourceIds": [
+        "src-264e39cbec8d2f89",
+        "src-30f33d3201c476ab",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-cedf284f61bb39ae",
+        "src-e1d67502167d29ad"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Xinbao_Qiao",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:ece5d20d0f79a3bd248813fd92f3949416c9d3a78bf0d698e8d8e48c1bfc4e88",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Zhejiang_University",
@@ -605,7 +1884,41 @@
         "education",
         "public-research-university"
       ],
-      "timestamp": "2026-05-05T21:15:18+08:00"
+      "timestamp": "2026-05-05T21:15:18+08:00",
+      "modifiedAt": "2026-07-12T22:06:12+08:00",
+      "contentHash": "sha256:fe657967adee3aad4c7e8e6568b609b6b12a116503f10d84ace705d1a9989b2c",
+      "reviewedAt": "2026-07-12T22:06:12+08:00",
+      "reviewDue": "2027-01-08",
+      "sourceIds": [
+        "src-575233d5188384df",
+        "src-c051bd6dcf566058"
+      ],
+      "citationSourceIds": [
+        "src-575233d5188384df"
+      ],
+      "footnoteSourceIds": [
+        "src-575233d5188384df"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Zhejiang_University",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:fe657967adee3aad4c7e8e6568b609b6b12a116503f10d84ace705d1a9989b2c",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "AI_and_Networks_zh",
@@ -620,7 +1933,43 @@
         "研究专题",
         "ai-and-networks"
       ],
-      "timestamp": "2026-06-13T20:46:02+08:00"
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:7b32da24e1154e954f16034881a76556c41f899f2b331d02ac50caf8cadf696a",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [
+        "src-5ffca2a581311c27",
+        "src-766234e11681dad2"
+      ],
+      "citationSourceIds": [
+        "src-5ffca2a581311c27",
+        "src-766234e11681dad2"
+      ],
+      "footnoteSourceIds": [
+        "src-5ffca2a581311c27",
+        "src-766234e11681dad2"
+      ],
+      "retrieval": {
+        "documentId": "wiki:AI_and_Networks_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:7b32da24e1154e954f16034881a76556c41f899f2b331d02ac50caf8cadf696a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "DynFrs_zh",
@@ -635,7 +1984,38 @@
         "iclr-2025-poster",
         "iclr-2025"
       ],
-      "timestamp": "2026-05-05T23:25:14+08:00"
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-16T20:08:42+08:00",
+      "contentHash": "sha256:971eed83f902bf36484676a0aeaa392153540246ac822e5e144fa7f9862ad5b0",
+      "reviewedAt": "2026-07-16T20:08:42+08:00",
+      "reviewDue": "2026-10-14",
+      "sourceIds": [
+        "src-19cdc04d387acf77",
+        "src-3234eea5652932e1",
+        "src-da17eb3884244bd3"
+      ],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:DynFrs_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:971eed83f902bf36484676a0aeaa392153540246ac822e5e144fa7f9862ad5b0",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "NUSRI_CQ_zh",
@@ -649,7 +2029,45 @@
         "research",
         "研究院"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:2864019dd92674e38d95921d097ef7924b01c524ef67ce6b20e0cfbfcd72e990",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [
+        "src-17dc8cb17c9da923",
+        "src-5816cdaa92b5e41c",
+        "src-606ddb789d451046",
+        "src-fbead0c8f06eb7bc"
+      ],
+      "citationSourceIds": [
+        "src-17dc8cb17c9da923",
+        "src-606ddb789d451046"
+      ],
+      "footnoteSourceIds": [
+        "src-17dc8cb17c9da923",
+        "src-606ddb789d451046"
+      ],
+      "retrieval": {
+        "documentId": "wiki:NUSRI_CQ_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:2864019dd92674e38d95921d097ef7924b01c524ef67ce6b20e0cfbfcd72e990",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Wasserstein_Geometry_zh",
@@ -664,7 +2082,46 @@
         "研究概念",
         "wasserstein"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:23fe4ef251fbe9ab9ba250c9e19140bd8721c19357fc1d2d55f5e6fdf86e2845",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221",
+        "src-3b3968d201c7ab67"
+      ],
+      "citationSourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221",
+        "src-3b3968d201c7ab67"
+      ],
+      "footnoteSourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221",
+        "src-3b3968d201c7ab67"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Wasserstein_Geometry_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:23fe4ef251fbe9ab9ba250c9e19140bd8721c19357fc1d2d55f5e6fdf86e2845",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Old_Homepage_Resources_zh",
@@ -678,7 +2135,34 @@
         "archive",
         "资源记录"
       ],
-      "timestamp": "2026-05-05T23:25:14+08:00"
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-15T22:33:36+08:00",
+      "contentHash": "sha256:1e3ab25218bb7c3ba4d95ba53f01a8dc2baca841ce6e7b5e5d17056f3bfcfd44",
+      "reviewedAt": "2026-07-15T22:33:36+08:00",
+      "reviewDue": "2027-07-15",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Old_Homepage_Resources_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:1e3ab25218bb7c3ba4d95ba53f01a8dc2baca841ce6e7b5e5d17056f3bfcfd44",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Qiao_Xinbao_zh",
@@ -692,7 +2176,67 @@
         "biography",
         "博士生"
       ],
-      "timestamp": "2026-06-13T20:46:02+08:00"
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-07-16T20:08:42+08:00",
+      "contentHash": "sha256:a4df4f1394b219dbe68acbff664db416aaa3f0e849cb1ff8ebe5c22273b0ec6a",
+      "reviewedAt": "2026-07-16T20:08:42+08:00",
+      "reviewDue": "2026-10-14",
+      "sourceIds": [
+        "src-264e39cbec8d2f89",
+        "src-30f33d3201c476ab",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-70ed6a3bfb603732",
+        "src-9b2be44d3f13005a",
+        "src-9d0661fee6814e6f",
+        "src-cea294f51d3559e8",
+        "src-cedf284f61bb39ae",
+        "src-dac65e05df6e888f",
+        "src-e1d67502167d29ad",
+        "src-f6009f51f54778f6"
+      ],
+      "citationSourceIds": [
+        "src-264e39cbec8d2f89",
+        "src-30f33d3201c476ab",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-70ed6a3bfb603732",
+        "src-9b2be44d3f13005a",
+        "src-9d0661fee6814e6f",
+        "src-cea294f51d3559e8",
+        "src-cedf284f61bb39ae",
+        "src-dac65e05df6e888f",
+        "src-e1d67502167d29ad",
+        "src-f6009f51f54778f6"
+      ],
+      "footnoteSourceIds": [
+        "src-264e39cbec8d2f89",
+        "src-30f33d3201c476ab",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-cedf284f61bb39ae",
+        "src-e1d67502167d29ad"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Qiao_Xinbao_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:a4df4f1394b219dbe68acbff664db416aaa3f0e849cb1ff8ebe5c22273b0ec6a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Fairness_and_Robustness_zh",
@@ -706,7 +2250,34 @@
         "concept",
         "研究概念"
       ],
-      "timestamp": "2026-05-05T23:25:14+08:00"
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:c1c485ae574d344b3bab011faced822faebcc7652bbd473cd1d62dd4afe10bcb",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Fairness_and_Robustness_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:c1c485ae574d344b3bab011faced822faebcc7652bbd473cd1d62dd4afe10bcb",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Distributed_Wasserstein_Barycenter_zh",
@@ -721,7 +2292,43 @@
         "研究概念",
         "wasserstein"
       ],
-      "timestamp": "2026-06-13T20:46:02+08:00"
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:07336e6f8ccb466caccf4710fad348230218dd8bbb1f5f57f389f28f285757a9",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221"
+      ],
+      "citationSourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221"
+      ],
+      "footnoteSourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Distributed_Wasserstein_Barycenter_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:07336e6f8ccb466caccf4710fad348230218dd8bbb1f5f57f389f28f285757a9",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Distributed_Learning_zh",
@@ -735,7 +2342,34 @@
         "concept",
         "研究概念"
       ],
-      "timestamp": "2026-05-06T06:22:22+08:00"
+      "timestamp": "2026-05-06T06:22:22+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:5e6803ef26eecbddb3aaa6d2e093509b80a07c36d2aef38e2c3c3b0c3d26cbde",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Distributed_Learning_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:5e6803ef26eecbddb3aaa6d2e093509b80a07c36d2aef38e2c3c3b0c3d26cbde",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Collaborative_Evaluation_zh",
@@ -749,7 +2383,34 @@
         "concept",
         "研究概念"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:4c416cdbc890f68f445c30e75c3233866340c0721cf1b433fd236987d5281868",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Collaborative_Evaluation_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:4c416cdbc890f68f445c30e75c3233866340c0721cf1b433fd236987d5281868",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Trustworthy_AI_zh",
@@ -763,7 +2424,34 @@
         "topic",
         "研究专题"
       ],
-      "timestamp": "2026-05-05T23:25:14+08:00"
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:28482b5d209cd82b224f5326fe62ebc4e226b20a176d694553294d64993e7052",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Trustworthy_AI_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:28482b5d209cd82b224f5326fe62ebc4e226b20a176d694553294d64993e7052",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Interpretability_zh",
@@ -778,7 +2466,34 @@
         "研究概念",
         "llm"
       ],
-      "timestamp": "2026-05-05T23:25:14+08:00"
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:38652d8ab54846774d1fd3e44dae5f4d2323fbfc11a8f1e9d2494bb4e5ea8d74",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Interpretability_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:38652d8ab54846774d1fd3e44dae5f4d2323fbfc11a8f1e9d2494bb4e5ea8d74",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Synthetic_Data_and_Model_Collapse_zh",
@@ -793,7 +2508,34 @@
         "研究专题",
         "synthetic-data"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-03T00:03:48+08:00",
+      "contentHash": "sha256:745941be243f09bc0462a6ce71bab7a0abce40149496f78bc21002cf2207e5c8",
+      "reviewedAt": "2026-07-03T00:03:48+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Synthetic_Data_and_Model_Collapse_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:745941be243f09bc0462a6ce71bab7a0abce40149496f78bc21002cf2207e5c8",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Synthetic_Data_zh",
@@ -808,7 +2550,34 @@
         "研究概念",
         "synthetic-data"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:0be9d0fd4d48f569a4a98be5a8e262abd0f666adf14656d58b7af7e19b57194d",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Synthetic_Data_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:0be9d0fd4d48f569a4a98be5a8e262abd0f666adf14656d58b7af7e19b57194d",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "LLM_Reliability_zh",
@@ -823,7 +2592,34 @@
         "研究概念",
         "llm"
       ],
-      "timestamp": "2026-05-05T23:25:14+08:00"
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:a604835116d0aa0ec94730397cb9bfa9ef4351aa5bc6502d52e9a225cb78442b",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:LLM_Reliability_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:a604835116d0aa0ec94730397cb9bfa9ef4351aa5bc6502d52e9a225cb78442b",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Shandong_University_zh",
@@ -837,7 +2633,42 @@
         "education",
         "公立研究型大学"
       ],
-      "timestamp": "2026-05-05T23:25:14+08:00"
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:c57202064e7fe6a89492d9160d3f630ce33ac111149aac58a6d7f4c5fa44718a",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [
+        "src-2698bddf338b56e5",
+        "src-33f25ef72f5cac0f",
+        "src-8207d2b85f96e6cb"
+      ],
+      "citationSourceIds": [
+        "src-8207d2b85f96e6cb"
+      ],
+      "footnoteSourceIds": [
+        "src-8207d2b85f96e6cb"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Shandong_University_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:c57202064e7fe6a89492d9160d3f630ce33ac111149aac58a6d7f4c5fa44718a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Meng_Zhang_zh",
@@ -851,7 +2682,40 @@
         "advisor",
         "academic-advisor"
       ],
-      "timestamp": "2026-05-05T23:25:14+08:00"
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:103093bd3886bfa0462229db2fd4d8557041ecd2ab27552727a5922d4bea88ed",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [
+        "src-716564daa4b6397f"
+      ],
+      "citationSourceIds": [
+        "src-716564daa4b6397f"
+      ],
+      "footnoteSourceIds": [
+        "src-716564daa4b6397f"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Meng_Zhang_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:103093bd3886bfa0462229db2fd4d8557041ecd2ab27552727a5922d4bea88ed",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Angela_Yingjun_Zhang_zh",
@@ -865,7 +2729,46 @@
         "advisor",
         "academic-advisor"
       ],
-      "timestamp": "2026-05-05T23:25:14+08:00"
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-13T20:54:38+08:00",
+      "contentHash": "sha256:22a803b3c72aafc454d04b3465a3141ddefe539d0cb848d603c789683d6c4a40",
+      "reviewedAt": "2026-07-13T20:54:38+08:00",
+      "reviewDue": "2027-01-09",
+      "sourceIds": [
+        "src-05cf85aef2ce8d53",
+        "src-938ce85aed5a8a94",
+        "src-e105b35a946250a9"
+      ],
+      "citationSourceIds": [
+        "src-05cf85aef2ce8d53",
+        "src-938ce85aed5a8a94",
+        "src-e105b35a946250a9"
+      ],
+      "footnoteSourceIds": [
+        "src-05cf85aef2ce8d53",
+        "src-938ce85aed5a8a94",
+        "src-e105b35a946250a9"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Angela_Yingjun_Zhang_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:22a803b3c72aafc454d04b3465a3141ddefe539d0cb848d603c789683d6c4a40",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Influence_Functions_zh",
@@ -879,7 +2782,34 @@
         "concept",
         "研究概念"
       ],
-      "timestamp": "2026-05-05T23:25:14+08:00"
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:647e43dc8868e7f86527f3026f7071cfd2aef1fa226e663e4b88c0d5a9098b33",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Influence_Functions_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:647e43dc8868e7f86527f3026f7071cfd2aef1fa226e663e4b88c0d5a9098b33",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Skills_zh",
@@ -893,7 +2823,34 @@
         "profile",
         "技术技能"
       ],
-      "timestamp": "2026-05-05T23:25:14+08:00"
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-03T00:03:48+08:00",
+      "contentHash": "sha256:75088b353ef9e2295e61ec52e17237ca0b79e5ded268d9a68678dddb7034225a",
+      "reviewedAt": "2026-07-03T00:03:48+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Skills_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:75088b353ef9e2295e61ec52e17237ca0b79e5ded268d9a68678dddb7034225a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Education_zh",
@@ -907,7 +2864,34 @@
         "profile",
         "教育时间线"
       ],
-      "timestamp": "2026-05-06T23:05:52+08:00"
+      "timestamp": "2026-05-06T23:05:52+08:00",
+      "modifiedAt": "2026-07-13T20:54:38+08:00",
+      "contentHash": "sha256:bdf1f3b0cacbec32e2f7caea98ff23b4ca9d2d94e2f2c1263d9caab69c6c3184",
+      "reviewedAt": "2026-07-13T20:54:38+08:00",
+      "reviewDue": "2027-01-09",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Education_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:bdf1f3b0cacbec32e2f7caea98ff23b4ca9d2d94e2f2c1263d9caab69c6c3184",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Data_Centric_Machine_Learning_zh",
@@ -921,7 +2905,34 @@
         "topic",
         "研究专题"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:b5ed150616b6bc664087f36dc9e5d5cdb8b191aa624cf0ed96b40dce31f72b12",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Data_Centric_Machine_Learning_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:b5ed150616b6bc664087f36dc9e5d5cdb8b191aa624cf0ed96b40dce31f72b12",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Data_Silos_zh",
@@ -935,7 +2946,34 @@
         "concept",
         "研究概念"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:5a9ef8f0796c6a6e5818894e93c6a2b241c6df834f9d5be05ff03858efaeaf66",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Data_Silos_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:5a9ef8f0796c6a6e5818894e93c6a2b241c6df834f9d5be05ff03858efaeaf66",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Data_Selection_zh",
@@ -949,7 +2987,34 @@
         "concept",
         "研究概念"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:f2f86de8a44e60f1923badf3e613b292b74546183791b33c64556111f7cb3f80",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Data_Selection_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:f2f86de8a44e60f1923badf3e613b292b74546183791b33c64556111f7cb3f80",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
@@ -964,7 +3029,38 @@
         "iclr-2025-poster",
         "iclr-2025"
       ],
-      "timestamp": "2026-05-05T23:25:14+08:00"
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-16T20:08:42+08:00",
+      "contentHash": "sha256:61f88b28567cc8c89e63a8e28760d7e18e12868069d2aefb90848e7b9a92ba72",
+      "reviewedAt": "2026-07-16T20:08:42+08:00",
+      "reviewDue": "2026-10-14",
+      "sourceIds": [
+        "src-65d81b8aca549860",
+        "src-a0a9b7171dc028d2",
+        "src-faaafad831fbefc5"
+      ],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Hessian_Free_Online_Certified_Unlearning_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:61f88b28567cc8c89e63a8e28760d7e18e12868069d2aefb90848e7b9a92ba72",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "log_zh",
@@ -978,7 +3074,34 @@
         "log",
         "维护日志"
       ],
-      "timestamp": "2026-06-13T20:46:02+08:00"
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-07-14T23:17:11+08:00",
+      "contentHash": "sha256:53d7d9477bde91a9a36630d60d0a98fc91360c28915d3a2425b657e0d02c7e1c",
+      "reviewedAt": "2026-07-14T23:17:11+08:00",
+      "reviewDue": "2027-07-14",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:log_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:53d7d9477bde91a9a36630d60d0a98fc91360c28915d3a2425b657e0d02c7e1c",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Machine_Unlearning_zh",
@@ -993,7 +3116,34 @@
         "研究专题",
         "machine-unlearning"
       ],
-      "timestamp": "2026-05-05T23:25:14+08:00"
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:55d954af2fcdd71a0b7e0ec05a6645e2e79f1d639b585b8687cd85f236fed742",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Machine_Unlearning_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:55d954af2fcdd71a0b7e0ec05a6645e2e79f1d639b585b8687cd85f236fed742",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Sample_Selection_Bias_zh",
@@ -1007,7 +3157,34 @@
         "concept",
         "研究概念"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:cc1aca2e7114303a2dad5668cb78a122c92d56ebbae3a31397a995c35a87af59",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Sample_Selection_Bias_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:cc1aca2e7114303a2dad5668cb78a122c92d56ebbae3a31397a995c35a87af59",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
@@ -1023,7 +3200,39 @@
         "icml-2026",
         "synthetic-data"
       ],
-      "timestamp": "2026-06-02T22:56:50+08:00"
+      "timestamp": "2026-06-02T22:56:50+08:00",
+      "modifiedAt": "2026-07-16T20:08:42+08:00",
+      "contentHash": "sha256:09b8d93c182cc7e7940467c8a17797f2744016e10d4aa01ec370c6f5e2abc779",
+      "reviewedAt": "2026-07-16T20:08:42+08:00",
+      "reviewDue": "2027-07-16",
+      "sourceIds": [
+        "src-03bf1b2f9af65762",
+        "src-4144e3776ac496d0",
+        "src-766234e11681dad2",
+        "src-94b169d5c233e588"
+      ],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:09b8d93c182cc7e7940467c8a17797f2744016e10d4aa01ec370c6f5e2abc779",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Model_Collapse_zh",
@@ -1038,7 +3247,34 @@
         "研究概念",
         "synthetic-data"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:2d69345869dcdfd5c55440e7b6849a7775821f895aba8b83fc43dd9cee7b19ae",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Model_Collapse_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:2d69345869dcdfd5c55440e7b6849a7775821f895aba8b83fc43dd9cee7b19ae",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Zhejiang_University_zh",
@@ -1052,7 +3288,41 @@
         "education",
         "公立研究型大学"
       ],
-      "timestamp": "2026-05-05T23:25:14+08:00"
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-12T22:06:12+08:00",
+      "contentHash": "sha256:b299fe56a1b40d6af75fd0dec521d43bbcce4f80812f3b644dc326f6d3e759e5",
+      "reviewedAt": "2026-07-12T22:06:12+08:00",
+      "reviewDue": "2027-01-08",
+      "sourceIds": [
+        "src-575233d5188384df",
+        "src-c051bd6dcf566058"
+      ],
+      "citationSourceIds": [
+        "src-575233d5188384df"
+      ],
+      "footnoteSourceIds": [
+        "src-575233d5188384df"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Zhejiang_University_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:b299fe56a1b40d6af75fd0dec521d43bbcce4f80812f3b644dc326f6d3e759e5",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Research_zh",
@@ -1066,7 +3336,34 @@
         "overview",
         "研究概览"
       ],
-      "timestamp": "2026-06-13T20:46:02+08:00"
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-07-11T07:28:06+08:00",
+      "contentHash": "sha256:0b3775a6da8240e7a8826285d93d76a8f51202552c6969c4c028ff60fb890bcf",
+      "reviewedAt": "2026-07-11T07:28:06+08:00",
+      "reviewDue": "2026-10-08",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Research_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:0b3775a6da8240e7a8826285d93d76a8f51202552c6969c4c028ff60fb890bcf",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Experience_zh",
@@ -1080,7 +3377,34 @@
         "profile",
         "研究经历"
       ],
-      "timestamp": "2026-06-13T20:46:02+08:00"
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-07-13T20:54:38+08:00",
+      "contentHash": "sha256:9c4c73137aa9bad98b0969e71f161d4b4d6d6760c553e8de6b96fbfaef4276ad",
+      "reviewedAt": "2026-07-13T20:54:38+08:00",
+      "reviewDue": "2026-10-11",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Experience_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:9c4c73137aa9bad98b0969e71f161d4b4d6d6760c553e8de6b96fbfaef4276ad",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "CV_zh",
@@ -1094,7 +3418,72 @@
         "profile",
         "cv-摘要"
       ],
-      "timestamp": "2026-07-02T19:37:18+08:00"
+      "timestamp": "2026-07-02T19:37:18+08:00",
+      "modifiedAt": "2026-07-13T21:35:14+08:00",
+      "contentHash": "sha256:28057554411f3276ab5c97ff0c4e3a9228ccbb041256e551471439ea54cff470",
+      "reviewedAt": "2026-07-13T21:35:14+08:00",
+      "reviewDue": "2026-10-11",
+      "sourceIds": [
+        "src-03bf1b2f9af65762",
+        "src-0642a11373a83c47",
+        "src-18fe2e2db0ff8b6a",
+        "src-19cdc04d387acf77",
+        "src-22eeced7ebe7a0c5",
+        "src-3234eea5652932e1",
+        "src-4144e3776ac496d0",
+        "src-53e1199f272a4df4",
+        "src-65d81b8aca549860",
+        "src-688381b8e9d8ad65",
+        "src-716564daa4b6397f",
+        "src-94b169d5c233e588",
+        "src-9b2be44d3f13005a",
+        "src-a0a9b7171dc028d2",
+        "src-b0de54fe614fa11d",
+        "src-cea294f51d3559e8",
+        "src-da17eb3884244bd3",
+        "src-faaafad831fbefc5"
+      ],
+      "citationSourceIds": [
+        "src-03bf1b2f9af65762",
+        "src-0642a11373a83c47",
+        "src-18fe2e2db0ff8b6a",
+        "src-19cdc04d387acf77",
+        "src-22eeced7ebe7a0c5",
+        "src-3234eea5652932e1",
+        "src-4144e3776ac496d0",
+        "src-53e1199f272a4df4",
+        "src-65d81b8aca549860",
+        "src-688381b8e9d8ad65",
+        "src-716564daa4b6397f",
+        "src-94b169d5c233e588",
+        "src-9b2be44d3f13005a",
+        "src-a0a9b7171dc028d2",
+        "src-b0de54fe614fa11d",
+        "src-cea294f51d3559e8",
+        "src-da17eb3884244bd3",
+        "src-faaafad831fbefc5"
+      ],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:CV_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:28057554411f3276ab5c97ff0c4e3a9228ccbb041256e551471439ea54cff470",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "index_zh",
@@ -1108,7 +3497,34 @@
         "navigation",
         "wiki-索引"
       ],
-      "timestamp": "2026-05-07T17:34:07+08:00"
+      "timestamp": "2026-05-07T17:34:07+08:00",
+      "modifiedAt": "2026-07-14T23:17:11+08:00",
+      "contentHash": "sha256:22e13d97b06e95ca53f4e6344ddcbf6cfd2252744cbd5957c5517a732b8ead1a",
+      "reviewedAt": "2026-07-14T23:17:11+08:00",
+      "reviewDue": "2027-07-14",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:index_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:22e13d97b06e95ca53f4e6344ddcbf6cfd2252744cbd5957c5517a732b8ead1a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Certified_Data_Removal_zh",
@@ -1123,7 +3539,34 @@
         "研究概念",
         "machine-unlearning"
       ],
-      "timestamp": "2026-05-05T23:25:14+08:00"
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:cf9f22c358563c9ded7edfa0b84c15a2ddc531896671859e2ef14dc1edf907be",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Certified_Data_Removal_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:cf9f22c358563c9ded7edfa0b84c15a2ddc531896671859e2ef14dc1edf907be",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Publications_zh",
@@ -1137,7 +3580,34 @@
         "index",
         "论文列表"
       ],
-      "timestamp": "2026-06-01T22:04:00+08:00"
+      "timestamp": "2026-06-01T22:04:00+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:15c34136b6393d0ec3a649ba10bea0676ae1a11c72cf328442f9161e415fa76b",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-09-30",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Publications_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:15c34136b6393d0ec3a649ba10bea0676ae1a11c72cf328442f9161e415fa76b",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Soft_Weighted_Machine_Unlearning_zh",
@@ -1153,7 +3623,38 @@
         "aaai-2026",
         "machine-unlearning"
       ],
-      "timestamp": "2026-05-05T23:25:14+08:00"
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-16T20:08:42+08:00",
+      "contentHash": "sha256:0081860c702601e108aa2ca1ae0519b8f89ecba44dd3585e716f6dc0198efa1c",
+      "reviewedAt": "2026-07-16T20:08:42+08:00",
+      "reviewDue": "2027-07-16",
+      "sourceIds": [
+        "src-0642a11373a83c47",
+        "src-22eeced7ebe7a0c5",
+        "src-53e1199f272a4df4"
+      ],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Soft_Weighted_Machine_Unlearning_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:0081860c702601e108aa2ca1ae0519b8f89ecba44dd3585e716f6dc0198efa1c",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Recursive_Synthetic_Data_Training_zh",
@@ -1168,7 +3669,34 @@
         "研究概念",
         "synthetic-data"
       ],
-      "timestamp": "2026-05-27T17:56:27+08:00"
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:2346ed0d127d9a8c6e84bfdf8fa967e3118ad2ae6adc8383c56cf69a8724c12a",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Recursive_Synthetic_Data_Training_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:2346ed0d127d9a8c6e84bfdf8fa967e3118ad2ae6adc8383c56cf69a8724c12a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Random_Forest_zh",
@@ -1182,7 +3710,34 @@
         "model",
         "模型族"
       ],
-      "timestamp": "2026-05-05T23:25:14+08:00"
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:6d257e9e58d7a5cdcb995d7953ef20d0399f947e387488808ee5cc005c98eec8",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Random_Forest_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:6d257e9e58d7a5cdcb995d7953ef20d0399f947e387488808ee5cc005c98eec8",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "Projects_zh",
@@ -1196,7 +3751,34 @@
         "overview",
         "项目概览"
       ],
-      "timestamp": "2026-06-13T20:46:02+08:00"
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:fee4ad67798127cc3b52660ab5227d1b67bb590c8a37300a540bb43e1e15bbec",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-09-30",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Projects_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:fee4ad67798127cc3b52660ab5227d1b67bb590c8a37300a540bb43e1e15bbec",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     },
     {
       "slug": "The_Chinese_University_of_Hong_Kong_zh",
@@ -1210,7 +3792,51 @@
         "education",
         "公立研究型大学"
       ],
-      "timestamp": "2026-06-13T20:46:02+08:00"
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-07-13T20:54:38+08:00",
+      "contentHash": "sha256:cc7ee27875948d4bdac61d09c00a69b27a9675d8b85091248c40ab359ba356e3",
+      "reviewedAt": "2026-07-13T20:54:38+08:00",
+      "reviewDue": "2027-01-09",
+      "sourceIds": [
+        "src-09fa966eeac1624e",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-cecd4e57ea891eee",
+        "src-f1b03a6c505acdf9",
+        "src-f6cb0623675b4752"
+      ],
+      "citationSourceIds": [
+        "src-09fa966eeac1624e",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-f6cb0623675b4752"
+      ],
+      "footnoteSourceIds": [
+        "src-09fa966eeac1624e",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-f6cb0623675b4752"
+      ],
+      "retrieval": {
+        "documentId": "wiki:The_Chinese_University_of_Hong_Kong_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:cc7ee27875948d4bdac61d09c00a69b27a9675d8b85091248c40ab359ba356e3",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
     }
   ]
 }

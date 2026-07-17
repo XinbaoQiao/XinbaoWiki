@@ -10,6 +10,10 @@ tags:
   - concept
   - research-concept
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:10fe6fafff148822ceebb3ec9a5727df2d39ea2c6ea4f674732a0fa67752cde6'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: Data Silos
 summary: >-
   Concept page for learning and evaluation when data are distributed across

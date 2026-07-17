@@ -1,0 +1,2300 @@
+{
+  "schemaVersion": 1,
+  "okfVersion": "0.1",
+  "profile": {
+    "id": "xinbaopedia-okf-profile",
+    "version": "1.0"
+  },
+  "identity": {
+    "strategy": "src- plus the first 16 hexadecimal characters of SHA-256(canonical URL)",
+    "canonicalization": "WHATWG URL normalization; fragments and common tracking parameters are removed"
+  },
+  "hashSemantics": {
+    "identity": "hash.value is SHA-256 of the canonical URL and is stable across page associations",
+    "content": "check.contentHash remains null until a scheduled or manual source snapshot audit records remote content"
+  },
+  "checkPolicy": {
+    "defaultMethod": "scheduled-http-head-or-get",
+    "uncheckedStatus": "not-checked",
+    "allowedStatuses": [
+      "not-checked",
+      "ok",
+      "redirected",
+      "unavailable",
+      "error"
+    ],
+    "maxAgeDaysByKind": {
+      "conference-site": 30,
+      "code-repository": 90,
+      "institutional-source": 90,
+      "public-profile": 90,
+      "researcher-profile": 90,
+      "default": 180
+    },
+    "meaning": "Registry generation proves declaration and page association, not remote availability or factual correctness"
+  },
+  "contentHash": "sha256:993bba13e839b4ae05bf19d819ca6456e151882e934ed0f2df4707b843b86e12",
+  "sources": [
+    {
+      "id": "src-03bf1b2f9af65762",
+      "url": "https://arxiv.org/abs/2606.13732",
+      "kind": "scholarly-publication",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:03bf1b2f9af65762104786067893865e9381df72a5f4bcaf1493eb1ed4812723"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "CV",
+        "CV_zh",
+        "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
+        "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
+          "locations": [
+            "frontmatter.links[1].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
+          "locations": [
+            "frontmatter.links[1].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-05cf85aef2ce8d53",
+      "url": "https://staff.ie.cuhk.edu.hk/~yjzhang/Research.html",
+      "kind": "institutional-source",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:05cf85aef2ce8d535846a5a4c2a35f93db130c7b9c6e8726e62a8c417286fb46"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "Angela_Yingjun_Zhang",
+        "Angela_Yingjun_Zhang_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Angela_Yingjun_Zhang",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Angela_Yingjun_Zhang_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-0642a11373a83c47",
+      "url": "https://arxiv.org/abs/2505.18783",
+      "kind": "scholarly-publication",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:0642a11373a83c4787994b1716cf60c33744c0a8d461a895f71e0c0571093530"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "CV",
+        "CV_zh",
+        "Soft_Weighted_Machine_Unlearning",
+        "Soft_Weighted_Machine_Unlearning_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Soft_Weighted_Machine_Unlearning",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Soft_Weighted_Machine_Unlearning_zh",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-09fa966eeac1624e",
+      "url": "https://www.cuhk.edu.hk/english/aboutus/university-intro.html",
+      "kind": "institutional-source",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:09fa966eeac1624e94823202a4b3142e3a42889644d92d2491ebf5ccfb5157b2"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "The_Chinese_University_of_Hong_Kong",
+        "The_Chinese_University_of_Hong_Kong_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "The_Chinese_University_of_Hong_Kong",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "The_Chinese_University_of_Hong_Kong_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-0d6548913a8c228f",
+      "url": "https://proceedings.mlr.press/v32/cuturi14.html",
+      "kind": "scholarly-publication",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:0d6548913a8c228ffe07b083574a145da8b7b5226485127bed63360459f6984c"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "Distributed_Wasserstein_Barycenter",
+        "Distributed_Wasserstein_Barycenter_zh",
+        "Wasserstein_Geometry",
+        "Wasserstein_Geometry_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Distributed_Wasserstein_Barycenter",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Distributed_Wasserstein_Barycenter_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Wasserstein_Geometry",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Wasserstein_Geometry_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-17dc8cb17c9da923",
+      "url": "https://en.nusricq.cn/about/yjyjj",
+      "kind": "web-reference",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:17dc8cb17c9da923d86cc763aee941934f60ad7341f3169b4888283aec7b3152"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "NUSRI_CQ",
+        "NUSRI_CQ_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "NUSRI_CQ",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "NUSRI_CQ_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-18fe2e2db0ff8b6a",
+      "url": "https://xinbaopedia.top/",
+      "kind": "web-reference",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:18fe2e2db0ff8b6a1a4028538dc71679e1fc840852c4f0b8a87b18165a627e2e"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "CV",
+        "CV_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-19cdc04d387acf77",
+      "url": "https://openreview.net/forum?id=nsCOeCLR8e",
+      "kind": "scholarly-publication",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:19cdc04d387acf77848fc3234eec1ecf945f662d8aa9967be3bda89c363ee173"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "CV",
+        "CV_zh",
+        "DynFrs",
+        "DynFrs_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "DynFrs",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "DynFrs_zh",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-22eeced7ebe7a0c5",
+      "url": "https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning",
+      "kind": "code-repository",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:22eeced7ebe7a0c5f13706f7c2239625b4313afc58e8ef7515bb20fd1152094b"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "CV",
+        "CV_zh",
+        "Soft_Weighted_Machine_Unlearning",
+        "Soft_Weighted_Machine_Unlearning_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Soft_Weighted_Machine_Unlearning",
+          "locations": [
+            "frontmatter.links[2].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Soft_Weighted_Machine_Unlearning_zh",
+          "locations": [
+            "frontmatter.links[2].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-264e39cbec8d2f89",
+      "url": "https://huggingface.co/MrCiao",
+      "kind": "public-profile",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:264e39cbec8d2f89f65aad45acbb1ff906933e85190383ad683e8d67e10aab0d"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "Qiao_Xinbao_zh",
+        "Xinbao_Qiao"
+      ],
+      "evidence": [
+        {
+          "slug": "Qiao_Xinbao_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Xinbao_Qiao",
+          "locations": [
+            "body",
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-2698bddf338b56e5",
+      "url": "https://www.en.sdu.edu.cn/",
+      "kind": "institutional-source",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:2698bddf338b56e54cc90cdc14ae6761ff95312028744554c894e1c24ad8b982"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "Shandong_University",
+        "Shandong_University_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Shandong_University",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Shandong_University_zh",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-30f33d3201c476ab",
+      "url": "https://pwbgis.kcg.gov.tw/construction/construction.aspx?id=7252",
+      "kind": "web-reference",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:30f33d3201c476ab475b904d3f81ae45b142a1f5a1ced1a5de3ca165bd2a59d8"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "Qiao_Xinbao_zh",
+        "Xinbao_Qiao"
+      ],
+      "evidence": [
+        {
+          "slug": "Qiao_Xinbao_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Xinbao_Qiao",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-3157a848b3737221",
+      "url": "https://epubs.siam.org/doi/10.1137/100805741",
+      "kind": "scholarly-publication",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:3157a848b37372216c56cbffb1d3a7ec31a8929a825832f11ca77cf9947cd466"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "Distributed_Wasserstein_Barycenter",
+        "Distributed_Wasserstein_Barycenter_zh",
+        "Wasserstein_Geometry",
+        "Wasserstein_Geometry_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Distributed_Wasserstein_Barycenter",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Distributed_Wasserstein_Barycenter_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Wasserstein_Geometry",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Wasserstein_Geometry_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-3234eea5652932e1",
+      "url": "https://arxiv.org/abs/2410.01588",
+      "kind": "scholarly-publication",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:3234eea5652932e1ecb9357b112109ebfd5ca0d2f83f17feac2e30af60bb8ece"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "CV",
+        "CV_zh",
+        "DynFrs",
+        "DynFrs_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "DynFrs",
+          "locations": [
+            "frontmatter.links[1].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "DynFrs_zh",
+          "locations": [
+            "frontmatter.links[1].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-33f25ef72f5cac0f",
+      "url": "https://www.en.sdu.edu.cn/About.htm",
+      "kind": "institutional-source",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:33f25ef72f5cac0fd557e8d506a4dc7c922d59ce4c505d13abcbb634611ad37f"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "Shandong_University",
+        "Shandong_University_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Shandong_University",
+          "locations": [
+            "frontmatter.links[1].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Shandong_University_zh",
+          "locations": [
+            "frontmatter.links[1].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-3b3968d201c7ab67",
+      "url": "https://arxiv.org/abs/1701.07875",
+      "kind": "scholarly-publication",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:3b3968d201c7ab675384b5e606d92332e120cf7e2c26ae0a059b04e6d6d90f3c"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "Wasserstein_Geometry",
+        "Wasserstein_Geometry_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Wasserstein_Geometry",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Wasserstein_Geometry_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-4144e3776ac496d0",
+      "url": "https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse",
+      "kind": "code-repository",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:4144e3776ac496d0d8fe4c09bd5c494614f3e4379403fdba91d7130a64a77717"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "CV",
+        "CV_zh",
+        "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
+        "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
+          "locations": [
+            "frontmatter.links[2].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
+          "locations": [
+            "frontmatter.links[2].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-53e1199f272a4df4",
+      "url": "https://ojs.aaai.org/index.php/AAAI/article/view/39681",
+      "kind": "scholarly-publication",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:53e1199f272a4df4e21a9c60d79ec10503607142e12f5847bdbde95832757b95"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "CV",
+        "CV_zh",
+        "Soft_Weighted_Machine_Unlearning",
+        "Soft_Weighted_Machine_Unlearning_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Soft_Weighted_Machine_Unlearning",
+          "locations": [
+            "frontmatter.links[1].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Soft_Weighted_Machine_Unlearning_zh",
+          "locations": [
+            "frontmatter.links[1].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-575233d5188384df",
+      "url": "https://www.zju.edu.cn/english/_t874/about/list.htm",
+      "kind": "institutional-source",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:575233d5188384dff0e243f5b78c28e93664df095230081ba05564f3e4368474"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "Zhejiang_University",
+        "Zhejiang_University_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Zhejiang_University",
+          "locations": [
+            "body.footnote",
+            "frontmatter.links[1].url"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Zhejiang_University_zh",
+          "locations": [
+            "body.footnote",
+            "frontmatter.links[1].url"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-5816cdaa92b5e41c",
+      "url": "https://en.nusricq.cn/about/yjysm",
+      "kind": "web-reference",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:5816cdaa92b5e41c1e96340b8492772e18a52118320bcbf86aad310c44f96847"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "NUSRI_CQ",
+        "NUSRI_CQ_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "NUSRI_CQ",
+          "locations": [
+            "frontmatter.links[1].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "NUSRI_CQ_zh",
+          "locations": [
+            "frontmatter.links[1].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-5dac6849a598aa84",
+      "url": "https://www.gs.cuhk.edu.hk/programmes/engineering",
+      "kind": "institutional-source",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:5dac6849a598aa8455260669847b7155f38ee00e6b39c94f2fc9fac778f49c01"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "Qiao_Xinbao_zh",
+        "The_Chinese_University_of_Hong_Kong",
+        "The_Chinese_University_of_Hong_Kong_zh",
+        "Xinbao_Qiao"
+      ],
+      "evidence": [
+        {
+          "slug": "Qiao_Xinbao_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "The_Chinese_University_of_Hong_Kong",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "The_Chinese_University_of_Hong_Kong_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Xinbao_Qiao",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-5ffca2a581311c27",
+      "url": "https://www.ie.cuhk.edu.hk/about-the-department/",
+      "kind": "institutional-source",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:5ffca2a581311c275d600b42a7ae63d7c2fae85b3551a513beaa02cb13dcdc02"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "AI_and_Networks",
+        "AI_and_Networks_zh",
+        "Qiao_Xinbao_zh",
+        "The_Chinese_University_of_Hong_Kong",
+        "The_Chinese_University_of_Hong_Kong_zh",
+        "Xinbao_Qiao"
+      ],
+      "evidence": [
+        {
+          "slug": "AI_and_Networks",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "AI_and_Networks_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Qiao_Xinbao_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "The_Chinese_University_of_Hong_Kong",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "The_Chinese_University_of_Hong_Kong_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Xinbao_Qiao",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-606ddb789d451046",
+      "url": "https://news.nus.edu.sg/news-reports/nus-signs-agreement-establish-nusricq",
+      "kind": "institutional-source",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:606ddb789d451046c9380fbdb386df203355d11c6513f3900532f5264c2917a5"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "NUSRI_CQ",
+        "NUSRI_CQ_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "NUSRI_CQ",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "NUSRI_CQ_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-65d81b8aca549860",
+      "url": "https://openreview.net/forum?id=C3TrHWanh5",
+      "kind": "scholarly-publication",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:65d81b8aca549860bfff28bea9b7235c1c3cfff4d507e7b9e52882e7d02f938d"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "CV",
+        "CV_zh",
+        "Hessian_Free_Online_Certified_Unlearning",
+        "Hessian_Free_Online_Certified_Unlearning_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Hessian_Free_Online_Certified_Unlearning",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-688381b8e9d8ad65",
+      "url": "https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/",
+      "kind": "institutional-source",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:688381b8e9d8ad652323894be0f77a08d1c60a83c2131c4f162047766b574941"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "CV",
+        "CV_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-70ed6a3bfb603732",
+      "url": "https://orcid.org/0009-0007-8359-7701",
+      "kind": "researcher-identifier",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:70ed6a3bfb603732179d7753b18885d357b2c76a0b2e60d2c526fce9c83d3ad2"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "Qiao_Xinbao_zh",
+        "Xinbao_Qiao"
+      ],
+      "evidence": [
+        {
+          "slug": "Qiao_Xinbao_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Xinbao_Qiao",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-716564daa4b6397f",
+      "url": "https://person.zju.edu.cn/mengzhang",
+      "kind": "institutional-source",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:716564daa4b6397f26c8f4caa0a3957e8921b084e57b0d8dd8d9588cd3b985f8"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "CV",
+        "CV_zh",
+        "Meng_Zhang",
+        "Meng_Zhang_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Meng_Zhang",
+          "locations": [
+            "body.footnote",
+            "frontmatter.links[0].url"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Meng_Zhang_zh",
+          "locations": [
+            "body.footnote",
+            "frontmatter.links[0].url"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-766234e11681dad2",
+      "url": "https://icml.cc/Conferences/2026",
+      "kind": "conference-site",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:766234e11681dad241b569721f3e6bec002eca30c1922aaa2a85cc034edf3624"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 30
+      },
+      "pages": [
+        "AI_and_Networks",
+        "AI_and_Networks_zh",
+        "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
+        "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "AI_and_Networks",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "AI_and_Networks_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
+          "locations": [
+            "frontmatter.links[3].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
+          "locations": [
+            "frontmatter.links[3].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-8207d2b85f96e6cb",
+      "url": "https://en.sdu.edu.cn/About.htm",
+      "kind": "institutional-source",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:8207d2b85f96e6cb8799d2d418c555625e5c2fda8b7c8fc8a81001f0cdbb3261"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "Shandong_University",
+        "Shandong_University_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Shandong_University",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Shandong_University_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-938ce85aed5a8a94",
+      "url": "https://staff.ie.cuhk.edu.hk/~yjzhang/",
+      "kind": "institutional-source",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:938ce85aed5a8a9439ad7165a7716408d394c2cb560cb598b1addf7416188124"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "Angela_Yingjun_Zhang",
+        "Angela_Yingjun_Zhang_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Angela_Yingjun_Zhang",
+          "locations": [
+            "body.footnote",
+            "frontmatter.links[0].url"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Angela_Yingjun_Zhang_zh",
+          "locations": [
+            "body.footnote",
+            "frontmatter.links[0].url"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-94b169d5c233e588",
+      "url": "https://openreview.net/forum?id=FFXvnzM254",
+      "kind": "scholarly-publication",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:94b169d5c233e5880a85b662c3884465741f2aa4155f4ebd60e371fa6f220d5e"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "CV",
+        "CV_zh",
+        "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
+        "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-9b2be44d3f13005a",
+      "url": "https://github.com/XinbaoQiao",
+      "kind": "code-repository",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:9b2be44d3f13005ac3cc3c948205bb9fe4dec04ea43fc882a9f20db03020a893"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "CV",
+        "CV_zh",
+        "Qiao_Xinbao_zh",
+        "Xinbao_Qiao"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Qiao_Xinbao_zh",
+          "locations": [
+            "body",
+            "frontmatter.links[2].url"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Xinbao_Qiao",
+          "locations": [
+            "body",
+            "frontmatter.links[2].url"
+          ],
+          "citation": true,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-9d0661fee6814e6f",
+      "url": "https://scholar.google.com/citations?user=nhC_OfEAAAAJ&hl=en",
+      "kind": "bibliographic-profile",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:9d0661fee6814e6f673f5f7d8c2cf0533fa11ee8c746951331e539ed51581212"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "Qiao_Xinbao_zh",
+        "Xinbao_Qiao"
+      ],
+      "evidence": [
+        {
+          "slug": "Qiao_Xinbao_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Xinbao_Qiao",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-a0a9b7171dc028d2",
+      "url": "https://arxiv.org/abs/2404.01712",
+      "kind": "scholarly-publication",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:a0a9b7171dc028d21e0657610ed452e805689999e7cb75c5cc190b84524f9da9"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "CV",
+        "CV_zh",
+        "Hessian_Free_Online_Certified_Unlearning",
+        "Hessian_Free_Online_Certified_Unlearning_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Hessian_Free_Online_Certified_Unlearning",
+          "locations": [
+            "frontmatter.links[1].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
+          "locations": [
+            "frontmatter.links[1].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-b0de54fe614fa11d",
+      "url": "https://scholar.google.com/citations?view_op=search_authors&mauthors=Xinbao+Qiao",
+      "kind": "bibliographic-profile",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:b0de54fe614fa11de126862ff75d25f9cc4a871640576e8dd35cc0f847d5e623"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "CV",
+        "CV_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-c051bd6dcf566058",
+      "url": "https://www.zju.edu.cn/english/",
+      "kind": "institutional-source",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:c051bd6dcf566058703bfb128a71e92b71ef12eae6e0d0dd989117fdb171d173"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "Zhejiang_University",
+        "Zhejiang_University_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Zhejiang_University",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Zhejiang_University_zh",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-cea294f51d3559e8",
+      "url": "https://www.linkedin.com/in/xinbaoqiao/",
+      "kind": "public-profile",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:cea294f51d3559e8faf473312f15efb038e09c29eee9b5433459a177358704fb"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "CV",
+        "CV_zh",
+        "Qiao_Xinbao_zh",
+        "Xinbao_Qiao"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Qiao_Xinbao_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Xinbao_Qiao",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-cecd4e57ea891eee",
+      "url": "https://www.ie.cuhk.edu.hk/",
+      "kind": "institutional-source",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:cecd4e57ea891eee02bdea3211a0655e099073919d949005817760f1ba201729"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "The_Chinese_University_of_Hong_Kong",
+        "The_Chinese_University_of_Hong_Kong_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "The_Chinese_University_of_Hong_Kong",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "The_Chinese_University_of_Hong_Kong_zh",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-cedf284f61bb39ae",
+      "url": "https://mapcarta.com/25634858",
+      "kind": "web-reference",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:cedf284f61bb39ae137f76903e5728a526de3502a57f92224bf155c01da9bed9"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "Qiao_Xinbao_zh",
+        "Xinbao_Qiao"
+      ],
+      "evidence": [
+        {
+          "slug": "Qiao_Xinbao_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Xinbao_Qiao",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-da17eb3884244bd3",
+      "url": "https://github.com/shurongwang/DynFrs",
+      "kind": "code-repository",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:da17eb3884244bd30ed416b953343a37c9797255761e3a453e697ca70bc72d3e"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "CV",
+        "CV_zh",
+        "DynFrs",
+        "DynFrs_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "DynFrs",
+          "locations": [
+            "frontmatter.links[2].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "DynFrs_zh",
+          "locations": [
+            "frontmatter.links[2].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-dac65e05df6e888f",
+      "url": "https://openreview.net/profile?id=~Xinbao_Qiao1",
+      "kind": "researcher-profile",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:dac65e05df6e888f0981456d70f8bb31882d0510586c15f0ea5aae790be995f2"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "Qiao_Xinbao_zh",
+        "Xinbao_Qiao"
+      ],
+      "evidence": [
+        {
+          "slug": "Qiao_Xinbao_zh",
+          "locations": [
+            "body",
+            "frontmatter.links[1].url"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Xinbao_Qiao",
+          "locations": [
+            "body",
+            "frontmatter.links[1].url"
+          ],
+          "citation": true,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-e105b35a946250a9",
+      "url": "https://staff.ie.cuhk.edu.hk/~yjzhang/About.html",
+      "kind": "institutional-source",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:e105b35a946250a9ff428eec791535d9722f22947f9002c905fdbbd7ac1d2e24"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "Angela_Yingjun_Zhang",
+        "Angela_Yingjun_Zhang_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Angela_Yingjun_Zhang",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Angela_Yingjun_Zhang_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-e1d67502167d29ad",
+      "url": "https://zoo.sandiegozoo.org/giant-pandas",
+      "kind": "web-reference",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:e1d67502167d29ad4515ce8da334318b43c17f9899b0602b3fa24d9a7df2eee0"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "Qiao_Xinbao_zh",
+        "Xinbao_Qiao"
+      ],
+      "evidence": [
+        {
+          "slug": "Qiao_Xinbao_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Xinbao_Qiao",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-f1b03a6c505acdf9",
+      "url": "https://www.gs.cuhk.edu.hk/admissions/programme/engineering",
+      "kind": "institutional-source",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:f1b03a6c505acdf91eff2faff7ad0d306ea5c1d4cde1bba517b1d21954a54fee"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "The_Chinese_University_of_Hong_Kong",
+        "The_Chinese_University_of_Hong_Kong_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "The_Chinese_University_of_Hong_Kong",
+          "locations": [
+            "frontmatter.links[1].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "The_Chinese_University_of_Hong_Kong_zh",
+          "locations": [
+            "frontmatter.links[1].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-f6009f51f54778f6",
+      "url": "https://dblp.uni-trier.de/pid/374/6619.html",
+      "kind": "bibliographic-profile",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:f6009f51f54778f6144a16f4d79dfdb3c9994329afc271f6ca9e3f7d10958a62"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "Qiao_Xinbao_zh",
+        "Xinbao_Qiao"
+      ],
+      "evidence": [
+        {
+          "slug": "Qiao_Xinbao_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Xinbao_Qiao",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-f6cb0623675b4752",
+      "url": "https://www.ie.cuhk.edu.hk/programmes/mphil-phd-in-information-engineering/",
+      "kind": "institutional-source",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:f6cb0623675b4752e24ae34827c51d9d24d401ecc4336582d7537a3b9fa556e8"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "The_Chinese_University_of_Hong_Kong",
+        "The_Chinese_University_of_Hong_Kong_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "The_Chinese_University_of_Hong_Kong",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "The_Chinese_University_of_Hong_Kong_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-faaafad831fbefc5",
+      "url": "https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning",
+      "kind": "code-repository",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:faaafad831fbefc57a79d87274c97716a29030d928e637f5773ac4d3560134e9"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "CV",
+        "CV_zh",
+        "Hessian_Free_Online_Certified_Unlearning",
+        "Hessian_Free_Online_Certified_Unlearning_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Hessian_Free_Online_Certified_Unlearning",
+          "locations": [
+            "frontmatter.links[2].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
+          "locations": [
+            "frontmatter.links[2].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-fbead0c8f06eb7bc",
+      "url": "https://en.nusricq.cn/",
+      "kind": "web-reference",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:fbead0c8f06eb7bc0c58903f020fdd640fca750cd0891d9b3e07df1e16bf7aa8"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "NUSRI_CQ",
+        "NUSRI_CQ_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "NUSRI_CQ",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "NUSRI_CQ_zh",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    }
+  ]
+}

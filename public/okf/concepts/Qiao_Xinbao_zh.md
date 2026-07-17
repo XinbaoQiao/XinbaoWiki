@@ -8,6 +8,10 @@ tags:
   - biography
   - 博士生
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-16T20:08:42+08:00'
+content_hash: 'sha256:a4df4f1394b219dbe68acbff664db416aaa3f0e849cb1ff8ebe5c22273b0ec6a'
+reviewed_at: '2026-07-16T20:08:42+08:00'
+review_due: '2026-10-14'
 language: zh
 aliases:
   - Mr. Ciao
@@ -19,6 +23,26 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-16T20:08:42+08:00'
+  reviewDue: '2026-10-14'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Qiao_Xinbao_zh'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-264e39cbec8d2f89
+  - src-30f33d3201c476ab
+  - src-5dac6849a598aa84
+  - src-5ffca2a581311c27
+  - src-70ed6a3bfb603732
+  - src-9b2be44d3f13005a
+  - src-9d0661fee6814e6f
+  - src-cea294f51d3559e8
+  - src-cedf284f61bb39ae
+  - src-dac65e05df6e888f
+  - src-e1d67502167d29ad
+  - src-f6009f51f54778f6
 source_path: wiki/Qiao_Xinbao_zh.md
 ---
 **乔鑫宝**（英文名：**Xinbao Qiao**[^xinbao-name-zh][^qiao-ciao-zh][^xinbao-qiao-bridge-zh]；生于2000年9月30日，云南西双版纳）是中国博士生，现为[香港中文大学](./The_Chinese_University_of_Hong_Kong_zh.md)信息工程系博士生。他的研究主要围绕 AI 模型中数据的全生命周期管理展开，关注数据从生成、使用到删除过程中的理论方法与实际问题。近期工作致力于提升 AI 模型在异质、计算和通信受限环境下的可靠性、可解释性与可控性。

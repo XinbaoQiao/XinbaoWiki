@@ -9,12 +9,24 @@ tags:
   - 研究概念
   - llm
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:38652d8ab54846774d1fd3e44dae5f4d2323fbfc11a8f1e9d2494bb4e5ea8d74'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Interpretability_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Interpretability_zh.md
 ---
 **可解释性** 指帮助人理解模型为何产生某种行为的方法。在本 wiki 中，重点比整个可解释性领域更窄，主要关注数据影响、错误诊断，以及支持可信决策的解释。

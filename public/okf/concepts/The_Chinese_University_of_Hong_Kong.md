@@ -8,12 +8,30 @@ tags:
   - education
   - public-research-university
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:a27c4d78f158b9564e002f310e7e37f4ac2fa63d951f4b0521f8c330fa042e2a'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:The_Chinese_University_of_Hong_Kong'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-09fa966eeac1624e
+  - src-5dac6849a598aa84
+  - src-5ffca2a581311c27
+  - src-cecd4e57ea891eee
+  - src-f1b03a6c505acdf9
+  - src-f6cb0623675b4752
 source_path: wiki/The_Chinese_University_of_Hong_Kong.md
 ---
 **The Chinese University of Hong Kong** (**CUHK**) is the current doctoral institution of [Xinbao Qiao](./Xinbao_Qiao.md), who is affiliated with its Department of Information Engineering. In this wiki the CUHK page functions as an institutional context page rather than a general encyclopedia article: it records why the university matters to Qiao's research biography, how the information-engineering program frames his current work, and where the doctoral phase sits in relation to earlier training at [Zhejiang University](./Zhejiang_University.md) and [Shandong University](./Shandong_University.md).[^cuhk-intro]

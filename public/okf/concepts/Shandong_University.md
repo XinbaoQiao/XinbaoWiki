@@ -8,12 +8,27 @@ tags:
   - education
   - public-research-university
 timestamp: '2026-05-05T20:55:21+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:b64a70b2a82421460cfe1bd75c931785572bf6b49508c8138d2e5866ed32ea8a'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Shandong_University'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-2698bddf338b56e5
+  - src-33f25ef72f5cac0f
+  - src-8207d2b85f96e6cb
 source_path: wiki/Shandong_University.md
 ---
 **Shandong University** (**SDU**) was [Xinbao Qiao](./Xinbao_Qiao.md)'s undergraduate institution, where he received a Bachelor of Engineering in Communication Engineering in 2022. In the structure of this wiki, SDU is the first formal academic stage in Qiao's higher-education record and supplies the engineering background behind his later interest in [AI and networks](./AI_and_Networks.md).[^sdu-about]

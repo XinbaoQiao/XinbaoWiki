@@ -9,6 +9,10 @@ tags:
   - 研究专题
   - ai-and-networks
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:7b32da24e1154e954f16034881a76556c41f899f2b331d02ac50caf8cadf696a'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: AI 与网络
 language: zh
 summary: 乔鑫宝当前主要研究专题，涵盖网络化数据与通信约束下的 AI 系统。

@@ -8,6 +8,10 @@ tags:
   - topic
   - 研究专题
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:b5ed150616b6bc664087f36dc9e5d5cdb8b191aa624cf0ed96b40dce31f72b12'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 aliases:
   - Data-Centric Machine Learning
@@ -16,6 +20,14 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Data_Centric_Machine_Learning_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Data_Centric_Machine_Learning_zh.md
 ---
 **数据中心 ML** 是本 wiki 对 data-centric machine learning 的简称。它指的是把数据变化本身作为一阶干预对象的研究，而不仅仅通过修改模型结构来提升性能。相关操作包括选择、剪枝、加权、删除、合成和跨方评估。

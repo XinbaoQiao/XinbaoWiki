@@ -10,6 +10,10 @@ tags:
   - concept
   - research-concept
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:49f49a19d651a14750d02e8624e31c769fe7be63310cb06cfef96324f5a290b0'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: Data Selection
 summary: >-
   Concept page for choosing training or evaluation data under reliability

@@ -8,12 +8,26 @@ tags:
   - education
   - public-research-university
 timestamp: '2026-05-05T21:15:18+08:00'
+modified: '2026-07-12T22:06:12+08:00'
+content_hash: 'sha256:fe657967adee3aad4c7e8e6568b609b6b12a116503f10d84ace705d1a9989b2c'
+reviewed_at: '2026-07-12T22:06:12+08:00'
+review_due: '2027-01-08'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-12T22:06:12+08:00'
+  reviewDue: '2027-01-08'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Zhejiang_University'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-575233d5188384df
+  - src-c051bd6dcf566058
 source_path: wiki/Zhejiang_University.md
 ---
 **Zhejiang University** (**ZJU**) was [Xinbao Qiao](./Xinbao_Qiao.md)'s master's institution from 2022 to 2025. In this wiki the article records the institutional setting for the work that led into Qiao's publications on [machine unlearning](./Machine_Unlearning.md), influence-based data correction, and [data centric ML](./Data_Centric_Machine_Learning.md). It is not intended as a full university history; instead, it explains the ZJU phase within Qiao's academic timeline.

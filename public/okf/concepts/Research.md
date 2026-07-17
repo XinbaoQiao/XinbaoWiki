@@ -8,12 +8,24 @@ tags:
   - overview
   - research-overview
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-11T07:28:06+08:00'
+content_hash: 'sha256:09e30b38e992c7f3c7c8b32a5bba43801fe9854088306229588b105b24990848'
+reviewed_at: '2026-07-11T07:28:06+08:00'
+review_due: '2026-10-08'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-11T07:28:06+08:00'
+  reviewDue: '2026-10-08'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Research'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Research.md
 ---
 This page summarizes the main research directions in Qiao Xinbao's academic wiki. It functions as a compiled map of linked topic pages rather than a static list of interests. The current center of gravity is [data-centric ML](./Data_Centric_Machine_Learning.md) and the two-way [AI-and-networks](./AI_and_Networks.md) problem.

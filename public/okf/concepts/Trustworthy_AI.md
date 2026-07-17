@@ -10,12 +10,24 @@ tags:
   - topic
   - research-topic
 timestamp: '2026-05-05T20:55:21+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:de85186a59ada4edf5598f5cdde696fb8984635557fbd8fecf816e4ffa2cffc3'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Trustworthy_AI'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Trustworthy_AI.md
 ---
 **Trustworthy AI** is the broadest reliability label in Qiao's wiki. It covers model behavior that can be audited, corrected, updated, or evaluated under realistic constraints. The page is deliberately broad, but the biography keeps the main research labels shorter: [AI and networks](./AI_and_Networks.md), [machine unlearning](./Machine_Unlearning.md), [synthetic data](./Synthetic_Data_and_Model_Collapse.md), and [Data Centric ML](./Data_Centric_Machine_Learning.md).

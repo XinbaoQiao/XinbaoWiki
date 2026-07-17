@@ -8,12 +8,24 @@ tags:
   - concept
   - 研究概念
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:5a9ef8f0796c6a6e5818894e93c6a2b241c6df834f9d5be05ff03858efaeaf66'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Data_Silos_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Data_Silos_zh.md
 ---
 **数据孤岛** 是组织、法律、技术或地理隔离造成的状态，使所有训练数据无法被汇集到一个地方。在本 wiki 中，该词指各自只持有目标分布局部视角的机构、设备或客户端。

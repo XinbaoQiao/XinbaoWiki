@@ -8,12 +8,24 @@ tags:
   - profile
   - 教育时间线
 timestamp: '2026-05-06T23:05:52+08:00'
+modified: '2026-07-13T20:54:38+08:00'
+content_hash: 'sha256:bdf1f3b0cacbec32e2f7caea98ff23b4ca9d2d94e2f2c1263d9caab69c6c3184'
+reviewed_at: '2026-07-13T20:54:38+08:00'
+review_due: '2027-01-09'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-13T20:54:38+08:00'
+  reviewDue: '2027-01-09'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Education_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Education_zh.md
 ---
 ## 时间线

@@ -8,6 +8,10 @@ tags:
   - concept
   - 研究概念
 timestamp: '2026-05-06T06:22:22+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:5e6803ef26eecbddb3aaa6d2e093509b80a07c36d2aef38e2c3c3b0c3d26cbde'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: 分布式学习
 language: zh
 summary: 解释数据、计算或通信去中心化条件下的学习问题。

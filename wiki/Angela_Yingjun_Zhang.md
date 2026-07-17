@@ -8,6 +8,10 @@ tags:
   - advisor
   - academic-advisor
 timestamp: '2026-05-05T21:15:18+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:4d88d219cff179aa32b1e44a28613a8f8dbab0dcfec3c4d20d5d51dc790e7d90'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: Angela Yingjun Zhang
 summary: CUHK Information Engineering professor and doctoral advisor of Xinbao Qiao.
 occupation:

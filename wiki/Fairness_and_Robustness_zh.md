@@ -8,6 +8,10 @@ tags:
   - concept
   - 研究概念
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:c1c485ae574d344b3bab011faced822faebcc7652bbd473cd1d62dd4afe10bcb'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: 公平性与鲁棒性
 language: zh
 summary: 解释公平性与鲁棒性作为数据中心修正目标的概念页。

@@ -8,6 +8,10 @@ tags:
   - model
   - 模型族
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:6d257e9e58d7a5cdcb995d7953ef20d0399f947e387488808ee5cc005c98eec8'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: 随机森林
 language: zh
 summary: 解释 DynFrs 所研究的随机森林模型类别。

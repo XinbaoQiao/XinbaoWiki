@@ -8,12 +8,24 @@ tags:
   - profile
   - education-timeline
 timestamp: '2026-05-06T23:05:52+08:00'
+modified: '2026-07-12T22:06:12+08:00'
+content_hash: 'sha256:dfec963a11e63f213f428fcf42ae03d3aa2f38ef6263e5c5466e5e99b417215a'
+reviewed_at: '2026-07-12T22:06:12+08:00'
+review_due: '2027-01-08'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-12T22:06:12+08:00'
+  reviewDue: '2027-01-08'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Education'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Education.md
 ---
 ## Timeline

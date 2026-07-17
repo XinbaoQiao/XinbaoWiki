@@ -2,6 +2,7 @@
   "name": "xinbao-qiao-academic-wiki",
   "version": "0.3.0",
   "private": true,
+  "type": "module",
   "description": "Personal academic wiki homepage for Xinbao Qiao.",
   "engines": {
     "node": "22.x"
@@ -14,10 +15,12 @@
     "lint:wiki": "node scripts/lint-wikilinks.mjs",
     "lint:okf": "node scripts/okf-conformance.mjs",
     "lint:content": "node scripts/wiki-maintenance.mjs --check",
+    "audit:wiki": "node scripts/run-with-node22.mjs node scripts/audit-wiki-maintenance.mjs",
+    "eval:wiki-chat": "node scripts/run-with-node22.mjs node scripts/evaluate-wiki-chat.mjs",
     "maintain:wiki": "node scripts/run-with-node22.mjs node scripts/wiki-maintenance.mjs --standardize --write",
     "new:wiki": "node scripts/new-wiki-page.mjs",
     "test:release": "node scripts/run-with-node22.mjs node scripts/test-release-workflow.mjs",
-    "test:wiki": "node scripts/test-wiki-data.mjs",
+    "test:wiki": "node scripts/run-with-node22.mjs node scripts/test-wiki-data.mjs",
     "verify:publish": "node scripts/run-with-node22.mjs node scripts/verify-publish-set.mjs",
     "verify:staged": "node scripts/run-with-node22.mjs node scripts/verify-publish-set.mjs --staged-only",
     "smoke:production": "node scripts/run-with-node22.mjs node scripts/smoke-production.mjs",
@@ -27,7 +30,7 @@
     "submit:indexnow": "node scripts/submit-indexnow.mjs",
     "typecheck": "node scripts/prepare-typecheck.mjs && tsc --noEmit",
     "check": "node scripts/run-with-node22.mjs npm run check:node22",
-    "check:node22": "npm run typecheck && npm run lint:wiki && npm run lint:content && npm run lint:okf && npm run test:wiki && npm run test:release"
+    "check:node22": "npm run typecheck && npm run lint:wiki && npm run lint:content && npm run lint:okf && npm run test:wiki && npm run audit:wiki && npm run eval:wiki-chat && npm run test:release"
   },
   "dependencies": {
     "@upstash/redis": "^1.38.0",

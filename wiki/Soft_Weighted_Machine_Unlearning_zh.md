@@ -10,6 +10,10 @@ tags:
   - aaai-2026
   - machine-unlearning
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-16T20:08:42+08:00'
+content_hash: 'sha256:0081860c702601e108aa2ca1ae0519b8f89ecba44dd3585e716f6dc0198efa1c'
+reviewed_at: '2026-07-16T20:08:42+08:00'
+review_due: '2027-07-16'
 name: 超越二元擦除：用于公平性与鲁棒性的软加权遗忘
 language: zh
 summary: AAAI 2026 论文，研究用于公平性与鲁棒性修正的软加权机器遗忘。

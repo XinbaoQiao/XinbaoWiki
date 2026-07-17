@@ -8,6 +8,8 @@ This bundle exposes the public Xinbaopedia wiki as Markdown concepts with OKF v0
 - [Graph](graph.json) - generated concept graph, backlinks, lifecycle metadata, and quality warnings.
 - [Pages](pages.json) - public page catalog for lightweight consumers.
 - [Schema](schema.json) - source and maintenance schema contract.
+- [Sources](sources.json) - stable source IDs, page associations, and verification state.
+- [Quality report](quality-report.json) - source, citation, review, relation, and retrieval coverage.
 - [Update log](log.md) - chronological wiki maintenance history.
 
 ## Concepts

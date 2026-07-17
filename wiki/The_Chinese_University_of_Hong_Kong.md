@@ -8,6 +8,10 @@ tags:
   - education
   - public-research-university
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:a27c4d78f158b9564e002f310e7e37f4ac2fa63d951f4b0521f8c330fa042e2a'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: The Chinese University of Hong Kong
 summary: Current doctoral institution of Xinbao Qiao.
 person:

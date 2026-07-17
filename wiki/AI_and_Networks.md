@@ -11,6 +11,10 @@ tags:
   - research-topic
   - ai-and-networks
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:e29224a6e9ced60652a179982834df6b1aa7fa7cde79ecf1e340d56c4e8508c6'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: AI and Networks
 summary: >-
   Primary research topic for Qiao Xinbao, covering AI systems under networked

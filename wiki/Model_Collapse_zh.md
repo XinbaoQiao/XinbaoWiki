@@ -9,6 +9,10 @@ tags:
   - 研究概念
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:2d69345869dcdfd5c55440e7b6849a7775821f895aba8b83fc43dd9cee7b19ae'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: 模型坍缩
 language: zh
 summary: 解释递归模型训练中退化性分布漂移的概念页。

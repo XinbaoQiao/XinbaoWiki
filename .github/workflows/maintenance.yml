@@ -1,0 +1,93 @@
+name: Weekly wiki maintenance audit
+
+on:
+  schedule:
+    # Sunday 11:17 Asia/Shanghai. A non-round minute reduces shared-runner spikes.
+    - cron: '17 3 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: wiki-maintenance-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate wiki structure and generated artifacts
+        id: structure
+        continue-on-error: true
+        run: |
+          npm run lint:wiki
+          npm run lint:content
+          npm run lint:okf
+          npm run test:wiki
+
+      - name: Audit sources, review freshness, and external links
+        id: maintenance
+        continue-on-error: true
+        run: >-
+          node scripts/audit-wiki-maintenance.mjs
+          --check-links
+          --output artifacts/wiki-maintenance-audit.json
+
+      - name: Evaluate production wiki retrieval
+        id: retrieval
+        continue-on-error: true
+        run: >-
+          node scripts/run-with-node22.mjs node scripts/evaluate-wiki-chat.mjs
+          --output artifacts/wiki-chat-evaluation.json
+
+      - name: Upload maintenance evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: wiki-maintenance-${{ github.run_id }}
+          if-no-files-found: warn
+          retention-days: 30
+          path: |
+            artifacts/wiki-maintenance-audit.json
+            artifacts/wiki-chat-evaluation.json
+
+      - name: Enforce maintenance gates
+        if: always()
+        env:
+          STRUCTURE_OUTCOME: ${{ steps.structure.outcome }}
+          MAINTENANCE_OUTCOME: ${{ steps.maintenance.outcome }}
+          RETRIEVAL_OUTCOME: ${{ steps.retrieval.outcome }}
+        run: |
+          {
+            echo '## Weekly wiki maintenance gate'
+            echo ''
+            echo "| Gate | Outcome |"
+            echo "| --- | --- |"
+            echo "| Structure and generated artifacts | ${STRUCTURE_OUTCOME} |"
+            echo "| Sources, reviews, and links | ${MAINTENANCE_OUTCOME} |"
+            echo "| Retrieval golden set | ${RETRIEVAL_OUTCOME} |"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+          if [ "$STRUCTURE_OUTCOME" != 'success' ] || \
+             [ "$MAINTENANCE_OUTCOME" != 'success' ] || \
+             [ "$RETRIEVAL_OUTCOME" != 'success' ]; then
+            echo 'One or more wiki maintenance gates failed. Inspect the uploaded JSON reports.'
+            exit 1
+          fi
+
+          echo 'All wiki maintenance gates passed.'

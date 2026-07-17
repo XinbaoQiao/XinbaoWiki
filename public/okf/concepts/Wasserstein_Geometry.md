@@ -9,12 +9,27 @@ tags:
   - research-concept
   - wasserstein
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:7332b1c94414444afaeadc595058d70d56cc4cbfc7d14d3d55bda2592ed311fe'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Wasserstein_Geometry'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-0d6548913a8c228f
+  - src-3157a848b3737221
+  - src-3b3968d201c7ab67
 source_path: wiki/Wasserstein_Geometry.md
 ---
 **Wasserstein Geometry** refers to the use of optimal-transport distances and related geometric ideas to compare probability distributions. Unlike pointwise metrics, Wasserstein distances account for the cost of moving probability mass from one distribution to another, which makes them useful for reasoning about distribution shift and generated data.[^ot]

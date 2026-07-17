@@ -8,6 +8,10 @@ tags:
   - overview
   - research-overview
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-11T07:28:06+08:00'
+content_hash: 'sha256:09e30b38e992c7f3c7c8b32a5bba43801fe9854088306229588b105b24990848'
+reviewed_at: '2026-07-11T07:28:06+08:00'
+review_due: '2026-10-08'
 name: Research
 summary: Overview of Xinbao Qiao's research directions and linked topic pages.
 occupation: Research overview

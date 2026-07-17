@@ -8,12 +8,28 @@ tags:
   - research
   - 研究院
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:2864019dd92674e38d95921d097ef7924b01c524ef67ce6b20e0cfbfcd72e990'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:NUSRI_CQ_zh'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-17dc8cb17c9da923
+  - src-5816cdaa92b5e41c
+  - src-606ddb789d451046
+  - src-fbead0c8f06eb7bc
 source_path: wiki/NUSRI_CQ_zh.md
 ---
 **NUSRI-CQ** 指 NUS（重庆）研究院，[乔鑫宝](./Qiao_Xinbao_zh.md) 于 2025 年 6 月至 12 月在此担任全职研究实习生。在本 wiki 中，该页是研究经历节点，而不是教育经历中的授位机构；它位于 [浙江大学](./Zhejiang_University_zh.md) 硕士阶段与 [香港中文大学](./The_Chinese_University_of_Hong_Kong_zh.md) 博士阶段之间。

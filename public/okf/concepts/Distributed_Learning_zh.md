@@ -8,12 +8,24 @@ tags:
   - concept
   - 研究概念
 timestamp: '2026-05-06T06:22:22+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:5e6803ef26eecbddb3aaa6d2e093509b80a07c36d2aef38e2c3c3b0c3d26cbde'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Distributed_Learning_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Distributed_Learning_zh.md
 ---
 **分布式学习** 覆盖数据、计算或优化步骤分散在多个客户端、设备、机构或工作节点上的学习设置。在本 wiki 中，它包括去中心化和联邦式问题，但作为描述性概念使用，并不限定于某一种协议。[^fed]

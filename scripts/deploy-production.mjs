@@ -185,49 +185,103 @@ async function runSmoke(env, siteUrl = productionUrl) {
 }
 
 async function runStagedSmoke(vercelCommand, routes, stagedUrl) {
+  const canaryUserAgent = `xinbaopedia-staged-canary/${process.pid}-${Date.now()}`;
   const checks = [
-    { path: '/', patterns: [/Xinbaopedia/i] },
+    { label: 'homepage', path: '/', patterns: [/Xinbaopedia/i] },
     biographyReleaseContract,
     { path: '/robots.txt', patterns: [/Sitemap: https:\/\/xinbaopedia\.top\/sitemap\.xml/] },
     { path: '/sitemap.xml', patterns: [/\/wiki\/Xinbao_Qiao\//] },
     { path: '/search-index.json', patterns: [/"slug":"Xinbao_Qiao"/] },
-    { path: '/api/chat-with-xinbao/', patterns: [/"limit":10/] },
+    {
+      label: 'chat retrieval diagnostic',
+      path: '/api/chat-with-xinbao/?diagnostic=retrieval',
+      patterns: [
+        /"limit":10/,
+        /"backendVersion":"xinbao-chat-api-v3"/,
+        /"responsePolicyVersion":"grounded-response-v1"/,
+        /"modelApiConfigured":true/,
+        /"indexedChunks":\d+/,
+      ],
+    },
+    {
+      label: 'chat grounded provider canary',
+      path: '/api/chat-with-xinbao/',
+      method: 'POST',
+      userAgent: `${canaryUserAgent}-grounded`,
+      data: JSON.stringify({
+        message: 'Which paper studies efficient machine unlearning for random forests?',
+        history: [],
+        language: 'en',
+      }),
+      patterns: [
+        /"responseMode":"model-grounded"/,
+        /"sources":\[\{/,
+        /\[1\]/,
+        /"shouldAbstain":false/,
+      ],
+    },
+    {
+      label: 'chat deterministic abstention canary',
+      path: '/api/chat-with-xinbao/',
+      method: 'POST',
+      userAgent: `${canaryUserAgent}-abstention`,
+      data: JSON.stringify({
+        message: 'How should I bake a sourdough loaf?',
+        history: [{ role: 'user', content: "What is Xinbao Qiao's research?" }],
+        language: 'en',
+      }),
+      patterns: [
+        /"responseMode":"deterministic-abstention"/,
+        /"sources":\[\]/,
+        /"shouldAbstain":true/,
+      ],
+    },
   ];
   const attempts = [];
 
   for (const check of checks) {
+    const label = check.label || check.path;
     let body;
     const failures = [];
     for (const route of routes) {
       try {
+        const requestArgs = ['--silent', '--show-error', '--max-time', '30'];
+        if (check.method === 'POST') {
+          requestArgs.push(
+            '--request', 'POST',
+            '--header', 'Content-Type: application/json',
+            '--header', `user-agent: ${check.userAgent}`,
+            '--data', check.data,
+          );
+        }
         body = await runCapture(
           vercelCommand,
           vercelArgs('curl', [
             check.path,
             '--deployment', stagedUrl,
             '--yes',
-            '--', '--silent', '--show-error', '--max-time', '30',
+            '--', ...requestArgs,
           ]),
           route.env,
           { timeoutMs: timeoutMs.stagedRequest }
         );
-        attempts.push({ path: check.path, route: route.name, status: 'passed' });
-        console.log(`deploy-production: staged ${check.path} passed via ${route.name}`);
+        attempts.push({ label, path: check.path, route: route.name, status: 'passed' });
+        console.log(`deploy-production: staged ${label} passed via ${route.name}`);
         break;
       } catch (error) {
         const kind = error.kind || 'request_error';
-        attempts.push({ kind, path: check.path, route: route.name, status: 'failed' });
+        attempts.push({ kind, label, path: check.path, route: route.name, status: 'failed' });
         failures.push(`${route.name}=${kind}`);
-        console.warn(`deploy-production: staged ${check.path} failed via ${route.name}: ${kind}`);
+        console.warn(`deploy-production: staged ${label} failed via ${route.name}: ${kind}`);
       }
     }
 
     if (body === undefined) {
-      throw new Error(`staged smoke failed for ${check.path} across ${failures.join(', ')}`);
+      throw new Error(`staged smoke failed for ${label} across ${failures.join(', ')}`);
     }
     for (const pattern of check.patterns) {
       if (!pattern.test(body)) {
-        throw new Error(`staged smoke content mismatch for ${check.path}: missing ${pattern}`);
+        throw new Error(`staged smoke content mismatch for ${label}: missing ${pattern}`);
       }
     }
   }

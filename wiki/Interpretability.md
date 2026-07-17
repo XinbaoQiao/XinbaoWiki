@@ -9,6 +9,10 @@ tags:
   - research-concept
   - llm
 timestamp: '2026-05-05T20:55:21+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:218df98003e2d7abaf687efc0c1417ef55412b77887fc85e5bdb222a572e63cb'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: Interpretability
 summary: Concept page for explaining model behavior and data influence.
 occupation: Research concept

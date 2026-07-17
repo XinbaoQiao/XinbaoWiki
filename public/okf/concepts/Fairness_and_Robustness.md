@@ -10,12 +10,24 @@ tags:
   - concept
   - research-concept
 timestamp: '2026-05-05T20:55:21+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:01ec70a2530423cf6b84a82836edb8899ddb896b3b6bf1456e347539aafbb777'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Fairness_and_Robustness'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Fairness_and_Robustness.md
 ---
 **Fairness and Robustness** are treated in this wiki as reliability objectives that can sometimes be improved by changing the training data or their weights. Fairness concerns systematic performance or treatment differences across groups, while robustness concerns stability under perturbations, corruptions, adversarial inputs, or distribution shift.

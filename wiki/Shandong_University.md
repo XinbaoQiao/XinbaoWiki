@@ -8,6 +8,10 @@ tags:
   - education
   - public-research-university
 timestamp: '2026-05-05T20:55:21+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:b64a70b2a82421460cfe1bd75c931785572bf6b49508c8138d2e5866ed32ea8a'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: Shandong University
 summary: Undergraduate institution of Xinbao Qiao.
 person:

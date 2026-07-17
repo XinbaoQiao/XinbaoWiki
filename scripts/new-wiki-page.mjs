@@ -119,3 +119,4 @@ const body = [
 
 fs.writeFileSync(filePath, `${frontmatter}\n${body}\n`);
 console.log(`Created wiki/${slug}.md`);
+console.log('Review is intentionally incomplete: add reviewed_at only after a maintainer verifies the page; npm run maintain:wiki will fail closed until then.');

@@ -9,12 +9,27 @@ tags:
   - 研究概念
   - wasserstein
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:23fe4ef251fbe9ab9ba250c9e19140bd8721c19357fc1d2d55f5e6fdf86e2845'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Wasserstein_Geometry_zh'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-0d6548913a8c228f
+  - src-3157a848b3737221
+  - src-3b3968d201c7ab67
 source_path: wiki/Wasserstein_Geometry_zh.md
 ---
 **Wasserstein 几何** 指使用最优传输距离及相关几何思想比较概率分布。与逐点指标不同，Wasserstein 距离考虑把概率质量从一个分布移动到另一个分布的代价，因此适合描述分布偏移和生成数据。[^ot]

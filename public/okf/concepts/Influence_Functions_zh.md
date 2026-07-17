@@ -8,12 +8,24 @@ tags:
   - concept
   - 研究概念
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:647e43dc8868e7f86527f3026f7071cfd2aef1fa226e663e4b88c0d5a9098b33'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Influence_Functions_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Influence_Functions_zh.md
 ---
 **影响函数** 是估计某个训练样本如何影响拟合模型或下游预测的分析工具。在现代机器学习中，它经常作为近似方法使用：与其在每次改变样本后重新训练，不如通过梯度和曲率信息估计影响。[^influence]

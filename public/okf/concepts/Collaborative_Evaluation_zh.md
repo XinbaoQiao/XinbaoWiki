@@ -8,12 +8,24 @@ tags:
   - concept
   - 研究概念
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:4c416cdbc890f68f445c30e75c3233866340c0721cf1b433fd236987d5281868'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Collaborative_Evaluation_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Collaborative_Evaluation_zh.md
 ---
 **协作评估** 指多个参与方共同提供关于模型行为、数据质量或分布漂移的证据。在本 wiki 中，它主要用于跨数据孤岛设置：每个参与者只有本地观测，没有任何一方完整掌握全局分布。

@@ -9,6 +9,10 @@ tags:
   - 研究概念
   - machine-unlearning
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:cf9f22c358563c9ded7edfa0b84c15a2ddc531896671859e2ef14dc1edf907be'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: 认证数据删除
 language: zh
 summary: 解释机器遗忘中删除保证的概念页。

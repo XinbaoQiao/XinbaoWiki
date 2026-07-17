@@ -8,6 +8,10 @@ tags:
   - research
   - research-institute
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:864772161c155d4e157103d60fb2b0db13bb3490b5afe3fc460ca19b1cb56e5a'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: NUSRI-CQ
 summary: Research internship institution of Xinbao Qiao.
 person:

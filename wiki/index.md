@@ -8,6 +8,10 @@ tags:
   - navigation
   - wiki-index
 timestamp: '2026-05-07T17:34:07+08:00'
+modified: '2026-07-14T23:17:11+08:00'
+content_hash: 'sha256:47074f3b8b0b101d64f11b2bbedd1bc5de61e0f63ab4c5346376750158f1895e'
+reviewed_at: '2026-07-14T23:17:11+08:00'
+review_due: '2027-07-14'
 name: Index
 summary: Navigation index for public Xinbaopedia pages.
 occupation: Wiki index

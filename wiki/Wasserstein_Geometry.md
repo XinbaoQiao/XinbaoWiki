@@ -9,6 +9,10 @@ tags:
   - research-concept
   - wasserstein
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:7332b1c94414444afaeadc595058d70d56cc4cbfc7d14d3d55bda2592ed311fe'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: Wasserstein Geometry
 summary: Concept page for distributional comparison using optimal-transport geometry.
 occupation: Research concept

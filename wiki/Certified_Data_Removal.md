@@ -9,6 +9,10 @@ tags:
   - research-concept
   - machine-unlearning
 timestamp: '2026-05-05T19:52:29+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:aa1f00effe5b056f30d3d7f991135fb9e7d563e4eec1d66b6a7413b3875c3c06'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: Certified Data Removal
 summary: Concept page for deletion guarantees in machine unlearning.
 occupation: Research concept

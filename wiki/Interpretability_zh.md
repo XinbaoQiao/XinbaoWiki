@@ -9,6 +9,10 @@ tags:
   - 研究概念
   - llm
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:38652d8ab54846774d1fd3e44dae5f4d2323fbfc11a8f1e9d2494bb4e5ea8d74'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: 可解释性
 language: zh
 summary: 解释模型行为和数据影响的概念页。

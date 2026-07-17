@@ -8,12 +8,24 @@ tags:
   - topic
   - 研究专题
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:28482b5d209cd82b224f5326fe62ebc4e226b20a176d694553294d64993e7052'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Trustworthy_AI_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Trustworthy_AI_zh.md
 ---
 **可信 AI** 是本 wiki 中最宽的可靠性标签。它覆盖在现实约束下可以被审计、修正、更新或评估的模型行为。主页为了简洁使用更短的研究标签：[AI 与网络](./AI_and_Networks_zh.md)、[机器遗忘](./Machine_Unlearning_zh.md)、[合成数据](./Synthetic_Data_and_Model_Collapse_zh.md) 和 [数据中心 ML](./Data_Centric_Machine_Learning_zh.md)。

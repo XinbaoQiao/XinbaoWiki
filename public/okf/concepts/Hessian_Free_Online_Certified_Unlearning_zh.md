@@ -9,12 +9,27 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-16T20:08:42+08:00'
+content_hash: 'sha256:61f88b28567cc8c89e63a8e28760d7e18e12868069d2aefb90848e7b9a92ba72'
+reviewed_at: '2026-07-16T20:08:42+08:00'
+review_due: '2026-10-14'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-16T20:08:42+08:00'
+  reviewDue: '2026-10-14'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Hessian_Free_Online_Certified_Unlearning_zh'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-65d81b8aca549860
+  - src-a0a9b7171dc028d2
+  - src-faaafad831fbefc5
 source_path: wiki/Hessian_Free_Online_Certified_Unlearning_zh.md
 ---
 **无 Hessian 在线认证遗忘** 是 **[乔鑫宝](./Qiao_Xinbao_zh.md)**、张萌、Ming Tang 和 Ermin Wei 的 ICLR 2025 会议论文。论文提出一种面向随机训练流程的认证机器遗忘方法，目标是在显式存储 Hessian、求逆 Hessian 或反复重新训练代价过高时，仍能把删除请求转化为在线向量更新。

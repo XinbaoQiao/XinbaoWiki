@@ -21,6 +21,7 @@ const MAX_ATTEMPTS = positiveIntegerEnv('SMOKE_ATTEMPTS', '3');
 const RETRY_DELAY_MS = positiveIntegerEnv('SMOKE_RETRY_DELAY_MS', '1000');
 const MAX_REDIRECTS = 5;
 const RETRYABLE_STATUS_CODES = new Set([408, 425, 429, 500, 502, 503, 504]);
+const SMOKE_USER_AGENT = process.env.SMOKE_USER_AGENT || `xinbaopedia-smoke/${process.pid}-${Date.now()}`;
 
 const base = new URL(SITE_URL);
 
@@ -28,11 +29,13 @@ function joinUrl(pathname) {
   return new URL(pathname, base).toString();
 }
 
-function requestOnce(url, redirects = 0) {
+function requestOnce(url, options = {}, redirects = 0) {
   return new Promise((resolve, reject) => {
     const parsed = new URL(url);
     const client = parsed.protocol === 'http:' ? http : https;
-    const req = client.request(parsed, { method: 'GET', headers: { 'user-agent': 'xinbaopedia-smoke/1.0' } }, (res) => {
+    const method = options.method || 'GET';
+    const headers = { 'user-agent': SMOKE_USER_AGENT, ...(options.headers || {}) };
+    const req = client.request(parsed, { method, headers }, (res) => {
       const status = res.statusCode || 0;
       const location = res.headers.location;
       if ([301, 302, 303, 307, 308].includes(status) && location) {
@@ -41,7 +44,12 @@ function requestOnce(url, redirects = 0) {
           reject(new Error(`${url}: too many redirects`));
           return;
         }
-        resolve(requestOnce(new URL(location, parsed).toString(), redirects + 1));
+        const redirectsAsGet = status === 303 || ((status === 301 || status === 302) && method === 'POST');
+        resolve(requestOnce(
+          new URL(location, parsed).toString(),
+          redirectsAsGet ? { method: 'GET', headers } : options,
+          redirects + 1
+        ));
         return;
       }
 
@@ -62,7 +70,7 @@ function requestOnce(url, redirects = 0) {
       req.destroy(new Error(`${url}: timed out after ${TIMEOUT_MS}ms`));
     });
     req.on('error', reject);
-    req.end();
+    req.end(options.body);
   });
 }
 
@@ -70,11 +78,11 @@ function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function request(url) {
+async function request(url, options = {}) {
   let lastError;
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt += 1) {
     try {
-      const response = await requestOnce(url);
+      const response = await requestOnce(url, options);
       if (!RETRYABLE_STATUS_CODES.has(response.status) || attempt === MAX_ATTEMPTS) {
         return response;
       }
@@ -107,6 +115,37 @@ function parseJson(response, label) {
   } catch (error) {
     throw new Error(`${label}: invalid JSON (${error.message})`);
   }
+}
+
+async function postJson(pathname, payload, label, userAgentSuffix) {
+  const response = await request(joinUrl(pathname), {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+      'user-agent': `${SMOKE_USER_AGENT}-${userAgentSuffix}`,
+    },
+    body: JSON.stringify(payload),
+  });
+  return parseJson(response, label);
+}
+
+function assertResponsePolicy(data, label, expectedMode, shouldAbstain) {
+  assert(data.meta?.backendVersion === 'xinbao-chat-api-v3', `${label}: unexpected backend version`);
+  assert(data.meta?.responsePolicyVersion === 'grounded-response-v1', `${label}: unexpected response policy version`);
+  assert(data.meta?.responseMode === expectedMode, `${label}: expected response mode ${expectedMode}`);
+  assert(data.meta?.shouldAbstain === shouldAbstain, `${label}: unexpected abstention decision`);
+}
+
+function assertValidCitationReply(data, label) {
+  assert(typeof data.reply === 'string' && data.reply.length > 0, `${label}: missing reply`);
+  assert(Array.isArray(data.sources) && data.sources.length > 0, `${label}: expected at least one cited source`);
+  const citationNumbers = [...data.reply.matchAll(/\[(\d+)\]/g)].map((match) => Number(match[1]));
+  assert(citationNumbers.length > 0, `${label}: reply has no numbered citation`);
+  assert(citationNumbers.every((number) => Number.isInteger(number) && number >= 1 && number <= data.sources.length), `${label}: reply has an out-of-range citation`);
+  assert(new Set(citationNumbers).size === data.sources.length, `${label}: returned sources must all be cited`);
+  assert(data.sources.every((source) => ['chunkId', 'slug', 'title', 'section', 'href'].every((field) => typeof source?.[field] === 'string' && source[field].length > 0)), `${label}: source metadata is incomplete`);
+  assertResponsePolicy(data, label, 'model-grounded', false);
+  assert(data.meta?.citedChunks === data.sources.length, `${label}: cited chunk count does not match returned sources`);
 }
 
 async function checkText(pathname, label, patterns) {
@@ -147,6 +186,52 @@ async function main() {
   assert(Number.isInteger(quality.schemaVersion), 'OKF quality report: missing integer schemaVersion');
   assert(quality.counts?.warnings === 0, `OKF quality report: expected zero warnings, got ${JSON.stringify(quality.counts?.warnings)}`);
   assert(Array.isArray(quality.hiddenPages?.pages) && quality.hiddenPages.pages.length === 0, 'OKF quality report: hidden page slugs must not be exposed');
+
+  const sources = parseJson(await request(joinUrl('/okf/sources.json')), 'OKF source registry');
+  assert(sources.schemaVersion === 1, `OKF source registry: expected schemaVersion 1, got ${JSON.stringify(sources.schemaVersion)}`);
+  assert(Array.isArray(sources.sources) && sources.sources.length > 0, 'OKF source registry: sources must be a non-empty array');
+  assert(!JSON.stringify(sources).includes(HIDDEN_SLUG), 'OKF source registry: hidden page slug must not be exposed');
+
+  const chatHealth = parseJson(
+    await request(joinUrl('/api/chat-with-xinbao?diagnostic=retrieval')),
+    'Chat retrieval health'
+  );
+  assert(chatHealth.limit === 10, `Chat retrieval health: expected daily limit 10, got ${JSON.stringify(chatHealth.limit)}`);
+  assert(chatHealth.meta?.backendVersion === 'xinbao-chat-api-v3', 'Chat retrieval health: unexpected backend version');
+  assert(chatHealth.meta?.responsePolicyVersion === 'grounded-response-v1', 'Chat retrieval health: unexpected response policy version');
+  assert(chatHealth.meta?.promptVersion === 'xinbao-grounded-citations-v2', 'Chat retrieval health: unexpected prompt version');
+  assert(chatHealth.meta?.modelApiConfigured === true, 'Chat retrieval health: model API configuration is not ready');
+  assert(/^wiki-heading-lexical-v1:/.test(chatHealth.meta?.indexVersion || ''), 'Chat retrieval health: missing runtime index version');
+  assert(/^[a-f0-9]{64}$/.test(chatHealth.meta?.indexFingerprint || ''), 'Chat retrieval health: missing runtime index fingerprint');
+  assert(Number.isInteger(chatHealth.meta?.indexedChunks) && chatHealth.meta.indexedChunks > 0, 'Chat retrieval health: runtime index is empty');
+
+  const groundedChat = await postJson(
+    '/api/chat-with-xinbao',
+    {
+      message: 'Which paper studies efficient machine unlearning for random forests?',
+      history: [],
+      language: 'en',
+    },
+    'Grounded chat canary',
+    'grounded'
+  );
+  assertValidCitationReply(groundedChat, 'Grounded chat canary');
+  assert(groundedChat.sources.some((source) => source.slug === 'DynFrs'), 'Grounded chat canary: expected a DynFrs source');
+
+  const abstentionChat = await postJson(
+    '/api/chat-with-xinbao',
+    {
+      message: 'How should I bake a sourdough loaf?',
+      history: [{ role: 'user', content: 'What is Xinbao Qiao\'s research?' }],
+      language: 'en',
+    },
+    'Deterministic abstention canary',
+    'abstention'
+  );
+  assert(typeof abstentionChat.reply === 'string' && abstentionChat.reply.length > 0, 'Deterministic abstention canary: missing reply');
+  assert(Array.isArray(abstentionChat.sources) && abstentionChat.sources.length === 0, 'Deterministic abstention canary: sources must be empty');
+  assertResponsePolicy(abstentionChat, 'Deterministic abstention canary', 'deterministic-abstention', true);
+  assert(abstentionChat.meta?.citedChunks === 0, 'Deterministic abstention canary: cited chunk count must be zero');
 
   const hiddenPath = `/wiki/${encodeURIComponent(HIDDEN_SLUG)}/`;
   const hiddenResponse = await request(joinUrl(hiddenPath));

@@ -8,12 +8,24 @@ tags:
   - overview
   - 项目概览
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:fee4ad67798127cc3b52660ab5227d1b67bb590c8a37300a540bb43e1e15bbec'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-09-30'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-09-30'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Projects_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Projects_zh.md
 ---
 ## 研究项目簇

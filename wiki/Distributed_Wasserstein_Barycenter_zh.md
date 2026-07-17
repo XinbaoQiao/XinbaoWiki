@@ -9,6 +9,10 @@ tags:
   - 研究概念
   - wasserstein
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:07336e6f8ccb466caccf4710fad348230218dd8bbb1f5f57f389f28f285757a9'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: 分布式 Wasserstein Barycenter
 language: zh
 summary: 解释乔鑫宝关于从分布式局部测度计算 Wasserstein barycenter 的相关工作。

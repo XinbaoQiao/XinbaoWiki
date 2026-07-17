@@ -8,6 +8,10 @@ tags:
   - education
   - 公立研究型大学
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-13T20:54:38+08:00'
+content_hash: 'sha256:cc7ee27875948d4bdac61d09c00a69b27a9675d8b85091248c40ab359ba356e3'
+reviewed_at: '2026-07-13T20:54:38+08:00'
+review_due: '2027-01-09'
 name: 香港中文大学
 language: zh
 summary: 乔鑫宝当前博士阶段所在机构。

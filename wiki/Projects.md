@@ -8,6 +8,10 @@ tags:
   - overview
   - project-overview
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:e58fcad724c37769eb9f4287683d1b6b794bad22d56608bf8bc623163b2a7807'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-09-30'
 name: Projects
 summary: Research projects and project clusters.
 occupation: Project overview

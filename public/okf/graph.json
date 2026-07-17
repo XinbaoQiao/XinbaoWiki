@@ -1,18 +1,32 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "okfVersion": "0.1",
   "nodes": [
     {
       "aliases": [],
+      "citationSourceIds": [
+        "src-5ffca2a581311c27",
+        "src-766234e11681dad2"
+      ],
+      "contentHash": "sha256:e29224a6e9ced60652a179982834df6b1aa7fa7cde79ecf1e340d56c4e8508c6",
       "file": "AI_and_Networks.md",
+      "footnoteSourceIds": [
+        "src-5ffca2a581311c27",
+        "src-766234e11681dad2"
+      ],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Collaborative_Evaluation",
         "Data_Centric_Machine_Learning",
@@ -28,6 +42,10 @@
         "wikilink"
       ],
       "slug": "AI_and_Networks",
+      "sourceIds": [
+        "src-5ffca2a581311c27",
+        "src-766234e11681dad2"
+      ],
       "summary": "Primary research topic for Qiao Xinbao, covering AI systems under networked data and communication constraints.",
       "tags": [
         "en",
@@ -39,6 +57,28 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "AI and Networks",
       "type": "Research topic",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:AI_and_Networks",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:e29224a6e9ced60652a179982834df6b1aa7fa7cde79ecf1e340d56c4e8508c6",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Angela_Yingjun_Zhang",
         "Certified_Data_Removal",
@@ -68,15 +108,29 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [
+        "src-5ffca2a581311c27",
+        "src-766234e11681dad2"
+      ],
+      "contentHash": "sha256:7b32da24e1154e954f16034881a76556c41f899f2b331d02ac50caf8cadf696a",
       "file": "AI_and_Networks_zh.md",
+      "footnoteSourceIds": [
+        "src-5ffca2a581311c27",
+        "src-766234e11681dad2"
+      ],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -92,6 +146,10 @@
         "wikilink"
       ],
       "slug": "AI_and_Networks_zh",
+      "sourceIds": [
+        "src-5ffca2a581311c27",
+        "src-766234e11681dad2"
+      ],
       "summary": "乔鑫宝当前主要研究专题，涵盖网络化数据与通信约束下的 AI 系统。",
       "tags": [
         "zh",
@@ -103,6 +161,28 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "AI 与网络",
       "type": "研究专题",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:AI_and_Networks_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:7b32da24e1154e954f16034881a76556c41f899f2b331d02ac50caf8cadf696a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Angela_Yingjun_Zhang_zh",
         "Certified_Data_Removal_zh",
@@ -131,15 +211,31 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [
+        "src-05cf85aef2ce8d53",
+        "src-938ce85aed5a8a94",
+        "src-e105b35a946250a9"
+      ],
+      "contentHash": "sha256:4d88d219cff179aa32b1e44a28613a8f8dbab0dcfec3c4d20d5d51dc790e7d90",
       "file": "Angela_Yingjun_Zhang.md",
+      "footnoteSourceIds": [
+        "src-05cf85aef2ce8d53",
+        "src-938ce85aed5a8a94",
+        "src-e105b35a946250a9"
+      ],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Distributed_Learning",
@@ -150,6 +246,11 @@
         "wikilink"
       ],
       "slug": "Angela_Yingjun_Zhang",
+      "sourceIds": [
+        "src-05cf85aef2ce8d53",
+        "src-938ce85aed5a8a94",
+        "src-e105b35a946250a9"
+      ],
       "summary": "CUHK Information Engineering professor and doctoral advisor of Xinbao Qiao.",
       "tags": [
         "en",
@@ -160,6 +261,28 @@
       "timestamp": "2026-05-05T21:15:18+08:00",
       "title": "Angela Yingjun Zhang",
       "type": "Academic advisor",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Angela_Yingjun_Zhang",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:4d88d219cff179aa32b1e44a28613a8f8dbab0dcfec3c4d20d5d51dc790e7d90",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Education",
         "Experience",
@@ -171,15 +294,31 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [
+        "src-05cf85aef2ce8d53",
+        "src-938ce85aed5a8a94",
+        "src-e105b35a946250a9"
+      ],
+      "contentHash": "sha256:22a803b3c72aafc454d04b3465a3141ddefe539d0cb848d603c789683d6c4a40",
       "file": "Angela_Yingjun_Zhang_zh.md",
+      "footnoteSourceIds": [
+        "src-05cf85aef2ce8d53",
+        "src-938ce85aed5a8a94",
+        "src-e105b35a946250a9"
+      ],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-13T20:54:38+08:00",
+        "reviewDue": "2027-01-09",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-13T20:54:38+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Distributed_Learning_zh",
@@ -190,6 +329,11 @@
         "wikilink"
       ],
       "slug": "Angela_Yingjun_Zhang_zh",
+      "sourceIds": [
+        "src-05cf85aef2ce8d53",
+        "src-938ce85aed5a8a94",
+        "src-e105b35a946250a9"
+      ],
       "summary": "香港中文大学信息工程系教授，乔鑫宝博士导师。",
       "tags": [
         "zh",
@@ -200,6 +344,28 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "张颖珺",
       "type": "Academic advisor",
+      "reviewedAt": "2026-07-13T20:54:38+08:00",
+      "reviewDue": "2027-01-09",
+      "retrieval": {
+        "documentId": "wiki:Angela_Yingjun_Zhang_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:22a803b3c72aafc454d04b3465a3141ddefe539d0cb848d603c789683d6c4a40",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Education_zh",
         "Experience_zh",
@@ -210,15 +376,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:aa1f00effe5b056f30d3d7f991135fb9e7d563e4eec1d66b6a7413b3875c3c06",
       "file": "Certified_Data_Removal.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Hessian_Free_Online_Certified_Unlearning",
@@ -230,6 +404,7 @@
         "wikilink"
       ],
       "slug": "Certified_Data_Removal",
+      "sourceIds": [],
       "summary": "Concept page for deletion guarantees in machine unlearning.",
       "tags": [
         "en",
@@ -241,6 +416,28 @@
       "timestamp": "2026-05-05T19:52:29+08:00",
       "title": "Certified Data Removal",
       "type": "Research concept",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Certified_Data_Removal",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:aa1f00effe5b056f30d3d7f991135fb9e7d563e4eec1d66b6a7413b3875c3c06",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Experience",
         "Hessian_Free_Online_Certified_Unlearning",
@@ -252,15 +449,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:cf9f22c358563c9ded7edfa0b84c15a2ddc531896671859e2ef14dc1edf907be",
       "file": "Certified_Data_Removal_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
@@ -272,6 +477,7 @@
         "wikilink"
       ],
       "slug": "Certified_Data_Removal_zh",
+      "sourceIds": [],
       "summary": "解释机器遗忘中删除保证的概念页。",
       "tags": [
         "zh",
@@ -283,6 +489,28 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "认证数据删除",
       "type": "研究概念",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Certified_Data_Removal_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:cf9f22c358563c9ded7edfa0b84c15a2ddc531896671859e2ef14dc1edf907be",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Experience_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
@@ -294,15 +522,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:8e9faf67f5ee31a4878fb7e692c8d5333fba5a60cbec15e95b72c457891e9436",
       "file": "Collaborative_Evaluation.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Data_Silos",
@@ -314,6 +550,7 @@
         "wikilink"
       ],
       "slug": "Collaborative_Evaluation",
+      "sourceIds": [],
       "summary": "Concept page for evaluating models or data processes across multiple parties.",
       "tags": [
         "en",
@@ -324,6 +561,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Collaborative Evaluation",
       "type": "Research concept",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Collaborative_Evaluation",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:8e9faf67f5ee31a4878fb7e692c8d5333fba5a60cbec15e95b72c457891e9436",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "AI_and_Networks",
         "Data_Centric_Machine_Learning",
@@ -345,15 +604,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:4c416cdbc890f68f445c30e75c3233866340c0721cf1b433fd236987d5281868",
       "file": "Collaborative_Evaluation_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Silos_zh",
@@ -365,6 +632,7 @@
         "wikilink"
       ],
       "slug": "Collaborative_Evaluation_zh",
+      "sourceIds": [],
       "summary": "解释多方共同评估模型或数据过程的概念页。",
       "tags": [
         "zh",
@@ -375,6 +643,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "协作评估",
       "type": "研究概念",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Collaborative_Evaluation_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:4c416cdbc890f68f445c30e75c3233866340c0721cf1b433fd236987d5281868",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "AI_and_Networks_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -396,15 +686,42 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [
+        "src-03bf1b2f9af65762",
+        "src-0642a11373a83c47",
+        "src-18fe2e2db0ff8b6a",
+        "src-19cdc04d387acf77",
+        "src-22eeced7ebe7a0c5",
+        "src-3234eea5652932e1",
+        "src-4144e3776ac496d0",
+        "src-53e1199f272a4df4",
+        "src-65d81b8aca549860",
+        "src-688381b8e9d8ad65",
+        "src-716564daa4b6397f",
+        "src-94b169d5c233e588",
+        "src-9b2be44d3f13005a",
+        "src-a0a9b7171dc028d2",
+        "src-b0de54fe614fa11d",
+        "src-cea294f51d3559e8",
+        "src-da17eb3884244bd3",
+        "src-faaafad831fbefc5"
+      ],
+      "contentHash": "sha256:b5007348122639a3571ac4d3c9cf928b75dba7755a15f7e14497a9c046590503",
       "file": "CV.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-13T21:35:14+08:00",
+        "reviewDue": "2026-10-11",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-13T21:35:14+08:00",
       "outgoing": [
         "Publications",
         "Zhejiang_University"
@@ -413,6 +730,26 @@
         "wikilink"
       ],
       "slug": "CV",
+      "sourceIds": [
+        "src-03bf1b2f9af65762",
+        "src-0642a11373a83c47",
+        "src-18fe2e2db0ff8b6a",
+        "src-19cdc04d387acf77",
+        "src-22eeced7ebe7a0c5",
+        "src-3234eea5652932e1",
+        "src-4144e3776ac496d0",
+        "src-53e1199f272a4df4",
+        "src-65d81b8aca549860",
+        "src-688381b8e9d8ad65",
+        "src-716564daa4b6397f",
+        "src-94b169d5c233e588",
+        "src-9b2be44d3f13005a",
+        "src-a0a9b7171dc028d2",
+        "src-b0de54fe614fa11d",
+        "src-cea294f51d3559e8",
+        "src-da17eb3884244bd3",
+        "src-faaafad831fbefc5"
+      ],
       "summary": "Academic CV summary for Xinbao Qiao.",
       "tags": [
         "en",
@@ -423,6 +760,28 @@
       "timestamp": "2026-07-02T19:37:18+08:00",
       "title": "Curriculum Vitae",
       "type": "CV summary",
+      "reviewedAt": "2026-07-13T21:35:14+08:00",
+      "reviewDue": "2026-10-11",
+      "retrieval": {
+        "documentId": "wiki:CV",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:b5007348122639a3571ac4d3c9cf928b75dba7755a15f7e14497a9c046590503",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index",
         "log",
@@ -432,15 +791,42 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [
+        "src-03bf1b2f9af65762",
+        "src-0642a11373a83c47",
+        "src-18fe2e2db0ff8b6a",
+        "src-19cdc04d387acf77",
+        "src-22eeced7ebe7a0c5",
+        "src-3234eea5652932e1",
+        "src-4144e3776ac496d0",
+        "src-53e1199f272a4df4",
+        "src-65d81b8aca549860",
+        "src-688381b8e9d8ad65",
+        "src-716564daa4b6397f",
+        "src-94b169d5c233e588",
+        "src-9b2be44d3f13005a",
+        "src-a0a9b7171dc028d2",
+        "src-b0de54fe614fa11d",
+        "src-cea294f51d3559e8",
+        "src-da17eb3884244bd3",
+        "src-faaafad831fbefc5"
+      ],
+      "contentHash": "sha256:28057554411f3276ab5c97ff0c4e3a9228ccbb041256e551471439ea54cff470",
       "file": "CV_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-13T21:35:14+08:00",
+        "reviewDue": "2026-10-11",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-13T21:35:14+08:00",
       "outgoing": [
         "NUSRI_CQ_zh",
         "Publications_zh",
@@ -450,6 +836,26 @@
         "wikilink"
       ],
       "slug": "CV_zh",
+      "sourceIds": [
+        "src-03bf1b2f9af65762",
+        "src-0642a11373a83c47",
+        "src-18fe2e2db0ff8b6a",
+        "src-19cdc04d387acf77",
+        "src-22eeced7ebe7a0c5",
+        "src-3234eea5652932e1",
+        "src-4144e3776ac496d0",
+        "src-53e1199f272a4df4",
+        "src-65d81b8aca549860",
+        "src-688381b8e9d8ad65",
+        "src-716564daa4b6397f",
+        "src-94b169d5c233e588",
+        "src-9b2be44d3f13005a",
+        "src-a0a9b7171dc028d2",
+        "src-b0de54fe614fa11d",
+        "src-cea294f51d3559e8",
+        "src-da17eb3884244bd3",
+        "src-faaafad831fbefc5"
+      ],
       "summary": "乔鑫宝的学术简历摘要。",
       "tags": [
         "zh",
@@ -460,6 +866,28 @@
       "timestamp": "2026-07-02T19:37:18+08:00",
       "title": "简历",
       "type": "CV 摘要",
+      "reviewedAt": "2026-07-13T21:35:14+08:00",
+      "reviewDue": "2026-10-11",
+      "retrieval": {
+        "documentId": "wiki:CV_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:28057554411f3276ab5c97ff0c4e3a9228ccbb041256e551471439ea54cff470",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index_zh",
         "log_zh",
@@ -471,15 +899,23 @@
       "aliases": [
         "Data-Centric Machine Learning"
       ],
+      "citationSourceIds": [],
+      "contentHash": "sha256:bcaecd59642ba0d6acba76857a5343801aa5f36e2826a75f8def334627b1de33",
       "file": "Data_Centric_Machine_Learning.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Collaborative_Evaluation",
@@ -497,6 +933,7 @@
         "wikilink"
       ],
       "slug": "Data_Centric_Machine_Learning",
+      "sourceIds": [],
       "summary": "Research topic focused on data quality, selection, valuation, correction, and governance.",
       "tags": [
         "en",
@@ -507,6 +944,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Data Centric ML",
       "type": "Research topic",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Data_Centric_Machine_Learning",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:bcaecd59642ba0d6acba76857a5343801aa5f36e2826a75f8def334627b1de33",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "AI_and_Networks",
         "Data_Selection",
@@ -532,15 +991,23 @@
       "aliases": [
         "Data-Centric Machine Learning"
       ],
+      "citationSourceIds": [],
+      "contentHash": "sha256:b5ed150616b6bc664087f36dc9e5d5cdb8b191aa624cf0ed96b40dce31f72b12",
       "file": "Data_Centric_Machine_Learning_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Collaborative_Evaluation_zh",
@@ -558,6 +1025,7 @@
         "wikilink"
       ],
       "slug": "Data_Centric_Machine_Learning_zh",
+      "sourceIds": [],
       "summary": "关注数据质量、选择、估值、修正和治理的研究专题。",
       "tags": [
         "zh",
@@ -568,6 +1036,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "数据中心 ML",
       "type": "研究专题",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Data_Centric_Machine_Learning_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:b5ed150616b6bc664087f36dc9e5d5cdb8b191aa624cf0ed96b40dce31f72b12",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "AI_and_Networks_zh",
         "Data_Selection_zh",
@@ -591,15 +1081,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:49f49a19d651a14750d02e8624e31c769fe7be63310cb06cfef96324f5a290b0",
       "file": "Data_Selection.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Data_Centric_Machine_Learning",
@@ -613,6 +1111,7 @@
         "wikilink"
       ],
       "slug": "Data_Selection",
+      "sourceIds": [],
       "summary": "Concept page for choosing training or evaluation data under reliability constraints.",
       "tags": [
         "en",
@@ -623,6 +1122,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Data Selection",
       "type": "Research concept",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Data_Selection",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:49f49a19d651a14750d02e8624e31c769fe7be63310cb06cfef96324f5a290b0",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Data_Centric_Machine_Learning",
         "Distributed_Learning",
@@ -637,15 +1158,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:f2f86de8a44e60f1923badf3e613b292b74546183791b33c64556111f7cb3f80",
       "file": "Data_Selection_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -659,6 +1188,7 @@
         "wikilink"
       ],
       "slug": "Data_Selection_zh",
+      "sourceIds": [],
       "summary": "解释在可靠性约束下选择训练或评估数据的概念页。",
       "tags": [
         "zh",
@@ -669,6 +1199,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "数据选择",
       "type": "研究概念",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Data_Selection_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:f2f86de8a44e60f1923badf3e613b292b74546183791b33c64556111f7cb3f80",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Data_Centric_Machine_Learning_zh",
         "Distributed_Learning_zh",
@@ -683,15 +1235,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:10fe6fafff148822ceebb3ec9a5727df2d39ea2c6ea4f674732a0fa67752cde6",
       "file": "Data_Silos.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Collaborative_Evaluation",
@@ -703,6 +1263,7 @@
         "wikilink"
       ],
       "slug": "Data_Silos",
+      "sourceIds": [],
       "summary": "Concept page for learning and evaluation when data are distributed across separate holders.",
       "tags": [
         "en",
@@ -713,6 +1274,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Data Silos",
       "type": "Research concept",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Data_Silos",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:10fe6fafff148822ceebb3ec9a5727df2d39ea2c6ea4f674732a0fa67752cde6",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "AI_and_Networks",
         "Collaborative_Evaluation",
@@ -733,15 +1316,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:5a9ef8f0796c6a6e5818894e93c6a2b241c6df834f9d5be05ff03858efaeaf66",
       "file": "Data_Silos_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Collaborative_Evaluation_zh",
@@ -753,6 +1344,7 @@
         "wikilink"
       ],
       "slug": "Data_Silos_zh",
+      "sourceIds": [],
       "summary": "解释数据分布在不同持有者之间时的学习与评估问题。",
       "tags": [
         "zh",
@@ -763,6 +1355,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "数据孤岛",
       "type": "研究概念",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Data_Silos_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:5a9ef8f0796c6a6e5818894e93c6a2b241c6df834f9d5be05ff03858efaeaf66",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "AI_and_Networks_zh",
         "Collaborative_Evaluation_zh",
@@ -783,15 +1397,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:3f633f2dc9b39e451931c33e1d641d68b8ceb3bafb18caa1f4a08b3ce6a2a993",
       "file": "Distributed_Learning.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Data_Selection",
@@ -801,6 +1423,7 @@
         "wikilink"
       ],
       "slug": "Distributed_Learning",
+      "sourceIds": [],
       "summary": "Concept page for learning with decentralized data, computation, or communication.",
       "tags": [
         "en",
@@ -811,6 +1434,28 @@
       "timestamp": "2026-05-06T06:22:22+08:00",
       "title": "Distributed Learning",
       "type": "Research concept",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Distributed_Learning",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:3f633f2dc9b39e451931c33e1d641d68b8ceb3bafb18caa1f4a08b3ce6a2a993",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -826,15 +1471,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:5e6803ef26eecbddb3aaa6d2e093509b80a07c36d2aef38e2c3c3b0c3d26cbde",
       "file": "Distributed_Learning_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Selection_zh",
@@ -844,6 +1497,7 @@
         "wikilink"
       ],
       "slug": "Distributed_Learning_zh",
+      "sourceIds": [],
       "summary": "解释数据、计算或通信去中心化条件下的学习问题。",
       "tags": [
         "zh",
@@ -854,6 +1508,28 @@
       "timestamp": "2026-05-06T06:22:22+08:00",
       "title": "分布式学习",
       "type": "研究概念",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Distributed_Learning_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:5e6803ef26eecbddb3aaa6d2e093509b80a07c36d2aef38e2c3c3b0c3d26cbde",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "AI_and_Networks_zh",
         "Angela_Yingjun_Zhang_zh",
@@ -873,15 +1549,29 @@
         "Wasserstein barycenter",
         "Distributed OT barycenter"
       ],
+      "citationSourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221"
+      ],
+      "contentHash": "sha256:ac832217767f95bb3b7abf0e98a1e4ce8a67ad69b99d4d8c880f113d3b2374da",
       "file": "Distributed_Wasserstein_Barycenter.md",
+      "footnoteSourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221"
+      ],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Collaborative_Evaluation",
@@ -897,6 +1587,10 @@
         "wikilink"
       ],
       "slug": "Distributed_Wasserstein_Barycenter",
+      "sourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221"
+      ],
       "summary": "Concept page for Qiao's work on computing Wasserstein barycenters from distributed local measures.",
       "tags": [
         "en",
@@ -908,6 +1602,28 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Distributed Wasserstein Barycenter",
       "type": "Research concept",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Distributed_Wasserstein_Barycenter",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:ac832217767f95bb3b7abf0e98a1e4ce8a67ad69b99d4d8c880f113d3b2374da",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "AI_and_Networks",
         "Experience",
@@ -926,15 +1642,29 @@
         "Wasserstein barycenter",
         "分布式最优传输 barycenter"
       ],
+      "citationSourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221"
+      ],
+      "contentHash": "sha256:07336e6f8ccb466caccf4710fad348230218dd8bbb1f5f57f389f28f285757a9",
       "file": "Distributed_Wasserstein_Barycenter_zh.md",
+      "footnoteSourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221"
+      ],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Collaborative_Evaluation_zh",
@@ -950,6 +1680,10 @@
         "wikilink"
       ],
       "slug": "Distributed_Wasserstein_Barycenter_zh",
+      "sourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221"
+      ],
       "summary": "解释乔鑫宝关于从分布式局部测度计算 Wasserstein barycenter 的相关工作。",
       "tags": [
         "zh",
@@ -961,6 +1695,28 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "分布式 Wasserstein Barycenter",
       "type": "研究概念",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Distributed_Wasserstein_Barycenter_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:07336e6f8ccb466caccf4710fad348230218dd8bbb1f5f57f389f28f285757a9",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "AI_and_Networks_zh",
         "Experience_zh",
@@ -975,15 +1731,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:e6ac063f602e015e12506e44c362a212c8155400bf1007d5aaa5be220af99a47",
       "file": "DynFrs.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-08T13:18:57+08:00",
+        "reviewDue": "2026-10-06",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-08T13:18:57+08:00",
       "outgoing": [
         "Hessian_Free_Online_Certified_Unlearning",
         "Machine_Unlearning",
@@ -995,6 +1759,11 @@
         "wikilink"
       ],
       "slug": "DynFrs",
+      "sourceIds": [
+        "src-19cdc04d387acf77",
+        "src-3234eea5652932e1",
+        "src-da17eb3884244bd3"
+      ],
       "summary": "ICLR 2025 paper on efficient machine unlearning for random forests.",
       "tags": [
         "en",
@@ -1006,6 +1775,28 @@
       "timestamp": "2026-05-05T21:39:01+08:00",
       "title": "DynFrs: An Efficient Framework for Machine Unlearning in Random Forest",
       "type": "publication",
+      "reviewedAt": "2026-07-08T13:18:57+08:00",
+      "reviewDue": "2026-10-06",
+      "retrieval": {
+        "documentId": "wiki:DynFrs",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:e6ac063f602e015e12506e44c362a212c8155400bf1007d5aaa5be220af99a47",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Data_Centric_Machine_Learning",
         "Hessian_Free_Online_Certified_Unlearning",
@@ -1022,15 +1813,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:971eed83f902bf36484676a0aeaa392153540246ac822e5e144fa7f9862ad5b0",
       "file": "DynFrs_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-16T20:08:42+08:00",
+        "reviewDue": "2026-10-14",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-16T20:08:42+08:00",
       "outgoing": [
         "Hessian_Free_Online_Certified_Unlearning_zh",
         "Machine_Unlearning_zh",
@@ -1042,6 +1841,11 @@
         "wikilink"
       ],
       "slug": "DynFrs_zh",
+      "sourceIds": [
+        "src-19cdc04d387acf77",
+        "src-3234eea5652932e1",
+        "src-da17eb3884244bd3"
+      ],
       "summary": "ICLR 2025 论文，研究随机森林中的高效机器遗忘。",
       "tags": [
         "zh",
@@ -1053,6 +1857,28 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "DynFrs：随机森林机器遗忘高效框架",
       "type": "publication",
+      "reviewedAt": "2026-07-16T20:08:42+08:00",
+      "reviewDue": "2026-10-14",
+      "retrieval": {
+        "documentId": "wiki:DynFrs_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:971eed83f902bf36484676a0aeaa392153540246ac822e5e144fa7f9862ad5b0",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Data_Centric_Machine_Learning_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
@@ -1068,15 +1894,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:dfec963a11e63f213f428fcf42ae03d3aa2f38ef6263e5c5466e5e99b417215a",
       "file": "Education.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-12T22:06:12+08:00",
+        "reviewDue": "2027-01-08",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-12T22:06:12+08:00",
       "outgoing": [
         "Angela_Yingjun_Zhang",
         "Meng_Zhang",
@@ -1088,6 +1922,7 @@
         "wikilink"
       ],
       "slug": "Education",
+      "sourceIds": [],
       "summary": "Education timeline for Qiao Xinbao.",
       "tags": [
         "en",
@@ -1098,6 +1933,28 @@
       "timestamp": "2026-05-06T23:05:52+08:00",
       "title": "Education",
       "type": "Education timeline",
+      "reviewedAt": "2026-07-12T22:06:12+08:00",
+      "reviewDue": "2027-01-08",
+      "retrieval": {
+        "documentId": "wiki:Education",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:dfec963a11e63f213f428fcf42ae03d3aa2f38ef6263e5c5466e5e99b417215a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index",
         "Shandong_University",
@@ -1107,15 +1964,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:bdf1f3b0cacbec32e2f7caea98ff23b4ca9d2d94e2f2c1263d9caab69c6c3184",
       "file": "Education_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-13T20:54:38+08:00",
+        "reviewDue": "2027-01-09",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-13T20:54:38+08:00",
       "outgoing": [
         "Angela_Yingjun_Zhang_zh",
         "Meng_Zhang_zh",
@@ -1127,6 +1992,7 @@
         "wikilink"
       ],
       "slug": "Education_zh",
+      "sourceIds": [],
       "summary": "乔鑫宝的教育时间线。",
       "tags": [
         "zh",
@@ -1137,6 +2003,28 @@
       "timestamp": "2026-05-06T23:05:52+08:00",
       "title": "教育经历",
       "type": "教育时间线",
+      "reviewedAt": "2026-07-13T20:54:38+08:00",
+      "reviewDue": "2027-01-09",
+      "retrieval": {
+        "documentId": "wiki:Education_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:bdf1f3b0cacbec32e2f7caea98ff23b4ca9d2d94e2f2c1263d9caab69c6c3184",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index_zh",
         "Shandong_University_zh",
@@ -1145,15 +2033,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:793c7f17feda70873d1e709248d0bc63d95c7ca89e95f536e4d0609fc81e2b95",
       "file": "Experience.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -1177,6 +2073,7 @@
         "wikilink"
       ],
       "slug": "Experience",
+      "sourceIds": [],
       "summary": "Research experience and affiliations.",
       "tags": [
         "en",
@@ -1187,6 +2084,28 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Experience",
       "type": "Research experience",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-09-30",
+      "retrieval": {
+        "documentId": "wiki:Experience",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:793c7f17feda70873d1e709248d0bc63d95c7ca89e95f536e4d0609fc81e2b95",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index",
         "log",
@@ -1196,15 +2115,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:9c4c73137aa9bad98b0969e71f161d4b4d6d6760c553e8de6b96fbfaef4276ad",
       "file": "Experience_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-13T20:54:38+08:00",
+        "reviewDue": "2026-10-11",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-13T20:54:38+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Angela_Yingjun_Zhang_zh",
@@ -1228,6 +2155,7 @@
         "wikilink"
       ],
       "slug": "Experience_zh",
+      "sourceIds": [],
       "summary": "研究经历与机构关系。",
       "tags": [
         "zh",
@@ -1238,6 +2166,28 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "研究经历",
       "type": "研究经历",
+      "reviewedAt": "2026-07-13T20:54:38+08:00",
+      "reviewDue": "2026-10-11",
+      "retrieval": {
+        "documentId": "wiki:Experience_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:9c4c73137aa9bad98b0969e71f161d4b4d6d6760c553e8de6b96fbfaef4276ad",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index_zh",
         "log_zh",
@@ -1247,15 +2197,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:01ec70a2530423cf6b84a82836edb8899ddb896b3b6bf1456e347539aafbb777",
       "file": "Fairness_and_Robustness.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Data_Centric_Machine_Learning",
         "Influence_Functions",
@@ -1267,6 +2225,7 @@
         "wikilink"
       ],
       "slug": "Fairness_and_Robustness",
+      "sourceIds": [],
       "summary": "Concept page for fairness and robustness as data-centric correction objectives.",
       "tags": [
         "en",
@@ -1277,6 +2236,28 @@
       "timestamp": "2026-05-05T20:55:21+08:00",
       "title": "Fairness and Robustness",
       "type": "Research concept",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Fairness_and_Robustness",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:01ec70a2530423cf6b84a82836edb8899ddb896b3b6bf1456e347539aafbb777",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index",
         "Influence_Functions",
@@ -1287,15 +2268,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:c1c485ae574d344b3bab011faced822faebcc7652bbd473cd1d62dd4afe10bcb",
       "file": "Fairness_and_Robustness_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Data_Centric_Machine_Learning_zh",
         "Influence_Functions_zh",
@@ -1307,6 +2296,7 @@
         "wikilink"
       ],
       "slug": "Fairness_and_Robustness_zh",
+      "sourceIds": [],
       "summary": "解释公平性与鲁棒性作为数据中心修正目标的概念页。",
       "tags": [
         "zh",
@@ -1317,6 +2307,28 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "公平性与鲁棒性",
       "type": "研究概念",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Fairness_and_Robustness_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:c1c485ae574d344b3bab011faced822faebcc7652bbd473cd1d62dd4afe10bcb",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index_zh",
         "Influence_Functions_zh",
@@ -1327,15 +2339,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:017f86e5da6b8fec2ff8c7a791fbebe84e2d8dcbaa22316b5d7239f9c4f04884",
       "file": "Hessian_Free_Online_Certified_Unlearning.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-08T13:18:57+08:00",
+        "reviewDue": "2026-10-06",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-08T13:18:57+08:00",
       "outgoing": [
         "Certified_Data_Removal",
         "DynFrs",
@@ -1347,6 +2367,11 @@
         "wikilink"
       ],
       "slug": "Hessian_Free_Online_Certified_Unlearning",
+      "sourceIds": [
+        "src-65d81b8aca549860",
+        "src-a0a9b7171dc028d2",
+        "src-faaafad831fbefc5"
+      ],
       "summary": "ICLR 2025 paper on efficient Hessian-free certified machine unlearning.",
       "tags": [
         "en",
@@ -1358,6 +2383,28 @@
       "timestamp": "2026-05-05T21:39:01+08:00",
       "title": "Hessian-Free Online Certified Unlearning",
       "type": "publication",
+      "reviewedAt": "2026-07-08T13:18:57+08:00",
+      "reviewDue": "2026-10-06",
+      "retrieval": {
+        "documentId": "wiki:Hessian_Free_Online_Certified_Unlearning",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:017f86e5da6b8fec2ff8c7a791fbebe84e2d8dcbaa22316b5d7239f9c4f04884",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Certified_Data_Removal",
         "Data_Centric_Machine_Learning",
@@ -1378,15 +2425,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:61f88b28567cc8c89e63a8e28760d7e18e12868069d2aefb90848e7b9a92ba72",
       "file": "Hessian_Free_Online_Certified_Unlearning_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-16T20:08:42+08:00",
+        "reviewDue": "2026-10-14",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-16T20:08:42+08:00",
       "outgoing": [
         "Certified_Data_Removal_zh",
         "DynFrs_zh",
@@ -1398,6 +2453,11 @@
         "wikilink"
       ],
       "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
+      "sourceIds": [
+        "src-65d81b8aca549860",
+        "src-a0a9b7171dc028d2",
+        "src-faaafad831fbefc5"
+      ],
       "summary": "ICLR 2025 论文，研究无显式 Hessian 求逆的高效认证机器遗忘。",
       "tags": [
         "zh",
@@ -1409,6 +2469,28 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "无 Hessian 在线认证遗忘",
       "type": "publication",
+      "reviewedAt": "2026-07-16T20:08:42+08:00",
+      "reviewDue": "2026-10-14",
+      "retrieval": {
+        "documentId": "wiki:Hessian_Free_Online_Certified_Unlearning_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:61f88b28567cc8c89e63a8e28760d7e18e12868069d2aefb90848e7b9a92ba72",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Certified_Data_Removal_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -1428,15 +2510,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:47074f3b8b0b101d64f11b2bbedd1bc5de61e0f63ab4c5346376750158f1895e",
       "file": "index.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-14T23:17:11+08:00",
+        "reviewDue": "2027-07-14",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-14T23:17:11+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -1485,6 +2575,7 @@
         "wikilink"
       ],
       "slug": "index",
+      "sourceIds": [],
       "summary": "Navigation index for public Xinbaopedia pages.",
       "tags": [
         "en",
@@ -1495,19 +2586,49 @@
       "timestamp": "2026-05-07T17:34:07+08:00",
       "title": "Index",
       "type": "Wiki index",
+      "reviewedAt": "2026-07-14T23:17:11+08:00",
+      "reviewDue": "2027-07-14",
+      "retrieval": {
+        "documentId": "wiki:index",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:47074f3b8b0b101d64f11b2bbedd1bc5de61e0f63ab4c5346376750158f1895e",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": []
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:22e13d97b06e95ca53f4e6344ddcbf6cfd2252744cbd5957c5517a732b8ead1a",
       "file": "index_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-14T23:17:11+08:00",
+        "reviewDue": "2027-07-14",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-14T23:17:11+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Angela_Yingjun_Zhang_zh",
@@ -1554,6 +2675,7 @@
         "wikilink"
       ],
       "slug": "index_zh",
+      "sourceIds": [],
       "summary": "Xinbaopedia 公开页面导航索引。",
       "tags": [
         "zh",
@@ -1564,19 +2686,49 @@
       "timestamp": "2026-05-07T17:34:07+08:00",
       "title": "索引",
       "type": "Wiki 索引",
+      "reviewedAt": "2026-07-14T23:17:11+08:00",
+      "reviewDue": "2027-07-14",
+      "retrieval": {
+        "documentId": "wiki:index_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:22e13d97b06e95ca53f4e6344ddcbf6cfd2252744cbd5957c5517a732b8ead1a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": []
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:6b90d74a4b42b4f6c28de85fa0e85f92ca8e9988557827d5641e32265639d5f3",
       "file": "Influence_Functions.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Data_Centric_Machine_Learning",
         "Data_Selection",
@@ -1589,6 +2741,7 @@
         "wikilink"
       ],
       "slug": "Influence_Functions",
+      "sourceIds": [],
       "summary": "Concept page for estimating how training examples affect learned models.",
       "tags": [
         "en",
@@ -1599,6 +2752,28 @@
       "timestamp": "2026-05-05T19:52:29+08:00",
       "title": "Influence Functions",
       "type": "Research concept",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Influence_Functions",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:6b90d74a4b42b4f6c28de85fa0e85f92ca8e9988557827d5641e32265639d5f3",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Certified_Data_Removal",
         "Experience",
@@ -1612,15 +2787,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:647e43dc8868e7f86527f3026f7071cfd2aef1fa226e663e4b88c0d5a9098b33",
       "file": "Influence_Functions_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Data_Centric_Machine_Learning_zh",
         "Data_Selection_zh",
@@ -1633,6 +2816,7 @@
         "wikilink"
       ],
       "slug": "Influence_Functions_zh",
+      "sourceIds": [],
       "summary": "解释估计训练样本如何影响学习模型的概念页。",
       "tags": [
         "zh",
@@ -1643,6 +2827,28 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "影响函数",
       "type": "研究概念",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Influence_Functions_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:647e43dc8868e7f86527f3026f7071cfd2aef1fa226e663e4b88c0d5a9098b33",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Certified_Data_Removal_zh",
         "Experience_zh",
@@ -1656,15 +2862,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:218df98003e2d7abaf687efc0c1417ef55412b77887fc85e5bdb222a572e63cb",
       "file": "Interpretability.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Data_Centric_Machine_Learning",
         "Hessian_Free_Online_Certified_Unlearning",
@@ -1677,6 +2891,7 @@
         "wikilink"
       ],
       "slug": "Interpretability",
+      "sourceIds": [],
       "summary": "Concept page for explaining model behavior and data influence.",
       "tags": [
         "en",
@@ -1688,6 +2903,28 @@
       "timestamp": "2026-05-05T20:55:21+08:00",
       "title": "Interpretability",
       "type": "Research concept",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Interpretability",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:218df98003e2d7abaf687efc0c1417ef55412b77887fc85e5bdb222a572e63cb",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index",
         "Trustworthy_AI"
@@ -1695,15 +2932,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:38652d8ab54846774d1fd3e44dae5f4d2323fbfc11a8f1e9d2494bb4e5ea8d74",
       "file": "Interpretability_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Data_Centric_Machine_Learning_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
@@ -1716,6 +2961,7 @@
         "wikilink"
       ],
       "slug": "Interpretability_zh",
+      "sourceIds": [],
       "summary": "解释模型行为和数据影响的概念页。",
       "tags": [
         "zh",
@@ -1727,21 +2973,51 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "可解释性",
       "type": "研究概念",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Interpretability_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:38652d8ab54846774d1fd3e44dae5f4d2323fbfc11a8f1e9d2494bb4e5ea8d74",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Trustworthy_AI_zh"
       ]
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:9fc884151786e76eff89e42916888985b0242098483f4ab65526f31cda0f2e5b",
       "file": "LLM_Reliability.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Collaborative_Evaluation",
         "NUSRI_CQ",
@@ -1752,6 +3028,7 @@
         "wikilink"
       ],
       "slug": "LLM_Reliability",
+      "sourceIds": [],
       "summary": "Concept page for reliability issues in large language model systems.",
       "tags": [
         "en",
@@ -1763,6 +3040,28 @@
       "timestamp": "2026-05-05T20:55:21+08:00",
       "title": "LLM Reliability",
       "type": "Research concept",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:LLM_Reliability",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:9fc884151786e76eff89e42916888985b0242098483f4ab65526f31cda0f2e5b",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Experience",
         "index",
@@ -1771,15 +3070,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:a604835116d0aa0ec94730397cb9bfa9ef4351aa5bc6502d52e9a225cb78442b",
       "file": "LLM_Reliability_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "NUSRI_CQ_zh",
@@ -1790,6 +3097,7 @@
         "wikilink"
       ],
       "slug": "LLM_Reliability_zh",
+      "sourceIds": [],
       "summary": "解释大语言模型系统可靠性问题的概念页。",
       "tags": [
         "zh",
@@ -1801,6 +3109,28 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "大语言模型可靠性",
       "type": "研究概念",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:LLM_Reliability_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:a604835116d0aa0ec94730397cb9bfa9ef4351aa5bc6502d52e9a225cb78442b",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Experience_zh",
         "index_zh",
@@ -1809,15 +3139,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:a6a05899af8aafad7a0975b9829069a22d573e22a9536742f6e6f8b3f6987755",
       "file": "log.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-15T23:04:06+08:00",
+        "reviewDue": "2027-07-15",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-15T23:04:06+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -1846,6 +3184,7 @@
         "wikilink"
       ],
       "slug": "log",
+      "sourceIds": [],
       "summary": "Append-only maintenance log for the wiki.",
       "tags": [
         "en",
@@ -1856,21 +3195,51 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Log",
       "type": "Maintenance log",
+      "reviewedAt": "2026-07-15T23:04:06+08:00",
+      "reviewDue": "2027-07-15",
+      "retrieval": {
+        "documentId": "wiki:log",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:a6a05899af8aafad7a0975b9829069a22d573e22a9536742f6e6f8b3f6987755",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index"
       ]
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:53d7d9477bde91a9a36630d60d0a98fc91360c28915d3a2425b657e0d02c7e1c",
       "file": "log_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-14T23:17:11+08:00",
+        "reviewDue": "2027-07-14",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-14T23:17:11+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "CV_zh",
@@ -1889,6 +3258,7 @@
         "wikilink"
       ],
       "slug": "log_zh",
+      "sourceIds": [],
       "summary": "Wiki 的追加式维护日志。",
       "tags": [
         "zh",
@@ -1899,21 +3269,51 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "日志",
       "type": "维护日志",
+      "reviewedAt": "2026-07-14T23:17:11+08:00",
+      "reviewDue": "2027-07-14",
+      "retrieval": {
+        "documentId": "wiki:log_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:53d7d9477bde91a9a36630d60d0a98fc91360c28915d3a2425b657e0d02c7e1c",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index_zh"
       ]
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:236de032e41b9ee4438821b3e08a80a8b44299c35558cb5dab318c3b206da375",
       "file": "Machine_Unlearning.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Certified_Data_Removal",
         "Data_Centric_Machine_Learning",
@@ -1930,6 +3330,7 @@
         "wikilink"
       ],
       "slug": "Machine_Unlearning",
+      "sourceIds": [],
       "summary": "Research topic on removing or correcting data influence from trained models.",
       "tags": [
         "en",
@@ -1941,6 +3342,28 @@
       "timestamp": "2026-05-05T22:09:30+08:00",
       "title": "Machine Unlearning",
       "type": "Research topic",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Machine_Unlearning",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:236de032e41b9ee4438821b3e08a80a8b44299c35558cb5dab318c3b206da375",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "AI_and_Networks",
         "Certified_Data_Removal",
@@ -1968,15 +3391,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:55d954af2fcdd71a0b7e0ec05a6645e2e79f1d639b585b8687cd85f236fed742",
       "file": "Machine_Unlearning_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Certified_Data_Removal_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -1993,6 +3424,7 @@
         "wikilink"
       ],
       "slug": "Machine_Unlearning_zh",
+      "sourceIds": [],
       "summary": "研究如何从已训练模型中删除、降低或纠正数据影响。",
       "tags": [
         "zh",
@@ -2004,6 +3436,28 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "机器遗忘",
       "type": "研究专题",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Machine_Unlearning_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:55d954af2fcdd71a0b7e0ec05a6645e2e79f1d639b585b8687cd85f236fed742",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "AI_and_Networks_zh",
         "Certified_Data_Removal_zh",
@@ -2030,15 +3484,27 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [
+        "src-716564daa4b6397f"
+      ],
+      "contentHash": "sha256:e3fc2253d995fdb7047157a92a3b1d378ba60d5b54aef3e7178e8d2431a0ea78",
       "file": "Meng_Zhang.md",
+      "footnoteSourceIds": [
+        "src-716564daa4b6397f"
+      ],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Data_Centric_Machine_Learning",
@@ -2053,6 +3519,9 @@
         "wikilink"
       ],
       "slug": "Meng_Zhang",
+      "sourceIds": [
+        "src-716564daa4b6397f"
+      ],
       "summary": "Zhejiang University faculty member and master's advisor of Xinbao Qiao.",
       "tags": [
         "en",
@@ -2063,6 +3532,28 @@
       "timestamp": "2026-05-05T21:15:18+08:00",
       "title": "Meng Zhang",
       "type": "Academic advisor",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Meng_Zhang",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:e3fc2253d995fdb7047157a92a3b1d378ba60d5b54aef3e7178e8d2431a0ea78",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Education",
         "Experience",
@@ -2074,15 +3565,27 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [
+        "src-716564daa4b6397f"
+      ],
+      "contentHash": "sha256:103093bd3886bfa0462229db2fd4d8557041ecd2ab27552727a5922d4bea88ed",
       "file": "Meng_Zhang_zh.md",
+      "footnoteSourceIds": [
+        "src-716564daa4b6397f"
+      ],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -2097,6 +3600,9 @@
         "wikilink"
       ],
       "slug": "Meng_Zhang_zh",
+      "sourceIds": [
+        "src-716564daa4b6397f"
+      ],
       "summary": "浙江大学教师，乔鑫宝硕士导师。",
       "tags": [
         "zh",
@@ -2107,6 +3613,28 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "张萌",
       "type": "Academic advisor",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Meng_Zhang_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:103093bd3886bfa0462229db2fd4d8557041ecd2ab27552727a5922d4bea88ed",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Education_zh",
         "Experience_zh",
@@ -2117,15 +3645,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:7cf354acdcfbd356f0f83c59eb6015020d32759105867a565a32f9e2dec77a80",
       "file": "Model_Collapse.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Collaborative_Evaluation",
         "Data_Silos",
@@ -2139,6 +3675,7 @@
         "wikilink"
       ],
       "slug": "Model_Collapse",
+      "sourceIds": [],
       "summary": "Concept page for degenerative distributional drift in recursive model training.",
       "tags": [
         "en",
@@ -2150,6 +3687,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Model Collapse",
       "type": "Research concept",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Model_Collapse",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:7cf354acdcfbd356f0f83c59eb6015020d32759105867a565a32f9e2dec77a80",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index",
         "Recursive_Synthetic_Data_Training",
@@ -2163,15 +3722,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:2d69345869dcdfd5c55440e7b6849a7775821f895aba8b83fc43dd9cee7b19ae",
       "file": "Model_Collapse_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "Data_Silos_zh",
@@ -2185,6 +3752,7 @@
         "wikilink"
       ],
       "slug": "Model_Collapse_zh",
+      "sourceIds": [],
       "summary": "解释递归模型训练中退化性分布漂移的概念页。",
       "tags": [
         "zh",
@@ -2196,6 +3764,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "模型坍缩",
       "type": "研究概念",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Model_Collapse_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:2d69345869dcdfd5c55440e7b6849a7775821f895aba8b83fc43dd9cee7b19ae",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index_zh",
         "Recursive_Synthetic_Data_Training_zh",
@@ -2209,15 +3799,29 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [
+        "src-17dc8cb17c9da923",
+        "src-606ddb789d451046"
+      ],
+      "contentHash": "sha256:864772161c155d4e157103d60fb2b0db13bb3490b5afe3fc460ca19b1cb56e5a",
       "file": "NUSRI_CQ.md",
+      "footnoteSourceIds": [
+        "src-17dc8cb17c9da923",
+        "src-606ddb789d451046"
+      ],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Collaborative_Evaluation",
         "Experience",
@@ -2232,6 +3836,12 @@
         "wikilink"
       ],
       "slug": "NUSRI_CQ",
+      "sourceIds": [
+        "src-17dc8cb17c9da923",
+        "src-5816cdaa92b5e41c",
+        "src-606ddb789d451046",
+        "src-fbead0c8f06eb7bc"
+      ],
       "summary": "Research internship institution of Xinbao Qiao.",
       "tags": [
         "en",
@@ -2242,6 +3852,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "NUSRI-CQ",
       "type": "Research institute",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:NUSRI_CQ",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:864772161c155d4e157103d60fb2b0db13bb3490b5afe3fc460ca19b1cb56e5a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Experience",
         "index",
@@ -2252,15 +3884,29 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [
+        "src-17dc8cb17c9da923",
+        "src-606ddb789d451046"
+      ],
+      "contentHash": "sha256:2864019dd92674e38d95921d097ef7924b01c524ef67ce6b20e0cfbfcd72e990",
       "file": "NUSRI_CQ_zh.md",
+      "footnoteSourceIds": [
+        "src-17dc8cb17c9da923",
+        "src-606ddb789d451046"
+      ],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "Experience_zh",
@@ -2275,6 +3921,12 @@
         "wikilink"
       ],
       "slug": "NUSRI_CQ_zh",
+      "sourceIds": [
+        "src-17dc8cb17c9da923",
+        "src-5816cdaa92b5e41c",
+        "src-606ddb789d451046",
+        "src-fbead0c8f06eb7bc"
+      ],
       "summary": "乔鑫宝研究实习阶段所在机构。",
       "tags": [
         "zh",
@@ -2285,6 +3937,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "NUSRI-CQ",
       "type": "研究院",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:NUSRI_CQ_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:2864019dd92674e38d95921d097ef7924b01c524ef67ce6b20e0cfbfcd72e990",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "CV_zh",
         "Experience_zh",
@@ -2296,15 +3970,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:7e8ced286cf6168956fdc2ba88b64f12248d8f3a6dc6a5cef4af0bff7037982e",
       "file": "Old_Homepage_Resources.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-15T22:33:36+08:00",
+        "reviewDue": "2027-07-15",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-15T22:33:36+08:00",
       "outgoing": [
         "Projects",
         "Publications",
@@ -2314,6 +3996,7 @@
         "wikilink"
       ],
       "slug": "Old_Homepage_Resources",
+      "sourceIds": [],
       "summary": "Record of the portrait gallery used by the main biography infobox.",
       "tags": [
         "en",
@@ -2324,21 +4007,51 @@
       "timestamp": "2026-05-05T01:10:50+08:00",
       "title": "Homepage Portrait Resources",
       "type": "Resource inventory",
+      "reviewedAt": "2026-07-15T22:33:36+08:00",
+      "reviewDue": "2027-07-15",
+      "retrieval": {
+        "documentId": "wiki:Old_Homepage_Resources",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:7e8ced286cf6168956fdc2ba88b64f12248d8f3a6dc6a5cef4af0bff7037982e",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index"
       ]
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:1e3ab25218bb7c3ba4d95ba53f01a8dc2baca841ce6e7b5e5d17056f3bfcfd44",
       "file": "Old_Homepage_Resources_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-15T22:33:36+08:00",
+        "reviewDue": "2027-07-15",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-15T22:33:36+08:00",
       "outgoing": [
         "Projects_zh",
         "Publications_zh",
@@ -2348,6 +4061,7 @@
         "wikilink"
       ],
       "slug": "Old_Homepage_Resources_zh",
+      "sourceIds": [],
       "summary": "记录个人主页 infobox 使用的肖像图库。",
       "tags": [
         "zh",
@@ -2358,21 +4072,51 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "主页肖像资源",
       "type": "资源记录",
+      "reviewedAt": "2026-07-15T22:33:36+08:00",
+      "reviewDue": "2027-07-15",
+      "retrieval": {
+        "documentId": "wiki:Old_Homepage_Resources_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:1e3ab25218bb7c3ba4d95ba53f01a8dc2baca841ce6e7b5e5d17056f3bfcfd44",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index_zh"
       ]
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:e58fcad724c37769eb9f4287683d1b6b794bad22d56608bf8bc623163b2a7807",
       "file": "Projects.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Collaborative_Evaluation",
@@ -2388,6 +4132,7 @@
         "wikilink"
       ],
       "slug": "Projects",
+      "sourceIds": [],
       "summary": "Research projects and project clusters.",
       "tags": [
         "en",
@@ -2398,6 +4143,28 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Projects",
       "type": "Project overview",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-09-30",
+      "retrieval": {
+        "documentId": "wiki:Projects",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:e58fcad724c37769eb9f4287683d1b6b794bad22d56608bf8bc623163b2a7807",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index",
         "log",
@@ -2407,15 +4174,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:fee4ad67798127cc3b52660ab5227d1b67bb590c8a37300a540bb43e1e15bbec",
       "file": "Projects_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Collaborative_Evaluation_zh",
@@ -2431,6 +4206,7 @@
         "wikilink"
       ],
       "slug": "Projects_zh",
+      "sourceIds": [],
       "summary": "研究项目与项目簇。",
       "tags": [
         "zh",
@@ -2441,6 +4217,28 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "项目",
       "type": "项目概览",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-09-30",
+      "retrieval": {
+        "documentId": "wiki:Projects_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:fee4ad67798127cc3b52660ab5227d1b67bb590c8a37300a540bb43e1e15bbec",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index_zh",
         "log_zh",
@@ -2450,15 +4248,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:5ac4efe9a526d8aa52adbadfa89b918acd748d254225726aad1858be0cd67f51",
       "file": "Publications.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Data_Centric_Machine_Learning",
@@ -2475,6 +4281,7 @@
         "wikilink"
       ],
       "slug": "Publications",
+      "sourceIds": [],
       "summary": "Publication list for Qiao Xinbao.",
       "tags": [
         "en",
@@ -2485,6 +4292,28 @@
       "timestamp": "2026-06-01T22:00:31+08:00",
       "title": "Publications",
       "type": "Publication list",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-09-30",
+      "retrieval": {
+        "documentId": "wiki:Publications",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:5ac4efe9a526d8aa52adbadfa89b918acd748d254225726aad1858be0cd67f51",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "CV",
         "index",
@@ -2496,15 +4325,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:15c34136b6393d0ec3a649ba10bea0676ae1a11c72cf328442f9161e415fa76b",
       "file": "Publications_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-09-30",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -2521,6 +4358,7 @@
         "wikilink"
       ],
       "slug": "Publications_zh",
+      "sourceIds": [],
       "summary": "乔鑫宝的论文索引。",
       "tags": [
         "zh",
@@ -2531,6 +4369,28 @@
       "timestamp": "2026-06-01T22:04:00+08:00",
       "title": "论文",
       "type": "论文列表",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-09-30",
+      "retrieval": {
+        "documentId": "wiki:Publications_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:15c34136b6393d0ec3a649ba10bea0676ae1a11c72cf328442f9161e415fa76b",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "CV_zh",
         "index_zh",
@@ -2547,15 +4407,43 @@
         "喬",
         "ciao"
       ],
+      "citationSourceIds": [
+        "src-264e39cbec8d2f89",
+        "src-30f33d3201c476ab",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-70ed6a3bfb603732",
+        "src-9b2be44d3f13005a",
+        "src-9d0661fee6814e6f",
+        "src-cea294f51d3559e8",
+        "src-cedf284f61bb39ae",
+        "src-dac65e05df6e888f",
+        "src-e1d67502167d29ad",
+        "src-f6009f51f54778f6"
+      ],
+      "contentHash": "sha256:a4df4f1394b219dbe68acbff664db416aaa3f0e849cb1ff8ebe5c22273b0ec6a",
       "file": "Qiao_Xinbao_zh.md",
+      "footnoteSourceIds": [
+        "src-264e39cbec8d2f89",
+        "src-30f33d3201c476ab",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-cedf284f61bb39ae",
+        "src-e1d67502167d29ad"
+      ],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-16T20:08:42+08:00",
+        "reviewDue": "2026-10-14",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-16T20:08:42+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Angela_Yingjun_Zhang_zh",
@@ -2586,6 +4474,20 @@
         "wikilink"
       ],
       "slug": "Qiao_Xinbao_zh",
+      "sourceIds": [
+        "src-264e39cbec8d2f89",
+        "src-30f33d3201c476ab",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-70ed6a3bfb603732",
+        "src-9b2be44d3f13005a",
+        "src-9d0661fee6814e6f",
+        "src-cea294f51d3559e8",
+        "src-cedf284f61bb39ae",
+        "src-dac65e05df6e888f",
+        "src-e1d67502167d29ad",
+        "src-f6009f51f54778f6"
+      ],
       "summary": "香港中文大学信息工程系博士生；研究方向包括数据中心 ML、AI for Networks、Networks for AI、机器遗忘和合成数据可靠性",
       "tags": [
         "zh",
@@ -2596,6 +4498,28 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "乔鑫宝",
       "type": "博士生",
+      "reviewedAt": "2026-07-16T20:08:42+08:00",
+      "reviewDue": "2026-10-14",
+      "retrieval": {
+        "documentId": "wiki:Qiao_Xinbao_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:a4df4f1394b219dbe68acbff664db416aaa3f0e849cb1ff8ebe5c22273b0ec6a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "AI_and_Networks_zh",
         "Angela_Yingjun_Zhang_zh",
@@ -2619,15 +4543,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:6ef03a3d58778c15b3243793362e42f687b2f20f9c364d1ce25f158e6de0a6b7",
       "file": "Random_Forest.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Certified_Data_Removal",
@@ -2639,6 +4571,7 @@
         "wikilink"
       ],
       "slug": "Random_Forest",
+      "sourceIds": [],
       "summary": "Concept page for random forests as the model class studied in DynFrs.",
       "tags": [
         "en",
@@ -2649,6 +4582,28 @@
       "timestamp": "2026-05-05T19:52:29+08:00",
       "title": "Random Forest",
       "type": "Model family",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Random_Forest",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:6ef03a3d58778c15b3243793362e42f687b2f20f9c364d1ce25f158e6de0a6b7",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "DynFrs",
         "index",
@@ -2657,15 +4612,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:6d257e9e58d7a5cdcb995d7953ef20d0399f947e387488808ee5cc005c98eec8",
       "file": "Random_Forest_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Certified_Data_Removal_zh",
@@ -2677,6 +4640,7 @@
         "wikilink"
       ],
       "slug": "Random_Forest_zh",
+      "sourceIds": [],
       "summary": "解释 DynFrs 所研究的随机森林模型类别。",
       "tags": [
         "zh",
@@ -2687,6 +4651,28 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "随机森林",
       "type": "模型族",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Random_Forest_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:6d257e9e58d7a5cdcb995d7953ef20d0399f947e387488808ee5cc005c98eec8",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "DynFrs_zh",
         "index_zh",
@@ -2695,15 +4681,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:2734a90abbd3686a946f0cea17b703481d18fe896f02981c9e0c7cdae4334395",
       "file": "Recursive_Synthetic_Data_Training.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Data_Silos",
@@ -2716,6 +4710,7 @@
         "wikilink"
       ],
       "slug": "Recursive_Synthetic_Data_Training",
+      "sourceIds": [],
       "summary": "Concept page for training models repeatedly on data generated by earlier models.",
       "tags": [
         "en",
@@ -2727,6 +4722,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Recursive Synthetic Data Training",
       "type": "Research concept",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Recursive_Synthetic_Data_Training",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:2734a90abbd3686a946f0cea17b703481d18fe896f02981c9e0c7cdae4334395",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index",
         "Model_Collapse",
@@ -2737,15 +4754,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:2346ed0d127d9a8c6e84bfdf8fa967e3118ad2ae6adc8383c56cf69a8724c12a",
       "file": "Recursive_Synthetic_Data_Training_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Silos_zh",
@@ -2758,6 +4783,7 @@
         "wikilink"
       ],
       "slug": "Recursive_Synthetic_Data_Training_zh",
+      "sourceIds": [],
       "summary": "解释模型反复使用早期模型生成数据进行训练的过程。",
       "tags": [
         "zh",
@@ -2769,6 +4795,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "递归合成数据训练",
       "type": "研究概念",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Recursive_Synthetic_Data_Training_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:2346ed0d127d9a8c6e84bfdf8fa967e3118ad2ae6adc8383c56cf69a8724c12a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index_zh",
         "Model_Collapse_zh",
@@ -2779,15 +4827,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:09e30b38e992c7f3c7c8b32a5bba43801fe9854088306229588b105b24990848",
       "file": "Research.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-11T07:28:06+08:00",
+        "reviewDue": "2026-10-08",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-11T07:28:06+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Certified_Data_Removal",
@@ -2812,6 +4868,7 @@
         "wikilink"
       ],
       "slug": "Research",
+      "sourceIds": [],
       "summary": "Overview of Xinbao Qiao's research directions and linked topic pages.",
       "tags": [
         "en",
@@ -2822,6 +4879,28 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Research",
       "type": "Research overview",
+      "reviewedAt": "2026-07-11T07:28:06+08:00",
+      "reviewDue": "2026-10-08",
+      "retrieval": {
+        "documentId": "wiki:Research",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:09e30b38e992c7f3c7c8b32a5bba43801fe9854088306229588b105b24990848",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index",
         "log",
@@ -2831,15 +4910,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:0b3775a6da8240e7a8826285d93d76a8f51202552c6969c4c028ff60fb890bcf",
       "file": "Research_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-11T07:28:06+08:00",
+        "reviewDue": "2026-10-08",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-11T07:28:06+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Certified_Data_Removal_zh",
@@ -2864,6 +4951,7 @@
         "wikilink"
       ],
       "slug": "Research_zh",
+      "sourceIds": [],
       "summary": "乔鑫宝研究方向与相关专题页面概览。",
       "tags": [
         "zh",
@@ -2874,6 +4962,28 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "研究",
       "type": "研究概览",
+      "reviewedAt": "2026-07-11T07:28:06+08:00",
+      "reviewDue": "2026-10-08",
+      "retrieval": {
+        "documentId": "wiki:Research_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:0b3775a6da8240e7a8826285d93d76a8f51202552c6969c4c028ff60fb890bcf",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index_zh",
         "log_zh",
@@ -2883,15 +4993,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:24005e66c5a5ac72037a20b6868fb1935bc8e292c9fea0810c3a76c85b7c06a8",
       "file": "Sample_Selection_Bias.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Data_Selection",
@@ -2904,6 +5022,7 @@
         "wikilink"
       ],
       "slug": "Sample_Selection_Bias",
+      "sourceIds": [],
       "summary": "Concept page for distributional bias introduced by non-representative sample choice.",
       "tags": [
         "en",
@@ -2914,6 +5033,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Sample Selection Bias",
       "type": "Research concept",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Sample_Selection_Bias",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:24005e66c5a5ac72037a20b6868fb1935bc8e292c9fea0810c3a76c85b7c06a8",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Data_Centric_Machine_Learning",
         "Data_Selection",
@@ -2930,15 +5071,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:cc1aca2e7114303a2dad5668cb78a122c92d56ebbae3a31397a995c35a87af59",
       "file": "Sample_Selection_Bias_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Data_Selection_zh",
         "Data_Silos_zh",
@@ -2950,6 +5099,7 @@
         "wikilink"
       ],
       "slug": "Sample_Selection_Bias_zh",
+      "sourceIds": [],
       "summary": "解释非代表性样本选择引入的分布偏差。",
       "tags": [
         "zh",
@@ -2960,6 +5110,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "样本选择偏差",
       "type": "研究概念",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Sample_Selection_Bias_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:cc1aca2e7114303a2dad5668cb78a122c92d56ebbae3a31397a995c35a87af59",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Data_Centric_Machine_Learning_zh",
         "Data_Selection_zh",
@@ -2976,15 +5148,27 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [
+        "src-8207d2b85f96e6cb"
+      ],
+      "contentHash": "sha256:b64a70b2a82421460cfe1bd75c931785572bf6b49508c8138d2e5866ed32ea8a",
       "file": "Shandong_University.md",
+      "footnoteSourceIds": [
+        "src-8207d2b85f96e6cb"
+      ],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Data_Silos",
@@ -2998,6 +5182,11 @@
         "wikilink"
       ],
       "slug": "Shandong_University",
+      "sourceIds": [
+        "src-2698bddf338b56e5",
+        "src-33f25ef72f5cac0f",
+        "src-8207d2b85f96e6cb"
+      ],
       "summary": "Undergraduate institution of Xinbao Qiao.",
       "tags": [
         "en",
@@ -3008,6 +5197,28 @@
       "timestamp": "2026-05-05T20:55:21+08:00",
       "title": "Shandong University",
       "type": "Public research university",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Shandong_University",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:b64a70b2a82421460cfe1bd75c931785572bf6b49508c8138d2e5866ed32ea8a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Education",
         "index",
@@ -3018,15 +5229,27 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [
+        "src-8207d2b85f96e6cb"
+      ],
+      "contentHash": "sha256:c57202064e7fe6a89492d9160d3f630ce33ac111149aac58a6d7f4c5fa44718a",
       "file": "Shandong_University_zh.md",
+      "footnoteSourceIds": [
+        "src-8207d2b85f96e6cb"
+      ],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Silos_zh",
@@ -3040,6 +5263,11 @@
         "wikilink"
       ],
       "slug": "Shandong_University_zh",
+      "sourceIds": [
+        "src-2698bddf338b56e5",
+        "src-33f25ef72f5cac0f",
+        "src-8207d2b85f96e6cb"
+      ],
       "summary": "乔鑫宝本科阶段所在机构。",
       "tags": [
         "zh",
@@ -3050,6 +5278,28 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "山东大学",
       "type": "公立研究型大学",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Shandong_University_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:c57202064e7fe6a89492d9160d3f630ce33ac111149aac58a6d7f4c5fa44718a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Education_zh",
         "index_zh",
@@ -3059,15 +5309,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:51dfec03a42c135e3d556b543bb9f92d4a9c7b64892db9957a719d12a25eff56",
       "file": "Skills.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-03T00:03:48+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-03T00:03:48+08:00",
       "outgoing": [
         "CV",
         "Research",
@@ -3077,6 +5335,7 @@
         "wikilink"
       ],
       "slug": "Skills",
+      "sourceIds": [],
       "summary": "Technical skills listed in Qiao Xinbao's CV.",
       "tags": [
         "en",
@@ -3087,21 +5346,51 @@
       "timestamp": "2026-05-05T00:55:59+08:00",
       "title": "Skills",
       "type": "Technical skills",
+      "reviewedAt": "2026-07-03T00:03:48+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Skills",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:51dfec03a42c135e3d556b543bb9f92d4a9c7b64892db9957a719d12a25eff56",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index"
       ]
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:75088b353ef9e2295e61ec52e17237ca0b79e5ded268d9a68678dddb7034225a",
       "file": "Skills_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-03T00:03:48+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-03T00:03:48+08:00",
       "outgoing": [
         "CV_zh",
         "Qiao_Xinbao_zh",
@@ -3111,6 +5400,7 @@
         "wikilink"
       ],
       "slug": "Skills_zh",
+      "sourceIds": [],
       "summary": "乔鑫宝 CV 中列出的技术技能。",
       "tags": [
         "zh",
@@ -3121,21 +5411,51 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "技能",
       "type": "技术技能",
+      "reviewedAt": "2026-07-03T00:03:48+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Skills_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:75088b353ef9e2295e61ec52e17237ca0b79e5ded268d9a68678dddb7034225a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "index_zh"
       ]
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:716cec747164b611174524f9ef173b5027f5d0873107ea5e7158c0676c2134e4",
       "file": "Soft_Weighted_Machine_Unlearning.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "confirmed",
         "confidence": 0.95,
         "review": "on venue/status change",
-        "retention": "long-lived semantic memory"
+        "retention": "long-lived semantic memory",
+        "reviewedAt": "2026-07-12T20:00:05+08:00",
+        "reviewDue": "2027-07-12",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-12T20:00:05+08:00",
       "outgoing": [
         "Fairness_and_Robustness",
         "Hessian_Free_Online_Certified_Unlearning",
@@ -3148,6 +5468,11 @@
         "wikilink"
       ],
       "slug": "Soft_Weighted_Machine_Unlearning",
+      "sourceIds": [
+        "src-0642a11373a83c47",
+        "src-22eeced7ebe7a0c5",
+        "src-53e1199f272a4df4"
+      ],
       "summary": "AAAI 2026 paper on soft-weighted unlearning for fairness and robustness correction.",
       "tags": [
         "en",
@@ -3160,6 +5485,28 @@
       "timestamp": "2026-05-05T21:39:01+08:00",
       "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
       "type": "publication",
+      "reviewedAt": "2026-07-12T20:00:05+08:00",
+      "reviewDue": "2027-07-12",
+      "retrieval": {
+        "documentId": "wiki:Soft_Weighted_Machine_Unlearning",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:716cec747164b611174524f9ef173b5027f5d0873107ea5e7158c0676c2134e4",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Data_Centric_Machine_Learning",
         "Fairness_and_Robustness",
@@ -3178,15 +5525,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:0081860c702601e108aa2ca1ae0519b8f89ecba44dd3585e716f6dc0198efa1c",
       "file": "Soft_Weighted_Machine_Unlearning_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "confirmed",
         "confidence": 0.95,
         "review": "on venue/status change",
-        "retention": "long-lived semantic memory"
+        "retention": "long-lived semantic memory",
+        "reviewedAt": "2026-07-16T20:08:42+08:00",
+        "reviewDue": "2027-07-16",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-16T20:08:42+08:00",
       "outgoing": [
         "Fairness_and_Robustness_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
@@ -3199,6 +5554,11 @@
         "wikilink"
       ],
       "slug": "Soft_Weighted_Machine_Unlearning_zh",
+      "sourceIds": [
+        "src-0642a11373a83c47",
+        "src-22eeced7ebe7a0c5",
+        "src-53e1199f272a4df4"
+      ],
       "summary": "AAAI 2026 论文，研究用于公平性与鲁棒性修正的软加权机器遗忘。",
       "tags": [
         "zh",
@@ -3211,6 +5571,28 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "超越二元擦除：用于公平性与鲁棒性的软加权遗忘",
       "type": "publication",
+      "reviewedAt": "2026-07-16T20:08:42+08:00",
+      "reviewDue": "2027-07-16",
+      "retrieval": {
+        "documentId": "wiki:Soft_Weighted_Machine_Unlearning_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:0081860c702601e108aa2ca1ae0519b8f89ecba44dd3585e716f6dc0198efa1c",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Data_Centric_Machine_Learning_zh",
         "Fairness_and_Robustness_zh",
@@ -3228,15 +5610,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:bbe93fac97f4c9cdd3408c23951a3082bd7e098256861dfd64ad06fb01970f2a",
       "file": "Synthetic_Data.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-03T00:03:48+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-03T00:03:48+08:00",
       "outgoing": [
         "Collaborative_Evaluation",
         "Data_Selection",
@@ -3250,6 +5640,7 @@
         "wikilink"
       ],
       "slug": "Synthetic_Data",
+      "sourceIds": [],
       "summary": "Concept page for generated data used in training, evaluation, or privacy-preserving collaboration.",
       "tags": [
         "en",
@@ -3261,6 +5652,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Synthetic Data (concept)",
       "type": "Research concept",
+      "reviewedAt": "2026-07-03T00:03:48+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Synthetic_Data",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:bbe93fac97f4c9cdd3408c23951a3082bd7e098256861dfd64ad06fb01970f2a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Data_Centric_Machine_Learning",
         "Data_Selection",
@@ -3274,15 +5687,23 @@
       "aliases": [
         "Synthetic Data and Model Collapse"
       ],
+      "citationSourceIds": [],
+      "contentHash": "sha256:e71393c9d3848004a058ac5c4889a5de233c1a26b86793c00ee99193924a49dc",
       "file": "Synthetic_Data_and_Model_Collapse.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-03T00:03:48+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-03T00:03:48+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Collaborative_Evaluation",
@@ -3300,6 +5721,7 @@
         "wikilink"
       ],
       "slug": "Synthetic_Data_and_Model_Collapse",
+      "sourceIds": [],
       "summary": "Research topic on synthetic data, recursive training, low-resource verification, selection bias, and model collapse.",
       "tags": [
         "en",
@@ -3311,6 +5733,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Synthetic Data",
       "type": "Research topic",
+      "reviewedAt": "2026-07-03T00:03:48+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Synthetic_Data_and_Model_Collapse",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:e71393c9d3848004a058ac5c4889a5de233c1a26b86793c00ee99193924a49dc",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Collaborative_Evaluation",
         "Data_Centric_Machine_Learning",
@@ -3337,15 +5781,23 @@
       "aliases": [
         "Synthetic Data and Model Collapse"
       ],
+      "citationSourceIds": [],
+      "contentHash": "sha256:745941be243f09bc0462a6ce71bab7a0abce40149496f78bc21002cf2207e5c8",
       "file": "Synthetic_Data_and_Model_Collapse_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-03T00:03:48+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-03T00:03:48+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Collaborative_Evaluation_zh",
@@ -3363,6 +5815,7 @@
         "wikilink"
       ],
       "slug": "Synthetic_Data_and_Model_Collapse_zh",
+      "sourceIds": [],
       "summary": "关于合成数据、递归训练、低资源验证、选择偏差和模型坍缩的研究专题。",
       "tags": [
         "zh",
@@ -3374,6 +5827,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "合成数据",
       "type": "研究专题",
+      "reviewedAt": "2026-07-03T00:03:48+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Synthetic_Data_and_Model_Collapse_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:745941be243f09bc0462a6ce71bab7a0abce40149496f78bc21002cf2207e5c8",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Collaborative_Evaluation_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -3397,15 +5872,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:0be9d0fd4d48f569a4a98be5a8e262abd0f666adf14656d58b7af7e19b57194d",
       "file": "Synthetic_Data_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "Data_Selection_zh",
@@ -3419,6 +5902,7 @@
         "wikilink"
       ],
       "slug": "Synthetic_Data_zh",
+      "sourceIds": [],
       "summary": "解释用于训练、评估或隐私友好协作的生成数据。",
       "tags": [
         "zh",
@@ -3430,6 +5914,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "合成数据（概念）",
       "type": "研究概念",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Synthetic_Data_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:0be9d0fd4d48f569a4a98be5a8e262abd0f666adf14656d58b7af7e19b57194d",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Data_Centric_Machine_Learning_zh",
         "Data_Selection_zh",
@@ -3441,15 +5947,33 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [
+        "src-09fa966eeac1624e",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-f6cb0623675b4752"
+      ],
+      "contentHash": "sha256:a27c4d78f158b9564e002f310e7e37f4ac2fa63d951f4b0521f8c330fa042e2a",
       "file": "The_Chinese_University_of_Hong_Kong.md",
+      "footnoteSourceIds": [
+        "src-09fa966eeac1624e",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-f6cb0623675b4752"
+      ],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -3467,6 +5991,14 @@
         "wikilink"
       ],
       "slug": "The_Chinese_University_of_Hong_Kong",
+      "sourceIds": [
+        "src-09fa966eeac1624e",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-cecd4e57ea891eee",
+        "src-f1b03a6c505acdf9",
+        "src-f6cb0623675b4752"
+      ],
       "summary": "Current doctoral institution of Xinbao Qiao.",
       "tags": [
         "en",
@@ -3477,6 +6009,28 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "The Chinese University of Hong Kong",
       "type": "Public research university",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:The_Chinese_University_of_Hong_Kong",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:a27c4d78f158b9564e002f310e7e37f4ac2fa63d951f4b0521f8c330fa042e2a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -3490,15 +6044,33 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [
+        "src-09fa966eeac1624e",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-f6cb0623675b4752"
+      ],
+      "contentHash": "sha256:cc7ee27875948d4bdac61d09c00a69b27a9675d8b85091248c40ab359ba356e3",
       "file": "The_Chinese_University_of_Hong_Kong_zh.md",
+      "footnoteSourceIds": [
+        "src-09fa966eeac1624e",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-f6cb0623675b4752"
+      ],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-13T20:54:38+08:00",
+        "reviewDue": "2027-01-09",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-13T20:54:38+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Angela_Yingjun_Zhang_zh",
@@ -3516,6 +6088,14 @@
         "wikilink"
       ],
       "slug": "The_Chinese_University_of_Hong_Kong_zh",
+      "sourceIds": [
+        "src-09fa966eeac1624e",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-cecd4e57ea891eee",
+        "src-f1b03a6c505acdf9",
+        "src-f6cb0623675b4752"
+      ],
       "summary": "乔鑫宝当前博士阶段所在机构。",
       "tags": [
         "zh",
@@ -3526,6 +6106,28 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "香港中文大学",
       "type": "公立研究型大学",
+      "reviewedAt": "2026-07-13T20:54:38+08:00",
+      "reviewDue": "2027-01-09",
+      "retrieval": {
+        "documentId": "wiki:The_Chinese_University_of_Hong_Kong_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:cc7ee27875948d4bdac61d09c00a69b27a9675d8b85091248c40ab359ba356e3",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "AI_and_Networks_zh",
         "Angela_Yingjun_Zhang_zh",
@@ -3538,15 +6140,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:de85186a59ada4edf5598f5cdde696fb8984635557fbd8fecf816e4ffa2cffc3",
       "file": "Trustworthy_AI.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Collaborative_Evaluation",
@@ -3561,6 +6171,7 @@
         "wikilink"
       ],
       "slug": "Trustworthy_AI",
+      "sourceIds": [],
       "summary": "Research topic covering reliability, deletion, fairness, robustness, interpretability, and evaluation.",
       "tags": [
         "en",
@@ -3571,6 +6182,28 @@
       "timestamp": "2026-05-05T20:55:21+08:00",
       "title": "Trustworthy AI",
       "type": "Research topic",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Trustworthy_AI",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:de85186a59ada4edf5598f5cdde696fb8984635557fbd8fecf816e4ffa2cffc3",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Certified_Data_Removal",
         "DynFrs",
@@ -3588,15 +6221,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:28482b5d209cd82b224f5326fe62ebc4e226b20a176d694553294d64993e7052",
       "file": "Trustworthy_AI_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Collaborative_Evaluation_zh",
@@ -3611,6 +6252,7 @@
         "wikilink"
       ],
       "slug": "Trustworthy_AI_zh",
+      "sourceIds": [],
       "summary": "覆盖可靠性、删除、公平性、鲁棒性、可解释性和评估的研究专题。",
       "tags": [
         "zh",
@@ -3621,6 +6263,28 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "可信 AI",
       "type": "研究专题",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Trustworthy_AI_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:28482b5d209cd82b224f5326fe62ebc4e226b20a176d694553294d64993e7052",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Certified_Data_Removal_zh",
         "DynFrs_zh",
@@ -3638,15 +6302,31 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221",
+        "src-3b3968d201c7ab67"
+      ],
+      "contentHash": "sha256:7332b1c94414444afaeadc595058d70d56cc4cbfc7d14d3d55bda2592ed311fe",
       "file": "Wasserstein_Geometry.md",
+      "footnoteSourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221",
+        "src-3b3968d201c7ab67"
+      ],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Collaborative_Evaluation",
         "Data_Silos",
@@ -3659,6 +6339,11 @@
         "wikilink"
       ],
       "slug": "Wasserstein_Geometry",
+      "sourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221",
+        "src-3b3968d201c7ab67"
+      ],
       "summary": "Concept page for distributional comparison using optimal-transport geometry.",
       "tags": [
         "en",
@@ -3670,6 +6355,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Wasserstein Geometry",
       "type": "Research concept",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Wasserstein_Geometry",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:7332b1c94414444afaeadc595058d70d56cc4cbfc7d14d3d55bda2592ed311fe",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Collaborative_Evaluation",
         "Distributed_Wasserstein_Barycenter",
@@ -3686,15 +6393,31 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221",
+        "src-3b3968d201c7ab67"
+      ],
+      "contentHash": "sha256:23fe4ef251fbe9ab9ba250c9e19140bd8721c19357fc1d2d55f5e6fdf86e2845",
       "file": "Wasserstein_Geometry_zh.md",
+      "footnoteSourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221",
+        "src-3b3968d201c7ab67"
+      ],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
-        "retention": "semantic memory with quality warnings"
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-07-02T20:03:20+08:00",
+        "reviewDue": "2026-12-29",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "Data_Silos_zh",
@@ -3707,6 +6430,11 @@
         "wikilink"
       ],
       "slug": "Wasserstein_Geometry_zh",
+      "sourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221",
+        "src-3b3968d201c7ab67"
+      ],
       "summary": "解释使用最优传输几何进行分布比较的概念页。",
       "tags": [
         "zh",
@@ -3718,6 +6446,28 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Wasserstein 几何",
       "type": "研究概念",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "retrieval": {
+        "documentId": "wiki:Wasserstein_Geometry_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:23fe4ef251fbe9ab9ba250c9e19140bd8721c19357fc1d2d55f5e6fdf86e2845",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "Collaborative_Evaluation_zh",
         "Distributed_Wasserstein_Barycenter_zh",
@@ -3734,15 +6484,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:0132752b19a51f653c6b62a66468fb1b3f3dcbd45675f431a2fcd7528fcd38a2",
       "file": "When_Sample_Selection_Bias_Precipitates_Model_Collapse.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "confirmed",
         "confidence": 0.95,
         "review": "on venue/status change",
-        "retention": "long-lived semantic memory"
+        "retention": "long-lived semantic memory",
+        "reviewedAt": "2026-07-12T20:00:05+08:00",
+        "reviewDue": "2027-07-12",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-12T20:00:05+08:00",
       "outgoing": [
         "Collaborative_Evaluation",
         "Data_Selection",
@@ -3759,6 +6517,12 @@
         "wikilink"
       ],
       "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
+      "sourceIds": [
+        "src-03bf1b2f9af65762",
+        "src-4144e3776ac496d0",
+        "src-766234e11681dad2",
+        "src-94b169d5c233e588"
+      ],
       "summary": "ICML 2026 paper on low-resource verification regimes, sample-selection bias, model collapse, and collaborative Wasserstein-geometry proxies.",
       "tags": [
         "en",
@@ -3771,6 +6535,28 @@
       "timestamp": "2026-06-02T22:56:50+08:00",
       "title": "When Sample Selection Bias Precipitates Model Collapse",
       "type": "publication",
+      "reviewedAt": "2026-07-12T20:00:05+08:00",
+      "reviewDue": "2027-07-12",
+      "retrieval": {
+        "documentId": "wiki:When_Sample_Selection_Bias_Precipitates_Model_Collapse",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:0132752b19a51f653c6b62a66468fb1b3f3dcbd45675f431a2fcd7528fcd38a2",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "AI_and_Networks",
         "Collaborative_Evaluation",
@@ -3795,15 +6581,23 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:09b8d93c182cc7e7940467c8a17797f2744016e10d4aa01ec370c6f5e2abc779",
       "file": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md",
+      "footnoteSourceIds": [],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "confirmed",
         "confidence": 0.95,
         "review": "on venue/status change",
-        "retention": "long-lived semantic memory"
+        "retention": "long-lived semantic memory",
+        "reviewedAt": "2026-07-16T20:08:42+08:00",
+        "reviewDue": "2027-07-16",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-16T20:08:42+08:00",
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "Data_Selection_zh",
@@ -3820,6 +6614,12 @@
         "wikilink"
       ],
       "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
+      "sourceIds": [
+        "src-03bf1b2f9af65762",
+        "src-4144e3776ac496d0",
+        "src-766234e11681dad2",
+        "src-94b169d5c233e588"
+      ],
       "summary": "ICML 2026 论文，研究低资源验证场景、样本选择偏差、模型坍缩与协作 Wasserstein 几何代理。",
       "tags": [
         "zh",
@@ -3832,6 +6632,28 @@
       "timestamp": "2026-06-02T22:56:50+08:00",
       "title": "样本选择偏差何以促成模型坍缩",
       "type": "publication",
+      "reviewedAt": "2026-07-16T20:08:42+08:00",
+      "reviewDue": "2027-07-16",
+      "retrieval": {
+        "documentId": "wiki:When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:09b8d93c182cc7e7940467c8a17797f2744016e10d4aa01ec370c6f5e2abc779",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "AI_and_Networks_zh",
         "Collaborative_Evaluation_zh",
@@ -3860,15 +6682,43 @@
         "MrCiao",
         "Ciao"
       ],
+      "citationSourceIds": [
+        "src-264e39cbec8d2f89",
+        "src-30f33d3201c476ab",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-70ed6a3bfb603732",
+        "src-9b2be44d3f13005a",
+        "src-9d0661fee6814e6f",
+        "src-cea294f51d3559e8",
+        "src-cedf284f61bb39ae",
+        "src-dac65e05df6e888f",
+        "src-e1d67502167d29ad",
+        "src-f6009f51f54778f6"
+      ],
+      "contentHash": "sha256:ece5d20d0f79a3bd248813fd92f3949416c9d3a78bf0d698e8d8e48c1bfc4e88",
       "file": "Xinbao_Qiao.md",
+      "footnoteSourceIds": [
+        "src-264e39cbec8d2f89",
+        "src-30f33d3201c476ab",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-cedf284f61bb39ae",
+        "src-e1d67502167d29ad"
+      ],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-15T23:04:06+08:00",
+        "reviewDue": "2026-10-13",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-15T23:04:06+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -3899,6 +6749,20 @@
         "wikilink"
       ],
       "slug": "Xinbao_Qiao",
+      "sourceIds": [
+        "src-264e39cbec8d2f89",
+        "src-30f33d3201c476ab",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-70ed6a3bfb603732",
+        "src-9b2be44d3f13005a",
+        "src-9d0661fee6814e6f",
+        "src-cea294f51d3559e8",
+        "src-cedf284f61bb39ae",
+        "src-dac65e05df6e888f",
+        "src-e1d67502167d29ad",
+        "src-f6009f51f54778f6"
+      ],
       "summary": "PhD student in Information Engineering at The Chinese University of Hong Kong; researcher in data-centric ML, AI for Networks, Networks for AI, machine unlearning, and synthetic-data reliability",
       "tags": [
         "en",
@@ -3909,6 +6773,28 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Xinbao Qiao",
       "type": "PhD student",
+      "reviewedAt": "2026-07-15T23:04:06+08:00",
+      "reviewDue": "2026-10-13",
+      "retrieval": {
+        "documentId": "wiki:Xinbao_Qiao",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:ece5d20d0f79a3bd248813fd92f3949416c9d3a78bf0d698e8d8e48c1bfc4e88",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -3932,15 +6818,27 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [
+        "src-575233d5188384df"
+      ],
+      "contentHash": "sha256:fe657967adee3aad4c7e8e6568b609b6b12a116503f10d84ace705d1a9989b2c",
       "file": "Zhejiang_University.md",
+      "footnoteSourceIds": [
+        "src-575233d5188384df"
+      ],
       "hidden": false,
       "language": "en",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-12T22:06:12+08:00",
+        "reviewDue": "2027-01-08",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-12T22:06:12+08:00",
       "outgoing": [
         "AI_and_Networks",
         "Data_Centric_Machine_Learning",
@@ -3955,6 +6853,10 @@
         "wikilink"
       ],
       "slug": "Zhejiang_University",
+      "sourceIds": [
+        "src-575233d5188384df",
+        "src-c051bd6dcf566058"
+      ],
       "summary": "Master's institution of Xinbao Qiao.",
       "tags": [
         "en",
@@ -3965,6 +6867,28 @@
       "timestamp": "2026-05-05T21:15:18+08:00",
       "title": "Zhejiang University",
       "type": "Public research university",
+      "reviewedAt": "2026-07-12T22:06:12+08:00",
+      "reviewDue": "2027-01-08",
+      "retrieval": {
+        "documentId": "wiki:Zhejiang_University",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:fe657967adee3aad4c7e8e6568b609b6b12a116503f10d84ace705d1a9989b2c",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "CV",
         "Education",
@@ -3980,15 +6904,27 @@
     },
     {
       "aliases": [],
+      "citationSourceIds": [
+        "src-575233d5188384df"
+      ],
+      "contentHash": "sha256:b299fe56a1b40d6af75fd0dec521d43bbcce4f80812f3b644dc326f6d3e759e5",
       "file": "Zhejiang_University_zh.md",
+      "footnoteSourceIds": [
+        "src-575233d5188384df"
+      ],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
         "status": "active",
         "confidence": 0.9,
         "review": "periodic",
-        "retention": "semantic memory"
+        "retention": "semantic memory",
+        "reviewedAt": "2026-07-12T22:06:12+08:00",
+        "reviewDue": "2027-01-08",
+        "pendingReview": false,
+        "overdue": false
       },
+      "modifiedAt": "2026-07-12T22:06:12+08:00",
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -4003,6 +6939,10 @@
         "wikilink"
       ],
       "slug": "Zhejiang_University_zh",
+      "sourceIds": [
+        "src-575233d5188384df",
+        "src-c051bd6dcf566058"
+      ],
       "summary": "乔鑫宝硕士阶段所在机构。",
       "tags": [
         "zh",
@@ -4013,6 +6953,28 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "浙江大学",
       "type": "公立研究型大学",
+      "reviewedAt": "2026-07-12T22:06:12+08:00",
+      "reviewDue": "2027-01-08",
+      "retrieval": {
+        "documentId": "wiki:Zhejiang_University_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:b299fe56a1b40d6af75fd0dec521d43bbcce4f80812f3b644dc326f6d3e759e5",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
       "backlinks": [
         "CV_zh",
         "Education_zh",

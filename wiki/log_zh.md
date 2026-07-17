@@ -8,6 +8,10 @@ tags:
   - log
   - 维护日志
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-14T23:17:11+08:00'
+content_hash: 'sha256:53d7d9477bde91a9a36630d60d0a98fc91360c28915d3a2425b657e0d02c7e1c'
+reviewed_at: '2026-07-14T23:17:11+08:00'
+review_due: '2027-07-14'
 name: 日志
 language: zh
 summary: Wiki 的追加式维护日志。

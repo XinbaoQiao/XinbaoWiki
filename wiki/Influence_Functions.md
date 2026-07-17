@@ -8,6 +8,10 @@ tags:
   - concept
   - research-concept
 timestamp: '2026-05-05T19:52:29+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:6b90d74a4b42b4f6c28de85fa0e85f92ca8e9988557827d5641e32265639d5f3'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: Influence Functions
 summary: Concept page for estimating how training examples affect learned models.
 occupation: Research concept

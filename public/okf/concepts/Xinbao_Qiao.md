@@ -11,6 +11,10 @@ tags:
   - biography
   - phd-student
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-15T23:04:06+08:00'
+content_hash: 'sha256:ece5d20d0f79a3bd248813fd92f3949416c9d3a78bf0d698e8d8e48c1bfc4e88'
+reviewed_at: '2026-07-15T23:04:06+08:00'
+review_due: '2026-10-13'
 language: en
 aliases:
   - Mr. Ciao
@@ -21,6 +25,26 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-15T23:04:06+08:00'
+  reviewDue: '2026-10-13'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Xinbao_Qiao'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-264e39cbec8d2f89
+  - src-30f33d3201c476ab
+  - src-5dac6849a598aa84
+  - src-5ffca2a581311c27
+  - src-70ed6a3bfb603732
+  - src-9b2be44d3f13005a
+  - src-9d0661fee6814e6f
+  - src-cea294f51d3559e8
+  - src-cedf284f61bb39ae
+  - src-dac65e05df6e888f
+  - src-e1d67502167d29ad
+  - src-f6009f51f54778f6
 source_path: wiki/Xinbao_Qiao.md
 ---
 **Xinbao Qiao**[^xinbao-name][^qiao-ciao][^xinbao-qiao-bridge] (Chinese: **乔鑫宝**; born September 2000 in Xishuangbanna, Yunnan) is a Chinese PhD student in the Department of Information Engineering at [The Chinese University of Hong Kong](./The_Chinese_University_of_Hong_Kong.md). His research primarily studies lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are generated, used, and deleted. His recent work aims to improve the reliability, interpretability, and controllability of AI models in heterogeneous, computation-constrained, and communication-constrained environments.

@@ -9,12 +9,24 @@ tags:
   - research-concept
   - llm
 timestamp: '2026-05-05T20:55:21+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:218df98003e2d7abaf687efc0c1417ef55412b77887fc85e5bdb222a572e63cb'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Interpretability'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Interpretability.md
 ---
 **Interpretability** refers to methods that help people understand why a model behaves the way it does. In this wiki the emphasis is narrower than the whole interpretability field: it focuses on data influence, error diagnosis, and explanations that support trustworthiness decisions.

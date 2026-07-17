@@ -24,6 +24,7 @@ tsconfig.tsbuildinfo
 cache/
 
 # Worktree and runtime artifacts
+artifacts/
 AGENTS.md
 CLAUDE.md
 DESIGN.md

@@ -8,12 +8,27 @@ tags:
   - advisor
   - academic-advisor
 timestamp: '2026-05-05T21:15:18+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:4d88d219cff179aa32b1e44a28613a8f8dbab0dcfec3c4d20d5d51dc790e7d90'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Angela_Yingjun_Zhang'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-05cf85aef2ce8d53
+  - src-938ce85aed5a8a94
+  - src-e105b35a946250a9
 source_path: wiki/Angela_Yingjun_Zhang.md
 ---
 **Angela Yingjun Zhang** is a Professor in the Department of Information Engineering at The Chinese University of Hong Kong and an IEEE Fellow.[^cuhk-profile] Her official homepage places her work in wireless communications and networking, with emphasis on optimization and learning in 5G and 6G wireless communication systems.[^cuhk-about]

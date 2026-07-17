@@ -8,6 +8,10 @@ tags:
   - profile
   - cv-summary
 timestamp: '2026-07-02T19:37:18+08:00'
+modified: '2026-07-13T21:35:14+08:00'
+content_hash: 'sha256:b5007348122639a3571ac4d3c9cf928b75dba7755a15f7e14497a9c046590503'
+reviewed_at: '2026-07-13T21:35:14+08:00'
+review_due: '2026-10-11'
 name: Curriculum Vitae
 summary: Academic CV summary for Xinbao Qiao.
 occupation: CV summary

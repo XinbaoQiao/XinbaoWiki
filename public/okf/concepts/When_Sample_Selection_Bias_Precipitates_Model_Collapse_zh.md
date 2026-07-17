@@ -10,12 +10,28 @@ tags:
   - icml-2026
   - synthetic-data
 timestamp: '2026-06-02T22:56:50+08:00'
+modified: '2026-07-16T20:08:42+08:00'
+content_hash: 'sha256:09b8d93c182cc7e7940467c8a17797f2744016e10d4aa01ec370c6f5e2abc779'
+reviewed_at: '2026-07-16T20:08:42+08:00'
+review_due: '2027-07-16'
 language: zh
 lifecycle:
   status: confirmed
   confidence: 0.95
   review: on venue/status change
   retention: long-lived semantic memory
+  reviewedAt: '2026-07-16T20:08:42+08:00'
+  reviewDue: '2027-07-16'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-03bf1b2f9af65762
+  - src-4144e3776ac496d0
+  - src-766234e11681dad2
+  - src-94b169d5c233e588
 source_path: wiki/When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md
 ---
 **样本选择偏差何以促成模型坍缩** 是 **[乔鑫宝](./Qiao_Xinbao_zh.md)**、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌和 Yan Pang 的 ICML 2026 会议论文。论文研究递归合成数据训练中的一种失效模式：当验证器只拥有本地、低资源证据时，它可能把稀有但有效的样本误判为低质量生成，使样本选择放大而不是抑制模型坍缩。论文把协作 Wasserstein 几何代理作为一种无需汇集原始数据的更宽分布参考。

@@ -9,6 +9,10 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T21:39:01+08:00'
+modified: '2026-07-08T13:18:57+08:00'
+content_hash: 'sha256:017f86e5da6b8fec2ff8c7a791fbebe84e2d8dcbaa22316b5d7239f9c4f04884'
+reviewed_at: '2026-07-08T13:18:57+08:00'
+review_due: '2026-10-06'
 name: Hessian-Free Online Certified Unlearning
 summary: ICLR 2025 paper on efficient Hessian-free certified machine unlearning.
 authors:

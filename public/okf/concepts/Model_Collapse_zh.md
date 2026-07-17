@@ -9,12 +9,24 @@ tags:
   - 研究概念
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:2d69345869dcdfd5c55440e7b6849a7775821f895aba8b83fc43dd9cee7b19ae'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Model_Collapse_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Model_Collapse_zh.md
 ---
 **模型坍缩** 是模型在递归使用生成或有偏数据训练时，逐渐丢失原始数据分布信息的退化过程。坍缩可以表现为模式丢失、多样性下降、类别比例扭曲或样本质量随代际恶化。[^collapse]

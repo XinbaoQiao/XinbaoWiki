@@ -16,6 +16,12 @@ const blockedPathPatterns = [
   { pattern: /(^|\/)\.vercel-auth[^/]*(?:\/|$)/, reason: 'temporary Vercel auth state' },
   { pattern: /(^|\/)\.npm-cache(?:\/|$)/, reason: 'npm cache' },
   { pattern: /(^|\/)\.omx(?:\/|$)/, reason: 'local runtime metadata' },
+  { pattern: /(^|\/)\.codex(?:\/|$)/, reason: 'local Codex state' },
+  { pattern: /(^|\/)AGENTS\.md$/, reason: 'agent instruction file requires explicit publication approval' },
+  { pattern: /(^|\/)CLAUDE\.md$/, reason: 'agent instruction file requires explicit publication approval' },
+  { pattern: /(^|\/)DESIGN\.md$/, reason: 'local design contract requires explicit publication approval' },
+  { pattern: /(^|\/)agent_progress\.md$/, reason: 'local agent ledger' },
+  { pattern: /(^|\/)artifacts(?:\/|$)/, reason: 'local review/runtime artifacts' },
   { pattern: /(^|\/)(?:cache|logs?|outputs?|tmp|temp)(?:\/|$)/, reason: 'runtime artifact path' },
   { pattern: /(^|\/).*\.(?:token|pem|key|p12|pfx)$/i, reason: 'credential-like file' },
 ];

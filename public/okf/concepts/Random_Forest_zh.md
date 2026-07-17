@@ -8,12 +8,24 @@ tags:
   - model
   - 模型族
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:6d257e9e58d7a5cdcb995d7953ef20d0399f947e387488808ee5cc005c98eec8'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Random_Forest_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Random_Forest_zh.md
 ---
 **随机森林** 是由多棵决策树组成的集成模型，训练中通常对样本、特征或划分候选引入随机性。它在表格数据上表现强、相对稳健，并且比许多神经模型更容易检查。[^breiman]

@@ -9,6 +9,10 @@ tags:
   - 研究概念
   - wasserstein
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:23fe4ef251fbe9ab9ba250c9e19140bd8721c19357fc1d2d55f5e6fdf86e2845'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: Wasserstein 几何
 language: zh
 summary: 解释使用最优传输几何进行分布比较的概念页。

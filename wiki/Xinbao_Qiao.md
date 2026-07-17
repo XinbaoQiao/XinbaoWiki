@@ -11,6 +11,10 @@ tags:
   - biography
   - phd-student
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-15T23:04:06+08:00'
+content_hash: 'sha256:ece5d20d0f79a3bd248813fd92f3949416c9d3a78bf0d698e8d8e48c1bfc4e88'
+reviewed_at: '2026-07-15T23:04:06+08:00'
+review_due: '2026-10-13'
 name: Xinbao Qiao
 summary: >-
   PhD student in Information Engineering at The Chinese University of Hong Kong;

@@ -8,6 +8,10 @@ tags:
   - topic
   - 研究专题
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:b5ed150616b6bc664087f36dc9e5d5cdb8b191aa624cf0ed96b40dce31f72b12'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: 数据中心 ML
 language: zh
 summary: 关注数据质量、选择、估值、修正和治理的研究专题。

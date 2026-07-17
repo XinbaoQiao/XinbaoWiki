@@ -8,12 +8,25 @@ tags:
   - advisor
   - academic-advisor
 timestamp: '2026-05-05T21:15:18+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:e3fc2253d995fdb7047157a92a3b1d378ba60d5b54aef3e7178e8d2431a0ea78'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Meng_Zhang'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-716564daa4b6397f
 source_path: wiki/Meng_Zhang.md
 ---
 **Meng Zhang** is a researcher and assistant professor at the ZJU-UIUC Institute, Zhejiang University. Zhejiang University's official personal profile lists him as a doctoral supervisor in the Zhejiang University-University of Illinois Urbana-Champaign Institute and International Joint College.[^zju-profile]

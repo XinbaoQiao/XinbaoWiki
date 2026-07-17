@@ -10,12 +10,24 @@ tags:
   - concept
   - research-concept
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:49f49a19d651a14750d02e8624e31c769fe7be63310cb06cfef96324f5a290b0'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Data_Selection'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Data_Selection.md
 ---
 **Data Selection** is the process of choosing which examples are used for training, pruning, evaluation, or synthetic-data reuse. In this wiki it is treated as a central data-centric operation: selection can reduce cost and improve quality, but biased selection can also distort a model's view of the target distribution.

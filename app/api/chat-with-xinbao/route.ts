@@ -1,43 +1,75 @@
 import crypto from 'node:crypto';
 import { Redis } from '@upstash/redis';
 import { after, NextRequest, NextResponse } from 'next/server';
-import { getXinbaoChatSystemPrompt } from '@/lib/chat-with-xinbao';
+import { getXinbaoChatSystemPrompt, XINBAO_CHAT_PROMPT_VERSION } from '@/lib/chat-with-xinbao';
+import { deterministicAbstentionReply, validateAndCompactCitations, WIKI_CHAT_RESPONSE_POLICY_VERSION } from '@/lib/wiki-chat-response';
+import { getWikiRetrievalIndex, retrieveWikiContext, WIKI_RETRIEVAL_INDEX_VERSION, type WikiRetrievalResult } from '@/lib/wiki-retrieval';
 
 export const runtime = 'nodejs';
 
 const MODEL = 'deepseek-v4-flash';
 const DEFAULT_BASE_URL = 'https://api.yunwu.ai/v1';
+const CHAT_BACKEND_VERSION = 'xinbao-chat-api-v3';
 const DAILY_LIMIT = 10;
 const COOLDOWN_SECONDS = 4;
 const HOURLY_IP_LIMIT = 80;
 const MAX_INPUT_LENGTH = 1000;
-const MAX_HISTORY_MESSAGES = 6;
 const MAX_OUTPUT_TOKENS = 450;
 const REQUEST_TIMEOUT_MS = 12_000;
 const QUESTION_LOG_MAX_RECENT = 2_000;
 const QUESTION_LOG_RETENTION_DAYS = 90;
-const QUESTION_LOG_MESSAGE_LENGTH = 1_000;
+const QUESTION_LOG_RETENTION_MS = 60 * 60 * 24 * 1_000 * QUESTION_LOG_RETENTION_DAYS;
 const COOKIE_NAME = 'xinbao_chat_vid';
 const UNAVAILABLE_MESSAGE = 'Xinbao AI is temporarily unavailable. Please try again later.';
 const DAILY_LIMIT_MESSAGE = 'Daily limit reached. Please come back tomorrow.';
-const QUESTION_LOG_RECENT_KEY = 'xinbao-chat:questions:recent';
 
-type ChatRole = 'user' | 'assistant';
-type ChatMessage = { role: ChatRole; content: string };
-type CompletionResponse = { choices?: Array<{ message?: { content?: unknown } }> };
+type ChatLanguage = 'en' | 'zh';
+type ParsedChatBody = { message?: unknown; language?: ChatLanguage };
+type CompletionResponse = {
+  choices?: Array<{ message?: { content?: unknown } }>;
+  usage?: { prompt_tokens?: unknown; completion_tokens?: unknown; total_tokens?: unknown };
+};
 type RequestIdentity = { visitorHash: string; browserHash: string; ipHash: string };
 type QuestionLogEntry = {
   id: string;
   createdAt: string;
   dateKey: string;
-  language: 'en' | 'zh';
-  message: string;
-  normalized: string;
+  language: ChatLanguage;
+  questionHash: string;
   messageLength: number;
   pagePath: string;
   visitorHash: string;
   browserHash: string;
   ipHash: string;
+  model: string;
+  provider: string;
+  promptVersion: string;
+  indexVersion: string;
+  indexFingerprint: string;
+  sourceChunkIds: string[];
+  sourceSlugs: string[];
+  evidenceScore: number;
+  queryCoverage: number;
+  shouldAbstain: boolean;
+};
+
+type ChatObservation = {
+  traceId: string;
+  outcome: 'ok' | 'deterministic-abstention' | 'invalid-citations' | 'upstream-error' | 'empty-reply' | 'timeout' | 'request-error';
+  provider: string;
+  model: string;
+  promptVersion: string;
+  indexVersion: string;
+  indexFingerprint: string;
+  retrievedChunks: number;
+  evidenceScore: number;
+  queryCoverage: number;
+  shouldAbstain: boolean;
+  durationMs: number;
+  upstreamStatus?: number;
+  promptTokens?: number;
+  completionTokens?: number;
+  totalTokens?: number;
 };
 
 let redisClient: Redis | null = null;
@@ -179,27 +211,20 @@ async function refundDailyUsage(redis: Redis, keys: string[]) {
   await releaseDailyUsage(redis, keys).catch(() => logServerIssue('daily quota refund failed'));
 }
 
-function inferLanguage(request: NextRequest): 'en' | 'zh' {
+function inferLanguage(request: NextRequest): ChatLanguage {
   const referer = request.headers.get('referer') || '';
   return /_zh(?:\/|\?|#|$)|\/Qiao_Xinbao_zh\//.test(referer) ? 'zh' : 'en';
 }
 
-function sanitizeHistory(history: unknown): ChatMessage[] {
-  if (!Array.isArray(history)) return [];
-  return history
-    .filter((item): item is ChatMessage => {
-      if (!item || typeof item !== 'object') return false;
-      const value = item as Partial<ChatMessage>;
-      return (value.role === 'user' || value.role === 'assistant') && typeof value.content === 'string';
-    })
-    .map((item) => ({ role: item.role, content: item.content.trim().slice(0, MAX_INPUT_LENGTH) }))
-    .filter((item) => item.content.length > 0)
-    .slice(-MAX_HISTORY_MESSAGES);
-}
-
 async function parseBody(request: NextRequest) {
   try {
-    return (await request.json()) as { message?: unknown; history?: unknown };
+    const value = await request.json() as unknown;
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
+    const body = value as Record<string, unknown>;
+    return {
+      message: body.message,
+      language: body.language === 'en' || body.language === 'zh' ? body.language : undefined
+    } satisfies ParsedChatBody;
   } catch {
     return null;
   }
@@ -213,6 +238,37 @@ function logServerIssue(type: string, status?: number) {
   console.error(`[chat-with-xinbao] ${type}`);
 }
 
+function providerName(baseUrl: string) {
+  try {
+    const hostname = new URL(baseUrl).hostname.toLocaleLowerCase();
+    if (hostname === 'api.yunwu.ai') return 'yunwu-openai-compatible';
+    if (hostname === 'api.deepseek.com') return 'deepseek';
+  } catch {
+    // Configuration validation is handled by the upstream request.
+  }
+  return 'openai-compatible';
+}
+
+function modelApiConfiguration() {
+  const apiKey = process.env.YUNWU_API_KEY?.trim() || '';
+  const configuredBaseUrl = (process.env.YUNWU_API_BASE_URL || DEFAULT_BASE_URL).trim().replace(/\/$/, '');
+  try {
+    const url = new URL(configuredBaseUrl);
+    const supportedProtocol = url.protocol === 'https:' || (process.env.NODE_ENV !== 'production' && url.protocol === 'http:');
+    return { apiKey, baseUrl: configuredBaseUrl, ready: Boolean(apiKey && supportedProtocol && url.hostname) };
+  } catch {
+    return { apiKey, baseUrl: configuredBaseUrl, ready: false };
+  }
+}
+
+function numericUsage(value: unknown) {
+  return typeof value === 'number' && Number.isFinite(value) && value >= 0 ? Math.round(value) : undefined;
+}
+
+function logChatObservation(observation: ChatObservation) {
+  console.info('[chat-with-xinbao] completion', JSON.stringify(observation));
+}
+
 function sanitizeRefererPath(request: NextRequest) {
   const referer = request.headers.get('referer') || '';
   if (!referer) return '';
@@ -224,8 +280,25 @@ function sanitizeRefererPath(request: NextRequest) {
   }
 }
 
-function normalizeQuestion(message: string) {
-  return message.replace(/\s+/g, ' ').trim().toLocaleLowerCase().slice(0, 240);
+function questionFingerprint(message: string) {
+  return hashIdentity(`question:${message.replace(/\s+/g, ' ').trim().toLocaleLowerCase()}`);
+}
+
+function contextSlugFromPagePath(pagePath: string) {
+  const encoded = pagePath.match(/\/wiki\/([^/?#]+)/)?.[1];
+  if (!encoded) return '';
+  try {
+    const slug = decodeURIComponent(encoded);
+    return /^[A-Za-z0-9_\-\u4e00-\u9fff]+$/u.test(slug) ? slug : '';
+  } catch {
+    return '';
+  }
+}
+
+function questionLogExpiration(dateKey: string) {
+  const [year, month, day] = dateKey.split('-').map(Number);
+  const tokyoDayStart = Date.UTC(year, month - 1, day) - 9 * 60 * 60 * 1_000;
+  return Math.floor((tokyoDayStart + QUESTION_LOG_RETENTION_MS) / 1_000);
 }
 
 async function recordQuestionLog(
@@ -234,42 +307,54 @@ async function recordQuestionLog(
   message: string,
   pagePath: string,
   dateKey: string,
-  language: 'en' | 'zh'
+  language: ChatLanguage,
+  retrieval: WikiRetrievalResult,
+  provider: string
 ) {
+  const questionHash = questionFingerprint(message);
+  if (!questionHash) return;
+  const createdAt = new Date();
   const entry: QuestionLogEntry = {
     id: crypto.randomUUID(),
-    createdAt: new Date().toISOString(),
+    createdAt: createdAt.toISOString(),
     dateKey,
     language,
-    message: message.slice(0, QUESTION_LOG_MESSAGE_LENGTH),
-    normalized: normalizeQuestion(message),
+    questionHash,
     messageLength: message.length,
     pagePath,
     visitorHash: identity.visitorHash,
     browserHash: identity.browserHash,
-    ipHash: identity.ipHash
+    ipHash: identity.ipHash,
+    model: MODEL,
+    provider,
+    promptVersion: XINBAO_CHAT_PROMPT_VERSION,
+    indexVersion: retrieval.indexVersion,
+    indexFingerprint: retrieval.indexFingerprint,
+    sourceChunkIds: retrieval.sources.map((source) => source.chunkId),
+    sourceSlugs: [...new Set(retrieval.sources.map((source) => source.slug))],
+    evidenceScore: retrieval.evidenceScore,
+    queryCoverage: retrieval.queryCoverage,
+    shouldAbstain: retrieval.shouldAbstain
   };
   const payload = JSON.stringify(entry);
   const dayKey = `xinbao-chat:questions:day:${dateKey}`;
-  const frequencyKey = `xinbao-chat:questions:frequency:${language}`;
-  const retentionTtl = 60 * 60 * 24 * QUESTION_LOG_RETENTION_DAYS;
+  const frequencyKey = `xinbao-chat:questions:frequency:${language}:${dateKey}`;
+  const expiresAt = questionLogExpiration(dateKey);
 
   try {
     const pipeline = redis.pipeline();
-    pipeline.lpush(QUESTION_LOG_RECENT_KEY, payload);
-    pipeline.ltrim(QUESTION_LOG_RECENT_KEY, 0, QUESTION_LOG_MAX_RECENT - 1);
-    pipeline.expire(QUESTION_LOG_RECENT_KEY, retentionTtl);
     pipeline.lpush(dayKey, payload);
-    pipeline.expire(dayKey, retentionTtl);
-    pipeline.zincrby(frequencyKey, 1, entry.normalized);
-    pipeline.expire(frequencyKey, retentionTtl);
+    pipeline.ltrim(dayKey, 0, QUESTION_LOG_MAX_RECENT - 1);
+    pipeline.expireat(dayKey, expiresAt);
+    pipeline.zincrby(frequencyKey, 1, entry.questionHash);
+    pipeline.expireat(frequencyKey, expiresAt);
     await pipeline.exec();
   } catch {
     logServerIssue('question log write failed');
   }
 }
 
-function withXinbaoSignature(reply: string, language: 'en' | 'zh') {
+function withXinbaoSignature(reply: string, language: ChatLanguage) {
   const signature = language === 'zh' ? '喵~' : ' meow~';
   const trimmed = reply.trim();
   const unsigned = trimmed
@@ -292,8 +377,40 @@ export async function GET(request: NextRequest) {
   if (!identity) return genericUnavailable(visitorCookie);
 
   const dailyUsage = await readDailyUsage(redis, dailyQuotaKeys(tokyoDateKey(), identity));
+  const diagnostic = new URL(request.url).searchParams.get('diagnostic') === 'retrieval';
+  const modelConfiguration = modelApiConfiguration();
+  if (diagnostic && !modelConfiguration.ready) {
+    logServerIssue('missing model API configuration');
+    return genericUnavailable(visitorCookie);
+  }
+  let retrievalHealth: Record<string, unknown> | undefined;
+  if (diagnostic) {
+    try {
+      const index = getWikiRetrievalIndex();
+      retrievalHealth = {
+        indexVersion: index.indexVersion,
+        indexFingerprint: index.indexFingerprint,
+        indexedChunks: index.chunks.length
+      };
+    } catch {
+      logServerIssue('retrieval health failed');
+      return genericUnavailable(visitorCookie);
+    }
+  }
   return jsonResponse(
-    { remaining: Math.max(0, DAILY_LIMIT - dailyUsage), limit: DAILY_LIMIT },
+    {
+      remaining: Math.max(0, DAILY_LIMIT - dailyUsage),
+      limit: DAILY_LIMIT,
+      meta: {
+        backendVersion: CHAT_BACKEND_VERSION,
+        responsePolicyVersion: WIKI_CHAT_RESPONSE_POLICY_VERSION,
+        model: MODEL,
+        promptVersion: XINBAO_CHAT_PROMPT_VERSION,
+        retrievalAlgorithm: WIKI_RETRIEVAL_INDEX_VERSION,
+        modelApiConfigured: modelConfiguration.ready,
+        ...retrievalHealth
+      }
+    },
     200,
     visitorCookie
   );
@@ -312,9 +429,9 @@ export async function POST(request: NextRequest) {
     return jsonResponse({ error: `Message must be ${MAX_INPUT_LENGTH} characters or fewer.` }, 400, visitorCookie);
   }
 
-  const apiKey = process.env.YUNWU_API_KEY;
+  const modelConfiguration = modelApiConfiguration();
   const redis = getRedis();
-  if (!apiKey || !redis || !process.env.RATE_LIMIT_SALT) {
+  if (!modelConfiguration.ready || !redis || !process.env.RATE_LIMIT_SALT) {
     logServerIssue('missing server configuration');
     return genericUnavailable(visitorCookie);
   }
@@ -361,12 +478,87 @@ export async function POST(request: NextRequest) {
     return jsonResponse({ error: DAILY_LIMIT_MESSAGE, remaining: 0, limit: DAILY_LIMIT }, 429, visitorCookie);
   }
 
+  const { apiKey, baseUrl } = modelConfiguration;
+  const provider = providerName(baseUrl);
+  const language = body.language ?? inferLanguage(request);
+  const pagePath = sanitizeRefererPath(request);
+  let retrieval: WikiRetrievalResult;
+  try {
+    retrieval = retrieveWikiContext(message, {
+      language,
+      contextSlug: contextSlugFromPagePath(pagePath)
+    });
+  } catch {
+    logServerIssue('retrieval failed');
+    await refundDailyUsage(redis, dailyKeys);
+    return genericUnavailable(visitorCookie);
+  }
+
+  const traceId = crypto.randomUUID();
+  const requestStartedAt = Date.now();
+  after(() => recordQuestionLog(redis, identity, message, pagePath, dateKey, language, retrieval, provider));
+
+  function observe(
+    outcome: ChatObservation['outcome'],
+    details: { upstreamStatus?: number; usage?: CompletionResponse['usage'] } = {}
+  ) {
+    logChatObservation({
+      traceId,
+      outcome,
+      provider,
+      model: MODEL,
+      promptVersion: XINBAO_CHAT_PROMPT_VERSION,
+      indexVersion: retrieval.indexVersion,
+      indexFingerprint: retrieval.indexFingerprint,
+      retrievedChunks: retrieval.sources.length,
+      evidenceScore: retrieval.evidenceScore,
+      queryCoverage: retrieval.queryCoverage,
+      shouldAbstain: retrieval.shouldAbstain,
+      durationMs: Date.now() - requestStartedAt,
+      upstreamStatus: details.upstreamStatus,
+      promptTokens: numericUsage(details.usage?.prompt_tokens),
+      completionTokens: numericUsage(details.usage?.completion_tokens),
+      totalTokens: numericUsage(details.usage?.total_tokens)
+    });
+  }
+
+  function responseMetadata(responseMode: 'model-grounded' | 'deterministic-abstention', citedChunks: number) {
+    return {
+      traceId,
+      backendVersion: CHAT_BACKEND_VERSION,
+      responsePolicyVersion: WIKI_CHAT_RESPONSE_POLICY_VERSION,
+      responseMode,
+      provider,
+      model: MODEL,
+      promptVersion: XINBAO_CHAT_PROMPT_VERSION,
+      indexVersion: retrieval.indexVersion,
+      indexFingerprint: retrieval.indexFingerprint,
+      retrievedChunks: retrieval.sources.length,
+      citedChunks,
+      evidenceScore: retrieval.evidenceScore,
+      queryCoverage: retrieval.queryCoverage,
+      shouldAbstain: retrieval.shouldAbstain,
+      durationMs: Date.now() - requestStartedAt
+    };
+  }
+
+  if (retrieval.shouldAbstain) {
+    observe('deterministic-abstention');
+    return jsonResponse(
+      {
+        reply: withXinbaoSignature(deterministicAbstentionReply(message, language), language),
+        sources: [],
+        remaining: Math.max(0, DAILY_LIMIT - dailyCount),
+        limit: DAILY_LIMIT,
+        meta: responseMetadata('deterministic-abstention', 0)
+      },
+      200,
+      visitorCookie
+    );
+  }
+
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-  const baseUrl = (process.env.YUNWU_API_BASE_URL || DEFAULT_BASE_URL).replace(/\/$/, '');
-  const language = inferLanguage(request);
-  const pagePath = sanitizeRefererPath(request);
-  after(() => recordQuestionLog(redis, identity, message, pagePath, dateKey, language));
 
   try {
     const response = await fetch(`${baseUrl}/chat/completions`, {
@@ -378,8 +570,7 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         model: MODEL,
         messages: [
-          { role: 'system', content: getXinbaoChatSystemPrompt(language) },
-          ...sanitizeHistory(body.history),
+          { role: 'system', content: getXinbaoChatSystemPrompt(language, retrieval) },
           { role: 'user', content: message }
         ],
         temperature: 0.3,
@@ -392,6 +583,7 @@ export async function POST(request: NextRequest) {
 
     if (!response.ok) {
       logServerIssue('model response status', response.status);
+      observe('upstream-error', { upstreamStatus: response.status });
       await refundDailyUsage(redis, dailyKeys);
       return genericUnavailable(visitorCookie);
     }
@@ -400,17 +592,35 @@ export async function POST(request: NextRequest) {
     const reply = data.choices?.[0]?.message?.content;
     if (typeof reply !== 'string' || !reply.trim()) {
       logServerIssue('empty model reply');
+      observe('empty-reply', { usage: data.usage });
       await refundDailyUsage(redis, dailyKeys);
       return genericUnavailable(visitorCookie);
     }
 
+    const groundedReply = validateAndCompactCitations(reply, retrieval.sources);
+    if (!groundedReply) {
+      logServerIssue('invalid model citations');
+      observe('invalid-citations', { usage: data.usage });
+      await refundDailyUsage(redis, dailyKeys);
+      return genericUnavailable(visitorCookie);
+    }
+
+    observe('ok', { usage: data.usage });
     return jsonResponse(
-      { reply: withXinbaoSignature(reply, language), remaining: Math.max(0, DAILY_LIMIT - dailyCount), limit: DAILY_LIMIT },
+      {
+        reply: withXinbaoSignature(groundedReply.reply, language),
+        sources: groundedReply.sources,
+        remaining: Math.max(0, DAILY_LIMIT - dailyCount),
+        limit: DAILY_LIMIT,
+        meta: responseMetadata('model-grounded', groundedReply.sources.length)
+      },
       200,
       visitorCookie
     );
   } catch (error) {
-    logServerIssue(error instanceof DOMException && error.name === 'AbortError' ? 'model timeout' : 'model request failed');
+    const timedOut = error instanceof DOMException && error.name === 'AbortError';
+    logServerIssue(timedOut ? 'model timeout' : 'model request failed');
+    observe(timedOut ? 'timeout' : 'request-error');
     await refundDailyUsage(redis, dailyKeys);
     return genericUnavailable(visitorCookie);
   } finally {

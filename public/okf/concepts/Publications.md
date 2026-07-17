@@ -8,12 +8,24 @@ tags:
   - index
   - publication-list
 timestamp: '2026-06-01T22:00:31+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:5ac4efe9a526d8aa52adbadfa89b918acd748d254225726aad1858be0cd67f51'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-09-30'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-09-30'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Publications'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Publications.md
 ---
 This page is the curated publication index. Each paper has a dedicated wiki page and is also assigned to research-topic pages; papers should not be left as isolated entries.

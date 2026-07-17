@@ -8,6 +8,10 @@ tags:
   - research
   - 研究院
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:2864019dd92674e38d95921d097ef7924b01c524ef67ce6b20e0cfbfcd72e990'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: NUSRI-CQ
 language: zh
 summary: 乔鑫宝研究实习阶段所在机构。

@@ -8,12 +8,24 @@ tags:
   - concept
   - 研究概念
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:f2f86de8a44e60f1923badf3e613b292b74546183791b33c64556111f7cb3f80'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Data_Selection_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Data_Selection_zh.md
 ---
 **数据选择** 是为训练、剪枝、评估或合成数据复用选择样本的过程。在本 wiki 中，它是核心的数据中心操作：选择可以降低成本、提升质量，但有偏选择也会扭曲模型对目标分布的理解。

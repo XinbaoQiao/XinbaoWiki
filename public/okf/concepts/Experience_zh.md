@@ -8,12 +8,24 @@ tags:
   - profile
   - 研究经历
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-13T20:54:38+08:00'
+content_hash: 'sha256:9c4c73137aa9bad98b0969e71f161d4b4d6d6760c553e8de6b96fbfaef4276ad'
+reviewed_at: '2026-07-13T20:54:38+08:00'
+review_due: '2026-10-11'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-13T20:54:38+08:00'
+  reviewDue: '2026-10-11'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Experience_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Experience_zh.md
 ---
 ## 当前机构

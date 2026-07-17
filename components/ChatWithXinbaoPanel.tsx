@@ -9,7 +9,14 @@ import remarkMath from 'remark-math';
 
 type Language = 'en' | 'zh';
 type MessageRole = 'user' | 'assistant';
-type Message = { role: MessageRole; content: string };
+type ChatSource = {
+  chunkId: string;
+  slug: string;
+  title: string;
+  section: string;
+  href: string;
+};
+type Message = { role: MessageRole; content: string; sources?: ChatSource[] };
 
 type Props = {
   language: Language;
@@ -30,6 +37,7 @@ const copy = {
     inputLabel: 'Message Chat with Xinbao',
     placeholder: 'Ask about Xinbao, research, papers, projects...',
     send: 'Send',
+    sources: 'Sources',
     typing: [
       'Checking Xinbaopedia notes',
       'Looking through public pages',
@@ -42,7 +50,7 @@ const copy = {
     ],
     quotaUnknown: '10 messages/day',
     quota: (remaining: number, limit: number) => `${remaining}/${limit} messages left today`,
-    logNotice: 'Questions may be logged to improve answers.',
+    logNotice: 'Pseudonymous usage metadata (one-way hashes, not raw messages or IPs) may be logged to improve answers.',
     empty: 'Please enter a question.',
     tooLong: `Please keep the message within ${MAX_INPUT_LENGTH} characters.`
   },
@@ -54,6 +62,7 @@ const copy = {
     inputLabel: '向 Chat with Xinbao 发送消息',
     placeholder: '询问研究方向、论文、项目、联系方式...',
     send: '发送',
+    sources: '参考页面',
     typing: [
       '正在查公开资料',
       '正在整理相关页面',
@@ -65,7 +74,7 @@ const copy = {
     ],
     quotaUnknown: '每天 10 条消息',
     quota: (remaining: number, limit: number) => `今天还剩 ${remaining}/${limit} 条消息`,
-    logNotice: '问题可能会被记录，用于改进回答。',
+    logNotice: '可能记录假名化的使用元数据（单向哈希，不含原始消息或 IP），用于改进回答。',
     empty: '请输入一个问题。',
     tooLong: `请将消息控制在 ${MAX_INPUT_LENGTH} 个字符以内。`
   }
@@ -80,15 +89,59 @@ function randomTypingMessage(options: string[]) {
   return options[Math.floor(Math.random() * options.length)] ?? options[0] ?? '';
 }
 
-function ChatMessageContent({ message }: { message: Message }) {
+function sanitizeSources(value: unknown): ChatSource[] {
+  if (!Array.isArray(value)) return [];
+  const seen = new Set<string>();
+  return value.flatMap((item): ChatSource[] => {
+    if (!item || typeof item !== 'object') return [];
+    const source = item as Partial<ChatSource>;
+    if (
+      typeof source.chunkId !== 'string' ||
+      typeof source.slug !== 'string' ||
+      typeof source.title !== 'string' ||
+      typeof source.section !== 'string' ||
+      typeof source.href !== 'string' ||
+      !source.href.startsWith('/') ||
+      source.href.startsWith('//') ||
+      !source.href.includes('/wiki/') ||
+      seen.has(source.chunkId)
+    ) return [];
+    seen.add(source.chunkId);
+    return [{
+      chunkId: source.chunkId.slice(0, 180),
+      slug: source.slug.slice(0, 120),
+      title: source.title.slice(0, 180),
+      section: source.section.slice(0, 180),
+      href: source.href.slice(0, 300)
+    }];
+  }).slice(0, 8);
+}
+
+function ChatMessageContent({ message, sourcesLabel }: { message: Message; sourcesLabel: string }) {
   if (message.role === 'assistant') {
     return (
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm, remarkMath]}
-        rehypePlugins={[rehypeKatex]}
-      >
-        {message.content}
-      </ReactMarkdown>
+      <>
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm, remarkMath]}
+          rehypePlugins={[rehypeKatex]}
+        >
+          {message.content}
+        </ReactMarkdown>
+        {message.sources && message.sources.length > 0 && (
+          <nav aria-label={sourcesLabel}>
+            <strong>{sourcesLabel}</strong>
+            <ol>
+              {message.sources.map((source) => (
+                <li key={source.chunkId}>
+                  <a href={source.href}>
+                    {source.title}{source.section ? ` — ${source.section}` : ''}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )}
+      </>
     );
   }
 
@@ -163,11 +216,6 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
       return;
     }
 
-    const history = messages
-      .filter((item) => item.role === 'user' || item.role === 'assistant')
-      .slice(-6)
-      .map((item) => ({ role: item.role, content: item.content.slice(0, MAX_INPUT_LENGTH) }));
-
     setError('');
     setInput('');
     setTypingMessage(randomTypingMessage(strings.typing));
@@ -178,10 +226,10 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
       const response = await fetch(chatEndpoint(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message, history })
+        body: JSON.stringify({ message, language })
       });
       const data = await response.json().catch(() => null) as
-        | { reply?: unknown; error?: unknown; remaining?: unknown; limit?: unknown }
+        | { reply?: unknown; error?: unknown; remaining?: unknown; limit?: unknown; sources?: unknown }
         | null;
 
       if (typeof data?.limit === 'number') setLimit(data.limit);
@@ -199,7 +247,11 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
         return;
       }
 
-      setMessages((current) => [...current, { role: 'assistant', content: reply }]);
+      setMessages((current) => [...current, {
+        role: 'assistant',
+        content: reply,
+        sources: sanitizeSources(data?.sources)
+      }]);
     } catch {
       setError(GENERIC_ERROR);
     } finally {
@@ -237,7 +289,7 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
           <div className="chat-xinbao-messages">
             {messages.map((message, index) => (
               <div className={`chat-xinbao-message ${message.role}`} key={`${message.role}-${index}`}>
-                <ChatMessageContent message={message} />
+                <ChatMessageContent message={message} sourcesLabel={strings.sources} />
               </div>
             ))}
             {loading && (

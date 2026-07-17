@@ -8,12 +8,42 @@ tags:
   - profile
   - cv-summary
 timestamp: '2026-07-02T19:37:18+08:00'
+modified: '2026-07-13T21:35:14+08:00'
+content_hash: 'sha256:b5007348122639a3571ac4d3c9cf928b75dba7755a15f7e14497a9c046590503'
+reviewed_at: '2026-07-13T21:35:14+08:00'
+review_due: '2026-10-11'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-13T21:35:14+08:00'
+  reviewDue: '2026-10-11'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:CV'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-03bf1b2f9af65762
+  - src-0642a11373a83c47
+  - src-18fe2e2db0ff8b6a
+  - src-19cdc04d387acf77
+  - src-22eeced7ebe7a0c5
+  - src-3234eea5652932e1
+  - src-4144e3776ac496d0
+  - src-53e1199f272a4df4
+  - src-65d81b8aca549860
+  - src-688381b8e9d8ad65
+  - src-716564daa4b6397f
+  - src-94b169d5c233e588
+  - src-9b2be44d3f13005a
+  - src-a0a9b7171dc028d2
+  - src-b0de54fe614fa11d
+  - src-cea294f51d3559e8
+  - src-da17eb3884244bd3
+  - src-faaafad831fbefc5
 source_path: wiki/CV.md
 ---
 This page summarizes Xinbao Qiao's academic CV for wiki readers. A downloadable résumé is available as [résumé](/files/XinbaoQiao_CV.pdf).

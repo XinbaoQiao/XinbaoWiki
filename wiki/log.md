@@ -8,6 +8,10 @@ tags:
   - log
   - maintenance-log
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-15T23:04:06+08:00'
+content_hash: 'sha256:a6a05899af8aafad7a0975b9829069a22d573e22a9536742f6e6f8b3f6987755'
+reviewed_at: '2026-07-15T23:04:06+08:00'
+review_due: '2027-07-15'
 name: Log
 summary: Append-only maintenance log for the wiki.
 occupation: Maintenance log

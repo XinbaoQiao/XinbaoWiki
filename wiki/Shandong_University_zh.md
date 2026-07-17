@@ -8,6 +8,10 @@ tags:
   - education
   - 公立研究型大学
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:c57202064e7fe6a89492d9160d3f630ce33ac111149aac58a6d7f4c5fa44718a'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: 山东大学
 language: zh
 summary: 乔鑫宝本科阶段所在机构。

@@ -8,12 +8,24 @@ tags:
   - concept
   - research-concept
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:8e9faf67f5ee31a4878fb7e692c8d5333fba5a60cbec15e95b72c457891e9436'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Collaborative_Evaluation'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Collaborative_Evaluation.md
 ---
 **Collaborative Evaluation** refers to evaluation procedures in which multiple parties contribute evidence about model behavior, data quality, or distributional drift. In this wiki the concept is used mainly for cross-silo settings, where each participant has local observations but no participant has complete access to the global distribution.

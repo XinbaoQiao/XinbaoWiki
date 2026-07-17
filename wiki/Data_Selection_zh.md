@@ -8,6 +8,10 @@ tags:
   - concept
   - 研究概念
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:f2f86de8a44e60f1923badf3e613b292b74546183791b33c64556111f7cb3f80'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: 数据选择
 language: zh
 summary: 解释在可靠性约束下选择训练或评估数据的概念页。

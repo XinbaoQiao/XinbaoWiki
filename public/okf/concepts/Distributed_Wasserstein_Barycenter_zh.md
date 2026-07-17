@@ -9,6 +9,10 @@ tags:
   - 研究概念
   - wasserstein
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:07336e6f8ccb466caccf4710fad348230218dd8bbb1f5f57f389f28f285757a9'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 aliases:
   - 分布式 Wasserstein barycenter
@@ -19,6 +23,16 @@ lifecycle:
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Distributed_Wasserstein_Barycenter_zh'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-0d6548913a8c228f
+  - src-3157a848b3737221
 source_path: wiki/Distributed_Wasserstein_Barycenter_zh.md
 ---
 **分布式 Wasserstein Barycenter** 是 [乔鑫宝](./Qiao_Xinbao_zh.md) 在 [AI 与网络](./AI_and_Networks_zh.md) 和 [数据中心 ML](./Data_Centric_Machine_Learning_zh.md) 方向下的相关概念页。Wasserstein barycenter 是在最优传输距离下对多个输入分布进行概括的概率测度。在分布式设置中，输入测度由不同参与方持有，因此问题不仅是统计问题，也是网络化计算问题：系统需要在通信和数据访问约束下计算或近似共同参考分布。[^barycenter]

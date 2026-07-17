@@ -8,12 +8,24 @@ tags:
   - concept
   - research-concept
 timestamp: '2026-05-05T19:52:29+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:6b90d74a4b42b4f6c28de85fa0e85f92ca8e9988557827d5641e32265639d5f3'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Influence_Functions'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Influence_Functions.md
 ---
 **Influence Functions** are analytical tools for estimating how a training point affects a fitted model or a downstream prediction. In modern machine learning they are often used as approximations: instead of retraining after changing one point, the method estimates the effect through gradients and curvature information.[^influence]

@@ -8,12 +8,25 @@ tags:
   - advisor
   - academic-advisor
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:103093bd3886bfa0462229db2fd4d8557041ecd2ab27552727a5922d4bea88ed'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Meng_Zhang_zh'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-716564daa4b6397f
 source_path: wiki/Meng_Zhang_zh.md
 ---
 **张萌** 是浙江大学 ZJU-UIUC Institute 的研究员/助理教授。浙江大学官方个人主页列出其为浙江大学-伊利诺伊大学厄巴纳香槟校区联合学院博士生导师。[^zju-profile]

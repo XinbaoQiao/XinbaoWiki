@@ -9,12 +9,24 @@ tags:
   - 研究概念
   - llm
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:a604835116d0aa0ec94730397cb9bfa9ef4351aa5bc6502d52e9a225cb78442b'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:LLM_Reliability_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/LLM_Reliability_zh.md
 ---
 **大语言模型可靠性** 关注大语言模型系统在真实使用中是否一致、安全且可信。在本 wiki 中，该概念与合成数据、评估和可信系统相连，而不是作为单独的产品开发路线。

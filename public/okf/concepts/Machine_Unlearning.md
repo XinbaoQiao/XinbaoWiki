@@ -9,12 +9,24 @@ tags:
   - research-topic
   - machine-unlearning
 timestamp: '2026-05-05T22:09:30+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:236de032e41b9ee4438821b3e08a80a8b44299c35558cb5dab318c3b206da375'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Machine_Unlearning'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Machine_Unlearning.md
 ---
 **Machine Unlearning** studies how to remove, reduce, or correct the effect of selected training data after a model has already been trained. In this wiki it is treated as both a privacy topic and a data-centric systems topic: an unlearning method must say what it removes, how faithfully it approximates retraining, and how much computation or latency is saved.[^unlearning]

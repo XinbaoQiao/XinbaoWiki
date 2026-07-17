@@ -9,12 +9,27 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T21:39:01+08:00'
+modified: '2026-07-08T13:18:57+08:00'
+content_hash: 'sha256:017f86e5da6b8fec2ff8c7a791fbebe84e2d8dcbaa22316b5d7239f9c4f04884'
+reviewed_at: '2026-07-08T13:18:57+08:00'
+review_due: '2026-10-06'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-08T13:18:57+08:00'
+  reviewDue: '2026-10-06'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Hessian_Free_Online_Certified_Unlearning'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-65d81b8aca549860
+  - src-a0a9b7171dc028d2
+  - src-faaafad831fbefc5
 source_path: wiki/Hessian_Free_Online_Certified_Unlearning.md
 ---
 **Hessian-Free Online Certified Unlearning** is an ICLR 2025 conference paper by **[Xinbao Qiao](./Xinbao_Qiao.md)**, Meng Zhang, Ming Tang, and Ermin Wei. The paper develops a certified unlearning procedure for stochastic training pipelines where explicit Hessian storage, inversion, or repeated retraining would be too costly. Its main contribution is to turn deletion into an online vector update after a trajectory-based precomputation stage.

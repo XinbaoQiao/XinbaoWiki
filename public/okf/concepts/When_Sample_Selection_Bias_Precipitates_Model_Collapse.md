@@ -12,12 +12,28 @@ tags:
   - icml-2026
   - synthetic-data
 timestamp: '2026-06-02T22:56:50+08:00'
+modified: '2026-07-12T20:00:05+08:00'
+content_hash: 'sha256:0132752b19a51f653c6b62a66468fb1b3f3dcbd45675f431a2fcd7528fcd38a2'
+reviewed_at: '2026-07-12T20:00:05+08:00'
+review_due: '2027-07-12'
 language: en
 lifecycle:
   status: confirmed
   confidence: 0.95
   review: on venue/status change
   retention: long-lived semantic memory
+  reviewedAt: '2026-07-12T20:00:05+08:00'
+  reviewDue: '2027-07-12'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:When_Sample_Selection_Bias_Precipitates_Model_Collapse'
+  chunking: markdown-heading-v1
+source_ids:
+  - src-03bf1b2f9af65762
+  - src-4144e3776ac496d0
+  - src-766234e11681dad2
+  - src-94b169d5c233e588
 source_path: wiki/When_Sample_Selection_Bias_Precipitates_Model_Collapse.md
 ---
 **When Sample Selection Bias Precipitates Model Collapse** is an ICML 2026 conference paper by **[Xinbao Qiao](./Xinbao_Qiao.md)**, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, and Yan Pang. It studies a failure mode in recursive synthetic-data training: a verifier with only local, low-resource evidence can mistake rare but valid samples for low-quality generations, causing sample selection to amplify model collapse rather than prevent it. The paper frames collaborative Wasserstein-geometry proxies as a way to evaluate synthetic samples against a broader distributional reference without pooling raw data.

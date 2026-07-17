@@ -11,6 +11,10 @@ tags:
   - research-concept
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:7cf354acdcfbd356f0f83c59eb6015020d32759105867a565a32f9e2dec77a80'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: Model Collapse
 summary: >-
   Concept page for degenerative distributional drift in recursive model

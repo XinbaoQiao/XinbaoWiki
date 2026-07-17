@@ -22,25 +22,29 @@ wiki/Internet_Slang_2026_zh.md
 ## Runtime flow
 
 1. The search bar renders an `AI` icon button before the search input.
-2. The client sends `{ message, history }` to `/api/chat-with-xinbao`.
-3. The route validates input, enforces cooldown and daily quotas in Upstash Redis, builds a server-only prompt from `wiki/*.md` and optional `project.md`, then calls Yunwu at `https://api.yunwu.ai/v1/chat/completions`.
-4. Accepted questions are written to server-side Upstash logs for later FAQ and predicted-answer mining.
-5. The route returns `{ reply, remaining, limit }` or a safe generic error.
+2. The client keeps visible conversation history locally and sends only `{ message, language }` to `/api/chat-with-xinbao`. The server ignores any extra client-provided history for backward compatibility: it neither retrieves against it nor forwards it to the provider. The provider prompt contains the server-authored system message and the current user message only.
+3. The route validates input, enforces cooldown and daily quotas in Upstash Redis, and retrieves a bounded set of public `wiki/*.md` heading chunks for the current message only.
+4. If the evidence gate abstains, the server returns a localized deterministic refusal (or a fact-free greeting) with no sources and does not call the model provider.
+5. If evidence is usable, the route calls Yunwu at `https://api.yunwu.ai/v1/chat/completions`. A model answer is accepted only when it contains at least one valid `[n]` citation into the retrieved evidence. The server compacts citation numbers and returns only the sources that the accepted answer actually cites; a missing or out-of-range citation fails closed as a safe generic error.
+6. Accepted questions produce data-minimized, pseudonymous server-side metadata for reliability, retrieval evaluation, and aggregate FAQ demand.
+7. The route returns `{ reply, remaining, limit, sources, meta }` or a safe generic error.
 
 ## Question logs
 
-`POST /api/chat-with-xinbao` stores each accepted question in Redis after quota and cooldown checks pass. It records the trimmed question text, normalized text, language, page path, timestamp, message length, and anonymous visitor/browser/IP hashes. It does not record chat history, system prompts, model raw errors, API keys, or full IP addresses.
+`POST /api/chat-with-xinbao` stores metadata for each accepted request in Redis after quota and cooldown checks pass. It records a salted one-way question fingerprint, language, page path, timestamp, message length, pseudonymous one-way visitor/browser/IP hashes, retrieval versions and scores, and retrieved source IDs. It does not record raw or normalized question text, chat history, system prompts, model raw errors, API keys, or full IP addresses. These hashes reduce direct identifiability but can still link records produced from the same inputs and server salt, so they are pseudonymous identifiers, not anonymous data.
 
 Stored keys:
 
 ```text
-xinbao-chat:questions:recent
 xinbao-chat:questions:day:YYYY-MM-DD
-xinbao-chat:questions:frequency:zh
-xinbao-chat:questions:frequency:en
+xinbao-chat:questions:frequency:zh:YYYY-MM-DD
+xinbao-chat:questions:frequency:en:YYYY-MM-DD
 ```
 
-The recent list is capped at 2,000 items. Daily logs expire after 90 days.
+Each daily list is capped at 2,000 items. Daily logs and frequency buckets use a
+fixed absolute expiration at the Tokyo day boundary plus 90 days; later traffic
+cannot extend older records. The admin endpoint aggregates only those 90 daily
+buckets.
 
 Admin export is available only from the server endpoint with `XINBAO_CHAT_ADMIN_TOKEN`:
 
@@ -52,7 +56,11 @@ curl -H "Authorization: Bearer $XINBAO_CHAT_ADMIN_TOKEN" \
   "https://xinbaopedia.top/api/chat-with-xinbao/questions?mode=frequency&language=zh&limit=50"
 ```
 
-Use these logs to identify repeated questions and then improve grounded answers in the wiki or prompt. Do not publish raw visitor questions without review.
+Use aggregate fingerprints and retrieval outcomes to identify repeated demand,
+then author or review an explicit golden question before improving the wiki or
+prompt. The raw question is not retained and the salted one-way fingerprint is
+not a recovery mechanism, but it remains pseudonymous telemetry rather than
+proof of anonymization. Never republish visitor metadata as evaluation data.
 
 ## Voice updates
 
@@ -64,6 +72,13 @@ Internal meme and slang notes are maintained as hidden yearly wiki sources. The 
 2. In Vercel Project Settings, add the variables shown in `env.example`.
 3. Keep `NEXT_PUBLIC_BASE_PATH` empty for a root Vercel deployment.
 4. Confirm the deployed Network panel shows only calls to `/api/chat-with-xinbao` from the browser.
+
+The release smoke is not only a configuration check. Staged and production
+smoke tests send an answerable `POST` through the deployed API, which invokes
+the configured provider, and require a non-empty answer with valid `[n]`
+citations plus matching returned sources. A separate unsupported-question
+canary must return `responseMode: deterministic-abstention` with an empty source
+list. Either failure blocks promotion or release.
 
 ## Key leak check
 

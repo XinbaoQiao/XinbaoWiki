@@ -10,6 +10,10 @@ tags:
   - topic
   - research-topic
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:bcaecd59642ba0d6acba76857a5343801aa5f36e2826a75f8def334627b1de33'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 aliases:
   - Data-Centric Machine Learning
@@ -18,6 +22,14 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Data_Centric_Machine_Learning'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Data_Centric_Machine_Learning.md
 ---
 **Data Centric ML** is the short label used in this wiki for data-centric machine learning. It refers to research where changes to data, rather than only changes to model architecture, are treated as first-order interventions. The relevant operations include selection, pruning, weighting, deletion, synthesis, and cross-party evaluation.

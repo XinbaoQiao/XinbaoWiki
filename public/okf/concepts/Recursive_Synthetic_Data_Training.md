@@ -11,12 +11,24 @@ tags:
   - research-concept
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:2734a90abbd3686a946f0cea17b703481d18fe896f02981c9e0c7cdae4334395'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Recursive_Synthetic_Data_Training'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Recursive_Synthetic_Data_Training.md
 ---
 **Recursive Synthetic Data Training** is a training process in which generated data from one model generation become part of the training set for a later generation. The process can be intentional, as in self-training or synthetic-data bootstrapping, or incidental, as generated content enters future training corpora.[^recursive]

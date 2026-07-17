@@ -8,6 +8,10 @@ tags:
   - advisor
   - academic-advisor
 timestamp: '2026-05-05T21:15:18+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:e3fc2253d995fdb7047157a92a3b1d378ba60d5b54aef3e7178e8d2431a0ea78'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: Meng Zhang
 summary: Zhejiang University faculty member and master's advisor of Xinbao Qiao.
 occupation:

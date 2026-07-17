@@ -8,6 +8,10 @@ tags:
   - education
   - 公立研究型大学
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-12T22:06:12+08:00'
+content_hash: 'sha256:b299fe56a1b40d6af75fd0dec521d43bbcce4f80812f3b644dc326f6d3e759e5'
+reviewed_at: '2026-07-12T22:06:12+08:00'
+review_due: '2027-01-08'
 name: 浙江大学
 language: zh
 summary: 乔鑫宝硕士阶段所在机构。

@@ -9,6 +9,10 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T21:39:01+08:00'
+modified: '2026-07-08T13:18:57+08:00'
+content_hash: 'sha256:e6ac063f602e015e12506e44c362a212c8155400bf1007d5aaa5be220af99a47'
+reviewed_at: '2026-07-08T13:18:57+08:00'
+review_due: '2026-10-06'
 name: 'DynFrs: An Efficient Framework for Machine Unlearning in Random Forest'
 summary: ICLR 2025 paper on efficient machine unlearning for random forests.
 authors:

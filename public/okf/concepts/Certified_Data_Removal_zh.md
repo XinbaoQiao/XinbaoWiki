@@ -9,12 +9,24 @@ tags:
   - 研究概念
   - machine-unlearning
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:cf9f22c358563c9ded7edfa0b84c15a2ddc531896671859e2ef14dc1edf907be'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 language: zh
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-02T20:03:20+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Certified_Data_Removal_zh'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Certified_Data_Removal_zh.md
 ---
 **认证数据删除** 指机器学习方法对“删除某些数据后模型应如何变化”给出明确可检验保证。在本 wiki 中，它主要用于解释 [机器遗忘](./Machine_Unlearning_zh.md) 的数学侧面：目标不仅是快速更新模型，还要约束更新模型与“真正不含被删数据重新训练模型”之间的差距。[^certified]

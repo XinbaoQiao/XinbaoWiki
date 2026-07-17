@@ -8,6 +8,10 @@ tags:
   - overview
   - 项目概览
 timestamp: '2026-06-13T20:46:02+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:fee4ad67798127cc3b52660ab5227d1b67bb590c8a37300a540bb43e1e15bbec'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-09-30'
 name: 项目
 language: zh
 summary: 研究项目与项目簇。

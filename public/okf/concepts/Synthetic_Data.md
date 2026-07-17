@@ -11,12 +11,24 @@ tags:
   - research-concept
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
+modified: '2026-07-03T00:03:48+08:00'
+content_hash: 'sha256:bbe93fac97f4c9cdd3408c23951a3082bd7e098256861dfd64ad06fb01970f2a'
+reviewed_at: '2026-07-03T00:03:48+08:00'
+review_due: '2026-12-29'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
+  reviewedAt: '2026-07-03T00:03:48+08:00'
+  reviewDue: '2026-12-29'
+  pendingReview: false
+  overdue: false
+retrieval:
+  document_id: 'wiki:Synthetic_Data'
+  chunking: markdown-heading-v1
+source_ids: []
 source_path: wiki/Synthetic_Data.md
 ---
 **Synthetic Data** refers to generated examples that are used in place of, alongside, or as a proxy for real data. In machine learning, synthetic data can expand coverage, reduce annotation cost, protect privacy, or enable evaluation when real data are scarce. It can also introduce failure modes when generated samples are recursively reused without enough real-data anchoring.

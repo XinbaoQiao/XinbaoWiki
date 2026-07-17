@@ -8,6 +8,10 @@ tags:
   - advisor
   - academic-advisor
 timestamp: '2026-05-05T23:25:14+08:00'
+modified: '2026-07-02T20:03:20+08:00'
+content_hash: 'sha256:103093bd3886bfa0462229db2fd4d8557041ecd2ab27552727a5922d4bea88ed'
+reviewed_at: '2026-07-02T20:03:20+08:00'
+review_due: '2026-12-29'
 name: 张萌
 language: zh
 summary: 浙江大学教师，乔鑫宝硕士导师。
