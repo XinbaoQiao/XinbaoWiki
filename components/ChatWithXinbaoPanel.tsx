@@ -50,7 +50,6 @@ const copy = {
     ],
     quotaUnknown: '10 messages/day',
     quota: (remaining: number, limit: number) => `${remaining}/${limit} messages left today`,
-    logNotice: 'Pseudonymous usage metadata (one-way hashes, not raw messages or IPs) may be logged to improve answers.',
     empty: 'Please enter a question.',
     tooLong: `Please keep the message within ${MAX_INPUT_LENGTH} characters.`
   },
@@ -74,7 +73,6 @@ const copy = {
     ],
     quotaUnknown: '每天 10 条消息',
     quota: (remaining: number, limit: number) => `今天还剩 ${remaining}/${limit} 条消息`,
-    logNotice: '可能记录假名化的使用元数据（单向哈希，不含原始消息或 IP），用于改进回答。',
     empty: '请输入一个问题。',
     tooLong: `请将消息控制在 ${MAX_INPUT_LENGTH} 个字符以内。`
   }
@@ -277,9 +275,8 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
         <section aria-label="Chat with Xinbao" className="chat-xinbao-shell">
           <header className="chat-xinbao-header">
             <div>
-              <h2>Chat with Xinbao</h2>
+              <h2><span aria-hidden="true" className="chat-xinbao-mark">AI</span>Chat with Xinbao</h2>
               <p>{remaining === null ? strings.quotaUnknown : strings.quota(remaining, limit)}</p>
-              <p>{strings.logNotice}</p>
             </div>
             <div className="chat-xinbao-actions">
               <button aria-label={strings.minimize} onClick={() => setMinimized(true)} type="button">-</button>
