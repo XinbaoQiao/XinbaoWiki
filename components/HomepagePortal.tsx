@@ -1,5 +1,6 @@
 'use client';
 
+import type { CSSProperties } from 'react';
 import { useLayoutEffect, useRef, useState } from 'react';
 import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
 
@@ -265,6 +266,12 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
                     height={158}
                     src={withBasePath('/site-logos/wordmark/xinbao-qiao-charcoal.png')}
                     width={641}
+                  />
+                  <span
+                    className="wiki-portal-name-logo wiki-portal-name-logo-tinted"
+                    style={{
+                      '--portal-wordmark-mask': `url("${withBasePath('/site-logos/wordmark/xinbao-qiao-charcoal.png')}")`
+                    } as CSSProperties}
                   />
                 </span>
                 <span className="wiki-portal-name-text">Xinbao Qiao</span>

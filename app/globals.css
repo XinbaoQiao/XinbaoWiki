@@ -41,16 +41,6 @@ html[data-site-palette="blue"] {
   --site-theme-surface: rgba(255, 255, 255, .88);
 }
 
-html[data-site-palette="text"] {
-  --wiki-accent: #36c;
-  --site-page-bg: #f6f8fb;
-  --site-page-bg-end: #ffffff;
-  --site-theme-accent: #36c;
-  --site-theme-accent-border: rgba(51, 102, 204, .24);
-  --site-theme-heading: #243142;
-  --site-theme-surface: rgba(255, 255, 255, .88);
-}
-
 html[data-site-palette="gold"] {
   --wiki-accent: #a46e12;
   --site-page-bg: #fff7e6;
@@ -58,6 +48,16 @@ html[data-site-palette="gold"] {
   --site-theme-accent: #b8871b;
   --site-theme-accent-border: rgba(184, 135, 27, .28);
   --site-theme-heading: #4a3a1f;
+  --site-theme-surface: rgba(255, 255, 255, .9);
+}
+
+html[data-site-palette="rose"] {
+  --wiki-accent: #97425a;
+  --site-page-bg: #fff4f7;
+  --site-page-bg-end: #ffffff;
+  --site-theme-accent: #a44962;
+  --site-theme-accent-border: rgba(164, 73, 98, .26);
+  --site-theme-heading: #4c2a34;
   --site-theme-surface: rgba(255, 255, 255, .9);
 }
 
@@ -69,6 +69,16 @@ html[data-site-palette="green"] {
   --site-theme-accent-border: rgba(42, 127, 98, .26);
   --site-theme-heading: #1d3f35;
   --site-theme-surface: rgba(255, 255, 255, .88);
+}
+
+html[data-site-palette="violet"] {
+  --wiki-accent: #684985;
+  --site-page-bg: #f8f4fc;
+  --site-page-bg-end: #ffffff;
+  --site-theme-accent: #70518f;
+  --site-theme-accent-border: rgba(112, 81, 143, .26);
+  --site-theme-heading: #392c46;
+  --site-theme-surface: rgba(255, 255, 255, .9);
 }
 
 html[data-site-palette="charcoal"] {
@@ -169,12 +179,7 @@ a.external::after {
 
 .site-palette-auto {
   background:
-    conic-gradient(from 45deg, #2b5f94, #b8871b, #2a7f62, #2f3437, #2b5f94);
-}
-
-.site-palette-text {
-  background:
-    linear-gradient(135deg, #ffffff 0 42%, #202122 42% 58%, #ffffff 58% 100%);
+    conic-gradient(from 45deg, #2b5f94, #b8871b, #a44962, #2a7f62, #70518f, #2f3437, #2b5f94);
 }
 
 .site-palette-button:hover,
@@ -196,7 +201,7 @@ a.external::after {
 
   .site-palette-switcher:hover,
   .site-palette-switcher:focus-within {
-    width: 150px;
+    width: 174px;
   }
 }
 
@@ -1384,13 +1389,15 @@ html[lang="zh-CN"] .wiki-page {
   margin: 0 auto 8px;
 }
 
-.wiki-portal-tagline {
+.wiki-main .wiki-portal-tagline {
+  width: 100%;
   max-width: 620px;
   margin: 0 auto 18px;
   color: var(--wiki-text-soft);
   font-family: var(--font-sans);
   font-size: 14px;
   line-height: 1.5;
+  text-align: center;
   text-wrap: balance;
 }
 
@@ -1462,12 +1469,23 @@ html[lang="zh-CN"] .wiki-page {
   object-fit: contain;
 }
 
+.wiki-portal-name-logo-tinted {
+  aspect-ratio: 641 / 158;
+  background: var(--site-theme-accent);
+  -webkit-mask: var(--portal-wordmark-mask) center / contain no-repeat;
+  mask: var(--portal-wordmark-mask) center / contain no-repeat;
+}
+
 .wiki-main .wiki-portal-name-logo {
   border: 0;
   outline: 0;
   background: transparent;
   box-shadow: none;
   margin: 0;
+}
+
+.wiki-main .wiki-portal-name-logo-tinted {
+  background: var(--site-theme-accent);
 }
 
 .wiki-portal-name-text {
@@ -1495,14 +1513,18 @@ html[lang="zh-CN"] .wiki-page {
 
 html[data-site-palette="blue"] .wiki-portal-name-text,
 html[data-site-palette="gold"] .wiki-portal-name-text,
+html[data-site-palette="rose"] .wiki-portal-name-text,
 html[data-site-palette="green"] .wiki-portal-name-text,
+html[data-site-palette="violet"] .wiki-portal-name-text,
 html[data-site-palette="charcoal"] .wiki-portal-name-text {
   display: none;
 }
 
 html[data-site-palette="blue"] .wiki-portal-name-logos,
 html[data-site-palette="gold"] .wiki-portal-name-logos,
+html[data-site-palette="rose"] .wiki-portal-name-logos,
 html[data-site-palette="green"] .wiki-portal-name-logos,
+html[data-site-palette="violet"] .wiki-portal-name-logos,
 html[data-site-palette="charcoal"] .wiki-portal-name-logos {
   display: block;
   animation: wiki-logo-write 2.4s cubic-bezier(.33, 0, .2, 1) .12s both;
@@ -1514,6 +1536,11 @@ html[data-site-palette="blue"] .wiki-portal-name-logo-blue,
 html[data-site-palette="gold"] .wiki-portal-name-logo-gold,
 html[data-site-palette="green"] .wiki-portal-name-logo-green,
 html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
+  display: block;
+}
+
+html[data-site-palette="rose"] .wiki-portal-name-logo-tinted,
+html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   display: block;
 }
 

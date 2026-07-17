@@ -59,7 +59,7 @@ export function LanguageToggle() {
   );
 }
 
-type SitePaletteName = 'text' | 'blue' | 'gold' | 'green' | 'charcoal';
+type SitePaletteName = 'blue' | 'gold' | 'rose' | 'green' | 'violet' | 'charcoal';
 type SitePaletteMode = SitePaletteName | 'auto';
 
 type SitePaletteOption = {
@@ -75,24 +75,27 @@ type SitePaletteProps = {
 const sitePaletteStorageKey = 'xinbaopedia-palette-mode';
 
 const sitePaletteOptions: SitePaletteOption[] = [
-  { color: '#202122', mode: 'text', title: 'Text wordmark theme' },
   { color: '#2b5f94', mode: 'blue', title: 'Morning blue theme' },
   { color: '#b8871b', mode: 'gold', title: 'Midday gold theme' },
+  { color: '#a44962', mode: 'rose', title: 'Scholar rose theme' },
   { color: '#2a7f62', mode: 'green', title: 'Evening green theme' },
+  { color: '#70518f', mode: 'violet', title: 'Archive violet theme' },
   { color: '#2f3437', mode: 'charcoal', title: 'Night charcoal theme' },
   { color: '#36c', mode: 'auto', title: 'Auto theme by local time' }
 ];
 
 function isSitePaletteMode(value: string | null): value is SitePaletteMode {
-  return value === 'auto' || value === 'text' || value === 'blue' || value === 'gold' || value === 'green' || value === 'charcoal';
+  return value === 'auto' || value === 'blue' || value === 'gold' || value === 'rose' || value === 'green' || value === 'violet' || value === 'charcoal';
 }
 
-function sitePaletteForLocalTime(date = new Date()): Exclude<SitePaletteName, 'text'> {
+function sitePaletteForLocalTime(date = new Date()): SitePaletteName {
   const hour = date.getHours();
 
-  if (hour >= 5 && hour < 10) return 'blue';
-  if (hour >= 10 && hour < 16) return 'gold';
-  if (hour >= 16 && hour < 20) return 'green';
+  if (hour >= 5 && hour < 9) return 'blue';
+  if (hour >= 9 && hour < 13) return 'gold';
+  if (hour >= 13 && hour < 16) return 'rose';
+  if (hour >= 16 && hour < 19) return 'green';
+  if (hour >= 19 && hour < 22) return 'violet';
   return 'charcoal';
 }
 
@@ -164,7 +167,7 @@ export function SitePalette({ icons }: SitePaletteProps) {
           <button
             aria-label={option.title}
             aria-pressed={pressed}
-            className={['site-palette-button', active ? 'is-active' : '', option.mode === 'auto' ? 'site-palette-auto' : '', option.mode === 'text' ? 'site-palette-text' : '']
+            className={['site-palette-button', active ? 'is-active' : '', option.mode === 'auto' ? 'site-palette-auto' : '']
               .filter(Boolean)
               .join(' ')}
             key={option.mode}
