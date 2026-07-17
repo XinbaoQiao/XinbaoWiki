@@ -4,9 +4,13 @@ import { after, NextRequest, NextResponse } from 'next/server';
 import { getXinbaoChatSystemPrompt, XINBAO_CHAT_PROMPT_VERSION } from '@/lib/chat-with-xinbao';
 import {
   deterministicAbstentionReply,
-  validateAndCompactCitations,
-  validateConversationalReply,
-  WIKI_CHAT_RESPONSE_POLICY_VERSION
+  resolveConversationalReply,
+  resolveGroundedReplyWithRetry,
+  WIKI_CHAT_RESPONSE_POLICY_VERSION,
+  type CitationRetryReason,
+  type GroundedValidationFailure,
+  type ProviderCompletionAttempt,
+  type ProviderUsage
 } from '@/lib/wiki-chat-response';
 import { getWikiRetrievalIndex, retrieveWikiContext, WIKI_RETRIEVAL_INDEX_VERSION, type WikiRetrievalResult } from '@/lib/wiki-retrieval';
 
@@ -14,10 +18,11 @@ export const runtime = 'nodejs';
 
 const MODEL = 'deepseek-v4-flash';
 const DEFAULT_BASE_URL = 'https://api.yunwu.ai/v1';
-const CHAT_BACKEND_VERSION = 'xinbao-chat-api-v4';
+const CHAT_BACKEND_VERSION = 'xinbao-chat-api-v5';
 const DAILY_LIMIT = 10;
 const COOLDOWN_SECONDS = 4;
 const HOURLY_IP_LIMIT = 80;
+const HOURLY_IP_RETRY_LIMIT = 20;
 const MAX_INPUT_LENGTH = 1000;
 const MAX_OUTPUT_TOKENS = 450;
 const REQUEST_TIMEOUT_MS = 12_000;
@@ -33,7 +38,7 @@ type ChatResponseMode = 'model-grounded' | 'model-conversational' | 'determinist
 type ParsedChatBody = { message?: unknown; language?: ChatLanguage };
 type CompletionResponse = {
   choices?: Array<{ message?: { content?: unknown } }>;
-  usage?: { prompt_tokens?: unknown; completion_tokens?: unknown; total_tokens?: unknown };
+  usage?: ProviderUsage;
 };
 type RequestIdentity = { visitorHash: string; browserHash: string; ipHash: string };
 type QuestionLogEntry = {
@@ -63,7 +68,7 @@ type QuestionLogEntry = {
 
 type ChatObservation = {
   traceId: string;
-  outcome: 'ok' | 'ok-conversational' | 'deterministic-abstention' | 'invalid-citations' | 'invalid-conversational-reply' | 'upstream-error' | 'empty-reply' | 'timeout' | 'request-error';
+  outcome: 'ok' | 'ok-conversational' | 'deterministic-abstention' | 'invalid-citations' | 'protected-output' | 'retry-rate-limited' | 'invalid-conversational-reply' | 'upstream-error' | 'empty-reply' | 'timeout' | 'request-error';
   provider: string;
   model: string;
   promptVersion: string;
@@ -77,6 +82,10 @@ type ChatObservation = {
   responseMode: ChatResponseMode;
   blockedReason: WikiRetrievalResult['blockedReason'];
   durationMs: number;
+  providerAttempts: number;
+  retryReason?: CitationRetryReason;
+  retryOutcome: 'not-attempted' | 'succeeded' | 'failed' | 'rate-limited';
+  finalValidationFailure?: GroundedValidationFailure;
   upstreamStatus?: number;
   promptTokens?: number;
   completionTokens?: number;
@@ -222,6 +231,21 @@ async function refundDailyUsage(redis: Redis, keys: string[]) {
   await releaseDailyUsage(redis, keys).catch(() => logServerIssue('daily quota refund failed'));
 }
 
+async function reserveHourlyRetry(redis: Redis, key: string) {
+  try {
+    const count = await redis.eval<[number], number>(
+      `local value = redis.call('INCR', KEYS[1])
+if value == 1 then redis.call('EXPIRE', KEYS[1], tonumber(ARGV[1])) end
+return value`,
+      [key],
+      [60 * 60]
+    );
+    return Number(count) <= HOURLY_IP_RETRY_LIMIT;
+  } catch {
+    return false;
+  }
+}
+
 function inferLanguage(request: NextRequest): ChatLanguage {
   const referer = request.headers.get('referer') || '';
   return /_zh(?:\/|\?|#|$)|\/Qiao_Xinbao_zh\//.test(referer) ? 'zh' : 'en';
@@ -274,6 +298,18 @@ function modelApiConfiguration() {
 
 function numericUsage(value: unknown) {
   return typeof value === 'number' && Number.isFinite(value) && value >= 0 ? Math.round(value) : undefined;
+}
+
+function combinedUsage(...values: Array<CompletionResponse['usage'] | undefined>): CompletionResponse['usage'] {
+  const sum = (field: 'prompt_tokens' | 'completion_tokens' | 'total_tokens') => {
+    const numbers = values.map((value) => numericUsage(value?.[field])).filter((value): value is number => value !== undefined);
+    return numbers.length > 0 ? numbers.reduce((total, value) => total + value, 0) : undefined;
+  };
+  return {
+    prompt_tokens: sum('prompt_tokens'),
+    completion_tokens: sum('completion_tokens'),
+    total_tokens: sum('total_tokens')
+  };
 }
 
 function logChatObservation(observation: ChatObservation) {
@@ -449,6 +485,7 @@ export async function POST(request: NextRequest) {
     logServerIssue('missing server configuration');
     return genericUnavailable(visitorCookie);
   }
+  const chatRedis = redis;
 
   const identity = getRequestIdentity(request, visitorCookie.visitorId);
   if (!identity) return genericUnavailable(visitorCookie);
@@ -456,7 +493,9 @@ export async function POST(request: NextRequest) {
   const dateKey = tokyoDateKey();
   const dailyKeys = dailyQuotaKeys(dateKey, identity);
   const cooldownKey = `xinbao-chat:cooldown:${identity.visitorHash}`;
-  const hourlyIpKey = `xinbao-chat:ip-hour:${identity.ipHash}:${Math.floor(Date.now() / 3_600_000)}`;
+  const hourBucket = Math.floor(Date.now() / 3_600_000);
+  const hourlyIpKey = `xinbao-chat:ip-hour:${identity.ipHash}:${hourBucket}`;
+  const hourlyRetryKey = `xinbao-chat:retry-hour:${identity.ipHash}:${hourBucket}`;
   const quotaTtl = secondsUntilNextTokyoMidnight();
 
   const previousDailyCount = await readDailyUsage(redis, dailyKeys);
@@ -504,7 +543,7 @@ export async function POST(request: NextRequest) {
     });
   } catch {
     logServerIssue('retrieval failed');
-    await refundDailyUsage(redis, dailyKeys);
+    await refundDailyUsage(chatRedis, dailyKeys);
     return genericUnavailable(visitorCookie);
   }
 
@@ -516,11 +555,21 @@ export async function POST(request: NextRequest) {
       ? 'model-conversational'
       : 'model-grounded';
   after(() => recordQuestionLog(redis, identity, message, pagePath, dateKey, language, retrieval, provider, responseMode));
+  let terminalObserved = false;
 
   function observe(
     outcome: ChatObservation['outcome'],
-    details: { upstreamStatus?: number; usage?: CompletionResponse['usage'] } = {}
+    details: {
+      finalValidationFailure?: GroundedValidationFailure;
+      providerAttempts?: number;
+      retryOutcome?: ChatObservation['retryOutcome'];
+      retryReason?: CitationRetryReason;
+      upstreamStatus?: number;
+      usage?: ProviderUsage;
+    } = {}
   ) {
+    if (terminalObserved) return;
+    terminalObserved = true;
     logChatObservation({
       traceId,
       outcome,
@@ -537,6 +586,10 @@ export async function POST(request: NextRequest) {
       responseMode,
       blockedReason: retrieval.blockedReason,
       durationMs: Date.now() - requestStartedAt,
+      providerAttempts: details.providerAttempts ?? 0,
+      retryReason: details.retryReason,
+      retryOutcome: details.retryOutcome ?? 'not-attempted',
+      finalValidationFailure: details.finalValidationFailure,
       upstreamStatus: details.upstreamStatus,
       promptTokens: numericUsage(details.usage?.prompt_tokens),
       completionTokens: numericUsage(details.usage?.completion_tokens),
@@ -544,7 +597,7 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  function responseMetadata(citedChunks: number) {
+  function responseMetadata(citedChunks: number, providerAttempts: number, retryReason?: CitationRetryReason) {
     return {
       traceId,
       backendVersion: CHAT_BACKEND_VERSION,
@@ -557,6 +610,9 @@ export async function POST(request: NextRequest) {
       indexFingerprint: retrieval.indexFingerprint,
       retrievedChunks: retrieval.sources.length,
       citedChunks,
+      providerAttempts,
+      retryReason: retryReason ?? null,
+      retryOutcome: retryReason ? 'succeeded' : 'not-attempted',
       evidenceScore: retrieval.evidenceScore,
       queryCoverage: retrieval.queryCoverage,
       shouldAbstain: responseMode === 'deterministic-abstention',
@@ -574,7 +630,7 @@ export async function POST(request: NextRequest) {
         sources: [],
         remaining: Math.max(0, DAILY_LIMIT - dailyCount),
         limit: DAILY_LIMIT,
-        meta: responseMetadata(0)
+        meta: responseMetadata(0, 0)
       },
       200,
       visitorCookie
@@ -588,8 +644,16 @@ export async function POST(request: NextRequest) {
     retrieval,
     responseMode === 'model-grounded' ? 'grounded' : 'conversational'
   );
+  let providerAttempts = 0;
+  let accumulatedUsage: ProviderUsage | undefined;
+  let activeRetryReason: CitationRetryReason | undefined;
 
-  try {
+  async function requestCompletion(
+    prompt: string,
+    temperature: number,
+    signal: AbortSignal
+  ): Promise<ProviderCompletionAttempt> {
+    providerAttempts += 1;
     const response = await fetch(`${baseUrl}/chat/completions`, {
       method: 'POST',
       headers: {
@@ -599,85 +663,147 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         model: MODEL,
         messages: [
-          {
-            role: 'system',
-            content: systemPrompt
-          },
+          { role: 'system', content: prompt },
           { role: 'user', content: message }
         ],
-        temperature: 0.3,
+        temperature,
         max_tokens: MAX_OUTPUT_TOKENS,
         thinking: { type: 'disabled' },
         stream: false
       }),
-      signal: controller.signal
+      signal
     });
-
-    if (!response.ok) {
-      logServerIssue('model response status', response.status);
-      observe('upstream-error', { upstreamStatus: response.status });
-      await refundDailyUsage(redis, dailyKeys);
-      return genericUnavailable(visitorCookie);
-    }
-
+    if (!response.ok) return { kind: 'upstream-error', status: response.status };
     const data = (await response.json()) as CompletionResponse;
+    accumulatedUsage = combinedUsage(accumulatedUsage, data.usage);
     const reply = data.choices?.[0]?.message?.content;
-    if (typeof reply !== 'string' || !reply.trim()) {
-      logServerIssue('empty model reply');
-      observe('empty-reply', { usage: data.usage });
-      await refundDailyUsage(redis, dailyKeys);
-      return genericUnavailable(visitorCookie);
-    }
+    if (typeof reply !== 'string' || !reply.trim()) return { kind: 'empty', usage: data.usage };
+    return { kind: 'ok', reply, usage: data.usage };
+  }
 
+  async function unavailableAfterProvider(
+    outcome: ChatObservation['outcome'],
+    details: {
+      finalValidationFailure?: GroundedValidationFailure;
+      retryOutcome?: ChatObservation['retryOutcome'];
+      retryReason?: CitationRetryReason;
+      upstreamStatus?: number;
+    } = {}
+  ) {
+    observe(outcome, { ...details, providerAttempts, usage: accumulatedUsage });
+    await refundDailyUsage(chatRedis, dailyKeys);
+    return genericUnavailable(visitorCookie);
+  }
+
+  try {
     if (responseMode === 'model-conversational') {
-      const conversationalReply = validateConversationalReply(reply, systemPrompt);
-      if (!conversationalReply) {
-        logServerIssue('invalid conversational reply');
-        observe('invalid-conversational-reply', { usage: data.usage });
-        await refundDailyUsage(redis, dailyKeys);
-        return genericUnavailable(visitorCookie);
+      const conversationalResult = await resolveConversationalReply({
+        requestCompletion,
+        signal: controller.signal,
+        systemPrompt
+      });
+      accumulatedUsage = conversationalResult.kind === 'upstream-error'
+        ? accumulatedUsage
+        : conversationalResult.usage ?? accumulatedUsage;
+      if (conversationalResult.kind === 'upstream-error') {
+        return unavailableAfterProvider('upstream-error', { upstreamStatus: conversationalResult.status });
+      }
+      if (conversationalResult.kind === 'empty') {
+        return unavailableAfterProvider('empty-reply');
+      }
+      if (conversationalResult.kind === 'invalid-conversational-reply') {
+        return unavailableAfterProvider('invalid-conversational-reply');
       }
 
-      observe('ok-conversational', { usage: data.usage });
+      observe('ok-conversational', { providerAttempts, usage: accumulatedUsage });
       return jsonResponse(
         {
-          reply: withXinbaoSignature(conversationalReply, language),
+          reply: withXinbaoSignature(conversationalResult.reply, language),
           sources: [],
           remaining: Math.max(0, DAILY_LIMIT - dailyCount),
           limit: DAILY_LIMIT,
-          meta: responseMetadata(0)
+          meta: responseMetadata(0, providerAttempts)
         },
         200,
         visitorCookie
       );
     }
 
-    const groundedReply = validateAndCompactCitations(reply, retrieval.sources, systemPrompt);
-    if (!groundedReply) {
-      logServerIssue('invalid model citations');
-      observe('invalid-citations', { usage: data.usage });
-      await refundDailyUsage(redis, dailyKeys);
-      return genericUnavailable(visitorCookie);
+    const groundedResult = await resolveGroundedReplyWithRetry({
+      beforeRetry: async (reason) => {
+        activeRetryReason = reason;
+        return reserveHourlyRetry(chatRedis, hourlyRetryKey);
+      },
+      requestCompletion,
+      signal: controller.signal,
+      sources: retrieval.sources,
+      systemPrompt
+    });
+    accumulatedUsage = groundedResult.usage ?? accumulatedUsage;
+    activeRetryReason = groundedResult.retryReason ?? activeRetryReason;
+    const retryOutcome: ChatObservation['retryOutcome'] = groundedResult.kind === 'retry-rate-limited'
+      ? 'rate-limited'
+      : groundedResult.retryReason
+        ? groundedResult.kind === 'ok' ? 'succeeded' : 'failed'
+        : 'not-attempted';
+
+    if (groundedResult.kind === 'upstream-error') {
+      return unavailableAfterProvider('upstream-error', {
+        retryOutcome,
+        retryReason: groundedResult.retryReason,
+        upstreamStatus: groundedResult.status
+      });
+    }
+    if (groundedResult.kind === 'empty') {
+      return unavailableAfterProvider('empty-reply', {
+        retryOutcome,
+        retryReason: groundedResult.retryReason
+      });
+    }
+    if (groundedResult.kind === 'protected-output') {
+      return unavailableAfterProvider('protected-output', {
+        finalValidationFailure: groundedResult.finalValidationFailure,
+        retryOutcome,
+        retryReason: groundedResult.retryReason
+      });
+    }
+    if (groundedResult.kind === 'retry-rate-limited') {
+      return unavailableAfterProvider('retry-rate-limited', {
+        retryOutcome,
+        retryReason: groundedResult.retryReason
+      });
+    }
+    if (groundedResult.kind === 'invalid-citations') {
+      return unavailableAfterProvider('invalid-citations', {
+        finalValidationFailure: groundedResult.finalValidationFailure,
+        retryOutcome,
+        retryReason: groundedResult.retryReason
+      });
     }
 
-    observe('ok', { usage: data.usage });
+    observe('ok', {
+      providerAttempts,
+      retryOutcome,
+      retryReason: groundedResult.retryReason,
+      usage: accumulatedUsage
+    });
     return jsonResponse(
       {
-        reply: withXinbaoSignature(groundedReply.reply, language),
-        sources: groundedReply.sources,
+        reply: withXinbaoSignature(groundedResult.response.reply, language),
+        sources: groundedResult.response.sources,
         remaining: Math.max(0, DAILY_LIMIT - dailyCount),
         limit: DAILY_LIMIT,
-        meta: responseMetadata(groundedReply.sources.length)
+        meta: responseMetadata(groundedResult.response.sources.length, providerAttempts, groundedResult.retryReason)
       },
       200,
       visitorCookie
     );
   } catch (error) {
     const timedOut = error instanceof DOMException && error.name === 'AbortError';
-    logServerIssue(timedOut ? 'model timeout' : 'model request failed');
-    observe(timedOut ? 'timeout' : 'request-error');
-    await refundDailyUsage(redis, dailyKeys);
-    return genericUnavailable(visitorCookie);
+    return unavailableAfterProvider(timedOut ? 'timeout' : 'request-error', {
+      retryOutcome: activeRetryReason ? 'failed' : 'not-attempted',
+      retryReason: activeRetryReason
+    });
   } finally {
     clearTimeout(timeout);
   }

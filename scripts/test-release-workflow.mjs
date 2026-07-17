@@ -27,6 +27,12 @@ import {
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 assert.equal(Number.parseInt(process.versions.node, 10), 22, 'release workflow tests execute under Node 22');
+const CHAT_CONTRACT_META = Object.freeze({
+  backendVersion: 'xinbao-chat-api-v5',
+  responsePolicyVersion: 'grounded-conversation-v3',
+  promptVersion: 'xinbao-grounded-conversation-v4',
+  indexVersion: 'wiki-heading-lexical-v2:test',
+});
 
 function run(command, args, options = {}) {
   return new Promise((resolve) => {
@@ -91,12 +97,9 @@ async function testSmokeRetry() {
         remaining: 10,
         limit: 10,
         meta: {
-          backendVersion: 'xinbao-chat-api-v4',
-          responsePolicyVersion: 'grounded-conversation-v2',
-          promptVersion: 'xinbao-grounded-conversation-v3',
+          ...CHAT_CONTRACT_META,
           retrievalAlgorithm: 'wiki-heading-lexical-v2',
           modelApiConfigured: true,
-          indexVersion: 'wiki-heading-lexical-v2:test',
           indexFingerprint: '0'.repeat(64),
           indexedChunks: 1
         }
@@ -117,11 +120,8 @@ async function testSmokeRetry() {
             remaining: 9,
             limit: 10,
             meta: {
-              backendVersion: 'xinbao-chat-api-v4',
-              responsePolicyVersion: 'grounded-conversation-v2',
+              ...CHAT_CONTRACT_META,
               responseMode: 'deterministic-abstention',
-              promptVersion: 'xinbao-grounded-conversation-v3',
-              indexVersion: 'wiki-heading-lexical-v2:test',
               citedChunks: 0,
               shouldAbstain: true,
               retrievalShouldAbstain: true,
@@ -138,11 +138,8 @@ async function testSmokeRetry() {
             remaining: 9,
             limit: 10,
             meta: {
-              backendVersion: 'xinbao-chat-api-v4',
-              responsePolicyVersion: 'grounded-conversation-v2',
+              ...CHAT_CONTRACT_META,
               responseMode: 'model-conversational',
-              promptVersion: 'xinbao-grounded-conversation-v3',
-              indexVersion: 'wiki-heading-lexical-v2:test',
               citedChunks: 0,
               shouldAbstain: false,
               retrievalShouldAbstain: true,
@@ -165,11 +162,8 @@ async function testSmokeRetry() {
             remaining: 9,
             limit: 10,
             meta: {
-              backendVersion: 'xinbao-chat-api-v4',
-              responsePolicyVersion: 'grounded-conversation-v2',
+              ...CHAT_CONTRACT_META,
               responseMode: 'model-grounded',
-              promptVersion: 'xinbao-grounded-conversation-v3',
-              indexVersion: 'wiki-heading-lexical-v2:test',
               citedChunks: 1,
               shouldAbstain: false,
               retrievalShouldAbstain: false,
@@ -190,11 +184,8 @@ async function testSmokeRetry() {
           remaining: 9,
           limit: 10,
           meta: {
-            backendVersion: 'xinbao-chat-api-v4',
-            responsePolicyVersion: 'grounded-conversation-v2',
+            ...CHAT_CONTRACT_META,
             responseMode: 'model-grounded',
-            promptVersion: 'xinbao-grounded-conversation-v3',
-            indexVersion: 'wiki-heading-lexical-v2:test',
             citedChunks: 1,
             shouldAbstain: false,
             retrievalShouldAbstain: false,

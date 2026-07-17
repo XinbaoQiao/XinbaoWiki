@@ -26,6 +26,11 @@ const root = fileURLToPath(new URL('..', import.meta.url));
 const scope = 'xinbaopedia';
 const project = 'xinbaopedia';
 const productionUrl = 'https://xinbaopedia.top';
+const EXPECTED_CHAT_CONTRACT = Object.freeze({
+  backendVersion: 'xinbao-chat-api-v5',
+  responsePolicyVersion: 'grounded-conversation-v3',
+  promptVersion: 'xinbao-grounded-conversation-v4',
+});
 const vercelCliVersion = '54.18.7';
 const vercelCliPackage = `vercel@${vercelCliVersion}`;
 const timeoutMs = {
@@ -196,6 +201,21 @@ async function runSmoke(env, siteUrl = productionUrl) {
   await checkProductionUrl(siteUrl);
 }
 
+function parseStagedChat(body, label) {
+  let parsed;
+  try {
+    parsed = JSON.parse(body);
+  } catch (error) {
+    throw new Error(`staged ${label} returned invalid JSON: ${error.message}`);
+  }
+  for (const [field, expected] of Object.entries(EXPECTED_CHAT_CONTRACT)) {
+    if (parsed.meta?.[field] !== expected) {
+      throw new Error(`staged ${label} expected ${field} ${expected}, got ${JSON.stringify(parsed.meta?.[field])}`);
+    }
+  }
+  return parsed;
+}
+
 async function runStagedSmoke(vercelCommand, routes, stagedUrl) {
   const canaryUserAgent = `xinbaopedia-staged-canary/${process.pid}-${Date.now()}`;
   const checks = [
@@ -209,14 +229,14 @@ async function runStagedSmoke(vercelCommand, routes, stagedUrl) {
       path: '/api/chat-with-xinbao/?diagnostic=retrieval',
       patterns: [
         /"limit":10/,
-        /"backendVersion":"xinbao-chat-api-v4"/,
-        /"responsePolicyVersion":"grounded-conversation-v2"/,
-        /"promptVersion":"xinbao-grounded-conversation-v3"/,
         /"retrievalAlgorithm":"wiki-heading-lexical-v2"/,
         /"indexVersion":"wiki-heading-lexical-v2:/,
         /"modelApiConfigured":true/,
         /"indexedChunks":\d+/,
       ],
+      validateBody(body) {
+        parseStagedChat(body, 'chat retrieval diagnostic');
+      },
     },
     {
       label: 'chat grounded provider canary',
@@ -235,6 +255,9 @@ async function runStagedSmoke(vercelCommand, routes, stagedUrl) {
         /"shouldAbstain":false/,
         /"retrievalShouldAbstain":false/,
       ],
+      validateBody(body) {
+        parseStagedChat(body, 'chat grounded provider canary');
+      },
     },
     {
       label: 'chat page-context grounded provider canary',
@@ -256,7 +279,7 @@ async function runStagedSmoke(vercelCommand, routes, stagedUrl) {
         /"retrievalShouldAbstain":false/,
       ],
       validateBody(body) {
-        const parsed = JSON.parse(body);
+        const parsed = parseStagedChat(body, 'chat page-context grounded provider canary');
         if (!Array.isArray(parsed.sources) || parsed.sources.length === 0 || !parsed.sources.every((source) => source.slug === 'DynFrs')) {
           throw new Error('staged page-context canary returned a source outside DynFrs');
         }
@@ -280,6 +303,9 @@ async function runStagedSmoke(vercelCommand, routes, stagedUrl) {
         /"retrievalShouldAbstain":true/,
       ],
       forbiddenPatterns: [/\[\d+\]/],
+      validateBody(body) {
+        parseStagedChat(body, 'chat conversational provider canary');
+      },
     },
     {
       label: 'chat sensitive-query abstention canary',
@@ -300,6 +326,9 @@ async function runStagedSmoke(vercelCommand, routes, stagedUrl) {
         /"blockedReason":"sensitive-query"/,
       ],
       forbiddenPatterns: [/\[\d+\]/],
+      validateBody(body) {
+        parseStagedChat(body, 'chat sensitive-query abstention canary');
+      },
     },
   ];
   const attempts = [];

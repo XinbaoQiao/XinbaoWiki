@@ -261,6 +261,8 @@ const hiddenSourceSlugs = fs.readdirSync(wikiDir)
 const internetSlang2026 = read('Internet_Slang_2026.md');
 const internetSlang2026Zh = read('Internet_Slang_2026_zh.md');
 const questionLogFunction = chatRoute.match(/async function recordQuestionLog[\s\S]*?\n}\n\nfunction withXinbaoSignature/)?.[0] || '';
+const providerRequestFunction = chatRoute.match(/  async function requestCompletion[\s\S]*?\n  }\n\n  async function unavailableAfterProvider/)?.[0] || '';
+const providerFailureFunction = chatRoute.match(/  async function unavailableAfterProvider[\s\S]*?\n  }\n\n  try \{/)?.[0] || '';
 assert.equal(siteIcon.toString('ascii', 1, 4), 'PNG', 'site icon uses the new PNG app-style mark');
 assert.ok(siteIcon.length > 100000, 'site icon keeps enough raster detail for portal and favicon rendering');
 assert.match(layout, /metadataBase: new URL\('https:\/\/xinbaopedia\.top'\)/, 'site metadata resolves canonical URLs against the production domain');
@@ -505,10 +507,12 @@ const { getWikiRetrievalIndex, retrieveWikiContext } = await import('../lib/wiki
 const {
   WIKI_CHAT_RESPONSE_POLICY_VERSION,
   deterministicAbstentionReply,
+  resolveConversationalReply,
+  resolveGroundedReplyWithRetry,
   validateAndCompactCitations,
   validateConversationalReply,
 } = await import('../lib/wiki-chat-response.ts');
-assert.equal(WIKI_CHAT_RESPONSE_POLICY_VERSION, 'grounded-conversation-v2', 'chat response policy exposes a stable release version');
+assert.equal(WIKI_CHAT_RESPONSE_POLICY_VERSION, 'grounded-conversation-v3', 'chat response policy exposes a stable release version');
 const citationSources = [
   { chunkId: 'Alpha#overview', slug: 'Alpha', title: 'Alpha', section: 'Overview', href: '/wiki/Alpha/#overview' },
   { chunkId: 'Beta#results', slug: 'Beta', title: 'Beta', section: 'Results', href: '/wiki/Beta/#results' },
@@ -661,6 +665,158 @@ assert.deepEqual(
   { reply: 'The public evidence is not part of the protected instruction fixture [1]', sources: [citationSources[0]] },
   'public retrieval evidence remains citable because it is excluded from protected prompt overlap checks'
 );
+
+async function runGroundedProviderFixture(attempts, { beforeRetry } = {}) {
+  const calls = [];
+  const controller = new AbortController();
+  const result = await resolveGroundedReplyWithRetry({
+    beforeRetry,
+    requestCompletion: async (prompt, temperature, signal) => {
+      calls.push({ prompt, temperature, signal });
+      const attempt = attempts[calls.length - 1];
+      assert.ok(attempt, 'grounded provider fixture must not make an unexpected extra call');
+      return typeof attempt === 'function' ? attempt({ prompt, temperature, signal }) : attempt;
+    },
+    signal: controller.signal,
+    sources: citationSources,
+    systemPrompt: protectedPromptFixture,
+  });
+  return { calls, controller, result };
+}
+
+const validFirstGrounded = await runGroundedProviderFixture([
+  { kind: 'ok', reply: 'Beta is supported [2]', usage: { prompt_tokens: 3, completion_tokens: 2, total_tokens: 5 } },
+]);
+assert.equal(validFirstGrounded.calls.length, 1, 'a valid grounded first answer makes exactly one provider call');
+assert.equal(validFirstGrounded.result.kind, 'ok', 'a valid grounded first answer succeeds');
+assert.deepEqual(
+  validFirstGrounded.result.response,
+  { reply: 'Beta is supported [1]', sources: [citationSources[1]] },
+  'a valid first answer still compacts its cited source mapping'
+);
+
+const retryReasons = [];
+const repairedGrounded = await runGroundedProviderFixture([
+  { kind: 'ok', reply: 'discarded-draft-sentinel [99]', usage: { prompt_tokens: 1, completion_tokens: 2, total_tokens: 3 } },
+  { kind: 'ok', reply: 'Beta survives the retry [2]', usage: { prompt_tokens: 4, completion_tokens: 5, total_tokens: 9 } },
+], {
+  beforeRetry: (reason) => {
+    retryReasons.push(reason);
+    return true;
+  },
+});
+assert.deepEqual(retryReasons, ['invalid-citation-number'], 'only a typed citation-number failure enters the retry gate');
+assert.equal(repairedGrounded.calls.length, 2, 'an invalid citation number receives exactly one repair attempt');
+assert.strictEqual(repairedGrounded.calls[0].signal, repairedGrounded.calls[1].signal, 'both grounded attempts share one AbortSignal');
+assert.strictEqual(repairedGrounded.calls[0].signal, repairedGrounded.controller.signal, 'the shared signal is the original request deadline signal');
+assert.deepEqual(repairedGrounded.calls.map((call) => call.temperature), [0.3, 0], 'the repair attempt is deterministic');
+assert.ok(
+  repairedGrounded.calls[1].prompt.indexOf('CITATION RETRY CONTRACT:') < repairedGrounded.calls[1].prompt.indexOf('RETRIEVED LOCAL WIKI EVIDENCE:'),
+  'the retry contract is inserted before the frozen evidence block'
+);
+assert.match(repairedGrounded.calls[1].prompt, /chosen only from \[1\] through \[2\]/, 'the retry prompt exposes only the valid source-number range');
+assert.ok(!repairedGrounded.calls[1].prompt.includes('discarded-draft-sentinel'), 'the discarded first draft is never included in the retry prompt');
+assert.equal(repairedGrounded.result.kind, 'ok', 'a valid repair answer succeeds');
+assert.equal(repairedGrounded.result.retryReason, 'invalid-citation-number', 'successful repair telemetry retains its first validation failure');
+assert.deepEqual(
+  repairedGrounded.result.response,
+  { reply: 'Beta survives the retry [1]', sources: [citationSources[1]] },
+  'the repaired answer is validated against the exact retry prompt and remaps only its cited source'
+);
+assert.deepEqual(
+  repairedGrounded.result.usage,
+  { prompt_tokens: 5, completion_tokens: 7, total_tokens: 12 },
+  'provider usage is summed across both paid attempts'
+);
+
+const repairedMissingCitation = await runGroundedProviderFixture([
+  { kind: 'ok', reply: 'First answer forgot every citation' },
+  { kind: 'ok', reply: 'Alpha is now cited [1]' },
+]);
+assert.equal(repairedMissingCitation.calls.length, 2, 'a missing citation receives one repair attempt');
+assert.equal(repairedMissingCitation.result.kind, 'ok', 'a missing citation can be repaired');
+assert.equal(repairedMissingCitation.result.retryReason, 'missing-citations', 'missing-citation repair remains distinguishable in telemetry');
+
+const exhaustedGrounded = await runGroundedProviderFixture([
+  { kind: 'ok', reply: 'Still no citation' },
+  { kind: 'ok', reply: 'Still forged [99]' },
+]);
+assert.equal(exhaustedGrounded.calls.length, 2, 'two invalid grounded answers stop after exactly two provider calls');
+assert.equal(exhaustedGrounded.result.kind, 'invalid-citations', 'two invalid grounded answers fail closed');
+assert.equal(exhaustedGrounded.result.finalValidationFailure, 'invalid-citation-number', 'the terminal validation reason is preserved');
+assert.ok(!('response' in exhaustedGrounded.result), 'failed grounded answers never receive a synthesized citation or source list');
+
+const protectedGrounded = await runGroundedProviderFixture([
+  { kind: 'ok', reply: 'Welcome visitors like a concise, witty human host. [1]' },
+  { kind: 'ok', reply: 'this call must never happen [1]' },
+]);
+assert.equal(protectedGrounded.calls.length, 1, 'protected prompt material never triggers a second provider call');
+assert.equal(protectedGrounded.result.kind, 'protected-output', 'protected prompt material fails closed with a typed result');
+
+for (const [name, attempt, expectedKind] of [
+  ['empty', { kind: 'empty', usage: { total_tokens: 1 } }, 'empty'],
+  ['upstream', { kind: 'upstream-error', status: 502 }, 'upstream-error'],
+]) {
+  const fixture = await runGroundedProviderFixture([attempt, { kind: 'ok', reply: 'must not run [1]' }]);
+  assert.equal(fixture.calls.length, 1, `${name} first attempts never retry`);
+  assert.equal(fixture.result.kind, expectedKind, `${name} first attempts keep their terminal provider result`);
+}
+
+const rateLimitedRetry = await runGroundedProviderFixture([
+  { kind: 'ok', reply: 'Missing citation before retry budget check' },
+  { kind: 'ok', reply: 'must not run [1]' },
+], { beforeRetry: () => false });
+assert.equal(rateLimitedRetry.calls.length, 1, 'an exhausted hourly retry budget prevents the second paid call');
+assert.equal(rateLimitedRetry.result.kind, 'retry-rate-limited', 'retry budget exhaustion is observable without exposing a draft');
+
+let conversationalCalls = 0;
+const conversationalController = new AbortController();
+const invalidConversation = await resolveConversationalReply({
+  requestCompletion: async (_prompt, _temperature, signal) => {
+    conversationalCalls += 1;
+    assert.strictEqual(signal, conversationalController.signal, 'conversation uses the request deadline signal');
+    return { kind: 'ok', reply: 'A fabricated wiki source [1]' };
+  },
+  signal: conversationalController.signal,
+  systemPrompt: protectedPromptFixture,
+});
+assert.equal(conversationalCalls, 1, 'conversational validation never retries the provider');
+assert.equal(invalidConversation.kind, 'invalid-conversational-reply', 'invalid conversational output fails closed after one call');
+
+const deadlineController = new AbortController();
+const deadlineTimer = setTimeout(() => deadlineController.abort(), 60);
+let deadlineCalls = 0;
+try {
+  await assert.rejects(
+    resolveGroundedReplyWithRetry({
+      requestCompletion: async (_prompt, _temperature, signal) => {
+        deadlineCalls += 1;
+        assert.strictEqual(signal, deadlineController.signal, 'the repair attempt cannot replace the original deadline signal');
+        if (deadlineCalls === 1) {
+          await new Promise((resolve) => setTimeout(resolve, 40));
+          return { kind: 'ok', reply: 'Late first answer without citations' };
+        }
+        await new Promise((resolve, reject) => {
+          if (signal.aborted) {
+            reject(new DOMException('request deadline reached', 'AbortError'));
+            return;
+          }
+          signal.addEventListener('abort', () => reject(new DOMException('request deadline reached', 'AbortError')), { once: true });
+        });
+        throw new Error('unreachable after abort');
+      },
+      signal: deadlineController.signal,
+      sources: citationSources,
+      systemPrompt: protectedPromptFixture,
+    }),
+    (error) => error instanceof DOMException && error.name === 'AbortError',
+    'a late invalid first answer leaves only the remainder of the original deadline for retry'
+  );
+} finally {
+  clearTimeout(deadlineTimer);
+}
+assert.equal(deadlineCalls, 2, 'the accelerated absolute-deadline fixture reaches the one allowed retry before aborting');
+
 assert.equal(validateConversationalReply('   '), null, 'empty conversational replies fail closed');
 assert.equal(
   deterministicAbstentionReply("What is Xinbao Qiao's passport number?", 'en'),
@@ -821,7 +977,7 @@ assert.match(maintenanceWorkflow, /schedule:[\s\S]*workflow_dispatch:/, 'weekly 
 assert.match(maintenanceWorkflow, /audit-wiki-maintenance\.mjs[\s\S]*evaluate-wiki-chat\.mjs[\s\S]*upload-artifact@v4/, 'weekly maintenance audits sources, evaluates retrieval, and preserves evidence');
 assert.doesNotMatch(maintenanceWorkflow, /maintain:wiki|git commit|git push|deploy:production/, 'weekly maintenance never rewrites content or publishes automatically');
 assert.match(wikiRetrieval, /WIKI_RETRIEVAL_INDEX_VERSION = 'wiki-heading-lexical-v2'/, 'chat retrieval exposes a versioned production algorithm');
-assert.match(chatRoute, /validateConversationalReply\(reply, systemPrompt\)[\s\S]*validateAndCompactCitations\(reply, retrieval\.sources, systemPrompt\)/, 'both conversational and grounded provider replies are checked against the actual protected prompt');
+assert.match(wikiChatResponse, /validateGroundedReply[\s\S]*containsProtectedPromptMaterial[\s\S]*kind: 'protected-output'[\s\S]*kind: 'missing-citations'[\s\S]*kind: 'invalid-citation-number'/, 'grounded validation distinguishes protected output from the two retryable citation failures');
 assert.equal(okfHome.data.type, 'PhD student', 'public OKF concept keeps a required type');
 assert.equal(okfHome.data.title, 'Xinbao Qiao', 'public OKF concept keeps a required title');
 assert.ok(okfHome.data.description, 'public OKF concept keeps a required description');
@@ -1167,16 +1323,27 @@ assert.match(chatRoute, /body\.language === 'en' \|\| body\.language === 'zh'/, 
 assert.match(chatRoute, /retrieveWikiContext\(message[\s\S]*getXinbaoChatSystemPrompt\([\s\S]*language,[\s\S]*retrieval,/, 'chat API gates retrieval on the current question only');
 assert.doesNotMatch(chatRoute, /retrievalQuery/, 'chat history cannot contaminate the current question evidence gate');
 assert.doesNotMatch(chatRoute, /sanitizeHistory|body\.history|\.\.\.history/, 'chat API never trusts client history or forwards it to the model provider');
-assert.match(chatRoute, /const systemPrompt = getXinbaoChatSystemPrompt\([\s\S]*language,[\s\S]*retrieval,[\s\S]*messages: \[[\s\S]*content: systemPrompt[\s\S]*role: 'user', content: message[\s\S]*\]/, 'provider messages contain only the server-authored system prompt and current user question');
-assert.match(chatRoute, /CHAT_BACKEND_VERSION = 'xinbao-chat-api-v4'/, 'chat API exposes the three-mode backend version');
+assert.match(providerRequestFunction, /messages: \[[\s\S]*\{ role: 'system', content: prompt \}[\s\S]*\{ role: 'user', content: message \}[\s\S]*\]/, 'every provider attempt contains only its server-authored system prompt and the current user question');
+assert.doesNotMatch(providerRequestFunction, /discarded|firstAttempt|firstReply|draft/i, 'provider request construction has no path for forwarding a discarded model draft');
+assert.match(chatRoute, /CHAT_BACKEND_VERSION = 'xinbao-chat-api-v5'/, 'chat API exposes the citation-repair backend version');
 assert.match(chatRoute, /responsePolicyVersion: WIKI_CHAT_RESPONSE_POLICY_VERSION[\s\S]*responseMode[\s\S]*citedChunks/, 'chat API returns versioned response-policy metadata');
-assert.match(chatRoute, /const responseMode:[\s\S]*retrieval\.blockedReason[\s\S]*model-conversational[\s\S]*if \(responseMode === 'deterministic-abstention'\)[\s\S]*deterministicAbstentionReply\(message, language\)[\s\S]*sources: \[\][\s\S]*responseMetadata\(0\)[\s\S]*const controller = new AbortController/, 'chat API hard-blocks only explicitly protected retrieval results before calling the model provider');
-assert.match(chatRoute, /if \(responseMode === 'model-conversational'\)[\s\S]*validateConversationalReply\(reply, systemPrompt\)[\s\S]*sources: \[\][\s\S]*responseMetadata\(0\)/, 'weak wiki evidence receives a normal uncited provider response after protected-prompt validation');
-assert.match(chatRoute, /validateAndCompactCitations\(reply, retrieval\.sources, systemPrompt\)[\s\S]*if \(!groundedReply\)[\s\S]*refundDailyUsage[\s\S]*sources: groundedReply\.sources[\s\S]*responseMetadata\(groundedReply\.sources\.length\)/, 'chat API rejects invalid citations or protected-prompt leakage and returns only compacted cited sources');
-assert.match(wikiChatResponse, /WIKI_CHAT_RESPONSE_POLICY_VERSION = 'grounded-conversation-v2'/, 'chat response policy has a stable version');
-assert.match(chatRoute, /function logChatObservation[\s\S]*retrievedChunks[\s\S]*durationMs[\s\S]*totalTokens/, 'chat API emits privacy-safe reliability and token observations');
+assert.match(chatRoute, /const responseMode: ChatResponseMode = retrieval\.blockedReason[\s\S]*'deterministic-abstention'[\s\S]*retrieval\.shouldAbstain[\s\S]*'model-conversational'[\s\S]*'model-grounded'/, 'chat API maps protected, weak-evidence, and grounded requests to three explicit modes');
+assert.match(chatRoute, /if \(responseMode === 'deterministic-abstention'\)[\s\S]*deterministicAbstentionReply\(message, language\)[\s\S]*responseMetadata\(0, 0\)/, 'protected requests are answered deterministically before provider setup');
+assert.match(chatRoute, /if \(responseMode === 'model-conversational'\)[\s\S]*resolveConversationalReply\(\{/, 'weak wiki evidence enters the tested one-call conversation resolver');
+assert.match(chatRoute, /resolveConversationalReply\(\{\s*requestCompletion,\s*signal: controller\.signal,\s*systemPrompt\s*\}\)/, 'conversation uses the same absolute request deadline signal');
+assert.match(chatRoute, /reply: withXinbaoSignature\(conversationalResult\.reply, language\)[\s\S]*sources: \[\][\s\S]*responseMetadata\(0, providerAttempts\)/, 'conversation returns a validated uncited provider reply');
+assert.match(chatRoute, /beforeRetry: async \(reason\)[\s\S]*reserveHourlyRetry\(chatRedis, hourlyRetryKey\)/, 'grounded repair passes through the hourly retry budget');
+assert.match(chatRoute, /requestCompletion,\s*signal: controller\.signal,\s*sources: retrieval\.sources,\s*systemPrompt/, 'grounded repair freezes its sources and shares the original deadline signal');
+assert.match(chatRoute, /reply: withXinbaoSignature\(groundedResult\.response\.reply, language\)[\s\S]*sources: groundedResult\.response\.sources/, 'grounded success returns only the resolver\'s validated reply and cited sources');
+assert.doesNotMatch(chatRoute, /validateAndCompactCitations\(/, 'the route cannot bypass typed grounded validation or retry protected output');
+assert.equal((chatRoute.match(/new AbortController\(\)/g) || []).length, 1, 'both provider attempts share the route\'s only AbortController');
+assert.equal((chatRoute.match(/setTimeout\(\(\) => controller\.abort\(\), REQUEST_TIMEOUT_MS\)/g) || []).length, 1, 'both provider attempts share the route\'s only absolute deadline timer');
+assert.match(wikiChatResponse, /WIKI_CHAT_RESPONSE_POLICY_VERSION = 'grounded-conversation-v3'/, 'chat response policy has a stable citation-repair version');
+assert.match(chatRoute, /function logChatObservation[\s\S]*providerAttempts[\s\S]*retryReason[\s\S]*retryOutcome[\s\S]*finalValidationFailure[\s\S]*totalTokens/, 'chat API emits privacy-safe terminal retry and aggregate-token observations');
 assert.match(chatRoute, /reserveDailyUsage[\s\S]*redis\.eval<[\s\S]*highest >= tonumber\(ARGV\[2\]\) then return tonumber\(ARGV\[2\]\) \+ 1/, 'chat API atomically reserves daily quota and returns a rejection sentinel at the limit');
-assert.match(chatRoute, /refundDailyUsage[\s\S]*model response status[\s\S]*refundDailyUsage[\s\S]*empty model reply[\s\S]*refundDailyUsage/, 'chat API refunds quota when the model request does not produce a usable answer');
+assert.match(chatRoute, /HOURLY_IP_RETRY_LIMIT = 20[\s\S]*reserveHourlyRetry[\s\S]*redis\.call\('INCR', KEYS\[1\]\)[\s\S]*redis\.call\('EXPIRE'/, 'chat API atomically bounds paid repair attempts per IP and hour');
+assert.match(providerFailureFunction, /observe\(outcome[\s\S]*await refundDailyUsage\(chatRedis, dailyKeys\)[\s\S]*genericUnavailable/, 'all provider failures converge on one terminal observation and quota-refund path');
+assert.equal((providerFailureFunction.match(/refundDailyUsage\(/g) || []).length, 1, 'the converged provider failure path refunds a request at most once');
 assert.match(chatRoute, /Cache-Control', 'private, no-store'/, 'chat quota and reply responses explicitly disable shared caching');
 assert.doesNotMatch(questionLogFunction, /history/, 'chat API question logging does not store chat history');
 assert.match(chatRoute, /httpOnly: true/, 'visitor cookie is HTTP-only');
@@ -1206,7 +1373,7 @@ assert.match(chatQuestionsRoute, /Cache-Control': 'private, no-store'/, 'questio
 assert.doesNotMatch(chatQuestionsRoute, /console\.log|console\.error|YUNWU_API_KEY/, 'question-log export route does not log or reference unrelated model secrets');
 assert.match(chatKnowledge, /import 'server-only';/, 'chat knowledge builder is server-only');
 assert.match(chatKnowledge, /WikiRetrievalResult/, 'chat prompt accepts the production retrieval result contract');
-assert.match(chatKnowledge, /XINBAO_CHAT_PROMPT_VERSION = 'xinbao-grounded-conversation-v3'/, 'chat prompt exposes a stable version for observability');
+assert.match(chatKnowledge, /XINBAO_CHAT_PROMPT_VERSION = 'xinbao-grounded-conversation-v4'/, 'chat prompt exposes the citation-repair version for observability');
 assert.doesNotMatch(chatKnowledge, /TOTAL_CONTEXT_LIMIT|PRIORITY_SLUGS|cachedKnowledge|buildKnowledge|project\.md/, 'chat prompt no longer stuffs a fixed full-wiki context');
 assert.match(chatKnowledge, /academic-homepage assistant[\s\S]*must not claim to be the real Xinbao Qiao/, 'persona identifies the assistant without impersonation');
 assert.match(chatKnowledge, /paper lore[\s\S]*bring the receipts[\s\S]*keep it real/, 'persona retains a concise internet-native English voice');

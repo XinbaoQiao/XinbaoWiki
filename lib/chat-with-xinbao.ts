@@ -5,7 +5,7 @@ import type { WikiRetrievalResult } from '@/lib/wiki-retrieval';
 type Language = 'en' | 'zh';
 export type XinbaoChatPromptMode = 'grounded' | 'conversational';
 
-export const XINBAO_CHAT_PROMPT_VERSION = 'xinbao-grounded-conversation-v3';
+export const XINBAO_CHAT_PROMPT_VERSION = 'xinbao-grounded-conversation-v4';
 
 function privateVoiceStyle() {
   const style = process.env.XINBAO_CHAT_VOICE_STYLE?.trim();

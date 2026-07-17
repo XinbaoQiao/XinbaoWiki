@@ -7,6 +7,11 @@ const DEFAULT_SITE_URL = 'https://xinbaopedia.top';
 const SITE_URL = process.env.SITE_URL || process.argv[2] || DEFAULT_SITE_URL;
 const WIKI_SLUG = process.env.SMOKE_WIKI_SLUG || 'Xinbao_Qiao';
 const HIDDEN_SLUG = process.env.SMOKE_HIDDEN_SLUG || 'Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning';
+const EXPECTED_CHAT_CONTRACT = Object.freeze({
+  backendVersion: 'xinbao-chat-api-v5',
+  responsePolicyVersion: 'grounded-conversation-v3',
+  promptVersion: 'xinbao-grounded-conversation-v4',
+});
 
 function positiveIntegerEnv(name, fallback) {
   const value = Number.parseInt(process.env[name] || fallback, 10);
@@ -130,10 +135,14 @@ async function postJson(pathname, payload, label, userAgentSuffix, extraHeaders 
   return parseJson(response, label);
 }
 
+function assertChatContract(data, label) {
+  for (const [field, expected] of Object.entries(EXPECTED_CHAT_CONTRACT)) {
+    assert(data.meta?.[field] === expected, `${label}: expected ${field} ${expected}, got ${JSON.stringify(data.meta?.[field])}`);
+  }
+}
+
 function assertResponsePolicy(data, label, expectedMode, shouldAbstain, retrievalShouldAbstain) {
-  assert(data.meta?.backendVersion === 'xinbao-chat-api-v4', `${label}: unexpected backend version`);
-  assert(data.meta?.responsePolicyVersion === 'grounded-conversation-v2', `${label}: unexpected response policy version`);
-  assert(data.meta?.promptVersion === 'xinbao-grounded-conversation-v3', `${label}: unexpected prompt version`);
+  assertChatContract(data, label);
   assert(/^wiki-heading-lexical-v2:/.test(data.meta?.indexVersion || ''), `${label}: unexpected retrieval index version`);
   assert(data.meta?.responseMode === expectedMode, `${label}: expected response mode ${expectedMode}`);
   assert(data.meta?.shouldAbstain === shouldAbstain, `${label}: unexpected abstention decision`);
@@ -209,9 +218,7 @@ async function main() {
     'Chat retrieval health'
   );
   assert(chatHealth.limit === 10, `Chat retrieval health: expected daily limit 10, got ${JSON.stringify(chatHealth.limit)}`);
-  assert(chatHealth.meta?.backendVersion === 'xinbao-chat-api-v4', 'Chat retrieval health: unexpected backend version');
-  assert(chatHealth.meta?.responsePolicyVersion === 'grounded-conversation-v2', 'Chat retrieval health: unexpected response policy version');
-  assert(chatHealth.meta?.promptVersion === 'xinbao-grounded-conversation-v3', 'Chat retrieval health: unexpected prompt version');
+  assertChatContract(chatHealth, 'Chat retrieval health');
   assert(chatHealth.meta?.retrievalAlgorithm === 'wiki-heading-lexical-v2', 'Chat retrieval health: unexpected retrieval algorithm');
   assert(chatHealth.meta?.modelApiConfigured === true, 'Chat retrieval health: model API configuration is not ready');
   assert(/^wiki-heading-lexical-v2:/.test(chatHealth.meta?.indexVersion || ''), 'Chat retrieval health: missing runtime index version');
