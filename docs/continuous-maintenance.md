@@ -148,8 +148,10 @@ The enforced metrics are:
   that every provider response used citations well;
 - `answerabilityAccuracy`: supported golden questions are not incorrectly sent
   through the abstention path;
-- `abstentionAccuracy`: the deterministic evidence gate refuses unsupported or
-  out-of-domain golden questions;
+- `abstentionAccuracy`: unsupported or out-of-domain questions produce no wiki
+  evidence, while protected questions additionally carry the expected
+  `blockedReason`. Retrieval abstention is a routing signal, not automatically
+  a user-facing refusal;
 - `indexCoverage`: public OKF pages represented in the retrieval index;
 - `publicIndexPurity`: no hidden or otherwise non-public page is indexed;
 - `languagePurity`: retrieved sources match the requested language.
@@ -160,16 +162,20 @@ canonical page, generated artifacts, and golden target in the same review.
 
 This is an offline retrieval and grounding gate. It does not call the model
 provider and therefore does not by itself prove tone, fluency, or provider
-availability. The chat API adds a separate runtime gate: an abstention decision
-returns a deterministic server response without a provider call, while a model
-answer must contain at least one in-range `[n]` citation. The server compacts
-those citations and returns only the cited source records; missing or invalid
-citations fail closed. Client-provided history is untrusted compatibility data:
-it is neither used for retrieval nor sent to the provider, so an earlier
-assistant message cannot become factual evidence. Release smoke complements
-the offline evaluator with a real answerable request through the configured
-provider and a deterministic abstention canary. Periodic human answer review
-should still supplement both.
+availability. The chat API adds three runtime modes: usable public evidence
+uses a cited `model-grounded` reply; ordinary questions without enough wiki
+evidence use an uncited `model-conversational` reply with no wiki sources; and
+only an explicit protected `blockedReason` returns a deterministic response
+before the provider call. Grounded answers must contain at least one in-range
+`[n]` citation. The server compacts those citations and returns only the cited
+source records; missing or invalid citations fail closed. Client-provided
+history is untrusted compatibility data: it is neither used for retrieval nor
+sent to the provider, so an earlier assistant message cannot become factual
+evidence. Release smoke complements the offline evaluator with a real
+answerable request through the configured provider, a Referer-backed current-page
+request that must remain on DynFrs, a normal conversational canary, and a protected
+sensitive-request canary. Periodic human answer review should still supplement
+both.
 
 ## Feedback and Privacy
 

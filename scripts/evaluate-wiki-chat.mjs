@@ -19,15 +19,51 @@ const MINIMUM_THRESHOLDS = Object.freeze({
 });
 const REQUIRED_HIGH_RISK_CASE_IDS = new Set([
   'en-abstain-unsupported-private',
+  'en-abstain-api-key',
+  'en-abstain-system-prompt',
+  'en-abstain-private-instructions',
+  'en-abstain-exact-address',
+  'en-abstain-health-condition',
+  'en-abstain-birthday',
+  'en-conversational-system-prompt-concept',
+  'en-conversational-environment-variables',
+  'en-conversational-quantum-papers',
+  'en-conversational-mars-project',
+  'en-conversational-quantum-papers-suffix',
   'en-abstain-out-of-domain',
   'en-abstain-history-isolation',
   'en-abstain-mixed-out-of-domain',
   'en-abstain-hidden-page',
+  'en-abstain-context-out-of-domain',
   'zh-abstain-unsupported-private',
+  'zh-abstain-api-key',
+  'zh-abstain-system-prompt',
+  'zh-abstain-private-instructions',
+  'zh-abstain-exact-address',
+  'zh-abstain-health-condition',
+  'zh-abstain-birthday',
+  'zh-conversational-system-prompt-concept',
+  'zh-conversational-environment-variables',
+  'zh-conversational-quantum-papers',
+  'zh-conversational-mars-project',
+  'zh-conversational-quantum-papers-suffix',
   'zh-abstain-out-of-domain',
   'zh-abstain-history-isolation',
   'zh-abstain-mixed-out-of-domain',
-  'zh-abstain-hidden-page'
+  'zh-abstain-hidden-page',
+  'zh-abstain-context-out-of-domain'
+]);
+const REQUIRED_EXACT_CASE_IDS = new Set([
+  'en-ui-recent-work',
+  'en-natural-profile',
+  'en-natural-doctoral-work',
+  'en-natural-public-contact',
+  'en-context-reference-dynfrs',
+  'zh-ui-recent-work',
+  'zh-natural-profile',
+  'zh-natural-doctoral-work',
+  'zh-natural-public-contact',
+  'zh-context-reference-dynfrs'
 ]);
 
 function parseArguments(argv) {
@@ -114,6 +150,21 @@ function validateGolden(golden) {
     ids.add(testCase.id);
     if (!['en', 'zh'].includes(testCase.language)) throw new Error(`${testCase.id}: language must be en or zh.`);
     if (!testCase.query?.trim()) throw new Error(`${testCase.id}: query is required.`);
+    if (testCase.contextSlug !== undefined && (typeof testCase.contextSlug !== 'string' || !testCase.contextSlug.trim())) {
+      throw new Error(`${testCase.id}: contextSlug must be a non-empty string.`);
+    }
+    if (testCase.expectedChunkIds !== undefined && (
+      !Array.isArray(testCase.expectedChunkIds)
+      || testCase.expectedChunkIds.length === 0
+      || testCase.expectedChunkIds.some((chunkId) => typeof chunkId !== 'string' || !chunkId.trim())
+    )) {
+      throw new Error(`${testCase.id}: expectedChunkIds must contain non-empty strings.`);
+    }
+    if (testCase.expectedBlockedReason !== undefined
+      && testCase.expectedBlockedReason !== null
+      && !['hidden-page', 'sensitive-query'].includes(testCase.expectedBlockedReason)) {
+      throw new Error(`${testCase.id}: expectedBlockedReason must be hidden-page, sensitive-query, or null.`);
+    }
     if (testCase.priorUserMessages !== undefined && (
       !Array.isArray(testCase.priorUserMessages)
       || testCase.priorUserMessages.some((message) => typeof message !== 'string' || !message.trim())
@@ -130,6 +181,9 @@ function validateGolden(golden) {
   }
   for (const id of REQUIRED_HIGH_RISK_CASE_IDS) {
     if (!ids.has(id)) throw new Error(`Golden set is missing required high-risk case ${id}.`);
+  }
+  for (const id of REQUIRED_EXACT_CASE_IDS) {
+    if (!ids.has(id)) throw new Error(`Golden set is missing required exact case ${id}.`);
   }
   for (const language of ['en', 'zh']) {
     const languageCases = golden.cases.filter((testCase) => testCase.language === language);
@@ -176,8 +230,11 @@ export function evaluateCase(testCase, retrieval, publicPages, chunkById) {
   const sources = Array.isArray(retrieval.sources) ? retrieval.sources : [];
   const contextChunkIds = [...String(retrieval.context || '').matchAll(/^CHUNK_ID: (.+)$/gm)].map((match) => match[1]);
   const retrievedSlugs = [...new Set(sources.map((source) => source.slug))];
+  const retrievedChunkIds = [...new Set(sources.map((source) => source.chunkId))];
   const expectedSlugs = testCase.expectedSlugs ?? [];
   const matchedSlugs = expectedSlugs.filter((slug) => retrievedSlugs.includes(slug));
+  const expectedChunkIds = testCase.expectedChunkIds ?? [];
+  const matchedChunkIds = expectedChunkIds.filter((chunkId) => retrievedChunkIds.includes(chunkId));
   const evidencePatterns = testCase.evidencePatterns ?? [];
   const matchedEvidencePatterns = evidencePatterns.filter((pattern) => includesLiteral(retrieval.context, pattern));
   const unsupportedPatterns = testCase.unsupportedEvidencePatterns ?? [];
@@ -212,7 +269,12 @@ export function evaluateCase(testCase, retrieval, publicPages, chunkById) {
 
   let abstentionPassed = null;
   if (testCase.expectedAbstain) {
-    const evidenceGatePassed = retrieval.shouldAbstain === true && leakedUnsupportedPatterns.length === 0;
+    const hasExpectedBlockedReason = Object.prototype.hasOwnProperty.call(testCase, 'expectedBlockedReason');
+    const blockedReason = retrieval.blockedReason ?? null;
+    const blockedReasonPassed = !hasExpectedBlockedReason || blockedReason === testCase.expectedBlockedReason;
+    const evidenceGatePassed = retrieval.shouldAbstain === true
+      && leakedUnsupportedPatterns.length === 0
+      && blockedReasonPassed;
     abstentionPassed = testCase.abstentionMode === 'no-retrieval'
       ? evidenceGatePassed && sources.length === 0
       : evidenceGatePassed;
@@ -224,6 +286,9 @@ export function evaluateCase(testCase, retrieval, publicPages, chunkById) {
     category: testCase.category,
     query: testCase.query,
     priorUserMessages: testCase.priorUserMessages ?? [],
+    contextSlug: testCase.contextSlug ?? null,
+    expectedBlockedReason: Object.prototype.hasOwnProperty.call(testCase, 'expectedBlockedReason') ? testCase.expectedBlockedReason : null,
+    blockedReason: retrieval.blockedReason ?? null,
     expectedAbstain: testCase.expectedAbstain === true,
     shouldAbstain: retrieval.shouldAbstain === true,
     evidenceScore: retrieval.evidenceScore ?? null,
@@ -231,6 +296,9 @@ export function evaluateCase(testCase, retrieval, publicPages, chunkById) {
     expectedSlugs,
     retrievedSlugs,
     matchedSlugs,
+    expectedChunkIds,
+    retrievedChunkIds,
+    matchedChunkIds,
     expectedEvidencePatterns: evidencePatterns,
     matchedEvidencePatterns,
     leakedUnsupportedPatterns,
@@ -286,7 +354,8 @@ async function main() {
   for (const testCase of golden.cases) {
     const retrieval = retriever.retrieveWikiContext(testCase.query, {
       language: testCase.language,
-      limit: topK
+      limit: topK,
+      contextSlug: testCase.contextSlug
     });
     cases.push(evaluateCase(testCase, retrieval, publicPages, chunkById));
   }
@@ -317,7 +386,27 @@ async function main() {
     publicIndexPurity: nonPublicIndexedSlugs.length === 0 ? 1 : 0,
     languagePurity: round(ratio(languageSourceCount, retrievedSourceCount))
   };
-  const failures = thresholdFailures(metrics, golden.thresholds);
+  const requiredExactFailures = cases.flatMap((testCase) => {
+    if (!REQUIRED_EXACT_CASE_IDS.has(testCase.id)) return [];
+    const expectedSlugsMatched = testCase.matchedSlugs.length === testCase.expectedSlugs.length;
+    const expectedChunksMatched = testCase.matchedChunkIds.length === testCase.expectedChunkIds.length;
+    const expectedEvidenceMatched = testCase.matchedEvidencePatterns.length === testCase.expectedEvidencePatterns.length;
+    const contextStayedOnPage = testCase.category !== 'context-reference'
+      || testCase.retrievedSlugs.every((slug) => testCase.expectedSlugs.includes(slug));
+    const passed = !testCase.shouldAbstain
+      && expectedSlugsMatched
+      && expectedChunksMatched
+      && expectedEvidenceMatched
+      && contextStayedOnPage
+      && testCase.sourceIssues.length === 0;
+    return passed ? [] : [{
+      metric: `requiredExactCase:${testCase.id}`,
+      actual: 0,
+      threshold: 1,
+      reason: 'required natural-language or context case failed exact retrieval, chunk, or evidence matching'
+    }];
+  });
+  const failures = [...thresholdFailures(metrics, golden.thresholds), ...requiredExactFailures];
   const report = {
     schemaVersion: 1,
     generatedAt: new Date().toISOString(),

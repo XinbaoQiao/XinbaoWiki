@@ -2,14 +2,19 @@ import crypto from 'node:crypto';
 import { Redis } from '@upstash/redis';
 import { after, NextRequest, NextResponse } from 'next/server';
 import { getXinbaoChatSystemPrompt, XINBAO_CHAT_PROMPT_VERSION } from '@/lib/chat-with-xinbao';
-import { deterministicAbstentionReply, validateAndCompactCitations, WIKI_CHAT_RESPONSE_POLICY_VERSION } from '@/lib/wiki-chat-response';
+import {
+  deterministicAbstentionReply,
+  validateAndCompactCitations,
+  validateConversationalReply,
+  WIKI_CHAT_RESPONSE_POLICY_VERSION
+} from '@/lib/wiki-chat-response';
 import { getWikiRetrievalIndex, retrieveWikiContext, WIKI_RETRIEVAL_INDEX_VERSION, type WikiRetrievalResult } from '@/lib/wiki-retrieval';
 
 export const runtime = 'nodejs';
 
 const MODEL = 'deepseek-v4-flash';
 const DEFAULT_BASE_URL = 'https://api.yunwu.ai/v1';
-const CHAT_BACKEND_VERSION = 'xinbao-chat-api-v3';
+const CHAT_BACKEND_VERSION = 'xinbao-chat-api-v4';
 const DAILY_LIMIT = 10;
 const COOLDOWN_SECONDS = 4;
 const HOURLY_IP_LIMIT = 80;
@@ -24,6 +29,7 @@ const UNAVAILABLE_MESSAGE = 'Xinbao AI is temporarily unavailable. Please try ag
 const DAILY_LIMIT_MESSAGE = 'Daily limit reached. Please come back tomorrow.';
 
 type ChatLanguage = 'en' | 'zh';
+type ChatResponseMode = 'model-grounded' | 'model-conversational' | 'deterministic-abstention';
 type ParsedChatBody = { message?: unknown; language?: ChatLanguage };
 type CompletionResponse = {
   choices?: Array<{ message?: { content?: unknown } }>;
@@ -51,11 +57,13 @@ type QuestionLogEntry = {
   evidenceScore: number;
   queryCoverage: number;
   shouldAbstain: boolean;
+  responseMode: ChatResponseMode;
+  blockedReason: WikiRetrievalResult['blockedReason'];
 };
 
 type ChatObservation = {
   traceId: string;
-  outcome: 'ok' | 'deterministic-abstention' | 'invalid-citations' | 'upstream-error' | 'empty-reply' | 'timeout' | 'request-error';
+  outcome: 'ok' | 'ok-conversational' | 'deterministic-abstention' | 'invalid-citations' | 'invalid-conversational-reply' | 'upstream-error' | 'empty-reply' | 'timeout' | 'request-error';
   provider: string;
   model: string;
   promptVersion: string;
@@ -65,6 +73,9 @@ type ChatObservation = {
   evidenceScore: number;
   queryCoverage: number;
   shouldAbstain: boolean;
+  retrievalShouldAbstain: boolean;
+  responseMode: ChatResponseMode;
+  blockedReason: WikiRetrievalResult['blockedReason'];
   durationMs: number;
   upstreamStatus?: number;
   promptTokens?: number;
@@ -309,7 +320,8 @@ async function recordQuestionLog(
   dateKey: string,
   language: ChatLanguage,
   retrieval: WikiRetrievalResult,
-  provider: string
+  provider: string,
+  responseMode: ChatResponseMode
 ) {
   const questionHash = questionFingerprint(message);
   if (!questionHash) return;
@@ -334,7 +346,9 @@ async function recordQuestionLog(
     sourceSlugs: [...new Set(retrieval.sources.map((source) => source.slug))],
     evidenceScore: retrieval.evidenceScore,
     queryCoverage: retrieval.queryCoverage,
-    shouldAbstain: retrieval.shouldAbstain
+    shouldAbstain: retrieval.shouldAbstain,
+    responseMode,
+    blockedReason: retrieval.blockedReason
   };
   const payload = JSON.stringify(entry);
   const dayKey = `xinbao-chat:questions:day:${dateKey}`;
@@ -496,7 +510,12 @@ export async function POST(request: NextRequest) {
 
   const traceId = crypto.randomUUID();
   const requestStartedAt = Date.now();
-  after(() => recordQuestionLog(redis, identity, message, pagePath, dateKey, language, retrieval, provider));
+  const responseMode: ChatResponseMode = retrieval.blockedReason
+    ? 'deterministic-abstention'
+    : retrieval.shouldAbstain
+      ? 'model-conversational'
+      : 'model-grounded';
+  after(() => recordQuestionLog(redis, identity, message, pagePath, dateKey, language, retrieval, provider, responseMode));
 
   function observe(
     outcome: ChatObservation['outcome'],
@@ -513,7 +532,10 @@ export async function POST(request: NextRequest) {
       retrievedChunks: retrieval.sources.length,
       evidenceScore: retrieval.evidenceScore,
       queryCoverage: retrieval.queryCoverage,
-      shouldAbstain: retrieval.shouldAbstain,
+      shouldAbstain: responseMode === 'deterministic-abstention',
+      retrievalShouldAbstain: retrieval.shouldAbstain,
+      responseMode,
+      blockedReason: retrieval.blockedReason,
       durationMs: Date.now() - requestStartedAt,
       upstreamStatus: details.upstreamStatus,
       promptTokens: numericUsage(details.usage?.prompt_tokens),
@@ -522,7 +544,7 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  function responseMetadata(responseMode: 'model-grounded' | 'deterministic-abstention', citedChunks: number) {
+  function responseMetadata(citedChunks: number) {
     return {
       traceId,
       backendVersion: CHAT_BACKEND_VERSION,
@@ -537,12 +559,14 @@ export async function POST(request: NextRequest) {
       citedChunks,
       evidenceScore: retrieval.evidenceScore,
       queryCoverage: retrieval.queryCoverage,
-      shouldAbstain: retrieval.shouldAbstain,
+      shouldAbstain: responseMode === 'deterministic-abstention',
+      retrievalShouldAbstain: retrieval.shouldAbstain,
+      blockedReason: retrieval.blockedReason,
       durationMs: Date.now() - requestStartedAt
     };
   }
 
-  if (retrieval.shouldAbstain) {
+  if (responseMode === 'deterministic-abstention') {
     observe('deterministic-abstention');
     return jsonResponse(
       {
@@ -550,7 +574,7 @@ export async function POST(request: NextRequest) {
         sources: [],
         remaining: Math.max(0, DAILY_LIMIT - dailyCount),
         limit: DAILY_LIMIT,
-        meta: responseMetadata('deterministic-abstention', 0)
+        meta: responseMetadata(0)
       },
       200,
       visitorCookie
@@ -570,7 +594,14 @@ export async function POST(request: NextRequest) {
       body: JSON.stringify({
         model: MODEL,
         messages: [
-          { role: 'system', content: getXinbaoChatSystemPrompt(language, retrieval) },
+          {
+            role: 'system',
+            content: getXinbaoChatSystemPrompt(
+              language,
+              retrieval,
+              responseMode === 'model-grounded' ? 'grounded' : 'conversational'
+            )
+          },
           { role: 'user', content: message }
         ],
         temperature: 0.3,
@@ -597,6 +628,29 @@ export async function POST(request: NextRequest) {
       return genericUnavailable(visitorCookie);
     }
 
+    if (responseMode === 'model-conversational') {
+      const conversationalReply = validateConversationalReply(reply);
+      if (!conversationalReply) {
+        logServerIssue('invalid conversational reply');
+        observe('invalid-conversational-reply', { usage: data.usage });
+        await refundDailyUsage(redis, dailyKeys);
+        return genericUnavailable(visitorCookie);
+      }
+
+      observe('ok-conversational', { usage: data.usage });
+      return jsonResponse(
+        {
+          reply: withXinbaoSignature(conversationalReply, language),
+          sources: [],
+          remaining: Math.max(0, DAILY_LIMIT - dailyCount),
+          limit: DAILY_LIMIT,
+          meta: responseMetadata(0)
+        },
+        200,
+        visitorCookie
+      );
+    }
+
     const groundedReply = validateAndCompactCitations(reply, retrieval.sources);
     if (!groundedReply) {
       logServerIssue('invalid model citations');
@@ -612,7 +666,7 @@ export async function POST(request: NextRequest) {
         sources: groundedReply.sources,
         remaining: Math.max(0, DAILY_LIMIT - dailyCount),
         limit: DAILY_LIMIT,
-        meta: responseMetadata('model-grounded', groundedReply.sources.length)
+        meta: responseMetadata(groundedReply.sources.length)
       },
       200,
       visitorCookie

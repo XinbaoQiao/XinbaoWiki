@@ -48,6 +48,7 @@ export type WikiRetrievalResult = {
   evidenceScore: number;
   queryCoverage: number;
   shouldAbstain: boolean;
+  blockedReason: 'hidden-page' | 'sensitive-query' | null;
 };
 
 type RetrievalOptions = {
@@ -85,7 +86,15 @@ type ScoredChunk = {
   matchedTerms: string[];
 };
 
-export const WIKI_RETRIEVAL_INDEX_VERSION = 'wiki-heading-lexical-v1';
+type BoundedIntentKind = 'profile' | 'recent-work' | 'doctoral-work' | 'public-contact';
+
+type BoundedTarget = {
+  slug: string;
+  sectionPattern?: RegExp;
+  newestMatchingSection?: boolean;
+};
+
+export const WIKI_RETRIEVAL_INDEX_VERSION = 'wiki-heading-lexical-v2';
 
 const WIKI_DIR = path.join(process.cwd(), 'wiki');
 const MAX_CHUNK_CHARACTERS = 1_800;
@@ -98,7 +107,9 @@ const ENGLISH_STOP_WORDS = new Set([
   'a', 'an', 'and', 'are', 'as', 'at', 'be', 'but', 'by', 'can', 'could', 'did', 'do', 'does',
   'for', 'from', 'had', 'has', 'have', 'he', 'her', 'his', 'how', 'i', 'in', 'is', 'it', 'its',
   'me', 'of', 'on', 'or', 'our', 'she', 'that', 'the', 'their', 'them', 'they', 'this', 'to', 'was',
-  'should', 'we', 'were', 'what', 'when', 'where', 'which', 'who', 'why', 'will', 'with', 'would', 'you', 'your'
+  'explain', 'list', 'method', 'paper', 'papers', 'project', 'projects', 'should', 'show', 'tell', 'use',
+  'there', 'used', 'using', 'we', 'were', 'what', 'when', 'where', 'which', 'who', 'why', 'will', 'with', 'work',
+  'works', 'would', 'you', 'your'
 ]);
 
 const CHINESE_STOP_GRAMS = new Set([
@@ -106,7 +117,72 @@ const CHINESE_STOP_GRAMS = new Set([
   '哪些', '是否', '介绍', '一下', '目前', '还是', '怎么', '为什么'
 ]);
 const CHINESE_STOP_CHARACTERS = new Set(['的', '了', '呢', '吗', '是', '有', '和', '与', '及', '在']);
-const SENSITIVE_QUERY_PATTERN = /\b(?:passport|password|social security|ssn|bank account|credit card|home address|private address|phone number|mobile number|medical record|diagnosis|salary)\b|护照|身份证|密码|银行(?:卡|账户)|信用卡|家庭住址|私人住址|手机号|电话号码|医疗记录|病历|诊断|工资|薪水/iu;
+const ENGLISH_PERSONAL_OWNER = String.raw`(?:xinbao(?: qiao)?(?: s)?|qiao xinbao(?: s)?|his|your)`;
+const ENGLISH_PERSON = String.raw`(?:xinbao(?: qiao)?|qiao xinbao|he|you)`;
+const ENGLISH_SECRET_OBJECT = String.raw`(?:api key|secret key|access token|system prompt|developer (?:message|prompt)|private voice(?: style)? note|voice style note|(?:authentication|login|api|secret) credentials|environment variables?|redis token|upstash token|yunwu key)`;
+const ENGLISH_PERSONAL_DETAIL = String.raw`(?:passport(?: number)?|password|social security(?: number)?|ssn|bank account|credit card(?: number)?|(?:exact|home|private|street|residential) address|birthday|date of birth|religion|religious beliefs?|health (?:problem|condition|status|history)|medical (?:condition|record|history)|diagnosis|illness|disease|phone number|mobile number|bank balance|savings|salary|income)`;
+const ENGLISH_OWNED_SECRET_PATTERN = new RegExp(String.raw`\b${ENGLISH_PERSONAL_OWNER} (?:(?:actual|hidden|secret|private|raw) )?${ENGLISH_SECRET_OBJECT}\b`, 'iu');
+const ENGLISH_SECRET_EXTRACTION_PATTERN = new RegExp(String.raw`\b(?:reveal|show|print|display|expose|leak|dump|list|share|provide|read|give me|tell me) (?:me )?(?:the |${ENGLISH_PERSONAL_OWNER} )(?:(?:actual|hidden|secret|private|raw) )?${ENGLISH_SECRET_OBJECT}\b`, 'iu');
+const ENGLISH_INSTRUCTION_EXTRACTION_PATTERN = /\b(?:repeat|reveal|show|print|display|expose|leak|dump|list|share|provide|read|give me|tell me) (?:me )?(?:the )?(?:(?:hidden|private|internal|initial|initialization|system|developer) instructions?|(?:every|all) rules? governing (?:this|the) assistant)\b/iu;
+const ENGLISH_PERSONAL_SENSITIVE_PATTERN = new RegExp(String.raw`\b(?:${ENGLISH_PERSONAL_OWNER} ${ENGLISH_PERSONAL_DETAIL}|(?:what is|what s|tell me) ${ENGLISH_PERSONAL_OWNER} age|where (?:does|do|is) ${ENGLISH_PERSON} (?:live|reside)|${ENGLISH_PERSON} (?:lives?|resides?) (?:where|at what address)|(?:what|which) (?:health|medical) (?:condition|problem|issue|history)s? (?:does|do) ${ENGLISH_PERSON} have|(?:does|do) ${ENGLISH_PERSON} (?:have|suffer from) (?:a |any )?(?:health|medical) (?:condition|problem|issue)|how old (?:is|are) ${ENGLISH_PERSON})\b`, 'iu');
+const CHINESE_SECRET_OBJECT = /(?:api\s*密钥|秘密密钥|访问(?:令牌|密钥)|系统提示(?:词)?|开发者(?:消息|提示)|私有语气|私密语气|语气(?:风格)?说明|(?:身份验证|认证|登录|api)凭据|环境变量|redis\s*令牌|upstash\s*令牌|云雾密钥)/iu;
+const CHINESE_OWNED_SECRET_PATTERN = /(?:乔鑫宝|鑫宝|他|你|本站|网站|应用|服务器)(?:的)?\s*(?:实际|隐藏|秘密|私有|内部|原始)?\s*(?:api\s*密钥|秘密密钥|访问(?:令牌|密钥)|系统提示(?:词)?|开发者(?:消息|提示)|私有语气|私密语气|语气(?:风格)?说明|(?:身份验证|认证|登录|api)凭据|环境变量|redis\s*令牌|upstash\s*令牌|云雾密钥)/iu;
+const CHINESE_SECRET_EXTRACTION_PATTERN = /(?:显示|展示|打印|泄露|公开|导出|列出|给我|告诉我|提供)(?:一下)?(?:给我)?(?:该|这个|那份|你的|他的|乔鑫宝的|鑫宝的|本站的|网站的|应用的|服务器的)?(?:实际|隐藏|秘密|私有|内部|原始)?(?:api\s*密钥|秘密密钥|访问(?:令牌|密钥)|系统提示(?:词)?|开发者(?:消息|提示)|私有语气|私密语气|语气(?:风格)?说明|(?:身份验证|认证|登录|api)凭据|环境变量|redis\s*令牌|upstash\s*令牌|云雾密钥)/iu;
+const CHINESE_INSTRUCTION_EXTRACTION_PATTERN = /(?:复述|重复|显示|展示|打印|泄露|公开|导出|列出|告诉我|提供)(?:一下)?(?:(?:你的|他的|该|这个)?(?:(?:隐藏|私有|内部|初始|系统|开发者)的?)+(?:指令|规则|提示词)|(?:所有|全部)(?:控制|约束|管理)?(?:这个|该|本)?(?:助手|系统)(?:的)?(?:指令|规则|提示词))/u;
+const CHINESE_PERSONAL_SENSITIVE_PATTERN = /(?:乔鑫宝|鑫宝|他|你)(?:的)?(?:护照(?:号码|号)?|身份证(?:号码|号)?|密码|银行(?:卡|账户)|信用卡|(?:具体|家庭|私人|住宅|街道)地址|生日|出生日期|宗教|信仰|健康问题|健康状况|疾病|病史|电话号码|手机号|银行余额|账户余额|存款|工资|薪水|收入)|(?:乔鑫宝|鑫宝|他|你)(?:的)?年龄(?:是|为|多大|多少|几岁|呢|吗|$)|(?:乔鑫宝|鑫宝|他|你)(?:现在)?(?:住|居住)(?:在)?哪(?:里|儿)|(?:乔鑫宝|鑫宝|他|你)(?:有|患有|得过)(?:什么|哪些)?(?:健康问题|健康状况|疾病|病史)|(?:乔鑫宝|鑫宝|他|你)(?:多大|几岁)/u;
+const ENGLISH_CONTEXT_REFERENCE_PATTERN = /^(?:(?:and )?(?:this|that)(?: one| paper| work| project)?|it|what (?:is|s) (?:this|it)(?: about)?|what does (?:this|it)(?: paper| work| project)? do|what problems? does (?:this|it)(?: paper| work| project)? solve|why does (?:this|it)(?: paper| work| project)? matter|tell me about (?:this|it)(?: paper| work| project)?|(?:could|can|would) you (?:please )?(?:explain|summarize|tell me) (?:what (?:this|that|it)(?: paper| work| project)? does|(?:this|that)(?: paper| work| project)?))$/u;
+const CHINESE_CONTEXT_REFERENCE_PATTERN = /^(?:这篇|这个|这项工作|这项研究|这个项目|它)(?:呢|讲(?:了)?(?:啥|什么)|是什么|是做什么的|做什么|有什么用|解决什么|解决了什么|为什么重要)?$/u;
+const ENGLISH_PROFILE_INTENT_PATTERN = /^(?:tell me about (?:yourself|xinbao(?: qiao)?)|introduce (?:yourself|xinbao(?: qiao)?)|who (?:are you|is xinbao(?: qiao)?)|give me (?:your|xinbao(?: qiao)? s) introduction)$/u;
+const ENGLISH_RECENT_WORK_INTENT_PATTERN = /^(?:whatever xinbao(?: qiao)? is cooking up lately|what (?:is|s) (?:xinbao(?: qiao)?|he) (?:working on|cooking up|researching)(?: lately| recently| now)?|what are you (?:working on|cooking up|researching)(?: lately| recently| now)?|what has (?:xinbao(?: qiao)?|he|you) been working on(?: lately| recently)?|what is (?:xinbao(?: qiao)?|he) up to(?: lately| recently| now)?)$/u;
+const ENGLISH_DOCTORAL_WORK_INTENT_PATTERN = /^(?:what did (?:xinbao(?: qiao)?|he|you) work on (?:during|in) (?:his|your|the) phd|what (?:is|was) (?:xinbao(?: qiao)? s|his|your) phd (?:work|research)(?: about)?|what (?:does|did) (?:xinbao(?: qiao)?|he|you) research (?:during|in) (?:his|your|the) phd)$/u;
+const ENGLISH_PUBLIC_CONTACT_INTENT_PATTERN = /^(?:(?:what(?: is|s)|give me|show me|share) (?:xinbao(?: qiao)? s|qiao xinbao s|his|your) (?:(?:public|work|academic) )?(?:email(?: address)?|contact (?:information|info|details))|how (?:can|do) i contact (?:xinbao(?: qiao)?|qiao xinbao|him|you))$/u;
+const ENGLISH_GENERAL_CONVERSATION_PATTERN = /^(?:what is (?:a |an )?(?:system prompt|authentication credential)|how are environment variables used|how does medical diagnosis work)$/u;
+
+const HOME_INTENT_TARGETS: Record<WikiRetrievalLanguage, Record<BoundedIntentKind, BoundedTarget[]>> = {
+  en: {
+    profile: [
+      { slug: 'Xinbao_Qiao', sectionPattern: /^Overview$/iu },
+      { slug: 'Research', sectionPattern: /^Research thesis$/iu },
+      { slug: 'Education', sectionPattern: /^Timeline$/iu }
+    ],
+    'recent-work': [
+      { slug: 'Xinbao_Qiao', sectionPattern: /Chinese University of Hong Kong \(2026-present\)|Academic projects/iu },
+      { slug: 'Projects', sectionPattern: /Research project clusters/iu },
+      { slug: 'Publications', sectionPattern: /Peer-reviewed and accepted papers/iu },
+      { slug: 'log', sectionPattern: /^2026-/u, newestMatchingSection: true }
+    ],
+    'doctoral-work': [
+      { slug: 'Xinbao_Qiao', sectionPattern: /Chinese University of Hong Kong \(2026-present\)/iu },
+      { slug: 'Experience', sectionPattern: /Doctoral research in AI and networks/iu },
+      { slug: 'Research', sectionPattern: /^AI and networks$/iu }
+    ],
+    'public-contact': [
+      { slug: 'CV', sectionPattern: /^Contact$/iu }
+    ]
+  },
+  zh: {
+    profile: [
+      { slug: 'Qiao_Xinbao_zh', sectionPattern: /^概述$/u },
+      { slug: 'Research_zh', sectionPattern: /^研究主线$/u },
+      { slug: 'Education_zh', sectionPattern: /^时间线$/u }
+    ],
+    'recent-work': [
+      { slug: 'Qiao_Xinbao_zh', sectionPattern: /香港中文大学博士阶段|学术项目/u },
+      { slug: 'Projects_zh', sectionPattern: /研究项目簇/u },
+      { slug: 'Publications_zh', sectionPattern: /已录用论文/u },
+      { slug: 'log_zh', sectionPattern: /^2026-/u, newestMatchingSection: true }
+    ],
+    'doctoral-work': [
+      { slug: 'Qiao_Xinbao_zh', sectionPattern: /香港中文大学博士阶段/u },
+      { slug: 'Experience_zh', sectionPattern: /AI 与网络博士研究/u },
+      { slug: 'Research_zh', sectionPattern: /^AI 与网络$/u }
+    ],
+    'public-contact': [
+      { slug: 'CV_zh', sectionPattern: /^联系方式$/u }
+    ]
+  }
+};
+
 
 let cachedIndex: WikiRetrievalIndex | null = null;
 let cachedPrepared: { fingerprint: string; chunks: PreparedChunk[] } | null = null;
@@ -148,6 +224,62 @@ function normalizeText(value: string) {
     .toLocaleLowerCase()
     .replace(/[\p{P}\p{S}\s]+/gu, ' ')
     .trim();
+}
+
+function targetsSensitiveInformation(query: string) {
+  const normalized = normalizeText(query);
+  return ENGLISH_OWNED_SECRET_PATTERN.test(normalized)
+    || ENGLISH_SECRET_EXTRACTION_PATTERN.test(normalized)
+    || ENGLISH_INSTRUCTION_EXTRACTION_PATTERN.test(normalized)
+    || ENGLISH_PERSONAL_SENSITIVE_PATTERN.test(normalized)
+    || CHINESE_OWNED_SECRET_PATTERN.test(normalized)
+    || (CHINESE_SECRET_OBJECT.test(normalized) && CHINESE_SECRET_EXTRACTION_PATTERN.test(normalized))
+    || CHINESE_INSTRUCTION_EXTRACTION_PATTERN.test(normalized)
+    || CHINESE_PERSONAL_SENSITIVE_PATTERN.test(normalized);
+}
+
+function homepageIntent(query: string, language: WikiRetrievalLanguage): BoundedIntentKind | null {
+  const normalized = normalizeText(query);
+  if (language === 'en') {
+    if (ENGLISH_PROFILE_INTENT_PATTERN.test(normalized)) return 'profile';
+    if (ENGLISH_RECENT_WORK_INTENT_PATTERN.test(normalized)) return 'recent-work';
+    if (ENGLISH_DOCTORAL_WORK_INTENT_PATTERN.test(normalized)) return 'doctoral-work';
+    if (ENGLISH_PUBLIC_CONTACT_INTENT_PATTERN.test(normalized)) return 'public-contact';
+    return null;
+  }
+
+  const compact = normalized.replace(/\s+/g, '');
+  if (/^(?:介绍一下|说说)(?:你自己|乔鑫宝|鑫宝)$|^(?:你|乔鑫宝|鑫宝)是谁$/u.test(compact)) return 'profile';
+  if (/^(?:看看)?(?:你|鑫宝|乔鑫宝|他)?(?:最近|现在)(?:又)?(?:在)?(?:折腾|搞|做|研究)(?:什么|啥)(?:工作|研究|项目|论文)?$/u.test(compact)) return 'recent-work';
+  if (/^(?:你|鑫宝|乔鑫宝|他)?(?:在)?博士(?:期间|阶段)(?:主要)?(?:在)?(?:做|搞|研究)(?:什么|啥)(?:工作|研究|项目)?$/u.test(compact)) return 'doctoral-work';
+  if (/^(?:(?:你|鑫宝|乔鑫宝|他)(?:的)?(?:(?:公开|工作|学术)?邮箱(?:地址)?|联系方式)(?:是什么|是多少|呢)?|(?:怎么|如何)(?:联系|联络)(?:你|鑫宝|乔鑫宝|他))$/u.test(compact)) return 'public-contact';
+  return null;
+}
+
+function isExplicitGeneralConversation(query: string, language: WikiRetrievalLanguage) {
+  const normalized = normalizeText(query);
+  if (language === 'en') return ENGLISH_GENERAL_CONVERSATION_PATTERN.test(normalized);
+  const compact = normalized.replace(/\s+/g, '');
+  return /^(?:什么是系统提示词|环境变量(?:如何|怎么)使用|医疗诊断(?:如何|怎么)工作)$/u.test(compact);
+}
+
+function requestedChineseTopicPhrase(query: string) {
+  const compact = normalizeText(query).replace(/\s+/g, '');
+  const prefixed = compact.match(/^(?:请)?(?:展示|列出|介绍|解释|告诉我|说说|讲讲)(.+)$/u);
+  const suffixed = compact.match(/^(.+?)(?:是什么|有哪些(?:论文|研究|项目)?|怎么做|如何做)$/u);
+  const rawTopic = prefixed?.[1] || suffixed?.[1];
+  if (!rawTopic) return null;
+  const topic = rawTopic
+    .replace(/(?:是什么|有哪些|有啥|怎么做|如何做)$/u, '')
+    .replace(/(?:相关)?(?:方法|论文|研究|项目|算法)$/u, '');
+  return topic.length >= 2 ? topic : null;
+}
+
+function isContextReference(query: string, language: WikiRetrievalLanguage) {
+  const normalized = normalizeText(query);
+  return language === 'en'
+    ? ENGLISH_CONTEXT_REFERENCE_PATTERN.test(normalized)
+    : CHINESE_CONTEXT_REFERENCE_PATTERN.test(normalized.replace(/\s+/g, ''));
 }
 
 function markdownToText(markdown: string) {
@@ -457,6 +589,60 @@ function prepareChunks(index: WikiRetrievalIndex) {
   return chunks;
 }
 
+function boundedChunkPriority(item: PreparedChunk, sectionPattern?: RegExp) {
+  if (sectionPattern?.test(item.chunk.section)) return 0;
+  if (item.chunk.chunkId.endsWith('#overview')) return 1;
+  if (/^(?:overview|introduction|summary|abstract|概述|简介|定位)$/iu.test(item.chunk.section)) return 2;
+  return 3;
+}
+
+function selectBoundedTargets(
+  index: WikiRetrievalIndex,
+  targets: BoundedTarget[],
+  language: WikiRetrievalLanguage,
+  limit: number,
+  intentLabel: string
+) {
+  const prepared = prepareChunks(index);
+  const selected: ScoredChunk[] = [];
+  const seen = new Set<string>();
+  for (const target of targets) {
+    const candidate = prepared
+      .filter((item) => item.chunk.language === language && item.chunk.slug === target.slug)
+      .sort((left, right) =>
+        boundedChunkPriority(left, target.sectionPattern) - boundedChunkPriority(right, target.sectionPattern)
+        || (target.newestMatchingSection
+          ? right.chunk.section.localeCompare(left.chunk.section)
+          : left.chunk.chunkId.localeCompare(right.chunk.chunkId))
+      )[0];
+    if (!candidate || seen.has(candidate.chunk.chunkId)) continue;
+    seen.add(candidate.chunk.chunkId);
+    selected.push({ prepared: candidate, score: 32 - selected.length, matchedTerms: [intentLabel] });
+    if (selected.length >= limit) break;
+  }
+  return selected;
+}
+
+function selectContextReferenceSources(
+  index: WikiRetrievalIndex,
+  contextSlug: string,
+  language: WikiRetrievalLanguage,
+  limit: number
+) {
+  return prepareChunks(index)
+    .filter((item) => item.chunk.language === language && item.chunk.slug === contextSlug)
+    .sort((left, right) =>
+      boundedChunkPriority(left) - boundedChunkPriority(right)
+      || left.chunk.chunkId.localeCompare(right.chunk.chunkId)
+    )
+    .slice(0, Math.min(2, limit))
+    .map((prepared, indexPosition): ScoredChunk => ({
+      prepared,
+      score: 32 - indexPosition,
+      matchedTerms: ['context-reference']
+    }));
+}
+
 function phraseScore(query: string, chunk: PreparedChunk) {
   if (query.length < 2 || query.length > 100) return 0;
   if (chunk.title === query) return 30;
@@ -569,21 +755,70 @@ function contextForSources(sources: ScoredChunk[]) {
   };
 }
 
+function emptyRetrievalResult(
+  index: WikiRetrievalIndex,
+  blockedReason: WikiRetrievalResult['blockedReason'] = null
+): WikiRetrievalResult {
+  return {
+    indexVersion: index.indexVersion,
+    indexFingerprint: index.indexFingerprint,
+    totalChunks: index.chunks.length,
+    sources: [],
+    context: 'No relevant local wiki evidence was retrieved.',
+    evidenceScore: 0,
+    queryCoverage: 0,
+    shouldAbstain: true,
+    blockedReason
+  };
+}
+
+function boundedRetrievalResult(index: WikiRetrievalIndex, selected: ScoredChunk[]): WikiRetrievalResult {
+  const packed = contextForSources(selected);
+  return {
+    indexVersion: index.indexVersion,
+    indexFingerprint: index.indexFingerprint,
+    totalChunks: index.chunks.length,
+    sources: packed.sources.map(({ prepared, score, matchedTerms }) => ({
+      chunkId: prepared.chunk.chunkId,
+      contentHash: prepared.chunk.contentHash,
+      slug: prepared.chunk.slug,
+      title: prepared.chunk.title,
+      section: prepared.chunk.section,
+      href: prepared.chunk.href,
+      score: Number(score.toFixed(3)),
+      matchedTerms: matchedTerms.slice(0, 8)
+    })),
+    context: packed.context,
+    evidenceScore: 1,
+    queryCoverage: 1,
+    shouldAbstain: false,
+    blockedReason: null
+  };
+}
+
 export function retrieveWikiContext(query: string, options: RetrievalOptions): WikiRetrievalResult {
   const index = getWikiRetrievalIndex();
-  if (targetsHiddenPage(query)) {
-    return {
-      indexVersion: index.indexVersion,
-      indexFingerprint: index.indexFingerprint,
-      totalChunks: index.chunks.length,
-      sources: [],
-      context: 'No relevant local wiki evidence was retrieved.',
-      evidenceScore: 0,
-      queryCoverage: 0,
-      shouldAbstain: true
-    };
-  }
+  if (targetsHiddenPage(query)) return emptyRetrievalResult(index, 'hidden-page');
+  if (targetsSensitiveInformation(query)) return emptyRetrievalResult(index, 'sensitive-query');
+  if (isExplicitGeneralConversation(query, options.language)) return emptyRetrievalResult(index);
+
   const limit = Math.max(1, Math.min(MAX_SOURCE_LIMIT, options.limit || DEFAULT_SOURCE_LIMIT));
+  const intent = homepageIntent(query, options.language);
+  if (intent) {
+    const selected = selectBoundedTargets(
+      index,
+      HOME_INTENT_TARGETS[options.language][intent],
+      options.language,
+      limit,
+      'home-intent:' + intent
+    );
+    if (selected.length > 0) return boundedRetrievalResult(index, selected);
+  }
+
+  if (isContextReference(query, options.language)) {
+    const selected = selectContextReferenceSources(index, options.contextSlug || '', options.language, limit);
+    return selected.length > 0 ? boundedRetrievalResult(index, selected) : emptyRetrievalResult(index);
+  }
   const { scored, terms } = scoreChunks(index, query, options.language, options.contextSlug);
   const selected = selectSources(scored, limit, options.contextSlug);
   const matched = new Set(selected.flatMap((item) => item.matchedTerms));
@@ -592,10 +827,22 @@ export function retrieveWikiContext(query: string, options: RetrievalOptions): W
   const queryCoverage = terms.length > 0 ? matched.size / terms.length : 0;
   const topScore = selected[0]?.score || 0;
   const evidenceScore = Math.min(1, queryCoverage * 0.65 + Math.min(1, topScore / 24) * 0.35);
-  const sensitiveQuery = SENSITIVE_QUERY_PATTERN.test(normalizeText(query));
   const identityOnlyEvidence = substantiveTerms.length > 0 && matchedSubstantiveTerms.length === 0;
-  const weakEvidence = identityOnlyEvidence || evidenceScore < 0.35 || (queryCoverage < 0.18 && evidenceScore < 0.5);
-  const shouldAbstain = selected.length === 0 || sensitiveQuery || weakEvidence;
+  const requestedChineseTopic = options.language === 'zh' ? requestedChineseTopicPhrase(query) : null;
+  const requestedChineseTopicMatched = !requestedChineseTopic || selected.some((item) => [
+    item.prepared.title,
+    item.prepared.section,
+    item.prepared.aliases,
+    item.prepared.tags,
+    item.prepared.summary,
+    item.prepared.body,
+  ].some((field) => field.replace(/\s+/g, '').includes(requestedChineseTopic)));
+  const weakEvidence = identityOnlyEvidence
+    || evidenceScore < 0.35
+    || topScore < 8
+    || (options.language === 'en' && queryCoverage < 0.6)
+    || !requestedChineseTopicMatched;
+  const shouldAbstain = selected.length === 0 || weakEvidence;
   const groundedSelection = shouldAbstain ? [] : selected;
   const packed = contextForSources(groundedSelection);
 
@@ -616,7 +863,8 @@ export function retrieveWikiContext(query: string, options: RetrievalOptions): W
     context: packed.context,
     evidenceScore: Number(evidenceScore.toFixed(3)),
     queryCoverage: Number(queryCoverage.toFixed(3)),
-    shouldAbstain
+    shouldAbstain,
+    blockedReason: null
   };
 }
 

@@ -24,14 +24,15 @@ wiki/Internet_Slang_2026_zh.md
 1. The search bar renders an `AI` icon button before the search input.
 2. The client keeps visible conversation history locally and sends only `{ message, language }` to `/api/chat-with-xinbao`. The server ignores any extra client-provided history for backward compatibility: it neither retrieves against it nor forwards it to the provider. The provider prompt contains the server-authored system message and the current user message only.
 3. The route validates input, enforces cooldown and daily quotas in Upstash Redis, and retrieves a bounded set of public `wiki/*.md` heading chunks for the current message only.
-4. If the evidence gate abstains, the server returns a localized deterministic refusal (or a fact-free greeting) with no sources and does not call the model provider.
-5. If evidence is usable, the route calls Yunwu at `https://api.yunwu.ai/v1/chat/completions`. A model answer is accepted only when it contains at least one valid `[n]` citation into the retrieved evidence. The server compacts citation numbers and returns only the sources that the accepted answer actually cites; a missing or out-of-range citation fails closed as a safe generic error.
-6. Accepted questions produce data-minimized, pseudonymous server-side metadata for reliability, retrieval evaluation, and aggregate FAQ demand.
-7. The route returns `{ reply, remaining, limit, sources, meta }` or a safe generic error.
+4. The route has three explicit response modes. Public wiki questions with usable evidence use `model-grounded`; ordinary conversation or general questions without enough wiki evidence use `model-conversational`; only sensitive or hidden-content requests use `deterministic-abstention` before the provider call.
+5. Both model modes call Yunwu at `https://api.yunwu.ai/v1/chat/completions`. A grounded answer is accepted only when it contains valid `[n]` citations into the retrieved evidence, after which the server compacts citation numbers and returns only cited sources. A conversational answer must be non-empty, must not contain fabricated numbered wiki citations, and returns an empty source list.
+6. Sensitive and hidden-content requests return a localized protected-information refusal with no sources. Weak retrieval by itself is never mapped to the old fixed “public evidence is insufficient” sentence.
+7. Accepted questions produce data-minimized, pseudonymous server-side metadata for reliability, retrieval evaluation, and aggregate FAQ demand.
+8. The route returns `{ reply, remaining, limit, sources, meta }` or a safe generic error.
 
 ## Question logs
 
-`POST /api/chat-with-xinbao` stores metadata for each accepted request in Redis after quota and cooldown checks pass. It records a salted one-way question fingerprint, language, page path, timestamp, message length, pseudonymous one-way visitor/browser/IP hashes, retrieval versions and scores, and retrieved source IDs. It does not record raw or normalized question text, chat history, system prompts, model raw errors, API keys, or full IP addresses. These hashes reduce direct identifiability but can still link records produced from the same inputs and server salt, so they are pseudonymous identifiers, not anonymous data.
+`POST /api/chat-with-xinbao` stores metadata for each accepted request in Redis after quota and cooldown checks pass. It records a salted one-way question fingerprint, language, page path, timestamp, message length, pseudonymous one-way visitor/browser/IP hashes, retrieval versions and scores, response mode, protected-block reason, and retrieved source IDs. It does not record raw or normalized question text, chat history, system prompts, model raw errors, API keys, or full IP addresses. These hashes reduce direct identifiability but can still link records produced from the same inputs and server salt, so they are pseudonymous identifiers, not anonymous data.
 
 Stored keys:
 
@@ -74,11 +75,13 @@ Internal meme and slang notes are maintained as hidden yearly wiki sources. The 
 4. Confirm the deployed Network panel shows only calls to `/api/chat-with-xinbao` from the browser.
 
 The release smoke is not only a configuration check. Staged and production
-smoke tests send an answerable `POST` through the deployed API, which invokes
-the configured provider, and require a non-empty answer with valid `[n]`
-citations plus matching returned sources. A separate unsupported-question
-canary must return `responseMode: deterministic-abstention` with an empty source
-list. Either failure blocks promotion or release.
+smoke tests send four `POST` canaries through the deployed API: a grounded wiki
+question must return valid `[n]` citations and matching sources; a page-context
+question sent with a DynFrs wiki `Referer` must cite only DynFrs sources; an
+ordinary out-of-domain question must return `responseMode: model-conversational`
+with no wiki citations or sources; and a sensitive request must return
+`responseMode: deterministic-abstention`, `blockedReason: sensitive-query`, and
+an empty source list. Any failure blocks promotion or release.
 
 ## Key leak check
 

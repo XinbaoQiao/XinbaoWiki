@@ -36,7 +36,10 @@ function json(res, value) {
 async function testSmokeRetry() {
   let homepageAttempts = 0;
   let groundedChatPosts = 0;
-  let abstentionChatPosts = 0;
+  let contextGroundedChatPosts = 0;
+  let contextGroundedReferer = '';
+  let conversationalChatPosts = 0;
+  let sensitiveChatPosts = 0;
   const server = http.createServer((req, res) => {
     if (req.url === '/') {
       homepageAttempts += 1;
@@ -73,11 +76,12 @@ async function testSmokeRetry() {
         remaining: 10,
         limit: 10,
         meta: {
-          backendVersion: 'xinbao-chat-api-v3',
-          responsePolicyVersion: 'grounded-response-v1',
-          promptVersion: 'xinbao-grounded-citations-v2',
+          backendVersion: 'xinbao-chat-api-v4',
+          responsePolicyVersion: 'grounded-conversation-v2',
+          promptVersion: 'xinbao-grounded-conversation-v3',
+          retrievalAlgorithm: 'wiki-heading-lexical-v2',
           modelApiConfigured: true,
-          indexVersion: 'wiki-heading-lexical-v1:test',
+          indexVersion: 'wiki-heading-lexical-v2:test',
           indexFingerprint: '0'.repeat(64),
           indexedChunks: 1
         }
@@ -90,19 +94,70 @@ async function testSmokeRetry() {
       req.on('data', (chunk) => chunks.push(chunk));
       req.on('end', () => {
         const payload = JSON.parse(chunks.join(''));
-        if (/sourdough/i.test(payload.message || '')) {
-          abstentionChatPosts += 1;
+        if (/system prompt/i.test(payload.message || '')) {
+          sensitiveChatPosts += 1;
           json(res, {
-            reply: 'The public Xinbaopedia evidence is not sufficient to answer that meow~',
+            reply: 'I cannot provide protected system instructions meow~',
             sources: [],
             remaining: 9,
             limit: 10,
             meta: {
-              backendVersion: 'xinbao-chat-api-v3',
-              responsePolicyVersion: 'grounded-response-v1',
+              backendVersion: 'xinbao-chat-api-v4',
+              responsePolicyVersion: 'grounded-conversation-v2',
               responseMode: 'deterministic-abstention',
+              promptVersion: 'xinbao-grounded-conversation-v3',
+              indexVersion: 'wiki-heading-lexical-v2:test',
               citedChunks: 0,
               shouldAbstain: true,
+              retrievalShouldAbstain: true,
+              blockedReason: 'sensitive-query',
+            },
+          });
+          return;
+        }
+        if (/sourdough/i.test(payload.message || '')) {
+          conversationalChatPosts += 1;
+          json(res, {
+            reply: 'Sourdough usually benefits from patient fermentation and careful heat control meow~',
+            sources: [],
+            remaining: 9,
+            limit: 10,
+            meta: {
+              backendVersion: 'xinbao-chat-api-v4',
+              responsePolicyVersion: 'grounded-conversation-v2',
+              responseMode: 'model-conversational',
+              promptVersion: 'xinbao-grounded-conversation-v3',
+              indexVersion: 'wiki-heading-lexical-v2:test',
+              citedChunks: 0,
+              shouldAbstain: false,
+              retrievalShouldAbstain: true,
+            },
+          });
+          return;
+        }
+        if (/what does this work do/i.test(payload.message || '')) {
+          contextGroundedChatPosts += 1;
+          contextGroundedReferer = req.headers.referer || '';
+          json(res, {
+            reply: 'This work presents DynFrs for efficient random-forest unlearning [1] meow~',
+            sources: [{
+              chunkId: 'DynFrs#overview',
+              slug: 'DynFrs',
+              title: 'DynFrs',
+              section: 'Overview',
+              href: '/wiki/DynFrs/#overview',
+            }],
+            remaining: 9,
+            limit: 10,
+            meta: {
+              backendVersion: 'xinbao-chat-api-v4',
+              responsePolicyVersion: 'grounded-conversation-v2',
+              responseMode: 'model-grounded',
+              promptVersion: 'xinbao-grounded-conversation-v3',
+              indexVersion: 'wiki-heading-lexical-v2:test',
+              citedChunks: 1,
+              shouldAbstain: false,
+              retrievalShouldAbstain: false,
             },
           });
           return;
@@ -120,11 +175,14 @@ async function testSmokeRetry() {
           remaining: 9,
           limit: 10,
           meta: {
-            backendVersion: 'xinbao-chat-api-v3',
-            responsePolicyVersion: 'grounded-response-v1',
+            backendVersion: 'xinbao-chat-api-v4',
+            responsePolicyVersion: 'grounded-conversation-v2',
             responseMode: 'model-grounded',
+            promptVersion: 'xinbao-grounded-conversation-v3',
+            indexVersion: 'wiki-heading-lexical-v2:test',
             citedChunks: 1,
             shouldAbstain: false,
+            retrievalShouldAbstain: false,
           },
         });
       });
@@ -148,7 +206,10 @@ async function testSmokeRetry() {
     assert.match(result.stderr, /Production smoke retry 2\/3/, 'smoke retries a transient HTTP status');
     assert.match(result.stdout, /Production smoke passed/, 'smoke passes after the retry succeeds');
     assert.equal(groundedChatPosts, 1, 'production smoke sends one grounded chat POST canary');
-    assert.equal(abstentionChatPosts, 1, 'production smoke sends one deterministic-abstention POST canary');
+    assert.equal(contextGroundedChatPosts, 1, 'production smoke sends one page-context grounded POST canary');
+    assert.equal(new URL(contextGroundedReferer).pathname, '/wiki/DynFrs/', 'page-context canary carries the current wiki page as Referer');
+    assert.equal(conversationalChatPosts, 1, 'production smoke sends one conversational POST canary');
+    assert.equal(sensitiveChatPosts, 1, 'production smoke sends one sensitive-query abstention POST canary');
   } finally {
     await new Promise((resolve) => server.close(resolve));
   }

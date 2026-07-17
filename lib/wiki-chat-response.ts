@@ -1,4 +1,4 @@
-export const WIKI_CHAT_RESPONSE_POLICY_VERSION = 'grounded-response-v1';
+export const WIKI_CHAT_RESPONSE_POLICY_VERSION = 'grounded-conversation-v2';
 
 export type WikiChatResponseLanguage = 'en' | 'zh';
 
@@ -10,17 +10,16 @@ export type CitableWikiSource = {
   href: string;
 };
 
-const PURE_GREETING_PATTERN = /^(?:hi|hello|hey|yo|good\s+(?:morning|afternoon|evening)|你好|您好|嗨|哈喽|在吗)[!！,.，。?？\s]*$/iu;
-
-export function deterministicAbstentionReply(message: string, language: WikiChatResponseLanguage) {
-  if (PURE_GREETING_PATTERN.test(message.trim())) {
-    return language === 'zh'
-      ? '嗨！想聊乔鑫宝的研究、论文、项目或学术经历，可以直接问我'
-      : 'Hi! Ask me about Xinbao Qiao\'s research, papers, projects, or academic background';
-  }
+export function deterministicAbstentionReply(_message: string, language: WikiChatResponseLanguage) {
   return language === 'zh'
-    ? '现有公开 Xinbaopedia 资料不足以回答这个问题；我可以帮你查乔鑫宝的研究、论文、项目、学术经历或公开联系方式'
-    : 'The public Xinbaopedia evidence is not sufficient to answer that; I can help with Xinbao Qiao\'s research, papers, projects, academic background, or public contact information';
+    ? '这个请求涉及我不能提供的非公开、敏感或受保护信息；可以改问公开的研究、论文、项目、学术经历或联系方式'
+    : 'I cannot provide non-public, sensitive, or otherwise protected information; you can ask about public research, papers, projects, academic background, or contact details instead';
+}
+
+export function validateConversationalReply(reply: string) {
+  const compactReply = reply.trim();
+  if (!compactReply || /\[\d+\]/u.test(compactReply)) return null;
+  return compactReply;
 }
 
 export function validateAndCompactCitations<T extends CitableWikiSource>(reply: string, sources: T[]) {
