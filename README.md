@@ -3,16 +3,19 @@
 
   # Xinbaopedia
 
-  **Turn an academic homepage into a queryable, cited knowledge system.**
+  ## Your academic story should be discovered — not just displayed.
 
-  *Browse it like a Wiki. Search it like an index. Ask it like an LLM.*
+  **Turn a static academic homepage into a product people can explore, question, and trust.**
+
+  把散落的履历、论文、项目与研究关系，变成一套可搜索、可追问、可验证、可复用的双语知识产品。
 
   <p>
-    <a href="https://xinbaopedia.top"><img src="https://img.shields.io/badge/Open-Live%20Site-3366cc?style=for-the-badge" height="28" alt="Open Xinbaopedia" /></a>
-    <a href="https://nextjs.org/docs/15/app"><img src="https://img.shields.io/badge/Next.js-15.5.20-000000?style=for-the-badge&logo=nextdotjs" height="28" alt="Next.js 15.5.20" /></a>
-    <a href="https://react.dev/"><img src="https://img.shields.io/badge/React-19.2.7-20232a?style=for-the-badge&logo=react" height="28" alt="React 19.2.7" /></a>
-    <a href="https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md"><img src="https://img.shields.io/badge/OKF-v0.1%20Draft-2a7f62?style=for-the-badge" height="28" alt="Open Knowledge Format v0.1 Draft" /></a>
+    <a href="https://xinbaopedia.top"><img src="https://img.shields.io/badge/Explore-Live%20Product-3366cc?style=for-the-badge" height="30" alt="Explore the live product" /></a>
+    <a href="https://xinbaopedia.top/wiki/Xinbao_Qiao/"><img src="https://img.shields.io/badge/Browse-The%20Wiki-2a7f62?style=for-the-badge" height="30" alt="Browse the Wiki" /></a>
+    <a href="https://xinbaopedia.top/okf/index.md"><img src="https://img.shields.io/badge/Open-Agent%20Knowledge-6b4fbb?style=for-the-badge" height="30" alt="Open the agent-readable knowledge bundle" /></a>
+    <a href="https://github.com/XinbaoQiao/XinbaoWiki/fork"><img src="https://img.shields.io/badge/Fork-Build%20Yours-f08c46?style=for-the-badge" height="30" alt="Fork Xinbaopedia" /></a>
   </p>
+
   <p>
     <a href="https://github.com/XinbaoQiao/XinbaoWiki/actions/workflows/ci.yml"><img src="https://github.com/XinbaoQiao/XinbaoWiki/actions/workflows/ci.yml/badge.svg" alt="CI status" /></a>
     <a href="https://github.com/XinbaoQiao/XinbaoWiki/actions/workflows/maintenance.yml"><img src="https://github.com/XinbaoQiao/XinbaoWiki/actions/workflows/maintenance.yml/badge.svg" alt="Weekly wiki maintenance status" /></a>
@@ -22,152 +25,261 @@
 
 ---
 
-Xinbaopedia 不是把一份 CV 搬上网页，也不是在个人主页旁边塞一个聊天框。它把公开学术资料编译成一套由 Git 驱动的双语知识系统：同一份 Markdown 同时服务于人类阅读、站内搜索、LLM 检索和 agent-readable 知识导出。
+## A homepage should open doors, not end the journey
 
-> **One source, four surfaces:** bilingual Wiki pages, weighted search, citation-checked AI answers, and an OKF knowledge bundle.
+普通个人主页回答“这个人是谁”。Xinbaopedia 继续回答：
 
-## 为什么它不只是另一个个人主页
+- 这些论文、项目、机构和研究问题是怎么连接起来的？
+- 我能不能直接搜索一个概念，而不是翻完整份 CV？
+- AI 的回答依据来自哪里，能不能点回原始 Wiki 页面核对？
+- 我能不能把这套系统换成自己的内容，用一套可复现流程维护并持续发布？
 
-| 普通个人主页通常提供 | Xinbaopedia 进一步提供 |
-| --- | --- |
-| 一页履历和若干外链 | 可以沿人物、论文、项目、机构和研究概念继续探索的双语 Wiki |
-| 标题或关键词匹配 | 对标题、别名、摘要和正文加权的可解释站内搜索；AI 检索还能感知当前页面 |
-| 一个没有证据边界的聊天窗口 | Wiki 证据充分时强制使用页级引用；一般问题正常回答；敏感请求在模型调用前阻断 |
-| 手工更新后直接上线 | 双语配对、链接、来源、内容哈希、检索 golden set、CI 和每周维护审计 |
+**Xinbaopedia 把个人主页从展示页变成了探索入口。** 访客得到的是一张可以阅读、搜索和对话的学术知识地图；构建者得到的是一套可以 fork、替换内容并部署的产品蓝图。
 
-最关键的区别是：**引用不是装饰，而是服务端契约。** Grounded 回答只有在 <code>[n]</code> 引用有效时才会返回，并且 API 只附上模型真正引用过的 Wiki 页面。缺失或越界引用不能直接进入用户界面。
+<table>
+  <tr>
+    <td width="25%" align="center"><strong>🧭 Browse</strong><br/><sub>沿人物、论文、项目、机构与概念继续探索</sub></td>
+    <td width="25%" align="center"><strong>⌕ Search</strong><br/><sub>用中英文标题、别名或自然表达直达内容</sub></td>
+    <td width="25%" align="center"><strong>✦ Ask</strong><br/><sub>有证据就引用回答，没有 Wiki 证据也能正常对话</sub></td>
+    <td width="25%" align="center"><strong>↗ Fork</strong><br/><sub>替换知识、品牌和媒体，构建自己的学术产品</sub></td>
+  </tr>
+</table>
 
-## 架构
+<br/>
+
+<table>
+  <tr>
+    <td width="25%" align="center"><strong>2</strong><br/><sub>languages, one knowledge graph</sub></td>
+    <td width="25%" align="center"><strong>84</strong><br/><sub>public agent-readable concepts</sub></td>
+    <td width="25%" align="center"><strong>64</strong><br/><sub>bilingual retrieval test cases</sub></td>
+    <td width="25%" align="center"><strong>3</strong><br/><sub>grounded, conversational, protected modes</sub></td>
+  </tr>
+</table>
+
+## What it feels like to use
+
+| You want to… | Xinbaopedia does… | You get… |
+| --- | --- | --- |
+| 快速了解一个人的研究 | 把人物、经历、论文与研究主题组织成双语 Wiki | 一条可以继续点下去的阅读路径，而不是履历终点 |
+| 找到某个模糊概念 | 对标题、别名、摘要和正文进行语言感知的加权搜索 | 更接近“我想找什么”的结果 |
+| 在论文页问“这项工作做了什么？” | 把当前页作为受约束上下文，检索相关公开证据 | 带有效 Wiki 引用、可以回查的回答 |
+| 问一个 Wiki 没覆盖的普通问题 | 转入普通对话，而不是重复固定拒答 | 自然回答，同时不伪造 Wiki 来源 |
+| 复用这套主页 | 从 Git-native 内容、维护器、评测到部署门禁全部开放 | 一套可持续维护的个人知识产品模板 |
+
+> **The product promise:** browse like a Wiki, discover like a search engine, ask like an LLM, verify like a researcher.
+
+## Product architecture
+
+这张图不从依赖开始，而从用户体验开始：一次浏览、搜索或提问，如何经过知识、智能与发布门禁，最终变成可以信任的产品结果。
 
 ~~~mermaid
-flowchart LR
-  A["wiki/*.md<br/>canonical public knowledge"] --> B["Maintenance compiler<br/>links · bilingual pairs · sources · hashes"]
-  B --> C["Next.js Wiki<br/>pages · search · themes"]
-  B --> D["OKF v0.1 bundle<br/>agent-readable export"]
-  B --> E["Lexical retrieval index<br/>stable heading chunks + graph hints"]
-  E --> F{"Response router"}
-  F -->|strong public evidence| G["Grounded LLM<br/>validated [n] citations"]
-  F -->|weak or no Wiki evidence| H["Normal conversation<br/>no fabricated Wiki sources"]
-  F -->|hidden or sensitive request| I["Deterministic protection<br/>provider not called"]
+flowchart TB
+  subgraph EXPERIENCE["01 · EXPERIENCE — what people touch"]
+    direction LR
+    B["Browse<br/>bilingual Wiki"]
+    S["Search<br/>weighted discovery"]
+    A["Ask<br/>page-aware AI"]
+    F["Fork<br/>build your own"]
+  end
+
+  subgraph INTELLIGENCE["02 · INTELLIGENCE — how evidence decides the answer"]
+    direction LR
+    UI["Product shell<br/>Next.js + React"]
+    RET["Bilingual retrieval<br/>stable heading chunks"]
+    ROUTER{"Evidence-aware<br/>response router"}
+    G["Grounded<br/>validated citations"]
+    C["Conversational<br/>normal answers"]
+    P["Protected<br/>stop before provider"]
+    RET --> ROUTER
+    ROUTER --> G
+    ROUTER --> C
+    ROUTER --> P
+  end
+
+  subgraph KNOWLEDGE["03 · KNOWLEDGE — one editable source, many surfaces"]
+    direction LR
+    W["Git-native Markdown<br/>wiki/*.md"]
+    COMP["Maintenance compiler<br/>links · sources · hashes"]
+    PAGES["Wiki pages<br/>+ search index"]
+    CHUNKS["Retrieval graph<br/>+ context chunks"]
+    OKF["OKF bundle<br/>for agents"]
+    W --> COMP
+    COMP --> PAGES
+    COMP --> CHUNKS
+    COMP --> OKF
+  end
+
+  subgraph TRUST["04 · TRUST — every release earns production"]
+    direction LR
+    TESTS["Content + retrieval<br/>quality gates"]
+    PREVIEW["Immutable preview<br/>live AI canaries"]
+    PROD["Production<br/>xinbaopedia.top"]
+    TESTS --> PREVIEW --> PROD
+  end
+
+  B --> UI
+  S --> UI
+  A --> RET
+  F --> W
+  PAGES --> UI
+  CHUNKS --> RET
+  COMP --> TESTS
+  ROUTER --> TESTS
+
+  classDef experience fill:#eef4ff,stroke:#3366cc,color:#172b4d,stroke-width:1.5px;
+  classDef intelligence fill:#f4efff,stroke:#6b4fbb,color:#2f2147,stroke-width:1.5px;
+  classDef knowledge fill:#edf8f3,stroke:#2a7f62,color:#173f32,stroke-width:1.5px;
+  classDef trust fill:#fff3e8,stroke:#d97706,color:#4b2b08,stroke-width:1.5px;
+
+  class B,S,A,F experience;
+  class UI,RET,ROUTER,G,C,P intelligence;
+  class W,COMP,PAGES,CHUNKS,OKF knowledge;
+  class TESTS,PREVIEW,PROD trust;
+
+  style EXPERIENCE fill:#f8fbff,stroke:#9bbcf5,stroke-width:1px;
+  style INTELLIGENCE fill:#fbf9ff,stroke:#c5afe8,stroke-width:1px;
+  style KNOWLEDGE fill:#f7fcf9,stroke:#9bcdbb,stroke-width:1px;
+  style TRUST fill:#fffaf5,stroke:#f2bd83,stroke-width:1px;
 ~~~
 
-<code>wiki/*.md</code> 是唯一规范内容源。页面、关系图、搜索数据、检索分块和 <code>public/okf/</code> 都由它生成或验证；生成物不应脱离源文件单独修改。
+<code>wiki/*.md</code> 是唯一规范内容源。它被编译为人类可读页面、搜索索引、检索上下文、知识图谱和 agent-readable OKF；回答策略与发布门禁则确保这些能力不会脱离证据边界。
 
-## 技术栈
+## Why it feels different
 
-### 前端
+### It turns a profile into a map
 
-| 组件 | 实际实现 | 作用 |
-| --- | --- | --- |
-| Web framework | [Next.js 15.5.20 App Router](https://nextjs.org/docs/15/app) | 页面路由、静态生成、metadata、sitemap、robots 与同站 API |
-| UI | [React 19.2.7](https://react.dev/) + TypeScript | 搜索、双语切换、主题系统、文章组件与 AI 对话面板 |
-| Wiki rendering | [react-markdown](https://github.com/remarkjs/react-markdown) + [remark-gfm](https://github.com/remarkjs/remark-gfm) + remark-math + rehype-katex + [KaTeX](https://katex.org/) | GFM、数学公式、表格、外链、WikiLinks 与缺失页提示 |
-| Visual system | 原生 CSS variables | Wikipedia-inspired 文章布局、响应式设计、七种手动主题与按本地时间自动切换 |
-| Search | 静态 <code>/search-index.json</code> + 客户端加权检索 | 中英文分流，对标题、别名、摘要和正文排序，并支持键盘操作 |
+履历不再是平铺的时间线。WikiLinks 把研究主题、论文、合作关系、机构与方法连成可以逐层探索的路径。
 
-### LLM + Wiki 后端
+### It makes AI earn its citations
 
-| 层 | 实际实现 | 作用 |
-| --- | --- | --- |
-| API runtime | Next.js Node Route Handlers，部署于 Vercel | 浏览器只访问同站 API；模型密钥和服务端提示不进入前端 bundle |
-| Knowledge source | Git-native Markdown + YAML frontmatter | <code>wiki/*.md</code> 保存可读、可 diff、可审查的公开知识 |
-| Retrieval | 自研双语 heading-level lexical retrieval | 稳定 <code>slug#section</code> chunk ID、内容哈希、语言过滤、当前页加权和轻量 Wiki 图邻接扩展 |
-| LLM gateway | 服务器端 OpenAI-compatible Chat Completions | 当前生产配置经 Yunwu 调用 <code>deepseek-v4-flash</code>；项目不依赖 OpenAI SDK |
-| Response policy | grounded / conversational / protected 三路路由 | 有证据则引用回答，无 Wiki 证据则正常对话，隐藏或敏感请求确定性阻断 |
-| Citation guard | 编号校验、来源压缩与一次有界重试 | 无效引用不能直接返回；普通对话不得伪造 Wiki 引用 |
-| State | [Upstash Redis JS](https://github.com/upstash/redis-js) | 每日配额、冷却、重试预算和数据最小化的假名化运行元数据 |
-| Knowledge export | OKF v0.1 Draft + Xinbaopedia OKF Profile v1 | 生成可被人类和 agent 读取的 <code>public/okf/</code> 知识包 |
+Grounded 回答只有在 <code>[n]</code> 引用真实、有效且落在检索结果内时才会返回。API 只附上模型实际使用的 Wiki 页面；缺失或越界引用会被拒绝或进行一次有界重试。
 
-这个后端不是 LangChain、LlamaIndex、Microsoft GraphRAG 或向量数据库的封装。检索、路由、引用验证、评测和维护流程都在仓库中显式实现，因此每个回答边界都可以从代码和测试追溯。
+### It answers normally when a citation is not the point
 
-## 可以获得什么效果
+Wiki 证据不足不等于什么都不能说。普通知识与自然对话会进入 conversational mode；只有隐藏内容、私密信息或敏感请求才在模型调用前确定性阻断。
 
-- **Browse:** 从人物或研究主题出发，沿 WikiLinks 阅读论文、项目、机构与方法之间的关系。
-- **Search:** 输入中英文标题、术语或自然表达，直接定位相关页面与摘要。
-- **Ask:** 在首页询问全站问题，或在论文页问“这项工作解决了什么”，当前页会成为受约束的检索上下文。
-- **Verify:** Grounded 回答附带实际引用页面；读者可以回到对应 Wiki 条目，并在条目提供外部引用时继续核对。
-- **Maintain:** 内容更新会经过链接、双语、来源、OKF、检索、隐私、构建和真实 provider canary 检查。
+### It ships maintenance, not just pages
 
-## 我们真正基于什么，以及只参考了什么
+双语配对、WikiLinks、来源、内容哈希、review due、OKF、新鲜度、检索评测、真实 provider canary 与 production smoke 都属于产品的一部分。
 
-| 来源 | 在 Xinbaopedia 中的角色 | 关系边界 |
-| --- | --- | --- |
-| [Next.js App Router](https://nextjs.org/docs/15/app) 与 [React](https://react.dev/) | Web 前端与同站后端的实际框架 | **实际采用** |
-| [GitHub Flavored Markdown Spec](https://github.github.com/gfm/) | 表格、列表、链接和代码块的 Markdown 语法基础 | **实际采用** |
-| [Open Knowledge Format v0.1 Draft](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) | Markdown + YAML 知识包的互操作基础 | **规范基础**；双语、检索、评测和复审周期是本项目扩展 |
-| [Google Cloud: Introducing the Open Knowledge Format](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing) | Git-managed、portable、human/agent-readable knowledge 的设计动机 | **设计依据** |
-| [Andrej Karpathy: LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) | durable Wiki memory、schema、ingest、query 和 lint 的概念起点 | **概念启发**；不是标准或生产参考实现 |
-| [MediaWiki architecture](https://www.mediawiki.org/wiki/Manual:MediaWiki_architecture) 与 [job queue](https://www.mediawiki.org/wiki/Manual:Job_queue) | Wiki 页面、链接、revision-driven invalidation 与延迟维护的比较对象 | **交互与维护参考**；项目没有运行 MediaWiki |
-| [Microsoft GraphRAG](https://github.com/microsoft/graphrag) | entity/relationship extraction 与 global graph query 的比较对象 | **比较参考**；未实现其 indexing、community detection 或 report pipeline |
-| [LlamaIndex ingestion pipeline](https://developers.llamaindex.ai/python/framework/module_guides/loading/ingestion_pipeline/) | stable document IDs、hashes 与 incremental ingestion 的比较对象 | **比较参考**；不是依赖 |
-| [Ragas metrics](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/) | retrieval、context 与 faithfulness 的评测术语 | **评测参考**；不声称 Ragas compatibility |
-| [OWASP Top 10 for LLM Applications](https://genai.owasp.org/llm-top-10/) | prompt injection、敏感信息披露、输出处理和资源消耗的安全审查词汇 | **安全参考**；不声称认证或全面合规 |
-| [OpenTelemetry GenAI semantic conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/) | provider、model、latency、tokens 与 outcome 的可选遥测词汇 | **可观测性参考**；当前不是 OTel 实现 |
+## Make it yours
 
-完整兼容矩阵与 claim boundaries 见 [Standards and conformance](docs/standards-and-conformance.md)。
+你不需要照搬乔鑫宝的内容。把 Xinbaopedia 当成一套可替换知识的产品骨架：
 
-## 安全、隐私与持续维护
-
-- 隐藏页面不会进入公开路由、OKF 导出或 LLM 检索语料。
-- Xinbaopedia 自有 Redis 与运行日志不写入原始问题、聊天历史、原始 IP、系统提示、私有语气配置或 API key；当前消息仍会发送给配置的模型服务生成回答，上游处理受该服务的政策约束。
-- 自有运行观测保留 salted one-way question fingerprint、长度、页面、语言、假名化 visitor/browser/IP hashes、检索版本与分数、provider/model、outcome/retry、延迟和 token counts；这些哈希是 **pseudonymous**，不是 anonymous。
-- <code>npm run check</code> 同时验证 TypeScript、WikiLinks、内容新鲜度、OKF、Wiki 行为、检索 golden set 与发布脚本。
-- GitHub Actions 在 push/PR 上运行依赖审计、完整检查和构建；每周任务复核来源、外链、review due 状态和双语检索。
-- 生产发布先验证 immutable preview deployment，再 promotion，并在 canonical domain 上执行 grounded、page-context、conversational 与 sensitive-request canaries。
-
-## 仓库地图
-
-~~~text
-app/                     Next.js pages, metadata and API routes
-components/              Wiki, search, theme and chat UI
-lib/                     Wiki parsing, retrieval, prompts and response policy
-wiki/                    canonical bilingual Markdown knowledge
-public/okf/              generated agent-readable OKF bundle
-evals/                   reviewed bilingual retrieval golden set
-scripts/                 maintenance, audit, evaluation and release gates
-docs/                    standards, taxonomy, maintenance, deployment and chat operations
-~~~
-
-深入文档：
-
-- [Standards and conformance](docs/standards-and-conformance.md)
-- [Continuous wiki maintenance](docs/continuous-maintenance.md)
-- [Relation taxonomy](docs/relation-taxonomy.md)
-- [Deployment troubleshooting](docs/deployment-troubleshooting.md)
-- [Chat backend and deployment](docs/chat/README.md)
-
-## 复用、贡献与安全
-
-Xinbaopedia 将可复用部分与受保护素材明确分开：
-
-- 软件代码和项目配置采用 [MIT License](LICENSE)。
-- 原创 Wiki 与文档文字在权利人可授权的范围内采用 [CC BY 4.0](LICENSES/CC-BY-4.0.txt)。
-- 个人照片、CV、论文图、机构标志、字体和其他第三方素材不包含在上述授权中。完整路径边界与逐文件状态见 [Licensing](LICENSING.md)、[Third-party notices](THIRD_PARTY_NOTICES.md) 和 [Asset provenance register](ASSET_PROVENANCE.md)。
-
-如果你希望复用这套主页，可以 fork 后替换 `wiki/*.md`、公开媒体与站点元数据，再运行维护和验证命令。提交内容纠错、功能或代码改进前，请阅读 [Contributing](CONTRIBUTING.md) 与 [Code of Conduct](CODE_OF_CONDUCT.md)；安全或隐私问题请不要公开开 Issue，按 [Security policy](SECURITY.md) 私下报告。
-
-## 本地运行
-
-需要 Node.js 22：
+1. **Fork the product** — 保留前端、检索、维护和发布门禁。
+2. **Replace the knowledge** — 修改 <code>wiki/*.md</code>、公开媒体与站点 metadata。
+3. **Compile and ship** — 重新生成知识产物，检查内容与检索，再部署自己的站点。
 
 ~~~bash
 npm ci
-npm run dev
-~~~
-
-默认地址为 <code>http://localhost:3000</code>。若需要启用 AI，请参考 [server environment example](docs/chat/env.example) 配置服务器端环境变量，切勿把真实密钥提交到仓库。
-
-修改 <code>wiki/*.md</code> 后运行：
-
-~~~bash
 npm run maintain:wiki
 npm run check
 npm run build
 ~~~
 
+核心目录：
+
+~~~text
+app/                     product pages, metadata and same-site API
+components/              Wiki, search, theme and chat experiences
+lib/                     parsing, retrieval, prompts and response policy
+wiki/                    canonical bilingual knowledge
+public/okf/              generated agent-readable knowledge bundle
+evals/                   reviewed bilingual retrieval cases
+scripts/                 maintenance, evaluation and release gates
+docs/                    standards, deployment and chat operations
+~~~
+
+[**Fork Xinbaopedia →**](https://github.com/XinbaoQiao/XinbaoWiki/fork) · [**Read the contribution guide →**](CONTRIBUTING.md) · [**Open the live product →**](https://xinbaopedia.top)
+
+## Trust is a product feature
+
+- **Evidence boundary:** grounded answers require validated citations; conversational replies cannot invent numbered Wiki sources.
+- **Privacy boundary:** Xinbaopedia 自有 Redis 与日志不保存原始问题、聊天历史、原始 IP、系统提示、私有语气配置或 API key。当前消息仍会发送给配置的模型服务，上游处理遵循该服务的政策。
+- **Knowledge boundary:** 隐藏页不会进入公开路由、OKF 或 LLM 检索语料。
+- **Release boundary:** 每次 production promotion 之前都要通过 immutable preview 上的内容、检索、grounded、page-context、conversation 与 sensitive-request canary。
+
+<details>
+<summary><strong>Under the hood — actual frontend and LLM + Wiki backend</strong></summary>
+
+### Frontend
+
+| Layer | Actual implementation | Product role |
+| --- | --- | --- |
+| Web framework | [Next.js 15.5.20 App Router](https://nextjs.org/docs/15/app) | 静态生成、metadata、sitemap、robots 与同站 API |
+| UI | [React 19.2.7](https://react.dev/) + TypeScript | 搜索、双语切换、主题系统、文章组件与 AI 面板 |
+| Wiki rendering | react-markdown + remark-gfm + remark-math + rehype-katex + KaTeX | GFM、公式、表格、外链、WikiLinks 与缺失页提示 |
+| Visual system | Repository-native CSS variables | Wikipedia-inspired 布局、响应式设计、手动主题与本地时间 Auto |
+| Search | Static <code>/search-index.json</code> + client-side weighting | 中英文分流，对标题、别名、摘要和正文排序 |
+
+### LLM + Wiki backend
+
+| Layer | Actual implementation | Product role |
+| --- | --- | --- |
+| API runtime | Next.js Node Route Handlers on Vercel | 浏览器只访问同站 API；模型密钥与服务端提示不进入前端 bundle |
+| Knowledge source | Git-native Markdown + YAML frontmatter | 保存可读、可 diff、可审查的规范知识 |
+| Retrieval | Custom bilingual heading-level lexical retrieval | 稳定 <code>slug#section</code> ID、内容哈希、语言过滤、当前页加权与轻量图扩展 |
+| LLM gateway | Server-side OpenAI-compatible Chat Completions | 当前生产配置经 Yunwu 调用 <code>deepseek-v4-flash</code>；不依赖 OpenAI SDK |
+| Response policy | Grounded / conversational / protected router | 有证据则引用回答，无 Wiki 证据则正常对话，敏感请求确定性阻断 |
+| Citation guard | Number validation, source compaction, one bounded retry | 无效引用不能进入 UI；只返回实际引用页面 |
+| State | Upstash Redis JS | 每日配额、冷却、重试预算与数据最小化的假名化运行元数据 |
+| Knowledge export | OKF v0.1 Draft + Xinbaopedia Profile | 生成供人类与 agent 读取的 <code>public/okf/</code> 知识包 |
+
+这个后端不是 LangChain、LlamaIndex、Microsoft GraphRAG 或向量数据库的包装。检索、路由、引用验证、评测与维护过程都在仓库中显式实现。
+
+</details>
+
+<details>
+<summary><strong>Standards, inspirations and comparison references</strong></summary>
+
+| Source | Role in Xinbaopedia | Boundary |
+| --- | --- | --- |
+| [Next.js App Router](https://nextjs.org/docs/15/app) + [React](https://react.dev/) | Web frontend and same-site backend | **Actually used** |
+| [GitHub Flavored Markdown](https://github.github.com/gfm/) | Markdown syntax foundation | **Actually used** |
+| [Open Knowledge Format v0.1 Draft](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) | Portable Markdown + YAML knowledge bundle | **Specification basis**; bilingual/retrieval/review fields are project extensions |
+| [Google Cloud OKF introduction](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing) | Git-managed, human/agent-readable knowledge motivation | **Design basis** |
+| [Andrej Karpathy: LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) | Durable Wiki memory, schema, ingest, query and lint | **Conceptual inspiration**; not a standard or reference implementation |
+| [MediaWiki architecture](https://www.mediawiki.org/wiki/Manual:MediaWiki_architecture) | Pages, links, revisions and deferred maintenance | **Comparison reference**; MediaWiki is not running here |
+| [Microsoft GraphRAG](https://github.com/microsoft/graphrag) | Entity/relationship and global graph workflows | **Comparison reference**; its indexing/community pipeline is not implemented |
+| [LlamaIndex ingestion pipeline](https://developers.llamaindex.ai/python/framework/module_guides/loading/ingestion_pipeline/) | Stable IDs, hashes and incremental ingestion | **Comparison reference**; not a dependency |
+| [Ragas metrics](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/) | Retrieval/context/faithfulness vocabulary | **Evaluation reference**; no Ragas compatibility claim |
+| [OWASP Top 10 for LLM Applications](https://genai.owasp.org/llm-top-10/) | Prompt injection, disclosure, output and resource review | **Security reference**; no certification claim |
+| [OpenTelemetry GenAI conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/) | Provider, model, latency, tokens and outcome vocabulary | **Observability reference**; not an OTel implementation |
+
+完整 claim boundaries 见 [Standards and conformance](docs/standards-and-conformance.md)。
+
+</details>
+
+<details>
+<summary><strong>Continuous maintenance and release gates</strong></summary>
+
+- <code>npm run check</code> 验证 TypeScript、WikiLinks、内容新鲜度、OKF、Wiki 行为、检索 golden set 与发布脚本。
+- GitHub Actions 在 push/PR 上执行依赖审计、完整检查和构建。
+- 每周维护任务复核来源、外链、review due 状态与双语检索。
+- 生产发布先验证 immutable preview，再 promotion，并对 canonical domain 执行真实 canary。
+
+深入阅读：
+
+- [Continuous wiki maintenance](docs/continuous-maintenance.md)
+- [Relation taxonomy](docs/relation-taxonomy.md)
+- [Deployment troubleshooting](docs/deployment-troubleshooting.md)
+- [Chat backend and deployment](docs/chat/README.md)
+
+</details>
+
+## Licensing, contribution and security
+
+Xinbaopedia 把可复用产品代码、开放内容与受保护素材明确分开：
+
+- 软件代码与项目配置采用 [MIT License](LICENSE)。
+- 原创 Wiki 与文档文字在权利人可授权的范围内采用 [CC BY 4.0](LICENSES/CC-BY-4.0.txt)。
+- 个人照片、CV、论文图、机构标志、字体与其他第三方素材不包含在上述授权中。完整路径和逐文件状态见 [Licensing](LICENSING.md)、[Third-party notices](THIRD_PARTY_NOTICES.md) 与 [Asset provenance register](ASSET_PROVENANCE.md)。
+
+提交内容纠错、功能或代码改进前，请阅读 [Contributing](CONTRIBUTING.md) 与 [Code of Conduct](CODE_OF_CONDUCT.md)。安全或隐私问题请不要公开开 Issue，请按 [Security policy](SECURITY.md) 私下报告。
+
 <div align="center">
 
-### A homepage you can read. A Wiki you can follow. An AI you can verify.
+### Stop publishing pages. Start shipping knowledge.
 
 [**Explore Xinbaopedia →**](https://xinbaopedia.top)
 
