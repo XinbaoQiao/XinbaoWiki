@@ -1759,6 +1759,8 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
 }
 
 .wiki-portal-search {
+  --portal-search-leading-width: 50px;
+  --portal-search-submit-width: 96px;
   max-width: 690px;
   margin: 18px auto 0;
 }
@@ -1767,8 +1769,8 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
-  max-width: 560px;
-  margin: 14px auto 0;
+  width: calc(100% - var(--portal-search-leading-width) - var(--portal-search-submit-width));
+  margin: 14px 0 0 var(--portal-search-leading-width);
 }
 
 .wiki-portal-edition {
@@ -2465,6 +2467,7 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   }
 
   .wiki-portal-search {
+    --portal-search-leading-width: 46px;
     margin-top: 18px;
   }
 
@@ -2491,7 +2494,6 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   .wiki-portal-editions {
     grid-template-columns: 1fr;
     gap: 8px;
-    max-width: 360px;
   }
 
   .wiki-portal-grid {

@@ -337,15 +337,15 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
             showLanguageSelect
             variant="portal"
           />
+          <nav className="wiki-portal-editions" aria-label={entriesLabel[language]}>
+            {languageEntries.map((item) => (
+              <a className="wiki-portal-edition" href={item.href} key={item.href}>
+                <strong>{item.label}</strong>
+                <span>{item.detail}</span>
+              </a>
+            ))}
+          </nav>
         </div>
-        <nav className="wiki-portal-editions" aria-label={entriesLabel[language]}>
-          {languageEntries.map((item) => (
-            <a className="wiki-portal-edition" href={item.href} key={item.href}>
-              <strong>{item.label}</strong>
-              <span>{item.detail}</span>
-            </a>
-          ))}
-        </nav>
       </section>
 
       <div className="wiki-portal-disclosures">
