@@ -23,10 +23,8 @@
   一个双语、Git-native 的学术知识产品：把人物、论文、项目、机构与研究概念连成可搜索、可追问、可验证且可持续维护的知识网络。
 
   <p>
-    <a href="https://xinbaopedia.top"><img src="https://img.shields.io/badge/EXPLORE-Live%20Product-3366cc?style=for-the-badge" height="31" alt="Explore the live product" /></a>
-    <a href="https://xinbaopedia.top/wiki/Xinbao_Qiao/"><img src="https://img.shields.io/badge/BROWSE-The%20Wiki-2a7f62?style=for-the-badge" height="31" alt="Browse the Wiki" /></a>
-    <a href="https://xinbaopedia.top/okf/index.md"><img src="https://img.shields.io/badge/OPEN-Agent%20Knowledge-6b4fbb?style=for-the-badge" height="31" alt="Open agent knowledge" /></a>
-    <a href="https://github.com/XinbaoQiao/XinbaoWiki/fork"><img src="https://img.shields.io/badge/FORK-Build%20Yours-f08c46?style=for-the-badge" height="31" alt="Fork Xinbaopedia" /></a>
+    <a href="https://xinbaopedia.top"><img src="https://img.shields.io/badge/EXPLORE-Live%20Product-0071e3?style=for-the-badge" height="31" alt="Explore the live product" /></a>
+    <a href="https://github.com/XinbaoQiao/XinbaoWiki/fork"><img src="https://img.shields.io/badge/FORK-Build%20Your%20Own-1d1d1f?style=for-the-badge" height="31" alt="Fork Xinbaopedia" /></a>
   </p>
 
   <p>
@@ -36,17 +34,23 @@
   </p>
 </div>
 
-## Meet the homepage · 看见主页
+## See it in motion · 看它如何工作
 
-<p align="center">
-  <a href="https://xinbaopedia.top">
-    <img src="public/readme/xinbaopedia-homepage.png" width="100%" alt="Xinbaopedia homepage with its themed wordmark, bilingual academic search, profile entry points, Latest Updates, and Browse Xinbaopedia." />
-  </a>
-</p>
+One product, two complete reading paths. Each walkthrough moves from discovery to a real Wiki page and finishes with an evidence-grounded AI answer.
 
-<p align="center">
-  <sub>A real product preview: search, browse, and ask from one bilingual academic portal. · 真实产品预览：在同一个双语学术入口中搜索、浏览与追问。</sub>
-</p>
+同一个产品，两条完整的阅读路径：从发现内容进入真实 Wiki 页面，最后由 AI 给出可以回查来源的回答。
+
+### English walkthrough
+
+<a href="https://xinbaopedia.top/wiki/DynFrs/"><img src="public/readme/xinbaopedia-tour-en.gif" width="100%" alt="Animated English walkthrough of Xinbaopedia: homepage, English profile, DynFrs publication page, and a citation-grounded AI answer." /></a>
+
+<p align="center"><sub>Home → profile → publication → grounded AI answer with sources.</sub></p>
+
+### 中文演示
+
+<a href="https://xinbaopedia.top/wiki/Research_zh/"><img src="public/readme/xinbaopedia-tour-zh.gif" width="100%" alt="Xinbaopedia 中文动图演示：首页、中文人物页、研究页，以及带引用来源的 AI 回答。" /></a>
+
+<p align="center"><sub>主页 → 中文人物页 → 研究页 → 带来源的 AI 回答。</sub></p>
 
 ---
 
@@ -370,25 +374,8 @@ docs/                    标准、部署和 AI 运维文档
 
 ---
 
-<br/>
+## Explore Xinbaopedia · 进入 Xinbaopedia
 
 <a href="https://xinbaopedia.top"><img src="public/readme/xinbaopedia-cta.svg" width="100%" alt="Stop publishing pages. Start shipping knowledge." /></a>
 
-<div align="center">
-
-## **Stop publishing pages. Start shipping knowledge.**
-
-**Explore the product. Trace the evidence. Fork the system. Make the knowledge yours.**
-
-**打开产品，追溯证据，Fork 系统，让知识真正属于你。**
-
-<p>
-  <a href="https://xinbaopedia.top"><img src="https://img.shields.io/badge/OPEN-Live%20Product-3366cc?style=for-the-badge" height="34" alt="Open live product" /></a>
-  <a href="https://xinbaopedia.top/wiki/Xinbao_Qiao/"><img src="https://img.shields.io/badge/READ-The%20Wiki-2a7f62?style=for-the-badge" height="34" alt="Read the Wiki" /></a>
-  <a href="https://github.com/XinbaoQiao/XinbaoWiki/fork"><img src="https://img.shields.io/badge/BUILD-Fork%20Xinbaopedia-6b4fbb?style=for-the-badge" height="34" alt="Fork Xinbaopedia" /></a>
-  <a href="CONTRIBUTING.md"><img src="https://img.shields.io/badge/EXTEND-Contribution%20Guide-f08c46?style=for-the-badge" height="34" alt="Contribution guide" /></a>
-</p>
-
-<sub>Wikipedia-inspired, independently built, and not affiliated with the Wikimedia Foundation.</sub>
-
-</div>
+<p align="center"><sub>Browse the Wiki, ask the evidence, or start building your own. · 浏览 Wiki、追问证据，或开始构建自己的知识产品。</sub></p>

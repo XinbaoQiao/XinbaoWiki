@@ -43,6 +43,18 @@ function pngDimensions(buffer) {
   };
 }
 
+function gifDimensions(buffer) {
+  assert.match(buffer.toString('ascii', 0, 6), /^GIF8[79]a$/, 'asset is a GIF image');
+  return {
+    width: buffer.readUInt16LE(6),
+    height: buffer.readUInt16LE(8),
+  };
+}
+
+function gifFrameCount(buffer) {
+  return (buffer.toString('latin1').match(/\x21\xf9\x04/g) || []).length;
+}
+
 for (const file of ['Xinbao_Qiao.md', 'Qiao_Xinbao_zh.md', 'index.md', 'log.md', 'CV.md', 'Meng_Zhang.md', 'Angela_Yingjun_Zhang.md', 'Internet_Slang_2026.md']) {
   assertFile(`wiki/${file}`);
 }
@@ -155,7 +167,9 @@ const wikiMarkdownTsx = fs.readFileSync(path.join(root, 'components/WikiMarkdown
 const wikiLib = fs.readFileSync(path.join(root, 'lib/wiki.ts'), 'utf8');
 const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 const rootReadme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
-const readmeHomepagePreview = fs.readFileSync(path.join(root, 'public/readme/xinbaopedia-homepage.png'));
+const readmeEnglishTour = fs.readFileSync(path.join(root, 'public/readme/xinbaopedia-tour-en.gif'));
+const readmeChineseTour = fs.readFileSync(path.join(root, 'public/readme/xinbaopedia-tour-zh.gif'));
+const readmeCta = fs.readFileSync(path.join(root, 'public/readme/xinbaopedia-cta.svg'), 'utf8');
 const repositoryCiWorkflow = fs.readFileSync(path.join(root, '.github/workflows/ci.yml'), 'utf8');
 const dependabotConfig = fs.readFileSync(path.join(root, '.github/dependabot.yml'), 'utf8');
 const licensingPolicy = fs.readFileSync(path.join(root, 'LICENSING.md'), 'utf8');
@@ -182,10 +196,17 @@ assertFile('docs/chat/persona-prompt.md');
 assertFile('docs/chat/meme-voice-notes.md');
 assert.ok(!fs.existsSync(path.join(root, 'README.zh-CN.md')), 'README keeps English and Chinese on one canonical page');
 assertFile('public/readme/xinbaopedia-cta.svg');
-assertFile('public/readme/xinbaopedia-homepage.png');
-assert.deepEqual(pngDimensions(readmeHomepagePreview), { width: 1440, height: 900 }, 'README homepage preview keeps the approved desktop viewport');
+assertFile('public/readme/xinbaopedia-tour-en.gif');
+assertFile('public/readme/xinbaopedia-tour-zh.gif');
+assert.ok(!fs.existsSync(path.join(root, 'public/readme/xinbaopedia-homepage.png')), 'README retires the single homepage-only preview');
+assert.deepEqual(gifDimensions(readmeEnglishTour), { width: 960, height: 600 }, 'English README tour keeps the approved desktop viewport');
+assert.deepEqual(gifDimensions(readmeChineseTour), { width: 960, height: 600 }, 'Chinese README tour keeps the approved desktop viewport');
+assert.equal(gifFrameCount(readmeEnglishTour), 4, 'English README tour contains four deliberate product states');
+assert.equal(gifFrameCount(readmeChineseTour), 4, 'Chinese README tour contains four deliberate product states');
+assert.match(readmeCta, /fill="#f5f5f7"[\s\S]*Start shipping knowledge\.[\s\S]*别只发布页面，让知识真正上线。[\s\S]*fill="#0071e3"/, 'README CTA keeps the approved minimal neutral surface, bilingual message, and one blue action');
+assert.doesNotMatch(readmeCta, /linearGradient|fill-opacity|BROWSE|SEARCH|ASK|VERIFY/, 'README CTA avoids the retired decorative gradient and feature-card clutter');
 assert.match(rootReadme, /href="#english"[\s\S]*href="#simplified-chinese"/, 'README exposes same-page English and Chinese navigation');
-assert.match(rootReadme, /Meet the homepage · 看见主页[\s\S]*public\/readme\/xinbaopedia-homepage\.png[\s\S]*<a id="english"><\/a>/, 'README shows the real homepage before the localized product sections');
+assert.match(rootReadme, /See it in motion · 看它如何工作[\s\S]*English walkthrough[\s\S]*xinbaopedia-tour-en\.gif[\s\S]*中文演示[\s\S]*xinbaopedia-tour-zh\.gif[\s\S]*<a id="english"><\/a>/, 'README shows separate English and Chinese product walkthroughs before the localized product sections');
 assert.match(rootReadme, /<a id="english"><\/a>[\s\S]*From profile page to knowledge product[\s\S]*<a id="simplified-chinese"><\/a>[\s\S]*从个人主页，到知识产品/, 'README contains complete English and Chinese product sections on one page');
 assert.match(rootReadme, /使用它是什么感觉[\s\S]*可信本身就是产品能力/, 'README includes localized Chinese product experience and trust sections');
 assert.match(rootReadme, /public\/readme\/xinbaopedia-cta\.svg/, 'README uses the approved product CTA');
