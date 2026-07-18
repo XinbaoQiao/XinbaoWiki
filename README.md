@@ -3,125 +3,128 @@
 
   # Xinbaopedia
 
-  **One person. A growing map of ideas, papers, and research stories.**
+  **A bilingual, searchable, AI-assisted academic homepage.**
 
-  把个人主页、论文档案和研究脉络，变成一座真正可以探索的学术百科。
+  把分散的学术履历、研究主题、论文与项目，整理成一个可以浏览、搜索、提问和持续维护的知识入口。
 
   <p>
-    <a href="https://xinbaopedia.top"><img src="https://img.shields.io/badge/Visit-Xinbaopedia-3366cc?style=for-the-badge" height="28" alt="Visit Xinbaopedia" /></a>
-    <a href="https://xinbaopedia.top/wiki/Xinbao_Qiao/"><img src="https://img.shields.io/badge/Language-English%20%7C%20中文-202122?style=for-the-badge" height="28" alt="English and Chinese" /></a>
-    <a href="https://xinbaopedia.top/wiki/Research/"><img src="https://img.shields.io/badge/Explore-Research-2a7f62?style=for-the-badge" height="28" alt="Explore the research" /></a>
+    <a href="https://xinbaopedia.top"><img src="https://img.shields.io/badge/Open-Homepage-3366cc?style=for-the-badge" height="28" alt="Open the Xinbaopedia homepage" /></a>
+    <a href="https://xinbaopedia.top/wiki/Research/"><img src="https://img.shields.io/badge/Browse-Connected%20Wiki-2a7f62?style=for-the-badge" height="28" alt="Browse the connected wiki" /></a>
+    <a href="https://xinbaopedia.top/wiki/Qiao_Xinbao_zh/"><img src="https://img.shields.io/badge/Language-English%20%7C%20中文-202122?style=for-the-badge" height="28" alt="English and Chinese" /></a>
   </p>
 </div>
 
 ---
 
-## 不只是另一份在线简历
+## 这是一个怎样的主页
 
-传统个人主页告诉你一个人“做过什么”。Xinbaopedia 更想回答：**这些工作为什么重要，它们彼此有什么关系，下一步又会走向哪里？**
+Xinbaopedia 是一个受 Wikipedia 启发的学术主页：它不把内容压缩成一页履历，也不要求访客从头读到尾，而是把人物条目、研究主题、论文、项目和学术经历组织成彼此连接的页面。
 
-从一篇论文出发，可以继续走进它背后的研究问题；从一个研究方向出发，可以看到相关项目、合作、经历和成果。这里不是把履历铺成一张长网页，而是把散落的信息连接成一张能读、能搜、能继续追问的知识地图。
+访客可以从首页建立整体印象，也可以直接搜索一个关键词、沿着页面链接继续探索，或者向 AI 提问。重点不只是展示“有哪些内容”，而是帮助读者更快找到入口、理解上下文，并回到对应的公开页面核对信息。
 
-> 如果你是合作者、审稿人、学生，或只是对可信人工智能和数据研究感兴趣，这里能让你更快看懂 Xinbao Qiao 正在研究什么，以及这些研究值得关注的原因。
+## 访客可以怎么使用
 
-## 你可以在这里看到什么
+<table>
+  <thead>
+    <tr>
+      <th align="left">你的需求</th>
+      <th align="left">使用方式</th>
+      <th align="left">可以获得的效果</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>第一次访问，想快速了解全貌</td>
+      <td>从首页选择语言，再进入人物、研究或论文入口</td>
+      <td>不用翻阅多份材料，就能建立清晰的内容地图</td>
+    </tr>
+    <tr>
+      <td>查找一篇论文、一个项目或一个关键词</td>
+      <td>使用首页或文章页顶部的双语搜索</td>
+      <td>直接定位相关页面，同时看到摘要、关键启示和关联内容</td>
+    </tr>
+    <tr>
+      <td>理解不同工作之间的关系</td>
+      <td>从研究主题出发，继续打开相关论文、概念和经历</td>
+      <td>把孤立的成果列表还原成可以顺着阅读的研究脉络</td>
+    </tr>
+    <tr>
+      <td>不知道应该从哪里开始</td>
+      <td>在首页打开 Chat with Xinbao，直接用自然语言提问</td>
+      <td>站内资料充分时获得带页面引用的回答；一般问题也可以正常对话</td>
+    </tr>
+    <tr>
+      <td>需要分享或在不同设备上阅读</td>
+      <td>切换中英文、主题色和桌面或移动端布局</td>
+      <td>得到稳定、可分享且适合当前阅读环境的页面入口</td>
+    </tr>
+  </tbody>
+</table>
+
+## 这套主页带来的效果
+
+- **从“履历列表”变成“知识地图”。** 内容按条目和关系组织，访客可以从任意入口继续探索。
+- **从“自己寻找”变成“搜索与提问并用”。** 精确查询交给站内搜索，开放问题交给 AI；有站内依据时保留引用。
+- **从“只有作者看得懂”变成“第一次访问也能理解”。** 论文页面优先说明问题、意义和关键启示，再补充必要的技术细节。
+- **从“单一版本”变成“双语且响应式”。** 中英文入口、移动端布局和主题系统服务于不同的阅读与分享场景。
+- **从“手工堆页面”变成“可持续维护”。** Markdown 内容、关系索引、数据检查和构建验证共同降低新增与更新内容的成本。
+
+## 可以直接体验的入口
 
 <table>
   <thead>
     <tr>
       <th width="48" align="center"></th>
-      <th width="190" align="left">入口</th>
-      <th align="left">你会得到什么</th>
+      <th width="210" align="left">入口</th>
+      <th align="left">适合做什么</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td align="center"><img src="public/site-icons/xinbaopedia-blue.png" width="22" height="22" alt="" /></td>
-      <td><a href="https://xinbaopedia.top/wiki/Xinbao_Qiao/">认识 Xinbao</a></td>
-      <td>学术背景、研究兴趣、教育经历与合作方向，一页快速看懂。</td>
+      <td><a href="https://xinbaopedia.top">主页与 AI 对话</a></td>
+      <td>搜索全部公开内容、选择浏览入口，或直接提出问题。</td>
     </tr>
     <tr>
       <td align="center"><img src="public/site-icons/xinbaopedia-green.png" width="22" height="22" alt="" /></td>
-      <td><a href="https://xinbaopedia.top/wiki/Research/">探索研究版图</a></td>
-      <td>不只罗列关键词，而是解释不同研究问题如何连成一条主线。</td>
+      <td><a href="https://xinbaopedia.top/wiki/Research/">研究主题</a></td>
+      <td>从问题和方向出发，理解论文、项目与概念之间的联系。</td>
     </tr>
     <tr>
       <td align="center"><img src="public/site-icons/xinbaopedia-gold.png" width="22" height="22" alt="" /></td>
-      <td><a href="https://xinbaopedia.top/wiki/Publications/">浏览论文</a></td>
-      <td>用容易理解的摘要、关键启示和图示快速抓住每项工作的价值。</td>
-    </tr>
-    <tr>
-      <td align="center"><img src="public/site-icons/xinbaopedia-charcoal.png" width="22" height="22" alt="" /></td>
-      <td><a href="https://xinbaopedia.top">Chat with Xinbao</a></td>
-      <td>不知道从哪里开始？直接提问，让 AI 带你找到相关页面。</td>
+      <td><a href="https://xinbaopedia.top/wiki/Publications/">论文档案</a></td>
+      <td>按条目浏览成果，并快速读取摘要、上下文和关键启示。</td>
     </tr>
     <tr>
       <td align="center"><img src="public/xinbaopedia-icon.png" width="22" height="22" alt="" /></td>
-      <td><a href="https://xinbaopedia.top/wiki/Qiao_Xinbao_zh/">切换中文</a></td>
-      <td>主要内容提供中英文入口，阅读和分享都更自然。</td>
+      <td><a href="https://xinbaopedia.top/wiki/Xinbao_Qiao/">English</a> · <a href="https://xinbaopedia.top/wiki/Qiao_Xinbao_zh/">中文</a></td>
+      <td>查看同一主页体系中的双语人物与学术信息入口。</td>
     </tr>
   </tbody>
 </table>
 
-## 四条值得沿着走下去的研究线索
+## 本地查看与维护
 
-<table>
-  <tr>
-    <td width="25%" height="112" align="center" valign="middle">
-      <a href="https://xinbaopedia.top/wiki/Data_Centric_Machine_Learning/">
-        <img src="public/topics/data-centric-ml.png" alt="Data-centric machine learning" height="96" />
-      </a>
-    </td>
-    <td width="25%" height="112" align="center" valign="middle">
-      <a href="https://xinbaopedia.top/wiki/Synthetic_Data/">
-        <img src="public/topics/synthetic-data.png" alt="Synthetic data" height="96" />
-      </a>
-    </td>
-    <td width="25%" height="112" align="center" valign="middle">
-      <a href="https://xinbaopedia.top/wiki/Machine_Unlearning/">
-        <img src="public/topics/machine-unlearning.png" alt="Machine unlearning" height="96" />
-      </a>
-    </td>
-    <td width="25%" height="112" align="center" valign="middle">
-      <a href="https://xinbaopedia.top/wiki/AI_and_Networks/">
-        <img src="public/topics/ai-and-networks.png" alt="AI and networks" height="96" />
-      </a>
-    </td>
-  </tr>
-  <tr>
-    <th width="25%" align="center"><a href="https://xinbaopedia.top/wiki/Data_Centric_Machine_Learning/">数据中心机器学习</a></th>
-    <th width="25%" align="center"><a href="https://xinbaopedia.top/wiki/Synthetic_Data/">合成数据</a></th>
-    <th width="25%" align="center"><a href="https://xinbaopedia.top/wiki/Machine_Unlearning/">机器遗忘</a></th>
-    <th width="25%" align="center"><a href="https://xinbaopedia.top/wiki/AI_and_Networks/">AI 与网络</a></th>
-  </tr>
-  <tr>
-    <td width="25%" align="center" valign="top">当数据本身决定模型上限，怎样让它更可靠、更公平、更有用？</td>
-    <td width="25%" align="center" valign="top">合成数据何时能扩大知识，何时又会让模型走向坍塌？</td>
-    <td width="25%" align="center" valign="top">当数据必须被删除，模型怎样真正忘记，同时保留能力？</td>
-    <td width="25%" align="center" valign="top">在分布式、受限和互联环境中，如何让智能协作得更稳？</td>
-  </tr>
-</table>
+项目使用 Node.js 22。若要查看这套主页如何运行：
 
-## 为什么是“百科”，而不是“主页”
+```bash
+npm ci
+npm run dev
+```
 
-- **看见联系，而不只是列表。** 论文、概念、机构和经历彼此相连，读者可以顺着兴趣自然探索。
-- **先讲意义，再讲术语。** 每个页面尽量回答“问题是什么、为什么值得解决、这项工作带来了什么”。
-- **对第一次来的人友好。** 搜索、侧边导航、信息框和双语入口，让重要信息不需要翻找。
-- **会继续生长。** 新论文、新合作和新想法进入后，会成为知识网络的一部分，而不是被埋在时间线里。
-- **可以直接对话。** Chat with Xinbao 把公开内容变成一个可提问的入口，帮访客快速找到答案和出处。
+开发服务器默认运行在 `http://localhost:3000`。公开内容以 `wiki/*.md` 为源；修改或新增内容后，使用现有维护与验证流程：
 
-## 从这里开始
+```bash
+npm run maintain:wiki
+npm run check
+npm run build
+```
 
-第一次访问，推荐按这条路线走：
-
-1. 先用一分钟阅读 [Xinbao Qiao 的个人条目](https://xinbaopedia.top/wiki/Xinbao_Qiao/)。
-2. 再从 [Research](https://xinbaopedia.top/wiki/Research/) 选择一条感兴趣的研究线索。
-3. 打开一篇论文，看它试图解决什么问题，以及关键启示是什么。
-4. 如果仍有疑问，回到 [首页](https://xinbaopedia.top) 问 Chat with Xinbao。
+AI 对话需要在服务器端配置模型与限流相关环境变量；密钥不应进入客户端代码或 Git 仓库。即使不配置 AI，Wiki 浏览、双语页面和站内搜索仍可独立使用。
 
 <div align="center">
 
-### 准备好开始探索了吗？
+### 从一个问题开始，而不是从一份长履历开始
 
 [**打开 Xinbaopedia →**](https://xinbaopedia.top)
 
