@@ -36,7 +36,7 @@
     "@upstash/redis": "^1.38.0",
     "gray-matter": "^4.0.3",
     "katex": "^0.16.45",
-    "next": "15.5.20",
+    "next": "16.2.10",
     "react": "19.2.7",
     "react-dom": "19.2.7",
     "react-markdown": "^10.0.0",
