@@ -14,13 +14,13 @@
 
   **Turn a static academic homepage into a product people can explore, question, verify, and reuse.**
 
-  A bilingual, Git-native knowledge product connecting profiles, publications, projects, institutions, and research ideas — with search, evidence-grounded AI, and continuous maintenance built in.
+  One bilingual, Git-native product for exploring profiles, publications, projects, institutions, and research ideas — with search, evidence-grounded AI, and continuous maintenance built in.
 
   ### 你的学术故事值得被发现，而不只是被展示。
 
   **把静态学术主页变成一件可以探索、追问、验证和复用的知识产品。**
 
-  Xinbaopedia 以双语、Git-native 的方式连接人物、论文、项目、机构与研究概念，并把搜索、有证据约束的 AI 问答和持续维护的发布流程放进同一个产品。
+  一个双语、Git-native 的学术知识产品：把人物、论文、项目、机构与研究概念连成可搜索、可追问、可验证且可持续维护的知识网络。
 
   <p>
     <a href="https://xinbaopedia.top"><img src="https://img.shields.io/badge/EXPLORE-Live%20Product-3366cc?style=for-the-badge" height="31" alt="Explore the live product" /></a>
@@ -36,7 +36,17 @@
   </p>
 </div>
 
+## Meet the homepage · 看见主页
 
+<p align="center">
+  <a href="https://xinbaopedia.top">
+    <img src="public/readme/xinbaopedia-homepage.png" width="100%" alt="Xinbaopedia homepage with its themed wordmark, bilingual academic search, profile entry points, Latest Updates, and Browse Xinbaopedia." />
+  </a>
+</p>
+
+<p align="center">
+  <sub>A real product preview: search, browse, and ask from one bilingual academic portal. · 真实产品预览：在同一个双语学术入口中搜索、浏览与追问。</sub>
+</p>
 
 ---
 
@@ -46,14 +56,14 @@
 
 ## From profile page to knowledge product
 
-A conventional academic homepage answers “Who is this person?” Xinbaopedia keeps going:
+A conventional academic homepage tells you who someone is. Xinbaopedia helps you understand how the work fits together — and where to explore next:
 
 - How do papers, projects, institutions, collaborators, and research questions connect?
 - Can I search for an idea directly instead of scanning an entire CV?
 - Can an AI answer point back to the exact Wiki evidence it used?
 - Can someone fork the product, replace the knowledge, and keep it healthy over time?
 
-**Visitors get a connected academic map. Builders get a reusable product blueprint.**
+**Visitors get a connected academic map. Builders get the system that keeps it alive.**
 
 <table>
   <tr>
@@ -206,14 +216,14 @@ Read [Contributing](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md),
 
 ## 从个人主页，到知识产品
 
-普通学术主页回答“这个人是谁”。Xinbaopedia 会继续回答：
+普通学术主页告诉你“这个人是谁”。Xinbaopedia 更进一步：解释研究如何彼此关联，以及下一步值得探索什么。
 
 - 论文、项目、机构、合作者和研究问题之间如何连接？
 - 能否直接搜索概念，而不是从头翻完整份 CV？
 - AI 的回答能否指回它真正使用过的 Wiki 证据？
 - 其他人能否 fork 产品、替换知识，并让它长期保持可靠？
 
-**访客得到一张连通的学术地图，构建者得到一套可复用的产品蓝图。**
+**访客得到一张连通的学术地图，构建者得到一套让知识持续生长的系统。**
 
 <table>
   <tr>
