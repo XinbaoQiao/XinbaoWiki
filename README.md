@@ -16,6 +16,7 @@
   <p>
     <a href="https://github.com/XinbaoQiao/XinbaoWiki/actions/workflows/ci.yml"><img src="https://github.com/XinbaoQiao/XinbaoWiki/actions/workflows/ci.yml/badge.svg" alt="CI status" /></a>
     <a href="https://github.com/XinbaoQiao/XinbaoWiki/actions/workflows/maintenance.yml"><img src="https://github.com/XinbaoQiao/XinbaoWiki/actions/workflows/maintenance.yml/badge.svg" alt="Weekly wiki maintenance status" /></a>
+    <a href="LICENSING.md"><img src="https://img.shields.io/badge/License-MIT%20%2B%20CC%20BY%204.0-6b4fbb" alt="MIT and CC BY 4.0 licensing" /></a>
   </p>
 </div>
 
@@ -124,8 +125,7 @@ wiki/                    canonical bilingual Markdown knowledge
 public/okf/              generated agent-readable OKF bundle
 evals/                   reviewed bilingual retrieval golden set
 scripts/                 maintenance, audit, evaluation and release gates
-docs/                    standards, taxonomy, maintenance and deployment docs
-chat with xinbao/        AI policy, environment example and operator notes
+docs/                    standards, taxonomy, maintenance, deployment and chat operations
 ~~~
 
 深入文档：
@@ -134,7 +134,17 @@ chat with xinbao/        AI policy, environment example and operator notes
 - [Continuous wiki maintenance](docs/continuous-maintenance.md)
 - [Relation taxonomy](docs/relation-taxonomy.md)
 - [Deployment troubleshooting](docs/deployment-troubleshooting.md)
-- [Chat backend and deployment](chat%20with%20xinbao/README.md)
+- [Chat backend and deployment](docs/chat/README.md)
+
+## 复用、贡献与安全
+
+Xinbaopedia 将可复用部分与受保护素材明确分开：
+
+- 软件代码和项目配置采用 [MIT License](LICENSE)。
+- 原创 Wiki 与文档文字在权利人可授权的范围内采用 [CC BY 4.0](LICENSES/CC-BY-4.0.txt)。
+- 个人照片、CV、论文图、机构标志、字体和其他第三方素材不包含在上述授权中。完整路径边界与逐文件状态见 [Licensing](LICENSING.md)、[Third-party notices](THIRD_PARTY_NOTICES.md) 和 [Asset provenance register](ASSET_PROVENANCE.md)。
+
+如果你希望复用这套主页，可以 fork 后替换 `wiki/*.md`、公开媒体与站点元数据，再运行维护和验证命令。提交内容纠错、功能或代码改进前，请阅读 [Contributing](CONTRIBUTING.md) 与 [Code of Conduct](CODE_OF_CONDUCT.md)；安全或隐私问题请不要公开开 Issue，按 [Security policy](SECURITY.md) 私下报告。
 
 ## 本地运行
 
@@ -145,7 +155,7 @@ npm ci
 npm run dev
 ~~~
 
-默认地址为 <code>http://localhost:3000</code>。若需要启用 AI，请参考 [server environment example](chat%20with%20xinbao/env.example) 配置服务器端环境变量，切勿把真实密钥提交到仓库。
+默认地址为 <code>http://localhost:3000</code>。若需要启用 AI，请参考 [server environment example](docs/chat/env.example) 配置服务器端环境变量，切勿把真实密钥提交到仓库。
 
 修改 <code>wiki/*.md</code> 后运行：
 

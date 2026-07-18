@@ -99,6 +99,7 @@ assert.equal(bioData.image_caption, undefined, 'English default portrait has no 
 assert.deepEqual(bioData.image_gallery.map((item) => item.src), ['/images/Portrait-Singapore-ICLR-2025.jpg', '/images/Portrait-Seoul-ICML-2026.png'], 'English portrait gallery keeps Singapore before Seoul');
 assert.equal(bioData.image_gallery[0].caption, 'Photograph taken at ICLR 2025, Singapore EXPO', 'English Singapore caption uses the photograph-taken format');
 assert.equal(bioData.image_gallery[1].caption, 'Photograph generated for ICML 2026, Seoul COEX', 'English Seoul caption uses the photograph-generated format');
+assert.equal(bioData.image_gallery[1].alt, 'AI-generated ICML 2026 Tech Walk scene in Seoul', 'English Seoul alt text remains AI-specific but provider-neutral');
 const educationBlock = frontmatterSlice(bio, 'education:', 'links:');
 assert.deepEqual(bioData.education.map((item) => item.label), ['The Chinese University of Hong Kong', 'Zhejiang University', 'Shandong University'], 'English education is reverse chronological');
 assert.deepEqual(bioData.education.at(-1), { label: 'Shandong University', url: '/wiki/Shandong_University/', detail: '(BEng, 2022)' }, 'English education links only school name and keeps degree detail separate');
@@ -120,6 +121,7 @@ assert.equal(zhBioData.image_caption, undefined, 'Chinese default portrait has n
 assert.deepEqual(zhBioData.image_gallery.map((item) => item.src), ['/images/Portrait-Singapore-ICLR-2025.jpg', '/images/Portrait-Seoul-ICML-2026.png'], 'Chinese portrait gallery keeps Singapore before Seoul');
 assert.equal(zhBioData.image_gallery[0].caption, 'Photograph taken at ICLR 2025, Singapore EXPO', 'Chinese page reuses the photograph-taken event label');
 assert.equal(zhBioData.image_gallery[1].caption, 'Photograph generated for ICML 2026, Seoul COEX', 'Chinese page reuses the photograph-generated event label');
+assert.equal(zhBioData.image_gallery[1].alt, 'AI 生成的 ICML 2026 首尔 Tech Walk 场景', 'Chinese Seoul alt text remains AI-specific but provider-neutral');
 assert.ok(['Mr. Ciao', 'MrCiao', '喬', 'ciao'].every((alias) => zhBioData.aliases.includes(alias)), 'Chinese biography aliases include Mr. Ciao and ciao spelling');
 const zhEducationBlock = frontmatterSlice(zhBio, 'education:', 'links:');
 assert.deepEqual(zhBioData.education.map((item) => item.label), ['香港中文大学', '浙江大学', '山东大学'], 'Chinese education is reverse chronological');
@@ -152,6 +154,13 @@ const wikiPageTsx = fs.readFileSync(path.join(root, 'app/wiki/[slug]/page.tsx'),
 const wikiMarkdownTsx = fs.readFileSync(path.join(root, 'components/WikiMarkdown.tsx'), 'utf8');
 const wikiLib = fs.readFileSync(path.join(root, 'lib/wiki.ts'), 'utf8');
 const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+const repositoryCiWorkflow = fs.readFileSync(path.join(root, '.github/workflows/ci.yml'), 'utf8');
+const dependabotConfig = fs.readFileSync(path.join(root, '.github/dependabot.yml'), 'utf8');
+const licensingPolicy = fs.readFileSync(path.join(root, 'LICENSING.md'), 'utf8');
+const thirdPartyNotices = fs.readFileSync(path.join(root, 'THIRD_PARTY_NOTICES.md'), 'utf8');
+const assetProvenance = fs.readFileSync(path.join(root, 'ASSET_PROVENANCE.md'), 'utf8');
+const contributingGuide = fs.readFileSync(path.join(root, 'CONTRIBUTING.md'), 'utf8');
+const codeOfConduct = fs.readFileSync(path.join(root, 'CODE_OF_CONDUCT.md'), 'utf8');
 const nextConfig = fs.readFileSync(path.join(root, 'next.config.mjs'), 'utf8');
 const indexNowScript = fs.readFileSync(path.join(root, 'scripts/submit-indexnow.mjs'), 'utf8');
 assertFile('components/LanguageToggle.tsx');
@@ -165,10 +174,33 @@ assertFile('app/sitemap.ts');
 assertFile('app/api/chat-with-xinbao/route.ts');
 assertFile('app/api/chat-with-xinbao/questions/route.ts');
 assertFile('lib/chat-with-xinbao.ts');
-assertFile('chat with xinbao/README.md');
-assertFile('chat with xinbao/env.example');
-assertFile('chat with xinbao/persona-prompt.md');
-assertFile('chat with xinbao/meme-voice-notes.md');
+assertFile('docs/chat/README.md');
+assertFile('docs/chat/env.example');
+assertFile('docs/chat/persona-prompt.md');
+assertFile('docs/chat/meme-voice-notes.md');
+for (const repositoryFile of [
+  'LICENSE',
+  'LICENSES/CC-BY-4.0.txt',
+  'LICENSES/Apache-2.0.txt',
+  'LICENSES/OFL-1.1.txt',
+  'LICENSES/GUST-FONT-LICENSE.txt',
+  'LICENSING.md',
+  'THIRD_PARTY_NOTICES.md',
+  'ASSET_PROVENANCE.md',
+  'CONTRIBUTING.md',
+  'SECURITY.md',
+  'CODE_OF_CONDUCT.md',
+  '.github/CODEOWNERS',
+  '.github/dependabot.yml',
+  '.github/PULL_REQUEST_TEMPLATE.md',
+  '.github/ISSUE_TEMPLATE/content-correction.yml',
+  '.github/ISSUE_TEMPLATE/bug-report.yml',
+  '.github/ISSUE_TEMPLATE/feature-request.yml',
+  '.github/ISSUE_TEMPLATE/config.yml',
+]) {
+  assertFile(repositoryFile);
+}
+assert.ok(!fs.existsSync(path.join(root, 'chat with xinbao')), 'chat operations live under docs/chat without a space-bearing top-level directory');
 assertFile('scripts/wiki-maintenance.mjs');
 assertFile('scripts/new-wiki-page.mjs');
 assertFile('scripts/submit-indexnow.mjs');
@@ -233,6 +265,7 @@ const wikiGraph = JSON.parse(fs.readFileSync(path.join(wikiDir, 'graph.json'), '
 const wikiQualityReport = JSON.parse(fs.readFileSync(path.join(wikiDir, 'quality-report.json'), 'utf8'));
 const maintenanceSchema = JSON.parse(fs.readFileSync(path.join(wikiDir, 'maintenance-schema.json'), 'utf8'));
 const sourceRegistry = JSON.parse(fs.readFileSync(path.join(wikiDir, 'source-registry.json'), 'utf8'));
+const okfIndex = fs.readFileSync(path.join(root, 'public/okf/index.md'), 'utf8');
 const okfManifest = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/manifest.json'), 'utf8'));
 const okfPageIndex = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/pages.json'), 'utf8'));
 const okfGraph = JSON.parse(fs.readFileSync(path.join(root, 'public/okf/graph.json'), 'utf8'));
@@ -250,10 +283,10 @@ const okfSyntheticTopic = matter(fs.readFileSync(path.join(root, 'public/okf/con
 const okfConceptLog = fs.readFileSync(path.join(root, 'public/okf/concepts/log.md'), 'utf8');
 const okfConceptLogZh = fs.readFileSync(path.join(root, 'public/okf/concepts/log_zh.md'), 'utf8');
 const okfConceptHomeZh = fs.readFileSync(path.join(root, 'public/okf/concepts/Qiao_Xinbao_zh.md'), 'utf8');
-const chatReadme = fs.readFileSync(path.join(root, 'chat with xinbao/README.md'), 'utf8');
-const chatEnvExample = fs.readFileSync(path.join(root, 'chat with xinbao/env.example'), 'utf8');
-const chatPersona = fs.readFileSync(path.join(root, 'chat with xinbao/persona-prompt.md'), 'utf8');
-const chatMemeNotes = fs.readFileSync(path.join(root, 'chat with xinbao/meme-voice-notes.md'), 'utf8');
+const chatReadme = fs.readFileSync(path.join(root, 'docs/chat/README.md'), 'utf8');
+const chatEnvExample = fs.readFileSync(path.join(root, 'docs/chat/env.example'), 'utf8');
+const chatPersona = fs.readFileSync(path.join(root, 'docs/chat/persona-prompt.md'), 'utf8');
+const chatMemeNotes = fs.readFileSync(path.join(root, 'docs/chat/meme-voice-notes.md'), 'utf8');
 const hiddenSourceSlugs = fs.readdirSync(wikiDir)
   .filter((file) => file.endsWith('.md') && frontmatterData(file).hidden === true)
   .map((file) => file.replace(/\.md$/, ''))
@@ -303,6 +336,27 @@ for (const dependency of ['remark-math', 'rehype-katex', 'katex']) {
   assert.ok(packageJson.dependencies?.[dependency], `package.json includes ${dependency}`);
 }
 assert.ok(packageJson.dependencies?.['@upstash/redis'], 'package.json includes Upstash Redis for server-side rate limits');
+assert.equal(packageJson.name, 'xinbaopedia', 'package metadata uses the public project name');
+assert.equal(packageJson.private, true, 'application package remains non-publishable on npm');
+assert.equal(packageJson.license, 'MIT', 'package metadata identifies the software license');
+assert.equal(packageJson.repository?.url, 'git+https://github.com/XinbaoQiao/XinbaoWiki.git', 'package metadata points to the canonical repository');
+assert.equal(packageJson.homepage, 'https://xinbaopedia.top', 'package metadata points to the canonical site');
+assert.match(packageJson.description || '', /bilingual, searchable academic wiki/i, 'package metadata describes the reusable system rather than its subject');
+assert.match(licensingPolicy, /Project software: MIT[\s\S]*Original text and knowledge metadata: CC BY 4\.0[\s\S]*Files outside the project MIT and CC BY grants/, 'licensing policy separates software, original content, and protected assets');
+for (const policyFile of ['LICENSING.md', 'THIRD_PARTY_NOTICES.md', 'ASSET_PROVENANCE.md']) {
+  assert.ok(licensingPolicy.includes(`\`${policyFile}\``), `${policyFile} has an explicit repository license scope`);
+}
+assert.match(thirdPartyNotices, /Roboto[\s\S]*Source Sans Pro[\s\S]*Font Awesome 5 Free[\s\S]*Latin Modern Math/, 'third-party notices preserve every bundled or embedded font family');
+assert.match(thirdPartyNotices, /\[ASSET_PROVENANCE\.md\]\(ASSET_PROVENANCE\.md\)/, 'third-party notices link the per-file asset register');
+assert.match(assetProvenance, /Portrait\.png[\s\S]*gpt-image 2\.0[\s\S]*not been signature-verified[\s\S]*Portrait-Seoul-ICML-2026\.png/, 'asset register records embedded portrait provenance claims without overstating verification');
+assert.match(contributingGuide, /Code contributions are accepted under the MIT License;[\s\S]*original text contributions are accepted under CC BY 4\.0/, 'contribution terms match the mixed repository license');
+assert.match(contributingGuide, /npm ci/, 'contributor setup uses the lockfile-reproducible install path');
+assert.doesNotMatch(codeOfConduct, /\[INSERT CONTACT METHOD\]/, 'Contributor Covenant has a private enforcement contact');
+assert.match(repositoryCiWorkflow, /permissions:\n  contents: read/, 'CI uses read-only repository permissions');
+assert.match(repositoryCiWorkflow, /timeout-minutes: 20/, 'CI has a bounded job timeout');
+assert.match(repositoryCiWorkflow, /concurrency:[\s\S]*cancel-in-progress: true/, 'CI cancels superseded runs on the same ref');
+assert.doesNotMatch(repositoryCiWorkflow, /Verify OKF conformance/, 'CI does not repeat the OKF gate already included by npm run check');
+assert.match(dependabotConfig, /package-ecosystem: npm[\s\S]*package-ecosystem: github-actions/, 'Dependabot covers npm and GitHub Actions');
 assert.match(packageJson.scripts?.['maintain:wiki'] || '', /run-with-node22\.mjs node scripts\/wiki-maintenance\.mjs --standardize --write/, 'package.json runs deterministic wiki maintenance under Node 22');
 assert.equal(packageJson.scripts?.['lint:content'], 'node scripts/wiki-maintenance.mjs --check', 'package.json exposes a deterministic content maintenance check');
 assert.equal(packageJson.scripts?.['lint:okf'], 'node scripts/okf-conformance.mjs', 'package.json exposes a deterministic OKF conformance check');
@@ -406,6 +460,7 @@ for (const expectedUrl of [
 assert.ok([...canonicalSourceUrls].every((url) => !url.includes('](') && !/\)%[A-Fa-f0-9]{2}/.test(url)), 'source registry never merges adjacent Markdown or Chinese prose into a URL');
 assert.ok(okfSources.sources.every((source) => source.pages.every((slug) => pageIndex.pages.some((page) => page.slug === slug))), 'public sources only associate with public pages');
 assert.ok(pageIndex.pages.every((page) => page.sourceIds.every((sourceId) => publicOkfSourceIds.has(sourceId))), 'page source IDs resolve in the public registry');
+assert.match(okfIndex, /## Licensing[\s\S]*CC BY 4\.0[\s\S]*github\.com\/XinbaoQiao\/XinbaoWiki\/blob\/main\/LICENSING\.md/, 'public OKF bundle exposes its qualified content license and full repository policy');
 assert.equal(okfManifest.okfVersion, '0.1', 'public OKF manifest declares OKF v0.1');
 assert.equal(okfManifest.schemaVersion, 3, 'public OKF manifest uses the provenance-aware bundle schema');
 assert.equal(okfManifest.bundle.publicPages, pageIndex.pages.length, 'public OKF manifest page count matches generated index');
@@ -551,7 +606,7 @@ assert.equal(
 const publicPromptIdentity = 'You are Chat with Xinbao, Xinbaopedia’s academic-homepage assistant for Xinbao Qiao.';
 const productionIdentityRule = 'You must not claim to be the real Xinbao Qiao. When identity matters, say that you are an AI assistant for the homepage.';
 const productionWelcomeInstruction = 'Welcome visitors like a concise, witty human host. Open casual greetings with one natural question instead of a capability list or product slogan.';
-const productionDataPolicyInstruction = 'Accepted requests may produce data-minimized, pseudonymous server-side usage metadata for reliability and retrieval evaluation. If asked, state this transparently: timestamp, page path, language, message length, one-way question fingerprint, pseudonymous one-way visitor/browser/IP hashes, and retrieved source IDs may be stored; raw question text, chat history, raw IPs, system prompts, private voice notes, and API keys are not stored for new requests. The hashes are not anonymous data.';
+const productionDataPolicyInstruction = "Accepted requests may produce data-minimized, pseudonymous server-side usage metadata for reliability and retrieval evaluation. If asked, state this transparently: a salted one-way question fingerprint, page path, language, timestamp, message length, pseudonymous one-way visitor/browser/IP hashes, and retrieved source IDs may be stored for at most 90 days; Xinbaopedia's own Redis and logs do not store raw question text, chat history, raw IPs, system prompts, private voice notes, or API keys for new requests. The current user message is still sent to the configured model provider to generate a reply, and upstream processing is governed by that provider's policy. The hashes reduce direct identifiability but are not anonymous data.";
 assert.ok(chatKnowledge.includes(productionIdentityRule), 'prompt-leak fixture uses the exact production identity rule');
 assert.ok(chatKnowledge.includes(productionWelcomeInstruction), 'prompt-leak fixture uses the exact production welcome instruction');
 assert.ok(chatKnowledge.includes(productionDataPolicyInstruction), 'prompt-leak fixture uses the exact production data-policy instruction');
@@ -650,11 +705,17 @@ assert.equal(
   'I am an AI assistant for the homepage.',
   'the identity statement explicitly requested by the production prompt remains answerable'
 );
-const publicDataPolicyReply = 'Raw question text, chat history, raw IPs, system prompts, private voice notes, and API keys are not stored for new requests.';
+const publicDataPolicyReply = "Xinbaopedia's own Redis and logs do not store raw questions or chat history, but the current message is sent to the configured model provider, whose policy governs its processing.";
 assert.equal(
   validateConversationalReply(publicDataPolicyReply, protectedPromptFixture),
   publicDataPolicyReply,
   'the data-policy disclosure explicitly requested by the production prompt remains answerable'
+);
+const publicPseudonymityReply = 'The hashes reduce direct identifiability but are not anonymous data.';
+assert.equal(
+  validateConversationalReply(publicPseudonymityReply, protectedPromptFixture),
+  publicPseudonymityReply,
+  'the public pseudonymity limitation remains answerable'
 );
 const longPrivateVoiceLine = [
   'Keep the answer clear and concise for every visitor while using warm language and practical examples.',
@@ -988,9 +1049,9 @@ const contextlessRetrieval = retrieveWikiContext('What does this work do?', { la
 assert.equal(contextlessRetrieval.shouldAbstain, true, 'current-page reference without a page context routes to conversation');
 assert.deepEqual(contextlessRetrieval.sources, [], 'contextless page reference does not retrieve unrelated wiki pages');
 const englishRecent = retrieveWikiContext('Whatever Xinbao is cooking up lately?', { language: 'en', limit: 8 });
-assert.ok(englishRecent.sources.some((source) => source.chunkId === 'log#2026-07-15'), 'English recent-work intent selects the newest matching log section');
+assert.ok(englishRecent.sources.some((source) => source.chunkId === 'log#2026-07-18'), 'English recent-work intent selects the newest matching log section');
 const chineseRecent = retrieveWikiContext('看看鑫宝最近又在折腾什么？', { language: 'zh', limit: 8 });
-assert.ok(chineseRecent.sources.some((source) => source.chunkId === 'log_zh#2026-06-13'), 'Chinese recent-work intent selects the newest matching log section');
+assert.ok(chineseRecent.sources.some((source) => source.chunkId === 'log_zh#2026-07-18'), 'Chinese recent-work intent selects the newest matching log section');
 const evaluatorCase = { id: 'integrity-fixture', language: 'en', category: 'citation', query: 'fixture', expectedSlugs: [] };
 assert.deepEqual(evaluateCase(evaluatorCase, cleanRetrieval, publicPages, chunkById).sourceIssues, [], 'production retrieval metadata matches indexed truth');
 const forgedHashRetrieval = structuredClone(cleanRetrieval);
@@ -1012,7 +1073,12 @@ for (const hiddenSlug of hiddenSourceSlugs) {
   assert.ok(!retrievalIndex.chunks.some((chunk) => chunk.slug === hiddenSlug), `retrieval index excludes hidden page ${hiddenSlug}`);
 }
 assert.match(maintenanceWorkflow, /schedule:[\s\S]*workflow_dispatch:/, 'weekly maintenance supports schedule and manual dispatch');
-assert.match(maintenanceWorkflow, /audit-wiki-maintenance\.mjs[\s\S]*evaluate-wiki-chat\.mjs[\s\S]*upload-artifact@v4/, 'weekly maintenance audits sources, evaluates retrieval, and preserves evidence');
+assert.match(maintenanceWorkflow, /audit-wiki-maintenance\.mjs[\s\S]*evaluate-wiki-chat\.mjs[\s\S]*actions\/upload-artifact@[a-f0-9]{40}/, 'weekly maintenance audits sources, evaluates retrieval, and preserves evidence');
+for (const workflow of [repositoryCiWorkflow, maintenanceWorkflow]) {
+  const actionRefs = [...workflow.matchAll(/^\s*uses:\s+[^\s@]+@([^\s#]+)/gm)].map((match) => match[1]);
+  assert.ok(actionRefs.length > 0, 'workflow contains external actions');
+  assert.ok(actionRefs.every((ref) => /^[a-f0-9]{40}$/.test(ref)), 'every external action is pinned to a full commit SHA');
+}
 assert.doesNotMatch(maintenanceWorkflow, /maintain:wiki|git commit|git push|deploy:production/, 'weekly maintenance never rewrites content or publishes automatically');
 assert.match(wikiRetrieval, /WIKI_RETRIEVAL_INDEX_VERSION = 'wiki-heading-lexical-v2'/, 'chat retrieval exposes a versioned production algorithm');
 assert.match(wikiChatResponse, /validateGroundedReply[\s\S]*containsProtectedPromptMaterial[\s\S]*kind: 'protected-output'[\s\S]*kind: 'missing-citations'[\s\S]*kind: 'invalid-citation-number'/, 'grounded validation distinguishes protected output from the two retryable citation failures');
@@ -1411,14 +1477,14 @@ assert.match(chatQuestionsRoute, /Cache-Control': 'private, no-store'/, 'questio
 assert.doesNotMatch(chatQuestionsRoute, /console\.log|console\.error|YUNWU_API_KEY/, 'question-log export route does not log or reference unrelated model secrets');
 assert.match(chatKnowledge, /import 'server-only';/, 'chat knowledge builder is server-only');
 assert.match(chatKnowledge, /WikiRetrievalResult/, 'chat prompt accepts the production retrieval result contract');
-assert.match(chatKnowledge, /XINBAO_CHAT_PROMPT_VERSION = 'xinbao-grounded-conversation-v4'/, 'chat prompt exposes the citation-repair version for observability');
+assert.match(chatKnowledge, /XINBAO_CHAT_PROMPT_VERSION = 'xinbao-grounded-conversation-v5'/, 'chat prompt exposes the current response-policy version for observability');
 assert.doesNotMatch(chatKnowledge, /TOTAL_CONTEXT_LIMIT|PRIORITY_SLUGS|cachedKnowledge|buildKnowledge|project\.md/, 'chat prompt no longer stuffs a fixed full-wiki context');
 assert.match(chatKnowledge, /academic-homepage assistant[\s\S]*must not claim to be the real Xinbao Qiao/, 'persona identifies the assistant without impersonation');
 assert.match(chatKnowledge, /paper lore[\s\S]*bring the receipts[\s\S]*keep it real/, 'persona retains a concise internet-native English voice');
 assert.match(chatKnowledge, /来都来了[\s\S]*有一说一[\s\S]*能查到的认真说[\s\S]*查不到的也不硬编/, 'persona retains a concise evidence-bounded Chinese voice');
 assert.match(chatKnowledge, /numbered evidence blocks as \[1\][\s\S]*Never fabricate a citation/, 'persona requires numbered citations for factual answers');
 assert.match(chatKnowledge, /Respond helpfully to greetings, casual conversation, and general-knowledge questions[\s\S]*Do not emit numbered source markers/, 'persona permits normal uncited conversation when wiki retrieval is insufficient');
-assert.match(chatKnowledge, /pseudonymous server-side usage metadata[\s\S]*one-way question fingerprint[\s\S]*raw question text[\s\S]*are not stored for new requests[\s\S]*not anonymous data/, 'persona accurately documents pseudonymous telemetry');
+assert.match(chatKnowledge, /pseudonymous server-side usage metadata[\s\S]*salted one-way question fingerprint[\s\S]*own Redis and logs do not store raw question text[\s\S]*current user message is still sent to the configured model provider[\s\S]*not anonymous data/, 'persona accurately documents pseudonymous telemetry and upstream model processing');
 assert.doesNotMatch(chatKnowledge, /\u8dd1\u5802/, 'persona removes the disallowed catchphrase');
 assert.match(chatKnowledge, /must not claim to be the real Xinbao Qiao/, 'persona prevents impersonating Xinbao');
 assert.match(chatKnowledge, /Do not invent facts, preferences, opinions, current activities, or private details about Xinbao Qiao/, 'persona prevents unsupported personal claims in conversational mode');
@@ -1432,14 +1498,14 @@ for (const envName of ['YUNWU_API_KEY', 'YUNWU_API_BASE_URL', 'UPSTASH_REDIS_RES
 }
 assert.match(chatPersona, /You are Chat with Xinbao/, 'persona prompt template documents assistant identity');
 assert.match(chatPersona, /XINBAO_CHAT_VOICE_STYLE/, 'persona prompt template documents the private voice style layer');
-assert.match(chatPersona, /pseudonymous server-side metadata[\s\S]*one-way question fingerprint[\s\S]*raw question text[\s\S]*not stored for new requests[\s\S]*not anonymous data/, 'persona prompt template documents pseudonymous logging transparently');
+assert.match(chatPersona, /pseudonymous server-side metadata[\s\S]*one-way question fingerprint[\s\S]*own Redis and logs do not store raw question text[\s\S]*current user message is still sent to the configured model provider[\s\S]*not anonymous data/, 'persona prompt template documents pseudonymous logging and upstream processing transparently');
 assert.match(chatPersona, /homepage chat assistant[\s\S]*not claim to be the real Xinbao Qiao[\s\S]*do not call yourself a distilled skill or digital persona/, 'persona prompt template documents homepage-assistant identity with technical-label boundaries');
 assert.match(chatPersona, /do not repeat one fixed meme[\s\S]*想快速了解乔鑫宝可以直接问我[\s\S]*我会尽量说人话[\s\S]*主打一个资料准[\s\S]*never use memes to cover missing evidence/, 'persona prompt template documents natural casual wording with factual boundaries');
 assert.match(chatPersona, /Modern meme-guide voice[\s\S]*情绪价值[\s\S]*City不City[\s\S]*YYDS[\s\S]*爱你老己[\s\S]*做完你的做你的/, 'persona prompt template documents current meme-guide wording');
 assert.match(chatPersona, /2026 sentence-template and abstract voice[\s\S]*我将辞职在家研究[\s\S]*听君一席话如听一席话[\s\S]*不按套路但按 source notes/, 'persona prompt template documents 2026 sentence-template and abstract wording');
 assert.match(chatPersona, /Reusable casual sentence templates[\s\S]*退一万步讲[\s\S]*尊嘟假嘟[\s\S]*source-grounded content only/, 'persona prompt template documents meme sentence-template boundaries');
 assert.match(chatPersona, /00s retro Chinese web voice[\s\S]*886[\s\S]*踩踩[\s\S]*留言板 energy/, 'persona prompt template documents the 00s retro phrase pool');
-assert.match(chatMemeNotes, /46 notes\.hdoc[\s\S]*private reference material[\s\S]*should not quote it or commit it/, 'meme voice notes document private hdoc handling');
+assert.match(chatMemeNotes, /Private source material is kept outside the repository[\s\S]*should not quote or commit raw private notes/, 'meme voice notes document private-source handling without exposing local filenames');
 assert.match(chatMemeNotes, /Modern meme-guide references[\s\S]*情绪价值[\s\S]*班味儿[\s\S]*绝绝子[\s\S]*不讲不讲[\s\S]*命运的齿轮开始转动[\s\S]*退一万步讲/, 'meme voice notes organize current meme-guide categories');
 assert.match(chatMemeNotes, /2026 sentence-template references[\s\S]*我将辞职在家研究[\s\S]*此人的 X 恐怕在我之上[\s\S]*从从容容、游刃有余[\s\S]*随橙想/, 'meme voice notes organize 2026 sentence-template categories');
 assert.match(chatMemeNotes, /2026 social and AI-era references[\s\S]*抽象力[\s\S]*AI人格[\s\S]*AI搭子[\s\S]*SBTI[\s\S]*武BOT/, 'meme voice notes organize 2026 social and AI-era categories');

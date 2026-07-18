@@ -1,0 +1,70 @@
+name: Feature request
+description: Propose a focused improvement to the Wiki, AI interface, themes, retrieval, maintenance, or contributor workflow.
+title: "[Feature]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Explain the reader or maintainer problem before prescribing an implementation. Proposals should preserve cited answers, bilingual content, privacy boundaries, and the canonical/generated file split.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: Who is affected, and what cannot be done reliably today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: Describe the observable result and how success could be checked.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed approach
+      description: Outline a possible solution, including UI or API behavior when relevant.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Primary area
+      options:
+        - Wiki content and navigation
+        - AI chat and citations
+        - Search and retrieval
+        - Themes and visual design
+        - Accessibility
+        - OKF export and integrations
+        - Maintenance and contributor tooling
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Note simpler workflows, existing features, or external tools that were considered.
+
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: Evidence, privacy, and maintenance impact
+      description: Explain any new sources, generated artifacts, LLM data flow, stored metadata, third-party service, permissions, or ongoing maintenance cost.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirmation
+    attributes:
+      label: Confirmation
+      options:
+        - label: This request contains no credentials, private prompts, unpublished personal information, or raw user data.
+          required: true

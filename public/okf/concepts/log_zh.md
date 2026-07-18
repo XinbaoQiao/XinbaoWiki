@@ -8,18 +8,18 @@ tags:
   - log
   - 维护日志
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-14T23:17:11+08:00'
-content_hash: 'sha256:53d7d9477bde91a9a36630d60d0a98fc91360c28915d3a2425b657e0d02c7e1c'
-reviewed_at: '2026-07-14T23:17:11+08:00'
-review_due: '2027-07-14'
+modified: '2026-07-18T04:24:40.199Z'
+content_hash: 'sha256:677f5a1048b6c711a78cdebd42f3336a82a0e1b1c8002da97506ff16cdb3c47d'
+reviewed_at: '2026-07-18T12:25:05+08:00'
+review_due: '2027-07-18'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-14T23:17:11+08:00'
-  reviewDue: '2027-07-14'
+  reviewedAt: '2026-07-18T12:25:05+08:00'
+  reviewDue: '2027-07-18'
   pendingReview: false
   overdue: false
 retrieval:
@@ -28,6 +28,10 @@ retrieval:
 source_ids: []
 source_path: wiki/log_zh.md
 ---
+## 2026-07-18
+
+- 在嵌入式来源声明与旧维护记录相冲突后，从当前人物页和资源页移除肖像的特定供应商归因；保留首尔图片的 AI 生成标识，并在仓库素材溯源清单中记录待核验情况。
+
 ## 2026-06-13
 
 - 更新 [英文人物主页](./Xinbao_Qiao.md)、[中文主页](./Qiao_Xinbao_zh.md)、[研究概览](./Research_zh.md)、[项目页](./Projects_zh.md)、[研究经历](./Experience_zh.md)、[简历](./CV_zh.md) 及相关专题页，将近期工作表述为围绕 AI 模型中的数据全生命周期管理、[数据中心 ML](./Data_Centric_Machine_Learning_zh.md)、AI for Networks 与 Networks for AI 展开，同时保留 [分布式 Wasserstein barycenter](./Distributed_Wasserstein_Barycenter_zh.md) 作为相关方法，而不是唯一当前重点。

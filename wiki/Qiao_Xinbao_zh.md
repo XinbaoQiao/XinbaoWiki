@@ -8,10 +8,10 @@ tags:
   - biography
   - 博士生
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-16T20:08:42+08:00'
-content_hash: 'sha256:a4df4f1394b219dbe68acbff664db416aaa3f0e849cb1ff8ebe5c22273b0ec6a'
-reviewed_at: '2026-07-16T20:08:42+08:00'
-review_due: '2026-10-14'
+modified: '2026-07-18T04:24:40.208Z'
+content_hash: 'sha256:79adc98848819e156be8c042915d26ba241a1e0b9d385633b3b6c34859f595f8'
+reviewed_at: '2026-07-18T12:25:05+08:00'
+review_due: '2026-10-16'
 name: 乔鑫宝
 summary: 香港中文大学信息工程系博士生；研究方向包括数据中心 ML、AI for Networks、Networks for AI、机器遗忘和合成数据可靠性
 aliases:
@@ -46,7 +46,7 @@ image_gallery:
     alt: 乔鑫宝摄于 ICLR 2025 新加坡 EXPO
     caption: 'Photograph taken at ICLR 2025, Singapore EXPO'
   - src: /images/Portrait-Seoul-ICML-2026.png
-    alt: 快手 AI 生成的 ICML 2026 首尔 Tech Walk 场景
+    alt: AI 生成的 ICML 2026 首尔 Tech Walk 场景
     caption: 'Photograph generated for ICML 2026, Seoul COEX'
     fit: contain
 links:

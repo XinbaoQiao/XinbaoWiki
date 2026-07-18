@@ -8,18 +8,18 @@ tags:
   - archive
   - resource-inventory
 timestamp: '2026-05-05T01:10:50+08:00'
-modified: '2026-07-15T22:33:36+08:00'
-content_hash: 'sha256:7e8ced286cf6168956fdc2ba88b64f12248d8f3a6dc6a5cef4af0bff7037982e'
-reviewed_at: '2026-07-15T22:33:36+08:00'
-review_due: '2027-07-15'
+modified: '2026-07-18T04:24:40.206Z'
+content_hash: 'sha256:9256ff3c6246d631a6881816d41e536c2456928190d9d9bbdce373f7219037ba'
+reviewed_at: '2026-07-18T12:25:05+08:00'
+review_due: '2027-07-18'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-15T22:33:36+08:00'
-  reviewDue: '2027-07-15'
+  reviewedAt: '2026-07-18T12:25:05+08:00'
+  reviewDue: '2027-07-18'
   pendingReview: false
   overdue: false
 retrieval:
@@ -34,7 +34,7 @@ This page records the media policy for the wiki. The main biography infobox uses
 
 - Default studio portrait: `images/Portrait.png`
 - ICLR 2025 at Singapore EXPO: `images/Portrait-Singapore-ICLR-2025.jpg`
-- Kuaishou AI-generated ICML 2026 Seoul image: `images/Portrait-Seoul-ICML-2026.png`
+- AI-generated ICML 2026 Seoul image: `images/Portrait-Seoul-ICML-2026.png`
 
 The event images use factual captions. The Seoul image is explicitly identified as AI-generated.
 

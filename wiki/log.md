@@ -8,14 +8,18 @@ tags:
   - log
   - maintenance-log
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-15T23:04:06+08:00'
-content_hash: 'sha256:a6a05899af8aafad7a0975b9829069a22d573e22a9536742f6e6f8b3f6987755'
-reviewed_at: '2026-07-15T23:04:06+08:00'
-review_due: '2027-07-15'
+modified: '2026-07-18T04:24:40.200Z'
+content_hash: 'sha256:ed5aa936226123765072932910f5e6f5bf7ce35dc1b15c8e48f258ca8f737583'
+reviewed_at: '2026-07-18T12:25:05+08:00'
+review_due: '2027-07-18'
 name: Log
 summary: Append-only maintenance log for the wiki.
 occupation: Maintenance log
 ---
+## 2026-07-18
+
+- Removed provider-specific portrait attribution from current public biography and resource text after embedded provenance claims conflicted with an older maintenance note; kept the Seoul scene labeled as AI-generated and recorded the unresolved evidence in the repository asset-provenance register.
+
 ## 2026-07-15
 
 - Replaced the single biography portrait with an accessible three-image gallery that always opens on the uncaptioned studio portrait and allows manual switching to ICLR 2025 Singapore and Kuaishou AI-generated ICML 2026 Seoul images.

@@ -8,10 +8,10 @@ tags:
   - biography
   - 博士生
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-16T20:08:42+08:00'
-content_hash: 'sha256:a4df4f1394b219dbe68acbff664db416aaa3f0e849cb1ff8ebe5c22273b0ec6a'
-reviewed_at: '2026-07-16T20:08:42+08:00'
-review_due: '2026-10-14'
+modified: '2026-07-18T04:24:40.208Z'
+content_hash: 'sha256:79adc98848819e156be8c042915d26ba241a1e0b9d385633b3b6c34859f595f8'
+reviewed_at: '2026-07-18T12:25:05+08:00'
+review_due: '2026-10-16'
 language: zh
 aliases:
   - Mr. Ciao
@@ -23,8 +23,8 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-16T20:08:42+08:00'
-  reviewDue: '2026-10-14'
+  reviewedAt: '2026-07-18T12:25:05+08:00'
+  reviewDue: '2026-10-16'
   pendingReview: false
   overdue: false
 retrieval:

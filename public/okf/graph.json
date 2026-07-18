@@ -3140,7 +3140,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:a6a05899af8aafad7a0975b9829069a22d573e22a9536742f6e6f8b3f6987755",
+      "contentHash": "sha256:ed5aa936226123765072932910f5e6f5bf7ce35dc1b15c8e48f258ca8f737583",
       "file": "log.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -3150,12 +3150,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-15T23:04:06+08:00",
-        "reviewDue": "2027-07-15",
+        "reviewedAt": "2026-07-18T12:25:05+08:00",
+        "reviewDue": "2027-07-18",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-15T23:04:06+08:00",
+      "modifiedAt": "2026-07-18T04:24:40.200Z",
       "outgoing": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -3195,12 +3195,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Log",
       "type": "Maintenance log",
-      "reviewedAt": "2026-07-15T23:04:06+08:00",
-      "reviewDue": "2027-07-15",
+      "reviewedAt": "2026-07-18T12:25:05+08:00",
+      "reviewDue": "2027-07-18",
       "retrieval": {
         "documentId": "wiki:log",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:a6a05899af8aafad7a0975b9829069a22d573e22a9536742f6e6f8b3f6987755",
+        "contentHash": "sha256:ed5aa936226123765072932910f5e6f5bf7ce35dc1b15c8e48f258ca8f737583",
         "textFields": [
           "title",
           "aliases",
@@ -3224,7 +3224,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:53d7d9477bde91a9a36630d60d0a98fc91360c28915d3a2425b657e0d02c7e1c",
+      "contentHash": "sha256:677f5a1048b6c711a78cdebd42f3336a82a0e1b1c8002da97506ff16cdb3c47d",
       "file": "log_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -3234,12 +3234,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-14T23:17:11+08:00",
-        "reviewDue": "2027-07-14",
+        "reviewedAt": "2026-07-18T12:25:05+08:00",
+        "reviewDue": "2027-07-18",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-14T23:17:11+08:00",
+      "modifiedAt": "2026-07-18T04:24:40.199Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "CV_zh",
@@ -3269,12 +3269,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "日志",
       "type": "维护日志",
-      "reviewedAt": "2026-07-14T23:17:11+08:00",
-      "reviewDue": "2027-07-14",
+      "reviewedAt": "2026-07-18T12:25:05+08:00",
+      "reviewDue": "2027-07-18",
       "retrieval": {
         "documentId": "wiki:log_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:53d7d9477bde91a9a36630d60d0a98fc91360c28915d3a2425b657e0d02c7e1c",
+        "contentHash": "sha256:677f5a1048b6c711a78cdebd42f3336a82a0e1b1c8002da97506ff16cdb3c47d",
         "textFields": [
           "title",
           "aliases",
@@ -3971,7 +3971,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:7e8ced286cf6168956fdc2ba88b64f12248d8f3a6dc6a5cef4af0bff7037982e",
+      "contentHash": "sha256:9256ff3c6246d631a6881816d41e536c2456928190d9d9bbdce373f7219037ba",
       "file": "Old_Homepage_Resources.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -3981,12 +3981,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-15T22:33:36+08:00",
-        "reviewDue": "2027-07-15",
+        "reviewedAt": "2026-07-18T12:25:05+08:00",
+        "reviewDue": "2027-07-18",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-15T22:33:36+08:00",
+      "modifiedAt": "2026-07-18T04:24:40.206Z",
       "outgoing": [
         "Projects",
         "Publications",
@@ -4007,12 +4007,12 @@
       "timestamp": "2026-05-05T01:10:50+08:00",
       "title": "Homepage Portrait Resources",
       "type": "Resource inventory",
-      "reviewedAt": "2026-07-15T22:33:36+08:00",
-      "reviewDue": "2027-07-15",
+      "reviewedAt": "2026-07-18T12:25:05+08:00",
+      "reviewDue": "2027-07-18",
       "retrieval": {
         "documentId": "wiki:Old_Homepage_Resources",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:7e8ced286cf6168956fdc2ba88b64f12248d8f3a6dc6a5cef4af0bff7037982e",
+        "contentHash": "sha256:9256ff3c6246d631a6881816d41e536c2456928190d9d9bbdce373f7219037ba",
         "textFields": [
           "title",
           "aliases",
@@ -4036,7 +4036,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:1e3ab25218bb7c3ba4d95ba53f01a8dc2baca841ce6e7b5e5d17056f3bfcfd44",
+      "contentHash": "sha256:82bba430782e8ac82d2afac3b574607ea08303043c86c0a12c4720064bfb896e",
       "file": "Old_Homepage_Resources_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -4046,12 +4046,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-15T22:33:36+08:00",
-        "reviewDue": "2027-07-15",
+        "reviewedAt": "2026-07-18T12:25:05+08:00",
+        "reviewDue": "2027-07-18",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-15T22:33:36+08:00",
+      "modifiedAt": "2026-07-18T04:24:40.205Z",
       "outgoing": [
         "Projects_zh",
         "Publications_zh",
@@ -4072,12 +4072,12 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "主页肖像资源",
       "type": "资源记录",
-      "reviewedAt": "2026-07-15T22:33:36+08:00",
-      "reviewDue": "2027-07-15",
+      "reviewedAt": "2026-07-18T12:25:05+08:00",
+      "reviewDue": "2027-07-18",
       "retrieval": {
         "documentId": "wiki:Old_Homepage_Resources_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:1e3ab25218bb7c3ba4d95ba53f01a8dc2baca841ce6e7b5e5d17056f3bfcfd44",
+        "contentHash": "sha256:82bba430782e8ac82d2afac3b574607ea08303043c86c0a12c4720064bfb896e",
         "textFields": [
           "title",
           "aliases",
@@ -4421,7 +4421,7 @@
         "src-e1d67502167d29ad",
         "src-f6009f51f54778f6"
       ],
-      "contentHash": "sha256:a4df4f1394b219dbe68acbff664db416aaa3f0e849cb1ff8ebe5c22273b0ec6a",
+      "contentHash": "sha256:79adc98848819e156be8c042915d26ba241a1e0b9d385633b3b6c34859f595f8",
       "file": "Qiao_Xinbao_zh.md",
       "footnoteSourceIds": [
         "src-264e39cbec8d2f89",
@@ -4438,12 +4438,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-16T20:08:42+08:00",
-        "reviewDue": "2026-10-14",
+        "reviewedAt": "2026-07-18T12:25:05+08:00",
+        "reviewDue": "2026-10-16",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-16T20:08:42+08:00",
+      "modifiedAt": "2026-07-18T04:24:40.208Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Angela_Yingjun_Zhang_zh",
@@ -4498,12 +4498,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "乔鑫宝",
       "type": "博士生",
-      "reviewedAt": "2026-07-16T20:08:42+08:00",
-      "reviewDue": "2026-10-14",
+      "reviewedAt": "2026-07-18T12:25:05+08:00",
+      "reviewDue": "2026-10-16",
       "retrieval": {
         "documentId": "wiki:Qiao_Xinbao_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:a4df4f1394b219dbe68acbff664db416aaa3f0e849cb1ff8ebe5c22273b0ec6a",
+        "contentHash": "sha256:79adc98848819e156be8c042915d26ba241a1e0b9d385633b3b6c34859f595f8",
         "textFields": [
           "title",
           "aliases",
@@ -6696,7 +6696,7 @@
         "src-e1d67502167d29ad",
         "src-f6009f51f54778f6"
       ],
-      "contentHash": "sha256:ece5d20d0f79a3bd248813fd92f3949416c9d3a78bf0d698e8d8e48c1bfc4e88",
+      "contentHash": "sha256:644f6709d8a5b7ad682dc27cd1f65b8753de694496eda1c740133f3916f175f5",
       "file": "Xinbao_Qiao.md",
       "footnoteSourceIds": [
         "src-264e39cbec8d2f89",
@@ -6713,12 +6713,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-15T23:04:06+08:00",
-        "reviewDue": "2026-10-13",
+        "reviewedAt": "2026-07-18T12:25:05+08:00",
+        "reviewDue": "2026-10-16",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-15T23:04:06+08:00",
+      "modifiedAt": "2026-07-18T04:24:40.221Z",
       "outgoing": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -6773,12 +6773,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Xinbao Qiao",
       "type": "PhD student",
-      "reviewedAt": "2026-07-15T23:04:06+08:00",
-      "reviewDue": "2026-10-13",
+      "reviewedAt": "2026-07-18T12:25:05+08:00",
+      "reviewDue": "2026-10-16",
       "retrieval": {
         "documentId": "wiki:Xinbao_Qiao",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:ece5d20d0f79a3bd248813fd92f3949416c9d3a78bf0d698e8d8e48c1bfc4e88",
+        "contentHash": "sha256:644f6709d8a5b7ad682dc27cd1f65b8753de694496eda1c740133f3916f175f5",
         "textFields": [
           "title",
           "aliases",

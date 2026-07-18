@@ -1,0 +1,79 @@
+name: Content correction
+description: Report a factual, citation, translation, attribution, or biographical issue in the public Wiki.
+title: "[Content]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping keep Xinbaopedia accurate. Use authoritative public sources and do not include private personal information. Security and privacy vulnerabilities must be reported through [SECURITY.md](https://github.com/XinbaoQiao/XinbaoWiki/security/policy), not here.
+
+  - type: input
+    id: page
+    attributes:
+      label: Page URL or Wiki file
+      description: Link to the affected public page, or name the canonical `wiki/*.md` file if known.
+      placeholder: https://xinbaopedia.top/wiki/Xinbao_Qiao
+    validations:
+      required: true
+
+  - type: input
+    id: section
+    attributes:
+      label: Section or passage
+      description: Identify the heading, field, or short passage that needs correction.
+      placeholder: Research interests, second paragraph
+    validations:
+      required: true
+
+  - type: textarea
+    id: current
+    attributes:
+      label: What is currently wrong?
+      description: Explain the factual, citation, translation, attribution, or wording problem. Quote only the minimum needed.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed
+    attributes:
+      label: Proposed correction
+      description: State the corrected fact or wording and its intended scope.
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Authoritative public evidence
+      description: Provide canonical URLs from a publisher, venue, institution, ORCID, OpenReview, or another primary source. Explain what each source supports.
+      placeholder: |
+        - https://example.org/official-record — supports the publication date
+    validations:
+      required: true
+
+  - type: dropdown
+    id: language
+    attributes:
+      label: Language impact
+      description: Which language page or pair is affected?
+      options:
+        - English and Chinese
+        - English only
+        - Chinese only
+        - Not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: pairing
+    attributes:
+      label: Paired-page notes
+      description: If only one language is affected, explain why. Otherwise describe how the meaning should remain aligned.
+
+  - type: checkboxes
+    id: public_data
+    attributes:
+      label: Public-information confirmation
+      options:
+        - label: I have not included unpublished personal information, credentials, private messages, raw user data, or other sensitive material.
+          required: true

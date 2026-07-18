@@ -10,7 +10,7 @@ const HIDDEN_SLUG = process.env.SMOKE_HIDDEN_SLUG || 'Learn_What_Matters_Data_Pr
 const EXPECTED_CHAT_CONTRACT = Object.freeze({
   backendVersion: 'xinbao-chat-api-v6',
   responsePolicyVersion: 'grounded-conversation-v4',
-  promptVersion: 'xinbao-grounded-conversation-v4',
+  promptVersion: 'xinbao-grounded-conversation-v5',
 });
 
 function positiveIntegerEnv(name, fallback) {

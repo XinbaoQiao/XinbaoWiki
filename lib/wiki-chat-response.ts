@@ -83,6 +83,9 @@ function isExplicitlyPublicPromptSegment(segment: string) {
     'when identity matters say that you are an ai assistant for the homepage',
     'accepted requests may produce data minimized pseudonymous server side usage metadata for reliability and retrieval evaluation',
     'if asked state this transparently',
+    'xinbaopedia s own redis and logs do not store raw question text',
+    'the current user message is still sent to the configured model provider',
+    'the hashes reduce direct identifiability but are not anonymous data',
     'the hashes are not anonymous data',
   ];
   return publicPrefixes.some((prefix) => normalized === prefix || normalized.startsWith(`${prefix} `));

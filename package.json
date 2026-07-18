@@ -1,9 +1,9 @@
 {
-  "name": "xinbao-qiao-academic-wiki",
+  "name": "xinbaopedia",
   "version": "0.3.0",
   "private": true,
   "type": "module",
-  "description": "Personal academic wiki homepage for Xinbao Qiao.",
+  "description": "A bilingual, searchable academic wiki with citation-grounded LLM answers and agent-readable knowledge exports.",
   "engines": {
     "node": "22.x"
   },
@@ -53,5 +53,23 @@
   "overrides": {
     "js-yaml": "3.15.0",
     "postcss": "^8.5.10"
-  }
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XinbaoQiao/XinbaoWiki.git"
+  },
+  "homepage": "https://xinbaopedia.top",
+  "bugs": {
+    "url": "https://github.com/XinbaoQiao/XinbaoWiki/issues"
+  },
+  "keywords": [
+    "academic-wiki",
+    "bilingual",
+    "knowledge-graph",
+    "llm",
+    "nextjs",
+    "rag",
+    "typescript"
+  ]
 }

@@ -10,7 +10,7 @@ app/api/chat-with-xinbao/route.ts
 app/api/chat-with-xinbao/questions/route.ts
 lib/chat-with-xinbao.ts
 wiki/*.md
-chat with xinbao/
+docs/chat/
   README.md
   env.example
   persona-prompt.md
@@ -65,7 +65,7 @@ proof of anonymization. Never republish visitor metadata as evaluation data.
 
 ## Voice updates
 
-Internal meme and slang notes are maintained as hidden yearly wiki sources. The 2026 phrase bank lives in `wiki/Internet_Slang_2026.md` and `wiki/Internet_Slang_2026_zh.md`; it is a developer maintenance reference, is excluded from public routes, exports, and runtime factual context, and is not a factual source about Xinbao Qiao. Keep greetings natural, action-oriented, and fact-first; light casual phrasing is optional, not the identity of the assistant.
+Meme and slang notes are repository-visible maintenance sources. The 2026 phrase bank lives in `wiki/Internet_Slang_2026.md` and `wiki/Internet_Slang_2026_zh.md`; those pages are excluded from public site routes, OKF exports, and runtime factual context, and they are not factual sources about Xinbao Qiao. Keep greetings natural, action-oriented, and fact-first; light casual phrasing is optional, not the identity of the assistant.
 
 ## Vercel deployment
 
@@ -88,7 +88,7 @@ an empty source list. Any failure blocks promotion or release.
 Run this before pushing or after `npm run build`:
 
 ```bash
-rg "YUNWU_API_KEY|sk-|Bearer|api.yunwu|UPSTASH_REDIS_REST_TOKEN" .next app components public "chat with xinbao"
+rg "YUNWU_API_KEY|sk-|Bearer|api.yunwu|UPSTASH_REDIS_REST_TOKEN" .next app components public docs/chat
 ```
 
 Expected public matches are variable names in server files or documentation examples. A real token, a `sk-...` value, or a direct browser request to Yunwu is a blocker.

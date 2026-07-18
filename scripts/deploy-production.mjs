@@ -29,7 +29,7 @@ const productionUrl = 'https://xinbaopedia.top';
 const EXPECTED_CHAT_CONTRACT = Object.freeze({
   backendVersion: 'xinbao-chat-api-v6',
   responsePolicyVersion: 'grounded-conversation-v4',
-  promptVersion: 'xinbao-grounded-conversation-v4',
+  promptVersion: 'xinbao-grounded-conversation-v5',
 });
 const vercelCliVersion = '54.18.7';
 const vercelCliPackage = `vercel@${vercelCliVersion}`;

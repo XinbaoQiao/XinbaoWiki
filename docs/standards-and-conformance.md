@@ -1,7 +1,7 @@
 # Xinbaopedia Standards and Conformance
 
 Status: maintained project contract
-Last upstream review: 2026-07-17
+Last upstream review: 2026-07-18
 
 Xinbaopedia is a Git-native academic wiki with an agent-readable export. Its
 base interchange format is Open Knowledge Format (OKF) v0.1 Draft. The project
@@ -13,13 +13,13 @@ provenance, review scheduling, graph traversal, and retrieval.
 | Reference | Tracked version | Role in Xinbaopedia | Authority |
 | --- | --- | --- | --- |
 | [GoogleCloudPlatform Knowledge Catalog: OKF specification](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) | OKF v0.1 Draft | Base Markdown and YAML interchange contract | Normative base format |
-| [Google Cloud OKF announcement](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing) | Published 2025-06-17 | Rationale for portable, Git-managed, agent-readable knowledge | Informative |
+| [Google Cloud OKF announcement](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing) | Published 2026-06-12 | Rationale for portable, Git-managed, agent-readable knowledge | Informative |
 | [Andrej Karpathy: LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) | Unversioned gist; reviewed 2026-07-17 | Conceptual origin for source material, durable wiki memory, schemas, ingest, query, and lint operations | Informative, not a standard |
 | [Microsoft GraphRAG](https://github.com/microsoft/graphrag) | Upstream main; reviewed 2026-07-17 | Comparison point for entity/relationship extraction and global graph queries | Informative, not a dependency |
 | [LlamaIndex ingestion pipeline](https://developers.llamaindex.ai/python/framework/module_guides/loading/ingestion_pipeline/) | Current documentation; reviewed 2026-07-17 | Comparison point for stable document IDs, hashes, and incremental ingestion | Informative, not a dependency |
 | [Ragas metrics](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/) | Stable documentation; reviewed 2026-07-17 | Vocabulary for retrieval, context, and faithfulness evaluation | Informative, not a dependency |
 | [MediaWiki architecture](https://www.mediawiki.org/wiki/Manual:MediaWiki_architecture) and [job queue](https://www.mediawiki.org/wiki/Manual:Job_queue) | Current documentation; reviewed 2026-07-17 | Comparison point for revision-driven invalidation and deferred maintenance | Informative, not a dependency |
-| [OWASP Top 10 for LLM Applications](https://owasp.org/www-project-top-10-for-large-language-model-applications/) | Current project; reviewed 2026-07-17 | Security review vocabulary | Informative |
+| [OWASP Top 10 for LLM Applications](https://genai.owasp.org/llm-top-10/) | Current project; reviewed 2026-07-17 | Security review vocabulary | Informative |
 | [OpenTelemetry GenAI semantic conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/) | Development conventions; reviewed 2026-07-17 | Optional telemetry vocabulary; raw prompts are not required | Informative |
 
 “Tracked version” above is the compatibility target. Before claiming support
@@ -98,12 +98,14 @@ standard.
   it is not a claim of Ragas compatibility or an independent proof of factual
   correctness.
 - The chat runtime has stricter response controls than the offline retrieval
-  metrics alone: unsupported requests receive a deterministic server response
-  without a provider call, and provider answers fail closed unless they contain
-  valid `[n]` citations. Only actually cited sources are returned. Client-provided
-  history is neither retrieval evidence nor provider input. Release smoke
-  exercises both a real provider-backed answer and the deterministic abstention
-  path; it is still a canary, not a general proof of model faithfulness.
+  metrics alone: strong public evidence routes to grounded responses whose
+  provider answers fail closed unless they contain valid `[n]` citations; weak
+  or absent Wiki evidence routes to ordinary uncited conversation; only sensitive
+  or hidden-content requests receive deterministic protection before a provider
+  call. Only actually cited sources are returned. Client-provided history is
+  neither retrieval evidence nor provider input. Release smoke exercises grounded,
+  page-context, conversational, and sensitive-request paths; it is still a canary,
+  not a general proof of model faithfulness.
 - A successful structural or hash freshness check proves that generated files
   match the repository source. It does not prove that real-world facts remain
   current; source checks and scheduled human review provide that evidence.

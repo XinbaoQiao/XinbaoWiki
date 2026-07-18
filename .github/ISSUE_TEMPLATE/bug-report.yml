@@ -1,0 +1,86 @@
+name: Bug report
+description: Report a reproducible defect in the site, API, themes, search, retrieval, accessibility, or build behavior.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not disclose vulnerabilities, credentials, private prompts, raw questions, or raw IP/user data here. Follow [SECURITY.md](https://github.com/XinbaoQiao/XinbaoWiki/security/policy) for private reporting. Ordinary weak AI answers may be reported here when they are reproducible and contain no sensitive data.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      options:
+        - Wiki page or navigation
+        - AI chat or citations
+        - Search or retrieval
+        - Theme or visual layout
+        - Accessibility
+        - API or rate limiting
+        - Build, maintenance, or OKF export
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: route
+    attributes:
+      label: URL, route, or command
+      placeholder: https://xinbaopedia.top/wiki/Xinbao_Qiao or npm run check
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      description: Give the smallest deterministic sequence that reproduces the problem. Use synthetic, non-sensitive AI prompts.
+      placeholder: |
+        1. Open ...
+        2. Select ...
+        3. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include exact visible errors when safe. Redact tokens, cookies, user data, request bodies, and private configuration.
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Provide browser/device, operating system, language, selected theme, commit, and local or production context when relevant.
+      placeholder: Chrome 126, macOS, Chinese, violet theme, production
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Screenshots, logs, or affected sources
+      description: Drag in a redacted screenshot or paste a short sanitized log. For AI/citation bugs, link the public Wiki sources that should support the answer.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submission checks
+      options:
+        - label: I reproduced this on the current production site or current `main` branch.
+          required: true
+        - label: I removed credentials, cookies, private prompts, raw user data, and other sensitive information.
+          required: true
+        - label: This is not a vulnerability or privacy incident requiring private disclosure.
+          required: true

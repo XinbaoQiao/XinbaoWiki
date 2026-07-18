@@ -4,7 +4,7 @@ These notes describe the public tone categories used by `Chat with Xinbao`. They
 
 ## Source handling
 
-The local file `46 notes.hdoc` is treated as private reference material. Current command-line extraction produced binary-looking content rather than reliable readable text, so the site should not quote it or commit it. If a future plain-text export is available, summarize it into categories first instead of pasting raw notes into the prompt.
+Private source material is kept outside the repository. The site should not quote or commit raw private notes. If a future plain-text export becomes available, summarize it into categories first instead of pasting raw notes into the prompt.
 
 ## Categories
 

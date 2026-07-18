@@ -11,10 +11,10 @@ tags:
   - biography
   - phd-student
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-15T23:04:06+08:00'
-content_hash: 'sha256:ece5d20d0f79a3bd248813fd92f3949416c9d3a78bf0d698e8d8e48c1bfc4e88'
-reviewed_at: '2026-07-15T23:04:06+08:00'
-review_due: '2026-10-13'
+modified: '2026-07-18T04:24:40.221Z'
+content_hash: 'sha256:644f6709d8a5b7ad682dc27cd1f65b8753de694496eda1c740133f3916f175f5'
+reviewed_at: '2026-07-18T12:25:05+08:00'
+review_due: '2026-10-16'
 name: Xinbao Qiao
 summary: >-
   PhD student in Information Engineering at The Chinese University of Hong Kong;
@@ -50,7 +50,7 @@ image_gallery:
     alt: Xinbao Qiao at Singapore EXPO during ICLR 2025
     caption: 'Photograph taken at ICLR 2025, Singapore EXPO'
   - src: /images/Portrait-Seoul-ICML-2026.png
-    alt: Kuaishou AI-generated ICML 2026 Tech Walk scene in Seoul
+    alt: AI-generated ICML 2026 Tech Walk scene in Seoul
     caption: 'Photograph generated for ICML 2026, Seoul COEX'
     fit: contain
 links:

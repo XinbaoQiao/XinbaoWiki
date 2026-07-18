@@ -1,5 +1,9 @@
 # Xinbaopedia OKF Update Log
 
+## 2026-07-18
+
+- Removed provider-specific portrait attribution from current public biography and resource text after embedded provenance claims conflicted with an older maintenance note; kept the Seoul scene labeled as AI-generated and recorded the unresolved evidence in the repository asset-provenance register.
+
 ## 2026-07-15
 
 - Replaced the single biography portrait with an accessible three-image gallery that always opens on the uncaptioned studio portrait and allows manual switching to ICLR 2025 Singapore and Kuaishou AI-generated ICML 2026 Seoul images.

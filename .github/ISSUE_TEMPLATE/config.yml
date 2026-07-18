@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Private security report
+    url: https://github.com/XinbaoQiao/XinbaoWiki/security/advisories/new
+    about: Report vulnerabilities and privacy incidents privately; do not disclose them in a public Issue.
+  - name: Live Xinbaopedia
+    url: https://xinbaopedia.top
+    about: Check the current production site before reporting a visual or behavioral problem.

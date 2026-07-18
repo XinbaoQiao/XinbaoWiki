@@ -37,6 +37,7 @@ log/
 output/
 outputs/
 tmp/
+.tmp/
 temp/
 *.log
 
@@ -45,4 +46,3 @@ temp/
 Thumbs.db
 .vscode/
 .idea/
-.vercel

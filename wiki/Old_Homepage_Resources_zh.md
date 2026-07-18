@@ -8,10 +8,10 @@ tags:
   - archive
   - 资源记录
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-07-15T22:33:36+08:00'
-content_hash: 'sha256:1e3ab25218bb7c3ba4d95ba53f01a8dc2baca841ce6e7b5e5d17056f3bfcfd44'
-reviewed_at: '2026-07-15T22:33:36+08:00'
-review_due: '2027-07-15'
+modified: '2026-07-18T04:24:40.205Z'
+content_hash: 'sha256:82bba430782e8ac82d2afac3b574607ea08303043c86c0a12c4720064bfb896e'
+reviewed_at: '2026-07-18T12:25:05+08:00'
+review_due: '2027-07-18'
 name: 主页肖像资源
 language: zh
 summary: 记录个人主页 infobox 使用的肖像图库。
@@ -24,7 +24,7 @@ translation_of: Old_Homepage_Resources
 
 - 默认棚拍肖像：images/Portrait.png
 - ICLR 2025 新加坡 EXPO 照片：images/Portrait-Singapore-ICLR-2025.jpg
-- 快手 AI 生成的 ICML 2026 首尔图片：images/Portrait-Seoul-ICML-2026.png
+- AI 生成的 ICML 2026 首尔图片：images/Portrait-Seoul-ICML-2026.png
 
 两张活动图片使用事实性图注，其中首尔图片明确标注为 AI 生成。
 

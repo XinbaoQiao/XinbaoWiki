@@ -12,6 +12,12 @@ This bundle exposes the public Xinbaopedia wiki as Markdown concepts with OKF v0
 - [Quality report](quality-report.json) - source, citation, review, relation, and retrieval coverage.
 - [Update log](log.md) - chronological wiki maintenance history.
 
+## Licensing
+
+Original textual content and knowledge-graph metadata in this bundle are available under CC BY 4.0 only to the extent the licensor owns the applicable rights.
+Software, protected media, brand assets, and third-party material have different terms. See the [repository licensing policy](https://github.com/XinbaoQiao/XinbaoWiki/blob/main/LICENSING.md).
+Recommended attribution: "Xinbao Qiao and Xinbaopedia contributors, Xinbaopedia, https://github.com/XinbaoQiao/XinbaoWiki, CC BY 4.0." Indicate changes.
+
 ## Concepts
 
 ### Academic advisor
