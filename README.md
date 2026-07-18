@@ -68,33 +68,25 @@
 
 > **The product promise:** browse like a Wiki, discover like a search engine, ask like an LLM, verify like a researcher.
 
-## The product, at a glance
-
-<p align="center">
-  <img src="public/readme/xinbaopedia-product-architecture.png" width="100%" alt="Xinbaopedia transforms academic source material through a connected knowledge core into four product experiences: Explore, Ask, Build, and Ship." />
-</p>
-
-<p align="center"><sub>AI-generated product architecture: academic sources converge into one knowledge core, then emerge as four outcomes — Explore, Ask, Build, and Ship.</sub></p>
-
-<code>wiki/*.md</code> 是唯一规范内容源。它被编译为人类可读页面、搜索索引、检索上下文、知识图谱和 agent-readable OKF；回答策略与发布门禁则确保这些能力不会脱离证据边界。
+一切从一份可信、可编辑的知识源开始：只需维护 <code>wiki/*.md</code>，Xinbaopedia 就会把它变成可阅读的页面、可探索的关系、可检索的上下文和可供 agent 使用的知识包。内容写一次，阅读、搜索、问答和持续发布自然连成一个产品。
 
 ## Why it feels different
 
-### It turns a profile into a map
+### A profile becomes a map
 
-履历不再是平铺的时间线。WikiLinks 把研究主题、论文、合作关系、机构与方法连成可以逐层探索的路径。
+履历不再止于一条平铺的时间线。WikiLinks 把研究主题、论文、合作关系、机构与方法连在一起，每一次点击都可能打开下一条值得探索的路径。
 
-### It makes AI earn its citations
+### AI has to show its work
 
-Grounded 回答只有在 <code>[n]</code> 引用真实、有效且落在检索结果内时才会返回。API 只附上模型实际使用的 Wiki 页面；缺失或越界引用会被拒绝或进行一次有界重试。
+当答案依赖 Wiki，AI 必须给出真实、有效、可以点回原文核对的引用。系统只展示模型实际使用过的页面；引用缺失或越界时，答案不会被包装成“有依据”的结论。
 
-### It answers normally when a citation is not the point
+### The conversation keeps flowing
 
-Wiki 证据不足不等于什么都不能说。普通知识与自然对话会进入 conversational mode；只有隐藏内容、私密信息或敏感请求才在模型调用前确定性阻断。
+Wiki 没有覆盖某个问题，并不意味着对话必须停在一句拒答上。普通知识与自然交流会继续正常回答；只有隐藏内容、私密信息和敏感请求会被明确阻断。
 
-### It ships maintenance, not just pages
+### It stays alive after launch
 
-双语配对、WikiLinks、来源、内容哈希、review due、OKF、新鲜度、检索评测、真实 provider canary 与 production smoke 都属于产品的一部分。
+发布不是终点。双语配对、链接完整性、来源、新鲜度、检索评测、真实模型检查和生产环境验证共同守住长期质量，让知识库可以持续生长，而不是上线后慢慢失真。
 
 ## Make it yours
 

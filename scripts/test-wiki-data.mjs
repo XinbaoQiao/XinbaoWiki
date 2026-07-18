@@ -155,7 +155,6 @@ const wikiMarkdownTsx = fs.readFileSync(path.join(root, 'components/WikiMarkdown
 const wikiLib = fs.readFileSync(path.join(root, 'lib/wiki.ts'), 'utf8');
 const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 const rootReadme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
-const readmeArchitecture = fs.readFileSync(path.join(root, 'public/readme/xinbaopedia-product-architecture.png'));
 const repositoryCiWorkflow = fs.readFileSync(path.join(root, '.github/workflows/ci.yml'), 'utf8');
 const dependabotConfig = fs.readFileSync(path.join(root, '.github/dependabot.yml'), 'utf8');
 const licensingPolicy = fs.readFileSync(path.join(root, 'LICENSING.md'), 'utf8');
@@ -180,9 +179,7 @@ assertFile('docs/chat/README.md');
 assertFile('docs/chat/env.example');
 assertFile('docs/chat/persona-prompt.md');
 assertFile('docs/chat/meme-voice-notes.md');
-assertFile('public/readme/xinbaopedia-product-architecture.png');
-assert.deepEqual(pngDimensions(readmeArchitecture), { width: 1672, height: 941 }, 'README product architecture keeps the approved wide AI-generated composition');
-assert.match(rootReadme, /The product, at a glance[\s\S]*xinbaopedia-product-architecture\.png/, 'README uses the approved product architecture hero');
+assert.doesNotMatch(rootReadme, /xinbaopedia-product-architecture\.png|The product, at a glance/, 'README omits the retired product architecture artwork');
 assert.doesNotMatch(rootReadme, /~~~mermaid|flowchart TB/, 'README does not regress to a Mermaid architecture diagram');
 for (const repositoryFile of [
   'LICENSE',
