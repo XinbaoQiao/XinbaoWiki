@@ -6,25 +6,25 @@
 </p>
 
 <div align="center">
-  <img src="public/xinbaopedia-icon.png" width="132" alt="Xinbaopedia" />
+  <img src="public/xinbaopedia-icon.png" width="112" alt="Xinbaopedia" />
 
   # Xinbaopedia
 
-  ## Your academic story should be discovered — not just displayed.
+  ## Research should be explorable.
 
-  **Turn a static academic homepage into a product people can explore, question, verify, and reuse.**
+  **A bilingual academic knowledge product for exploring people, papers, projects, institutions, and ideas — then asking questions with evidence in view.**
 
-  One bilingual, Git-native product for exploring profiles, publications, projects, institutions, and research ideas — with search, evidence-grounded AI, and continuous maintenance built in.
+  Browse the connections. Search what you only half remember. Ask the Wiki. Trace grounded answers back to their sources.
 
-  ### 你的学术故事值得被发现，而不只是被展示。
+  ### 研究不只应该被展示，更应该被探索。
 
-  **把静态学术主页变成一件可以探索、追问、验证和复用的知识产品。**
+  **一个连接人物、论文、项目、机构与概念的双语学术知识产品，让每一次搜索与追问都有证据可循。**
 
-  一个双语、Git-native 的学术知识产品：把人物、论文、项目、机构与研究概念连成可搜索、可追问、可验证且可持续维护的知识网络。
+  浏览关联，搜索只记得大概的内容，向 Wiki 提问，再沿着证据继续探索。
 
   <p>
-    <a href="https://xinbaopedia.top"><img src="https://img.shields.io/badge/EXPLORE-Live%20Product-0071e3?style=for-the-badge" height="31" alt="Explore the live product" /></a>
-    <a href="https://github.com/XinbaoQiao/XinbaoWiki/fork"><img src="https://img.shields.io/badge/FORK-Build%20Your%20Own-1d1d1f?style=for-the-badge" height="31" alt="Fork Xinbaopedia" /></a>
+    <a href="https://xinbaopedia.top"><img src="https://img.shields.io/badge/OPEN-Xinbaopedia-0071e3?style=for-the-badge" height="31" alt="Open Xinbaopedia" /></a>
+    <a href="https://github.com/XinbaoQiao/XinbaoWiki/fork"><img src="https://img.shields.io/badge/BUILD-Your%20Own-1d1d1f?style=for-the-badge" height="31" alt="Build your own Xinbaopedia" /></a>
   </p>
 
   <p>
@@ -40,51 +40,46 @@
 
 ## English
 
-### See it in motion
+### See the product work
 
 <a href="https://xinbaopedia.top/wiki/DynFrs/"><img src="public/readme/xinbaopedia-tour-en.gif" width="100%" alt="Animated English walkthrough of Xinbaopedia: homepage, English profile, DynFrs publication page, and a citation-grounded AI answer." /></a>
 
-<p align="center"><sub>Home → profile → publication → grounded AI answer with sources.</sub></p>
+<p align="center"><sub>Discover on the homepage → follow the profile → open a publication → ask for a source-grounded answer.</sub></p>
 
 ## From profile page to knowledge product
 
-A conventional academic homepage tells you who someone is. Xinbaopedia helps you understand how the work fits together — and where to explore next:
+A conventional academic homepage is an endpoint: a biography, a list of papers, a few links. Xinbaopedia turns the same material into a starting point — a connected place to browse, search, ask, and keep discovering.
 
-- How do papers, projects, institutions, collaborators, and research questions connect?
-- Can I search for an idea directly instead of scanning an entire CV?
-- Can an AI answer point back to the exact Wiki evidence it used?
-- Can someone fork the product, replace the knowledge, and keep it healthy over time?
-
-**Visitors get a connected academic map. Builders get the system that keeps it alive.**
+**Readers see how the work fits together. Builders own the system that keeps it useful.**
 
 <table>
   <tr>
     <td width="50%" valign="top">
-      <img src="https://img.shields.io/badge/BROWSE-Connected%20knowledge-3366cc?style=flat-square" alt="Browse" />
+      <sub><strong>01 · EXPLORE</strong></sub>
       <h3>A profile becomes a map</h3>
-      Follow people, papers, projects, institutions, and concepts through real WikiLinks instead of stopping at a flat timeline.
+      Move through people, papers, projects, institutions, and concepts with real WikiLinks — not a flat CV timeline.
     </td>
     <td width="50%" valign="top">
-      <img src="https://img.shields.io/badge/SEARCH-Bilingual%20discovery-2a7f62?style=flat-square" alt="Search" />
+      <sub><strong>02 · DISCOVER</strong></sub>
       <h3>Search follows intent</h3>
-      Find content through English and Chinese titles, aliases, summaries, and natural phrasing — not exact filenames.
+      Find ideas through English and Chinese titles, aliases, summaries, and natural phrasing — no exact filename required.
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <img src="https://img.shields.io/badge/ASK-Evidence%20first-6b4fbb?style=flat-square" alt="Ask" />
+      <sub><strong>03 · ASK</strong></sub>
       <h3>AI has to show its work</h3>
-      Grounded answers cite the Wiki pages they used. Questions outside the Wiki still receive normal conversational answers.
+      Wiki-grounded answers cite the pages they used. Questions beyond the Wiki still receive a natural conversational response.
     </td>
     <td width="50%" valign="top">
-      <img src="https://img.shields.io/badge/SHIP-Continuously%20maintained-f08c46?style=flat-square" alt="Ship" />
+      <sub><strong>04 · SUSTAIN</strong></sub>
       <h3>Launch is not the finish line</h3>
-      Content checks, retrieval evaluation, provider canaries, and production smoke keep the product trustworthy after release.
+      Content checks, retrieval evaluation, live-model canaries, and production smoke protect quality after release.
     </td>
   </tr>
 </table>
 
-<br/>
+### Proof built into the product
 
 <table>
   <tr>
@@ -95,25 +90,25 @@ A conventional academic homepage tells you who someone is. Xinbaopedia helps you
   </tr>
 </table>
 
-## What it feels like to use
+## Designed around real questions
 
-| You want to… | Xinbaopedia does… | You get… |
+| When you want to… | The product… | So you get… |
 | --- | --- | --- |
-| Understand a research profile quickly | Organizes biography, education, papers, and themes as a bilingual Wiki | A reading path that invites the next click |
-| Find an idea you only vaguely remember | Weighs titles, aliases, summaries, headings, and body text | Results closer to what you meant |
-| Ask “What did this paper contribute?” | Uses the current page and retrieves related public evidence | A cited answer you can inspect |
-| Ask something outside the Wiki | Switches to ordinary conversation instead of a canned refusal | A natural answer without invented sources |
-| Build your own version | Opens the content model, maintainer, evaluations, and release gates | A sustainable academic knowledge-product template |
+| Understand a research profile quickly | Organizes biography, education, papers, and themes as a bilingual Wiki | A clear reading path instead of a document to scan |
+| Find an idea you only half remember | Searches titles, aliases, summaries, headings, and body text | Results closer to your intent |
+| Ask “What did this paper contribute?” | Combines current-page context with related public evidence | A cited answer you can inspect |
+| Ask beyond the Wiki | Switches to ordinary conversation instead of a canned refusal | A useful answer without invented Wiki sources |
+| Build your own version | Opens the content model, maintainer, evaluations, and release gates | A reusable knowledge-product foundation |
 
-> **The product promise:** browse like a Wiki, discover like a search engine, ask like an LLM, verify like a researcher.
+<p align="center"><strong>Browse like a Wiki · Discover like search · Ask like an LLM · Verify like a researcher</strong></p>
 
-Everything begins with one editable source of truth: <code>wiki/*.md</code>. Maintain knowledge once; Xinbaopedia compiles it into readable pages, connected navigation, search context, a knowledge graph, and an agent-readable bundle.
+Everything begins with one editable source of truth: <code>wiki/*.md</code>. Maintain the knowledge once; Xinbaopedia turns it into readable pages, connected navigation, search context, a knowledge graph, and an agent-readable bundle.
 
-## Make it yours
+## Build your own Xinbaopedia
 
-1. **Fork the product** — keep the frontend, retrieval, maintenance, and release gates.
-2. **Replace the knowledge** — edit <code>wiki/*.md</code>, public media, and site metadata.
-3. **Compile and ship** — regenerate knowledge artifacts, validate content and retrieval, then deploy.
+1. **Fork the system.** Keep the product UI, retrieval, maintenance, and release gates.
+2. **Bring your knowledge.** Replace <code>wiki/*.md</code>, public media, and site metadata.
+3. **Compile with confidence.** Regenerate knowledge artifacts, validate content and retrieval, then deploy.
 
 ~~~bash
 npm ci
@@ -124,9 +119,9 @@ npm run build
 
 <table>
   <tr>
-    <td width="33%" valign="top"><strong>01 · Content</strong><br/><sub>Git-native bilingual Markdown that stays readable, reviewable, and portable.</sub></td>
-    <td width="33%" valign="top"><strong>02 · Intelligence</strong><br/><sub>Explicit retrieval, response policy, citation validation, and evaluation.</sub></td>
-    <td width="33%" valign="top"><strong>03 · Operations</strong><br/><sub>Maintenance checks, immutable previews, provider canaries, and production smoke.</sub></td>
+    <td width="33%" valign="top"><strong>Content you can own</strong><br/><sub>Git-native bilingual Markdown that stays readable, reviewable, and portable.</sub></td>
+    <td width="33%" valign="top"><strong>Intelligence you can inspect</strong><br/><sub>Explicit retrieval, response policy, citation validation, and evaluation.</sub></td>
+    <td width="33%" valign="top"><strong>Operations you can trust</strong><br/><sub>Maintenance checks, immutable previews, live canaries, and production smoke.</sub></td>
   </tr>
 </table>
 
@@ -206,51 +201,46 @@ Read [Contributing](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md),
 
 ## 简体中文
 
-### 看它如何工作
+### 看见产品如何工作
 
 <a href="https://xinbaopedia.top/wiki/Research_zh/"><img src="public/readme/xinbaopedia-tour-zh.gif" width="100%" alt="Xinbaopedia 中文动图演示：首页、中文人物页、研究页，以及带引用来源的 AI 回答。" /></a>
 
-<p align="center"><sub>主页 → 中文人物页 → 研究页 → 带来源的 AI 回答。</sub></p>
+<p align="center"><sub>从主页发现 → 沿人物页探索 → 打开研究页 → 获得可回查来源的 AI 回答。</sub></p>
 
 ## 从个人主页，到知识产品
 
-普通学术主页告诉你“这个人是谁”。Xinbaopedia 更进一步：解释研究如何彼此关联，以及下一步值得探索什么。
+传统学术主页通常是终点：一段简介、一列论文、几个链接。Xinbaopedia 把同样的材料变成探索的起点——可以沿关联浏览，可以按意图搜索，也可以带着证据继续追问。
 
-- 论文、项目、机构、合作者和研究问题之间如何连接？
-- 能否直接搜索概念，而不是从头翻完整份 CV？
-- AI 的回答能否指回它真正使用过的 Wiki 证据？
-- 其他人能否 fork 产品、替换知识，并让它长期保持可靠？
-
-**访客得到一张连通的学术地图，构建者得到一套让知识持续生长的系统。**
+**读者看到研究如何彼此关联，构建者掌握让它持续有用的整套系统。**
 
 <table>
   <tr>
     <td width="50%" valign="top">
-      <img src="https://img.shields.io/badge/浏览-连通的知识-3366cc?style=flat-square" alt="浏览" />
+      <sub><strong>01 · 探索</strong></sub>
       <h3>个人主页变成知识地图</h3>
-      人物、论文、项目、机构与概念通过真实 WikiLinks 相互连接，阅读不会停在平铺的时间线上。
+      人物、论文、项目、机构与概念通过真实 WikiLinks 相连，阅读不再停在平铺的履历时间线上。
     </td>
     <td width="50%" valign="top">
-      <img src="https://img.shields.io/badge/搜索-双语发现-2a7f62?style=flat-square" alt="搜索" />
+      <sub><strong>02 · 发现</strong></sub>
       <h3>搜索理解你的意图</h3>
-      同时理解中英文标题、别名、摘要和自然表达，不要求用户记住精确文件名。
+      同时理解中英文标题、别名、摘要和自然表达，不要求你记住精确文件名。
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <img src="https://img.shields.io/badge/问答-证据优先-6b4fbb?style=flat-square" alt="问答" />
+      <sub><strong>03 · 追问</strong></sub>
       <h3>AI 必须展示依据</h3>
-      依赖 Wiki 的回答引用真正使用过的页面；普通问题则继续自然对话，不重复固定拒答。
+      基于 Wiki 的回答引用真正使用过的页面；超出 Wiki 的问题仍会得到自然回答，而不是固定拒答。
     </td>
     <td width="50%" valign="top">
-      <img src="https://img.shields.io/badge/发布-持续维护-f08c46?style=flat-square" alt="发布" />
+      <sub><strong>04 · 持续</strong></sub>
       <h3>上线不是终点</h3>
-      内容检查、检索评测、真实模型 canary 与生产 smoke 共同守住发布后的长期质量。
+      内容检查、检索评测、真实模型 canary 与生产 smoke 共同守住上线后的长期质量。
     </td>
   </tr>
 </table>
 
-<br/>
+### 产品自带的证明
 
 <table>
   <tr>
@@ -261,25 +251,25 @@ Read [Contributing](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md),
   </tr>
 </table>
 
-## 使用它是什么感觉
+## 围绕真实问题设计
 
-| 你想要…… | Xinbaopedia 会…… | 你将得到…… |
+| 当你想要…… | 产品会…… | 于是你得到…… |
 | --- | --- | --- |
-| 快速了解一个人的研究 | 把人物、教育、论文与主题组织成双语 Wiki | 自然引向下一页的阅读路径 |
-| 找到只记得大概意思的概念 | 加权检索标题、别名、摘要、小节与正文 | 更接近真实意图的结果 |
-| 问“这篇论文做了什么？” | 使用当前页并检索相关公开证据 | 可以回查的引用回答 |
-| 问 Wiki 没覆盖的问题 | 转入普通对话而不是固定拒答 | 不伪造来源的自然回答 |
-| 构建自己的版本 | 开放内容模型、维护器、评测与发布门禁 | 可持续维护的知识产品模板 |
+| 快速理解一个人的研究 | 把人物、教育、论文与主题组织成双语 Wiki | 清晰的阅读路径，而不是一份需要扫读的文档 |
+| 找到只记得大概的概念 | 检索标题、别名、摘要、小节与正文 | 更接近真实意图的结果 |
+| 问“这篇论文做了什么？” | 结合当前页与相关公开证据 | 可以回查的引用回答 |
+| 问 Wiki 尚未覆盖的问题 | 转入普通对话，而不是重复固定拒答 | 有用且不虚构 Wiki 来源的回答 |
+| 构建自己的版本 | 开放内容模型、维护器、评测与发布门禁 | 可以复用的知识产品底座 |
 
-> **产品承诺：** 像 Wiki 一样浏览，像搜索引擎一样发现，像 LLM 一样对话，像研究者一样验证。
+<p align="center"><strong>像 Wiki 一样浏览 · 像搜索一样发现 · 像 LLM 一样对话 · 像研究者一样验证</strong></p>
 
-一切从一份可编辑的可信知识源开始：只需维护 <code>wiki/*.md</code>，Xinbaopedia 就会把它编译为可阅读页面、关联导航、检索上下文、知识图谱和 agent-readable 知识包。
+一切从一份可编辑的可信知识源开始：只需维护 <code>wiki/*.md</code>，Xinbaopedia 就会把它转化为可阅读页面、关联导航、检索上下文、知识图谱和 agent-readable 知识包。
 
-## 构建你的版本
+## 构建属于你的 Xinbaopedia
 
-1. **Fork 产品** — 保留前端、检索、维护和发布门禁。
-2. **替换知识** — 修改 <code>wiki/*.md</code>、公开媒体和站点 metadata。
-3. **编译并发布** — 重新生成知识产物，验证内容与检索，然后部署。
+1. **Fork 整套系统。** 保留产品界面、检索、维护和发布门禁。
+2. **带入你的知识。** 替换 <code>wiki/*.md</code>、公开媒体和站点 metadata。
+3. **经过验证再发布。** 重新生成知识产物，检查内容与检索，然后部署。
 
 ~~~bash
 npm ci
@@ -290,9 +280,9 @@ npm run build
 
 <table>
   <tr>
-    <td width="33%" valign="top"><strong>01 · 内容</strong><br/><sub>Git-native 双语 Markdown，可阅读、可审查、可迁移。</sub></td>
-    <td width="33%" valign="top"><strong>02 · 智能</strong><br/><sub>显式实现检索、回答策略、引用验证与评测。</sub></td>
-    <td width="33%" valign="top"><strong>03 · 运维</strong><br/><sub>维护检查、不可变预览、模型 canary 与生产 smoke。</sub></td>
+    <td width="33%" valign="top"><strong>你拥有的内容</strong><br/><sub>Git-native 双语 Markdown，可阅读、可审查、可迁移。</sub></td>
+    <td width="33%" valign="top"><strong>你看得懂的智能</strong><br/><sub>显式实现检索、回答策略、引用验证与评测。</sub></td>
+    <td width="33%" valign="top"><strong>你可以信任的运维</strong><br/><sub>维护检查、不可变预览、真实模型 canary 与生产 smoke。</sub></td>
   </tr>
 </table>
 

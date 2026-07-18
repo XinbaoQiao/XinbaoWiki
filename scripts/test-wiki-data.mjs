@@ -206,11 +206,11 @@ assert.equal(gifFrameCount(readmeChineseTour), 4, 'Chinese README tour contains 
 assert.match(readmeCta, /fill="#f5f5f7"[\s\S]*Start shipping knowledge\.[\s\S]*别只发布页面，让知识真正上线。[\s\S]*fill="#0071e3"/, 'README CTA keeps the approved minimal neutral surface, bilingual message, and one blue action');
 assert.doesNotMatch(readmeCta, /linearGradient|fill-opacity|BROWSE|SEARCH|ASK|VERIFY/, 'README CTA avoids the retired decorative gradient and feature-card clutter');
 assert.match(rootReadme, /href="#english"[\s\S]*href="#simplified-chinese"/, 'README exposes same-page English and Chinese navigation');
-assert.match(rootReadme, /<a id="english"><\/a>[\s\S]*## English[\s\S]*### See it in motion[\s\S]*xinbaopedia-tour-en\.gif[\s\S]*From profile page to knowledge product[\s\S]*<a id="simplified-chinese"><\/a>/, 'README keeps the English walkthrough inside the English section');
-assert.match(rootReadme, /<a id="simplified-chinese"><\/a>[\s\S]*## 简体中文[\s\S]*### 看它如何工作[\s\S]*xinbaopedia-tour-zh\.gif[\s\S]*从个人主页，到知识产品/, 'README keeps the Chinese walkthrough inside the Chinese section');
+assert.match(rootReadme, /<a id="english"><\/a>[\s\S]*## English[\s\S]*### See the product work[\s\S]*xinbaopedia-tour-en\.gif[\s\S]*From profile page to knowledge product[\s\S]*<a id="simplified-chinese"><\/a>/, 'README keeps the English walkthrough inside the English section');
+assert.match(rootReadme, /<a id="simplified-chinese"><\/a>[\s\S]*## 简体中文[\s\S]*### 看见产品如何工作[\s\S]*xinbaopedia-tour-zh\.gif[\s\S]*从个人主页，到知识产品/, 'README keeps the Chinese walkthrough inside the Chinese section');
 assert.doesNotMatch(rootReadme.slice(0, rootReadme.indexOf('<a id="english"></a>')), /xinbaopedia-tour-(?:en|zh)\.gif/, 'README shared hero does not mix localized walkthroughs before the language sections');
 assert.match(rootReadme, /<a id="english"><\/a>[\s\S]*From profile page to knowledge product[\s\S]*<a id="simplified-chinese"><\/a>[\s\S]*从个人主页，到知识产品/, 'README contains complete English and Chinese product sections on one page');
-assert.match(rootReadme, /使用它是什么感觉[\s\S]*可信本身就是产品能力/, 'README includes localized Chinese product experience and trust sections');
+assert.match(rootReadme, /围绕真实问题设计[\s\S]*可信本身就是产品能力/, 'README includes localized Chinese product experience and trust sections');
 assert.match(rootReadme, /public\/readme\/xinbaopedia-cta\.svg/, 'README uses the approved product CTA');
 assert.match(rootReadme, /Stop publishing pages\. Start shipping knowledge\./, 'README keeps the flagship closing slogan');
 assert.doesNotMatch(rootReadme, /README\.zh-CN\.md|xinbaopedia-product-architecture\.png|The product, at a glance|~~~mermaid|flowchart TB/, 'README stays single-page and omits retired architecture artwork and Mermaid');
