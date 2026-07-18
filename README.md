@@ -42,7 +42,7 @@
 
 ### See the product work
 
-<a href="https://xinbaopedia.top/wiki/DynFrs/"><img src="public/readme/xinbaopedia-tour-en.gif" width="100%" alt="Animated English walkthrough of Xinbaopedia: homepage, English profile, DynFrs publication page, and a citation-grounded AI answer." /></a>
+<a href="https://xinbaopedia.top/wiki/When_Sample_Selection_Bias_Precipitates_Model_Collapse/"><img src="public/readme/xinbaopedia-tour-en.gif" width="100%" alt="Animated English walkthrough of Xinbaopedia: homepage, English profile, When Sample Selection Bias Precipitates Model Collapse paper page, and a citation-grounded AI answer." /></a>
 
 <p align="center"><sub>Discover on the homepage → follow the profile → open a publication → ask for a source-grounded answer.</sub></p>
 
