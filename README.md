@@ -34,29 +34,17 @@
   </p>
 </div>
 
-## See it in motion · 看它如何工作
-
-One product, two complete reading paths. Each walkthrough moves from discovery to a real Wiki page and finishes with an evidence-grounded AI answer.
-
-同一个产品，两条完整的阅读路径：从发现内容进入真实 Wiki 页面，最后由 AI 给出可以回查来源的回答。
-
-### English walkthrough
-
-<a href="https://xinbaopedia.top/wiki/DynFrs/"><img src="public/readme/xinbaopedia-tour-en.gif" width="100%" alt="Animated English walkthrough of Xinbaopedia: homepage, English profile, DynFrs publication page, and a citation-grounded AI answer." /></a>
-
-<p align="center"><sub>Home → profile → publication → grounded AI answer with sources.</sub></p>
-
-### 中文演示
-
-<a href="https://xinbaopedia.top/wiki/Research_zh/"><img src="public/readme/xinbaopedia-tour-zh.gif" width="100%" alt="Xinbaopedia 中文动图演示：首页、中文人物页、研究页，以及带引用来源的 AI 回答。" /></a>
-
-<p align="center"><sub>主页 → 中文人物页 → 研究页 → 带来源的 AI 回答。</sub></p>
-
 ---
 
 <a id="english"></a>
 
 ## English
+
+### See it in motion
+
+<a href="https://xinbaopedia.top/wiki/DynFrs/"><img src="public/readme/xinbaopedia-tour-en.gif" width="100%" alt="Animated English walkthrough of Xinbaopedia: homepage, English profile, DynFrs publication page, and a citation-grounded AI answer." /></a>
+
+<p align="center"><sub>Home → profile → publication → grounded AI answer with sources.</sub></p>
 
 ## From profile page to knowledge product
 
@@ -217,6 +205,12 @@ Read [Contributing](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md),
 <a id="simplified-chinese"></a>
 
 ## 简体中文
+
+### 看它如何工作
+
+<a href="https://xinbaopedia.top/wiki/Research_zh/"><img src="public/readme/xinbaopedia-tour-zh.gif" width="100%" alt="Xinbaopedia 中文动图演示：首页、中文人物页、研究页，以及带引用来源的 AI 回答。" /></a>
+
+<p align="center"><sub>主页 → 中文人物页 → 研究页 → 带来源的 AI 回答。</sub></p>
 
 ## 从个人主页，到知识产品
 
