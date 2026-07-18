@@ -154,6 +154,8 @@ const wikiPageTsx = fs.readFileSync(path.join(root, 'app/wiki/[slug]/page.tsx'),
 const wikiMarkdownTsx = fs.readFileSync(path.join(root, 'components/WikiMarkdown.tsx'), 'utf8');
 const wikiLib = fs.readFileSync(path.join(root, 'lib/wiki.ts'), 'utf8');
 const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
+const rootReadme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
+const readmeArchitecture = fs.readFileSync(path.join(root, 'public/readme/xinbaopedia-product-architecture.png'));
 const repositoryCiWorkflow = fs.readFileSync(path.join(root, '.github/workflows/ci.yml'), 'utf8');
 const dependabotConfig = fs.readFileSync(path.join(root, '.github/dependabot.yml'), 'utf8');
 const licensingPolicy = fs.readFileSync(path.join(root, 'LICENSING.md'), 'utf8');
@@ -178,6 +180,10 @@ assertFile('docs/chat/README.md');
 assertFile('docs/chat/env.example');
 assertFile('docs/chat/persona-prompt.md');
 assertFile('docs/chat/meme-voice-notes.md');
+assertFile('public/readme/xinbaopedia-product-architecture.png');
+assert.deepEqual(pngDimensions(readmeArchitecture), { width: 1672, height: 941 }, 'README product architecture keeps the approved wide AI-generated composition');
+assert.match(rootReadme, /The product, at a glance[\s\S]*xinbaopedia-product-architecture\.png/, 'README uses the approved product architecture hero');
+assert.doesNotMatch(rootReadme, /~~~mermaid|flowchart TB/, 'README does not regress to a Mermaid architecture diagram');
 for (const repositoryFile of [
   'LICENSE',
   'LICENSES/CC-BY-4.0.txt',
@@ -356,7 +362,8 @@ assert.match(repositoryCiWorkflow, /permissions:\n  contents: read/, 'CI uses re
 assert.match(repositoryCiWorkflow, /timeout-minutes: 20/, 'CI has a bounded job timeout');
 assert.match(repositoryCiWorkflow, /concurrency:[\s\S]*cancel-in-progress: true/, 'CI cancels superseded runs on the same ref');
 assert.doesNotMatch(repositoryCiWorkflow, /Verify OKF conformance/, 'CI does not repeat the OKF gate already included by npm run check');
-assert.match(dependabotConfig, /package-ecosystem: npm[\s\S]*package-ecosystem: github-actions/, 'Dependabot covers npm and GitHub Actions');
+assert.match(dependabotConfig, /package-ecosystem: npm[\s\S]*package-ecosystem: github-actions/, 'Dependabot keeps npm and GitHub Actions policy entries');
+assert.deepEqual([...dependabotConfig.matchAll(/open-pull-requests-limit: (\d+)/g)].map((match) => Number(match[1])), [0, 0], 'Dependabot does not create automated update branches');
 assert.match(packageJson.scripts?.['maintain:wiki'] || '', /run-with-node22\.mjs node scripts\/wiki-maintenance\.mjs --standardize --write/, 'package.json runs deterministic wiki maintenance under Node 22');
 assert.equal(packageJson.scripts?.['lint:content'], 'node scripts/wiki-maintenance.mjs --check', 'package.json exposes a deterministic content maintenance check');
 assert.equal(packageJson.scripts?.['lint:okf'], 'node scripts/okf-conformance.mjs', 'package.json exposes a deterministic OKF conformance check');

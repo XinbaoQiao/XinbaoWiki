@@ -68,79 +68,13 @@
 
 > **The product promise:** browse like a Wiki, discover like a search engine, ask like an LLM, verify like a researcher.
 
-## Product architecture
+## The product, at a glance
 
-这张图不从依赖开始，而从用户体验开始：一次浏览、搜索或提问，如何经过知识、智能与发布门禁，最终变成可以信任的产品结果。
+<p align="center">
+  <img src="public/readme/xinbaopedia-product-architecture.png" width="100%" alt="Xinbaopedia transforms academic source material through a connected knowledge core into four product experiences: Explore, Ask, Build, and Ship." />
+</p>
 
-~~~mermaid
-flowchart TB
-  subgraph EXPERIENCE["01 · EXPERIENCE — what people touch"]
-    direction LR
-    B["Browse<br/>bilingual Wiki"]
-    S["Search<br/>weighted discovery"]
-    A["Ask<br/>page-aware AI"]
-    F["Fork<br/>build your own"]
-  end
-
-  subgraph INTELLIGENCE["02 · INTELLIGENCE — how evidence decides the answer"]
-    direction LR
-    UI["Product shell<br/>Next.js + React"]
-    RET["Bilingual retrieval<br/>stable heading chunks"]
-    ROUTER{"Evidence-aware<br/>response router"}
-    G["Grounded<br/>validated citations"]
-    C["Conversational<br/>normal answers"]
-    P["Protected<br/>stop before provider"]
-    RET --> ROUTER
-    ROUTER --> G
-    ROUTER --> C
-    ROUTER --> P
-  end
-
-  subgraph KNOWLEDGE["03 · KNOWLEDGE — one editable source, many surfaces"]
-    direction LR
-    W["Git-native Markdown<br/>wiki/*.md"]
-    COMP["Maintenance compiler<br/>links · sources · hashes"]
-    PAGES["Wiki pages<br/>+ search index"]
-    CHUNKS["Retrieval graph<br/>+ context chunks"]
-    OKF["OKF bundle<br/>for agents"]
-    W --> COMP
-    COMP --> PAGES
-    COMP --> CHUNKS
-    COMP --> OKF
-  end
-
-  subgraph TRUST["04 · TRUST — every release earns production"]
-    direction LR
-    TESTS["Content + retrieval<br/>quality gates"]
-    PREVIEW["Immutable preview<br/>live AI canaries"]
-    PROD["Production<br/>xinbaopedia.top"]
-    TESTS --> PREVIEW --> PROD
-  end
-
-  B --> UI
-  S --> UI
-  A --> RET
-  F --> W
-  PAGES --> UI
-  CHUNKS --> RET
-  COMP --> TESTS
-  ROUTER --> TESTS
-
-  classDef experience fill:#eef4ff,stroke:#3366cc,color:#172b4d,stroke-width:1.5px;
-  classDef intelligence fill:#f4efff,stroke:#6b4fbb,color:#2f2147,stroke-width:1.5px;
-  classDef knowledge fill:#edf8f3,stroke:#2a7f62,color:#173f32,stroke-width:1.5px;
-  classDef trust fill:#fff3e8,stroke:#d97706,color:#4b2b08,stroke-width:1.5px;
-
-  class B,S,A,F experience;
-  class UI,RET,ROUTER,G,C,P intelligence;
-  class W,COMP,PAGES,CHUNKS,OKF knowledge;
-  class TESTS,PREVIEW,PROD trust;
-
-  style EXPERIENCE fill:#f8fbff,stroke:#9bbcf5,stroke-width:1px;
-  style INTELLIGENCE fill:#fbf9ff,stroke:#c5afe8,stroke-width:1px;
-  style KNOWLEDGE fill:#f7fcf9,stroke:#9bcdbb,stroke-width:1px;
-  style TRUST fill:#fffaf5,stroke:#f2bd83,stroke-width:1px;
-~~~
+<p align="center"><sub>AI-generated product architecture: academic sources converge into one knowledge core, then emerge as four outcomes — Explore, Ask, Build, and Ship.</sub></p>
 
 <code>wiki/*.md</code> 是唯一规范内容源。它被编译为人类可读页面、搜索索引、检索上下文、知识图谱和 agent-readable OKF；回答策略与发布门禁则确保这些能力不会脱离证据边界。
 
