@@ -155,7 +155,6 @@ const wikiMarkdownTsx = fs.readFileSync(path.join(root, 'components/WikiMarkdown
 const wikiLib = fs.readFileSync(path.join(root, 'lib/wiki.ts'), 'utf8');
 const packageJson = JSON.parse(fs.readFileSync(path.join(root, 'package.json'), 'utf8'));
 const rootReadme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
-const zhRootReadme = fs.readFileSync(path.join(root, 'README.zh-CN.md'), 'utf8');
 const repositoryCiWorkflow = fs.readFileSync(path.join(root, '.github/workflows/ci.yml'), 'utf8');
 const dependabotConfig = fs.readFileSync(path.join(root, '.github/dependabot.yml'), 'utf8');
 const licensingPolicy = fs.readFileSync(path.join(root, 'LICENSING.md'), 'utf8');
@@ -180,17 +179,14 @@ assertFile('docs/chat/README.md');
 assertFile('docs/chat/env.example');
 assertFile('docs/chat/persona-prompt.md');
 assertFile('docs/chat/meme-voice-notes.md');
-assertFile('README.zh-CN.md');
+assert.ok(!fs.existsSync(path.join(root, 'README.zh-CN.md')), 'README keeps English and Chinese on one canonical page');
 assertFile('public/readme/xinbaopedia-cta.svg');
-assert.match(rootReadme, /README\.zh-CN\.md[\s\S]*Your academic story should be discovered/, 'English README exposes the Chinese version and English product promise');
-assert.match(zhRootReadme, /README\.md[\s\S]*你的学术故事值得被发现/, 'Chinese README exposes the English version and Chinese product promise');
-assert.match(zhRootReadme, /使用它是什么感觉[\s\S]*可信本身就是产品能力/, 'Chinese README localizes the product experience and trust sections');
-assert.doesNotMatch(zhRootReadme, /A conventional academic homepage|What it feels like to use|Trust is a product feature|Evidence boundary:/, 'Chinese README does not retain English product-copy blocks');
-for (const readme of [rootReadme, zhRootReadme]) {
-  assert.match(readme, /public\/readme\/xinbaopedia-cta\.svg/, 'localized README uses the approved product CTA');
-  assert.match(readme, /Stop publishing pages\. Start shipping knowledge\./, 'localized README keeps the flagship closing slogan');
-  assert.doesNotMatch(readme, /xinbaopedia-product-architecture\.png|The product, at a glance|~~~mermaid|flowchart TB/, 'localized README omits retired architecture artwork and Mermaid');
-}
+assert.match(rootReadme, /href="#english"[\s\S]*href="#simplified-chinese"/, 'README exposes same-page English and Chinese navigation');
+assert.match(rootReadme, /<a id="english"><\/a>[\s\S]*From profile page to knowledge product[\s\S]*<a id="simplified-chinese"><\/a>[\s\S]*从个人主页，到知识产品/, 'README contains complete English and Chinese product sections on one page');
+assert.match(rootReadme, /使用它是什么感觉[\s\S]*可信本身就是产品能力/, 'README includes localized Chinese product experience and trust sections');
+assert.match(rootReadme, /public\/readme\/xinbaopedia-cta\.svg/, 'README uses the approved product CTA');
+assert.match(rootReadme, /Stop publishing pages\. Start shipping knowledge\./, 'README keeps the flagship closing slogan');
+assert.doesNotMatch(rootReadme, /README\.zh-CN\.md|xinbaopedia-product-architecture\.png|The product, at a glance|~~~mermaid|flowchart TB/, 'README stays single-page and omits retired architecture artwork and Mermaid');
 for (const repositoryFile of [
   'LICENSE',
   'LICENSES/CC-BY-4.0.txt',
