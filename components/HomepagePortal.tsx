@@ -3,6 +3,7 @@
 import type { CSSProperties } from 'react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
+import { siteUpdates } from '@/lib/site-updates';
 
 type LocalizedText = Record<SearchLanguage, string>;
 type PortalPalette = 'text' | 'blue' | 'gold' | 'rose' | 'green' | 'violet' | 'charcoal';
@@ -20,14 +21,6 @@ type LanguageEntry = {
   href: string;
   label: string;
 };
-type NewsEntry = {
-  date: string;
-  dateTime: string;
-  detail: string;
-  href: string;
-  title: string;
-};
-
 type Props = {
   directorySections: PortalSection[];
   languageEntries: LanguageEntry[];
@@ -100,125 +93,20 @@ const updateLabels = {
 
 const quickLinkLabels = {
   en: {
-    feed: 'Updates feed',
+    feed: 'All updates',
     latest: 'Latest',
     latestAria: 'Open Latest details',
     topics: 'Topics',
     topicsAria: 'Open Topics details'
   },
   zh: {
-    feed: '更新订阅',
+    feed: '全部动态',
     latest: '最新动态',
     latestAria: '打开最新动态',
     topics: '主题',
     topicsAria: '打开主题发现'
   }
 } satisfies Record<SearchLanguage, { feed: string; latest: string; latestAria: string; topics: string; topicsAria: string }>;
-
-const updateEntries: Record<SearchLanguage, NewsEntry[]> = {
-  en: [
-    {
-      date: 'Apr 2026',
-      dateTime: '2026-04',
-      detail: '“When Sample Selection Bias Precipitates Model Collapse”.',
-      href: '/wiki/When_Sample_Selection_Bias_Precipitates_Model_Collapse/',
-      title: 'ICML 2026 paper accepted'
-    },
-    {
-      date: 'Dec 2025',
-      dateTime: '2025-12',
-      detail: 'M.Eng. in Artificial Intelligence, Zhejiang University.',
-      href: '/wiki/Zhejiang_University/',
-      title: 'Completed master’s degree'
-    },
-    {
-      date: 'Nov 2025',
-      dateTime: '2025-11',
-      detail: '“Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness”.',
-      href: '/wiki/Soft_Weighted_Machine_Unlearning/',
-      title: 'AAAI 2026 paper accepted'
-    },
-    {
-      date: 'Jun 2025',
-      dateTime: '2025-06',
-      detail: 'Six-month full-time research internship on trustworthy LLMs at NUSRI-CQ.',
-      href: '/wiki/NUSRI_CQ/',
-      title: 'Started full-time research internship'
-    },
-    {
-      date: 'Jan 2025',
-      dateTime: '2025-01',
-      detail: '“Hessian-Free Online Certified Unlearning” and “DynFrs”.',
-      href: '/wiki/Publications/',
-      title: 'Two ICLR 2025 papers accepted'
-    },
-    {
-      date: 'Sep 2022',
-      dateTime: '2022-09',
-      detail: 'M.Eng. in Artificial Intelligence, Zhejiang University.',
-      href: '/wiki/Education/',
-      title: 'Started master’s degree'
-    },
-    {
-      date: 'Jul 2022',
-      dateTime: '2022-07',
-      detail: 'B.Eng. in Communication Engineering, Shandong University.',
-      href: '/wiki/Shandong_University/',
-      title: 'Completed bachelor’s degree'
-    }
-  ],
-  zh: [
-    {
-      date: '2026年4月',
-      dateTime: '2026-04',
-      detail: '《When Sample Selection Bias Precipitates Model Collapse》。',
-      href: '/wiki/When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh/',
-      title: 'ICML 2026 论文录用'
-    },
-    {
-      date: '2025年12月',
-      dateTime: '2025-12',
-      detail: '浙江大学人工智能工学硕士。',
-      href: '/wiki/Zhejiang_University_zh/',
-      title: '完成硕士学位'
-    },
-    {
-      date: '2025年11月',
-      dateTime: '2025-11',
-      detail: '《Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness》。',
-      href: '/wiki/Soft_Weighted_Machine_Unlearning_zh/',
-      title: 'AAAI 2026 论文录用'
-    },
-    {
-      date: '2025年6月',
-      dateTime: '2025-06',
-      detail: '在 NUSRI-CQ 开展为期六个月的可信大模型全职研究实习。',
-      href: '/wiki/NUSRI_CQ_zh/',
-      title: '开始全职研究实习'
-    },
-    {
-      date: '2025年1月',
-      dateTime: '2025-01',
-      detail: '《Hessian-Free Online Certified Unlearning》和《DynFrs》。',
-      href: '/wiki/Publications_zh/',
-      title: '两篇 ICLR 2025 论文录用'
-    },
-    {
-      date: '2022年9月',
-      dateTime: '2022-09',
-      detail: '浙江大学人工智能工学硕士阶段。',
-      href: '/wiki/Education_zh/',
-      title: '开始硕士阶段'
-    },
-    {
-      date: '2022年7月',
-      dateTime: '2022-07',
-      detail: '山东大学通信工程工学学士。',
-      href: '/wiki/Shandong_University_zh/',
-      title: '完成本科学位'
-    }
-  ]
-};
 
 function withBasePath(pathname: string) {
   const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
@@ -248,8 +136,8 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
     collapseAllSections();
   };
   const portalClassName = ['wiki-portal', allSectionsClosed ? 'wiki-portal-collapsed' : ''].filter(Boolean).join(' ');
-  const latestUpdate = updateEntries[language][0];
-  const feedHref = withBasePath('/feed.xml');
+  const latestUpdate = siteUpdates[language][0];
+  const feedHref = withBasePath('/updates/');
 
   useEffect(() => {
     document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
@@ -397,7 +285,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
           <summary>
             <span className="wiki-portal-timeline-heading">
               <strong>{updateLabels[language].title}</strong>
-              <em>{updateEntries[language].length} {language === 'zh' ? '条动态' : 'updates'}</em>
+              <em>{siteUpdates[language].length} {language === 'zh' ? '条动态' : 'updates'}</em>
             </span>
             <span className="wiki-portal-news-preview">
               <time dateTime={latestUpdate.dateTime}>{latestUpdate.date}</time>
@@ -415,7 +303,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
             tabIndex={0}
           >
             <ol className="wiki-portal-news-list">
-              {updateEntries[language].map((item) => (
+              {siteUpdates[language].map((item) => (
                 <li key={`${item.dateTime}-${item.title}`}>
                   <time dateTime={item.dateTime}>{item.date}</time>
                   <div>

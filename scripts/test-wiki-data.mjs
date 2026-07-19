@@ -299,6 +299,9 @@ const chatWithXinbaoPanel = fs.readFileSync(path.join(root, 'components/ChatWith
 const sidebar = fs.readFileSync(path.join(root, 'components/Sidebar.tsx'), 'utf8');
 const sidebarClient = fs.readFileSync(path.join(root, 'components/SidebarClient.tsx'), 'utf8');
 const siteUpdates = fs.readFileSync(path.join(root, 'lib/site-navigation.ts'), 'utf8');
+const updateData = fs.readFileSync(path.join(root, 'lib/site-updates.ts'), 'utf8');
+const updatesPage = fs.readFileSync(path.join(root, 'app/updates/page.tsx'), 'utf8');
+const updatesStyles = fs.readFileSync(path.join(root, 'app/updates/updates.module.css'), 'utf8');
 const searchIndexRoute = fs.readFileSync(path.join(root, 'app/search-index.json/route.ts'), 'utf8');
 const robotsRoute = fs.readFileSync(path.join(root, 'app/robots.ts'), 'utf8');
 const sitemapRoute = fs.readFileSync(path.join(root, 'app/sitemap.ts'), 'utf8');
@@ -1628,10 +1631,10 @@ assert.doesNotMatch(sidebarClient, /function NavSection|className="nav-section"|
 assert.match(sidebar, /localizedSlug: \{ en: enSlug, zh: zhSlug \}/, 'server sidebar builds localized article links');
 assert.match(siteUpdates, /navigationLabels[\s\S]*Xinbao_Qiao: \{ en: 'Main page', zh: '主页' \}/, 'sidebar keeps the homepage label compact and localized');
 assert.match(siteUpdates, /sidebarSections[\s\S]*navigation[\s\S]*Publications/, 'site navigation metadata supplies sidebar sections');
-assert.match(sidebarClient, /feed: \{ en: 'Updates feed', zh: '更新 Feed' \}/, 'SidebarClient supplies localized feed labels');
+assert.match(sidebarClient, /feed: { en: 'Latest updates', zh: '最新动态' }/, 'SidebarClient links ordinary visitors to readable localized updates');
 assert.doesNotMatch(siteUpdates + sidebarClient, /Research Atlas|研究图谱|\/atlas/, 'sidebar removes the retired Research Atlas entry');
 assert.doesNotMatch(sidebarClient, /Source repository|OpenReview profile/, 'sidebar contribute avoids non-Colarpedia sidebar labels');
-assert.match(sidebarClient, /LinkedIn[\s\S]*sectionLabels\.email\[language\][\s\S]*sectionLabels\.feed\[language\]/, 'sidebar contribute mirrors Colarpedia with LinkedIn, email, and updates feed');
+assert.match(sidebarClient, /LinkedIn[\s\S]*sectionLabels\.email\[language\][\s\S]*sectionLabels\.feed\[language\]/, 'sidebar contribute keeps LinkedIn and email, then links to the readable updates archive');
 assert.doesNotMatch(sidebarClient, /className="external" href="mailto:/, 'email link is not styled as an external link');
 for (const shortLabel of ['CUHK', 'NUSRI-CQ', 'ZJU', 'SDU']) {
   assert.match(siteUpdates, new RegExp(`en: '${shortLabel}'`), `sidebar uses short label ${shortLabel}`);
@@ -2134,8 +2137,8 @@ assert.match(styles, /\.wiki-portal-edition:focus-visible \{[\s\S]*outline: 2px 
 assert.match(styles, /\.wiki-portal-quicklinks \{[\s\S]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);[\s\S]*width: calc\(100% - var\(--portal-search-leading-width\) - var\(--portal-search-submit-width\)\);[\s\S]*margin: 8px 0 0 var\(--portal-search-leading-width\);[\s\S]*\}/, 'homepage quick links preserve the search/profile geometry');
 assert.match(styles, /\.wiki-portal-quicklinks a,[\s\S]*\.wiki-portal-quicklinks button \{[\s\S]*border: 1px solid var\(--site-theme-accent-border\);[\s\S]*text-align: center;[\s\S]*\}/, 'homepage quick links style links and buttons consistently');
 assert.match(styles, /\.wiki-portal-quicklinks button \{[\s\S]*appearance: none;[\s\S]*font-family: var\(--font-sans\);[\s\S]*cursor: pointer;[\s\S]*\}/, 'homepage quicklink buttons reset browser chrome while retaining button semantics');
-assert.match(homepagePortal, /quickLinkLabels[\s\S]*feed: 'Updates feed'[\s\S]*latest: 'Latest'[\s\S]*latestAria: 'Open Latest details'[\s\S]*topics: 'Topics'[\s\S]*topicsAria: 'Open Topics details'[\s\S]*feed: '更新订阅'[\s\S]*latest: '最新动态'[\s\S]*latestAria: '打开最新动态'[\s\S]*topics: '主题'[\s\S]*topicsAria: '打开主题发现'/, 'homepage quick links keep concise visible labels and put open-detail wording in aria labels');
-assert.match(homepagePortal, /<nav className="wiki-portal-quicklinks"[\s\S]*aria-controls="portal-news"[\s\S]*aria-label=\{quickLinkLabels\[language\]\.latestAria\}[\s\S]*onClick=\{\(\) => setNewsOpen\(true\)\}[\s\S]*href=\{feedHref\}[\s\S]*aria-controls="portal-directory"[\s\S]*aria-label=\{quickLinkLabels\[language\]\.topicsAria\}[\s\S]*onClick=\{\(\) => setBrowseOpen\(true\)\}[\s\S]*<\/nav>/, 'homepage quicklinks are a nav where buttons open details and the feed is the only link');
+assert.match(homepagePortal, /quickLinkLabels[\s\S]*feed: 'All updates'[\s\S]*latest: 'Latest'[\s\S]*latestAria: 'Open Latest details'[\s\S]*topics: 'Topics'[\s\S]*topicsAria: 'Open Topics details'[\s\S]*feed: '全部动态'[\s\S]*latest: '最新动态'[\s\S]*latestAria: '打开最新动态'[\s\S]*topics: '主题'[\s\S]*topicsAria: '打开主题发现'/, 'homepage quick links keep concise visible labels and put open-detail wording in aria labels');
+assert.match(homepagePortal, /<nav className="wiki-portal-quicklinks"[\s\S]*aria-controls="portal-news"[\s\S]*aria-label=\{quickLinkLabels\[language\]\.latestAria\}[\s\S]*onClick=\{\(\) => setNewsOpen\(true\)\}[\s\S]*href=\{feedHref\}[\s\S]*aria-controls="portal-directory"[\s\S]*aria-label=\{quickLinkLabels\[language\]\.topicsAria\}[\s\S]*onClick=\{\(\) => setBrowseOpen\(true\)\}[\s\S]*<\/nav>/, 'homepage quicklinks are a nav where buttons open details and the readable update archive is the only link');
 assert.doesNotMatch(homepagePortal, /const latestHref|href=\{latestHref\}|const topicsHref|href=\{topicsHref\}/, 'homepage quick links do not link Latest or Topics to arbitrary article pages');
 assert.match(styles, /\.wiki-portal-directory summary \{[\s\S]*display: flex;[\s\S]*cursor: pointer;[\s\S]*\}/, 'homepage browse directory is collapsible');
 assert.match(styles, /\.wiki-portal-directory summary span::after \{[\s\S]*content: "▸";[\s\S]*margin-left: 8px;[\s\S]*color: var\(--site-theme-action-ink\);[\s\S]*font-size: 19px;[\s\S]*font-weight: 700;[\s\S]*\}/, 'homepage browse disclosure uses a theme-aware right-pointing triangle when collapsed');
@@ -2176,11 +2179,16 @@ assert.match(homepagePortal, /const browseLabels[\s\S]*en: 'Browse Xinbaopedia'[
 assert.doesNotMatch(homepagePortal, /Research Atlas|研究图谱|\/atlas/, 'homepage removes the retired Research Atlas entry');
 assert.match(homepagePortal, /const updateLabels[\s\S]*Latest Updates[\s\S]*Scrollable latest updates[\s\S]*最新动态[\s\S]*可滚动的最新动态/, 'homepage updates have bilingual labels for the feed and scrollable region');
 assert.doesNotMatch(homepagePortal, /milestoneLabels|milestoneEntries|portal-milestones|wiki-portal-milestones|Milestones|里程碑/, 'homepage removes the duplicate Milestones surface and its supporting state and data');
-assert.match(homepagePortal, /const updateEntries[\s\S]*ICML 2026 paper accepted[\s\S]*Completed master’s degree[\s\S]*AAAI 2026 paper accepted[\s\S]*Started full-time research internship[\s\S]*Two ICLR 2025 papers accepted[\s\S]*dateTime: '2022-09'[\s\S]*dateTime: '2022-07'/, 'homepage keeps the selected high-signal English update archive in reverse chronology');
-assert.match(homepagePortal, /ICML 2026 论文录用[\s\S]*完成硕士学位[\s\S]*AAAI 2026 论文录用[\s\S]*开始全职研究实习[\s\S]*两篇 ICLR 2025 论文录用[\s\S]*dateTime: '2022-09'[\s\S]*dateTime: '2022-07'/, 'homepage keeps the selected Chinese update archive in reverse chronology');
-assert.doesNotMatch(homepagePortal, /Mar 2023|2023年3月|Started data-centric ML research|开始数据中心机器学习研究|dateTime: '2023-03'/, 'homepage excludes the March 2023 research-start update');
-assert.match(homepagePortal, /updateEntries\[language\]\.map/, 'homepage renders the complete update archive without slicing away older entries');
-assert.doesNotMatch(homepagePortal, /Research code released|研究代码公开|Academic service|学术服务|Serving as a reviewer/, 'homepage updates exclude routine code and service notices');
+assert.ok(['ICML 2026 paper accepted', 'Completed master’s degree', 'AAAI 2026 paper accepted', 'Started full-time research internship', 'Two ICLR 2025 papers accepted'].every((title, index, titles) => index === 0 || updateData.indexOf(titles[index - 1]) < updateData.indexOf(title)), 'shared update data keeps the selected high-signal English archive in reverse chronology');
+assert.match(updateData, /ICML 2026 论文录用[\s\S]*完成硕士学位[\s\S]*AAAI 2026 论文录用[\s\S]*开始全职研究实习[\s\S]*两篇 ICLR 2025 论文录用[\s\S]*dateTime: '2022-09'[\s\S]*dateTime: '2022-07'/, 'homepage keeps the selected Chinese update archive in reverse chronology');
+assert.doesNotMatch(updateData, /Mar 2023|2023年3月|Started data-centric ML research|开始数据中心机器学习研究|dateTime: '2023-03'/, 'homepage excludes the March 2023 research-start update');
+assert.ok(homepagePortal.includes('siteUpdates[language].map'), 'homepage renders the complete shared update archive without slicing away older entries');
+assert.doesNotMatch(updateData, /Research code released|研究代码公开|Academic service|学术服务|Serving as a reviewer/, 'homepage updates exclude routine code and service notices');
+assert.ok(homepagePortal.includes("withBasePath('/updates/')") && sidebarClient.includes("withBasePath('/updates/')"), 'ordinary update navigation opens the human-readable archive');
+assert.ok(!homepagePortal.includes("withBasePath('/feed.xml')") && !sidebarClient.includes("withBasePath('/feed.xml')"), 'ordinary navigation never opens the raw Atom document');
+assert.ok(updatesPage.includes('siteUpdates[language].map') && updatesPage.includes('XML source') && updatesPage.includes('Atom 订阅源'), 'updates page renders shared bilingual data and explains the optional Atom feed');
+assert.ok(updatesStyles.includes('grid-template-columns: repeat(2, minmax(0, 1fr))') && updatesStyles.includes('@media (max-width: 760px)'), 'updates archive has responsive bilingual layout styles');
+assert.ok(sitemapRoute.includes("SITE_URL + '/updates/'"), 'sitemap includes the readable updates archive');
 assert.match(homepagePortal, /className="wiki-portal-disclosures"[\s\S]*className="wiki-portal-news wiki-portal-timeline"[\s\S]*className="wiki-portal-directory"/, 'homepage places only Updates and Browse as sibling disclosure sections');
 assert.match(styles, /\.wiki-portal-disclosures \{[\s\S]*--portal-search-width: 690px;[\s\S]*--portal-search-leading-width: 50px;[\s\S]*--portal-search-submit-width: 96px;[\s\S]*max-width: 920px;/, 'homepage restores the original 920px expanded Browse container while retaining search measurements');
 assert.match(styles, /\.wiki-portal-disclosures > details \{[\s\S]*interpolate-size: allow-keywords;[\s\S]*\}[\s\S]*\.wiki-portal-disclosures > details::details-content \{[\s\S]*block-size: 0;[\s\S]*opacity: 0;[\s\S]*transition:[\s\S]*block-size \.24s[\s\S]*content-visibility \.24s allow-discrete[\s\S]*opacity \.16s[\s\S]*\}[\s\S]*\.wiki-portal-disclosures > details\[open\]::details-content \{[\s\S]*block-size: auto;[\s\S]*opacity: 1;/, 'homepage disclosures animate their content smoothly in both directions');

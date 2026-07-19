@@ -10,6 +10,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'monthly',
       priority: 1
     },
+    {
+      url: SITE_URL + '/updates/',
+      changeFrequency: 'monthly',
+      priority: 0.8
+    },
     ...getPublicWikiSlugs().map((slug) => ({
       url: `${SITE_URL}/wiki/${encodeURIComponent(slug)}/`,
       changeFrequency: 'monthly' as const,

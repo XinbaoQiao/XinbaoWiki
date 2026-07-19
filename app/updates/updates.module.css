@@ -1,0 +1,137 @@
+.page {
+  max-width: 920px;
+}
+
+.title span {
+  color: var(--wiki-text-soft);
+  font-size: .72em;
+}
+
+.intro {
+  max-width: 720px;
+  margin-top: 14px;
+  color: var(--wiki-text-soft);
+  font-family: var(--font-sans);
+}
+
+.intro span,
+.subscribe p > span {
+  display: block;
+  margin-top: 4px;
+}
+
+.languageNav {
+  display: flex;
+  gap: 8px;
+  margin: 18px 0 22px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+}
+
+.languageNav a {
+  padding: 5px 10px;
+  border: 1px solid var(--site-theme-accent-border);
+  background: var(--site-theme-chrome-surface);
+}
+
+.languageNav a:focus-visible,
+.list a:focus-visible,
+.subscribe a:focus-visible {
+  outline: 2px solid var(--site-theme-action-ink);
+  outline-offset: 2px;
+}
+
+.columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.section {
+  min-width: 0;
+}
+
+.section > h2 {
+  margin-top: 0;
+  border-bottom-color: var(--site-theme-accent-border);
+}
+
+.sectionSummary {
+  min-height: 3.2em;
+  color: var(--wiki-text-soft);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list li {
+  display: grid;
+  grid-template-columns: 78px minmax(0, 1fr);
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--site-theme-chrome-border);
+}
+
+.list time {
+  padding-top: 2px;
+  color: var(--wiki-text-soft);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+
+.list a {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.list p {
+  margin: 3px 0 0;
+  color: var(--wiki-text-soft);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.subscribe {
+  margin-top: 30px;
+  padding: 2px 14px 10px;
+  border-left: 4px solid var(--site-theme-accent);
+  background: var(--site-theme-chrome-surface);
+  font-family: var(--font-sans);
+}
+
+.subscribe h2 {
+  margin-top: 10px;
+  font-size: 1.22em;
+}
+
+.subscribe p {
+  margin-bottom: 0;
+  color: var(--wiki-text-soft);
+  font-size: 12.5px;
+}
+
+@media (max-width: 760px) {
+  .columns {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .sectionSummary {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .list li {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+}

@@ -86,7 +86,7 @@ assert.match(pageSource, /getWikiManifestEntry\(slug\)/, 'homepage entries resol
 assert.doesNotMatch(pageSource, /getWikiPageBySlug/, 'homepage no longer rereads wiki files per curated link');
 assert.match(sidebarSource, /getWikiManifestEntry/, 'sidebar server wrapper validates links against the public manifest');
 assert.match(sidebarSource, /<SidebarClient sections=\{sidebarManifest\(\)\}/, 'sidebar keeps the layout import stable while passing manifest-derived data to the client');
-assert.match(sidebarClientSource, /href=\{withBasePath\('\/feed\.xml'\)\}/, 'sidebar exposes a discoverable feed link without editing SEO files');
+assert.ok(sidebarClientSource.includes("href={withBasePath('/updates/')}"), 'sidebar sends ordinary visitors to the readable updates archive');
 
 assert.match(feedSource, /xmlns="http:\/\/www\.w3\.org\/2005\/Atom"/, 'feed route emits Atom XML');
 assert.match(feedSource, /application\/atom\+xml; charset=utf-8/, 'feed route returns an Atom content type');

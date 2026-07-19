@@ -27,7 +27,7 @@ const sectionLabels = {
   navigation: { en: 'Navigation', zh: '导航' },
   contribute: { en: 'Contribute', zh: '链接' },
   email: { en: 'Email the author', zh: '发送邮件' },
-  feed: { en: 'Updates feed', zh: '更新 Feed' },
+  feed: { en: 'Latest updates', zh: '最新动态' },
   openNavigation: { en: 'Open navigation', zh: '打开导航' },
   closeNavigation: { en: 'Close navigation', zh: '关闭导航' }
 } satisfies Record<string, LocalizedText>;
@@ -45,7 +45,8 @@ function activeSlug(pathname: string) {
   const decoded = decodeURIComponent(pathname);
   const parts = decoded.replace(/\/+$/, '').split('/').filter(Boolean);
   const wikiIndex = parts.lastIndexOf('wiki');
-  return wikiIndex >= 0 && parts[wikiIndex + 1] ? parts[wikiIndex + 1] : 'Xinbao_Qiao';
+  if (wikiIndex >= 0 && parts[wikiIndex + 1]) return parts[wikiIndex + 1];
+  return parts.at(-1) === 'updates' ? 'Updates' : 'Xinbao_Qiao';
 }
 
 function SidebarSections({
@@ -92,7 +93,7 @@ function SidebarSections({
           </a>
         </li>
         <li><a href="mailto:xinbaoqiao@cuhk.edu.hk" onClick={onNavigate}>{sectionLabels.email[language]}</a></li>
-        <li><a href={withBasePath('/feed.xml')} onClick={onNavigate}>{sectionLabels.feed[language]}</a></li>
+        <li><a href={withBasePath('/updates/')} onClick={onNavigate}>{sectionLabels.feed[language]}</a></li>
       </ul>
     </div>
   );
