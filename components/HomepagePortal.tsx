@@ -91,23 +91,6 @@ const updateLabels = {
   }
 } satisfies Record<SearchLanguage, { title: string; window: string }>;
 
-const quickLinkLabels = {
-  en: {
-    feed: 'All updates',
-    latest: 'Latest',
-    latestAria: 'Open Latest details',
-    topics: 'Topics',
-    topicsAria: 'Open Topics details'
-  },
-  zh: {
-    feed: '全部动态',
-    latest: '最新动态',
-    latestAria: '打开最新动态',
-    topics: '主题',
-    topicsAria: '打开主题发现'
-  }
-} satisfies Record<SearchLanguage, { feed: string; latest: string; latestAria: string; topics: string; topicsAria: string }>;
-
 function withBasePath(pathname: string) {
   const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
   return basePath ? `${basePath}${pathname}` : pathname;
@@ -137,7 +120,6 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
   };
   const portalClassName = ['wiki-portal', allSectionsClosed ? 'wiki-portal-collapsed' : ''].filter(Boolean).join(' ');
   const latestUpdate = siteUpdates[language][0];
-  const feedHref = withBasePath('/updates/');
 
   useEffect(() => {
     document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
@@ -250,27 +232,6 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
                 <span>{item.detail}</span>
               </a>
             ))}
-          </nav>
-          <nav className="wiki-portal-quicklinks" aria-label={language === 'zh' ? '首页快捷入口' : 'Homepage quick links'}>
-            <button
-              type="button"
-              aria-controls="portal-news"
-              aria-expanded={newsOpen}
-              aria-label={quickLinkLabels[language].latestAria}
-              onClick={() => setNewsOpen(true)}
-            >
-              {quickLinkLabels[language].latest}
-            </button>
-            <a href={feedHref}>{quickLinkLabels[language].feed}</a>
-            <button
-              type="button"
-              aria-controls="portal-directory"
-              aria-expanded={browseOpen}
-              aria-label={quickLinkLabels[language].topicsAria}
-              onClick={() => setBrowseOpen(true)}
-            >
-              {quickLinkLabels[language].topics}
-            </button>
           </nav>
         </div>
       </section>

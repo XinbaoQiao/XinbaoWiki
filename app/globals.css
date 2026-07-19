@@ -1915,43 +1915,6 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   line-height: 1.35;
 }
 
-.wiki-portal-quicklinks {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-  width: calc(100% - var(--portal-search-leading-width) - var(--portal-search-submit-width));
-  margin: 8px 0 0 var(--portal-search-leading-width);
-}
-
-.wiki-portal-quicklinks a,
-.wiki-portal-quicklinks button {
-  min-width: 0;
-  padding: 5px 8px;
-  border: 1px solid var(--site-theme-accent-border);
-  background: color-mix(in srgb, var(--site-theme-accent) 2%, var(--wiki-bg));
-  color: var(--site-theme-action-ink);
-  font-size: 12px;
-  font-weight: 700;
-  line-height: 1.25;
-  text-align: center;
-  text-decoration: none;
-}
-
-.wiki-portal-quicklinks button {
-  appearance: none;
-  font-family: var(--font-sans);
-  cursor: pointer;
-}
-
-.wiki-portal-quicklinks a:hover,
-.wiki-portal-quicklinks a:focus-visible,
-.wiki-portal-quicklinks button:hover,
-.wiki-portal-quicklinks button:focus-visible {
-  border-color: var(--site-theme-action-ink);
-  background: color-mix(in srgb, var(--site-theme-accent) 7%, var(--wiki-bg));
-  text-decoration: none;
-}
-
 .wiki-portal-disclosures {
   --portal-search-width: 690px;
   --portal-search-leading-width: 50px;
