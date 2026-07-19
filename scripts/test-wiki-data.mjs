@@ -2173,6 +2173,12 @@ assert.match(homepagePortal, /wiki-portal-name-logos[\s\S]*\/site-logos\/wordmar
 assert.match(homepagePortal, /className="wiki-portal-name-logo wiki-portal-name-logo-tinted"[\s\S]*--portal-wordmark-mask[\s\S]*xinbao-qiao-charcoal\.png/, 'homepage provides a base-path-aware alpha mask for additional branded theme colors');
 assert.doesNotMatch(homepagePortal, /height=\{190\}|width=\{760\}/, 'homepage no longer renders the old rectangular logo canvas dimensions');
 assert.match(homepagePortal, /const browseLabels[\s\S]*en: 'Browse Xinbaopedia'[\s\S]*zh: '浏览 Xinbaopedia'/, 'homepage Browse heading has English and Chinese labels');
+assert.ok(homepagePortal.includes("Typographic cube") && homepagePortal.includes("文字魔方"), "homepage typographic-cube option has bilingual labels");
+assert.ok(homepagePortal.includes("useState<BrowseView>('list')") && homepagePortal.includes("localStorage.getItem('xinbaopedia-browse-view')") && homepagePortal.includes("localStorage.setItem('xinbaopedia-browse-view', nextView)"), "homepage Browse defaults to the list and persists an explicit view choice");
+assert.ok(homepagePortal.includes('role="group" aria-label={browseViewLabels[language].group}') && homepagePortal.includes('aria-pressed={browseView === view}') && homepagePortal.includes('selectBrowseView(view)'), "homepage Browse view selector exposes native pressed-button semantics");
+assert.ok(styles.includes("perspective: 1500px") && styles.includes("transform-style: preserve-3d"), "desktop typographic cube uses a real perspective context");
+assert.ok(styles.includes("@media (max-width: 720px)") && styles.includes(".wiki-portal-grid-cube .wiki-portal-block:nth-of-type(3)"), "small screens unfold the typographic cube into readable panels");
+assert.ok(styles.includes("@media (prefers-reduced-motion: reduce)") && styles.includes(".wiki-portal-grid-cube:hover"), "typographic-cube animation honors reduced-motion settings");
 assert.doesNotMatch(homepagePortal, /Research Atlas|研究图谱|\/atlas/, 'homepage removes the retired Research Atlas entry');
 assert.match(homepagePortal, /const updateLabels[\s\S]*Latest Updates[\s\S]*Scrollable latest updates[\s\S]*最新动态[\s\S]*可滚动的最新动态/, 'homepage updates have bilingual labels for the feed and scrollable region');
 assert.doesNotMatch(homepagePortal, /milestoneLabels|milestoneEntries|portal-milestones|wiki-portal-milestones|Milestones|里程碑/, 'homepage removes the duplicate Milestones surface and its supporting state and data');

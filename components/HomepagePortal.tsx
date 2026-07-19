@@ -7,6 +7,7 @@ import { siteUpdates } from '@/lib/site-updates';
 
 type LocalizedText = Record<SearchLanguage, string>;
 type PortalPalette = 'text' | 'blue' | 'gold' | 'rose' | 'green' | 'violet' | 'charcoal';
+type BrowseView = 'list' | 'cube';
 type PortalEntry = { href: string; summary: string; title: string };
 type PortalGroup = {
   label: LocalizedText;
@@ -30,6 +31,13 @@ const browseLabels: LocalizedText = {
   en: 'Browse Xinbaopedia',
   zh: '浏览 Xinbaopedia'
 };
+
+const browseViewLabels = {
+  en: { cube: 'Typographic cube', group: 'Browse view', list: 'List' },
+  zh: { cube: '文字魔方', group: '浏览视图', list: '列表' }
+} satisfies Record<SearchLanguage, Record<BrowseView | 'group', string>>;
+
+const cubeFaceNames = ['top', 'front', 'right'] as const;
 
 const entriesLabel: LocalizedText = {
   en: 'Primary academic entries',
@@ -98,6 +106,7 @@ function withBasePath(pathname: string) {
 
 export function HomepagePortal({ directorySections, languageEntries }: Props) {
   const [language, setLanguage] = useState<SearchLanguage>('en');
+  const [browseView, setBrowseView] = useState<BrowseView>('list');
   const [browseOpen, setBrowseOpen] = useState(false);
   const [newsOpen, setNewsOpen] = useState(false);
   const updatesWindowRef = useRef<HTMLDivElement>(null);
@@ -124,6 +133,24 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
   useEffect(() => {
     document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
   }, [language]);
+
+  useEffect(() => {
+    try {
+      const savedView = window.localStorage.getItem('xinbaopedia-browse-view');
+      if (savedView === 'list' || savedView === 'cube') setBrowseView(savedView);
+    } catch {
+      // Storage can be unavailable in privacy-restricted browsing contexts.
+    }
+  }, []);
+
+  const selectBrowseView = (nextView: BrowseView) => {
+    setBrowseView(nextView);
+    try {
+      window.localStorage.setItem('xinbaopedia-browse-view', nextView);
+    } catch {
+      // The view remains usable for this session when persistence is unavailable.
+    }
+  };
 
   useLayoutEffect(() => {
     const viewport = updatesWindowRef.current;
@@ -286,12 +313,33 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
           <summary>
             <span>{browseLabels[language]}</span>
           </summary>
-          <div className="wiki-portal-grid">
-            {directorySections.map((section) => {
+          <div className="wiki-portal-view-switcher" role="group" aria-label={browseViewLabels[language].group}>
+            <span>{browseViewLabels[language].group}</span>
+            <div>
+              {(['list', 'cube'] as const).map((view) => (
+                <button
+                  aria-pressed={browseView === view}
+                  className={browseView === view ? 'is-active' : undefined}
+                  key={view}
+                  onClick={() => selectBrowseView(view)}
+                  type="button"
+                >
+                  {browseViewLabels[language][view]}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className={'wiki-portal-cube-stage wiki-portal-cube-stage-' + browseView}>
+            <div className={'wiki-portal-grid wiki-portal-grid-' + browseView} data-browse-view={browseView}>
+              {directorySections.map((section, sectionIndex) => {
               const sectionTitle = section.title[language];
               const sectionId = `portal-${section.title.en.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
               return (
-                <section className="wiki-portal-block" aria-labelledby={sectionId} key={section.title.en}>
+                <section
+                  className={'wiki-portal-block wiki-portal-cube-face-' + cubeFaceNames[sectionIndex]}
+                  aria-labelledby={sectionId}
+                  key={section.title.en}
+                >
                   <h3 id={sectionId}>
                     <span>{sectionTitle}</span>
                   </h3>
@@ -310,7 +358,8 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
                   ))}
                 </section>
               );
-            })}
+              })}
+            </div>
           </div>
         </details>
       </div>

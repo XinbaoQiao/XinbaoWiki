@@ -2226,6 +2226,181 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   transform: translateY(1px) rotate(90deg);
 }
 
+.wiki-portal-view-switcher {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 12px auto 4px;
+  color: var(--wiki-text-soft);
+  font-family: var(--font-sans);
+  font-size: 11px;
+}
+
+.wiki-portal-view-switcher > span {
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.wiki-portal-view-switcher > div {
+  display: inline-flex;
+  padding: 2px;
+  border: 1px solid var(--site-theme-chrome-border);
+  border-radius: 999px;
+  background: var(--wiki-bg-alt);
+}
+
+.wiki-portal-view-switcher button {
+  min-height: 30px;
+  padding: 4px 11px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--wiki-text-soft);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.wiki-portal-view-switcher button:hover,
+.wiki-portal-view-switcher button.is-active {
+  background: color-mix(in srgb, var(--site-theme-accent) 10%, var(--wiki-bg));
+  color: var(--site-theme-action-ink);
+}
+
+.wiki-portal-view-switcher button:focus-visible {
+  outline: 2px solid var(--site-theme-action-ink);
+  outline-offset: 1px;
+}
+
+.wiki-portal-cube-stage-cube {
+  height: 650px;
+  overflow: clip;
+  perspective: 1500px;
+  perspective-origin: 50% 38%;
+}
+
+.wiki-portal-grid-cube {
+  --portal-cube-size: 420px;
+  position: relative;
+  top: 90px;
+  display: block;
+  width: var(--portal-cube-size);
+  height: var(--portal-cube-size);
+  margin: 0 auto;
+  transform: rotateX(-26deg) rotateY(-38deg);
+  transform-style: preserve-3d;
+  animation: wiki-portal-cube-enter .7s cubic-bezier(.2, .75, .2, 1) both;
+  transition: transform .45s cubic-bezier(.2, .75, .2, 1);
+}
+
+.wiki-portal-grid-cube:hover {
+  transform: rotateX(-22deg) rotateY(-34deg);
+}
+
+@keyframes wiki-portal-cube-enter {
+  from {
+    transform: rotateX(-18deg) rotateY(-28deg) scale(.9);
+  }
+
+  to {
+    transform: rotateX(-26deg) rotateY(-38deg) scale(1);
+  }
+}
+
+.wiki-portal-grid-cube .wiki-portal-block {
+  position: absolute;
+  inset: 0;
+  box-sizing: border-box;
+  width: var(--portal-cube-size);
+  height: var(--portal-cube-size);
+  padding: 20px 22px;
+  border: 1px solid color-mix(in srgb, var(--portal-section-accent-resolved) 42%, var(--site-theme-chrome-border));
+  background: color-mix(in srgb, var(--portal-section-accent-resolved) 8%, var(--wiki-bg) 92%);
+  backface-visibility: hidden;
+  box-shadow: inset 0 0 40px color-mix(in srgb, var(--portal-section-accent-resolved) 8%, transparent);
+  transform: var(--portal-cube-face-transform);
+  transform-style: preserve-3d;
+  transition: box-shadow .24s ease, transform .3s cubic-bezier(.2, .75, .2, 1);
+}
+
+.wiki-portal-grid-cube .wiki-portal-cube-face-top {
+  --portal-cube-face-transform: rotateX(90deg) translateZ(calc(var(--portal-cube-size) / 2));
+}
+
+.wiki-portal-grid-cube .wiki-portal-cube-face-front {
+  --portal-cube-face-transform: translateZ(calc(var(--portal-cube-size) / 2));
+}
+
+.wiki-portal-grid-cube .wiki-portal-cube-face-right {
+  --portal-cube-face-transform: rotateY(90deg) translateZ(calc(var(--portal-cube-size) / 2));
+}
+
+.wiki-portal-grid-cube .wiki-portal-block:hover,
+.wiki-portal-grid-cube .wiki-portal-block:focus-within {
+  box-shadow: inset 0 0 44px color-mix(in srgb, var(--portal-section-accent-resolved) 13%, transparent), 0 0 0 2px color-mix(in srgb, var(--portal-section-accent-resolved) 34%, transparent);
+  transform: var(--portal-cube-face-transform) translateZ(12px);
+}
+
+.wiki-portal-grid-cube .wiki-portal-block h3 {
+  margin-bottom: 9px;
+  padding: 7px 9px;
+  background: color-mix(in srgb, var(--portal-section-accent-resolved) 13%, var(--wiki-bg));
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.15;
+  text-transform: uppercase;
+}
+
+.wiki-portal-grid-cube .wiki-portal-group {
+  margin-top: 7px;
+  transform: translateZ(2px);
+}
+
+.wiki-portal-grid-cube .wiki-portal-group + .wiki-portal-group {
+  padding-top: 6px;
+  border-color: color-mix(in srgb, var(--portal-section-accent-resolved) 20%, var(--wiki-border-light));
+}
+
+.wiki-portal-grid-cube .wiki-portal-group-label {
+  min-height: 0;
+  margin-bottom: 2px;
+  padding: 1px 5px;
+  border: 0;
+  border-left: 3px solid var(--portal-section-accent-resolved);
+  background: transparent;
+  font-size: 9px;
+  letter-spacing: .06em;
+}
+
+.wiki-portal-grid-cube .wiki-portal-block li {
+  padding: 3px 0;
+  border-color: color-mix(in srgb, var(--portal-section-accent-resolved) 14%, var(--wiki-border-light));
+  line-height: 1.15;
+}
+
+.wiki-portal-grid-cube .wiki-portal-block a {
+  padding: 1px 3px;
+  color: color-mix(in srgb, var(--portal-section-accent-resolved) 70%, var(--site-theme-action-ink));
+  font-size: 11px;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: background-color .18s ease, color .18s ease, transform .18s ease;
+}
+
+.wiki-portal-grid-cube .wiki-portal-block a:hover,
+.wiki-portal-grid-cube .wiki-portal-block a:focus-visible {
+  background: var(--wiki-bg);
+  color: var(--site-theme-action-ink);
+  outline: 1px solid var(--portal-section-accent-resolved);
+  transform: translateZ(18px) scale(1.035);
+}
+
+.wiki-portal-grid-cube .wiki-portal-block li > span {
+  display: none;
+}
+
 .wiki-portal-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2481,6 +2656,15 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
     gap: 22px;
   }
 
+  .wiki-portal-cube-stage-cube {
+    height: 590px;
+  }
+
+  .wiki-portal-grid-cube {
+    --portal-cube-size: 370px;
+    top: 82px;
+  }
+
 }
 
 @media (max-width: 720px) {
@@ -2600,6 +2784,43 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
     grid-template-columns: 1fr;
   }
 
+  .wiki-portal-cube-stage-cube {
+    height: auto;
+    overflow: visible;
+    perspective: none;
+  }
+
+  .wiki-portal-grid-cube,
+  .wiki-portal-grid-cube:hover {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: 100%;
+    height: auto;
+    margin-top: 18px;
+    transform: none;
+    animation: none;
+  }
+
+  .wiki-portal-grid-cube .wiki-portal-block,
+  .wiki-portal-grid-cube .wiki-portal-block:hover,
+  .wiki-portal-grid-cube .wiki-portal-block:focus-within {
+    position: relative;
+    inset: auto;
+    width: calc(100% - 24px);
+    height: auto;
+    min-height: 0;
+    transform: none;
+  }
+
+  .wiki-portal-grid-cube .wiki-portal-block:nth-of-type(2) {
+    margin-left: 12px;
+  }
+
+  .wiki-portal-grid-cube .wiki-portal-block:nth-of-type(3) {
+    margin-left: 24px;
+  }
+
   .wiki-portal-timeline {
     width: 100%;
     margin-inline: 0;
@@ -2660,7 +2881,41 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
     transition: none;
   }
 
+  .wiki-portal-grid-cube,
+  .wiki-portal-grid-cube:hover,
+  .wiki-portal-grid-cube .wiki-portal-block,
+  .wiki-portal-grid-cube .wiki-portal-block:hover,
+  .wiki-portal-grid-cube .wiki-portal-block:focus-within,
+  .wiki-portal-grid-cube .wiki-portal-block a {
+    animation: none;
+    transition: none;
+  }
+
+  .wiki-portal-grid-cube:hover {
+    transform: rotateX(-26deg) rotateY(-38deg);
+  }
+
+  .wiki-portal-grid-cube .wiki-portal-block:hover,
+  .wiki-portal-grid-cube .wiki-portal-block:focus-within {
+    transform: var(--portal-cube-face-transform);
+  }
+
+  .wiki-portal-grid-cube .wiki-portal-block a:hover,
+  .wiki-portal-grid-cube .wiki-portal-block a:focus-visible {
+    transform: none;
+  }
+
   .wiki-portal-collapsed {
+    transform: none;
+  }
+}
+
+@media (max-width: 720px) and (prefers-reduced-motion: reduce) {
+  .wiki-portal-grid-cube,
+  .wiki-portal-grid-cube:hover,
+  .wiki-portal-grid-cube .wiki-portal-block,
+  .wiki-portal-grid-cube .wiki-portal-block:hover,
+  .wiki-portal-grid-cube .wiki-portal-block:focus-within {
     transform: none;
   }
 }
