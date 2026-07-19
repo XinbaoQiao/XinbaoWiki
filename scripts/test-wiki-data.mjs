@@ -404,6 +404,7 @@ assert.match(packageJson.scripts?.['verify:publish'] || '', /run-with-node22\.mj
 assert.match(packageJson.scripts?.['smoke:production'] || '', /run-with-node22\.mjs node scripts\/smoke-production\.mjs/, 'package.json runs production smoke under Node 22');
 assert.match(packageJson.scripts?.['deploy:production'] || '', /run-with-node22\.mjs node scripts\/deploy-production\.mjs/, 'package.json runs the token-safe Vercel deployment wrapper under Node 22');
 assert.equal(packageJson.scripts?.['setup:node22'], 'node scripts/bootstrap-node22.mjs', 'package.json exposes one deterministic project-local Node 22 bootstrap');
+assert.match(packageJson.scripts?.start || '', /run-with-node22\.mjs next start/, 'production-mode local server selects Node 22 automatically');
 assert.match(packageJson.scripts?.build || '', /run-with-node22\.mjs next build/, 'repository build selects Node 22 automatically');
 assert.match(packageJson.scripts?.['release:production'] || '', /run-with-node22\.mjs node scripts\/release-production\.mjs/, 'production release selects Node 22 automatically');
 assert.match(packageJson.scripts?.['release:resume'] || '', /release-production\.mjs --resume/, 'production release exposes an explicit exact-deployment resume command');
@@ -1241,7 +1242,9 @@ assert.match(deployProductionScript, /timeoutMs: timeoutMs\.stagedRequest/, 'eac
 assert.match(externalProcessScript, /terminateProcessTree[\s\S]*SIGTERM[\s\S]*SIGKILL/, 'external process runner escalates from graceful termination to killing the full process tree');
 assert.match(externalProcessScript, /kind: 'output_limit'/, 'external process runner bounds captured output');
 assert.match(networkRoutesScript, /return proxy \? \[direct, proxy\] : \[direct\]/, 'staged smoke selects direct and proxy routes explicitly instead of inheriting one global route');
-assert.match(deployProductionScript, /for \(const route of routes\)/, 'staged smoke tries each configured network route at most once');
+assert.match(deployProductionScript, /for \(const route of preferStagedSmokeRoute\(routes, preferredRouteName\)\)/, 'staged smoke prioritizes the route that already worked while keeping configured fallbacks');
+assert.match(deployProductionScript, /preferredRouteName = route\.name/, 'staged smoke remembers a successful route for the remaining checks');
+assert.match(networkRoutesScript, /return \[preferredRoute, \.\.\.routes\.filter\(\(route\) => route !== preferredRoute\)\]/, 'route preference preserves every configured fallback without duplicating a route');
 assert.match(deployProductionScript, /staged smoke failed for \$\{label\} across/, 'staged smoke reports the exhausted route matrix with a descriptive canary label before blocking promotion');
 assert.match(deployProductionScript, /chat grounded provider canary[\s\S]*method: 'POST'[\s\S]*responseMode[^\n]*model-grounded/, 'staged smoke calls the configured model provider and requires a grounded cited response before promotion');
 assert.match(deployProductionScript, /chat page-context grounded provider canary[\s\S]*Referer:.*wiki\/DynFrs\/[\s\S]*What does this work do[\s\S]*"slug":"DynFrs"[\s\S]*every\(\(source\) => source\.slug === 'DynFrs'\)/, 'staged smoke proves Referer-backed page context stays on DynFrs before promotion');

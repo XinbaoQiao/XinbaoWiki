@@ -12,7 +12,7 @@ import {
   validateProductionDeploymentIdentity,
 } from './lib/deployment-identity.mjs';
 import { runExternal } from './lib/external-process.mjs';
-import { stagedSmokeRoutes, withoutProxyEnv } from './lib/network-routes.mjs';
+import { preferStagedSmokeRoute, stagedSmokeRoutes, withoutProxyEnv } from './lib/network-routes.mjs';
 import { runReleaseOrchestrator } from './lib/release-orchestrator.mjs';
 import {
   initializeReleaseState,
@@ -332,12 +332,13 @@ async function runStagedSmoke(vercelCommand, routes, stagedUrl) {
     },
   ];
   const attempts = [];
+  let preferredRouteName;
 
   for (const check of checks) {
     const label = check.label || check.path;
     let body;
     const failures = [];
-    for (const route of routes) {
+    for (const route of preferStagedSmokeRoute(routes, preferredRouteName)) {
       try {
         const requestArgs = ['--silent', '--show-error', '--max-time', '30'];
         if (check.method === 'POST') {
@@ -361,6 +362,7 @@ async function runStagedSmoke(vercelCommand, routes, stagedUrl) {
           { timeoutMs: timeoutMs.stagedRequest }
         );
         attempts.push({ label, path: check.path, route: route.name, status: 'passed' });
+        preferredRouteName = route.name;
         console.log(`deploy-production: staged ${label} passed via ${route.name}`);
         break;
       } catch (error) {

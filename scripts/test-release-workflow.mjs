@@ -13,7 +13,7 @@ import {
   validateProductionDeploymentIdentity,
 } from './lib/deployment-identity.mjs';
 import { runExternal } from './lib/external-process.mjs';
-import { stagedSmokeRoutes } from './lib/network-routes.mjs';
+import { preferStagedSmokeRoute, stagedSmokeRoutes } from './lib/network-routes.mjs';
 import { runReleaseOrchestrator } from './lib/release-orchestrator.mjs';
 import {
   initializeReleaseState,
@@ -279,6 +279,18 @@ function testNetworkRouteSelection() {
     stagedSmokeRoutes(base, { HTTPS_PROXY: 'http://127.0.0.1:17897' }, 'proxy').map((route) => route.name),
     ['proxy'],
     'an explicit staged-smoke route is deterministic'
+  );
+
+  const routes = stagedSmokeRoutes(base, { HTTPS_PROXY: 'http://127.0.0.1:17897' }, 'auto');
+  assert.deepEqual(
+    preferStagedSmokeRoute(routes, 'proxy').map((route) => route.name),
+    ['proxy', 'direct'],
+    'staged smoke reuses the route that already worked before retrying another route'
+  );
+  assert.deepEqual(
+    routes.map((route) => route.name),
+    ['direct', 'proxy'],
+    'route preference does not mutate the configured fallback order'
   );
 }
 

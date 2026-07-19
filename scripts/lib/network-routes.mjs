@@ -39,3 +39,10 @@ export function stagedSmokeRoutes(baseEnv, source = process.env, requestedMode =
   }
   return proxy ? [direct, proxy] : [direct];
 }
+
+export function preferStagedSmokeRoute(routes, preferredRouteName) {
+  if (!preferredRouteName) return routes;
+  const preferredRoute = routes.find((route) => route.name === preferredRouteName);
+  if (!preferredRoute) return routes;
+  return [preferredRoute, ...routes.filter((route) => route !== preferredRoute)];
+}

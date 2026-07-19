@@ -10,6 +10,7 @@
   "scripts": {
     "setup:node22": "node scripts/bootstrap-node22.mjs",
     "dev": "node scripts/run-with-node22.mjs next dev",
+    "start": "node scripts/run-with-node22.mjs next start",
     "build": "node scripts/run-with-node22.mjs next build",
     "export": "npm run build",
     "lint:wiki": "node scripts/lint-wikilinks.mjs",
