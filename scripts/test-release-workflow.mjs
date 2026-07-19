@@ -429,6 +429,11 @@ function testDeploymentIdentityValidation() {
     },
     'a canonical deployment with the exact release commit passes identity validation'
   );
+  const githubInspection = { ...validInspection, meta: { githubCommitSha: 'abc123' } };
+  assert.deepEqual(validateDeploymentIdentity(JSON.stringify(githubInspection), expected), { deploymentId: 'dpl_test123', deploymentUrl: 'https://xinbaopedia-abc-xinbaopedia.vercel.app' }, 'current Vercel GitHub metadata identifies the exact release commit');
+  assert.deepEqual(validateProductionDeploymentIdentity(JSON.stringify(githubInspection), expected), { commit: 'abc123', deploymentId: 'dpl_test123', deploymentUrl: 'https://xinbaopedia-abc-xinbaopedia.vercel.app' }, 'production identity accepts the current GitHub commit metadata field');
+  assert.throws(() => validateDeploymentIdentity(JSON.stringify({ ...validInspection, meta: { gitCommitSha: 'abc123', githubCommitSha: 'stale' } }), expected), /fields conflict/, 'conflicting Vercel commit metadata fails closed');
+  assert.deepEqual(reusableDeploymentFromList(JSON.stringify({ deployments: [{ uid: 'dpl_test123', name: 'xinbaopedia', url: 'xinbaopedia-abc-xinbaopedia.vercel.app', readyState: 'READY', meta: { githubCommitSha: 'abc123' } }] }), expected), { deploymentId: 'dpl_test123', deploymentUrl: 'https://xinbaopedia-abc-xinbaopedia.vercel.app' }, 'resume recognizes the current GitHub commit metadata field');
   assert.deepEqual(
     validateProductionDeploymentIdentity(JSON.stringify(validInspection), expected),
     {

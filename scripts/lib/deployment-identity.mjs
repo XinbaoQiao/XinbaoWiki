@@ -36,6 +36,15 @@ function validateOwnedReadyDeployment(inspection, { orgId, project, projectId })
   }
 }
 
+function deploymentCommit(meta = {}) {
+  const gitCommitSha = typeof meta.gitCommitSha === 'string' ? meta.gitCommitSha : null;
+  const githubCommitSha = typeof meta.githubCommitSha === 'string' ? meta.githubCommitSha : null;
+  if (gitCommitSha && githubCommitSha && gitCommitSha !== githubCommitSha) {
+    throw new Error('Vercel deployment commit metadata fields conflict');
+  }
+  return gitCommitSha || githubCommitSha;
+}
+
 export function validateDeploymentIdentity(
   inspectionOutput,
   { commit, deploymentUrl, orgId, project, projectId }
@@ -48,7 +57,7 @@ export function validateDeploymentIdentity(
     throw new Error('Vercel deployment URL does not match the staged release state');
   }
   validateOwnedReadyDeployment(inspection, { orgId, project, projectId });
-  if (inspection.meta?.gitCommitSha !== commit) {
+  if (deploymentCommit(inspection.meta) !== commit) {
     throw new Error('Vercel deployment commit metadata does not match the release commit');
   }
 
@@ -65,9 +74,7 @@ export function validateProductionDeploymentIdentity(
   const inspection = parseJson(inspectionOutput, 'Vercel production deployment API');
   validateOwnedReadyDeployment(inspection, { orgId, project, projectId });
   return {
-    commit: typeof inspection.meta?.gitCommitSha === 'string'
-      ? inspection.meta.gitCommitSha
-      : null,
+    commit: deploymentCommit(inspection.meta),
     deploymentId: inspection.id,
     deploymentUrl: `https://${deploymentHost(inspection.url)}`,
   };
@@ -82,7 +89,7 @@ export function reusableDeploymentFromList(listOutput, { commit, project }) {
   const candidates = response.deployments
     .filter((deployment) => (
       deployment.name === project
-      && deployment.meta?.gitCommitSha === commit
+      && deploymentCommit(deployment.meta) === commit
       && reusableStates.has(deployment.readyState ?? deployment.state)
       && typeof deployment.uid === 'string'
       && deployment.uid.startsWith('dpl_')
