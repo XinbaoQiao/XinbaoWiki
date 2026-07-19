@@ -35,6 +35,7 @@ const DAILY_LIMIT_MESSAGE = 'Daily limit reached. Please come back tomorrow.';
 
 type ChatLanguage = 'en' | 'zh';
 type ChatResponseMode = 'model-grounded' | 'model-conversational' | 'deterministic-abstention';
+type ProviderReservationPolicy = 'release' | 'retain';
 type ParsedChatBody = { message?: unknown; language?: ChatLanguage };
 type CompletionResponse = {
   choices?: Array<{ message?: { content?: unknown } }>;
@@ -68,7 +69,7 @@ type QuestionLogEntry = {
 
 type ChatObservation = {
   traceId: string;
-  outcome: 'ok' | 'ok-conversational' | 'deterministic-abstention' | 'invalid-citations' | 'protected-output' | 'retry-rate-limited' | 'invalid-conversational-reply' | 'upstream-error' | 'empty-reply' | 'timeout' | 'request-error';
+  outcome: 'ok' | 'ok-conversational' | 'deterministic-abstention' | 'invalid-citations' | 'protected-output' | 'retry-rate-limited' | 'invalid-conversational-reply' | 'upstream-error' | 'empty-reply' | 'timeout' | 'client-aborted' | 'request-error';
   provider: string;
   model: string;
   promptVersion: string;
@@ -105,10 +106,14 @@ function getRedis() {
 function jsonResponse(
   body: Record<string, unknown>,
   status: number,
-  cookie?: { visitorId: string; shouldSet: boolean }
+  cookie?: { visitorId: string; shouldSet: boolean },
+  options: { retryAfterSeconds?: number } = {}
 ) {
   const response = NextResponse.json(body, { status });
   response.headers.set('Cache-Control', 'private, no-store');
+  if (status === 429 && options.retryAfterSeconds) {
+    response.headers.set('Retry-After', String(Math.max(1, Math.ceil(options.retryAfterSeconds))));
+  }
   if (cookie?.shouldSet) {
     response.cookies.set(COOKIE_NAME, cookie.visitorId, {
       httpOnly: true,
@@ -138,8 +143,15 @@ function getVisitorId(request: NextRequest) {
 function requestIp(request: NextRequest) {
   const localOverride = process.env.NODE_ENV !== 'production' ? process.env.CHAT_TEST_IP : undefined;
   if (localOverride) return localOverride;
-  const forwarded = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
-  return forwarded || request.headers.get('x-real-ip') || '0.0.0.0';
+  const vercelForwarded = request.headers.get('x-vercel-forwarded-for')?.split(',')[0]?.trim();
+  if (process.env.VERCEL === '1' && vercelForwarded) return vercelForwarded;
+  if (process.env.CHAT_TRUST_PROXY_HEADERS === 'true') {
+    const forwarded = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
+    if (forwarded) return forwarded;
+    const realIp = request.headers.get('x-real-ip')?.trim();
+    if (realIp) return realIp;
+  }
+  return 'anonymous-network';
 }
 
 function hashIdentity(value: string) {
@@ -244,6 +256,60 @@ return value`,
   } catch {
     return false;
   }
+}
+
+async function reserveCooldown(redis: Redis, key: string) {
+  try {
+    const result = await redis.eval<[number], [number, number]>(
+      `local ttl = redis.call('TTL', KEYS[1])
+if ttl > 0 then return {0, ttl} end
+if ttl == -1 then
+  redis.call('EXPIRE', KEYS[1], tonumber(ARGV[1]))
+  return {0, tonumber(ARGV[1])}
+end
+redis.call('SET', KEYS[1], '1', 'EX', tonumber(ARGV[1]))
+return {1, 0}`,
+      [key],
+      [COOLDOWN_SECONDS]
+    );
+    return { reserved: Number(result[0]) === 1, retryAfterSeconds: Math.max(1, Number(result[1]) || COOLDOWN_SECONDS) };
+  } catch {
+    logServerIssue('cooldown reservation failed');
+    return null;
+  }
+}
+
+async function clearCooldown(redis: Redis, key: string) {
+  await redis.del(key).catch(() => logServerIssue('cooldown cleanup failed'));
+}
+
+function linkedRequestController(requestSignal: AbortSignal, timeoutMs: number) {
+  const controller = new AbortController();
+  let abortReason: 'client' | 'timeout' | null = requestSignal.aborted ? 'client' : null;
+  const abort = (reason: 'client' | 'timeout') => {
+    abortReason ??= reason;
+    if (!controller.signal.aborted) controller.abort();
+  };
+  const onClientAbort = () => abort('client');
+  if (requestSignal.aborted) {
+    abort('client');
+  } else {
+    requestSignal.addEventListener('abort', onClientAbort, { once: true });
+  }
+  const timeout = setTimeout(() => abort('timeout'), timeoutMs);
+  return {
+    signal: controller.signal,
+    get timedOut() {
+      return abortReason === 'timeout';
+    },
+    get clientAborted() {
+      return abortReason === 'client';
+    },
+    cleanup() {
+      clearTimeout(timeout);
+      requestSignal.removeEventListener('abort', onClientAbort);
+    }
+  };
 }
 
 function inferLanguage(request: NextRequest): ChatLanguage {
@@ -426,7 +492,13 @@ export async function GET(request: NextRequest) {
   const identity = getRequestIdentity(request, visitorCookie.visitorId);
   if (!identity) return genericUnavailable(visitorCookie);
 
-  const dailyUsage = await readDailyUsage(redis, dailyQuotaKeys(tokyoDateKey(), identity));
+  let dailyUsage: number;
+  try {
+    dailyUsage = await readDailyUsage(redis, dailyQuotaKeys(tokyoDateKey(), identity));
+  } catch {
+    logServerIssue('daily quota read failed');
+    return genericUnavailable(visitorCookie);
+  }
   const diagnostic = new URL(request.url).searchParams.get('diagnostic') === 'retrieval';
   const modelConfiguration = modelApiConfiguration();
   if (diagnostic && !modelConfiguration.ready) {
@@ -498,13 +570,25 @@ export async function POST(request: NextRequest) {
   const hourlyRetryKey = `xinbao-chat:retry-hour:${identity.ipHash}:${hourBucket}`;
   const quotaTtl = secondsUntilNextTokyoMidnight();
 
-  const previousDailyCount = await readDailyUsage(redis, dailyKeys);
+  let previousDailyCount: number;
+  try {
+    previousDailyCount = await readDailyUsage(redis, dailyKeys);
+  } catch {
+    logServerIssue('daily quota read failed');
+    return genericUnavailable(visitorCookie);
+  }
   if (previousDailyCount >= DAILY_LIMIT) {
-    return jsonResponse({ error: DAILY_LIMIT_MESSAGE, remaining: 0, limit: DAILY_LIMIT }, 429, visitorCookie);
+    return jsonResponse(
+      { error: DAILY_LIMIT_MESSAGE, remaining: 0, limit: DAILY_LIMIT },
+      429,
+      visitorCookie,
+      { retryAfterSeconds: quotaTtl }
+    );
   }
 
-  const cooldown = await redis.set(cooldownKey, '1', { nx: true, ex: COOLDOWN_SECONDS });
-  if (cooldown !== 'OK') {
+  const cooldown = await reserveCooldown(redis, cooldownKey);
+  if (!cooldown) return genericUnavailable(visitorCookie);
+  if (!cooldown.reserved) {
     return jsonResponse(
       {
         error: 'Please wait a few seconds before sending another message.',
@@ -512,23 +596,46 @@ export async function POST(request: NextRequest) {
         limit: DAILY_LIMIT
       },
       429,
-      visitorCookie
+      visitorCookie,
+      { retryAfterSeconds: cooldown.retryAfterSeconds }
     );
   }
 
-  const hourlyIpCount = await redis.incr(hourlyIpKey);
-  if (hourlyIpCount === 1) await redis.expire(hourlyIpKey, 60 * 60);
+  let hourlyIpCount: number;
+  try {
+    hourlyIpCount = await redis.incr(hourlyIpKey);
+    if (hourlyIpCount === 1) await redis.expire(hourlyIpKey, 60 * 60);
+  } catch {
+    logServerIssue('hourly IP reservation failed');
+    await clearCooldown(chatRedis, cooldownKey);
+    return genericUnavailable(visitorCookie);
+  }
   if (hourlyIpCount > HOURLY_IP_LIMIT) {
+    await clearCooldown(chatRedis, cooldownKey);
     return jsonResponse(
       { error: 'Please wait before trying again.', remaining: Math.max(0, DAILY_LIMIT - previousDailyCount), limit: DAILY_LIMIT },
       429,
-      visitorCookie
+      visitorCookie,
+      { retryAfterSeconds: Math.max(1, 60 * 60 - (Math.floor(Date.now() / 1000) % (60 * 60))) }
     );
   }
 
-  const dailyCount = await reserveDailyUsage(redis, dailyKeys, quotaTtl);
+  let dailyCount: number;
+  try {
+    dailyCount = await reserveDailyUsage(redis, dailyKeys, quotaTtl);
+  } catch {
+    logServerIssue('daily quota reservation failed');
+    await clearCooldown(chatRedis, cooldownKey);
+    return genericUnavailable(visitorCookie);
+  }
   if (dailyCount > DAILY_LIMIT) {
-    return jsonResponse({ error: DAILY_LIMIT_MESSAGE, remaining: 0, limit: DAILY_LIMIT }, 429, visitorCookie);
+    await clearCooldown(chatRedis, cooldownKey);
+    return jsonResponse(
+      { error: DAILY_LIMIT_MESSAGE, remaining: 0, limit: DAILY_LIMIT },
+      429,
+      visitorCookie,
+      { retryAfterSeconds: quotaTtl }
+    );
   }
 
   const { apiKey, baseUrl } = modelConfiguration;
@@ -544,6 +651,7 @@ export async function POST(request: NextRequest) {
   } catch {
     logServerIssue('retrieval failed');
     await refundDailyUsage(chatRedis, dailyKeys);
+    await clearCooldown(chatRedis, cooldownKey);
     return genericUnavailable(visitorCookie);
   }
 
@@ -637,8 +745,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  const providerAbort = linkedRequestController(request.signal, REQUEST_TIMEOUT_MS);
   const systemPrompt = getXinbaoChatSystemPrompt(
     language,
     retrieval,
@@ -688,10 +795,14 @@ export async function POST(request: NextRequest) {
       retryOutcome?: ChatObservation['retryOutcome'];
       retryReason?: CitationRetryReason;
       upstreamStatus?: number;
-    } = {}
+    } = {},
+    reservationPolicy: ProviderReservationPolicy = 'release'
   ) {
     observe(outcome, { ...details, providerAttempts, usage: accumulatedUsage });
-    await refundDailyUsage(chatRedis, dailyKeys);
+    if (reservationPolicy === 'release') {
+      await refundDailyUsage(chatRedis, dailyKeys);
+      await clearCooldown(chatRedis, cooldownKey);
+    }
     return genericUnavailable(visitorCookie);
   }
 
@@ -699,7 +810,7 @@ export async function POST(request: NextRequest) {
     if (responseMode === 'model-conversational') {
       const conversationalResult = await resolveConversationalReply({
         requestCompletion,
-        signal: controller.signal,
+        signal: providerAbort.signal,
         systemPrompt
       });
       accumulatedUsage = conversationalResult.kind === 'upstream-error'
@@ -737,7 +848,7 @@ export async function POST(request: NextRequest) {
         return reserveHourlyRetry(chatRedis, hourlyRetryKey);
       },
       requestCompletion,
-      signal: controller.signal,
+      signal: providerAbort.signal,
       sources: retrieval.sources,
       systemPrompt
     });
@@ -801,12 +912,20 @@ export async function POST(request: NextRequest) {
       visitorCookie
     );
   } catch (error) {
-    const timedOut = error instanceof DOMException && error.name === 'AbortError';
-    return unavailableAfterProvider(timedOut ? 'timeout' : 'request-error', {
+    const aborted = error instanceof DOMException && error.name === 'AbortError';
+    const providerFailureDetails = {
       retryOutcome: activeRetryReason ? 'failed' : 'not-attempted',
       retryReason: activeRetryReason
-    });
+    } satisfies {
+      retryOutcome: ChatObservation['retryOutcome'];
+      retryReason?: CitationRetryReason;
+    };
+    if (aborted && providerAbort.clientAborted) {
+      return unavailableAfterProvider('client-aborted', providerFailureDetails, 'retain');
+    }
+    const outcome = aborted && providerAbort.timedOut ? 'timeout' : 'request-error';
+    return unavailableAfterProvider(outcome, providerFailureDetails, 'release');
   } finally {
-    clearTimeout(timeout);
+    providerAbort.cleanup();
   }
 }

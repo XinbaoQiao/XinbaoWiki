@@ -17,6 +17,7 @@ type ChatSource = {
   href: string;
 };
 type Message = { role: MessageRole; content: string; sources?: ChatSource[] };
+type RetryRequest = { message: string; language: Language };
 
 type Props = {
   language: Language;
@@ -26,7 +27,7 @@ type Props = {
 };
 
 const MAX_INPUT_LENGTH = 1000;
-const GENERIC_ERROR = 'Xinbao AI is temporarily unavailable. Please try again later.';
+const CLIENT_REQUEST_TIMEOUT_MS = 15_000;
 
 const copy = {
   en: {
@@ -37,7 +38,13 @@ const copy = {
     inputLabel: 'Message Chat with Xinbao',
     placeholder: 'Ask about Xinbao, research, papers, projects...',
     send: 'Send',
+    cancel: 'Cancel',
+    retry: 'Retry',
     sources: 'Sources',
+    genericError: 'Xinbao AI is temporarily unavailable. Please try again later.',
+    networkError: 'Network connection failed. Check your connection and retry.',
+    timeoutError: 'Chat with Xinbao took too long to respond. Please retry.',
+    cancelledError: 'Request cancelled. Your question is ready to retry.',
     typing: [
       'Checking Xinbaopedia notes',
       'Looking through public pages',
@@ -61,7 +68,13 @@ const copy = {
     inputLabel: '向 Chat with Xinbao 发送消息',
     placeholder: '询问研究方向、论文、项目、联系方式...',
     send: '发送',
+    cancel: '取消',
+    retry: '重试',
     sources: '参考页面',
+    genericError: 'Xinbao AI 暂时不可用，请稍后重试。',
+    networkError: '网络连接失败，请检查连接后重试。',
+    timeoutError: 'Chat with Xinbao 响应超时，请重试。',
+    cancelledError: '请求已取消，当前问题可以直接重试。',
     typing: [
       '正在查公开资料',
       '正在整理相关页面',
@@ -155,18 +168,27 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
   const [loading, setLoading] = useState(false);
   const [typingMessage, setTypingMessage] = useState(() => randomTypingMessage(strings.typing));
   const [error, setError] = useState('');
+  const [retryRequest, setRetryRequest] = useState<RetryRequest | null>(null);
   const [remaining, setRemaining] = useState<number | null>(null);
   const [limit, setLimit] = useState(10);
   const [mounted, setMounted] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
+  const activeRequestRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
     setMounted(true);
+    return () => {
+      activeRequestRef.current?.abort();
+    };
   }, []);
 
   useEffect(() => {
     if (open) setMinimized(false);
   }, [open, restoreRequest]);
+
+  useEffect(() => {
+    if (!open) activeRequestRef.current?.abort();
+  }, [open]);
 
   useEffect(() => {
     setMessages((current) => {
@@ -202,6 +224,69 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
     };
   }, [open]);
 
+  async function sendMessage(message: string, language: Language, appendUserMessage: boolean) {
+    setError('');
+    setRetryRequest(null);
+    setInput('');
+    setTypingMessage(randomTypingMessage(strings.typing));
+    setLoading(true);
+    if (appendUserMessage) {
+      setMessages((current) => [...current, { role: 'user', content: message }]);
+    }
+
+    const controller = new AbortController();
+    activeRequestRef.current = controller;
+    let timedOut = false;
+    const timeout = setTimeout(() => {
+      timedOut = true;
+      controller.abort();
+    }, CLIENT_REQUEST_TIMEOUT_MS);
+
+    try {
+      const response = await fetch(chatEndpoint(), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message, language }),
+        signal: controller.signal
+      });
+      const data = await response.json().catch(() => null) as
+        | { reply?: unknown; error?: unknown; remaining?: unknown; limit?: unknown; sources?: unknown }
+        | null;
+
+      if (typeof data?.limit === 'number') setLimit(data.limit);
+      if (typeof data?.remaining === 'number') setRemaining(data.remaining);
+
+      if (!response.ok) {
+        const visibleError = response.status === 429 && typeof data?.error === 'string' ? data.error : strings.genericError;
+        setRetryRequest({ message, language });
+        setError(visibleError);
+        return;
+      }
+
+      const reply = typeof data?.reply === 'string' ? data.reply.trim() : '';
+      if (!reply) {
+        setRetryRequest({ message, language });
+        setError(strings.genericError);
+        return;
+      }
+
+      setMessages((current) => [...current, {
+        role: 'assistant',
+        content: reply,
+        sources: sanitizeSources(data?.sources)
+      }]);
+    } catch (requestError) {
+      setInput(message);
+      setRetryRequest({ message, language });
+      const aborted = requestError instanceof DOMException && requestError.name === 'AbortError';
+      setError(aborted ? (timedOut ? strings.timeoutError : strings.cancelledError) : strings.networkError);
+    } finally {
+      clearTimeout(timeout);
+      if (activeRequestRef.current === controller) activeRequestRef.current = null;
+      setLoading(false);
+    }
+  }
+
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const message = input.trim();
@@ -214,47 +299,16 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
       return;
     }
 
-    setError('');
-    setInput('');
-    setTypingMessage(randomTypingMessage(strings.typing));
-    setLoading(true);
-    setMessages((current) => [...current, { role: 'user', content: message }]);
+    await sendMessage(message, language, true);
+  }
 
-    try {
-      const response = await fetch(chatEndpoint(), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message, language })
-      });
-      const data = await response.json().catch(() => null) as
-        | { reply?: unknown; error?: unknown; remaining?: unknown; limit?: unknown; sources?: unknown }
-        | null;
+  function cancelRequest() {
+    activeRequestRef.current?.abort();
+  }
 
-      if (typeof data?.limit === 'number') setLimit(data.limit);
-      if (typeof data?.remaining === 'number') setRemaining(data.remaining);
-
-      if (!response.ok) {
-        const visibleError = response.status === 429 && typeof data?.error === 'string' ? data.error : GENERIC_ERROR;
-        setError(visibleError);
-        return;
-      }
-
-      const reply = typeof data?.reply === 'string' ? data.reply.trim() : '';
-      if (!reply) {
-        setError(GENERIC_ERROR);
-        return;
-      }
-
-      setMessages((current) => [...current, {
-        role: 'assistant',
-        content: reply,
-        sources: sanitizeSources(data?.sources)
-      }]);
-    } catch {
-      setError(GENERIC_ERROR);
-    } finally {
-      setLoading(false);
-    }
+  function retryLastRequest() {
+    if (!retryRequest || loading) return;
+    void sendMessage(retryRequest.message, retryRequest.language, false);
   }
 
   if (!mounted) return null;
@@ -299,7 +353,16 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
             )}
             <div ref={endRef} />
           </div>
-          {error && <div className="chat-xinbao-error" role="alert">{error}</div>}
+          {error && (
+            <div className="chat-xinbao-error" role="alert">
+              <span>{error}</span>
+              {retryRequest && (
+                <button className="chat-xinbao-retry" disabled={loading} onClick={retryLastRequest} type="button">
+                  {strings.retry}
+                </button>
+              )}
+            </div>
+          )}
           <form className="chat-xinbao-composer" onSubmit={submit}>
             <label className="sr-only" htmlFor="chat-with-xinbao-input">{strings.inputLabel}</label>
             <textarea
@@ -319,7 +382,11 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
             />
             <div className="chat-xinbao-composer-footer">
               <span>{MAX_INPUT_LENGTH - input.length}</span>
-              <button disabled={loading || !input.trim()} type="submit">{strings.send}</button>
+              {loading ? (
+                <button className="chat-xinbao-cancel" onClick={cancelRequest} type="button">{strings.cancel}</button>
+              ) : (
+                <button disabled={!input.trim()} type="submit">{strings.send}</button>
+              )}
             </div>
           </form>
         </section>

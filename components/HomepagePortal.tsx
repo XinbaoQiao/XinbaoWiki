@@ -98,6 +98,23 @@ const updateLabels = {
   }
 } satisfies Record<SearchLanguage, { title: string; window: string }>;
 
+const quickLinkLabels = {
+  en: {
+    feed: 'Updates feed',
+    latest: 'Latest',
+    latestAria: 'Open Latest details',
+    topics: 'Topics',
+    topicsAria: 'Open Topics details'
+  },
+  zh: {
+    feed: '更新订阅',
+    latest: '最新动态',
+    latestAria: '打开最新动态',
+    topics: '主题',
+    topicsAria: '打开主题发现'
+  }
+} satisfies Record<SearchLanguage, { feed: string; latest: string; latestAria: string; topics: string; topicsAria: string }>;
+
 const updateEntries: Record<SearchLanguage, NewsEntry[]> = {
   en: [
     {
@@ -232,6 +249,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
   };
   const portalClassName = ['wiki-portal', allSectionsClosed ? 'wiki-portal-collapsed' : ''].filter(Boolean).join(' ');
   const latestUpdate = updateEntries[language][0];
+  const feedHref = withBasePath('/feed.xml');
 
   useEffect(() => {
     document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
@@ -268,16 +286,8 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
       <section className="wiki-portal-hero" aria-labelledby="portal-title">
         <div className="wiki-portal-masthead">
           <div className="wiki-portal-brand">
-            <h1 className="wiki-portal-name" id="portal-title">
-              <button
-                type="button"
-                aria-controls="portal-news portal-directory"
-                aria-expanded={!allSectionsClosed}
-                aria-label={allSectionsClosed ? sectionToggleLabels[language].expand : sectionToggleLabels[language].collapse}
-                className="wiki-portal-name-button"
-                onClick={toggleAllSections}
-                onDoubleClick={collapseAllSections}
-              >
+            <div className="wiki-portal-name-wrap">
+              <h1 className="wiki-portal-name" id="portal-title">
                 <span className="wiki-portal-name-logos" aria-hidden="true">
                   <img
                     alt=""
@@ -319,8 +329,16 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
                   />
                 </span>
                 <span className="wiki-portal-name-text">Xinbao Qiao</span>
-              </button>
-            </h1>
+              </h1>
+              <button
+                type="button"
+                aria-controls="portal-news portal-directory"
+                aria-expanded={!allSectionsClosed}
+                aria-label={allSectionsClosed ? sectionToggleLabels[language].expand : sectionToggleLabels[language].collapse}
+                className="wiki-portal-name-button"
+                onClick={toggleAllSections}
+              />
+            </div>
           </div>
         </div>
         <p aria-atomic="true" aria-live="polite" className="wiki-portal-tagline">
@@ -345,6 +363,27 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
               </a>
             ))}
           </nav>
+          <nav className="wiki-portal-quicklinks" aria-label={language === 'zh' ? '首页快捷入口' : 'Homepage quick links'}>
+            <button
+              type="button"
+              aria-controls="portal-news"
+              aria-expanded={newsOpen}
+              aria-label={quickLinkLabels[language].latestAria}
+              onClick={() => setNewsOpen(true)}
+            >
+              {quickLinkLabels[language].latest}
+            </button>
+            <a href={feedHref}>{quickLinkLabels[language].feed}</a>
+            <button
+              type="button"
+              aria-controls="portal-directory"
+              aria-expanded={browseOpen}
+              aria-label={quickLinkLabels[language].topicsAria}
+              onClick={() => setBrowseOpen(true)}
+            >
+              {quickLinkLabels[language].topics}
+            </button>
+          </nav>
         </div>
       </section>
 
@@ -352,14 +391,10 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
         <details
           className="wiki-portal-news wiki-portal-timeline"
           id="portal-news"
+          onToggle={(event) => setNewsOpen(event.currentTarget.open)}
           open={newsOpen}
         >
-          <summary
-            onClick={(event) => {
-              event.preventDefault();
-              setNewsOpen((open) => !open);
-            }}
-          >
+          <summary>
             <span className="wiki-portal-timeline-heading">
               <strong>{updateLabels[language].title}</strong>
               <em>{updateEntries[language].length} {language === 'zh' ? '条动态' : 'updates'}</em>
@@ -396,14 +431,10 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
         <details
           className="wiki-portal-directory"
           id="portal-directory"
+          onToggle={(event) => setBrowseOpen(event.currentTarget.open)}
           open={browseOpen}
         >
-          <summary
-            onClick={(event) => {
-              event.preventDefault();
-              setBrowseOpen((open) => !open);
-            }}
-          >
+          <summary>
             <span>{browseLabels[language]}</span>
           </summary>
           <div className="wiki-portal-grid">

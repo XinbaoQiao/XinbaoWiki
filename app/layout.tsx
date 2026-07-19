@@ -27,7 +27,12 @@ export const metadata: Metadata = {
     template: '%s | Xinbaopedia'
   },
   description: siteDescription,
-  alternates: { canonical: '/' },
+  alternates: {
+    canonical: '/',
+    types: {
+      'application/atom+xml': '/feed.xml'
+    }
+  },
   icons: { icon: sitePaletteIcons.blue },
   openGraph: {
     type: 'website',
@@ -47,6 +52,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html lang="en">
       <body>
+        <a className="skip-to-content" href="#main-content">Skip to content / 跳至正文</a>
         <SitePalette icons={sitePaletteIcons} />
         <header className="wiki-topbar">
           <div className="wiki-topbar-inner">

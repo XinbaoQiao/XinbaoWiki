@@ -1,6 +1,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
+import { isChineseSlug, toChineseSlug, toEnglishSlug, wikiConceptType, wikiPageSummary, wikiPageTitle } from '@/lib/wiki-metadata';
+import { getManifestSearchIndex, getManifestWikiPage, getPublicManifestSlugs } from '@/lib/wiki-manifest';
+
+export { isChineseSlug, toChineseSlug, toEnglishSlug, wikiConceptType, wikiPageSummary, wikiPageTitle } from '@/lib/wiki-metadata';
 
 export type LinkItem = { label: string; url: string; detail?: string; title?: string };
 
@@ -113,7 +117,7 @@ export function getAllWikiSlugs(options: WikiSlugOptions = {}) {
 }
 
 export function getPublicWikiSlugs() {
-  return getAllWikiSlugs();
+  return getPublicManifestSlugs();
 }
 
 function normalizeSlug(slug: string) {
@@ -149,46 +153,6 @@ function pageExists(slug: string) {
   return Boolean(filePath && fs.existsSync(filePath));
 }
 
-export function isChineseSlug(slug: string) {
-  return slug === 'Qiao_Xinbao_zh' || slug.endsWith('_zh');
-}
-
-export function toChineseSlug(slug: string) {
-  if (slug === 'Xinbao_Qiao') return 'Qiao_Xinbao_zh';
-  if (isChineseSlug(slug)) return slug;
-  return `${slug}_zh`;
-}
-
-export function toEnglishSlug(slug: string) {
-  if (slug === 'Qiao_Xinbao_zh') return 'Xinbao_Qiao';
-  return slug.endsWith('_zh') ? slug.slice(0, -3) : slug;
-}
-
-export function wikiPageTitle(data: WikiFrontmatter, slug: string) {
-  const name = typeof data.name === 'string' ? data.name.trim() : '';
-  const title = typeof data.title === 'string' ? data.title.trim() : '';
-  return name || title || slug.replaceAll('_', ' ');
-}
-
-export function wikiPageSummary(data: WikiFrontmatter) {
-  const summary = typeof data.summary === 'string' ? data.summary.trim() : '';
-  const description = typeof data.description === 'string' ? data.description.trim() : '';
-  return summary || description;
-}
-
-export function wikiConceptType(data: WikiFrontmatter, slug: string) {
-  if (typeof data.type === 'string' && data.type.trim()) return data.type.trim();
-  if (typeof data.occupation === 'string' && data.occupation.trim()) return data.occupation.trim();
-  if (Array.isArray(data.occupation)) {
-    const first = data.occupation.find((item) => typeof item === 'string' && item.trim());
-    if (typeof first === 'string') return first.trim();
-  }
-  if (Array.isArray(data.authors) || data.venue || data.publication_type) return 'publication';
-  if (slug === 'index' || slug === 'index_zh') return 'index';
-  if (slug === 'log' || slug === 'log_zh') return 'update log';
-  return 'article';
-}
-
 export function getWikiPageBySlug(slug: string, options: WikiPageOptions = {}): WikiPage | null {
   let decoded = '';
   try {
@@ -198,6 +162,7 @@ export function getWikiPageBySlug(slug: string, options: WikiPageOptions = {}): 
   }
   const resolved = resolveSlug(decoded);
   if (!resolved) return null;
+  if (!options.includeHidden) return getManifestWikiPage(resolved);
   const fileName = `${resolved}.md`;
   const filePath = wikiFilePath(resolved);
   if (!filePath) return null;
@@ -205,72 +170,16 @@ export function getWikiPageBySlug(slug: string, options: WikiPageOptions = {}): 
   const raw = fs.readFileSync(filePath, 'utf8');
   const parsed = matter(raw);
   const data = parsed.data as WikiFrontmatter;
-  if (data.hidden === true && !options.includeHidden) return null;
   const title = wikiPageTitle(data, resolved);
   const summary = wikiPageSummary(data);
   return { slug: resolved, title, summary, data, content: parsed.content.trim(), fileName };
 }
 
-function asSearchStrings(value: unknown): string[] {
-  if (value === null || value === undefined) return [];
-  if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') return [String(value)];
-  if (Array.isArray(value)) return value.flatMap(asSearchStrings);
-  if (typeof value === 'object') return Object.values(value).flatMap(asSearchStrings);
-  return [];
-}
-
-function plainText(markdown: string) {
-  return markdown
-    .replace(/!\[[^\]]*\]\([^)]+\)/g, ' ')
-    .replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (_match, target, label) => String(label || target).replaceAll('_', ' '))
-    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-    .replace(/\$\$[\s\S]*?\$\$/g, ' ')
-    .replace(/`{1,3}[\s\S]*?`{1,3}/g, ' ')
-    .replace(/[#>*_|~`$\\-]+/g, ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-}
-
 export function getSearchIndex(): SearchIndexItem[] {
-  return getAllWikiSlugs()
-    .map((slug) => getWikiPageBySlug(slug))
-    .filter((page): page is WikiPage => Boolean(page))
-    .filter((page) => page.data.hidden !== true)
-    .map((page) => {
-      const aliases = Array.isArray(page.data.aliases) ? page.data.aliases.filter((alias): alias is string => typeof alias === 'string') : [];
-      const tags = Array.isArray(page.data.tags) ? page.data.tags.filter((tag): tag is string => typeof tag === 'string') : [];
-      const frontmatterText = asSearchStrings({
-        occupation: page.data.occupation,
-        affiliation: page.data.affiliation,
-        education: page.data.education,
-        type: wikiConceptType(page.data, page.slug),
-        tags,
-        authors: page.data.authors,
-        venue: page.data.venue,
-        location: page.data.location,
-        year: page.data.year,
-        status: page.data.status,
-        publication_type: page.data.publication_type
-      }).join(' ');
-      const text = [
-        page.title,
-        page.summary,
-        aliases.join(' '),
-        frontmatterText,
-        plainText(page.content)
-      ].join(' ');
-      return {
-        slug: page.slug,
-        href: pathWithBasePath(`/wiki/${encodeURIComponent(page.slug)}/`),
-        title: page.title,
-        summary: page.summary,
-        language: isChineseSlug(page.slug) ? 'zh' : 'en',
-        type: wikiConceptType(page.data, page.slug),
-        aliases,
-        tags,
-        text: text.slice(0, 2400)
-      };
-    });
+  return getManifestSearchIndex().map((item) => ({
+    ...item,
+    href: pathWithBasePath(item.href)
+  }));
 }
 
 function hasExplicitEnglishLabel(label: string) {

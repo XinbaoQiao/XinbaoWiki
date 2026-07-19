@@ -140,7 +140,9 @@ export function WikiSearch({
   variant = 'topbar'
 }: Props) {
   const pathname = usePathname();
-  const listboxId = useId();
+  const generatedId = useId();
+  const comboboxId = `${generatedId}-combobox`;
+  const listboxId = `${generatedId}-listbox`;
   const rootRef = useRef<HTMLDivElement>(null);
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
@@ -166,6 +168,9 @@ export function WikiSearch({
       .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title))
       .slice(0, 8);
   }, [languageItems, normalizedQuery, terms]);
+  const showResults = open && Boolean(normalizedQuery);
+  const activeResult = showResults && results.length ? results[active] : undefined;
+  const activeOptionId = activeResult ? `${generatedId}-option-${activeResult.slug}` : undefined;
 
   const loadItems = useCallback(async () => {
     if (loadState === 'loading' || loadState === 'ready') return;
@@ -181,6 +186,10 @@ export function WikiSearch({
   useEffect(() => {
     setActive(0);
   }, [normalizedQuery]);
+
+  useEffect(() => {
+    if (active >= results.length) setActive(Math.max(0, results.length - 1));
+  }, [active, results.length]);
 
   useEffect(() => {
     if (language === undefined) setSelectedLanguage(preferredLanguage);
@@ -220,11 +229,13 @@ export function WikiSearch({
       >
         <div className="wiki-search-fields">
           <input
+            aria-activedescendant={activeOptionId}
             aria-autocomplete="list"
             aria-controls={listboxId}
-            aria-expanded={open && normalizedQuery ? 'true' : 'false'}
+            aria-expanded={showResults}
             aria-label={copy.inputAria}
             autoComplete="off"
+            id={comboboxId}
             onChange={(event) => {
               setQuery(event.target.value);
               setOpen(true);
@@ -250,8 +261,13 @@ export function WikiSearch({
                 setOpen(true);
                 setActive((index) => (index - 1 + results.length) % results.length);
               }
+              if (event.key === 'Enter' && results.length) {
+                event.preventDefault();
+                goTo(results[active] || results[0]);
+              }
             }}
             placeholder={copy.placeholder}
+            role="combobox"
             type="search"
             value={query}
           />
@@ -274,8 +290,8 @@ export function WikiSearch({
           <button className="wiki-search-submit" type="submit">{copy.submit}</button>
         </div>
       </form>
-      {open && normalizedQuery && (
-        <div className="wiki-search-panel" id={listboxId} role="listbox">
+      {showResults && (
+        <div aria-label={copy.inputAria} className="wiki-search-panel" id={listboxId} role="listbox">
           {loadState === 'loading' ? (
             <div className="wiki-search-empty" role="status">{copy.loading}</div>
           ) : loadState === 'error' ? (
@@ -286,6 +302,7 @@ export function WikiSearch({
                 aria-selected={index === active}
                 className="wiki-search-result"
                 href={item.href}
+                id={`${generatedId}-option-${item.slug}`}
                 key={item.slug}
                 onMouseEnter={() => setActive(index)}
                 role="option"
