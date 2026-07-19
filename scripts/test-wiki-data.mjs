@@ -1295,6 +1295,7 @@ assert.equal(fs.readFileSync(path.join(root, '.nvmrc'), 'utf8').trim(), '22', 'l
 const gitignore = fs.readFileSync(path.join(root, '.gitignore'), 'utf8');
 const vercelignore = fs.readFileSync(path.join(root, '.vercelignore'), 'utf8');
 const verifyPublishSet = fs.readFileSync(path.join(root, 'scripts/verify-publish-set.mjs'), 'utf8');
+assert.ok(gitignore.split(String.fromCharCode(10)).includes('.vercel'), 'gitignore keeps the exact Vercel CLI sentinel so linking cannot dirty the release tree');
 assert.match(gitignore, /\.vercel-auth-\*\//, 'gitignore excludes temporary Vercel auth directories');
 assert.match(vercelignore, /\.vercel-auth-\*\//, 'vercelignore excludes temporary Vercel auth directories');
 assert.match(gitignore, /agent_progress\.md/, 'gitignore keeps the local agent ledger out of commits by default');
