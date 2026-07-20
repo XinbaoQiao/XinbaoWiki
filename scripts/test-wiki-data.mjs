@@ -1988,15 +1988,17 @@ assertCssRule(styles, '.wiki-infobox th', [
   /color: var\(--site-theme-heading\);/
 ], 'infobox label and value columns retain a crisp theme-aware divider and shallow label tint');
 assert.match(styles, /\.wiki-main:has\(\.wiki-portal\) \{[\s\S]*grid-column: 1 \/ -1;[\s\S]*max-width: 100%;[\s\S]*\}/, 'homepage main content spans the hidden sidebar grid column');
-assert.match(styles, /\.wiki-page\[data-page-type="publication"\] \.wiki-title \{[\s\S]*white-space: nowrap;[\s\S]*font-size: 1\.56em;[\s\S]*\}/, 'publication article titles stay on one line on desktop');
-assert.match(styles, /\.wiki-page\[data-page-type="publication"\] \.wiki-title \{[\s\S]*font-size: 1\.08em;[\s\S]*\}/, 'publication article titles use a compact single-line size on mobile');
+assert.match(styles, /\.wiki-page\[data-page-type="publication"\] \.wiki-title \{[\s\S]*font-size: clamp\(1\.55em, 2\.3vw, 1\.9em\);[\s\S]*overflow-wrap: anywhere;[\s\S]*white-space: normal;[\s\S]*\}/, 'publication article titles wrap into balanced readable lines instead of horizontal scrolling');
+assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.wiki-page\[data-page-type="publication"\] \.wiki-title \{[\s\S]*font-size: 1\.36em;[\s\S]*\}/, 'publication article titles retain a readable mobile scale while wrapping naturally');
 assertCssRule(styles, '.wiki-title', [
   /border-bottom: 1px solid var\(--site-theme-chrome-border\);/,
   /color: var\(--site-theme-heading\);/
 ], 'article title uses restrained resolved-theme rules and heading ink');
 assertCssRule(styles, '.wiki-title-sub', [
   /border-left: 3px solid var\(--site-theme-action-ink\);/,
-  /background: var\(--site-theme-chrome-surface\);/
+  /background: var\(--site-theme-chrome-surface\);/,
+  /font-size: 13px;/,
+  /line-height: 1\.58;/
 ], 'article summary uses a shallow resolved-theme surface and action edge');
 assertCssRule(styles, '.wiki-infobox-title', [
   /border-bottom: 1px solid var\(--site-theme-chrome-border\);/,
@@ -2009,7 +2011,9 @@ assertCssRule(styles, '.wiki-infobox-section', [
   /color: var\(--site-theme-heading\);/
 ], 'infobox section labels share the resolved-theme chrome');
 assertCssRule(styles, '.wiki-main blockquote', [
-  /border-left: 3px solid var\(--site-theme-accent\);/
+  /border-left: 3px solid var\(--site-theme-accent\);/,
+  /background: var\(--site-theme-chrome-surface\);/,
+  /font-style: normal;/
 ], 'article blockquotes use the decorative resolved-theme accent');
 assertCssRule(styles, '.wiki-main th', [
   /background: var\(--site-theme-chrome-surface-strong\);/,
@@ -2186,11 +2190,12 @@ assert.ok(!homepagePortal.includes('onPointerOut=') && styles.includes('width: m
 assert.match(homepagePortal, /cubeFaceNames\.map\(\(face\)[\s\S]*data-cube-hover-face=\{face\}[\s\S]*onPointerEnter=\{\(\) => \{[\s\S]*if \(!activeCubeFace\) scheduleCubeFace\(face\)[\s\S]*onPointerLeave=\{clearCubeHoverIntent\}/, "dedicated transparent 3D hit faces reliably activate top, front, and right before yielding to the readable face");
 assert.match(styles, /\.wiki-portal-grid-cube \.wiki-portal-cube-hit-face \{[\s\S]*background: rgb\(255 255 255 \/ \.001\)[\s\S]*transform: var\(--portal-cube-face-transform\)[\s\S]*\.wiki-portal-grid-cube\[data-active-face\] \.wiki-portal-cube-hit-face \{\s*display: none;\s*pointer-events: none/, "cube hover hit faces share the resting visual geometry and leave the compositor completely after activation");
 assert.match(homepagePortal, /pinnedCubeFace[\s\S]*xinbaopedia-cube-pinned-face[\s\S]*togglePinnedCubeFace[\s\S]*aria-pressed=\{pinnedCubeFace === activeCubeFace\}/, "each active cube face exposes a persistent, toggleable pin control");
-assert.match(homepagePortal, /browseView === 'cube' && activeCubeFace[\s\S]*className="wiki-portal-cube-pin"[\s\S]*data-cube-face=\{activeCubeFace\}[\s\S]*>\s*Pin\s*<\/button>/, "the visible Pin control uses the stable stage interaction layer while tracking the selected original face");
+assert.match(homepagePortal, /browseView === 'cube' && activeCubeFace[\s\S]*className="wiki-portal-cube-pin"[\s\S]*data-cube-face=\{activeCubeFace\}[\s\S]*className="wiki-portal-cube-pin-icon"[\s\S]*<span>Pin<\/span>/, "the visible Pin control uses a concise icon-and-label treatment on the stable stage layer");
 assert.match(homepagePortal, /onPointerLeave=\{\(\) => \{[\s\S]*if \(!pinnedCubeFace\) setActiveCubeFace\(null\)/, "a pinned cube face survives pointer exit while an unpinned face restores the resting cube");
 assert.ok(!homepagePortal.includes('hoveredCubeItemHref') && !homepagePortal.includes('isReader') && !homepagePortal.includes('wiki-portal-cube-reader-shell'), "cube items use the exact visible original anchors without a misaligned duplicate hit layer");
 assert.ok(!styles.includes('wiki-portal-cube-reader-shell') && !styles.includes('wiki-portal-cube-reader'), "cube CSS contains no duplicate reader surface or transparent anchor map");
-assert.match(styles, /\.wiki-portal-cube-pin \{[\s\S]*position: absolute[\s\S]*top: 123px[\s\S]*left: calc\(50% \+ 144px\)[\s\S]*border-radius: 6px[\s\S]*\.wiki-portal-cube-pin\[aria-pressed="true"\]/, "the compact Pin control uses a stable title-aligned upper-right position outside the 3D compositor");
+assert.match(styles, /\.wiki-portal-cube-pin \{[\s\S]*position: absolute[\s\S]*top: 55px[\s\S]*left: calc\(50% \+ 170px\)[\s\S]*min-height: 32px[\s\S]*border-radius: 999px[\s\S]*\.wiki-portal-cube-pin\[aria-pressed="true"\][\s\S]*background: var\(--portal-cube-accent\);/, "the Pin control touches the active paper's upper-right edge as a stable pill with a distinct theme-filled pressed state outside the 3D compositor");
+assert.match(styles, /\.wiki-portal-cube-pin\[data-cube-face="front"\],[\s\S]*data-cube-face="right"\][\s\S]*top: 63px;/, "Pin compensates for the top-versus-side face projection so every active paper meets the control at the same visual edge");
 assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.wiki-portal-cube-pin \{\s*display: none;/, "mobile unfolded cube panels omit the desktop Pin overlay");
 assert.ok(styles.includes("rotateX(90deg) translateZ") && styles.includes("translateZ(calc(var(--portal-cube-size) / 2))") && styles.includes("rotateY(90deg) translateZ"), "typographic cube joins its top, front, and right content planes at the visible cube edges");
 assert.ok(styles.includes("--portal-cube-accent: var(--site-theme-action-ink)") && styles.includes("--portal-cube-edge: color-mix(in srgb, var(--site-theme-accent)"), "typographic cube derives its ink and illuminated edges from the active site theme");

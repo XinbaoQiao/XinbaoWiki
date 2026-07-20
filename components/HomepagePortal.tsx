@@ -39,8 +39,8 @@ const browseViewLabels = {
 } satisfies Record<SearchLanguage, Record<BrowseView | 'group', string>>;
 
 const cubePinLabels = {
-  en: { pin: 'Pin current face', unpin: 'Unpin current face' },
-  zh: { pin: '固定当前面', unpin: '取消固定当前面' }
+  en: { pin: 'Pin current face', unpin: 'Pin: unpin current face' },
+  zh: { pin: 'Pin：固定当前面', unpin: 'Pin：取消固定当前面' }
 } satisfies Record<SearchLanguage, { pin: string; unpin: string }>;
 
 const cubeFaceNames = ['top', 'front', 'right'] as const;
@@ -477,7 +477,11 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
                 onClick={() => togglePinnedCubeFace(activeCubeFace)}
                 type="button"
               >
-                Pin
+                <svg aria-hidden="true" className="wiki-portal-cube-pin-icon" viewBox="0 0 16 16">
+                  <path d="m9.8 2.2 4 4-1.4 1.4-.9-.9-2.7 2.7.9.9-1.4 1.4-4-4 1.4-1.4.9.9 2.7-2.7-.9-.9 1.4-1.4Z" />
+                  <path d="m6.1 9.9-3.6 3.6" />
+                </svg>
+                <span>Pin</span>
               </button>
             )}
           </div>
