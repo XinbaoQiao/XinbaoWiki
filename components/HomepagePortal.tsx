@@ -45,6 +45,7 @@ const cubePinLabels = {
 
 const cubeFaceNames = ['top', 'front', 'right'] as const;
 const cubeHoverIntentMs = 150;
+const cubeTurnDurationMs = 820;
 
 const entriesLabel: LocalizedText = {
   en: 'Primary academic entries',
@@ -115,6 +116,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
   const [language, setLanguage] = useState<SearchLanguage>('en');
   const [browseView, setBrowseView] = useState<BrowseView>('list');
   const [activeCubeFace, setActiveCubeFace] = useState<CubeFace | null>(null);
+  const [cubeFaceSettled, setCubeFaceSettled] = useState(false);
   const [pinnedCubeFace, setPinnedCubeFace] = useState<CubeFace | null>(null);
   const [browseOpen, setBrowseOpen] = useState(false);
   const [newsOpen, setNewsOpen] = useState(false);
@@ -161,6 +163,14 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
   useEffect(() => () => {
     if (cubeHoverIntentRef.current !== null) window.clearTimeout(cubeHoverIntentRef.current);
   }, []);
+
+  useEffect(() => {
+    setCubeFaceSettled(false);
+    if (!activeCubeFace) return;
+    const settleDelay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : cubeTurnDurationMs;
+    const settleTimer = window.setTimeout(() => setCubeFaceSettled(true), settleDelay);
+    return () => window.clearTimeout(settleTimer);
+  }, [activeCubeFace]);
 
   const clearCubeHoverIntent = () => {
     if (cubeHoverIntentRef.current === null) return;
@@ -410,6 +420,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
           </div>
           <div
             className={'wiki-portal-cube-stage wiki-portal-cube-stage-' + browseView}
+            data-active-face={browseView === 'cube' ? activeCubeFace ?? undefined : undefined}
             onBlurCapture={(event) => {
               if (!pinnedCubeFace && !event.currentTarget.contains(event.relatedTarget as Node | null)) {
                 clearCubeHoverIntent();
@@ -434,12 +445,20 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
               if (targetFace === relatedFace || !face || !cubeFaceNames.includes(face)) return;
               scheduleCubeFace(face);
             }}
+            style={browseView === 'cube' && activeCubeFace ? { perspective: 'none' } : undefined}
           >
             <div
               className={'wiki-portal-grid wiki-portal-grid-' + browseView}
               data-active-face={activeCubeFace ?? undefined}
               data-browse-view={browseView}
+              data-face-settled={cubeFaceSettled ? '' : undefined}
               data-pinned-face={pinnedCubeFace ?? undefined}
+              style={browseView === 'cube' && activeCubeFace ? {
+                transform: 'none',
+                transformStyle: 'flat',
+                transition: cubeFaceSettled ? 'none' : undefined,
+                willChange: 'auto',
+              } : undefined}
             >
               {directorySections.map((section, sectionIndex) => {
                 const sectionId = `portal-${section.title.en.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
@@ -450,25 +469,32 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
                   aria-labelledby={sectionId}
                   data-cube-face={cubeFace}
                   key={section.title.en}
+                  style={browseView === 'cube' && activeCubeFace === cubeFace ? {
+                    backfaceVisibility: 'visible',
+                    transform: 'none',
+                    transformStyle: 'flat',
+                    transition: cubeFaceSettled ? 'none' : undefined,
+                  } : undefined}
                 >
                   {renderPortalSectionContent(section, sectionId)}
                 </section>
                 );
               })}
-              {browseView === 'cube' && cubeFaceNames.map((face) => (
-                <span
-                  aria-hidden="true"
-                  className={'wiki-portal-cube-hit-face wiki-portal-cube-face-' + face}
-                  data-cube-hover-face={face}
-                  key={'cube-hover-' + face}
-                  onPointerEnter={() => {
-                    if (!activeCubeFace) scheduleCubeFace(face);
-                  }}
-                  onPointerLeave={clearCubeHoverIntent}
-                />
-              ))}
             </div>
-            {browseView === 'cube' && activeCubeFace && (
+            {browseView === 'cube' && !activeCubeFace && (
+              <div aria-hidden="true" className="wiki-portal-cube-hover-zones">
+                {cubeFaceNames.map((face) => (
+                  <span
+                    className={'wiki-portal-cube-hover-zone wiki-portal-cube-hover-zone-' + face}
+                    data-cube-hover-face={face}
+                    key={'cube-hover-' + face}
+                    onPointerEnter={() => scheduleCubeFace(face)}
+                    onPointerLeave={clearCubeHoverIntent}
+                  />
+                ))}
+              </div>
+            )}
+            {browseView === 'cube' && activeCubeFace && cubeFaceSettled && (
               <button
                 aria-label={pinnedCubeFace === activeCubeFace ? cubePinLabels[language].unpin : cubePinLabels[language].pin}
                 aria-pressed={pinnedCubeFace === activeCubeFace}
@@ -477,9 +503,12 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
                 onClick={() => togglePinnedCubeFace(activeCubeFace)}
                 type="button"
               >
-                <svg aria-hidden="true" className="wiki-portal-cube-pin-icon" viewBox="0 0 16 16">
-                  <path d="m9.8 2.2 4 4-1.4 1.4-.9-.9-2.7 2.7.9.9-1.4 1.4-4-4 1.4-1.4.9.9 2.7-2.7-.9-.9 1.4-1.4Z" />
-                  <path d="m6.1 9.9-3.6 3.6" />
+                <svg aria-hidden="true" className="wiki-portal-cube-pin-icon" viewBox="0 0 32 40">
+                  <ellipse className="wiki-portal-cube-pin-head" cx="16" cy="7" rx="10" ry="4" />
+                  <path className="wiki-portal-cube-pin-body" d="M8 8h16l-4.5 11h-7Z" />
+                  <ellipse className="wiki-portal-cube-pin-collar" cx="16" cy="19" rx="5" ry="2.2" />
+                  <path className="wiki-portal-cube-pin-needle" d="M16 20v15" />
+                  <ellipse className="wiki-portal-cube-pin-highlight" cx="13" cy="5.8" rx="3.2" ry="1.2" />
                 </svg>
                 <span>Pin</span>
               </button>
