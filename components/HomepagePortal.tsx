@@ -371,17 +371,8 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
               clearCubeHoverIntent();
               setActiveCubeFace(null);
             }}
-            onPointerOut={(event) => {
-              if (browseView !== 'cube') return;
-              const sourceFace = (event.target as HTMLElement).closest<HTMLElement>('[data-cube-face]');
-              const destinationFace = (event.relatedTarget as HTMLElement | null)?.closest?.<HTMLElement>('[data-cube-face]');
-              if (sourceFace && !destinationFace) {
-                clearCubeHoverIntent();
-                setActiveCubeFace(null);
-              }
-            }}
             onPointerOver={(event) => {
-              if (browseView !== 'cube') return;
+              if (browseView !== 'cube' || activeCubeFace) return;
               const targetFace = (event.target as HTMLElement).closest<HTMLElement>('[data-cube-face]');
               const relatedFace = (event.relatedTarget as HTMLElement | null)?.closest?.<HTMLElement>('[data-cube-face]');
               const face = targetFace?.dataset.cubeFace as CubeFace | undefined;

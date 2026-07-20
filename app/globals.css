@@ -2277,7 +2277,9 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
 .wiki-portal-cube-stage-cube {
   position: relative;
   isolation: isolate;
+  width: min(100%, 760px);
   height: 750px;
+  margin-inline: auto;
   overflow: clip;
   perspective: 1900px;
   perspective-origin: 50% 40%;
