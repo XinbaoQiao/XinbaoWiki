@@ -116,6 +116,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
   const [browseView, setBrowseView] = useState<BrowseView>('list');
   const [activeCubeFace, setActiveCubeFace] = useState<CubeFace | null>(null);
   const [pinnedCubeFace, setPinnedCubeFace] = useState<CubeFace | null>(null);
+  const [hoveredCubeItemHref, setHoveredCubeItemHref] = useState<string | null>(null);
   const [browseOpen, setBrowseOpen] = useState(false);
   const [newsOpen, setNewsOpen] = useState(false);
   const cubeHoverIntentRef = useRef<number | null>(null);
@@ -172,6 +173,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
     clearCubeHoverIntent();
     if (pinnedCubeFace || face === activeCubeFace) return;
     cubeHoverIntentRef.current = window.setTimeout(() => {
+      setHoveredCubeItemHref(null);
       setActiveCubeFace(face);
       cubeHoverIntentRef.current = null;
     }, cubeHoverIntentMs);
@@ -182,6 +184,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
     setBrowseView(nextView);
     setActiveCubeFace(null);
     setPinnedCubeFace(null);
+    setHoveredCubeItemHref(null);
     try {
       window.localStorage.setItem('xinbaopedia-browse-view', nextView);
       window.localStorage.removeItem('xinbaopedia-cube-pinned-face');
@@ -235,7 +238,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
   const activeCubeSectionIndex = activeCubeFace ? cubeFaceNames.indexOf(activeCubeFace) : -1;
   const activeCubeSection = activeCubeSectionIndex >= 0 ? directorySections[activeCubeSectionIndex] : undefined;
 
-  const renderPortalSectionContent = (section: PortalSection, headingId: string) => (
+  const renderPortalSectionContent = (section: PortalSection, headingId: string, isReader = false) => (
     <>
       <h3 id={headingId}>
         <span>{section.title[language]}</span>
@@ -246,7 +249,14 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
           <ul>
             {group.links[language].map((item) => (
               <li key={item.href}>
-                <a href={item.href}>{item.title}</a>
+                <a
+                  data-cube-item-active={!isReader && hoveredCubeItemHref === item.href ? '' : undefined}
+                  href={item.href}
+                  onPointerEnter={isReader ? () => setHoveredCubeItemHref(item.href) : undefined}
+                  onPointerLeave={isReader ? () => setHoveredCubeItemHref(null) : undefined}
+                >
+                  {item.title}
+                </a>
                 {item.summary && <span>{item.summary}</span>}
               </li>
             ))}
@@ -423,6 +433,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
             }}
             onPointerLeave={() => {
               clearCubeHoverIntent();
+              setHoveredCubeItemHref(null);
               if (!pinnedCubeFace) setActiveCubeFace(null);
             }}
             onPointerOver={(event) => {
@@ -488,7 +499,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
                     <span aria-hidden="true" />
                     {pinnedCubeFace === activeCubeFace ? cubePinLabels[language].pinned : cubePinLabels[language].pin}
                   </button>
-                  {renderPortalSectionContent(activeCubeSection, `portal-cube-reader-${activeCubeFace}`)}
+                  {renderPortalSectionContent(activeCubeSection, `portal-cube-reader-${activeCubeFace}`, true)}
                 </section>
               </div>
             )}
