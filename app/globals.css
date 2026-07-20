@@ -2540,8 +2540,26 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
   background: linear-gradient(90deg, color-mix(in srgb, var(--portal-section-accent-resolved) 9%, var(--wiki-bg)), transparent 88%);
   color: var(--portal-cube-accent);
   letter-spacing: .025em;
-  outline: 0;
   transform: translateX(3px) translateZ(18px) scale(1.018);
+}
+
+.wiki-portal-grid-cube .wiki-portal-block a:hover {
+  outline: 0;
+}
+
+.wiki-portal-grid-cube .wiki-portal-block a:focus-visible {
+  border-radius: 2px;
+  outline: 2px solid color-mix(in srgb, var(--portal-cube-accent) 74%, white);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--portal-cube-accent) 10%, transparent);
+}
+
+.wiki-portal-grid-cube[data-active-face="top"] [data-cube-face="top"] a,
+.wiki-portal-grid-cube[data-active-face="front"] [data-cube-face="front"] a,
+.wiki-portal-grid-cube[data-active-face="right"] [data-cube-face="right"] a {
+  padding-block: 4px;
+  font-size: 11px;
+  font-weight: 680;
 }
 
 .wiki-portal-grid-cube .wiki-portal-block a:hover::after,

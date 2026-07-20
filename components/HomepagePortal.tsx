@@ -39,6 +39,7 @@ const browseViewLabels = {
 } satisfies Record<SearchLanguage, Record<BrowseView | 'group', string>>;
 
 const cubeFaceNames = ['top', 'front', 'right'] as const;
+const cubeHoverIntentMs = 150;
 
 const entriesLabel: LocalizedText = {
   en: 'Primary academic entries',
@@ -111,6 +112,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
   const [activeCubeFace, setActiveCubeFace] = useState<CubeFace | null>(null);
   const [browseOpen, setBrowseOpen] = useState(false);
   const [newsOpen, setNewsOpen] = useState(false);
+  const cubeHoverIntentRef = useRef<number | null>(null);
   const updatesWindowRef = useRef<HTMLDivElement>(null);
   const collapsibleSections = { browse: browseOpen, news: newsOpen };
   const allSectionsClosed = Object.values(collapsibleSections).every((open) => !open);
@@ -145,7 +147,27 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
     }
   }, []);
 
+  useEffect(() => () => {
+    if (cubeHoverIntentRef.current !== null) window.clearTimeout(cubeHoverIntentRef.current);
+  }, []);
+
+  const clearCubeHoverIntent = () => {
+    if (cubeHoverIntentRef.current === null) return;
+    window.clearTimeout(cubeHoverIntentRef.current);
+    cubeHoverIntentRef.current = null;
+  };
+
+  const scheduleCubeFace = (face: CubeFace) => {
+    clearCubeHoverIntent();
+    if (face === activeCubeFace) return;
+    cubeHoverIntentRef.current = window.setTimeout(() => {
+      setActiveCubeFace(face);
+      cubeHoverIntentRef.current = null;
+    }, cubeHoverIntentMs);
+  };
+
   const selectBrowseView = (nextView: BrowseView) => {
+    clearCubeHoverIntent();
     setBrowseView(nextView);
     setActiveCubeFace(null);
     try {
@@ -335,17 +357,36 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
           <div
             className={'wiki-portal-cube-stage wiki-portal-cube-stage-' + browseView}
             onBlurCapture={(event) => {
-              if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setActiveCubeFace(null);
+              if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                clearCubeHoverIntent();
+                setActiveCubeFace(null);
+              }
             }}
             onFocusCapture={(event) => {
+              clearCubeHoverIntent();
               const face = (event.target as HTMLElement).closest<HTMLElement>('[data-cube-face]')?.dataset.cubeFace as CubeFace | undefined;
               if (face && cubeFaceNames.includes(face)) setActiveCubeFace(face);
             }}
-            onPointerLeave={() => setActiveCubeFace(null)}
+            onPointerLeave={() => {
+              clearCubeHoverIntent();
+              setActiveCubeFace(null);
+            }}
+            onPointerOut={(event) => {
+              if (browseView !== 'cube') return;
+              const sourceFace = (event.target as HTMLElement).closest<HTMLElement>('[data-cube-face]');
+              const destinationFace = (event.relatedTarget as HTMLElement | null)?.closest?.<HTMLElement>('[data-cube-face]');
+              if (sourceFace && !destinationFace) {
+                clearCubeHoverIntent();
+                setActiveCubeFace(null);
+              }
+            }}
             onPointerOver={(event) => {
-              if (browseView !== 'cube' || activeCubeFace) return;
-              const face = (event.target as HTMLElement).closest<HTMLElement>('[data-cube-face]')?.dataset.cubeFace as CubeFace | undefined;
-              if (face && cubeFaceNames.includes(face)) setActiveCubeFace(face);
+              if (browseView !== 'cube') return;
+              const targetFace = (event.target as HTMLElement).closest<HTMLElement>('[data-cube-face]');
+              const relatedFace = (event.relatedTarget as HTMLElement | null)?.closest?.<HTMLElement>('[data-cube-face]');
+              const face = targetFace?.dataset.cubeFace as CubeFace | undefined;
+              if (targetFace === relatedFace || !face || !cubeFaceNames.includes(face)) return;
+              scheduleCubeFace(face);
             }}
           >
             <div
