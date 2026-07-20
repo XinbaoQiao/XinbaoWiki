@@ -2355,7 +2355,7 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
     0 22px 52px rgb(31 35 42 / 7%);
   transform: var(--portal-cube-face-transform);
   transform-style: preserve-3d;
-  transition: background-color .36s ease, border-color .36s ease, box-shadow .36s ease, opacity .34s ease, transform .36s ease;
+  transition: background-color .36s ease, border-color .36s ease, box-shadow .36s ease, transform .36s ease;
   pointer-events: none;
 }
 
@@ -2462,7 +2462,7 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
 }
 
 .wiki-portal-grid-cube[data-active-face] .wiki-portal-block {
-  opacity: .24;
+  opacity: 0;
 }
 
 .wiki-portal-grid-cube[data-active-face="top"] [data-cube-face="top"],
@@ -2698,8 +2698,8 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
 .wiki-portal-cube-pin {
   position: absolute;
   z-index: 6;
-  top: 24px;
-  right: 28px;
+  top: 20px;
+  right: 22px;
   display: inline-flex;
   align-items: center;
   gap: 7px;

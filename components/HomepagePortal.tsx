@@ -39,9 +39,9 @@ const browseViewLabels = {
 } satisfies Record<SearchLanguage, Record<BrowseView | 'group', string>>;
 
 const cubePinLabels = {
-  en: { pin: 'Pin face', pinned: 'Pinned', unpin: 'Unpin face' },
-  zh: { pin: '固定此面', pinned: '已固定', unpin: '取消固定' }
-} satisfies Record<SearchLanguage, { pin: string; pinned: string; unpin: string }>;
+  en: { pin: 'Pin current face', unpin: 'Unpin current face' },
+  zh: { pin: '固定当前面', unpin: '取消固定当前面' }
+} satisfies Record<SearchLanguage, { pin: string; unpin: string }>;
 
 const cubeFaceNames = ['top', 'front', 'right'] as const;
 const cubeHoverIntentMs = 150;
@@ -497,7 +497,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
                     type="button"
                   >
                     <span aria-hidden="true" />
-                    {pinnedCubeFace === activeCubeFace ? cubePinLabels[language].pinned : cubePinLabels[language].pin}
+                    Pin
                   </button>
                   {renderPortalSectionContent(activeCubeSection, `portal-cube-reader-${activeCubeFace}`, true)}
                 </section>
