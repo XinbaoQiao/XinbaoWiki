@@ -59,20 +59,22 @@ export const directorySections: CuratedDirectorySection[] = [
           en: [
             'Hessian_Free_Online_Certified_Unlearning',
             'Soft_Weighted_Machine_Unlearning',
-            'When_Sample_Selection_Bias_Precipitates_Model_Collapse'
+            'When_Sample_Selection_Bias_Precipitates_Model_Collapse',
+            'DynFrs'
           ],
           zh: [
             'Hessian_Free_Online_Certified_Unlearning_zh',
             'Soft_Weighted_Machine_Unlearning_zh',
-            'When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh'
+            'When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh',
+            'DynFrs_zh'
           ]
         }
       },
       {
         label: { en: 'Project pages', zh: '项目页面' },
         links: {
-          en: ['DynFrs', 'Collaborative_Evaluation'],
-          zh: ['DynFrs_zh', 'Collaborative_Evaluation_zh']
+          en: ['AI_and_Networks', 'Collaborative_Evaluation'],
+          zh: ['AI_and_Networks_zh', 'Collaborative_Evaluation_zh']
         }
       }
     ]
