@@ -34,8 +34,8 @@ const browseLabels: LocalizedText = {
 };
 
 const browseViewLabels = {
-  en: { cube: 'Typographic cube', group: 'Browse view', list: 'List' },
-  zh: { cube: '文字魔方', group: '浏览视图', list: '列表' }
+  en: { cube: 'Cube', group: 'Browse view', list: 'List' },
+  zh: { cube: '魔方', group: '浏览视图', list: '列表' }
 } satisfies Record<SearchLanguage, Record<BrowseView | 'group', string>>;
 
 const cubeFaceNames = ['top', 'front', 'right'] as const;

@@ -2173,7 +2173,7 @@ assert.match(homepagePortal, /wiki-portal-name-logos[\s\S]*\/site-logos\/wordmar
 assert.match(homepagePortal, /className="wiki-portal-name-logo wiki-portal-name-logo-tinted"[\s\S]*--portal-wordmark-mask[\s\S]*xinbao-qiao-charcoal\.png/, 'homepage provides a base-path-aware alpha mask for additional branded theme colors');
 assert.doesNotMatch(homepagePortal, /height=\{190\}|width=\{760\}/, 'homepage no longer renders the old rectangular logo canvas dimensions');
 assert.match(homepagePortal, /const browseLabels[\s\S]*en: 'Browse Xinbaopedia'[\s\S]*zh: '浏览 Xinbaopedia'/, 'homepage Browse heading has English and Chinese labels');
-assert.ok(homepagePortal.includes("Typographic cube") && homepagePortal.includes("文字魔方"), "homepage typographic-cube option has bilingual labels");
+assert.ok(homepagePortal.includes("cube: 'Cube'") && homepagePortal.includes("cube: '魔方'"), "homepage cube option uses concise bilingual labels");
 assert.ok(homepagePortal.includes("useState<BrowseView>('list')") && homepagePortal.includes("localStorage.getItem('xinbaopedia-browse-view')") && homepagePortal.includes("localStorage.setItem('xinbaopedia-browse-view', nextView)"), "homepage Browse defaults to the list and persists an explicit view choice");
 assert.ok(homepagePortal.includes('role="group" aria-label={browseViewLabels[language].group}') && homepagePortal.includes('aria-pressed={browseView === view}') && homepagePortal.includes('selectBrowseView(view)'), "homepage Browse view selector exposes native pressed-button semantics");
 assert.ok(styles.includes("perspective: 2050px") && styles.includes("transform-style: preserve-3d"), "desktop typographic cube uses a restrained real perspective context");
