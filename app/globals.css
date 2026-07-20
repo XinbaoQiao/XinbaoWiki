@@ -2356,6 +2356,7 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   transform: var(--portal-cube-face-transform);
   transform-style: preserve-3d;
   transition: background-color .36s ease, border-color .36s ease, box-shadow .36s ease, opacity .34s ease, transform .36s ease;
+  pointer-events: none;
 }
 
 .wiki-portal-grid-cube .wiki-portal-block {
@@ -2384,6 +2385,23 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
   background:
     linear-gradient(105deg, color-mix(in srgb, var(--portal-cube-accent) 5%, transparent) 0, transparent 32%),
     linear-gradient(145deg, var(--portal-cube-paper) 0, var(--portal-cube-paper-deep) 100%);
+}
+
+.wiki-portal-grid-cube .wiki-portal-cube-hit-face {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: var(--portal-cube-size);
+  height: var(--portal-cube-size);
+  background: rgb(255 255 255 / .001);
+  backface-visibility: hidden;
+  cursor: pointer;
+  transform: var(--portal-cube-face-transform);
+  transform-style: preserve-3d;
+}
+
+.wiki-portal-grid-cube[data-active-face] .wiki-portal-cube-hit-face {
+  pointer-events: none;
 }
 
 .wiki-portal-grid-cube .wiki-portal-cube-panel::before {
@@ -2451,6 +2469,7 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
 .wiki-portal-grid-cube[data-active-face="front"] [data-cube-face="front"],
 .wiki-portal-grid-cube[data-active-face="right"] [data-cube-face="right"] {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .wiki-portal-grid-cube .wiki-portal-block h3 {
@@ -2508,6 +2527,18 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
   color: color-mix(in srgb, var(--portal-section-accent-resolved) 78%, var(--wiki-text));
   letter-spacing: .075em;
   line-height: 1.2;
+  transform: translateZ(4px);
+  transition: background-color .24s ease, border-color .24s ease, box-shadow .3s ease, color .24s ease, transform .3s cubic-bezier(.16, 1, .3, 1);
+}
+
+.wiki-portal-grid-cube[data-active-face="top"] [data-cube-face="top"] .wiki-portal-group-label,
+.wiki-portal-grid-cube[data-active-face="front"] [data-cube-face="front"] .wiki-portal-group-label,
+.wiki-portal-grid-cube[data-active-face="right"] [data-cube-face="right"] .wiki-portal-group-label {
+  border-color: color-mix(in srgb, var(--portal-section-accent-resolved) 38%, var(--wiki-border-light));
+  background: linear-gradient(90deg, color-mix(in srgb, var(--portal-section-accent-resolved) 17%, var(--wiki-bg)), color-mix(in srgb, var(--portal-cube-paper) 88%, transparent));
+  box-shadow: 0 5px 16px color-mix(in srgb, var(--portal-section-accent-resolved) 10%, transparent);
+  color: var(--portal-cube-accent);
+  transform: translateZ(16px);
 }
 
 .wiki-portal-grid-cube .wiki-portal-block li {
@@ -2572,13 +2603,19 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
   font-weight: 700;
 }
 
-.wiki-portal-grid-cube .wiki-portal-cube-face-front .wiki-portal-group + .wiki-portal-group {
+.wiki-portal-grid-cube .wiki-portal-cube-face-top .wiki-portal-group + .wiki-portal-group,
+.wiki-portal-grid-cube .wiki-portal-cube-face-front .wiki-portal-group + .wiki-portal-group,
+.wiki-portal-grid-cube .wiki-portal-cube-face-right .wiki-portal-group + .wiki-portal-group {
   margin-top: 7px;
   padding-top: 6px;
 }
 
+.wiki-portal-grid-cube .wiki-portal-cube-face-top a,
 .wiki-portal-grid-cube .wiki-portal-cube-face-front a,
-.wiki-portal-grid-cube[data-active-face="front"] [data-cube-face="front"] a {
+.wiki-portal-grid-cube .wiki-portal-cube-face-right a,
+.wiki-portal-grid-cube[data-active-face="top"] [data-cube-face="top"] a,
+.wiki-portal-grid-cube[data-active-face="front"] [data-cube-face="front"] a,
+.wiki-portal-grid-cube[data-active-face="right"] [data-cube-face="right"] a {
   padding-block: 3px;
 }
 
@@ -3004,6 +3041,11 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
     height: auto;
     min-height: 0;
     transform: none;
+    pointer-events: auto;
+  }
+
+  .wiki-portal-grid-cube .wiki-portal-cube-hit-face {
+    display: none;
   }
 
   .wiki-portal-grid-cube .wiki-portal-block {
@@ -3090,6 +3132,7 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
   .wiki-portal-grid-cube .wiki-portal-block:focus-within,
   .wiki-portal-grid-cube .wiki-portal-cube-panel,
   .wiki-portal-grid-cube .wiki-portal-block h3,
+  .wiki-portal-grid-cube .wiki-portal-group-label,
   .wiki-portal-grid-cube .wiki-portal-block a,
   .wiki-portal-grid-cube .wiki-portal-block a::after {
     animation: none;

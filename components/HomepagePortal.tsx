@@ -414,6 +414,18 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
                 </section>
                 );
               })}
+              {browseView === 'cube' && cubeFaceNames.map((face) => (
+                <span
+                  aria-hidden="true"
+                  className={'wiki-portal-cube-hit-face wiki-portal-cube-face-' + face}
+                  data-cube-hover-face={face}
+                  key={'cube-hover-' + face}
+                  onPointerEnter={() => {
+                    if (!activeCubeFace) scheduleCubeFace(face);
+                  }}
+                  onPointerLeave={clearCubeHoverIntent}
+                />
+              ))}
             </div>
           </div>
         </details>
