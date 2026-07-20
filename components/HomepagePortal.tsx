@@ -38,6 +38,11 @@ const browseViewLabels = {
   zh: { cube: '魔方', group: '浏览视图', list: '列表' }
 } satisfies Record<SearchLanguage, Record<BrowseView | 'group', string>>;
 
+const cubePinLabels = {
+  en: { pin: 'Pin face', pinned: 'Pinned', unpin: 'Unpin face' },
+  zh: { pin: '固定此面', pinned: '已固定', unpin: '取消固定' }
+} satisfies Record<SearchLanguage, { pin: string; pinned: string; unpin: string }>;
+
 const cubeFaceNames = ['top', 'front', 'right'] as const;
 const cubeHoverIntentMs = 150;
 
@@ -110,6 +115,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
   const [language, setLanguage] = useState<SearchLanguage>('en');
   const [browseView, setBrowseView] = useState<BrowseView>('list');
   const [activeCubeFace, setActiveCubeFace] = useState<CubeFace | null>(null);
+  const [pinnedCubeFace, setPinnedCubeFace] = useState<CubeFace | null>(null);
   const [browseOpen, setBrowseOpen] = useState(false);
   const [newsOpen, setNewsOpen] = useState(false);
   const cubeHoverIntentRef = useRef<number | null>(null);
@@ -142,6 +148,11 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
     try {
       const savedView = window.localStorage.getItem('xinbaopedia-browse-view');
       if (savedView === 'list' || savedView === 'cube') setBrowseView(savedView);
+      const savedPinnedFace = window.localStorage.getItem('xinbaopedia-cube-pinned-face') as CubeFace | null;
+      if (savedView === 'cube' && savedPinnedFace && cubeFaceNames.includes(savedPinnedFace)) {
+        setPinnedCubeFace(savedPinnedFace);
+        setActiveCubeFace(savedPinnedFace);
+      }
     } catch {
       // Storage can be unavailable in privacy-restricted browsing contexts.
     }
@@ -159,7 +170,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
 
   const scheduleCubeFace = (face: CubeFace) => {
     clearCubeHoverIntent();
-    if (face === activeCubeFace) return;
+    if (pinnedCubeFace || face === activeCubeFace) return;
     cubeHoverIntentRef.current = window.setTimeout(() => {
       setActiveCubeFace(face);
       cubeHoverIntentRef.current = null;
@@ -170,10 +181,28 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
     clearCubeHoverIntent();
     setBrowseView(nextView);
     setActiveCubeFace(null);
+    setPinnedCubeFace(null);
     try {
       window.localStorage.setItem('xinbaopedia-browse-view', nextView);
+      window.localStorage.removeItem('xinbaopedia-cube-pinned-face');
     } catch {
       // The view remains usable for this session when persistence is unavailable.
+    }
+  };
+
+  const togglePinnedCubeFace = (face: CubeFace) => {
+    clearCubeHoverIntent();
+    const nextPinnedFace = pinnedCubeFace === face ? null : face;
+    setPinnedCubeFace(nextPinnedFace);
+    setActiveCubeFace(face);
+    try {
+      if (nextPinnedFace) {
+        window.localStorage.setItem('xinbaopedia-cube-pinned-face', nextPinnedFace);
+      } else {
+        window.localStorage.removeItem('xinbaopedia-cube-pinned-face');
+      }
+    } catch {
+      // Pinning still works for this session when persistence is unavailable.
     }
   };
 
@@ -202,6 +231,30 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
       window.removeEventListener('resize', measureWindow);
     };
   }, [language, newsOpen]);
+
+  const activeCubeSectionIndex = activeCubeFace ? cubeFaceNames.indexOf(activeCubeFace) : -1;
+  const activeCubeSection = activeCubeSectionIndex >= 0 ? directorySections[activeCubeSectionIndex] : undefined;
+
+  const renderPortalSectionContent = (section: PortalSection, headingId: string) => (
+    <>
+      <h3 id={headingId}>
+        <span>{section.title[language]}</span>
+      </h3>
+      {section.groups.map((group) => (
+        <div className="wiki-portal-group" key={group.label.en}>
+          <p className="wiki-portal-group-label">{group.label[language]}</p>
+          <ul>
+            {group.links[language].map((item) => (
+              <li key={item.href}>
+                <a href={item.href}>{item.title}</a>
+                {item.summary && <span>{item.summary}</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </>
+  );
 
   return (
     <article className={portalClassName} data-page-slug="Xinbao_Qiao">
@@ -357,22 +410,23 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
           <div
             className={'wiki-portal-cube-stage wiki-portal-cube-stage-' + browseView}
             onBlurCapture={(event) => {
-              if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+              if (!pinnedCubeFace && !event.currentTarget.contains(event.relatedTarget as Node | null)) {
                 clearCubeHoverIntent();
                 setActiveCubeFace(null);
               }
             }}
             onFocusCapture={(event) => {
+              if (pinnedCubeFace) return;
               clearCubeHoverIntent();
               const face = (event.target as HTMLElement).closest<HTMLElement>('[data-cube-face]')?.dataset.cubeFace as CubeFace | undefined;
               if (face && cubeFaceNames.includes(face)) setActiveCubeFace(face);
             }}
             onPointerLeave={() => {
               clearCubeHoverIntent();
-              setActiveCubeFace(null);
+              if (!pinnedCubeFace) setActiveCubeFace(null);
             }}
             onPointerOver={(event) => {
-              if (browseView !== 'cube' || activeCubeFace) return;
+              if (event.pointerType === 'touch' || browseView !== 'cube' || activeCubeFace || pinnedCubeFace) return;
               const targetFace = (event.target as HTMLElement).closest<HTMLElement>('[data-cube-face]');
               const relatedFace = (event.relatedTarget as HTMLElement | null)?.closest?.<HTMLElement>('[data-cube-face]');
               const face = targetFace?.dataset.cubeFace as CubeFace | undefined;
@@ -384,9 +438,9 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
               className={'wiki-portal-grid wiki-portal-grid-' + browseView}
               data-active-face={activeCubeFace ?? undefined}
               data-browse-view={browseView}
+              data-pinned-face={pinnedCubeFace ?? undefined}
             >
               {directorySections.map((section, sectionIndex) => {
-                const sectionTitle = section.title[language];
                 const sectionId = `portal-${section.title.en.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
                 return (
                 <section
@@ -395,22 +449,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
                   data-cube-face={cubeFaceNames[sectionIndex]}
                   key={section.title.en}
                 >
-                  <h3 id={sectionId}>
-                    <span>{sectionTitle}</span>
-                  </h3>
-                  {section.groups.map((group) => (
-                    <div className="wiki-portal-group" key={group.label.en}>
-                      <p className="wiki-portal-group-label">{group.label[language]}</p>
-                      <ul>
-                        {group.links[language].map((item) => (
-                          <li key={item.href}>
-                            <a href={item.href}>{item.title}</a>
-                            {item.summary && <span>{item.summary}</span>}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
+                  {renderPortalSectionContent(section, sectionId)}
                 </section>
                 );
               })}
@@ -427,6 +466,32 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
                 />
               ))}
             </div>
+            {browseView === 'cube' && activeCubeFace && activeCubeSection && (
+              <div
+                className="wiki-portal-grid-cube wiki-portal-cube-reader-shell"
+                data-active-face={activeCubeFace}
+                data-pinned-face={pinnedCubeFace ?? undefined}
+                key={activeCubeFace}
+              >
+                <section
+                  aria-labelledby={`portal-cube-reader-${activeCubeFace}`}
+                  className="wiki-portal-block wiki-portal-cube-panel wiki-portal-cube-reader"
+                  data-cube-face={activeCubeFace}
+                >
+                  <button
+                    aria-label={pinnedCubeFace === activeCubeFace ? cubePinLabels[language].unpin : cubePinLabels[language].pin}
+                    aria-pressed={pinnedCubeFace === activeCubeFace}
+                    className="wiki-portal-cube-pin"
+                    onClick={() => togglePinnedCubeFace(activeCubeFace)}
+                    type="button"
+                  >
+                    <span aria-hidden="true" />
+                    {pinnedCubeFace === activeCubeFace ? cubePinLabels[language].pinned : cubePinLabels[language].pin}
+                  </button>
+                  {renderPortalSectionContent(activeCubeSection, `portal-cube-reader-${activeCubeFace}`)}
+                </section>
+              </div>
+            )}
           </div>
         </details>
       </div>
