@@ -39,17 +39,6 @@ const browseViewLabels = {
 } satisfies Record<SearchLanguage, Record<BrowseView | 'group', string>>;
 
 const cubeFaceNames = ['top', 'front', 'right'] as const;
-const cubeShellFaceNames = ['back', 'left', 'bottom'] as const;
-
-const cubeHintLabels: LocalizedText = {
-  en: 'Hover a face to bring its words forward. Move away to reset.',
-  zh: '悬停一个面以正视文字，移开后恢复。'
-};
-
-const cubeTextureWords = {
-  en: ['EVIDENCE', 'QUESTIONS', 'MODELS', 'NETWORKS', 'LEARNING', 'TRUST', 'DATA', 'DISCOVERY'],
-  zh: ['证据', '问题', '模型', '网络', '学习', '可信', '数据', '发现']
-} satisfies Record<SearchLanguage, string[]>;
 
 const entriesLabel: LocalizedText = {
   en: 'Primary academic entries',
@@ -343,7 +332,6 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
               ))}
             </div>
           </div>
-          {browseView === 'cube' && <p className="wiki-portal-cube-hint">{cubeHintLabels[language]}</p>}
           <div
             className={'wiki-portal-cube-stage wiki-portal-cube-stage-' + browseView}
             onBlurCapture={(event) => {
@@ -394,21 +382,6 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
                 </section>
                 );
               })}
-              {browseView === 'cube' && cubeShellFaceNames.map((face, faceIndex) => (
-                <div
-                  aria-hidden="true"
-                  className={'wiki-portal-cube-panel wiki-portal-cube-shell-face wiki-portal-cube-face-' + face}
-                  key={face}
-                >
-                  <div className="wiki-portal-cube-texture">
-                    {cubeTextureWords[language].map((word, wordIndex) => (
-                      <span key={word} style={{ "--cube-word-index": wordIndex + faceIndex } as CSSProperties}>
-                        {word}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
             </div>
           </div>
         </details>
