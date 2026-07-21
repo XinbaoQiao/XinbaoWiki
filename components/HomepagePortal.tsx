@@ -44,6 +44,11 @@ const cubePinLabels = {
   zh: { pin: 'Pin：固定当前面', unpin: 'Pin：取消固定当前面' }
 } satisfies Record<SearchLanguage, { pin: string; unpin: string }>;
 
+const cubeReturnLabels = {
+  en: { label: 'Back', ariaLabel: 'Return to the initial cube' },
+  zh: { label: '返回', ariaLabel: '返回初始魔方' }
+} satisfies Record<SearchLanguage, { ariaLabel: string; label: string }>;
+
 const cubeFaceNames = ['top', 'front', 'right'] as const;
 const touchCubeAngles = ['top', 'front', 'right'] as const;
 const cubeHoverIntentMs = 150;
@@ -196,24 +201,6 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
     return () => window.clearTimeout(settleTimer);
   }, [activeCubeFace]);
 
-  useEffect(() => {
-    if (!activeCubeFace) return;
-    const returnToCube = (event: PointerEvent) => {
-      if (event.pointerType !== 'touch' && event.pointerType !== 'pen') return;
-      if (cubeStageRef.current?.contains(event.target as Node)) return;
-      clearCubeHoverIntent();
-      setActiveCubeFace(null);
-      setPinnedCubeFace(null);
-      try {
-        window.localStorage.removeItem('xinbaopedia-cube-pinned-face');
-      } catch {
-        // Returning to the touch cube remains available without storage access.
-      }
-    };
-    document.addEventListener('pointerdown', returnToCube, true);
-    return () => document.removeEventListener('pointerdown', returnToCube, true);
-  }, [activeCubeFace]);
-
   const clearCubeHoverIntent = () => {
     if (cubeHoverIntentRef.current === null) return;
     window.clearTimeout(cubeHoverIntentRef.current);
@@ -234,6 +221,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
     setBrowseView(nextView);
     setActiveCubeFace(null);
     setPinnedCubeFace(null);
+    setTouchCubeAngle('front');
     try {
       window.localStorage.setItem('xinbaopedia-browse-view', nextView);
       window.localStorage.removeItem('xinbaopedia-cube-pinned-face');
@@ -264,6 +252,30 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
     setTouchCubeDragDegrees(0);
   };
 
+  const returnTouchCubeToInitial = () => {
+    clearCubeHoverIntent();
+    resetTouchCubeGesture();
+    setActiveCubeFace(null);
+    setPinnedCubeFace(null);
+    setTouchCubeAngle('front');
+    try {
+      window.localStorage.removeItem('xinbaopedia-cube-pinned-face');
+    } catch {
+      // Returning to the touch cube remains available without storage access.
+    }
+  };
+
+  useEffect(() => {
+    if (!activeCubeFace) return;
+    const returnToCube = (event: PointerEvent) => {
+      if (event.pointerType !== 'touch' && event.pointerType !== 'pen') return;
+      if (cubeStageRef.current?.contains(event.target as Node)) return;
+      returnTouchCubeToInitial();
+    };
+    document.addEventListener('pointerdown', returnToCube, true);
+    return () => document.removeEventListener('pointerdown', returnToCube, true);
+  }, [activeCubeFace]);
+
   const isDirectPointer = (event: ReactPointerEvent) => event.pointerType === 'touch' || event.pointerType === 'pen';
 
   const beginTouchCubeGesture = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -271,10 +283,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
     if ((event.target as HTMLElement).closest('button')) return;
     if (activeCubeFace) {
       const targetPanel = (event.target as HTMLElement).closest<HTMLElement>('.wiki-portal-cube-panel');
-      if (!targetPanel) {
-        setActiveCubeFace(null);
-        setPinnedCubeFace(null);
-      }
+      if (!targetPanel) returnTouchCubeToInitial();
       return;
     }
     const targetFace = (event.target as HTMLElement).closest<HTMLElement>('[data-cube-hover-face]')?.dataset.cubeHoverFace as CubeFace | undefined;
@@ -635,6 +644,19 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
                   />
                 ))}
               </div>
+            )}
+            {browseView === 'cube' && activeCubeFace && (
+              <button
+                aria-label={cubeReturnLabels[language].ariaLabel}
+                className="wiki-portal-cube-touch-return"
+                onClick={returnTouchCubeToInitial}
+                type="button"
+              >
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="M10 6 4 12l6 6M4 12h10.5a5.5 5.5 0 0 1 5.5 5.5V19" />
+                </svg>
+                <span>{cubeReturnLabels[language].label}</span>
+              </button>
             )}
             {browseView === 'cube' && activeCubeFace && cubeFaceSettled && (
               <button
