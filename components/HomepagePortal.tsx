@@ -661,7 +661,6 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
                   <path className="wiki-portal-cube-pin-needle" d="M16 20v15" />
                   <ellipse className="wiki-portal-cube-pin-highlight" cx="13" cy="5.8" rx="3.2" ry="1.2" />
                 </svg>
-                <span>Pin</span>
               </button>
             )}
           </div>
