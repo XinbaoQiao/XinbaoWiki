@@ -1,6 +1,6 @@
 'use client';
 
-import type { CSSProperties } from 'react';
+import type { CSSProperties, PointerEvent as ReactPointerEvent } from 'react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
 import { siteUpdates } from '@/lib/site-updates';
@@ -9,6 +9,7 @@ type LocalizedText = Record<SearchLanguage, string>;
 type PortalPalette = 'text' | 'blue' | 'gold' | 'rose' | 'green' | 'violet' | 'charcoal';
 type BrowseView = 'list' | 'cube';
 type CubeFace = 'top' | 'front' | 'right';
+type TouchCubeAngle = 'top' | 'front' | 'right';
 type PortalEntry = { href: string; summary: string; title: string };
 type PortalGroup = {
   label: LocalizedText;
@@ -44,8 +45,22 @@ const cubePinLabels = {
 } satisfies Record<SearchLanguage, { pin: string; unpin: string }>;
 
 const cubeFaceNames = ['top', 'front', 'right'] as const;
+const touchCubeAngles = ['top', 'front', 'right'] as const;
 const cubeHoverIntentMs = 150;
 const cubeTurnDurationMs = 820;
+const touchCubeTurnDurationMs = 420;
+const touchCubeDragThresholdPx = 10;
+const touchCubeSwipeThresholdPx = 34;
+
+type TouchCubeGesture = {
+  face: CubeFace | null;
+  lastX: number;
+  lastY: number;
+  mode: 'pending' | 'rotate' | 'scroll';
+  pointerId: number;
+  startX: number;
+  startY: number;
+};
 
 const entriesLabel: LocalizedText = {
   en: 'Primary academic entries',
@@ -118,9 +133,14 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
   const [activeCubeFace, setActiveCubeFace] = useState<CubeFace | null>(null);
   const [cubeFaceSettled, setCubeFaceSettled] = useState(false);
   const [pinnedCubeFace, setPinnedCubeFace] = useState<CubeFace | null>(null);
+  const [touchCubeAngle, setTouchCubeAngle] = useState<TouchCubeAngle>('front');
+  const [touchCubeDragging, setTouchCubeDragging] = useState(false);
+  const [touchCubeDragDegrees, setTouchCubeDragDegrees] = useState(0);
   const [browseOpen, setBrowseOpen] = useState(false);
   const [newsOpen, setNewsOpen] = useState(false);
   const cubeHoverIntentRef = useRef<number | null>(null);
+  const cubeStageRef = useRef<HTMLDivElement>(null);
+  const touchCubeGestureRef = useRef<TouchCubeGesture | null>(null);
   const updatesWindowRef = useRef<HTMLDivElement>(null);
   const collapsibleSections = { browse: browseOpen, news: newsOpen };
   const allSectionsClosed = Object.values(collapsibleSections).every((open) => !open);
@@ -167,9 +187,31 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
   useEffect(() => {
     setCubeFaceSettled(false);
     if (!activeCubeFace) return;
-    const settleDelay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : cubeTurnDurationMs;
+    const settleDelay = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      ? 0
+      : window.matchMedia('(hover: none), (pointer: coarse)').matches
+        ? touchCubeTurnDurationMs
+        : cubeTurnDurationMs;
     const settleTimer = window.setTimeout(() => setCubeFaceSettled(true), settleDelay);
     return () => window.clearTimeout(settleTimer);
+  }, [activeCubeFace]);
+
+  useEffect(() => {
+    if (!activeCubeFace) return;
+    const returnToCube = (event: PointerEvent) => {
+      if (event.pointerType !== 'touch' && event.pointerType !== 'pen') return;
+      if (cubeStageRef.current?.contains(event.target as Node)) return;
+      clearCubeHoverIntent();
+      setActiveCubeFace(null);
+      setPinnedCubeFace(null);
+      try {
+        window.localStorage.removeItem('xinbaopedia-cube-pinned-face');
+      } catch {
+        // Returning to the touch cube remains available without storage access.
+      }
+    };
+    document.addEventListener('pointerdown', returnToCube, true);
+    return () => document.removeEventListener('pointerdown', returnToCube, true);
   }, [activeCubeFace]);
 
   const clearCubeHoverIntent = () => {
@@ -214,6 +256,80 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
     } catch {
       // Pinning still works for this session when persistence is unavailable.
     }
+  };
+
+  const resetTouchCubeGesture = () => {
+    touchCubeGestureRef.current = null;
+    setTouchCubeDragging(false);
+    setTouchCubeDragDegrees(0);
+  };
+
+  const isDirectPointer = (event: ReactPointerEvent) => event.pointerType === 'touch' || event.pointerType === 'pen';
+
+  const beginTouchCubeGesture = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!isDirectPointer(event) || !event.isPrimary || browseView !== 'cube') return;
+    if ((event.target as HTMLElement).closest('button')) return;
+    if (activeCubeFace) {
+      const targetPanel = (event.target as HTMLElement).closest<HTMLElement>('.wiki-portal-cube-panel');
+      if (!targetPanel) {
+        setActiveCubeFace(null);
+        setPinnedCubeFace(null);
+      }
+      return;
+    }
+    const targetFace = (event.target as HTMLElement).closest<HTMLElement>('[data-cube-hover-face]')?.dataset.cubeHoverFace as CubeFace | undefined;
+    touchCubeGestureRef.current = {
+      face: targetFace && cubeFaceNames.includes(targetFace) ? targetFace : null,
+      lastX: event.clientX,
+      lastY: event.clientY,
+      mode: 'pending',
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+    };
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch {
+      // Some embedded browsers provide implicit capture without exposing the method.
+    }
+  };
+
+  const moveTouchCubeGesture = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const gesture = touchCubeGestureRef.current;
+    if (!gesture || gesture.pointerId !== event.pointerId) return;
+    gesture.lastX = event.clientX;
+    gesture.lastY = event.clientY;
+    const deltaX = event.clientX - gesture.startX;
+    const deltaY = event.clientY - gesture.startY;
+    if (gesture.mode === 'pending') {
+      if (Math.max(Math.abs(deltaX), Math.abs(deltaY)) < touchCubeDragThresholdPx) return;
+      if (Math.abs(deltaY) > Math.abs(deltaX) * 1.1) {
+        gesture.mode = 'scroll';
+        return;
+      }
+      gesture.mode = 'rotate';
+      setTouchCubeDragging(true);
+    }
+    if (gesture.mode !== 'rotate') return;
+    event.preventDefault();
+    setTouchCubeDragDegrees(Math.max(-15, Math.min(15, deltaX * .12)));
+  };
+
+  const finishTouchCubeGesture = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const gesture = touchCubeGestureRef.current;
+    if (!gesture || gesture.pointerId !== event.pointerId) return;
+    const deltaX = gesture.lastX - gesture.startX;
+    if (gesture.mode === 'rotate') {
+      if (Math.abs(deltaX) >= touchCubeSwipeThresholdPx) {
+        const currentIndex = touchCubeAngles.indexOf(touchCubeAngle);
+        const direction = deltaX < 0 ? 1 : -1;
+        setTouchCubeAngle(touchCubeAngles[(currentIndex + direction + touchCubeAngles.length) % touchCubeAngles.length]);
+      }
+    } else if (gesture.mode === 'pending' && gesture.face) {
+      clearCubeHoverIntent();
+      setActiveCubeFace(gesture.face);
+    }
+    resetTouchCubeGesture();
   };
 
   useLayoutEffect(() => {
@@ -421,6 +537,8 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
           <div
             className={'wiki-portal-cube-stage wiki-portal-cube-stage-' + browseView}
             data-active-face={browseView === 'cube' ? activeCubeFace ?? undefined : undefined}
+            data-touch-cube-angle={browseView === 'cube' ? touchCubeAngle : undefined}
+            data-touch-cube-dragging={browseView === 'cube' && touchCubeDragging ? '' : undefined}
             onBlurCapture={(event) => {
               if (!pinnedCubeFace && !event.currentTarget.contains(event.relatedTarget as Node | null)) {
                 clearCubeHoverIntent();
@@ -433,18 +551,24 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
               const face = (event.target as HTMLElement).closest<HTMLElement>('[data-cube-face]')?.dataset.cubeFace as CubeFace | undefined;
               if (face && cubeFaceNames.includes(face)) setActiveCubeFace(face);
             }}
-            onPointerLeave={() => {
+            onPointerCancel={resetTouchCubeGesture}
+            onPointerDown={beginTouchCubeGesture}
+            onPointerLeave={(event) => {
+              if (isDirectPointer(event)) return;
               clearCubeHoverIntent();
               if (!pinnedCubeFace) setActiveCubeFace(null);
             }}
+            onPointerMove={moveTouchCubeGesture}
             onPointerOver={(event) => {
-              if (event.pointerType === 'touch' || browseView !== 'cube' || activeCubeFace || pinnedCubeFace) return;
+              if (event.pointerType !== 'mouse' || browseView !== 'cube' || activeCubeFace || pinnedCubeFace) return;
               const targetFace = (event.target as HTMLElement).closest<HTMLElement>('[data-cube-face]');
               const relatedFace = (event.relatedTarget as HTMLElement | null)?.closest?.<HTMLElement>('[data-cube-face]');
               const face = targetFace?.dataset.cubeFace as CubeFace | undefined;
               if (targetFace === relatedFace || !face || !cubeFaceNames.includes(face)) return;
               scheduleCubeFace(face);
             }}
+            onPointerUp={finishTouchCubeGesture}
+            ref={cubeStageRef}
             style={browseView === 'cube' && activeCubeFace ? { perspective: 'none' } : undefined}
           >
             <div
@@ -453,12 +577,15 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
               data-browse-view={browseView}
               data-face-settled={cubeFaceSettled ? '' : undefined}
               data-pinned-face={pinnedCubeFace ?? undefined}
+              data-touch-cube-angle={touchCubeAngle}
               style={browseView === 'cube' && activeCubeFace ? {
                 transform: 'none',
                 transformStyle: 'flat',
                 transition: cubeFaceSettled ? 'none' : undefined,
                 willChange: 'auto',
-              } : undefined}
+              } : browseView === 'cube' ? {
+                '--portal-touch-drag-y': `${touchCubeDragDegrees}deg`,
+              } as CSSProperties : undefined}
             >
               {directorySections.map((section, sectionIndex) => {
                 const sectionId = `portal-${section.title.en.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
@@ -488,8 +615,23 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
                     className={'wiki-portal-cube-hover-zone wiki-portal-cube-hover-zone-' + face}
                     data-cube-hover-face={face}
                     key={'cube-hover-' + face}
-                    onPointerEnter={() => scheduleCubeFace(face)}
+                    onPointerEnter={(event) => {
+                      if (event.pointerType === 'mouse') scheduleCubeFace(face);
+                    }}
                     onPointerLeave={clearCubeHoverIntent}
+                  />
+                ))}
+              </div>
+            )}
+            {browseView === 'cube' && !activeCubeFace && (
+              <div className="wiki-portal-cube-touch-angles" role="group" aria-label={language === 'zh' ? '魔方观察角度' : 'Cube viewing angle'}>
+                {touchCubeAngles.map((angle) => (
+                  <button
+                    aria-label={language === 'zh' ? `切换至${angle === 'top' ? '上方' : angle === 'front' ? '正面' : '右侧'}视角` : `Switch to ${angle} view`}
+                    aria-pressed={touchCubeAngle === angle}
+                    key={angle}
+                    onClick={() => setTouchCubeAngle(angle)}
+                    type="button"
                   />
                 ))}
               </div>
