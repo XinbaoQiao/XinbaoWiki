@@ -12,7 +12,12 @@ import {
   validateProductionDeploymentIdentity,
 } from './lib/deployment-identity.mjs';
 import { runExternal } from './lib/external-process.mjs';
-import { preferStagedSmokeRoute, stagedSmokeRoutes, withoutProxyEnv } from './lib/network-routes.mjs';
+import {
+  preferStagedSmokeRoute,
+  stagedSmokeRequestBudget,
+  stagedSmokeRoutes,
+  withoutProxyEnv,
+} from './lib/network-routes.mjs';
 import { runReleaseOrchestrator } from './lib/release-orchestrator.mjs';
 import {
   initializeReleaseState,
@@ -340,7 +345,8 @@ async function runStagedSmoke(vercelCommand, routes, stagedUrl) {
     const failures = [];
     for (const route of preferStagedSmokeRoute(routes, preferredRouteName)) {
       try {
-        const requestArgs = ['--silent', '--show-error', '--max-time', '30'];
+        const requestBudget = stagedSmokeRequestBudget(route, routes.length);
+        const requestArgs = ['--silent', '--show-error', '--max-time', String(requestBudget.curlSeconds)];
         if (check.method === 'POST') {
           requestArgs.push(
             '--request', 'POST',
@@ -359,7 +365,7 @@ async function runStagedSmoke(vercelCommand, routes, stagedUrl) {
             '--', ...requestArgs,
           ]),
           route.env,
-          { timeoutMs: timeoutMs.stagedRequest }
+          { timeoutMs: requestBudget.parentMs }
         );
         attempts.push({ label, path: check.path, route: route.name, status: 'passed' });
         preferredRouteName = route.name;

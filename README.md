@@ -117,6 +117,8 @@ npm run check
 npm run build
 ~~~
 
+After the production build, `npm run test:cube-geometry` verifies all three desktop reading faces against the Latest Updates track. Set `CUBE_GEOMETRY_BASE_URL` to reuse the same assertions against a deployed site. For an authorized publication, inject `GITHUB_TOKEN` and `VERCEL_TOKEN` through the operator's secret environment, run `npm run push:check`, then `npm run push:main` and `npm run release:production`; tokens never belong in command arguments or remotes.
+
 <table>
   <tr>
     <td width="33%" valign="top"><strong>Content you can own</strong><br/><sub>Git-native bilingual Markdown that stays readable, reviewable, and portable.</sub></td>
@@ -277,6 +279,8 @@ npm run maintain:wiki
 npm run check
 npm run build
 ~~~
+
+生产构建完成后，`npm run test:cube-geometry` 会验证三个桌面阅读面是否与 Latest Updates 轨道一致；设置 `CUBE_GEOMETRY_BASE_URL` 后，同一组断言也可复验已部署站点。获得发布授权后，应通过运维环境安全注入 `GITHUB_TOKEN` 与 `VERCEL_TOKEN`，依次运行 `npm run push:check`、`npm run push:main` 和 `npm run release:production`；令牌不得出现在命令参数或远端地址中。
 
 <table>
   <tr>

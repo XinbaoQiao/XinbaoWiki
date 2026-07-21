@@ -21,9 +21,12 @@
     "maintain:wiki": "node scripts/run-with-node22.mjs node scripts/wiki-maintenance.mjs --standardize --write",
     "new:wiki": "node scripts/new-wiki-page.mjs",
     "test:release": "node scripts/run-with-node22.mjs node scripts/test-release-workflow.mjs",
+    "test:cube-geometry": "node scripts/run-with-node22.mjs playwright test tests/browser/cube-geometry.spec.mjs",
     "test:wiki": "node scripts/run-with-node22.mjs node scripts/test-wiki-data.mjs",
     "verify:publish": "node scripts/run-with-node22.mjs node scripts/verify-publish-set.mjs",
     "verify:staged": "node scripts/run-with-node22.mjs node scripts/verify-publish-set.mjs --staged-only",
+    "push:check": "node scripts/run-with-node22.mjs node scripts/push-main.mjs --check",
+    "push:main": "node scripts/run-with-node22.mjs node scripts/push-main.mjs",
     "smoke:production": "node scripts/run-with-node22.mjs node scripts/smoke-production.mjs",
     "deploy:production": "node scripts/run-with-node22.mjs node scripts/deploy-production.mjs",
     "release:production": "node scripts/run-with-node22.mjs node scripts/release-production.mjs",
@@ -47,6 +50,7 @@
     "remark-math": "^6.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "1.61.1",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",

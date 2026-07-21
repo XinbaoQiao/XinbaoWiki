@@ -23,6 +23,10 @@ cache/
 .omx/
 .turbo/
 coverage/
+playwright-report/
+test-results/
+tests/
+playwright.config.mjs
 logs/
 log/
 output/

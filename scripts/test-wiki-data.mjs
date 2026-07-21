@@ -1228,6 +1228,7 @@ const networkRoutesScript = fs.readFileSync(path.join(root, 'scripts/lib/network
 const releaseStateScript = fs.readFileSync(path.join(root, 'scripts/lib/release-state.mjs'), 'utf8');
 const releaseContractScript = fs.readFileSync(path.join(root, 'scripts/release-contract.mjs'), 'utf8');
 const releaseProductionScript = fs.readFileSync(path.join(root, 'scripts/release-production.mjs'), 'utf8');
+const pushMainScript = fs.readFileSync(path.join(root, 'scripts/push-main.mjs'), 'utf8');
 assert.match(ciWorkflow, /apt-get install -y --no-install-recommends imagemagick mupdf-tools/, 'CI installs ImageMagick and mutool for image and CV PDF checks');
 assert.match(ciWorkflow, /npm audit --omit=dev --audit-level=high/, 'CI blocks high-severity production dependency advisories');
 assert.match(deployProductionScript, /const vercelCliVersion = '54\.18\.7';/, 'deployment wrapper pins a Vercel CLI version with VERCEL_TOKEN env support');
@@ -1248,11 +1249,12 @@ assert.match(deployProductionScript, /'--project', project, '--scope', scope/, '
 assert.match(deployProductionScript, /'--prod',[\s\S]*'--skip-domain'/, 'deployment wrapper stages a production build without changing the canonical domain');
 assert.match(deployProductionScript, /function runStagedSmoke[\s\S]*vercelArgs\('curl'/, 'deployment wrapper uses authenticated Vercel curl for protected staged deployments');
 assert.match(deployProductionScript, /\/robots\.txt[\s\S]*\/sitemap\.xml[\s\S]*\/search-index\.json[\s\S]*\/api\/chat-with-xinbao\//, 'staged smoke covers metadata, search, and chat routes');
-assert.match(deployProductionScript, /'--silent', '--show-error', '--max-time', '30'/, 'each staged smoke request keeps a curl-level timeout as defense in depth');
-assert.match(deployProductionScript, /timeoutMs: timeoutMs\.stagedRequest/, 'each staged request also has a parent-enforced process timeout');
+assert.match(deployProductionScript, /stagedSmokeRequestBudget\(route, routes\.length\)[\s\S]*'--max-time', String\(requestBudget\.curlSeconds\)/, 'each staged smoke request uses a route-aware curl timeout as defense in depth');
+assert.match(deployProductionScript, /timeoutMs: requestBudget\.parentMs/, 'each staged request also uses its route-aware parent process timeout');
 assert.match(externalProcessScript, /terminateProcessTree[\s\S]*SIGTERM[\s\S]*SIGKILL/, 'external process runner escalates from graceful termination to killing the full process tree');
 assert.match(externalProcessScript, /kind: 'output_limit'/, 'external process runner bounds captured output');
 assert.match(networkRoutesScript, /return proxy \? \[direct, proxy\] : \[direct\]/, 'staged smoke selects direct and proxy routes explicitly instead of inheriting one global route');
+assert.match(networkRoutesScript, /stagedSmokeRequestBudget[\s\S]*route\.name === 'direct' && routeCount > 1[\s\S]*curlSeconds: 10[\s\S]*parentMs: 20_000[\s\S]*curlSeconds: 30[\s\S]*parentMs: 45_000/, 'staged smoke switches quickly from a failing direct route only when a distinct fallback exists');
 assert.match(deployProductionScript, /for \(const route of preferStagedSmokeRoute\(routes, preferredRouteName\)\)/, 'staged smoke prioritizes the route that already worked while keeping configured fallbacks');
 assert.match(deployProductionScript, /preferredRouteName = route\.name/, 'staged smoke remembers a successful route for the remaining checks');
 assert.match(networkRoutesScript, /return \[preferredRoute, \.\.\.routes\.filter\(\(route\) => route !== preferredRoute\)\]/, 'route preference preserves every configured fallback without duplicating a route');
@@ -1291,6 +1293,10 @@ assert.match(releaseProductionScript, /commit or unstage pending files before re
 assert.match(releaseProductionScript, /git\(\['worktree', 'add', '--detach'/, 'release wrapper deploys the immutable remote commit in an isolated worktree');
 assert.match(releaseProductionScript, /git\(\['worktree', 'remove', '--force'/, 'release wrapper cleans up its isolated deployment worktree');
 assert.match(releaseProductionScript, /Node \$\{process\.versions\.node\} is active but the project requires[\s\S]*use npm run release:production/, 'release wrapper blocks direct execution under the wrong Node major and points to the automatic selector');
+assert.match(packageJson.scripts?.['push:check'] || '', /push-main\.mjs --check/, 'package.json exposes a non-writing GitHub permission and divergence preflight');
+assert.match(packageJson.scripts?.['push:main'] || '', /run-with-node22\.mjs node scripts\/push-main\.mjs/, 'package.json exposes the bounded authenticated main-branch push workflow');
+assert.match(pushMainScript, /GITHUB_TOKEN is required in the environment[\s\S]*requireGithubPushPermission\(repositoryPayload\)[\s\S]*merge-base[\s\S]*--is-ancestor[\s\S]*GIT_ASKPASS[\s\S]*GIT_TERMINAL_PROMPT/, 'GitHub push verifies token permission and fast-forward safety before using a non-interactive ephemeral credential helper');
+assert.doesNotMatch(pushMainScript, /github_pat_|ghp_|authorization:\s*['"`]Bearer [^$]/, 'GitHub push source contains no embedded token');
 assert.equal(fs.readFileSync(path.join(root, '.nvmrc'), 'utf8').trim(), '22', 'local Node selector matches the package engine');
 const gitignore = fs.readFileSync(path.join(root, '.gitignore'), 'utf8');
 const vercelignore = fs.readFileSync(path.join(root, '.vercelignore'), 'utf8');
@@ -1299,6 +1305,8 @@ assert.ok(gitignore.split(String.fromCharCode(10)).includes('.vercel'), 'gitigno
 assert.match(gitignore, /\.vercel-auth-\*\//, 'gitignore excludes temporary Vercel auth directories');
 assert.match(vercelignore, /\.vercel-auth-\*\//, 'vercelignore excludes temporary Vercel auth directories');
 assert.match(gitignore, /agent_progress\.md/, 'gitignore keeps the local agent ledger out of commits by default');
+assert.match(gitignore, /playwright-report\/[\s\S]*test-results\//, 'gitignore keeps browser-test reports and attachments out of commits');
+assert.match(vercelignore, /playwright-report\/[\s\S]*test-results\/[\s\S]*tests\/[\s\S]*playwright\.config\.mjs/, 'Vercel uploads exclude browser-test sources, configuration, reports, and attachments');
 assert.match(vercelignore, /AGENTS\.md[\s\S]*CLAUDE\.md[\s\S]*agent_progress\.md[\s\S]*CV\.tex[\s\S]*assets\//, 'vercelignore excludes agent guidance, local ledger, and CV source assets from deploy uploads');
 assert.match(verifyPublishSet, /temporary Vercel auth state/, 'publish-set checker blocks temporary Vercel auth directories if staged');
 assert.match(verifyPublishSet, /function untrackedFiles\(\)/, 'publish-set checker includes untracked files that are not ignored');

@@ -13,7 +13,16 @@ import {
   validateProductionDeploymentIdentity,
 } from './lib/deployment-identity.mjs';
 import { runExternal } from './lib/external-process.mjs';
-import { preferStagedSmokeRoute, stagedSmokeRoutes } from './lib/network-routes.mjs';
+import {
+  authenticatedGithubRemote,
+  githubRepositoryFromRemote,
+  requireGithubPushPermission,
+} from './lib/github-publish.mjs';
+import {
+  preferStagedSmokeRoute,
+  stagedSmokeRequestBudget,
+  stagedSmokeRoutes,
+} from './lib/network-routes.mjs';
 import { runReleaseOrchestrator } from './lib/release-orchestrator.mjs';
 import {
   initializeReleaseState,
@@ -291,6 +300,45 @@ function testNetworkRouteSelection() {
     routes.map((route) => route.name),
     ['direct', 'proxy'],
     'route preference does not mutate the configured fallback order'
+  );
+  assert.deepEqual(
+    stagedSmokeRequestBudget(routes[0], routes.length),
+    { curlSeconds: 10, parentMs: 20_000 },
+    'direct staged smoke fails over quickly when a distinct proxy route is available'
+  );
+  assert.deepEqual(
+    stagedSmokeRequestBudget(routes[1], routes.length),
+    { curlSeconds: 30, parentMs: 45_000 },
+    'the configured proxy route keeps the full staged-smoke budget'
+  );
+  assert.deepEqual(
+    stagedSmokeRequestBudget({ name: 'direct' }, 1),
+    { curlSeconds: 30, parentMs: 45_000 },
+    'direct-only environments keep the full budget because no fallback exists'
+  );
+}
+
+function testGithubPublishPreflight() {
+  assert.deepEqual(
+    githubRepositoryFromRemote('https://github.com/XinbaoQiao/XinbaoWiki.git'),
+    { owner: 'XinbaoQiao', repository: 'XinbaoWiki' },
+    'GitHub HTTPS origin parsing is deterministic'
+  );
+  assert.deepEqual(
+    githubRepositoryFromRemote('git@github.com:XinbaoQiao/XinbaoWiki.git'),
+    { owner: 'XinbaoQiao', repository: 'XinbaoWiki' },
+    'GitHub SSH origin parsing is deterministic'
+  );
+  assert.equal(
+    authenticatedGithubRemote('https://github.com/XinbaoQiao/XinbaoWiki.git', 'XinbaoQiao'),
+    'https://XinbaoQiao@github.com/XinbaoQiao/XinbaoWiki.git',
+    'authenticated push URL binds the username without embedding a token'
+  );
+  assert.doesNotThrow(() => requireGithubPushPermission({ permissions: { push: true } }));
+  assert.throws(
+    () => requireGithubPushPermission({ permissions: { push: false } }),
+    /does not have push permission/,
+    'publish preflight blocks a token without repository write permission'
   );
 }
 
@@ -925,6 +973,7 @@ await testExternalProcessTimeoutKillsTree();
 await testExternalProcessOutputLimit();
 await testReleaseOrchestratorMatrix();
 testNetworkRouteSelection();
+testGithubPublishPreflight();
 testReleaseStateRoundTrip();
 testReleaseResumePhaseMatrix();
 testReleaseInitializationGuard();

@@ -46,3 +46,10 @@ export function preferStagedSmokeRoute(routes, preferredRouteName) {
   if (!preferredRoute) return routes;
   return [preferredRoute, ...routes.filter((route) => route !== preferredRoute)];
 }
+
+export function stagedSmokeRequestBudget(route, routeCount) {
+  const hasDistinctFallback = route.name === 'direct' && routeCount > 1;
+  return hasDistinctFallback
+    ? { curlSeconds: 10, parentMs: 20_000 }
+    : { curlSeconds: 30, parentMs: 45_000 };
+}

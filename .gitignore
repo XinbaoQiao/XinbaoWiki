@@ -32,6 +32,8 @@ agent_progress.md
 .omx/
 .turbo/
 coverage/
+playwright-report/
+test-results/
 logs/
 log/
 output/
