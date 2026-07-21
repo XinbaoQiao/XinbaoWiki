@@ -1926,6 +1926,14 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   --portal-search-width: 690px;
   --portal-search-leading-width: 50px;
   --portal-search-submit-width: 96px;
+  --portal-updates-track-width: min(
+    calc(var(--portal-search-width) - var(--portal-search-leading-width) - var(--portal-search-submit-width)),
+    calc(100% - var(--portal-search-leading-width) - var(--portal-search-submit-width))
+  );
+  --portal-updates-track-offset: max(
+    var(--portal-search-leading-width),
+    calc((100% - var(--portal-search-width)) / 2 + var(--portal-search-leading-width))
+  );
   display: grid;
   gap: 8px;
   width: 100%;
@@ -1960,15 +1968,9 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
 .wiki-portal-timeline {
   position: relative;
   overflow: hidden;
-  width: min(
-    calc(var(--portal-search-width) - var(--portal-search-leading-width) - var(--portal-search-submit-width)),
-    calc(100% - var(--portal-search-leading-width) - var(--portal-search-submit-width))
-  );
+  width: var(--portal-updates-track-width);
   margin-right: auto;
-  margin-left: max(
-    var(--portal-search-leading-width),
-    calc((100% - var(--portal-search-width)) / 2 + var(--portal-search-leading-width))
-  );
+  margin-left: var(--portal-updates-track-offset);
   border: 1px solid var(--wiki-border-light);
   border-left: 4px solid var(--site-theme-accent);
   border-radius: 2px;
@@ -2282,13 +2284,13 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
 }
 
 .wiki-portal-cube-stage-cube {
-  --portal-cube-reading-width: min(100%, 920px);
+  --portal-cube-reading-width: var(--portal-updates-track-width);
   --portal-cube-reading-height: 620px;
   --portal-cube-reading-top: 32px;
   --portal-cube-pin-height: 44px;
   position: relative;
   isolation: isolate;
-  width: var(--portal-cube-reading-width);
+  width: min(100%, 920px);
   height: 820px;
   margin-inline: auto;
   overflow: clip;
@@ -2355,6 +2357,8 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
 .wiki-portal-grid-cube[data-active-face] {
   --portal-cube-width: var(--portal-cube-reading-width);
   --portal-cube-height: var(--portal-cube-reading-height);
+  margin-right: auto;
+  margin-left: var(--portal-updates-track-offset);
   top: var(--portal-cube-reading-top);
   transform: none;
   transform-style: preserve-3d;
@@ -2378,8 +2382,8 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   position: absolute;
   inset: 0;
   box-sizing: border-box;
-  width: var(--portal-cube-width);
-  height: var(--portal-cube-height);
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   border: 1px solid var(--portal-cube-edge);
   border-radius: 7px;
@@ -2780,9 +2784,10 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
   position: absolute;
   z-index: 5;
   top: calc(var(--portal-cube-reading-top) - var(--portal-cube-pin-height));
-  right: calc((100% - var(--portal-cube-reading-width)) / 2);
+  right: calc(100% - var(--portal-updates-track-offset) - var(--portal-cube-reading-width));
   left: auto;
   display: inline-flex;
+  flex-direction: row-reverse;
   align-items: center;
   justify-content: center;
   gap: 2px;
@@ -2854,7 +2859,7 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
 
 .wiki-portal-cube-pin[aria-pressed="true"] .wiki-portal-cube-pin-icon {
   filter: drop-shadow(0 1px 1px rgb(18 22 29 / 12%));
-  transform: rotate(0deg) translateY(5px) scale(.94);
+  transform: rotate(0deg) translateY(10px) scale(.94);
   transition: none;
 }
 
