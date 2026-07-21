@@ -1,6 +1,6 @@
 'use client';
 
-import type { CSSProperties, PointerEvent as ReactPointerEvent } from 'react';
+import type { CSSProperties, PointerEvent as ReactPointerEvent, TransitionEvent as ReactTransitionEvent } from 'react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
 import { siteUpdates } from '@/lib/site-updates';
@@ -52,8 +52,6 @@ const cubeReturnLabels = {
 const cubeFaceNames = ['top', 'front', 'right'] as const;
 const touchCubeAngles = ['top', 'front', 'right'] as const;
 const cubeHoverIntentMs = 150;
-const cubeTurnDurationMs = 820;
-const touchCubeTurnDurationMs = 420;
 const touchCubeDragThresholdPx = 10;
 const touchCubeSwipeThresholdPx = 34;
 
@@ -192,14 +190,13 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
   useEffect(() => {
     setCubeFaceSettled(false);
     if (!activeCubeFace) return;
-    const settleDelay = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      ? 0
-      : window.matchMedia('(hover: none), (pointer: coarse)').matches
-        ? touchCubeTurnDurationMs
-        : cubeTurnDurationMs;
-    const settleTimer = window.setTimeout(() => setCubeFaceSettled(true), settleDelay);
-    return () => window.clearTimeout(settleTimer);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) setCubeFaceSettled(true);
   }, [activeCubeFace]);
+
+  const completeCubeFaceTurn = (event: ReactTransitionEvent<HTMLDivElement>) => {
+    if (!activeCubeFace || event.target !== event.currentTarget || event.propertyName !== 'transform') return;
+    setCubeFaceSettled(true);
+  };
 
   const clearCubeHoverIntent = () => {
     if (cubeHoverIntentRef.current === null) return;
@@ -546,6 +543,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
           <div
             className={'wiki-portal-cube-stage wiki-portal-cube-stage-' + browseView}
             data-active-face={browseView === 'cube' ? activeCubeFace ?? undefined : undefined}
+            data-face-settled={browseView === 'cube' && activeCubeFace && cubeFaceSettled ? '' : undefined}
             data-touch-cube-angle={browseView === 'cube' ? touchCubeAngle : undefined}
             data-touch-cube-dragging={browseView === 'cube' && touchCubeDragging ? '' : undefined}
             onBlurCapture={(event) => {
@@ -578,7 +576,6 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
             }}
             onPointerUp={finishTouchCubeGesture}
             ref={cubeStageRef}
-            style={browseView === 'cube' && activeCubeFace ? { perspective: 'none' } : undefined}
           >
             <div
               className={'wiki-portal-grid wiki-portal-grid-' + browseView}
@@ -587,12 +584,8 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
               data-face-settled={cubeFaceSettled ? '' : undefined}
               data-pinned-face={pinnedCubeFace ?? undefined}
               data-touch-cube-angle={touchCubeAngle}
-              style={browseView === 'cube' && activeCubeFace ? {
-                transform: 'none',
-                transformStyle: 'flat',
-                transition: cubeFaceSettled ? 'none' : undefined,
-                willChange: 'auto',
-              } : browseView === 'cube' ? {
+              onTransitionEnd={completeCubeFaceTurn}
+              style={browseView === 'cube' && !activeCubeFace ? {
                 '--portal-touch-drag-y': `${touchCubeDragDegrees}deg`,
               } as CSSProperties : undefined}
             >
@@ -605,12 +598,6 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
                   aria-labelledby={sectionId}
                   data-cube-face={cubeFace}
                   key={section.title.en}
-                  style={browseView === 'cube' && activeCubeFace === cubeFace ? {
-                    backfaceVisibility: 'visible',
-                    transform: 'none',
-                    transformStyle: 'flat',
-                    transition: cubeFaceSettled ? 'none' : undefined,
-                  } : undefined}
                 >
                   {renderPortalSectionContent(section, sectionId)}
                 </section>

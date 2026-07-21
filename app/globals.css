@@ -2282,17 +2282,27 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
 }
 
 .wiki-portal-cube-stage-cube {
+  --portal-cube-reading-width: min(100%, 920px);
+  --portal-cube-reading-height: 620px;
+  --portal-cube-reading-top: 32px;
+  --portal-cube-pin-height: 44px;
   position: relative;
   isolation: isolate;
-  width: min(100%, 850px);
+  width: var(--portal-cube-reading-width);
   height: 820px;
   margin-inline: auto;
   overflow: clip;
   perspective: 2050px;
   perspective-origin: 50% 40%;
+  transition: height .78s cubic-bezier(.16, 1, .3, 1);
 }
 
 .wiki-portal-cube-stage-cube[data-active-face] {
+  height: 680px;
+  overflow: visible;
+}
+
+.wiki-portal-cube-stage-cube[data-face-settled][data-active-face] {
   perspective: none;
 }
 
@@ -2314,6 +2324,8 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
 
 .wiki-portal-grid-cube {
   --portal-cube-size: 550px;
+  --portal-cube-width: var(--portal-cube-size);
+  --portal-cube-height: var(--portal-cube-size);
   --portal-cube-accent: var(--site-theme-action-ink);
   --portal-cube-edge: color-mix(in srgb, var(--site-theme-accent) 34%, var(--wiki-border-light));
   --portal-cube-paper: color-mix(in srgb, var(--wiki-bg) 86%, #f0e8dc 14%);
@@ -2322,12 +2334,16 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   z-index: 1;
   top: 88px;
   display: block;
-  width: var(--portal-cube-size);
-  height: var(--portal-cube-size);
+  width: var(--portal-cube-width);
+  height: var(--portal-cube-height);
   margin: 0 auto;
   transform: rotateX(-19deg) rotateY(-34deg);
   transform-style: preserve-3d;
-  transition: transform .78s cubic-bezier(.16, 1, .3, 1);
+  transition:
+    top .68s cubic-bezier(.16, 1, .3, 1),
+    width .68s cubic-bezier(.16, 1, .3, 1),
+    height .68s cubic-bezier(.16, 1, .3, 1),
+    transform .78s cubic-bezier(.16, 1, .3, 1);
   pointer-events: none;
   will-change: transform;
 }
@@ -2337,13 +2353,21 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
 }
 
 .wiki-portal-grid-cube[data-active-face] {
+  --portal-cube-width: var(--portal-cube-reading-width);
+  --portal-cube-height: var(--portal-cube-reading-height);
+  top: var(--portal-cube-reading-top);
   transform: none;
-  transform-style: flat;
-  will-change: auto;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .wiki-portal-grid-cube[data-active-face]:hover {
   transform: none;
+}
+
+.wiki-portal-grid-cube[data-face-settled][data-active-face] {
+  transform-style: flat;
+  will-change: auto;
 }
 
 .wiki-portal-grid-cube[data-face-settled][data-active-face] {
@@ -2354,8 +2378,8 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   position: absolute;
   inset: 0;
   box-sizing: border-box;
-  width: var(--portal-cube-size);
-  height: var(--portal-cube-size);
+  width: var(--portal-cube-width);
+  height: var(--portal-cube-height);
   overflow: hidden;
   border: 1px solid var(--portal-cube-edge);
   border-radius: 7px;
@@ -2370,7 +2394,14 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
     0 24px 58px rgb(31 35 42 / 8%);
   transform: var(--portal-cube-face-transform);
   transform-style: preserve-3d;
-  transition: background-color .36s ease, border-color .36s ease, box-shadow .36s ease, transform .78s cubic-bezier(.16, 1, .3, 1);
+  transition:
+    width .68s cubic-bezier(.16, 1, .3, 1),
+    height .68s cubic-bezier(.16, 1, .3, 1),
+    background-color .36s ease,
+    border-color .36s ease,
+    box-shadow .36s ease,
+    opacity .24s ease,
+    transform .78s cubic-bezier(.16, 1, .3, 1);
   pointer-events: auto;
 }
 
@@ -2516,6 +2547,11 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
 }
 
 .wiki-portal-grid-cube[data-active-face] .wiki-portal-block {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.wiki-portal-grid-cube[data-face-settled][data-active-face] .wiki-portal-block {
   display: none;
   opacity: 0;
   visibility: hidden;
@@ -2530,6 +2566,15 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
   pointer-events: auto;
   backface-visibility: visible;
   transform: none;
+  transform-style: preserve-3d;
+}
+
+.wiki-portal-grid-cube[data-face-settled][data-active-face="top"] [data-cube-face="top"],
+.wiki-portal-grid-cube[data-face-settled][data-active-face="front"] [data-cube-face="front"],
+.wiki-portal-grid-cube[data-face-settled][data-active-face="right"] [data-cube-face="right"] {
+  display: block;
+  opacity: 1;
+  visibility: visible;
   transform-style: flat;
 }
 
@@ -2734,14 +2779,15 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
   --portal-cube-accent: var(--site-theme-action-ink);
   position: absolute;
   z-index: 5;
-  top: 42px;
-  left: calc(50% + 184px);
+  top: calc(var(--portal-cube-reading-top) - var(--portal-cube-pin-height));
+  right: calc((100% - var(--portal-cube-reading-width)) / 2);
+  left: auto;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 2px;
   min-width: 62px;
-  min-height: 44px;
+  min-height: var(--portal-cube-pin-height);
   padding: 2px 7px 2px 5px;
   border: 0;
   border-radius: 0;
@@ -2794,11 +2840,6 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
 
 .wiki-portal-cube-pin-highlight {
   fill: rgb(255 255 255 / 62%);
-}
-
-.wiki-portal-cube-pin[data-cube-face="front"],
-.wiki-portal-cube-pin[data-cube-face="right"] {
-  top: 50px;
 }
 
 .wiki-portal-cube-pin:hover,
@@ -3111,11 +3152,6 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
       calc(50% + 221px) 444px,
       calc(50% + 51px) 534px
     );
-  }
-
-  .wiki-portal-cube-pin {
-    top: 42px;
-    left: calc(50% + 133px);
   }
 
 }
