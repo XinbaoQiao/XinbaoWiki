@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import type { SearchLanguage } from '@/components/WikiSearch';
 import {
   parseSiteActivityPayload,
@@ -16,6 +16,7 @@ type Props = {
 };
 
 type ActivityStatus = 'empty' | 'error' | 'loading' | 'ready' | 'unavailable';
+type OwnerGateStatus = 'checking' | 'error' | 'idle' | 'rate-limited' | 'saving' | 'success' | 'unavailable';
 
 type VisitorAtlasCopy = {
   error: string;
@@ -27,6 +28,19 @@ type VisitorAtlasCopy = {
   mapTitle: string;
   medium: string;
   noPublicCell: string;
+  ownerCancel: string;
+  ownerClose: string;
+  ownerDescription: string;
+  ownerExcluded: string;
+  ownerIncluded: string;
+  ownerInvalid: string;
+  ownerLabel: string;
+  ownerRateLimited: string;
+  ownerSubmitExclude: string;
+  ownerSubmitInclude: string;
+  ownerTitle: string;
+  ownerUnavailable: string;
+  ownerWorking: string;
   summaryFallback: string;
   summaryLoading: string;
   summaryUnavailable: string;
@@ -56,6 +70,19 @@ const copy = {
     mapTitle: 'Visitor activity world map',
     medium: 'Medium',
     noPublicCell: 'Not public',
+    ownerCancel: 'Cancel',
+    ownerClose: 'Close activity controls',
+    ownerDescription: 'Enter the private password. Changes apply to future visits from this browser.',
+    ownerExcluded: 'This browser is now excluded from future activity.',
+    ownerIncluded: 'This browser will be included in future activity.',
+    ownerInvalid: 'Password not accepted.',
+    ownerLabel: 'Password',
+    ownerRateLimited: 'Too many attempts. Try again later.',
+    ownerSubmitExclude: 'Exclude this browser',
+    ownerSubmitInclude: 'Include this browser',
+    ownerTitle: 'Activity controls',
+    ownerUnavailable: 'Private controls are temporarily unavailable.',
+    ownerWorking: 'Verifying…',
     summaryFallback: 'All history',
     summaryLoading: 'All history · loading',
     summaryUnavailable: 'Activity map · unavailable',
@@ -73,6 +100,19 @@ const copy = {
     mapTitle: '访问足迹世界地图',
     medium: '中',
     noPublicCell: '未公开',
+    ownerCancel: '取消',
+    ownerClose: '关闭访问统计设置',
+    ownerDescription: '请输入私密密码。设置仅影响此浏览器验证后的未来访问。',
+    ownerExcluded: '此浏览器之后的访问将不再计入。',
+    ownerIncluded: '此浏览器之后的访问将重新计入。',
+    ownerInvalid: '密码未通过验证。',
+    ownerLabel: '密码',
+    ownerRateLimited: '尝试次数过多，请稍后再试。',
+    ownerSubmitExclude: '排除此浏览器',
+    ownerSubmitInclude: '重新计入此浏览器',
+    ownerTitle: '访问统计设置',
+    ownerUnavailable: '私密设置暂时不可用。',
+    ownerWorking: '正在验证……',
     summaryFallback: '全部历史',
     summaryLoading: '全部历史 · 正在载入',
     summaryUnavailable: '访问地图 · 暂不可用',
@@ -125,9 +165,15 @@ async function fetchSiteActivity(apiPath: string, signal: AbortSignal) {
 export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) {
   const [payload, setPayload] = useState<SiteActivityPayload | null>(null);
   const [status, setStatus] = useState<ActivityStatus>('loading');
+  const [ownerDialogOpen, setOwnerDialogOpen] = useState(false);
+  const [ownerExcluded, setOwnerExcluded] = useState(false);
+  const [ownerGateStatus, setOwnerGateStatus] = useState<OwnerGateStatus>('idle');
+  const [ownerPassword, setOwnerPassword] = useState('');
+  const ownerDialogRef = useRef<HTMLDialogElement>(null);
   const recordedRef = useRef(false);
   const labels = copy[language];
   const apiPath = withBasePath('/api/site-activity/');
+  const preferencePath = withBasePath('/api/site-activity/preference/');
 
   useEffect(() => {
     if (recordedRef.current) return;
@@ -141,6 +187,84 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
       // Public statistics must never block or disturb the homepage.
     });
   }, [apiPath]);
+
+  useEffect(() => {
+    const dialog = ownerDialogRef.current;
+    if (!dialog) return;
+    if (ownerDialogOpen && !dialog.open) dialog.showModal();
+    if (!ownerDialogOpen && dialog.open) dialog.close();
+  }, [ownerDialogOpen]);
+
+  useEffect(() => {
+    if (!ownerDialogOpen) return;
+    const controller = new AbortController();
+    setOwnerGateStatus('checking');
+    void fetch(preferencePath, {
+      cache: 'no-store',
+      credentials: 'same-origin',
+      signal: controller.signal
+    })
+      .then(async (response) => {
+        if (!response.ok) throw new Error('preference status failed');
+        const next = await response.json() as { enabled?: boolean; excluded?: boolean };
+        if (!next.enabled) {
+          setOwnerGateStatus('unavailable');
+          return;
+        }
+        setOwnerExcluded(Boolean(next.excluded));
+        setOwnerGateStatus('idle');
+      })
+      .catch((error: unknown) => {
+        if (error instanceof DOMException && error.name === 'AbortError') return;
+        setOwnerGateStatus('unavailable');
+      });
+    return () => controller.abort();
+  }, [ownerDialogOpen, preferencePath]);
+
+  async function submitOwnerPreference(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (ownerGateStatus === 'checking' || ownerGateStatus === 'saving') return;
+    setOwnerGateStatus('saving');
+    try {
+      const response = await fetch(preferencePath, {
+        body: JSON.stringify({ excluded: !ownerExcluded, password: ownerPassword }),
+        cache: 'no-store',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST'
+      });
+      if (response.status === 401) {
+        setOwnerGateStatus('error');
+        return;
+      }
+      if (response.status === 429) {
+        setOwnerGateStatus('rate-limited');
+        return;
+      }
+      if (!response.ok) {
+        setOwnerGateStatus('unavailable');
+        return;
+      }
+      const next = await response.json() as { excluded?: boolean };
+      if (typeof next.excluded !== 'boolean') throw new Error('preference response invalid');
+      setOwnerExcluded(next.excluded);
+      setOwnerPassword('');
+      setOwnerGateStatus('success');
+    } catch {
+      setOwnerGateStatus('unavailable');
+    }
+  }
+
+  function openOwnerDialog() {
+    setOwnerGateStatus('checking');
+    setOwnerDialogOpen(true);
+  }
+
+  function closeOwnerDialog() {
+    setOwnerDialogOpen(false);
+    setOwnerPassword('');
+    setOwnerGateStatus('idle');
+  }
 
   useEffect(() => {
     const controller = new AbortController();
@@ -228,13 +352,77 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
           </svg>
           <figcaption>
             <span className="wiki-visitor-atlas-legend" aria-label={labels.intensity}>
-              <b>{labels.intensity}</b>
-              <span><i className="level-0" />{labels.noPublicCell}</span>
-              <span><i className="level-1" />{labels.low}</span>
-              <span><i className="level-2" />{labels.medium}</span>
-              <span><i className="level-3" />{labels.high}</span>
+              <button
+                aria-controls="visitor-atlas-owner-dialog"
+                aria-expanded={ownerDialogOpen}
+                aria-haspopup="dialog"
+                className="wiki-visitor-atlas-legend-trigger"
+                onClick={openOwnerDialog}
+                type="button"
+              >
+                {labels.intensity}
+              </button>
+              <span className="wiki-visitor-atlas-legend-scale">
+                <span><i className="level-0" />{labels.noPublicCell}</span>
+                <span><i className="level-1" />{labels.low}</span>
+                <span><i className="level-2" />{labels.medium}</span>
+                <span><i className="level-3" />{labels.high}</span>
+              </span>
             </span>
           </figcaption>
+          <dialog
+            aria-describedby="visitor-atlas-owner-description"
+            aria-labelledby="visitor-atlas-owner-title"
+            aria-modal="true"
+            className="wiki-visitor-atlas-owner-dialog"
+            id="visitor-atlas-owner-dialog"
+            onCancel={closeOwnerDialog}
+            onClose={closeOwnerDialog}
+            ref={ownerDialogRef}
+          >
+            <form onSubmit={submitOwnerPreference}>
+              <header>
+                <strong id="visitor-atlas-owner-title">{labels.ownerTitle}</strong>
+                <button aria-label={labels.ownerClose} onClick={closeOwnerDialog} type="button">×</button>
+              </header>
+              <div className="wiki-visitor-atlas-owner-body">
+                <p id="visitor-atlas-owner-description">{labels.ownerDescription}</p>
+                <label htmlFor="visitor-atlas-owner-password">{labels.ownerLabel}</label>
+                <input
+                  autoComplete="current-password"
+                  autoFocus
+                  id="visitor-atlas-owner-password"
+                  maxLength={256}
+                  minLength={8}
+                  onChange={(event) => setOwnerPassword(event.currentTarget.value)}
+                  required
+                  type="password"
+                  value={ownerPassword}
+                />
+                {ownerGateStatus === 'error' ? <p className="wiki-visitor-atlas-owner-message" role="alert">{labels.ownerInvalid}</p> : null}
+                {ownerGateStatus === 'rate-limited' ? <p className="wiki-visitor-atlas-owner-message" role="alert">{labels.ownerRateLimited}</p> : null}
+                {ownerGateStatus === 'unavailable' ? <p className="wiki-visitor-atlas-owner-message" role="alert">{labels.ownerUnavailable}</p> : null}
+                {ownerGateStatus === 'success' ? (
+                  <p aria-live="polite" className="wiki-visitor-atlas-owner-message is-success" role="status">
+                    {ownerExcluded ? labels.ownerExcluded : labels.ownerIncluded}
+                  </p>
+                ) : null}
+              </div>
+              <footer>
+                <button onClick={closeOwnerDialog} type="button">{labels.ownerCancel}</button>
+                <button
+                  disabled={ownerGateStatus === 'checking' || ownerGateStatus === 'saving' || ownerGateStatus === 'unavailable'}
+                  type="submit"
+                >
+                  {ownerGateStatus === 'saving'
+                    ? labels.ownerWorking
+                    : ownerExcluded
+                      ? labels.ownerSubmitInclude
+                      : labels.ownerSubmitExclude}
+                </button>
+              </footer>
+            </form>
+          </dialog>
         </figure>
         {statusMessage ? (
           <p aria-live="polite" className="wiki-visitor-atlas-status" role="status">{statusMessage}</p>

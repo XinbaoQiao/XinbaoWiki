@@ -16,13 +16,21 @@ import {
   SITE_ACTIVITY_VISITOR_COOKIE_NAME,
   siteActivityExclusionCookieValue
 } from '../lib/site-activity-preference.ts';
+import {
+  createSiteActivityOwnerPasswordHash,
+  isSiteActivityOwnerPasswordHash,
+  reserveSiteActivityOwnerRateLimit,
+  SITE_ACTIVITY_OWNER_RATE_LIMIT,
+  SITE_ACTIVITY_OWNER_RATE_LIMIT_WINDOW_SECONDS,
+  siteActivityOwnerRateLimitKey,
+  verifySiteActivityOwnerPassword
+} from '../lib/site-activity-owner-auth.ts';
 
 const route = fs.readFileSync('app/api/site-activity/route.ts', 'utf8');
 const preferenceRoute = fs.readFileSync('app/api/site-activity/preference/route.ts', 'utf8');
+const ownerAuth = fs.readFileSync('lib/site-activity-owner-auth.ts', 'utf8');
 const aggregation = fs.readFileSync('lib/site-activity-aggregation.ts', 'utf8');
 const component = fs.readFileSync('components/VisitorAtlasDisclosure.tsx', 'utf8');
-const preferenceComponent = fs.readFileSync('components/SiteActivityPreferences.tsx', 'utf8');
-const preferencePage = fs.readFileSync('app/site-activity-preferences/page.tsx', 'utf8');
 const shared = fs.readFileSync('lib/site-activity.ts', 'utf8');
 const map = fs.readFileSync('public/maps/world-land-dots.svg', 'utf8');
 
@@ -88,23 +96,37 @@ assert.equal(SITE_ACTIVITY_VISITOR_COOKIE_NAME, 'xinbao_site_vid');
 assert.equal(SITE_ACTIVITY_PREFERENCE_COOKIE_MAX_AGE_SECONDS, 34_560_000, 'browser exclusion lasts at most 400 days');
 hasAll(preferenceRoute, [
   "'Cache-Control': 'private, no-store'",
-  'request.arrayBuffer()',
+  "process.env.SITE_ACTIVITY_OWNER_PASSWORD_HASH",
+  'process.env.UPSTASH_REDIS_REST_URL',
+  'process.env.UPSTASH_REDIS_REST_TOKEN',
+  'isSiteActivityOwnerPasswordHash(ownerPasswordHash())',
+  'async function readCappedBody(request: NextRequest, maximumBytes: number)',
+  'request.body.getReader()',
+  'await reader.cancel()',
+  'async function parsePreferenceBody(request: NextRequest)',
+  "content-type",
   'httpOnly: true',
   "path: '/'",
   "sameSite: 'strict'",
-  'process.env.UPSTASH_REDIS_REST_URL',
-  'process.env.UPSTASH_REDIS_REST_TOKEN',
   'export async function GET(request: NextRequest)',
   'isSiteActivityBrowserExcluded(',
   'export async function POST(request: NextRequest)',
   'if (!sameOriginRequest(request)) return privateResponse(403)',
-  'if (!(await acceptsEmptyBody(request))) return privateResponse(400)',
+  'if (!body) return privateResponse(400)',
+  "request.headers.get('x-vercel-forwarded-for')",
+  'reserveSiteActivityOwnerRateLimit(',
+  "return privateResponse(429, { 'Retry-After': String(reservation.retryAfterSeconds) })",
+  'verifySiteActivityOwnerPassword(body.password, passwordHash)',
+  'return privateResponse(401)',
+  "response.cookies.set(",
   'siteActivityExclusionCookieValue(secret)',
-  'export async function DELETE(request: NextRequest)',
-  "response.cookies.set(SITE_ACTIVITY_EXCLUSION_COOKIE_NAME, '', expiredOptions)"
-], 'browser preference endpoint is same-origin, private, signed, reversible, and aligned with activity storage configuration');
+  'body.excluded ? cookieOptions() : { ...cookieOptions(), maxAge: 0 }'
+], 'owner preference endpoint is same-origin, private, hashed, rate-limited, and reversible');
 assert.match(route, /request\.arrayBuffer\(\)[\s\S]*byteLength === 0[\s\S]*await acceptsEmptyBody\(request\)/, 'recording consumes and rejects non-empty streamed or chunked request bodies even without Content-Length');
-assert.doesNotMatch(preferenceRoute, /cookies\.set\(SITE_ACTIVITY_VISITOR_COOKIE_NAME/, 'rejoining preserves the existing signed visitor identifier instead of inflating the lifetime count');
+assert.match(preferenceRoute, /length \+ value\.byteLength > maximumBytes[\s\S]*await reader\.cancel\(\)[\s\S]*const keys = Object\.keys\(value\)[\s\S]*keys\.length !== 2[\s\S]*passwordLength > 256/, 'owner preference caps streamed bodies and rejects malformed, extra-key, and oversized JSON before password verification');
+assert.match(preferenceRoute, /process\.env\.VERCEL === '1'[\s\S]*request\.headers\.get\('x-vercel-forwarded-for'\)[\s\S]*if \(!redis \|\| !requestIp\) return privateResponse\(503\)/, 'production owner rate limiting requires a trusted Vercel forwarding IP and fails closed when unavailable');
+assert.doesNotMatch(preferenceRoute, /console\.(?:log|error)\([^)]*password|console\.(?:log|error)\([^)]*request/i, 'owner endpoint does not log the password or request body');
+assert.doesNotMatch(`${component}\n${preferenceRoute}\n${ownerAuth}`, /NEXT_PUBLIC_[A-Z0-9_]*OWNER|SITE_ACTIVITY_OWNER_PASSWORD\s*[:=]\s*['"]/i, 'owner password configuration is server-only and never embedded as a plaintext assignment');
 hasAll(route, [
   'const secret = process.env.RATE_LIMIT_SALT',
   'isSiteActivityBrowserExcluded(request.cookies.get(SITE_ACTIVITY_EXCLUSION_COOKIE_NAME)?.value, secret)',
@@ -112,17 +134,7 @@ hasAll(route, [
   'const visitor = getVisitorCookie(request, secret)',
   'const cellId = requestCell(request)'
 ], 'a valid exclusion cookie stops recording before visitor minting or geographic lookup');
-assert.doesNotMatch(preferenceRoute, /x-vercel-ip|x-forwarded-for|latitude|longitude|country|region/i, 'browser exclusion never depends on an IP or geographic allowlist');
-hasAll(preferenceComponent, [
-  "withBasePath('/api/site-activity/preference/')",
-  "method: excluded ? 'POST' : 'DELETE'",
-  'setStatus(await readPreference(endpoint))',
-  'countries and regions',
-  '其他浏览器、设备、无痕窗口或清除 Cookie 后需要分别设置',
-  'Existing lifetime aggregates cannot remove one earlier browser entry',
-  'Exclude this browser / 排除此浏览器'
-], 'preference UI explains cross-region persistence, per-browser scope, and the forward-only history boundary');
-assert.match(preferencePage, /robots: \{ index: false, follow: false \}/, 'unlinked browser preference page stays out of search indexes');
+assert.doesNotMatch(preferenceRoute, /x-vercel-ip|x-forwarded-for|latitude|longitude|country|region/i, 'browser exclusion cookie itself never depends on an IP or geographic allowlist');
 hasAll(route, [
   'const transaction = redis.multi()',
   'transaction.pfadd(siteActivityAggregationKeys.lifetimeAll(), visitor.digest)',
@@ -201,6 +213,78 @@ assert.match(component, /summaryFallback: 'All history'[\s\S]*uniqueBrowsers: \(
 assert.doesNotMatch(component, /Cells appear|Approximate IP|No map cell|30 complete|\u8fd1 30|wiki-visitor-atlas-note/, 'homepage removes visible threshold, approximation, empty-state, and rolling-window explanations');
 assert.match(map, /world-atlas 2\.0\.2 \/ Natural Earth/, 'generated neutral map records its source geometry');
 assert.match(map, /<pattern id="dots"[\s\S]*<path[\s\S]*fill="url\(#dots\)"/, 'neutral map is a static dotted SVG silhouette');
+
+const ownerTestPassword = 'owner-test-password';
+const ownerTestHash = await createSiteActivityOwnerPasswordHash(
+  ownerTestPassword,
+  '00112233445566778899aabbccddeeff'
+);
+assert.equal(isSiteActivityOwnerPasswordHash(ownerTestHash), true, 'fixed test scrypt envelope is accepted');
+assert.equal(await verifySiteActivityOwnerPassword(ownerTestPassword, ownerTestHash), true, 'owner password verifier accepts the test password');
+assert.equal(await verifySiteActivityOwnerPassword('wrong-owner-password', ownerTestHash), false, 'owner password verifier rejects an incorrect password');
+assert.equal(isSiteActivityOwnerPasswordHash('owner-test-password'), false, 'plaintext owner password is not a valid deployment configuration');
+
+class FakeOwnerRateLimitStore {
+  constructor() {
+    this.counts = new Map();
+    this.expirations = new Map();
+    this.fail = false;
+  }
+
+  multi() {
+    const operations = [];
+    const transaction = {
+      incr: (key) => {
+        operations.push(() => {
+          const count = (this.counts.get(key) ?? 0) + 1;
+          this.counts.set(key, count);
+          return count;
+        });
+        return transaction;
+      },
+      expire: (key, seconds) => {
+        operations.push(() => {
+          this.expirations.set(key, seconds);
+          return 1;
+        });
+        return transaction;
+      },
+      exec: async () => {
+        if (this.fail) throw new Error('simulated owner rate-limit failure');
+        return operations.map((operation) => operation());
+      }
+    };
+    return transaction;
+  }
+}
+
+const ownerRateStore = new FakeOwnerRateLimitStore();
+const ownerRateIp = '203.0.113.10';
+const ownerRateFixture = 'owner-rate-test-fixture';
+const ownerRateNow = 1_700_000_000_000;
+const ownerRateKey = siteActivityOwnerRateLimitKey(ownerRateIp, ownerRateFixture, ownerRateNow);
+assert.equal(ownerRateKey.includes(ownerRateIp), false, 'owner rate-limit key never stores the raw IP');
+assert.notEqual(ownerRateKey, siteActivityOwnerRateLimitKey('203.0.113.11', ownerRateFixture, ownerRateNow), 'different IPs use independent keyed rate-limit buckets');
+assert.equal(
+  SITE_ACTIVITY_OWNER_RATE_LIMIT_WINDOW_SECONDS,
+  900,
+  'owner password attempts use the reviewed fifteen-minute rate-limit window'
+);
+for (let attempt = 1; attempt <= SITE_ACTIVITY_OWNER_RATE_LIMIT; attempt += 1) {
+  const reservation = await reserveSiteActivityOwnerRateLimit(ownerRateStore, ownerRateKey, ownerRateNow);
+  assert.equal(reservation.allowed, true, `owner attempt ${attempt} remains within the limit`);
+  assert.equal(reservation.count, attempt, `owner attempt ${attempt} increments the keyed counter once`);
+}
+const blockedOwnerAttempt = await reserveSiteActivityOwnerRateLimit(ownerRateStore, ownerRateKey, ownerRateNow);
+assert.equal(blockedOwnerAttempt.allowed, false, 'the sixth owner attempt is rate limited');
+assert.ok(blockedOwnerAttempt.retryAfterSeconds >= 1, 'rate-limited owner attempts expose a positive retry window');
+assert.equal(ownerRateStore.expirations.get(ownerRateKey), SITE_ACTIVITY_OWNER_RATE_LIMIT_WINDOW_SECONDS, 'owner rate-limit buckets expire after fifteen minutes');
+ownerRateStore.fail = true;
+await assert.rejects(
+  reserveSiteActivityOwnerRateLimit(ownerRateStore, siteActivityOwnerRateLimitKey('203.0.113.12', ownerRateFixture, ownerRateNow), ownerRateNow),
+  /simulated owner rate-limit failure/,
+  'a Redis rate-limit failure reaches the route so it can fail closed with 503'
+);
 
 class FakeMigrationRedis {
   constructor(now) {

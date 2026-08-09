@@ -21,19 +21,37 @@ const unavailableAggregate = {
   uniqueBrowsersEstimate: null
 };
 
-async function installRoutes(page, getResponse) {
+const ownerTestPassword = 'playwright-owner-password';
+const ownerPreferencePath = '/api/site-activity/preference/';
+
+async function installRoutes(page, getResponse, {
+  mockActivityPost = true,
+  preferencePostResponse = null
+} = {}) {
   await page.route('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap', (route) => route.fulfill({
     body: '',
     contentType: 'text/css',
     status: 200
   }));
-  await page.route('**/api/site-activity/**', async (route) => {
-    if (route.request().method() === 'POST') {
-      return route.fulfill({ body: '', status: 204 });
+  const interceptSiteActivity = async (route) => {
+    const pathname = new URL(route.request().url()).pathname.replace(/\/+$/, '');
+    if (pathname.endsWith('/api/site-activity')) {
+      if (route.request().method() === 'POST' && mockActivityPost) {
+        return route.fulfill({ body: '', status: 204 });
+      }
+      if (route.request().method() === 'GET') {
+        const response = await getResponse();
+        return route.fulfill(response);
+      }
+      return route.fallback();
     }
-    const response = await getResponse();
-    return route.fulfill(response);
-  });
+    if (pathname.endsWith(ownerPreferencePath.replace(/\/$/, '')) && route.request().method() === 'POST' && preferencePostResponse) {
+      return route.fulfill(preferencePostResponse);
+    }
+    return route.fallback();
+  };
+  await page.route('**/api/site-activity', interceptSiteActivity);
+  await page.route('**/api/site-activity/**', interceptSiteActivity);
 }
 
 function captureErrors(page, {
@@ -44,7 +62,7 @@ function captureErrors(page, {
   page.on('console', (message) => {
     if (
       message.type() === 'error' &&
-      !(allowSiteActivityHttpError && /(?:site-activity|503)/i.test(message.text()))
+      !(allowSiteActivityHttpError && /(?:site-activity|401|429|503)/i.test(message.text()))
     ) {
       errors.push(`console: ${message.text()}`);
     }
@@ -69,6 +87,18 @@ async function readLegendMetrics(legend) {
     centers: [...element.children].map((child) => {
       const bounds = child.getBoundingClientRect();
       return bounds.top + bounds.height / 2;
+    }),
+    scaleRanges: [...element.querySelectorAll('.wiki-visitor-atlas-legend-scale > span')].map((child) => {
+      const bounds = child.getBoundingClientRect();
+      const range = document.createRange();
+      range.selectNodeContents(child);
+      const textBounds = range.getBoundingClientRect();
+      return {
+        cellLeft: bounds.left,
+        cellRight: bounds.right,
+        textLeft: textBounds.left,
+        textRight: textBounds.right
+      };
     })
   }));
 }
@@ -76,6 +106,30 @@ async function readLegendMetrics(legend) {
 function expectSingleLineLegend(metrics) {
   expect(metrics.scrollWidth).toBeLessThanOrEqual(metrics.clientWidth + 1);
   expect(Math.max(...metrics.centers) - Math.min(...metrics.centers)).toBeLessThanOrEqual(1);
+  for (const range of metrics.scaleRanges) {
+    expect(range.textLeft).toBeGreaterThanOrEqual(range.cellLeft - 0.5);
+    expect(range.textRight).toBeLessThanOrEqual(range.cellRight + 0.5);
+  }
+  for (let index = 1; index < metrics.scaleRanges.length; index += 1) {
+    expect(metrics.scaleRanges[index - 1].textRight).toBeLessThanOrEqual(metrics.scaleRanges[index].textLeft + 0.5);
+  }
+}
+
+async function waitForOwnerDialogReady(page) {
+  const preferenceResponse = page.waitForResponse((response) => (
+    new URL(response.url()).pathname === ownerPreferencePath &&
+    response.request().method() === 'GET'
+  ));
+  const trigger = page.getByRole('button', { name: 'Public intensity' });
+  await expect(trigger).toBeVisible();
+  // Native details-content transitions confuse Playwright actionability; the
+  // separate keyboard test and pointer smoke cover physical activation.
+  await trigger.evaluate((element) => element.click());
+  await preferenceResponse;
+  const dialog = page.getByRole('dialog', { name: 'Activity controls' });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole('button', { name: 'Exclude this browser' })).toBeEnabled();
+  return { dialog, trigger };
 }
 
 test('homepage visitor atlas is scoped, accessible, bilingual, and responsive', async ({ page }) => {
@@ -109,6 +163,12 @@ test('homepage visitor atlas is scoped, accessible, bilingual, and responsive', 
   await expect(activity.locator('.wiki-visitor-atlas-legend')).toContainText('Not public');
   await expect(activity.locator('.wiki-visitor-atlas-legend')).toContainText('High');
   expectSingleLineLegend(await readLegendMetrics(activity.locator('.wiki-visitor-atlas-legend')));
+  const ownerTrigger = activity.locator('.wiki-visitor-atlas-legend-trigger');
+  await expect(ownerTrigger).toBeVisible();
+  await expect(ownerTrigger).toHaveAttribute('aria-haspopup', 'dialog');
+  await expect(ownerTrigger).toHaveAttribute('aria-controls', 'visitor-atlas-owner-dialog');
+  await expect(ownerTrigger).toHaveAttribute('aria-expanded', 'false');
+  await expect(activity.locator('#visitor-atlas-owner-dialog')).toBeHidden();
   await expect(activity.locator('figcaption > *')).toHaveCount(1);
   await expect(activity.locator('.wiki-visitor-atlas-note')).toHaveCount(0);
   await expect(activity).not.toContainText('Cells appear only after');
@@ -133,6 +193,12 @@ test('homepage visitor atlas is scoped, accessible, bilingual, and responsive', 
   expect(mapBounds.width / mapBounds.height).toBeCloseTo(672 / 276, 1);
   const legend = activity.locator('.wiki-visitor-atlas-legend');
   expectSingleLineLegend(await readLegendMetrics(legend));
+  const legendBounds = await legend.boundingBox();
+  const triggerBounds = await ownerTrigger.boundingBox();
+  expect(legendBounds).not.toBeNull();
+  expect(triggerBounds).not.toBeNull();
+  expect(triggerBounds.x).toBeGreaterThanOrEqual(legendBounds.x - 0.5);
+  expect(triggerBounds.x + triggerBounds.width).toBeLessThanOrEqual(legendBounds.x + legendBounds.width + 0.5);
 
   await page.locator('.wiki-search-language-select').selectOption('en');
   expectSingleLineLegend(await readLegendMetrics(legend));
@@ -209,22 +275,80 @@ test('visitor atlas retries migration, then distinguishes a persistent error fro
   expect(errors).toEqual([]);
 });
 
-test('site activity preference persists a real cross-location browser exclusion and can rejoin', async ({ context, page }) => {
+test('hidden owner dialog is keyboard accessible and remains inside a 320px viewport', async ({ page }) => {
+  test.skip(Boolean(process.env.CUBE_GEOMETRY_BASE_URL), 'owner password fixture is local-only');
   const errors = captureErrors(page, { allowSiteActivityAbort: true });
-  await page.route('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap', (route) => route.fulfill({
-    body: '',
-    contentType: 'text/css',
-    status: 200
-  }));
-  const activityPosts = [];
-  page.on('request', (request) => {
-    const url = new URL(request.url());
-    if (url.pathname === '/api/site-activity/' && request.method() === 'POST') {
-      activityPosts.push(request.headers());
-    }
-  });
+  await installRoutes(page, () => ({ body: JSON.stringify(aggregate), contentType: 'application/json', status: 200 }));
+  await page.goto('/', { waitUntil: 'networkidle' });
+  await page.locator('.wiki-portal-name-button').click({ force: true });
 
-  await page.goto('/site-activity-preferences/', { waitUntil: 'networkidle' });
+  const trigger = page.getByRole('button', { name: 'Public intensity' });
+  const preferenceResponse = page.waitForResponse((response) => (
+    new URL(response.url()).pathname === ownerPreferencePath &&
+    response.request().method() === 'GET'
+  ));
+  const dialog = page.getByRole('dialog', { name: 'Activity controls' });
+  await trigger.focus();
+  await page.keyboard.press('Enter');
+  await preferenceResponse;
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByRole('button', { name: 'Exclude this browser' })).toBeEnabled();
+  await expect(trigger).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.locator('#visitor-atlas-owner-password')).toBeFocused();
+
+  await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
+  await expect(trigger).toBeFocused();
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+
+  await page.keyboard.press('Space');
+  await expect(dialog).toBeVisible();
+  await page.setViewportSize({ width: 320, height: 720 });
+  const dialogBounds = await dialog.boundingBox();
+  expect(dialogBounds).not.toBeNull();
+  expect(dialogBounds.x).toBeGreaterThanOrEqual(0);
+  expect(dialogBounds.y).toBeGreaterThanOrEqual(0);
+  expect(dialogBounds.x + dialogBounds.width).toBeLessThanOrEqual(320.5);
+  expect(dialogBounds.y + dialogBounds.height).toBeLessThanOrEqual(720.5);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
+  await page.keyboard.press('Escape');
+  expect(errors).toEqual([]);
+});
+
+test('wrong owner password leaves the browser included and exposes only a generic error', async ({ context, page }) => {
+  test.skip(Boolean(process.env.CUBE_GEOMETRY_BASE_URL), 'owner password fixture is local-only');
+  const errors = captureErrors(page, {
+    allowSiteActivityAbort: true,
+    allowSiteActivityHttpError: true
+  });
+  await installRoutes(page, () => ({ body: JSON.stringify(aggregate), contentType: 'application/json', status: 200 }));
+  const ownerRequests = [];
+  page.on('request', (request) => {
+    if (new URL(request.url()).pathname === ownerPreferencePath && request.method() === 'POST') ownerRequests.push(request);
+  });
+  await page.goto('/', { waitUntil: 'networkidle' });
+  await page.locator('.wiki-portal-name-button').click({ force: true });
+  const { dialog } = await waitForOwnerDialogReady(page);
+  await page.locator('#visitor-atlas-owner-password').fill('wrong-owner-password');
+  await dialog.getByRole('button', { name: 'Exclude this browser' }).click({ force: true });
+  await expect(dialog.getByRole('alert')).toHaveText('Password not accepted.');
+  expect((await context.cookies(page.url())).some((cookie) => cookie.name === 'xinbao_site_activity_excluded')).toBe(false);
+  expect(ownerRequests).toHaveLength(1);
+  expect(new URL(ownerRequests[0].url()).search).toBe('');
+  expect(ownerRequests[0].postData()).toContain('wrong-owner-password');
+  expect(errors).toEqual([]);
+});
+
+test('correct owner password sets an exclusion cookie across simulated locations and rejoining preserves the visitor cookie', async ({ context, page, request }) => {
+  test.skip(Boolean(process.env.CUBE_GEOMETRY_BASE_URL), 'owner password fixture is local-only');
+  const errors = captureErrors(page, { allowSiteActivityAbort: true });
+  const activityPosts = [];
+  page.on('request', (requestEvent) => {
+    const url = new URL(requestEvent.url());
+    if (url.pathname === '/api/site-activity/' && requestEvent.method() === 'POST') activityPosts.push(requestEvent.headers());
+  });
+  await installRoutes(page, () => ({ body: JSON.stringify(aggregate), contentType: 'application/json', status: 200 }));
+  await page.goto('/', { waitUntil: 'networkidle' });
   await context.addCookies([{
     httpOnly: true,
     name: 'xinbao_site_vid',
@@ -232,13 +356,11 @@ test('site activity preference persists a real cross-location browser exclusion 
     url: new URL(page.url()).origin,
     value: 'test-preserved-visitor-cookie'
   }]);
-  const panel = page.getByRole('region', { name: 'This browser / 此浏览器' });
-  await expect(panel.getByText('Included / 已计入')).toBeVisible();
-  await expect(panel).toContainText('across countries and regions');
-  await expect(panel).toContainText('已有全历史聚合无法单独删除');
-
-  await panel.getByRole('button', { name: 'Exclude this browser / 排除此浏览器' }).click({ force: true });
-  await expect(panel.getByText('Excluded / 已排除')).toBeVisible();
+  await page.locator('.wiki-portal-name-button').click({ force: true });
+  const { dialog } = await waitForOwnerDialogReady(page);
+  await page.locator('#visitor-atlas-owner-password').fill(ownerTestPassword);
+  await dialog.getByRole('button', { name: 'Exclude this browser' }).click({ force: true });
+  await expect(dialog.getByRole('status')).toHaveText('This browser is now excluded from future activity.');
   const exclusionCookie = (await context.cookies(page.url())).find((cookie) => cookie.name === 'xinbao_site_activity_excluded');
   expect(exclusionCookie).toMatchObject({
     httpOnly: true,
@@ -247,39 +369,72 @@ test('site activity preference persists a real cross-location browser exclusion 
     secure: true
   });
 
-  await page.reload({ waitUntil: 'networkidle' });
-  await expect(panel.getByText('Excluded / 已排除')).toBeVisible();
-  const activityStatuses = await page.evaluate(async () => {
-    const responses = await Promise.all([
-      fetch('/api/site-activity/', {
-        headers: { 'x-vercel-ip-latitude': '22.3', 'x-vercel-ip-longitude': '114.2' },
-        method: 'POST'
-      }),
-      fetch('/api/site-activity/', {
-        headers: { 'x-vercel-ip-latitude': '40.7', 'x-vercel-ip-longitude': '-74.0' },
-        method: 'POST'
-      })
-    ]);
-    return responses.map((response) => response.status);
-  });
-  expect(activityStatuses).toEqual([204, 204]);
-  expect(activityPosts).toHaveLength(2);
-  for (const headers of activityPosts) {
-    expect(headers.cookie).toContain('xinbao_site_activity_excluded=');
-  }
-
-  await panel.getByRole('button', { name: 'Include this browser / 重新计入此浏览器' }).click({ force: true });
-  await expect(panel.getByText('Included / 已计入')).toBeVisible();
-  let cookies = await context.cookies(page.url());
+  const cookieHeader = `${exclusionCookie.name}=${exclusionCookie.value}`;
+  const activityStatuses = await Promise.all([
+    request.post('/api/site-activity/', {
+      headers: {
+        cookie: cookieHeader,
+        'x-vercel-forwarded-for': '198.51.100.10',
+        'x-vercel-ip-latitude': '22.3',
+        'x-vercel-ip-longitude': '114.2'
+      }
+    }),
+    request.post('/api/site-activity/', {
+      headers: {
+        cookie: cookieHeader,
+        'x-vercel-forwarded-for': '198.51.100.11',
+        'x-vercel-ip-latitude': '40.7',
+        'x-vercel-ip-longitude': '-74.0'
+      }
+    })
+  ]);
+  expect(activityStatuses.map((response) => response.status())).toEqual([204, 204]);
+  await expect(dialog.getByRole('button', { name: 'Include this browser' })).toBeVisible();
+  await page.locator('#visitor-atlas-owner-password').fill(ownerTestPassword);
+  await dialog.getByRole('button', { name: 'Include this browser' }).click({ force: true });
+  await expect(dialog.getByRole('status')).toHaveText('This browser will be included in future activity.');
+  const cookies = await context.cookies(page.url());
   expect(cookies.some((cookie) => cookie.name === 'xinbao_site_activity_excluded')).toBe(false);
   expect(cookies.find((cookie) => cookie.name === 'xinbao_site_vid')?.value).toBe('test-preserved-visitor-cookie');
-
-  const repeatedDeleteStatus = await page.evaluate(async () => (
-    await fetch('/api/site-activity/preference/', { method: 'DELETE' })
-  ).status);
-  expect(repeatedDeleteStatus).toBe(204);
-  cookies = await context.cookies(page.url());
-  expect(cookies.find((cookie) => cookie.name === 'xinbao_site_vid')?.value).toBe('test-preserved-visitor-cookie');
-  expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
+  expect(activityPosts.every((headers) => !headers.cookie || headers.cookie.includes('xinbao_site_activity_excluded=') || headers.cookie.includes('xinbao_site_vid='))).toBe(true);
   expect(errors).toEqual([]);
+});
+
+test('owner dialog surfaces rate-limit and unavailable responses without changing cookies', async ({ context, page }) => {
+  test.skip(Boolean(process.env.CUBE_GEOMETRY_BASE_URL), 'owner password fixture is local-only');
+  for (const scenario of [
+    { name: 'rate-limit', response: { body: '', headers: { 'Retry-After': '900' }, status: 429 }, message: 'Too many attempts. Try again later.' },
+    { name: 'unavailable', response: { body: '', status: 503 }, message: 'Private controls are temporarily unavailable.' }
+  ]) {
+    await context.clearCookies();
+    await installRoutes(page, () => ({ body: JSON.stringify(aggregate), contentType: 'application/json', status: 200 }), { preferencePostResponse: scenario.response });
+    await page.goto('/', { waitUntil: 'networkidle' });
+    await page.locator('.wiki-portal-name-button').click({ force: true });
+    const { dialog } = await waitForOwnerDialogReady(page);
+    await page.locator('#visitor-atlas-owner-password').fill(ownerTestPassword);
+    await dialog.getByRole('button', { name: 'Exclude this browser' }).click({ force: true });
+    await expect(dialog.getByRole('alert')).toHaveText(scenario.message);
+    expect((await context.cookies(page.url())).some((cookie) => cookie.name === 'xinbao_site_activity_excluded')).toBe(false);
+  }
+});
+
+test('owner endpoint rejects malformed JSON and cross-origin writes before authentication', async ({ request }) => {
+  test.skip(Boolean(process.env.CUBE_GEOMETRY_BASE_URL), 'owner password fixture is local-only');
+  const malformed = await request.post(ownerPreferencePath, {
+    data: JSON.stringify({ password: ownerTestPassword }),
+    headers: { 'content-type': 'application/json' }
+  });
+  expect(malformed.status()).toBe(400);
+  expect(malformed.headers()['cache-control']).toContain('private');
+  expect(malformed.headers()['set-cookie'] || '').not.toContain('xinbao_site_activity_excluded=');
+
+  const crossOrigin = await request.post(ownerPreferencePath, {
+    data: JSON.stringify({ excluded: true, password: ownerTestPassword }),
+    headers: {
+      'content-type': 'application/json',
+      origin: 'https://attacker.invalid'
+    }
+  });
+  expect(crossOrigin.status()).toBe(403);
+  expect(crossOrigin.headers()['set-cookie'] || '').not.toContain('xinbao_site_activity_excluded=');
 });

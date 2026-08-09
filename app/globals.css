@@ -2173,9 +2173,6 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
 }
 
 .wiki-visitor-atlas figcaption {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
   margin-top: 9px;
   color: var(--wiki-text-soft);
   font-size: 10.5px;
@@ -2183,60 +2180,237 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
 }
 
 .wiki-visitor-atlas-legend {
-  display: flex;
+  display: grid;
   width: 100%;
   max-width: 100%;
   min-width: 0;
-  flex-wrap: nowrap;
+  grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
-  justify-content: space-between;
-  gap: 4px;
+  gap: clamp(10px, 2.8vw, 24px);
+  padding-top: 7px;
+  border-top: 1px solid color-mix(in srgb, var(--site-theme-accent) 12%, var(--wiki-border-light));
   color: var(--wiki-text-soft);
 }
 
-.wiki-visitor-atlas-legend b {
+.wiki-visitor-atlas-legend-trigger {
+  position: relative;
+  appearance: none;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: transparent;
   color: var(--wiki-text);
+  cursor: default;
   font-family: var(--font-mono);
   font-size: 9.5px;
+  font-weight: 700;
+  line-height: 1.4;
   letter-spacing: .055em;
+  text-align: left;
   text-transform: uppercase;
 }
 
-.wiki-visitor-atlas-legend span {
+.wiki-visitor-atlas-legend-trigger::after {
+  position: absolute;
+  inset: -12px -6px;
+  content: "";
+}
+
+.wiki-visitor-atlas-legend-trigger:hover {
+  border-bottom-color: var(--site-theme-accent);
+  color: var(--site-theme-action-ink);
+}
+
+.wiki-visitor-atlas-legend-trigger:focus-visible {
+  border-bottom-color: transparent;
+  border-radius: 1px;
+  outline: 2px solid var(--site-theme-action-ink);
+  outline-offset: 3px;
+}
+
+.wiki-visitor-atlas-legend-scale {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(3px, 1vw, 9px);
+}
+
+.wiki-visitor-atlas-legend-scale > span {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 4px;
+  padding-inline: clamp(3px, .8vw, 8px);
+  border-left: 1px solid color-mix(in srgb, var(--wiki-border-light) 72%, transparent);
   white-space: nowrap;
 }
 
-.wiki-visitor-atlas-legend i {
+.wiki-visitor-atlas-legend-scale > span:first-child {
+  border-left: 0;
+}
+
+.wiki-visitor-atlas-legend-scale i {
   display: inline-block;
+  flex: 0 0 auto;
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: var(--wiki-border);
 }
 
-.wiki-visitor-atlas-legend i.level-1,
-.wiki-visitor-atlas-legend i.level-2,
-.wiki-visitor-atlas-legend i.level-3 {
+.wiki-visitor-atlas-legend-scale i.level-1,
+.wiki-visitor-atlas-legend-scale i.level-2,
+.wiki-visitor-atlas-legend-scale i.level-3 {
   background: var(--site-theme-action-ink);
 }
 
-.wiki-visitor-atlas-legend i.level-1 {
+.wiki-visitor-atlas-legend-scale i.level-1 {
   opacity: .42;
 }
 
-.wiki-visitor-atlas-legend i.level-2 {
+.wiki-visitor-atlas-legend-scale i.level-2 {
   width: 7px;
   height: 7px;
   opacity: .68;
 }
 
-.wiki-visitor-atlas-legend i.level-3 {
+.wiki-visitor-atlas-legend-scale i.level-3 {
   width: 8px;
   height: 8px;
   opacity: .92;
+}
+
+.wiki-visitor-atlas-owner-dialog {
+  width: min(420px, calc(100vw - 32px));
+  max-width: none;
+  max-height: min(620px, calc(100vh - 32px));
+  margin: auto;
+  padding: 0;
+  overflow: auto;
+  border: 1px solid var(--wiki-border);
+  border-top: 3px solid var(--site-theme-accent);
+  border-radius: 2px;
+  background: var(--wiki-bg);
+  box-shadow: 0 18px 54px rgb(0 0 0 / 20%);
+  color: var(--wiki-text);
+}
+
+.wiki-visitor-atlas-owner-dialog::backdrop {
+  background: rgb(32 33 34 / 38%);
+}
+
+.wiki-visitor-atlas-owner-dialog form {
+  display: grid;
+  gap: 0;
+  margin: 0;
+}
+
+.wiki-visitor-atlas-owner-dialog header,
+.wiki-visitor-atlas-owner-dialog footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+}
+
+.wiki-visitor-atlas-owner-dialog header {
+  justify-content: space-between;
+  border-bottom: 1px solid var(--wiki-border-light);
+}
+
+.wiki-visitor-atlas-owner-dialog header strong {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  line-height: 1.25;
+}
+
+.wiki-visitor-atlas-owner-dialog header button {
+  width: 44px;
+  min-width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--wiki-text-soft);
+  cursor: pointer;
+  font: 24px/1 var(--font-sans);
+}
+
+.wiki-visitor-atlas-owner-body {
+  display: grid;
+  gap: 8px;
+  padding: 15px 14px 8px;
+}
+
+.wiki-visitor-atlas-owner-body p {
+  margin: 0 0 4px;
+  color: var(--wiki-text-soft);
+  font-size: 12.5px;
+  line-height: 1.5;
+  text-wrap: balance;
+}
+
+.wiki-visitor-atlas-owner-body label {
+  color: var(--wiki-text);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.wiki-visitor-atlas-owner-body input {
+  width: 100%;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid var(--wiki-border);
+  border-radius: 1px;
+  background: var(--wiki-bg);
+  color: var(--wiki-text);
+  font: 15px/1.3 var(--font-sans);
+}
+
+.wiki-visitor-atlas-owner-dialog button:focus-visible,
+.wiki-visitor-atlas-owner-body input:focus-visible {
+  outline: 2px solid var(--site-theme-action-ink);
+  outline-offset: 2px;
+}
+
+.wiki-visitor-atlas-owner-message {
+  min-height: 1.5em;
+  color: var(--site-theme-heading) !important;
+  font-weight: 650;
+}
+
+.wiki-visitor-atlas-owner-message.is-success {
+  color: var(--site-theme-action-ink) !important;
+}
+
+.wiki-visitor-atlas-owner-dialog footer {
+  justify-content: flex-end;
+  padding-top: 10px;
+}
+
+.wiki-visitor-atlas-owner-dialog footer button {
+  min-height: 44px;
+  padding: 8px 13px;
+  border: 1px solid var(--wiki-border);
+  border-radius: 1px;
+  background: var(--wiki-bg);
+  color: var(--wiki-text);
+  cursor: pointer;
+  font: 700 12px/1.2 var(--font-sans);
+}
+
+.wiki-visitor-atlas-owner-dialog footer button[type="submit"] {
+  border-color: var(--site-theme-action-ink);
+  background: var(--site-theme-action-ink);
+  color: var(--wiki-bg);
+}
+
+.wiki-visitor-atlas-owner-dialog footer button:disabled {
+  cursor: wait;
+  opacity: .55;
 }
 
 .wiki-visitor-atlas-status {
@@ -3521,17 +3695,27 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
   }
 
   .wiki-visitor-atlas-legend {
-    gap: 3px;
+    gap: 5px;
   }
 
-  .wiki-visitor-atlas-legend b {
+  .wiki-visitor-atlas-legend-trigger {
     font-size: 8px;
     letter-spacing: .035em;
   }
 
-  .wiki-visitor-atlas-legend span {
-    gap: 2px;
-    font-size: 9.5px;
+  .wiki-visitor-atlas-legend-scale > span {
+    gap: 1px;
+    padding-inline: 1px;
+    font-size: 9px;
+  }
+
+  .wiki-visitor-atlas-legend-scale {
+    gap: 0;
+  }
+
+  .wiki-visitor-atlas-owner-dialog {
+    width: calc(100vw - 24px);
+    max-height: calc(100vh - 24px);
   }
 }
 

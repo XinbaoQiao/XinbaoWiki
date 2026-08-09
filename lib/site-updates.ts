@@ -60,6 +60,21 @@ function paperAcceptance({ date, dateTime, href, papers, venue }: PaperAcceptanc
 // Canonical ordered event data for both the homepage Updates disclosure and
 // the readable Latest updates page linked under Contribute.
 const siteUpdateEvents: readonly SiteUpdateEvent[] = [
+  {
+    dateTime: '2026-08-01',
+    en: {
+      date: 'Aug 1, 2026',
+      detail: 'PhD in Information Engineering, The Chinese University of Hong Kong.',
+      href: '/wiki/The_Chinese_University_of_Hong_Kong/',
+      title: 'Started PhD studies at CUHK'
+    },
+    zh: {
+      date: '2026年8月1日',
+      detail: '香港中文大学信息工程博士阶段。',
+      href: '/wiki/The_Chinese_University_of_Hong_Kong_zh/',
+      title: '开始在香港中文大学攻读博士学位'
+    }
+  },
   paperAcceptance({
     date: { en: 'Apr 2026', zh: '2026年4月' },
     dateTime: '2026-04',

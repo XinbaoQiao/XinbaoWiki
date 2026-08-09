@@ -67,12 +67,17 @@ cells, retention failures, cross-origin recording, or manipulation of the
 public aggregate are in scope. The complete data contract is documented in
 [`docs/site-activity/README.md`](docs/site-activity/README.md).
 
-Any browser can opt itself out through `/site-activity-preferences/`. The
-server-issued marker is `HttpOnly`, `SameSite=Strict`, and checked before
-visitor-cookie minting, geographic lookup, migration, or Redis writes. It is a
-per-browser forward-looking control rather than an IP allowlist: changing
-regions does not bypass it, while another browser or cleared cookie must opt
-out separately. Existing lifetime HLL entries cannot be selectively removed.
+The atlas legend contains an understated, password-gated maintainer control.
+The password is verified only against a server-side scrypt hash and failed
+attempts are limited per HMAC-derived network key; neither the password nor the
+raw request IP is stored or returned. Successful verification sets an
+`HttpOnly`, `SameSite=Strict` marker that is checked before visitor-cookie
+minting, geographic lookup, migration, or Redis writes. It is a per-browser,
+forward-looking exclusion rather than an IP denylist: changing regions does
+not bypass it, while another browser, device, private window, or cleared cookie
+must be verified separately. This prevents an owner from accidentally
+excluding unrelated visitors behind a shared address. Existing lifetime HLL
+entries cannot be selectively removed.
 
 ## Security Scope
 

@@ -53,23 +53,32 @@ it does not identify people.
    positions, three-level intensity buckets, thresholds, and the collection
    start date.
 
-## Browser self-exclusion
+## Private maintainer exclusion
 
-Open `/site-activity-preferences/` on each browser that should not contribute
-to the public statistic and choose **Exclude this browser**. The server sets a
-signed `HttpOnly`, `SameSite=Strict` first-party exclusion cookie. The recording
-route validates that marker before it creates a visitor identifier, reads
-geographic headers, runs migration, or writes Redis, and returns an ordinary
-private `204` without recording the request.
+The intensity heading below the atlas is an understated control rather than a
+public settings link. Activating it opens a native password dialog. The
+password is sent only in a same-origin JSON request and is verified against the
+server-only `SITE_ACTIVITY_OWNER_PASSWORD_HASH` scrypt envelope; plaintext is
+not included in the client bundle, URL, cookie, Redis, or application logs.
+Wrong attempts are limited to five per 15-minute window using a keyed digest of
+Vercel's trusted forwarding IP. The raw IP is not persisted, and a Redis or
+configuration failure fails closed without creating an exclusion.
+
+Successful verification sets a signed `HttpOnly`, `SameSite=Strict`
+first-party exclusion cookie. The recording route validates that marker before
+it creates a visitor identifier, reads geographic headers, runs migration, or
+writes Redis, and returns an ordinary private `204` without recording the
+request. The same password dialog can clear only the exclusion marker; it
+preserves an existing signed visitor identifier so rejoining does not create a
+second lifetime identity.
 
 The exclusion follows that browser when its public IP, country, or region
-changes. It does not follow a person across devices, different browsers,
+changes. It deliberately does not block an entire IP address, because shared
+NAT, campus, office, mobile, and VPN addresses may also carry unrelated
+visitors. It does not follow a person across devices, different browsers,
 private windows, or cleared cookies because the site has no owner-login
-identity. Each such browser must enable the preference separately; browser
-cookie limits mean it should be renewed after at most 400 days. Choosing
-**Include this browser** clears only the exclusion marker. An existing signed
-visitor identifier is preserved so opting out and back in does not create a
-second lifetime identity.
+identity. Each maintainer browser must be verified separately, and the marker
+must be renewed after at most 400 days.
 
 Redis HyperLogLog cannot remove one historical digest. Therefore the preference
 is forward-only: visits made before it is enabled remain in the lifetime total
@@ -90,8 +99,9 @@ enumerate or delete individual browser digests; resetting the public history
 requires rotating the versioned key prefix and deleting the retired aggregate
 keys. The maintainer owns that reset decision, including any response to
 long-term automated inflation or a `RATE_LIMIT_SALT` rotation. Redis may hold
-the short-lived HMAC IP digest used only to limit fresh-cookie issuance; it is
-pseudonymous abuse-control data, not an anonymous activity-map value. The
+the short-lived HMAC IP digest used only to limit fresh-cookie issuance and
+owner-password attempts; it is pseudonymous abuse-control data, not an
+anonymous activity-map value. The
 hosting/network platform still processes the request IP to route requests and
 derive its geolocation headers under the platform's own terms and privacy
 policy.
@@ -100,8 +110,12 @@ policy.
 
 The route reuses `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, and
 `RATE_LIMIT_SALT`. The same salt signs the non-identifying browser exclusion
-marker; rotating it invalidates existing visitor and exclusion cookies. No
-client-side analytics package or browser geolocation permission is required.
+marker and HMACs its attempt-limit key; rotating it invalidates existing
+visitor and exclusion cookies. `SITE_ACTIVITY_OWNER_PASSWORD_HASH` contains an
+independent `scrypt:v1:<salt>:<digest>` envelope and must be configured only in
+the server environment. It must not reuse the chat administration token, the
+Redis token, or the rate-limit salt. No client-side analytics package or
+browser geolocation permission is required.
 
 When Redis or the salt is absent, recording returns an empty `204` and the
 public endpoint returns `enabled: false`. Recording errors still soft-fail so

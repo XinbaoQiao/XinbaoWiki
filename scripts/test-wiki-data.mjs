@@ -1578,7 +1578,7 @@ assert.match(chatKnowledge, /private voice notes/, 'persona prevents revealing p
 assert.match(chatReadme, /Vercel deployment/, 'chat documentation explains Vercel deployment');
 assert.match(chatReadme, /rg "YUNWU_API_KEY\|sk-\|Bearer\|api\.yunwu\|UPSTASH_REDIS_REST_TOKEN"/, 'chat documentation includes the key leak check command');
 assert.match(chatReadme, /11th daily request[\s\S]*429/, 'chat documentation explains testing the 10-message limit');
-for (const envName of ['YUNWU_API_KEY', 'YUNWU_API_BASE_URL', 'UPSTASH_REDIS_REST_URL', 'UPSTASH_REDIS_REST_TOKEN', 'RATE_LIMIT_SALT', 'XINBAO_CHAT_VOICE_STYLE', 'XINBAO_CHAT_ADMIN_TOKEN']) {
+for (const envName of ['YUNWU_API_KEY', 'YUNWU_API_BASE_URL', 'UPSTASH_REDIS_REST_URL', 'UPSTASH_REDIS_REST_TOKEN', 'RATE_LIMIT_SALT', 'SITE_ACTIVITY_OWNER_PASSWORD_HASH', 'XINBAO_CHAT_VOICE_STYLE', 'XINBAO_CHAT_ADMIN_TOKEN']) {
   assert.match(chatEnvExample, new RegExp(`^${envName}=`, 'm'), `env.example includes ${envName}`);
 }
 assert.match(chatPersona, /You are Chat with Xinbao/, 'persona prompt template documents assistant identity');
@@ -1825,7 +1825,6 @@ const styles = fs.readFileSync(path.join(root, 'app/globals.css'), 'utf8');
 const homePage = fs.readFileSync(path.join(root, 'app/page.tsx'), 'utf8');
 const homepagePortal = fs.readFileSync(path.join(root, 'components/HomepagePortal.tsx'), 'utf8');
 const visitorAtlas = fs.readFileSync(path.join(root, 'components/VisitorAtlasDisclosure.tsx'), 'utf8');
-const siteActivityPreferences = fs.readFileSync(path.join(root, 'components/SiteActivityPreferences.tsx'), 'utf8');
 
 function cssRuleBody(source, selector) {
   const selectorPattern = selector
@@ -2251,8 +2250,8 @@ assert.match(styles, /@media \(prefers-reduced-motion: reduce\)[\s\S]*\.wiki-por
 assert.doesNotMatch(homepagePortal, /Research Atlas|研究图谱|\/atlas/, 'homepage removes the retired Research Atlas entry');
 assert.match(homepagePortal, /const updateLabels[\s\S]*Latest Updates[\s\S]*Scrollable latest updates[\s\S]*最新动态[\s\S]*可滚动的最新动态/, 'homepage updates have bilingual labels for the feed and scrollable region');
 assert.doesNotMatch(homepagePortal, /milestoneLabels|milestoneEntries|portal-milestones|wiki-portal-milestones|Milestones|里程碑/, 'homepage removes the duplicate Milestones surface and its supporting state and data');
-assert.ok(['2026-04', '2025-12', '2025-11', '2025-06', '2025-01', '2022-09', '2022-07'].every((date, index, dates) => index === 0 || updateData.indexOf(`dateTime: '${dates[index - 1]}'`) < updateData.indexOf(`dateTime: '${date}'`)), 'canonical shared update events remain in reverse chronology before deriving either language');
-assert.match(updateData, /title: 'Completed master’s degree'[\s\S]*title: '完成硕士学位'[\s\S]*title: 'Started full-time research internship'[\s\S]*title: '开始全职研究实习'/, 'canonical non-paper updates keep paired English and Chinese content on each event');
+assert.ok(['2026-08-01', '2026-04', '2025-12', '2025-11', '2025-06', '2025-01', '2022-09', '2022-07'].every((date, index, dates) => index === 0 || updateData.indexOf(`dateTime: '${dates[index - 1]}'`) < updateData.indexOf(`dateTime: '${date}'`)), 'canonical shared update events remain in reverse chronology before deriving either language');
+assert.match(updateData, /title: 'Started PhD studies at CUHK'[\s\S]*title: '开始在香港中文大学攻读博士学位'[\s\S]*title: 'Completed master’s degree'[\s\S]*title: '完成硕士学位'[\s\S]*title: 'Started full-time research internship'[\s\S]*title: '开始全职研究实习'/, 'canonical non-paper updates keep paired English and Chinese content on each event');
 assert.doesNotMatch(updateData, /Mar 2023|2023年3月|Started data-centric ML research|开始数据中心机器学习研究|dateTime: '2023-03'/, 'homepage excludes the March 2023 research-start update');
 assert.ok(homepagePortal.includes('siteUpdates[language].map'), 'homepage renders the complete shared update archive without slicing away older entries');
 assert.ok(homepagePortal.includes("import { siteUpdates } from '@/lib/site-updates'") && updatesPage.includes("import { siteUpdates } from '@/lib/site-updates'"), 'homepage Updates and the Contribute-linked Latest updates page read the same backend data export');
@@ -2283,7 +2282,9 @@ assert.match(styles, /\.wiki-portal-directory \{[\s\S]*width: 100%;[\s\S]*\}[\s\
 assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.wiki-portal-timeline \{[\s\S]*width: 100%;[\s\S]*margin-inline: 0;/, 'homepage timelines use the available width on small screens instead of inheriting narrow desktop search controls');
 assert.match(styles, /\.wiki-visitor-atlas-map \{[\s\S]*width: 100%;[\s\S]*height: auto;[\s\S]*aspect-ratio: 672 \/ 276;[\s\S]*overflow: hidden;/, 'visitor atlas uses one responsive, overflow-safe static map surface');
 assert.match(styles, /\.wiki-visitor-atlas-cluster\.level-1[\s\S]*opacity: \.42;[\s\S]*\.wiki-visitor-atlas-cluster\.level-2[\s\S]*opacity: \.68;[\s\S]*\.wiki-visitor-atlas-cluster\.level-3[\s\S]*opacity: \.92;/, 'visitor atlas encodes only three restrained theme-native public intensity levels');
-assert.match(styles, /\.wiki-visitor-atlas-legend \{[\s\S]*width: 100%;[\s\S]*flex-wrap: nowrap;[\s\S]*justify-content: space-between;/, 'visitor atlas keeps the complete intensity legend on one full-width row');
+assert.match(styles, /\.wiki-visitor-atlas-legend \{[\s\S]*width: 100%;[\s\S]*grid-template-columns: auto minmax\(0, 1fr\);[\s\S]*align-items: center;/, 'visitor atlas keeps its trigger and complete intensity scale on one full-width row');
+assert.match(styles, /\.wiki-visitor-atlas-legend-scale \{[\s\S]*display: flex;[\s\S]*align-items: center;[\s\S]*justify-content: space-between;/, 'visitor atlas distributes four naturally sized intensity labels beside the hidden control without clipping text');
+assert.match(styles, /\.wiki-visitor-atlas-legend-trigger:focus-visible \{[\s\S]*outline: 2px solid var\(--site-theme-action-ink\);/, 'hidden intensity control retains a visible keyboard focus ring');
 assert.doesNotMatch(styles, /\.wiki-visitor-atlas figcaption \{[^}]*flex-direction: column/s, 'visitor atlas does not stack its legend into a second line on small screens');
 assert.match(homepagePortal, /const \[browseOpen, setBrowseOpen\] = useState\(false\);/, 'homepage browse directory is collapsed by default');
 assert.match(homepagePortal, /const \[newsOpen, setNewsOpen\] = useState\(false\);/, 'homepage News is collapsed by default');
@@ -2300,12 +2301,16 @@ assert.match(homepagePortal, /<details[\s\S]*className="wiki-portal-directory"[\
 assert.match(homepagePortal, /<details[\s\S]*className="wiki-portal-news wiki-portal-timeline"[\s\S]*id="portal-news"[\s\S]*onToggle=\{\(event\) => setNewsOpen\(event\.currentTarget\.open\)\}[\s\S]*open=\{newsOpen\}[\s\S]*<summary>/, 'homepage Updates uses native disclosure toggle semantics with controlled state sync');
 assert.match(visitorAtlas, /<details[\s\S]*className="wiki-portal-activity wiki-portal-timeline"[\s\S]*id="portal-activity"[\s\S]*onToggle=\{\(event\) => onOpenChange\(event\.currentTarget\.open\)\}[\s\S]*open=\{open\}[\s\S]*<summary>/, 'homepage Site activity uses native disclosure toggle semantics with controlled state sync');
 assert.match(visitorAtlas, /role="img"[\s\S]*<title id="visitor-atlas-title">[\s\S]*<desc id="visitor-atlas-description">[\s\S]*wiki-visitor-atlas-legend/, 'visitor atlas exposes one named SVG image and a visible intensity legend');
+assert.match(visitorAtlas, /<button[\s\S]*aria-controls="visitor-atlas-owner-dialog"[\s\S]*aria-expanded=\{ownerDialogOpen\}[\s\S]*aria-haspopup="dialog"[\s\S]*className="wiki-visitor-atlas-legend-trigger"[\s\S]*type="button"/, 'public intensity is a discreet native button with dialog semantics');
+assert.match(visitorAtlas, /<dialog[\s\S]*aria-describedby="visitor-atlas-owner-description"[\s\S]*aria-labelledby="visitor-atlas-owner-title"[\s\S]*aria-modal="true"[\s\S]*id="visitor-atlas-owner-dialog"[\s\S]*onCancel=\{closeOwnerDialog\}[\s\S]*onClose=\{closeOwnerDialog\}/, 'owner controls use a native modal dialog with Escape and close-state handling');
+assert.match(visitorAtlas, /<input[\s\S]*autoComplete="current-password"[\s\S]*id="visitor-atlas-owner-password"[\s\S]*type="password"/, 'owner dialog keeps the password in a masked, labeled, client-only field');
+assert.match(visitorAtlas, /body: JSON\.stringify\(\{ excluded: !ownerExcluded, password: ownerPassword \}\)[\s\S]*method: 'POST'/, 'owner dialog sends the password only in a same-origin POST body');
+assert.match(visitorAtlas, /response\.status === 401[\s\S]*setOwnerGateStatus\('error'\)[\s\S]*response\.status === 429[\s\S]*setOwnerGateStatus\('rate-limited'\)[\s\S]*setOwnerGateStatus\('unavailable'\)/, 'owner dialog distinguishes only generic authentication, rate-limit, and unavailable states');
+assert.doesNotMatch(visitorAtlas, /localStorage|sessionStorage|document\.cookie|URLSearchParams/, 'owner password never enters browser persistence or a URL');
 assert.doesNotMatch(visitorAtlas, /navigator\.geolocation|Country \/ region ranking|国家.*排行/, 'visitor atlas neither requests browser geolocation nor publishes a region ranking');
 assert.match(visitorAtlas, /summaryFallback: 'All history'[\s\S]*summaryFallback: '全部历史'/, 'visitor atlas summarizes all collected history in both languages');
 assert.doesNotMatch(visitorAtlas, /Cells appear|Approximate IP|No map cell|wiki-visitor-atlas-note|至少 5|近 30 个完整日/, 'visitor atlas removes visible threshold, IP approximation, empty-state, and rolling-window explanations');
-assert.match(visitorAtlas, /<figcaption>[\s\S]*wiki-visitor-atlas-legend[\s\S]*<\/figcaption>[\s\S]*\{statusMessage \?/, 'visitor atlas figcaption contains only the one-row intensity legend');
-assert.match(siteActivityPreferences, /Include this browser \/ 重新计入此浏览器[\s\S]*Exclude this browser \/ 排除此浏览器/, 'site activity preference offers a reversible per-browser control outside the homepage atlas');
-assert.match(siteActivityPreferences, /countries and regions[\s\S]*其他浏览器、设备、无痕窗口或清除 Cookie 后需要分别设置/, 'preference copy explains that location changes do not bypass a browser exclusion');
+assert.match(visitorAtlas, /<figcaption>[\s\S]*wiki-visitor-atlas-legend[\s\S]*<\/figcaption>[\s\S]*<dialog[\s\S]*visitor-atlas-owner-dialog/, 'visitor atlas keeps the one-row legend and hidden owner dialog in the same disclosure');
 assert.doesNotMatch(homepagePortal, /summary[\s\S]{0,120}preventDefault/, 'homepage summaries do not cancel native details activation');
 assert.match(siteUpdates, /Core research[\s\S]*Methods and geometry[\s\S]*Reliability and trust/, 'homepage research topics are organized into a readable taxonomy');
 assert.match(siteUpdates, /核心研究[\s\S]*方法与几何[\s\S]*可靠性与可信/, 'homepage research taxonomy has Chinese labels');
