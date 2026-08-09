@@ -1825,6 +1825,7 @@ const styles = fs.readFileSync(path.join(root, 'app/globals.css'), 'utf8');
 const homePage = fs.readFileSync(path.join(root, 'app/page.tsx'), 'utf8');
 const homepagePortal = fs.readFileSync(path.join(root, 'components/HomepagePortal.tsx'), 'utf8');
 const visitorAtlas = fs.readFileSync(path.join(root, 'components/VisitorAtlasDisclosure.tsx'), 'utf8');
+const siteActivityPreferences = fs.readFileSync(path.join(root, 'components/SiteActivityPreferences.tsx'), 'utf8');
 
 function cssRuleBody(source, selector) {
   const selectorPattern = selector
@@ -2282,6 +2283,8 @@ assert.match(styles, /\.wiki-portal-directory \{[\s\S]*width: 100%;[\s\S]*\}[\s\
 assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.wiki-portal-timeline \{[\s\S]*width: 100%;[\s\S]*margin-inline: 0;/, 'homepage timelines use the available width on small screens instead of inheriting narrow desktop search controls');
 assert.match(styles, /\.wiki-visitor-atlas-map \{[\s\S]*width: 100%;[\s\S]*height: auto;[\s\S]*aspect-ratio: 672 \/ 276;[\s\S]*overflow: hidden;/, 'visitor atlas uses one responsive, overflow-safe static map surface');
 assert.match(styles, /\.wiki-visitor-atlas-cluster\.level-1[\s\S]*opacity: \.42;[\s\S]*\.wiki-visitor-atlas-cluster\.level-2[\s\S]*opacity: \.68;[\s\S]*\.wiki-visitor-atlas-cluster\.level-3[\s\S]*opacity: \.92;/, 'visitor atlas encodes only three restrained theme-native public intensity levels');
+assert.match(styles, /\.wiki-visitor-atlas-legend \{[\s\S]*width: 100%;[\s\S]*flex-wrap: nowrap;[\s\S]*justify-content: space-between;/, 'visitor atlas keeps the complete intensity legend on one full-width row');
+assert.doesNotMatch(styles, /\.wiki-visitor-atlas figcaption \{[^}]*flex-direction: column/s, 'visitor atlas does not stack its legend into a second line on small screens');
 assert.match(homepagePortal, /const \[browseOpen, setBrowseOpen\] = useState\(false\);/, 'homepage browse directory is collapsed by default');
 assert.match(homepagePortal, /const \[newsOpen, setNewsOpen\] = useState\(false\);/, 'homepage News is collapsed by default');
 assert.match(homepagePortal, /const \[activityOpen, setActivityOpen\] = useState\(false\);/, 'homepage Site activity is collapsed by default');
@@ -2298,6 +2301,11 @@ assert.match(homepagePortal, /<details[\s\S]*className="wiki-portal-news wiki-po
 assert.match(visitorAtlas, /<details[\s\S]*className="wiki-portal-activity wiki-portal-timeline"[\s\S]*id="portal-activity"[\s\S]*onToggle=\{\(event\) => onOpenChange\(event\.currentTarget\.open\)\}[\s\S]*open=\{open\}[\s\S]*<summary>/, 'homepage Site activity uses native disclosure toggle semantics with controlled state sync');
 assert.match(visitorAtlas, /role="img"[\s\S]*<title id="visitor-atlas-title">[\s\S]*<desc id="visitor-atlas-description">[\s\S]*wiki-visitor-atlas-legend/, 'visitor atlas exposes one named SVG image and a visible intensity legend');
 assert.doesNotMatch(visitorAtlas, /navigator\.geolocation|Country \/ region ranking|国家.*排行/, 'visitor atlas neither requests browser geolocation nor publishes a region ranking');
+assert.match(visitorAtlas, /summaryFallback: 'All history'[\s\S]*summaryFallback: '全部历史'/, 'visitor atlas summarizes all collected history in both languages');
+assert.doesNotMatch(visitorAtlas, /Cells appear|Approximate IP|No map cell|wiki-visitor-atlas-note|至少 5|近 30 个完整日/, 'visitor atlas removes visible threshold, IP approximation, empty-state, and rolling-window explanations');
+assert.match(visitorAtlas, /<figcaption>[\s\S]*wiki-visitor-atlas-legend[\s\S]*<\/figcaption>[\s\S]*\{statusMessage \?/, 'visitor atlas figcaption contains only the one-row intensity legend');
+assert.match(siteActivityPreferences, /Include this browser \/ 重新计入此浏览器[\s\S]*Exclude this browser \/ 排除此浏览器/, 'site activity preference offers a reversible per-browser control outside the homepage atlas');
+assert.match(siteActivityPreferences, /countries and regions[\s\S]*其他浏览器、设备、无痕窗口或清除 Cookie 后需要分别设置/, 'preference copy explains that location changes do not bypass a browser exclusion');
 assert.doesNotMatch(homepagePortal, /summary[\s\S]{0,120}preventDefault/, 'homepage summaries do not cancel native details activation');
 assert.match(siteUpdates, /Core research[\s\S]*Methods and geometry[\s\S]*Reliability and trust/, 'homepage research topics are organized into a readable taxonomy');
 assert.match(siteUpdates, /核心研究[\s\S]*方法与几何[\s\S]*可靠性与可信/, 'homepage research taxonomy has Chinese labels');

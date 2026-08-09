@@ -8,11 +8,10 @@ const aggregate = {
   ],
   enabled: true,
   generatedAt: '2026-08-09T00:00:00.000Z',
-  schemaVersion: 1,
-  thresholds: { cell: 5, total: 10 },
-  timezone: 'UTC',
-  uniqueBrowsersEstimate: 25,
-  window: { completeDays: 30, end: '2026-08-08', start: '2026-07-10' }
+  period: { scope: 'lifetime', since: '2026-08-09' },
+  schemaVersion: 2,
+  thresholds: { cell: 2, total: 2 },
+  uniqueBrowsersEstimate: 7
 };
 
 const unavailableAggregate = {
@@ -63,6 +62,22 @@ function captureErrors(page, {
   return errors;
 }
 
+async function readLegendMetrics(legend) {
+  return legend.evaluate((element) => ({
+    clientWidth: element.clientWidth,
+    scrollWidth: element.scrollWidth,
+    centers: [...element.children].map((child) => {
+      const bounds = child.getBoundingClientRect();
+      return bounds.top + bounds.height / 2;
+    })
+  }));
+}
+
+function expectSingleLineLegend(metrics) {
+  expect(metrics.scrollWidth).toBeLessThanOrEqual(metrics.clientWidth + 1);
+  expect(Math.max(...metrics.centers) - Math.min(...metrics.centers)).toBeLessThanOrEqual(1);
+}
+
 test('homepage visitor atlas is scoped, accessible, bilingual, and responsive', async ({ page }) => {
   const errors = captureErrors(page, { allowSiteActivityAbort: true });
   await installRoutes(page, () => ({ body: JSON.stringify(aggregate), contentType: 'application/json', status: 200 }));
@@ -74,7 +89,7 @@ test('homepage visitor atlas is scoped, accessible, bilingual, and responsive', 
   await expect(activity).not.toHaveAttribute('open', '');
   await expect(homepageToggle).toHaveAttribute('aria-controls', 'portal-news portal-activity portal-directory');
   await expect(homepageToggle).toHaveAttribute('aria-expanded', 'false');
-  await expect(activity.locator('summary')).toContainText('25 browsers');
+  await expect(activity.locator('summary')).toContainText('7 browsers · all history');
 
   await homepageToggle.click({ force: true });
   await expect(page.locator('#portal-news')).toHaveAttribute('open', '');
@@ -89,30 +104,38 @@ test('homepage visitor atlas is scoped, accessible, bilingual, and responsive', 
   const map = activity.locator('svg[role="img"]');
   await expect(activity).toHaveAttribute('open', '');
   await expect(map).toBeVisible();
-  await expect(map).toHaveAccessibleName('Anonymous visitor activity world map');
+  await expect(map).toHaveAccessibleName('Visitor activity world map');
   await expect(activity.locator('.wiki-visitor-atlas-cluster')).toHaveCount(3);
   await expect(activity.locator('.wiki-visitor-atlas-legend')).toContainText('Not public');
   await expect(activity.locator('.wiki-visitor-atlas-legend')).toContainText('High');
+  expectSingleLineLegend(await readLegendMetrics(activity.locator('.wiki-visitor-atlas-legend')));
+  await expect(activity.locator('figcaption > *')).toHaveCount(1);
+  await expect(activity.locator('.wiki-visitor-atlas-note')).toHaveCount(0);
+  await expect(activity).not.toContainText('Cells appear only after');
+  await expect(activity).not.toContainText('Approximate IP');
+  await expect(activity).not.toContainText('No map cell');
   await expect(activity).not.toContainText('Country / region ranking');
   await expect(activity).not.toContainText('latitude');
   await expect(activity).not.toContainText('longitude');
 
   await page.locator('.wiki-search-language-select').selectOption('zh');
-  await expect(map).toHaveAccessibleName('匿名访问足迹世界地图');
-  await expect(activity.locator('summary')).toContainText('近 30 个完整日约 25 个浏览器');
+  await expect(map).toHaveAccessibleName('访问足迹世界地图');
+  await expect(activity.locator('summary')).toContainText('约 7 个浏览器 · 全部历史');
   await expect(page.locator('html')).toHaveAttribute('lang', 'zh-CN');
 
-  await page.setViewportSize({ width: 390, height: 844 });
+  await page.setViewportSize({ width: 320, height: 720 });
   const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
   expect(overflow).toBeLessThanOrEqual(1);
   const mapBounds = await map.boundingBox();
   expect(mapBounds).not.toBeNull();
   expect(mapBounds.x).toBeGreaterThanOrEqual(0);
-  expect(mapBounds.x + mapBounds.width).toBeLessThanOrEqual(390.5);
+  expect(mapBounds.x + mapBounds.width).toBeLessThanOrEqual(320.5);
   expect(mapBounds.width / mapBounds.height).toBeCloseTo(672 / 276, 1);
-  await expect.poll(() => activity.locator('figcaption').evaluate((element) => (
-    getComputedStyle(element).flexDirection
-  ))).toBe('column');
+  const legend = activity.locator('.wiki-visitor-atlas-legend');
+  expectSingleLineLegend(await readLegendMetrics(legend));
+
+  await page.locator('.wiki-search-language-select').selectOption('en');
+  expectSingleLineLegend(await readLegendMetrics(legend));
   expect(errors).toEqual([]);
 });
 
@@ -139,35 +162,124 @@ test('visitor atlas exposes loading and disabled states without sample markers',
   await expect(page.locator('#portal-activity')).toHaveAttribute('open', '');
   await expect(atlas).toBeVisible();
   await expect(atlas).toHaveAttribute('aria-busy', 'true');
-  await expect(atlas.getByRole('status')).toContainText('Loading the anonymous visitor map');
+  await expect(atlas.getByRole('status')).toContainText('Loading activity map');
   releaseResponse();
   await expect(atlas).toHaveAttribute('aria-busy', 'false');
-  await expect(atlas.getByRole('status')).toContainText('Statistics are not configured yet');
+  await expect(atlas.getByRole('status')).toContainText('Statistics are unavailable');
   await expect(atlas.locator('.wiki-visitor-atlas-cluster')).toHaveCount(0);
   expect(errors).toEqual([]);
 });
 
-test('visitor atlas distinguishes a temporary error from a below-threshold aggregate', async ({ page }) => {
+test('visitor atlas retries migration, then distinguishes a persistent error from a quiet empty aggregate', async ({ page }) => {
   const errors = captureErrors(page, {
     allowSiteActivityAbort: true,
     allowSiteActivityHttpError: true
   });
-  let responseMode = 'error';
-  await installRoutes(page, () => responseMode === 'error'
-    ? { body: '', status: 503 }
-    : {
+  let responseMode = 'migration';
+  let migrationReads = 0;
+  await installRoutes(page, () => {
+    if (responseMode === 'migration' && migrationReads++ === 0) return { body: '', status: 503 };
+    if (responseMode === 'migration') {
+      return { body: JSON.stringify(aggregate), contentType: 'application/json', status: 200 };
+    }
+    if (responseMode === 'error') return { body: '', status: 503 };
+    return {
         body: JSON.stringify({ ...aggregate, cells: [], uniqueBrowsersEstimate: null }),
         contentType: 'application/json',
         status: 200
-      });
+      };
+  });
 
   await page.goto('/', { waitUntil: 'networkidle' });
+  const atlas = page.locator('#portal-activity .wiki-visitor-atlas');
   const status = page.locator('#portal-activity .wiki-visitor-atlas-status');
+  await expect(atlas).toHaveAttribute('data-status', 'ready');
+  await expect(page.locator('#portal-activity .wiki-visitor-atlas-cluster')).toHaveCount(3);
+
+  responseMode = 'error';
+  await page.reload({ waitUntil: 'networkidle' });
   await expect(status).toContainText('temporarily unavailable');
 
   responseMode = 'empty';
   await page.reload({ waitUntil: 'networkidle' });
-  await expect(status).toContainText('No map cell has reached the public display threshold yet');
+  await expect(atlas).toHaveAttribute('data-status', 'empty');
+  await expect(atlas.locator('.wiki-visitor-atlas-status')).toHaveCount(0);
+  await expect(page.locator('#portal-activity')).not.toContainText('No map cell');
   await expect(page.locator('#portal-activity .wiki-visitor-atlas-cluster')).toHaveCount(0);
+  expect(errors).toEqual([]);
+});
+
+test('site activity preference persists a real cross-location browser exclusion and can rejoin', async ({ context, page }) => {
+  const errors = captureErrors(page, { allowSiteActivityAbort: true });
+  await page.route('https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap', (route) => route.fulfill({
+    body: '',
+    contentType: 'text/css',
+    status: 200
+  }));
+  const activityPosts = [];
+  page.on('request', (request) => {
+    const url = new URL(request.url());
+    if (url.pathname === '/api/site-activity/' && request.method() === 'POST') {
+      activityPosts.push(request.headers());
+    }
+  });
+
+  await page.goto('/site-activity-preferences/', { waitUntil: 'networkidle' });
+  await context.addCookies([{
+    httpOnly: true,
+    name: 'xinbao_site_vid',
+    sameSite: 'Lax',
+    url: new URL(page.url()).origin,
+    value: 'test-preserved-visitor-cookie'
+  }]);
+  const panel = page.getByRole('region', { name: 'This browser / 此浏览器' });
+  await expect(panel.getByText('Included / 已计入')).toBeVisible();
+  await expect(panel).toContainText('across countries and regions');
+  await expect(panel).toContainText('已有全历史聚合无法单独删除');
+
+  await panel.getByRole('button', { name: 'Exclude this browser / 排除此浏览器' }).click({ force: true });
+  await expect(panel.getByText('Excluded / 已排除')).toBeVisible();
+  const exclusionCookie = (await context.cookies(page.url())).find((cookie) => cookie.name === 'xinbao_site_activity_excluded');
+  expect(exclusionCookie).toMatchObject({
+    httpOnly: true,
+    path: '/',
+    sameSite: 'Strict',
+    secure: true
+  });
+
+  await page.reload({ waitUntil: 'networkidle' });
+  await expect(panel.getByText('Excluded / 已排除')).toBeVisible();
+  const activityStatuses = await page.evaluate(async () => {
+    const responses = await Promise.all([
+      fetch('/api/site-activity/', {
+        headers: { 'x-vercel-ip-latitude': '22.3', 'x-vercel-ip-longitude': '114.2' },
+        method: 'POST'
+      }),
+      fetch('/api/site-activity/', {
+        headers: { 'x-vercel-ip-latitude': '40.7', 'x-vercel-ip-longitude': '-74.0' },
+        method: 'POST'
+      })
+    ]);
+    return responses.map((response) => response.status);
+  });
+  expect(activityStatuses).toEqual([204, 204]);
+  expect(activityPosts).toHaveLength(2);
+  for (const headers of activityPosts) {
+    expect(headers.cookie).toContain('xinbao_site_activity_excluded=');
+  }
+
+  await panel.getByRole('button', { name: 'Include this browser / 重新计入此浏览器' }).click({ force: true });
+  await expect(panel.getByText('Included / 已计入')).toBeVisible();
+  let cookies = await context.cookies(page.url());
+  expect(cookies.some((cookie) => cookie.name === 'xinbao_site_activity_excluded')).toBe(false);
+  expect(cookies.find((cookie) => cookie.name === 'xinbao_site_vid')?.value).toBe('test-preserved-visitor-cookie');
+
+  const repeatedDeleteStatus = await page.evaluate(async () => (
+    await fetch('/api/site-activity/preference/', { method: 'DELETE' })
+  ).status);
+  expect(repeatedDeleteStatus).toBe(204);
+  cookies = await context.cookies(page.url());
+  expect(cookies.find((cookie) => cookie.name === 'xinbao_site_vid')?.value).toBe('test-preserved-visitor-cookie');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)).toBeLessThanOrEqual(1);
   expect(errors).toEqual([]);
 });

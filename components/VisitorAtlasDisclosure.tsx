@@ -18,8 +18,6 @@ type Props = {
 type ActivityStatus = 'empty' | 'error' | 'loading' | 'ready' | 'unavailable';
 
 type VisitorAtlasCopy = {
-  caveat: string;
-  empty: string;
   error: string;
   high: string;
   intensity: string;
@@ -32,11 +30,9 @@ type VisitorAtlasCopy = {
   summaryFallback: string;
   summaryLoading: string;
   summaryUnavailable: string;
-  threshold: (count: number) => string;
   title: string;
   unavailable: string;
   uniqueBrowsers: (count: number) => string;
-  updated: (date: string) => string;
 };
 
 const clusterOffsets = [
@@ -51,46 +47,38 @@ const clusterOffsets = [
 
 const copy = {
   en: {
-    caveat: 'Approximate IP-derived activity. The browser receives no raw IP, exact geographic coordinates, or region list.',
-    empty: 'No map cell has reached the public display threshold yet.',
     error: 'The visitor map is temporarily unavailable.',
     high: 'High',
     intensity: 'Public intensity',
-    loading: 'Loading the anonymous visitor map…',
+    loading: 'Loading activity map…',
     low: 'Low',
-    mapDescription: 'A dotted world silhouette with coarse, delayed activity clusters. Colors represent ranges, not exact visitor counts.',
-    mapTitle: 'Anonymous visitor activity world map',
+    mapDescription: 'A dotted world silhouette with low, medium, and high activity levels.',
+    mapTitle: 'Visitor activity world map',
     medium: 'Medium',
     noPublicCell: 'Not public',
-    summaryFallback: '30 days · anonymous aggregate',
-    summaryLoading: '30 days · loading',
-    summaryUnavailable: 'Anonymous map · not configured',
-    threshold: (count: number) => `Cells appear only after at least ${count} estimated browsers.`,
+    summaryFallback: 'All history',
+    summaryLoading: 'All history · loading',
+    summaryUnavailable: 'Activity map · unavailable',
     title: 'Site activity',
-    unavailable: 'Statistics are not configured yet. The map will remain neutral until collection begins.',
-    uniqueBrowsers: (count: number) => `≈ ${count.toLocaleString('en')} browsers · 30 complete days`,
-    updated: (date: string) => `Updated ${date} · UTC days · one-day delay`
+    unavailable: 'Statistics are unavailable.',
+    uniqueBrowsers: (count: number) => `≈ ${count.toLocaleString('en')} browsers · all history`
   },
   zh: {
-    caveat: '基于 IP 推断的近似访问密度；浏览器不会收到原始 IP、地理经纬度或地区列表。',
-    empty: '目前还没有地图单元达到公开显示阈值。',
     error: '访问地图暂时无法获取。',
     high: '高',
     intensity: '公开强度',
-    loading: '正在载入匿名访问地图……',
+    loading: '正在载入访问地图……',
     low: '低',
-    mapDescription: '点阵世界轮廓显示经过延迟和粗化的访问密度。颜色代表区间，不代表精确访客数。',
-    mapTitle: '匿名访问足迹世界地图',
+    mapDescription: '点阵世界轮廓以低、中、高三级显示访问强度。',
+    mapTitle: '访问足迹世界地图',
     medium: '中',
     noPublicCell: '未公开',
-    summaryFallback: '近 30 天 · 匿名聚合',
-    summaryLoading: '近 30 天 · 正在载入',
-    summaryUnavailable: '匿名地图 · 尚未配置',
-    threshold: (count: number) => `单元达到至少 ${count} 个估算浏览器后才会显示。`,
+    summaryFallback: '全部历史',
+    summaryLoading: '全部历史 · 正在载入',
+    summaryUnavailable: '访问地图 · 暂不可用',
     title: '访问足迹',
-    unavailable: '统计尚未配置；开始收集前，地图会保持中性。',
-    uniqueBrowsers: (count: number) => `近 30 个完整日约 ${count.toLocaleString('zh-CN')} 个浏览器`,
-    updated: (date: string) => `更新于 ${date} · UTC 完整日 · 延迟一天`
+    unavailable: '统计暂不可用。',
+    uniqueBrowsers: (count: number) => `约 ${count.toLocaleString('zh-CN')} 个浏览器 · 全部历史`
   }
 } satisfies Record<SearchLanguage, VisitorAtlasCopy>;
 
@@ -99,15 +87,39 @@ function withBasePath(pathname: string) {
   return basePath ? `${basePath}${pathname}` : pathname;
 }
 
-function formatDate(isoDate: string, language: SearchLanguage) {
-  const date = new Date(isoDate);
-  if (Number.isNaN(date.getTime())) return isoDate.slice(0, 10);
-  return new Intl.DateTimeFormat(language === 'zh' ? 'zh-CN' : 'en', {
-    day: 'numeric',
-    month: 'short',
-    timeZone: 'UTC',
-    year: 'numeric'
-  }).format(date);
+function waitForRetry(delay: number, signal: AbortSignal) {
+  if (signal.aborted) {
+    return Promise.reject(signal.reason ?? new DOMException('Aborted', 'AbortError'));
+  }
+  return new Promise<void>((resolve, reject) => {
+    const onAbort = () => {
+      clearTimeout(timer);
+      reject(signal.reason ?? new DOMException('Aborted', 'AbortError'));
+    };
+    const timer = window.setTimeout(() => {
+      signal.removeEventListener('abort', onAbort);
+      resolve();
+    }, delay);
+    signal.addEventListener('abort', onAbort, { once: true });
+  });
+}
+
+async function fetchSiteActivity(apiPath: string, signal: AbortSignal) {
+  const retryDelays = [0, 500, 1500, 3000];
+  for (let attempt = 0; attempt < retryDelays.length; attempt += 1) {
+    if (retryDelays[attempt] > 0) await waitForRetry(retryDelays[attempt], signal);
+    const response = await fetch(apiPath, {
+      cache: 'no-store',
+      credentials: 'same-origin',
+      signal
+    });
+    if (response.status === 503 && attempt < retryDelays.length - 1) continue;
+    if (!response.ok) throw new Error('site activity response failed');
+    const payload = parseSiteActivityPayload(await response.json());
+    if (!payload) throw new Error('site activity response was invalid');
+    return payload;
+  }
+  throw new Error('site activity response failed');
 }
 
 export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) {
@@ -133,15 +145,8 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
   useEffect(() => {
     const controller = new AbortController();
     setStatus('loading');
-    void fetch(apiPath, {
-      cache: 'no-store',
-      credentials: 'same-origin',
-      signal: controller.signal
-    })
-      .then(async (response) => {
-        if (!response.ok) throw new Error('site activity response failed');
-        const nextPayload = parseSiteActivityPayload(await response.json());
-        if (!nextPayload) throw new Error('site activity response was invalid');
+    void fetchSiteActivity(apiPath, controller.signal)
+      .then((nextPayload) => {
         setPayload(nextPayload);
         if (!nextPayload.enabled) {
           setStatus('unavailable');
@@ -171,12 +176,7 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
       ? labels.unavailable
       : status === 'error'
         ? labels.error
-        : status === 'empty'
-          ? labels.empty
-          : payload
-            ? labels.updated(formatDate(payload.generatedAt, language))
-            : labels.error;
-  const threshold = payload?.thresholds.cell ?? 5;
+        : null;
 
   return (
     <details
@@ -196,9 +196,9 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
         className="wiki-visitor-atlas"
         data-status={status}
       >
-        <figure aria-describedby="visitor-atlas-note">
+        <figure>
           <svg
-            aria-describedby="visitor-atlas-description visitor-atlas-note"
+            aria-describedby="visitor-atlas-description"
             aria-labelledby="visitor-atlas-title"
             className="wiki-visitor-atlas-map"
             role="img"
@@ -234,11 +234,11 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
               <span><i className="level-2" />{labels.medium}</span>
               <span><i className="level-3" />{labels.high}</span>
             </span>
-            <span>{labels.threshold(threshold)}</span>
           </figcaption>
         </figure>
-        <p aria-live="polite" className="wiki-visitor-atlas-status" role="status">{statusMessage}</p>
-        <p className="wiki-visitor-atlas-note" id="visitor-atlas-note">{labels.caveat}</p>
+        {statusMessage ? (
+          <p aria-live="polite" className="wiki-visitor-atlas-status" role="status">{statusMessage}</p>
+        ) : null}
       </div>
     </details>
   );

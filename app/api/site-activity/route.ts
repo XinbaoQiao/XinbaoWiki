@@ -5,28 +5,39 @@ import {
   SITE_ACTIVITY_MAP_HEIGHT,
   SITE_ACTIVITY_MAP_WIDTH,
   SITE_ACTIVITY_SCHEMA_VERSION,
+  SITE_ACTIVITY_SINCE,
   type SiteActivityCell,
   type SiteActivityPayload
 } from '@/lib/site-activity';
+import {
+  migrateLegacySiteActivity,
+  publicSiteActivityEstimate,
+  publicSiteActivityLevel,
+  SITE_ACTIVITY_CELL_THRESHOLD,
+  SITE_ACTIVITY_KEY_PREFIX,
+  SITE_ACTIVITY_MAX_CELLS,
+  SITE_ACTIVITY_TOTAL_THRESHOLD,
+  siteActivityAggregationKeys
+} from '@/lib/site-activity-aggregation';
+import {
+  isSiteActivityBrowserExcluded,
+  SITE_ACTIVITY_EXCLUSION_COOKIE_NAME,
+  SITE_ACTIVITY_VISITOR_COOKIE_NAME
+} from '@/lib/site-activity-preference';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
-const COOKIE_NAME = 'xinbao_site_vid';
-const COMPLETE_DAYS = 30;
-const DAY_MS = 86_400_000;
+const COOKIE_NAME = SITE_ACTIVITY_VISITOR_COOKIE_NAME;
+const COOKIE_VERSION = 'v2';
 const CELL_DEGREES = 5;
-const CELL_PUBLIC_THRESHOLD = 5;
-const TOTAL_PUBLIC_THRESHOLD = 10;
-const KEY_PREFIX = 'xinbao-site-activity:v1';
-const MAX_ACTIVE_CELLS = 256;
-const RETENTION_DAYS = 33;
-const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * RETENTION_DAYS;
+const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 400;
 const COOKIE_MINT_LIMIT_PER_HOUR = 4;
 const COOKIE_MINT_TTL_SECONDS = 60 * 60;
 
 type VisitorCookie = {
   digest: string;
+  requiresMintReservation: boolean;
   shouldSet: boolean;
   value: string;
 };
@@ -39,34 +50,6 @@ function getRedis() {
   if (!url || !token) return null;
   redisClient ??= new Redis({ url, token });
   return redisClient;
-}
-
-function utcDateKey(date: Date) {
-  return `${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, '0')}-${String(date.getUTCDate()).padStart(2, '0')}`;
-}
-
-function completedDateKeys(now = new Date()) {
-  const today = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
-  return Array.from({ length: COMPLETE_DAYS }, (_, index) => {
-    const daysAgo = COMPLETE_DAYS - index;
-    return utcDateKey(new Date(today - daysAgo * DAY_MS));
-  });
-}
-
-function expiryForDateKey(dateKey: string) {
-  return Math.floor((Date.parse(`${dateKey}T00:00:00.000Z`) + RETENTION_DAYS * DAY_MS) / 1000);
-}
-
-function allKey(dateKey: string) {
-  return `${KEY_PREFIX}:day:${dateKey}:all`;
-}
-
-function cellsIndexKey(dateKey: string) {
-  return `${KEY_PREFIX}:day:${dateKey}:cells`;
-}
-
-function cellKey(dateKey: string, cellId: string) {
-  return `${KEY_PREFIX}:day:${dateKey}:cell:${cellId}`;
 }
 
 function signVisitorId(visitorId: string, secret: string) {
@@ -85,20 +68,29 @@ function safeSignatureMatch(provided: string, expected: string) {
 function getVisitorCookie(request: NextRequest, secret: string): VisitorCookie {
   const existing = request.cookies.get(COOKIE_NAME)?.value || '';
   const cookieParts = existing.split('.');
-  const [visitorId, signature] = cookieParts;
+  const versioned = cookieParts.length === 3 && cookieParts[0] === COOKIE_VERSION;
+  const legacy = cookieParts.length === 2;
+  const visitorId = versioned ? cookieParts[1] : cookieParts[0];
+  const signature = versioned ? cookieParts[2] : cookieParts[1];
   if (
-    cookieParts.length === 2 &&
+    (versioned || legacy) &&
     /^[a-f0-9-]{36}$/i.test(visitorId || '') &&
     safeSignatureMatch(signature || '', signVisitorId(visitorId, secret))
   ) {
-    return { digest: visitorDigest(visitorId, secret), shouldSet: false, value: existing };
+    return {
+      digest: visitorDigest(visitorId, secret),
+      requiresMintReservation: false,
+      shouldSet: legacy,
+      value: legacy ? `${COOKIE_VERSION}.${visitorId}.${signature}` : existing
+    };
   }
 
   const nextVisitorId = crypto.randomUUID();
   return {
     digest: visitorDigest(nextVisitorId, secret),
+    requiresMintReservation: true,
     shouldSet: true,
-    value: `${nextVisitorId}.${signVisitorId(nextVisitorId, secret)}`
+    value: `${COOKIE_VERSION}.${nextVisitorId}.${signVisitorId(nextVisitorId, secret)}`
   };
 }
 
@@ -114,7 +106,7 @@ function cookieMintKey(requestIp: string, secret: string, now = new Date()) {
     .update(`site-activity-cookie-mint:${requestIp}`)
     .digest('hex')
     .slice(0, 40);
-  return `${KEY_PREFIX}:cookie-mint:${hour}:${digest}`;
+  return `${SITE_ACTIVITY_KEY_PREFIX}:cookie-mint:${hour}:${digest}`;
 }
 
 async function reserveCookieMint(redis: Redis, request: NextRequest, secret: string) {
@@ -172,11 +164,12 @@ function parseCellId(cellId: string) {
 
 function projectCell(cellId: string, count: number): SiteActivityCell | null {
   const coordinates = parseCellId(cellId);
-  if (!coordinates || count < CELL_PUBLIC_THRESHOLD) return null;
+  const level = publicSiteActivityLevel(count);
+  if (!coordinates || level === null) return null;
   const x = ((coordinates.longitude + 180) / 360) * SITE_ACTIVITY_MAP_WIDTH;
   const y = ((82 - coordinates.latitude) / 140) * SITE_ACTIVITY_MAP_HEIGHT;
   return {
-    level: count >= 25 ? 3 : count >= 10 ? 2 : 1,
+    level,
     x: Math.round(x),
     y: Math.round(y)
   };
@@ -186,26 +179,15 @@ function cellSelectionScore(cellId: string, secret: string) {
   return crypto.createHmac('sha256', secret).update(`site-activity-cell-selection:${cellId}`).digest('hex');
 }
 
-function publicEstimate(count: number) {
-  if (count < TOTAL_PUBLIC_THRESHOLD) return null;
-  return Math.max(TOTAL_PUBLIC_THRESHOLD, Math.round(count / 5) * 5);
-}
-
 function emptyPayload(enabled: boolean, now = new Date()): SiteActivityPayload {
-  const dateKeys = completedDateKeys(now);
   return {
     cells: [],
     enabled,
     generatedAt: now.toISOString(),
+    period: { scope: 'lifetime', since: SITE_ACTIVITY_SINCE },
     schemaVersion: SITE_ACTIVITY_SCHEMA_VERSION,
-    thresholds: { cell: CELL_PUBLIC_THRESHOLD, total: TOTAL_PUBLIC_THRESHOLD },
-    timezone: 'UTC',
-    uniqueBrowsersEstimate: null,
-    window: {
-      completeDays: COMPLETE_DAYS,
-      end: dateKeys.at(-1) || '',
-      start: dateKeys[0] || ''
-    }
+    thresholds: { cell: SITE_ACTIVITY_CELL_THRESHOLD, total: SITE_ACTIVITY_TOTAL_THRESHOLD },
+    uniqueBrowsersEstimate: null
   };
 }
 
@@ -231,6 +213,16 @@ function sameOriginRequest(request: NextRequest) {
   return !origin || origin === new URL(request.url).origin;
 }
 
+async function acceptsEmptyBody(request: NextRequest) {
+  const contentLength = Number(request.headers.get('content-length') || 0);
+  if (!Number.isFinite(contentLength) || contentLength < 0 || contentLength > 0) return false;
+  try {
+    return (await request.arrayBuffer()).byteLength === 0;
+  } catch {
+    return false;
+  }
+}
+
 function setVisitorCookie(response: NextResponse, visitor: VisitorCookie) {
   if (!visitor.shouldSet) return;
   response.cookies.set(COOKIE_NAME, visitor.value, {
@@ -248,31 +240,33 @@ function logSiteActivityIssue(message: string) {
 
 export async function POST(request: NextRequest) {
   if (!sameOriginRequest(request)) return privateResponse(403);
-  const contentLength = Number(request.headers.get('content-length') || 0);
-  if (!Number.isFinite(contentLength) || contentLength > 0) return privateResponse(400);
+  if (!(await acceptsEmptyBody(request))) return privateResponse(400);
 
-  const redis = getRedis();
   const secret = process.env.RATE_LIMIT_SALT;
+  if (secret && isSiteActivityBrowserExcluded(request.cookies.get(SITE_ACTIVITY_EXCLUSION_COOKIE_NAME)?.value, secret)) {
+    return privateResponse(204);
+  }
+  const redis = getRedis();
   if (!redis || !secret) return privateResponse(204);
 
   const visitor = getVisitorCookie(request, secret);
-  const dateKey = utcDateKey(new Date());
-  const expiresAt = expiryForDateKey(dateKey);
   const cellId = requestCell(request);
 
   try {
-    if (visitor.shouldSet && !(await reserveCookieMint(redis, request, secret))) {
+    if (visitor.requiresMintReservation && !(await reserveCookieMint(redis, request, secret))) {
       return privateResponse(204);
+    }
+    try {
+      await migrateLegacySiteActivity(redis, secret, SITE_ACTIVITY_SINCE);
+    } catch {
+      logSiteActivityIssue('legacy aggregate migration failed');
     }
 
     const transaction = redis.multi();
-    transaction.pfadd(allKey(dateKey), visitor.digest);
-    transaction.expireat(allKey(dateKey), expiresAt);
+    transaction.pfadd(siteActivityAggregationKeys.lifetimeAll(), visitor.digest);
     if (cellId) {
-      transaction.pfadd(cellKey(dateKey, cellId), visitor.digest);
-      transaction.expireat(cellKey(dateKey, cellId), expiresAt);
-      transaction.sadd(cellsIndexKey(dateKey), cellId);
-      transaction.expireat(cellsIndexKey(dateKey), expiresAt);
+      transaction.pfadd(siteActivityAggregationKeys.lifetimeCell(cellId), visitor.digest);
+      transaction.sadd(siteActivityAggregationKeys.lifetimeCellsIndex(), cellId);
     }
     await transaction.exec();
   } catch {
@@ -294,24 +288,19 @@ export async function GET(request: NextRequest) {
   const secret = process.env.RATE_LIMIT_SALT;
   if (!redis || !secret) return publicJson(empty);
 
-  const dateKeys = completedDateKeys(now);
   try {
-    const indexPipeline = redis.pipeline();
-    for (const dateKey of dateKeys) indexPipeline.smembers(cellsIndexKey(dateKey));
-    const dailyCells = await indexPipeline.exec<string[][]>();
-    const cellIds = [...new Set(dailyCells.flat().filter((cellId) => parseCellId(cellId)))]
+    const migrationState = await migrateLegacySiteActivity(redis, secret, SITE_ACTIVITY_SINCE, now);
+    if (migrationState === 'busy') return privateResponse(503);
+    const activeCells = await redis.smembers(siteActivityAggregationKeys.lifetimeCellsIndex());
+    const cellIds = [...new Set(activeCells.filter((cellId) => parseCellId(cellId)))]
       .sort((left, right) => cellSelectionScore(left, secret).localeCompare(cellSelectionScore(right, secret)))
-      .slice(0, MAX_ACTIVE_CELLS);
+      .slice(0, SITE_ACTIVITY_MAX_CELLS);
 
     const countPipeline = redis.pipeline();
-    const [firstAllKey, ...remainingAllKeys] = dateKeys.map(allKey);
-    countPipeline.pfcount(firstAllKey, ...remainingAllKeys);
-    for (const cellId of cellIds) {
-      const [firstCellKey, ...remainingCellKeys] = dateKeys.map((dateKey) => cellKey(dateKey, cellId));
-      countPipeline.pfcount(firstCellKey, ...remainingCellKeys);
-    }
+    countPipeline.pfcount(siteActivityAggregationKeys.lifetimeAll());
+    for (const cellId of cellIds) countPipeline.pfcount(siteActivityAggregationKeys.lifetimeCell(cellId));
     const counts = await countPipeline.exec<number[]>();
-    const uniqueBrowsersEstimate = publicEstimate(Number(counts[0]) || 0);
+    const uniqueBrowsersEstimate = publicSiteActivityEstimate(Number(counts[0]) || 0);
     const cells = uniqueBrowsersEstimate === null
       ? []
       : cellIds

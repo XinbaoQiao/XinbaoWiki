@@ -1,6 +1,7 @@
-export const SITE_ACTIVITY_SCHEMA_VERSION = 1 as const;
+export const SITE_ACTIVITY_SCHEMA_VERSION = 2 as const;
 export const SITE_ACTIVITY_MAP_WIDTH = 672;
 export const SITE_ACTIVITY_MAP_HEIGHT = 276;
+export const SITE_ACTIVITY_SINCE = '2026-08-09';
 
 export type SiteActivityLevel = 1 | 2 | 3;
 
@@ -19,13 +20,11 @@ export type SiteActivityPayload = {
     cell: number;
     total: number;
   };
-  timezone: 'UTC';
-  uniqueBrowsersEstimate: number | null;
-  window: {
-    completeDays: number;
-    end: string;
-    start: string;
+  period: {
+    scope: 'lifetime';
+    since: string;
   };
+  uniqueBrowsersEstimate: number | null;
 };
 
 function isSiteActivityCell(value: unknown): value is SiteActivityCell {
@@ -49,39 +48,35 @@ function isSiteActivityCell(value: unknown): value is SiteActivityCell {
 export function parseSiteActivityPayload(value: unknown): SiteActivityPayload | null {
   if (!value || typeof value !== 'object') return null;
   const payload = value as Partial<SiteActivityPayload>;
-  const window = payload.window;
+  const period = payload.period;
   const thresholds = payload.thresholds;
   const uniqueBrowsersEstimate = payload.uniqueBrowsersEstimate;
   const isoDatePattern = /^\d{4}-\d{2}-\d{2}$/;
   if (
     payload.schemaVersion !== SITE_ACTIVITY_SCHEMA_VERSION ||
     typeof payload.enabled !== 'boolean' ||
-    payload.timezone !== 'UTC' ||
     typeof payload.generatedAt !== 'string' ||
     !Number.isFinite(Date.parse(payload.generatedAt)) ||
-    !window ||
-    typeof window.start !== 'string' ||
-    !isoDatePattern.test(window.start) ||
-    typeof window.end !== 'string' ||
-    !isoDatePattern.test(window.end) ||
-    window.completeDays !== 30 ||
+    !period ||
+    period.scope !== 'lifetime' ||
+    typeof period.since !== 'string' ||
+    !isoDatePattern.test(period.since) ||
+    period.since !== SITE_ACTIVITY_SINCE ||
     !thresholds ||
-    thresholds.cell !== 5 ||
-    thresholds.total !== 10 ||
+    thresholds.cell !== 2 ||
+    thresholds.total !== 2 ||
     !Array.isArray(payload.cells) ||
-    payload.cells.length > 256 ||
+    payload.cells.length > 512 ||
     !payload.cells.every(isSiteActivityCell) ||
     !(
       uniqueBrowsersEstimate === null ||
       (
         Number.isInteger(uniqueBrowsersEstimate) &&
-        (uniqueBrowsersEstimate ?? -1) >= thresholds.total &&
-        (uniqueBrowsersEstimate ?? -1) % 5 === 0
+        (uniqueBrowsersEstimate ?? -1) >= thresholds.total
       )
     ) ||
     (uniqueBrowsersEstimate === null && payload.cells.length > 0) ||
-    (!payload.enabled && (uniqueBrowsersEstimate !== null || payload.cells.length > 0)) ||
-    window.start > window.end
+    (!payload.enabled && (uniqueBrowsersEstimate !== null || payload.cells.length > 0))
   ) {
     return null;
   }

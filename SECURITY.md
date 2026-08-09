@@ -43,11 +43,13 @@ bounty program.
 ## Site Activity Data Boundary
 
 The public homepage activity map uses a signed random first-party browser
-cookie, Redis HyperLogLog aggregates, and delayed coarse geographic cells. The
+cookie, Redis HyperLogLog aggregates, and coarse geographic cells. The
 Xinbaopedia application does not store the raw request IP or the original
 IP-derived latitude/longitude for this feature. Geography is quantized before
-storage, low-volume cells are suppressed, totals are rounded, and daily keys
-expire after the documented short retention window.
+storage, and totals and map cells remain suppressed until at least two signed
+browser identifiers have contributed. Versioned lifetime aggregate keys are
+retained until an explicit maintainer reset; they cannot enumerate or delete an
+individual browser digest.
 
 To prevent trivial inflation by repeatedly discarding the browser cookie,
 Vercel requests use the trusted forwarding IP only long enough to derive a
@@ -55,12 +57,22 @@ keyed one-hour rate-limit digest. The raw IP is not written to Redis or logs;
 the short-lived digest is pseudonymous abuse-control data and never appears in
 the public map response.
 
-The deployment platform still processes public request IPs for network routing
+The browser cookie has a 400-day maximum age. Clearing or expiring it can cause
+a returning browser to be counted again, so the public value is an estimate of
+browser identifiers rather than people. The deployment platform still
+processes public request IPs for network routing
 and may derive the geolocation headers supplied to the application under its
 own privacy policy. Reports about leaked cookie identifiers, unsuppressed map
 cells, retention failures, cross-origin recording, or manipulation of the
 public aggregate are in scope. The complete data contract is documented in
 [`docs/site-activity/README.md`](docs/site-activity/README.md).
+
+Any browser can opt itself out through `/site-activity-preferences/`. The
+server-issued marker is `HttpOnly`, `SameSite=Strict`, and checked before
+visitor-cookie minting, geographic lookup, migration, or Redis writes. It is a
+per-browser forward-looking control rather than an IP allowlist: changing
+regions does not bypass it, while another browser or cleared cookie must opt
+out separately. Existing lifetime HLL entries cannot be selectively removed.
 
 ## Security Scope
 
