@@ -1,6 +1,6 @@
 # Asset provenance register
 
-Last reviewed: 2026-07-18
+Last reviewed: 2026-08-09
 
 This register records the evidence currently available for non-code assets in
 Xinbaopedia. It is an audit surface, not a license grant. The governing reuse
@@ -63,6 +63,12 @@ The component notices and full local license texts are linked from
 
 Official names and insignia may remain restricted even when an image file is
 in the public domain.
+
+## Visitor activity map geometry
+
+| Path | Evidence | Status |
+| --- | --- | --- |
+| `public/maps/world-land-dots.svg` | Generated on 2026-08-09 by `scripts/generate-site-activity-map.mjs` from the pinned `world-atlas` 2.0.2 `countries-110m.json` source, which redistributes Natural Earth 4.1.0 geometry. The project script merges the land geometry, applies a fixed projection and samples it into a dotted silhouette without internal political borders. SHA-256: `464d4d0ee4c209779f4b47135c66254839286754dd6f6a47fe83f9cebbb41225`. | **Documented upstream terms.** `world-atlas` 2.0.2 is ISC licensed; its copyright and permission notice are retained in `LICENSES/ISC-world-atlas.txt`. Natural Earth states that its raster and vector data are public domain. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). This provenance record does not represent Chinese official-map approval or a map-review number. |
 
 ## Paper figures and posters
 

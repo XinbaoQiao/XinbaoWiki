@@ -51,16 +51,30 @@ OKF bundle does not create a broader license than its canonical source.
 `CODE_OF_CONDUCT.md` is adapted from Contributor Covenant 2.1 under CC BY
 4.0. Its upstream attribution is retained in that file.
 
+## Visitor activity map geometry: upstream terms
+
+`public/maps/world-land-dots.svg` is generated from `world-atlas` 2.0.2 and
+Natural Earth geometry. It is excluded from Xinbaopedia's blanket MIT and CC BY
+4.0 grants and remains under the upstream terms recorded in
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md): the World Atlas distribution
+is ISC licensed, while Natural Earth declares its source map data to be public
+domain. The corresponding World Atlas notice is retained in
+`LICENSES/ISC-world-atlas.txt`.
+
+These copyright terms do not establish cartographic accuracy, official-map
+status, regulatory approval, or permission to imply government endorsement.
+
 ## Files outside the project MIT and CC BY grants
 
 No license is granted by this repository for the following files, except for
-the separate upstream font licenses identified in
+the separate upstream terms identified in
 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md):
 
 - `CV.tex` and `public/files/**`;
 - `assets/cv-fonts/**`;
 - `public/images/**`;
 - `public/institutions/**`;
+- `public/maps/**`;
 - `public/papers/**`;
 - `public/topics/**`;
 - `public/site-icons/**`, `public/site-logos/**`, and

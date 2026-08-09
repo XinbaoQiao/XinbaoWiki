@@ -18,10 +18,12 @@
     "lint:content": "node scripts/wiki-maintenance.mjs --check",
     "audit:wiki": "node scripts/run-with-node22.mjs node scripts/audit-wiki-maintenance.mjs",
     "eval:wiki-chat": "node scripts/run-with-node22.mjs node scripts/evaluate-wiki-chat.mjs",
+    "generate:site-activity-map": "node scripts/run-with-node22.mjs node scripts/generate-site-activity-map.mjs",
     "maintain:wiki": "node scripts/run-with-node22.mjs node scripts/wiki-maintenance.mjs --standardize --write",
     "new:wiki": "node scripts/new-wiki-page.mjs",
     "test:release": "node scripts/run-with-node22.mjs node scripts/test-release-workflow.mjs",
     "test:cube-geometry": "node scripts/run-with-node22.mjs playwright test tests/browser/cube-geometry.spec.mjs",
+    "test:site-activity": "node scripts/run-with-node22.mjs playwright test tests/browser/site-activity.spec.mjs",
     "test:wiki": "node scripts/run-with-node22.mjs node scripts/test-wiki-data.mjs",
     "verify:publish": "node scripts/run-with-node22.mjs node scripts/verify-publish-set.mjs",
     "verify:staged": "node scripts/run-with-node22.mjs node scripts/verify-publish-set.mjs --staged-only",
@@ -35,7 +37,7 @@
     "typecheck": "node scripts/prepare-typecheck.mjs && tsc --noEmit",
     "check": "node scripts/run-with-node22.mjs npm run check:node22",
     "check:node22": "npm run typecheck && npm run lint:wiki && npm run lint:content && npm run lint:okf && npm run test:features && npm run test:wiki && npm run audit:wiki && npm run eval:wiki-chat && npm run test:release",
-    "test:features": "node scripts/test-content-manifest.mjs && node scripts/test-chat-hardening.mjs"
+    "test:features": "node scripts/test-content-manifest.mjs && node scripts/test-chat-hardening.mjs && node scripts/test-site-activity.mjs"
   },
   "dependencies": {
     "@upstash/redis": "^1.38.0",

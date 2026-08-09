@@ -2,7 +2,7 @@
 
 This inventory records material that is not covered by Xinbaopedia's project
 MIT grant or its original-content CC BY 4.0 grant. It reflects the repository
-state reviewed on 2026-07-18. These notices preserve upstream attribution; they
+state reviewed on 2026-08-09. These notices preserve upstream attribution; they
 do not transfer ownership, grant endorsement, or relicense protected material.
 A per-file evidence and status register is maintained in
 [ASSET_PROVENANCE.md](ASSET_PROVENANCE.md).
@@ -19,6 +19,17 @@ A per-file evidence and status register is maintained in
 The bundled font files remain under their upstream licenses. Reserved font
 names and upstream attribution requirements continue to apply. The CV source
 and rendered PDF are not otherwise opened by those font licenses.
+
+## Visitor activity map geometry
+
+| Component | Tracked location | Version and ownership information | Terms and upstream |
+| --- | --- | --- | --- |
+| World Atlas TopoJSON | Source transformation recorded by `scripts/generate-site-activity-map.mjs`; derived output at `public/maps/world-land-dots.svg` | Version 2.0.2; copyright 2013-2019 Michael Bostock. The package redistributes Natural Earth 4.1.0 geometry. | ISC License. See [local license](LICENSES/ISC-world-atlas.txt), [upstream repository](https://github.com/topojson/world-atlas/tree/v2.0.2), and the pinned [`countries-110m.json`](https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json) source. |
+| Natural Earth map data | Geometry underlying the same derived SVG | Natural Earth 4.1.0 vector data; primary authors include Tom Patterson and Nathaniel Vaughn Kelso. | Natural Earth declares all versions of its raster and vector map data to be public domain. See the official [terms of use](https://www.naturalearthdata.com/about/terms-of-use/). Attribution is not required, but the source is retained here for provenance. |
+
+These upstream copyright terms do not imply that the generated silhouette is a
+Chinese official standard map, has a map-review number, or is suitable for any
+particular jurisdiction without a separate map-publication assessment.
 
 ## Community policy source
 

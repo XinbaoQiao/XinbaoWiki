@@ -1947,20 +1947,17 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
 
 .wiki-portal-disclosures > details::details-content {
   block-size: 0;
-  content-visibility: hidden;
   overflow: clip;
   opacity: 0;
   transform: translateY(-4px);
   transition:
     block-size .24s cubic-bezier(.22, 1, .36, 1),
-    content-visibility .24s allow-discrete,
     opacity .16s ease,
     transform .24s cubic-bezier(.22, 1, .36, 1);
 }
 
 .wiki-portal-disclosures > details[open]::details-content {
   block-size: auto;
-  content-visibility: visible;
   opacity: 1;
   transform: translateY(0);
 }
@@ -2136,6 +2133,132 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   font-size: 12.5px;
   line-height: 1.4;
   text-wrap: balance;
+}
+
+.wiki-visitor-atlas {
+  padding: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--site-theme-accent) 14%, var(--wiki-border-light));
+}
+
+.wiki-visitor-atlas figure {
+  margin: 0;
+}
+
+.wiki-visitor-atlas-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 672 / 276;
+  overflow: hidden;
+  border: 1px solid var(--wiki-border-light);
+  border-radius: 2px;
+  background: var(--wiki-bg-alt);
+}
+
+.wiki-visitor-atlas-cluster {
+  fill: var(--site-theme-action-ink);
+  pointer-events: none;
+}
+
+.wiki-visitor-atlas-cluster.level-1 {
+  opacity: .42;
+}
+
+.wiki-visitor-atlas-cluster.level-2 {
+  opacity: .68;
+}
+
+.wiki-visitor-atlas-cluster.level-3 {
+  opacity: .92;
+}
+
+.wiki-visitor-atlas figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  margin-top: 9px;
+  color: var(--wiki-text-soft);
+  font-size: 10.5px;
+  line-height: 1.4;
+}
+
+.wiki-visitor-atlas-legend {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  color: var(--wiki-text-soft);
+}
+
+.wiki-visitor-atlas-legend b {
+  color: var(--wiki-text);
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: .055em;
+  text-transform: uppercase;
+}
+
+.wiki-visitor-atlas-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.wiki-visitor-atlas-legend i {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--wiki-border);
+}
+
+.wiki-visitor-atlas-legend i.level-1,
+.wiki-visitor-atlas-legend i.level-2,
+.wiki-visitor-atlas-legend i.level-3 {
+  background: var(--site-theme-action-ink);
+}
+
+.wiki-visitor-atlas-legend i.level-1 {
+  opacity: .42;
+}
+
+.wiki-visitor-atlas-legend i.level-2 {
+  width: 7px;
+  height: 7px;
+  opacity: .68;
+}
+
+.wiki-visitor-atlas-legend i.level-3 {
+  width: 8px;
+  height: 8px;
+  opacity: .92;
+}
+
+.wiki-visitor-atlas-status,
+.wiki-visitor-atlas-note {
+  margin: 0;
+  text-wrap: balance;
+}
+
+.wiki-visitor-atlas-status {
+  margin-top: 12px;
+  color: var(--site-theme-heading);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+.wiki-visitor-atlas-note {
+  margin-top: 3px;
+  color: var(--wiki-text-soft);
+  font-size: 10.5px;
+  line-height: 1.45;
+}
+
+.wiki-visitor-atlas[data-status="loading"] .wiki-visitor-atlas-map {
+  opacity: .76;
 }
 
 .wiki-portal-block ul {
@@ -3400,6 +3523,11 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
 
   .wiki-portal-news-list {
     grid-template-columns: 1fr;
+  }
+
+  .wiki-visitor-atlas figcaption {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 

@@ -146,7 +146,7 @@ docs/                    standards, deployment and chat operations
 ## Trust is a product feature
 
 - **Evidence boundary:** grounded answers require validated citations; conversational replies cannot invent numbered Wiki sources.
-- **Privacy boundary:** Xinbaopedia-owned Redis and logs do not store raw questions, chat history, raw IP addresses, system prompts, private voice configuration, or API keys. The current message is still sent to the configured provider under its policies.
+- **Privacy boundary:** Xinbaopedia-owned Redis and logs do not store raw questions, chat history, raw IP addresses, original visitor coordinates, system prompts, private voice configuration, or API keys. The homepage activity map keeps only signed-browser HLL aggregates and quantized, thresholded map cells; the hosting platform still processes request IPs under its policies. The current chat message is still sent to the configured provider under its policies. See the [site-activity data contract](docs/site-activity/README.md).
 - **Knowledge boundary:** hidden pages never enter public routes, OKF, or LLM retrieval.
 - **Release boundary:** every production promotion must pass content, retrieval, grounded-answer, page-context, conversation, and sensitive-request canaries on an immutable preview.
 
@@ -309,7 +309,7 @@ docs/                    标准、部署和 AI 运维文档
 ## 可信本身就是产品能力
 
 - **证据边界：** grounded 回答必须通过引用验证；普通对话不能虚构带编号的 Wiki 来源。
-- **隐私边界：** Xinbaopedia 自有 Redis 与日志不保存原始问题、聊天历史、原始 IP、系统提示、私有语气配置或 API key。当前消息仍会发送给配置的模型服务。
+- **隐私边界：** Xinbaopedia 自有 Redis 与日志不保存原始问题、聊天历史、原始 IP、原始访客坐标、系统提示、私有语气配置或 API key。主页访问地图只保留签名浏览器的 HLL 聚合，以及经过量化和阈值保护的地图单元；托管平台仍会按其政策处理请求 IP。当前聊天消息仍会发送给配置的模型服务。详见[访问地图数据契约](docs/site-activity/README.md)。
 - **知识边界：** 隐藏页不会进入公开路由、OKF 或 LLM 检索。
 - **发布边界：** 每次 production promotion 前必须在 immutable preview 上通过完整 canary。
 

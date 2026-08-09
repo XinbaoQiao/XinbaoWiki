@@ -2,6 +2,7 @@
 
 import type { CSSProperties, PointerEvent as ReactPointerEvent, TransitionEvent as ReactTransitionEvent } from 'react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { VisitorAtlasDisclosure } from '@/components/VisitorAtlasDisclosure';
 import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
 import { siteUpdates } from '@/lib/site-updates';
 
@@ -141,19 +142,22 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
   const [touchCubeDragDegrees, setTouchCubeDragDegrees] = useState(0);
   const [browseOpen, setBrowseOpen] = useState(false);
   const [newsOpen, setNewsOpen] = useState(false);
+  const [activityOpen, setActivityOpen] = useState(false);
   const cubeHoverIntentRef = useRef<number | null>(null);
   const cubeStageRef = useRef<HTMLDivElement>(null);
   const touchCubeGestureRef = useRef<TouchCubeGesture | null>(null);
   const updatesWindowRef = useRef<HTMLDivElement>(null);
-  const collapsibleSections = { browse: browseOpen, news: newsOpen };
+  const collapsibleSections = { activity: activityOpen, browse: browseOpen, news: newsOpen };
   const allSectionsClosed = Object.values(collapsibleSections).every((open) => !open);
   const expandAllSections = () => {
     setBrowseOpen(true);
     setNewsOpen(true);
+    setActivityOpen(true);
   };
   const collapseAllSections = () => {
     setBrowseOpen(false);
     setNewsOpen(false);
+    setActivityOpen(false);
   };
   const toggleAllSections = () => {
     if (allSectionsClosed) {
@@ -440,7 +444,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
               </h1>
               <button
                 type="button"
-                aria-controls="portal-news portal-directory"
+                aria-controls="portal-news portal-activity portal-directory"
                 aria-expanded={!allSectionsClosed}
                 aria-label={allSectionsClosed ? sectionToggleLabels[language].expand : sectionToggleLabels[language].collapse}
                 className="wiki-portal-name-button"
@@ -514,6 +518,12 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
             </ol>
           </div>
         </details>
+
+        <VisitorAtlasDisclosure
+          language={language}
+          onOpenChange={setActivityOpen}
+          open={activityOpen}
+        />
 
         <details
           className="wiki-portal-directory"

@@ -40,6 +40,28 @@ scope, and coordinate remediation and disclosure. Response time may vary with
 impact and reproducibility. This project does not currently operate a bug
 bounty program.
 
+## Site Activity Data Boundary
+
+The public homepage activity map uses a signed random first-party browser
+cookie, Redis HyperLogLog aggregates, and delayed coarse geographic cells. The
+Xinbaopedia application does not store the raw request IP or the original
+IP-derived latitude/longitude for this feature. Geography is quantized before
+storage, low-volume cells are suppressed, totals are rounded, and daily keys
+expire after the documented short retention window.
+
+To prevent trivial inflation by repeatedly discarding the browser cookie,
+Vercel requests use the trusted forwarding IP only long enough to derive a
+keyed one-hour rate-limit digest. The raw IP is not written to Redis or logs;
+the short-lived digest is pseudonymous abuse-control data and never appears in
+the public map response.
+
+The deployment platform still processes public request IPs for network routing
+and may derive the geolocation headers supplied to the application under its
+own privacy policy. Reports about leaked cookie identifiers, unsuppressed map
+cells, retention failures, cross-origin recording, or manipulation of the
+public aggregate are in scope. The complete data contract is documented in
+[`docs/site-activity/README.md`](docs/site-activity/README.md).
+
 ## Security Scope
 
 Examples of in-scope reports include:
