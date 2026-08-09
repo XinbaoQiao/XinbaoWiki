@@ -9,10 +9,10 @@ tags:
   - under-review
   - private
 timestamp: '2026-05-06T06:22:22+08:00'
-modified: '2026-07-16T20:08:42+08:00'
-content_hash: 'sha256:b7b6cbf2738b1bfd58359d9f58e313ce81a60547a97343241012008dd743da1f'
-reviewed_at: '2026-07-16T20:08:42+08:00'
-review_due: '2026-08-15'
+modified: '2026-08-09T18:32:45.771Z'
+content_hash: 'sha256:15bf945ff1ae853db6b004210c7c4a64fb7e37c7c8ccb8ba5b4ad1bb91e2c4db'
+reviewed_at: '2026-08-10T02:34:00+08:00'
+review_due: '2026-09-08'
 name: Learn What Matters：高效去中心化学习的数据剪枝
 language: zh
 summary: 关于高效去中心化学习中数据剪枝的在审手稿。
@@ -29,11 +29,11 @@ status: under review
 publication_type: Journal manuscript
 translation_of: Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning
 ---
-**Learn What Matters：高效去中心化学习的数据剪枝** 是 **乔鑫宝** 及合作者的活跃手稿，列于乔鑫宝的 CV。
+本隐藏记录仅保留 **乔鑫宝** 及合作者手稿的书目信息。该页面不属于公开 wiki 索引，也不对当前公开版本或审稿结果作出判断。
 
 ## 状态
 
-当前公开 wiki 页面只记录 CV 中可见的书目信息。到 2026年5月5日 更新时，本地项目材料中没有可公开的论文包、poster、摘要或预印本。
+该记录仅限于 2026 年 8 月 10 日审阅的内部快照中保留的书目信息。本地项目材料中未发现可公开的论文包、poster、摘要或预印本。
 
 ## 定位
 

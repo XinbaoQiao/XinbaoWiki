@@ -11,24 +11,25 @@ tags:
   - research-concept
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:2734a90abbd3686a946f0cea17b703481d18fe896f02981c9e0c7cdae4334395'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-08-09T18:32:45.787Z'
+content_hash: 'sha256:ba2fdb06ebad4c9b4ef0a71c4f71f77f0be438a2c6dac3237f1f392771cd61c6'
+reviewed_at: '2026-08-10T02:34:00+08:00'
+review_due: '2027-02-05'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-07-02T20:03:20+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-08-10T02:34:00+08:00'
+  reviewDue: '2027-02-05'
   pendingReview: false
   overdue: false
 retrieval:
   document_id: 'wiki:Recursive_Synthetic_Data_Training'
   chunking: markdown-heading-v1
-source_ids: []
+source_ids:
+  - src-3e9d5d7dceceebc1
 source_path: wiki/Recursive_Synthetic_Data_Training.md
 ---
 **Recursive Synthetic Data Training** is a training process in which generated data from one model generation become part of the training set for a later generation. The process can be intentional, as in self-training or synthetic-data bootstrapping, or incidental, as generated content enters future training corpora.[^recursive]
@@ -48,4 +49,4 @@ This page explains the process behind [model collapse](./Model_Collapse.md). It 
 - [Sample Selection Bias](./Sample_Selection_Bias.md)
 - [Data Silos](./Data_Silos.md)
 
-[^recursive]: The 2024 Nature paper "AI models collapse when trained on recursively generated data" helped popularize this recursive framing for generative models and synthetic corpora.
+[^recursive]: Shumailov et al., ["AI models collapse when trained on recursively generated data"](https://www.nature.com/articles/s41586-024-07566-y), *Nature* 631 (2024), study this recursive framing and show that indiscriminate reuse can progressively erase information from the original distribution; their experiments also show less degradation when some original data are retained.

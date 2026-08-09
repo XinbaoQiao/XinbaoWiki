@@ -8,10 +8,10 @@ tags:
   - profile
   - cv-summary
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-07-13T21:35:14+08:00'
-content_hash: 'sha256:b5007348122639a3571ac4d3c9cf928b75dba7755a15f7e14497a9c046590503'
-reviewed_at: '2026-07-13T21:35:14+08:00'
-review_due: '2026-10-11'
+modified: '2026-08-09T18:32:45.749Z'
+content_hash: 'sha256:0a1e554c1c1bf043340bfced843e9417a8a2e79044646cc7dce36fb09c8c4386'
+reviewed_at: '2026-08-10T02:34:00+08:00'
+review_due: '2026-11-07'
 name: Curriculum Vitae
 summary: Academic CV summary for Xinbao Qiao.
 occupation: CV summary
@@ -29,7 +29,7 @@ This page summarizes Xinbao Qiao's academic CV for wiki readers. A downloadable 
 
 ## Education
 
-- **The Chinese University of Hong Kong**, PhD student in Information Engineering, 2026-present. Advised by [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/).
+- **The Chinese University of Hong Kong**, PhD student in Information Engineering, 2026-08-01-present. Advised by [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/).
 - **Zhejiang University**, M.Eng. in Artificial Intelligence, 2022-09 to 2025-12.
 - **Shandong University**, B.Eng. in Communication Engineering, 2018-09 to 2022-07.
 
@@ -39,7 +39,7 @@ This page summarizes Xinbao Qiao's academic CV for wiki readers. A downloadable 
 
 ## Research experience
 
-- **Doctoral Research at The Chinese University of Hong Kong**, 2026-present, advised by [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/). Investigates data lifecycle management in distributed AI systems, connecting data generation, use, and deletion with federated representation geometry.
+- **Doctoral Research at The Chinese University of Hong Kong**, 2026-08-01-present, advised by [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/). Investigates data lifecycle management in distributed AI systems, connecting data generation, use, and deletion with federated representation geometry.
   - Paper #5: proposed an optimal-transport view of federated learning and a barycentric multi-prototype classifier for communication-constrained representation geometry.
 - **Research on Data-Centric ML Systems**, 03/2023 to 12/2025, advised by Prof. [Meng Zhang](https://person.zju.edu.cn/mengzhang) at [[Zhejiang_University]]. Built unlearning methods for data deletion across continuous influence weights, certified online updates, and dynamic tree ensembles.
   - Paper #2: introduced soft-weighted unlearning for continuous influence weights, supporting fairness and robustness interventions beyond binary erasure.
@@ -67,7 +67,7 @@ Asterisks (*) denote co-first authorship; daggers (†) denote corresponding aut
   Forty-Third International Conference on Machine Learning, ICML, 2026. Links: [OpenReview](https://openreview.net/forum?id=FFXvnzM254), [arXiv](https://arxiv.org/abs/2606.13732), [GitHub](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse).
 - **Paper #2: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**.\
   **Xinbao Qiao**, Ningning Ding, Yushi Cheng, Meng Zhang†.\
-  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026. Links: [arXiv](https://arxiv.org/abs/2505.18783), [AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681), [GitHub](https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning).
+  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026. Links: [arXiv](https://arxiv.org/abs/2505.18783), [AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681).
 - **Paper #3: Hessian-Free Online Certified Unlearning**.\
   **Xinbao Qiao**, Meng Zhang†, Ming Tang, Ermin Wei.\
   Thirteenth International Conference on Learning Representations, ICLR, 2025. Links: [OpenReview](https://openreview.net/forum?id=C3TrHWanh5), [arXiv](https://arxiv.org/abs/2404.01712), [GitHub](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning).

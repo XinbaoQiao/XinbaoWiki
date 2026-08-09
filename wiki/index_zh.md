@@ -8,10 +8,10 @@ tags:
   - navigation
   - wiki-索引
 timestamp: '2026-05-07T17:34:07+08:00'
-modified: '2026-07-14T23:17:11+08:00'
-content_hash: 'sha256:22e13d97b06e95ca53f4e6344ddcbf6cfd2252744cbd5957c5517a732b8ead1a'
-reviewed_at: '2026-07-14T23:17:11+08:00'
-review_due: '2027-07-14'
+modified: '2026-08-09T18:32:45.766Z'
+content_hash: 'sha256:f0993dd3507ea1df7bc170526845fe30ee4236ac4a7129fcebffa62fd2301375'
+reviewed_at: '2026-08-10T02:34:00+08:00'
+review_due: '2027-08-09'
 name: 索引
 language: zh
 summary: Xinbaopedia 公开页面导航索引。
@@ -76,6 +76,11 @@ translation_of: index
 - [[Influence_Functions|影响函数]]
 - [[Fairness_and_Robustness|公平性与鲁棒性]]
 - [[Random_Forest|随机森林]]
+
+## 大语言模型与可解释性
+
+- [[LLM_Reliability|大语言模型可靠性]]
+- [[Interpretability|可解释性]]
 
 ## 机构
 

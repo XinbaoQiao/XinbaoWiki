@@ -8,10 +8,10 @@ tags:
   - profile
   - 教育时间线
 timestamp: '2026-05-06T23:05:52+08:00'
-modified: '2026-07-13T20:54:38+08:00'
-content_hash: 'sha256:bdf1f3b0cacbec32e2f7caea98ff23b4ca9d2d94e2f2c1263d9caab69c6c3184'
-reviewed_at: '2026-07-13T20:54:38+08:00'
-review_due: '2027-01-09'
+modified: '2026-08-09T18:32:45.759Z'
+content_hash: 'sha256:2c6a9ddd5c60275f5b8bf4b67e9079a5796f71dfb3ad7f93c413958f874d13ab'
+reviewed_at: '2026-08-10T02:34:00+08:00'
+review_due: '2027-02-05'
 name: 教育经历
 language: zh
 summary: 乔鑫宝的教育时间线。
@@ -20,7 +20,7 @@ translation_of: Education
 ---
 ## 时间线
 
-- **2026年至今**：[[The_Chinese_University_of_Hong_Kong|香港中文大学]] 信息工程博士生，导师 [[Angela_Yingjun_Zhang|张颖珺]]。
+- **2026年8月1日至今**：[[The_Chinese_University_of_Hong_Kong|香港中文大学]] 信息工程博士生，导师 [[Angela_Yingjun_Zhang|张颖珺]]。
 - **2022-2025**：[[Zhejiang_University|浙江大学]] 人工智能工学硕士，导师 [[Meng_Zhang|张萌]]。专业 GPA：90/100；排名 3/25。
 - **2018-2022**：[[Shandong_University|山东大学]] 通信工程工学学士。专业 GPA：82.47/100；2018-2019 年三等奖学金。
 

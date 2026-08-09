@@ -8,10 +8,10 @@ tags:
   - profile
   - cv-摘要
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-07-13T21:35:14+08:00'
-content_hash: 'sha256:28057554411f3276ab5c97ff0c4e3a9228ccbb041256e551471439ea54cff470'
-reviewed_at: '2026-07-13T21:35:14+08:00'
-review_due: '2026-10-11'
+modified: '2026-08-09T18:32:45.747Z'
+content_hash: 'sha256:0c7772f84c5ccec8d04862a487dac3cbf216c398cbaf59e24919b2bbe1fd9d8c'
+reviewed_at: '2026-08-10T02:34:00+08:00'
+review_due: '2026-11-07'
 name: 简历
 language: zh
 summary: 乔鑫宝的学术简历摘要。
@@ -31,7 +31,7 @@ translation_of: CV
 
 ## 教育经历
 
-- **香港中文大学**，信息工程博士生，2026 年至今。导师为 [张颖珺](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/)。
+- **香港中文大学**，信息工程博士生，2026 年 8 月 1 日至今。导师为 [张颖珺](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/)。
 - **浙江大学**，人工智能工学硕士，2022-09 至 2025-12。
 - **山东大学**，通信工程工学学士，2018-09 至 2022-07。
 
@@ -41,7 +41,7 @@ translation_of: CV
 
 ## 研究经历
 
-- **香港中文大学博士阶段研究**，2026 年至今，导师 [张颖珺](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/)。研究分布式 AI 系统中的数据生命周期管理，将数据生成、使用和删除问题与联邦表示几何联系起来。
+- **香港中文大学博士阶段研究**，2026 年 8 月 1 日至今，导师 [张颖珺](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/)。研究分布式 AI 系统中的数据生命周期管理，将数据生成、使用和删除问题与联邦表示几何联系起来。
   - Paper #5：提出联邦学习的最优传输视角，并构建面向通信受限表示几何的 barycentric multi-prototype classifier。
 - **数据中心机器学习系统研究**，2023-03 至 2025-12，导师 [张萌](https://person.zju.edu.cn/mengzhang) 教授，机构 [[Zhejiang_University|浙江大学]]。构建面向数据删除的机器遗忘方法，覆盖连续影响权重、在线认证更新和动态树集成模型。
   - Paper #2：提出面向连续影响权重的 soft-weighted unlearning，支持超越二元删除的公平性和鲁棒性干预。
@@ -69,7 +69,7 @@ translation_of: CV
   Forty-Third International Conference on Machine Learning, ICML, 2026。链接：[OpenReview](https://openreview.net/forum?id=FFXvnzM254)、[arXiv](https://arxiv.org/abs/2606.13732)、[GitHub](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse)。
 - **Paper #2: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**。\
   **乔鑫宝**、Ningning Ding、Yushi Cheng、张萌†。\
-  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026。链接：[arXiv](https://arxiv.org/abs/2505.18783)、[AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681)、[GitHub](https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning)。
+  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026。链接：[arXiv](https://arxiv.org/abs/2505.18783)、[AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681)。
 - **Paper #3: Hessian-Free Online Certified Unlearning**。\
   **乔鑫宝**、张萌†、Ming Tang、Ermin Wei。\
   Thirteenth International Conference on Learning Representations, ICLR, 2025。链接：[OpenReview](https://openreview.net/forum?id=C3TrHWanh5)、[arXiv](https://arxiv.org/abs/2404.01712)、[GitHub](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning)。

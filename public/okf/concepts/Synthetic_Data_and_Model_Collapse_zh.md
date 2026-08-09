@@ -9,10 +9,10 @@ tags:
   - 研究专题
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-07-03T00:03:48+08:00'
-content_hash: 'sha256:745941be243f09bc0462a6ce71bab7a0abce40149496f78bc21002cf2207e5c8'
-reviewed_at: '2026-07-03T00:03:48+08:00'
-review_due: '2026-12-29'
+modified: '2026-08-09T18:35:47.584Z'
+content_hash: 'sha256:5a069eaa1588657e8fbff7ef13242a297852f722338a5a6acb3b5a0b2843788b'
+reviewed_at: '2026-08-10T02:36:00+08:00'
+review_due: '2027-02-05'
 language: zh
 aliases:
   - Synthetic Data and Model Collapse
@@ -25,21 +25,22 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-03T00:03:48+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-08-10T02:36:00+08:00'
+  reviewDue: '2027-02-05'
   pendingReview: false
   overdue: false
 retrieval:
   document_id: 'wiki:Synthetic_Data_and_Model_Collapse_zh'
   chunking: markdown-heading-v1
-source_ids: []
+source_ids:
+  - src-3e9d5d7dceceebc1
 source_path: wiki/Synthetic_Data_and_Model_Collapse_zh.md
 ---
-**合成数据** 是本 wiki 对乔鑫宝关于生成数据、递归训练和模型坍缩研究的简短专题名。完整研究簇还包括 [递归合成数据训练](./Recursive_Synthetic_Data_Training_zh.md)、[数据选择](./Data_Selection_zh.md)、[样本选择偏差](./Sample_Selection_Bias_zh.md)、[模型坍缩](./Model_Collapse_zh.md)、[数据孤岛](./Data_Silos_zh.md) 和 [Wasserstein 几何](./Wasserstein_Geometry_zh.md)。[^collapse]
+**合成数据** 是本 wiki 对乔鑫宝关于生成数据、递归训练和模型坍缩研究的简短专题名。完整研究簇还包括 [递归合成数据训练](./Recursive_Synthetic_Data_Training_zh.md)、[数据选择](./Data_Selection_zh.md)、[样本选择偏差](./Sample_Selection_Bias_zh.md)、[模型坍缩](./Model_Collapse_zh.md)、[数据孤岛](./Data_Silos_zh.md) 和 [Wasserstein 几何](./Wasserstein_Geometry_zh.md)。
 
 ## 引言
 
-该专题把合成数据同时视为资源和风险。生成样本可以降低真实数据访问成本、支持隐私友好的工作流，但若被选择后反复用于后续训练，也可能使训练分布逐代变窄。本页记录的核心张力正是低资源验证、偏置本地选择与协作评估之间的关系。
+该专题把合成数据同时视为资源和风险。生成样本可以降低真实数据访问成本、支持隐私友好的工作流，但若被选择后反复用于后续训练，也可能使训练分布逐代变窄。模型坍缩证据针对的是无差别递归复用，而不是所有合成数据用途；所引研究中，保留原始数据可以减轻退化。[^collapse] 本页记录的核心张力正是低资源验证、偏置本地选择与协作评估之间的关系。
 
 ## 在本 wiki 中的作用
 
@@ -63,4 +64,4 @@ source_path: wiki/Synthetic_Data_and_Model_Collapse_zh.md
 - [数据孤岛](./Data_Silos_zh.md)
 - [协作评估](./Collaborative_Evaluation_zh.md)
 
-[^collapse]: Shumailov 等人的 “AI models collapse when trained on recursively generated data”（Nature 2024）是递归模型坍缩问题的常见参考。
+[^collapse]: Shumailov 等人的 [“AI models collapse when trained on recursively generated data”](https://www.nature.com/articles/s41586-024-07566-y)（*Nature* 631，755-759，2024）是递归模型坍缩问题的一手参考，并报告了保留部分原始数据时退化减轻的结果。

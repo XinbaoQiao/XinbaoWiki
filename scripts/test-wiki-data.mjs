@@ -504,10 +504,14 @@ const canonicalSourceUrls = new Set(sourceRegistry.sources.map((source) => sourc
 for (const expectedUrl of [
   'https://arxiv.org/abs/2505.18783',
   'https://ojs.aaai.org/index.php/AAAI/article/view/39681',
-  'https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning'
+  'https://aclanthology.org/2022.acl-long.229/',
+  'https://www.nature.com/articles/s41586-026-10549-w',
+  'https://proceedings.mlr.press/v267/choi25b.html',
+  'https://www.nature.com/articles/s41586-024-07566-y'
 ]) {
   assert.ok(canonicalSourceUrls.has(expectedUrl), `source registry extracts ${expectedUrl} as an independent URL`);
 }
+assert.ok(!canonicalSourceUrls.has('https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning'), 'source registry excludes the confirmed 404 Soft-Weighted code URL');
 assert.ok([...canonicalSourceUrls].every((url) => !url.includes('](') && !/\)%[A-Fa-f0-9]{2}/.test(url)), 'source registry never merges adjacent Markdown or Chinese prose into a URL');
 assert.ok(okfSources.sources.every((source) => source.pages.every((slug) => pageIndex.pages.some((page) => page.slug === slug))), 'public sources only associate with public pages');
 assert.ok(pageIndex.pages.every((page) => page.sourceIds.every((sourceId) => publicOkfSourceIds.has(sourceId))), 'page source IDs resolve in the public registry');
@@ -550,7 +554,7 @@ for (const edge of okfGraph.edges) {
 assert.equal(okfSchema.okfVersion, '0.1', 'public OKF schema mirrors the maintenance schema');
 assert.equal(okfSchema.schemaVersion, 5, 'public OKF schema mirrors the source contract version');
 assert.equal(wikiChatGolden.topK, 6, 'retrieval golden set uses the production default top-6 depth');
-assert.equal(wikiChatGolden.cases.length, 64, 'retrieval golden set covers 64 bilingual, natural-language, contextual, conversational-routing, and adversarial cases');
+assert.equal(wikiChatGolden.cases.length, 68, 'retrieval golden set covers 68 bilingual, natural-language, contextual, conversational-routing, and adversarial cases');
 for (const metric of ['retrievalRecallAtK', 'fullCaseRecallAtK', 'evidencePatternRecall', 'citationValidity', 'answerabilityAccuracy', 'abstentionAccuracy', 'indexCoverage', 'publicIndexPurity', 'languagePurity']) {
   assert.ok(Number.isFinite(wikiChatGolden.thresholds[metric]), `retrieval golden set enforces ${metric}`);
 }
@@ -1100,9 +1104,9 @@ const contextlessRetrieval = retrieveWikiContext('What does this work do?', { la
 assert.equal(contextlessRetrieval.shouldAbstain, true, 'current-page reference without a page context routes to conversation');
 assert.deepEqual(contextlessRetrieval.sources, [], 'contextless page reference does not retrieve unrelated wiki pages');
 const englishRecent = retrieveWikiContext('Whatever Xinbao is cooking up lately?', { language: 'en', limit: 8 });
-assert.ok(englishRecent.sources.some((source) => source.chunkId === 'log#2026-07-18'), 'English recent-work intent selects the newest matching log section');
+assert.ok(englishRecent.sources.some((source) => source.chunkId === 'log#2026-08-10'), 'English recent-work intent selects the newest matching log section');
 const chineseRecent = retrieveWikiContext('看看鑫宝最近又在折腾什么？', { language: 'zh', limit: 8 });
-assert.ok(chineseRecent.sources.some((source) => source.chunkId === 'log_zh#2026-07-18'), 'Chinese recent-work intent selects the newest matching log section');
+assert.ok(chineseRecent.sources.some((source) => source.chunkId === 'log_zh#2026-08-10'), 'Chinese recent-work intent selects the newest matching log section');
 const evaluatorCase = { id: 'integrity-fixture', language: 'en', category: 'citation', query: 'fixture', expectedSlugs: [] };
 assert.deepEqual(evaluateCase(evaluatorCase, cleanRetrieval, publicPages, chunkById).sourceIssues, [], 'production retrieval metadata matches indexed truth');
 const forgedHashRetrieval = structuredClone(cleanRetrieval);
@@ -2396,8 +2400,9 @@ for (const page of [
   const body = read(page);
   assert.match(body, /^## Role in this wiki$/m, `${page} explains its role in the wiki`);
   assert.match(body, /^## Connection to Qiao's work$/m, `${page} connects the topic to Qiao's work`);
-  assert.ok(footnoteRefs(body).length <= 1, `${page} avoids over-footnoting background`);
-  assert.ok(footnoteDefs(body).length <= 1, `${page} keeps at most one source note`);
+  const maxSourceNotes = page === 'LLM_Reliability.md' ? 2 : 1;
+  assert.ok(footnoteRefs(body).length <= maxSourceNotes, `${page} avoids over-footnoting background`);
+  assert.ok(footnoteDefs(body).length <= maxSourceNotes, `${page} keeps source notes sparse`);
   assert.ok(body.split(/\s+/).length >= 120, `${page} is no longer a one-paragraph placeholder`);
 }
 
@@ -2408,7 +2413,6 @@ for (const page of [
   'Data_Silos.md',
   'Fairness_and_Robustness.md',
   'Interpretability.md',
-  'LLM_Reliability.md',
   'Sample_Selection_Bias.md',
   'Synthetic_Data.md',
   'Trustworthy_AI.md'
@@ -2417,6 +2421,12 @@ for (const page of [
   assert.equal(footnoteRefs(body).length, 0, `${page} keeps generic topic prose unfootnoted`);
   assert.equal(footnoteDefs(body).length, 0, `${page} removes explanatory-only footnotes`);
 }
+
+assert.match(read('LLM_Reliability.md'), /accuracy-only evaluation can reward guessing over abstaining[\s\S]*s41586-026-10549-w[\s\S]*choi25b/, 'English LLM reliability page connects evaluation incentives and benchmark leakage to primary sources');
+assert.match(read('LLM_Reliability_zh.md'), /只按准确率评价会在证据不足时奖励猜测[\s\S]*s41586-026-10549-w[\s\S]*choi25b/, 'Chinese LLM reliability page mirrors the sourced reliability update');
+assert.match(read('Model_Collapse.md'), /s41586-024-07566-y/, 'English model-collapse concept cites the primary Nature study');
+assert.match(read('Model_Collapse_zh.md'), /s41586-024-07566-y/, 'Chinese model-collapse concept cites the primary Nature study');
+assert.match(read('index_zh.md'), /## 大语言模型与可解释性[\s\S]*\[\[LLM_Reliability\|大语言模型可靠性\]\][\s\S]*\[\[Interpretability\|可解释性\]\]/, 'Chinese index mirrors the English LLM and interpretability navigation cluster');
 
 function assertSectionOrder(page, sections) {
   const body = read(page);
@@ -2541,7 +2551,7 @@ assert.match(cvTex, /When[\s\S]*Sample Selection Bias[\s\S]*Model Collapse[\s\S]
 assert.doesNotMatch(cvTex, /withheld\s+LLM\s+manuscript/i, 'CV omits withheld manuscript notes');
 assert.match(cvTex, /arxiv\.org\/abs\/2606\.13732/, 'CV PDF source links Paper #1 arXiv page');
 assert.match(cvTex, /ojs\.aaai\.org\/index\.php\/AAAI\/article\/view\/39681/, 'CV PDF source links Paper #2 AAAI article page');
-assert.match(cvTex, /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'CV PDF source links Paper #2 code');
+assert.doesNotMatch(cvTex, /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'CV PDF source excludes the confirmed 404 Paper #2 code URL');
 assert.match(cvTex, /\\newcommand\{\\corrauthor\}\{\\textsuperscript\{\\textdagger\}\}/, 'CV defines one consistent corresponding-author dagger macro');
 assert.match(cvTex, /Asterisks \(\*\) denote co-first authorship; daggers \(\\textdagger\) denote corresponding authors\./, 'CV note defines co-first and corresponding-author symbols');
 assert.doesNotMatch(cvTex, /Accepted papers are listed before under-review manuscripts\./, 'CV removes the accepted-paper ordering sentence');
@@ -2574,16 +2584,18 @@ assert.match(read('CV_zh.md'), /\*\*学术审稿，2026 年\*\*：担任 ICML、
 assert.doesNotMatch(read('CV_zh.md'), /Research on Data-Centric ML Systems|Research on Trustworthy LLM systems|Research code releases|Peer-reviewing/, 'Chinese CV avoids English section labels inside the Chinese summary');
 assert.doesNotMatch(read('CV.md'), /\[XinbaoQiao_CV\.pdf\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English CV page avoids exposing the PDF filename as link text');
 assert.doesNotMatch(read('CV_zh.md'), /\[XinbaoQiao_CV\.pdf\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese CV page avoids exposing the PDF filename as link text');
-assert.match(read('CV.md'), /Soft-Weighted-Machine-Unlearning/, 'English CV page links Paper #2 code');
-assert.match(read('CV_zh.md'), /Soft-Weighted-Machine-Unlearning/, 'Chinese CV page links Paper #2 code');
+assert.doesNotMatch(read('CV.md'), /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'English CV page excludes the confirmed 404 Paper #2 code URL');
+assert.doesNotMatch(read('CV_zh.md'), /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'Chinese CV page excludes the confirmed 404 Paper #2 code URL');
 assert.match(read('CV.md'), /2606\.13732[\s\S]*39681/, 'English CV page links Paper #1 arXiv and Paper #2 AAAI article');
 assert.match(read('CV_zh.md'), /2606\.13732[\s\S]*39681/, 'Chinese CV page links Paper #1 arXiv and Paper #2 AAAI article');
 assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /label: arXiv[\s\S]*2606\.13732/, 'Paper #1 English page metadata links arXiv');
 assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md'), /label: arXiv[\s\S]*2606\.13732/, 'Paper #1 Chinese page metadata links arXiv');
-assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /label: AAAI article[\s\S]*39681[\s\S]*label: Code[\s\S]*Soft-Weighted-Machine-Unlearning/, 'Paper #2 English page metadata links AAAI article and code');
-assert.match(read('Soft_Weighted_Machine_Unlearning_zh.md'), /label: AAAI article[\s\S]*39681[\s\S]*label: Code[\s\S]*Soft-Weighted-Machine-Unlearning/, 'Paper #2 Chinese page metadata links AAAI article and code');
-assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8'), /Soft-Weighted-Machine-Unlearning/, 'English OKF CV concept links Paper #2 code');
-assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV_zh.md'), 'utf8'), /Soft-Weighted-Machine-Unlearning/, 'Chinese OKF CV concept links Paper #2 code');
+assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /label: AAAI article[\s\S]*39681/, 'Paper #2 English page metadata keeps the official AAAI article');
+assert.match(read('Soft_Weighted_Machine_Unlearning_zh.md'), /label: AAAI article[\s\S]*39681/, 'Paper #2 Chinese page metadata keeps the official AAAI article');
+assert.doesNotMatch(read('Soft_Weighted_Machine_Unlearning.md'), /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'Paper #2 English metadata excludes the confirmed 404 code URL');
+assert.doesNotMatch(read('Soft_Weighted_Machine_Unlearning_zh.md'), /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'Paper #2 Chinese metadata excludes the confirmed 404 code URL');
+assert.doesNotMatch(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8'), /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'English OKF CV concept excludes the confirmed 404 code URL');
+assert.doesNotMatch(fs.readFileSync(path.join(root, 'public/okf/concepts/CV_zh.md'), 'utf8'), /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'Chinese OKF CV concept excludes the confirmed 404 code URL');
 assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8'), /2606\.13732[\s\S]*39681/, 'English OKF CV concept links Paper #1 arXiv and Paper #2 AAAI article');
 assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV_zh.md'), 'utf8'), /2606\.13732[\s\S]*39681/, 'Chinese OKF CV concept links Paper #1 arXiv and Paper #2 AAAI article');
 assert.doesNotMatch(read('CV.md'), /citations\?user=nhC_OfEAAAAJ/, 'English CV page avoids exposing the Google Scholar author ID');

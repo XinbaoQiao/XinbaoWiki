@@ -11,10 +11,10 @@ tags:
   - research-topic
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-07-03T00:03:48+08:00'
-content_hash: 'sha256:e71393c9d3848004a058ac5c4889a5de233c1a26b86793c00ee99193924a49dc'
-reviewed_at: '2026-07-03T00:03:48+08:00'
-review_due: '2026-12-29'
+modified: '2026-08-09T18:35:47.585Z'
+content_hash: 'sha256:8e10aaffd38b6de7d730ab148309b29754b1ece074005d16edbeb942f5c93887'
+reviewed_at: '2026-08-10T02:36:00+08:00'
+review_due: '2027-02-05'
 language: en
 aliases:
   - Synthetic Data and Model Collapse
@@ -27,21 +27,22 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-03T00:03:48+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-08-10T02:36:00+08:00'
+  reviewDue: '2027-02-05'
   pendingReview: false
   overdue: false
 retrieval:
   document_id: 'wiki:Synthetic_Data_and_Model_Collapse'
   chunking: markdown-heading-v1
-source_ids: []
+source_ids:
+  - src-3e9d5d7dceceebc1
 source_path: wiki/Synthetic_Data_and_Model_Collapse.md
 ---
-**Synthetic Data** is the short research-topic label for Qiao's work on generated data, recursive training, and model collapse. The full cluster remains broader than the label: it includes [recursive synthetic-data training](./Recursive_Synthetic_Data_Training.md), [data selection](./Data_Selection.md), [sample selection bias](./Sample_Selection_Bias.md), [model collapse](./Model_Collapse.md), [data silos](./Data_Silos.md), and [Wasserstein geometry](./Wasserstein_Geometry.md).[^collapse]
+**Synthetic Data** is the short research-topic label for Qiao's work on generated data, recursive training, and model collapse. The full cluster remains broader than the label: it includes [recursive synthetic-data training](./Recursive_Synthetic_Data_Training.md), [data selection](./Data_Selection.md), [sample selection bias](./Sample_Selection_Bias.md), [model collapse](./Model_Collapse.md), [data silos](./Data_Silos.md), and [Wasserstein geometry](./Wasserstein_Geometry.md).
 
 ## Introduction
 
-The topic treats synthetic data as both a resource and a risk. Generated samples can reduce data-access costs and support privacy-preserving workflows, but recursive use of selected synthetic data can also narrow the training distribution. This page records that tension in the specific setting of low-resource verification, biased local selection, and collaborative evaluation.
+The topic treats synthetic data as both a resource and a risk. Generated samples can reduce data-access costs and support privacy-preserving workflows, but recursive use of selected synthetic data can also narrow the training distribution. Evidence for model collapse concerns indiscriminate recursive reuse rather than every use of synthetic data; retaining original data reduced degradation in the cited study.[^collapse] This page records that tension in the specific setting of low-resource verification, biased local selection, and collaborative evaluation.
 
 ## Role in this wiki
 
@@ -65,4 +66,4 @@ This page keeps the biography readable by giving the long technical background i
 - [Data Silos](./Data_Silos.md)
 - [Collaborative Evaluation](./Collaborative_Evaluation.md)
 
-[^collapse]: Shumailov et al., "AI models collapse when trained on recursively generated data", Nature 631, 755-759 (2024), is a widely cited reference for the recursive model-collapse framing.
+[^collapse]: Shumailov et al., ["AI models collapse when trained on recursively generated data"](https://www.nature.com/articles/s41586-024-07566-y), *Nature* 631, 755-759 (2024), is a primary reference for the recursive model-collapse framing and reports reduced degradation when part of the original data is preserved.

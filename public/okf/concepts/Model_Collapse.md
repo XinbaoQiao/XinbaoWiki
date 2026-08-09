@@ -11,24 +11,25 @@ tags:
   - research-concept
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:7cf354acdcfbd356f0f83c59eb6015020d32759105867a565a32f9e2dec77a80'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-08-09T18:32:45.779Z'
+content_hash: 'sha256:026aaccf6d298044dc9d9397d84569e104f51de8a5c8fcd9264e76513516d336'
+reviewed_at: '2026-08-10T02:34:00+08:00'
+review_due: '2027-02-05'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-07-02T20:03:20+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-08-10T02:34:00+08:00'
+  reviewDue: '2027-02-05'
   pendingReview: false
   overdue: false
 retrieval:
   document_id: 'wiki:Model_Collapse'
   chunking: markdown-heading-v1
-source_ids: []
+source_ids:
+  - src-3e9d5d7dceceebc1
 source_path: wiki/Model_Collapse.md
 ---
 **Model Collapse** is a degenerative process in which a model trained recursively on generated or biased data loses information about the original data distribution. Collapse can appear as mode loss, reduced diversity, distorted class proportions, or worsening sample quality over generations.[^collapse]
@@ -48,4 +49,4 @@ Qiao's ICML 2026 paper studies when sample-selection bias precipitates collapse 
 - [Sample Selection Bias](./Sample_Selection_Bias.md)
 - [Collaborative Evaluation](./Collaborative_Evaluation.md)
 
-[^collapse]: Shumailov et al. define model collapse in the context of recursively generated data and report the phenomenon across language models, variational autoencoders, and Gaussian mixture models.
+[^collapse]: Shumailov et al., ["AI models collapse when trained on recursively generated data"](https://www.nature.com/articles/s41586-024-07566-y), *Nature* 631 (2024), define model collapse in the context of indiscriminate recursive use of generated data and report the phenomenon across language models, variational autoencoders, and Gaussian mixture models.

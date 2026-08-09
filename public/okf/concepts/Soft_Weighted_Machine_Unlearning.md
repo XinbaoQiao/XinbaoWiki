@@ -12,18 +12,18 @@ tags:
   - aaai-2026
   - machine-unlearning
 timestamp: '2026-05-05T21:39:01+08:00'
-modified: '2026-07-12T20:00:05+08:00'
-content_hash: 'sha256:716cec747164b611174524f9ef173b5027f5d0873107ea5e7158c0676c2134e4'
-reviewed_at: '2026-07-12T20:00:05+08:00'
-review_due: '2027-07-12'
+modified: '2026-08-09T18:32:45.791Z'
+content_hash: 'sha256:d7a3e28224e6311f498205d6587820daf15900850de91be3292f965b8ffe3a02'
+reviewed_at: '2026-08-10T02:34:00+08:00'
+review_due: '2027-08-09'
 language: en
 lifecycle:
   status: confirmed
   confidence: 0.95
   review: on venue/status change
   retention: long-lived semantic memory
-  reviewedAt: '2026-07-12T20:00:05+08:00'
-  reviewDue: '2027-07-12'
+  reviewedAt: '2026-08-10T02:34:00+08:00'
+  reviewDue: '2027-08-09'
   pendingReview: false
   overdue: false
 retrieval:
@@ -31,7 +31,6 @@ retrieval:
   chunking: markdown-heading-v1
 source_ids:
   - src-0642a11373a83c47
-  - src-22eeced7ebe7a0c5
   - src-53e1199f272a4df4
 source_path: wiki/Soft_Weighted_Machine_Unlearning.md
 ---

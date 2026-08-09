@@ -8,17 +8,17 @@ tags:
   - profile
   - education-timeline
 timestamp: '2026-05-06T23:05:52+08:00'
-modified: '2026-07-12T22:06:12+08:00'
-content_hash: 'sha256:dfec963a11e63f213f428fcf42ae03d3aa2f38ef6263e5c5466e5e99b417215a'
-reviewed_at: '2026-07-12T22:06:12+08:00'
-review_due: '2027-01-08'
+modified: '2026-08-09T18:32:45.760Z'
+content_hash: 'sha256:d13ea461c354b9ee594e6839f086949cde6711fe80ea6a78a6302975b7316cc4'
+reviewed_at: '2026-08-10T02:34:00+08:00'
+review_due: '2027-02-05'
 name: Education
 summary: Education timeline for Qiao Xinbao.
 occupation: Education timeline
 ---
 ## Timeline
 
-- **2026-present**: PhD student in Information Engineering, [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]], advised by [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]].
+- **2026-08-01-present**: PhD student in Information Engineering, [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]], advised by [[Angela_Yingjun_Zhang|Angela Yingjun Zhang]].
 - **2022-2025**: M.Eng. in Artificial Intelligence, [[Zhejiang_University]], advised by [[Meng_Zhang|Meng Zhang]]. Major GPA: 90/100; rank 3/25.
 - **2018-2022**: B.Eng. in Communication Engineering, [[Shandong_University]]. Major GPA: 82.47/100. Third-class Academic Award, 2018-2019.
 

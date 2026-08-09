@@ -8,18 +8,18 @@ tags:
   - log
   - maintenance-log
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-18T04:24:40.200Z'
-content_hash: 'sha256:ed5aa936226123765072932910f5e6f5bf7ce35dc1b15c8e48f258ca8f737583'
-reviewed_at: '2026-07-18T12:25:05+08:00'
-review_due: '2027-07-18'
+modified: '2026-08-09T18:32:45.776Z'
+content_hash: 'sha256:90f33ae93a1e8057681c7d00f314b9d6542ffeb741941d9a03cbbc14896799a2'
+reviewed_at: '2026-08-10T02:34:00+08:00'
+review_due: '2027-08-09'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-18T12:25:05+08:00'
-  reviewDue: '2027-07-18'
+  reviewedAt: '2026-08-10T02:34:00+08:00'
+  reviewDue: '2027-08-09'
   pendingReview: false
   overdue: false
 retrieval:
@@ -28,6 +28,11 @@ retrieval:
 source_ids: []
 source_path: wiki/log.md
 ---
+## 2026-08-10
+
+- Updated the bilingual profile, education, experience, and CV pages to record that Qiao began the PhD in Information Engineering at The Chinese University of Hong Kong on 2026-08-01; kept private records excluded from the public index while removing stale CV wording.
+- Refreshed the bilingual LLM-reliability and synthetic-data pages with primary sources on abstention incentives, benchmark leakage, and recursive generated-data training; reviewed the Karpathy LLM Wiki reference at revision `ac46de1`; removed the broken Soft-Weighted Unlearning GitHub link from public paper metadata and the downloadable CV.
+
 ## 2026-07-18
 
 - Removed provider-specific portrait attribution from current public biography and resource text after embedded provenance claims conflicted with an older maintenance note; kept the Seoul scene labeled as AI-generated and recorded the unresolved evidence in the repository asset-provenance register.

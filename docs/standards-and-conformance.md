@@ -1,7 +1,7 @@
 # Xinbaopedia Standards and Conformance
 
 Status: maintained project contract
-Last upstream review: 2026-07-18
+Last upstream review: 2026-08-10
 
 Xinbaopedia is a Git-native academic wiki with an agent-readable export. Its
 base interchange format is Open Knowledge Format (OKF) v0.1 Draft. The project
@@ -14,7 +14,7 @@ provenance, review scheduling, graph traversal, and retrieval.
 | --- | --- | --- | --- |
 | [GoogleCloudPlatform Knowledge Catalog: OKF specification](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) | OKF v0.1 Draft | Base Markdown and YAML interchange contract | Normative base format |
 | [Google Cloud OKF announcement](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing) | Published 2026-06-12 | Rationale for portable, Git-managed, agent-readable knowledge | Informative |
-| [Andrej Karpathy: LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) | Unversioned gist; reviewed 2026-07-17 | Conceptual origin for source material, durable wiki memory, schemas, ingest, query, and lint operations | Informative, not a standard |
+| [Andrej Karpathy: LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) | Gist revision `ac46de1`; reviewed 2026-08-10 | Conceptual origin for source material, durable wiki memory, schemas, ingest, query, and lint operations | Informative, not a standard |
 | [Microsoft GraphRAG](https://github.com/microsoft/graphrag) | Upstream main; reviewed 2026-07-17 | Comparison point for entity/relationship extraction and global graph queries | Informative, not a dependency |
 | [LlamaIndex ingestion pipeline](https://developers.llamaindex.ai/python/framework/module_guides/loading/ingestion_pipeline/) | Current documentation; reviewed 2026-07-17 | Comparison point for stable document IDs, hashes, and incremental ingestion | Informative, not a dependency |
 | [Ragas metrics](https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/) | Stable documentation; reviewed 2026-07-17 | Vocabulary for retrieval, context, and faithfulness evaluation | Informative, not a dependency |
@@ -27,6 +27,8 @@ for a newer upstream version, a maintainer must review the upstream diff,
 update this table, regenerate the bundle, and run all conformance and retrieval
 gates. For an unversioned upstream, record the review date and, when it affects
 implementation semantics, the reviewed commit in the change description.
+Comments and third-party implementations attached to an upstream discussion
+are design signals, not revisions of the tracked reference.
 
 ## Local Profile
 

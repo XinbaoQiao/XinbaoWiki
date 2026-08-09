@@ -11,7 +11,7 @@
   "source": {
     "directory": "wiki",
     "files": 88,
-    "contentHash": "f1b387163e54f1e7e3d92888f9522bdb8219004a432074e719c160b0658ea34a",
+    "contentHash": "cbb9d82380a55fe2810c077188b210af1bf92ef8fc8405ce729774b4440ae543",
     "hashAlgorithm": "sha256"
   },
   "bundle": {
@@ -19,7 +19,7 @@
     "concepts": "concepts/*.md",
     "hiddenPagesExcluded": 4,
     "publicPages": 84,
-    "sources": 48,
+    "sources": 51,
     "sourceRegistry": "sources.json"
   },
   "maintenance": {
@@ -30,6 +30,6 @@
     "pages": "pages.json",
     "sources": "sources.json",
     "qualityReport": "quality-report.json",
-    "reviewAsOf": "2026-07-13"
+    "reviewAsOf": "2026-08-10"
   }
 }

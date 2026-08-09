@@ -85,7 +85,7 @@ A conventional academic homepage is an endpoint: a biography, a list of papers, 
   <tr>
     <td width="25%" align="center"><strong>2</strong><br/><sub>languages, one knowledge graph</sub></td>
     <td width="25%" align="center"><strong>84</strong><br/><sub>public agent-readable concepts</sub></td>
-    <td width="25%" align="center"><strong>64</strong><br/><sub>bilingual retrieval test cases</sub></td>
+    <td width="25%" align="center"><strong>68</strong><br/><sub>bilingual retrieval test cases</sub></td>
     <td width="25%" align="center"><strong>3</strong><br/><sub>grounded, conversational, protected modes</sub></td>
   </tr>
 </table>
@@ -248,7 +248,7 @@ Read [Contributing](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md),
   <tr>
     <td width="25%" align="center"><strong>2</strong><br/><sub>种语言，一张知识图谱</sub></td>
     <td width="25%" align="center"><strong>84</strong><br/><sub>个公开 agent-readable 概念</sub></td>
-    <td width="25%" align="center"><strong>64</strong><br/><sub>条双语检索测试</sub></td>
+    <td width="25%" align="center"><strong>68</strong><br/><sub>条双语检索测试</sub></td>
     <td width="25%" align="center"><strong>3</strong><br/><sub>种模式：有据、对话、保护</sub></td>
   </tr>
 </table>

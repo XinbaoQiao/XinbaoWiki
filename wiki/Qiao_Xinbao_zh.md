@@ -8,10 +8,10 @@ tags:
   - biography
   - 博士生
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-18T04:24:40.208Z'
-content_hash: 'sha256:79adc98848819e156be8c042915d26ba241a1e0b9d385633b3b6c34859f595f8'
-reviewed_at: '2026-07-18T12:25:05+08:00'
-review_due: '2026-10-16'
+modified: '2026-08-09T18:32:45.784Z'
+content_hash: 'sha256:9d8bcf4ee892d1daaa24590438ace4c37e32f79f5917586244b6c85f96051317'
+reviewed_at: '2026-08-10T02:34:00+08:00'
+review_due: '2026-11-07'
 name: 乔鑫宝
 summary: 香港中文大学信息工程系博士生；研究方向包括数据中心 ML、AI for Networks、Networks for AI、机器遗忘和合成数据可靠性
 aliases:
@@ -70,7 +70,7 @@ nationality: 中国
 
 ## 教育经历
 
-乔鑫宝目前在[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系攻读博士学位，导师为[[Angela_Yingjun_Zhang|张颖珺]]。[^cuhk-ie-zh] 其博士阶段工作围绕分布式证据、网络化计算和可靠 AI 评估展开。
+自 2026 年 8 月 1 日起，乔鑫宝在[[The_Chinese_University_of_Hong_Kong|香港中文大学]]信息工程系攻读博士学位，导师为[[Angela_Yingjun_Zhang|张颖珺]]。[^cuhk-ie-zh] 其博士阶段工作围绕分布式证据、网络化计算和可靠 AI 评估展开。
 
 2022年至2025年，他在[[Zhejiang_University|浙江大学]]攻读人工智能工学硕士学位，硕士阶段专业 GPA 为 90/100，排名 3/25；硕士导师为[[Meng_Zhang|张萌]]。
 
@@ -88,7 +88,7 @@ nationality: 中国
 
 2025年6月至12月，乔鑫宝在[[NUSRI_CQ|新加坡国立大学重庆研究院]]担任全职研究实习生。研究内容包括可信 LLM 系统和合成数据评估，尤其关注真实数据覆盖有限或碎片化时的低资源递归合成数据训练。
 
-### 香港中文大学博士阶段（2026至今）
+### 香港中文大学博士阶段（2026年8月1日至今）
 
 在[[The_Chinese_University_of_Hong_Kong|香港中文大学]]阶段，乔鑫宝的博士研究延续分布式证据这一主线，并将其放入[[AI_and_Networks|AI 与网络]]框架：当数据和计算不能被简单汇总时，学习系统如何被训练、评估和维护。
 

@@ -9,10 +9,10 @@ tags:
   - 研究概念
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:2d69345869dcdfd5c55440e7b6849a7775821f895aba8b83fc43dd9cee7b19ae'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-08-09T18:32:45.779Z'
+content_hash: 'sha256:9d6e82dd8a993b7b97228f53c9525ae3a0918f82de2274633ab0ad0c52770b1f'
+reviewed_at: '2026-08-10T02:34:00+08:00'
+review_due: '2027-02-05'
 name: 模型坍缩
 language: zh
 summary: 解释递归模型训练中退化性分布漂移的概念页。
@@ -36,4 +36,4 @@ translation_of: Model_Collapse
 - [[Sample_Selection_Bias|样本选择偏差]]
 - [[Collaborative_Evaluation|协作评估]]
 
-[^collapse]: Shumailov 等人在递归生成数据背景下定义了模型坍缩，并在语言模型、变分自编码器和高斯混合模型中报告了该现象。
+[^collapse]: Shumailov 等人的 [“AI models collapse when trained on recursively generated data”](https://www.nature.com/articles/s41586-024-07566-y)（*Nature* 631，2024）在无差别递归使用生成数据的背景下定义模型坍缩，并在语言模型、变分自编码器和高斯混合模型中报告了该现象。

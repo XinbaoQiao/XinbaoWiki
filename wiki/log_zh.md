@@ -8,16 +8,21 @@ tags:
   - log
   - 维护日志
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-18T04:24:40.199Z'
-content_hash: 'sha256:677f5a1048b6c711a78cdebd42f3336a82a0e1b1c8002da97506ff16cdb3c47d'
-reviewed_at: '2026-07-18T12:25:05+08:00'
-review_due: '2027-07-18'
+modified: '2026-08-09T18:32:45.775Z'
+content_hash: 'sha256:749d82fe7aee0b9b5634aa707999e32d26d4059096ad9eb65583e676db312f0f'
+reviewed_at: '2026-08-10T02:34:00+08:00'
+review_due: '2027-08-09'
 name: 日志
 language: zh
 summary: Wiki 的追加式维护日志。
 occupation: 维护日志
 translation_of: log
 ---
+## 2026-08-10
+
+- 同步中英文人物、教育、经历与 CV 页面，记录乔鑫宝于 2026-08-01 开始在香港中文大学信息工程系攻读博士；保留私有记录并排除在公开索引之外，同时移除过时的 CV 表述。
+- 依据弃答激励、基准泄漏与递归生成数据训练的一手研究，更新中英文 LLM 可靠性和合成数据页面；将 Karpathy LLM Wiki 的审阅版本固定为 `ac46de1`；从公开论文元数据和可下载 CV 中移除失效的 Soft-Weighted Unlearning GitHub 链接。
+
 ## 2026-07-18
 
 - 在嵌入式来源声明与旧维护记录相冲突后，从当前人物页和资源页移除肖像的特定供应商归因；保留首尔图片的 AI 生成标识，并在仓库素材溯源清单中记录待核验情况。

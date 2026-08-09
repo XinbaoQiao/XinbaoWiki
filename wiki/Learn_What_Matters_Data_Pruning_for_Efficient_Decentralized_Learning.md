@@ -9,10 +9,10 @@ tags:
   - under-review
   - private
 timestamp: '2026-05-06T06:22:22+08:00'
-modified: '2026-07-09T00:58:22+08:00'
-content_hash: 'sha256:0e22e42f00ce4bf2bdc7e039b1be6aa0046600956da0fb8483d8791dffeb6c28'
-reviewed_at: '2026-07-09T00:58:22+08:00'
-review_due: '2026-08-07'
+modified: '2026-08-09T18:32:45.772Z'
+content_hash: 'sha256:68f5b36b9bb3fb0a105dfd49aa760575f59d0b5629c6389306f6abe8f7612e98'
+reviewed_at: '2026-08-10T02:34:00+08:00'
+review_due: '2026-09-08'
 name: 'Learn What Matters: Data Pruning for Efficient Decentralized Learning'
 summary: Manuscript on data pruning for efficient decentralized learning.
 hidden: true
@@ -27,11 +27,11 @@ year: 2025
 status: under review
 publication_type: Journal manuscript
 ---
-**Learn What Matters: Data Pruning for Efficient Decentralized Learning** is an active manuscript by **Xinbao Qiao** and collaborators, listed in Qiao Xinbao's CV.
+This hidden record preserves bibliographic metadata for a manuscript by **Xinbao Qiao** and collaborators. It is not part of the public wiki index, and this page does not assert a current public version or review outcome.
 
 ## Status
 
-The current public wiki page records only bibliographic metadata available from the CV. No paper package, poster, abstract, or public preprint was available in the local project materials during the 5 May 2026 update.
+The record is limited to bibliographic metadata retained from an earlier internal snapshot. No paper package, poster, abstract, or public preprint was available in the local project materials reviewed on 2026-08-10.
 
 ## Placement
 

@@ -75,6 +75,22 @@
       "evidencePatterns": ["sample selection bias", "Wasserstein"]
     },
     {
+      "id": "en-llm-reliability-evaluation",
+      "language": "en",
+      "category": "research",
+      "query": "Why can accuracy-only evaluation and benchmark leakage make an LLM look more reliable than it is?",
+      "expectedSlugs": ["LLM_Reliability"],
+      "evidencePatterns": ["reward guessing", "dataset leakage"]
+    },
+    {
+      "id": "en-llm-reliability-internship",
+      "language": "en",
+      "category": "multi-hop",
+      "query": "How is Xinbao Qiao's NUSRI-CQ internship connected to LLM reliability and synthetic-data evaluation?",
+      "expectedSlugs": ["LLM_Reliability", "NUSRI_CQ"],
+      "evidencePatterns": ["trustworthy LLM", "synthetic-data evaluation"]
+    },
+    {
       "id": "en-citation-public-profile",
       "language": "en",
       "category": "citation",
@@ -88,7 +104,7 @@
       "category": "natural-query",
       "query": "Whatever Xinbao is cooking up lately?",
       "expectedSlugs": ["Xinbao_Qiao", "Projects", "Publications"],
-      "expectedChunkIds": ["log#2026-07-18"]
+      "expectedChunkIds": ["log#2026-08-10"]
     },
     {
       "id": "en-natural-profile",
@@ -349,6 +365,22 @@
       "evidencePatterns": ["样本选择偏差", "Wasserstein"]
     },
     {
+      "id": "zh-llm-reliability-evaluation",
+      "language": "zh",
+      "category": "research",
+      "query": "为什么只看准确率和评测集泄漏会让大语言模型显得比实际更可靠？",
+      "expectedSlugs": ["LLM_Reliability_zh"],
+      "evidencePatterns": ["奖励猜测", "数据集泄漏"]
+    },
+    {
+      "id": "zh-llm-reliability-internship",
+      "language": "zh",
+      "category": "multi-hop",
+      "query": "乔鑫宝在 NUSRI-CQ 的实习如何连接大语言模型可靠性与合成数据评估？",
+      "expectedSlugs": ["LLM_Reliability_zh", "NUSRI_CQ_zh"],
+      "evidencePatterns": ["可信 LLM", "合成数据评估"]
+    },
+    {
       "id": "zh-citation-public-profile",
       "language": "zh",
       "category": "citation",
@@ -362,7 +394,7 @@
       "category": "natural-query",
       "query": "看看鑫宝最近又在折腾什么？",
       "expectedSlugs": ["Qiao_Xinbao_zh", "Projects_zh", "Publications_zh"],
-      "expectedChunkIds": ["log_zh#2026-07-18"]
+      "expectedChunkIds": ["log_zh#2026-08-10"]
     },
     {
       "id": "zh-natural-profile",

@@ -9,10 +9,10 @@ tags:
   - 研究概念
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:2346ed0d127d9a8c6e84bfdf8fa967e3118ad2ae6adc8383c56cf69a8724c12a'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-08-09T18:32:45.786Z'
+content_hash: 'sha256:5d8a4e20eec790d14fac24557dfedfa4ab08a87f6ea28bc0c80802df8c7bb414'
+reviewed_at: '2026-08-10T02:34:00+08:00'
+review_due: '2027-02-05'
 name: 递归合成数据训练
 language: zh
 summary: 解释模型反复使用早期模型生成数据进行训练的过程。
@@ -36,4 +36,4 @@ translation_of: Recursive_Synthetic_Data_Training
 - [[Sample_Selection_Bias|样本选择偏差]]
 - [[Data_Silos|数据孤岛]]
 
-[^recursive]: 2024 年 Nature 论文 “AI models collapse when trained on recursively generated data” 使递归生成数据导致模型坍缩的表述广为人知。
+[^recursive]: Shumailov 等人的 [“AI models collapse when trained on recursively generated data”](https://www.nature.com/articles/s41586-024-07566-y)（*Nature* 631，2024）研究了这一递归过程，并表明无差别复用会逐步丢失原始分布信息；其实验也显示，保留部分原始数据时退化较轻。

@@ -33,7 +33,7 @@
     },
     "meaning": "Registry generation proves declaration and page association, not remote availability or factual correctness"
   },
-  "contentHash": "sha256:526c2b0c1c62d8468a30c492b44a6835cfd03943d4421c221ba3c19af44dd998",
+  "contentHash": "sha256:6cc9f7e2575363d3cf5cd10458ac6fae57fc472529f8831ae19dcee07e9ac222",
   "sources": [
     {
       "id": "src-03b02edf8ea59d6e",
@@ -324,6 +324,45 @@
       ]
     },
     {
+      "id": "src-11be10768dbb7de0",
+      "url": "https://www.nature.com/articles/s41586-026-10549-w",
+      "kind": "web-reference",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:11be10768dbb7de08957ae172913b01671d24a388baff346aafb062e7d6b64ed"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "LLM_Reliability",
+        "LLM_Reliability_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "LLM_Reliability",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "LLM_Reliability_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
       "id": "src-17dc8cb17c9da923",
       "url": "https://en.nusricq.cn/about/yjyjj",
       "kind": "web-reference",
@@ -452,63 +491,6 @@
           "slug": "DynFrs_zh",
           "locations": [
             "frontmatter.links[0].url"
-          ],
-          "citation": false,
-          "footnote": false
-        }
-      ]
-    },
-    {
-      "id": "src-22eeced7ebe7a0c5",
-      "url": "https://github.com/XinbaoQiao/Soft-Weighted-Machine-Unlearning",
-      "kind": "code-repository",
-      "hash": {
-        "algorithm": "sha256",
-        "scope": "canonical-url",
-        "value": "sha256:22eeced7ebe7a0c5f13706f7c2239625b4313afc58e8ef7515bb20fd1152094b"
-      },
-      "check": {
-        "method": "scheduled-http-head-or-get",
-        "status": "not-checked",
-        "checkedAt": null,
-        "contentHash": null,
-        "maxAgeDays": 90
-      },
-      "pages": [
-        "CV",
-        "CV_zh",
-        "Soft_Weighted_Machine_Unlearning",
-        "Soft_Weighted_Machine_Unlearning_zh"
-      ],
-      "evidence": [
-        {
-          "slug": "CV",
-          "locations": [
-            "body"
-          ],
-          "citation": true,
-          "footnote": false
-        },
-        {
-          "slug": "CV_zh",
-          "locations": [
-            "body"
-          ],
-          "citation": true,
-          "footnote": false
-        },
-        {
-          "slug": "Soft_Weighted_Machine_Unlearning",
-          "locations": [
-            "frontmatter.links[2].url"
-          ],
-          "citation": false,
-          "footnote": false
-        },
-        {
-          "slug": "Soft_Weighted_Machine_Unlearning_zh",
-          "locations": [
-            "frontmatter.links[2].url"
           ],
           "citation": false,
           "footnote": false
@@ -865,6 +847,81 @@
       ]
     },
     {
+      "id": "src-3e9d5d7dceceebc1",
+      "url": "https://www.nature.com/articles/s41586-024-07566-y",
+      "kind": "web-reference",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:3e9d5d7dceceebc1541f425ccbfbbdadde6d6fb8870cd591ca5c2142b6fa1fba"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "Model_Collapse",
+        "Model_Collapse_zh",
+        "Recursive_Synthetic_Data_Training",
+        "Recursive_Synthetic_Data_Training_zh",
+        "Synthetic_Data_and_Model_Collapse",
+        "Synthetic_Data_and_Model_Collapse_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Model_Collapse",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Model_Collapse_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Recursive_Synthetic_Data_Training",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Recursive_Synthetic_Data_Training_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Synthetic_Data_and_Model_Collapse",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Synthetic_Data_and_Model_Collapse_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
       "id": "src-4144e3776ac496d0",
       "url": "https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse",
       "kind": "code-repository",
@@ -918,6 +975,45 @@
           ],
           "citation": false,
           "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-44708abf72c85407",
+      "url": "https://proceedings.mlr.press/v267/choi25b.html",
+      "kind": "scholarly-publication",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:44708abf72c854078c392ccfc4d7d814449b854e3d4520e510b572e26def8ed7"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "LLM_Reliability",
+        "LLM_Reliability_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "LLM_Reliability",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "LLM_Reliability_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
         }
       ]
     },
@@ -1589,6 +1685,45 @@
         },
         {
           "slug": "Shandong_University_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        }
+      ]
+    },
+    {
+      "id": "src-8e21f24eb6b80d2c",
+      "url": "https://aclanthology.org/2022.acl-long.229/",
+      "kind": "web-reference",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:8e21f24eb6b80d2c0e8b0908b82f92cdebee53670a63f4b520e4b43176acb044"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "LLM_Reliability",
+        "LLM_Reliability_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "LLM_Reliability",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "LLM_Reliability_zh",
           "locations": [
             "body.footnote"
           ],

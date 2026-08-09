@@ -8,18 +8,18 @@ tags:
   - profile
   - research-experience
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:793c7f17feda70873d1e709248d0bc63d95c7ca89e95f536e4d0609fc81e2b95'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-09-30'
+modified: '2026-08-09T18:32:45.762Z'
+content_hash: 'sha256:c213babca2918a9728aaac57badb72797578f588269356d9c47e712d7906703b'
+reviewed_at: '2026-08-10T02:34:00+08:00'
+review_due: '2026-11-07'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-02T20:03:20+08:00'
-  reviewDue: '2026-09-30'
+  reviewedAt: '2026-08-10T02:34:00+08:00'
+  reviewDue: '2026-11-07'
   pendingReview: false
   overdue: false
 retrieval:
@@ -30,11 +30,11 @@ source_path: wiki/Experience.md
 ---
 ## Current affiliation
 
-- PhD student, Department of Information Engineering, [The Chinese University of Hong Kong](./The_Chinese_University_of_Hong_Kong.md), advised by [Angela Yingjun Zhang](./Angela_Yingjun_Zhang.md).
+- PhD student in the Department of Information Engineering at [The Chinese University of Hong Kong](./The_Chinese_University_of_Hong_Kong.md) since 2026-08-01, advised by [Angela Yingjun Zhang](./Angela_Yingjun_Zhang.md).
 
 ## Doctoral research in AI and networks
 
-**PhD student**, 2026-present. Advisor: [Angela Yingjun Zhang](./Angela_Yingjun_Zhang.md), [The Chinese University of Hong Kong](./The_Chinese_University_of_Hong_Kong.md).
+**PhD student**, 2026-08-01-present. Advisor: [Angela Yingjun Zhang](./Angela_Yingjun_Zhang.md), [The Chinese University of Hong Kong](./The_Chinese_University_of_Hong_Kong.md).
 
 Qiao's current doctoral work is centered on [data-centric ML](./Data_Centric_Machine_Learning.md) and [AI and networks](./AI_and_Networks.md), including AI for Networks and Networks for AI. The research asks how learning systems should operate when data, computation, and evaluation signals are distributed across clients, institutions, or networked infrastructure. [Distributed Wasserstein barycenter](./Distributed_Wasserstein_Barycenter.md) computation remains one related method for constructing shared distributional references without assuming that all raw data can be pooled.
 

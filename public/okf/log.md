@@ -1,5 +1,10 @@
 # Xinbaopedia OKF Update Log
 
+## 2026-08-10
+
+- Updated the bilingual profile, education, experience, and CV pages to record that Qiao began the PhD in Information Engineering at The Chinese University of Hong Kong on 2026-08-01; kept private records excluded from the public index while removing stale CV wording.
+- Refreshed the bilingual LLM-reliability and synthetic-data pages with primary sources on abstention incentives, benchmark leakage, and recursive generated-data training; reviewed the Karpathy LLM Wiki reference at revision `ac46de1`; removed the broken Soft-Weighted Unlearning GitHub link from public paper metadata and the downloadable CV.
+
 ## 2026-07-18
 
 - Removed provider-specific portrait attribution from current public biography and resource text after embedded provenance claims conflicted with an older maintenance note; kept the Seoul scene labeled as AI-generated and recorded the unresolved evidence in the repository asset-provenance register.

@@ -9,24 +9,25 @@ tags:
   - 研究概念
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:2d69345869dcdfd5c55440e7b6849a7775821f895aba8b83fc43dd9cee7b19ae'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-08-09T18:32:45.779Z'
+content_hash: 'sha256:9d6e82dd8a993b7b97228f53c9525ae3a0918f82de2274633ab0ad0c52770b1f'
+reviewed_at: '2026-08-10T02:34:00+08:00'
+review_due: '2027-02-05'
 language: zh
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-07-02T20:03:20+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-08-10T02:34:00+08:00'
+  reviewDue: '2027-02-05'
   pendingReview: false
   overdue: false
 retrieval:
   document_id: 'wiki:Model_Collapse_zh'
   chunking: markdown-heading-v1
-source_ids: []
+source_ids:
+  - src-3e9d5d7dceceebc1
 source_path: wiki/Model_Collapse_zh.md
 ---
 **模型坍缩** 是模型在递归使用生成或有偏数据训练时，逐渐丢失原始数据分布信息的退化过程。坍缩可以表现为模式丢失、多样性下降、类别比例扭曲或样本质量随代际恶化。[^collapse]
@@ -46,4 +47,4 @@ source_path: wiki/Model_Collapse_zh.md
 - [样本选择偏差](./Sample_Selection_Bias_zh.md)
 - [协作评估](./Collaborative_Evaluation_zh.md)
 
-[^collapse]: Shumailov 等人在递归生成数据背景下定义了模型坍缩，并在语言模型、变分自编码器和高斯混合模型中报告了该现象。
+[^collapse]: Shumailov 等人的 [“AI models collapse when trained on recursively generated data”](https://www.nature.com/articles/s41586-024-07566-y)（*Nature* 631，2024）在无差别递归使用生成数据的背景下定义模型坍缩，并在语言模型、变分自编码器和高斯混合模型中报告了该现象。

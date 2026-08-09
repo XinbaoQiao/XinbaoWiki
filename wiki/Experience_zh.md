@@ -8,10 +8,10 @@ tags:
   - profile
   - 研究经历
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-13T20:54:38+08:00'
-content_hash: 'sha256:9c4c73137aa9bad98b0969e71f161d4b4d6d6760c553e8de6b96fbfaef4276ad'
-reviewed_at: '2026-07-13T20:54:38+08:00'
-review_due: '2026-10-11'
+modified: '2026-08-09T18:32:45.761Z'
+content_hash: 'sha256:41c47204c95a67a24b584dd34b2d2598945cb0f958b46c3f3a6fa1aaa50f35a8'
+reviewed_at: '2026-08-10T02:34:00+08:00'
+review_due: '2026-11-07'
 name: 研究经历
 language: zh
 summary: 研究经历与机构关系。
@@ -20,11 +20,11 @@ translation_of: Experience
 ---
 ## 当前机构
 
-- [[The_Chinese_University_of_Hong_Kong|香港中文大学]] 信息工程系博士生，导师 [[Angela_Yingjun_Zhang|张颖珺]]。
+- 自 2026 年 8 月 1 日起，在 [[The_Chinese_University_of_Hong_Kong|香港中文大学]] 信息工程系攻读博士，导师为 [[Angela_Yingjun_Zhang|张颖珺]]。
 
 ## AI 与网络博士研究
 
-**博士生**，2026年至今。导师：[[Angela_Yingjun_Zhang|张颖珺]]，[[The_Chinese_University_of_Hong_Kong|香港中文大学]]。
+**博士生**，2026 年 8 月 1 日至今。导师：[[Angela_Yingjun_Zhang|张颖珺]]，[[The_Chinese_University_of_Hong_Kong|香港中文大学]]。
 
 乔鑫宝当前博士研究以[[Data_Centric_Machine_Learning|数据中心 ML]]和[[AI_and_Networks|AI 与网络]]为核心，包括 AI for Networks 与 Networks for AI。研究关注数据、计算和评估信号分散在客户端、机构或网络基础设施中时，学习系统应如何运行。[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]计算仍是其中一个相关方法，用于在不假设原始数据可以集中汇总的情况下构造共享分布参考。
 

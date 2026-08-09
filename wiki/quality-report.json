@@ -5,7 +5,7 @@
     "pages": 88,
     "publicPages": 84,
     "hiddenPages": 4,
-    "edges": 1027,
+    "edges": 1029,
     "warnings": 0,
     "languages": {
       "en": 44,
@@ -98,7 +98,7 @@
   },
   "sourceCoverage": {
     "pages": 84,
-    "pagesWithSources": 30,
+    "pagesWithSources": 38,
     "pagesWithoutSources": [
       {
         "slug": "Certified_Data_Removal",
@@ -200,33 +200,33 @@
         "slug": "Education",
         "title": "Education",
         "language": "en",
-        "modifiedAt": "2026-07-12T22:06:12+08:00",
-        "reviewedAt": "2026-07-12T22:06:12+08:00",
-        "reviewDue": "2027-01-08"
+        "modifiedAt": "2026-08-09T18:32:45.760Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-02-05"
       },
       {
         "slug": "Education_zh",
         "title": "教育经历",
         "language": "zh",
-        "modifiedAt": "2026-07-13T20:54:38+08:00",
-        "reviewedAt": "2026-07-13T20:54:38+08:00",
-        "reviewDue": "2027-01-09"
+        "modifiedAt": "2026-08-09T18:32:45.759Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-02-05"
       },
       {
         "slug": "Experience",
         "title": "Experience",
         "language": "en",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-09-30"
+        "modifiedAt": "2026-08-09T18:32:45.762Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2026-11-07"
       },
       {
         "slug": "Experience_zh",
         "title": "研究经历",
         "language": "zh",
-        "modifiedAt": "2026-07-13T20:54:38+08:00",
-        "reviewedAt": "2026-07-13T20:54:38+08:00",
-        "reviewDue": "2026-10-11"
+        "modifiedAt": "2026-08-09T18:32:45.761Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2026-11-07"
       },
       {
         "slug": "Fairness_and_Robustness",
@@ -256,9 +256,9 @@
         "slug": "index_zh",
         "title": "索引",
         "language": "zh",
-        "modifiedAt": "2026-07-14T23:17:11+08:00",
-        "reviewedAt": "2026-07-14T23:17:11+08:00",
-        "reviewDue": "2027-07-14"
+        "modifiedAt": "2026-08-09T18:32:45.766Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-08-09"
       },
       {
         "slug": "Influence_Functions",
@@ -293,36 +293,20 @@
         "reviewDue": "2026-12-29"
       },
       {
-        "slug": "LLM_Reliability",
-        "title": "LLM Reliability",
-        "language": "en",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
-      },
-      {
-        "slug": "LLM_Reliability_zh",
-        "title": "大语言模型可靠性",
-        "language": "zh",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
-      },
-      {
         "slug": "log",
         "title": "Log",
         "language": "en",
-        "modifiedAt": "2026-07-18T04:24:40.200Z",
-        "reviewedAt": "2026-07-18T12:25:05+08:00",
-        "reviewDue": "2027-07-18"
+        "modifiedAt": "2026-08-09T18:32:45.776Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-08-09"
       },
       {
         "slug": "log_zh",
         "title": "日志",
         "language": "zh",
-        "modifiedAt": "2026-07-18T04:24:40.199Z",
-        "reviewedAt": "2026-07-18T12:25:05+08:00",
-        "reviewDue": "2027-07-18"
+        "modifiedAt": "2026-08-09T18:32:45.775Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-08-09"
       },
       {
         "slug": "Machine_Unlearning",
@@ -335,22 +319,6 @@
       {
         "slug": "Machine_Unlearning_zh",
         "title": "机器遗忘",
-        "language": "zh",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
-      },
-      {
-        "slug": "Model_Collapse",
-        "title": "Model Collapse",
-        "language": "en",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
-      },
-      {
-        "slug": "Model_Collapse_zh",
-        "title": "模型坍缩",
         "language": "zh",
         "modifiedAt": "2026-07-02T20:03:20+08:00",
         "reviewedAt": "2026-07-02T20:03:20+08:00",
@@ -421,22 +389,6 @@
         "reviewDue": "2026-12-29"
       },
       {
-        "slug": "Recursive_Synthetic_Data_Training",
-        "title": "Recursive Synthetic Data Training",
-        "language": "en",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
-      },
-      {
-        "slug": "Recursive_Synthetic_Data_Training_zh",
-        "title": "递归合成数据训练",
-        "language": "zh",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
-      },
-      {
         "slug": "Research",
         "title": "Research",
         "language": "en",
@@ -493,22 +445,6 @@
         "reviewDue": "2026-12-29"
       },
       {
-        "slug": "Synthetic_Data_and_Model_Collapse",
-        "title": "Synthetic Data",
-        "language": "en",
-        "modifiedAt": "2026-07-03T00:03:48+08:00",
-        "reviewedAt": "2026-07-03T00:03:48+08:00",
-        "reviewDue": "2026-12-29"
-      },
-      {
-        "slug": "Synthetic_Data_and_Model_Collapse_zh",
-        "title": "合成数据",
-        "language": "zh",
-        "modifiedAt": "2026-07-03T00:03:48+08:00",
-        "reviewedAt": "2026-07-03T00:03:48+08:00",
-        "reviewDue": "2026-12-29"
-      },
-      {
         "slug": "Synthetic_Data_zh",
         "title": "合成数据（概念）",
         "language": "zh",
@@ -533,13 +469,13 @@
         "reviewDue": "2026-12-29"
       }
     ],
-    "coverage": 0.3571,
-    "registeredSources": 56
+    "coverage": 0.4524,
+    "registeredSources": 59
   },
   "citationCoverage": {
     "pages": 84,
-    "pagesWithBodyCitations": 22,
-    "pagesWithFootnoteCitations": 20,
+    "pagesWithBodyCitations": 30,
+    "pagesWithFootnoteCitations": 28,
     "pagesWithoutBodyCitations": [
       {
         "slug": "Certified_Data_Removal",
@@ -657,33 +593,33 @@
         "slug": "Education",
         "title": "Education",
         "language": "en",
-        "modifiedAt": "2026-07-12T22:06:12+08:00",
-        "reviewedAt": "2026-07-12T22:06:12+08:00",
-        "reviewDue": "2027-01-08"
+        "modifiedAt": "2026-08-09T18:32:45.760Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-02-05"
       },
       {
         "slug": "Education_zh",
         "title": "教育经历",
         "language": "zh",
-        "modifiedAt": "2026-07-13T20:54:38+08:00",
-        "reviewedAt": "2026-07-13T20:54:38+08:00",
-        "reviewDue": "2027-01-09"
+        "modifiedAt": "2026-08-09T18:32:45.759Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-02-05"
       },
       {
         "slug": "Experience",
         "title": "Experience",
         "language": "en",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-09-30"
+        "modifiedAt": "2026-08-09T18:32:45.762Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2026-11-07"
       },
       {
         "slug": "Experience_zh",
         "title": "研究经历",
         "language": "zh",
-        "modifiedAt": "2026-07-13T20:54:38+08:00",
-        "reviewedAt": "2026-07-13T20:54:38+08:00",
-        "reviewDue": "2026-10-11"
+        "modifiedAt": "2026-08-09T18:32:45.761Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2026-11-07"
       },
       {
         "slug": "Fairness_and_Robustness",
@@ -729,9 +665,9 @@
         "slug": "index_zh",
         "title": "索引",
         "language": "zh",
-        "modifiedAt": "2026-07-14T23:17:11+08:00",
-        "reviewedAt": "2026-07-14T23:17:11+08:00",
-        "reviewDue": "2027-07-14"
+        "modifiedAt": "2026-08-09T18:32:45.766Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-08-09"
       },
       {
         "slug": "Influence_Functions",
@@ -766,36 +702,20 @@
         "reviewDue": "2026-12-29"
       },
       {
-        "slug": "LLM_Reliability",
-        "title": "LLM Reliability",
-        "language": "en",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
-      },
-      {
-        "slug": "LLM_Reliability_zh",
-        "title": "大语言模型可靠性",
-        "language": "zh",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
-      },
-      {
         "slug": "log",
         "title": "Log",
         "language": "en",
-        "modifiedAt": "2026-07-18T04:24:40.200Z",
-        "reviewedAt": "2026-07-18T12:25:05+08:00",
-        "reviewDue": "2027-07-18"
+        "modifiedAt": "2026-08-09T18:32:45.776Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-08-09"
       },
       {
         "slug": "log_zh",
         "title": "日志",
         "language": "zh",
-        "modifiedAt": "2026-07-18T04:24:40.199Z",
-        "reviewedAt": "2026-07-18T12:25:05+08:00",
-        "reviewDue": "2027-07-18"
+        "modifiedAt": "2026-08-09T18:32:45.775Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-08-09"
       },
       {
         "slug": "Machine_Unlearning",
@@ -808,22 +728,6 @@
       {
         "slug": "Machine_Unlearning_zh",
         "title": "机器遗忘",
-        "language": "zh",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
-      },
-      {
-        "slug": "Model_Collapse",
-        "title": "Model Collapse",
-        "language": "en",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
-      },
-      {
-        "slug": "Model_Collapse_zh",
-        "title": "模型坍缩",
         "language": "zh",
         "modifiedAt": "2026-07-02T20:03:20+08:00",
         "reviewedAt": "2026-07-02T20:03:20+08:00",
@@ -894,22 +798,6 @@
         "reviewDue": "2026-12-29"
       },
       {
-        "slug": "Recursive_Synthetic_Data_Training",
-        "title": "Recursive Synthetic Data Training",
-        "language": "en",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
-      },
-      {
-        "slug": "Recursive_Synthetic_Data_Training_zh",
-        "title": "递归合成数据训练",
-        "language": "zh",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
-      },
-      {
         "slug": "Research",
         "title": "Research",
         "language": "en",
@@ -961,38 +849,22 @@
         "slug": "Soft_Weighted_Machine_Unlearning",
         "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
         "language": "en",
-        "modifiedAt": "2026-07-12T20:00:05+08:00",
-        "reviewedAt": "2026-07-12T20:00:05+08:00",
-        "reviewDue": "2027-07-12"
+        "modifiedAt": "2026-08-09T18:32:45.791Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-08-09"
       },
       {
         "slug": "Soft_Weighted_Machine_Unlearning_zh",
         "title": "超越二元擦除：用于公平性与鲁棒性的软加权遗忘",
         "language": "zh",
-        "modifiedAt": "2026-07-16T20:08:42+08:00",
-        "reviewedAt": "2026-07-16T20:08:42+08:00",
-        "reviewDue": "2027-07-16"
+        "modifiedAt": "2026-08-09T18:32:45.791Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-08-09"
       },
       {
         "slug": "Synthetic_Data",
         "title": "Synthetic Data (concept)",
         "language": "en",
-        "modifiedAt": "2026-07-03T00:03:48+08:00",
-        "reviewedAt": "2026-07-03T00:03:48+08:00",
-        "reviewDue": "2026-12-29"
-      },
-      {
-        "slug": "Synthetic_Data_and_Model_Collapse",
-        "title": "Synthetic Data",
-        "language": "en",
-        "modifiedAt": "2026-07-03T00:03:48+08:00",
-        "reviewedAt": "2026-07-03T00:03:48+08:00",
-        "reviewDue": "2026-12-29"
-      },
-      {
-        "slug": "Synthetic_Data_and_Model_Collapse_zh",
-        "title": "合成数据",
-        "language": "zh",
         "modifiedAt": "2026-07-03T00:03:48+08:00",
         "reviewedAt": "2026-07-03T00:03:48+08:00",
         "reviewDue": "2026-12-29"
@@ -1038,11 +910,11 @@
         "reviewDue": "2027-07-16"
       }
     ],
-    "coverage": 0.2619,
-    "footnoteCoverage": 0.2381
+    "coverage": 0.3571,
+    "footnoteCoverage": 0.3333
   },
   "reviewFreshness": {
-    "asOf": "2026-07-13",
+    "asOf": "2026-08-10",
     "policy": "review status is recalculated at the start of each UTC week",
     "currentPages": 84,
     "overduePages": [],
@@ -1121,17 +993,17 @@
         "slug": "CV",
         "title": "Curriculum Vitae",
         "language": "en",
-        "modifiedAt": "2026-07-13T21:35:14+08:00",
-        "reviewedAt": "2026-07-13T21:35:14+08:00",
-        "reviewDue": "2026-10-11"
+        "modifiedAt": "2026-08-09T18:32:45.749Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2026-11-07"
       },
       {
         "slug": "CV_zh",
         "title": "简历",
         "language": "zh",
-        "modifiedAt": "2026-07-13T21:35:14+08:00",
-        "reviewedAt": "2026-07-13T21:35:14+08:00",
-        "reviewDue": "2026-10-11"
+        "modifiedAt": "2026-08-09T18:32:45.747Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2026-11-07"
       },
       {
         "slug": "Data_Centric_Machine_Learning",
@@ -1233,33 +1105,33 @@
         "slug": "Education",
         "title": "Education",
         "language": "en",
-        "modifiedAt": "2026-07-12T22:06:12+08:00",
-        "reviewedAt": "2026-07-12T22:06:12+08:00",
-        "reviewDue": "2027-01-08"
+        "modifiedAt": "2026-08-09T18:32:45.760Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-02-05"
       },
       {
         "slug": "Education_zh",
         "title": "教育经历",
         "language": "zh",
-        "modifiedAt": "2026-07-13T20:54:38+08:00",
-        "reviewedAt": "2026-07-13T20:54:38+08:00",
-        "reviewDue": "2027-01-09"
+        "modifiedAt": "2026-08-09T18:32:45.759Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-02-05"
       },
       {
         "slug": "Experience",
         "title": "Experience",
         "language": "en",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-09-30"
+        "modifiedAt": "2026-08-09T18:32:45.762Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2026-11-07"
       },
       {
         "slug": "Experience_zh",
         "title": "研究经历",
         "language": "zh",
-        "modifiedAt": "2026-07-13T20:54:38+08:00",
-        "reviewedAt": "2026-07-13T20:54:38+08:00",
-        "reviewDue": "2026-10-11"
+        "modifiedAt": "2026-08-09T18:32:45.761Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2026-11-07"
       },
       {
         "slug": "Fairness_and_Robustness",
@@ -1305,9 +1177,9 @@
         "slug": "index_zh",
         "title": "索引",
         "language": "zh",
-        "modifiedAt": "2026-07-14T23:17:11+08:00",
-        "reviewedAt": "2026-07-14T23:17:11+08:00",
-        "reviewDue": "2027-07-14"
+        "modifiedAt": "2026-08-09T18:32:45.766Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-08-09"
       },
       {
         "slug": "Influence_Functions",
@@ -1345,33 +1217,33 @@
         "slug": "LLM_Reliability",
         "title": "LLM Reliability",
         "language": "en",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
+        "modifiedAt": "2026-08-09T18:32:45.774Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-02-05"
       },
       {
         "slug": "LLM_Reliability_zh",
         "title": "大语言模型可靠性",
         "language": "zh",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
+        "modifiedAt": "2026-08-09T18:32:45.773Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-02-05"
       },
       {
         "slug": "log",
         "title": "Log",
         "language": "en",
-        "modifiedAt": "2026-07-18T04:24:40.200Z",
-        "reviewedAt": "2026-07-18T12:25:05+08:00",
-        "reviewDue": "2027-07-18"
+        "modifiedAt": "2026-08-09T18:32:45.776Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-08-09"
       },
       {
         "slug": "log_zh",
         "title": "日志",
         "language": "zh",
-        "modifiedAt": "2026-07-18T04:24:40.199Z",
-        "reviewedAt": "2026-07-18T12:25:05+08:00",
-        "reviewDue": "2027-07-18"
+        "modifiedAt": "2026-08-09T18:32:45.775Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-08-09"
       },
       {
         "slug": "Machine_Unlearning",
@@ -1409,17 +1281,17 @@
         "slug": "Model_Collapse",
         "title": "Model Collapse",
         "language": "en",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
+        "modifiedAt": "2026-08-09T18:32:45.779Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-02-05"
       },
       {
         "slug": "Model_Collapse_zh",
         "title": "模型坍缩",
         "language": "zh",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
+        "modifiedAt": "2026-08-09T18:32:45.779Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-02-05"
       },
       {
         "slug": "NUSRI_CQ",
@@ -1489,9 +1361,9 @@
         "slug": "Qiao_Xinbao_zh",
         "title": "乔鑫宝",
         "language": "zh",
-        "modifiedAt": "2026-07-18T04:24:40.208Z",
-        "reviewedAt": "2026-07-18T12:25:05+08:00",
-        "reviewDue": "2026-10-16"
+        "modifiedAt": "2026-08-09T18:32:45.784Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2026-11-07"
       },
       {
         "slug": "Random_Forest",
@@ -1513,17 +1385,17 @@
         "slug": "Recursive_Synthetic_Data_Training",
         "title": "Recursive Synthetic Data Training",
         "language": "en",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
+        "modifiedAt": "2026-08-09T18:32:45.787Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-02-05"
       },
       {
         "slug": "Recursive_Synthetic_Data_Training_zh",
         "title": "递归合成数据训练",
         "language": "zh",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
+        "modifiedAt": "2026-08-09T18:32:45.786Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-02-05"
       },
       {
         "slug": "Research",
@@ -1593,17 +1465,17 @@
         "slug": "Soft_Weighted_Machine_Unlearning",
         "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
         "language": "en",
-        "modifiedAt": "2026-07-12T20:00:05+08:00",
-        "reviewedAt": "2026-07-12T20:00:05+08:00",
-        "reviewDue": "2027-07-12"
+        "modifiedAt": "2026-08-09T18:32:45.791Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-08-09"
       },
       {
         "slug": "Soft_Weighted_Machine_Unlearning_zh",
         "title": "超越二元擦除：用于公平性与鲁棒性的软加权遗忘",
         "language": "zh",
-        "modifiedAt": "2026-07-16T20:08:42+08:00",
-        "reviewedAt": "2026-07-16T20:08:42+08:00",
-        "reviewDue": "2027-07-16"
+        "modifiedAt": "2026-08-09T18:32:45.791Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2027-08-09"
       },
       {
         "slug": "Synthetic_Data",
@@ -1689,9 +1561,9 @@
         "slug": "Xinbao_Qiao",
         "title": "Xinbao Qiao",
         "language": "en",
-        "modifiedAt": "2026-07-18T04:24:40.221Z",
-        "reviewedAt": "2026-07-18T12:25:05+08:00",
-        "reviewDue": "2026-10-16"
+        "modifiedAt": "2026-08-09T18:32:45.801Z",
+        "reviewedAt": "2026-08-10T02:34:00+08:00",
+        "reviewDue": "2026-11-07"
       },
       {
         "slug": "Zhejiang_University",
@@ -1712,7 +1584,7 @@
     ],
     "coverage": 0.0238,
     "structuredEdges": 2,
-    "totalEdges": 1027
+    "totalEdges": 1029
   },
   "retrievalReadiness": {
     "pages": 84,

@@ -11,10 +11,10 @@ tags:
   - biography
   - phd-student
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-18T04:24:40.221Z'
-content_hash: 'sha256:644f6709d8a5b7ad682dc27cd1f65b8753de694496eda1c740133f3916f175f5'
-reviewed_at: '2026-07-18T12:25:05+08:00'
-review_due: '2026-10-16'
+modified: '2026-08-09T18:32:45.801Z'
+content_hash: 'sha256:04b20b696b5d70393a4bd34c5abf764a6997b90145f2d0a18195691e473f2f4c'
+reviewed_at: '2026-08-10T02:34:00+08:00'
+review_due: '2026-11-07'
 language: en
 aliases:
   - Mr. Ciao
@@ -25,8 +25,8 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-18T12:25:05+08:00'
-  reviewDue: '2026-10-16'
+  reviewedAt: '2026-08-10T02:34:00+08:00'
+  reviewDue: '2026-11-07'
   pendingReview: false
   overdue: false
 retrieval:
@@ -57,7 +57,7 @@ These directions connect [data-centric ML](./Data_Centric_Machine_Learning.md), 
 
 ## Education
 
-Qiao is a PhD student in Information Engineering at [The Chinese University of Hong Kong](./The_Chinese_University_of_Hong_Kong.md), advised by [Angela Yingjun Zhang](./Angela_Yingjun_Zhang.md).[^cuhk-ie] His doctoral-stage work is organized around distributed evidence, networked computation, and reliable AI evaluation.
+Since 2026-08-01, Qiao has been a PhD student in Information Engineering at [The Chinese University of Hong Kong](./The_Chinese_University_of_Hong_Kong.md), advised by [Angela Yingjun Zhang](./Angela_Yingjun_Zhang.md).[^cuhk-ie] His doctoral-stage work is organized around distributed evidence, networked computation, and reliable AI evaluation.
 
 From 2022 to 2025, he studied Artificial Intelligence at [Zhejiang University](./Zhejiang_University.md), where his master's transcript records a major GPA of 90/100 and a rank of 3/25. His master's research was advised by [Meng Zhang](./Meng_Zhang.md).
 
@@ -75,7 +75,7 @@ This period includes work on [Hessian-Free Online Certified Unlearning](./Hessia
 
 From June to December 2025, Qiao worked as a full-time research intern at [NUSRI-CQ](./NUSRI_CQ.md). The research focused on trustworthy LLM systems and synthetic-data evaluation, especially low-resource recursive training where real-data coverage is limited or fragmented.
 
-### The Chinese University of Hong Kong (2026-present)
+### The Chinese University of Hong Kong (2026-08-01-present)
 
 At [The Chinese University of Hong Kong](./The_Chinese_University_of_Hong_Kong.md), Qiao's doctoral work extends the same distributed-evidence thread into [AI and networks](./AI_and_Networks.md): how learning systems can be trained, evaluated, and maintained when data and computation are distributed rather than pooled.
 
