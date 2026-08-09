@@ -42,11 +42,11 @@
 
 ### See the product work
 
-<a href="https://xinbaopedia.top/wiki/When_Sample_Selection_Bias_Precipitates_Model_Collapse/"><img src="public/readme/xinbaopedia-tour-en.gif" width="100%" alt="Animated English walkthrough of Xinbaopedia: homepage, English profile, When Sample Selection Bias Precipitates Model Collapse paper page, and a citation-grounded AI answer." /></a>
+<a href="https://xinbaopedia.top/"><img src="public/readme/xinbaopedia-tour-en.gif" width="100%" alt="Animated English walkthrough of Xinbaopedia: the latest homepage update, the public Site activity map, the Browse Xinbaopedia knowledge cube, and a citation-grounded AI answer." /></a>
 
-<p align="center"><sub>Discover on the homepage → follow the profile → open a publication → ask for a source-grounded answer.</sub></p>
+<p align="center"><sub>Read the latest update → inspect public Site activity → browse the knowledge cube → ask for a source-grounded answer.</sub></p>
 
-## From profile page to knowledge product
+## From homepage to knowledge product
 
 A conventional academic homepage is an endpoint: a biography, a list of papers, a few links. Xinbaopedia turns the same material into a starting point — a connected place to browse, search, ask, and keep discovering.
 
@@ -57,7 +57,7 @@ A conventional academic homepage is an endpoint: a biography, a list of papers, 
     <td width="50%" valign="top">
       <sub><strong>01 · EXPLORE</strong></sub>
       <h3>A profile becomes a map</h3>
-      Move through people, papers, projects, institutions, and concepts with real WikiLinks — not a flat CV timeline.
+      Move through people, papers, projects, institutions, and concepts with Browse Xinbaopedia's list and typographic cube — not a flat CV timeline.
     </td>
     <td width="50%" valign="top">
       <sub><strong>02 · DISCOVER</strong></sub>
@@ -95,6 +95,7 @@ A conventional academic homepage is an endpoint: a biography, a list of papers, 
 | When you want to… | The product… | So you get… |
 | --- | --- | --- |
 | Understand a research profile quickly | Organizes biography, education, papers, and themes as a bilingual Wiki | A clear reading path instead of a document to scan |
+| See how the public site is being explored | Summarizes lifetime Site activity in a thresholded world view | A coarse public signal without raw IPs or region rankings |
 | Find an idea you only half remember | Searches titles, aliases, summaries, headings, and body text | Results closer to your intent |
 | Ask “What did this paper contribute?” | Combines current-page context with related public evidence | A cited answer you can inspect |
 | Ask beyond the Wiki | Switches to ordinary conversation instead of a canned refusal | A useful answer without invented Wiki sources |
@@ -205,11 +206,11 @@ Read [Contributing](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md),
 
 ### 看见产品如何工作
 
-<a href="https://xinbaopedia.top/wiki/Research_zh/"><img src="public/readme/xinbaopedia-tour-zh.gif" width="100%" alt="Xinbaopedia 中文动图演示：首页、中文人物页、研究页，以及带引用来源的 AI 回答。" /></a>
+<a href="https://xinbaopedia.top/"><img src="public/readme/xinbaopedia-tour-zh.gif" width="100%" alt="Xinbaopedia 中文动图演示：主页最新动态、公开访问足迹、浏览 Xinbaopedia 知识魔方，以及带引用来源的 AI 回答。" /></a>
 
-<p align="center"><sub>从主页发现 → 沿人物页探索 → 打开研究页 → 获得可回查来源的 AI 回答。</sub></p>
+<p align="center"><sub>阅读最新动态 → 查看公开访问足迹 → 浏览知识魔方 → 获得可回查来源的 AI 回答。</sub></p>
 
-## 从个人主页，到知识产品
+## 从主页，到知识产品
 
 传统学术主页通常是终点：一段简介、一列论文、几个链接。Xinbaopedia 把同样的材料变成探索的起点——可以沿关联浏览，可以按意图搜索，也可以带着证据继续追问。
 
@@ -220,7 +221,7 @@ Read [Contributing](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md),
     <td width="50%" valign="top">
       <sub><strong>01 · 探索</strong></sub>
       <h3>个人主页变成知识地图</h3>
-      人物、论文、项目、机构与概念通过真实 WikiLinks 相连，阅读不再停在平铺的履历时间线上。
+      人物、论文、项目、机构与概念通过真实 WikiLinks 相连，并可在“浏览 Xinbaopedia”的列表与知识魔方之间切换，阅读不再停在平铺的履历时间线上。
     </td>
     <td width="50%" valign="top">
       <sub><strong>02 · 发现</strong></sub>
@@ -258,6 +259,7 @@ Read [Contributing](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md),
 | 当你想要…… | 产品会…… | 于是你得到…… |
 | --- | --- | --- |
 | 快速理解一个人的研究 | 把人物、教育、论文与主题组织成双语 Wiki | 清晰的阅读路径，而不是一份需要扫读的文档 |
+| 了解公开站点如何被探索 | 用带阈值的世界视图汇总全部历史访问足迹 | 不暴露原始 IP 或地区排行的粗粒度公开信号 |
 | 找到只记得大概的概念 | 检索标题、别名、摘要、小节与正文 | 更接近真实意图的结果 |
 | 问“这篇论文做了什么？” | 结合当前页与相关公开证据 | 可以回查的引用回答 |
 | 问 Wiki 尚未覆盖的问题 | 转入普通对话，而不是重复固定拒答 | 有用且不虚构 Wiki 来源的回答 |
