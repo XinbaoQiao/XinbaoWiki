@@ -13,7 +13,8 @@ function hasAll(text, needles, label) {
   }
 }
 
-assert.match(panel, /CLIENT_REQUEST_TIMEOUT_MS = 15_000/, 'client has an explicit request timeout');
+assert.match(panel, /CLIENT_REQUEST_TIMEOUT_MS = 25_000/, 'client leaves headroom beyond the backend provider deadline');
+assert.match(route, /REQUEST_TIMEOUT_MS = 20_000/, 'backend provider deadline accommodates the observed upstream latency');
 assert.ok(panel.includes('activeRequestRef = useRef<AbortController | null>(null)'), 'client keeps the active AbortController');
 hasAll(panel, ['const controller = new AbortController()', 'signal: controller.signal'], 'client passes AbortController.signal to fetch');
 hasAll(panel, ['const timeout = setTimeout(() => {', 'timedOut = true;', 'controller.abort();'], 'client aborts slow requests with timeout state');

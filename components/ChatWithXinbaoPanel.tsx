@@ -27,7 +27,7 @@ type Props = {
 };
 
 const MAX_INPUT_LENGTH = 1000;
-const CLIENT_REQUEST_TIMEOUT_MS = 15_000;
+const CLIENT_REQUEST_TIMEOUT_MS = 25_000;
 
 const copy = {
   en: {

@@ -1504,7 +1504,7 @@ assert.match(chatRoute, /MAX_INPUT_LENGTH = 1000/, 'chat API validates input len
 assert.doesNotMatch(chatRoute, /MAX_HISTORY_MESSAGES|type ChatRole|type ChatMessage/, 'chat API has no client-history provider path');
 assert.match(chatRoute, /MAX_OUTPUT_TOKENS = 450/, 'chat API caps model output tokens');
 assert.match(chatRoute, /thinking: \{ type: 'disabled' \}/, 'chat API disables model thinking output so the 450-token cap is reserved for the final answer');
-assert.match(chatRoute, /REQUEST_TIMEOUT_MS = 12_000/, 'chat API has a backend timeout');
+assert.match(chatRoute, /REQUEST_TIMEOUT_MS = 20_000/, 'chat API has a bounded backend timeout with upstream latency headroom');
 assert.match(chatRoute, /QUESTION_LOG_MAX_RECENT = 2_000/, 'chat API caps the retained recent question log');
 assert.match(chatRoute, /QUESTION_LOG_RETENTION_DAYS = 90/, 'chat API expires daily question logs after 90 days');
 assert.match(chatRoute, /function questionFingerprint[\s\S]*hashIdentity\(`question:/, 'chat API converts accepted questions to a salted one-way fingerprint');
