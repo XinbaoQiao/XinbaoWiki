@@ -25,8 +25,7 @@ type Props = {
 
 const sectionLabels = {
   navigation: { en: 'Navigation', zh: '导航' },
-  contribute: { en: 'Contribute', zh: '链接' },
-  email: { en: 'Email the author', zh: '发送邮件' },
+  updates: { en: 'Updates', zh: '更新' },
   feed: { en: 'Latest updates', zh: '最新动态' },
   openNavigation: { en: 'Open navigation', zh: '打开导航' },
   closeNavigation: { en: 'Close navigation', zh: '关闭导航' }
@@ -79,20 +78,8 @@ function SidebarSections({
         </div>
       ))}
 
-      <h4>{sectionLabels.contribute[language]}</h4>
+      <h4>{sectionLabels.updates[language]}</h4>
       <ul>
-        <li>
-          <a
-            className="external"
-            href="https://www.linkedin.com/in/xinbaoqiao/"
-            onClick={onNavigate}
-            target="_blank"
-            rel="noreferrer"
-          >
-            LinkedIn
-          </a>
-        </li>
-        <li><a href="mailto:xinbaoqiao@cuhk.edu.hk" onClick={onNavigate}>{sectionLabels.email[language]}</a></li>
         <li><a href={withBasePath('/updates/')} onClick={onNavigate}>{sectionLabels.feed[language]}</a></li>
       </ul>
     </div>

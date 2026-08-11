@@ -111,7 +111,7 @@ export const sidebarSections = [
   {
     key: 'navigation',
     label: { en: 'Navigation', zh: '导航' },
-    links: ['Xinbao_Qiao', 'Publications']
+    links: ['Xinbao_Qiao', 'Publications', 'CV']
   },
   {
     key: 'researchTopics',
@@ -133,6 +133,7 @@ export const sidebarSections = [
 export const navigationLabels: Record<string, LocalizedText> = {
   Xinbao_Qiao: { en: 'Main page', zh: '主页' },
   Publications: { en: 'Publications', zh: '论文' },
+  CV: { en: 'CV', zh: '简历' },
   AI_and_Networks: { en: 'AI and Networks', zh: 'AI 与网络' },
   Machine_Unlearning: { en: 'Machine Unlearning', zh: '机器遗忘' },
   Synthetic_Data_and_Model_Collapse: { en: 'Synthetic Data', zh: '合成数据' },

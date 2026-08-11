@@ -1647,12 +1647,13 @@ assert.match(languageToggle, /document\.documentElement\.lang = isWikiPage && is
 assert.doesNotMatch(sidebarClient, /function NavSection|className="nav-section"|<section className="nav-section">/, 'sidebar uses flat Colarpedia h4 plus ul blocks');
 assert.match(sidebar, /localizedSlug: \{ en: enSlug, zh: zhSlug \}/, 'server sidebar builds localized article links');
 assert.match(siteUpdates, /navigationLabels[\s\S]*Xinbao_Qiao: \{ en: 'Main page', zh: '主页' \}/, 'sidebar keeps the homepage label compact and localized');
-assert.match(siteUpdates, /sidebarSections[\s\S]*navigation[\s\S]*Publications/, 'site navigation metadata supplies sidebar sections');
+assert.match(siteUpdates, /sidebarSections[\s\S]*navigation[\s\S]*links: \['Xinbao_Qiao', 'Publications', 'CV'\]/, 'primary navigation ends with CV immediately after Publications');
+assert.match(siteUpdates, /CV: \{ en: 'CV', zh: '简历' \}/, 'sidebar gives the CV entry a compact bilingual label');
 assert.match(sidebarClient, /feed: { en: 'Latest updates', zh: '最新动态' }/, 'SidebarClient links ordinary visitors to readable localized updates');
 assert.doesNotMatch(siteUpdates + sidebarClient, /Research Atlas|研究图谱|\/atlas/, 'sidebar removes the retired Research Atlas entry');
 assert.doesNotMatch(sidebarClient, /Source repository|OpenReview profile/, 'sidebar contribute avoids non-Colarpedia sidebar labels');
-assert.match(sidebarClient, /LinkedIn[\s\S]*sectionLabels\.email\[language\][\s\S]*sectionLabels\.feed\[language\]/, 'sidebar contribute keeps LinkedIn and email, then links to the readable updates archive');
-assert.doesNotMatch(sidebarClient, /className="external" href="mailto:/, 'email link is not styled as an external link');
+assert.match(sidebarClient, /updates: \{ en: 'Updates', zh: '更新' \}[\s\S]*<h4>\{sectionLabels\.updates\[language\]\}<\/h4>[\s\S]*sectionLabels\.feed\[language\]/, 'sidebar gives the remaining updates link an accurate localized section heading');
+assert.doesNotMatch(sidebarClient, /Contribute|LinkedIn|Email the author|mailto:/, 'sidebar omits redundant contribution, LinkedIn, and email chrome');
 for (const shortLabel of ['CUHK', 'NUSRI-CQ', 'ZJU', 'SDU']) {
   assert.match(siteUpdates, new RegExp(`en: '${shortLabel}'`), `sidebar uses short label ${shortLabel}`);
 }
