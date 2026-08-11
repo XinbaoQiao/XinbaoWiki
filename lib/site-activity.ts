@@ -3,6 +3,29 @@ export const SITE_ACTIVITY_API_PATH = `/api/site-activity/v${SITE_ACTIVITY_SCHEM
 export const SITE_ACTIVITY_MAP_WIDTH = 672;
 export const SITE_ACTIVITY_MAP_HEIGHT = 276;
 export const SITE_ACTIVITY_SINCE = '2026-08-09';
+export const SITE_ACTIVITY_CANONICAL_HOSTNAME = 'xinbaopedia.top';
+
+const SITE_ACTIVITY_AUTOMATION_USER_AGENT = /(?:HeadlessChrome\/|Playwright|Puppeteer|xinbaopedia-)/i;
+const SITE_ACTIVITY_LOOPBACK_HOSTNAMES = new Set(['127.0.0.1', '::1', '[::1]', 'localhost']);
+
+type SiteActivityRequestSource = {
+  hostname: string;
+  testMode?: boolean;
+  userAgent?: string | null;
+};
+
+export function shouldRecordSiteActivityRequest({
+  hostname,
+  testMode = false,
+  userAgent = null
+}: SiteActivityRequestSource) {
+  const normalizedHostname = hostname.trim().toLowerCase().replace(/\.$/, '');
+  if (testMode && SITE_ACTIVITY_LOOPBACK_HOSTNAMES.has(normalizedHostname)) return true;
+  return (
+    normalizedHostname === SITE_ACTIVITY_CANONICAL_HOSTNAME &&
+    !SITE_ACTIVITY_AUTOMATION_USER_AGENT.test(userAgent ?? '')
+  );
+}
 
 export type SiteActivityLevel = 1 | 2 | 3;
 

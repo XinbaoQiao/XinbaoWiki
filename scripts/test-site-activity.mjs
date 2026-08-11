@@ -16,6 +16,7 @@ import {
   SITE_ACTIVITY_VISITOR_COOKIE_NAME,
   siteActivityExclusionCookieValue
 } from '../lib/site-activity-preference.ts';
+import { shouldRecordSiteActivityRequest } from '../lib/site-activity.ts';
 import {
   createSiteActivityOwnerPasswordHash,
   isSiteActivityOwnerPasswordHash,
@@ -32,6 +33,7 @@ const preferenceRoute = fs.readFileSync('app/api/site-activity/preference/route.
 const ownerAuth = fs.readFileSync('lib/site-activity-owner-auth.ts', 'utf8');
 const aggregation = fs.readFileSync('lib/site-activity-aggregation.ts', 'utf8');
 const component = fs.readFileSync('components/VisitorAtlasDisclosure.tsx', 'utf8');
+const playwrightConfig = fs.readFileSync('playwright.config.mjs', 'utf8');
 const shared = fs.readFileSync('lib/site-activity.ts', 'utf8');
 const map = fs.readFileSync('public/maps/world-land-dots.svg', 'utf8');
 
@@ -56,6 +58,38 @@ hasAll(route, [
   "const CELL_DEGREES = 5",
   "const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 400"
 ], 'site activity uses five-degree cells and a long-lived signed browser identifier');
+assert.equal(shouldRecordSiteActivityRequest({ hostname: 'xinbaopedia.top', userAgent: 'Mozilla/5.0 Chrome/140.0' }), true, 'ordinary canonical browsers are recorded');
+assert.equal(shouldRecordSiteActivityRequest({ hostname: 'XINBAOPEDIA.TOP.', userAgent: 'Mozilla/5.0' }), true, 'canonical hostname matching is normalized');
+assert.equal(shouldRecordSiteActivityRequest({ hostname: 'xinbaopedia-preview.vercel.app', userAgent: 'Mozilla/5.0' }), false, 'Vercel preview deployments are excluded');
+assert.equal(shouldRecordSiteActivityRequest({ hostname: 'localhost', userAgent: 'Mozilla/5.0' }), false, 'local servers are excluded by default');
+assert.equal(shouldRecordSiteActivityRequest({ hostname: 'localhost', testMode: true, userAgent: 'HeadlessChrome/140.0' }), true, 'explicit test mode enables loopback regression recording');
+assert.equal(shouldRecordSiteActivityRequest({ hostname: 'xinbaopedia-preview.vercel.app', testMode: true, userAgent: 'Mozilla/5.0' }), false, 'test mode cannot enable a remote preview host');
+for (const userAgent of [
+  'Mozilla/5.0 HeadlessChrome/140.0',
+  'Playwright/1.61',
+  'Puppeteer/24.0',
+  'xinbaopedia-smoke/123',
+  'xinbaopedia-staged-canary/123-grounded',
+  'xinbaopedia-deployment-browser-qa/1',
+  'xinbaopedia-future-deployment/1',
+  'xinbaopedia-publish-preflight'
+]) {
+  assert.equal(shouldRecordSiteActivityRequest({ hostname: 'xinbaopedia.top', userAgent }), false, `${userAgent} is excluded from canonical activity`);
+}
+hasAll(route, [
+  'function shouldRecordVisit(request: NextRequest)',
+  'shouldRecordSiteActivityRequest({',
+  'hostname: new URL(request.url).hostname',
+  "testMode: process.env.SITE_ACTIVITY_TEST_MODE === 'true'",
+  "userAgent: request.headers.get('user-agent')",
+  'if (!shouldRecordVisit(request)) return privateResponse(204)',
+  'if (!sameOriginRequest(request)) return privateResponse(403)'
+], 'recording rejects non-canonical and deployment-automation traffic before request validation');
+hasAll(playwrightConfig, [
+  "const deploymentBrowserUserAgent = 'xinbaopedia-deployment-browser-qa/1'",
+  'externalBaseUrl ? { userAgent: deploymentBrowserUserAgent } : {}',
+  "SITE_ACTIVITY_TEST_MODE: 'true'"
+], 'external browser QA is marked for exclusion while local recording tests use an explicit loopback-only mode');
 assert.doesNotMatch(`${route}\n${aggregation}`, /\bCOMPLETE_DAYS\b|\bexpiryForDateKey\b|\.expireat\(/, 'lifetime aggregate has no rolling day window or automatic aggregate expiry');
 hasAll(route, [
   "process.env.VERCEL !== '1'",

@@ -70,6 +70,9 @@ async function testSmokeRetry() {
   let contextGroundedReferer = '';
   let conversationalChatPosts = 0;
   let sensitiveChatPosts = 0;
+  let siteActivityExclusionPosts = 0;
+  let siteActivityUserAgent = '';
+  let leakSiteActivityVisitorCookie = false;
   const server = http.createServer((req, res) => {
     if (req.url === '/') {
       homepageAttempts += 1;
@@ -99,6 +102,16 @@ async function testSmokeRetry() {
     }
     if (req.url?.startsWith('/okf/sources')) {
       json(res, { schemaVersion: 1, sources: [{ id: 'src-test', pages: ['Xinbao_Qiao'] }] });
+      return;
+    }
+    if (req.method === 'POST' && req.url?.startsWith('/api/site-activity/v2/')) {
+      siteActivityExclusionPosts += 1;
+      siteActivityUserAgent = req.headers['user-agent'] || '';
+      if (leakSiteActivityVisitorCookie) {
+        res.setHeader('set-cookie', 'xinbao_site_vid=unexpected; Path=/; HttpOnly');
+      }
+      res.statusCode = 204;
+      res.end();
       return;
     }
     if (req.method === 'GET' && req.url?.startsWith('/api/chat-with-xinbao?diagnostic=retrieval')) {
@@ -220,11 +233,26 @@ async function testSmokeRetry() {
     assert.equal(result.status, 0, result.stderr || result.stdout);
     assert.match(result.stderr, /Production smoke retry 2\/3/, 'smoke retries a transient HTTP status');
     assert.match(result.stdout, /Production smoke passed/, 'smoke passes after the retry succeeds');
+    assert.equal(siteActivityExclusionPosts, 1, 'production smoke sends one Site activity exclusion canary');
+    assert.match(siteActivityUserAgent, /^xinbaopedia-smoke\//, 'Site activity canary carries the project automation marker');
     assert.equal(groundedChatPosts, 1, 'production smoke sends one grounded chat POST canary');
     assert.equal(contextGroundedChatPosts, 1, 'production smoke sends one page-context grounded POST canary');
     assert.equal(new URL(contextGroundedReferer).pathname, '/wiki/DynFrs/', 'page-context canary carries the current wiki page as Referer');
     assert.equal(conversationalChatPosts, 1, 'production smoke sends one conversational POST canary');
     assert.equal(sensitiveChatPosts, 1, 'production smoke sends one sensitive-query abstention POST canary');
+
+    leakSiteActivityVisitorCookie = true;
+    const rejected = await run(process.execPath, ['scripts/smoke-production.mjs'], {
+      env: {
+        ...process.env,
+        SITE_URL: `http://127.0.0.1:${port}`,
+        SMOKE_RETRY_DELAY_MS: '1',
+      },
+    });
+    assert.equal(rejected.status, 1, 'production smoke rejects a Site activity visitor cookie');
+    assert.match(rejected.stderr, /response issued the visitor cookie/, 'cookie rejection reports the exact release invariant');
+    assert.equal(siteActivityExclusionPosts, 2, 'cookie rejection occurs on the second Site activity canary');
+    assert.equal(groundedChatPosts, 1, 'early Site activity rejection avoids repeating expensive chat canaries');
   } finally {
     await new Promise((resolve) => server.close(resolve));
   }
@@ -316,6 +344,25 @@ function testNetworkRouteSelection() {
     { curlSeconds: 30, parentMs: 45_000 },
     'direct-only environments keep the full budget because no fallback exists'
   );
+}
+
+function testSiteActivityDeploymentGate() {
+  const deploySource = readFileSync(join(root, 'scripts', 'deploy-production.mjs'), 'utf8');
+  const smokeSource = readFileSync(join(root, 'scripts', 'smoke-production.mjs'), 'utf8');
+  const stagedGate = deploySource.indexOf("label: 'site activity deployment exclusion'");
+  const stagedChat = deploySource.indexOf("label: 'chat grounded provider canary'");
+  assert.ok(stagedGate > 0 && stagedGate < stagedChat, 'staged Site activity exclusion fails before provider chat canaries');
+  for (const fragment of [
+    "path: '/api/site-activity/v2/'",
+    "patterns: [/^HTTP\\/(?:1\\.1|2) 204",
+    "forbiddenPatterns: [/^set-cookie:.*\\bxinbao_site_vid=",
+    "requestArgs.push('--dump-header', '-')",
+  ]) {
+    assert.ok(deploySource.includes(fragment), `staged Site activity gate is missing ${fragment}`);
+  }
+  const productionGate = smokeSource.indexOf('await checkSiteActivityExclusion();');
+  const productionChat = smokeSource.indexOf('const groundedChat = await postJson(');
+  assert.ok(productionGate > 0 && productionGate < productionChat, 'production Site activity exclusion fails before provider chat canaries');
 }
 
 function testGithubPublishPreflight() {
@@ -973,6 +1020,7 @@ await testExternalProcessTimeoutKillsTree();
 await testExternalProcessOutputLimit();
 await testReleaseOrchestratorMatrix();
 testNetworkRouteSelection();
+testSiteActivityDeploymentGate();
 testGithubPublishPreflight();
 testReleaseStateRoundTrip();
 testReleaseResumePhaseMatrix();

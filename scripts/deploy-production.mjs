@@ -225,6 +225,16 @@ async function runStagedSmoke(vercelCommand, routes, stagedUrl) {
   const canaryUserAgent = `xinbaopedia-staged-canary/${process.pid}-${Date.now()}`;
   const checks = [
     { label: 'homepage', path: '/', patterns: [/Xinbaopedia/i] },
+    {
+      label: 'site activity deployment exclusion',
+      path: '/api/site-activity/v2/',
+      method: 'POST',
+      userAgent: `${canaryUserAgent}-site-activity`,
+      data: '',
+      includeHeaders: true,
+      patterns: [/^HTTP\/(?:1\.1|2) 204(?:\s|$)/m],
+      forbiddenPatterns: [/^set-cookie:.*\bxinbao_site_vid=/im],
+    },
     biographyReleaseContract,
     { path: '/robots.txt', patterns: [/Sitemap: https:\/\/xinbaopedia\.top\/sitemap\.xml/] },
     { path: '/sitemap.xml', patterns: [/\/wiki\/Xinbao_Qiao\//] },
@@ -347,6 +357,7 @@ async function runStagedSmoke(vercelCommand, routes, stagedUrl) {
       try {
         const requestBudget = stagedSmokeRequestBudget(route, routes.length);
         const requestArgs = ['--silent', '--show-error', '--max-time', String(requestBudget.curlSeconds)];
+        if (check.includeHeaders) requestArgs.push('--dump-header', '-');
         if (check.method === 'POST') {
           requestArgs.push(
             '--request', 'POST',

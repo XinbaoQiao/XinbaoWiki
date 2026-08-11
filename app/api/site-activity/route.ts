@@ -6,6 +6,7 @@ import {
   SITE_ACTIVITY_MAP_WIDTH,
   SITE_ACTIVITY_SCHEMA_VERSION,
   SITE_ACTIVITY_SINCE,
+  shouldRecordSiteActivityRequest,
   type SiteActivityCell,
   type SiteActivityPayload
 } from '@/lib/site-activity';
@@ -213,6 +214,14 @@ function sameOriginRequest(request: NextRequest) {
   return !origin || origin === new URL(request.url).origin;
 }
 
+function shouldRecordVisit(request: NextRequest) {
+  return shouldRecordSiteActivityRequest({
+    hostname: new URL(request.url).hostname,
+    testMode: process.env.SITE_ACTIVITY_TEST_MODE === 'true',
+    userAgent: request.headers.get('user-agent')
+  });
+}
+
 async function acceptsEmptyBody(request: NextRequest) {
   const contentLength = Number(request.headers.get('content-length') || 0);
   if (!Number.isFinite(contentLength) || contentLength < 0 || contentLength > 0) return false;
@@ -239,6 +248,7 @@ function logSiteActivityIssue(message: string) {
 }
 
 export async function POST(request: NextRequest) {
+  if (!shouldRecordVisit(request)) return privateResponse(204);
   if (!sameOriginRequest(request)) return privateResponse(403);
   if (!(await acceptsEmptyBody(request))) return privateResponse(400);
 

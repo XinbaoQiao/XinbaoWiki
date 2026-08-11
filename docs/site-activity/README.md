@@ -29,6 +29,16 @@ it does not identify people.
    The schema version is part of the route so a future incompatible payload can
    use a new endpoint without breaking an already-open page. The unversioned
    version 2 route remains available for pages opened before this change.
+   Recording accepts only the canonical `xinbaopedia.top` hostname. Vercel
+   preview or staged hostnames, loopback servers, any project automation marked
+   with a `xinbaopedia-` user agent, and recognized headless-browser automation
+   receive a private `204` before visitor-cookie creation, geographic-header
+   handling, migration, or Redis writes. The automation marker is an analytics
+   exclusion rather than an authentication boundary; its value is never stored.
+   A test-only switch can exercise recording on loopback and cannot enable a
+   remote preview or production automation request. The staged deployment
+   canary and canonical production smoke both require this `204` and reject a
+   response that issues the visitor cookie before a release is considered safe.
 2. The server creates or verifies a signed random `HttpOnly`, `SameSite=Lax`
    first-party cookie with a 400-day maximum age. Only its keyed digest enters
    Redis HyperLogLog buckets. Browser deletion or expiry can cause a returning

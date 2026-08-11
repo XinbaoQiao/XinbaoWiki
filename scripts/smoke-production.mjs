@@ -178,8 +178,21 @@ async function checkText(pathname, label, patterns) {
   return response;
 }
 
+async function checkSiteActivityExclusion() {
+  const label = 'Site activity deployment exclusion';
+  const response = await request(joinUrl('/api/site-activity/v2/'), { method: 'POST' });
+  const setCookieHeaders = response.headers['set-cookie'];
+  const cookies = Array.isArray(setCookieHeaders)
+    ? setCookieHeaders
+    : setCookieHeaders ? [setCookieHeaders] : [];
+  assert(response.status === 204, `${label}: expected HTTP 204, got ${response.status} at ${response.url}`);
+  assert(response.body.length === 0, `${label}: expected an empty response body`);
+  assert(!cookies.some((cookie) => /\bxinbao_site_vid=/i.test(cookie)), `${label}: response issued the visitor cookie`);
+}
+
 async function main() {
   await checkText('/', 'homepage', [/Xinbaopedia/i]);
+  await checkSiteActivityExclusion();
   const wikiPath = WIKI_SLUG === 'Xinbao_Qiao'
     ? biographyReleaseContract.path
     : `/wiki/${encodeURIComponent(WIKI_SLUG)}/`;
