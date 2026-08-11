@@ -2413,17 +2413,41 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   opacity: .55;
 }
 
-.wiki-visitor-atlas-status {
-  margin: 0;
-  text-wrap: balance;
+.wiki-visitor-atlas-status-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin-top: 12px;
 }
 
 .wiki-visitor-atlas-status {
-  margin-top: 12px;
+  margin: 0;
   color: var(--site-theme-heading);
   font-size: 12px;
   font-weight: 650;
   line-height: 1.4;
+  text-wrap: balance;
+}
+
+.wiki-visitor-atlas-retry {
+  min-height: 32px;
+  padding: 5px 10px;
+  border: 1px solid var(--site-theme-chrome-border);
+  border-radius: 1px;
+  background: var(--wiki-bg);
+  color: var(--site-theme-action-ink);
+  cursor: pointer;
+  font: 700 12px/1.2 var(--font-sans);
+}
+
+.wiki-visitor-atlas-retry:hover {
+  background: var(--site-theme-chrome-surface-strong);
+}
+
+.wiki-visitor-atlas-retry:focus-visible {
+  outline: 2px solid var(--site-theme-action-ink);
+  outline-offset: 2px;
 }
 
 .wiki-visitor-atlas[data-status="loading"] .wiki-visitor-atlas-map {

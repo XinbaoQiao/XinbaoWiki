@@ -289,8 +289,12 @@ export async function GET(request: NextRequest) {
   if (!redis || !secret) return publicJson(empty);
 
   try {
-    const migrationState = await migrateLegacySiteActivity(redis, secret, SITE_ACTIVITY_SINCE, now);
-    if (migrationState === 'busy') return privateResponse(503);
+    await migrateLegacySiteActivity(redis, secret, SITE_ACTIVITY_SINCE, now);
+  } catch {
+    logSiteActivityIssue('legacy aggregate migration failed');
+  }
+
+  try {
     const activeCells = await redis.smembers(siteActivityAggregationKeys.lifetimeCellsIndex());
     const cellIds = [...new Set(activeCells.filter((cellId) => parseCellId(cellId)))]
       .sort((left, right) => cellSelectionScore(left, secret).localeCompare(cellSelectionScore(right, secret)))

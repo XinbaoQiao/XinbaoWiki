@@ -22,6 +22,7 @@ const unavailableAggregate = {
 };
 
 const ownerTestPassword = 'playwright-owner-password';
+const activityPath = '/api/site-activity/v2/';
 const ownerPreferencePath = '/api/site-activity/preference/';
 
 async function installRoutes(page, getResponse, {
@@ -35,12 +36,13 @@ async function installRoutes(page, getResponse, {
   }));
   const interceptSiteActivity = async (route) => {
     const pathname = new URL(route.request().url()).pathname.replace(/\/+$/, '');
-    if (pathname.endsWith('/api/site-activity')) {
+    if (pathname === activityPath.replace(/\/$/, '')) {
       if (route.request().method() === 'POST' && mockActivityPost) {
         return route.fulfill({ body: '', status: 204 });
       }
       if (route.request().method() === 'GET') {
         const response = await getResponse();
+        if (response.abort) return route.abort(response.abort);
         return route.fulfill(response);
       }
       return route.fallback();
@@ -56,13 +58,15 @@ async function installRoutes(page, getResponse, {
 
 function captureErrors(page, {
   allowSiteActivityAbort = false,
-  allowSiteActivityHttpError = false
+  allowSiteActivityHttpError = false,
+  allowSiteActivityRetryFailure = false
 } = {}) {
   const errors = [];
   page.on('console', (message) => {
     if (
       message.type() === 'error' &&
-      !(allowSiteActivityHttpError && /(?:site-activity|401|429|503)/i.test(message.text()))
+      !(allowSiteActivityHttpError && /(?:site-activity|401|429|503)/i.test(message.text())) &&
+      !(allowSiteActivityRetryFailure && message.text() === 'Failed to load resource: net::ERR_FAILED')
     ) {
       errors.push(`console: ${message.text()}`);
     }
@@ -74,6 +78,11 @@ function captureErrors(page, {
       allowSiteActivityAbort &&
       request.url().includes('/api/site-activity/') &&
       errorText === 'net::ERR_ABORTED'
+    ) return;
+    if (
+      allowSiteActivityRetryFailure &&
+      request.url().includes(activityPath) &&
+      errorText === 'net::ERR_FAILED'
     ) return;
     errors.push(`request: ${request.url()} (${errorText})`);
   });
@@ -248,6 +257,9 @@ test('visitor atlas retries migration, then distinguishes a persistent error fro
     if (responseMode === 'migration') {
       return { body: JSON.stringify(aggregate), contentType: 'application/json', status: 200 };
     }
+    if (responseMode === 'ready') {
+      return { body: JSON.stringify(aggregate), contentType: 'application/json', status: 200 };
+    }
     if (responseMode === 'error') return { body: '', status: 503 };
     return {
         body: JSON.stringify({ ...aggregate, cells: [], uniqueBrowsersEstimate: null }),
@@ -264,7 +276,16 @@ test('visitor atlas retries migration, then distinguishes a persistent error fro
 
   responseMode = 'error';
   await page.reload({ waitUntil: 'networkidle' });
+  await page.locator('.wiki-portal-name-button').click({ force: true });
+  await expect(page.locator('#portal-activity')).toHaveAttribute('open', '');
   await expect(status).toContainText('temporarily unavailable');
+  const retry = page.getByRole('button', { name: 'Retry' });
+  await expect(retry).toBeVisible();
+
+  responseMode = 'ready';
+  await retry.evaluate((element) => element.click());
+  await expect(atlas).toHaveAttribute('data-status', 'ready');
+  await expect(retry).toHaveCount(0);
 
   responseMode = 'empty';
   await page.reload({ waitUntil: 'networkidle' });
@@ -272,6 +293,24 @@ test('visitor atlas retries migration, then distinguishes a persistent error fro
   await expect(atlas.locator('.wiki-visitor-atlas-status')).toHaveCount(0);
   await expect(page.locator('#portal-activity')).not.toContainText('No map cell');
   await expect(page.locator('#portal-activity .wiki-visitor-atlas-cluster')).toHaveCount(0);
+  expect(errors).toEqual([]);
+});
+
+test('visitor atlas retries a transport failure before exposing an error', async ({ page }) => {
+  const errors = captureErrors(page, {
+    allowSiteActivityAbort: true,
+    allowSiteActivityRetryFailure: true
+  });
+  let reads = 0;
+  await installRoutes(page, () => {
+    reads += 1;
+    if (reads === 1) return { abort: 'failed' };
+    return { body: JSON.stringify(aggregate), contentType: 'application/json', status: 200 };
+  });
+
+  await page.goto('/', { waitUntil: 'networkidle' });
+  await expect(page.locator('#portal-activity .wiki-visitor-atlas')).toHaveAttribute('data-status', 'ready');
+  expect(reads).toBe(2);
   expect(errors).toEqual([]);
 });
 
@@ -345,7 +384,7 @@ test('correct owner password sets an exclusion cookie across simulated locations
   const activityPosts = [];
   page.on('request', (requestEvent) => {
     const url = new URL(requestEvent.url());
-    if (url.pathname === '/api/site-activity/' && requestEvent.method() === 'POST') activityPosts.push(requestEvent.headers());
+    if (url.pathname === activityPath && requestEvent.method() === 'POST') activityPosts.push(requestEvent.headers());
   });
   await installRoutes(page, () => ({ body: JSON.stringify(aggregate), contentType: 'application/json', status: 200 }));
   await page.goto('/', { waitUntil: 'networkidle' });
@@ -371,7 +410,7 @@ test('correct owner password sets an exclusion cookie across simulated locations
 
   const cookieHeader = `${exclusionCookie.name}=${exclusionCookie.value}`;
   const activityStatuses = await Promise.all([
-    request.post('/api/site-activity/', {
+    request.post(activityPath, {
       headers: {
         cookie: cookieHeader,
         'x-vercel-forwarded-for': '198.51.100.10',
@@ -379,7 +418,7 @@ test('correct owner password sets an exclusion cookie across simulated locations
         'x-vercel-ip-longitude': '114.2'
       }
     }),
-    request.post('/api/site-activity/', {
+    request.post(activityPath, {
       headers: {
         cookie: cookieHeader,
         'x-vercel-forwarded-for': '198.51.100.11',

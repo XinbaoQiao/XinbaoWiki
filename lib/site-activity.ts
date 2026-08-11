@@ -1,4 +1,5 @@
 export const SITE_ACTIVITY_SCHEMA_VERSION = 2 as const;
+export const SITE_ACTIVITY_API_PATH = `/api/site-activity/v${SITE_ACTIVITY_SCHEMA_VERSION}/` as const;
 export const SITE_ACTIVITY_MAP_WIDTH = 672;
 export const SITE_ACTIVITY_MAP_HEIGHT = 276;
 export const SITE_ACTIVITY_SINCE = '2026-08-09';

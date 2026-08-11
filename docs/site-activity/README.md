@@ -25,7 +25,10 @@ it does not identify people.
 
 ## Data flow and retention
 
-1. The homepage sends a same-origin, bodyless `POST /api/site-activity/`.
+1. The homepage sends a same-origin, bodyless `POST /api/site-activity/v2/`.
+   The schema version is part of the route so a future incompatible payload can
+   use a new endpoint without breaking an already-open page. The unversioned
+   version 2 route remains available for pages opened before this change.
 2. The server creates or verifies a signed random `HttpOnly`, `SameSite=Lax`
    first-party cookie with a 400-day maximum age. Only its keyed digest enters
    Redis HyperLogLog buckets. Browser deletion or expiry can cause a returning
@@ -48,7 +51,9 @@ it does not identify people.
    128-cell batches, and two catch-up passes at 15-minute intervals capture
    writes from an old deployment over a 30-minute rollout window. The old daily
    keys retain their original 33-day expiry and are not used after the migration
-   receipt is complete.
+   receipt is complete. Migration is best-effort on the public read path: a busy
+   lock or failed migration attempt does not prevent the route from returning
+   the lifetime aggregate already available in version 2.
 6. The public `GET` response contains only the estimate, projected map
    positions, three-level intensity buckets, thresholds, and the collection
    start date.
@@ -121,7 +126,9 @@ When Redis or the salt is absent, recording returns an empty `204` and the
 public endpoint returns `enabled: false`. Recording errors still soft-fail so
 activity statistics never block the homepage; public read errors return a
 generic uncached `503`, allowing the interface to distinguish a temporary
-failure from missing configuration. Successful public aggregates are
+failure from missing configuration. The client retries transient network and
+server failures, then exposes a bilingual retry control rather than leaving the
+panel in a terminal error state. Successful public aggregates are
 shared-cached for five minutes; recording responses are private and never
 cached. The public endpoint rejects query strings so callers cannot create
 arbitrary cache-key variants that repeatedly force the Redis read path.

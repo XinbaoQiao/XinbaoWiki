@@ -27,6 +27,7 @@ import {
 } from '../lib/site-activity-owner-auth.ts';
 
 const route = fs.readFileSync('app/api/site-activity/route.ts', 'utf8');
+const versionedRoute = fs.readFileSync('app/api/site-activity/v2/route.ts', 'utf8');
 const preferenceRoute = fs.readFileSync('app/api/site-activity/preference/route.ts', 'utf8');
 const ownerAuth = fs.readFileSync('lib/site-activity-owner-auth.ts', 'utf8');
 const aggregation = fs.readFileSync('lib/site-activity-aggregation.ts', 'utf8');
@@ -154,7 +155,8 @@ hasAll(aggregation, [
   'migrationReceipt(), JSON.stringify(nextReceipt)'
 ], 'launch-period version 1 HLLs use a distributed lock, bounded batches, and a second catch-up pass');
 hasAll(route, [
-  "if (migrationState === 'busy') return privateResponse(503)",
+  'await migrateLegacySiteActivity(redis, secret, SITE_ACTIVITY_SINCE, now)',
+  "logSiteActivityIssue('legacy aggregate migration failed')",
   'const activeCells = await redis.smembers(siteActivityAggregationKeys.lifetimeCellsIndex())',
   'slice(0, SITE_ACTIVITY_MAX_CELLS)',
   'countPipeline.pfcount(siteActivityAggregationKeys.lifetimeAll())',
@@ -162,7 +164,15 @@ hasAll(route, [
   'uniqueBrowsersEstimate === null',
   '? []',
   'projectCell(cellId'
-], 'public reads the lifetime HLLs and suppresses all geography below the total threshold');
+], 'public reads continue from the lifetime HLLs when migration is busy or fails and suppress all geography below the total threshold');
+assert.doesNotMatch(route, /migrationState === 'busy'[^\n]*privateResponse\(503\)/, 'a migration lock never turns an otherwise readable public aggregate into a 503');
+hasAll(versionedRoute, [
+  "from '../route'",
+  "export const dynamic = 'force-dynamic'",
+  "export const runtime = 'nodejs'",
+  'export const GET = getSiteActivity',
+  'export const POST = recordSiteActivity'
+], 'schema v2 has a stable versioned route while the unversioned handler remains available to older open pages');
 assert.match(route, /cellSelectionScore\(left, secret\).*cellSelectionScore\(right, secret\)/, 'active-cell overflow uses deterministic non-geographic sampling rather than lexicographic bias');
 hasAll(route, [
   "'Cache-Control': 'public, max-age=0, s-maxage=300, stale-while-revalidate=900'",
@@ -186,6 +196,7 @@ assert.doesNotMatch(shared, /\bip\b|latitude|longitude|country|region|cellId|cou
 assert.match(shared, /payload\.cells\.length > 512/, 'client rejects a public cell payload beyond the bounded aggregate response');
 hasAll(shared, [
   'SITE_ACTIVITY_SCHEMA_VERSION = 2',
+  'SITE_ACTIVITY_API_PATH = `/api/site-activity/v${SITE_ACTIVITY_SCHEMA_VERSION}/`',
   "SITE_ACTIVITY_SINCE = '2026-08-09'",
   '!Number.isFinite(Date.parse(payload.generatedAt))',
   "period.scope !== 'lifetime'",
@@ -199,15 +210,21 @@ for (const expected of [
   "cache: 'no-store'",
   "credentials: 'same-origin'",
   'parseSiteActivityPayload',
+  'const apiPath = withBasePath(SITE_ACTIVITY_API_PATH)',
   "href={withBasePath('/maps/world-land-dots.svg')}"
 ]) {
   assert.ok(component.includes(expected), `homepage same-origin map flow is missing ${expected}`);
 }
 hasAll(component, [
+  "retry: 'Retry'",
+  "retry: '\u91cd\u8bd5'",
   'const retryDelays = [0, 500, 1500, 3000]',
-  'if (response.status === 503 && attempt < retryDelays.length - 1) continue',
-  'void fetchSiteActivity(apiPath, controller.signal)'
-], 'homepage retries a transient migration lock before exposing an unavailable state');
+  "error instanceof DOMException && error.name === 'AbortError'",
+  'if (attempt < retryDelays.length - 1) continue',
+  "response.status === 408 || response.status === 429 || response.status >= 500",
+  'void fetchSiteActivity(apiPath, controller.signal)',
+  'setRequestVersion((version) => version + 1)'
+], 'homepage retries transport and transient server failures before exposing a bilingual manual retry');
 assert.doesNotMatch(component, /country|region ranking|latitude|longitude|raw IP address/i, 'homepage exposes neither a geographic ranking nor raw location fields');
 assert.match(component, /summaryFallback: 'All history'[\s\S]*uniqueBrowsers: \(count: number\) => `≈ \$\{count\.toLocaleString\('en'\)\} browsers · all history`/, 'homepage summary presents the complete collected history rather than a rolling window');
 assert.doesNotMatch(component, /Cells appear|Approximate IP|No map cell|30 complete|\u8fd1 30|wiki-visitor-atlas-note/, 'homepage removes visible threshold, approximation, empty-state, and rolling-window explanations');

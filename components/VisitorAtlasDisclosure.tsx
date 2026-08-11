@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type FormEvent } from 'react';
 import type { SearchLanguage } from '@/components/WikiSearch';
 import {
   parseSiteActivityPayload,
+  SITE_ACTIVITY_API_PATH,
   SITE_ACTIVITY_MAP_HEIGHT,
   SITE_ACTIVITY_MAP_WIDTH,
   type SiteActivityPayload
@@ -41,6 +42,7 @@ type VisitorAtlasCopy = {
   ownerTitle: string;
   ownerUnavailable: string;
   ownerWorking: string;
+  retry: string;
   summaryFallback: string;
   summaryLoading: string;
   summaryUnavailable: string;
@@ -83,6 +85,7 @@ const copy = {
     ownerTitle: 'Activity controls',
     ownerUnavailable: 'Private controls are temporarily unavailable.',
     ownerWorking: 'Verifying…',
+    retry: 'Retry',
     summaryFallback: 'All history',
     summaryLoading: 'All history · loading',
     summaryUnavailable: 'Activity map · unavailable',
@@ -113,6 +116,7 @@ const copy = {
     ownerTitle: '访问统计设置',
     ownerUnavailable: '私密设置暂时不可用。',
     ownerWorking: '正在验证……',
+    retry: '重试',
     summaryFallback: '全部历史',
     summaryLoading: '全部历史 · 正在载入',
     summaryUnavailable: '访问地图 · 暂不可用',
@@ -148,16 +152,29 @@ async function fetchSiteActivity(apiPath: string, signal: AbortSignal) {
   const retryDelays = [0, 500, 1500, 3000];
   for (let attempt = 0; attempt < retryDelays.length; attempt += 1) {
     if (retryDelays[attempt] > 0) await waitForRetry(retryDelays[attempt], signal);
-    const response = await fetch(apiPath, {
-      cache: 'no-store',
-      credentials: 'same-origin',
-      signal
-    });
-    if (response.status === 503 && attempt < retryDelays.length - 1) continue;
+    let response: Response;
+    try {
+      response = await fetch(apiPath, {
+        cache: 'no-store',
+        credentials: 'same-origin',
+        signal
+      });
+    } catch (error) {
+      if (error instanceof DOMException && error.name === 'AbortError') throw error;
+      if (attempt < retryDelays.length - 1) continue;
+      throw error;
+    }
+    const retryable = response.status === 408 || response.status === 429 || response.status >= 500;
+    if (retryable && attempt < retryDelays.length - 1) continue;
     if (!response.ok) throw new Error('site activity response failed');
-    const payload = parseSiteActivityPayload(await response.json());
-    if (!payload) throw new Error('site activity response was invalid');
-    return payload;
+    try {
+      const payload = parseSiteActivityPayload(await response.json());
+      if (!payload) throw new Error('site activity response was invalid');
+      return payload;
+    } catch (error) {
+      if (attempt < retryDelays.length - 1) continue;
+      throw error;
+    }
   }
   throw new Error('site activity response failed');
 }
@@ -165,6 +182,7 @@ async function fetchSiteActivity(apiPath: string, signal: AbortSignal) {
 export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) {
   const [payload, setPayload] = useState<SiteActivityPayload | null>(null);
   const [status, setStatus] = useState<ActivityStatus>('loading');
+  const [requestVersion, setRequestVersion] = useState(0);
   const [ownerDialogOpen, setOwnerDialogOpen] = useState(false);
   const [ownerExcluded, setOwnerExcluded] = useState(false);
   const [ownerGateStatus, setOwnerGateStatus] = useState<OwnerGateStatus>('idle');
@@ -172,7 +190,7 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
   const ownerDialogRef = useRef<HTMLDialogElement>(null);
   const recordedRef = useRef(false);
   const labels = copy[language];
-  const apiPath = withBasePath('/api/site-activity/');
+  const apiPath = withBasePath(SITE_ACTIVITY_API_PATH);
   const preferencePath = withBasePath('/api/site-activity/preference/');
 
   useEffect(() => {
@@ -285,7 +303,7 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
         setStatus('error');
       });
     return () => controller.abort();
-  }, [apiPath]);
+  }, [apiPath, requestVersion]);
 
   const summary = status === 'loading'
     ? labels.summaryLoading
@@ -425,7 +443,18 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
           </dialog>
         </figure>
         {statusMessage ? (
-          <p aria-live="polite" className="wiki-visitor-atlas-status" role="status">{statusMessage}</p>
+          <div className="wiki-visitor-atlas-status-row">
+            <p aria-live="polite" className="wiki-visitor-atlas-status" role="status">{statusMessage}</p>
+            {status === 'error' ? (
+              <button
+                className="wiki-visitor-atlas-retry"
+                onClick={() => setRequestVersion((version) => version + 1)}
+                type="button"
+              >
+                {labels.retry}
+              </button>
+            ) : null}
+          </div>
         ) : null}
       </div>
     </details>
