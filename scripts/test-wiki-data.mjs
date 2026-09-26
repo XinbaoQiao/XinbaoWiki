@@ -1495,16 +1495,16 @@ assert.doesNotMatch(chatWithXinbaoPanel, /digital-proxy skill distilled|蒸馏�
 assert.match(chatWithXinbaoPanel, /Checking Xinbaopedia notes[\s\S]*Looking through public pages[\s\S]*Almost there/, 'chat client includes varied English typing messages');
 assert.match(chatWithXinbaoPanel, /正在查公开资料[\s\S]*正在整理相关页面[\s\S]*先看资料，不硬编[\s\S]*马上整理好/, 'chat client includes natural Chinese typing messages');
 assert.match(chatWithXinbaoPanel, /function randomTypingMessage[\s\S]*Math\.random\(\)[\s\S]*setTypingMessage\(randomTypingMessage\(strings\.typing\)\)/, 'chat client randomly selects one typing message per request');
-assert.doesNotMatch(`${chatWithXinbao}\n${chatWithXinbaoPanel}`, /YUNWU_API_KEY|UPSTASH_REDIS_REST_TOKEN|api\.yunwu|Bearer/, 'chat client contains no backend key names or provider endpoint');
+assert.doesNotMatch(`${chatWithXinbao}\n${chatWithXinbaoPanel}`, /YUNWU_API_KEY|UPSTASH_REDIS_REST_TOKEN|api\.(?:openlux|yunwu)|Bearer/, 'chat client contains no backend key names or provider endpoint');
 assert.match(chatRoute, /runtime = 'nodejs'/, 'chat API route uses the Node runtime');
 assert.match(chatRoute, /export async function GET\(request: NextRequest\)/, 'chat API exposes a backend quota endpoint');
 assert.match(chatRoute, /diagnostic'\) === 'retrieval'[\s\S]*getWikiRetrievalIndex\(\)[\s\S]*indexedChunks/, 'chat GET exposes a read-only runtime retrieval health check');
 assert.match(chatRoute, /function modelApiConfiguration[\s\S]*modelApiConfigured: modelConfiguration\.ready/, 'chat diagnostic proves the model API configuration is ready without exposing it');
 assert.match(chatRoute, /if \(diagnostic && !modelConfiguration\.ready\)[\s\S]*return genericUnavailable\(visitorCookie\)/, 'chat diagnostic fails closed when the model API configuration is absent');
 assert.match(smokeProduction, /modelApiConfigured === true/, 'production smoke blocks promotion when the model API is not configured');
-assert.match(chatRoute, /MODEL = 'deepseek-v4-flash'/, 'chat API fixes the requested Yunwu model');
-assert.match(chatRoute, /DEFAULT_BASE_URL = 'https:\/\/api\.yunwu\.ai\/v1'/, 'chat API uses the documented Yunwu base URL');
-assert.match(chatRoute, /YUNWU_API_KEY/, 'chat API reads the Yunwu key from server env');
+assert.match(chatRoute, /MODEL = 'deepseek-v4-flash'/, 'chat API fixes the configured model');
+assert.match(chatRoute, /DEFAULT_BASE_URL = 'https:\/\/api\.openlux\.ai\/v1'/, 'chat API uses the documented OpenLux base URL');
+assert.match(chatRoute, /YUNWU_API_KEY/, 'chat API reads the deployment-compatible provider key from server env');
 assert.match(chatRoute, /YUNWU_API_BASE_URL/, 'chat API supports a server env base URL override');
 assert.match(chatRoute, /UPSTASH_REDIS_REST_URL[\s\S]*UPSTASH_REDIS_REST_TOKEN/, 'chat API reads Upstash credentials from server env');
 assert.match(chatRoute, /RATE_LIMIT_SALT/, 'chat API hashes visitor identifiers with a server salt');
@@ -1596,7 +1596,7 @@ assert.match(chatKnowledge, /Do not invent facts, preferences, opinions, current
 assert.match(chatKnowledge, /XINBAO_CHAT_VOICE_STYLE/, 'chat knowledge builder supports a server-only private voice style layer');
 assert.match(chatKnowledge, /private voice notes/, 'persona prevents revealing private voice notes');
 assert.match(chatReadme, /Vercel deployment/, 'chat documentation explains Vercel deployment');
-assert.match(chatReadme, /rg "YUNWU_API_KEY\|sk-\|Bearer\|api\.yunwu\|UPSTASH_REDIS_REST_TOKEN"/, 'chat documentation includes the key leak check command');
+assert.match(chatReadme, /rg "YUNWU_API_KEY\|sk-\|Bearer\|api\.openlux\|api\.yunwu\|UPSTASH_REDIS_REST_TOKEN"/, 'chat documentation includes the key leak check command');
 assert.match(chatReadme, /11th daily request[\s\S]*429/, 'chat documentation explains testing the 10-message limit');
 for (const envName of ['YUNWU_API_KEY', 'YUNWU_API_BASE_URL', 'UPSTASH_REDIS_REST_URL', 'UPSTASH_REDIS_REST_TOKEN', 'RATE_LIMIT_SALT', 'SITE_ACTIVITY_OWNER_PASSWORD_HASH', 'XINBAO_CHAT_VOICE_STYLE', 'XINBAO_CHAT_ADMIN_TOKEN']) {
   assert.match(chatEnvExample, new RegExp(`^${envName}=`, 'm'), `env.example includes ${envName}`);

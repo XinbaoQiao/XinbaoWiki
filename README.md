@@ -160,7 +160,7 @@ docs/                    standards, deployment and chat operations
 | Wiki rendering | react-markdown, GFM, KaTeX, WikiLinks | Articles, equations, tables, linked concepts, and missing-page hints |
 | Knowledge source | Git-native Markdown + YAML frontmatter | Readable, diffable, reviewable canonical knowledge |
 | Retrieval | Custom bilingual heading-level lexical retrieval | Stable section IDs, hashes, language filters, page weighting, and light graph expansion |
-| LLM gateway | Server-side OpenAI-compatible Chat Completions | Production currently calls <code>deepseek-v4-flash</code> through Yunwu |
+| LLM gateway | Server-side OpenAI-compatible Chat Completions | Defaults to <code>deepseek-v4-flash</code> through OpenLux |
 | Response policy | Grounded / conversational / protected router | Cited evidence, ordinary conversation, and deterministic sensitive-request blocking |
 | Citation guard | Number validation, source compaction, one bounded retry | Invalid citations cannot reach the UI |
 | State and export | Upstash Redis JS + OKF v0.1 Draft profile | Quota and retry state plus a portable human/agent-readable knowledge bundle |
@@ -324,7 +324,7 @@ docs/                    标准、部署和 AI 运维文档
 | Wiki 渲染 | react-markdown、GFM、KaTeX、WikiLinks | 文章、公式、表格、概念链接与缺失页提示 |
 | 知识源 | Git-native Markdown + YAML frontmatter | 可读、可 diff、可审查的规范知识 |
 | 检索 | 自研双语小节级词法检索 | 稳定小节 ID、哈希、语言过滤、当前页加权与轻量图扩展 |
-| LLM gateway | 服务端 OpenAI-compatible Chat Completions | 生产环境目前经 Yunwu 调用 <code>deepseek-v4-flash</code> |
+| LLM gateway | 服务端 OpenAI-compatible Chat Completions | 默认经 OpenLux 调用 <code>deepseek-v4-flash</code> |
 | 回答策略 | Grounded / conversational / protected router | 引用证据、普通对话与敏感请求确定性阻断 |
 | 引用保护 | 编号验证、来源压缩、一次有界重试 | 无效引用不能进入 UI |
 | 状态与导出 | Upstash Redis JS + OKF v0.1 Draft profile | 配额、重试状态与可迁移的人类/agent 知识包 |

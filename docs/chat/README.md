@@ -1,6 +1,6 @@
 # Chat with Xinbao
 
-`Chat with Xinbao` is a same-site conversational assistant for Xinbaopedia. It is implemented as a Next.js client component plus a server-only API route, so the browser never receives the Yunwu API key, the Upstash credentials, or the full persona prompt.
+`Chat with Xinbao` is a same-site conversational assistant for Xinbaopedia. It is implemented as a Next.js client component plus a server-only API route, so the browser never receives the model-provider API key, the Upstash credentials, or the full persona prompt.
 
 ## Recommended project structure
 
@@ -25,7 +25,7 @@ wiki/Internet_Slang_2026_zh.md
 2. The client keeps visible conversation history locally and sends only `{ message, language }` to `/api/chat-with-xinbao`. The server ignores any extra client-provided history for backward compatibility: it neither retrieves against it nor forwards it to the provider. The provider prompt contains the server-authored system message and the current user message only.
 3. The route validates input, enforces cooldown and daily quotas in Upstash Redis, and retrieves a bounded set of public `wiki/*.md` heading chunks for the current message only.
 4. The route has three explicit response modes. Public wiki questions with usable evidence use `model-grounded`; ordinary conversation or general questions without enough wiki evidence use `model-conversational`; only sensitive or hidden-content requests use `deterministic-abstention` before the provider call.
-5. Both model modes call Yunwu at `https://api.yunwu.ai/v1/chat/completions`. A grounded answer is accepted only when it contains valid `[n]` citations into the retrieved evidence, after which the server compacts citation numbers and returns only cited sources. A conversational answer must be non-empty, must not contain fabricated numbered wiki citations, and returns an empty source list.
+5. Both model modes call OpenLux at `https://api.openlux.ai/v1/chat/completions` by default. A grounded answer is accepted only when it contains valid `[n]` citations into the retrieved evidence, after which the server compacts citation numbers and returns only cited sources. A conversational answer must be non-empty, must not contain fabricated numbered wiki citations, and returns an empty source list.
 6. Sensitive and hidden-content requests return a localized protected-information refusal with no sources. Weak retrieval by itself is never mapped to the old fixed “public evidence is insufficient” sentence.
 7. Accepted questions produce data-minimized, pseudonymous server-side metadata for reliability, retrieval evaluation, and aggregate FAQ demand.
 8. The route returns `{ reply, remaining, limit, sources, meta }` or a safe generic error.
@@ -71,6 +71,7 @@ Meme and slang notes are repository-visible maintenance sources. The 2026 phrase
 
 1. Deploy this repository as a normal Next.js 15 project, not a static export.
 2. In Vercel Project Settings, add the variables shown in `env.example`.
+   The `YUNWU_*` variable names are retained for deployment compatibility, but their values must use a newly created OpenLux API key and the OpenLux base URL. Keys from the retired Yunwu API do not work at the new host. Changing Vercel variables requires a new deployment; it does not update an existing deployment.
 3. Keep `NEXT_PUBLIC_BASE_PATH` empty for a root Vercel deployment.
 4. Confirm the deployed Network panel shows only calls to `/api/chat-with-xinbao` from the browser.
 
@@ -88,10 +89,10 @@ an empty source list. Any failure blocks promotion or release.
 Run this before pushing or after `npm run build`:
 
 ```bash
-rg "YUNWU_API_KEY|sk-|Bearer|api.yunwu|UPSTASH_REDIS_REST_TOKEN" .next app components public docs/chat
+rg "YUNWU_API_KEY|sk-|Bearer|api.openlux|api.yunwu|UPSTASH_REDIS_REST_TOKEN" .next app components public docs/chat
 ```
 
-Expected public matches are variable names in server files or documentation examples. A real token, a `sk-...` value, or a direct browser request to Yunwu is a blocker.
+Expected public matches are variable names in server files or documentation examples. A real token, a `sk-...` value, or a direct browser request to the model provider is a blocker.
 
 ## Daily limit test
 

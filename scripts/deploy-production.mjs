@@ -3,7 +3,7 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { homedir } from 'node:os';
-import { join } from 'node:path';
+import { basename, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   reusableDeploymentFromList,
@@ -60,23 +60,39 @@ function displayCommand(command, args, env) {
   return [command, ...redactArgs(args, env)].join(' ');
 }
 
+function nativeVercelInvocation(command, args) {
+  if (process.platform !== 'win32' || basename(command).toLowerCase() !== 'vercel.cmd') {
+    return { command, args };
+  }
+  const cliEntry = join(dirname(command), '..', 'vercel', 'dist', 'vc.js');
+  if (!existsSync(cliEntry)) {
+    throw new Error(`Vercel CLI entry is missing beside ${command}`);
+  }
+  // cmd.exe drops empty args and splits header/body strings. Run the pinned CLI with Node.
+  return { command: process.execPath, args: [cliEntry, ...args], shell: false };
+}
+
 async function run(command, args, env, options = {}) {
-  return runExternal(command, args, {
+  const invocation = nativeVercelInvocation(command, args);
+  return runExternal(invocation.command, invocation.args, {
     capture: false,
     cwd: root,
     displayCommand: displayCommand(command, args, env),
     env,
+    shell: invocation.shell,
     timeoutMs: options.timeoutMs,
   });
 }
 
 async function runCapture(command, args, env, options = {}) {
-  const result = await runExternal(command, args, {
+  const invocation = nativeVercelInvocation(command, args);
+  const result = await runExternal(invocation.command, invocation.args, {
     cwd: root,
     displayCommand: displayCommand(command, args, env),
     env,
     maxOutputBytes: options.maxOutputBytes,
     mirrorStderr: true,
+    shell: invocation.shell,
     timeoutMs: options.timeoutMs,
   });
   return result.stdout;

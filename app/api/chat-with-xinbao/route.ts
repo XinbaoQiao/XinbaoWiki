@@ -17,7 +17,7 @@ import { getWikiRetrievalIndex, retrieveWikiContext, WIKI_RETRIEVAL_INDEX_VERSIO
 export const runtime = 'nodejs';
 
 const MODEL = 'deepseek-v4-flash';
-const DEFAULT_BASE_URL = 'https://api.yunwu.ai/v1';
+const DEFAULT_BASE_URL = 'https://api.openlux.ai/v1';
 const CHAT_BACKEND_VERSION = 'xinbao-chat-api-v6';
 const DAILY_LIMIT = 10;
 const COOLDOWN_SECONDS = 4;
@@ -342,6 +342,7 @@ function logServerIssue(type: string, status?: number) {
 function providerName(baseUrl: string) {
   try {
     const hostname = new URL(baseUrl).hostname.toLocaleLowerCase();
+    if (hostname === 'api.openlux.ai') return 'openlux-openai-compatible';
     if (hostname === 'api.yunwu.ai') return 'yunwu-openai-compatible';
     if (hostname === 'api.deepseek.com') return 'deepseek';
   } catch {
