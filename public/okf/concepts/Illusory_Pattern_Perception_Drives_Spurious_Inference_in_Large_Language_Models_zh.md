@@ -10,18 +10,18 @@ tags:
   - neurips-2026
   - llm-reliability
 timestamp: '2026-09-25T13:49:35+09:00'
-modified: '2026-09-25T04:53:27.237Z'
-content_hash: 'sha256:f4c790a4291c9ec7cf40078711cf0c8a08559b37f22ed15fc5fb7a7f7d2164f8'
-reviewed_at: '2026-09-25T04:54:14.029Z'
-review_due: '2027-09-25'
+modified: '2026-09-26T08:09:04.309Z'
+content_hash: 'sha256:835e399ecf6b3cc8a1bc3d3ef9c97168487ca5f2876220f6b446f62b9db65166'
+reviewed_at: '2026-09-26T08:09:37.000Z'
+review_due: '2027-09-26'
 language: zh
 lifecycle:
   status: confirmed
   confidence: 0.95
   review: on venue/status change
   retention: long-lived semantic memory
-  reviewedAt: '2026-09-25T04:54:14.029Z'
-  reviewDue: '2027-09-25'
+  reviewedAt: '2026-09-26T08:09:37.000Z'
+  reviewDue: '2027-09-26'
   pendingReview: false
   overdue: false
 retrieval:
@@ -33,6 +33,8 @@ source_path: >-
   wiki/Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md
 ---
 **《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》** 是 Peihua Mai、Zhuoyan Shao、**[乔鑫宝](./Qiao_Xinbao_zh.md)**、张萌、Xinyue Zhou 和 Yan Pang 的论文，已获 NeurIPS 2026 录用。论文研究提示中被感知到的模式如何使大语言模型作出缺乏充分证据支持的推理。
+
+*作者说明：Peihua Mai、Zhuoyan Shao 和乔鑫宝贡献相同，均为共同第一作者。*
 
 ## 概述
 

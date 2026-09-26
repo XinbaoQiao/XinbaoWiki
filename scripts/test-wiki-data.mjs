@@ -1682,8 +1682,9 @@ assert.doesNotMatch(publications, /raw\.githubusercontent\.com/, 'publication in
 assert.doesNotMatch(publications, /!\[/, 'publication index is text-only');
 assert.doesNotMatch(publications, /Soft-Weighted Machine Unlearning/, 'publication index uses the final AAAI title');
 assert.match(publications, /DynFrs: An Efficient Framework for Machine Unlearning in Random Forest/, 'publication index uses full DynFrs title');
-assert.doesNotMatch(publications, /(?<!\*)Xinbao Qiao(?!\*)/, 'publication index bolds Xinbao Qiao in author lists');
-assert.equal((publications.match(/\*\*Xinbao Qiao\*\*/g) || []).length, 5, 'publication index bolds Xinbao Qiao in every visible listed paper');
+const publicationRows = publications.split('\n').filter((line) => line.startsWith('| **[[')).join('\n');
+assert.doesNotMatch(publicationRows, /(?<!\*)Xinbao Qiao(?!\*)/, 'publication index bolds Xinbao Qiao in author lists');
+assert.equal((publicationRows.match(/\*\*Xinbao Qiao\*\*/g) || []).length, 5, 'publication index bolds Xinbao Qiao in every visible listed paper');
 
 for (const page of [
   'Xinbao_Qiao.md',
@@ -2568,21 +2569,35 @@ assert.match(cvTex, /Academic service, 2025\}\{reviewer for NeurIPS, ICLR, AAAI,
 assert.match(cvTex, /When[\s\S]*Sample Selection Bias[\s\S]*Model Collapse[\s\S]*ICML,? 2026/, 'CV updates model-collapse paper status');
 assert.doesNotMatch(cvTex, /withheld\s+LLM\s+manuscript/i, 'CV omits withheld manuscript notes');
 assert.match(cvTex, /arxiv\.org\/abs\/2606\.13732/, 'CV PDF source links Paper #1 arXiv page');
-assert.match(cvTex, /ojs\.aaai\.org\/index\.php\/AAAI\/article\/view\/39681/, 'CV PDF source links Paper #2 AAAI article page');
-assert.doesNotMatch(cvTex, /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'CV PDF source excludes the confirmed 404 Paper #2 code URL');
+assert.match(cvTex, /ojs\.aaai\.org\/index\.php\/AAAI\/article\/view\/39681/, 'CV PDF source links Paper #3 AAAI article page');
+assert.doesNotMatch(cvTex, /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'CV PDF source excludes the confirmed 404 Paper #3 code URL');
 assert.match(cvTex, /\\newcommand\{\\corrauthor\}\{\\textsuperscript\{\\textdagger\}\}/, 'CV defines one consistent corresponding-author dagger macro');
+assert.match(cvTex, /\\newcommand\{\\cofirst\}\{\\textsuperscript\{\*\}\}/, 'CV defines a co-first-author marker');
 assert.match(cvTex, /Asterisks \(\*\) denote co-first authorship; daggers \(\\textdagger\) denote corresponding authors\./, 'CV note defines co-first and corresponding-author symbols');
 assert.doesNotMatch(cvTex, /Accepted papers are listed before under-review manuscripts\./, 'CV removes the accepted-paper ordering sentence');
 assert.match(cvTex, /\\textbf\{Xinbao Qiao\}\\corrauthor, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang\\corrauthor, Yan Pang\\corrauthor/, 'CV Paper #1 marks Xinbao Qiao, Meng Zhang, and Yan Pang as corresponding authors');
-assert.match(cvTex, /\\textbf\{Xinbao Qiao\}, Ningning Ding, Yushi Cheng, Meng Zhang\\corrauthor/, 'CV Paper #2 marks Meng Zhang as corresponding author');
-assert.match(cvTex, /\\textbf\{Xinbao Qiao\}, Meng Zhang\\corrauthor, Ming Tang, Ermin Wei/, 'CV Paper #3 marks Meng Zhang as corresponding author');
-assert.match(cvTex, /Shurong Wang, Zhuoyang Shen, \\textbf\{Xinbao Qiao\}, Tongning Zhang, Meng Zhang\\corrauthor/, 'CV Paper #4 marks Meng Zhang as corresponding author');
-assert.match(cvTex, /\\textbf\{Xinbao Qiao\}, Wenjing Yan\\corrauthor, Ying-Jun Angela Zhang/, 'CV Paper #5 marks Wenjing Yan as corresponding author');
-assert.match(cvTex, /Peihua Mai, Zhuoyan Shao, \\textbf\{Xinbao Qiao\}, Meng Zhang, Xinyue Zhou\\corrauthor, Yan Pang\\corrauthor/, 'CV Paper #6 marks Xinyue Zhou and Yan Pang as corresponding authors');
-assert.match(cvTex, /Illusory Pattern Perception[\s\S]*\{NeurIPS 2026\.\}/, 'downloadable CV source records Paper #6 as NeurIPS 2026');
+assert.match(cvTex, /Peihua Mai\\cofirst, Zhuoyan Shao\\cofirst, \\textbf\{Xinbao Qiao\}\\cofirst, Meng Zhang, Xinyue Zhou\\corrauthor, Yan Pang\\corrauthor/, 'CV Paper #2 marks all three co-first authors and both corresponding authors');
+assert.match(cvTex, /\\textbf\{Xinbao Qiao\}, Ningning Ding, Yushi Cheng, Meng Zhang\\corrauthor/, 'CV Paper #3 marks Meng Zhang as corresponding author');
+assert.match(cvTex, /\\textbf\{Xinbao Qiao\}, Meng Zhang\\corrauthor, Ming Tang, Ermin Wei/, 'CV Paper #4 marks Meng Zhang as corresponding author');
+assert.match(cvTex, /Shurong Wang, Zhuoyang Shen, \\textbf\{Xinbao Qiao\}, Tongning Zhang, Meng Zhang\\corrauthor/, 'CV Paper #5 marks Meng Zhang as corresponding author');
+assert.match(cvTex, /\\textbf\{Xinbao Qiao\}, Wenjing Yan\\corrauthor, Ying-Jun Angela Zhang/, 'CV Paper #6 marks Wenjing Yan as corresponding author');
+assert.match(cvTex, /Illusory Pattern Perception[\s\S]*\{NeurIPS 2026\.\}/, 'downloadable CV source records Paper #2 as NeurIPS 2026');
 assert.match(cvTex, /scholar\.google\.com\/citations\?view_op=search_authors\\&mauthors=Xinbao\+Qiao/, 'CV PDF source links Google Scholar without exposing the author ID');
 const cvPublicationBlock = cvTex.slice(cvTex.indexOf('\\cvsection{Selected Publications}'));
 assert.doesNotMatch(cvPublicationBlock, /icml\.cc|iclr\.cc|underline\.io|Distributed_Wasserstein_Barycenter|LLM_Reliability/, 'CV publication icons only link arXiv, GitHub, OpenReview, or official paper pages');
+const cvPublicationOrder = [
+  'When \\red{Sample Selection Bias}',
+  '\\red{Illusory Pattern Perception}',
+  'Beyond Binary Erasure:',
+  '\\red{Hessian-Free}',
+  '\\red{DynFrs}',
+  '\\red{Federated Learning as Optimal Transport}',
+];
+const cvPublicationPositions = cvPublicationOrder.map((marker) => cvPublicationBlock.indexOf('\\pubentry{' + marker));
+assert.ok(cvPublicationPositions.every((position) => position >= 0), 'CV contains all six selected publications');
+assert.deepEqual(cvPublicationPositions, [...cvPublicationPositions].sort((a, b) => a - b), 'CV orders the newest sole first-author paper first, then accepted papers by recency, with under-review work last');
+assert.doesNotMatch(cvPublicationBlock.slice(cvPublicationPositions[0], cvPublicationPositions[1]), /\\cofirst/, 'CV Paper #1 is sole first-author work');
+assert.equal(cvPublicationBlock.lastIndexOf('\\pubentry{'), cvPublicationPositions.at(-1), 'CV under-review paper is the final entry');
 assert.match(read('CV.md'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English CV page labels the PDF link as résumé');
 assert.match(read('CV_zh.md'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese CV page labels the PDF link as résumé');
 assert.match(read('CV.md'), /M\.Eng\. in Artificial Intelligence/, 'English CV page records the ZJU AI degree as M.Eng.');
@@ -2590,11 +2605,34 @@ assert.match(read('CV_zh.md'), /人工智能工学硕士/, 'Chinese CV page reco
 assert.match(read('CV.md'), /Asterisks \(\*\) denote co-first authorship; daggers \(†\) denote corresponding authors\./, 'English wiki CV explains corresponding-author daggers');
 assert.match(read('CV_zh.md'), /星号（\*）表示共同第一作者；剑号（†）表示通讯作者。/, 'Chinese wiki CV explains corresponding-author daggers');
 assert.match(read('CV.md'), /\*\*Xinbao Qiao\*\*†, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang†, Yan Pang†/, 'English wiki CV marks Paper #1 corresponding authors');
-assert.match(read('CV.md'), /Wenjing Yan†, Ying-Jun Angela Zhang[\s\S]*Xinyue Zhou†, Yan Pang†/, 'English wiki CV marks Papers #5 and #6 corresponding authors');
+assert.ok(read('CV.md').includes('Peihua Mai\\*, Zhuoyan Shao\\*, **Xinbao Qiao**\\*'), 'English wiki CV marks all three co-first authors of Paper #2');
+assert.match(read('CV.md'), /Xinyue Zhou†, Yan Pang†/, 'English wiki CV marks Paper #2 corresponding authors');
+assert.match(read('CV.md'), /Wenjing Yan†, Ying-Jun Angela Zhang/, 'English wiki CV marks Paper #6 corresponding author');
 assert.match(read('CV_zh.md'), /\*\*乔鑫宝\*\*†、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌†、Yan Pang†/, 'Chinese wiki CV marks Paper #1 corresponding authors');
-assert.match(read('CV_zh.md'), /Wenjing Yan†、Ying-Jun Angela Zhang[\s\S]*Xinyue Zhou†、Yan Pang†/, 'Chinese wiki CV marks Papers #5 and #6 corresponding authors');
-assert.match(read('CV.md'), /Paper #6: Illusory Pattern Perception Drives Spurious Inference in Large Language Models[\s\S]*NeurIPS 2026\./, 'English wiki CV records Paper #6 acceptance');
-assert.match(read('CV_zh.md'), /Paper #6: Illusory Pattern Perception Drives Spurious Inference in Large Language Models[\s\S]*NeurIPS 2026，已录用。/, 'Chinese wiki CV records Paper #6 acceptance');
+assert.ok(read('CV_zh.md').includes('Peihua Mai\\*、Zhuoyan Shao\\*、**乔鑫宝**\\*'), 'Chinese wiki CV marks all three co-first authors of Paper #2');
+assert.match(read('CV_zh.md'), /Xinyue Zhou†、Yan Pang†/, 'Chinese wiki CV marks Paper #2 corresponding authors');
+assert.match(read('CV_zh.md'), /Wenjing Yan†、Ying-Jun Angela Zhang/, 'Chinese wiki CV marks Paper #6 corresponding author');
+assert.match(read('CV.md'), /Paper #2: Illusory Pattern Perception Drives Spurious Inference in Large Language Models[\s\S]*NeurIPS 2026, accepted\./, 'English wiki CV records Paper #2 acceptance');
+assert.match(read('CV_zh.md'), /Paper #2: Illusory Pattern Perception Drives Spurious Inference in Large Language Models[\s\S]*NeurIPS 2026，已录用。/, 'Chinese wiki CV records Paper #2 acceptance');
+const cvWikiPublicationOrder = [
+  'Paper #1: When Sample Selection Bias Precipitates Model Collapse',
+  'Paper #2: Illusory Pattern Perception Drives Spurious Inference in Large Language Models',
+  'Paper #3: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness',
+  'Paper #4: Hessian-Free Online Certified Unlearning',
+  'Paper #5: DynFrs: An Efficient Framework for Machine Unlearning in Random Forest',
+  'Paper #6: Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification',
+];
+for (const page of ['CV.md', 'CV_zh.md']) {
+  const content = read(page);
+  const positions = cvWikiPublicationOrder.map((title) => content.indexOf(title));
+  assert.ok(positions.every((position) => position >= 0), page + ' contains all numbered CV papers');
+  assert.deepEqual(positions, [...positions].sort((a, b) => a - b), page + ' follows the selected-publication order');
+  assert.ok(content.indexOf(page === 'CV.md' ? 'Under review.' : '在审。') > positions.at(-1), page + ' places the under-review manuscript last');
+}
+assert.match(read('Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md'), /Peihua Mai, Zhuoyan Shao, and Xinbao Qiao contributed equally as co-first authors/, 'English paper page states equal first contribution');
+assert.match(read('Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md'), /Peihua Mai、Zhuoyan Shao 和乔鑫宝贡献相同，均为共同第一作者/, 'Chinese paper page states equal first contribution');
+assert.ok(read('Publications.md').includes('Peihua Mai\\*, Zhuoyan Shao\\*, **Xinbao Qiao**\\*'), 'English publication index marks three co-first authors');
+assert.ok(read('Publications_zh.md').includes('Peihua Mai\\*、Zhuoyan Shao\\*、**乔鑫宝**\\*'), 'Chinese publication index marks three co-first authors');
 assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English OKF CV concept labels the PDF link as résumé');
 assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV_zh.md'), 'utf8'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese OKF CV concept labels the PDF link as résumé');
 assert.match(read('CV.md'), /Open-Source Contributions and Academic Service/, 'English CV labels reviewing as academic service');
@@ -2605,20 +2643,20 @@ assert.match(read('CV_zh.md'), /\*\*学术审稿，2026 年\*\*：担任 ICML、
 assert.doesNotMatch(read('CV_zh.md'), /Research on Data-Centric ML Systems|Research on Trustworthy LLM systems|Research code releases|Peer-reviewing/, 'Chinese CV avoids English section labels inside the Chinese summary');
 assert.doesNotMatch(read('CV.md'), /\[XinbaoQiao_CV\.pdf\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English CV page avoids exposing the PDF filename as link text');
 assert.doesNotMatch(read('CV_zh.md'), /\[XinbaoQiao_CV\.pdf\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese CV page avoids exposing the PDF filename as link text');
-assert.doesNotMatch(read('CV.md'), /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'English CV page excludes the confirmed 404 Paper #2 code URL');
-assert.doesNotMatch(read('CV_zh.md'), /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'Chinese CV page excludes the confirmed 404 Paper #2 code URL');
-assert.match(read('CV.md'), /2606\.13732[\s\S]*39681/, 'English CV page links Paper #1 arXiv and Paper #2 AAAI article');
-assert.match(read('CV_zh.md'), /2606\.13732[\s\S]*39681/, 'Chinese CV page links Paper #1 arXiv and Paper #2 AAAI article');
+assert.doesNotMatch(read('CV.md'), /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'English CV page excludes the confirmed 404 Paper #3 code URL');
+assert.doesNotMatch(read('CV_zh.md'), /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'Chinese CV page excludes the confirmed 404 Paper #3 code URL');
+assert.match(read('CV.md'), /2606\.13732[\s\S]*39681/, 'English CV page links Paper #1 arXiv and Paper #3 AAAI article');
+assert.match(read('CV_zh.md'), /2606\.13732[\s\S]*39681/, 'Chinese CV page links Paper #1 arXiv and Paper #3 AAAI article');
 assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /label: arXiv[\s\S]*2606\.13732/, 'Paper #1 English page metadata links arXiv');
 assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md'), /label: arXiv[\s\S]*2606\.13732/, 'Paper #1 Chinese page metadata links arXiv');
-assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /label: AAAI article[\s\S]*39681/, 'Paper #2 English page metadata keeps the official AAAI article');
-assert.match(read('Soft_Weighted_Machine_Unlearning_zh.md'), /label: AAAI article[\s\S]*39681/, 'Paper #2 Chinese page metadata keeps the official AAAI article');
-assert.doesNotMatch(read('Soft_Weighted_Machine_Unlearning.md'), /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'Paper #2 English metadata excludes the confirmed 404 code URL');
-assert.doesNotMatch(read('Soft_Weighted_Machine_Unlearning_zh.md'), /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'Paper #2 Chinese metadata excludes the confirmed 404 code URL');
+assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /label: AAAI article[\s\S]*39681/, 'Paper #3 English page metadata keeps the official AAAI article');
+assert.match(read('Soft_Weighted_Machine_Unlearning_zh.md'), /label: AAAI article[\s\S]*39681/, 'Paper #3 Chinese page metadata keeps the official AAAI article');
+assert.doesNotMatch(read('Soft_Weighted_Machine_Unlearning.md'), /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'Paper #3 English metadata excludes the confirmed 404 code URL');
+assert.doesNotMatch(read('Soft_Weighted_Machine_Unlearning_zh.md'), /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'Paper #3 Chinese metadata excludes the confirmed 404 code URL');
 assert.doesNotMatch(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8'), /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'English OKF CV concept excludes the confirmed 404 code URL');
 assert.doesNotMatch(fs.readFileSync(path.join(root, 'public/okf/concepts/CV_zh.md'), 'utf8'), /github\.com\/XinbaoQiao\/Soft-Weighted-Machine-Unlearning/, 'Chinese OKF CV concept excludes the confirmed 404 code URL');
-assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8'), /2606\.13732[\s\S]*39681/, 'English OKF CV concept links Paper #1 arXiv and Paper #2 AAAI article');
-assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV_zh.md'), 'utf8'), /2606\.13732[\s\S]*39681/, 'Chinese OKF CV concept links Paper #1 arXiv and Paper #2 AAAI article');
+assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8'), /2606\.13732[\s\S]*39681/, 'English OKF CV concept links Paper #1 arXiv and Paper #3 AAAI article');
+assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV_zh.md'), 'utf8'), /2606\.13732[\s\S]*39681/, 'Chinese OKF CV concept links Paper #1 arXiv and Paper #3 AAAI article');
 assert.doesNotMatch(read('CV.md'), /citations\?user=nhC_OfEAAAAJ/, 'English CV page avoids exposing the Google Scholar author ID');
 assert.doesNotMatch(read('CV_zh.md'), /citations\?user=nhC_OfEAAAAJ/, 'Chinese CV page avoids exposing the Google Scholar author ID');
 const cvTexUris = sortedUrls([...cvTex.matchAll(/\\(?:blackhref|linkish|iconlink)\{([^{}]+)\}/g)].map((match) => match[1]));

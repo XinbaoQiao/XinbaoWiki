@@ -8,10 +8,10 @@ tags:
   - profile
   - cv-摘要
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-09-25T04:53:23.450Z'
-content_hash: 'sha256:f5d36d2fbe22a327d421b21d7ce03c7a21bfc6a364bd2b32f924faa6674da1a3'
-reviewed_at: '2026-09-25T04:54:14.029Z'
-review_due: '2026-12-24'
+modified: '2026-09-26T08:09:04.295Z'
+content_hash: 'sha256:e38a3dde63e25e60e6a4a4d47d697d0dbc1bc5eb9c4051a71468a9e9d6ecb1d5'
+reviewed_at: '2026-09-26T08:09:37.000Z'
+review_due: '2026-12-25'
 name: 简历
 language: zh
 summary: 乔鑫宝的学术简历摘要。
@@ -42,14 +42,14 @@ translation_of: CV
 ## 研究经历
 
 - **香港中文大学博士阶段研究**，2026 年 8 月 1 日至今，导师 [张颖珺](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/)。研究分布式 AI 系统中的数据生命周期管理，将数据生成、使用和删除问题与联邦表示几何联系起来。
-  - Paper #5：提出联邦学习的最优传输视角，并构建面向通信受限表示几何的 barycentric multi-prototype classifier。
+  - Paper #6：提出联邦学习的最优传输视角，并构建面向通信受限表示几何的 barycentric multi-prototype classifier。
 - **数据中心机器学习系统研究**，2023-03 至 2025-12，导师 [张萌](https://person.zju.edu.cn/mengzhang) 教授，机构 [[Zhejiang_University|浙江大学]]。构建面向数据删除的机器遗忘方法，覆盖连续影响权重、在线认证更新和动态树集成模型。
-  - Paper #2：提出面向连续影响权重的 soft-weighted unlearning，支持超越二元删除的公平性和鲁棒性干预。
-  - Paper #3：提出基于 recollected trajectory statistics 的无 Hessian 在线认证遗忘，避免显式 Hessian 求逆并支持流式删除请求。
-  - Paper #4：构建用于动态在线环境的精确高效随机森林遗忘框架，通过更新受影响的树统计量替代重训。
+  - Paper #3：提出面向连续影响权重的 soft-weighted unlearning，支持超越二元删除的公平性和鲁棒性干预。
+  - Paper #4：提出基于 recollected trajectory statistics 的无 Hessian 在线认证遗忘，避免显式 Hessian 求逆并支持流式删除请求。
+  - Paper #5：构建用于动态在线环境的精确高效随机森林遗忘框架，通过更新受影响的树统计量替代重训。
 - **可信 LLM 系统研究**，2025-06 至 2025-12，全职研究实习，导师 PANG Yan, James，机构 [[NUSRI_CQ|新加坡国立大学重庆研究院（NUSRI-CQ）]]。分析模型在递归选择的合成数据上训练，或从提示中推断虚假模式时出现的可靠性失效。
   - Paper #1：说明递归合成数据训练中的样本选择如何在低资源验证下剪除尾部样本并诱发模型坍缩。
-  - Paper #6：分析错觉模式感知如何成为 LLM 虚假推理机制，尤其是感知到的模式压过基于证据的推理时。
+  - Paper #2：分析错觉模式感知如何成为 LLM 虚假推理机制，尤其是感知到的模式压过基于证据的推理时。
 
 ## 开源贡献与学术服务
 
@@ -60,25 +60,25 @@ translation_of: CV
 
 ## 论文
 
-见 [[Publications|论文]]。简历列出已录用、已公开和在审的机器遗忘、去中心化学习、合成数据模型坍缩、联邦学习与 LLM 可靠性工作。
+见 [[Publications|论文]]。简历列出已录用、已公开和在审的机器遗忘、去中心化学习、合成数据模型坍缩、联邦学习与 LLM 可靠性工作。最近录用且由乔鑫宝独立担任第一作者的论文列在首位；其余已录用论文按录用时间由近及远排列，在审论文列于末尾。
 
 星号（*）表示共同第一作者；剑号（†）表示通讯作者。
 
 - **Paper #1: When Sample Selection Bias Precipitates Model Collapse**。\
   **乔鑫宝**†、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌†、Yan Pang†。\
   Forty-Third International Conference on Machine Learning, ICML, 2026。链接：[OpenReview](https://openreview.net/forum?id=FFXvnzM254)、[arXiv](https://arxiv.org/abs/2606.13732)、[GitHub](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse)。
-- **Paper #2: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**。\
+- **Paper #2: Illusory Pattern Perception Drives Spurious Inference in Large Language Models**。\
+  Peihua Mai\*、Zhuoyan Shao\*、**乔鑫宝**\*、张萌、Xinyue Zhou†、Yan Pang†。\
+  NeurIPS 2026，已录用。
+- **Paper #3: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**。\
   **乔鑫宝**、Ningning Ding、Yushi Cheng、张萌†。\
   Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026。链接：[arXiv](https://arxiv.org/abs/2505.18783)、[AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681)。
-- **Paper #3: Hessian-Free Online Certified Unlearning**。\
+- **Paper #4: Hessian-Free Online Certified Unlearning**。\
   **乔鑫宝**、张萌†、Ming Tang、Ermin Wei。\
   Thirteenth International Conference on Learning Representations, ICLR, 2025。链接：[OpenReview](https://openreview.net/forum?id=C3TrHWanh5)、[arXiv](https://arxiv.org/abs/2404.01712)、[GitHub](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning)。
-- **Paper #4: DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**。\
+- **Paper #5: DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**。\
   Shurong Wang、Zhuoyang Shen、**乔鑫宝**、Tongning Zhang、张萌†。\
   Thirteenth International Conference on Learning Representations, ICLR, 2025。链接：[OpenReview](https://openreview.net/forum?id=nsCOeCLR8e)、[arXiv](https://arxiv.org/abs/2410.01588)、[GitHub](https://github.com/shurongwang/DynFrs)。
-- **Paper #5: Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification**。\
+- **Paper #6: Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification**。\
   **乔鑫宝**、Wenjing Yan†、Ying-Jun Angela Zhang。\
   在审。
-- **Paper #6: Illusory Pattern Perception Drives Spurious Inference in Large Language Models**。\
-  Peihua Mai、Zhuoyan Shao、**乔鑫宝**、张萌、Xinyue Zhou†、Yan Pang†。\
-  NeurIPS 2026，已录用。

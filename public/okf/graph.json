@@ -705,7 +705,7 @@
         "src-da17eb3884244bd3",
         "src-faaafad831fbefc5"
       ],
-      "contentHash": "sha256:c403b395dd8dc2d8498a961317d18bf7cc2a550e8eb90d3392d9b9d738227bb3",
+      "contentHash": "sha256:2e6bef8ac8bf818acdb83a41edf5a65b150d94a56d365d423537811f2fd359f1",
       "file": "CV.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -715,12 +715,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-09-25T04:54:14.029Z",
-        "reviewDue": "2026-12-24",
+        "reviewedAt": "2026-09-26T08:09:37.000Z",
+        "reviewDue": "2026-12-25",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-25T04:53:23.451Z",
+      "modifiedAt": "2026-09-26T08:09:04.296Z",
       "outgoing": [
         "Publications",
         "Zhejiang_University"
@@ -758,12 +758,12 @@
       "timestamp": "2026-07-02T19:37:18+08:00",
       "title": "Curriculum Vitae",
       "type": "CV summary",
-      "reviewedAt": "2026-09-25T04:54:14.029Z",
-      "reviewDue": "2026-12-24",
+      "reviewedAt": "2026-09-26T08:09:37.000Z",
+      "reviewDue": "2026-12-25",
       "retrieval": {
         "documentId": "wiki:CV",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:c403b395dd8dc2d8498a961317d18bf7cc2a550e8eb90d3392d9b9d738227bb3",
+        "contentHash": "sha256:2e6bef8ac8bf818acdb83a41edf5a65b150d94a56d365d423537811f2fd359f1",
         "textFields": [
           "title",
           "aliases",
@@ -808,7 +808,7 @@
         "src-da17eb3884244bd3",
         "src-faaafad831fbefc5"
       ],
-      "contentHash": "sha256:f5d36d2fbe22a327d421b21d7ce03c7a21bfc6a364bd2b32f924faa6674da1a3",
+      "contentHash": "sha256:e38a3dde63e25e60e6a4a4d47d697d0dbc1bc5eb9c4051a71468a9e9d6ecb1d5",
       "file": "CV_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -818,12 +818,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-09-25T04:54:14.029Z",
-        "reviewDue": "2026-12-24",
+        "reviewedAt": "2026-09-26T08:09:37.000Z",
+        "reviewDue": "2026-12-25",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-25T04:53:23.450Z",
+      "modifiedAt": "2026-09-26T08:09:04.295Z",
       "outgoing": [
         "NUSRI_CQ_zh",
         "Publications_zh",
@@ -862,12 +862,12 @@
       "timestamp": "2026-07-02T19:37:18+08:00",
       "title": "简历",
       "type": "CV 摘要",
-      "reviewedAt": "2026-09-25T04:54:14.029Z",
-      "reviewDue": "2026-12-24",
+      "reviewedAt": "2026-09-26T08:09:37.000Z",
+      "reviewDue": "2026-12-25",
       "retrieval": {
         "documentId": "wiki:CV_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:f5d36d2fbe22a327d421b21d7ce03c7a21bfc6a364bd2b32f924faa6674da1a3",
+        "contentHash": "sha256:e38a3dde63e25e60e6a4a4d47d697d0dbc1bc5eb9c4051a71468a9e9d6ecb1d5",
         "textFields": [
           "title",
           "aliases",
@@ -2509,7 +2509,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:4a1ece16f18adcced12dffe73eba0c7165439fcd437df1f31cdc7b14c182becd",
+      "contentHash": "sha256:a64171fe2c4772e24a1f4e9c058ce8b7faaa12a9089385675f2f26b6871abf2a",
       "file": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -2519,12 +2519,12 @@
         "confidence": 0.95,
         "review": "on venue/status change",
         "retention": "long-lived semantic memory",
-        "reviewedAt": "2026-09-25T04:54:14.029Z",
-        "reviewDue": "2027-09-25",
+        "reviewedAt": "2026-09-26T08:09:37.000Z",
+        "reviewDue": "2027-09-26",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-25T04:53:27.388Z",
+      "modifiedAt": "2026-09-26T08:09:04.310Z",
       "outgoing": [
         "LLM_Reliability",
         "Trustworthy_AI",
@@ -2547,12 +2547,12 @@
       "timestamp": "2026-09-25T13:49:35+09:00",
       "title": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
       "type": "publication",
-      "reviewedAt": "2026-09-25T04:54:14.029Z",
-      "reviewDue": "2027-09-25",
+      "reviewedAt": "2026-09-26T08:09:37.000Z",
+      "reviewDue": "2027-09-26",
       "retrieval": {
         "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:4a1ece16f18adcced12dffe73eba0c7165439fcd437df1f31cdc7b14c182becd",
+        "contentHash": "sha256:a64171fe2c4772e24a1f4e9c058ce8b7faaa12a9089385675f2f26b6871abf2a",
         "textFields": [
           "title",
           "aliases",
@@ -2586,7 +2586,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:f4c790a4291c9ec7cf40078711cf0c8a08559b37f22ed15fc5fb7a7f7d2164f8",
+      "contentHash": "sha256:835e399ecf6b3cc8a1bc3d3ef9c97168487ca5f2876220f6b446f62b9db65166",
       "file": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -2596,12 +2596,12 @@
         "confidence": 0.95,
         "review": "on venue/status change",
         "retention": "long-lived semantic memory",
-        "reviewedAt": "2026-09-25T04:54:14.029Z",
-        "reviewDue": "2027-09-25",
+        "reviewedAt": "2026-09-26T08:09:37.000Z",
+        "reviewDue": "2027-09-26",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-25T04:53:27.237Z",
+      "modifiedAt": "2026-09-26T08:09:04.309Z",
       "outgoing": [
         "LLM_Reliability_zh",
         "Qiao_Xinbao_zh",
@@ -2624,12 +2624,12 @@
       "timestamp": "2026-09-25T13:49:35+09:00",
       "title": "错觉模式感知驱动大语言模型的虚假推理",
       "type": "publication",
-      "reviewedAt": "2026-09-25T04:54:14.029Z",
-      "reviewDue": "2027-09-25",
+      "reviewedAt": "2026-09-26T08:09:37.000Z",
+      "reviewDue": "2027-09-26",
       "retrieval": {
         "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:f4c790a4291c9ec7cf40078711cf0c8a08559b37f22ed15fc5fb7a7f7d2164f8",
+        "contentHash": "sha256:835e399ecf6b3cc8a1bc3d3ef9c97168487ca5f2876220f6b446f62b9db65166",
         "textFields": [
           "title",
           "aliases",
@@ -4465,7 +4465,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:52f068c553925d68105fe2ab76d62f356b4fb5ae40278d3e1fb982ce09aea80a",
+      "contentHash": "sha256:b3a97d70dfb40c84fdff1d3cec5147595bd6bd05ba5edece8c4e7a7b2b7e76a4",
       "file": "Publications.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -4475,12 +4475,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-09-26T03:15:12.636Z",
+        "reviewedAt": "2026-09-26T08:09:37.000Z",
         "reviewDue": "2026-12-25",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-26T03:14:39.302Z",
+      "modifiedAt": "2026-09-26T08:09:04.323Z",
       "outgoing": [
         "AI_and_Networks",
         "Data_Centric_Machine_Learning",
@@ -4510,12 +4510,12 @@
       "timestamp": "2026-06-01T22:00:31+08:00",
       "title": "Publications",
       "type": "Publication list",
-      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewedAt": "2026-09-26T08:09:37.000Z",
       "reviewDue": "2026-12-25",
       "retrieval": {
         "documentId": "wiki:Publications",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:52f068c553925d68105fe2ab76d62f356b4fb5ae40278d3e1fb982ce09aea80a",
+        "contentHash": "sha256:b3a97d70dfb40c84fdff1d3cec5147595bd6bd05ba5edece8c4e7a7b2b7e76a4",
         "textFields": [
           "title",
           "aliases",
@@ -4544,7 +4544,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:414b0693e3233ea35f3b6f94043e5c7ee852849ea1e8e36e7789d839dd48cf1c",
+      "contentHash": "sha256:df4ed554e2e3f21039c8f066d4ac0bd692c9a296f0e25b2eb8e32a13bb5f3270",
       "file": "Publications_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -4554,12 +4554,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-09-26T03:15:12.636Z",
+        "reviewedAt": "2026-09-26T08:09:37.000Z",
         "reviewDue": "2026-12-25",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-26T03:14:39.301Z",
+      "modifiedAt": "2026-09-26T08:09:04.322Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -4589,12 +4589,12 @@
       "timestamp": "2026-06-01T22:04:00+08:00",
       "title": "论文",
       "type": "论文列表",
-      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewedAt": "2026-09-26T08:09:37.000Z",
       "reviewDue": "2026-12-25",
       "retrieval": {
         "documentId": "wiki:Publications_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:414b0693e3233ea35f3b6f94043e5c7ee852849ea1e8e36e7789d839dd48cf1c",
+        "contentHash": "sha256:df4ed554e2e3f21039c8f066d4ac0bd692c9a296f0e25b2eb8e32a13bb5f3270",
         "textFields": [
           "title",
           "aliases",

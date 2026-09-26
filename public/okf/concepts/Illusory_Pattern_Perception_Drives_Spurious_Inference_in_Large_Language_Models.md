@@ -12,18 +12,18 @@ tags:
   - neurips-2026
   - llm-reliability
 timestamp: '2026-09-25T13:49:35+09:00'
-modified: '2026-09-25T04:53:27.388Z'
-content_hash: 'sha256:4a1ece16f18adcced12dffe73eba0c7165439fcd437df1f31cdc7b14c182becd'
-reviewed_at: '2026-09-25T04:54:14.029Z'
-review_due: '2027-09-25'
+modified: '2026-09-26T08:09:04.310Z'
+content_hash: 'sha256:a64171fe2c4772e24a1f4e9c058ce8b7faaa12a9089385675f2f26b6871abf2a'
+reviewed_at: '2026-09-26T08:09:37.000Z'
+review_due: '2027-09-26'
 language: en
 lifecycle:
   status: confirmed
   confidence: 0.95
   review: on venue/status change
   retention: long-lived semantic memory
-  reviewedAt: '2026-09-25T04:54:14.029Z'
-  reviewDue: '2027-09-25'
+  reviewedAt: '2026-09-26T08:09:37.000Z'
+  reviewDue: '2027-09-26'
   pendingReview: false
   overdue: false
 retrieval:
@@ -35,6 +35,8 @@ source_path: >-
   wiki/Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md
 ---
 **Illusory Pattern Perception Drives Spurious Inference in Large Language Models** is a paper by Peihua Mai, Zhuoyan Shao, **[Xinbao Qiao](./Xinbao_Qiao.md)**, Meng Zhang, Xinyue Zhou, and Yan Pang, accepted at NeurIPS 2026. It examines how a perceived pattern in a prompt can lead a large language model to make an inference that is insufficiently grounded in the available evidence.
+
+*Authorship note: Peihua Mai, Zhuoyan Shao, and Xinbao Qiao contributed equally as co-first authors.*
 
 ## Overview
 

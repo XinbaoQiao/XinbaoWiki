@@ -248,10 +248,10 @@
         "cv-summary"
       ],
       "timestamp": "2026-07-02T19:37:18+08:00",
-      "modifiedAt": "2026-09-25T04:53:23.451Z",
-      "contentHash": "sha256:c403b395dd8dc2d8498a961317d18bf7cc2a550e8eb90d3392d9b9d738227bb3",
-      "reviewedAt": "2026-09-25T04:54:14.029Z",
-      "reviewDue": "2026-12-24",
+      "modifiedAt": "2026-09-26T08:09:04.296Z",
+      "contentHash": "sha256:2e6bef8ac8bf818acdb83a41edf5a65b150d94a56d365d423537811f2fd359f1",
+      "reviewedAt": "2026-09-26T08:09:37.000Z",
+      "reviewDue": "2026-12-25",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-0642a11373a83c47",
@@ -294,7 +294,7 @@
       "retrieval": {
         "documentId": "wiki:CV",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:c403b395dd8dc2d8498a961317d18bf7cc2a550e8eb90d3392d9b9d738227bb3",
+        "contentHash": "sha256:2e6bef8ac8bf818acdb83a41edf5a65b150d94a56d365d423537811f2fd359f1",
         "textFields": [
           "title",
           "aliases",
@@ -798,17 +798,17 @@
         "llm-reliability"
       ],
       "timestamp": "2026-09-25T13:49:35+09:00",
-      "modifiedAt": "2026-09-25T04:53:27.388Z",
-      "contentHash": "sha256:4a1ece16f18adcced12dffe73eba0c7165439fcd437df1f31cdc7b14c182becd",
-      "reviewedAt": "2026-09-25T04:54:14.029Z",
-      "reviewDue": "2027-09-25",
+      "modifiedAt": "2026-09-26T08:09:04.310Z",
+      "contentHash": "sha256:a64171fe2c4772e24a1f4e9c058ce8b7faaa12a9089385675f2f26b6871abf2a",
+      "reviewedAt": "2026-09-26T08:09:37.000Z",
+      "reviewDue": "2027-09-26",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:4a1ece16f18adcced12dffe73eba0c7165439fcd437df1f31cdc7b14c182becd",
+        "contentHash": "sha256:a64171fe2c4772e24a1f4e9c058ce8b7faaa12a9089385675f2f26b6871abf2a",
         "textFields": [
           "title",
           "aliases",
@@ -1288,9 +1288,9 @@
         "publication-list"
       ],
       "timestamp": "2026-06-01T22:00:31+08:00",
-      "modifiedAt": "2026-09-26T03:14:39.302Z",
-      "contentHash": "sha256:52f068c553925d68105fe2ab76d62f356b4fb5ae40278d3e1fb982ce09aea80a",
-      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "modifiedAt": "2026-09-26T08:09:04.323Z",
+      "contentHash": "sha256:b3a97d70dfb40c84fdff1d3cec5147595bd6bd05ba5edece8c4e7a7b2b7e76a4",
+      "reviewedAt": "2026-09-26T08:09:37.000Z",
       "reviewDue": "2026-12-25",
       "sourceIds": [],
       "citationSourceIds": [],
@@ -1298,7 +1298,7 @@
       "retrieval": {
         "documentId": "wiki:Publications",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:52f068c553925d68105fe2ab76d62f356b4fb5ae40278d3e1fb982ce09aea80a",
+        "contentHash": "sha256:b3a97d70dfb40c84fdff1d3cec5147595bd6bd05ba5edece8c4e7a7b2b7e76a4",
         "textFields": [
           "title",
           "aliases",
@@ -2051,17 +2051,17 @@
         "llm-reliability"
       ],
       "timestamp": "2026-09-25T13:49:35+09:00",
-      "modifiedAt": "2026-09-25T04:53:27.237Z",
-      "contentHash": "sha256:f4c790a4291c9ec7cf40078711cf0c8a08559b37f22ed15fc5fb7a7f7d2164f8",
-      "reviewedAt": "2026-09-25T04:54:14.029Z",
-      "reviewDue": "2027-09-25",
+      "modifiedAt": "2026-09-26T08:09:04.309Z",
+      "contentHash": "sha256:835e399ecf6b3cc8a1bc3d3ef9c97168487ca5f2876220f6b446f62b9db65166",
+      "reviewedAt": "2026-09-26T08:09:37.000Z",
+      "reviewDue": "2027-09-26",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:f4c790a4291c9ec7cf40078711cf0c8a08559b37f22ed15fc5fb7a7f7d2164f8",
+        "contentHash": "sha256:835e399ecf6b3cc8a1bc3d3ef9c97168487ca5f2876220f6b446f62b9db65166",
         "textFields": [
           "title",
           "aliases",
@@ -2500,10 +2500,10 @@
         "cv-摘要"
       ],
       "timestamp": "2026-07-02T19:37:18+08:00",
-      "modifiedAt": "2026-09-25T04:53:23.450Z",
-      "contentHash": "sha256:f5d36d2fbe22a327d421b21d7ce03c7a21bfc6a364bd2b32f924faa6674da1a3",
-      "reviewedAt": "2026-09-25T04:54:14.029Z",
-      "reviewDue": "2026-12-24",
+      "modifiedAt": "2026-09-26T08:09:04.295Z",
+      "contentHash": "sha256:e38a3dde63e25e60e6a4a4d47d697d0dbc1bc5eb9c4051a71468a9e9d6ecb1d5",
+      "reviewedAt": "2026-09-26T08:09:37.000Z",
+      "reviewDue": "2026-12-25",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-0642a11373a83c47",
@@ -2546,7 +2546,7 @@
       "retrieval": {
         "documentId": "wiki:CV_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:f5d36d2fbe22a327d421b21d7ce03c7a21bfc6a364bd2b32f924faa6674da1a3",
+        "contentHash": "sha256:e38a3dde63e25e60e6a4a4d47d697d0dbc1bc5eb9c4051a71468a9e9d6ecb1d5",
         "textFields": [
           "title",
           "aliases",
@@ -2701,9 +2701,9 @@
         "论文列表"
       ],
       "timestamp": "2026-06-01T22:04:00+08:00",
-      "modifiedAt": "2026-09-26T03:14:39.301Z",
-      "contentHash": "sha256:414b0693e3233ea35f3b6f94043e5c7ee852849ea1e8e36e7789d839dd48cf1c",
-      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "modifiedAt": "2026-09-26T08:09:04.322Z",
+      "contentHash": "sha256:df4ed554e2e3f21039c8f066d4ac0bd692c9a296f0e25b2eb8e32a13bb5f3270",
+      "reviewedAt": "2026-09-26T08:09:37.000Z",
       "reviewDue": "2026-12-25",
       "sourceIds": [],
       "citationSourceIds": [],
@@ -2711,7 +2711,7 @@
       "retrieval": {
         "documentId": "wiki:Publications_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:414b0693e3233ea35f3b6f94043e5c7ee852849ea1e8e36e7789d839dd48cf1c",
+        "contentHash": "sha256:df4ed554e2e3f21039c8f066d4ac0bd692c9a296f0e25b2eb8e32a13bb5f3270",
         "textFields": [
           "title",
           "aliases",
