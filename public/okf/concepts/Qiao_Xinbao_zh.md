@@ -8,10 +8,10 @@ tags:
   - biography
   - 博士生
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-08-09T18:32:45.784Z'
-content_hash: 'sha256:9d8bcf4ee892d1daaa24590438ace4c37e32f79f5917586244b6c85f96051317'
-reviewed_at: '2026-08-10T02:34:00+08:00'
-review_due: '2026-11-07'
+modified: '2026-09-25T04:53:27.410Z'
+content_hash: 'sha256:91a45d1089ce31c847ead75b1c1e9b2ce0dac88da8ab5f0ec4d94bce79544264'
+reviewed_at: '2026-09-25T04:54:14.029Z'
+review_due: '2026-12-24'
 language: zh
 aliases:
   - Mr. Ciao
@@ -23,8 +23,8 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-08-10T02:34:00+08:00'
-  reviewDue: '2026-11-07'
+  reviewedAt: '2026-09-25T04:54:14.029Z'
+  reviewDue: '2026-12-24'
   pendingReview: false
   overdue: false
 retrieval:
@@ -51,7 +51,7 @@ source_path: wiki/Qiao_Xinbao_zh.md
 2. 在数据使用方面，关注分布式学习、AI for Networks 与 Networks for AI 等场景下的数据建模、协同优化与系统设计；
 3. 在数据删除方面，研究机器遗忘与数据影响评估，探索如何在保护隐私和满足删除需求的同时维持模型性能。
 
-这些方向连接[数据中心 ML](./Data_Centric_Machine_Learning_zh.md)、[AI 与网络](./AI_and_Networks_zh.md)、[机器遗忘](./Machine_Unlearning_zh.md)、[合成数据可靠性](./Synthetic_Data_and_Model_Collapse_zh.md)，以及用于协作分布参考的[分布式 Wasserstein barycenter](./Distributed_Wasserstein_Barycenter_zh.md)方法。在博士阶段以前，乔鑫宝于[浙江大学](./Zhejiang_University_zh.md)获得人工智能工学硕士学位，并于[山东大学](./Shandong_University_zh.md)获得通信工程工学学士学位。他的[论文](./Publications_zh.md)包括 ICML、AAAI 与 ICLR 录用或发表的工作。
+这些方向连接[数据中心 ML](./Data_Centric_Machine_Learning_zh.md)、[AI 与网络](./AI_and_Networks_zh.md)、[机器遗忘](./Machine_Unlearning_zh.md)、[合成数据可靠性](./Synthetic_Data_and_Model_Collapse_zh.md)，以及用于协作分布参考的[分布式 Wasserstein barycenter](./Distributed_Wasserstein_Barycenter_zh.md)方法。在博士阶段以前，乔鑫宝于[浙江大学](./Zhejiang_University_zh.md)获得人工智能工学硕士学位，并于[山东大学](./Shandong_University_zh.md)获得通信工程工学学士学位。他的[论文](./Publications_zh.md)包括 NeurIPS、ICML、AAAI 与 ICLR 录用或发表的工作。
 
 ## 教育经历
 
@@ -72,6 +72,8 @@ source_path: wiki/Qiao_Xinbao_zh.md
 ### 新加坡国立大学重庆研究院的可信大模型系统研究（2025）
 
 2025年6月至12月，乔鑫宝在[新加坡国立大学重庆研究院](./NUSRI_CQ_zh.md)担任全职研究实习生。研究内容包括可信 LLM 系统和合成数据评估，尤其关注真实数据覆盖有限或碎片化时的低资源递归合成数据训练。
+
+这一时期的工作还包括获 NeurIPS 2026 录用的[Illusory Pattern Perception Drives Spurious Inference in Large Language Models](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md)，研究提示中的错觉模式如何使大语言模型偏离基于证据的推理。
 
 ### 香港中文大学博士阶段（2026年8月1日至今）
 

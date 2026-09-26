@@ -8,18 +8,18 @@ tags:
   - research
   - research-institute
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:864772161c155d4e157103d60fb2b0db13bb3490b5afe3fc460ca19b1cb56e5a'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-09-26T03:14:39.298Z'
+content_hash: 'sha256:18d9a449d027da84f26e30cb6cd9b50a81fa7362f7fdda94e8e8710084b523ae'
+reviewed_at: '2026-09-26T03:15:12.636Z'
+review_due: '2027-03-25'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-02T20:03:20+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-09-26T03:15:12.636Z'
+  reviewDue: '2027-03-25'
   pendingReview: false
   overdue: false
 retrieval:
@@ -44,7 +44,7 @@ Public NUS material describes NUSRI-CQ as a joint effort between the National Un
 
 ## Connection to Qiao
 
-The NUSRI-CQ period is associated in this wiki with [synthetic data](./Synthetic_Data_and_Model_Collapse.md), [collaborative evaluation](./Collaborative_Evaluation.md), and [Wasserstein geometry](./Wasserstein_Geometry.md). It provides the immediate research context for the ICML 2026 paper [When Sample Selection Bias Precipitates Model Collapse](./When_Sample_Selection_Bias_Precipitates_Model_Collapse.md), especially the question of how low-resource distributed parties can diagnose data-generation failure without exposing all local data.
+The NUSRI-CQ period is associated in this wiki with [synthetic data](./Synthetic_Data_and_Model_Collapse.md), [collaborative evaluation](./Collaborative_Evaluation.md), [Wasserstein geometry](./Wasserstein_Geometry.md), and [LLM reliability](./LLM_Reliability.md). It provides the immediate research context for the ICML 2026 paper [When Sample Selection Bias Precipitates Model Collapse](./When_Sample_Selection_Bias_Precipitates_Model_Collapse.md), especially the question of how low-resource distributed parties can diagnose data-generation failure without exposing all local data. The NeurIPS 2026 paper [Illusory Pattern Perception Drives Spurious Inference in Large Language Models](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md) addresses how perceived prompt patterns can lead to spurious inference.
 
 ## See also
 
@@ -52,6 +52,7 @@ The NUSRI-CQ period is associated in this wiki with [synthetic data](./Synthetic
 - [Experience](./Experience.md)
 - [Synthetic Data and Model Collapse](./Synthetic_Data_and_Model_Collapse.md)
 - [When Sample Selection Bias Precipitates Model Collapse](./When_Sample_Selection_Bias_Precipitates_Model_Collapse.md)
+- [Illusory Pattern Perception Drives Spurious Inference in Large Language Models](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md)
 - [The Chinese University of Hong Kong](./The_Chinese_University_of_Hong_Kong.md)
 
 [^nusri-intro]: The NUSRI-CQ English [institute introduction](https://en.nusricq.cn/about/yjyjj) describes the institute as a research, incubation, education, and training platform focused on industry-academia-research integration.

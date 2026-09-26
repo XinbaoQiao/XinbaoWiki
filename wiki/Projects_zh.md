@@ -8,10 +8,10 @@ tags:
   - overview
   - 项目概览
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:fee4ad67798127cc3b52660ab5227d1b67bb590c8a37300a540bb43e1e15bbec'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-09-30'
+modified: '2026-09-26T03:14:39.300Z'
+content_hash: 'sha256:62f3a053ce6b446e0e0c69fa958b2108fd9095d872e8947c80aaef5ccc0d6174'
+reviewed_at: '2026-09-26T03:15:12.636Z'
+review_due: '2026-12-25'
 name: 项目
 language: zh
 summary: 研究项目与项目簇。
@@ -39,3 +39,7 @@ translation_of: Projects
 ### 合成数据
 
 [[Synthetic_Data_and_Model_Collapse|合成数据]] 追问生成数据何时能够安全替代或增强真实数据，以及递归训练何时放大偏差或侵蚀多样性。当前重点是低资源社区：当真实数据覆盖碎片化时，本地过滤更容易剪掉有效尾部模式。主论文页是 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]]。
+
+### 可信大语言模型系统
+
+[[LLM_Reliability|大语言模型可靠性]] 研究提示中出现误导性模式时，语言模型能否恰当地使用证据。获 NeurIPS 2026 录用的[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》]]是这一项目簇对应的论文。

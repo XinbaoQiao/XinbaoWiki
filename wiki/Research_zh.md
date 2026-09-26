@@ -8,10 +8,10 @@ tags:
   - overview
   - 研究概览
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-11T07:28:06+08:00'
-content_hash: 'sha256:0b3775a6da8240e7a8826285d93d76a8f51202552c6969c4c028ff60fb890bcf'
-reviewed_at: '2026-07-11T07:28:06+08:00'
-review_due: '2026-10-08'
+modified: '2026-09-26T03:14:39.306Z'
+content_hash: 'sha256:292bbf81253d117ee0cc401cfd4b2722c52d753ca7ed725f3f9b96356bd34ecc'
+reviewed_at: '2026-09-26T03:15:12.636Z'
+review_due: '2026-12-25'
 name: 研究
 language: zh
 summary: 乔鑫宝研究方向与相关专题页面概览。
@@ -39,6 +39,10 @@ translation_of: Research
 ## 合成数据
 
 [[Synthetic_Data_and_Model_Collapse|合成数据]] 研究递归合成数据训练、[[Data_Selection|数据选择]]、[[Sample_Selection_Bias|样本选择偏差]]、[[Model_Collapse|模型坍缩]]，以及低资源 [[Data_Silos|数据孤岛]] 中的协作缓解。中心论文是 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]]，其核心表述是：当真实数据覆盖稀缺或碎片化时，模型坍缩风险尤其高。
+
+## 大语言模型可靠性
+
+[[LLM_Reliability|大语言模型可靠性]] 研究模型回答能否获得充分证据支持。获 NeurIPS 2026 录用的[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》]]将这一问题与可能诱发无依据推理的提示模式联系起来。
 
 ## 数据中心 ML 与可信 AI
 

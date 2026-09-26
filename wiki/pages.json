@@ -248,10 +248,10 @@
         "cv-summary"
       ],
       "timestamp": "2026-07-02T19:37:18+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.749Z",
-      "contentHash": "sha256:0a1e554c1c1bf043340bfced843e9417a8a2e79044646cc7dce36fb09c8c4386",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2026-11-07",
+      "modifiedAt": "2026-09-25T04:53:23.451Z",
+      "contentHash": "sha256:c403b395dd8dc2d8498a961317d18bf7cc2a550e8eb90d3392d9b9d738227bb3",
+      "reviewedAt": "2026-09-25T04:54:14.029Z",
+      "reviewDue": "2026-12-24",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-0642a11373a83c47",
@@ -294,7 +294,7 @@
       "retrieval": {
         "documentId": "wiki:CV",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:0a1e554c1c1bf043340bfced843e9417a8a2e79044646cc7dce36fb09c8c4386",
+        "contentHash": "sha256:c403b395dd8dc2d8498a961317d18bf7cc2a550e8eb90d3392d9b9d738227bb3",
         "textFields": [
           "title",
           "aliases",
@@ -627,17 +627,17 @@
         "research-experience"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.762Z",
-      "contentHash": "sha256:c213babca2918a9728aaac57badb72797578f588269356d9c47e712d7906703b",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2026-11-07",
+      "modifiedAt": "2026-09-26T03:14:39.278Z",
+      "contentHash": "sha256:6a1ff21af4c7e70ae1b21fa4dccb07b513e83cf10bace4d4920c024d73981717",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2026-12-25",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Experience",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:c213babca2918a9728aaac57badb72797578f588269356d9c47e712d7906703b",
+        "contentHash": "sha256:6a1ff21af4c7e70ae1b21fa4dccb07b513e83cf10bace4d4920c024d73981717",
         "textFields": [
           "title",
           "aliases",
@@ -784,6 +784,49 @@
       }
     },
     {
+      "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+      "title": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
+      "summary": "NeurIPS 2026 paper on illusory pattern perception and spurious inference in large language models.",
+      "language": "en",
+      "type": "publication",
+      "tags": [
+        "en",
+        "publication",
+        "paper",
+        "accepted",
+        "neurips-2026",
+        "llm-reliability"
+      ],
+      "timestamp": "2026-09-25T13:49:35+09:00",
+      "modifiedAt": "2026-09-25T04:53:27.388Z",
+      "contentHash": "sha256:4a1ece16f18adcced12dffe73eba0c7165439fcd437df1f31cdc7b14c182becd",
+      "reviewedAt": "2026-09-25T04:54:14.029Z",
+      "reviewDue": "2027-09-25",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:4a1ece16f18adcced12dffe73eba0c7165439fcd437df1f31cdc7b14c182becd",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
       "slug": "index",
       "title": "Index",
       "summary": "Navigation index for public Xinbaopedia pages.",
@@ -796,17 +839,17 @@
         "wiki-index"
       ],
       "timestamp": "2026-05-07T17:34:07+08:00",
-      "modifiedAt": "2026-07-14T23:17:11+08:00",
-      "contentHash": "sha256:47074f3b8b0b101d64f11b2bbedd1bc5de61e0f63ab4c5346376750158f1895e",
-      "reviewedAt": "2026-07-14T23:17:11+08:00",
-      "reviewDue": "2027-07-14",
+      "modifiedAt": "2026-09-26T03:14:39.284Z",
+      "contentHash": "sha256:d3e94cb04e82f64ff8faf8f627fb425891b0ca0ee253ec6bb670a21f809cdd65",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2027-09-26",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:index",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:47074f3b8b0b101d64f11b2bbedd1bc5de61e0f63ab4c5346376750158f1895e",
+        "contentHash": "sha256:d3e94cb04e82f64ff8faf8f627fb425891b0ca0ee253ec6bb670a21f809cdd65",
         "textFields": [
           "title",
           "aliases",
@@ -879,17 +922,17 @@
         "llm"
       ],
       "timestamp": "2026-05-05T20:55:21+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:218df98003e2d7abaf687efc0c1417ef55412b77887fc85e5bdb222a572e63cb",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-09-26T03:16:03.686Z",
+      "contentHash": "sha256:ac548023cbd839572a1e3f5ddefb436d467bc8c0cd2200e78efbda8de32c85ac",
+      "reviewedAt": "2026-09-26T03:16:12.059Z",
+      "reviewDue": "2027-03-25",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Interpretability",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:218df98003e2d7abaf687efc0c1417ef55412b77887fc85e5bdb222a572e63cb",
+        "contentHash": "sha256:ac548023cbd839572a1e3f5ddefb436d467bc8c0cd2200e78efbda8de32c85ac",
         "textFields": [
           "title",
           "aliases",
@@ -921,10 +964,10 @@
         "llm"
       ],
       "timestamp": "2026-05-05T20:55:21+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.774Z",
-      "contentHash": "sha256:1885ac03c0831fa96b282dd4551ca989f43635aef8fc127cd44acd64c724c1a8",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-02-05",
+      "modifiedAt": "2026-09-25T04:53:27.398Z",
+      "contentHash": "sha256:8b76deadc92e23f4c96327ed7c72fa9434143e195aff9885355292b1b8244fef",
+      "reviewedAt": "2026-09-25T04:54:14.029Z",
+      "reviewDue": "2027-03-24",
       "sourceIds": [
         "src-11be10768dbb7de0",
         "src-44708abf72c85407",
@@ -943,7 +986,7 @@
       "retrieval": {
         "documentId": "wiki:LLM_Reliability",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:1885ac03c0831fa96b282dd4551ca989f43635aef8fc127cd44acd64c724c1a8",
+        "contentHash": "sha256:8b76deadc92e23f4c96327ed7c72fa9434143e195aff9885355292b1b8244fef",
         "textFields": [
           "title",
           "aliases",
@@ -974,17 +1017,17 @@
         "maintenance-log"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.776Z",
-      "contentHash": "sha256:90f33ae93a1e8057681c7d00f314b9d6542ffeb741941d9a03cbbc14896799a2",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-08-09",
+      "modifiedAt": "2026-09-26T03:14:39.293Z",
+      "contentHash": "sha256:3809ec757a887c700c6bdd6aa3f7cc471d4ba1bfac51f493e9eaaf6bc11413e4",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2027-09-26",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:log",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:90f33ae93a1e8057681c7d00f314b9d6542ffeb741941d9a03cbbc14896799a2",
+        "contentHash": "sha256:3809ec757a887c700c6bdd6aa3f7cc471d4ba1bfac51f493e9eaaf6bc11413e4",
         "textFields": [
           "title",
           "aliases",
@@ -1152,10 +1195,10 @@
         "research-institute"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:864772161c155d4e157103d60fb2b0db13bb3490b5afe3fc460ca19b1cb56e5a",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-09-26T03:14:39.298Z",
+      "contentHash": "sha256:18d9a449d027da84f26e30cb6cd9b50a81fa7362f7fdda94e8e8710084b523ae",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2027-03-25",
       "sourceIds": [
         "src-17dc8cb17c9da923",
         "src-5816cdaa92b5e41c",
@@ -1173,7 +1216,7 @@
       "retrieval": {
         "documentId": "wiki:NUSRI_CQ",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:864772161c155d4e157103d60fb2b0db13bb3490b5afe3fc460ca19b1cb56e5a",
+        "contentHash": "sha256:18d9a449d027da84f26e30cb6cd9b50a81fa7362f7fdda94e8e8710084b523ae",
         "textFields": [
           "title",
           "aliases",
@@ -1204,17 +1247,17 @@
         "project-overview"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:e58fcad724c37769eb9f4287683d1b6b794bad22d56608bf8bc623163b2a7807",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-09-30",
+      "modifiedAt": "2026-09-26T03:14:39.300Z",
+      "contentHash": "sha256:66e161feecf5b81c952502aa0be768a4a692f649df2d4867a8801cfff69f8a2d",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2026-12-25",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Projects",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:e58fcad724c37769eb9f4287683d1b6b794bad22d56608bf8bc623163b2a7807",
+        "contentHash": "sha256:66e161feecf5b81c952502aa0be768a4a692f649df2d4867a8801cfff69f8a2d",
         "textFields": [
           "title",
           "aliases",
@@ -1245,17 +1288,17 @@
         "publication-list"
       ],
       "timestamp": "2026-06-01T22:00:31+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:5ac4efe9a526d8aa52adbadfa89b918acd748d254225726aad1858be0cd67f51",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-09-30",
+      "modifiedAt": "2026-09-26T03:14:39.302Z",
+      "contentHash": "sha256:52f068c553925d68105fe2ab76d62f356b4fb5ae40278d3e1fb982ce09aea80a",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2026-12-25",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Publications",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:5ac4efe9a526d8aa52adbadfa89b918acd748d254225726aad1858be0cd67f51",
+        "contentHash": "sha256:52f068c553925d68105fe2ab76d62f356b4fb5ae40278d3e1fb982ce09aea80a",
         "textFields": [
           "title",
           "aliases",
@@ -1375,17 +1418,17 @@
         "research-overview"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-07-11T07:28:06+08:00",
-      "contentHash": "sha256:09e30b38e992c7f3c7c8b32a5bba43801fe9854088306229588b105b24990848",
-      "reviewedAt": "2026-07-11T07:28:06+08:00",
-      "reviewDue": "2026-10-08",
+      "modifiedAt": "2026-09-26T03:14:39.306Z",
+      "contentHash": "sha256:e61b51fc87645fd464569bb60f7a2425cb124feaeca5d8b7dbe102e0a1c10516",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2026-12-25",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Research",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:09e30b38e992c7f3c7c8b32a5bba43801fe9854088306229588b105b24990848",
+        "contentHash": "sha256:e61b51fc87645fd464569bb60f7a2425cb124feaeca5d8b7dbe102e0a1c10516",
         "textFields": [
           "title",
           "aliases",
@@ -1695,17 +1738,17 @@
         "research-topic"
       ],
       "timestamp": "2026-05-05T20:55:21+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:de85186a59ada4edf5598f5cdde696fb8984635557fbd8fecf816e4ffa2cffc3",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-09-26T03:14:39.316Z",
+      "contentHash": "sha256:451c6ffc09f41ea68e6fdb591b53ab16b8ede8cd929f3dc822f6bf109ea405f6",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2027-03-25",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Trustworthy_AI",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:de85186a59ada4edf5598f5cdde696fb8984635557fbd8fecf816e4ffa2cffc3",
+        "contentHash": "sha256:451c6ffc09f41ea68e6fdb591b53ab16b8ede8cd929f3dc822f6bf109ea405f6",
         "textFields": [
           "title",
           "aliases",
@@ -1838,10 +1881,10 @@
         "phd-student"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.801Z",
-      "contentHash": "sha256:04b20b696b5d70393a4bd34c5abf764a6997b90145f2d0a18195691e473f2f4c",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2026-11-07",
+      "modifiedAt": "2026-09-25T04:53:27.434Z",
+      "contentHash": "sha256:61e34d6882d795cd09cd6c0134dddbc93821f2db611c8e2a2174e2c14bff943c",
+      "reviewedAt": "2026-09-25T04:54:14.029Z",
+      "reviewDue": "2026-12-24",
       "sourceIds": [
         "src-264e39cbec8d2f89",
         "src-30f33d3201c476ab",
@@ -1881,7 +1924,7 @@
       "retrieval": {
         "documentId": "wiki:Xinbao_Qiao",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:04b20b696b5d70393a4bd34c5abf764a6997b90145f2d0a18195691e473f2f4c",
+        "contentHash": "sha256:61e34d6882d795cd09cd6c0134dddbc93821f2db611c8e2a2174e2c14bff943c",
         "textFields": [
           "title",
           "aliases",
@@ -1930,6 +1973,1791 @@
         "documentId": "wiki:Zhejiang_University",
         "chunking": "markdown-heading-v1",
         "contentHash": "sha256:fe657967adee3aad4c7e8e6568b609b6b12a116503f10d84ace705d1a9989b2c",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Soft_Weighted_Machine_Unlearning_zh",
+      "title": "超越二元擦除：用于公平性与鲁棒性的软加权遗忘",
+      "summary": "AAAI 2026 论文，研究用于公平性与鲁棒性修正的软加权机器遗忘。",
+      "language": "zh",
+      "type": "publication",
+      "tags": [
+        "zh",
+        "publication",
+        "paper",
+        "accepted",
+        "aaai-2026",
+        "machine-unlearning"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-08-09T18:32:45.791Z",
+      "contentHash": "sha256:59b316fe6de53b980d856a0166747d9a5575808682f4be2678df40b059b842f4",
+      "reviewedAt": "2026-08-10T02:34:00+08:00",
+      "reviewDue": "2027-08-09",
+      "sourceIds": [
+        "src-0642a11373a83c47",
+        "src-53e1199f272a4df4"
+      ],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Soft_Weighted_Machine_Unlearning_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:59b316fe6de53b980d856a0166747d9a5575808682f4be2678df40b059b842f4",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+      "title": "错觉模式感知驱动大语言模型的虚假推理",
+      "summary": "NeurIPS 2026 论文，研究错觉模式感知与大语言模型的虚假推理。",
+      "language": "zh",
+      "type": "publication",
+      "tags": [
+        "zh",
+        "publication",
+        "paper",
+        "accepted",
+        "neurips-2026",
+        "llm-reliability"
+      ],
+      "timestamp": "2026-09-25T13:49:35+09:00",
+      "modifiedAt": "2026-09-25T04:53:27.237Z",
+      "contentHash": "sha256:f4c790a4291c9ec7cf40078711cf0c8a08559b37f22ed15fc5fb7a7f7d2164f8",
+      "reviewedAt": "2026-09-25T04:54:14.029Z",
+      "reviewDue": "2027-09-25",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:f4c790a4291c9ec7cf40078711cf0c8a08559b37f22ed15fc5fb7a7f7d2164f8",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "LLM_Reliability_zh",
+      "title": "大语言模型可靠性",
+      "summary": "解释大语言模型系统可靠性问题的概念页。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念",
+        "llm"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-09-25T04:53:27.397Z",
+      "contentHash": "sha256:259816be38eb1a03c1a9890c33a0a8a3158cb33bc42392b1089a12f539088cb6",
+      "reviewedAt": "2026-09-25T04:54:14.029Z",
+      "reviewDue": "2027-03-24",
+      "sourceIds": [
+        "src-11be10768dbb7de0",
+        "src-44708abf72c85407",
+        "src-8e21f24eb6b80d2c"
+      ],
+      "citationSourceIds": [
+        "src-11be10768dbb7de0",
+        "src-44708abf72c85407",
+        "src-8e21f24eb6b80d2c"
+      ],
+      "footnoteSourceIds": [
+        "src-11be10768dbb7de0",
+        "src-44708abf72c85407",
+        "src-8e21f24eb6b80d2c"
+      ],
+      "retrieval": {
+        "documentId": "wiki:LLM_Reliability_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:259816be38eb1a03c1a9890c33a0a8a3158cb33bc42392b1089a12f539088cb6",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Recursive_Synthetic_Data_Training_zh",
+      "title": "递归合成数据训练",
+      "summary": "解释模型反复使用早期模型生成数据进行训练的过程。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念",
+        "synthetic-data"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-08-09T18:32:45.786Z",
+      "contentHash": "sha256:5d8a4e20eec790d14fac24557dfedfa4ab08a87f6ea28bc0c80802df8c7bb414",
+      "reviewedAt": "2026-08-10T02:34:00+08:00",
+      "reviewDue": "2027-02-05",
+      "sourceIds": [
+        "src-3e9d5d7dceceebc1"
+      ],
+      "citationSourceIds": [
+        "src-3e9d5d7dceceebc1"
+      ],
+      "footnoteSourceIds": [
+        "src-3e9d5d7dceceebc1"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Recursive_Synthetic_Data_Training_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:5d8a4e20eec790d14fac24557dfedfa4ab08a87f6ea28bc0c80802df8c7bb414",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Distributed_Wasserstein_Barycenter_zh",
+      "title": "分布式 Wasserstein Barycenter",
+      "summary": "解释乔鑫宝关于从分布式局部测度计算 Wasserstein barycenter 的相关工作。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念",
+        "wasserstein"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:07336e6f8ccb466caccf4710fad348230218dd8bbb1f5f57f389f28f285757a9",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221"
+      ],
+      "citationSourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221"
+      ],
+      "footnoteSourceIds": [
+        "src-0d6548913a8c228f",
+        "src-3157a848b3737221"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Distributed_Wasserstein_Barycenter_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:07336e6f8ccb466caccf4710fad348230218dd8bbb1f5f57f389f28f285757a9",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Distributed_Learning_zh",
+      "title": "分布式学习",
+      "summary": "解释数据、计算或通信去中心化条件下的学习问题。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念"
+      ],
+      "timestamp": "2026-05-06T06:22:22+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:5e6803ef26eecbddb3aaa6d2e093509b80a07c36d2aef38e2c3c3b0c3d26cbde",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Distributed_Learning_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:5e6803ef26eecbddb3aaa6d2e093509b80a07c36d2aef38e2c3c3b0c3d26cbde",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Fairness_and_Robustness_zh",
+      "title": "公平性与鲁棒性",
+      "summary": "解释公平性与鲁棒性作为数据中心修正目标的概念页。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:c1c485ae574d344b3bab011faced822faebcc7652bbd473cd1d62dd4afe10bcb",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Fairness_and_Robustness_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:c1c485ae574d344b3bab011faced822faebcc7652bbd473cd1d62dd4afe10bcb",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Synthetic_Data_and_Model_Collapse_zh",
+      "title": "合成数据",
+      "summary": "关于合成数据、递归训练、低资源验证、选择偏差和模型坍缩的研究专题。",
+      "language": "zh",
+      "type": "研究专题",
+      "tags": [
+        "zh",
+        "research",
+        "topic",
+        "研究专题",
+        "synthetic-data"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-08-09T18:35:47.584Z",
+      "contentHash": "sha256:5a069eaa1588657e8fbff7ef13242a297852f722338a5a6acb3b5a0b2843788b",
+      "reviewedAt": "2026-08-10T02:36:00+08:00",
+      "reviewDue": "2027-02-05",
+      "sourceIds": [
+        "src-3e9d5d7dceceebc1"
+      ],
+      "citationSourceIds": [
+        "src-3e9d5d7dceceebc1"
+      ],
+      "footnoteSourceIds": [
+        "src-3e9d5d7dceceebc1"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Synthetic_Data_and_Model_Collapse_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:5a069eaa1588657e8fbff7ef13242a297852f722338a5a6acb3b5a0b2843788b",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Synthetic_Data_zh",
+      "title": "合成数据（概念）",
+      "summary": "解释用于训练、评估或隐私友好协作的生成数据。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念",
+        "synthetic-data"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:0be9d0fd4d48f569a4a98be5a8e262abd0f666adf14656d58b7af7e19b57194d",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Synthetic_Data_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:0be9d0fd4d48f569a4a98be5a8e262abd0f666adf14656d58b7af7e19b57194d",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Machine_Unlearning_zh",
+      "title": "机器遗忘",
+      "summary": "研究如何从已训练模型中删除、降低或纠正数据影响。",
+      "language": "zh",
+      "type": "研究专题",
+      "tags": [
+        "zh",
+        "research",
+        "topic",
+        "研究专题",
+        "machine-unlearning"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:55d954af2fcdd71a0b7e0ec05a6645e2e79f1d639b585b8687cd85f236fed742",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Machine_Unlearning_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:55d954af2fcdd71a0b7e0ec05a6645e2e79f1d639b585b8687cd85f236fed742",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Skills_zh",
+      "title": "技能",
+      "summary": "乔鑫宝 CV 中列出的技术技能。",
+      "language": "zh",
+      "type": "技术技能",
+      "tags": [
+        "zh",
+        "skills",
+        "profile",
+        "技术技能"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-03T00:03:48+08:00",
+      "contentHash": "sha256:75088b353ef9e2295e61ec52e17237ca0b79e5ded268d9a68678dddb7034225a",
+      "reviewedAt": "2026-07-03T00:03:48+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Skills_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:75088b353ef9e2295e61ec52e17237ca0b79e5ded268d9a68678dddb7034225a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "CV_zh",
+      "title": "简历",
+      "summary": "乔鑫宝的学术简历摘要。",
+      "language": "zh",
+      "type": "CV 摘要",
+      "tags": [
+        "zh",
+        "cv",
+        "profile",
+        "cv-摘要"
+      ],
+      "timestamp": "2026-07-02T19:37:18+08:00",
+      "modifiedAt": "2026-09-25T04:53:23.450Z",
+      "contentHash": "sha256:f5d36d2fbe22a327d421b21d7ce03c7a21bfc6a364bd2b32f924faa6674da1a3",
+      "reviewedAt": "2026-09-25T04:54:14.029Z",
+      "reviewDue": "2026-12-24",
+      "sourceIds": [
+        "src-03bf1b2f9af65762",
+        "src-0642a11373a83c47",
+        "src-18fe2e2db0ff8b6a",
+        "src-19cdc04d387acf77",
+        "src-3234eea5652932e1",
+        "src-4144e3776ac496d0",
+        "src-53e1199f272a4df4",
+        "src-65d81b8aca549860",
+        "src-688381b8e9d8ad65",
+        "src-716564daa4b6397f",
+        "src-94b169d5c233e588",
+        "src-9b2be44d3f13005a",
+        "src-a0a9b7171dc028d2",
+        "src-b0de54fe614fa11d",
+        "src-cea294f51d3559e8",
+        "src-da17eb3884244bd3",
+        "src-faaafad831fbefc5"
+      ],
+      "citationSourceIds": [
+        "src-03bf1b2f9af65762",
+        "src-0642a11373a83c47",
+        "src-18fe2e2db0ff8b6a",
+        "src-19cdc04d387acf77",
+        "src-3234eea5652932e1",
+        "src-4144e3776ac496d0",
+        "src-53e1199f272a4df4",
+        "src-65d81b8aca549860",
+        "src-688381b8e9d8ad65",
+        "src-716564daa4b6397f",
+        "src-94b169d5c233e588",
+        "src-9b2be44d3f13005a",
+        "src-a0a9b7171dc028d2",
+        "src-b0de54fe614fa11d",
+        "src-cea294f51d3559e8",
+        "src-da17eb3884244bd3",
+        "src-faaafad831fbefc5"
+      ],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:CV_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:f5d36d2fbe22a327d421b21d7ce03c7a21bfc6a364bd2b32f924faa6674da1a3",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Education_zh",
+      "title": "教育经历",
+      "summary": "乔鑫宝的教育时间线。",
+      "language": "zh",
+      "type": "教育时间线",
+      "tags": [
+        "zh",
+        "education",
+        "profile",
+        "教育时间线"
+      ],
+      "timestamp": "2026-05-06T23:05:52+08:00",
+      "modifiedAt": "2026-08-09T18:32:45.759Z",
+      "contentHash": "sha256:2c6a9ddd5c60275f5b8bf4b67e9079a5796f71dfb3ad7f93c413958f874d13ab",
+      "reviewedAt": "2026-08-10T02:34:00+08:00",
+      "reviewDue": "2027-02-05",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Education_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:2c6a9ddd5c60275f5b8bf4b67e9079a5796f71dfb3ad7f93c413958f874d13ab",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Interpretability_zh",
+      "title": "可解释性",
+      "summary": "解释模型行为和数据影响的概念页。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念",
+        "llm"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-09-26T03:16:03.685Z",
+      "contentHash": "sha256:266b5e422ec9fa4043f5b360a12859a58f732ee34eb0ba8e9729340e2716c52d",
+      "reviewedAt": "2026-09-26T03:16:12.059Z",
+      "reviewDue": "2027-03-25",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Interpretability_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:266b5e422ec9fa4043f5b360a12859a58f732ee34eb0ba8e9729340e2716c52d",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Trustworthy_AI_zh",
+      "title": "可信 AI",
+      "summary": "覆盖可靠性、删除、公平性、鲁棒性、可解释性和评估的研究专题。",
+      "language": "zh",
+      "type": "研究专题",
+      "tags": [
+        "zh",
+        "research",
+        "topic",
+        "研究专题"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-09-26T03:14:39.316Z",
+      "contentHash": "sha256:c05c065380b2dcd791708855265e26643f89bc5ce50e39c688b2a04da29f1c32",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2027-03-25",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Trustworthy_AI_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:c05c065380b2dcd791708855265e26643f89bc5ce50e39c688b2a04da29f1c32",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Publications_zh",
+      "title": "论文",
+      "summary": "乔鑫宝的论文索引。",
+      "language": "zh",
+      "type": "论文列表",
+      "tags": [
+        "zh",
+        "publication",
+        "index",
+        "论文列表"
+      ],
+      "timestamp": "2026-06-01T22:04:00+08:00",
+      "modifiedAt": "2026-09-26T03:14:39.301Z",
+      "contentHash": "sha256:414b0693e3233ea35f3b6f94043e5c7ee852849ea1e8e36e7789d839dd48cf1c",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2026-12-25",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Publications_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:414b0693e3233ea35f3b6f94043e5c7ee852849ea1e8e36e7789d839dd48cf1c",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Model_Collapse_zh",
+      "title": "模型坍缩",
+      "summary": "解释递归模型训练中退化性分布漂移的概念页。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念",
+        "synthetic-data"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-08-09T18:32:45.779Z",
+      "contentHash": "sha256:9d6e82dd8a993b7b97228f53c9525ae3a0918f82de2274633ab0ad0c52770b1f",
+      "reviewedAt": "2026-08-10T02:34:00+08:00",
+      "reviewDue": "2027-02-05",
+      "sourceIds": [
+        "src-3e9d5d7dceceebc1"
+      ],
+      "citationSourceIds": [
+        "src-3e9d5d7dceceebc1"
+      ],
+      "footnoteSourceIds": [
+        "src-3e9d5d7dceceebc1"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Model_Collapse_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:9d6e82dd8a993b7b97228f53c9525ae3a0918f82de2274633ab0ad0c52770b1f",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Qiao_Xinbao_zh",
+      "title": "乔鑫宝",
+      "summary": "香港中文大学信息工程系博士生；研究方向包括数据中心 ML、AI for Networks、Networks for AI、机器遗忘和合成数据可靠性",
+      "language": "zh",
+      "type": "博士生",
+      "tags": [
+        "zh",
+        "person",
+        "biography",
+        "博士生"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-09-25T04:53:27.410Z",
+      "contentHash": "sha256:91a45d1089ce31c847ead75b1c1e9b2ce0dac88da8ab5f0ec4d94bce79544264",
+      "reviewedAt": "2026-09-25T04:54:14.029Z",
+      "reviewDue": "2026-12-24",
+      "sourceIds": [
+        "src-264e39cbec8d2f89",
+        "src-30f33d3201c476ab",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-70ed6a3bfb603732",
+        "src-9b2be44d3f13005a",
+        "src-9d0661fee6814e6f",
+        "src-cea294f51d3559e8",
+        "src-cedf284f61bb39ae",
+        "src-dac65e05df6e888f",
+        "src-e1d67502167d29ad",
+        "src-f6009f51f54778f6"
+      ],
+      "citationSourceIds": [
+        "src-264e39cbec8d2f89",
+        "src-30f33d3201c476ab",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-70ed6a3bfb603732",
+        "src-9b2be44d3f13005a",
+        "src-9d0661fee6814e6f",
+        "src-cea294f51d3559e8",
+        "src-cedf284f61bb39ae",
+        "src-dac65e05df6e888f",
+        "src-e1d67502167d29ad",
+        "src-f6009f51f54778f6"
+      ],
+      "footnoteSourceIds": [
+        "src-264e39cbec8d2f89",
+        "src-30f33d3201c476ab",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-cedf284f61bb39ae",
+        "src-e1d67502167d29ad"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Qiao_Xinbao_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:91a45d1089ce31c847ead75b1c1e9b2ce0dac88da8ab5f0ec4d94bce79544264",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Certified_Data_Removal_zh",
+      "title": "认证数据删除",
+      "summary": "解释机器遗忘中删除保证的概念页。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念",
+        "machine-unlearning"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:cf9f22c358563c9ded7edfa0b84c15a2ddc531896671859e2ef14dc1edf907be",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Certified_Data_Removal_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:cf9f22c358563c9ded7edfa0b84c15a2ddc531896671859e2ef14dc1edf907be",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "log_zh",
+      "title": "日志",
+      "summary": "Wiki 的追加式维护日志。",
+      "language": "zh",
+      "type": "维护日志",
+      "tags": [
+        "zh",
+        "maintenance",
+        "log",
+        "维护日志"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-09-26T03:14:39.292Z",
+      "contentHash": "sha256:1c42f2eb5cfaf81674c3ebbff17f5e39532d2106129ea185dee8752bb1d1b7e0",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2027-09-26",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:log_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:1c42f2eb5cfaf81674c3ebbff17f5e39532d2106129ea185dee8752bb1d1b7e0",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Shandong_University_zh",
+      "title": "山东大学",
+      "summary": "乔鑫宝本科阶段所在机构。",
+      "language": "zh",
+      "type": "公立研究型大学",
+      "tags": [
+        "zh",
+        "institution",
+        "education",
+        "公立研究型大学"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:c57202064e7fe6a89492d9160d3f630ce33ac111149aac58a6d7f4c5fa44718a",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [
+        "src-2698bddf338b56e5",
+        "src-33f25ef72f5cac0f",
+        "src-8207d2b85f96e6cb"
+      ],
+      "citationSourceIds": [
+        "src-8207d2b85f96e6cb"
+      ],
+      "footnoteSourceIds": [
+        "src-8207d2b85f96e6cb"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Shandong_University_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:c57202064e7fe6a89492d9160d3f630ce33ac111149aac58a6d7f4c5fa44718a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Data_Silos_zh",
+      "title": "数据孤岛",
+      "summary": "解释数据分布在不同持有者之间时的学习与评估问题。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:5a9ef8f0796c6a6e5818894e93c6a2b241c6df834f9d5be05ff03858efaeaf66",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Data_Silos_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:5a9ef8f0796c6a6e5818894e93c6a2b241c6df834f9d5be05ff03858efaeaf66",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Data_Selection_zh",
+      "title": "数据选择",
+      "summary": "解释在可靠性约束下选择训练或评估数据的概念页。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:f2f86de8a44e60f1923badf3e613b292b74546183791b33c64556111f7cb3f80",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Data_Selection_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:f2f86de8a44e60f1923badf3e613b292b74546183791b33c64556111f7cb3f80",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Data_Centric_Machine_Learning_zh",
+      "title": "数据中心 ML",
+      "summary": "关注数据质量、选择、估值、修正和治理的研究专题。",
+      "language": "zh",
+      "type": "研究专题",
+      "tags": [
+        "zh",
+        "research",
+        "topic",
+        "研究专题"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:b5ed150616b6bc664087f36dc9e5d5cdb8b191aa624cf0ed96b40dce31f72b12",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Data_Centric_Machine_Learning_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:b5ed150616b6bc664087f36dc9e5d5cdb8b191aa624cf0ed96b40dce31f72b12",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Random_Forest_zh",
+      "title": "随机森林",
+      "summary": "解释 DynFrs 所研究的随机森林模型类别。",
+      "language": "zh",
+      "type": "模型族",
+      "tags": [
+        "zh",
+        "research",
+        "model",
+        "模型族"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:6d257e9e58d7a5cdcb995d7953ef20d0399f947e387488808ee5cc005c98eec8",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Random_Forest_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:6d257e9e58d7a5cdcb995d7953ef20d0399f947e387488808ee5cc005c98eec8",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "index_zh",
+      "title": "索引",
+      "summary": "Xinbaopedia 公开页面导航索引。",
+      "language": "zh",
+      "type": "Wiki 索引",
+      "tags": [
+        "zh",
+        "index",
+        "navigation",
+        "wiki-索引"
+      ],
+      "timestamp": "2026-05-07T17:34:07+08:00",
+      "modifiedAt": "2026-09-26T03:14:39.283Z",
+      "contentHash": "sha256:dbe3f3853edc732a85f569def35e30196ef674dd764a596f2473624c264459b1",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2027-09-26",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:index_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:dbe3f3853edc732a85f569def35e30196ef674dd764a596f2473624c264459b1",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
+      "title": "无 Hessian 在线认证遗忘",
+      "summary": "ICLR 2025 论文，研究无显式 Hessian 求逆的高效认证机器遗忘。",
+      "language": "zh",
+      "type": "publication",
+      "tags": [
+        "zh",
+        "publication",
+        "paper",
+        "iclr-2025-poster",
+        "iclr-2025"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-16T20:08:42+08:00",
+      "contentHash": "sha256:61f88b28567cc8c89e63a8e28760d7e18e12868069d2aefb90848e7b9a92ba72",
+      "reviewedAt": "2026-07-16T20:08:42+08:00",
+      "reviewDue": "2026-10-14",
+      "sourceIds": [
+        "src-65d81b8aca549860",
+        "src-a0a9b7171dc028d2",
+        "src-faaafad831fbefc5"
+      ],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Hessian_Free_Online_Certified_Unlearning_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:61f88b28567cc8c89e63a8e28760d7e18e12868069d2aefb90848e7b9a92ba72",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "The_Chinese_University_of_Hong_Kong_zh",
+      "title": "香港中文大学",
+      "summary": "乔鑫宝当前博士阶段所在机构。",
+      "language": "zh",
+      "type": "公立研究型大学",
+      "tags": [
+        "zh",
+        "institution",
+        "education",
+        "公立研究型大学"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-07-13T20:54:38+08:00",
+      "contentHash": "sha256:cc7ee27875948d4bdac61d09c00a69b27a9675d8b85091248c40ab359ba356e3",
+      "reviewedAt": "2026-07-13T20:54:38+08:00",
+      "reviewDue": "2027-01-09",
+      "sourceIds": [
+        "src-09fa966eeac1624e",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-cecd4e57ea891eee",
+        "src-f1b03a6c505acdf9",
+        "src-f6cb0623675b4752"
+      ],
+      "citationSourceIds": [
+        "src-09fa966eeac1624e",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-f6cb0623675b4752"
+      ],
+      "footnoteSourceIds": [
+        "src-09fa966eeac1624e",
+        "src-5dac6849a598aa84",
+        "src-5ffca2a581311c27",
+        "src-f6cb0623675b4752"
+      ],
+      "retrieval": {
+        "documentId": "wiki:The_Chinese_University_of_Hong_Kong_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:cc7ee27875948d4bdac61d09c00a69b27a9675d8b85091248c40ab359ba356e3",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Projects_zh",
+      "title": "项目",
+      "summary": "研究项目与项目簇。",
+      "language": "zh",
+      "type": "项目概览",
+      "tags": [
+        "zh",
+        "project",
+        "overview",
+        "项目概览"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-09-26T03:14:39.300Z",
+      "contentHash": "sha256:62f3a053ce6b446e0e0c69fa958b2108fd9095d872e8947c80aaef5ccc0d6174",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2026-12-25",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Projects_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:62f3a053ce6b446e0e0c69fa958b2108fd9095d872e8947c80aaef5ccc0d6174",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Collaborative_Evaluation_zh",
+      "title": "协作评估",
+      "summary": "解释多方共同评估模型或数据过程的概念页。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:4c416cdbc890f68f445c30e75c3233866340c0721cf1b433fd236987d5281868",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Collaborative_Evaluation_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:4c416cdbc890f68f445c30e75c3233866340c0721cf1b433fd236987d5281868",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Research_zh",
+      "title": "研究",
+      "summary": "乔鑫宝研究方向与相关专题页面概览。",
+      "language": "zh",
+      "type": "研究概览",
+      "tags": [
+        "zh",
+        "research",
+        "overview",
+        "研究概览"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-09-26T03:14:39.306Z",
+      "contentHash": "sha256:292bbf81253d117ee0cc401cfd4b2722c52d753ca7ed725f3f9b96356bd34ecc",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2026-12-25",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Research_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:292bbf81253d117ee0cc401cfd4b2722c52d753ca7ed725f3f9b96356bd34ecc",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Experience_zh",
+      "title": "研究经历",
+      "summary": "研究经历与机构关系。",
+      "language": "zh",
+      "type": "研究经历",
+      "tags": [
+        "zh",
+        "experience",
+        "profile",
+        "研究经历"
+      ],
+      "timestamp": "2026-06-13T20:46:02+08:00",
+      "modifiedAt": "2026-09-26T03:14:39.278Z",
+      "contentHash": "sha256:abbe9def10416e552a47169241635f5dcdb8ac8eba3ede2f5ba724de772aa016",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2026-12-25",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Experience_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:abbe9def10416e552a47169241635f5dcdb8ac8eba3ede2f5ba724de772aa016",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Sample_Selection_Bias_zh",
+      "title": "样本选择偏差",
+      "summary": "解释非代表性样本选择引入的分布偏差。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念"
+      ],
+      "timestamp": "2026-05-27T17:56:27+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:cc1aca2e7114303a2dad5668cb78a122c92d56ebbae3a31397a995c35a87af59",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Sample_Selection_Bias_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:cc1aca2e7114303a2dad5668cb78a122c92d56ebbae3a31397a995c35a87af59",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
+      "title": "样本选择偏差何以促成模型坍缩",
+      "summary": "ICML 2026 论文，研究低资源验证场景、样本选择偏差、模型坍缩与协作 Wasserstein 几何代理。",
+      "language": "zh",
+      "type": "publication",
+      "tags": [
+        "zh",
+        "publication",
+        "paper",
+        "accepted",
+        "icml-2026",
+        "synthetic-data"
+      ],
+      "timestamp": "2026-06-02T22:56:50+08:00",
+      "modifiedAt": "2026-07-16T20:08:42+08:00",
+      "contentHash": "sha256:09b8d93c182cc7e7940467c8a17797f2744016e10d4aa01ec370c6f5e2abc779",
+      "reviewedAt": "2026-07-16T20:08:42+08:00",
+      "reviewDue": "2027-07-16",
+      "sourceIds": [
+        "src-03bf1b2f9af65762",
+        "src-4144e3776ac496d0",
+        "src-766234e11681dad2",
+        "src-94b169d5c233e588"
+      ],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:09b8d93c182cc7e7940467c8a17797f2744016e10d4aa01ec370c6f5e2abc779",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Influence_Functions_zh",
+      "title": "影响函数",
+      "summary": "解释估计训练样本如何影响学习模型的概念页。",
+      "language": "zh",
+      "type": "研究概念",
+      "tags": [
+        "zh",
+        "research",
+        "concept",
+        "研究概念"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:647e43dc8868e7f86527f3026f7071cfd2aef1fa226e663e4b88c0d5a9098b33",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Influence_Functions_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:647e43dc8868e7f86527f3026f7071cfd2aef1fa226e663e4b88c0d5a9098b33",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Meng_Zhang_zh",
+      "title": "张萌",
+      "summary": "浙江大学教师，乔鑫宝硕士导师。",
+      "language": "zh",
+      "type": "Academic advisor",
+      "tags": [
+        "zh",
+        "person",
+        "advisor",
+        "academic-advisor"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "contentHash": "sha256:103093bd3886bfa0462229db2fd4d8557041ecd2ab27552727a5922d4bea88ed",
+      "reviewedAt": "2026-07-02T20:03:20+08:00",
+      "reviewDue": "2026-12-29",
+      "sourceIds": [
+        "src-716564daa4b6397f"
+      ],
+      "citationSourceIds": [
+        "src-716564daa4b6397f"
+      ],
+      "footnoteSourceIds": [
+        "src-716564daa4b6397f"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Meng_Zhang_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:103093bd3886bfa0462229db2fd4d8557041ecd2ab27552727a5922d4bea88ed",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Angela_Yingjun_Zhang_zh",
+      "title": "张颖珺",
+      "summary": "香港中文大学信息工程系教授，乔鑫宝博士导师。",
+      "language": "zh",
+      "type": "Academic advisor",
+      "tags": [
+        "zh",
+        "person",
+        "advisor",
+        "academic-advisor"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-13T20:54:38+08:00",
+      "contentHash": "sha256:22a803b3c72aafc454d04b3465a3141ddefe539d0cb848d603c789683d6c4a40",
+      "reviewedAt": "2026-07-13T20:54:38+08:00",
+      "reviewDue": "2027-01-09",
+      "sourceIds": [
+        "src-05cf85aef2ce8d53",
+        "src-938ce85aed5a8a94",
+        "src-e105b35a946250a9"
+      ],
+      "citationSourceIds": [
+        "src-05cf85aef2ce8d53",
+        "src-938ce85aed5a8a94",
+        "src-e105b35a946250a9"
+      ],
+      "footnoteSourceIds": [
+        "src-05cf85aef2ce8d53",
+        "src-938ce85aed5a8a94",
+        "src-e105b35a946250a9"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Angela_Yingjun_Zhang_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:22a803b3c72aafc454d04b3465a3141ddefe539d0cb848d603c789683d6c4a40",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Zhejiang_University_zh",
+      "title": "浙江大学",
+      "summary": "乔鑫宝硕士阶段所在机构。",
+      "language": "zh",
+      "type": "公立研究型大学",
+      "tags": [
+        "zh",
+        "institution",
+        "education",
+        "公立研究型大学"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-12T22:06:12+08:00",
+      "contentHash": "sha256:b299fe56a1b40d6af75fd0dec521d43bbcce4f80812f3b644dc326f6d3e759e5",
+      "reviewedAt": "2026-07-12T22:06:12+08:00",
+      "reviewDue": "2027-01-08",
+      "sourceIds": [
+        "src-575233d5188384df",
+        "src-c051bd6dcf566058"
+      ],
+      "citationSourceIds": [
+        "src-575233d5188384df"
+      ],
+      "footnoteSourceIds": [
+        "src-575233d5188384df"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Zhejiang_University_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:b299fe56a1b40d6af75fd0dec521d43bbcce4f80812f3b644dc326f6d3e759e5",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Old_Homepage_Resources_zh",
+      "title": "主页肖像资源",
+      "summary": "记录个人主页 infobox 使用的肖像图库。",
+      "language": "zh",
+      "type": "资源记录",
+      "tags": [
+        "zh",
+        "resource",
+        "archive",
+        "资源记录"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-07-18T04:24:40.205Z",
+      "contentHash": "sha256:82bba430782e8ac82d2afac3b574607ea08303043c86c0a12c4720064bfb896e",
+      "reviewedAt": "2026-07-18T12:25:05+08:00",
+      "reviewDue": "2027-07-18",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Old_Homepage_Resources_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:82bba430782e8ac82d2afac3b574607ea08303043c86c0a12c4720064bfb896e",
         "textFields": [
           "title",
           "aliases",
@@ -2057,10 +3885,10 @@
         "研究院"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:2864019dd92674e38d95921d097ef7924b01c524ef67ce6b20e0cfbfcd72e990",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-09-26T03:14:39.297Z",
+      "contentHash": "sha256:c2f41cc5e190cfb587438f0dba43d1fdc14216dea025d6d482cdb9c13e14a383",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2027-03-25",
       "sourceIds": [
         "src-17dc8cb17c9da923",
         "src-5816cdaa92b5e41c",
@@ -2078,7 +3906,7 @@
       "retrieval": {
         "documentId": "wiki:NUSRI_CQ_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:2864019dd92674e38d95921d097ef7924b01c524ef67ce6b20e0cfbfcd72e990",
+        "contentHash": "sha256:c2f41cc5e190cfb587438f0dba43d1fdc14216dea025d6d482cdb9c13e14a383",
         "textFields": [
           "title",
           "aliases",
@@ -2133,1748 +3961,6 @@
         "documentId": "wiki:Wasserstein_Geometry_zh",
         "chunking": "markdown-heading-v1",
         "contentHash": "sha256:23fe4ef251fbe9ab9ba250c9e19140bd8721c19357fc1d2d55f5e6fdf86e2845",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Old_Homepage_Resources_zh",
-      "title": "主页肖像资源",
-      "summary": "记录个人主页 infobox 使用的肖像图库。",
-      "language": "zh",
-      "type": "资源记录",
-      "tags": [
-        "zh",
-        "resource",
-        "archive",
-        "资源记录"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-18T04:24:40.205Z",
-      "contentHash": "sha256:82bba430782e8ac82d2afac3b574607ea08303043c86c0a12c4720064bfb896e",
-      "reviewedAt": "2026-07-18T12:25:05+08:00",
-      "reviewDue": "2027-07-18",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Old_Homepage_Resources_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:82bba430782e8ac82d2afac3b574607ea08303043c86c0a12c4720064bfb896e",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Qiao_Xinbao_zh",
-      "title": "乔鑫宝",
-      "summary": "香港中文大学信息工程系博士生；研究方向包括数据中心 ML、AI for Networks、Networks for AI、机器遗忘和合成数据可靠性",
-      "language": "zh",
-      "type": "博士生",
-      "tags": [
-        "zh",
-        "person",
-        "biography",
-        "博士生"
-      ],
-      "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.784Z",
-      "contentHash": "sha256:9d8bcf4ee892d1daaa24590438ace4c37e32f79f5917586244b6c85f96051317",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2026-11-07",
-      "sourceIds": [
-        "src-264e39cbec8d2f89",
-        "src-30f33d3201c476ab",
-        "src-5dac6849a598aa84",
-        "src-5ffca2a581311c27",
-        "src-70ed6a3bfb603732",
-        "src-9b2be44d3f13005a",
-        "src-9d0661fee6814e6f",
-        "src-cea294f51d3559e8",
-        "src-cedf284f61bb39ae",
-        "src-dac65e05df6e888f",
-        "src-e1d67502167d29ad",
-        "src-f6009f51f54778f6"
-      ],
-      "citationSourceIds": [
-        "src-264e39cbec8d2f89",
-        "src-30f33d3201c476ab",
-        "src-5dac6849a598aa84",
-        "src-5ffca2a581311c27",
-        "src-70ed6a3bfb603732",
-        "src-9b2be44d3f13005a",
-        "src-9d0661fee6814e6f",
-        "src-cea294f51d3559e8",
-        "src-cedf284f61bb39ae",
-        "src-dac65e05df6e888f",
-        "src-e1d67502167d29ad",
-        "src-f6009f51f54778f6"
-      ],
-      "footnoteSourceIds": [
-        "src-264e39cbec8d2f89",
-        "src-30f33d3201c476ab",
-        "src-5dac6849a598aa84",
-        "src-5ffca2a581311c27",
-        "src-cedf284f61bb39ae",
-        "src-e1d67502167d29ad"
-      ],
-      "retrieval": {
-        "documentId": "wiki:Qiao_Xinbao_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:9d8bcf4ee892d1daaa24590438ace4c37e32f79f5917586244b6c85f96051317",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Fairness_and_Robustness_zh",
-      "title": "公平性与鲁棒性",
-      "summary": "解释公平性与鲁棒性作为数据中心修正目标的概念页。",
-      "language": "zh",
-      "type": "研究概念",
-      "tags": [
-        "zh",
-        "research",
-        "concept",
-        "研究概念"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:c1c485ae574d344b3bab011faced822faebcc7652bbd473cd1d62dd4afe10bcb",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Fairness_and_Robustness_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:c1c485ae574d344b3bab011faced822faebcc7652bbd473cd1d62dd4afe10bcb",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Distributed_Wasserstein_Barycenter_zh",
-      "title": "分布式 Wasserstein Barycenter",
-      "summary": "解释乔鑫宝关于从分布式局部测度计算 Wasserstein barycenter 的相关工作。",
-      "language": "zh",
-      "type": "研究概念",
-      "tags": [
-        "zh",
-        "research",
-        "concept",
-        "研究概念",
-        "wasserstein"
-      ],
-      "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:07336e6f8ccb466caccf4710fad348230218dd8bbb1f5f57f389f28f285757a9",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
-      "sourceIds": [
-        "src-0d6548913a8c228f",
-        "src-3157a848b3737221"
-      ],
-      "citationSourceIds": [
-        "src-0d6548913a8c228f",
-        "src-3157a848b3737221"
-      ],
-      "footnoteSourceIds": [
-        "src-0d6548913a8c228f",
-        "src-3157a848b3737221"
-      ],
-      "retrieval": {
-        "documentId": "wiki:Distributed_Wasserstein_Barycenter_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:07336e6f8ccb466caccf4710fad348230218dd8bbb1f5f57f389f28f285757a9",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Distributed_Learning_zh",
-      "title": "分布式学习",
-      "summary": "解释数据、计算或通信去中心化条件下的学习问题。",
-      "language": "zh",
-      "type": "研究概念",
-      "tags": [
-        "zh",
-        "research",
-        "concept",
-        "研究概念"
-      ],
-      "timestamp": "2026-05-06T06:22:22+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:5e6803ef26eecbddb3aaa6d2e093509b80a07c36d2aef38e2c3c3b0c3d26cbde",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Distributed_Learning_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:5e6803ef26eecbddb3aaa6d2e093509b80a07c36d2aef38e2c3c3b0c3d26cbde",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Collaborative_Evaluation_zh",
-      "title": "协作评估",
-      "summary": "解释多方共同评估模型或数据过程的概念页。",
-      "language": "zh",
-      "type": "研究概念",
-      "tags": [
-        "zh",
-        "research",
-        "concept",
-        "研究概念"
-      ],
-      "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:4c416cdbc890f68f445c30e75c3233866340c0721cf1b433fd236987d5281868",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Collaborative_Evaluation_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:4c416cdbc890f68f445c30e75c3233866340c0721cf1b433fd236987d5281868",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Trustworthy_AI_zh",
-      "title": "可信 AI",
-      "summary": "覆盖可靠性、删除、公平性、鲁棒性、可解释性和评估的研究专题。",
-      "language": "zh",
-      "type": "研究专题",
-      "tags": [
-        "zh",
-        "research",
-        "topic",
-        "研究专题"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:28482b5d209cd82b224f5326fe62ebc4e226b20a176d694553294d64993e7052",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Trustworthy_AI_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:28482b5d209cd82b224f5326fe62ebc4e226b20a176d694553294d64993e7052",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Interpretability_zh",
-      "title": "可解释性",
-      "summary": "解释模型行为和数据影响的概念页。",
-      "language": "zh",
-      "type": "研究概念",
-      "tags": [
-        "zh",
-        "research",
-        "concept",
-        "研究概念",
-        "llm"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:38652d8ab54846774d1fd3e44dae5f4d2323fbfc11a8f1e9d2494bb4e5ea8d74",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Interpretability_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:38652d8ab54846774d1fd3e44dae5f4d2323fbfc11a8f1e9d2494bb4e5ea8d74",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Synthetic_Data_and_Model_Collapse_zh",
-      "title": "合成数据",
-      "summary": "关于合成数据、递归训练、低资源验证、选择偏差和模型坍缩的研究专题。",
-      "language": "zh",
-      "type": "研究专题",
-      "tags": [
-        "zh",
-        "research",
-        "topic",
-        "研究专题",
-        "synthetic-data"
-      ],
-      "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-08-09T18:35:47.584Z",
-      "contentHash": "sha256:5a069eaa1588657e8fbff7ef13242a297852f722338a5a6acb3b5a0b2843788b",
-      "reviewedAt": "2026-08-10T02:36:00+08:00",
-      "reviewDue": "2027-02-05",
-      "sourceIds": [
-        "src-3e9d5d7dceceebc1"
-      ],
-      "citationSourceIds": [
-        "src-3e9d5d7dceceebc1"
-      ],
-      "footnoteSourceIds": [
-        "src-3e9d5d7dceceebc1"
-      ],
-      "retrieval": {
-        "documentId": "wiki:Synthetic_Data_and_Model_Collapse_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:5a069eaa1588657e8fbff7ef13242a297852f722338a5a6acb3b5a0b2843788b",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Synthetic_Data_zh",
-      "title": "合成数据（概念）",
-      "summary": "解释用于训练、评估或隐私友好协作的生成数据。",
-      "language": "zh",
-      "type": "研究概念",
-      "tags": [
-        "zh",
-        "research",
-        "concept",
-        "研究概念",
-        "synthetic-data"
-      ],
-      "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:0be9d0fd4d48f569a4a98be5a8e262abd0f666adf14656d58b7af7e19b57194d",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Synthetic_Data_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:0be9d0fd4d48f569a4a98be5a8e262abd0f666adf14656d58b7af7e19b57194d",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "LLM_Reliability_zh",
-      "title": "大语言模型可靠性",
-      "summary": "解释大语言模型系统可靠性问题的概念页。",
-      "language": "zh",
-      "type": "研究概念",
-      "tags": [
-        "zh",
-        "research",
-        "concept",
-        "研究概念",
-        "llm"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.773Z",
-      "contentHash": "sha256:eaee39fcbfdc086b2eb5337244acb6ae9f264f286710ebe156de116eb56af51f",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-02-05",
-      "sourceIds": [
-        "src-11be10768dbb7de0",
-        "src-44708abf72c85407",
-        "src-8e21f24eb6b80d2c"
-      ],
-      "citationSourceIds": [
-        "src-11be10768dbb7de0",
-        "src-44708abf72c85407",
-        "src-8e21f24eb6b80d2c"
-      ],
-      "footnoteSourceIds": [
-        "src-11be10768dbb7de0",
-        "src-44708abf72c85407",
-        "src-8e21f24eb6b80d2c"
-      ],
-      "retrieval": {
-        "documentId": "wiki:LLM_Reliability_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:eaee39fcbfdc086b2eb5337244acb6ae9f264f286710ebe156de116eb56af51f",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Shandong_University_zh",
-      "title": "山东大学",
-      "summary": "乔鑫宝本科阶段所在机构。",
-      "language": "zh",
-      "type": "公立研究型大学",
-      "tags": [
-        "zh",
-        "institution",
-        "education",
-        "公立研究型大学"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:c57202064e7fe6a89492d9160d3f630ce33ac111149aac58a6d7f4c5fa44718a",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
-      "sourceIds": [
-        "src-2698bddf338b56e5",
-        "src-33f25ef72f5cac0f",
-        "src-8207d2b85f96e6cb"
-      ],
-      "citationSourceIds": [
-        "src-8207d2b85f96e6cb"
-      ],
-      "footnoteSourceIds": [
-        "src-8207d2b85f96e6cb"
-      ],
-      "retrieval": {
-        "documentId": "wiki:Shandong_University_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:c57202064e7fe6a89492d9160d3f630ce33ac111149aac58a6d7f4c5fa44718a",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Meng_Zhang_zh",
-      "title": "张萌",
-      "summary": "浙江大学教师，乔鑫宝硕士导师。",
-      "language": "zh",
-      "type": "Academic advisor",
-      "tags": [
-        "zh",
-        "person",
-        "advisor",
-        "academic-advisor"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:103093bd3886bfa0462229db2fd4d8557041ecd2ab27552727a5922d4bea88ed",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
-      "sourceIds": [
-        "src-716564daa4b6397f"
-      ],
-      "citationSourceIds": [
-        "src-716564daa4b6397f"
-      ],
-      "footnoteSourceIds": [
-        "src-716564daa4b6397f"
-      ],
-      "retrieval": {
-        "documentId": "wiki:Meng_Zhang_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:103093bd3886bfa0462229db2fd4d8557041ecd2ab27552727a5922d4bea88ed",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Angela_Yingjun_Zhang_zh",
-      "title": "张颖珺",
-      "summary": "香港中文大学信息工程系教授，乔鑫宝博士导师。",
-      "language": "zh",
-      "type": "Academic advisor",
-      "tags": [
-        "zh",
-        "person",
-        "advisor",
-        "academic-advisor"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-13T20:54:38+08:00",
-      "contentHash": "sha256:22a803b3c72aafc454d04b3465a3141ddefe539d0cb848d603c789683d6c4a40",
-      "reviewedAt": "2026-07-13T20:54:38+08:00",
-      "reviewDue": "2027-01-09",
-      "sourceIds": [
-        "src-05cf85aef2ce8d53",
-        "src-938ce85aed5a8a94",
-        "src-e105b35a946250a9"
-      ],
-      "citationSourceIds": [
-        "src-05cf85aef2ce8d53",
-        "src-938ce85aed5a8a94",
-        "src-e105b35a946250a9"
-      ],
-      "footnoteSourceIds": [
-        "src-05cf85aef2ce8d53",
-        "src-938ce85aed5a8a94",
-        "src-e105b35a946250a9"
-      ],
-      "retrieval": {
-        "documentId": "wiki:Angela_Yingjun_Zhang_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:22a803b3c72aafc454d04b3465a3141ddefe539d0cb848d603c789683d6c4a40",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Influence_Functions_zh",
-      "title": "影响函数",
-      "summary": "解释估计训练样本如何影响学习模型的概念页。",
-      "language": "zh",
-      "type": "研究概念",
-      "tags": [
-        "zh",
-        "research",
-        "concept",
-        "研究概念"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:647e43dc8868e7f86527f3026f7071cfd2aef1fa226e663e4b88c0d5a9098b33",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Influence_Functions_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:647e43dc8868e7f86527f3026f7071cfd2aef1fa226e663e4b88c0d5a9098b33",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Skills_zh",
-      "title": "技能",
-      "summary": "乔鑫宝 CV 中列出的技术技能。",
-      "language": "zh",
-      "type": "技术技能",
-      "tags": [
-        "zh",
-        "skills",
-        "profile",
-        "技术技能"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-03T00:03:48+08:00",
-      "contentHash": "sha256:75088b353ef9e2295e61ec52e17237ca0b79e5ded268d9a68678dddb7034225a",
-      "reviewedAt": "2026-07-03T00:03:48+08:00",
-      "reviewDue": "2026-12-29",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Skills_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:75088b353ef9e2295e61ec52e17237ca0b79e5ded268d9a68678dddb7034225a",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Education_zh",
-      "title": "教育经历",
-      "summary": "乔鑫宝的教育时间线。",
-      "language": "zh",
-      "type": "教育时间线",
-      "tags": [
-        "zh",
-        "education",
-        "profile",
-        "教育时间线"
-      ],
-      "timestamp": "2026-05-06T23:05:52+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.759Z",
-      "contentHash": "sha256:2c6a9ddd5c60275f5b8bf4b67e9079a5796f71dfb3ad7f93c413958f874d13ab",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-02-05",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Education_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:2c6a9ddd5c60275f5b8bf4b67e9079a5796f71dfb3ad7f93c413958f874d13ab",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Data_Centric_Machine_Learning_zh",
-      "title": "数据中心 ML",
-      "summary": "关注数据质量、选择、估值、修正和治理的研究专题。",
-      "language": "zh",
-      "type": "研究专题",
-      "tags": [
-        "zh",
-        "research",
-        "topic",
-        "研究专题"
-      ],
-      "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:b5ed150616b6bc664087f36dc9e5d5cdb8b191aa624cf0ed96b40dce31f72b12",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Data_Centric_Machine_Learning_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:b5ed150616b6bc664087f36dc9e5d5cdb8b191aa624cf0ed96b40dce31f72b12",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Data_Silos_zh",
-      "title": "数据孤岛",
-      "summary": "解释数据分布在不同持有者之间时的学习与评估问题。",
-      "language": "zh",
-      "type": "研究概念",
-      "tags": [
-        "zh",
-        "research",
-        "concept",
-        "研究概念"
-      ],
-      "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:5a9ef8f0796c6a6e5818894e93c6a2b241c6df834f9d5be05ff03858efaeaf66",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Data_Silos_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:5a9ef8f0796c6a6e5818894e93c6a2b241c6df834f9d5be05ff03858efaeaf66",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Data_Selection_zh",
-      "title": "数据选择",
-      "summary": "解释在可靠性约束下选择训练或评估数据的概念页。",
-      "language": "zh",
-      "type": "研究概念",
-      "tags": [
-        "zh",
-        "research",
-        "concept",
-        "研究概念"
-      ],
-      "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:f2f86de8a44e60f1923badf3e613b292b74546183791b33c64556111f7cb3f80",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Data_Selection_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:f2f86de8a44e60f1923badf3e613b292b74546183791b33c64556111f7cb3f80",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
-      "title": "无 Hessian 在线认证遗忘",
-      "summary": "ICLR 2025 论文，研究无显式 Hessian 求逆的高效认证机器遗忘。",
-      "language": "zh",
-      "type": "publication",
-      "tags": [
-        "zh",
-        "publication",
-        "paper",
-        "iclr-2025-poster",
-        "iclr-2025"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-16T20:08:42+08:00",
-      "contentHash": "sha256:61f88b28567cc8c89e63a8e28760d7e18e12868069d2aefb90848e7b9a92ba72",
-      "reviewedAt": "2026-07-16T20:08:42+08:00",
-      "reviewDue": "2026-10-14",
-      "sourceIds": [
-        "src-65d81b8aca549860",
-        "src-a0a9b7171dc028d2",
-        "src-faaafad831fbefc5"
-      ],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Hessian_Free_Online_Certified_Unlearning_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:61f88b28567cc8c89e63a8e28760d7e18e12868069d2aefb90848e7b9a92ba72",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "log_zh",
-      "title": "日志",
-      "summary": "Wiki 的追加式维护日志。",
-      "language": "zh",
-      "type": "维护日志",
-      "tags": [
-        "zh",
-        "maintenance",
-        "log",
-        "维护日志"
-      ],
-      "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.775Z",
-      "contentHash": "sha256:749d82fe7aee0b9b5634aa707999e32d26d4059096ad9eb65583e676db312f0f",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-08-09",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:log_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:749d82fe7aee0b9b5634aa707999e32d26d4059096ad9eb65583e676db312f0f",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Machine_Unlearning_zh",
-      "title": "机器遗忘",
-      "summary": "研究如何从已训练模型中删除、降低或纠正数据影响。",
-      "language": "zh",
-      "type": "研究专题",
-      "tags": [
-        "zh",
-        "research",
-        "topic",
-        "研究专题",
-        "machine-unlearning"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:55d954af2fcdd71a0b7e0ec05a6645e2e79f1d639b585b8687cd85f236fed742",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Machine_Unlearning_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:55d954af2fcdd71a0b7e0ec05a6645e2e79f1d639b585b8687cd85f236fed742",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Sample_Selection_Bias_zh",
-      "title": "样本选择偏差",
-      "summary": "解释非代表性样本选择引入的分布偏差。",
-      "language": "zh",
-      "type": "研究概念",
-      "tags": [
-        "zh",
-        "research",
-        "concept",
-        "研究概念"
-      ],
-      "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:cc1aca2e7114303a2dad5668cb78a122c92d56ebbae3a31397a995c35a87af59",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Sample_Selection_Bias_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:cc1aca2e7114303a2dad5668cb78a122c92d56ebbae3a31397a995c35a87af59",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
-      "title": "样本选择偏差何以促成模型坍缩",
-      "summary": "ICML 2026 论文，研究低资源验证场景、样本选择偏差、模型坍缩与协作 Wasserstein 几何代理。",
-      "language": "zh",
-      "type": "publication",
-      "tags": [
-        "zh",
-        "publication",
-        "paper",
-        "accepted",
-        "icml-2026",
-        "synthetic-data"
-      ],
-      "timestamp": "2026-06-02T22:56:50+08:00",
-      "modifiedAt": "2026-07-16T20:08:42+08:00",
-      "contentHash": "sha256:09b8d93c182cc7e7940467c8a17797f2744016e10d4aa01ec370c6f5e2abc779",
-      "reviewedAt": "2026-07-16T20:08:42+08:00",
-      "reviewDue": "2027-07-16",
-      "sourceIds": [
-        "src-03bf1b2f9af65762",
-        "src-4144e3776ac496d0",
-        "src-766234e11681dad2",
-        "src-94b169d5c233e588"
-      ],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:09b8d93c182cc7e7940467c8a17797f2744016e10d4aa01ec370c6f5e2abc779",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Model_Collapse_zh",
-      "title": "模型坍缩",
-      "summary": "解释递归模型训练中退化性分布漂移的概念页。",
-      "language": "zh",
-      "type": "研究概念",
-      "tags": [
-        "zh",
-        "research",
-        "concept",
-        "研究概念",
-        "synthetic-data"
-      ],
-      "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.779Z",
-      "contentHash": "sha256:9d6e82dd8a993b7b97228f53c9525ae3a0918f82de2274633ab0ad0c52770b1f",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-02-05",
-      "sourceIds": [
-        "src-3e9d5d7dceceebc1"
-      ],
-      "citationSourceIds": [
-        "src-3e9d5d7dceceebc1"
-      ],
-      "footnoteSourceIds": [
-        "src-3e9d5d7dceceebc1"
-      ],
-      "retrieval": {
-        "documentId": "wiki:Model_Collapse_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:9d6e82dd8a993b7b97228f53c9525ae3a0918f82de2274633ab0ad0c52770b1f",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Zhejiang_University_zh",
-      "title": "浙江大学",
-      "summary": "乔鑫宝硕士阶段所在机构。",
-      "language": "zh",
-      "type": "公立研究型大学",
-      "tags": [
-        "zh",
-        "institution",
-        "education",
-        "公立研究型大学"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-12T22:06:12+08:00",
-      "contentHash": "sha256:b299fe56a1b40d6af75fd0dec521d43bbcce4f80812f3b644dc326f6d3e759e5",
-      "reviewedAt": "2026-07-12T22:06:12+08:00",
-      "reviewDue": "2027-01-08",
-      "sourceIds": [
-        "src-575233d5188384df",
-        "src-c051bd6dcf566058"
-      ],
-      "citationSourceIds": [
-        "src-575233d5188384df"
-      ],
-      "footnoteSourceIds": [
-        "src-575233d5188384df"
-      ],
-      "retrieval": {
-        "documentId": "wiki:Zhejiang_University_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:b299fe56a1b40d6af75fd0dec521d43bbcce4f80812f3b644dc326f6d3e759e5",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Research_zh",
-      "title": "研究",
-      "summary": "乔鑫宝研究方向与相关专题页面概览。",
-      "language": "zh",
-      "type": "研究概览",
-      "tags": [
-        "zh",
-        "research",
-        "overview",
-        "研究概览"
-      ],
-      "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-07-11T07:28:06+08:00",
-      "contentHash": "sha256:0b3775a6da8240e7a8826285d93d76a8f51202552c6969c4c028ff60fb890bcf",
-      "reviewedAt": "2026-07-11T07:28:06+08:00",
-      "reviewDue": "2026-10-08",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Research_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:0b3775a6da8240e7a8826285d93d76a8f51202552c6969c4c028ff60fb890bcf",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Experience_zh",
-      "title": "研究经历",
-      "summary": "研究经历与机构关系。",
-      "language": "zh",
-      "type": "研究经历",
-      "tags": [
-        "zh",
-        "experience",
-        "profile",
-        "研究经历"
-      ],
-      "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.761Z",
-      "contentHash": "sha256:41c47204c95a67a24b584dd34b2d2598945cb0f958b46c3f3a6fa1aaa50f35a8",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2026-11-07",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Experience_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:41c47204c95a67a24b584dd34b2d2598945cb0f958b46c3f3a6fa1aaa50f35a8",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "CV_zh",
-      "title": "简历",
-      "summary": "乔鑫宝的学术简历摘要。",
-      "language": "zh",
-      "type": "CV 摘要",
-      "tags": [
-        "zh",
-        "cv",
-        "profile",
-        "cv-摘要"
-      ],
-      "timestamp": "2026-07-02T19:37:18+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.747Z",
-      "contentHash": "sha256:0c7772f84c5ccec8d04862a487dac3cbf216c398cbaf59e24919b2bbe1fd9d8c",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2026-11-07",
-      "sourceIds": [
-        "src-03bf1b2f9af65762",
-        "src-0642a11373a83c47",
-        "src-18fe2e2db0ff8b6a",
-        "src-19cdc04d387acf77",
-        "src-3234eea5652932e1",
-        "src-4144e3776ac496d0",
-        "src-53e1199f272a4df4",
-        "src-65d81b8aca549860",
-        "src-688381b8e9d8ad65",
-        "src-716564daa4b6397f",
-        "src-94b169d5c233e588",
-        "src-9b2be44d3f13005a",
-        "src-a0a9b7171dc028d2",
-        "src-b0de54fe614fa11d",
-        "src-cea294f51d3559e8",
-        "src-da17eb3884244bd3",
-        "src-faaafad831fbefc5"
-      ],
-      "citationSourceIds": [
-        "src-03bf1b2f9af65762",
-        "src-0642a11373a83c47",
-        "src-18fe2e2db0ff8b6a",
-        "src-19cdc04d387acf77",
-        "src-3234eea5652932e1",
-        "src-4144e3776ac496d0",
-        "src-53e1199f272a4df4",
-        "src-65d81b8aca549860",
-        "src-688381b8e9d8ad65",
-        "src-716564daa4b6397f",
-        "src-94b169d5c233e588",
-        "src-9b2be44d3f13005a",
-        "src-a0a9b7171dc028d2",
-        "src-b0de54fe614fa11d",
-        "src-cea294f51d3559e8",
-        "src-da17eb3884244bd3",
-        "src-faaafad831fbefc5"
-      ],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:CV_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:0c7772f84c5ccec8d04862a487dac3cbf216c398cbaf59e24919b2bbe1fd9d8c",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "index_zh",
-      "title": "索引",
-      "summary": "Xinbaopedia 公开页面导航索引。",
-      "language": "zh",
-      "type": "Wiki 索引",
-      "tags": [
-        "zh",
-        "index",
-        "navigation",
-        "wiki-索引"
-      ],
-      "timestamp": "2026-05-07T17:34:07+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.766Z",
-      "contentHash": "sha256:f0993dd3507ea1df7bc170526845fe30ee4236ac4a7129fcebffa62fd2301375",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-08-09",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:index_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:f0993dd3507ea1df7bc170526845fe30ee4236ac4a7129fcebffa62fd2301375",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Certified_Data_Removal_zh",
-      "title": "认证数据删除",
-      "summary": "解释机器遗忘中删除保证的概念页。",
-      "language": "zh",
-      "type": "研究概念",
-      "tags": [
-        "zh",
-        "research",
-        "concept",
-        "研究概念",
-        "machine-unlearning"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:cf9f22c358563c9ded7edfa0b84c15a2ddc531896671859e2ef14dc1edf907be",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Certified_Data_Removal_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:cf9f22c358563c9ded7edfa0b84c15a2ddc531896671859e2ef14dc1edf907be",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Publications_zh",
-      "title": "论文",
-      "summary": "乔鑫宝的论文索引。",
-      "language": "zh",
-      "type": "论文列表",
-      "tags": [
-        "zh",
-        "publication",
-        "index",
-        "论文列表"
-      ],
-      "timestamp": "2026-06-01T22:04:00+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:15c34136b6393d0ec3a649ba10bea0676ae1a11c72cf328442f9161e415fa76b",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-09-30",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Publications_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:15c34136b6393d0ec3a649ba10bea0676ae1a11c72cf328442f9161e415fa76b",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Soft_Weighted_Machine_Unlearning_zh",
-      "title": "超越二元擦除：用于公平性与鲁棒性的软加权遗忘",
-      "summary": "AAAI 2026 论文，研究用于公平性与鲁棒性修正的软加权机器遗忘。",
-      "language": "zh",
-      "type": "publication",
-      "tags": [
-        "zh",
-        "publication",
-        "paper",
-        "accepted",
-        "aaai-2026",
-        "machine-unlearning"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.791Z",
-      "contentHash": "sha256:59b316fe6de53b980d856a0166747d9a5575808682f4be2678df40b059b842f4",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-08-09",
-      "sourceIds": [
-        "src-0642a11373a83c47",
-        "src-53e1199f272a4df4"
-      ],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Soft_Weighted_Machine_Unlearning_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:59b316fe6de53b980d856a0166747d9a5575808682f4be2678df40b059b842f4",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Recursive_Synthetic_Data_Training_zh",
-      "title": "递归合成数据训练",
-      "summary": "解释模型反复使用早期模型生成数据进行训练的过程。",
-      "language": "zh",
-      "type": "研究概念",
-      "tags": [
-        "zh",
-        "research",
-        "concept",
-        "研究概念",
-        "synthetic-data"
-      ],
-      "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.786Z",
-      "contentHash": "sha256:5d8a4e20eec790d14fac24557dfedfa4ab08a87f6ea28bc0c80802df8c7bb414",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-02-05",
-      "sourceIds": [
-        "src-3e9d5d7dceceebc1"
-      ],
-      "citationSourceIds": [
-        "src-3e9d5d7dceceebc1"
-      ],
-      "footnoteSourceIds": [
-        "src-3e9d5d7dceceebc1"
-      ],
-      "retrieval": {
-        "documentId": "wiki:Recursive_Synthetic_Data_Training_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:5d8a4e20eec790d14fac24557dfedfa4ab08a87f6ea28bc0c80802df8c7bb414",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Random_Forest_zh",
-      "title": "随机森林",
-      "summary": "解释 DynFrs 所研究的随机森林模型类别。",
-      "language": "zh",
-      "type": "模型族",
-      "tags": [
-        "zh",
-        "research",
-        "model",
-        "模型族"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:6d257e9e58d7a5cdcb995d7953ef20d0399f947e387488808ee5cc005c98eec8",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Random_Forest_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:6d257e9e58d7a5cdcb995d7953ef20d0399f947e387488808ee5cc005c98eec8",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Projects_zh",
-      "title": "项目",
-      "summary": "研究项目与项目簇。",
-      "language": "zh",
-      "type": "项目概览",
-      "tags": [
-        "zh",
-        "project",
-        "overview",
-        "项目概览"
-      ],
-      "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:fee4ad67798127cc3b52660ab5227d1b67bb590c8a37300a540bb43e1e15bbec",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-09-30",
-      "sourceIds": [],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Projects_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:fee4ad67798127cc3b52660ab5227d1b67bb590c8a37300a540bb43e1e15bbec",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "The_Chinese_University_of_Hong_Kong_zh",
-      "title": "香港中文大学",
-      "summary": "乔鑫宝当前博士阶段所在机构。",
-      "language": "zh",
-      "type": "公立研究型大学",
-      "tags": [
-        "zh",
-        "institution",
-        "education",
-        "公立研究型大学"
-      ],
-      "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-07-13T20:54:38+08:00",
-      "contentHash": "sha256:cc7ee27875948d4bdac61d09c00a69b27a9675d8b85091248c40ab359ba356e3",
-      "reviewedAt": "2026-07-13T20:54:38+08:00",
-      "reviewDue": "2027-01-09",
-      "sourceIds": [
-        "src-09fa966eeac1624e",
-        "src-5dac6849a598aa84",
-        "src-5ffca2a581311c27",
-        "src-cecd4e57ea891eee",
-        "src-f1b03a6c505acdf9",
-        "src-f6cb0623675b4752"
-      ],
-      "citationSourceIds": [
-        "src-09fa966eeac1624e",
-        "src-5dac6849a598aa84",
-        "src-5ffca2a581311c27",
-        "src-f6cb0623675b4752"
-      ],
-      "footnoteSourceIds": [
-        "src-09fa966eeac1624e",
-        "src-5dac6849a598aa84",
-        "src-5ffca2a581311c27",
-        "src-f6cb0623675b4752"
-      ],
-      "retrieval": {
-        "documentId": "wiki:The_Chinese_University_of_Hong_Kong_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:cc7ee27875948d4bdac61d09c00a69b27a9675d8b85091248c40ab359ba356e3",
         "textFields": [
           "title",
           "aliases",

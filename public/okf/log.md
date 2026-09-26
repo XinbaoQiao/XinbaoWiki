@@ -1,5 +1,9 @@
 # Xinbaopedia OKF Update Log
 
+## 2026-09-26
+
+- Updated the bilingual biography, CV, publication index, research map, and related pages to record the NeurIPS 2026 acceptance of [Illusory Pattern Perception Drives Spurious Inference in Large Language Models](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md); refreshed the downloadable CV and site navigation.
+
 ## 2026-08-10
 
 - Updated the bilingual profile, education, experience, and CV pages to record that Qiao began the PhD in Information Engineering at The Chinese University of Hong Kong on 2026-08-01; kept private records excluded from the public index while removing stale CV wording.

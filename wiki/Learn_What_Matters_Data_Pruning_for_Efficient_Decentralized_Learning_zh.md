@@ -11,8 +11,8 @@ tags:
 timestamp: '2026-05-06T06:22:22+08:00'
 modified: '2026-08-09T18:32:45.771Z'
 content_hash: 'sha256:15bf945ff1ae853db6b004210c7c4a64fb7e37c7c8ccb8ba5b4ad1bb91e2c4db'
-reviewed_at: '2026-08-10T02:34:00+08:00'
-review_due: '2026-09-08'
+reviewed_at: '2026-09-25T04:59:05.905Z'
+review_due: '2026-10-25'
 name: Learn What Matters：高效去中心化学习的数据剪枝
 language: zh
 summary: 关于高效去中心化学习中数据剪枝的在审手稿。

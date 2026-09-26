@@ -11,10 +11,10 @@ tags:
   - biography
   - phd-student
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-08-09T18:32:45.801Z'
-content_hash: 'sha256:04b20b696b5d70393a4bd34c5abf764a6997b90145f2d0a18195691e473f2f4c'
-reviewed_at: '2026-08-10T02:34:00+08:00'
-review_due: '2026-11-07'
+modified: '2026-09-25T04:53:27.434Z'
+content_hash: 'sha256:61e34d6882d795cd09cd6c0134dddbc93821f2db611c8e2a2174e2c14bff943c'
+reviewed_at: '2026-09-25T04:54:14.029Z'
+review_due: '2026-12-24'
 name: Xinbao Qiao
 summary: >-
   PhD student in Information Engineering at The Chinese University of Hong Kong;
@@ -70,7 +70,7 @@ nationality: Chinese
 2. In data use, he focuses on data modeling, collaborative optimization, and system design in distributed learning, AI for Networks, and Networks for AI.
 3. In data deletion, he studies machine unlearning and data influence evaluation, exploring how to preserve model performance while protecting privacy and satisfying deletion requests.
 
-These directions connect [[Data_Centric_Machine_Learning|data-centric ML]], [[AI_and_Networks|AI and networks]], [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic-data reliability]], and [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenter]] methods for collaborative distributional references. Qiao previously received a Master of Engineering in Artificial Intelligence from [[Zhejiang_University|Zhejiang University]] and a Bachelor of Engineering in Communication Engineering from [[Shandong_University|Shandong University]]. His [[Publications]] include accepted or published papers at ICML, AAAI, and ICLR.
+These directions connect [[Data_Centric_Machine_Learning|data-centric ML]], [[AI_and_Networks|AI and networks]], [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic-data reliability]], and [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenter]] methods for collaborative distributional references. Qiao previously received a Master of Engineering in Artificial Intelligence from [[Zhejiang_University|Zhejiang University]] and a Bachelor of Engineering in Communication Engineering from [[Shandong_University|Shandong University]]. His [[Publications]] include accepted or published papers at NeurIPS, ICML, AAAI, and ICLR.
 
 ## Education
 
@@ -91,6 +91,8 @@ This period includes work on [[Hessian_Free_Online_Certified_Unlearning|Hessian-
 ### Trustworthy LLM systems at NUSRI-CQ (2025)
 
 From June to December 2025, Qiao worked as a full-time research intern at [[NUSRI_CQ|NUSRI-CQ]]. The research focused on trustworthy LLM systems and synthetic-data evaluation, especially low-resource recursive training where real-data coverage is limited or fragmented.
+
+This period also includes [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|Illusory Pattern Perception Drives Spurious Inference in Large Language Models]], accepted at NeurIPS 2026, which examines how perceived prompt patterns can steer an LLM away from evidence-grounded inference.
 
 ### The Chinese University of Hong Kong (2026-08-01-present)
 

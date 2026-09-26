@@ -8,18 +8,18 @@ tags:
   - overview
   - research-overview
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-11T07:28:06+08:00'
-content_hash: 'sha256:09e30b38e992c7f3c7c8b32a5bba43801fe9854088306229588b105b24990848'
-reviewed_at: '2026-07-11T07:28:06+08:00'
-review_due: '2026-10-08'
+modified: '2026-09-26T03:14:39.306Z'
+content_hash: 'sha256:e61b51fc87645fd464569bb60f7a2425cb124feaeca5d8b7dbe102e0a1c10516'
+reviewed_at: '2026-09-26T03:15:12.636Z'
+review_due: '2026-12-25'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-11T07:28:06+08:00'
-  reviewDue: '2026-10-08'
+  reviewedAt: '2026-09-26T03:15:12.636Z'
+  reviewDue: '2026-12-25'
   pendingReview: false
   overdue: false
 retrieval:
@@ -49,6 +49,10 @@ Qiao's work primarily studies lifecycle management of data in AI models, focusin
 ## Synthetic data
 
 [Synthetic Data](./Synthetic_Data_and_Model_Collapse.md) studies recursive synthetic-data training, [Data Selection](./Data_Selection.md), [Sample Selection Bias](./Sample_Selection_Bias.md), [Model Collapse](./Model_Collapse.md), and collaborative mitigation in low-resource [data silos](./Data_Silos.md). The central paper is [When Sample Selection Bias Precipitates Model Collapse](./When_Sample_Selection_Bias_Precipitates_Model_Collapse.md), which frames model collapse as especially risky when real-data coverage is scarce or fragmented.
+
+## LLM reliability
+
+[LLM Reliability](./LLM_Reliability.md) studies whether model responses remain grounded in adequate evidence. The NeurIPS 2026 paper [Illusory Pattern Perception Drives Spurious Inference in Large Language Models](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md) connects this question to prompt patterns that can invite unsupported inferences.
 
 ## Data centric ML and trustworthy AI
 

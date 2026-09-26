@@ -3,6 +3,7 @@ import path from 'node:path';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import matter from 'gray-matter';
+import sharp from 'sharp';
 
 const root = process.cwd();
 const wikiDir = path.join(root, 'wiki');
@@ -290,9 +291,19 @@ for (const logoPath of themedSiteWordmarks) {
   const logo = fs.readFileSync(path.join(root, logoPath));
   assert.deepEqual(pngDimensions(logo), { width: 641, height: 158 }, `${logoPath} is cropped to the visible homepage wordmark instead of keeping the rectangular source canvas`);
   assert.ok(logo.length > 20000 && logo.length < 50000, `${logoPath} is a compact flattened homepage wordmark instead of publishing the full source artwork`);
-  const alphaBounds = execFileSync('convert', [logoPath, '-alpha', 'extract', '-trim', '-format', '%wx%h+%X+%Y', 'info:'], { cwd: root, encoding: 'utf8' });
-  assert.equal(alphaBounds, '633x150++4++4', `${logoPath} keeps only a small transparent guard around the visible logo`);
-  const visibleColorCount = Number(execFileSync('convert', [logoPath, '-trim', '+repage', '-alpha', 'off', '-format', '%k', 'info:'], { cwd: root, encoding: 'utf8' }));
+  const trimmed = await sharp(logo).trim({ threshold: 0 }).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  assert.deepEqual(
+    [trimmed.info.width, trimmed.info.height, -trimmed.info.trimOffsetLeft, -trimmed.info.trimOffsetTop],
+    [633, 150, 4, 4],
+    `${logoPath} keeps only a small transparent guard around the visible logo`
+  );
+  const visibleColors = new Set();
+  for (let offset = 0; offset < trimmed.data.length; offset += trimmed.info.channels) {
+    if (trimmed.data[offset + 3] > 0) {
+      visibleColors.add(trimmed.data.subarray(offset, offset + 3).toString('hex'));
+    }
+  }
+  const visibleColorCount = visibleColors.size;
   assert.ok(visibleColorCount <= 2, `${logoPath} uses a flat visible logo color without a separate decorative outline`);
 }
 const languageToggle = fs.readFileSync(path.join(root, 'components/LanguageToggle.tsx'), 'utf8');
@@ -1108,9 +1119,9 @@ const contextlessRetrieval = retrieveWikiContext('What does this work do?', { la
 assert.equal(contextlessRetrieval.shouldAbstain, true, 'current-page reference without a page context routes to conversation');
 assert.deepEqual(contextlessRetrieval.sources, [], 'contextless page reference does not retrieve unrelated wiki pages');
 const englishRecent = retrieveWikiContext('Whatever Xinbao is cooking up lately?', { language: 'en', limit: 8 });
-assert.ok(englishRecent.sources.some((source) => source.chunkId === 'log#2026-08-10'), 'English recent-work intent selects the newest matching log section');
+assert.ok(englishRecent.sources.some((source) => source.chunkId === 'log#2026-09-26'), 'English recent-work intent selects the newest matching log section');
 const chineseRecent = retrieveWikiContext('看看鑫宝最近又在折腾什么？', { language: 'zh', limit: 8 });
-assert.ok(chineseRecent.sources.some((source) => source.chunkId === 'log_zh#2026-08-10'), 'Chinese recent-work intent selects the newest matching log section');
+assert.ok(chineseRecent.sources.some((source) => source.chunkId === 'log_zh#2026-09-26'), 'Chinese recent-work intent selects the newest matching log section');
 const evaluatorCase = { id: 'integrity-fixture', language: 'en', category: 'citation', query: 'fixture', expectedSlugs: [] };
 assert.deepEqual(evaluateCase(evaluatorCase, cleanRetrieval, publicPages, chunkById).sourceIssues, [], 'production retrieval metadata matches indexed truth');
 const forgedHashRetrieval = structuredClone(cleanRetrieval);
@@ -1304,12 +1315,13 @@ assert.match(releaseProductionScript, /Node \$\{process\.versions\.node\} is act
 assert.match(packageJson.scripts?.['push:check'] || '', /push-main\.mjs --check/, 'package.json exposes a non-writing GitHub permission and divergence preflight');
 assert.match(packageJson.scripts?.['push:main'] || '', /run-with-node22\.mjs node scripts\/push-main\.mjs/, 'package.json exposes the bounded authenticated main-branch push workflow');
 assert.match(pushMainScript, /GITHUB_TOKEN is required in the environment[\s\S]*requireGithubPushPermission\(repositoryPayload\)[\s\S]*merge-base[\s\S]*--is-ancestor[\s\S]*GIT_ASKPASS[\s\S]*GIT_TERMINAL_PROMPT/, 'GitHub push verifies token permission and fast-forward safety before using a non-interactive ephemeral credential helper');
+assert.match(pushMainScript, /\['-c', 'credential\.helper=', '-c', 'credential\.interactive=always', 'push', 'origin'/, 'GitHub push clears ambient helpers, permits scoped askpass, and preserves the uncredentialed origin URL for the publish guard');
 assert.doesNotMatch(pushMainScript, /github_pat_|ghp_|authorization:\s*['"`]Bearer [^$]/, 'GitHub push source contains no embedded token');
 assert.equal(fs.readFileSync(path.join(root, '.nvmrc'), 'utf8').trim(), '22', 'local Node selector matches the package engine');
 const gitignore = fs.readFileSync(path.join(root, '.gitignore'), 'utf8');
 const vercelignore = fs.readFileSync(path.join(root, '.vercelignore'), 'utf8');
 const verifyPublishSet = fs.readFileSync(path.join(root, 'scripts/verify-publish-set.mjs'), 'utf8');
-assert.ok(gitignore.split(String.fromCharCode(10)).includes('.vercel'), 'gitignore keeps the exact Vercel CLI sentinel so linking cannot dirty the release tree');
+assert.ok(gitignore.split(/\r?\n/).includes('.vercel'), 'gitignore keeps the exact Vercel CLI sentinel so linking cannot dirty the release tree');
 assert.match(gitignore, /\.vercel-auth-\*\//, 'gitignore excludes temporary Vercel auth directories');
 assert.match(vercelignore, /\.vercel-auth-\*\//, 'vercelignore excludes temporary Vercel auth directories');
 assert.match(gitignore, /agent_progress\.md/, 'gitignore keeps the local agent ledger out of commits by default');
@@ -1671,7 +1683,7 @@ assert.doesNotMatch(publications, /!\[/, 'publication index is text-only');
 assert.doesNotMatch(publications, /Soft-Weighted Machine Unlearning/, 'publication index uses the final AAAI title');
 assert.match(publications, /DynFrs: An Efficient Framework for Machine Unlearning in Random Forest/, 'publication index uses full DynFrs title');
 assert.doesNotMatch(publications, /(?<!\*)Xinbao Qiao(?!\*)/, 'publication index bolds Xinbao Qiao in author lists');
-assert.equal((publications.match(/\*\*Xinbao Qiao\*\*/g) || []).length, 4, 'publication index bolds Xinbao Qiao in every visible listed paper');
+assert.equal((publications.match(/\*\*Xinbao Qiao\*\*/g) || []).length, 5, 'publication index bolds Xinbao Qiao in every visible listed paper');
 
 for (const page of [
   'Xinbao_Qiao.md',
@@ -2266,7 +2278,8 @@ assert.ok(homepagePortal.includes('siteUpdates[language].map'), 'homepage render
 assert.ok(homepagePortal.includes("import { siteUpdates } from '@/lib/site-updates'") && updatesPage.includes("import { siteUpdates } from '@/lib/site-updates'"), 'homepage Updates and the Contribute-linked Latest updates page read the same backend data export');
 assert.match(updateData, /const siteUpdateEvents:[\s\S]*function updatesFor\(language: SiteLanguage\)[\s\S]*siteUpdateEvents\.map\(\(event\) => \(\{ dateTime: event\.dateTime, \.\.\.event\[language\] \}\)\)/, 'one canonical ordered event collection derives both localized update lists');
 assert.match(updateData, /function paperAcceptance[\s\S]*must list every paper's full title[\s\S]*title: `\$\{joinEnglishTitles\(papers\)\} accepted at \$\{venue\}`[\s\S]*title: `\$\{joinChineseTitles\(papers\)\}获 \$\{venue\} 录用`/, 'paper acceptance events require and prominently render every full paper title in both languages');
-assert.ok(updateData.includes('When Sample Selection Bias Precipitates Model Collapse') && updateData.includes('Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness') && updateData.includes('Hessian-Free Online Certified Unlearning') && updateData.includes('DynFrs: An Efficient Framework for Machine Unlearning in Random Forest'), 'every accepted paper in the shared update history uses its full title');
+assert.ok(updateData.includes('Illusory Pattern Perception Drives Spurious Inference in Large Language Models') && updateData.includes('When Sample Selection Bias Precipitates Model Collapse') && updateData.includes('Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness') && updateData.includes('Hessian-Free Online Certified Unlearning') && updateData.includes('DynFrs: An Efficient Framework for Machine Unlearning in Random Forest'), 'every accepted paper in the shared update history uses its full title');
+assert.match(updateData, /Illusory Pattern Perception Drives Spurious Inference in Large Language Models'[\s\S]*venue: 'NeurIPS 2026'/, 'shared homepage update records the NeurIPS 2026 acceptance');
 assert.doesNotMatch(updateData, /Research code released|研究代码公开|Academic service|学术服务|Serving as a reviewer/, 'homepage updates exclude routine code and service notices');
 assert.ok(!homepagePortal.includes("withBasePath('/updates/')") && sidebarClient.includes("withBasePath('/updates/')"), 'homepage removes the redundant archive shortcut while the sidebar keeps the readable updates route discoverable');
 assert.ok(!homepagePortal.includes("withBasePath('/feed.xml')") && !sidebarClient.includes("withBasePath('/feed.xml')"), 'ordinary navigation never opens the raw Atom document');
@@ -2566,6 +2579,7 @@ assert.match(cvTex, /\\textbf\{Xinbao Qiao\}, Meng Zhang\\corrauthor, Ming Tang,
 assert.match(cvTex, /Shurong Wang, Zhuoyang Shen, \\textbf\{Xinbao Qiao\}, Tongning Zhang, Meng Zhang\\corrauthor/, 'CV Paper #4 marks Meng Zhang as corresponding author');
 assert.match(cvTex, /\\textbf\{Xinbao Qiao\}, Wenjing Yan\\corrauthor, Ying-Jun Angela Zhang/, 'CV Paper #5 marks Wenjing Yan as corresponding author');
 assert.match(cvTex, /Peihua Mai, Zhuoyan Shao, \\textbf\{Xinbao Qiao\}, Meng Zhang, Xinyue Zhou\\corrauthor, Yan Pang\\corrauthor/, 'CV Paper #6 marks Xinyue Zhou and Yan Pang as corresponding authors');
+assert.match(cvTex, /Illusory Pattern Perception[\s\S]*\{NeurIPS 2026\.\}/, 'downloadable CV source records Paper #6 as NeurIPS 2026');
 assert.match(cvTex, /scholar\.google\.com\/citations\?view_op=search_authors\\&mauthors=Xinbao\+Qiao/, 'CV PDF source links Google Scholar without exposing the author ID');
 const cvPublicationBlock = cvTex.slice(cvTex.indexOf('\\cvsection{Selected Publications}'));
 assert.doesNotMatch(cvPublicationBlock, /icml\.cc|iclr\.cc|underline\.io|Distributed_Wasserstein_Barycenter|LLM_Reliability/, 'CV publication icons only link arXiv, GitHub, OpenReview, or official paper pages');
@@ -2579,6 +2593,8 @@ assert.match(read('CV.md'), /\*\*Xinbao Qiao\*\*†, Xianglong Du, Wei Liu, Jing
 assert.match(read('CV.md'), /Wenjing Yan†, Ying-Jun Angela Zhang[\s\S]*Xinyue Zhou†, Yan Pang†/, 'English wiki CV marks Papers #5 and #6 corresponding authors');
 assert.match(read('CV_zh.md'), /\*\*乔鑫宝\*\*†、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌†、Yan Pang†/, 'Chinese wiki CV marks Paper #1 corresponding authors');
 assert.match(read('CV_zh.md'), /Wenjing Yan†、Ying-Jun Angela Zhang[\s\S]*Xinyue Zhou†、Yan Pang†/, 'Chinese wiki CV marks Papers #5 and #6 corresponding authors');
+assert.match(read('CV.md'), /Paper #6: Illusory Pattern Perception Drives Spurious Inference in Large Language Models[\s\S]*NeurIPS 2026\./, 'English wiki CV records Paper #6 acceptance');
+assert.match(read('CV_zh.md'), /Paper #6: Illusory Pattern Perception Drives Spurious Inference in Large Language Models[\s\S]*NeurIPS 2026，已录用。/, 'Chinese wiki CV records Paper #6 acceptance');
 assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English OKF CV concept labels the PDF link as résumé');
 assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV_zh.md'), 'utf8'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese OKF CV concept labels the PDF link as résumé');
 assert.match(read('CV.md'), /Open-Source Contributions and Academic Service/, 'English CV labels reviewing as academic service');
@@ -2606,8 +2622,11 @@ assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV_zh.md'), 'u
 assert.doesNotMatch(read('CV.md'), /citations\?user=nhC_OfEAAAAJ/, 'English CV page avoids exposing the Google Scholar author ID');
 assert.doesNotMatch(read('CV_zh.md'), /citations\?user=nhC_OfEAAAAJ/, 'Chinese CV page avoids exposing the Google Scholar author ID');
 const cvTexUris = sortedUrls([...cvTex.matchAll(/\\(?:blackhref|linkish|iconlink)\{([^{}]+)\}/g)].map((match) => match[1]));
-const cvPdfUriOutput = execFileSync('mutool', ['show', 'public/files/XinbaoQiao_CV.pdf', 'grep', 'URI'], { cwd: root, encoding: 'utf8' });
-const cvPdfUris = sortedUrls([...cvPdfUriOutput.matchAll(/\/URI\(([^)]*)\)/g)].map((match) => match[1]));
+const cvPdfUriOutput = execFileSync('pdfinfo', ['-url', 'public/files/XinbaoQiao_CV.pdf'], { cwd: root, encoding: 'utf8' });
+const cvPdfUris = sortedUrls(cvPdfUriOutput.split(/\r?\n/).flatMap((line) => {
+  const match = line.match(/^\s*\d+\s+Annotation\s+(.+)$/);
+  return match ? [match[1]] : [];
+}));
 assert.deepEqual(cvPdfUris, cvTexUris, 'CV PDF URI annotations match CV.tex hyperlink targets');
 
 const publicImages = fs.readdirSync(path.join(root, 'public/images')).filter((file) => /\.(png|jpe?g|gif|webp|svg|ico)$/i.test(file)).sort();

@@ -8,10 +8,10 @@ tags:
   - research
   - 研究院
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:2864019dd92674e38d95921d097ef7924b01c524ef67ce6b20e0cfbfcd72e990'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-09-26T03:14:39.297Z'
+content_hash: 'sha256:c2f41cc5e190cfb587438f0dba43d1fdc14216dea025d6d482cdb9c13e14a383'
+reviewed_at: '2026-09-26T03:15:12.636Z'
+review_due: '2027-03-25'
 name: NUSRI-CQ
 language: zh
 summary: 乔鑫宝研究实习阶段所在机构。
@@ -44,7 +44,7 @@ translation_of: NUSRI_CQ
 
 ## 与乔鑫宝的关系
 
-NUSRI-CQ 阶段在本 wiki 中与 [[Synthetic_Data_and_Model_Collapse|合成数据]]、[[Collaborative_Evaluation|协作评估]] 和 [[Wasserstein_Geometry|Wasserstein 几何]] 相关。它为 ICML 2026 论文 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 提供了直接研究语境，尤其是低资源分布式参与方如何在不暴露全部本地数据的条件下诊断数据生成失效。
+NUSRI-CQ 阶段在本 wiki 中与 [[Synthetic_Data_and_Model_Collapse|合成数据]]、[[Collaborative_Evaluation|协作评估]]、[[Wasserstein_Geometry|Wasserstein 几何]]和[[LLM_Reliability|大语言模型可靠性]]相关。它为 ICML 2026 论文 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 提供了直接研究语境，尤其是低资源分布式参与方如何在不暴露全部本地数据的条件下诊断数据生成失效。获 NeurIPS 2026 录用的[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》]]研究感知到的提示模式如何导致虚假推理。
 
 ## 参见
 
@@ -52,6 +52,7 @@ NUSRI-CQ 阶段在本 wiki 中与 [[Synthetic_Data_and_Model_Collapse|合成数�
 - [[Experience|研究经历]]
 - [[Synthetic_Data_and_Model_Collapse|合成数据]]
 - [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]]
+- [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|错觉模式感知论文]]
 - [[The_Chinese_University_of_Hong_Kong|香港中文大学]]
 
 [^nusri-intro]: NUSRI-CQ 英文[研究院介绍](https://en.nusricq.cn/about/yjyjj)描述其为研究、孵化、教育和培训平台，关注产学研融合。

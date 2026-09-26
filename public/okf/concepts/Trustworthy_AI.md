@@ -10,18 +10,18 @@ tags:
   - topic
   - research-topic
 timestamp: '2026-05-05T20:55:21+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:de85186a59ada4edf5598f5cdde696fb8984635557fbd8fecf816e4ffa2cffc3'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-09-26T03:14:39.316Z'
+content_hash: 'sha256:451c6ffc09f41ea68e6fdb591b53ab16b8ede8cd929f3dc822f6bf109ea405f6'
+reviewed_at: '2026-09-26T03:15:12.636Z'
+review_due: '2027-03-25'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-02T20:03:20+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-09-26T03:15:12.636Z'
+  reviewDue: '2027-03-25'
   pendingReview: false
   overdue: false
 retrieval:
@@ -38,7 +38,7 @@ This page functions as a parent concept rather than a single project. It gathers
 
 ## Connection to Qiao's work
 
-Qiao's work contributes to trustworthy AI through concrete mechanisms. Unlearning papers give methods for deleting or correcting data influence. Synthetic-data work studies how recursive training can fail and how distributed parties can detect the failure. AI-and-networks projects study how reliability and efficiency change under communication constraints. This page is therefore a map of the trustworthiness motivations behind the more specific research pages.
+Qiao's work contributes to trustworthy AI through concrete mechanisms. Unlearning papers give methods for deleting or correcting data influence. Synthetic-data work studies how recursive training can fail and how distributed parties can detect the failure. The NeurIPS 2026 paper [Illusory Pattern Perception Drives Spurious Inference in Large Language Models](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md) examines a different reliability risk: perceived prompt patterns can steer inference away from evidence. AI-and-networks projects study how reliability and efficiency change under communication constraints. This page is therefore a map of the trustworthiness motivations behind the more specific research pages.
 
 ## See also
 

@@ -22,23 +22,28 @@ export class ExternalProcessError extends Error {
 function terminateProcessTree(child, signal) {
   if (!child.pid) return;
 
-  if (process.platform !== 'win32') {
-    try {
-      process.kill(-child.pid, signal);
-      return;
-    } catch (error) {
-      if (error?.code !== 'ESRCH') {
-        try {
-          child.kill(signal);
-        } catch {}
-      }
-      return;
-    }
+  if (process.platform === 'win32') {
+    const killer = spawn('taskkill.exe', ['/PID', String(child.pid), '/T', '/F'], {
+      stdio: 'ignore',
+      windowsHide: true,
+    });
+    killer.on('error', () => {
+      try {
+        child.kill(signal);
+      } catch {}
+    });
+    return;
   }
 
   try {
-    child.kill(signal);
-  } catch {}
+    process.kill(-child.pid, signal);
+  } catch (error) {
+    if (error?.code !== 'ESRCH') {
+      try {
+        child.kill(signal);
+      } catch {}
+    }
+  }
 }
 
 function appendBounded(current, chunk, maxOutputBytes) {
@@ -71,7 +76,7 @@ export function runExternal(command, args = [], options = {}) {
       cwd: options.cwd,
       detached: process.platform !== 'win32',
       env: options.env,
-      shell: process.platform === 'win32',
+      shell: options.shell ?? process.platform === 'win32',
       stdio: capture ? ['ignore', 'pipe', 'pipe'] : 'inherit',
     });
 

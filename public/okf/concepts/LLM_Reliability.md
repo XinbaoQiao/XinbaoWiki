@@ -9,18 +9,18 @@ tags:
   - research-concept
   - llm
 timestamp: '2026-05-05T20:55:21+08:00'
-modified: '2026-08-09T18:32:45.774Z'
-content_hash: 'sha256:1885ac03c0831fa96b282dd4551ca989f43635aef8fc127cd44acd64c724c1a8'
-reviewed_at: '2026-08-10T02:34:00+08:00'
-review_due: '2027-02-05'
+modified: '2026-09-25T04:53:27.398Z'
+content_hash: 'sha256:8b76deadc92e23f4c96327ed7c72fa9434143e195aff9885355292b1b8244fef'
+reviewed_at: '2026-09-25T04:54:14.029Z'
+review_due: '2027-03-24'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-08-10T02:34:00+08:00'
-  reviewDue: '2027-02-05'
+  reviewedAt: '2026-09-25T04:54:14.029Z'
+  reviewDue: '2027-03-24'
   pendingReview: false
   overdue: false
 retrieval:
@@ -42,10 +42,11 @@ Recent evidence sharpens two distinctions. First, false but fluent outputs are n
 
 ## Connection to Qiao's work
 
-Qiao's public publication pages currently emphasize machine unlearning, AI and networks, and synthetic-data model collapse rather than a standalone LLM paper. This page therefore stays conservative: it records the research context and links LLM reliability to the methods that are already visible in the wiki. The relevant methodological bridge is evaluation under imperfect evidence, especially when data are generated, distributed, or selected before training.
+Qiao's [NeurIPS 2026 paper](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md) examines how perceived prompt patterns can lead to spurious inference. It connects his LLM-reliability work to a broader research concern: whether AI systems ground their conclusions in adequate evidence when that evidence is limited, distributed, generated, or potentially misleading.
 
 ## See also
 
+- [Illusory Pattern Perception Drives Spurious Inference in Large Language Models](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md)
 - [NUSRI CQ](./NUSRI_CQ.md)
 - [Synthetic Data](./Synthetic_Data_and_Model_Collapse.md)
 - [Collaborative Evaluation](./Collaborative_Evaluation.md)

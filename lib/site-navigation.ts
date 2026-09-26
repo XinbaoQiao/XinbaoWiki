@@ -57,12 +57,14 @@ export const directorySections: CuratedDirectorySection[] = [
         label: { en: 'Selected publications', zh: '代表论文' },
         links: {
           en: [
+            'Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models',
             'Hessian_Free_Online_Certified_Unlearning',
             'Soft_Weighted_Machine_Unlearning',
             'When_Sample_Selection_Bias_Precipitates_Model_Collapse',
             'DynFrs'
           ],
           zh: [
+            'Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh',
             'Hessian_Free_Online_Certified_Unlearning_zh',
             'Soft_Weighted_Machine_Unlearning_zh',
             'When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh',

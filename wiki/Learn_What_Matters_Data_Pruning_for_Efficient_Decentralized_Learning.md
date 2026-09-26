@@ -11,8 +11,8 @@ tags:
 timestamp: '2026-05-06T06:22:22+08:00'
 modified: '2026-08-09T18:32:45.772Z'
 content_hash: 'sha256:68f5b36b9bb3fb0a105dfd49aa760575f59d0b5629c6389306f6abe8f7612e98'
-reviewed_at: '2026-08-10T02:34:00+08:00'
-review_due: '2026-09-08'
+reviewed_at: '2026-09-25T04:59:05.905Z'
+review_due: '2026-10-25'
 name: 'Learn What Matters: Data Pruning for Efficient Decentralized Learning'
 summary: Manuscript on data pruning for efficient decentralized learning.
 hidden: true

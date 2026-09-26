@@ -8,10 +8,10 @@ tags:
   - biography
   - 博士生
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-08-09T18:32:45.784Z'
-content_hash: 'sha256:9d8bcf4ee892d1daaa24590438ace4c37e32f79f5917586244b6c85f96051317'
-reviewed_at: '2026-08-10T02:34:00+08:00'
-review_due: '2026-11-07'
+modified: '2026-09-25T04:53:27.410Z'
+content_hash: 'sha256:91a45d1089ce31c847ead75b1c1e9b2ce0dac88da8ab5f0ec4d94bce79544264'
+reviewed_at: '2026-09-25T04:54:14.029Z'
+review_due: '2026-12-24'
 name: 乔鑫宝
 summary: 香港中文大学信息工程系博士生；研究方向包括数据中心 ML、AI for Networks、Networks for AI、机器遗忘和合成数据可靠性
 aliases:
@@ -66,7 +66,7 @@ nationality: 中国
 2. 在数据使用方面，关注分布式学习、AI for Networks 与 Networks for AI 等场景下的数据建模、协同优化与系统设计；
 3. 在数据删除方面，研究机器遗忘与数据影响评估，探索如何在保护隐私和满足删除需求的同时维持模型性能。
 
-这些方向连接[[Data_Centric_Machine_Learning|数据中心 ML]]、[[AI_and_Networks|AI 与网络]]、[[Machine_Unlearning|机器遗忘]]、[[Synthetic_Data_and_Model_Collapse|合成数据可靠性]]，以及用于协作分布参考的[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]方法。在博士阶段以前，乔鑫宝于[[Zhejiang_University|浙江大学]]获得人工智能工学硕士学位，并于[[Shandong_University|山东大学]]获得通信工程工学学士学位。他的[[Publications|论文]]包括 ICML、AAAI 与 ICLR 录用或发表的工作。
+这些方向连接[[Data_Centric_Machine_Learning|数据中心 ML]]、[[AI_and_Networks|AI 与网络]]、[[Machine_Unlearning|机器遗忘]]、[[Synthetic_Data_and_Model_Collapse|合成数据可靠性]]，以及用于协作分布参考的[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]方法。在博士阶段以前，乔鑫宝于[[Zhejiang_University|浙江大学]]获得人工智能工学硕士学位，并于[[Shandong_University|山东大学]]获得通信工程工学学士学位。他的[[Publications|论文]]包括 NeurIPS、ICML、AAAI 与 ICLR 录用或发表的工作。
 
 ## 教育经历
 
@@ -87,6 +87,8 @@ nationality: 中国
 ### 新加坡国立大学重庆研究院的可信大模型系统研究（2025）
 
 2025年6月至12月，乔鑫宝在[[NUSRI_CQ|新加坡国立大学重庆研究院]]担任全职研究实习生。研究内容包括可信 LLM 系统和合成数据评估，尤其关注真实数据覆盖有限或碎片化时的低资源递归合成数据训练。
+
+这一时期的工作还包括获 NeurIPS 2026 录用的[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|Illusory Pattern Perception Drives Spurious Inference in Large Language Models]]，研究提示中的错觉模式如何使大语言模型偏离基于证据的推理。
 
 ### 香港中文大学博士阶段（2026年8月1日至今）
 

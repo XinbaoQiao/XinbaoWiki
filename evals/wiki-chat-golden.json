@@ -104,7 +104,7 @@
       "category": "natural-query",
       "query": "Whatever Xinbao is cooking up lately?",
       "expectedSlugs": ["Xinbao_Qiao", "Projects", "Publications"],
-      "expectedChunkIds": ["log#2026-08-10"]
+      "expectedChunkIds": ["log#2026-09-26"]
     },
     {
       "id": "en-natural-profile",
@@ -394,7 +394,7 @@
       "category": "natural-query",
       "query": "看看鑫宝最近又在折腾什么？",
       "expectedSlugs": ["Qiao_Xinbao_zh", "Projects_zh", "Publications_zh"],
-      "expectedChunkIds": ["log_zh#2026-08-10"]
+      "expectedChunkIds": ["log_zh#2026-09-26"]
     },
     {
       "id": "zh-natural-profile",

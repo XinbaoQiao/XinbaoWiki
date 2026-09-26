@@ -8,18 +8,18 @@ tags:
   - navigation
   - wiki-索引
 timestamp: '2026-05-07T17:34:07+08:00'
-modified: '2026-08-09T18:32:45.766Z'
-content_hash: 'sha256:f0993dd3507ea1df7bc170526845fe30ee4236ac4a7129fcebffa62fd2301375'
-reviewed_at: '2026-08-10T02:34:00+08:00'
-review_due: '2027-08-09'
+modified: '2026-09-26T03:14:39.283Z'
+content_hash: 'sha256:dbe3f3853edc732a85f569def35e30196ef674dd764a596f2473624c264459b1'
+reviewed_at: '2026-09-26T03:15:12.636Z'
+review_due: '2027-09-26'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-08-10T02:34:00+08:00'
-  reviewDue: '2027-08-09'
+  reviewedAt: '2026-09-26T03:15:12.636Z'
+  reviewDue: '2027-09-26'
   pendingReview: false
   overdue: false
 retrieval:
@@ -62,6 +62,7 @@ source_path: wiki/index_zh.md
 
 ## 论文
 
+- [错觉模式感知驱动大语言模型的虚假推理](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md)
 - [样本选择偏差何以促成模型坍缩](./When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md)
 - [超越二元擦除：用于公平性与鲁棒性的软加权遗忘](./Soft_Weighted_Machine_Unlearning_zh.md)
 - [无 Hessian 在线认证遗忘](./Hessian_Free_Online_Certified_Unlearning_zh.md)

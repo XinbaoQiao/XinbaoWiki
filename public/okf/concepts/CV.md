@@ -8,18 +8,18 @@ tags:
   - profile
   - cv-summary
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-08-09T18:32:45.749Z'
-content_hash: 'sha256:0a1e554c1c1bf043340bfced843e9417a8a2e79044646cc7dce36fb09c8c4386'
-reviewed_at: '2026-08-10T02:34:00+08:00'
-review_due: '2026-11-07'
+modified: '2026-09-25T04:53:23.451Z'
+content_hash: 'sha256:c403b395dd8dc2d8498a961317d18bf7cc2a550e8eb90d3392d9b9d738227bb3'
+reviewed_at: '2026-09-25T04:54:14.029Z'
+review_due: '2026-12-24'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-08-10T02:34:00+08:00'
-  reviewDue: '2026-11-07'
+  reviewedAt: '2026-09-25T04:54:14.029Z'
+  reviewDue: '2026-12-24'
   pendingReview: false
   overdue: false
 retrieval:
@@ -108,4 +108,4 @@ Asterisks (*) denote co-first authorship; daggers (†) denote corresponding aut
   Under review.
 - **Paper #6: Illusory Pattern Perception Drives Spurious Inference in Large Language Models**.\
   Peihua Mai, Zhuoyan Shao, **Xinbao Qiao**, Meng Zhang, Xinyue Zhou†, Yan Pang†.\
-  Under review.
+  NeurIPS 2026.

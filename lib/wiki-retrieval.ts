@@ -278,7 +278,7 @@ function isExplicitGeneralConversation(query: string, language: WikiRetrievalLan
   const normalized = normalizeText(query);
   if (language === 'en') return ENGLISH_GENERAL_CONVERSATION_PATTERN.test(normalized);
   const compact = normalized.replace(/\s+/g, '');
-  return /^(?:什么是系统提示词|环境变量(?:如何|怎么)使用|医疗诊断(?:如何|怎么)工作)$/u.test(compact);
+  return /^(?:什么是系统提示词|开发者提示词和系统提示词有什么区别|环境变量(?:如何|怎么)使用|医疗诊断(?:如何|怎么)工作)$/u.test(compact);
 }
 
 function requestedChineseTopicPhrase(query: string) {

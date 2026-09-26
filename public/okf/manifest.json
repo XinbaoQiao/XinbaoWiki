@@ -10,15 +10,15 @@
   "description": "Public, agent-readable OKF export of Xinbao Qiao academic wiki content.",
   "source": {
     "directory": "wiki",
-    "files": 88,
-    "contentHash": "cbb9d82380a55fe2810c077188b210af1bf92ef8fc8405ce729774b4440ae543",
+    "files": 90,
+    "contentHash": "7999058b37fdf331a75a262302c31bcb87ab8506da730bab3503c458dda2b3ba",
     "hashAlgorithm": "sha256"
   },
   "bundle": {
     "root": "public/okf",
     "concepts": "concepts/*.md",
     "hiddenPagesExcluded": 4,
-    "publicPages": 84,
+    "publicPages": 86,
     "sources": 51,
     "sourceRegistry": "sources.json"
   },
@@ -30,6 +30,6 @@
     "pages": "pages.json",
     "sources": "sources.json",
     "qualityReport": "quality-report.json",
-    "reviewAsOf": "2026-08-10"
+    "reviewAsOf": "2026-09-21"
   }
 }

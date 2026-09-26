@@ -8,14 +8,18 @@ tags:
   - log
   - maintenance-log
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-08-09T18:32:45.776Z'
-content_hash: 'sha256:90f33ae93a1e8057681c7d00f314b9d6542ffeb741941d9a03cbbc14896799a2'
-reviewed_at: '2026-08-10T02:34:00+08:00'
-review_due: '2027-08-09'
+modified: '2026-09-26T03:14:39.293Z'
+content_hash: 'sha256:3809ec757a887c700c6bdd6aa3f7cc471d4ba1bfac51f493e9eaaf6bc11413e4'
+reviewed_at: '2026-09-26T03:15:12.636Z'
+review_due: '2027-09-26'
 name: Log
 summary: Append-only maintenance log for the wiki.
 occupation: Maintenance log
 ---
+## 2026-09-26
+
+- Updated the bilingual biography, CV, publication index, research map, and related pages to record the NeurIPS 2026 acceptance of [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|Illusory Pattern Perception Drives Spurious Inference in Large Language Models]]; refreshed the downloadable CV and site navigation.
+
 ## 2026-08-10
 
 - Updated the bilingual profile, education, experience, and CV pages to record that Qiao began the PhD in Information Engineering at The Chinese University of Hong Kong on 2026-08-01; kept private records excluded from the public index while removing stale CV wording.

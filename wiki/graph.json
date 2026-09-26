@@ -709,7 +709,7 @@
         "src-da17eb3884244bd3",
         "src-faaafad831fbefc5"
       ],
-      "contentHash": "sha256:0a1e554c1c1bf043340bfced843e9417a8a2e79044646cc7dce36fb09c8c4386",
+      "contentHash": "sha256:c403b395dd8dc2d8498a961317d18bf7cc2a550e8eb90d3392d9b9d738227bb3",
       "file": "CV.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -719,12 +719,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-08-10T02:34:00+08:00",
-        "reviewDue": "2026-11-07",
+        "reviewedAt": "2026-09-25T04:54:14.029Z",
+        "reviewDue": "2026-12-24",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-08-09T18:32:45.749Z",
+      "modifiedAt": "2026-09-25T04:53:23.451Z",
       "outgoing": [
         "Publications",
         "Zhejiang_University"
@@ -762,12 +762,12 @@
       "timestamp": "2026-07-02T19:37:18+08:00",
       "title": "Curriculum Vitae",
       "type": "CV summary",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2026-11-07",
+      "reviewedAt": "2026-09-25T04:54:14.029Z",
+      "reviewDue": "2026-12-24",
       "retrieval": {
         "documentId": "wiki:CV",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:0a1e554c1c1bf043340bfced843e9417a8a2e79044646cc7dce36fb09c8c4386",
+        "contentHash": "sha256:c403b395dd8dc2d8498a961317d18bf7cc2a550e8eb90d3392d9b9d738227bb3",
         "textFields": [
           "title",
           "aliases",
@@ -813,7 +813,7 @@
         "src-da17eb3884244bd3",
         "src-faaafad831fbefc5"
       ],
-      "contentHash": "sha256:0c7772f84c5ccec8d04862a487dac3cbf216c398cbaf59e24919b2bbe1fd9d8c",
+      "contentHash": "sha256:f5d36d2fbe22a327d421b21d7ce03c7a21bfc6a364bd2b32f924faa6674da1a3",
       "file": "CV_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -823,12 +823,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-08-10T02:34:00+08:00",
-        "reviewDue": "2026-11-07",
+        "reviewedAt": "2026-09-25T04:54:14.029Z",
+        "reviewDue": "2026-12-24",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-08-09T18:32:45.747Z",
+      "modifiedAt": "2026-09-25T04:53:23.450Z",
       "outgoing": [
         "NUSRI_CQ_zh",
         "Publications_zh",
@@ -867,12 +867,12 @@
       "timestamp": "2026-07-02T19:37:18+08:00",
       "title": "简历",
       "type": "CV 摘要",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2026-11-07",
+      "reviewedAt": "2026-09-25T04:54:14.029Z",
+      "reviewDue": "2026-12-24",
       "retrieval": {
         "documentId": "wiki:CV_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:0c7772f84c5ccec8d04862a487dac3cbf216c398cbaf59e24919b2bbe1fd9d8c",
+        "contentHash": "sha256:f5d36d2fbe22a327d421b21d7ce03c7a21bfc6a364bd2b32f924faa6674da1a3",
         "textFields": [
           "title",
           "aliases",
@@ -2042,7 +2042,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:c213babca2918a9728aaac57badb72797578f588269356d9c47e712d7906703b",
+      "contentHash": "sha256:6a1ff21af4c7e70ae1b21fa4dccb07b513e83cf10bace4d4920c024d73981717",
       "file": "Experience.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -2052,12 +2052,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-08-10T02:34:00+08:00",
-        "reviewDue": "2026-11-07",
+        "reviewedAt": "2026-09-26T03:15:12.636Z",
+        "reviewDue": "2026-12-25",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-08-09T18:32:45.762Z",
+      "modifiedAt": "2026-09-26T03:14:39.278Z",
       "outgoing": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -2066,6 +2066,7 @@
         "Data_Centric_Machine_Learning",
         "Distributed_Learning",
         "Distributed_Wasserstein_Barycenter",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "Influence_Functions",
         "LLM_Reliability",
         "Machine_Unlearning",
@@ -2092,12 +2093,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Experience",
       "type": "Research experience",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2026-11-07",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2026-12-25",
       "retrieval": {
         "documentId": "wiki:Experience",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:c213babca2918a9728aaac57badb72797578f588269356d9c47e712d7906703b",
+        "contentHash": "sha256:6a1ff21af4c7e70ae1b21fa4dccb07b513e83cf10bace4d4920c024d73981717",
         "textFields": [
           "title",
           "aliases",
@@ -2124,7 +2125,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:41c47204c95a67a24b584dd34b2d2598945cb0f958b46c3f3a6fa1aaa50f35a8",
+      "contentHash": "sha256:abbe9def10416e552a47169241635f5dcdb8ac8eba3ede2f5ba724de772aa016",
       "file": "Experience_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -2134,12 +2135,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-08-10T02:34:00+08:00",
-        "reviewDue": "2026-11-07",
+        "reviewedAt": "2026-09-26T03:15:12.636Z",
+        "reviewDue": "2026-12-25",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-08-09T18:32:45.761Z",
+      "modifiedAt": "2026-09-26T03:14:39.278Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Angela_Yingjun_Zhang_zh",
@@ -2148,6 +2149,7 @@
         "Data_Centric_Machine_Learning_zh",
         "Distributed_Learning_zh",
         "Distributed_Wasserstein_Barycenter_zh",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "Influence_Functions_zh",
         "LLM_Reliability_zh",
         "Machine_Unlearning_zh",
@@ -2174,12 +2176,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "研究经历",
       "type": "研究经历",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2026-11-07",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2026-12-25",
       "retrieval": {
         "documentId": "wiki:Experience_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:41c47204c95a67a24b584dd34b2d2598945cb0f958b46c3f3a6fa1aaa50f35a8",
+        "contentHash": "sha256:abbe9def10416e552a47169241635f5dcdb8ac8eba3ede2f5ba724de772aa016",
         "textFields": [
           "title",
           "aliases",
@@ -2519,7 +2521,161 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:47074f3b8b0b101d64f11b2bbedd1bc5de61e0f63ab4c5346376750158f1895e",
+      "contentHash": "sha256:4a1ece16f18adcced12dffe73eba0c7165439fcd437df1f31cdc7b14c182becd",
+      "file": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "en",
+      "lifecycle": {
+        "status": "confirmed",
+        "confidence": 0.95,
+        "review": "on venue/status change",
+        "retention": "long-lived semantic memory",
+        "reviewedAt": "2026-09-25T04:54:14.029Z",
+        "reviewDue": "2027-09-25",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-09-25T04:53:27.388Z",
+      "outgoing": [
+        "LLM_Reliability",
+        "Trustworthy_AI",
+        "Xinbao_Qiao"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+      "sourceIds": [],
+      "summary": "NeurIPS 2026 paper on illusory pattern perception and spurious inference in large language models.",
+      "tags": [
+        "en",
+        "publication",
+        "paper",
+        "accepted",
+        "neurips-2026",
+        "llm-reliability"
+      ],
+      "timestamp": "2026-09-25T13:49:35+09:00",
+      "title": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
+      "type": "publication",
+      "reviewedAt": "2026-09-25T04:54:14.029Z",
+      "reviewDue": "2027-09-25",
+      "retrieval": {
+        "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:4a1ece16f18adcced12dffe73eba0c7165439fcd437df1f31cdc7b14c182becd",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "Experience",
+        "index",
+        "Interpretability",
+        "LLM_Reliability",
+        "log",
+        "NUSRI_CQ",
+        "Projects",
+        "Publications",
+        "Research",
+        "Trustworthy_AI",
+        "Xinbao_Qiao"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:f4c790a4291c9ec7cf40078711cf0c8a08559b37f22ed15fc5fb7a7f7d2164f8",
+      "file": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "zh",
+      "lifecycle": {
+        "status": "confirmed",
+        "confidence": 0.95,
+        "review": "on venue/status change",
+        "retention": "long-lived semantic memory",
+        "reviewedAt": "2026-09-25T04:54:14.029Z",
+        "reviewDue": "2027-09-25",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-09-25T04:53:27.237Z",
+      "outgoing": [
+        "LLM_Reliability_zh",
+        "Qiao_Xinbao_zh",
+        "Trustworthy_AI_zh"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+      "sourceIds": [],
+      "summary": "NeurIPS 2026 论文，研究错觉模式感知与大语言模型的虚假推理。",
+      "tags": [
+        "zh",
+        "publication",
+        "paper",
+        "accepted",
+        "neurips-2026",
+        "llm-reliability"
+      ],
+      "timestamp": "2026-09-25T13:49:35+09:00",
+      "title": "错觉模式感知驱动大语言模型的虚假推理",
+      "type": "publication",
+      "reviewedAt": "2026-09-25T04:54:14.029Z",
+      "reviewDue": "2027-09-25",
+      "retrieval": {
+        "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:f4c790a4291c9ec7cf40078711cf0c8a08559b37f22ed15fc5fb7a7f7d2164f8",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "Experience_zh",
+        "index_zh",
+        "Interpretability_zh",
+        "LLM_Reliability_zh",
+        "log_zh",
+        "NUSRI_CQ_zh",
+        "Projects_zh",
+        "Publications_zh",
+        "Qiao_Xinbao_zh",
+        "Research_zh",
+        "Trustworthy_AI_zh"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:d3e94cb04e82f64ff8faf8f627fb425891b0ca0ee253ec6bb670a21f809cdd65",
       "file": "index.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -2529,12 +2685,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-14T23:17:11+08:00",
-        "reviewDue": "2027-07-14",
+        "reviewedAt": "2026-09-26T03:15:12.636Z",
+        "reviewDue": "2027-09-26",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-14T23:17:11+08:00",
+      "modifiedAt": "2026-09-26T03:14:39.284Z",
       "outgoing": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -2551,6 +2707,7 @@
         "Experience",
         "Fairness_and_Robustness",
         "Hessian_Free_Online_Certified_Unlearning",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "Influence_Functions",
         "Interpretability",
         "LLM_Reliability",
@@ -2594,12 +2751,12 @@
       "timestamp": "2026-05-07T17:34:07+08:00",
       "title": "Index",
       "type": "Wiki index",
-      "reviewedAt": "2026-07-14T23:17:11+08:00",
-      "reviewDue": "2027-07-14",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2027-09-26",
       "retrieval": {
         "documentId": "wiki:index",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:47074f3b8b0b101d64f11b2bbedd1bc5de61e0f63ab4c5346376750158f1895e",
+        "contentHash": "sha256:d3e94cb04e82f64ff8faf8f627fb425891b0ca0ee253ec6bb670a21f809cdd65",
         "textFields": [
           "title",
           "aliases",
@@ -2621,7 +2778,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:f0993dd3507ea1df7bc170526845fe30ee4236ac4a7129fcebffa62fd2301375",
+      "contentHash": "sha256:dbe3f3853edc732a85f569def35e30196ef674dd764a596f2473624c264459b1",
       "file": "index_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -2631,12 +2788,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-08-10T02:34:00+08:00",
-        "reviewDue": "2027-08-09",
+        "reviewedAt": "2026-09-26T03:15:12.636Z",
+        "reviewDue": "2027-09-26",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-08-09T18:32:45.766Z",
+      "modifiedAt": "2026-09-26T03:14:39.283Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Angela_Yingjun_Zhang_zh",
@@ -2653,6 +2810,7 @@
         "Experience_zh",
         "Fairness_and_Robustness_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "Influence_Functions_zh",
         "Interpretability_zh",
         "LLM_Reliability_zh",
@@ -2695,12 +2853,12 @@
       "timestamp": "2026-05-07T17:34:07+08:00",
       "title": "索引",
       "type": "Wiki 索引",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-08-09",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2027-09-26",
       "retrieval": {
         "documentId": "wiki:index_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:f0993dd3507ea1df7bc170526845fe30ee4236ac4a7129fcebffa62fd2301375",
+        "contentHash": "sha256:dbe3f3853edc732a85f569def35e30196ef674dd764a596f2473624c264459b1",
         "textFields": [
           "title",
           "aliases",
@@ -3067,7 +3225,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:218df98003e2d7abaf687efc0c1417ef55412b77887fc85e5bdb222a572e63cb",
+      "contentHash": "sha256:ac548023cbd839572a1e3f5ddefb436d467bc8c0cd2200e78efbda8de32c85ac",
       "file": "Interpretability.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -3077,15 +3235,16 @@
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
         "retention": "semantic memory with quality warnings",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29",
+        "reviewedAt": "2026-09-26T03:16:12.059Z",
+        "reviewDue": "2027-03-25",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "modifiedAt": "2026-09-26T03:16:03.686Z",
       "outgoing": [
         "Data_Centric_Machine_Learning",
         "Hessian_Free_Online_Certified_Unlearning",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "Influence_Functions",
         "Machine_Unlearning",
         "Soft_Weighted_Machine_Unlearning",
@@ -3107,12 +3266,12 @@
       "timestamp": "2026-05-05T20:55:21+08:00",
       "title": "Interpretability",
       "type": "Research concept",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "reviewedAt": "2026-09-26T03:16:12.059Z",
+      "reviewDue": "2027-03-25",
       "retrieval": {
         "documentId": "wiki:Interpretability",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:218df98003e2d7abaf687efc0c1417ef55412b77887fc85e5bdb222a572e63cb",
+        "contentHash": "sha256:ac548023cbd839572a1e3f5ddefb436d467bc8c0cd2200e78efbda8de32c85ac",
         "textFields": [
           "title",
           "aliases",
@@ -3137,7 +3296,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:38652d8ab54846774d1fd3e44dae5f4d2323fbfc11a8f1e9d2494bb4e5ea8d74",
+      "contentHash": "sha256:266b5e422ec9fa4043f5b360a12859a58f732ee34eb0ba8e9729340e2716c52d",
       "file": "Interpretability_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -3147,15 +3306,16 @@
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
         "retention": "semantic memory with quality warnings",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29",
+        "reviewedAt": "2026-09-26T03:16:12.059Z",
+        "reviewDue": "2027-03-25",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "modifiedAt": "2026-09-26T03:16:03.685Z",
       "outgoing": [
         "Data_Centric_Machine_Learning_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "Influence_Functions_zh",
         "Machine_Unlearning_zh",
         "Soft_Weighted_Machine_Unlearning_zh",
@@ -3177,12 +3337,12 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "可解释性",
       "type": "研究概念",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "reviewedAt": "2026-09-26T03:16:12.059Z",
+      "reviewDue": "2027-03-25",
       "retrieval": {
         "documentId": "wiki:Interpretability_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:38652d8ab54846774d1fd3e44dae5f4d2323fbfc11a8f1e9d2494bb4e5ea8d74",
+        "contentHash": "sha256:266b5e422ec9fa4043f5b360a12859a58f732ee34eb0ba8e9729340e2716c52d",
         "textFields": [
           "title",
           "aliases",
@@ -3217,8 +3377,8 @@
         "confidence": 0.55,
         "review": "manual before publication",
         "retention": "exclude from public bundle until explicitly unhidden",
-        "reviewedAt": "2026-08-10T02:34:00+08:00",
-        "reviewDue": "2026-09-08",
+        "reviewedAt": "2026-09-25T04:59:05.905Z",
+        "reviewDue": "2026-10-25",
         "pendingReview": false,
         "overdue": false
       },
@@ -3245,8 +3405,8 @@
       "timestamp": "2026-05-06T06:22:22+08:00",
       "title": "Learn What Matters: Data Pruning for Efficient Decentralized Learning",
       "type": "publication",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2026-09-08",
+      "reviewedAt": "2026-09-25T04:59:05.905Z",
+      "reviewDue": "2026-10-25",
       "retrieval": {
         "documentId": "wiki:Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning",
         "chunking": "markdown-heading-v1",
@@ -3282,8 +3442,8 @@
         "confidence": 0.55,
         "review": "manual before publication",
         "retention": "exclude from public bundle until explicitly unhidden",
-        "reviewedAt": "2026-08-10T02:34:00+08:00",
-        "reviewDue": "2026-09-08",
+        "reviewedAt": "2026-09-25T04:59:05.905Z",
+        "reviewDue": "2026-10-25",
         "pendingReview": false,
         "overdue": false
       },
@@ -3310,8 +3470,8 @@
       "timestamp": "2026-05-06T06:22:22+08:00",
       "title": "Learn What Matters：高效去中心化学习的数据剪枝",
       "type": "publication",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2026-09-08",
+      "reviewedAt": "2026-09-25T04:59:05.905Z",
+      "reviewDue": "2026-10-25",
       "retrieval": {
         "documentId": "wiki:Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning_zh",
         "chunking": "markdown-heading-v1",
@@ -3341,7 +3501,7 @@
         "src-44708abf72c85407",
         "src-8e21f24eb6b80d2c"
       ],
-      "contentHash": "sha256:1885ac03c0831fa96b282dd4551ca989f43635aef8fc127cd44acd64c724c1a8",
+      "contentHash": "sha256:8b76deadc92e23f4c96327ed7c72fa9434143e195aff9885355292b1b8244fef",
       "file": "LLM_Reliability.md",
       "footnoteSourceIds": [
         "src-11be10768dbb7de0",
@@ -3355,14 +3515,15 @@
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
         "retention": "semantic memory with quality warnings",
-        "reviewedAt": "2026-08-10T02:34:00+08:00",
-        "reviewDue": "2027-02-05",
+        "reviewedAt": "2026-09-25T04:54:14.029Z",
+        "reviewDue": "2027-03-24",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-08-09T18:32:45.774Z",
+      "modifiedAt": "2026-09-25T04:53:27.398Z",
       "outgoing": [
         "Collaborative_Evaluation",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "NUSRI_CQ",
         "Synthetic_Data_and_Model_Collapse",
         "Trustworthy_AI"
@@ -3387,12 +3548,12 @@
       "timestamp": "2026-05-05T20:55:21+08:00",
       "title": "LLM Reliability",
       "type": "Research concept",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-02-05",
+      "reviewedAt": "2026-09-25T04:54:14.029Z",
+      "reviewDue": "2027-03-24",
       "retrieval": {
         "documentId": "wiki:LLM_Reliability",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:1885ac03c0831fa96b282dd4551ca989f43635aef8fc127cd44acd64c724c1a8",
+        "contentHash": "sha256:8b76deadc92e23f4c96327ed7c72fa9434143e195aff9885355292b1b8244fef",
         "textFields": [
           "title",
           "aliases",
@@ -3411,7 +3572,12 @@
       },
       "backlinks": [
         "Experience",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "index",
+        "NUSRI_CQ",
+        "Projects",
+        "Publications",
+        "Research",
         "Trustworthy_AI"
       ]
     },
@@ -3422,7 +3588,7 @@
         "src-44708abf72c85407",
         "src-8e21f24eb6b80d2c"
       ],
-      "contentHash": "sha256:eaee39fcbfdc086b2eb5337244acb6ae9f264f286710ebe156de116eb56af51f",
+      "contentHash": "sha256:259816be38eb1a03c1a9890c33a0a8a3158cb33bc42392b1089a12f539088cb6",
       "file": "LLM_Reliability_zh.md",
       "footnoteSourceIds": [
         "src-11be10768dbb7de0",
@@ -3436,14 +3602,15 @@
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
         "retention": "semantic memory with quality warnings",
-        "reviewedAt": "2026-08-10T02:34:00+08:00",
-        "reviewDue": "2027-02-05",
+        "reviewedAt": "2026-09-25T04:54:14.029Z",
+        "reviewDue": "2027-03-24",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-08-09T18:32:45.773Z",
+      "modifiedAt": "2026-09-25T04:53:27.397Z",
       "outgoing": [
         "Collaborative_Evaluation_zh",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "NUSRI_CQ_zh",
         "Synthetic_Data_and_Model_Collapse_zh",
         "Trustworthy_AI_zh"
@@ -3468,12 +3635,12 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "大语言模型可靠性",
       "type": "研究概念",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-02-05",
+      "reviewedAt": "2026-09-25T04:54:14.029Z",
+      "reviewDue": "2027-03-24",
       "retrieval": {
         "documentId": "wiki:LLM_Reliability_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:eaee39fcbfdc086b2eb5337244acb6ae9f264f286710ebe156de116eb56af51f",
+        "contentHash": "sha256:259816be38eb1a03c1a9890c33a0a8a3158cb33bc42392b1089a12f539088cb6",
         "textFields": [
           "title",
           "aliases",
@@ -3492,14 +3659,19 @@
       },
       "backlinks": [
         "Experience_zh",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "index_zh",
+        "NUSRI_CQ_zh",
+        "Projects_zh",
+        "Publications_zh",
+        "Research_zh",
         "Trustworthy_AI_zh"
       ]
     },
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:90f33ae93a1e8057681c7d00f314b9d6542ffeb741941d9a03cbbc14896799a2",
+      "contentHash": "sha256:3809ec757a887c700c6bdd6aa3f7cc471d4ba1bfac51f493e9eaaf6bc11413e4",
       "file": "log.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -3509,12 +3681,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-08-10T02:34:00+08:00",
-        "reviewDue": "2027-08-09",
+        "reviewedAt": "2026-09-26T03:15:12.636Z",
+        "reviewDue": "2027-09-26",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-08-09T18:32:45.776Z",
+      "modifiedAt": "2026-09-26T03:14:39.293Z",
       "outgoing": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -3524,6 +3696,7 @@
         "DynFrs",
         "Experience",
         "Hessian_Free_Online_Certified_Unlearning",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "Machine_Unlearning",
         "Meng_Zhang",
         "NUSRI_CQ",
@@ -3554,12 +3727,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Log",
       "type": "Maintenance log",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-08-09",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2027-09-26",
       "retrieval": {
         "documentId": "wiki:log",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:90f33ae93a1e8057681c7d00f314b9d6542ffeb741941d9a03cbbc14896799a2",
+        "contentHash": "sha256:3809ec757a887c700c6bdd6aa3f7cc471d4ba1bfac51f493e9eaaf6bc11413e4",
         "textFields": [
           "title",
           "aliases",
@@ -3583,7 +3756,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:749d82fe7aee0b9b5634aa707999e32d26d4059096ad9eb65583e676db312f0f",
+      "contentHash": "sha256:1c42f2eb5cfaf81674c3ebbff17f5e39532d2106129ea185dee8752bb1d1b7e0",
       "file": "log_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -3593,18 +3766,19 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-08-10T02:34:00+08:00",
-        "reviewDue": "2027-08-09",
+        "reviewedAt": "2026-09-26T03:15:12.636Z",
+        "reviewDue": "2027-09-26",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-08-09T18:32:45.775Z",
+      "modifiedAt": "2026-09-26T03:14:39.292Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "CV_zh",
         "Data_Centric_Machine_Learning_zh",
         "Distributed_Wasserstein_Barycenter_zh",
         "Experience_zh",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "NUSRI_CQ_zh",
         "Projects_zh",
         "Publications_zh",
@@ -3628,12 +3802,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "日志",
       "type": "维护日志",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-08-09",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2027-09-26",
       "retrieval": {
         "documentId": "wiki:log_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:749d82fe7aee0b9b5634aa707999e32d26d4059096ad9eb65583e676db312f0f",
+        "contentHash": "sha256:1c42f2eb5cfaf81674c3ebbff17f5e39532d2106129ea185dee8752bb1d1b7e0",
         "textFields": [
           "title",
           "aliases",
@@ -4174,7 +4348,7 @@
         "src-17dc8cb17c9da923",
         "src-606ddb789d451046"
       ],
-      "contentHash": "sha256:864772161c155d4e157103d60fb2b0db13bb3490b5afe3fc460ca19b1cb56e5a",
+      "contentHash": "sha256:18d9a449d027da84f26e30cb6cd9b50a81fa7362f7fdda94e8e8710084b523ae",
       "file": "NUSRI_CQ.md",
       "footnoteSourceIds": [
         "src-17dc8cb17c9da923",
@@ -4187,15 +4361,17 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29",
+        "reviewedAt": "2026-09-26T03:15:12.636Z",
+        "reviewDue": "2027-03-25",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "modifiedAt": "2026-09-26T03:14:39.298Z",
       "outgoing": [
         "Collaborative_Evaluation",
         "Experience",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+        "LLM_Reliability",
         "Synthetic_Data_and_Model_Collapse",
         "The_Chinese_University_of_Hong_Kong",
         "Wasserstein_Geometry",
@@ -4223,12 +4399,12 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "NUSRI-CQ",
       "type": "Research institute",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2027-03-25",
       "retrieval": {
         "documentId": "wiki:NUSRI_CQ",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:864772161c155d4e157103d60fb2b0db13bb3490b5afe3fc460ca19b1cb56e5a",
+        "contentHash": "sha256:18d9a449d027da84f26e30cb6cd9b50a81fa7362f7fdda94e8e8710084b523ae",
         "textFields": [
           "title",
           "aliases",
@@ -4259,7 +4435,7 @@
         "src-17dc8cb17c9da923",
         "src-606ddb789d451046"
       ],
-      "contentHash": "sha256:2864019dd92674e38d95921d097ef7924b01c524ef67ce6b20e0cfbfcd72e990",
+      "contentHash": "sha256:c2f41cc5e190cfb587438f0dba43d1fdc14216dea025d6d482cdb9c13e14a383",
       "file": "NUSRI_CQ_zh.md",
       "footnoteSourceIds": [
         "src-17dc8cb17c9da923",
@@ -4272,15 +4448,17 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29",
+        "reviewedAt": "2026-09-26T03:15:12.636Z",
+        "reviewDue": "2027-03-25",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "modifiedAt": "2026-09-26T03:14:39.297Z",
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "Experience_zh",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+        "LLM_Reliability_zh",
         "Qiao_Xinbao_zh",
         "Synthetic_Data_and_Model_Collapse_zh",
         "The_Chinese_University_of_Hong_Kong_zh",
@@ -4308,12 +4486,12 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "NUSRI-CQ",
       "type": "研究院",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2027-03-25",
       "retrieval": {
         "documentId": "wiki:NUSRI_CQ_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:2864019dd92674e38d95921d097ef7924b01c524ef67ce6b20e0cfbfcd72e990",
+        "contentHash": "sha256:c2f41cc5e190cfb587438f0dba43d1fdc14216dea025d6d482cdb9c13e14a383",
         "textFields": [
           "title",
           "aliases",
@@ -4472,7 +4650,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:e58fcad724c37769eb9f4287683d1b6b794bad22d56608bf8bc623163b2a7807",
+      "contentHash": "sha256:66e161feecf5b81c952502aa0be768a4a692f649df2d4867a8801cfff69f8a2d",
       "file": "Projects.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -4482,18 +4660,20 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-09-30",
+        "reviewedAt": "2026-09-26T03:15:12.636Z",
+        "reviewDue": "2026-12-25",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "modifiedAt": "2026-09-26T03:14:39.300Z",
       "outgoing": [
         "AI_and_Networks",
         "Collaborative_Evaluation",
         "Distributed_Wasserstein_Barycenter",
         "DynFrs",
         "Hessian_Free_Online_Certified_Unlearning",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+        "LLM_Reliability",
         "Machine_Unlearning",
         "Soft_Weighted_Machine_Unlearning",
         "Synthetic_Data_and_Model_Collapse",
@@ -4514,12 +4694,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Projects",
       "type": "Project overview",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-09-30",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2026-12-25",
       "retrieval": {
         "documentId": "wiki:Projects",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:e58fcad724c37769eb9f4287683d1b6b794bad22d56608bf8bc623163b2a7807",
+        "contentHash": "sha256:66e161feecf5b81c952502aa0be768a4a692f649df2d4867a8801cfff69f8a2d",
         "textFields": [
           "title",
           "aliases",
@@ -4546,7 +4726,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:fee4ad67798127cc3b52660ab5227d1b67bb590c8a37300a540bb43e1e15bbec",
+      "contentHash": "sha256:62f3a053ce6b446e0e0c69fa958b2108fd9095d872e8947c80aaef5ccc0d6174",
       "file": "Projects_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -4556,18 +4736,20 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-09-30",
+        "reviewedAt": "2026-09-26T03:15:12.636Z",
+        "reviewDue": "2026-12-25",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "modifiedAt": "2026-09-26T03:14:39.300Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Collaborative_Evaluation_zh",
         "Distributed_Wasserstein_Barycenter_zh",
         "DynFrs_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+        "LLM_Reliability_zh",
         "Machine_Unlearning_zh",
         "Soft_Weighted_Machine_Unlearning_zh",
         "Synthetic_Data_and_Model_Collapse_zh",
@@ -4588,12 +4770,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "项目",
       "type": "项目概览",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-09-30",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2026-12-25",
       "retrieval": {
         "documentId": "wiki:Projects_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:fee4ad67798127cc3b52660ab5227d1b67bb590c8a37300a540bb43e1e15bbec",
+        "contentHash": "sha256:62f3a053ce6b446e0e0c69fa958b2108fd9095d872e8947c80aaef5ccc0d6174",
         "textFields": [
           "title",
           "aliases",
@@ -4620,7 +4802,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:5ac4efe9a526d8aa52adbadfa89b918acd748d254225726aad1858be0cd67f51",
+      "contentHash": "sha256:52f068c553925d68105fe2ab76d62f356b4fb5ae40278d3e1fb982ce09aea80a",
       "file": "Publications.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -4630,17 +4812,19 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-09-30",
+        "reviewedAt": "2026-09-26T03:15:12.636Z",
+        "reviewDue": "2026-12-25",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "modifiedAt": "2026-09-26T03:14:39.302Z",
       "outgoing": [
         "AI_and_Networks",
         "Data_Centric_Machine_Learning",
         "DynFrs",
         "Hessian_Free_Online_Certified_Unlearning",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+        "LLM_Reliability",
         "Machine_Unlearning",
         "Soft_Weighted_Machine_Unlearning",
         "Synthetic_Data_and_Model_Collapse",
@@ -4663,12 +4847,12 @@
       "timestamp": "2026-06-01T22:00:31+08:00",
       "title": "Publications",
       "type": "Publication list",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-09-30",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2026-12-25",
       "retrieval": {
         "documentId": "wiki:Publications",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:5ac4efe9a526d8aa52adbadfa89b918acd748d254225726aad1858be0cd67f51",
+        "contentHash": "sha256:52f068c553925d68105fe2ab76d62f356b4fb5ae40278d3e1fb982ce09aea80a",
         "textFields": [
           "title",
           "aliases",
@@ -4697,7 +4881,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:15c34136b6393d0ec3a649ba10bea0676ae1a11c72cf328442f9161e415fa76b",
+      "contentHash": "sha256:414b0693e3233ea35f3b6f94043e5c7ee852849ea1e8e36e7789d839dd48cf1c",
       "file": "Publications_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -4707,17 +4891,19 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-09-30",
+        "reviewedAt": "2026-09-26T03:15:12.636Z",
+        "reviewDue": "2026-12-25",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "modifiedAt": "2026-09-26T03:14:39.301Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Centric_Machine_Learning_zh",
         "DynFrs_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+        "LLM_Reliability_zh",
         "Machine_Unlearning_zh",
         "Soft_Weighted_Machine_Unlearning_zh",
         "Synthetic_Data_and_Model_Collapse_zh",
@@ -4740,12 +4926,12 @@
       "timestamp": "2026-06-01T22:04:00+08:00",
       "title": "论文",
       "type": "论文列表",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-09-30",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2026-12-25",
       "retrieval": {
         "documentId": "wiki:Publications_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:15c34136b6393d0ec3a649ba10bea0676ae1a11c72cf328442f9161e415fa76b",
+        "contentHash": "sha256:414b0693e3233ea35f3b6f94043e5c7ee852849ea1e8e36e7789d839dd48cf1c",
         "textFields": [
           "title",
           "aliases",
@@ -4792,7 +4978,7 @@
         "src-e1d67502167d29ad",
         "src-f6009f51f54778f6"
       ],
-      "contentHash": "sha256:9d8bcf4ee892d1daaa24590438ace4c37e32f79f5917586244b6c85f96051317",
+      "contentHash": "sha256:91a45d1089ce31c847ead75b1c1e9b2ce0dac88da8ab5f0ec4d94bce79544264",
       "file": "Qiao_Xinbao_zh.md",
       "footnoteSourceIds": [
         "src-264e39cbec8d2f89",
@@ -4809,12 +4995,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-08-10T02:34:00+08:00",
-        "reviewDue": "2026-11-07",
+        "reviewedAt": "2026-09-25T04:54:14.029Z",
+        "reviewDue": "2026-12-24",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-08-09T18:32:45.784Z",
+      "modifiedAt": "2026-09-25T04:53:27.410Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Angela_Yingjun_Zhang_zh",
@@ -4825,6 +5011,7 @@
         "Distributed_Wasserstein_Barycenter_zh",
         "DynFrs_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "Machine_Unlearning_zh",
         "Meng_Zhang_zh",
         "NUSRI_CQ_zh",
@@ -4869,12 +5056,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "乔鑫宝",
       "type": "博士生",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2026-11-07",
+      "reviewedAt": "2026-09-25T04:54:14.029Z",
+      "reviewDue": "2026-12-24",
       "retrieval": {
         "documentId": "wiki:Qiao_Xinbao_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:9d8bcf4ee892d1daaa24590438ace4c37e32f79f5917586244b6c85f96051317",
+        "contentHash": "sha256:91a45d1089ce31c847ead75b1c1e9b2ce0dac88da8ab5f0ec4d94bce79544264",
         "textFields": [
           "title",
           "aliases",
@@ -4897,6 +5084,7 @@
         "Distributed_Wasserstein_Barycenter_zh",
         "DynFrs_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "index",
         "index_zh",
         "log",
@@ -5211,7 +5399,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:09e30b38e992c7f3c7c8b32a5bba43801fe9854088306229588b105b24990848",
+      "contentHash": "sha256:e61b51fc87645fd464569bb60f7a2425cb124feaeca5d8b7dbe102e0a1c10516",
       "file": "Research.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -5221,12 +5409,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-11T07:28:06+08:00",
-        "reviewDue": "2026-10-08",
+        "reviewedAt": "2026-09-26T03:15:12.636Z",
+        "reviewDue": "2026-12-25",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-11T07:28:06+08:00",
+      "modifiedAt": "2026-09-26T03:14:39.306Z",
       "outgoing": [
         "AI_and_Networks",
         "Certified_Data_Removal",
@@ -5237,7 +5425,9 @@
         "Distributed_Wasserstein_Barycenter",
         "DynFrs",
         "Hessian_Free_Online_Certified_Unlearning",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "Influence_Functions",
+        "LLM_Reliability",
         "Machine_Unlearning",
         "Model_Collapse",
         "Sample_Selection_Bias",
@@ -5262,12 +5452,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Research",
       "type": "Research overview",
-      "reviewedAt": "2026-07-11T07:28:06+08:00",
-      "reviewDue": "2026-10-08",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2026-12-25",
       "retrieval": {
         "documentId": "wiki:Research",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:09e30b38e992c7f3c7c8b32a5bba43801fe9854088306229588b105b24990848",
+        "contentHash": "sha256:e61b51fc87645fd464569bb60f7a2425cb124feaeca5d8b7dbe102e0a1c10516",
         "textFields": [
           "title",
           "aliases",
@@ -5294,7 +5484,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:0b3775a6da8240e7a8826285d93d76a8f51202552c6969c4c028ff60fb890bcf",
+      "contentHash": "sha256:292bbf81253d117ee0cc401cfd4b2722c52d753ca7ed725f3f9b96356bd34ecc",
       "file": "Research_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -5304,12 +5494,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-11T07:28:06+08:00",
-        "reviewDue": "2026-10-08",
+        "reviewedAt": "2026-09-26T03:15:12.636Z",
+        "reviewDue": "2026-12-25",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-11T07:28:06+08:00",
+      "modifiedAt": "2026-09-26T03:14:39.306Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Certified_Data_Removal_zh",
@@ -5320,7 +5510,9 @@
         "Distributed_Wasserstein_Barycenter_zh",
         "DynFrs_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "Influence_Functions_zh",
+        "LLM_Reliability_zh",
         "Machine_Unlearning_zh",
         "Model_Collapse_zh",
         "Sample_Selection_Bias_zh",
@@ -5345,12 +5537,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "研究",
       "type": "研究概览",
-      "reviewedAt": "2026-07-11T07:28:06+08:00",
-      "reviewDue": "2026-10-08",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2026-12-25",
       "retrieval": {
         "documentId": "wiki:Research_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:0b3775a6da8240e7a8826285d93d76a8f51202552c6969c4c028ff60fb890bcf",
+        "contentHash": "sha256:292bbf81253d117ee0cc401cfd4b2722c52d753ca7ed725f3f9b96356bd34ecc",
         "textFields": [
           "title",
           "aliases",
@@ -6534,7 +6726,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:de85186a59ada4edf5598f5cdde696fb8984635557fbd8fecf816e4ffa2cffc3",
+      "contentHash": "sha256:451c6ffc09f41ea68e6fdb591b53ab16b8ede8cd929f3dc822f6bf109ea405f6",
       "file": "Trustworthy_AI.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -6544,17 +6736,18 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29",
+        "reviewedAt": "2026-09-26T03:15:12.636Z",
+        "reviewDue": "2027-03-25",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "modifiedAt": "2026-09-26T03:14:39.316Z",
       "outgoing": [
         "AI_and_Networks",
         "Collaborative_Evaluation",
         "Data_Centric_Machine_Learning",
         "Fairness_and_Robustness",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "Interpretability",
         "LLM_Reliability",
         "Machine_Unlearning",
@@ -6575,12 +6768,12 @@
       "timestamp": "2026-05-05T20:55:21+08:00",
       "title": "Trustworthy AI",
       "type": "Research topic",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2027-03-25",
       "retrieval": {
         "documentId": "wiki:Trustworthy_AI",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:de85186a59ada4edf5598f5cdde696fb8984635557fbd8fecf816e4ffa2cffc3",
+        "contentHash": "sha256:451c6ffc09f41ea68e6fdb591b53ab16b8ede8cd929f3dc822f6bf109ea405f6",
         "textFields": [
           "title",
           "aliases",
@@ -6603,6 +6796,7 @@
         "Experience",
         "Fairness_and_Robustness",
         "Hessian_Free_Online_Certified_Unlearning",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "index",
         "Interpretability",
         "LLM_Reliability",
@@ -6615,7 +6809,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:28482b5d209cd82b224f5326fe62ebc4e226b20a176d694553294d64993e7052",
+      "contentHash": "sha256:c05c065380b2dcd791708855265e26643f89bc5ce50e39c688b2a04da29f1c32",
       "file": "Trustworthy_AI_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -6625,17 +6819,18 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29",
+        "reviewedAt": "2026-09-26T03:15:12.636Z",
+        "reviewDue": "2027-03-25",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "modifiedAt": "2026-09-26T03:14:39.316Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Collaborative_Evaluation_zh",
         "Data_Centric_Machine_Learning_zh",
         "Fairness_and_Robustness_zh",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "Interpretability_zh",
         "LLM_Reliability_zh",
         "Machine_Unlearning_zh",
@@ -6656,12 +6851,12 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "可信 AI",
       "type": "研究专题",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "reviewedAt": "2026-09-26T03:15:12.636Z",
+      "reviewDue": "2027-03-25",
       "retrieval": {
         "documentId": "wiki:Trustworthy_AI_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:28482b5d209cd82b224f5326fe62ebc4e226b20a176d694553294d64993e7052",
+        "contentHash": "sha256:c05c065380b2dcd791708855265e26643f89bc5ce50e39c688b2a04da29f1c32",
         "textFields": [
           "title",
           "aliases",
@@ -6684,6 +6879,7 @@
         "Experience_zh",
         "Fairness_and_Robustness_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "index_zh",
         "Interpretability_zh",
         "LLM_Reliability_zh",
@@ -7089,7 +7285,7 @@
         "src-e1d67502167d29ad",
         "src-f6009f51f54778f6"
       ],
-      "contentHash": "sha256:04b20b696b5d70393a4bd34c5abf764a6997b90145f2d0a18195691e473f2f4c",
+      "contentHash": "sha256:61e34d6882d795cd09cd6c0134dddbc93821f2db611c8e2a2174e2c14bff943c",
       "file": "Xinbao_Qiao.md",
       "footnoteSourceIds": [
         "src-264e39cbec8d2f89",
@@ -7106,12 +7302,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-08-10T02:34:00+08:00",
-        "reviewDue": "2026-11-07",
+        "reviewedAt": "2026-09-25T04:54:14.029Z",
+        "reviewDue": "2026-12-24",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-08-09T18:32:45.801Z",
+      "modifiedAt": "2026-09-25T04:53:27.434Z",
       "outgoing": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -7123,6 +7319,7 @@
         "DynFrs",
         "Education",
         "Hessian_Free_Online_Certified_Unlearning",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "Machine_Unlearning",
         "Meng_Zhang",
         "NUSRI_CQ",
@@ -7166,12 +7363,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Xinbao Qiao",
       "type": "PhD student",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2026-11-07",
+      "reviewedAt": "2026-09-25T04:54:14.029Z",
+      "reviewDue": "2026-12-24",
       "retrieval": {
         "documentId": "wiki:Xinbao_Qiao",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:04b20b696b5d70393a4bd34c5abf764a6997b90145f2d0a18195691e473f2f4c",
+        "contentHash": "sha256:61e34d6882d795cd09cd6c0134dddbc93821f2db611c8e2a2174e2c14bff943c",
         "textFields": [
           "title",
           "aliases",
@@ -7194,6 +7391,7 @@
         "Distributed_Wasserstein_Barycenter",
         "DynFrs",
         "Hessian_Free_Online_Certified_Unlearning",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "index",
         "log",
         "log_zh",
@@ -8868,6 +9066,20 @@
     },
     {
       "from": "Experience_zh",
+      "label": "《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh"
+    },
+    {
+      "from": "Experience_zh",
+      "label": "错觉模式感知论文",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh"
+    },
+    {
+      "from": "Experience_zh",
       "label": "影响函数",
       "relation": "wikilink",
       "source": "body",
@@ -9026,6 +9238,20 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Distributed_Wasserstein_Barycenter"
+    },
+    {
+      "from": "Experience",
+      "label": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models"
+    },
+    {
+      "from": "Experience",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models"
     },
     {
       "from": "Experience",
@@ -9294,6 +9520,48 @@
       "to": "Xinbao_Qiao"
     },
     {
+      "from": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+      "label": "大语言模型可靠性",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "LLM_Reliability_zh"
+    },
+    {
+      "from": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+      "label": "乔鑫宝",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Qiao_Xinbao_zh"
+    },
+    {
+      "from": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+      "label": "可信 AI",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Trustworthy_AI_zh"
+    },
+    {
+      "from": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "LLM_Reliability"
+    },
+    {
+      "from": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Trustworthy_AI"
+    },
+    {
+      "from": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+      "label": "Xinbao Qiao",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Xinbao_Qiao"
+    },
+    {
       "from": "index_zh",
       "label": "AI 与网络",
       "relation": "wikilink",
@@ -9404,6 +9672,13 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Hessian_Free_Online_Certified_Unlearning_zh"
+    },
+    {
+      "from": "index_zh",
+      "label": "错觉模式感知驱动大语言模型的虚假推理",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh"
     },
     {
       "from": "index_zh",
@@ -9712,6 +9987,13 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Hessian_Free_Online_Certified_Unlearning"
+    },
+    {
+      "from": "index",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models"
     },
     {
       "from": "index",
@@ -10093,6 +10375,20 @@
     },
     {
       "from": "Interpretability_zh",
+      "label": "《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh"
+    },
+    {
+      "from": "Interpretability_zh",
+      "label": "错觉模式感知论文",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh"
+    },
+    {
+      "from": "Interpretability_zh",
       "label": "影响函数",
       "relation": "wikilink",
       "source": "body",
@@ -10153,6 +10449,20 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Hessian_Free_Online_Certified_Unlearning"
+    },
+    {
+      "from": "Interpretability",
+      "label": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models"
+    },
+    {
+      "from": "Interpretability",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models"
     },
     {
       "from": "Interpretability",
@@ -10261,6 +10571,20 @@
     },
     {
       "from": "LLM_Reliability_zh",
+      "label": "NeurIPS 2026 论文",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh"
+    },
+    {
+      "from": "LLM_Reliability_zh",
+      "label": "错觉模式感知驱动大语言模型的虚假推理",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh"
+    },
+    {
+      "from": "LLM_Reliability_zh",
       "label": "NUSRI-CQ",
       "relation": "wikilink",
       "source": "body",
@@ -10300,6 +10624,20 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Collaborative_Evaluation"
+    },
+    {
+      "from": "LLM_Reliability",
+      "label": "NeurIPS 2026 paper",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models"
+    },
+    {
+      "from": "LLM_Reliability",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models"
     },
     {
       "from": "LLM_Reliability",
@@ -10377,6 +10715,13 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Experience_zh"
+    },
+    {
+      "from": "log_zh",
+      "label": "《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh"
     },
     {
       "from": "log_zh",
@@ -10636,6 +10981,13 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Hessian_Free_Online_Certified_Unlearning"
+    },
+    {
+      "from": "log",
+      "label": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models"
     },
     {
       "from": "log",
@@ -11381,6 +11733,27 @@
     },
     {
       "from": "NUSRI_CQ_zh",
+      "label": "《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh"
+    },
+    {
+      "from": "NUSRI_CQ_zh",
+      "label": "错觉模式感知论文",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh"
+    },
+    {
+      "from": "NUSRI_CQ_zh",
+      "label": "大语言模型可靠性",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "LLM_Reliability_zh"
+    },
+    {
+      "from": "NUSRI_CQ_zh",
       "label": "乔鑫宝",
       "relation": "wikilink",
       "source": "body",
@@ -11462,6 +11835,27 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Experience"
+    },
+    {
+      "from": "NUSRI_CQ",
+      "label": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models"
+    },
+    {
+      "from": "NUSRI_CQ",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models"
+    },
+    {
+      "from": "NUSRI_CQ",
+      "label": "LLM reliability",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "LLM_Reliability"
     },
     {
       "from": "NUSRI_CQ",
@@ -11612,6 +12006,20 @@
     },
     {
       "from": "Projects_zh",
+      "label": "《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh"
+    },
+    {
+      "from": "Projects_zh",
+      "label": "大语言模型可靠性",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "LLM_Reliability_zh"
+    },
+    {
+      "from": "Projects_zh",
       "label": "机器遗忘",
       "relation": "wikilink",
       "source": "body",
@@ -11675,6 +12083,20 @@
     },
     {
       "from": "Projects",
+      "label": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models"
+    },
+    {
+      "from": "Projects",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "LLM_Reliability"
+    },
+    {
+      "from": "Projects",
       "label": "",
       "relation": "wikilink",
       "source": "body",
@@ -11728,6 +12150,20 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Hessian_Free_Online_Certified_Unlearning_zh"
+    },
+    {
+      "from": "Publications_zh",
+      "label": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh"
+    },
+    {
+      "from": "Publications_zh",
+      "label": "大语言模型可靠性",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "LLM_Reliability_zh"
     },
     {
       "from": "Publications_zh",
@@ -11798,6 +12234,20 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Hessian_Free_Online_Certified_Unlearning"
+    },
+    {
+      "from": "Publications",
+      "label": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models"
+    },
+    {
+      "from": "Publications",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "LLM_Reliability"
     },
     {
       "from": "Publications",
@@ -11980,6 +12430,13 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Hessian_Free_Online_Certified_Unlearning_zh"
+    },
+    {
+      "from": "Qiao_Xinbao_zh",
+      "label": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh"
     },
     {
       "from": "Qiao_Xinbao_zh",
@@ -12445,10 +12902,24 @@
     },
     {
       "from": "Research_zh",
+      "label": "《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh"
+    },
+    {
+      "from": "Research_zh",
       "label": "影响函数",
       "relation": "wikilink",
       "source": "body",
       "to": "Influence_Functions_zh"
+    },
+    {
+      "from": "Research_zh",
+      "label": "大语言模型可靠性",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "LLM_Reliability_zh"
     },
     {
       "from": "Research_zh",
@@ -12599,10 +13070,24 @@
     },
     {
       "from": "Research",
+      "label": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models"
+    },
+    {
+      "from": "Research",
       "label": "",
       "relation": "wikilink",
       "source": "body",
       "to": "Influence_Functions"
+    },
+    {
+      "from": "Research",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "LLM_Reliability"
     },
     {
       "from": "Research",
@@ -13635,6 +14120,13 @@
     },
     {
       "from": "Trustworthy_AI_zh",
+      "label": "《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh"
+    },
+    {
+      "from": "Trustworthy_AI_zh",
       "label": "可解释性",
       "relation": "wikilink",
       "source": "body",
@@ -13730,6 +14222,13 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Fairness_and_Robustness"
+    },
+    {
+      "from": "Trustworthy_AI",
+      "label": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models"
     },
     {
       "from": "Trustworthy_AI",
@@ -14216,6 +14715,13 @@
     },
     {
       "from": "Xinbao_Qiao",
+      "label": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models"
+    },
+    {
+      "from": "Xinbao_Qiao",
       "label": "machine unlearning",
       "relation": "wikilink",
       "source": "body",
@@ -14589,23 +15095,37 @@
   "stats": {
     "hiddenPages": 4,
     "languages": {
-      "en": 44,
-      "zh": 44
+      "en": 45,
+      "zh": 45
     },
-    "pages": 88,
-    "publicPages": 84,
-    "relations": 1029,
+    "pages": 90,
+    "publicPages": 86,
+    "relations": 1073,
     "types": {
+      "博士生": 1,
+      "公立研究型大学": 3,
+      "技术技能": 1,
+      "教育时间线": 1,
+      "论文列表": 1,
+      "模型族": 1,
+      "维护日志": 1,
+      "项目概览": 1,
+      "研究概览": 1,
+      "研究概念": 15,
+      "研究经历": 1,
+      "研究院": 1,
+      "研究专题": 5,
+      "资源记录": 1,
       "Academic advisor": 4,
-      "CV summary": 1,
       "CV 摘要": 1,
+      "CV summary": 1,
       "Education timeline": 1,
       "Maintenance log": 1,
       "Model family": 1,
       "PhD student": 1,
       "Project overview": 1,
       "Public research university": 3,
-      "publication": 10,
+      "publication": 12,
       "Publication list": 1,
       "Research concept": 15,
       "Research experience": 1,
@@ -14615,22 +15135,8 @@
       "Resource inventory": 1,
       "style guide": 2,
       "Technical skills": 1,
-      "Wiki index": 1,
       "Wiki 索引": 1,
-      "公立研究型大学": 3,
-      "博士生": 1,
-      "技术技能": 1,
-      "教育时间线": 1,
-      "模型族": 1,
-      "研究专题": 5,
-      "研究概念": 15,
-      "研究概览": 1,
-      "研究经历": 1,
-      "研究院": 1,
-      "维护日志": 1,
-      "论文列表": 1,
-      "资源记录": 1,
-      "项目概览": 1
+      "Wiki index": 1
     },
     "warnings": 0
   },

@@ -8,18 +8,18 @@ tags:
   - log
   - 维护日志
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-08-09T18:32:45.775Z'
-content_hash: 'sha256:749d82fe7aee0b9b5634aa707999e32d26d4059096ad9eb65583e676db312f0f'
-reviewed_at: '2026-08-10T02:34:00+08:00'
-review_due: '2027-08-09'
+modified: '2026-09-26T03:14:39.292Z'
+content_hash: 'sha256:1c42f2eb5cfaf81674c3ebbff17f5e39532d2106129ea185dee8752bb1d1b7e0'
+reviewed_at: '2026-09-26T03:15:12.636Z'
+review_due: '2027-09-26'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-08-10T02:34:00+08:00'
-  reviewDue: '2027-08-09'
+  reviewedAt: '2026-09-26T03:15:12.636Z'
+  reviewDue: '2027-09-26'
   pendingReview: false
   overdue: false
 retrieval:
@@ -28,6 +28,10 @@ retrieval:
 source_ids: []
 source_path: wiki/log_zh.md
 ---
+## 2026-09-26
+
+- 更新中英文人物主页、简历、论文索引、研究概览及相关页面，记录[《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md)获 NeurIPS 2026 录用；同步可下载 CV 与站点导航。
+
 ## 2026-08-10
 
 - 同步中英文人物、教育、经历与 CV 页面，记录乔鑫宝于 2026-08-01 开始在香港中文大学信息工程系攻读博士；保留私有记录并排除在公开索引之外，同时移除过时的 CV 表述。

@@ -8,18 +8,18 @@ tags:
   - research
   - 研究院
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:2864019dd92674e38d95921d097ef7924b01c524ef67ce6b20e0cfbfcd72e990'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-09-26T03:14:39.297Z'
+content_hash: 'sha256:c2f41cc5e190cfb587438f0dba43d1fdc14216dea025d6d482cdb9c13e14a383'
+reviewed_at: '2026-09-26T03:15:12.636Z'
+review_due: '2027-03-25'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-02T20:03:20+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-09-26T03:15:12.636Z'
+  reviewDue: '2027-03-25'
   pendingReview: false
   overdue: false
 retrieval:
@@ -44,7 +44,7 @@ source_path: wiki/NUSRI_CQ_zh.md
 
 ## 与乔鑫宝的关系
 
-NUSRI-CQ 阶段在本 wiki 中与 [合成数据](./Synthetic_Data_and_Model_Collapse_zh.md)、[协作评估](./Collaborative_Evaluation_zh.md) 和 [Wasserstein 几何](./Wasserstein_Geometry_zh.md) 相关。它为 ICML 2026 论文 [样本选择偏差何以促成模型坍缩](./When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md) 提供了直接研究语境，尤其是低资源分布式参与方如何在不暴露全部本地数据的条件下诊断数据生成失效。
+NUSRI-CQ 阶段在本 wiki 中与 [合成数据](./Synthetic_Data_and_Model_Collapse_zh.md)、[协作评估](./Collaborative_Evaluation_zh.md)、[Wasserstein 几何](./Wasserstein_Geometry_zh.md)和[大语言模型可靠性](./LLM_Reliability_zh.md)相关。它为 ICML 2026 论文 [样本选择偏差何以促成模型坍缩](./When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md) 提供了直接研究语境，尤其是低资源分布式参与方如何在不暴露全部本地数据的条件下诊断数据生成失效。获 NeurIPS 2026 录用的[《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md)研究感知到的提示模式如何导致虚假推理。
 
 ## 参见
 
@@ -52,6 +52,7 @@ NUSRI-CQ 阶段在本 wiki 中与 [合成数据](./Synthetic_Data_and_Model_Coll
 - [研究经历](./Experience_zh.md)
 - [合成数据](./Synthetic_Data_and_Model_Collapse_zh.md)
 - [样本选择偏差何以促成模型坍缩](./When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md)
+- [错觉模式感知论文](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md)
 - [香港中文大学](./The_Chinese_University_of_Hong_Kong_zh.md)
 
 [^nusri-intro]: NUSRI-CQ 英文[研究院介绍](https://en.nusricq.cn/about/yjyjj)描述其为研究、孵化、教育和培训平台，关注产学研融合。

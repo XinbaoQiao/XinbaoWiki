@@ -11,10 +11,10 @@ tags:
   - biography
   - phd-student
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-08-09T18:32:45.801Z'
-content_hash: 'sha256:04b20b696b5d70393a4bd34c5abf764a6997b90145f2d0a18195691e473f2f4c'
-reviewed_at: '2026-08-10T02:34:00+08:00'
-review_due: '2026-11-07'
+modified: '2026-09-25T04:53:27.434Z'
+content_hash: 'sha256:61e34d6882d795cd09cd6c0134dddbc93821f2db611c8e2a2174e2c14bff943c'
+reviewed_at: '2026-09-25T04:54:14.029Z'
+review_due: '2026-12-24'
 language: en
 aliases:
   - Mr. Ciao
@@ -25,8 +25,8 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-08-10T02:34:00+08:00'
-  reviewDue: '2026-11-07'
+  reviewedAt: '2026-09-25T04:54:14.029Z'
+  reviewDue: '2026-12-24'
   pendingReview: false
   overdue: false
 retrieval:
@@ -53,7 +53,7 @@ source_path: wiki/Xinbao_Qiao.md
 2. In data use, he focuses on data modeling, collaborative optimization, and system design in distributed learning, AI for Networks, and Networks for AI.
 3. In data deletion, he studies machine unlearning and data influence evaluation, exploring how to preserve model performance while protecting privacy and satisfying deletion requests.
 
-These directions connect [data-centric ML](./Data_Centric_Machine_Learning.md), [AI and networks](./AI_and_Networks.md), [machine unlearning](./Machine_Unlearning.md), [synthetic-data reliability](./Synthetic_Data_and_Model_Collapse.md), and [distributed Wasserstein barycenter](./Distributed_Wasserstein_Barycenter.md) methods for collaborative distributional references. Qiao previously received a Master of Engineering in Artificial Intelligence from [Zhejiang University](./Zhejiang_University.md) and a Bachelor of Engineering in Communication Engineering from [Shandong University](./Shandong_University.md). His [Publications](./Publications.md) include accepted or published papers at ICML, AAAI, and ICLR.
+These directions connect [data-centric ML](./Data_Centric_Machine_Learning.md), [AI and networks](./AI_and_Networks.md), [machine unlearning](./Machine_Unlearning.md), [synthetic-data reliability](./Synthetic_Data_and_Model_Collapse.md), and [distributed Wasserstein barycenter](./Distributed_Wasserstein_Barycenter.md) methods for collaborative distributional references. Qiao previously received a Master of Engineering in Artificial Intelligence from [Zhejiang University](./Zhejiang_University.md) and a Bachelor of Engineering in Communication Engineering from [Shandong University](./Shandong_University.md). His [Publications](./Publications.md) include accepted or published papers at NeurIPS, ICML, AAAI, and ICLR.
 
 ## Education
 
@@ -74,6 +74,8 @@ This period includes work on [Hessian-Free Online Certified Unlearning](./Hessia
 ### Trustworthy LLM systems at NUSRI-CQ (2025)
 
 From June to December 2025, Qiao worked as a full-time research intern at [NUSRI-CQ](./NUSRI_CQ.md). The research focused on trustworthy LLM systems and synthetic-data evaluation, especially low-resource recursive training where real-data coverage is limited or fragmented.
+
+This period also includes [Illusory Pattern Perception Drives Spurious Inference in Large Language Models](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md), accepted at NeurIPS 2026, which examines how perceived prompt patterns can steer an LLM away from evidence-grounded inference.
 
 ### The Chinese University of Hong Kong (2026-08-01-present)
 

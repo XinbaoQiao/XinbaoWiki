@@ -8,10 +8,10 @@ tags:
   - navigation
   - wiki-index
 timestamp: '2026-05-07T17:34:07+08:00'
-modified: '2026-07-14T23:17:11+08:00'
-content_hash: 'sha256:47074f3b8b0b101d64f11b2bbedd1bc5de61e0f63ab4c5346376750158f1895e'
-reviewed_at: '2026-07-14T23:17:11+08:00'
-review_due: '2027-07-14'
+modified: '2026-09-26T03:14:39.284Z'
+content_hash: 'sha256:d3e94cb04e82f64ff8faf8f627fb425891b0ca0ee253ec6bb670a21f809cdd65'
+reviewed_at: '2026-09-26T03:15:12.636Z'
+review_due: '2027-09-26'
 name: Index
 summary: Navigation index for public Xinbaopedia pages.
 occupation: Wiki index
@@ -51,6 +51,7 @@ occupation: Wiki index
 
 ## Publications
 
+- [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models]]
 - [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]]
 - [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]]
 - [[Hessian_Free_Online_Certified_Unlearning]]

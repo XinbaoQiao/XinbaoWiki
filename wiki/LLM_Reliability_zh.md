@@ -9,10 +9,10 @@ tags:
   - 研究概念
   - llm
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-08-09T18:32:45.773Z'
-content_hash: 'sha256:eaee39fcbfdc086b2eb5337244acb6ae9f264f286710ebe156de116eb56af51f'
-reviewed_at: '2026-08-10T02:34:00+08:00'
-review_due: '2027-02-05'
+modified: '2026-09-25T04:53:27.397Z'
+content_hash: 'sha256:259816be38eb1a03c1a9890c33a0a8a3158cb33bc42392b1089a12f539088cb6'
+reviewed_at: '2026-09-25T04:54:14.029Z'
+review_due: '2027-03-24'
 name: 大语言模型可靠性
 language: zh
 summary: 解释大语言模型系统可靠性问题的概念页。
@@ -29,10 +29,11 @@ translation_of: LLM_Reliability
 
 ## 与乔鑫宝工作的关系
 
-乔鑫宝公开的论文页目前主要强调机器遗忘、AI 与网络，以及合成数据模型坍缩，而不是单独的 LLM 论文。因此本页保持保守：它记录研究背景，并把 LLM 可靠性连接到 wiki 中已有方法。相关方法桥梁是“证据不完美时的评估”，尤其当数据是生成的、分布式的或训练前被选择过。
+乔鑫宝的[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|NeurIPS 2026 论文]]研究提示中的错觉模式如何导致虚假推理。这项工作与其更广泛的研究关注相连：当证据有限、分散、由模型生成或可能具有误导性时，AI 系统能否基于充分证据作出结论。
 
 ## 参见
 
+- [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|错觉模式感知驱动大语言模型的虚假推理]]
 - [[NUSRI_CQ|NUSRI-CQ]]
 - [[Synthetic_Data_and_Model_Collapse|合成数据]]
 - [[Collaborative_Evaluation|协作评估]]

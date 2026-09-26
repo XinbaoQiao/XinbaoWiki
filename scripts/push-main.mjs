@@ -4,7 +4,6 @@ import { chmodSync, mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:f
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-  authenticatedGithubRemote,
   githubRepositoryFromRemote,
   requireGithubPushPermission,
 } from './lib/github-publish.mjs';
@@ -67,7 +66,7 @@ async function main() {
     githubJson(`/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repository)}`, token),
   ]);
   requireGithubPushPermission(repositoryPayload);
-  const authenticatedRemote = authenticatedGithubRemote(origin, user.login);
+  if (!/^[A-Za-z0-9-]+$/.test(user.login)) throw new Error('GitHub username is invalid');
 
   await run('git', ['fetch', '--no-tags', 'origin', branch], { timeoutMs: 60_000 });
   const head = await run('git', ['rev-parse', 'HEAD']);
@@ -89,14 +88,15 @@ async function main() {
   const temporaryDirectory = mkdtempSync(join(temporaryRoot, 'github-auth-'));
   const askpassPath = join(temporaryDirectory, 'askpass.sh');
   try {
-    writeFileSync(askpassPath, '#!/bin/sh\nprintf \'%s\\n\' "$GITHUB_TOKEN"\n', { mode: 0o700 });
+    writeFileSync(askpassPath, '#!/bin/sh\ncase "$1" in\n  *Username*) printf \'%s\\n\' "$GITHUB_USER" ;;\n  *) printf \'%s\\n\' "$GITHUB_TOKEN" ;;\nesac\n', { mode: 0o700 });
     chmodSync(askpassPath, 0o700);
-    await run('git', ['push', authenticatedRemote, `${branch}:${branch}`], {
-      displayCommand: `git push https://${user.login}@github.com/${owner}/${repository}.git ${branch}:${branch}`,
+    await run('git', ['-c', 'credential.helper=', '-c', 'credential.interactive=always', 'push', 'origin', `${branch}:${branch}`], {
+      displayCommand: `git -c credential.helper= -c credential.interactive=always push origin ${branch}:${branch}`,
       env: {
         ...process.env,
         GIT_ASKPASS: askpassPath,
         GIT_TERMINAL_PROMPT: '0',
+        GITHUB_USER: user.login,
         GITHUB_TOKEN: token,
       },
       timeoutMs: 2 * 60_000,

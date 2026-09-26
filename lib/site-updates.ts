@@ -60,6 +60,16 @@ function paperAcceptance({ date, dateTime, href, papers, venue }: PaperAcceptanc
 // Canonical ordered event data for both the homepage Updates disclosure and
 // the readable Latest updates page linked under Contribute.
 const siteUpdateEvents: readonly SiteUpdateEvent[] = [
+  paperAcceptance({
+    date: { en: 'Sep 2026', zh: '2026年9月' },
+    dateTime: '2026-09',
+    href: {
+      en: '/wiki/Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models/',
+      zh: '/wiki/Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh/'
+    },
+    papers: ['Illusory Pattern Perception Drives Spurious Inference in Large Language Models'],
+    venue: 'NeurIPS 2026'
+  }),
   {
     dateTime: '2026-08-01',
     en: {

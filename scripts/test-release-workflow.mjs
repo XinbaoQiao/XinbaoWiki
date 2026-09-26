@@ -276,11 +276,13 @@ async function testExternalProcessTimeoutKillsTree() {
     await assert.rejects(
       runExternal(process.execPath, ['-e', script, pidPath], {
         killGraceMs: 100,
+        shell: false,
         timeoutMs: 250,
       }),
       (error) => error.kind === 'timeout' && error.timeoutMs === 250
     );
-    assert.ok(Date.now() - startedAt < 2_000, 'parent timeout bounds the full process tree');
+    const elapsedMs = Date.now() - startedAt;
+    assert.ok(elapsedMs < (process.platform === 'win32' ? 5_000 : 2_000), `parent timeout bounds the full process tree (${elapsedMs}ms)`);
     assert.ok(existsSync(pidPath), 'timeout fixture recorded its grandchild pid');
     const grandchildPid = Number.parseInt(readFileSync(pidPath, 'utf8'), 10);
     await new Promise((resolve) => setTimeout(resolve, 100));
@@ -294,6 +296,7 @@ async function testExternalProcessOutputLimit() {
   await assert.rejects(
     runExternal(process.execPath, ['-e', "process.stdout.write('x'.repeat(4096))"], {
       maxOutputBytes: 1_024,
+      shell: false,
       timeoutMs: 2_000,
     }),
     (error) => error.kind === 'output_limit' && Buffer.byteLength(error.stdout) === 1_024

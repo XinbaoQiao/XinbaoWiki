@@ -8,10 +8,10 @@ tags:
   - overview
   - project-overview
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:e58fcad724c37769eb9f4287683d1b6b794bad22d56608bf8bc623163b2a7807'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-09-30'
+modified: '2026-09-26T03:14:39.300Z'
+content_hash: 'sha256:66e161feecf5b81c952502aa0be768a4a692f649df2d4867a8801cfff69f8a2d'
+reviewed_at: '2026-09-26T03:15:12.636Z'
+review_due: '2026-12-25'
 name: Projects
 summary: Research projects and project clusters.
 occupation: Project overview
@@ -37,3 +37,7 @@ occupation: Project overview
 ### Synthetic data
 
 [[Synthetic_Data_and_Model_Collapse|Synthetic Data]] asks when generated data can safely replace or augment real data, and when recursive training amplifies bias or erodes diversity. The current emphasis is low-resource communities, where fragmented real-data coverage makes local filtering more likely to prune valid tail modes. The main paper page is [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]].
+
+### Trustworthy LLM systems
+
+[[LLM_Reliability]] examines whether language models use evidence appropriately when prompts suggest misleading patterns. The NeurIPS 2026 paper [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|Illusory Pattern Perception Drives Spurious Inference in Large Language Models]] provides a publication entry for this project cluster.

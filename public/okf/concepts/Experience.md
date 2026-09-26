@@ -8,18 +8,18 @@ tags:
   - profile
   - research-experience
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-08-09T18:32:45.762Z'
-content_hash: 'sha256:c213babca2918a9728aaac57badb72797578f588269356d9c47e712d7906703b'
-reviewed_at: '2026-08-10T02:34:00+08:00'
-review_due: '2026-11-07'
+modified: '2026-09-26T03:14:39.278Z'
+content_hash: 'sha256:6a1ff21af4c7e70ae1b21fa4dccb07b513e83cf10bace4d4920c024d73981717'
+reviewed_at: '2026-09-26T03:15:12.636Z'
+review_due: '2026-12-25'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-08-10T02:34:00+08:00'
-  reviewDue: '2026-11-07'
+  reviewedAt: '2026-09-26T03:15:12.636Z'
+  reviewDue: '2026-12-25'
   pendingReview: false
   overdue: false
 retrieval:
@@ -52,6 +52,6 @@ Related pages: [Machine Unlearning](./Machine_Unlearning.md), [Influence Functio
 
 **Full-time research intern**, 2025-06 to 2025-12. Advisor: Pang Yan, James, [NUSRI CQ](./NUSRI_CQ.md).
 
-This research line studies trustworthy model behavior and synthetic-data evaluation, including distributed Wasserstein methods for low-resource synthetic-data evaluation when real data are limited or fragmented.
+This research line studies trustworthy model behavior and synthetic-data evaluation, including distributed Wasserstein methods for low-resource synthetic-data evaluation when real data are limited or fragmented. The period also includes the NeurIPS 2026 paper [Illusory Pattern Perception Drives Spurious Inference in Large Language Models](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md), which examines how perceived prompt patterns can displace evidence-grounded inference.
 
-Related pages: [LLM Reliability](./LLM_Reliability.md), [Synthetic Data](./Synthetic_Data_and_Model_Collapse.md), and [Wasserstein Geometry](./Wasserstein_Geometry.md).
+Related pages: [LLM Reliability](./LLM_Reliability.md), [Illusory Pattern Perception Drives Spurious Inference in Large Language Models](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md), [Synthetic Data](./Synthetic_Data_and_Model_Collapse.md), and [Wasserstein Geometry](./Wasserstein_Geometry.md).

@@ -8,10 +8,10 @@ tags:
   - profile
   - 研究经历
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-08-09T18:32:45.761Z'
-content_hash: 'sha256:41c47204c95a67a24b584dd34b2d2598945cb0f958b46c3f3a6fa1aaa50f35a8'
-reviewed_at: '2026-08-10T02:34:00+08:00'
-review_due: '2026-11-07'
+modified: '2026-09-26T03:14:39.278Z'
+content_hash: 'sha256:abbe9def10416e552a47169241635f5dcdb8ac8eba3ede2f5ba724de772aa016'
+reviewed_at: '2026-09-26T03:15:12.636Z'
+review_due: '2026-12-25'
 name: 研究经历
 language: zh
 summary: 研究经历与机构关系。
@@ -42,6 +42,6 @@ translation_of: Experience
 
 **全职研究实习生**，2025-06 至 2025-12。导师：Pang Yan, James，[[NUSRI_CQ|NUSRI-CQ]]。
 
-该研究线关注可信模型行为和合成数据评估，包括在真实数据有限或碎片化时用于低资源合成数据评估的分布式 Wasserstein 方法。
+该研究线关注可信模型行为和合成数据评估，包括在真实数据有限或碎片化时用于低资源合成数据评估的分布式 Wasserstein 方法。这一阶段还包括获 NeurIPS 2026 录用的[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》]]，研究感知到的提示模式如何使推理偏离证据。
 
-相关页面：[[LLM_Reliability|大语言模型可靠性]]、[[Synthetic_Data_and_Model_Collapse|合成数据]] 和 [[Wasserstein_Geometry|Wasserstein 几何]]。
+相关页面：[[LLM_Reliability|大语言模型可靠性]]、[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|错觉模式感知论文]]、[[Synthetic_Data_and_Model_Collapse|合成数据]] 和 [[Wasserstein_Geometry|Wasserstein 几何]]。
