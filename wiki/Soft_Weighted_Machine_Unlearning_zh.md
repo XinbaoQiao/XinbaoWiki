@@ -10,13 +10,14 @@ tags:
   - aaai-2026
   - machine-unlearning
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-08-09T18:32:45.791Z'
-content_hash: 'sha256:59b316fe6de53b980d856a0166747d9a5575808682f4be2678df40b059b842f4'
-reviewed_at: '2026-08-10T02:34:00+08:00'
-review_due: '2027-08-09'
+modified: '2026-09-27T11:41:29.333Z'
+content_hash: 'sha256:37ec1da4797e98f9ed76612b38a2ee57faf840c86682727f03c130d0157f8072'
+reviewed_at: '2026-09-27T11:41:45.576Z'
+review_due: '2027-09-27'
 name: 超越二元擦除：用于公平性与鲁棒性的软加权遗忘
 language: zh
 summary: AAAI 2026 论文，研究用于公平性与鲁棒性修正的软加权机器遗忘。
+dates: 2026年1月20日至27日
 authors:
   - Xinbao Qiao
   - Ningning Ding
@@ -28,6 +29,8 @@ year: 2026
 status: accepted
 publication_type: 会议论文
 links:
+  - label: AAAI 2026 会议官网
+    url: 'https://aaai.org/conference/aaai/aaai-26/'
   - label: arXiv
     url: 'https://arxiv.org/abs/2505.18783'
   - label: AAAI article

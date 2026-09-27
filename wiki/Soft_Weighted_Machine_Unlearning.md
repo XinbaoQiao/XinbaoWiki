@@ -12,14 +12,15 @@ tags:
   - aaai-2026
   - machine-unlearning
 timestamp: '2026-05-05T21:39:01+08:00'
-modified: '2026-08-09T18:32:45.791Z'
-content_hash: 'sha256:d7a3e28224e6311f498205d6587820daf15900850de91be3292f965b8ffe3a02'
-reviewed_at: '2026-08-10T02:34:00+08:00'
-review_due: '2027-08-09'
+modified: '2026-09-27T11:41:29.334Z'
+content_hash: 'sha256:580b8813439245763dc7717c0158ba37ebc171ccb3426307d73b7325a01b90fd'
+reviewed_at: '2026-09-27T11:41:45.576Z'
+review_due: '2027-09-27'
 name: 'Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness'
 summary: >-
   AAAI 2026 paper on soft-weighted unlearning for fairness and robustness
   correction.
+dates: 20-27 January 2026
 authors:
   - Xinbao Qiao
   - Ningning Ding
@@ -31,6 +32,8 @@ year: 2026
 status: accepted
 publication_type: Conference paper
 links:
+  - label: AAAI 2026 conference
+    url: 'https://aaai.org/conference/aaai/aaai-26/'
   - label: arXiv
     url: 'https://arxiv.org/abs/2505.18783'
   - label: AAAI article

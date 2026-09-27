@@ -1728,7 +1728,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:e6ac063f602e015e12506e44c362a212c8155400bf1007d5aaa5be220af99a47",
+      "contentHash": "sha256:607d21b9f9d344e69559bb4d489b1137a36960067ecfb102f57ab822f885217f",
       "file": "DynFrs.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -1738,12 +1738,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-08T13:18:57+08:00",
-        "reviewDue": "2026-10-06",
+        "reviewedAt": "2026-09-27T11:41:45.577Z",
+        "reviewDue": "2026-12-26",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-08T13:18:57+08:00",
+      "modifiedAt": "2026-09-27T11:41:29.310Z",
       "outgoing": [
         "Hessian_Free_Online_Certified_Unlearning",
         "Machine_Unlearning",
@@ -1758,6 +1758,7 @@
       "sourceIds": [
         "src-19cdc04d387acf77",
         "src-3234eea5652932e1",
+        "src-508cc93a8723d9eb",
         "src-da17eb3884244bd3"
       ],
       "summary": "ICLR 2025 paper on efficient machine unlearning for random forests.",
@@ -1771,12 +1772,12 @@
       "timestamp": "2026-05-05T21:39:01+08:00",
       "title": "DynFrs: An Efficient Framework for Machine Unlearning in Random Forest",
       "type": "publication",
-      "reviewedAt": "2026-07-08T13:18:57+08:00",
-      "reviewDue": "2026-10-06",
+      "reviewedAt": "2026-09-27T11:41:45.577Z",
+      "reviewDue": "2026-12-26",
       "retrieval": {
         "documentId": "wiki:DynFrs",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:e6ac063f602e015e12506e44c362a212c8155400bf1007d5aaa5be220af99a47",
+        "contentHash": "sha256:607d21b9f9d344e69559bb4d489b1137a36960067ecfb102f57ab822f885217f",
         "textFields": [
           "title",
           "aliases",
@@ -1810,7 +1811,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:971eed83f902bf36484676a0aeaa392153540246ac822e5e144fa7f9862ad5b0",
+      "contentHash": "sha256:a7ffaacf234f60b7d49c78edd9f830f1f037b653e355e94cdaa456b1c91caca7",
       "file": "DynFrs_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -1820,12 +1821,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-16T20:08:42+08:00",
-        "reviewDue": "2026-10-14",
+        "reviewedAt": "2026-09-27T11:41:45.577Z",
+        "reviewDue": "2026-12-26",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-16T20:08:42+08:00",
+      "modifiedAt": "2026-09-27T11:41:29.308Z",
       "outgoing": [
         "Hessian_Free_Online_Certified_Unlearning_zh",
         "Machine_Unlearning_zh",
@@ -1840,6 +1841,7 @@
       "sourceIds": [
         "src-19cdc04d387acf77",
         "src-3234eea5652932e1",
+        "src-508cc93a8723d9eb",
         "src-da17eb3884244bd3"
       ],
       "summary": "ICLR 2025 论文，研究随机森林中的高效机器遗忘。",
@@ -1853,12 +1855,12 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "DynFrs：随机森林机器遗忘高效框架",
       "type": "publication",
-      "reviewedAt": "2026-07-16T20:08:42+08:00",
-      "reviewDue": "2026-10-14",
+      "reviewedAt": "2026-09-27T11:41:45.577Z",
+      "reviewDue": "2026-12-26",
       "retrieval": {
         "documentId": "wiki:DynFrs_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:971eed83f902bf36484676a0aeaa392153540246ac822e5e144fa7f9862ad5b0",
+        "contentHash": "sha256:a7ffaacf234f60b7d49c78edd9f830f1f037b653e355e94cdaa456b1c91caca7",
         "textFields": [
           "title",
           "aliases",
@@ -2338,7 +2340,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:017f86e5da6b8fec2ff8c7a791fbebe84e2d8dcbaa22316b5d7239f9c4f04884",
+      "contentHash": "sha256:af90e8175302eafeb1187ca078d63d2077a11b323b111d3173703b5257fda7e4",
       "file": "Hessian_Free_Online_Certified_Unlearning.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -2348,12 +2350,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-08T13:18:57+08:00",
-        "reviewDue": "2026-10-06",
+        "reviewedAt": "2026-09-27T11:41:45.576Z",
+        "reviewDue": "2026-12-26",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-08T13:18:57+08:00",
+      "modifiedAt": "2026-09-27T11:41:29.314Z",
       "outgoing": [
         "Certified_Data_Removal",
         "DynFrs",
@@ -2366,6 +2368,7 @@
       ],
       "slug": "Hessian_Free_Online_Certified_Unlearning",
       "sourceIds": [
+        "src-508cc93a8723d9eb",
         "src-65d81b8aca549860",
         "src-a0a9b7171dc028d2",
         "src-faaafad831fbefc5"
@@ -2381,12 +2384,12 @@
       "timestamp": "2026-05-05T21:39:01+08:00",
       "title": "Hessian-Free Online Certified Unlearning",
       "type": "publication",
-      "reviewedAt": "2026-07-08T13:18:57+08:00",
-      "reviewDue": "2026-10-06",
+      "reviewedAt": "2026-09-27T11:41:45.576Z",
+      "reviewDue": "2026-12-26",
       "retrieval": {
         "documentId": "wiki:Hessian_Free_Online_Certified_Unlearning",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:017f86e5da6b8fec2ff8c7a791fbebe84e2d8dcbaa22316b5d7239f9c4f04884",
+        "contentHash": "sha256:af90e8175302eafeb1187ca078d63d2077a11b323b111d3173703b5257fda7e4",
         "textFields": [
           "title",
           "aliases",
@@ -2424,7 +2427,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:61f88b28567cc8c89e63a8e28760d7e18e12868069d2aefb90848e7b9a92ba72",
+      "contentHash": "sha256:add6a727cffd2dd22754857f3844140488f9f71e8129e3934ba8e0828cf6c6dc",
       "file": "Hessian_Free_Online_Certified_Unlearning_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -2434,12 +2437,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-16T20:08:42+08:00",
-        "reviewDue": "2026-10-14",
+        "reviewedAt": "2026-09-27T11:41:45.577Z",
+        "reviewDue": "2026-12-26",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-16T20:08:42+08:00",
+      "modifiedAt": "2026-09-27T11:41:29.313Z",
       "outgoing": [
         "Certified_Data_Removal_zh",
         "DynFrs_zh",
@@ -2452,6 +2455,7 @@
       ],
       "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
       "sourceIds": [
+        "src-508cc93a8723d9eb",
         "src-65d81b8aca549860",
         "src-a0a9b7171dc028d2",
         "src-faaafad831fbefc5"
@@ -2467,12 +2471,12 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "无 Hessian 在线认证遗忘",
       "type": "publication",
-      "reviewedAt": "2026-07-16T20:08:42+08:00",
-      "reviewDue": "2026-10-14",
+      "reviewedAt": "2026-09-27T11:41:45.577Z",
+      "reviewDue": "2026-12-26",
       "retrieval": {
         "documentId": "wiki:Hessian_Free_Online_Certified_Unlearning_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:61f88b28567cc8c89e63a8e28760d7e18e12868069d2aefb90848e7b9a92ba72",
+        "contentHash": "sha256:add6a727cffd2dd22754857f3844140488f9f71e8129e3934ba8e0828cf6c6dc",
         "textFields": [
           "title",
           "aliases",
@@ -2509,7 +2513,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:a64171fe2c4772e24a1f4e9c058ce8b7faaa12a9089385675f2f26b6871abf2a",
+      "contentHash": "sha256:7a1e1072fcd8e84d387b65469659a5cfbf93234281790ea4043b12236b855a08",
       "file": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -2519,12 +2523,12 @@
         "confidence": 0.95,
         "review": "on venue/status change",
         "retention": "long-lived semantic memory",
-        "reviewedAt": "2026-09-26T08:09:37.000Z",
-        "reviewDue": "2027-09-26",
+        "reviewedAt": "2026-09-27T11:41:45.574Z",
+        "reviewDue": "2027-09-27",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-26T08:09:04.310Z",
+      "modifiedAt": "2026-09-27T11:41:29.316Z",
       "outgoing": [
         "LLM_Reliability",
         "Trustworthy_AI",
@@ -2534,7 +2538,10 @@
         "wikilink"
       ],
       "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
-      "sourceIds": [],
+      "sourceIds": [
+        "src-b005562340a1c871",
+        "src-d48b0fa9ae43a703"
+      ],
       "summary": "NeurIPS 2026 paper on illusory pattern perception and spurious inference in large language models.",
       "tags": [
         "en",
@@ -2547,12 +2554,12 @@
       "timestamp": "2026-09-25T13:49:35+09:00",
       "title": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
       "type": "publication",
-      "reviewedAt": "2026-09-26T08:09:37.000Z",
-      "reviewDue": "2027-09-26",
+      "reviewedAt": "2026-09-27T11:41:45.574Z",
+      "reviewDue": "2027-09-27",
       "retrieval": {
         "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:a64171fe2c4772e24a1f4e9c058ce8b7faaa12a9089385675f2f26b6871abf2a",
+        "contentHash": "sha256:7a1e1072fcd8e84d387b65469659a5cfbf93234281790ea4043b12236b855a08",
         "textFields": [
           "title",
           "aliases",
@@ -2586,7 +2593,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:835e399ecf6b3cc8a1bc3d3ef9c97168487ca5f2876220f6b446f62b9db65166",
+      "contentHash": "sha256:546696d1b623dedcb937d4a09511560a538b2bf5f85218169020988b32f226fa",
       "file": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -2596,12 +2603,12 @@
         "confidence": 0.95,
         "review": "on venue/status change",
         "retention": "long-lived semantic memory",
-        "reviewedAt": "2026-09-26T08:09:37.000Z",
-        "reviewDue": "2027-09-26",
+        "reviewedAt": "2026-09-27T11:41:45.575Z",
+        "reviewDue": "2027-09-27",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-26T08:09:04.309Z",
+      "modifiedAt": "2026-09-27T11:41:29.315Z",
       "outgoing": [
         "LLM_Reliability_zh",
         "Qiao_Xinbao_zh",
@@ -2611,7 +2618,10 @@
         "wikilink"
       ],
       "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
-      "sourceIds": [],
+      "sourceIds": [
+        "src-b005562340a1c871",
+        "src-d48b0fa9ae43a703"
+      ],
       "summary": "NeurIPS 2026 论文，研究错觉模式感知与大语言模型的虚假推理。",
       "tags": [
         "zh",
@@ -2624,12 +2634,12 @@
       "timestamp": "2026-09-25T13:49:35+09:00",
       "title": "错觉模式感知驱动大语言模型的虚假推理",
       "type": "publication",
-      "reviewedAt": "2026-09-26T08:09:37.000Z",
-      "reviewDue": "2027-09-26",
+      "reviewedAt": "2026-09-27T11:41:45.575Z",
+      "reviewDue": "2027-09-27",
       "retrieval": {
         "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:835e399ecf6b3cc8a1bc3d3ef9c97168487ca5f2876220f6b446f62b9db65166",
+        "contentHash": "sha256:546696d1b623dedcb937d4a09511560a538b2bf5f85218169020988b32f226fa",
         "textFields": [
           "title",
           "aliases",
@@ -4464,8 +4474,13 @@
     },
     {
       "aliases": [],
-      "citationSourceIds": [],
-      "contentHash": "sha256:b3a97d70dfb40c84fdff1d3cec5147595bd6bd05ba5edece8c4e7a7b2b7e76a4",
+      "citationSourceIds": [
+        "src-508cc93a8723d9eb",
+        "src-766234e11681dad2",
+        "src-998b6c4324199ad3",
+        "src-b005562340a1c871"
+      ],
+      "contentHash": "sha256:933e760276becbeb6d330f4e588a1cfa55f9a660e529144290334480fc0874ae",
       "file": "Publications.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -4475,12 +4490,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-09-26T08:09:37.000Z",
-        "reviewDue": "2026-12-25",
+        "reviewedAt": "2026-09-27T11:41:45.573Z",
+        "reviewDue": "2026-12-26",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-26T08:09:04.323Z",
+      "modifiedAt": "2026-09-27T11:41:29.328Z",
       "outgoing": [
         "AI_and_Networks",
         "Data_Centric_Machine_Learning",
@@ -4499,7 +4514,12 @@
         "wikilink"
       ],
       "slug": "Publications",
-      "sourceIds": [],
+      "sourceIds": [
+        "src-508cc93a8723d9eb",
+        "src-766234e11681dad2",
+        "src-998b6c4324199ad3",
+        "src-b005562340a1c871"
+      ],
       "summary": "Publication list for Qiao Xinbao.",
       "tags": [
         "en",
@@ -4510,12 +4530,12 @@
       "timestamp": "2026-06-01T22:00:31+08:00",
       "title": "Publications",
       "type": "Publication list",
-      "reviewedAt": "2026-09-26T08:09:37.000Z",
-      "reviewDue": "2026-12-25",
+      "reviewedAt": "2026-09-27T11:41:45.573Z",
+      "reviewDue": "2026-12-26",
       "retrieval": {
         "documentId": "wiki:Publications",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:b3a97d70dfb40c84fdff1d3cec5147595bd6bd05ba5edece8c4e7a7b2b7e76a4",
+        "contentHash": "sha256:933e760276becbeb6d330f4e588a1cfa55f9a660e529144290334480fc0874ae",
         "textFields": [
           "title",
           "aliases",
@@ -4543,8 +4563,13 @@
     },
     {
       "aliases": [],
-      "citationSourceIds": [],
-      "contentHash": "sha256:df4ed554e2e3f21039c8f066d4ac0bd692c9a296f0e25b2eb8e32a13bb5f3270",
+      "citationSourceIds": [
+        "src-508cc93a8723d9eb",
+        "src-766234e11681dad2",
+        "src-998b6c4324199ad3",
+        "src-b005562340a1c871"
+      ],
+      "contentHash": "sha256:629735a9ac9611a1d71549e8150e61bbb73c89cbc2bb69555cc228ecc47409a8",
       "file": "Publications_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -4554,12 +4579,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-09-26T08:09:37.000Z",
-        "reviewDue": "2026-12-25",
+        "reviewedAt": "2026-09-27T11:41:45.574Z",
+        "reviewDue": "2026-12-26",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-26T08:09:04.322Z",
+      "modifiedAt": "2026-09-27T11:41:29.327Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -4578,7 +4603,12 @@
         "wikilink"
       ],
       "slug": "Publications_zh",
-      "sourceIds": [],
+      "sourceIds": [
+        "src-508cc93a8723d9eb",
+        "src-766234e11681dad2",
+        "src-998b6c4324199ad3",
+        "src-b005562340a1c871"
+      ],
       "summary": "乔鑫宝的论文索引。",
       "tags": [
         "zh",
@@ -4589,12 +4619,12 @@
       "timestamp": "2026-06-01T22:04:00+08:00",
       "title": "论文",
       "type": "论文列表",
-      "reviewedAt": "2026-09-26T08:09:37.000Z",
-      "reviewDue": "2026-12-25",
+      "reviewedAt": "2026-09-27T11:41:45.574Z",
+      "reviewDue": "2026-12-26",
       "retrieval": {
         "documentId": "wiki:Publications_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:df4ed554e2e3f21039c8f066d4ac0bd692c9a296f0e25b2eb8e32a13bb5f3270",
+        "contentHash": "sha256:629735a9ac9611a1d71549e8150e61bbb73c89cbc2bb69555cc228ecc47409a8",
         "textFields": [
           "title",
           "aliases",
@@ -5678,7 +5708,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:d7a3e28224e6311f498205d6587820daf15900850de91be3292f965b8ffe3a02",
+      "contentHash": "sha256:580b8813439245763dc7717c0158ba37ebc171ccb3426307d73b7325a01b90fd",
       "file": "Soft_Weighted_Machine_Unlearning.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -5688,12 +5718,12 @@
         "confidence": 0.95,
         "review": "on venue/status change",
         "retention": "long-lived semantic memory",
-        "reviewedAt": "2026-08-10T02:34:00+08:00",
-        "reviewDue": "2027-08-09",
+        "reviewedAt": "2026-09-27T11:41:45.576Z",
+        "reviewDue": "2027-09-27",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-08-09T18:32:45.791Z",
+      "modifiedAt": "2026-09-27T11:41:29.334Z",
       "outgoing": [
         "Fairness_and_Robustness",
         "Hessian_Free_Online_Certified_Unlearning",
@@ -5708,7 +5738,8 @@
       "slug": "Soft_Weighted_Machine_Unlearning",
       "sourceIds": [
         "src-0642a11373a83c47",
-        "src-53e1199f272a4df4"
+        "src-53e1199f272a4df4",
+        "src-998b6c4324199ad3"
       ],
       "summary": "AAAI 2026 paper on soft-weighted unlearning for fairness and robustness correction.",
       "tags": [
@@ -5722,12 +5753,12 @@
       "timestamp": "2026-05-05T21:39:01+08:00",
       "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
       "type": "publication",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-08-09",
+      "reviewedAt": "2026-09-27T11:41:45.576Z",
+      "reviewDue": "2027-09-27",
       "retrieval": {
         "documentId": "wiki:Soft_Weighted_Machine_Unlearning",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:d7a3e28224e6311f498205d6587820daf15900850de91be3292f965b8ffe3a02",
+        "contentHash": "sha256:580b8813439245763dc7717c0158ba37ebc171ccb3426307d73b7325a01b90fd",
         "textFields": [
           "title",
           "aliases",
@@ -5763,7 +5794,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:59b316fe6de53b980d856a0166747d9a5575808682f4be2678df40b059b842f4",
+      "contentHash": "sha256:37ec1da4797e98f9ed76612b38a2ee57faf840c86682727f03c130d0157f8072",
       "file": "Soft_Weighted_Machine_Unlearning_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -5773,12 +5804,12 @@
         "confidence": 0.95,
         "review": "on venue/status change",
         "retention": "long-lived semantic memory",
-        "reviewedAt": "2026-08-10T02:34:00+08:00",
-        "reviewDue": "2027-08-09",
+        "reviewedAt": "2026-09-27T11:41:45.576Z",
+        "reviewDue": "2027-09-27",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-08-09T18:32:45.791Z",
+      "modifiedAt": "2026-09-27T11:41:29.333Z",
       "outgoing": [
         "Fairness_and_Robustness_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
@@ -5793,7 +5824,8 @@
       "slug": "Soft_Weighted_Machine_Unlearning_zh",
       "sourceIds": [
         "src-0642a11373a83c47",
-        "src-53e1199f272a4df4"
+        "src-53e1199f272a4df4",
+        "src-998b6c4324199ad3"
       ],
       "summary": "AAAI 2026 论文，研究用于公平性与鲁棒性修正的软加权机器遗忘。",
       "tags": [
@@ -5807,12 +5839,12 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "超越二元擦除：用于公平性与鲁棒性的软加权遗忘",
       "type": "publication",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-08-09",
+      "reviewedAt": "2026-09-27T11:41:45.576Z",
+      "reviewDue": "2027-09-27",
       "retrieval": {
         "documentId": "wiki:Soft_Weighted_Machine_Unlearning_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:59b316fe6de53b980d856a0166747d9a5575808682f4be2678df40b059b842f4",
+        "contentHash": "sha256:37ec1da4797e98f9ed76612b38a2ee57faf840c86682727f03c130d0157f8072",
         "textFields": [
           "title",
           "aliases",
@@ -6737,7 +6769,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:0132752b19a51f653c6b62a66468fb1b3f3dcbd45675f431a2fcd7528fcd38a2",
+      "contentHash": "sha256:543e3cc6633709a96ddeffa2f3f51be0833cc55d25f3ccfa483ba371345750ef",
       "file": "When_Sample_Selection_Bias_Precipitates_Model_Collapse.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -6747,12 +6779,12 @@
         "confidence": 0.95,
         "review": "on venue/status change",
         "retention": "long-lived semantic memory",
-        "reviewedAt": "2026-07-12T20:00:05+08:00",
-        "reviewDue": "2027-07-12",
+        "reviewedAt": "2026-09-27T11:41:45.575Z",
+        "reviewDue": "2027-09-27",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-12T20:00:05+08:00",
+      "modifiedAt": "2026-09-27T11:41:29.339Z",
       "outgoing": [
         "Collaborative_Evaluation",
         "Data_Selection",
@@ -6787,12 +6819,12 @@
       "timestamp": "2026-06-02T22:56:50+08:00",
       "title": "When Sample Selection Bias Precipitates Model Collapse",
       "type": "publication",
-      "reviewedAt": "2026-07-12T20:00:05+08:00",
-      "reviewDue": "2027-07-12",
+      "reviewedAt": "2026-09-27T11:41:45.575Z",
+      "reviewDue": "2027-09-27",
       "retrieval": {
         "documentId": "wiki:When_Sample_Selection_Bias_Precipitates_Model_Collapse",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:0132752b19a51f653c6b62a66468fb1b3f3dcbd45675f431a2fcd7528fcd38a2",
+        "contentHash": "sha256:543e3cc6633709a96ddeffa2f3f51be0833cc55d25f3ccfa483ba371345750ef",
         "textFields": [
           "title",
           "aliases",
@@ -6834,7 +6866,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:09b8d93c182cc7e7940467c8a17797f2744016e10d4aa01ec370c6f5e2abc779",
+      "contentHash": "sha256:381b0a1efabd5ac09d483c339abc3169208ce35632b757c0adc91f069f3175d9",
       "file": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -6844,12 +6876,12 @@
         "confidence": 0.95,
         "review": "on venue/status change",
         "retention": "long-lived semantic memory",
-        "reviewedAt": "2026-07-16T20:08:42+08:00",
-        "reviewDue": "2027-07-16",
+        "reviewedAt": "2026-09-27T11:41:45.575Z",
+        "reviewDue": "2027-09-27",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-16T20:08:42+08:00",
+      "modifiedAt": "2026-09-27T11:41:29.339Z",
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "Data_Selection_zh",
@@ -6884,12 +6916,12 @@
       "timestamp": "2026-06-02T22:56:50+08:00",
       "title": "样本选择偏差何以促成模型坍缩",
       "type": "publication",
-      "reviewedAt": "2026-07-16T20:08:42+08:00",
-      "reviewDue": "2027-07-16",
+      "reviewedAt": "2026-09-27T11:41:45.575Z",
+      "reviewDue": "2027-09-27",
       "retrieval": {
         "documentId": "wiki:When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:09b8d93c182cc7e7940467c8a17797f2744016e10d4aa01ec370c6f5e2abc779",
+        "contentHash": "sha256:381b0a1efabd5ac09d483c339abc3169208ce35632b757c0adc91f069f3175d9",
         "textFields": [
           "title",
           "aliases",

@@ -9,24 +9,25 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-07-16T20:08:42+08:00'
-content_hash: 'sha256:61f88b28567cc8c89e63a8e28760d7e18e12868069d2aefb90848e7b9a92ba72'
-reviewed_at: '2026-07-16T20:08:42+08:00'
-review_due: '2026-10-14'
+modified: '2026-09-27T11:41:29.313Z'
+content_hash: 'sha256:add6a727cffd2dd22754857f3844140488f9f71e8129e3934ba8e0828cf6c6dc'
+reviewed_at: '2026-09-27T11:41:45.577Z'
+review_due: '2026-12-26'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-16T20:08:42+08:00'
-  reviewDue: '2026-10-14'
+  reviewedAt: '2026-09-27T11:41:45.577Z'
+  reviewDue: '2026-12-26'
   pendingReview: false
   overdue: false
 retrieval:
   document_id: 'wiki:Hessian_Free_Online_Certified_Unlearning_zh'
   chunking: markdown-heading-v1
 source_ids:
+  - src-508cc93a8723d9eb
   - src-65d81b8aca549860
   - src-a0a9b7171dc028d2
   - src-faaafad831fbefc5

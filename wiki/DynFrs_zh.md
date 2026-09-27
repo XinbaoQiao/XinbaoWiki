@@ -9,13 +9,14 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-07-16T20:08:42+08:00'
-content_hash: 'sha256:971eed83f902bf36484676a0aeaa392153540246ac822e5e144fa7f9862ad5b0'
-reviewed_at: '2026-07-16T20:08:42+08:00'
-review_due: '2026-10-14'
+modified: '2026-09-27T11:41:29.308Z'
+content_hash: 'sha256:a7ffaacf234f60b7d49c78edd9f830f1f037b653e355e94cdaa456b1c91caca7'
+reviewed_at: '2026-09-27T11:41:45.577Z'
+review_due: '2026-12-26'
 name: DynFrs：随机森林机器遗忘高效框架
 language: zh
 summary: ICLR 2025 论文，研究随机森林中的高效机器遗忘。
+dates: 2025年4月24日至28日
 authors:
   - Shurong Wang
   - Zhuoyang Shen
@@ -28,6 +29,8 @@ year: 2025
 status: ICLR 2025 poster
 publication_type: 会议论文
 links:
+  - label: ICLR 2025 会议官网
+    url: 'https://iclr.cc/Conferences/2025'
   - label: OpenReview
     url: 'https://openreview.net/forum?id=nsCOeCLR8e'
   - label: arXiv

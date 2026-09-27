@@ -9,13 +9,14 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-07-16T20:08:42+08:00'
-content_hash: 'sha256:61f88b28567cc8c89e63a8e28760d7e18e12868069d2aefb90848e7b9a92ba72'
-reviewed_at: '2026-07-16T20:08:42+08:00'
-review_due: '2026-10-14'
+modified: '2026-09-27T11:41:29.313Z'
+content_hash: 'sha256:add6a727cffd2dd22754857f3844140488f9f71e8129e3934ba8e0828cf6c6dc'
+reviewed_at: '2026-09-27T11:41:45.577Z'
+review_due: '2026-12-26'
 name: 无 Hessian 在线认证遗忘
 language: zh
 summary: ICLR 2025 论文，研究无显式 Hessian 求逆的高效认证机器遗忘。
+dates: 2025年4月24日至28日
 authors:
   - Xinbao Qiao
   - 张萌
@@ -27,6 +28,8 @@ year: 2025
 status: ICLR 2025 poster
 publication_type: 会议论文
 links:
+  - label: ICLR 2025 会议官网
+    url: 'https://iclr.cc/Conferences/2025'
   - label: OpenReview
     url: 'https://openreview.net/forum?id=C3TrHWanh5'
   - label: arXiv

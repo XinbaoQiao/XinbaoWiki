@@ -33,7 +33,7 @@
     },
     "meaning": "Registry generation proves declaration and page association, not remote availability or factual correctness"
   },
-  "contentHash": "sha256:8f97b84b5b4092e6c0b4d100c25bc55787ee6dae85596de96510f74782bfbfc8",
+  "contentHash": "sha256:7a54065ea7964793d314f46cb46a01555a089d36b1d7f6429ec213972f3cc0dd",
   "sources": [
     {
       "id": "src-03bf1b2f9af65762",
@@ -173,7 +173,7 @@
         {
           "slug": "Soft_Weighted_Machine_Unlearning",
           "locations": [
-            "frontmatter.links[0].url"
+            "frontmatter.links[1].url"
           ],
           "citation": false,
           "footnote": false
@@ -181,7 +181,7 @@
         {
           "slug": "Soft_Weighted_Machine_Unlearning_zh",
           "locations": [
-            "frontmatter.links[0].url"
+            "frontmatter.links[1].url"
           ],
           "citation": false,
           "footnote": false
@@ -443,7 +443,7 @@
         {
           "slug": "DynFrs",
           "locations": [
-            "frontmatter.links[0].url"
+            "frontmatter.links[1].url"
           ],
           "citation": false,
           "footnote": false
@@ -451,7 +451,7 @@
         {
           "slug": "DynFrs_zh",
           "locations": [
-            "frontmatter.links[0].url"
+            "frontmatter.links[1].url"
           ],
           "citation": false,
           "footnote": false
@@ -675,7 +675,7 @@
         {
           "slug": "DynFrs",
           "locations": [
-            "frontmatter.links[1].url"
+            "frontmatter.links[2].url"
           ],
           "citation": false,
           "footnote": false
@@ -683,7 +683,7 @@
         {
           "slug": "DynFrs_zh",
           "locations": [
-            "frontmatter.links[1].url"
+            "frontmatter.links[2].url"
           ],
           "citation": false,
           "footnote": false
@@ -940,6 +940,81 @@
       ]
     },
     {
+      "id": "src-508cc93a8723d9eb",
+      "url": "https://iclr.cc/Conferences/2025",
+      "kind": "conference-site",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:508cc93a8723d9eb78f69f68fed9c1874a19e82867ec1fd7c5e29f49fea68074"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 30
+      },
+      "pages": [
+        "DynFrs",
+        "DynFrs_zh",
+        "Hessian_Free_Online_Certified_Unlearning",
+        "Hessian_Free_Online_Certified_Unlearning_zh",
+        "Publications",
+        "Publications_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "DynFrs",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "DynFrs_zh",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Hessian_Free_Online_Certified_Unlearning",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        }
+      ]
+    },
+    {
       "id": "src-53e1199f272a4df4",
       "url": "https://ojs.aaai.org/index.php/AAAI/article/view/39681",
       "kind": "scholarly-publication",
@@ -981,7 +1056,7 @@
         {
           "slug": "Soft_Weighted_Machine_Unlearning",
           "locations": [
-            "frontmatter.links[1].url"
+            "frontmatter.links[2].url"
           ],
           "citation": false,
           "footnote": false
@@ -989,7 +1064,7 @@
         {
           "slug": "Soft_Weighted_Machine_Unlearning_zh",
           "locations": [
-            "frontmatter.links[1].url"
+            "frontmatter.links[2].url"
           ],
           "citation": false,
           "footnote": false
@@ -1289,7 +1364,7 @@
         {
           "slug": "Hessian_Free_Online_Certified_Unlearning",
           "locations": [
-            "frontmatter.links[0].url"
+            "frontmatter.links[1].url"
           ],
           "citation": false,
           "footnote": false
@@ -1297,7 +1372,7 @@
         {
           "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
           "locations": [
-            "frontmatter.links[0].url"
+            "frontmatter.links[1].url"
           ],
           "citation": false,
           "footnote": false
@@ -1460,6 +1535,8 @@
       "pages": [
         "AI_and_Networks",
         "AI_and_Networks_zh",
+        "Publications",
+        "Publications_zh",
         "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
         "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh"
       ],
@@ -1479,6 +1556,22 @@
           ],
           "citation": true,
           "footnote": true
+        },
+        {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
         },
         {
           "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
@@ -1675,6 +1768,63 @@
       ]
     },
     {
+      "id": "src-998b6c4324199ad3",
+      "url": "https://aaai.org/conference/aaai/aaai-26/",
+      "kind": "conference-site",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:998b6c4324199ad3aa25828cc93117ac5b4b89235fab1d425b5a39980d772375"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 30
+      },
+      "pages": [
+        "Publications",
+        "Publications_zh",
+        "Soft_Weighted_Machine_Unlearning",
+        "Soft_Weighted_Machine_Unlearning_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Soft_Weighted_Machine_Unlearning",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Soft_Weighted_Machine_Unlearning_zh",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
       "id": "src-9b2be44d3f13005a",
       "url": "https://github.com/XinbaoQiao",
       "kind": "code-repository",
@@ -1814,7 +1964,7 @@
         {
           "slug": "Hessian_Free_Online_Certified_Unlearning",
           "locations": [
-            "frontmatter.links[1].url"
+            "frontmatter.links[2].url"
           ],
           "citation": false,
           "footnote": false
@@ -1822,9 +1972,66 @@
         {
           "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
           "locations": [
-            "frontmatter.links[1].url"
+            "frontmatter.links[2].url"
           ],
           "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-b005562340a1c871",
+      "url": "https://neurips.cc/Conferences/2026",
+      "kind": "conference-site",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:b005562340a1c871dc2afa5c39f551baf114a0926e83690b1dd7820c4f554f53"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 30
+      },
+      "pages": [
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+        "Publications",
+        "Publications_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
           "footnote": false
         }
       ]
@@ -2043,6 +2250,45 @@
       ]
     },
     {
+      "id": "src-d48b0fa9ae43a703",
+      "url": "https://openreview.net/forum?id=VLcmdFfRQc",
+      "kind": "scholarly-publication",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:d48b0fa9ae43a7031b562a8c8cb97769edf61ce9be746a01bdaf18e22b643106"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+          "locations": [
+            "frontmatter.links[1].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+          "locations": [
+            "frontmatter.links[1].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
       "id": "src-da17eb3884244bd3",
       "url": "https://github.com/shurongwang/DynFrs",
       "kind": "code-repository",
@@ -2084,7 +2330,7 @@
         {
           "slug": "DynFrs",
           "locations": [
-            "frontmatter.links[2].url"
+            "frontmatter.links[3].url"
           ],
           "citation": false,
           "footnote": false
@@ -2092,7 +2338,7 @@
         {
           "slug": "DynFrs_zh",
           "locations": [
-            "frontmatter.links[2].url"
+            "frontmatter.links[3].url"
           ],
           "citation": false,
           "footnote": false
@@ -2377,7 +2623,7 @@
         {
           "slug": "Hessian_Free_Online_Certified_Unlearning",
           "locations": [
-            "frontmatter.links[2].url"
+            "frontmatter.links[3].url"
           ],
           "citation": false,
           "footnote": false
@@ -2385,7 +2631,7 @@
         {
           "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
           "locations": [
-            "frontmatter.links[2].url"
+            "frontmatter.links[3].url"
           ],
           "citation": false,
           "footnote": false

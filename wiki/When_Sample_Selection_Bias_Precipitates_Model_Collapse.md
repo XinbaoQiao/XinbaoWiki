@@ -12,15 +12,16 @@ tags:
   - icml-2026
   - synthetic-data
 timestamp: '2026-06-02T22:56:50+08:00'
-modified: '2026-07-12T20:00:05+08:00'
-content_hash: 'sha256:0132752b19a51f653c6b62a66468fb1b3f3dcbd45675f431a2fcd7528fcd38a2'
-reviewed_at: '2026-07-12T20:00:05+08:00'
-review_due: '2027-07-12'
+modified: '2026-09-27T11:41:29.339Z'
+content_hash: 'sha256:543e3cc6633709a96ddeffa2f3f51be0833cc55d25f3ccfa483ba371345750ef'
+reviewed_at: '2026-09-27T11:41:45.575Z'
+review_due: '2027-09-27'
 name: When Sample Selection Bias Precipitates Model Collapse
 summary: >-
   ICML 2026 paper on low-resource verification regimes, sample-selection bias,
   model collapse, and collaborative Wasserstein-geometry proxies.
 occupation: ICML 2026 paper
+dates: 6-11 July 2026
 authors:
   - Xinbao Qiao
   - Xianglong Du

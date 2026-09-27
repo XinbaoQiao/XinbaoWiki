@@ -2629,8 +2629,30 @@ for (const page of ['CV.md', 'CV_zh.md']) {
   assert.deepEqual(positions, [...positions].sort((a, b) => a - b), page + ' follows the selected-publication order');
   assert.ok(content.indexOf(page === 'CV.md' ? 'Under review.' : '在审。') > positions.at(-1), page + ' places the under-review manuscript last');
 }
-assert.match(read('Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md'), /Peihua Mai, Zhuoyan Shao, and Xinbao Qiao contributed equally as co-first authors/, 'English paper page states equal first contribution');
-assert.match(read('Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md'), /Peihua Mai、Zhuoyan Shao 和乔鑫宝贡献相同，均为共同第一作者/, 'Chinese paper page states equal first contribution');
+assert.ok(read('Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md').includes('Peihua Mai\\*, Zhuoyan Shao\\*, **[[Xinbao_Qiao|Xinbao Qiao]]**\\*'), 'English paper page marks all three co-first authors');
+assert.ok(read('Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md').includes('Peihua Mai\\*、Zhuoyan Shao\\*、**[[Xinbao_Qiao|乔鑫宝]]**\\*'), 'Chinese paper page marks all three co-first authors');
+for (const zh of [false, true]) {
+  const indexPage = zh ? 'Publications_zh.md' : 'Publications.md';
+  const paperPage = `Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models${zh ? '_zh' : ''}.md`;
+  for (const page of [indexPage, paperPage]) {
+    assert.ok(read(page).includes(zh ? '\\* 共同第一作者。' : '\\* Co-first authors.'), `${page} uses a concise authorship legend`);
+    assert.doesNotMatch(read(page), /contributed equally as co-first authors|贡献相同，均为共同第一作者/, `${page} avoids a repeated author-name explanation`);
+  }
+  // Derive the coverage from the actual index so new papers cannot miss metadata checks.
+  for (const row of read(indexPage).split('\n').filter((line) => line.startsWith('| **[['))) {
+    const slug = row.match(/^\| \*\*\[\[([^|\]]+)/)[1];
+    const page = `${slug}${zh ? '_zh' : ''}.md`;
+    const data = frontmatterData(page);
+    for (const field of ['venue', 'dates', 'location', 'status']) {
+      assert.ok(typeof data[field] === 'string' && data[field].trim(), `${page} supplies ${field}`);
+    }
+    const venueCell = row.split(' | ').at(-1).replace(/\s*\|$/, '');
+    assert.ok(venueCell.includes(data.dates), `${indexPage} dates agree with ${page}`);
+    assert.ok(venueCell.includes(data.venue), `${indexPage} venue agrees with ${page}`);
+    const conferenceLink = data.links.find((link) => link.label.startsWith(data.venue));
+    assert.ok(conferenceLink && venueCell.includes(conferenceLink.url), `${indexPage} cites the same official conference page as ${page}`);
+  }
+}
 assert.ok(read('Publications.md').includes('Peihua Mai\\*, Zhuoyan Shao\\*, **Xinbao Qiao**\\*'), 'English publication index marks three co-first authors');
 assert.ok(read('Publications_zh.md').includes('Peihua Mai\\*、Zhuoyan Shao\\*、**乔鑫宝**\\*'), 'Chinese publication index marks three co-first authors');
 assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English OKF CV concept labels the PDF link as résumé');

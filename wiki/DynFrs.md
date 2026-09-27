@@ -9,12 +9,13 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T21:39:01+08:00'
-modified: '2026-07-08T13:18:57+08:00'
-content_hash: 'sha256:e6ac063f602e015e12506e44c362a212c8155400bf1007d5aaa5be220af99a47'
-reviewed_at: '2026-07-08T13:18:57+08:00'
-review_due: '2026-10-06'
+modified: '2026-09-27T11:41:29.310Z'
+content_hash: 'sha256:607d21b9f9d344e69559bb4d489b1137a36960067ecfb102f57ab822f885217f'
+reviewed_at: '2026-09-27T11:41:45.577Z'
+review_due: '2026-12-26'
 name: 'DynFrs: An Efficient Framework for Machine Unlearning in Random Forest'
 summary: ICLR 2025 paper on efficient machine unlearning for random forests.
+dates: 24-28 April 2025
 authors:
   - Shurong Wang
   - Zhuoyang Shen
@@ -27,6 +28,8 @@ year: 2025
 status: ICLR 2025 poster
 publication_type: Conference paper
 links:
+  - label: ICLR 2025 conference
+    url: 'https://iclr.cc/Conferences/2025'
   - label: OpenReview
     url: 'https://openreview.net/forum?id=nsCOeCLR8e'
   - label: arXiv
