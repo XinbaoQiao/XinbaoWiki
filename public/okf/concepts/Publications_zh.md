@@ -8,9 +8,9 @@ tags:
   - index
   - 论文列表
 timestamp: '2026-06-01T22:04:00+08:00'
-modified: '2026-09-27T11:41:29.327Z'
-content_hash: 'sha256:629735a9ac9611a1d71549e8150e61bbb73c89cbc2bb69555cc228ecc47409a8'
-reviewed_at: '2026-09-27T11:41:45.574Z'
+modified: '2026-09-27T12:52:23.252Z'
+content_hash: 'sha256:abcb17caf4656406272781c356a9d1a960b39018284404fdb8818db177a4ff77'
+reviewed_at: '2026-09-27T12:52:49.768Z'
 review_due: '2026-12-26'
 language: zh
 lifecycle:
@@ -18,7 +18,7 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-09-27T11:41:45.574Z'
+  reviewedAt: '2026-09-27T12:52:49.768Z'
   reviewDue: '2026-12-26'
   pendingReview: false
   overdue: false
@@ -36,13 +36,13 @@ source_path: wiki/Publications_zh.md
 
 ## 已录用论文
 
-| 论文 | 会议与状态 |
+| 论文 | 会议 |
 |---|---|
-| **[Illusory Pattern Perception Drives Spurious Inference in Large Language Models](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md)**。<br />Peihua Mai\*、Zhuoyan Shao\*、**乔鑫宝**\*、张萌、Xinyue Zhou、Yan Pang。<br />*提示中的错觉模式可能使大语言模型作出缺乏证据支持的推理。* | [NeurIPS 2026](https://neurips.cc/Conferences/2026)，<br />2026年12月6日至12日，<br />澳大利亚悉尼（主会场），<br />已录用。 |
-| **[样本选择偏差何以促成模型坍缩](./When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md)**。<br />**乔鑫宝**、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌、Yan Pang。<br />*研究低资源验证机制如何把局部样本选择变成持续的尾部剪枝。* | [ICML 2026](https://icml.cc/Conferences/2026)，<br />2026年7月6日至11日，<br />韩国首尔，<br />已录用。 |
-| **[超越二元擦除：用于公平性与鲁棒性的软加权遗忘](./Soft_Weighted_Machine_Unlearning_zh.md)**。<br />**乔鑫宝**、Ningning Ding、Yushi Cheng、张萌。<br />*研究面向非二元公平性与鲁棒性干预的软加权修正遗忘。* | [AAAI 2026](https://aaai.org/conference/aaai/aaai-26/)，<br />2026年1月20日至27日，<br />新加坡，<br />已录用。 |
-| **[无 Hessian 在线认证遗忘](./Hessian_Free_Online_Certified_Unlearning_zh.md)**。<br />**乔鑫宝**、张萌、Ming Tang、Ermin Wei。<br />*研究不显式求逆 Hessian 的认证遗忘，以及基于轨迹统计的高效删除。* | [ICLR 2025](https://iclr.cc/Conferences/2025)，<br />2025年4月24日至28日，<br />新加坡，<br />海报论文。 |
-| **[DynFrs：随机森林机器遗忘高效框架](./DynFrs_zh.md)**。<br />Shurong Wang、Zhuoyang Shen、**乔鑫宝**、Tongning Zhang、张萌。<br />*研究动态环境中随机森林的精确高效遗忘。* | [ICLR 2025](https://iclr.cc/Conferences/2025)，<br />2025年4月24日至28日，<br />新加坡，<br />海报论文。 |
+| **[Illusory Pattern Perception Drives Spurious Inference in Large Language Models](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md)**。<br />Peihua Mai\*、Zhuoyan Shao\*、**乔鑫宝**\*、张萌、Xinyue Zhou、Yan Pang。<br />*提示中的错觉模式可能使大语言模型作出缺乏证据支持的推理。* | [NeurIPS 2026](https://neurips.cc/Conferences/2026)，<br />2026年12月6日至12日，<br />澳大利亚悉尼（主会场）。 |
+| **[样本选择偏差何以促成模型坍缩](./When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md)**。<br />**乔鑫宝**、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌、Yan Pang。<br />*研究低资源验证机制如何把局部样本选择变成持续的尾部剪枝。* | [ICML 2026](https://icml.cc/Conferences/2026)，<br />2026年7月6日至11日，<br />韩国首尔。 |
+| **[超越二元擦除：用于公平性与鲁棒性的软加权遗忘](./Soft_Weighted_Machine_Unlearning_zh.md)**。<br />**乔鑫宝**、Ningning Ding、Yushi Cheng、张萌。<br />*研究面向非二元公平性与鲁棒性干预的软加权修正遗忘。* | [AAAI 2026](https://aaai.org/conference/aaai/aaai-26/)，<br />2026年1月20日至27日，<br />新加坡。 |
+| **[无 Hessian 在线认证遗忘](./Hessian_Free_Online_Certified_Unlearning_zh.md)**。<br />**乔鑫宝**、张萌、Ming Tang、Ermin Wei。<br />*研究不显式求逆 Hessian 的认证遗忘，以及基于轨迹统计的高效删除。* | [ICLR 2025](https://iclr.cc/Conferences/2025)，<br />2025年4月24日至28日，<br />新加坡。 |
+| **[DynFrs：随机森林机器遗忘高效框架](./DynFrs_zh.md)**。<br />Shurong Wang、Zhuoyang Shen、**乔鑫宝**、Tongning Zhang、张萌。<br />*研究动态环境中随机森林的精确高效遗忘。* | [ICLR 2025](https://iclr.cc/Conferences/2025)，<br />2025年4月24日至28日，<br />新加坡。 |
 
 \* 共同第一作者。
 

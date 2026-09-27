@@ -1530,6 +1530,11 @@ body:has(.wiki-portal) .wiki-topbar {
   line-height: 1.45;
 }
 
+.wiki-body .publication-oral {
+  color: #d32f2f;
+  white-space: nowrap;
+}
+
 .wiki-main th,
 .wiki-main td {
   padding: 6px 8px;

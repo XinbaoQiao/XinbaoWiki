@@ -79,6 +79,9 @@ export function WikiMarkdown({ editLabel, markdown, sourceHref }: Props) {
           },
           td({ children }) {
             return <td>{renderTableLineBreaks(children)}</td>;
+          },
+          strong({ children }) {
+            return <strong className={children === 'Oral' ? 'publication-oral' : undefined}>{children}</strong>;
           }
         }}
       >

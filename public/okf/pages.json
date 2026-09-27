@@ -1294,9 +1294,9 @@
         "publication-list"
       ],
       "timestamp": "2026-06-01T22:00:31+08:00",
-      "modifiedAt": "2026-09-27T11:41:29.328Z",
-      "contentHash": "sha256:933e760276becbeb6d330f4e588a1cfa55f9a660e529144290334480fc0874ae",
-      "reviewedAt": "2026-09-27T11:41:45.573Z",
+      "modifiedAt": "2026-09-27T12:52:23.259Z",
+      "contentHash": "sha256:b7d4eb82df3b6ee4bb1ac4b447fc1ed370dfea1a127dc0e91e3024e62221bfe7",
+      "reviewedAt": "2026-09-27T12:52:49.768Z",
       "reviewDue": "2026-12-26",
       "sourceIds": [
         "src-508cc93a8723d9eb",
@@ -1314,7 +1314,7 @@
       "retrieval": {
         "documentId": "wiki:Publications",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:933e760276becbeb6d330f4e588a1cfa55f9a660e529144290334480fc0874ae",
+        "contentHash": "sha256:b7d4eb82df3b6ee4bb1ac4b447fc1ed370dfea1a127dc0e91e3024e62221bfe7",
         "textFields": [
           "title",
           "aliases",
@@ -2721,9 +2721,9 @@
         "论文列表"
       ],
       "timestamp": "2026-06-01T22:04:00+08:00",
-      "modifiedAt": "2026-09-27T11:41:29.327Z",
-      "contentHash": "sha256:629735a9ac9611a1d71549e8150e61bbb73c89cbc2bb69555cc228ecc47409a8",
-      "reviewedAt": "2026-09-27T11:41:45.574Z",
+      "modifiedAt": "2026-09-27T12:52:23.252Z",
+      "contentHash": "sha256:abcb17caf4656406272781c356a9d1a960b39018284404fdb8818db177a4ff77",
+      "reviewedAt": "2026-09-27T12:52:49.768Z",
       "reviewDue": "2026-12-26",
       "sourceIds": [
         "src-508cc93a8723d9eb",
@@ -2741,7 +2741,7 @@
       "retrieval": {
         "documentId": "wiki:Publications_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:629735a9ac9611a1d71549e8150e61bbb73c89cbc2bb69555cc228ecc47409a8",
+        "contentHash": "sha256:abcb17caf4656406272781c356a9d1a960b39018284404fdb8818db177a4ff77",
         "textFields": [
           "title",
           "aliases",

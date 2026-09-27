@@ -4480,7 +4480,7 @@
         "src-998b6c4324199ad3",
         "src-b005562340a1c871"
       ],
-      "contentHash": "sha256:933e760276becbeb6d330f4e588a1cfa55f9a660e529144290334480fc0874ae",
+      "contentHash": "sha256:b7d4eb82df3b6ee4bb1ac4b447fc1ed370dfea1a127dc0e91e3024e62221bfe7",
       "file": "Publications.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -4490,12 +4490,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-09-27T11:41:45.573Z",
+        "reviewedAt": "2026-09-27T12:52:49.768Z",
         "reviewDue": "2026-12-26",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-27T11:41:29.328Z",
+      "modifiedAt": "2026-09-27T12:52:23.259Z",
       "outgoing": [
         "AI_and_Networks",
         "Data_Centric_Machine_Learning",
@@ -4530,12 +4530,12 @@
       "timestamp": "2026-06-01T22:00:31+08:00",
       "title": "Publications",
       "type": "Publication list",
-      "reviewedAt": "2026-09-27T11:41:45.573Z",
+      "reviewedAt": "2026-09-27T12:52:49.768Z",
       "reviewDue": "2026-12-26",
       "retrieval": {
         "documentId": "wiki:Publications",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:933e760276becbeb6d330f4e588a1cfa55f9a660e529144290334480fc0874ae",
+        "contentHash": "sha256:b7d4eb82df3b6ee4bb1ac4b447fc1ed370dfea1a127dc0e91e3024e62221bfe7",
         "textFields": [
           "title",
           "aliases",
@@ -4569,7 +4569,7 @@
         "src-998b6c4324199ad3",
         "src-b005562340a1c871"
       ],
-      "contentHash": "sha256:629735a9ac9611a1d71549e8150e61bbb73c89cbc2bb69555cc228ecc47409a8",
+      "contentHash": "sha256:abcb17caf4656406272781c356a9d1a960b39018284404fdb8818db177a4ff77",
       "file": "Publications_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -4579,12 +4579,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-09-27T11:41:45.574Z",
+        "reviewedAt": "2026-09-27T12:52:49.768Z",
         "reviewDue": "2026-12-26",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-27T11:41:29.327Z",
+      "modifiedAt": "2026-09-27T12:52:23.252Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -4619,12 +4619,12 @@
       "timestamp": "2026-06-01T22:04:00+08:00",
       "title": "论文",
       "type": "论文列表",
-      "reviewedAt": "2026-09-27T11:41:45.574Z",
+      "reviewedAt": "2026-09-27T12:52:49.768Z",
       "reviewDue": "2026-12-26",
       "retrieval": {
         "documentId": "wiki:Publications_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:629735a9ac9611a1d71549e8150e61bbb73c89cbc2bb69555cc228ecc47409a8",
+        "contentHash": "sha256:abcb17caf4656406272781c356a9d1a960b39018284404fdb8818db177a4ff77",
         "textFields": [
           "title",
           "aliases",
