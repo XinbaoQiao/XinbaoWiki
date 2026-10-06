@@ -16,10 +16,10 @@
         "ai-and-networks"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:e29224a6e9ced60652a179982834df6b1aa7fa7cde79ecf1e340d56c4e8508c6",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-06T15:55:58.149Z",
+      "contentHash": "sha256:dfbbfa7ff610f79703c1e20e003317c3a9b47eeea1a9084a0bfbfd63a5305998",
+      "reviewedAt": "2026-10-06T15:56:41.014903+00:00",
+      "reviewDue": "2027-04-04",
       "sourceIds": [
         "src-5ffca2a581311c27",
         "src-766234e11681dad2"
@@ -35,7 +35,7 @@
       "retrieval": {
         "documentId": "wiki:AI_and_Networks",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:e29224a6e9ced60652a179982834df6b1aa7fa7cde79ecf1e340d56c4e8508c6",
+        "contentHash": "sha256:dfbbfa7ff610f79703c1e20e003317c3a9b47eeea1a9084a0bfbfd63a5305998",
         "textFields": [
           "title",
           "aliases",
@@ -249,10 +249,10 @@
         "cv-summary"
       ],
       "timestamp": "2026-07-02T19:37:18+08:00",
-      "modifiedAt": "2026-09-26T08:09:04.296Z",
-      "contentHash": "sha256:2e6bef8ac8bf818acdb83a41edf5a65b150d94a56d365d423537811f2fd359f1",
-      "reviewedAt": "2026-09-26T08:09:37.000Z",
-      "reviewDue": "2026-12-25",
+      "modifiedAt": "2026-10-06T16:11:19.173Z",
+      "contentHash": "sha256:0a2bdf27e75aa7aa964a56e14450d24b9e49ae38f6c170711b204a2d7e6a9329",
+      "reviewedAt": "2026-10-06T16:12:11.431042+00:00",
+      "reviewDue": "2027-01-04",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-0642a11373a83c47",
@@ -295,7 +295,7 @@
       "retrieval": {
         "documentId": "wiki:CV",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:2e6bef8ac8bf818acdb83a41edf5a65b150d94a56d365d423537811f2fd359f1",
+        "contentHash": "sha256:0a2bdf27e75aa7aa964a56e14450d24b9e49ae38f6c170711b204a2d7e6a9329",
         "textFields": [
           "title",
           "aliases",
@@ -437,6 +437,48 @@
       }
     },
     {
+      "slug": "Decentralized_Free_Support_Wasserstein_Barycenter",
+      "title": "Decentralized Free-Support Wasserstein Barycenter",
+      "summary": "Under-review manuscript on movable barycenter supports and shared geometric references under decentralized communication.",
+      "language": "en",
+      "type": "publication",
+      "tags": [
+        "en",
+        "publication",
+        "paper",
+        "under-review",
+        "wasserstein"
+      ],
+      "timestamp": "2026-08-20T00:00:00+09:00",
+      "modifiedAt": "2026-10-06T16:11:19.217Z",
+      "contentHash": "sha256:cbf4ce79c372ecc58be3a0e2bbdc8af11adcc54207a700f18643e6f8c86d29be",
+      "reviewedAt": "2026-10-06T16:12:11.432600+00:00",
+      "reviewDue": "2026-11-05",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Decentralized_Free_Support_Wasserstein_Barycenter",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:cbf4ce79c372ecc58be3a0e2bbdc8af11adcc54207a700f18643e6f8c86d29be",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
       "slug": "Distributed_Learning",
       "title": "Distributed Learning",
       "summary": "Concept page for learning with decentralized data, computation, or communication.",
@@ -491,10 +533,10 @@
         "wasserstein"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:ac832217767f95bb3b7abf0e98a1e4ce8a67ad69b99d4d8c880f113d3b2374da",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-06T15:56:02.294Z",
+      "contentHash": "sha256:ea6642e396c17e813a98854bf2b5fe2fa7169bfa3c342c1789f0fe09b0305285",
+      "reviewedAt": "2026-10-06T15:56:41.016617+00:00",
+      "reviewDue": "2027-04-04",
       "sourceIds": [
         "src-0d6548913a8c228f",
         "src-3157a848b3737221"
@@ -510,7 +552,7 @@
       "retrieval": {
         "documentId": "wiki:Distributed_Wasserstein_Barycenter",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:ac832217767f95bb3b7abf0e98a1e4ce8a67ad69b99d4d8c880f113d3b2374da",
+        "contentHash": "sha256:ea6642e396c17e813a98854bf2b5fe2fa7169bfa3c342c1789f0fe09b0305285",
         "textFields": [
           "title",
           "aliases",
@@ -845,17 +887,17 @@
         "wiki-index"
       ],
       "timestamp": "2026-05-07T17:34:07+08:00",
-      "modifiedAt": "2026-09-26T03:14:39.284Z",
-      "contentHash": "sha256:d3e94cb04e82f64ff8faf8f627fb425891b0ca0ee253ec6bb670a21f809cdd65",
-      "reviewedAt": "2026-09-26T03:15:12.636Z",
-      "reviewDue": "2027-09-26",
+      "modifiedAt": "2026-10-06T16:11:19.340Z",
+      "contentHash": "sha256:61f707f2bc084e6e3e9c92df691f017bde347d81c4eb56bbe969517b52eb26dc",
+      "reviewedAt": "2026-10-06T16:12:11.433874+00:00",
+      "reviewDue": "2027-10-06",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:index",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:d3e94cb04e82f64ff8faf8f627fb425891b0ca0ee253ec6bb670a21f809cdd65",
+        "contentHash": "sha256:61f707f2bc084e6e3e9c92df691f017bde347d81c4eb56bbe969517b52eb26dc",
         "textFields": [
           "title",
           "aliases",
@@ -1294,10 +1336,10 @@
         "publication-list"
       ],
       "timestamp": "2026-06-01T22:00:31+08:00",
-      "modifiedAt": "2026-09-27T12:52:23.259Z",
-      "contentHash": "sha256:b7d4eb82df3b6ee4bb1ac4b447fc1ed370dfea1a127dc0e91e3024e62221bfe7",
-      "reviewedAt": "2026-09-27T12:52:49.768Z",
-      "reviewDue": "2026-12-26",
+      "modifiedAt": "2026-10-06T16:11:19.508Z",
+      "contentHash": "sha256:6f4ee39a7241a6ea7905e12b5f9f708925b7e324b8d57f186294e012dcac810e",
+      "reviewedAt": "2026-10-06T16:12:11.434524+00:00",
+      "reviewDue": "2027-01-04",
       "sourceIds": [
         "src-508cc93a8723d9eb",
         "src-766234e11681dad2",
@@ -1314,7 +1356,7 @@
       "retrieval": {
         "documentId": "wiki:Publications",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:b7d4eb82df3b6ee4bb1ac4b447fc1ed370dfea1a127dc0e91e3024e62221bfe7",
+        "contentHash": "sha256:6f4ee39a7241a6ea7905e12b5f9f708925b7e324b8d57f186294e012dcac810e",
         "textFields": [
           "title",
           "aliases",
@@ -1434,17 +1476,17 @@
         "research-overview"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-09-26T03:14:39.306Z",
-      "contentHash": "sha256:e61b51fc87645fd464569bb60f7a2425cb124feaeca5d8b7dbe102e0a1c10516",
-      "reviewedAt": "2026-09-26T03:15:12.636Z",
-      "reviewDue": "2026-12-25",
+      "modifiedAt": "2026-10-06T15:56:02.593Z",
+      "contentHash": "sha256:797ad93d8b2eef1568048abaaeeab07b1c936b1b36eb3b082c8ebaf9b977bb07",
+      "reviewedAt": "2026-10-06T15:56:41.019106+00:00",
+      "reviewDue": "2027-01-04",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Research",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:e61b51fc87645fd464569bb60f7a2425cb124feaeca5d8b7dbe102e0a1c10516",
+        "contentHash": "sha256:797ad93d8b2eef1568048abaaeeab07b1c936b1b36eb3b082c8ebaf9b977bb07",
         "textFields": [
           "title",
           "aliases",
@@ -1897,10 +1939,10 @@
         "phd-student"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-09-25T04:53:27.434Z",
-      "contentHash": "sha256:61e34d6882d795cd09cd6c0134dddbc93821f2db611c8e2a2174e2c14bff943c",
-      "reviewedAt": "2026-09-25T04:54:14.029Z",
-      "reviewDue": "2026-12-24",
+      "modifiedAt": "2026-10-06T15:56:02.729Z",
+      "contentHash": "sha256:15335c0a64ddb0ae4fe47e5140b1f6f9488b43ec06e56b57637b0e4a5d7e9d8a",
+      "reviewedAt": "2026-10-06T15:56:41.020410+00:00",
+      "reviewDue": "2027-01-04",
       "sourceIds": [
         "src-264e39cbec8d2f89",
         "src-30f33d3201c476ab",
@@ -1940,7 +1982,7 @@
       "retrieval": {
         "documentId": "wiki:Xinbao_Qiao",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:61e34d6882d795cd09cd6c0134dddbc93821f2db611c8e2a2174e2c14bff943c",
+        "contentHash": "sha256:15335c0a64ddb0ae4fe47e5140b1f6f9488b43ec06e56b57637b0e4a5d7e9d8a",
         "textFields": [
           "title",
           "aliases",
@@ -2215,10 +2257,10 @@
         "wasserstein"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:07336e6f8ccb466caccf4710fad348230218dd8bbb1f5f57f389f28f285757a9",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-06T15:56:02.292Z",
+      "contentHash": "sha256:b67673faf482d7f191c0e393306303cab0213522510bfc58c848cbb8638a7f84",
+      "reviewedAt": "2026-10-06T15:56:41.017046+00:00",
+      "reviewDue": "2027-04-04",
       "sourceIds": [
         "src-0d6548913a8c228f",
         "src-3157a848b3737221"
@@ -2234,7 +2276,7 @@
       "retrieval": {
         "documentId": "wiki:Distributed_Wasserstein_Barycenter_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:07336e6f8ccb466caccf4710fad348230218dd8bbb1f5f57f389f28f285757a9",
+        "contentHash": "sha256:b67673faf482d7f191c0e393306303cab0213522510bfc58c848cbb8638a7f84",
         "textFields": [
           "title",
           "aliases",
@@ -2520,10 +2562,10 @@
         "cv-摘要"
       ],
       "timestamp": "2026-07-02T19:37:18+08:00",
-      "modifiedAt": "2026-09-26T08:09:04.295Z",
-      "contentHash": "sha256:e38a3dde63e25e60e6a4a4d47d697d0dbc1bc5eb9c4051a71468a9e9d6ecb1d5",
-      "reviewedAt": "2026-09-26T08:09:37.000Z",
-      "reviewDue": "2026-12-25",
+      "modifiedAt": "2026-10-06T16:11:19.162Z",
+      "contentHash": "sha256:3a3fb0a6ee4923f923acdbe935d29f47256446215a96fa958e357e473d5b4081",
+      "reviewedAt": "2026-10-06T16:12:11.431923+00:00",
+      "reviewDue": "2027-01-04",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-0642a11373a83c47",
@@ -2566,7 +2608,7 @@
       "retrieval": {
         "documentId": "wiki:CV_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:e38a3dde63e25e60e6a4a4d47d697d0dbc1bc5eb9c4051a71468a9e9d6ecb1d5",
+        "contentHash": "sha256:3a3fb0a6ee4923f923acdbe935d29f47256446215a96fa958e357e473d5b4081",
         "textFields": [
           "title",
           "aliases",
@@ -2721,10 +2763,10 @@
         "论文列表"
       ],
       "timestamp": "2026-06-01T22:04:00+08:00",
-      "modifiedAt": "2026-09-27T12:52:23.252Z",
-      "contentHash": "sha256:abcb17caf4656406272781c356a9d1a960b39018284404fdb8818db177a4ff77",
-      "reviewedAt": "2026-09-27T12:52:49.768Z",
-      "reviewDue": "2026-12-26",
+      "modifiedAt": "2026-10-06T16:11:19.499Z",
+      "contentHash": "sha256:ec1666f1d0f5ef00e813cb6a5ae6965ab6088f97b44d7d8e0fc7dc58030929d2",
+      "reviewedAt": "2026-10-06T16:12:11.435208+00:00",
+      "reviewDue": "2027-01-04",
       "sourceIds": [
         "src-508cc93a8723d9eb",
         "src-766234e11681dad2",
@@ -2741,7 +2783,7 @@
       "retrieval": {
         "documentId": "wiki:Publications_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:abcb17caf4656406272781c356a9d1a960b39018284404fdb8818db177a4ff77",
+        "contentHash": "sha256:ec1666f1d0f5ef00e813cb6a5ae6965ab6088f97b44d7d8e0fc7dc58030929d2",
         "textFields": [
           "title",
           "aliases",
@@ -2820,10 +2862,10 @@
         "博士生"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-09-25T04:53:27.410Z",
-      "contentHash": "sha256:91a45d1089ce31c847ead75b1c1e9b2ce0dac88da8ab5f0ec4d94bce79544264",
-      "reviewedAt": "2026-09-25T04:54:14.029Z",
-      "reviewDue": "2026-12-24",
+      "modifiedAt": "2026-10-06T15:56:02.564Z",
+      "contentHash": "sha256:5b99f9a557560ac9f04425af5dfb90ae07970941db68a6c26fff23715545a837",
+      "reviewedAt": "2026-10-06T15:56:41.018163+00:00",
+      "reviewDue": "2027-01-04",
       "sourceIds": [
         "src-264e39cbec8d2f89",
         "src-30f33d3201c476ab",
@@ -2863,7 +2905,7 @@
       "retrieval": {
         "documentId": "wiki:Qiao_Xinbao_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:91a45d1089ce31c847ead75b1c1e9b2ce0dac88da8ab5f0ec4d94bce79544264",
+        "contentHash": "sha256:5b99f9a557560ac9f04425af5dfb90ae07970941db68a6c26fff23715545a837",
         "textFields": [
           "title",
           "aliases",
@@ -3418,17 +3460,17 @@
         "研究概览"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-09-26T03:14:39.306Z",
-      "contentHash": "sha256:292bbf81253d117ee0cc401cfd4b2722c52d753ca7ed725f3f9b96356bd34ecc",
-      "reviewedAt": "2026-09-26T03:15:12.636Z",
-      "reviewDue": "2026-12-25",
+      "modifiedAt": "2026-10-06T15:56:02.592Z",
+      "contentHash": "sha256:a7dc125b460f4f07bbe42c085cbb978a1edda11624066928969a4d21fa47db8d",
+      "reviewedAt": "2026-10-06T15:56:41.019813+00:00",
+      "reviewDue": "2027-01-04",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Research_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:292bbf81253d117ee0cc401cfd4b2722c52d753ca7ed725f3f9b96356bd34ecc",
+        "contentHash": "sha256:a7dc125b460f4f07bbe42c085cbb978a1edda11624066928969a4d21fa47db8d",
         "textFields": [
           "title",
           "aliases",
@@ -3820,10 +3862,10 @@
         "ai-and-networks"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:7b32da24e1154e954f16034881a76556c41f899f2b331d02ac50caf8cadf696a",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-06T15:55:58.146Z",
+      "contentHash": "sha256:bd6ddd0ef148f5e63e11caa1c97b4a5735eca6cf4b786df0feace503b685c345",
+      "reviewedAt": "2026-10-06T15:56:41.015397+00:00",
+      "reviewDue": "2027-04-04",
       "sourceIds": [
         "src-5ffca2a581311c27",
         "src-766234e11681dad2"
@@ -3839,7 +3881,49 @@
       "retrieval": {
         "documentId": "wiki:AI_and_Networks_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:7b32da24e1154e954f16034881a76556c41f899f2b331d02ac50caf8cadf696a",
+        "contentHash": "sha256:bd6ddd0ef148f5e63e11caa1c97b4a5735eca6cf4b786df0feace503b685c345",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
+      "title": "Decentralized Free-Support Wasserstein Barycenter",
+      "summary": "在审稿件，研究可移动支撑点如何在去中心化通信约束下构建共享几何参考。",
+      "language": "zh",
+      "type": "publication",
+      "tags": [
+        "zh",
+        "publication",
+        "paper",
+        "under-review",
+        "wasserstein"
+      ],
+      "timestamp": "2026-08-20T00:00:00+09:00",
+      "modifiedAt": "2026-10-06T16:11:19.215Z",
+      "contentHash": "sha256:eb13a956b4be7416bd126789760956dd81da840fea6123f5f89d102f5319fe9d",
+      "reviewedAt": "2026-10-06T16:12:11.433332+00:00",
+      "reviewDue": "2026-11-05",
+      "sourceIds": [],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Decentralized_Free_Support_Wasserstein_Barycenter_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:eb13a956b4be7416bd126789760956dd81da840fea6123f5f89d102f5319fe9d",
         "textFields": [
           "title",
           "aliases",

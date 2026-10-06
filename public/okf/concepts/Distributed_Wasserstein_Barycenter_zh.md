@@ -9,10 +9,10 @@ tags:
   - 研究概念
   - wasserstein
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:07336e6f8ccb466caccf4710fad348230218dd8bbb1f5f57f389f28f285757a9'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-10-06T15:56:02.292Z'
+content_hash: 'sha256:b67673faf482d7f191c0e393306303cab0213522510bfc58c848cbb8638a7f84'
+reviewed_at: '2026-10-06T15:56:41.017046+00:00'
+review_due: '2027-04-04'
 language: zh
 aliases:
   - 分布式 Wasserstein barycenter
@@ -23,8 +23,8 @@ lifecycle:
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-07-02T20:03:20+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-10-06T15:56:41.017046+00:00'
+  reviewDue: '2027-04-04'
   pendingReview: false
   overdue: false
 retrieval:
@@ -59,6 +59,8 @@ $$
 乔鑫宝的 ICML 2026 工作 [样本选择偏差何以促成模型坍缩](./When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md) 已经使用协作 Wasserstein 风格信号分析低资源数据孤岛下的合成数据失效。分布式 Wasserstein barycenter 在基础设施层面延续这一方向：当证据被切分在网络中时，如何计算可靠参考分布，而不是默认先汇总评估数据。
 
 该问题连接 [AI 与网络](./AI_and_Networks_zh.md)，因为计算对象会被通信模式塑造；也连接 [合成数据](./Synthetic_Data_and_Model_Collapse_zh.md)，因为递归生成需要分布检查；同时连接 [数据中心 ML](./Data_Centric_Machine_Learning_zh.md)，因为 barycenter 可以成为跨参与方判断数据或样本重要性的工具。
+
+在审稿件 [Decentralized Free-Support Wasserstein Barycenter](./Decentralized_Free_Support_Wasserstein_Barycenter_zh.md) 将这一方向具体化为自由支撑重心计算：通过学习支撑点位置，让共享参考适应分布几何，同时区分重心质量与网络一致性的通信需求。
 
 ## 参见
 

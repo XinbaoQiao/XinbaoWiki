@@ -18,7 +18,7 @@ Do **not** open a public Issue or Discussion for a suspected vulnerability.
 1. Preferred: use [GitHub private vulnerability
    reporting](https://github.com/XinbaoQiao/XinbaoWiki/security/advisories/new).
 2. If that channel is unavailable, email
-   [xinbaoqiao@cuhk.edu.hk](mailto:xinbaoqiao@cuhk.edu.hk) with the subject
+   [xinbaoqiao@link.cuhk.edu.hk](mailto:xinbaoqiao@link.cuhk.edu.hk) with the subject
    `Xinbaopedia security report`.
 
 Include only the information needed to reproduce and assess the problem:

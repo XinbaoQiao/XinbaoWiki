@@ -2,14 +2,14 @@
   "schemaVersion": 2,
   "okfVersion": "0.1",
   "counts": {
-    "pages": 90,
-    "publicPages": 86,
+    "pages": 92,
+    "publicPages": 88,
     "hiddenPages": 4,
-    "edges": 1073,
+    "edges": 1096,
     "warnings": 0,
     "languages": {
-      "en": 45,
-      "zh": 45
+      "en": 46,
+      "zh": 46
     },
     "types": {
       "博士生": 1,
@@ -35,7 +35,7 @@
       "PhD student": 1,
       "Project overview": 1,
       "Public research university": 3,
-      "publication": 12,
+      "publication": 14,
       "Publication list": 1,
       "Research concept": 15,
       "Research experience": 1,
@@ -97,7 +97,7 @@
     "uses": 0
   },
   "sourceCoverage": {
-    "pages": 86,
+    "pages": 88,
     "pagesWithSources": 42,
     "pagesWithoutSources": [
       {
@@ -181,6 +181,22 @@
         "reviewDue": "2026-12-29"
       },
       {
+        "slug": "Decentralized_Free_Support_Wasserstein_Barycenter",
+        "title": "Decentralized Free-Support Wasserstein Barycenter",
+        "language": "en",
+        "modifiedAt": "2026-10-06T16:11:19.217Z",
+        "reviewedAt": "2026-10-06T16:12:11.432600+00:00",
+        "reviewDue": "2026-11-05"
+      },
+      {
+        "slug": "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
+        "title": "Decentralized Free-Support Wasserstein Barycenter",
+        "language": "zh",
+        "modifiedAt": "2026-10-06T16:11:19.215Z",
+        "reviewedAt": "2026-10-06T16:12:11.433332+00:00",
+        "reviewDue": "2026-11-05"
+      },
+      {
         "slug": "Distributed_Learning",
         "title": "Distributed Learning",
         "language": "en",
@@ -248,9 +264,9 @@
         "slug": "index",
         "title": "Index",
         "language": "en",
-        "modifiedAt": "2026-09-26T03:14:39.284Z",
-        "reviewedAt": "2026-09-26T03:15:12.636Z",
-        "reviewDue": "2027-09-26"
+        "modifiedAt": "2026-10-06T16:11:19.340Z",
+        "reviewedAt": "2026-10-06T16:12:11.433874+00:00",
+        "reviewDue": "2027-10-06"
       },
       {
         "slug": "index_zh",
@@ -376,17 +392,17 @@
         "slug": "Research",
         "title": "Research",
         "language": "en",
-        "modifiedAt": "2026-09-26T03:14:39.306Z",
-        "reviewedAt": "2026-09-26T03:15:12.636Z",
-        "reviewDue": "2026-12-25"
+        "modifiedAt": "2026-10-06T15:56:02.593Z",
+        "reviewedAt": "2026-10-06T15:56:41.019106+00:00",
+        "reviewDue": "2027-01-04"
       },
       {
         "slug": "Research_zh",
         "title": "研究",
         "language": "zh",
-        "modifiedAt": "2026-09-26T03:14:39.306Z",
-        "reviewedAt": "2026-09-26T03:15:12.636Z",
-        "reviewDue": "2026-12-25"
+        "modifiedAt": "2026-10-06T15:56:02.592Z",
+        "reviewedAt": "2026-10-06T15:56:41.019813+00:00",
+        "reviewDue": "2027-01-04"
       },
       {
         "slug": "Sample_Selection_Bias",
@@ -453,11 +469,11 @@
         "reviewDue": "2027-03-25"
       }
     ],
-    "coverage": 0.4884,
+    "coverage": 0.4773,
     "registeredSources": 63
   },
   "citationCoverage": {
-    "pages": 86,
+    "pages": 88,
     "pagesWithBodyCitations": 32,
     "pagesWithFootnoteCitations": 28,
     "pagesWithoutBodyCitations": [
@@ -540,6 +556,22 @@
         "modifiedAt": "2026-07-02T20:03:20+08:00",
         "reviewedAt": "2026-07-02T20:03:20+08:00",
         "reviewDue": "2026-12-29"
+      },
+      {
+        "slug": "Decentralized_Free_Support_Wasserstein_Barycenter",
+        "title": "Decentralized Free-Support Wasserstein Barycenter",
+        "language": "en",
+        "modifiedAt": "2026-10-06T16:11:19.217Z",
+        "reviewedAt": "2026-10-06T16:12:11.432600+00:00",
+        "reviewDue": "2026-11-05"
+      },
+      {
+        "slug": "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
+        "title": "Decentralized Free-Support Wasserstein Barycenter",
+        "language": "zh",
+        "modifiedAt": "2026-10-06T16:11:19.215Z",
+        "reviewedAt": "2026-10-06T16:12:11.433332+00:00",
+        "reviewDue": "2026-11-05"
       },
       {
         "slug": "Distributed_Learning",
@@ -657,9 +689,9 @@
         "slug": "index",
         "title": "Index",
         "language": "en",
-        "modifiedAt": "2026-09-26T03:14:39.284Z",
-        "reviewedAt": "2026-09-26T03:15:12.636Z",
-        "reviewDue": "2027-09-26"
+        "modifiedAt": "2026-10-06T16:11:19.340Z",
+        "reviewedAt": "2026-10-06T16:12:11.433874+00:00",
+        "reviewDue": "2027-10-06"
       },
       {
         "slug": "index_zh",
@@ -785,17 +817,17 @@
         "slug": "Research",
         "title": "Research",
         "language": "en",
-        "modifiedAt": "2026-09-26T03:14:39.306Z",
-        "reviewedAt": "2026-09-26T03:15:12.636Z",
-        "reviewDue": "2026-12-25"
+        "modifiedAt": "2026-10-06T15:56:02.593Z",
+        "reviewedAt": "2026-10-06T15:56:41.019106+00:00",
+        "reviewDue": "2027-01-04"
       },
       {
         "slug": "Research_zh",
         "title": "研究",
         "language": "zh",
-        "modifiedAt": "2026-09-26T03:14:39.306Z",
-        "reviewedAt": "2026-09-26T03:15:12.636Z",
-        "reviewDue": "2026-12-25"
+        "modifiedAt": "2026-10-06T15:56:02.592Z",
+        "reviewedAt": "2026-10-06T15:56:41.019813+00:00",
+        "reviewDue": "2027-01-04"
       },
       {
         "slug": "Sample_Selection_Bias",
@@ -894,36 +926,36 @@
         "reviewDue": "2027-09-27"
       }
     ],
-    "coverage": 0.3721,
-    "footnoteCoverage": 0.3256
+    "coverage": 0.3636,
+    "footnoteCoverage": 0.3182
   },
   "reviewFreshness": {
-    "asOf": "2026-09-21",
+    "asOf": "2026-10-05",
     "policy": "review status is recalculated at the start of each UTC week",
-    "currentPages": 86,
+    "currentPages": 88,
     "overduePages": [],
     "pendingReviewPages": [],
-    "nextReviewDue": "2026-12-24"
+    "nextReviewDue": "2026-11-05"
   },
   "typedRelationCoverage": {
-    "pages": 86,
+    "pages": 88,
     "pagesWithTypedRelations": 2,
     "pagesWithoutTypedRelations": [
       {
         "slug": "AI_and_Networks",
         "title": "AI and Networks",
         "language": "en",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
+        "modifiedAt": "2026-10-06T15:55:58.149Z",
+        "reviewedAt": "2026-10-06T15:56:41.014903+00:00",
+        "reviewDue": "2027-04-04"
       },
       {
         "slug": "AI_and_Networks_zh",
         "title": "AI 与网络",
         "language": "zh",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
+        "modifiedAt": "2026-10-06T15:55:58.146Z",
+        "reviewedAt": "2026-10-06T15:56:41.015397+00:00",
+        "reviewDue": "2027-04-04"
       },
       {
         "slug": "Angela_Yingjun_Zhang",
@@ -977,17 +1009,17 @@
         "slug": "CV",
         "title": "Curriculum Vitae",
         "language": "en",
-        "modifiedAt": "2026-09-26T08:09:04.296Z",
-        "reviewedAt": "2026-09-26T08:09:37.000Z",
-        "reviewDue": "2026-12-25"
+        "modifiedAt": "2026-10-06T16:11:19.173Z",
+        "reviewedAt": "2026-10-06T16:12:11.431042+00:00",
+        "reviewDue": "2027-01-04"
       },
       {
         "slug": "CV_zh",
         "title": "简历",
         "language": "zh",
-        "modifiedAt": "2026-09-26T08:09:04.295Z",
-        "reviewedAt": "2026-09-26T08:09:37.000Z",
-        "reviewDue": "2026-12-25"
+        "modifiedAt": "2026-10-06T16:11:19.162Z",
+        "reviewedAt": "2026-10-06T16:12:11.431923+00:00",
+        "reviewDue": "2027-01-04"
       },
       {
         "slug": "Data_Centric_Machine_Learning",
@@ -1038,6 +1070,22 @@
         "reviewDue": "2026-12-29"
       },
       {
+        "slug": "Decentralized_Free_Support_Wasserstein_Barycenter",
+        "title": "Decentralized Free-Support Wasserstein Barycenter",
+        "language": "en",
+        "modifiedAt": "2026-10-06T16:11:19.217Z",
+        "reviewedAt": "2026-10-06T16:12:11.432600+00:00",
+        "reviewDue": "2026-11-05"
+      },
+      {
+        "slug": "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
+        "title": "Decentralized Free-Support Wasserstein Barycenter",
+        "language": "zh",
+        "modifiedAt": "2026-10-06T16:11:19.215Z",
+        "reviewedAt": "2026-10-06T16:12:11.433332+00:00",
+        "reviewDue": "2026-11-05"
+      },
+      {
         "slug": "Distributed_Learning",
         "title": "Distributed Learning",
         "language": "en",
@@ -1057,17 +1105,17 @@
         "slug": "Distributed_Wasserstein_Barycenter",
         "title": "Distributed Wasserstein Barycenter",
         "language": "en",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
+        "modifiedAt": "2026-10-06T15:56:02.294Z",
+        "reviewedAt": "2026-10-06T15:56:41.016617+00:00",
+        "reviewDue": "2027-04-04"
       },
       {
         "slug": "Distributed_Wasserstein_Barycenter_zh",
         "title": "分布式 Wasserstein Barycenter",
         "language": "zh",
-        "modifiedAt": "2026-07-02T20:03:20+08:00",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29"
+        "modifiedAt": "2026-10-06T15:56:02.292Z",
+        "reviewedAt": "2026-10-06T15:56:41.017046+00:00",
+        "reviewDue": "2027-04-04"
       },
       {
         "slug": "DynFrs",
@@ -1169,9 +1217,9 @@
         "slug": "index",
         "title": "Index",
         "language": "en",
-        "modifiedAt": "2026-09-26T03:14:39.284Z",
-        "reviewedAt": "2026-09-26T03:15:12.636Z",
-        "reviewDue": "2027-09-26"
+        "modifiedAt": "2026-10-06T16:11:19.340Z",
+        "reviewedAt": "2026-10-06T16:12:11.433874+00:00",
+        "reviewDue": "2027-10-06"
       },
       {
         "slug": "index_zh",
@@ -1345,25 +1393,25 @@
         "slug": "Publications",
         "title": "Publications",
         "language": "en",
-        "modifiedAt": "2026-09-27T12:52:23.259Z",
-        "reviewedAt": "2026-09-27T12:52:49.768Z",
-        "reviewDue": "2026-12-26"
+        "modifiedAt": "2026-10-06T16:11:19.508Z",
+        "reviewedAt": "2026-10-06T16:12:11.434524+00:00",
+        "reviewDue": "2027-01-04"
       },
       {
         "slug": "Publications_zh",
         "title": "论文",
         "language": "zh",
-        "modifiedAt": "2026-09-27T12:52:23.252Z",
-        "reviewedAt": "2026-09-27T12:52:49.768Z",
-        "reviewDue": "2026-12-26"
+        "modifiedAt": "2026-10-06T16:11:19.499Z",
+        "reviewedAt": "2026-10-06T16:12:11.435208+00:00",
+        "reviewDue": "2027-01-04"
       },
       {
         "slug": "Qiao_Xinbao_zh",
         "title": "乔鑫宝",
         "language": "zh",
-        "modifiedAt": "2026-09-25T04:53:27.410Z",
-        "reviewedAt": "2026-09-25T04:54:14.029Z",
-        "reviewDue": "2026-12-24"
+        "modifiedAt": "2026-10-06T15:56:02.564Z",
+        "reviewedAt": "2026-10-06T15:56:41.018163+00:00",
+        "reviewDue": "2027-01-04"
       },
       {
         "slug": "Random_Forest",
@@ -1401,17 +1449,17 @@
         "slug": "Research",
         "title": "Research",
         "language": "en",
-        "modifiedAt": "2026-09-26T03:14:39.306Z",
-        "reviewedAt": "2026-09-26T03:15:12.636Z",
-        "reviewDue": "2026-12-25"
+        "modifiedAt": "2026-10-06T15:56:02.593Z",
+        "reviewedAt": "2026-10-06T15:56:41.019106+00:00",
+        "reviewDue": "2027-01-04"
       },
       {
         "slug": "Research_zh",
         "title": "研究",
         "language": "zh",
-        "modifiedAt": "2026-09-26T03:14:39.306Z",
-        "reviewedAt": "2026-09-26T03:15:12.636Z",
-        "reviewDue": "2026-12-25"
+        "modifiedAt": "2026-10-06T15:56:02.592Z",
+        "reviewedAt": "2026-10-06T15:56:41.019813+00:00",
+        "reviewDue": "2027-01-04"
       },
       {
         "slug": "Sample_Selection_Bias",
@@ -1561,9 +1609,9 @@
         "slug": "Xinbao_Qiao",
         "title": "Xinbao Qiao",
         "language": "en",
-        "modifiedAt": "2026-09-25T04:53:27.434Z",
-        "reviewedAt": "2026-09-25T04:54:14.029Z",
-        "reviewDue": "2026-12-24"
+        "modifiedAt": "2026-10-06T15:56:02.729Z",
+        "reviewedAt": "2026-10-06T15:56:41.020410+00:00",
+        "reviewDue": "2027-01-04"
       },
       {
         "slug": "Zhejiang_University",
@@ -1582,13 +1630,13 @@
         "reviewDue": "2027-01-08"
       }
     ],
-    "coverage": 0.0233,
+    "coverage": 0.0227,
     "structuredEdges": 2,
-    "totalEdges": 1073
+    "totalEdges": 1096
   },
   "retrievalReadiness": {
-    "pages": 86,
-    "readyPages": 86,
+    "pages": 88,
+    "readyPages": 88,
     "missingMetadataPages": [],
     "coverage": 1,
     "contract": "markdown-heading-v1 with stable wiki:<slug> document IDs and content hashes"

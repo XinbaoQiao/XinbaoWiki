@@ -8,18 +8,18 @@ tags:
   - profile
   - cv-summary
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-09-26T08:09:04.296Z'
-content_hash: 'sha256:2e6bef8ac8bf818acdb83a41edf5a65b150d94a56d365d423537811f2fd359f1'
-reviewed_at: '2026-09-26T08:09:37.000Z'
-review_due: '2026-12-25'
+modified: '2026-10-06T16:11:19.173Z'
+content_hash: 'sha256:0a2bdf27e75aa7aa964a56e14450d24b9e49ae38f6c170711b204a2d7e6a9329'
+reviewed_at: '2026-10-06T16:12:11.431042+00:00'
+review_due: '2027-01-04'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-09-26T08:09:37.000Z'
-  reviewDue: '2026-12-25'
+  reviewedAt: '2026-10-06T16:12:11.431042+00:00'
+  reviewDue: '2027-01-04'
   pendingReview: false
   overdue: false
 retrieval:
@@ -50,7 +50,7 @@ This page summarizes Xinbao Qiao's academic CV for wiki readers. A downloadable 
 ## Contact
 
 - Phone: [+852-70141618](tel:+85270141618)
-- Email: [xinbaoqiao@cuhk.edu.hk](mailto:xinbaoqiao@cuhk.edu.hk)
+- Email: [xinbaoqiao@link.cuhk.edu.hk](mailto:xinbaoqiao@link.cuhk.edu.hk)
 - Homepage: [xinbaopedia.top](https://xinbaopedia.top/)
 - GitHub: [GitHub](https://github.com/XinbaoQiao)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/xinbaoqiao/)
@@ -109,3 +109,6 @@ Asterisks (*) denote co-first authorship; daggers (†) denote corresponding aut
 - **Paper #6: Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification**.\
   **Xinbao Qiao**, Wenjing Yan†, Ying-Jun Angela Zhang.\
   Under review.
+- **Paper #7: Decentralized Free-Support Wasserstein Barycenter**.\
+  **Xinbao Qiao**, Bokai Hou, Peihua Mai, Wenqian Li, Wenjing Yan, Ying-Jun Angela Zhang.\
+  Under review. Details: [Decentralized Free-Support Wasserstein Barycenter](./Decentralized_Free_Support_Wasserstein_Barycenter.md).

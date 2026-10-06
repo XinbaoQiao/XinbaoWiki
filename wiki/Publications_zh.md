@@ -8,10 +8,10 @@ tags:
   - index
   - 论文列表
 timestamp: '2026-06-01T22:04:00+08:00'
-modified: '2026-09-27T12:52:23.252Z'
-content_hash: 'sha256:abcb17caf4656406272781c356a9d1a960b39018284404fdb8818db177a4ff77'
-reviewed_at: '2026-09-27T12:52:49.768Z'
-review_due: '2026-12-26'
+modified: '2026-10-06T16:11:19.499Z'
+content_hash: 'sha256:ec1666f1d0f5ef00e813cb6a5ae6965ab6088f97b44d7d8e0fc7dc58030929d2'
+reviewed_at: '2026-10-06T16:12:11.435208+00:00'
+review_due: '2027-01-04'
 name: 论文
 language: zh
 summary: 乔鑫宝的论文索引。
@@ -31,6 +31,13 @@ translation_of: Publications
 | **[[DynFrs|DynFrs：随机森林机器遗忘高效框架]]**。<br />Shurong Wang、Zhuoyang Shen、**乔鑫宝**、Tongning Zhang、张萌。<br />*研究动态环境中随机森林的精确高效遗忘。* | [ICLR 2025](https://iclr.cc/Conferences/2025)，<br />2025年4月24日至28日，<br />新加坡。 |
 
 \* 共同第一作者。
+
+## 在审稿件
+
+- **[[Decentralized_Free_Support_Wasserstein_Barycenter|Decentralized Free-Support Wasserstein Barycenter]]**。\
+  **乔鑫宝**、Bokai Hou、Peihua Mai、Wenqian Li、Wenjing Yan、Ying-Jun Angela Zhang。\
+  在审（under review）。\
+  *通过可移动支撑点，在通信受限的网络中构建保留分布几何的共享重心。*
 
 ## 专题索引
 

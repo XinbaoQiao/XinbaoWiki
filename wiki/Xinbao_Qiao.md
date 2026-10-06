@@ -11,10 +11,10 @@ tags:
   - biography
   - phd-student
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-09-25T04:53:27.434Z'
-content_hash: 'sha256:61e34d6882d795cd09cd6c0134dddbc93821f2db611c8e2a2174e2c14bff943c'
-reviewed_at: '2026-09-25T04:54:14.029Z'
-review_due: '2026-12-24'
+modified: '2026-10-06T15:56:02.729Z'
+content_hash: 'sha256:15335c0a64ddb0ae4fe47e5140b1f6f9488b43ec06e56b57637b0e4a5d7e9d8a'
+reviewed_at: '2026-10-06T15:56:41.020410+00:00'
+review_due: '2027-01-04'
 name: Xinbao Qiao
 summary: >-
   PhD student in Information Engineering at The Chinese University of Hong Kong;
@@ -54,8 +54,8 @@ image_gallery:
     caption: 'Photograph generated for ICML 2026, Seoul COEX'
     fit: contain
 links:
-  - label: xinbaoqiao@cuhk.edu.hk
-    url: 'mailto:xinbaoqiao@cuhk.edu.hk'
+  - label: xinbaoqiao@link.cuhk.edu.hk
+    url: 'mailto:xinbaoqiao@link.cuhk.edu.hk'
   - title: OpenReview
     label: Xinbao Qiao
     url: 'https://openreview.net/profile?id=~Xinbao_Qiao1'
@@ -107,6 +107,8 @@ The project sections below group Qiao's work by research problem rather than by 
 ### AI and networks (2024-present)
 
 Qiao's current primary line, [[AI_and_Networks|AI and networks]], studies learning systems whose behavior depends on communication, locality, or networked infrastructure. In this usage, "networks" includes both AI for Networks and Networks for AI: where evidence is stored, how it moves, and which parties can evaluate or maintain a model. The topic links decentralized learning, communication-aware evaluation, [[Data_Silos|data silos]], [[Collaborative_Evaluation|collaborative evaluation]], [[Data_Centric_Machine_Learning|data-centric ML]], and [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenters]]. Within this line, [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] examines why low-resource communities and institutions with fragmented data coverage are especially vulnerable to model collapse under local sample-selection bias.
+
+The under-review manuscript [[Decentralized_Free_Support_Wasserstein_Barycenter|Decentralized Free-Support Wasserstein Barycenter]] develops this direction through free-support barycenter computation: learning support locations lets the shared reference adapt to distributional geometry, while separating the communication needed for barycenter quality from that needed for network agreement.
 
 ### Machine unlearning (2023-2026)
 

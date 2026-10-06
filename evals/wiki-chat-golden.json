@@ -126,7 +126,7 @@
       "category": "natural-query",
       "query": "What is Xinbao Qiao's email address?",
       "expectedSlugs": ["CV"],
-      "evidencePatterns": ["xinbaoqiao@cuhk.edu.hk"]
+      "evidencePatterns": ["xinbaoqiao@link.cuhk.edu.hk"]
     },
     {
       "id": "en-context-reference-dynfrs",
@@ -416,7 +416,7 @@
       "category": "natural-query",
       "query": "乔鑫宝的邮箱地址是什么？",
       "expectedSlugs": ["CV_zh"],
-      "evidencePatterns": ["xinbaoqiao@cuhk.edu.hk"]
+      "evidencePatterns": ["xinbaoqiao@link.cuhk.edu.hk"]
     },
     {
       "id": "zh-context-reference-dynfrs",

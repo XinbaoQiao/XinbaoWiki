@@ -8,18 +8,18 @@ tags:
   - profile
   - cv-摘要
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-09-26T08:09:04.295Z'
-content_hash: 'sha256:e38a3dde63e25e60e6a4a4d47d697d0dbc1bc5eb9c4051a71468a9e9d6ecb1d5'
-reviewed_at: '2026-09-26T08:09:37.000Z'
-review_due: '2026-12-25'
+modified: '2026-10-06T16:11:19.162Z'
+content_hash: 'sha256:3a3fb0a6ee4923f923acdbe935d29f47256446215a96fa958e357e473d5b4081'
+reviewed_at: '2026-10-06T16:12:11.431923+00:00'
+review_due: '2027-01-04'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-09-26T08:09:37.000Z'
-  reviewDue: '2026-12-25'
+  reviewedAt: '2026-10-06T16:12:11.431923+00:00'
+  reviewDue: '2027-01-04'
   pendingReview: false
   overdue: false
 retrieval:
@@ -50,7 +50,7 @@ source_path: wiki/CV_zh.md
 ## 联系方式
 
 - 电话：[+852-70141618](tel:+85270141618)
-- 邮箱：[xinbaoqiao@cuhk.edu.hk](mailto:xinbaoqiao@cuhk.edu.hk)
+- 邮箱：[xinbaoqiao@link.cuhk.edu.hk](mailto:xinbaoqiao@link.cuhk.edu.hk)
 - 主页：[xinbaopedia.top](https://xinbaopedia.top/)
 - GitHub：[GitHub](https://github.com/XinbaoQiao)
 - LinkedIn：[LinkedIn](https://www.linkedin.com/in/xinbaoqiao/)
@@ -109,3 +109,6 @@ source_path: wiki/CV_zh.md
 - **Paper #6: Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification**。\
   **乔鑫宝**、Wenjing Yan†、Ying-Jun Angela Zhang。\
   在审。
+- **Paper #7: Decentralized Free-Support Wasserstein Barycenter**。\
+  **乔鑫宝**、Bokai Hou、Peihua Mai、Wenqian Li、Wenjing Yan、Ying-Jun Angela Zhang。\
+  在审。详情见 [Decentralized Free-Support Wasserstein Barycenter](./Decentralized_Free_Support_Wasserstein_Barycenter_zh.md)。

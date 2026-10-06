@@ -8,10 +8,10 @@ tags:
   - biography
   - 博士生
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-09-25T04:53:27.410Z'
-content_hash: 'sha256:91a45d1089ce31c847ead75b1c1e9b2ce0dac88da8ab5f0ec4d94bce79544264'
-reviewed_at: '2026-09-25T04:54:14.029Z'
-review_due: '2026-12-24'
+modified: '2026-10-06T15:56:02.564Z'
+content_hash: 'sha256:5b99f9a557560ac9f04425af5dfb90ae07970941db68a6c26fff23715545a837'
+reviewed_at: '2026-10-06T15:56:41.018163+00:00'
+review_due: '2027-01-04'
 name: 乔鑫宝
 summary: 香港中文大学信息工程系博士生；研究方向包括数据中心 ML、AI for Networks、Networks for AI、机器遗忘和合成数据可靠性
 aliases:
@@ -50,8 +50,8 @@ image_gallery:
     caption: 'Photograph generated for ICML 2026, Seoul COEX'
     fit: contain
 links:
-  - label: xinbaoqiao@cuhk.edu.hk
-    url: 'mailto:xinbaoqiao@cuhk.edu.hk'
+  - label: xinbaoqiao@link.cuhk.edu.hk
+    url: 'mailto:xinbaoqiao@link.cuhk.edu.hk'
   - title: OpenReview
     label: Xinbao Qiao
     url: 'https://openreview.net/profile?id=~Xinbao_Qiao1'
@@ -103,6 +103,8 @@ nationality: 中国
 ### AI 与网络（2024至今）
 
 乔鑫宝当前的主要研究主线是[[AI_and_Networks|AI 与网络]]，关注学习系统如何受到通信、局部性和网络基础设施的影响。这里的“网络”同时包括 AI for Networks 和 Networks for AI：证据存在哪里、如何流动，以及哪些参与方能够评估或维护模型。该主线连接去中心化学习、通信感知评估、[[Data_Silos|数据孤岛]]、[[Collaborative_Evaluation|协作评估]]、[[Data_Centric_Machine_Learning|数据中心 ML]]和[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]。在这一主线下，[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]]研究低资源社区和数据覆盖碎片化机构为什么更容易在局部样本选择偏差下发生模型坍缩。
+
+在审稿件 [[Decentralized_Free_Support_Wasserstein_Barycenter|Decentralized Free-Support Wasserstein Barycenter]] 将这一方向具体化为自由支撑重心计算：通过学习支撑点位置，让共享参考适应分布几何，同时区分重心质量与网络一致性的通信需求。
 
 ### 机器遗忘（2023-2026）
 

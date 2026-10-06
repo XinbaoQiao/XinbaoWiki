@@ -8,18 +8,18 @@ tags:
   - navigation
   - wiki-index
 timestamp: '2026-05-07T17:34:07+08:00'
-modified: '2026-09-26T03:14:39.284Z'
-content_hash: 'sha256:d3e94cb04e82f64ff8faf8f627fb425891b0ca0ee253ec6bb670a21f809cdd65'
-reviewed_at: '2026-09-26T03:15:12.636Z'
-review_due: '2027-09-26'
+modified: '2026-10-06T16:11:19.340Z'
+content_hash: 'sha256:61f707f2bc084e6e3e9c92df691f017bde347d81c4eb56bbe969517b52eb26dc'
+reviewed_at: '2026-10-06T16:12:11.433874+00:00'
+review_due: '2027-10-06'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-09-26T03:15:12.636Z'
-  reviewDue: '2027-09-26'
+  reviewedAt: '2026-10-06T16:12:11.433874+00:00'
+  reviewDue: '2027-10-06'
   pendingReview: false
   overdue: false
 retrieval:
@@ -63,6 +63,7 @@ source_path: wiki/index.md
 
 ## Publications
 
+- [Decentralized Free Support Wasserstein Barycenter](./Decentralized_Free_Support_Wasserstein_Barycenter.md) — Under review.
 - [Illusory Pattern Perception Drives Spurious Inference in Large Language Models](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md)
 - [When Sample Selection Bias Precipitates Model Collapse](./When_Sample_Selection_Bias_Precipitates_Model_Collapse.md)
 - [Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness](./Soft_Weighted_Machine_Unlearning.md)

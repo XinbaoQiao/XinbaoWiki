@@ -2557,7 +2557,7 @@ for (const page of ['Xinbao_Qiao.md', 'Qiao_Xinbao_zh.md', 'Publications.md']) {
 }
 
 const cvTex = fs.readFileSync(path.join(root, 'CV.tex'), 'utf8');
-assert.match(cvTex, /xinbaoqiao@cuhk\.edu\.hk/, 'CV uses current CUHK email');
+assert.match(cvTex, /xinbaoqiao@link\.cuhk\.edu\.hk/, 'CV uses current CUHK email');
 assert.doesNotMatch(cvTex, /xinbaoqiao@zju\.edu\.cn/, 'CV removes old Zhejiang email');
 assert.match(cvTex, /The Chinese University of Hong Kong/, 'CV includes current PhD affiliation');
 assert.match(cvTex, /M\.Eng\. in Artificial Intelligence/, 'CV PDF source records the ZJU AI degree as M.Eng.');
@@ -2592,12 +2592,37 @@ const cvPublicationOrder = [
   '\\red{Hessian-Free}',
   '\\red{DynFrs}',
   '\\red{Federated Learning as Optimal Transport}',
+  '\\red{Decentralized Free-Support Wasserstein Barycenter}',
 ];
 const cvPublicationPositions = cvPublicationOrder.map((marker) => cvPublicationBlock.indexOf('\\pubentry{' + marker));
-assert.ok(cvPublicationPositions.every((position) => position >= 0), 'CV contains all six selected publications');
+assert.ok(cvPublicationPositions.every((position) => position >= 0), 'CV contains all seven selected publications');
 assert.deepEqual(cvPublicationPositions, [...cvPublicationPositions].sort((a, b) => a - b), 'CV orders the newest sole first-author paper first, then accepted papers by recency, with under-review work last');
 assert.doesNotMatch(cvPublicationBlock.slice(cvPublicationPositions[0], cvPublicationPositions[1]), /\\cofirst/, 'CV Paper #1 is sole first-author work');
 assert.equal(cvPublicationBlock.lastIndexOf('\\pubentry{'), cvPublicationPositions.at(-1), 'CV under-review paper is the final entry');
+const barycenterSlug = 'Decentralized_Free_Support_Wasserstein_Barycenter';
+const barycenterAuthors = ['Xinbao Qiao', 'Bokai Hou', 'Peihua Mai', 'Wenqian Li', 'Wenjing Yan', 'Ying-Jun Angela Zhang'];
+for (const zh of [false, true]) {
+  const suffix = zh ? '_zh' : '';
+  const page = `${barycenterSlug}${suffix}.md`;
+  const metadata = frontmatterData(page);
+  assert.deepEqual(metadata.authors, barycenterAuthors, `${page} preserves the author-confirmed order`);
+  assert.match(metadata.status, /under review/, `${page} remains under review`);
+  for (const field of ['venue', 'dates', 'location']) assert.equal(metadata[field], undefined, `${page} omits conference arrangements for the under-review manuscript`);
+  assert.doesNotMatch(read(page), /ICLR|Conferences\/2027|California|加利福尼亚/, `${page} discloses only review status`);
+  assert.ok(read(page).includes(zh ? '## 关键启示' : '## Key takeaways'), `${page} gives portable takeaways`);
+  assert.doesNotMatch(read(page), /Antiquus|Cranberry|Natalia Cerebro|iclrfinalcopy/, `${page} excludes template placeholders`);
+  const index = read(`Publications${suffix}.md`);
+  assert.ok(index.indexOf(barycenterSlug) > index.indexOf(zh ? '## 在审稿件' : '## Manuscripts under review'), `${page} is indexed in the under-review section`);
+  assert.doesNotMatch(index.slice(index.indexOf(zh ? '## 在审稿件' : '## Manuscripts under review')), /ICLR|Conferences\/2027|California|加利福尼亚/, `${page} and publication index omit the submission venue`);
+  for (const hub of ['Research', 'AI_and_Networks', 'Distributed_Wasserstein_Barycenter']) {
+    assert.ok(read(`${hub}${suffix}.md`).includes(`[[${barycenterSlug}|`), `${hub}${suffix} connects the manuscript to its research context`);
+  }
+}
+for (const page of ['Xinbao_Qiao.md', 'Qiao_Xinbao_zh.md', 'CV.md', 'CV_zh.md']) {
+  assert.ok(read(page).includes('xinbaoqiao@link.cuhk.edu.hk'), `${page} uses the current email`);
+  assert.doesNotMatch(read(page), /xinbaoqiao@cuhk\.edu\.hk/, `${page} removes the former email`);
+}
+assert.match(fs.readFileSync(path.join(root, 'app/layout.tsx'), 'utf8'), /mailto:xinbaoqiao@link\.cuhk\.edu\.hk/, 'global footer uses the current email');
 assert.match(read('CV.md'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English CV page labels the PDF link as résumé');
 assert.match(read('CV_zh.md'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese CV page labels the PDF link as résumé');
 assert.match(read('CV.md'), /M\.Eng\. in Artificial Intelligence/, 'English CV page records the ZJU AI degree as M.Eng.');
@@ -2621,13 +2646,14 @@ const cvWikiPublicationOrder = [
   'Paper #4: Hessian-Free Online Certified Unlearning',
   'Paper #5: DynFrs: An Efficient Framework for Machine Unlearning in Random Forest',
   'Paper #6: Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification',
+  'Paper #7: Decentralized Free-Support Wasserstein Barycenter',
 ];
 for (const page of ['CV.md', 'CV_zh.md']) {
   const content = read(page);
   const positions = cvWikiPublicationOrder.map((title) => content.indexOf(title));
   assert.ok(positions.every((position) => position >= 0), page + ' contains all numbered CV papers');
   assert.deepEqual(positions, [...positions].sort((a, b) => a - b), page + ' follows the selected-publication order');
-  assert.ok(content.indexOf(page === 'CV.md' ? 'Under review.' : '在审。') > positions.at(-1), page + ' places the under-review manuscript last');
+  assert.ok(content.lastIndexOf(page === 'CV.md' ? 'Under review.' : '在审。') > positions.at(-1), page + ' places the under-review manuscript last');
 }
 assert.ok(read('Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md').includes('Peihua Mai\\*, Zhuoyan Shao\\*, **[[Xinbao_Qiao|Xinbao Qiao]]**\\*'), 'English paper page marks all three co-first authors');
 assert.ok(read('Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md').includes('Peihua Mai\\*、Zhuoyan Shao\\*、**[[Xinbao_Qiao|乔鑫宝]]**\\*'), 'Chinese paper page marks all three co-first authors');

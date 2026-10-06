@@ -9,10 +9,10 @@ tags:
   - 研究专题
   - ai-and-networks
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:7b32da24e1154e954f16034881a76556c41f899f2b331d02ac50caf8cadf696a'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-10-06T15:55:58.146Z'
+content_hash: 'sha256:bd6ddd0ef148f5e63e11caa1c97b4a5735eca6cf4b786df0feace503b685c345'
+reviewed_at: '2026-10-06T15:56:41.015397+00:00'
+review_due: '2027-04-04'
 name: AI 与网络
 language: zh
 summary: 乔鑫宝当前主要研究专题，涵盖网络化数据与通信约束下的 AI 系统。
@@ -40,6 +40,10 @@ translation_of: AI_and_Networks
 | 论文 | 会议/状态 |
 | --- | --- |
 | [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] | ICML 2026，2026年7月6日至11日，首尔。 |
+
+## 在审稿件
+
+在审稿件 [[Decentralized_Free_Support_Wasserstein_Barycenter|Decentralized Free-Support Wasserstein Barycenter]] 将这一方向具体化为自由支撑重心计算：通过学习支撑点位置，让共享参考适应分布几何，同时区分重心质量与网络一致性的通信需求。
 
 ## 与乔鑫宝工作的关系
 

@@ -8,18 +8,18 @@ tags:
   - index
   - publication-list
 timestamp: '2026-06-01T22:00:31+08:00'
-modified: '2026-09-27T12:52:23.259Z'
-content_hash: 'sha256:b7d4eb82df3b6ee4bb1ac4b447fc1ed370dfea1a127dc0e91e3024e62221bfe7'
-reviewed_at: '2026-09-27T12:52:49.768Z'
-review_due: '2026-12-26'
+modified: '2026-10-06T16:11:19.508Z'
+content_hash: 'sha256:6f4ee39a7241a6ea7905e12b5f9f708925b7e324b8d57f186294e012dcac810e'
+reviewed_at: '2026-10-06T16:12:11.434524+00:00'
+review_due: '2027-01-04'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-09-27T12:52:49.768Z'
-  reviewDue: '2026-12-26'
+  reviewedAt: '2026-10-06T16:12:11.434524+00:00'
+  reviewDue: '2027-01-04'
   pendingReview: false
   overdue: false
 retrieval:
@@ -45,6 +45,13 @@ This page is the curated publication index. Each paper has a dedicated wiki page
 | **[DynFrs: An Efficient Framework for Machine Unlearning in Random Forest](./DynFrs.md)**.<br />Shurong Wang, Zhuoyang Shen, **Xinbao Qiao**, Tongning Zhang, Meng Zhang.<br />*Exact and efficient random-forest unlearning in dynamic environments.* | [ICLR 2025](https://iclr.cc/Conferences/2025),<br />24-28 April 2025,<br />Singapore. |
 
 \* Co-first authors.
+
+## Manuscripts under review
+
+- **[Decentralized Free-Support Wasserstein Barycenter](./Decentralized_Free_Support_Wasserstein_Barycenter.md)**.\
+  **Xinbao Qiao**, Bokai Hou, Peihua Mai, Wenqian Li, Wenjing Yan, Ying-Jun Angela Zhang.\
+  Under review.\
+  *Movable supports build geometry-aware shared barycenters under network communication constraints.*
 
 ## Topic index
 

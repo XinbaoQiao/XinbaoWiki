@@ -77,6 +77,12 @@ export function WikiMarkdown({ editLabel, markdown, sourceHref }: Props) {
           h3({ children }) {
             return <h3>{children}{editLink(sourceHref, editLabel)}</h3>;
           },
+          p({ children }) {
+            const authorshipNote = children === '* Co-first authors.' || children === '* 共同第一作者。'
+              || children === 'Asterisks (*) denote co-first authorship; daggers (†) denote corresponding authors.'
+              || children === '星号（*）表示共同第一作者；剑号（†）表示通讯作者。';
+            return <p className={authorshipNote ? 'publication-authorship-note' : undefined}>{children}</p>;
+          },
           td({ children }) {
             return <td>{renderTableLineBreaks(children)}</td>;
           },

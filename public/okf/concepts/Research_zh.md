@@ -8,18 +8,18 @@ tags:
   - overview
   - 研究概览
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-09-26T03:14:39.306Z'
-content_hash: 'sha256:292bbf81253d117ee0cc401cfd4b2722c52d753ca7ed725f3f9b96356bd34ecc'
-reviewed_at: '2026-09-26T03:15:12.636Z'
-review_due: '2026-12-25'
+modified: '2026-10-06T15:56:02.592Z'
+content_hash: 'sha256:a7dc125b460f4f07bbe42c085cbb978a1edda11624066928969a4d21fa47db8d'
+reviewed_at: '2026-10-06T15:56:41.019813+00:00'
+review_due: '2027-01-04'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-09-26T03:15:12.636Z'
-  reviewDue: '2026-12-25'
+  reviewedAt: '2026-10-06T15:56:41.019813+00:00'
+  reviewDue: '2027-01-04'
   pendingReview: false
   overdue: false
 retrieval:
@@ -41,6 +41,8 @@ source_path: wiki/Research_zh.md
 ## AI 与网络
 
 [AI 与网络](./AI_and_Networks_zh.md) 覆盖 AI 与网络通信系统的交叉：AI for Networks、Networks for AI、去中心化学习、数据剪枝和协作评估。在当前 CUHK 博士阶段，这条主线与[数据中心 ML](./Data_Centric_Machine_Learning_zh.md)相结合，并包括[Wasserstein barycenter 的分布式计算](./Distributed_Wasserstein_Barycenter_zh.md)等工具，即在不默认汇总原始数据的前提下，把多方局部分布组合成共享的分布参考。
+
+在审稿件 [Decentralized Free-Support Wasserstein Barycenter](./Decentralized_Free_Support_Wasserstein_Barycenter_zh.md) 将这一方向具体化为自由支撑重心计算：通过学习支撑点位置，让共享参考适应分布几何，同时区分重心质量与网络一致性的通信需求。
 
 ## 机器遗忘
 

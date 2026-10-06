@@ -11,18 +11,18 @@ tags:
   - research-topic
   - ai-and-networks
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:e29224a6e9ced60652a179982834df6b1aa7fa7cde79ecf1e340d56c4e8508c6'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-10-06T15:55:58.149Z'
+content_hash: 'sha256:dfbbfa7ff610f79703c1e20e003317c3a9b47eeea1a9084a0bfbfd63a5305998'
+reviewed_at: '2026-10-06T15:56:41.014903+00:00'
+review_due: '2027-04-04'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-02T20:03:20+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-10-06T15:56:41.014903+00:00'
+  reviewDue: '2027-04-04'
   pendingReview: false
   overdue: false
 retrieval:
@@ -52,6 +52,10 @@ In the CUHK doctoral stage, Qiao's recent work within this topic centers on [dat
 | Paper | Venue/status |
 | --- | --- |
 | [When Sample Selection Bias Precipitates Model Collapse](./When_Sample_Selection_Bias_Precipitates_Model_Collapse.md) | ICML 2026, 6-11 July 2026, Seoul. |
+
+## Manuscripts under review
+
+The under-review manuscript [Decentralized Free-Support Wasserstein Barycenter](./Decentralized_Free_Support_Wasserstein_Barycenter.md) develops this direction through free-support barycenter computation: learning support locations lets the shared reference adapt to distributional geometry, while separating the communication needed for barycenter quality from that needed for network agreement.
 
 ## Connection to Qiao's work
 

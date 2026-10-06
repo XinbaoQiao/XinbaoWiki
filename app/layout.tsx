@@ -77,7 +77,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <footer className="wiki-footer">
           <p>This page is maintained as a personal academic wiki. Xinbaopedia is a stylistic tribute to Wikipedia and is not affiliated with the Wikimedia Foundation.</p>
           <p>
-            <a className="external" href="mailto:xinbaoqiao@cuhk.edu.hk">Email</a>
+            <a className="external" href="mailto:xinbaoqiao@link.cuhk.edu.hk">Email</a>
             {' · '}
             <a className="external" href="https://github.com/XinbaoQiao" target="_blank" rel="noreferrer">GitHub</a>
           </p>

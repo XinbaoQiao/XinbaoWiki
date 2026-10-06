@@ -11,10 +11,10 @@ tags:
   - research-concept
   - wasserstein
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:ac832217767f95bb3b7abf0e98a1e4ce8a67ad69b99d4d8c880f113d3b2374da'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-10-06T15:56:02.294Z'
+content_hash: 'sha256:ea6642e396c17e813a98854bf2b5fe2fa7169bfa3c342c1789f0fe09b0305285'
+reviewed_at: '2026-10-06T15:56:41.016617+00:00'
+review_due: '2027-04-04'
 language: en
 aliases:
   - Distributed Wasserstein barycenters
@@ -25,8 +25,8 @@ lifecycle:
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-07-02T20:03:20+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-10-06T15:56:41.016617+00:00'
+  reviewDue: '2027-04-04'
   pendingReview: false
   overdue: false
 retrieval:
@@ -61,6 +61,8 @@ The page also follows the LLM-wiki pattern used by Xinbaopedia: instead of leavi
 Qiao's ICML 2026 work on [sample-selection bias and model collapse](./When_Sample_Selection_Bias_Precipitates_Model_Collapse.md) already uses collaborative Wasserstein-style signals to reason about synthetic-data failure under low-resource siloed access. Distributed Wasserstein barycenters continue that direction at the infrastructure level by asking how a reliable reference distribution can be computed when the evidence is split across the network, rather than assuming that evaluation data can be pooled first.
 
 This connects to [AI and networks](./AI_and_Networks.md) because the computational object is shaped by the communication pattern. It connects to [Synthetic Data](./Synthetic_Data_and_Model_Collapse.md) because recursive generation needs distributional checks. It also connects to [Data Centric ML](./Data_Centric_Machine_Learning.md) because the barycenter can become a tool for deciding which data or samples matter across parties.
+
+The under-review manuscript [Decentralized Free-Support Wasserstein Barycenter](./Decentralized_Free_Support_Wasserstein_Barycenter.md) develops this direction through free-support barycenter computation: learning support locations lets the shared reference adapt to distributional geometry, while separating the communication needed for barycenter quality from that needed for network agreement.
 
 ## See also
 

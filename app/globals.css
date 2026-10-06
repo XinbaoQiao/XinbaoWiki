@@ -1560,6 +1560,23 @@ body:has(.wiki-portal) .wiki-topbar {
   table-layout: auto;
 }
 
+.wiki-body .publication-authorship-note {
+  margin: 4px 0 16px;
+  color: #8b8f97;
+  font-family: var(--font-sans);
+  font-size: 11px;
+  line-height: 1.4;
+  text-align: right;
+}
+
+.wiki-body p:has(+ .publication-authorship-note) {
+  margin-bottom: 4px;
+}
+
+.wiki-body table + .publication-authorship-note {
+  margin-top: -12px;
+}
+
 .wiki-page[data-page-slug="Publications"] .wiki-body th:nth-child(2),
 .wiki-page[data-page-slug="Publications"] .wiki-body td:nth-child(2),
 .wiki-page[data-page-slug="Publications_zh"] .wiki-body th:nth-child(2),

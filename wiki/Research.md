@@ -8,10 +8,10 @@ tags:
   - overview
   - research-overview
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-09-26T03:14:39.306Z'
-content_hash: 'sha256:e61b51fc87645fd464569bb60f7a2425cb124feaeca5d8b7dbe102e0a1c10516'
-reviewed_at: '2026-09-26T03:15:12.636Z'
-review_due: '2026-12-25'
+modified: '2026-10-06T15:56:02.593Z'
+content_hash: 'sha256:797ad93d8b2eef1568048abaaeeab07b1c936b1b36eb3b082c8ebaf9b977bb07'
+reviewed_at: '2026-10-06T15:56:41.019106+00:00'
+review_due: '2027-01-04'
 name: Research
 summary: Overview of Xinbao Qiao's research directions and linked topic pages.
 occupation: Research overview
@@ -29,6 +29,8 @@ Qiao's work primarily studies lifecycle management of data in AI models, focusin
 ## AI and networks
 
 [[AI_and_Networks]] covers the intersection of AI with networking and communication systems: AI for Networks, Networks for AI, decentralized learning, data pruning, and collaborative evaluation. In the current CUHK doctoral stage, this line is paired with [[Data_Centric_Machine_Learning|data-centric ML]] and includes distributed tools such as [[Distributed_Wasserstein_Barycenter|Wasserstein barycenters]], where multiple local distributions can be combined into a shared distributional reference without treating raw-data pooling as the default assumption.
+
+The under-review manuscript [[Decentralized_Free_Support_Wasserstein_Barycenter|Decentralized Free-Support Wasserstein Barycenter]] develops this direction through free-support barycenter computation: learning support locations lets the shared reference adapt to distributional geometry, while separating the communication needed for barycenter quality from that needed for network agreement.
 
 ## Machine unlearning
 

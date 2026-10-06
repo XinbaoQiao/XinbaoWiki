@@ -11,10 +11,10 @@ tags:
   - biography
   - phd-student
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-09-25T04:53:27.434Z'
-content_hash: 'sha256:61e34d6882d795cd09cd6c0134dddbc93821f2db611c8e2a2174e2c14bff943c'
-reviewed_at: '2026-09-25T04:54:14.029Z'
-review_due: '2026-12-24'
+modified: '2026-10-06T15:56:02.729Z'
+content_hash: 'sha256:15335c0a64ddb0ae4fe47e5140b1f6f9488b43ec06e56b57637b0e4a5d7e9d8a'
+reviewed_at: '2026-10-06T15:56:41.020410+00:00'
+review_due: '2027-01-04'
 language: en
 aliases:
   - Mr. Ciao
@@ -25,8 +25,8 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-09-25T04:54:14.029Z'
-  reviewDue: '2026-12-24'
+  reviewedAt: '2026-10-06T15:56:41.020410+00:00'
+  reviewDue: '2027-01-04'
   pendingReview: false
   overdue: false
 retrieval:
@@ -90,6 +90,8 @@ The project sections below group Qiao's work by research problem rather than by 
 ### AI and networks (2024-present)
 
 Qiao's current primary line, [AI and networks](./AI_and_Networks.md), studies learning systems whose behavior depends on communication, locality, or networked infrastructure. In this usage, "networks" includes both AI for Networks and Networks for AI: where evidence is stored, how it moves, and which parties can evaluate or maintain a model. The topic links decentralized learning, communication-aware evaluation, [data silos](./Data_Silos.md), [collaborative evaluation](./Collaborative_Evaluation.md), [data-centric ML](./Data_Centric_Machine_Learning.md), and [distributed Wasserstein barycenters](./Distributed_Wasserstein_Barycenter.md). Within this line, [When Sample Selection Bias Precipitates Model Collapse](./When_Sample_Selection_Bias_Precipitates_Model_Collapse.md) examines why low-resource communities and institutions with fragmented data coverage are especially vulnerable to model collapse under local sample-selection bias.
+
+The under-review manuscript [Decentralized Free-Support Wasserstein Barycenter](./Decentralized_Free_Support_Wasserstein_Barycenter.md) develops this direction through free-support barycenter computation: learning support locations lets the shared reference adapt to distributional geometry, while separating the communication needed for barycenter quality from that needed for network agreement.
 
 ### Machine unlearning (2023-2026)
 

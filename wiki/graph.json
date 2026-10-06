@@ -8,7 +8,7 @@
         "src-5ffca2a581311c27",
         "src-766234e11681dad2"
       ],
-      "contentHash": "sha256:e29224a6e9ced60652a179982834df6b1aa7fa7cde79ecf1e340d56c4e8508c6",
+      "contentHash": "sha256:dfbbfa7ff610f79703c1e20e003317c3a9b47eeea1a9084a0bfbfd63a5305998",
       "file": "AI_and_Networks.md",
       "footnoteSourceIds": [
         "src-5ffca2a581311c27",
@@ -21,16 +21,17 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29",
+        "reviewedAt": "2026-10-06T15:56:41.014903+00:00",
+        "reviewDue": "2027-04-04",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "modifiedAt": "2026-10-06T15:55:58.149Z",
       "outgoing": [
         "Collaborative_Evaluation",
         "Data_Centric_Machine_Learning",
         "Data_Silos",
+        "Decentralized_Free_Support_Wasserstein_Barycenter",
         "Distributed_Learning",
         "Distributed_Wasserstein_Barycenter",
         "Machine_Unlearning",
@@ -57,12 +58,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "AI and Networks",
       "type": "Research topic",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "reviewedAt": "2026-10-06T15:56:41.014903+00:00",
+      "reviewDue": "2027-04-04",
       "retrieval": {
         "documentId": "wiki:AI_and_Networks",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:e29224a6e9ced60652a179982834df6b1aa7fa7cde79ecf1e340d56c4e8508c6",
+        "contentHash": "sha256:dfbbfa7ff610f79703c1e20e003317c3a9b47eeea1a9084a0bfbfd63a5305998",
         "textFields": [
           "title",
           "aliases",
@@ -86,6 +87,7 @@
         "Data_Centric_Machine_Learning",
         "Data_Selection",
         "Data_Silos",
+        "Decentralized_Free_Support_Wasserstein_Barycenter",
         "Distributed_Learning",
         "Distributed_Wasserstein_Barycenter",
         "Experience",
@@ -114,7 +116,7 @@
         "src-5ffca2a581311c27",
         "src-766234e11681dad2"
       ],
-      "contentHash": "sha256:7b32da24e1154e954f16034881a76556c41f899f2b331d02ac50caf8cadf696a",
+      "contentHash": "sha256:bd6ddd0ef148f5e63e11caa1c97b4a5735eca6cf4b786df0feace503b685c345",
       "file": "AI_and_Networks_zh.md",
       "footnoteSourceIds": [
         "src-5ffca2a581311c27",
@@ -127,16 +129,17 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29",
+        "reviewedAt": "2026-10-06T15:56:41.015397+00:00",
+        "reviewDue": "2027-04-04",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "modifiedAt": "2026-10-06T15:55:58.146Z",
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "Data_Centric_Machine_Learning_zh",
         "Data_Silos_zh",
+        "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "Distributed_Learning_zh",
         "Distributed_Wasserstein_Barycenter_zh",
         "Machine_Unlearning_zh",
@@ -163,12 +166,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "AI 与网络",
       "type": "研究专题",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "reviewedAt": "2026-10-06T15:56:41.015397+00:00",
+      "reviewDue": "2027-04-04",
       "retrieval": {
         "documentId": "wiki:AI_and_Networks_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:7b32da24e1154e954f16034881a76556c41f899f2b331d02ac50caf8cadf696a",
+        "contentHash": "sha256:bd6ddd0ef148f5e63e11caa1c97b4a5735eca6cf4b786df0feace503b685c345",
         "textFields": [
           "title",
           "aliases",
@@ -192,6 +195,7 @@
         "Data_Centric_Machine_Learning_zh",
         "Data_Selection_zh",
         "Data_Silos_zh",
+        "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "Distributed_Learning_zh",
         "Distributed_Wasserstein_Barycenter_zh",
         "Experience_zh",
@@ -709,7 +713,7 @@
         "src-da17eb3884244bd3",
         "src-faaafad831fbefc5"
       ],
-      "contentHash": "sha256:2e6bef8ac8bf818acdb83a41edf5a65b150d94a56d365d423537811f2fd359f1",
+      "contentHash": "sha256:0a2bdf27e75aa7aa964a56e14450d24b9e49ae38f6c170711b204a2d7e6a9329",
       "file": "CV.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -719,13 +723,14 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-09-26T08:09:37.000Z",
-        "reviewDue": "2026-12-25",
+        "reviewedAt": "2026-10-06T16:12:11.431042+00:00",
+        "reviewDue": "2027-01-04",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-26T08:09:04.296Z",
+      "modifiedAt": "2026-10-06T16:11:19.173Z",
       "outgoing": [
+        "Decentralized_Free_Support_Wasserstein_Barycenter",
         "Publications",
         "Zhejiang_University"
       ],
@@ -762,12 +767,12 @@
       "timestamp": "2026-07-02T19:37:18+08:00",
       "title": "Curriculum Vitae",
       "type": "CV summary",
-      "reviewedAt": "2026-09-26T08:09:37.000Z",
-      "reviewDue": "2026-12-25",
+      "reviewedAt": "2026-10-06T16:12:11.431042+00:00",
+      "reviewDue": "2027-01-04",
       "retrieval": {
         "documentId": "wiki:CV",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:2e6bef8ac8bf818acdb83a41edf5a65b150d94a56d365d423537811f2fd359f1",
+        "contentHash": "sha256:0a2bdf27e75aa7aa964a56e14450d24b9e49ae38f6c170711b204a2d7e6a9329",
         "textFields": [
           "title",
           "aliases",
@@ -813,7 +818,7 @@
         "src-da17eb3884244bd3",
         "src-faaafad831fbefc5"
       ],
-      "contentHash": "sha256:e38a3dde63e25e60e6a4a4d47d697d0dbc1bc5eb9c4051a71468a9e9d6ecb1d5",
+      "contentHash": "sha256:3a3fb0a6ee4923f923acdbe935d29f47256446215a96fa958e357e473d5b4081",
       "file": "CV_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -823,13 +828,14 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-09-26T08:09:37.000Z",
-        "reviewDue": "2026-12-25",
+        "reviewedAt": "2026-10-06T16:12:11.431923+00:00",
+        "reviewDue": "2027-01-04",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-26T08:09:04.295Z",
+      "modifiedAt": "2026-10-06T16:11:19.162Z",
       "outgoing": [
+        "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "NUSRI_CQ_zh",
         "Publications_zh",
         "Zhejiang_University_zh"
@@ -867,12 +873,12 @@
       "timestamp": "2026-07-02T19:37:18+08:00",
       "title": "简历",
       "type": "CV 摘要",
-      "reviewedAt": "2026-09-26T08:09:37.000Z",
-      "reviewDue": "2026-12-25",
+      "reviewedAt": "2026-10-06T16:12:11.431923+00:00",
+      "reviewDue": "2027-01-04",
       "retrieval": {
         "documentId": "wiki:CV_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:e38a3dde63e25e60e6a4a4d47d697d0dbc1bc5eb9c4051a71468a9e9d6ecb1d5",
+        "contentHash": "sha256:3a3fb0a6ee4923f923acdbe935d29f47256446215a96fa958e357e473d5b4081",
         "textFields": [
           "title",
           "aliases",
@@ -971,6 +977,7 @@
       "backlinks": [
         "AI_and_Networks",
         "Data_Selection",
+        "Decentralized_Free_Support_Wasserstein_Barycenter",
         "Distributed_Wasserstein_Barycenter",
         "Experience",
         "Fairness_and_Robustness",
@@ -1064,6 +1071,7 @@
       "backlinks": [
         "AI_and_Networks_zh",
         "Data_Selection_zh",
+        "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "Distributed_Wasserstein_Barycenter_zh",
         "Experience_zh",
         "Fairness_and_Robustness_zh",
@@ -1404,6 +1412,153 @@
     {
       "aliases": [],
       "citationSourceIds": [],
+      "contentHash": "sha256:cbf4ce79c372ecc58be3a0e2bbdc8af11adcc54207a700f18643e6f8c86d29be",
+      "file": "Decentralized_Free_Support_Wasserstein_Barycenter.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-10-06T16:12:11.432600+00:00",
+        "reviewDue": "2026-11-05",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-06T16:11:19.217Z",
+      "outgoing": [
+        "AI_and_Networks",
+        "Data_Centric_Machine_Learning",
+        "Distributed_Wasserstein_Barycenter",
+        "Wasserstein_Geometry",
+        "Xinbao_Qiao"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Decentralized_Free_Support_Wasserstein_Barycenter",
+      "sourceIds": [],
+      "summary": "Under-review manuscript on movable barycenter supports and shared geometric references under decentralized communication.",
+      "tags": [
+        "en",
+        "publication",
+        "paper",
+        "under-review",
+        "wasserstein"
+      ],
+      "timestamp": "2026-08-20T00:00:00+09:00",
+      "title": "Decentralized Free-Support Wasserstein Barycenter",
+      "type": "publication",
+      "reviewedAt": "2026-10-06T16:12:11.432600+00:00",
+      "reviewDue": "2026-11-05",
+      "retrieval": {
+        "documentId": "wiki:Decentralized_Free_Support_Wasserstein_Barycenter",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:cbf4ce79c372ecc58be3a0e2bbdc8af11adcc54207a700f18643e6f8c86d29be",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "AI_and_Networks",
+        "CV",
+        "Distributed_Wasserstein_Barycenter",
+        "index",
+        "Publications",
+        "Research",
+        "Xinbao_Qiao"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:eb13a956b4be7416bd126789760956dd81da840fea6123f5f89d102f5319fe9d",
+      "file": "Decentralized_Free_Support_Wasserstein_Barycenter_zh.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-10-06T16:12:11.433332+00:00",
+        "reviewDue": "2026-11-05",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-06T16:11:19.215Z",
+      "outgoing": [
+        "AI_and_Networks_zh",
+        "Data_Centric_Machine_Learning_zh",
+        "Distributed_Wasserstein_Barycenter_zh",
+        "Qiao_Xinbao_zh",
+        "Wasserstein_Geometry_zh"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
+      "sourceIds": [],
+      "summary": "在审稿件，研究可移动支撑点如何在去中心化通信约束下构建共享几何参考。",
+      "tags": [
+        "zh",
+        "publication",
+        "paper",
+        "under-review",
+        "wasserstein"
+      ],
+      "timestamp": "2026-08-20T00:00:00+09:00",
+      "title": "Decentralized Free-Support Wasserstein Barycenter",
+      "type": "publication",
+      "reviewedAt": "2026-10-06T16:12:11.433332+00:00",
+      "reviewDue": "2026-11-05",
+      "retrieval": {
+        "documentId": "wiki:Decentralized_Free_Support_Wasserstein_Barycenter_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:eb13a956b4be7416bd126789760956dd81da840fea6123f5f89d102f5319fe9d",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "AI_and_Networks_zh",
+        "CV_zh",
+        "Distributed_Wasserstein_Barycenter_zh",
+        "Publications_zh",
+        "Qiao_Xinbao_zh",
+        "Research_zh"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
       "contentHash": "sha256:3f633f2dc9b39e451931c33e1d641d68b8ceb3bafb18caa1f4a08b3ce6a2a993",
       "file": "Distributed_Learning.md",
       "footnoteSourceIds": [],
@@ -1561,7 +1716,7 @@
         "src-0d6548913a8c228f",
         "src-3157a848b3737221"
       ],
-      "contentHash": "sha256:ac832217767f95bb3b7abf0e98a1e4ce8a67ad69b99d4d8c880f113d3b2374da",
+      "contentHash": "sha256:ea6642e396c17e813a98854bf2b5fe2fa7169bfa3c342c1789f0fe09b0305285",
       "file": "Distributed_Wasserstein_Barycenter.md",
       "footnoteSourceIds": [
         "src-0d6548913a8c228f",
@@ -1574,17 +1729,18 @@
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
         "retention": "semantic memory with quality warnings",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29",
+        "reviewedAt": "2026-10-06T15:56:41.016617+00:00",
+        "reviewDue": "2027-04-04",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "modifiedAt": "2026-10-06T15:56:02.294Z",
       "outgoing": [
         "AI_and_Networks",
         "Collaborative_Evaluation",
         "Data_Centric_Machine_Learning",
         "Data_Silos",
+        "Decentralized_Free_Support_Wasserstein_Barycenter",
         "Distributed_Learning",
         "Synthetic_Data_and_Model_Collapse",
         "Wasserstein_Geometry",
@@ -1610,12 +1766,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Distributed Wasserstein Barycenter",
       "type": "Research concept",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "reviewedAt": "2026-10-06T15:56:41.016617+00:00",
+      "reviewDue": "2027-04-04",
       "retrieval": {
         "documentId": "wiki:Distributed_Wasserstein_Barycenter",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:ac832217767f95bb3b7abf0e98a1e4ce8a67ad69b99d4d8c880f113d3b2374da",
+        "contentHash": "sha256:ea6642e396c17e813a98854bf2b5fe2fa7169bfa3c342c1789f0fe09b0305285",
         "textFields": [
           "title",
           "aliases",
@@ -1634,6 +1790,7 @@
       },
       "backlinks": [
         "AI_and_Networks",
+        "Decentralized_Free_Support_Wasserstein_Barycenter",
         "Experience",
         "index",
         "log",
@@ -1654,7 +1811,7 @@
         "src-0d6548913a8c228f",
         "src-3157a848b3737221"
       ],
-      "contentHash": "sha256:07336e6f8ccb466caccf4710fad348230218dd8bbb1f5f57f389f28f285757a9",
+      "contentHash": "sha256:b67673faf482d7f191c0e393306303cab0213522510bfc58c848cbb8638a7f84",
       "file": "Distributed_Wasserstein_Barycenter_zh.md",
       "footnoteSourceIds": [
         "src-0d6548913a8c228f",
@@ -1667,17 +1824,18 @@
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
         "retention": "semantic memory with quality warnings",
-        "reviewedAt": "2026-07-02T20:03:20+08:00",
-        "reviewDue": "2026-12-29",
+        "reviewedAt": "2026-10-06T15:56:41.017046+00:00",
+        "reviewDue": "2027-04-04",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
+      "modifiedAt": "2026-10-06T15:56:02.292Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Collaborative_Evaluation_zh",
         "Data_Centric_Machine_Learning_zh",
         "Data_Silos_zh",
+        "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "Distributed_Learning_zh",
         "Qiao_Xinbao_zh",
         "Synthetic_Data_and_Model_Collapse_zh",
@@ -1703,12 +1861,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "分布式 Wasserstein Barycenter",
       "type": "研究概念",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "reviewedAt": "2026-10-06T15:56:41.017046+00:00",
+      "reviewDue": "2027-04-04",
       "retrieval": {
         "documentId": "wiki:Distributed_Wasserstein_Barycenter_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:07336e6f8ccb466caccf4710fad348230218dd8bbb1f5f57f389f28f285757a9",
+        "contentHash": "sha256:b67673faf482d7f191c0e393306303cab0213522510bfc58c848cbb8638a7f84",
         "textFields": [
           "title",
           "aliases",
@@ -1727,6 +1885,7 @@
       },
       "backlinks": [
         "AI_and_Networks_zh",
+        "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "Experience_zh",
         "index_zh",
         "log_zh",
@@ -2685,7 +2844,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:d3e94cb04e82f64ff8faf8f627fb425891b0ca0ee253ec6bb670a21f809cdd65",
+      "contentHash": "sha256:61f707f2bc084e6e3e9c92df691f017bde347d81c4eb56bbe969517b52eb26dc",
       "file": "index.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -2695,12 +2854,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-09-26T03:15:12.636Z",
-        "reviewDue": "2027-09-26",
+        "reviewedAt": "2026-10-06T16:12:11.433874+00:00",
+        "reviewDue": "2027-10-06",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-26T03:14:39.284Z",
+      "modifiedAt": "2026-10-06T16:11:19.340Z",
       "outgoing": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -2710,6 +2869,7 @@
         "Data_Centric_Machine_Learning",
         "Data_Selection",
         "Data_Silos",
+        "Decentralized_Free_Support_Wasserstein_Barycenter",
         "Distributed_Learning",
         "Distributed_Wasserstein_Barycenter",
         "DynFrs",
@@ -2761,12 +2921,12 @@
       "timestamp": "2026-05-07T17:34:07+08:00",
       "title": "Index",
       "type": "Wiki index",
-      "reviewedAt": "2026-09-26T03:15:12.636Z",
-      "reviewDue": "2027-09-26",
+      "reviewedAt": "2026-10-06T16:12:11.433874+00:00",
+      "reviewDue": "2027-10-06",
       "retrieval": {
         "documentId": "wiki:index",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:d3e94cb04e82f64ff8faf8f627fb425891b0ca0ee253ec6bb670a21f809cdd65",
+        "contentHash": "sha256:61f707f2bc084e6e3e9c92df691f017bde347d81c4eb56bbe969517b52eb26dc",
         "textFields": [
           "title",
           "aliases",
@@ -4817,7 +4977,7 @@
         "src-998b6c4324199ad3",
         "src-b005562340a1c871"
       ],
-      "contentHash": "sha256:b7d4eb82df3b6ee4bb1ac4b447fc1ed370dfea1a127dc0e91e3024e62221bfe7",
+      "contentHash": "sha256:6f4ee39a7241a6ea7905e12b5f9f708925b7e324b8d57f186294e012dcac810e",
       "file": "Publications.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -4827,15 +4987,16 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-09-27T12:52:49.768Z",
-        "reviewDue": "2026-12-26",
+        "reviewedAt": "2026-10-06T16:12:11.434524+00:00",
+        "reviewDue": "2027-01-04",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-27T12:52:23.259Z",
+      "modifiedAt": "2026-10-06T16:11:19.508Z",
       "outgoing": [
         "AI_and_Networks",
         "Data_Centric_Machine_Learning",
+        "Decentralized_Free_Support_Wasserstein_Barycenter",
         "DynFrs",
         "Hessian_Free_Online_Certified_Unlearning",
         "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
@@ -4867,12 +5028,12 @@
       "timestamp": "2026-06-01T22:00:31+08:00",
       "title": "Publications",
       "type": "Publication list",
-      "reviewedAt": "2026-09-27T12:52:49.768Z",
-      "reviewDue": "2026-12-26",
+      "reviewedAt": "2026-10-06T16:12:11.434524+00:00",
+      "reviewDue": "2027-01-04",
       "retrieval": {
         "documentId": "wiki:Publications",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:b7d4eb82df3b6ee4bb1ac4b447fc1ed370dfea1a127dc0e91e3024e62221bfe7",
+        "contentHash": "sha256:6f4ee39a7241a6ea7905e12b5f9f708925b7e324b8d57f186294e012dcac810e",
         "textFields": [
           "title",
           "aliases",
@@ -4906,7 +5067,7 @@
         "src-998b6c4324199ad3",
         "src-b005562340a1c871"
       ],
-      "contentHash": "sha256:abcb17caf4656406272781c356a9d1a960b39018284404fdb8818db177a4ff77",
+      "contentHash": "sha256:ec1666f1d0f5ef00e813cb6a5ae6965ab6088f97b44d7d8e0fc7dc58030929d2",
       "file": "Publications_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -4916,15 +5077,16 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-09-27T12:52:49.768Z",
-        "reviewDue": "2026-12-26",
+        "reviewedAt": "2026-10-06T16:12:11.435208+00:00",
+        "reviewDue": "2027-01-04",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-27T12:52:23.252Z",
+      "modifiedAt": "2026-10-06T16:11:19.499Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Centric_Machine_Learning_zh",
+        "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "DynFrs_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
         "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
@@ -4956,12 +5118,12 @@
       "timestamp": "2026-06-01T22:04:00+08:00",
       "title": "论文",
       "type": "论文列表",
-      "reviewedAt": "2026-09-27T12:52:49.768Z",
-      "reviewDue": "2026-12-26",
+      "reviewedAt": "2026-10-06T16:12:11.435208+00:00",
+      "reviewDue": "2027-01-04",
       "retrieval": {
         "documentId": "wiki:Publications_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:abcb17caf4656406272781c356a9d1a960b39018284404fdb8818db177a4ff77",
+        "contentHash": "sha256:ec1666f1d0f5ef00e813cb6a5ae6965ab6088f97b44d7d8e0fc7dc58030929d2",
         "textFields": [
           "title",
           "aliases",
@@ -5008,7 +5170,7 @@
         "src-e1d67502167d29ad",
         "src-f6009f51f54778f6"
       ],
-      "contentHash": "sha256:91a45d1089ce31c847ead75b1c1e9b2ce0dac88da8ab5f0ec4d94bce79544264",
+      "contentHash": "sha256:5b99f9a557560ac9f04425af5dfb90ae07970941db68a6c26fff23715545a837",
       "file": "Qiao_Xinbao_zh.md",
       "footnoteSourceIds": [
         "src-264e39cbec8d2f89",
@@ -5025,12 +5187,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-09-25T04:54:14.029Z",
-        "reviewDue": "2026-12-24",
+        "reviewedAt": "2026-10-06T15:56:41.018163+00:00",
+        "reviewDue": "2027-01-04",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-25T04:53:27.410Z",
+      "modifiedAt": "2026-10-06T15:56:02.564Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Angela_Yingjun_Zhang_zh",
@@ -5038,6 +5200,7 @@
         "CV_zh",
         "Data_Centric_Machine_Learning_zh",
         "Data_Silos_zh",
+        "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "Distributed_Wasserstein_Barycenter_zh",
         "DynFrs_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
@@ -5086,12 +5249,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "乔鑫宝",
       "type": "博士生",
-      "reviewedAt": "2026-09-25T04:54:14.029Z",
-      "reviewDue": "2026-12-24",
+      "reviewedAt": "2026-10-06T15:56:41.018163+00:00",
+      "reviewDue": "2027-01-04",
       "retrieval": {
         "documentId": "wiki:Qiao_Xinbao_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:91a45d1089ce31c847ead75b1c1e9b2ce0dac88da8ab5f0ec4d94bce79544264",
+        "contentHash": "sha256:5b99f9a557560ac9f04425af5dfb90ae07970941db68a6c26fff23715545a837",
         "textFields": [
           "title",
           "aliases",
@@ -5111,6 +5274,7 @@
       "backlinks": [
         "AI_and_Networks_zh",
         "Angela_Yingjun_Zhang_zh",
+        "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "Distributed_Wasserstein_Barycenter_zh",
         "DynFrs_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
@@ -5429,7 +5593,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:e61b51fc87645fd464569bb60f7a2425cb124feaeca5d8b7dbe102e0a1c10516",
+      "contentHash": "sha256:797ad93d8b2eef1568048abaaeeab07b1c936b1b36eb3b082c8ebaf9b977bb07",
       "file": "Research.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -5439,18 +5603,19 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-09-26T03:15:12.636Z",
-        "reviewDue": "2026-12-25",
+        "reviewedAt": "2026-10-06T15:56:41.019106+00:00",
+        "reviewDue": "2027-01-04",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-26T03:14:39.306Z",
+      "modifiedAt": "2026-10-06T15:56:02.593Z",
       "outgoing": [
         "AI_and_Networks",
         "Certified_Data_Removal",
         "Data_Centric_Machine_Learning",
         "Data_Selection",
         "Data_Silos",
+        "Decentralized_Free_Support_Wasserstein_Barycenter",
         "Distributed_Learning",
         "Distributed_Wasserstein_Barycenter",
         "DynFrs",
@@ -5482,12 +5647,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Research",
       "type": "Research overview",
-      "reviewedAt": "2026-09-26T03:15:12.636Z",
-      "reviewDue": "2026-12-25",
+      "reviewedAt": "2026-10-06T15:56:41.019106+00:00",
+      "reviewDue": "2027-01-04",
       "retrieval": {
         "documentId": "wiki:Research",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:e61b51fc87645fd464569bb60f7a2425cb124feaeca5d8b7dbe102e0a1c10516",
+        "contentHash": "sha256:797ad93d8b2eef1568048abaaeeab07b1c936b1b36eb3b082c8ebaf9b977bb07",
         "textFields": [
           "title",
           "aliases",
@@ -5514,7 +5679,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:292bbf81253d117ee0cc401cfd4b2722c52d753ca7ed725f3f9b96356bd34ecc",
+      "contentHash": "sha256:a7dc125b460f4f07bbe42c085cbb978a1edda11624066928969a4d21fa47db8d",
       "file": "Research_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -5524,18 +5689,19 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-09-26T03:15:12.636Z",
-        "reviewDue": "2026-12-25",
+        "reviewedAt": "2026-10-06T15:56:41.019813+00:00",
+        "reviewDue": "2027-01-04",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-26T03:14:39.306Z",
+      "modifiedAt": "2026-10-06T15:56:02.592Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Certified_Data_Removal_zh",
         "Data_Centric_Machine_Learning_zh",
         "Data_Selection_zh",
         "Data_Silos_zh",
+        "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "Distributed_Learning_zh",
         "Distributed_Wasserstein_Barycenter_zh",
         "DynFrs_zh",
@@ -5567,12 +5733,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "研究",
       "type": "研究概览",
-      "reviewedAt": "2026-09-26T03:15:12.636Z",
-      "reviewDue": "2026-12-25",
+      "reviewedAt": "2026-10-06T15:56:41.019813+00:00",
+      "reviewDue": "2027-01-04",
       "retrieval": {
         "documentId": "wiki:Research_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:292bbf81253d117ee0cc401cfd4b2722c52d753ca7ed725f3f9b96356bd34ecc",
+        "contentHash": "sha256:a7dc125b460f4f07bbe42c085cbb978a1edda11624066928969a4d21fa47db8d",
         "textFields": [
           "title",
           "aliases",
@@ -7000,6 +7166,7 @@
       },
       "backlinks": [
         "Collaborative_Evaluation",
+        "Decentralized_Free_Support_Wasserstein_Barycenter",
         "Distributed_Wasserstein_Barycenter",
         "Experience",
         "index",
@@ -7091,6 +7258,7 @@
       },
       "backlinks": [
         "Collaborative_Evaluation_zh",
+        "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "Distributed_Wasserstein_Barycenter_zh",
         "Experience_zh",
         "index_zh",
@@ -7317,7 +7485,7 @@
         "src-e1d67502167d29ad",
         "src-f6009f51f54778f6"
       ],
-      "contentHash": "sha256:61e34d6882d795cd09cd6c0134dddbc93821f2db611c8e2a2174e2c14bff943c",
+      "contentHash": "sha256:15335c0a64ddb0ae4fe47e5140b1f6f9488b43ec06e56b57637b0e4a5d7e9d8a",
       "file": "Xinbao_Qiao.md",
       "footnoteSourceIds": [
         "src-264e39cbec8d2f89",
@@ -7334,12 +7502,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-09-25T04:54:14.029Z",
-        "reviewDue": "2026-12-24",
+        "reviewedAt": "2026-10-06T15:56:41.020410+00:00",
+        "reviewDue": "2027-01-04",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-09-25T04:53:27.434Z",
+      "modifiedAt": "2026-10-06T15:56:02.729Z",
       "outgoing": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -7347,6 +7515,7 @@
         "CV",
         "Data_Centric_Machine_Learning",
         "Data_Silos",
+        "Decentralized_Free_Support_Wasserstein_Barycenter",
         "Distributed_Wasserstein_Barycenter",
         "DynFrs",
         "Education",
@@ -7395,12 +7564,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Xinbao Qiao",
       "type": "PhD student",
-      "reviewedAt": "2026-09-25T04:54:14.029Z",
-      "reviewDue": "2026-12-24",
+      "reviewedAt": "2026-10-06T15:56:41.020410+00:00",
+      "reviewDue": "2027-01-04",
       "retrieval": {
         "documentId": "wiki:Xinbao_Qiao",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:61e34d6882d795cd09cd6c0134dddbc93821f2db611c8e2a2174e2c14bff943c",
+        "contentHash": "sha256:15335c0a64ddb0ae4fe47e5140b1f6f9488b43ec06e56b57637b0e4a5d7e9d8a",
         "textFields": [
           "title",
           "aliases",
@@ -7420,6 +7589,7 @@
       "backlinks": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
+        "Decentralized_Free_Support_Wasserstein_Barycenter",
         "Distributed_Wasserstein_Barycenter",
         "DynFrs",
         "Hessian_Free_Online_Certified_Unlearning",
@@ -7656,6 +7826,13 @@
     },
     {
       "from": "AI_and_Networks_zh",
+      "label": "Decentralized Free-Support Wasserstein Barycenter",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Decentralized_Free_Support_Wasserstein_Barycenter_zh"
+    },
+    {
+      "from": "AI_and_Networks_zh",
       "label": "分布式学习",
       "relation": "wikilink",
       "source": "body",
@@ -7765,6 +7942,13 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Data_Silos"
+    },
+    {
+      "from": "AI_and_Networks",
+      "label": "Decentralized Free-Support Wasserstein Barycenter",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Decentralized_Free_Support_Wasserstein_Barycenter"
     },
     {
       "from": "AI_and_Networks",
@@ -8146,6 +8330,13 @@
     },
     {
       "from": "CV_zh",
+      "label": "Decentralized Free-Support Wasserstein Barycenter",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Decentralized_Free_Support_Wasserstein_Barycenter_zh"
+    },
+    {
+      "from": "CV_zh",
       "label": "新加坡国立大学重庆研究院（NUSRI-CQ）",
       "relation": "wikilink",
       "source": "body",
@@ -8164,6 +8355,13 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Zhejiang_University_zh"
+    },
+    {
+      "from": "CV",
+      "label": "Decentralized Free-Support Wasserstein Barycenter",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Decentralized_Free_Support_Wasserstein_Barycenter"
     },
     {
       "from": "CV",
@@ -8579,6 +8777,76 @@
       "to": "When_Sample_Selection_Bias_Precipitates_Model_Collapse"
     },
     {
+      "from": "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
+      "label": "AI 与网络",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "AI_and_Networks_zh"
+    },
+    {
+      "from": "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
+      "label": "数据中心 ML",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Data_Centric_Machine_Learning_zh"
+    },
+    {
+      "from": "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
+      "label": "分布式 Wasserstein 重心",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Distributed_Wasserstein_Barycenter_zh"
+    },
+    {
+      "from": "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
+      "label": "乔鑫宝",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Qiao_Xinbao_zh"
+    },
+    {
+      "from": "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
+      "label": "Wasserstein 几何",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Wasserstein_Geometry_zh"
+    },
+    {
+      "from": "Decentralized_Free_Support_Wasserstein_Barycenter",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "AI_and_Networks"
+    },
+    {
+      "from": "Decentralized_Free_Support_Wasserstein_Barycenter",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Data_Centric_Machine_Learning"
+    },
+    {
+      "from": "Decentralized_Free_Support_Wasserstein_Barycenter",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Distributed_Wasserstein_Barycenter"
+    },
+    {
+      "from": "Decentralized_Free_Support_Wasserstein_Barycenter",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Wasserstein_Geometry"
+    },
+    {
+      "from": "Decentralized_Free_Support_Wasserstein_Barycenter",
+      "label": "Xinbao Qiao",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Xinbao_Qiao"
+    },
+    {
       "from": "Distributed_Learning_zh",
       "label": "AI 与网络",
       "relation": "wikilink",
@@ -8699,6 +8967,13 @@
     },
     {
       "from": "Distributed_Wasserstein_Barycenter_zh",
+      "label": "Decentralized Free-Support Wasserstein Barycenter",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Decentralized_Free_Support_Wasserstein_Barycenter_zh"
+    },
+    {
+      "from": "Distributed_Wasserstein_Barycenter_zh",
       "label": "分布式学习",
       "relation": "wikilink",
       "source": "body",
@@ -8801,6 +9076,13 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Data_Silos"
+    },
+    {
+      "from": "Distributed_Wasserstein_Barycenter",
+      "label": "Decentralized Free-Support Wasserstein Barycenter",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Decentralized_Free_Support_Wasserstein_Barycenter"
     },
     {
       "from": "Distributed_Wasserstein_Barycenter",
@@ -9963,6 +10245,13 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Data_Silos"
+    },
+    {
+      "from": "index",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Decentralized_Free_Support_Wasserstein_Barycenter"
     },
     {
       "from": "index",
@@ -12171,6 +12460,13 @@
     },
     {
       "from": "Publications_zh",
+      "label": "Decentralized Free-Support Wasserstein Barycenter",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Decentralized_Free_Support_Wasserstein_Barycenter_zh"
+    },
+    {
+      "from": "Publications_zh",
       "label": "DynFrs：随机森林机器遗忘高效框架",
       "relation": "wikilink",
       "source": "body",
@@ -12252,6 +12548,13 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Data_Centric_Machine_Learning"
+    },
+    {
+      "from": "Publications",
+      "label": "Decentralized Free-Support Wasserstein Barycenter",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Decentralized_Free_Support_Wasserstein_Barycenter"
     },
     {
       "from": "Publications",
@@ -12413,6 +12716,13 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Data_Silos_zh"
+    },
+    {
+      "from": "Qiao_Xinbao_zh",
+      "label": "Decentralized Free-Support Wasserstein Barycenter",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Decentralized_Free_Support_Wasserstein_Barycenter_zh"
     },
     {
       "from": "Qiao_Xinbao_zh",
@@ -12899,6 +13209,13 @@
     },
     {
       "from": "Research_zh",
+      "label": "Decentralized Free-Support Wasserstein Barycenter",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Decentralized_Free_Support_Wasserstein_Barycenter_zh"
+    },
+    {
+      "from": "Research_zh",
       "label": "分布式学习",
       "relation": "wikilink",
       "source": "body",
@@ -13064,6 +13381,13 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Data_Silos"
+    },
+    {
+      "from": "Research",
+      "label": "Decentralized Free-Support Wasserstein Barycenter",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Decentralized_Free_Support_Wasserstein_Barycenter"
     },
     {
       "from": "Research",
@@ -14691,6 +15015,13 @@
     },
     {
       "from": "Xinbao_Qiao",
+      "label": "Decentralized Free-Support Wasserstein Barycenter",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Decentralized_Free_Support_Wasserstein_Barycenter"
+    },
+    {
+      "from": "Xinbao_Qiao",
       "label": "distributed Wasserstein barycenter",
       "relation": "wikilink",
       "source": "body",
@@ -15127,12 +15458,12 @@
   "stats": {
     "hiddenPages": 4,
     "languages": {
-      "en": 45,
-      "zh": 45
+      "en": 46,
+      "zh": 46
     },
-    "pages": 90,
-    "publicPages": 86,
-    "relations": 1073,
+    "pages": 92,
+    "publicPages": 88,
+    "relations": 1096,
     "types": {
       "博士生": 1,
       "公立研究型大学": 3,
@@ -15157,7 +15488,7 @@
       "PhD student": 1,
       "Project overview": 1,
       "Public research university": 3,
-      "publication": 12,
+      "publication": 14,
       "Publication list": 1,
       "Research concept": 15,
       "Research experience": 1,
