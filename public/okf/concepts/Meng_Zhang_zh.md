@@ -8,18 +8,18 @@ tags:
   - advisor
   - academic-advisor
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:103093bd3886bfa0462229db2fd4d8557041ecd2ab27552727a5922d4bea88ed'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-10-07T07:07:23.914Z'
+content_hash: 'sha256:7169d9dd45faa781ba51eb8c6268457f65670167edc5ccc24079947f5e385354'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-02T20:03:20+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-10-07T07:07:51.129Z'
+  reviewDue: '2027-04-05'
   pendingReview: false
   overdue: false
 retrieval:
@@ -33,15 +33,15 @@ source_path: wiki/Meng_Zhang_zh.md
 
 ## 传记
 
-在本 wiki 中，张萌与 [浙江大学](./Zhejiang_University_zh.md) 以及 [乔鑫宝](./Qiao_Xinbao_zh.md) 的硕士阶段相关。官方主页记录其职务、学院归属与研究方向；本页作为学术导师条目使用，而不是完整独立传记。
+张萌是 [乔鑫宝](./Qiao_Xinbao_zh.md) 在 [浙江大学](./Zhejiang_University_zh.md) 攻读硕士期间的导师。官方主页记录其职务、学院归属与研究方向。
 
 ## 研究
 
-浙江大学主页列出的研究方向包括无线与计算机网络、边缘智能、网络经济学和智能 IoT。这些方向构成网络系统背景，与本 wiki 中的 [AI 与网络](./AI_and_Networks_zh.md)、[分布式学习](./Distributed_Learning_zh.md) 和 [数据中心 ML](./Data_Centric_Machine_Learning_zh.md) 等标签接近。
+浙江大学主页列出的研究方向包括无线与计算机网络、边缘智能、网络经济学和智能 IoT。这些方向构成网络系统背景，与 [AI 与网络](./AI_and_Networks_zh.md)、[分布式学习](./Distributed_Learning_zh.md) 和 [数据中心 ML](./Data_Centric_Machine_Learning_zh.md) 等研究方向相关。
 
 ## 与乔鑫宝的关系
 
-张萌是乔鑫宝在浙江大学阶段的硕士导师。该阶段在本 wiki 中与数据中心机器学习、机器遗忘和数据影响分析相连，并包括后来出现在乔鑫宝论文记录中的 [无 Hessian 在线认证遗忘](./Hessian_Free_Online_Certified_Unlearning_zh.md) 和 [超越二元擦除](./Soft_Weighted_Machine_Unlearning_zh.md)。
+张萌是乔鑫宝在浙江大学阶段的硕士导师。乔鑫宝在该阶段研究数据中心机器学习、机器遗忘和数据影响分析，相关工作包括 [无 Hessian 在线认证遗忘](./Hessian_Free_Online_Certified_Unlearning_zh.md) 和 [超越二元擦除](./Soft_Weighted_Machine_Unlearning_zh.md)。
 
 ## 参见
 

@@ -10,25 +10,25 @@ tags:
   - topic
   - research-topic
 timestamp: '2026-05-05T20:55:21+08:00'
-modified: '2026-09-26T03:14:39.316Z'
-content_hash: 'sha256:451c6ffc09f41ea68e6fdb591b53ab16b8ede8cd929f3dc822f6bf109ea405f6'
-reviewed_at: '2026-09-26T03:15:12.636Z'
-review_due: '2027-03-25'
+modified: '2026-10-07T06:42:08.636Z'
+content_hash: 'sha256:1a24126519061279056efd864675f4e806c6c191063728a33d3b0fdf7cabec25'
+reviewed_at: '2026-10-07T06:43:53.160Z'
+review_due: '2027-04-05'
 name: Trustworthy AI
 summary: >-
   Research topic covering reliability, deletion, fairness, robustness,
   interpretability, and evaluation.
 occupation: Research topic
 ---
-**Trustworthy AI** is the broadest reliability label in Qiao's wiki. It covers model behavior that can be audited, corrected, updated, or evaluated under realistic constraints. The page is deliberately broad, but the biography keeps the main research labels shorter: [[AI_and_Networks|AI and networks]], [[Machine_Unlearning|machine unlearning]], [[Synthetic_Data_and_Model_Collapse|synthetic data]], and [[Data_Centric_Machine_Learning|Data Centric ML]].
+**Trustworthy AI** concerns model behavior that can be audited, corrected, updated, or evaluated under realistic constraints.
 
-## Role in this wiki
+## Research context
 
-This page functions as a parent concept rather than a single project. It gathers [[Machine_Unlearning|machine unlearning]], [[Fairness_and_Robustness|fairness and robustness]], [[Interpretability|interpretability]], [[LLM_Reliability|LLM reliability]], and [[Collaborative_Evaluation|collaborative evaluation]]. The unifying idea is that reliability is not only a property of a trained model. It also depends on the data process, who can inspect the data, how changes are requested, and how evidence is shared.
+Trustworthy AI encompasses [[Machine_Unlearning|machine unlearning]], [[Fairness_and_Robustness|fairness and robustness]], [[Interpretability|interpretability]], [[LLM_Reliability|LLM reliability]], and [[Collaborative_Evaluation|collaborative evaluation]]. The unifying idea is that reliability is not only a property of a trained model. It also depends on the data process, who can inspect the data, how changes are requested, and how evidence is shared.
 
 ## Connection to Qiao's work
 
-Qiao's work contributes to trustworthy AI through concrete mechanisms. Unlearning papers give methods for deleting or correcting data influence. Synthetic-data work studies how recursive training can fail and how distributed parties can detect the failure. The NeurIPS 2026 paper [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|Illusory Pattern Perception Drives Spurious Inference in Large Language Models]] examines a different reliability risk: perceived prompt patterns can steer inference away from evidence. AI-and-networks projects study how reliability and efficiency change under communication constraints. This page is therefore a map of the trustworthiness motivations behind the more specific research pages.
+Qiao's work contributes to trustworthy AI through concrete mechanisms. Unlearning papers give methods for deleting or correcting data influence. Synthetic-data work studies how recursive training can fail and how distributed parties can detect the failure. The NeurIPS 2026 paper [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|Illusory Pattern Perception Drives Spurious Inference in Large Language Models]] examines a different reliability risk: perceived prompt patterns can steer inference away from evidence. AI-and-networks projects study how reliability and efficiency change under communication constraints.
 
 ## See also
 

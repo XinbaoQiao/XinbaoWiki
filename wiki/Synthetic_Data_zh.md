@@ -1,7 +1,7 @@
 ---
 type: 研究概念
 title: 合成数据（概念）
-description: 解释用于训练、评估或隐私友好协作的生成数据。
+description: 用于训练、评估与协作的生成数据。
 tags:
   - zh
   - research
@@ -9,21 +9,21 @@ tags:
   - 研究概念
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:0be9d0fd4d48f569a4a98be5a8e262abd0f666adf14656d58b7af7e19b57194d'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-10-07T07:07:23.975Z'
+content_hash: 'sha256:588592e73953a10a6c1634b5c4faa0ac881b88131b22827b1072096d683aef75'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 name: 合成数据（概念）
 language: zh
-summary: 解释用于训练、评估或隐私友好协作的生成数据。
+summary: 用于训练、评估与协作的生成数据。
 occupation: 研究概念
 translation_of: Synthetic_Data
 ---
 **合成数据** 指被用来替代、补充或代理真实数据的生成样本。在机器学习中，合成数据可以扩大覆盖面、降低标注成本、保护隐私，或在真实数据稀缺时支持评估；但如果缺乏真实数据锚点并被递归复用，也会引入失效模式。
 
-## 在本 wiki 中的作用
+## 研究背景
 
-本页提供狭义概念定义；[[Synthetic_Data_and_Model_Collapse|合成数据]] 专题页则覆盖乔鑫宝的完整研究簇。这个区分有用：作为工具的合成数据可能有益，而递归合成数据训练是一种具有独立风险的过程。读者可以从本页进入模型坍缩研究线。
+合成数据可以用于数据增强等应用，而递归复用会引入额外风险。乔鑫宝的 [[Synthetic_Data_and_Model_Collapse|合成数据研究]] 关注这些风险如何受到样本选择与真实数据访问条件的影响。
 
 ## 与乔鑫宝工作的关系
 

@@ -8,10 +8,10 @@ tags:
   - profile
   - research-experience
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-09-26T03:14:39.278Z'
-content_hash: 'sha256:6a1ff21af4c7e70ae1b21fa4dccb07b513e83cf10bace4d4920c024d73981717'
-reviewed_at: '2026-09-26T03:15:12.636Z'
-review_due: '2026-12-25'
+modified: '2026-10-07T07:07:23.874Z'
+content_hash: 'sha256:cfc5730177fb40659d99dab607b2e99ff66f5f836ee5daff2da47372ab937560'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-01-05'
 name: Experience
 summary: Research experience and affiliations.
 occupation: Research experience
@@ -26,7 +26,7 @@ occupation: Research experience
 
 Qiao's current doctoral work is centered on [[Data_Centric_Machine_Learning|data-centric ML]] and [[AI_and_Networks|AI and networks]], including AI for Networks and Networks for AI. The research asks how learning systems should operate when data, computation, and evaluation signals are distributed across clients, institutions, or networked infrastructure. [[Distributed_Wasserstein_Barycenter|Distributed Wasserstein barycenter]] computation remains one related method for constructing shared distributional references without assuming that all raw data can be pooled.
 
-Related pages: [[AI_and_Networks]], [[Distributed_Learning]], [[Wasserstein_Geometry]], [[Distributed_Wasserstein_Barycenter]], and [[Collaborative_Evaluation]].
+Related research: [[AI_and_Networks]], [[Distributed_Learning]], [[Wasserstein_Geometry]], [[Distributed_Wasserstein_Barycenter]], and [[Collaborative_Evaluation]].
 
 ## Research on data-centric ML systems
 
@@ -34,7 +34,7 @@ Related pages: [[AI_and_Networks]], [[Distributed_Learning]], [[Wasserstein_Geom
 
 This line of work developed theoretically grounded approaches for data influence attribution, machine unlearning, and data-centric trade-offs in trustworthy AI. It also included cloud-edge collaborative human-space healthcare, where multimodal video, audio, and sensor signals were considered for real-time monitoring.
 
-Related pages: [[Machine_Unlearning]], [[Influence_Functions]], [[Certified_Data_Removal]], [[Trustworthy_AI]], and [[Data_Centric_Machine_Learning|Data Centric ML]].
+Related research: [[Machine_Unlearning]], [[Influence_Functions]], [[Certified_Data_Removal]], [[Trustworthy_AI]], and [[Data_Centric_Machine_Learning|Data Centric ML]].
 
 ## Research on trustworthy LLM systems
 
@@ -42,4 +42,4 @@ Related pages: [[Machine_Unlearning]], [[Influence_Functions]], [[Certified_Data
 
 This research line studies trustworthy model behavior and synthetic-data evaluation, including distributed Wasserstein methods for low-resource synthetic-data evaluation when real data are limited or fragmented. The period also includes the NeurIPS 2026 paper [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|Illusory Pattern Perception Drives Spurious Inference in Large Language Models]], which examines how perceived prompt patterns can displace evidence-grounded inference.
 
-Related pages: [[LLM_Reliability]], [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models]], [[Synthetic_Data_and_Model_Collapse|Synthetic Data]], and [[Wasserstein_Geometry]].
+Related research: [[LLM_Reliability]], [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models]], [[Synthetic_Data_and_Model_Collapse|Synthetic Data]], and [[Wasserstein_Geometry]].

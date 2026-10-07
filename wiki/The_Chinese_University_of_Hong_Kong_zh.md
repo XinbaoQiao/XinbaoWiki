@@ -8,10 +8,10 @@ tags:
   - education
   - 公立研究型大学
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-13T20:54:38+08:00'
-content_hash: 'sha256:cc7ee27875948d4bdac61d09c00a69b27a9675d8b85091248c40ab359ba356e3'
-reviewed_at: '2026-07-13T20:54:38+08:00'
-review_due: '2027-01-09'
+modified: '2026-10-07T07:07:23.982Z'
+content_hash: 'sha256:f07d5a0032333d8027d0ba57bc87da503432763434d3daeba18b098a39582a0e'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 name: 香港中文大学
 language: zh
 summary: 乔鑫宝当前博士阶段所在机构。
@@ -33,7 +33,7 @@ links:
     url: 'https://www.gs.cuhk.edu.hk/admissions/programme/engineering'
 translation_of: The_Chinese_University_of_Hong_Kong
 ---
-**香港中文大学**（**CUHK**）是 [[Xinbao_Qiao|乔鑫宝]] 当前博士阶段所在机构；乔鑫宝隶属于其信息工程系。在本 wiki 中，CUHK 页面是机构背景页，而非完整大学史条目：它记录该校为何与乔鑫宝研究传记相关、信息工程项目如何框定当前研究，以及博士阶段与此前 [[Zhejiang_University|浙江大学]] 和 [[Shandong_University|山东大学]] 训练之间的关系。[^cuhk-intro]
+**香港中文大学**（**CUHK**）是 [[Xinbao_Qiao|乔鑫宝]] 当前博士阶段所在机构；乔鑫宝隶属于其信息工程系。[^cuhk-intro]
 
 ## 项目
 
@@ -41,11 +41,11 @@ translation_of: The_Chinese_University_of_Hong_Kong
 
 ## 学术背景
 
-CUHK 信息工程系成立于 1989 年，并在官方介绍中称其为香港首个且唯一同类学系。[^cuhk-ie] 该系范围包括信息的生成、传输、存储和处理及其真实应用。这个框架比传统计算机科学更宽，为连接机器学习、数据系统、通信网络和可信部署的研究提供了制度语境。
+CUHK 信息工程系成立于 1989 年，并在官方介绍中称其为香港首个且唯一同类学系。[^cuhk-ie] 该系范围包括信息的生成、传输、存储和处理及其真实应用。
 
 ## 与乔鑫宝的关系
 
-乔鑫宝的 CUHK 阶段开始于其硕士阶段的 [[Data_Centric_Machine_Learning|数据中心 ML]] 与 [[Machine_Unlearning|机器遗忘]] 工作之后。在 [[Angela_Yingjun_Zhang|张颖珺]] 指导下，博士阶段强调数据中心 ML、AI for Networks 与 Networks for AI：高效去中心化学习、跨 [[Data_Silos|数据孤岛]] 协作评估、通信感知可靠性，以及[[Distributed_Wasserstein_Barycenter|Wasserstein barycenter]]计算等分布式方法。因此，主页 infobox 中 Affiliation 只列 CUHK 当前机构，而过去机构放在教育与经历中。
+乔鑫宝的 CUHK 阶段开始于其硕士阶段的 [[Data_Centric_Machine_Learning|数据中心 ML]] 与 [[Machine_Unlearning|机器遗忘]] 工作之后。在 [[Angela_Yingjun_Zhang|张颖珺]] 指导下，博士阶段强调数据中心 ML、AI for Networks 与 Networks for AI：高效去中心化学习、跨 [[Data_Silos|数据孤岛]] 协作评估、通信感知可靠性，以及[[Distributed_Wasserstein_Barycenter|Wasserstein barycenter]]计算等分布式方法。
 
 ## 参见
 

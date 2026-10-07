@@ -12,10 +12,10 @@ tags:
   - neurips-2026
   - llm-reliability
 timestamp: '2026-09-25T13:49:35+09:00'
-modified: '2026-09-27T11:41:29.316Z'
-content_hash: 'sha256:7a1e1072fcd8e84d387b65469659a5cfbf93234281790ea4043b12236b855a08'
-reviewed_at: '2026-09-27T11:41:45.574Z'
-review_due: '2027-09-27'
+modified: '2026-10-07T07:07:23.889Z'
+content_hash: 'sha256:e0d2648cb02319ac9826e60cda5da663655894e53eb671c1be8360a9335a6287'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-10-07'
 name: Illusory Pattern Perception Drives Spurious Inference in Large Language Models
 summary: >-
   NeurIPS 2026 paper on illusory pattern perception and spurious inference in
@@ -46,7 +46,7 @@ links:
 
 ## Overview
 
-The paper places illusory pattern perception among the reliability problems of large language models. A prompt can appear to contain a regularity even when that regularity is a poor basis for the requested conclusion. The resulting risk is that a model follows the apparent pattern instead of evaluating the evidence relevant to the question.
+A prompt may suggest a pattern that does not support the requested conclusion. The paper examines how a model can follow this apparent pattern and give too little weight to evidence relevant to the question.
 
 ## Key takeaways
 

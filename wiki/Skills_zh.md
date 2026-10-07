@@ -8,10 +8,10 @@ tags:
   - profile
   - 技术技能
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-07-03T00:03:48+08:00'
-content_hash: 'sha256:75088b353ef9e2295e61ec52e17237ca0b79e5ded268d9a68678dddb7034225a'
-reviewed_at: '2026-07-03T00:03:48+08:00'
-review_due: '2026-12-29'
+modified: '2026-10-07T06:42:08.613Z'
+content_hash: 'sha256:3e21b48738a5e1f1950e09cee20497b349861adcb12cb0a734e3ff986962023a'
+reviewed_at: '2026-10-07T06:43:53.160Z'
+review_due: '2027-04-05'
 name: 技能
 language: zh
 summary: 乔鑫宝 CV 中列出的技术技能。
@@ -31,10 +31,6 @@ translation_of: Skills
 
 - 中文普通话：母语。
 - 英语：IELTS 6.5。
-
-## 研究工作流
-
-该站点设计为通过编辑 wiki/ 下的 markdown 页面完成未来更新，而不是每次手动重建整个主页。
 
 ## 参见
 

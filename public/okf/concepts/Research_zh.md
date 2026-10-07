@@ -1,25 +1,25 @@
 ---
 type: 研究概览
 title: 研究
-description: 乔鑫宝研究方向与相关专题页面概览。
+description: 乔鑫宝在数据中心机器学习、AI 与网络及可信 AI 领域的研究。
 tags:
   - zh
   - research
   - overview
   - 研究概览
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-06T15:56:02.592Z'
-content_hash: 'sha256:a7dc125b460f4f07bbe42c085cbb978a1edda11624066928969a4d21fa47db8d'
-reviewed_at: '2026-10-06T15:56:41.019813+00:00'
-review_due: '2027-01-04'
+modified: '2026-10-07T07:07:23.947Z'
+content_hash: 'sha256:6952f850efb2b43088f354239d8b3c1a7ec6ef1b0cc50fa9f714b107818ec08e'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-01-05'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-06T15:56:41.019813+00:00'
-  reviewDue: '2027-01-04'
+  reviewedAt: '2026-10-07T07:07:51.129Z'
+  reviewDue: '2027-01-05'
   pendingReview: false
   overdue: false
 retrieval:
@@ -28,7 +28,7 @@ retrieval:
 source_ids: []
 source_path: wiki/Research_zh.md
 ---
-本页总结乔鑫宝学术 wiki 中的主要研究方向。它不是静态兴趣列表，而是由多个相互链接的专题页编译出的研究图谱。当前重心是[数据中心 ML](./Data_Centric_Machine_Learning_zh.md)和双向的 [AI 与网络](./AI_and_Networks_zh.md)问题。
+乔鑫宝当前的研究重心是[数据中心 ML](./Data_Centric_Machine_Learning_zh.md)和 [AI 与网络](./AI_and_Networks_zh.md)，包括 AI for Networks 与 Networks for AI。
 
 ## 研究主线
 
@@ -46,11 +46,11 @@ source_path: wiki/Research_zh.md
 
 ## 机器遗忘
 
-[机器遗忘](./Machine_Unlearning_zh.md) 研究删除请求后的认证数据删除和低成本更新机制。相关页面包括 [无 Hessian 在线认证遗忘](./Hessian_Free_Online_Certified_Unlearning_zh.md)、[超越二元擦除](./Soft_Weighted_Machine_Unlearning_zh.md)、[DynFrs](./DynFrs_zh.md)、[影响函数](./Influence_Functions_zh.md) 和 [认证数据删除](./Certified_Data_Removal_zh.md)。
+[机器遗忘](./Machine_Unlearning_zh.md) 研究删除请求后的认证数据删除和低成本更新机制。相关工作包括 [无 Hessian 在线认证遗忘](./Hessian_Free_Online_Certified_Unlearning_zh.md)、[超越二元擦除](./Soft_Weighted_Machine_Unlearning_zh.md)、[DynFrs](./DynFrs_zh.md)、[影响函数](./Influence_Functions_zh.md) 和 [认证数据删除](./Certified_Data_Removal_zh.md)。
 
 ## 合成数据
 
-[合成数据](./Synthetic_Data_and_Model_Collapse_zh.md) 研究递归合成数据训练、[数据选择](./Data_Selection_zh.md)、[样本选择偏差](./Sample_Selection_Bias_zh.md)、[模型坍缩](./Model_Collapse_zh.md)，以及低资源 [数据孤岛](./Data_Silos_zh.md) 中的协作缓解。中心论文是 [样本选择偏差何以促成模型坍缩](./When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md)，其核心表述是：当真实数据覆盖稀缺或碎片化时，模型坍缩风险尤其高。
+[合成数据](./Synthetic_Data_and_Model_Collapse_zh.md) 研究递归合成数据训练、[数据选择](./Data_Selection_zh.md)、[样本选择偏差](./Sample_Selection_Bias_zh.md)、[模型坍缩](./Model_Collapse_zh.md)，以及低资源 [数据孤岛](./Data_Silos_zh.md) 中的协作缓解。代表性论文是 [样本选择偏差何以促成模型坍缩](./When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md)，研究有限且分散的真实数据如何使本地筛选放大模型坍缩风险。
 
 ## 大语言模型可靠性
 

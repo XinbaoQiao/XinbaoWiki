@@ -8,10 +8,10 @@ tags:
   - advisor
   - academic-advisor
 timestamp: '2026-05-05T21:15:18+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:4d88d219cff179aa32b1e44a28613a8f8dbab0dcfec3c4d20d5d51dc790e7d90'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-10-07T07:07:23.803Z'
+content_hash: 'sha256:6b14958c2473e97c3a70c8dfdb1fc1b708d67fcadddc0234182404665ad01a2a'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 name: Angela Yingjun Zhang
 summary: CUHK Information Engineering professor and doctoral advisor of Xinbao Qiao.
 occupation:
@@ -33,11 +33,11 @@ Zhang is a faculty member in [[The_Chinese_University_of_Hong_Kong|The Chinese U
 
 ## Research
 
-Her research pages list wireless communications and networking as the main area. The specific topics include machine learning and AI in wireless communication and networking, convex and non-convex optimization, reconfigurable intelligent surfaces, massive MIMO, semantic and task-oriented communications, and 5G and 6G wireless technologies. In this wiki, these topics form the institutional context for Qiao's [[AI_and_Networks|AI and networks]] direction.
+Her research pages list wireless communications and networking as the main area. The specific topics include machine learning and AI in wireless communication and networking, convex and non-convex optimization, reconfigurable intelligent surfaces, massive MIMO, semantic and task-oriented communications, and 5G and 6G wireless technologies. These topics form the institutional context for Qiao's [[AI_and_Networks|AI and networks]] direction.
 
 ## Connection to Qiao
 
-Zhang is [[Xinbao_Qiao|Xinbao Qiao]]'s doctoral advisor at CUHK. This advisor relation is used in the biography to connect Qiao's earlier data-centric machine-learning work with a doctoral emphasis on networked AI systems, decentralized learning, and communication-aware reliability.
+Zhang is [[Xinbao_Qiao|Xinbao Qiao]]'s doctoral advisor at CUHK, where his research focuses on networked AI systems, decentralized learning, and reliability under communication constraints.
 
 ## See also
 

@@ -8,10 +8,10 @@ tags:
   - profile
   - 教育时间线
 timestamp: '2026-05-06T23:05:52+08:00'
-modified: '2026-08-09T18:32:45.759Z'
-content_hash: 'sha256:2c6a9ddd5c60275f5b8bf4b67e9079a5796f71dfb3ad7f93c413958f874d13ab'
-reviewed_at: '2026-08-10T02:34:00+08:00'
-review_due: '2027-02-05'
+modified: '2026-10-07T06:42:08.562Z'
+content_hash: 'sha256:1dde7f957c78063e436685637fd1b8f6ceef0f0bb6b7568d9b157608fd6b31a2'
+reviewed_at: '2026-10-07T06:43:53.160Z'
+review_due: '2027-04-05'
 name: 教育经历
 language: zh
 summary: 乔鑫宝的教育时间线。
@@ -30,7 +30,3 @@ translation_of: Education
 - Secure Artificial Intelligence：97。
 - Data and Computer Communications：95。
 - Wireless Communications：90。
-
-## 说明
-
-教育经历按时间倒序排列，以匹配主页 infobox 与 Colarpedia 风格的个人页面布局。

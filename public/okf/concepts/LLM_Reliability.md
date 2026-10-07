@@ -1,7 +1,7 @@
 ---
 type: Research concept
 title: LLM Reliability
-description: Concept page for reliability issues in large language model systems.
+description: Reliability of large language model systems in realistic use.
 tags:
   - en
   - research
@@ -9,18 +9,18 @@ tags:
   - research-concept
   - llm
 timestamp: '2026-05-05T20:55:21+08:00'
-modified: '2026-09-25T04:53:27.398Z'
-content_hash: 'sha256:8b76deadc92e23f4c96327ed7c72fa9434143e195aff9885355292b1b8244fef'
-reviewed_at: '2026-09-25T04:54:14.029Z'
-review_due: '2027-03-24'
+modified: '2026-10-07T07:07:23.911Z'
+content_hash: 'sha256:d4e101ad467955c8334ea6306fbac54af8769922af9a346f8556eb583b3cc3b2'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-09-25T04:54:14.029Z'
-  reviewDue: '2027-03-24'
+  reviewedAt: '2026-10-07T07:07:51.129Z'
+  reviewDue: '2027-04-05'
   pendingReview: false
   overdue: false
 retrieval:
@@ -32,11 +32,11 @@ source_ids:
   - src-8e21f24eb6b80d2c
 source_path: wiki/LLM_Reliability.md
 ---
-**LLM Reliability** concerns whether large language model systems behave consistently, safely, and truthfully under realistic use. In this wiki the term is connected to synthetic data, evaluation, and trustworthy systems rather than to a separate product-building track. Reliability includes knowing when an answer lacks adequate support, not only maximizing the number of answers scored as correct.
+**LLM Reliability** concerns whether large language model systems behave consistently, safely, and truthfully under realistic use. Reliability includes knowing when an answer lacks adequate support, not only maximizing the number of answers scored as correct.
 
-## Role in this wiki
+## Research context
 
-This page gives context for Qiao's 2025 research internship at [NUSRI-CQ](./NUSRI_CQ.md), where the biography records work on trustworthy LLM systems and synthetic-data evaluation. Reliability is used here as an umbrella for problems such as hallucination, data contamination, evaluation leakage, recursive synthetic-data use, and miscalibrated trust in generated outputs. The page is intentionally linked to [Synthetic Data](./Synthetic_Data_and_Model_Collapse.md) because generated text or multimodal data can become part of future model-training pipelines.
+During his 2025 research internship at [NUSRI-CQ](./NUSRI_CQ.md), Qiao worked on trustworthy LLM systems and synthetic-data evaluation. Reliability is used here as an umbrella for problems such as hallucination, data contamination, evaluation leakage, recursive synthetic-data use, and miscalibrated trust in generated outputs. This also matters for [synthetic data](./Synthetic_Data_and_Model_Collapse.md): generated text or multimodal data can become part of future model-training pipelines.
 
 Recent evidence sharpens two distinctions. First, false but fluent outputs are not explained only by missing knowledge: TruthfulQA showed that language models can reproduce widely held human misconceptions, while a 2026 Nature study argued that accuracy-only evaluation can reward guessing over abstaining when evidence is weak.[^truthfulness] Second, reported benchmark performance is not the same as generalization. If evaluation examples overlap with pre-training data, scores can be inflated; a 2025 ICML paper treats this overlap as measurable dataset leakage rather than as an abstract concern.[^leakage] Reliable evaluation should therefore examine factual support, abstention behavior, benchmark freshness, and possible contamination together.
 

@@ -8,18 +8,18 @@ tags:
   - education
   - 公立研究型大学
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-13T20:54:38+08:00'
-content_hash: 'sha256:cc7ee27875948d4bdac61d09c00a69b27a9675d8b85091248c40ab359ba356e3'
-reviewed_at: '2026-07-13T20:54:38+08:00'
-review_due: '2027-01-09'
+modified: '2026-10-07T07:07:23.982Z'
+content_hash: 'sha256:f07d5a0032333d8027d0ba57bc87da503432763434d3daeba18b098a39582a0e'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-13T20:54:38+08:00'
-  reviewDue: '2027-01-09'
+  reviewedAt: '2026-10-07T07:07:51.129Z'
+  reviewDue: '2027-04-05'
   pendingReview: false
   overdue: false
 retrieval:
@@ -34,7 +34,7 @@ source_ids:
   - src-f6cb0623675b4752
 source_path: wiki/The_Chinese_University_of_Hong_Kong_zh.md
 ---
-**香港中文大学**（**CUHK**）是 [乔鑫宝](./Qiao_Xinbao_zh.md) 当前博士阶段所在机构；乔鑫宝隶属于其信息工程系。在本 wiki 中，CUHK 页面是机构背景页，而非完整大学史条目：它记录该校为何与乔鑫宝研究传记相关、信息工程项目如何框定当前研究，以及博士阶段与此前 [浙江大学](./Zhejiang_University_zh.md) 和 [山东大学](./Shandong_University_zh.md) 训练之间的关系。[^cuhk-intro]
+**香港中文大学**（**CUHK**）是 [乔鑫宝](./Qiao_Xinbao_zh.md) 当前博士阶段所在机构；乔鑫宝隶属于其信息工程系。[^cuhk-intro]
 
 ## 项目
 
@@ -42,11 +42,11 @@ source_path: wiki/The_Chinese_University_of_Hong_Kong_zh.md
 
 ## 学术背景
 
-CUHK 信息工程系成立于 1989 年，并在官方介绍中称其为香港首个且唯一同类学系。[^cuhk-ie] 该系范围包括信息的生成、传输、存储和处理及其真实应用。这个框架比传统计算机科学更宽，为连接机器学习、数据系统、通信网络和可信部署的研究提供了制度语境。
+CUHK 信息工程系成立于 1989 年，并在官方介绍中称其为香港首个且唯一同类学系。[^cuhk-ie] 该系范围包括信息的生成、传输、存储和处理及其真实应用。
 
 ## 与乔鑫宝的关系
 
-乔鑫宝的 CUHK 阶段开始于其硕士阶段的 [数据中心 ML](./Data_Centric_Machine_Learning_zh.md) 与 [机器遗忘](./Machine_Unlearning_zh.md) 工作之后。在 [张颖珺](./Angela_Yingjun_Zhang_zh.md) 指导下，博士阶段强调数据中心 ML、AI for Networks 与 Networks for AI：高效去中心化学习、跨 [数据孤岛](./Data_Silos_zh.md) 协作评估、通信感知可靠性，以及[Wasserstein barycenter](./Distributed_Wasserstein_Barycenter_zh.md)计算等分布式方法。因此，主页 infobox 中 Affiliation 只列 CUHK 当前机构，而过去机构放在教育与经历中。
+乔鑫宝的 CUHK 阶段开始于其硕士阶段的 [数据中心 ML](./Data_Centric_Machine_Learning_zh.md) 与 [机器遗忘](./Machine_Unlearning_zh.md) 工作之后。在 [张颖珺](./Angela_Yingjun_Zhang_zh.md) 指导下，博士阶段强调数据中心 ML、AI for Networks 与 Networks for AI：高效去中心化学习、跨 [数据孤岛](./Data_Silos_zh.md) 协作评估、通信感知可靠性，以及[Wasserstein barycenter](./Distributed_Wasserstein_Barycenter_zh.md)计算等分布式方法。
 
 ## 参见
 

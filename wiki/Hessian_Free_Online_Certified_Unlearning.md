@@ -9,10 +9,10 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T21:39:01+08:00'
-modified: '2026-09-27T11:41:29.314Z'
-content_hash: 'sha256:af90e8175302eafeb1187ca078d63d2077a11b323b111d3173703b5257fda7e4'
-reviewed_at: '2026-09-27T11:41:45.576Z'
-review_due: '2026-12-26'
+modified: '2026-10-07T07:07:23.883Z'
+content_hash: 'sha256:809a45415e206a5078ad9191c1422a3b97cf19fd566acdfb8e87577fff96e1c4'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-01-05'
 name: Hessian-Free Online Certified Unlearning
 summary: ICLR 2025 paper on efficient Hessian-free certified machine unlearning.
 dates: 24-28 April 2025
@@ -42,28 +42,28 @@ links:
 
 ## Overview
 
-The paper studies [[Certified_Data_Removal|certified data removal]] for models that cannot afford explicit Hessian construction, Hessian inversion, or a strict convex empirical-risk-minimizer assumption. Earlier certified-unlearning methods often use Newton-style corrections from stored second-order statistics, but those matrix operations become impractical for high-dimensional and over-parameterized models.
+The paper studies [[Certified_Data_Removal|certified data removal]] for stochastic training, relaxing the requirement of a strictly convex empirical-risk minimizer and avoiding explicit Hessian construction or inversion. Earlier certified-unlearning methods often use Newton-style corrections from stored second-order statistics, but those matrix operations become impractical for high-dimensional and over-parameterized models.
 
-The paper's central move is to treat training as a trajectory rather than only a final optimizer. It records per-sample trajectory statistics that approximate how the learned model would have changed if a sample had been absent during stochastic training.
+The method tracks the stochastic optimization trajectory throughout training. It records per-sample trajectory statistics that approximate how the learned model would have changed if a sample had been absent during stochastic training.
 
 ## Method
 
-The method recollects an approximator for each training point through affine stochastic recursion. The recursion tracks the discrepancy between the model trained on the full dataset and the counterfactual model retrained without a requested sample. Because the update can be computed through Hessian-vector products, the algorithm avoids materializing the full Hessian matrix while retaining a certificate-style approximation guarantee.
+The method accumulates an approximate influence vector for each training point through affine stochastic recursion. The recursion tracks the discrepancy between the model trained on the full dataset and the counterfactual model retrained without a requested sample. Because the update can be computed through Hessian-vector products, the algorithm avoids materializing the full Hessian matrix while retaining a certificate-style approximation guarantee.
 
 Once the recollected vectors have been computed, online deletion becomes additive: a batch of deletion requests is handled by summing the stored per-sample approximators and applying a vector update to the current model.
 
 ## Key takeaways
 
-- **Unlearning needs an operational model, not only a legal ideal.** The paper treats a deletion request as a concrete systems event that must be handled without full retraining or storing massive second-order objects.
-- **The training trajectory contains reusable deletion information.** Instead of asking the final model alone to explain every future removal, the method preserves enough trajectory-level information to make later updates cheap.
-- **Certification and efficiency should be designed together.** The contribution is not simply faster unlearning; it is a way to keep a certificate-style link to retraining while avoiding Hessian materialization.
-- **The broader lesson is lifecycle readiness.** Models intended for regulated or user-facing environments should be built with future removal requests in mind, not patched after deployment.
+- **Deletion costs depend on how training is organized.** Recording per-sample information during training can reduce the work needed when deletion requests arrive.
+- **Training trajectories contain reusable information about data influence.** Stored trajectory statistics support later vector updates without explicitly constructing or inverting the full Hessian.
+- **Efficiency and certification can be designed together.** The method combines low-cost updates with a formal approximation guarantee relative to retraining.
+- **Future deletion requests belong in the model lifecycle.** Planning for removal during training makes subsequent model maintenance more practical.
 
 ## Results
 
 The paper reports millisecond-level unlearning execution and orders-of-magnitude lower time and storage costs than Hessian-based certified-unlearning baselines. In large-scale application experiments, the method removes a sample through vector additions while preserving test accuracy close to retraining.
 
-The experiments also include membership-inference analysis. The reported trade-off is that certified unlearning should be evaluated not only for approximation-to-retraining and utility, but also for privacy leakage under repeated model releases.
+The experiments also use membership-inference analysis to examine privacy leakage under repeated model releases.
 
 ## Placement
 

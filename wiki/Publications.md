@@ -8,16 +8,15 @@ tags:
   - index
   - publication-list
 timestamp: '2026-06-01T22:00:31+08:00'
-modified: '2026-10-06T16:11:19.508Z'
-content_hash: 'sha256:6f4ee39a7241a6ea7905e12b5f9f708925b7e324b8d57f186294e012dcac810e'
-reviewed_at: '2026-10-06T16:12:11.434524+00:00'
-review_due: '2027-01-04'
+modified: '2026-10-07T06:42:08.606Z'
+content_hash: 'sha256:5951475666a39aaf9dcf488bdd5553c8b52bc48a9e780e78c30effb25b36dd45'
+reviewed_at: '2026-10-07T06:43:53.160Z'
+review_due: '2027-01-05'
 name: Publications
 summary: Publication list for Qiao Xinbao.
 occupation: Publication list
+show_summary: false
 ---
-This page is the curated publication index. Each paper has a dedicated wiki page and is also assigned to research-topic pages; papers should not be left as isolated entries.
-
 ## Peer-reviewed and accepted papers
 
 | Publication | Venue |

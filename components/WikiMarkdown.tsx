@@ -4,6 +4,7 @@ import rehypeKatex from 'rehype-katex';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import { pathWithBasePath } from '@/lib/wiki';
+import { rehypeWikiOutline } from '@/lib/wiki-outline';
 
 type Props = { editLabel: string; markdown: string; sourceHref?: string };
 
@@ -47,7 +48,8 @@ export function WikiMarkdown({ editLabel, markdown, sourceHref }: Props) {
     <div className="wiki-body">
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkMath]}
-        rehypePlugins={[rehypeKatex]}
+        remarkRehypeOptions={{ footnoteLabel: editLabel === '编辑' ? '脚注' : 'Footnotes' }}
+        rehypePlugins={[[rehypeWikiOutline, { label: editLabel === '编辑' ? '本页目录' : 'On this page' }], rehypeKatex]}
         urlTransform={wikiUrlTransform}
         components={{
           a({ href, children }) {
@@ -71,11 +73,11 @@ export function WikiMarkdown({ editLabel, markdown, sourceHref }: Props) {
             const safeSrc = typeof src === 'string' ? pathWithBasePath(src) : '';
             return <img src={safeSrc} alt={alt || ''} loading="lazy" />;
           },
-          h2({ children }) {
-            return <h2>{children}{editLink(sourceHref, editLabel)}</h2>;
+          h2({ id, tabIndex, children }) {
+            return <h2 id={id} tabIndex={tabIndex}>{children}{editLink(sourceHref, editLabel)}</h2>;
           },
-          h3({ children }) {
-            return <h3>{children}{editLink(sourceHref, editLabel)}</h3>;
+          h3({ id, tabIndex, children }) {
+            return <h3 id={id} tabIndex={tabIndex}>{children}{editLink(sourceHref, editLabel)}</h3>;
           },
           p({ children }) {
             const authorshipNote = children === '* Co-first authors.' || children === '* 共同第一作者。'

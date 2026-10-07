@@ -1,24 +1,24 @@
 ---
 type: 研究概览
 title: 研究
-description: 乔鑫宝研究方向与相关专题页面概览。
+description: 乔鑫宝在数据中心机器学习、AI 与网络及可信 AI 领域的研究。
 tags:
   - zh
   - research
   - overview
   - 研究概览
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-06T15:56:02.592Z'
-content_hash: 'sha256:a7dc125b460f4f07bbe42c085cbb978a1edda11624066928969a4d21fa47db8d'
-reviewed_at: '2026-10-06T15:56:41.019813+00:00'
-review_due: '2027-01-04'
+modified: '2026-10-07T07:07:23.947Z'
+content_hash: 'sha256:6952f850efb2b43088f354239d8b3c1a7ec6ef1b0cc50fa9f714b107818ec08e'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-01-05'
 name: 研究
 language: zh
-summary: 乔鑫宝研究方向与相关专题页面概览。
+summary: 乔鑫宝在数据中心机器学习、AI 与网络及可信 AI 领域的研究。
 occupation: 研究概览
 translation_of: Research
 ---
-本页总结乔鑫宝学术 wiki 中的主要研究方向。它不是静态兴趣列表，而是由多个相互链接的专题页编译出的研究图谱。当前重心是[[Data_Centric_Machine_Learning|数据中心 ML]]和双向的 [[AI_and_Networks|AI 与网络]]问题。
+乔鑫宝当前的研究重心是[[Data_Centric_Machine_Learning|数据中心 ML]]和 [[AI_and_Networks|AI 与网络]]，包括 AI for Networks 与 Networks for AI。
 
 ## 研究主线
 
@@ -36,11 +36,11 @@ translation_of: Research
 
 ## 机器遗忘
 
-[[Machine_Unlearning|机器遗忘]] 研究删除请求后的认证数据删除和低成本更新机制。相关页面包括 [[Hessian_Free_Online_Certified_Unlearning|无 Hessian 在线认证遗忘]]、[[Soft_Weighted_Machine_Unlearning|超越二元擦除]]、[[DynFrs|DynFrs]]、[[Influence_Functions|影响函数]] 和 [[Certified_Data_Removal|认证数据删除]]。
+[[Machine_Unlearning|机器遗忘]] 研究删除请求后的认证数据删除和低成本更新机制。相关工作包括 [[Hessian_Free_Online_Certified_Unlearning|无 Hessian 在线认证遗忘]]、[[Soft_Weighted_Machine_Unlearning|超越二元擦除]]、[[DynFrs|DynFrs]]、[[Influence_Functions|影响函数]] 和 [[Certified_Data_Removal|认证数据删除]]。
 
 ## 合成数据
 
-[[Synthetic_Data_and_Model_Collapse|合成数据]] 研究递归合成数据训练、[[Data_Selection|数据选择]]、[[Sample_Selection_Bias|样本选择偏差]]、[[Model_Collapse|模型坍缩]]，以及低资源 [[Data_Silos|数据孤岛]] 中的协作缓解。中心论文是 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]]，其核心表述是：当真实数据覆盖稀缺或碎片化时，模型坍缩风险尤其高。
+[[Synthetic_Data_and_Model_Collapse|合成数据]] 研究递归合成数据训练、[[Data_Selection|数据选择]]、[[Sample_Selection_Bias|样本选择偏差]]、[[Model_Collapse|模型坍缩]]，以及低资源 [[Data_Silos|数据孤岛]] 中的协作缓解。代表性论文是 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]]，研究有限且分散的真实数据如何使本地筛选放大模型坍缩风险。
 
 ## 大语言模型可靠性
 

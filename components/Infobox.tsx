@@ -177,6 +177,13 @@ function render(value: unknown, language: InfoboxLanguage): ReactNode {
   return null;
 }
 
+export function hasInfoboxDetails(data: WikiFrontmatter) {
+  return !empty(data.image)
+    || order.some((key) => key !== 'type' && !empty(data[key])
+      && (key !== 'occupation' || !sameInfoboxText(data.occupation, data.type)))
+    || (Array.isArray(data.links) && data.links.some(isLink));
+}
+
 export function Infobox({ data, language = 'en' }: Props) {
   const title = typeof data.name === 'string' ? data.name : 'Infobox';
   const image = typeof data.image === 'string' ? data.image : '';

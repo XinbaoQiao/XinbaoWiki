@@ -8,10 +8,10 @@ tags:
   - advisor
   - academic-advisor
 timestamp: '2026-05-05T21:15:18+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:e3fc2253d995fdb7047157a92a3b1d378ba60d5b54aef3e7178e8d2431a0ea78'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-10-07T07:07:23.915Z'
+content_hash: 'sha256:0dd4cc969ed93d58a75bb75a16caa92ce53eb29464013a2a5d5e37d8f267b71d'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 name: Meng Zhang
 summary: Zhejiang University faculty member and master's advisor of Xinbao Qiao.
 occupation:
@@ -31,15 +31,15 @@ links:
 
 ## Biography
 
-Zhang is associated in this wiki with [[Zhejiang_University|Zhejiang University]] and the master's stage of [[Xinbao_Qiao|Xinbao Qiao]]. The official ZJU profile records his role as researcher/assistant professor and doctoral supervisor, and gives his affiliation as the ZJU-UIUC Institute and International Joint College. Within Qiao's wiki, the page is used as an academic-advisor entry rather than a full independent biography.
+Zhang was [[Xinbao_Qiao|Xinbao Qiao]]'s master's advisor at [[Zhejiang_University|Zhejiang University]]. The official ZJU profile records his role as researcher/assistant professor and doctoral supervisor, and gives his affiliation as the ZJU-UIUC Institute and International Joint College.
 
 ## Research
 
-The ZJU profile lists Zhang's research areas as wireless and computer networks, edge intelligence, network economics, and intelligent IoT. These topics form a network-systems background that is close to several labels in this wiki, including [[AI_and_Networks|AI and networks]], [[Distributed_Learning|distributed learning]], and [[Data_Centric_Machine_Learning|Data Centric ML]].
+The ZJU profile lists Zhang's research areas as wireless and computer networks, edge intelligence, network economics, and intelligent IoT. These topics form a network-systems background that is close to research on [[AI_and_Networks|AI and networks]], [[Distributed_Learning|distributed learning]], and [[Data_Centric_Machine_Learning|Data Centric ML]].
 
 ## Connection to Qiao
 
-Zhang was Qiao's master's advisor during the Zhejiang University phase. The period is linked in this wiki to data-centric machine learning, machine unlearning, and data influence analysis. It includes work that later appears in Qiao's publication record, including [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]] and [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]].
+Zhang was Qiao's master's advisor during the Zhejiang University phase. Qiao's research during this period included data-centric machine learning, machine unlearning, and data influence analysis. This work includes [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]] and [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]].
 
 ## See also
 

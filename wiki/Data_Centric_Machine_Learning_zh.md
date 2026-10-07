@@ -8,10 +8,10 @@ tags:
   - topic
   - 研究专题
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:b5ed150616b6bc664087f36dc9e5d5cdb8b191aa624cf0ed96b40dce31f72b12'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-10-07T07:07:23.824Z'
+content_hash: 'sha256:224fd6fd4ec5bb06be49840dec076fb87251226fb434041d64efb30efa82a4ab'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 name: 数据中心 ML
 language: zh
 summary: 关注数据质量、选择、估值、修正和治理的研究专题。
@@ -22,15 +22,15 @@ image: /topics/data-centric-ml.png
 image_caption: 数据中心 ML 主题图
 translation_of: Data_Centric_Machine_Learning
 ---
-**数据中心 ML** 是本 wiki 对 data-centric machine learning 的简称。它指的是把数据变化本身作为一阶干预对象的研究，而不仅仅通过修改模型结构来提升性能。相关操作包括选择、剪枝、加权、删除、合成和跨方评估。
+**数据中心 ML**（data-centric machine learning）研究如何通过改进数据来改变模型表现，将数据与模型结构同样视为重要的改进对象。相关操作包括选择、剪枝、加权、删除、合成和跨方评估。
 
 ## 引言
 
-本页把主要干预来自数据操作的项目放在一起。有些操作发生在训练之后，例如删除和重加权；有些发生在训练前或训练中，例如剪枝、合成数据筛选和跨孤岛评估。该专题连接了乔鑫宝早期机器遗忘工作与当前 AI 与网络方向。
+数据中心 ML 研究以数据操作为主要干预手段。有些操作发生在训练之后，例如删除和重加权；有些发生在训练前或训练中，例如剪枝、合成数据筛选和跨孤岛评估。这些数据操作贯穿乔鑫宝早期的机器遗忘工作与当前的 AI 与网络研究。
 
-## 在本 wiki 中的作用
+## 研究背景
 
-本页解释为什么 [[Data_Selection|数据选择]]、[[Sample_Selection_Bias|样本选择偏差]]、[[Synthetic_Data|合成数据]]、[[Machine_Unlearning|机器遗忘]] 和 [[Collaborative_Evaluation|协作评估]] 属于同一研究图谱。它们都在追问：当数据过程发生变化时，模型行为如何变化，哪些数据重要，哪些数据会伤害可靠性，以及哪些数据可以在现实成本约束下被忽略。
+[[Data_Selection|数据选择]]、[[Sample_Selection_Bias|样本选择偏差]]、[[Synthetic_Data|合成数据]]、[[Machine_Unlearning|机器遗忘]] 和 [[Collaborative_Evaluation|协作评估]] 共同关注：当数据过程发生变化时，模型行为如何变化，哪些数据重要，哪些数据会伤害可靠性，以及哪些数据可以在现实成本约束下被忽略。
 
 ## 论文
 

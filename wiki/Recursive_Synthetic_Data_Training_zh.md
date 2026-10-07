@@ -1,7 +1,7 @@
 ---
 type: 研究概念
 title: 递归合成数据训练
-description: 解释模型反复使用早期模型生成数据进行训练的过程。
+description: 反复使用前代模型生成的数据进行训练。
 tags:
   - zh
   - research
@@ -9,21 +9,21 @@ tags:
   - 研究概念
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-08-09T18:32:45.786Z'
-content_hash: 'sha256:5d8a4e20eec790d14fac24557dfedfa4ab08a87f6ea28bc0c80802df8c7bb414'
-reviewed_at: '2026-08-10T02:34:00+08:00'
-review_due: '2027-02-05'
+modified: '2026-10-07T07:07:23.941Z'
+content_hash: 'sha256:ff333141baeb729c0abff1d4538893c15e0149a76ea8e59ba9e72603897fbe43'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 name: 递归合成数据训练
 language: zh
-summary: 解释模型反复使用早期模型生成数据进行训练的过程。
+summary: 反复使用前代模型生成的数据进行训练。
 occupation: 研究概念
 translation_of: Recursive_Synthetic_Data_Training
 ---
 **递归合成数据训练** 是指某一代模型生成的数据进入后一代模型训练集的过程。它可能是有意设计的，例如自训练或合成数据自举；也可能是偶然发生的，例如生成内容进入未来训练语料。[^recursive]
 
-## 在本 wiki 中的作用
+## 研究背景
 
-本页解释 [[Model_Collapse|模型坍缩]] 背后的过程。它与一般合成数据不同：一次性的合成增强可能有益，但重复复用会放大分布误差。本 wiki 用该页区分机制和结果：递归训练是循环，坍缩是可能的退化结果之一。
+递归复用可能引发 [[Model_Collapse|模型坍缩]]：一次性的合成增强可能有益，但重复复用会放大分布误差。递归训练是循环，坍缩是可能的退化结果之一。
 
 ## 与乔鑫宝工作的关系
 

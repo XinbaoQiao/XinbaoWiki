@@ -11,18 +11,18 @@ tags:
   - research-topic
   - ai-and-networks
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-06T15:55:58.149Z'
-content_hash: 'sha256:dfbbfa7ff610f79703c1e20e003317c3a9b47eeea1a9084a0bfbfd63a5305998'
-reviewed_at: '2026-10-06T15:56:41.014903+00:00'
-review_due: '2027-04-04'
+modified: '2026-10-07T07:07:23.801Z'
+content_hash: 'sha256:78bc4eec7153f9a602c35e00f370aadc195bf4c8d76657fd9f13f6bde180bbe8'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-06T15:56:41.014903+00:00'
-  reviewDue: '2027-04-04'
+  reviewedAt: '2026-10-07T07:07:51.129Z'
+  reviewDue: '2027-04-05'
   pendingReview: false
   overdue: false
 retrieval:
@@ -33,15 +33,15 @@ source_ids:
   - src-766234e11681dad2
 source_path: wiki/AI_and_Networks.md
 ---
-**AI and Networks** is the primary research topic currently emphasized in [Xinbao Qiao](./Xinbao_Qiao.md)'s wiki. The term is used here in a deliberately broad but bounded sense: it covers AI for Networks, Networks for AI, and learning algorithms whose behavior depends on communication, decentralization, edge devices, institutional data silos, or cross-party evaluation.[^sources]
+**AI and Networks** is a primary research direction of [Xinbao Qiao](./Xinbao_Qiao.md). It covers AI for Networks, Networks for AI, and learning algorithms whose behavior depends on communication, decentralization, edge devices, institutional data silos, or cross-party evaluation.[^sources]
 
 ## Introduction
 
-In this wiki, AI and Networks is not a separate application label but the organizing frame for research in which learning is shaped by where data live, how information moves, and which parties can evaluate a model. The topic therefore includes AI-assisted networked systems, network support for AI systems, decentralized learning, distributed computing, data pruning, collaborative evaluation, and synthetic-data verification under low-resource or siloed access.
+AI and networks research examines how learning is shaped by where data live, how information moves, and which parties can evaluate a model. The topic therefore includes AI-assisted networked systems, network support for AI systems, decentralized learning, distributed computing, data pruning, collaborative evaluation, and synthetic-data verification under low-resource or siloed access.
 
-## Role in this wiki
+## Research context
 
-This page is the top-level hub for research in which model performance is shaped by where data live and how information moves. It links Qiao's background in communication engineering with later work on [distributed learning](./Distributed_Learning.md), [data silos](./Data_Silos.md), [collaborative evaluation](./Collaborative_Evaluation.md), [distributed Wasserstein barycenters](./Distributed_Wasserstein_Barycenter.md), and data pruning for decentralized training. The page also explains why several apparently separate projects are grouped together: they all treat communication, locality, or infrastructure as part of the learning problem, not merely as deployment details.
+Qiao's background in communication engineering connects with his later work on [distributed learning](./Distributed_Learning.md), [data silos](./Data_Silos.md), [collaborative evaluation](./Collaborative_Evaluation.md), [distributed Wasserstein barycenters](./Distributed_Wasserstein_Barycenter.md), and data pruning for decentralized training. These problems treat communication, locality, and infrastructure as factors that shape learning.
 
 ## Current doctoral focus
 
@@ -59,7 +59,7 @@ The under-review manuscript [Decentralized Free-Support Wasserstein Barycenter](
 
 ## Connection to Qiao's work
 
-The ICML 2026 paper [When Sample Selection Bias Precipitates Model Collapse](./When_Sample_Selection_Bias_Precipitates_Model_Collapse.md) belongs here because it studies collaborative verification when low-resource parties only hold fragmented local evidence. Distributed [Wasserstein barycenter](./Distributed_Wasserstein_Barycenter.md) methods remain one technical route for treating a reference distribution as something computed across a network rather than assumed to exist centrally. Earlier work in [machine unlearning](./Machine_Unlearning.md) contributes the same systems instinct: algorithms are evaluated not only by accuracy, but also by latency, communication, and the cost of changing data after training.
+The ICML 2026 paper [When Sample Selection Bias Precipitates Model Collapse](./When_Sample_Selection_Bias_Precipitates_Model_Collapse.md) studies collaborative verification when low-resource parties only hold fragmented local evidence. Distributed [Wasserstein barycenter](./Distributed_Wasserstein_Barycenter.md) methods remain one technical route for treating a reference distribution as something computed across a network rather than assumed to exist centrally. Earlier work in [machine unlearning](./Machine_Unlearning.md) reflects the same systems perspective: algorithms are evaluated not only by accuracy, but also by latency, communication, and the cost of changing data after training.
 
 ## See also
 

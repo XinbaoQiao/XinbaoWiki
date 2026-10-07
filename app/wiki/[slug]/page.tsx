@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { Infobox } from '@/components/Infobox';
+import { hasInfoboxDetails, Infobox } from '@/components/Infobox';
+import { ArticleFacts } from '@/components/ArticleFacts';
 import { WikiMarkdown } from '@/components/WikiMarkdown';
 import {
   getPublicWikiSlugs,
@@ -98,6 +99,7 @@ export default async function WikiPage({ params }: Props) {
   const updatedAt = pageModifiedDate(page.data);
   const updatedLabel = language === 'zh' ? '最后更新' : 'Last updated';
   const pageType = wikiConceptType(page.data, page.slug);
+  const hasFacts = hasInfoboxDetails(page.data);
   return (
     <article
       className="wiki-page"
@@ -117,9 +119,15 @@ export default async function WikiPage({ params }: Props) {
           {updatedLabel} <time dateTime={updatedAt}>{readableDate(updatedAt)}</time>
         </p>
       )}
-      {page.summary && <p className="wiki-title-sub">{page.summary}</p>}
-      <Infobox data={page.data} language={language} />
-      <WikiMarkdown editLabel={editLabel} sourceHref={sourceHref} markdown={preprocessWikiLinks(page.content, { language })} />
+      {page.data.show_summary !== false && page.summary && <p className="wiki-title-sub">{page.summary}</p>}
+      <div className={hasFacts ? 'wiki-article-layout' : 'wiki-article-layout wiki-article-layout-text'}>
+        {hasFacts && (
+          <ArticleFacts label={language === 'zh' ? '条目信息' : 'Page details'}>
+            <Infobox data={page.data} language={language} />
+          </ArticleFacts>
+        )}
+        <WikiMarkdown editLabel={editLabel} sourceHref={sourceHref} markdown={preprocessWikiLinks(page.content, { language })} />
+      </div>
     </article>
   );
 }

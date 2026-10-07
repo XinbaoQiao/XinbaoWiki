@@ -16,10 +16,10 @@
         "ai-and-networks"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-06T15:55:58.149Z",
-      "contentHash": "sha256:dfbbfa7ff610f79703c1e20e003317c3a9b47eeea1a9084a0bfbfd63a5305998",
-      "reviewedAt": "2026-10-06T15:56:41.014903+00:00",
-      "reviewDue": "2027-04-04",
+      "modifiedAt": "2026-10-07T07:07:23.801Z",
+      "contentHash": "sha256:78bc4eec7153f9a602c35e00f370aadc195bf4c8d76657fd9f13f6bde180bbe8",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-5ffca2a581311c27",
         "src-766234e11681dad2"
@@ -35,7 +35,7 @@
       "retrieval": {
         "documentId": "wiki:AI_and_Networks",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:dfbbfa7ff610f79703c1e20e003317c3a9b47eeea1a9084a0bfbfd63a5305998",
+        "contentHash": "sha256:78bc4eec7153f9a602c35e00f370aadc195bf4c8d76657fd9f13f6bde180bbe8",
         "textFields": [
           "title",
           "aliases",
@@ -66,10 +66,10 @@
         "academic-advisor"
       ],
       "timestamp": "2026-05-05T21:15:18+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:4d88d219cff179aa32b1e44a28613a8f8dbab0dcfec3c4d20d5d51dc790e7d90",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.803Z",
+      "contentHash": "sha256:6b14958c2473e97c3a70c8dfdb1fc1b708d67fcadddc0234182404665ad01a2a",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-05cf85aef2ce8d53",
         "src-938ce85aed5a8a94",
@@ -88,7 +88,7 @@
       "retrieval": {
         "documentId": "wiki:Angela_Yingjun_Zhang",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:4d88d219cff179aa32b1e44a28613a8f8dbab0dcfec3c4d20d5d51dc790e7d90",
+        "contentHash": "sha256:6b14958c2473e97c3a70c8dfdb1fc1b708d67fcadddc0234182404665ad01a2a",
         "textFields": [
           "title",
           "aliases",
@@ -121,10 +121,10 @@
         "machine-unlearning"
       ],
       "timestamp": "2026-05-05T21:39:01+08:00",
-      "modifiedAt": "2026-09-27T11:41:29.334Z",
-      "contentHash": "sha256:580b8813439245763dc7717c0158ba37ebc171ccb3426307d73b7325a01b90fd",
-      "reviewedAt": "2026-09-27T11:41:45.576Z",
-      "reviewDue": "2027-09-27",
+      "modifiedAt": "2026-10-07T07:07:23.968Z",
+      "contentHash": "sha256:6a442fefe80b6de9b6128ea4a2ac0d4e7b2f61ba27fa2882d6532008246686a0",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-10-07",
       "sourceIds": [
         "src-0642a11373a83c47",
         "src-53e1199f272a4df4",
@@ -135,7 +135,7 @@
       "retrieval": {
         "documentId": "wiki:Soft_Weighted_Machine_Unlearning",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:580b8813439245763dc7717c0158ba37ebc171ccb3426307d73b7325a01b90fd",
+        "contentHash": "sha256:6a442fefe80b6de9b6128ea4a2ac0d4e7b2f61ba27fa2882d6532008246686a0",
         "textFields": [
           "title",
           "aliases",
@@ -156,7 +156,7 @@
     {
       "slug": "Certified_Data_Removal",
       "title": "Certified Data Removal",
-      "summary": "Concept page for deletion guarantees in machine unlearning.",
+      "summary": "Deletion guarantees in machine unlearning.",
       "language": "en",
       "type": "Research concept",
       "tags": [
@@ -167,17 +167,17 @@
         "machine-unlearning"
       ],
       "timestamp": "2026-05-05T19:52:29+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:aa1f00effe5b056f30d3d7f991135fb9e7d563e4eec1d66b6a7413b3875c3c06",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.807Z",
+      "contentHash": "sha256:0d82a6e82c5fe2bd97b3e47abac339d956fd7295e8cfaab308cef27d6e7119a6",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Certified_Data_Removal",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:aa1f00effe5b056f30d3d7f991135fb9e7d563e4eec1d66b6a7413b3875c3c06",
+        "contentHash": "sha256:0d82a6e82c5fe2bd97b3e47abac339d956fd7295e8cfaab308cef27d6e7119a6",
         "textFields": [
           "title",
           "aliases",
@@ -198,7 +198,7 @@
     {
       "slug": "Collaborative_Evaluation",
       "title": "Collaborative Evaluation",
-      "summary": "Concept page for evaluating models or data processes across multiple parties.",
+      "summary": "Evaluation of models and data processes using evidence from multiple parties.",
       "language": "en",
       "type": "Research concept",
       "tags": [
@@ -208,17 +208,17 @@
         "research-concept"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:8e9faf67f5ee31a4878fb7e692c8d5333fba5a60cbec15e95b72c457891e9436",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.816Z",
+      "contentHash": "sha256:4e5e84fafa00db7b2bcb8408d677f1c2d4c3f6fcd8cb540ea75839f7dceab75c",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Collaborative_Evaluation",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:8e9faf67f5ee31a4878fb7e692c8d5333fba5a60cbec15e95b72c457891e9436",
+        "contentHash": "sha256:4e5e84fafa00db7b2bcb8408d677f1c2d4c3f6fcd8cb540ea75839f7dceab75c",
         "textFields": [
           "title",
           "aliases",
@@ -249,10 +249,10 @@
         "cv-summary"
       ],
       "timestamp": "2026-07-02T19:37:18+08:00",
-      "modifiedAt": "2026-10-06T16:11:19.173Z",
-      "contentHash": "sha256:0a2bdf27e75aa7aa964a56e14450d24b9e49ae38f6c170711b204a2d7e6a9329",
-      "reviewedAt": "2026-10-06T16:12:11.431042+00:00",
-      "reviewDue": "2027-01-04",
+      "modifiedAt": "2026-10-07T07:07:23.817Z",
+      "contentHash": "sha256:8dfb826b19aa8c3fe70b1bd41accb2c532b0b3b2d2c4682dddb2083a7add9a77",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-01-05",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-0642a11373a83c47",
@@ -295,7 +295,7 @@
       "retrieval": {
         "documentId": "wiki:CV",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:0a2bdf27e75aa7aa964a56e14450d24b9e49ae38f6c170711b204a2d7e6a9329",
+        "contentHash": "sha256:8dfb826b19aa8c3fe70b1bd41accb2c532b0b3b2d2c4682dddb2083a7add9a77",
         "textFields": [
           "title",
           "aliases",
@@ -326,17 +326,17 @@
         "research-topic"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:bcaecd59642ba0d6acba76857a5343801aa5f36e2826a75f8def334627b1de33",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.824Z",
+      "contentHash": "sha256:67ec95dfc5667e24e7ec5f3934d13fc4699571a7d587fa70b57794a5ef439950",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Data_Centric_Machine_Learning",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:bcaecd59642ba0d6acba76857a5343801aa5f36e2826a75f8def334627b1de33",
+        "contentHash": "sha256:67ec95dfc5667e24e7ec5f3934d13fc4699571a7d587fa70b57794a5ef439950",
         "textFields": [
           "title",
           "aliases",
@@ -357,7 +357,7 @@
     {
       "slug": "Data_Selection",
       "title": "Data Selection",
-      "summary": "Concept page for choosing training or evaluation data under reliability constraints.",
+      "summary": "Selection of training or evaluation data under reliability constraints.",
       "language": "en",
       "type": "Research concept",
       "tags": [
@@ -367,17 +367,17 @@
         "research-concept"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:49f49a19d651a14750d02e8624e31c769fe7be63310cb06cfef96324f5a290b0",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.831Z",
+      "contentHash": "sha256:5f6c2676592f1d2db8f81830e111c54f8b0d6ec3d0ff75b0d3335de981a2aac4",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Data_Selection",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:49f49a19d651a14750d02e8624e31c769fe7be63310cb06cfef96324f5a290b0",
+        "contentHash": "sha256:5f6c2676592f1d2db8f81830e111c54f8b0d6ec3d0ff75b0d3335de981a2aac4",
         "textFields": [
           "title",
           "aliases",
@@ -398,7 +398,7 @@
     {
       "slug": "Data_Silos",
       "title": "Data Silos",
-      "summary": "Concept page for learning and evaluation when data are distributed across separate holders.",
+      "summary": "Learning and evaluation across institutions with limited data sharing.",
       "language": "en",
       "type": "Research concept",
       "tags": [
@@ -408,17 +408,17 @@
         "research-concept"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:10fe6fafff148822ceebb3ec9a5727df2d39ea2c6ea4f674732a0fa67752cde6",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.844Z",
+      "contentHash": "sha256:c278c75bcb5e1728747d675ea93232ef5160f79c8f55f67800b939aad76de498",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Data_Silos",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:10fe6fafff148822ceebb3ec9a5727df2d39ea2c6ea4f674732a0fa67752cde6",
+        "contentHash": "sha256:c278c75bcb5e1728747d675ea93232ef5160f79c8f55f67800b939aad76de498",
         "textFields": [
           "title",
           "aliases",
@@ -450,17 +450,17 @@
         "wasserstein"
       ],
       "timestamp": "2026-08-20T00:00:00+09:00",
-      "modifiedAt": "2026-10-06T16:11:19.217Z",
-      "contentHash": "sha256:cbf4ce79c372ecc58be3a0e2bbdc8af11adcc54207a700f18643e6f8c86d29be",
-      "reviewedAt": "2026-10-06T16:12:11.432600+00:00",
-      "reviewDue": "2026-11-05",
+      "modifiedAt": "2026-10-07T07:07:23.846Z",
+      "contentHash": "sha256:880653007652fbf48f1f36ddd63085d593512f97ebeefa5b48c7c036001989fb",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2026-11-06",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Decentralized_Free_Support_Wasserstein_Barycenter",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:cbf4ce79c372ecc58be3a0e2bbdc8af11adcc54207a700f18643e6f8c86d29be",
+        "contentHash": "sha256:880653007652fbf48f1f36ddd63085d593512f97ebeefa5b48c7c036001989fb",
         "textFields": [
           "title",
           "aliases",
@@ -481,7 +481,7 @@
     {
       "slug": "Distributed_Learning",
       "title": "Distributed Learning",
-      "summary": "Concept page for learning with decentralized data, computation, or communication.",
+      "summary": "Learning with data, computation, or evaluation distributed across participants.",
       "language": "en",
       "type": "Research concept",
       "tags": [
@@ -491,17 +491,17 @@
         "research-concept"
       ],
       "timestamp": "2026-05-06T06:22:22+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:3f633f2dc9b39e451931c33e1d641d68b8ceb3bafb18caa1f4a08b3ce6a2a993",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.857Z",
+      "contentHash": "sha256:3ba64e696d88221e84fc7ec15f75ebc4c232a6be088894560d8c27e6a9a663fe",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Distributed_Learning",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:3f633f2dc9b39e451931c33e1d641d68b8ceb3bafb18caa1f4a08b3ce6a2a993",
+        "contentHash": "sha256:3ba64e696d88221e84fc7ec15f75ebc4c232a6be088894560d8c27e6a9a663fe",
         "textFields": [
           "title",
           "aliases",
@@ -522,7 +522,7 @@
     {
       "slug": "Distributed_Wasserstein_Barycenter",
       "title": "Distributed Wasserstein Barycenter",
-      "summary": "Concept page for Qiao's work on computing Wasserstein barycenters from distributed local measures.",
+      "summary": "Computing a shared Wasserstein reference distribution from locally held data.",
       "language": "en",
       "type": "Research concept",
       "tags": [
@@ -533,10 +533,10 @@
         "wasserstein"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-06T15:56:02.294Z",
-      "contentHash": "sha256:ea6642e396c17e813a98854bf2b5fe2fa7169bfa3c342c1789f0fe09b0305285",
-      "reviewedAt": "2026-10-06T15:56:41.016617+00:00",
-      "reviewDue": "2027-04-04",
+      "modifiedAt": "2026-10-07T07:07:23.871Z",
+      "contentHash": "sha256:0cc32576ea6ab9dbb41a5cd044aec451883b92305a47942726591118ead54bdb",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-0d6548913a8c228f",
         "src-3157a848b3737221"
@@ -552,7 +552,7 @@
       "retrieval": {
         "documentId": "wiki:Distributed_Wasserstein_Barycenter",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:ea6642e396c17e813a98854bf2b5fe2fa7169bfa3c342c1789f0fe09b0305285",
+        "contentHash": "sha256:0cc32576ea6ab9dbb41a5cd044aec451883b92305a47942726591118ead54bdb",
         "textFields": [
           "title",
           "aliases",
@@ -584,10 +584,10 @@
         "iclr-2025"
       ],
       "timestamp": "2026-05-05T21:39:01+08:00",
-      "modifiedAt": "2026-09-27T11:41:29.310Z",
-      "contentHash": "sha256:607d21b9f9d344e69559bb4d489b1137a36960067ecfb102f57ab822f885217f",
-      "reviewedAt": "2026-09-27T11:41:45.577Z",
-      "reviewDue": "2026-12-26",
+      "modifiedAt": "2026-10-07T07:07:23.872Z",
+      "contentHash": "sha256:1b6691f31f55df4e55be20372c488f69dc0ad3daf113d0cf1380144f96bca4f1",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-01-05",
       "sourceIds": [
         "src-19cdc04d387acf77",
         "src-3234eea5652932e1",
@@ -599,7 +599,7 @@
       "retrieval": {
         "documentId": "wiki:DynFrs",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:607d21b9f9d344e69559bb4d489b1137a36960067ecfb102f57ab822f885217f",
+        "contentHash": "sha256:1b6691f31f55df4e55be20372c488f69dc0ad3daf113d0cf1380144f96bca4f1",
         "textFields": [
           "title",
           "aliases",
@@ -630,17 +630,17 @@
         "education-timeline"
       ],
       "timestamp": "2026-05-06T23:05:52+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.760Z",
-      "contentHash": "sha256:d13ea461c354b9ee594e6839f086949cde6711fe80ea6a78a6302975b7316cc4",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-02-05",
+      "modifiedAt": "2026-10-07T06:42:08.563Z",
+      "contentHash": "sha256:6d886020cc64d21423a5d6c25db28081f7ad3f5e13281f28c2432c0ced3568b4",
+      "reviewedAt": "2026-10-07T06:43:53.160Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Education",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:d13ea461c354b9ee594e6839f086949cde6711fe80ea6a78a6302975b7316cc4",
+        "contentHash": "sha256:6d886020cc64d21423a5d6c25db28081f7ad3f5e13281f28c2432c0ced3568b4",
         "textFields": [
           "title",
           "aliases",
@@ -671,17 +671,17 @@
         "research-experience"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-09-26T03:14:39.278Z",
-      "contentHash": "sha256:6a1ff21af4c7e70ae1b21fa4dccb07b513e83cf10bace4d4920c024d73981717",
-      "reviewedAt": "2026-09-26T03:15:12.636Z",
-      "reviewDue": "2026-12-25",
+      "modifiedAt": "2026-10-07T07:07:23.874Z",
+      "contentHash": "sha256:cfc5730177fb40659d99dab607b2e99ff66f5f836ee5daff2da47372ab937560",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-01-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Experience",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:6a1ff21af4c7e70ae1b21fa4dccb07b513e83cf10bace4d4920c024d73981717",
+        "contentHash": "sha256:cfc5730177fb40659d99dab607b2e99ff66f5f836ee5daff2da47372ab937560",
         "textFields": [
           "title",
           "aliases",
@@ -702,7 +702,7 @@
     {
       "slug": "Fairness_and_Robustness",
       "title": "Fairness and Robustness",
-      "summary": "Concept page for fairness and robustness as data-centric correction objectives.",
+      "summary": "Fairness and robustness as goals of data-driven model correction.",
       "language": "en",
       "type": "Research concept",
       "tags": [
@@ -712,17 +712,17 @@
         "research-concept"
       ],
       "timestamp": "2026-05-05T20:55:21+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:01ec70a2530423cf6b84a82836edb8899ddb896b3b6bf1456e347539aafbb777",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:11:31.524Z",
+      "contentHash": "sha256:b3b6572931163e8bca1f1fe05c5fb2012d4a19831d3aa8bc5716d943cbef03ff",
+      "reviewedAt": "2026-10-07T07:11:31.718Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Fairness_and_Robustness",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:01ec70a2530423cf6b84a82836edb8899ddb896b3b6bf1456e347539aafbb777",
+        "contentHash": "sha256:b3b6572931163e8bca1f1fe05c5fb2012d4a19831d3aa8bc5716d943cbef03ff",
         "textFields": [
           "title",
           "aliases",
@@ -754,10 +754,10 @@
         "iclr-2025"
       ],
       "timestamp": "2026-05-05T21:39:01+08:00",
-      "modifiedAt": "2026-09-27T11:41:29.314Z",
-      "contentHash": "sha256:af90e8175302eafeb1187ca078d63d2077a11b323b111d3173703b5257fda7e4",
-      "reviewedAt": "2026-09-27T11:41:45.576Z",
-      "reviewDue": "2026-12-26",
+      "modifiedAt": "2026-10-07T07:07:23.883Z",
+      "contentHash": "sha256:809a45415e206a5078ad9191c1422a3b97cf19fd566acdfb8e87577fff96e1c4",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-01-05",
       "sourceIds": [
         "src-508cc93a8723d9eb",
         "src-65d81b8aca549860",
@@ -769,7 +769,7 @@
       "retrieval": {
         "documentId": "wiki:Hessian_Free_Online_Certified_Unlearning",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:af90e8175302eafeb1187ca078d63d2077a11b323b111d3173703b5257fda7e4",
+        "contentHash": "sha256:809a45415e206a5078ad9191c1422a3b97cf19fd566acdfb8e87577fff96e1c4",
         "textFields": [
           "title",
           "aliases",
@@ -790,7 +790,7 @@
     {
       "slug": "Old_Homepage_Resources",
       "title": "Homepage Portrait Resources",
-      "summary": "Record of the portrait gallery used by the main biography infobox.",
+      "summary": "Portraits and conference images on Xinbao Qiao's homepage.",
       "language": "en",
       "type": "Resource inventory",
       "tags": [
@@ -800,17 +800,17 @@
         "resource-inventory"
       ],
       "timestamp": "2026-05-05T01:10:50+08:00",
-      "modifiedAt": "2026-07-18T04:24:40.206Z",
-      "contentHash": "sha256:9256ff3c6246d631a6881816d41e536c2456928190d9d9bbdce373f7219037ba",
-      "reviewedAt": "2026-07-18T12:25:05+08:00",
-      "reviewDue": "2027-07-18",
+      "modifiedAt": "2026-10-07T07:07:23.927Z",
+      "contentHash": "sha256:06959ca4b2134d8826a63aadb3c8d62f52cd6c5a21ec68e9a285c1514a38d8dd",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-10-07",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Old_Homepage_Resources",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:9256ff3c6246d631a6881816d41e536c2456928190d9d9bbdce373f7219037ba",
+        "contentHash": "sha256:06959ca4b2134d8826a63aadb3c8d62f52cd6c5a21ec68e9a285c1514a38d8dd",
         "textFields": [
           "title",
           "aliases",
@@ -843,10 +843,10 @@
         "llm-reliability"
       ],
       "timestamp": "2026-09-25T13:49:35+09:00",
-      "modifiedAt": "2026-09-27T11:41:29.316Z",
-      "contentHash": "sha256:7a1e1072fcd8e84d387b65469659a5cfbf93234281790ea4043b12236b855a08",
-      "reviewedAt": "2026-09-27T11:41:45.574Z",
-      "reviewDue": "2027-09-27",
+      "modifiedAt": "2026-10-07T07:07:23.889Z",
+      "contentHash": "sha256:e0d2648cb02319ac9826e60cda5da663655894e53eb671c1be8360a9335a6287",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-10-07",
       "sourceIds": [
         "src-b005562340a1c871",
         "src-d48b0fa9ae43a703"
@@ -856,7 +856,7 @@
       "retrieval": {
         "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:7a1e1072fcd8e84d387b65469659a5cfbf93234281790ea4043b12236b855a08",
+        "contentHash": "sha256:e0d2648cb02319ac9826e60cda5da663655894e53eb671c1be8360a9335a6287",
         "textFields": [
           "title",
           "aliases",
@@ -918,7 +918,7 @@
     {
       "slug": "Influence_Functions",
       "title": "Influence Functions",
-      "summary": "Concept page for estimating how training examples affect learned models.",
+      "summary": "Methods for estimating how training examples affect learned models.",
       "language": "en",
       "type": "Research concept",
       "tags": [
@@ -928,17 +928,17 @@
         "research-concept"
       ],
       "timestamp": "2026-05-05T19:52:29+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:6b90d74a4b42b4f6c28de85fa0e85f92ca8e9988557827d5641e32265639d5f3",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.897Z",
+      "contentHash": "sha256:84594f6a416a716b49cf16028573e32797cb63de4c513df9016ce3357b9eb714",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Influence_Functions",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:6b90d74a4b42b4f6c28de85fa0e85f92ca8e9988557827d5641e32265639d5f3",
+        "contentHash": "sha256:84594f6a416a716b49cf16028573e32797cb63de4c513df9016ce3357b9eb714",
         "textFields": [
           "title",
           "aliases",
@@ -959,7 +959,7 @@
     {
       "slug": "Interpretability",
       "title": "Interpretability",
-      "summary": "Concept page for explaining model behavior and data influence.",
+      "summary": "Understanding model behavior and the influence of training data.",
       "language": "en",
       "type": "Research concept",
       "tags": [
@@ -970,17 +970,17 @@
         "llm"
       ],
       "timestamp": "2026-05-05T20:55:21+08:00",
-      "modifiedAt": "2026-09-26T03:16:03.686Z",
-      "contentHash": "sha256:ac548023cbd839572a1e3f5ddefb436d467bc8c0cd2200e78efbda8de32c85ac",
-      "reviewedAt": "2026-09-26T03:16:12.059Z",
-      "reviewDue": "2027-03-25",
+      "modifiedAt": "2026-10-07T07:07:23.903Z",
+      "contentHash": "sha256:2ac8a263a49bb7d1cc07ce83e65f860dc1b3b6febdfca5b3dd9839b14751620f",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Interpretability",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:ac548023cbd839572a1e3f5ddefb436d467bc8c0cd2200e78efbda8de32c85ac",
+        "contentHash": "sha256:2ac8a263a49bb7d1cc07ce83e65f860dc1b3b6febdfca5b3dd9839b14751620f",
         "textFields": [
           "title",
           "aliases",
@@ -1001,7 +1001,7 @@
     {
       "slug": "LLM_Reliability",
       "title": "LLM Reliability",
-      "summary": "Concept page for reliability issues in large language model systems.",
+      "summary": "Reliability of large language model systems in realistic use.",
       "language": "en",
       "type": "Research concept",
       "tags": [
@@ -1012,10 +1012,10 @@
         "llm"
       ],
       "timestamp": "2026-05-05T20:55:21+08:00",
-      "modifiedAt": "2026-09-25T04:53:27.398Z",
-      "contentHash": "sha256:8b76deadc92e23f4c96327ed7c72fa9434143e195aff9885355292b1b8244fef",
-      "reviewedAt": "2026-09-25T04:54:14.029Z",
-      "reviewDue": "2027-03-24",
+      "modifiedAt": "2026-10-07T07:07:23.911Z",
+      "contentHash": "sha256:d4e101ad467955c8334ea6306fbac54af8769922af9a346f8556eb583b3cc3b2",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-11be10768dbb7de0",
         "src-44708abf72c85407",
@@ -1034,7 +1034,7 @@
       "retrieval": {
         "documentId": "wiki:LLM_Reliability",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:8b76deadc92e23f4c96327ed7c72fa9434143e195aff9885355292b1b8244fef",
+        "contentHash": "sha256:d4e101ad467955c8334ea6306fbac54af8769922af9a346f8556eb583b3cc3b2",
         "textFields": [
           "title",
           "aliases",
@@ -1107,17 +1107,17 @@
         "machine-unlearning"
       ],
       "timestamp": "2026-05-05T22:09:30+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:236de032e41b9ee4438821b3e08a80a8b44299c35558cb5dab318c3b206da375",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T06:42:08.576Z",
+      "contentHash": "sha256:0a72575d856c00b9c4f8bc90d059a033ffa47da23652f498d9ae820cc26b6a45",
+      "reviewedAt": "2026-10-07T06:43:53.160Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Machine_Unlearning",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:236de032e41b9ee4438821b3e08a80a8b44299c35558cb5dab318c3b206da375",
+        "contentHash": "sha256:0a72575d856c00b9c4f8bc90d059a033ffa47da23652f498d9ae820cc26b6a45",
         "textFields": [
           "title",
           "aliases",
@@ -1148,10 +1148,10 @@
         "academic-advisor"
       ],
       "timestamp": "2026-05-05T21:15:18+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:e3fc2253d995fdb7047157a92a3b1d378ba60d5b54aef3e7178e8d2431a0ea78",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.915Z",
+      "contentHash": "sha256:0dd4cc969ed93d58a75bb75a16caa92ce53eb29464013a2a5d5e37d8f267b71d",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-716564daa4b6397f"
       ],
@@ -1164,7 +1164,7 @@
       "retrieval": {
         "documentId": "wiki:Meng_Zhang",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:e3fc2253d995fdb7047157a92a3b1d378ba60d5b54aef3e7178e8d2431a0ea78",
+        "contentHash": "sha256:0dd4cc969ed93d58a75bb75a16caa92ce53eb29464013a2a5d5e37d8f267b71d",
         "textFields": [
           "title",
           "aliases",
@@ -1185,7 +1185,7 @@
     {
       "slug": "Model_Collapse",
       "title": "Model Collapse",
-      "summary": "Concept page for degenerative distributional drift in recursive model training.",
+      "summary": "Distributional degradation during recursive model training.",
       "language": "en",
       "type": "Research concept",
       "tags": [
@@ -1196,10 +1196,10 @@
         "synthetic-data"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.779Z",
-      "contentHash": "sha256:026aaccf6d298044dc9d9397d84569e104f51de8a5c8fcd9264e76513516d336",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-02-05",
+      "modifiedAt": "2026-10-07T07:07:23.925Z",
+      "contentHash": "sha256:30a590aad71dec54fb3dbf59a63fb452bc2b48c5b3c19e7a6f26c3d5bfbd65ee",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-3e9d5d7dceceebc1"
       ],
@@ -1212,7 +1212,7 @@
       "retrieval": {
         "documentId": "wiki:Model_Collapse",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:026aaccf6d298044dc9d9397d84569e104f51de8a5c8fcd9264e76513516d336",
+        "contentHash": "sha256:30a590aad71dec54fb3dbf59a63fb452bc2b48c5b3c19e7a6f26c3d5bfbd65ee",
         "textFields": [
           "title",
           "aliases",
@@ -1243,10 +1243,10 @@
         "research-institute"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-09-26T03:14:39.298Z",
-      "contentHash": "sha256:18d9a449d027da84f26e30cb6cd9b50a81fa7362f7fdda94e8e8710084b523ae",
-      "reviewedAt": "2026-09-26T03:15:12.636Z",
-      "reviewDue": "2027-03-25",
+      "modifiedAt": "2026-10-07T07:07:23.926Z",
+      "contentHash": "sha256:649fb3f977d335514df8f862392095d574dc67f7dde46854e82fdf6d41ab4e97",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-17dc8cb17c9da923",
         "src-5816cdaa92b5e41c",
@@ -1264,7 +1264,7 @@
       "retrieval": {
         "documentId": "wiki:NUSRI_CQ",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:18d9a449d027da84f26e30cb6cd9b50a81fa7362f7fdda94e8e8710084b523ae",
+        "contentHash": "sha256:649fb3f977d335514df8f862392095d574dc67f7dde46854e82fdf6d41ab4e97",
         "textFields": [
           "title",
           "aliases",
@@ -1285,7 +1285,7 @@
     {
       "slug": "Projects",
       "title": "Projects",
-      "summary": "Research projects and project clusters.",
+      "summary": "Research projects in AI and networks, machine unlearning, synthetic data, and reliable language models.",
       "language": "en",
       "type": "Project overview",
       "tags": [
@@ -1295,17 +1295,17 @@
         "project-overview"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-09-26T03:14:39.300Z",
-      "contentHash": "sha256:66e161feecf5b81c952502aa0be768a4a692f649df2d4867a8801cfff69f8a2d",
-      "reviewedAt": "2026-09-26T03:15:12.636Z",
-      "reviewDue": "2026-12-25",
+      "modifiedAt": "2026-10-07T07:07:23.928Z",
+      "contentHash": "sha256:fda4d8d5340b060e97ab1830e822325f8c58e4b446191dcfd155c7e4f703643e",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-01-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Projects",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:66e161feecf5b81c952502aa0be768a4a692f649df2d4867a8801cfff69f8a2d",
+        "contentHash": "sha256:fda4d8d5340b060e97ab1830e822325f8c58e4b446191dcfd155c7e4f703643e",
         "textFields": [
           "title",
           "aliases",
@@ -1336,10 +1336,10 @@
         "publication-list"
       ],
       "timestamp": "2026-06-01T22:00:31+08:00",
-      "modifiedAt": "2026-10-06T16:11:19.508Z",
-      "contentHash": "sha256:6f4ee39a7241a6ea7905e12b5f9f708925b7e324b8d57f186294e012dcac810e",
-      "reviewedAt": "2026-10-06T16:12:11.434524+00:00",
-      "reviewDue": "2027-01-04",
+      "modifiedAt": "2026-10-07T06:42:08.606Z",
+      "contentHash": "sha256:5951475666a39aaf9dcf488bdd5553c8b52bc48a9e780e78c30effb25b36dd45",
+      "reviewedAt": "2026-10-07T06:43:53.160Z",
+      "reviewDue": "2027-01-05",
       "sourceIds": [
         "src-508cc93a8723d9eb",
         "src-766234e11681dad2",
@@ -1356,7 +1356,7 @@
       "retrieval": {
         "documentId": "wiki:Publications",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:6f4ee39a7241a6ea7905e12b5f9f708925b7e324b8d57f186294e012dcac810e",
+        "contentHash": "sha256:5951475666a39aaf9dcf488bdd5553c8b52bc48a9e780e78c30effb25b36dd45",
         "textFields": [
           "title",
           "aliases",
@@ -1377,7 +1377,7 @@
     {
       "slug": "Random_Forest",
       "title": "Random Forest",
-      "summary": "Concept page for random forests as the model class studied in DynFrs.",
+      "summary": "Randomized tree ensembles and their efficient maintenance in DynFrs.",
       "language": "en",
       "type": "Model family",
       "tags": [
@@ -1387,17 +1387,17 @@
         "model-family"
       ],
       "timestamp": "2026-05-05T19:52:29+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:6ef03a3d58778c15b3243793362e42f687b2f20f9c364d1ce25f158e6de0a6b7",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.935Z",
+      "contentHash": "sha256:1fc3a6369d686420f43c19ba558107ebad315ba5f9dad0282251eea21b7fb399",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Random_Forest",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:6ef03a3d58778c15b3243793362e42f687b2f20f9c364d1ce25f158e6de0a6b7",
+        "contentHash": "sha256:1fc3a6369d686420f43c19ba558107ebad315ba5f9dad0282251eea21b7fb399",
         "textFields": [
           "title",
           "aliases",
@@ -1418,7 +1418,7 @@
     {
       "slug": "Recursive_Synthetic_Data_Training",
       "title": "Recursive Synthetic Data Training",
-      "summary": "Concept page for training models repeatedly on data generated by earlier models.",
+      "summary": "Repeated training on data generated by earlier models.",
       "language": "en",
       "type": "Research concept",
       "tags": [
@@ -1429,10 +1429,10 @@
         "synthetic-data"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.787Z",
-      "contentHash": "sha256:ba2fdb06ebad4c9b4ef0a71c4f71f77f0be438a2c6dac3237f1f392771cd61c6",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-02-05",
+      "modifiedAt": "2026-10-07T07:07:23.947Z",
+      "contentHash": "sha256:f3d429be725e3500618765876e4f71cebd81892da5b5ec95711feabef8c4e164",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-3e9d5d7dceceebc1"
       ],
@@ -1445,7 +1445,7 @@
       "retrieval": {
         "documentId": "wiki:Recursive_Synthetic_Data_Training",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:ba2fdb06ebad4c9b4ef0a71c4f71f77f0be438a2c6dac3237f1f392771cd61c6",
+        "contentHash": "sha256:f3d429be725e3500618765876e4f71cebd81892da5b5ec95711feabef8c4e164",
         "textFields": [
           "title",
           "aliases",
@@ -1466,7 +1466,7 @@
     {
       "slug": "Research",
       "title": "Research",
-      "summary": "Overview of Xinbao Qiao's research directions and linked topic pages.",
+      "summary": "Xinbao Qiao's research on data-centric machine learning, AI and networks, and trustworthy AI.",
       "language": "en",
       "type": "Research overview",
       "tags": [
@@ -1476,17 +1476,17 @@
         "research-overview"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-06T15:56:02.593Z",
-      "contentHash": "sha256:797ad93d8b2eef1568048abaaeeab07b1c936b1b36eb3b082c8ebaf9b977bb07",
-      "reviewedAt": "2026-10-06T15:56:41.019106+00:00",
-      "reviewDue": "2027-01-04",
+      "modifiedAt": "2026-10-07T07:07:23.948Z",
+      "contentHash": "sha256:30f689ed5a3dfb40a9804d100cce93fd9d4bbf7c12e7a8cc23ed60b4da778b24",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-01-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Research",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:797ad93d8b2eef1568048abaaeeab07b1c936b1b36eb3b082c8ebaf9b977bb07",
+        "contentHash": "sha256:30f689ed5a3dfb40a9804d100cce93fd9d4bbf7c12e7a8cc23ed60b4da778b24",
         "textFields": [
           "title",
           "aliases",
@@ -1507,7 +1507,7 @@
     {
       "slug": "Sample_Selection_Bias",
       "title": "Sample Selection Bias",
-      "summary": "Concept page for distributional bias introduced by non-representative sample choice.",
+      "summary": "How data selection can distort the distribution used for learning or evaluation.",
       "language": "en",
       "type": "Research concept",
       "tags": [
@@ -1517,17 +1517,17 @@
         "research-concept"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:24005e66c5a5ac72037a20b6868fb1935bc8e292c9fea0810c3a76c85b7c06a8",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.959Z",
+      "contentHash": "sha256:a02db56ea6834971d3c1d619584632060ceb8e20e17b999fda1493a1d8f94d15",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Sample_Selection_Bias",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:24005e66c5a5ac72037a20b6868fb1935bc8e292c9fea0810c3a76c85b7c06a8",
+        "contentHash": "sha256:a02db56ea6834971d3c1d619584632060ceb8e20e17b999fda1493a1d8f94d15",
         "textFields": [
           "title",
           "aliases",
@@ -1558,10 +1558,10 @@
         "public-research-university"
       ],
       "timestamp": "2026-05-05T20:55:21+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:b64a70b2a82421460cfe1bd75c931785572bf6b49508c8138d2e5866ed32ea8a",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.960Z",
+      "contentHash": "sha256:42cad85bbe657d1f8d41723fd2b79fc3f715dd276d9e1a7fbf4aa878a15746b5",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-2698bddf338b56e5",
         "src-33f25ef72f5cac0f",
@@ -1576,7 +1576,7 @@
       "retrieval": {
         "documentId": "wiki:Shandong_University",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:b64a70b2a82421460cfe1bd75c931785572bf6b49508c8138d2e5866ed32ea8a",
+        "contentHash": "sha256:42cad85bbe657d1f8d41723fd2b79fc3f715dd276d9e1a7fbf4aa878a15746b5",
         "textFields": [
           "title",
           "aliases",
@@ -1607,17 +1607,17 @@
         "technical-skills"
       ],
       "timestamp": "2026-05-05T00:55:59+08:00",
-      "modifiedAt": "2026-07-03T00:03:48+08:00",
-      "contentHash": "sha256:51dfec03a42c135e3d556b543bb9f92d4a9c7b64892db9957a719d12a25eff56",
-      "reviewedAt": "2026-07-03T00:03:48+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T06:42:08.613Z",
+      "contentHash": "sha256:0b5311edd27c2f3a3076adf8111a3d7205e8f1655fccc7441fcadf8107d8e86e",
+      "reviewedAt": "2026-10-07T06:43:53.160Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Skills",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:51dfec03a42c135e3d556b543bb9f92d4a9c7b64892db9957a719d12a25eff56",
+        "contentHash": "sha256:0b5311edd27c2f3a3076adf8111a3d7205e8f1655fccc7441fcadf8107d8e86e",
         "textFields": [
           "title",
           "aliases",
@@ -1649,10 +1649,10 @@
         "synthetic-data"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-08-09T18:35:47.585Z",
-      "contentHash": "sha256:8e10aaffd38b6de7d730ab148309b29754b1ece074005d16edbeb942f5c93887",
-      "reviewedAt": "2026-08-10T02:36:00+08:00",
-      "reviewDue": "2027-02-05",
+      "modifiedAt": "2026-10-07T07:07:23.970Z",
+      "contentHash": "sha256:3ec58145d656d9cc7adf4493e8b851749546d1805d8e30fca3822fe5c2c0877f",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-3e9d5d7dceceebc1"
       ],
@@ -1665,7 +1665,7 @@
       "retrieval": {
         "documentId": "wiki:Synthetic_Data_and_Model_Collapse",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:8e10aaffd38b6de7d730ab148309b29754b1ece074005d16edbeb942f5c93887",
+        "contentHash": "sha256:3ec58145d656d9cc7adf4493e8b851749546d1805d8e30fca3822fe5c2c0877f",
         "textFields": [
           "title",
           "aliases",
@@ -1686,7 +1686,7 @@
     {
       "slug": "Synthetic_Data",
       "title": "Synthetic Data (concept)",
-      "summary": "Concept page for generated data used in training, evaluation, or privacy-preserving collaboration.",
+      "summary": "Generated data used for training, evaluation, and collaboration.",
       "language": "en",
       "type": "Research concept",
       "tags": [
@@ -1697,17 +1697,17 @@
         "synthetic-data"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-03T00:03:48+08:00",
-      "contentHash": "sha256:bbe93fac97f4c9cdd3408c23951a3082bd7e098256861dfd64ad06fb01970f2a",
-      "reviewedAt": "2026-07-03T00:03:48+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.981Z",
+      "contentHash": "sha256:d82e3aff42533a29575db5055bba799019c7640c26267922953b7b15fbb65520",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Synthetic_Data",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:bbe93fac97f4c9cdd3408c23951a3082bd7e098256861dfd64ad06fb01970f2a",
+        "contentHash": "sha256:d82e3aff42533a29575db5055bba799019c7640c26267922953b7b15fbb65520",
         "textFields": [
           "title",
           "aliases",
@@ -1738,10 +1738,10 @@
         "public-research-university"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:a27c4d78f158b9564e002f310e7e37f4ac2fa63d951f4b0521f8c330fa042e2a",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.983Z",
+      "contentHash": "sha256:c77c7bbf6178291e65e15c442ee5c3940c3a286fe04489d1258176dfd2a78e6f",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-09fa966eeac1624e",
         "src-5dac6849a598aa84",
@@ -1765,7 +1765,7 @@
       "retrieval": {
         "documentId": "wiki:The_Chinese_University_of_Hong_Kong",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:a27c4d78f158b9564e002f310e7e37f4ac2fa63d951f4b0521f8c330fa042e2a",
+        "contentHash": "sha256:c77c7bbf6178291e65e15c442ee5c3940c3a286fe04489d1258176dfd2a78e6f",
         "textFields": [
           "title",
           "aliases",
@@ -1796,17 +1796,17 @@
         "research-topic"
       ],
       "timestamp": "2026-05-05T20:55:21+08:00",
-      "modifiedAt": "2026-09-26T03:14:39.316Z",
-      "contentHash": "sha256:451c6ffc09f41ea68e6fdb591b53ab16b8ede8cd929f3dc822f6bf109ea405f6",
-      "reviewedAt": "2026-09-26T03:15:12.636Z",
-      "reviewDue": "2027-03-25",
+      "modifiedAt": "2026-10-07T06:42:08.636Z",
+      "contentHash": "sha256:1a24126519061279056efd864675f4e806c6c191063728a33d3b0fdf7cabec25",
+      "reviewedAt": "2026-10-07T06:43:53.160Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Trustworthy_AI",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:451c6ffc09f41ea68e6fdb591b53ab16b8ede8cd929f3dc822f6bf109ea405f6",
+        "contentHash": "sha256:1a24126519061279056efd864675f4e806c6c191063728a33d3b0fdf7cabec25",
         "textFields": [
           "title",
           "aliases",
@@ -1827,7 +1827,7 @@
     {
       "slug": "Wasserstein_Geometry",
       "title": "Wasserstein Geometry",
-      "summary": "Concept page for distributional comparison using optimal-transport geometry.",
+      "summary": "Comparison of probability distributions using optimal-transport geometry.",
       "language": "en",
       "type": "Research concept",
       "tags": [
@@ -1838,10 +1838,10 @@
         "wasserstein"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:7332b1c94414444afaeadc595058d70d56cc4cbfc7d14d3d55bda2592ed311fe",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.991Z",
+      "contentHash": "sha256:42e4fd8c66b3c167e945107307eb5766a39851c47626736d11673f95b24f5daf",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-0d6548913a8c228f",
         "src-3157a848b3737221",
@@ -1860,7 +1860,7 @@
       "retrieval": {
         "documentId": "wiki:Wasserstein_Geometry",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:7332b1c94414444afaeadc595058d70d56cc4cbfc7d14d3d55bda2592ed311fe",
+        "contentHash": "sha256:42e4fd8c66b3c167e945107307eb5766a39851c47626736d11673f95b24f5daf",
         "textFields": [
           "title",
           "aliases",
@@ -1893,10 +1893,10 @@
         "synthetic-data"
       ],
       "timestamp": "2026-06-02T22:56:50+08:00",
-      "modifiedAt": "2026-09-27T11:41:29.339Z",
-      "contentHash": "sha256:543e3cc6633709a96ddeffa2f3f51be0833cc55d25f3ccfa483ba371345750ef",
-      "reviewedAt": "2026-09-27T11:41:45.575Z",
-      "reviewDue": "2027-09-27",
+      "modifiedAt": "2026-10-07T07:07:23.992Z",
+      "contentHash": "sha256:8c296d38b0b975003b0af814841b1887241505ace4386e7f0d13b9b9dbfff9cb",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-10-07",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-4144e3776ac496d0",
@@ -1908,7 +1908,7 @@
       "retrieval": {
         "documentId": "wiki:When_Sample_Selection_Bias_Precipitates_Model_Collapse",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:543e3cc6633709a96ddeffa2f3f51be0833cc55d25f3ccfa483ba371345750ef",
+        "contentHash": "sha256:8c296d38b0b975003b0af814841b1887241505ace4386e7f0d13b9b9dbfff9cb",
         "textFields": [
           "title",
           "aliases",
@@ -1939,10 +1939,10 @@
         "phd-student"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-06T15:56:02.729Z",
-      "contentHash": "sha256:15335c0a64ddb0ae4fe47e5140b1f6f9488b43ec06e56b57637b0e4a5d7e9d8a",
-      "reviewedAt": "2026-10-06T15:56:41.020410+00:00",
-      "reviewDue": "2027-01-04",
+      "modifiedAt": "2026-10-07T07:07:23.993Z",
+      "contentHash": "sha256:f5142daf8bce2787124f0120522f50f75ede3a74df0b93a09401729b1231f907",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-01-05",
       "sourceIds": [
         "src-264e39cbec8d2f89",
         "src-30f33d3201c476ab",
@@ -1982,7 +1982,7 @@
       "retrieval": {
         "documentId": "wiki:Xinbao_Qiao",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:15335c0a64ddb0ae4fe47e5140b1f6f9488b43ec06e56b57637b0e4a5d7e9d8a",
+        "contentHash": "sha256:f5142daf8bce2787124f0120522f50f75ede3a74df0b93a09401729b1231f907",
         "textFields": [
           "title",
           "aliases",
@@ -2013,10 +2013,10 @@
         "public-research-university"
       ],
       "timestamp": "2026-05-05T21:15:18+08:00",
-      "modifiedAt": "2026-07-12T22:06:12+08:00",
-      "contentHash": "sha256:fe657967adee3aad4c7e8e6568b609b6b12a116503f10d84ace705d1a9989b2c",
-      "reviewedAt": "2026-07-12T22:06:12+08:00",
-      "reviewDue": "2027-01-08",
+      "modifiedAt": "2026-10-07T07:07:23.994Z",
+      "contentHash": "sha256:dd5afd256301754d53f932f2eae3fbe925caf40c26f4c2a82417c08cedbd1eb1",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-575233d5188384df",
         "src-c051bd6dcf566058"
@@ -2030,7 +2030,7 @@
       "retrieval": {
         "documentId": "wiki:Zhejiang_University",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:fe657967adee3aad4c7e8e6568b609b6b12a116503f10d84ace705d1a9989b2c",
+        "contentHash": "sha256:dd5afd256301754d53f932f2eae3fbe925caf40c26f4c2a82417c08cedbd1eb1",
         "textFields": [
           "title",
           "aliases",
@@ -2063,10 +2063,10 @@
         "machine-unlearning"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-09-27T11:41:29.333Z",
-      "contentHash": "sha256:37ec1da4797e98f9ed76612b38a2ee57faf840c86682727f03c130d0157f8072",
-      "reviewedAt": "2026-09-27T11:41:45.576Z",
-      "reviewDue": "2027-09-27",
+      "modifiedAt": "2026-10-07T07:07:23.961Z",
+      "contentHash": "sha256:98d9d2923e94991072248dcee4fa65175455644381d64baaab900f00381572d6",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-10-07",
       "sourceIds": [
         "src-0642a11373a83c47",
         "src-53e1199f272a4df4",
@@ -2077,7 +2077,7 @@
       "retrieval": {
         "documentId": "wiki:Soft_Weighted_Machine_Unlearning_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:37ec1da4797e98f9ed76612b38a2ee57faf840c86682727f03c130d0157f8072",
+        "contentHash": "sha256:98d9d2923e94991072248dcee4fa65175455644381d64baaab900f00381572d6",
         "textFields": [
           "title",
           "aliases",
@@ -2110,10 +2110,10 @@
         "llm-reliability"
       ],
       "timestamp": "2026-09-25T13:49:35+09:00",
-      "modifiedAt": "2026-09-27T11:41:29.315Z",
-      "contentHash": "sha256:546696d1b623dedcb937d4a09511560a538b2bf5f85218169020988b32f226fa",
-      "reviewedAt": "2026-09-27T11:41:45.575Z",
-      "reviewDue": "2027-09-27",
+      "modifiedAt": "2026-10-07T07:07:23.888Z",
+      "contentHash": "sha256:9f5b1aba471881db05fbe70afb44b584137bbb00b9cd7b37fc9362d35de3540b",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-10-07",
       "sourceIds": [
         "src-b005562340a1c871",
         "src-d48b0fa9ae43a703"
@@ -2123,7 +2123,7 @@
       "retrieval": {
         "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:546696d1b623dedcb937d4a09511560a538b2bf5f85218169020988b32f226fa",
+        "contentHash": "sha256:9f5b1aba471881db05fbe70afb44b584137bbb00b9cd7b37fc9362d35de3540b",
         "textFields": [
           "title",
           "aliases",
@@ -2144,7 +2144,7 @@
     {
       "slug": "LLM_Reliability_zh",
       "title": "大语言模型可靠性",
-      "summary": "解释大语言模型系统可靠性问题的概念页。",
+      "summary": "大语言模型系统在真实使用中的可靠性。",
       "language": "zh",
       "type": "研究概念",
       "tags": [
@@ -2155,10 +2155,10 @@
         "llm"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-09-25T04:53:27.397Z",
-      "contentHash": "sha256:259816be38eb1a03c1a9890c33a0a8a3158cb33bc42392b1089a12f539088cb6",
-      "reviewedAt": "2026-09-25T04:54:14.029Z",
-      "reviewDue": "2027-03-24",
+      "modifiedAt": "2026-10-07T07:07:23.909Z",
+      "contentHash": "sha256:af816ed16b8daaba36aa9529f16e0f1d78392e0be36a597836823a11f807996e",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-11be10768dbb7de0",
         "src-44708abf72c85407",
@@ -2177,7 +2177,7 @@
       "retrieval": {
         "documentId": "wiki:LLM_Reliability_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:259816be38eb1a03c1a9890c33a0a8a3158cb33bc42392b1089a12f539088cb6",
+        "contentHash": "sha256:af816ed16b8daaba36aa9529f16e0f1d78392e0be36a597836823a11f807996e",
         "textFields": [
           "title",
           "aliases",
@@ -2198,7 +2198,7 @@
     {
       "slug": "Recursive_Synthetic_Data_Training_zh",
       "title": "递归合成数据训练",
-      "summary": "解释模型反复使用早期模型生成数据进行训练的过程。",
+      "summary": "反复使用前代模型生成的数据进行训练。",
       "language": "zh",
       "type": "研究概念",
       "tags": [
@@ -2209,10 +2209,10 @@
         "synthetic-data"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.786Z",
-      "contentHash": "sha256:5d8a4e20eec790d14fac24557dfedfa4ab08a87f6ea28bc0c80802df8c7bb414",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-02-05",
+      "modifiedAt": "2026-10-07T07:07:23.941Z",
+      "contentHash": "sha256:ff333141baeb729c0abff1d4538893c15e0149a76ea8e59ba9e72603897fbe43",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-3e9d5d7dceceebc1"
       ],
@@ -2225,7 +2225,7 @@
       "retrieval": {
         "documentId": "wiki:Recursive_Synthetic_Data_Training_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:5d8a4e20eec790d14fac24557dfedfa4ab08a87f6ea28bc0c80802df8c7bb414",
+        "contentHash": "sha256:ff333141baeb729c0abff1d4538893c15e0149a76ea8e59ba9e72603897fbe43",
         "textFields": [
           "title",
           "aliases",
@@ -2246,7 +2246,7 @@
     {
       "slug": "Distributed_Wasserstein_Barycenter_zh",
       "title": "分布式 Wasserstein Barycenter",
-      "summary": "解释乔鑫宝关于从分布式局部测度计算 Wasserstein barycenter 的相关工作。",
+      "summary": "根据各方本地数据计算共享的 Wasserstein 参考分布。",
       "language": "zh",
       "type": "研究概念",
       "tags": [
@@ -2257,10 +2257,10 @@
         "wasserstein"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-06T15:56:02.292Z",
-      "contentHash": "sha256:b67673faf482d7f191c0e393306303cab0213522510bfc58c848cbb8638a7f84",
-      "reviewedAt": "2026-10-06T15:56:41.017046+00:00",
-      "reviewDue": "2027-04-04",
+      "modifiedAt": "2026-10-07T07:07:23.864Z",
+      "contentHash": "sha256:a4dc1740e7975be08dc9b74f2e88194e15c1cfdfff93cae3380ed116ae99ce12",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-0d6548913a8c228f",
         "src-3157a848b3737221"
@@ -2276,7 +2276,7 @@
       "retrieval": {
         "documentId": "wiki:Distributed_Wasserstein_Barycenter_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:b67673faf482d7f191c0e393306303cab0213522510bfc58c848cbb8638a7f84",
+        "contentHash": "sha256:a4dc1740e7975be08dc9b74f2e88194e15c1cfdfff93cae3380ed116ae99ce12",
         "textFields": [
           "title",
           "aliases",
@@ -2297,7 +2297,7 @@
     {
       "slug": "Distributed_Learning_zh",
       "title": "分布式学习",
-      "summary": "解释数据、计算或通信去中心化条件下的学习问题。",
+      "summary": "数据、计算或评估分散于多个参与方的学习方式。",
       "language": "zh",
       "type": "研究概念",
       "tags": [
@@ -2307,17 +2307,17 @@
         "研究概念"
       ],
       "timestamp": "2026-05-06T06:22:22+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:5e6803ef26eecbddb3aaa6d2e093509b80a07c36d2aef38e2c3c3b0c3d26cbde",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.851Z",
+      "contentHash": "sha256:b7328b26ebe614d423ccd01b32f99c6f54d3b3010d3e312ad646c686e75f2e5e",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Distributed_Learning_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:5e6803ef26eecbddb3aaa6d2e093509b80a07c36d2aef38e2c3c3b0c3d26cbde",
+        "contentHash": "sha256:b7328b26ebe614d423ccd01b32f99c6f54d3b3010d3e312ad646c686e75f2e5e",
         "textFields": [
           "title",
           "aliases",
@@ -2338,7 +2338,7 @@
     {
       "slug": "Fairness_and_Robustness_zh",
       "title": "公平性与鲁棒性",
-      "summary": "解释公平性与鲁棒性作为数据中心修正目标的概念页。",
+      "summary": "以公平性与鲁棒性为目标的数据驱动模型修正。",
       "language": "zh",
       "type": "研究概念",
       "tags": [
@@ -2348,17 +2348,17 @@
         "研究概念"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:c1c485ae574d344b3bab011faced822faebcc7652bbd473cd1d62dd4afe10bcb",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:11:31.523Z",
+      "contentHash": "sha256:95aadf13b2c49d124e6f6d199a6a44ad4b847e2aa4a3a14a887817f6f342bea1",
+      "reviewedAt": "2026-10-07T07:11:31.730Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Fairness_and_Robustness_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:c1c485ae574d344b3bab011faced822faebcc7652bbd473cd1d62dd4afe10bcb",
+        "contentHash": "sha256:95aadf13b2c49d124e6f6d199a6a44ad4b847e2aa4a3a14a887817f6f342bea1",
         "textFields": [
           "title",
           "aliases",
@@ -2390,10 +2390,10 @@
         "synthetic-data"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-08-09T18:35:47.584Z",
-      "contentHash": "sha256:5a069eaa1588657e8fbff7ef13242a297852f722338a5a6acb3b5a0b2843788b",
-      "reviewedAt": "2026-08-10T02:36:00+08:00",
-      "reviewDue": "2027-02-05",
+      "modifiedAt": "2026-10-07T07:07:23.969Z",
+      "contentHash": "sha256:a22933a5d45f0e375b50a54086443668327831bb3b3c977863be22bf80f02b71",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-3e9d5d7dceceebc1"
       ],
@@ -2406,7 +2406,7 @@
       "retrieval": {
         "documentId": "wiki:Synthetic_Data_and_Model_Collapse_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:5a069eaa1588657e8fbff7ef13242a297852f722338a5a6acb3b5a0b2843788b",
+        "contentHash": "sha256:a22933a5d45f0e375b50a54086443668327831bb3b3c977863be22bf80f02b71",
         "textFields": [
           "title",
           "aliases",
@@ -2427,7 +2427,7 @@
     {
       "slug": "Synthetic_Data_zh",
       "title": "合成数据（概念）",
-      "summary": "解释用于训练、评估或隐私友好协作的生成数据。",
+      "summary": "用于训练、评估与协作的生成数据。",
       "language": "zh",
       "type": "研究概念",
       "tags": [
@@ -2438,17 +2438,17 @@
         "synthetic-data"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:0be9d0fd4d48f569a4a98be5a8e262abd0f666adf14656d58b7af7e19b57194d",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.975Z",
+      "contentHash": "sha256:588592e73953a10a6c1634b5c4faa0ac881b88131b22827b1072096d683aef75",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Synthetic_Data_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:0be9d0fd4d48f569a4a98be5a8e262abd0f666adf14656d58b7af7e19b57194d",
+        "contentHash": "sha256:588592e73953a10a6c1634b5c4faa0ac881b88131b22827b1072096d683aef75",
         "textFields": [
           "title",
           "aliases",
@@ -2480,17 +2480,17 @@
         "machine-unlearning"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:55d954af2fcdd71a0b7e0ec05a6645e2e79f1d639b585b8687cd85f236fed742",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.913Z",
+      "contentHash": "sha256:1c4a33c10b5fec9bdad7ae8523f3bfe3936d4e74cc559acc1eaabec056cb8d84",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Machine_Unlearning_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:55d954af2fcdd71a0b7e0ec05a6645e2e79f1d639b585b8687cd85f236fed742",
+        "contentHash": "sha256:1c4a33c10b5fec9bdad7ae8523f3bfe3936d4e74cc559acc1eaabec056cb8d84",
         "textFields": [
           "title",
           "aliases",
@@ -2521,17 +2521,17 @@
         "技术技能"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-03T00:03:48+08:00",
-      "contentHash": "sha256:75088b353ef9e2295e61ec52e17237ca0b79e5ded268d9a68678dddb7034225a",
-      "reviewedAt": "2026-07-03T00:03:48+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T06:42:08.613Z",
+      "contentHash": "sha256:3e21b48738a5e1f1950e09cee20497b349861adcb12cb0a734e3ff986962023a",
+      "reviewedAt": "2026-10-07T06:43:53.160Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Skills_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:75088b353ef9e2295e61ec52e17237ca0b79e5ded268d9a68678dddb7034225a",
+        "contentHash": "sha256:3e21b48738a5e1f1950e09cee20497b349861adcb12cb0a734e3ff986962023a",
         "textFields": [
           "title",
           "aliases",
@@ -2562,10 +2562,10 @@
         "cv-摘要"
       ],
       "timestamp": "2026-07-02T19:37:18+08:00",
-      "modifiedAt": "2026-10-06T16:11:19.162Z",
-      "contentHash": "sha256:3a3fb0a6ee4923f923acdbe935d29f47256446215a96fa958e357e473d5b4081",
-      "reviewedAt": "2026-10-06T16:12:11.431923+00:00",
-      "reviewDue": "2027-01-04",
+      "modifiedAt": "2026-10-07T07:07:23.816Z",
+      "contentHash": "sha256:f3c8e5b6a399201f7a84b55fbb9d01144f998d35d8cee7e1c5aebc53b288eb90",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-01-05",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-0642a11373a83c47",
@@ -2608,7 +2608,7 @@
       "retrieval": {
         "documentId": "wiki:CV_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:3a3fb0a6ee4923f923acdbe935d29f47256446215a96fa958e357e473d5b4081",
+        "contentHash": "sha256:f3c8e5b6a399201f7a84b55fbb9d01144f998d35d8cee7e1c5aebc53b288eb90",
         "textFields": [
           "title",
           "aliases",
@@ -2639,17 +2639,17 @@
         "教育时间线"
       ],
       "timestamp": "2026-05-06T23:05:52+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.759Z",
-      "contentHash": "sha256:2c6a9ddd5c60275f5b8bf4b67e9079a5796f71dfb3ad7f93c413958f874d13ab",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-02-05",
+      "modifiedAt": "2026-10-07T06:42:08.562Z",
+      "contentHash": "sha256:1dde7f957c78063e436685637fd1b8f6ceef0f0bb6b7568d9b157608fd6b31a2",
+      "reviewedAt": "2026-10-07T06:43:53.160Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Education_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:2c6a9ddd5c60275f5b8bf4b67e9079a5796f71dfb3ad7f93c413958f874d13ab",
+        "contentHash": "sha256:1dde7f957c78063e436685637fd1b8f6ceef0f0bb6b7568d9b157608fd6b31a2",
         "textFields": [
           "title",
           "aliases",
@@ -2670,7 +2670,7 @@
     {
       "slug": "Interpretability_zh",
       "title": "可解释性",
-      "summary": "解释模型行为和数据影响的概念页。",
+      "summary": "理解模型行为及训练数据的影响。",
       "language": "zh",
       "type": "研究概念",
       "tags": [
@@ -2681,17 +2681,17 @@
         "llm"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-09-26T03:16:03.685Z",
-      "contentHash": "sha256:266b5e422ec9fa4043f5b360a12859a58f732ee34eb0ba8e9729340e2716c52d",
-      "reviewedAt": "2026-09-26T03:16:12.059Z",
-      "reviewDue": "2027-03-25",
+      "modifiedAt": "2026-10-07T07:07:23.901Z",
+      "contentHash": "sha256:9391c55bdc02046528c646cfd101ff4a3138cc78b50f2959a6b6467b47f1ea85",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Interpretability_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:266b5e422ec9fa4043f5b360a12859a58f732ee34eb0ba8e9729340e2716c52d",
+        "contentHash": "sha256:9391c55bdc02046528c646cfd101ff4a3138cc78b50f2959a6b6467b47f1ea85",
         "textFields": [
           "title",
           "aliases",
@@ -2722,17 +2722,17 @@
         "研究专题"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-09-26T03:14:39.316Z",
-      "contentHash": "sha256:c05c065380b2dcd791708855265e26643f89bc5ce50e39c688b2a04da29f1c32",
-      "reviewedAt": "2026-09-26T03:15:12.636Z",
-      "reviewDue": "2027-03-25",
+      "modifiedAt": "2026-10-07T07:07:23.983Z",
+      "contentHash": "sha256:f71b0e565c802ae4b658a8394cb98ecba9ebefeab9d13bdc1e1144390b05e000",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Trustworthy_AI_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:c05c065380b2dcd791708855265e26643f89bc5ce50e39c688b2a04da29f1c32",
+        "contentHash": "sha256:f71b0e565c802ae4b658a8394cb98ecba9ebefeab9d13bdc1e1144390b05e000",
         "textFields": [
           "title",
           "aliases",
@@ -2763,10 +2763,10 @@
         "论文列表"
       ],
       "timestamp": "2026-06-01T22:04:00+08:00",
-      "modifiedAt": "2026-10-06T16:11:19.499Z",
-      "contentHash": "sha256:ec1666f1d0f5ef00e813cb6a5ae6965ab6088f97b44d7d8e0fc7dc58030929d2",
-      "reviewedAt": "2026-10-06T16:12:11.435208+00:00",
-      "reviewDue": "2027-01-04",
+      "modifiedAt": "2026-10-07T06:42:08.606Z",
+      "contentHash": "sha256:4530306087fd45f32510361481d7dc6fc5aaf279abbe95e83954629ec7ea8a0b",
+      "reviewedAt": "2026-10-07T06:43:53.160Z",
+      "reviewDue": "2027-01-05",
       "sourceIds": [
         "src-508cc93a8723d9eb",
         "src-766234e11681dad2",
@@ -2783,7 +2783,7 @@
       "retrieval": {
         "documentId": "wiki:Publications_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:ec1666f1d0f5ef00e813cb6a5ae6965ab6088f97b44d7d8e0fc7dc58030929d2",
+        "contentHash": "sha256:4530306087fd45f32510361481d7dc6fc5aaf279abbe95e83954629ec7ea8a0b",
         "textFields": [
           "title",
           "aliases",
@@ -2804,7 +2804,7 @@
     {
       "slug": "Model_Collapse_zh",
       "title": "模型坍缩",
-      "summary": "解释递归模型训练中退化性分布漂移的概念页。",
+      "summary": "递归模型训练中的分布退化。",
       "language": "zh",
       "type": "研究概念",
       "tags": [
@@ -2815,10 +2815,10 @@
         "synthetic-data"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-08-09T18:32:45.779Z",
-      "contentHash": "sha256:9d6e82dd8a993b7b97228f53c9525ae3a0918f82de2274633ab0ad0c52770b1f",
-      "reviewedAt": "2026-08-10T02:34:00+08:00",
-      "reviewDue": "2027-02-05",
+      "modifiedAt": "2026-10-07T07:07:23.921Z",
+      "contentHash": "sha256:9b2ece20bb98d464023ec8685981be50ffa47d96a77645b172d5dd6f5ae773b8",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-3e9d5d7dceceebc1"
       ],
@@ -2831,7 +2831,7 @@
       "retrieval": {
         "documentId": "wiki:Model_Collapse_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:9d6e82dd8a993b7b97228f53c9525ae3a0918f82de2274633ab0ad0c52770b1f",
+        "contentHash": "sha256:9b2ece20bb98d464023ec8685981be50ffa47d96a77645b172d5dd6f5ae773b8",
         "textFields": [
           "title",
           "aliases",
@@ -2862,10 +2862,10 @@
         "博士生"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-06T15:56:02.564Z",
-      "contentHash": "sha256:5b99f9a557560ac9f04425af5dfb90ae07970941db68a6c26fff23715545a837",
-      "reviewedAt": "2026-10-06T15:56:41.018163+00:00",
-      "reviewDue": "2027-01-04",
+      "modifiedAt": "2026-10-07T07:07:23.930Z",
+      "contentHash": "sha256:67eab38e700924c9e843db40b2024cbc974c4d8e89e4d4654939d92aa82fc758",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-01-05",
       "sourceIds": [
         "src-264e39cbec8d2f89",
         "src-30f33d3201c476ab",
@@ -2905,7 +2905,7 @@
       "retrieval": {
         "documentId": "wiki:Qiao_Xinbao_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:5b99f9a557560ac9f04425af5dfb90ae07970941db68a6c26fff23715545a837",
+        "contentHash": "sha256:67eab38e700924c9e843db40b2024cbc974c4d8e89e4d4654939d92aa82fc758",
         "textFields": [
           "title",
           "aliases",
@@ -2926,7 +2926,7 @@
     {
       "slug": "Certified_Data_Removal_zh",
       "title": "认证数据删除",
-      "summary": "解释机器遗忘中删除保证的概念页。",
+      "summary": "机器遗忘中的数据删除保证。",
       "language": "zh",
       "type": "研究概念",
       "tags": [
@@ -2937,17 +2937,17 @@
         "machine-unlearning"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:cf9f22c358563c9ded7edfa0b84c15a2ddc531896671859e2ef14dc1edf907be",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.805Z",
+      "contentHash": "sha256:162f4178318d09c46918ee17539661a9c8f5880cbee839f5b518cbfdfcb8b146",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Certified_Data_Removal_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:cf9f22c358563c9ded7edfa0b84c15a2ddc531896671859e2ef14dc1edf907be",
+        "contentHash": "sha256:162f4178318d09c46918ee17539661a9c8f5880cbee839f5b518cbfdfcb8b146",
         "textFields": [
           "title",
           "aliases",
@@ -3019,10 +3019,10 @@
         "公立研究型大学"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:c57202064e7fe6a89492d9160d3f630ce33ac111149aac58a6d7f4c5fa44718a",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.959Z",
+      "contentHash": "sha256:7717a610ac9c233c685eb8e48dcb76db8a6fb9f0d31cc382f1d0ae615c5ba9dd",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-2698bddf338b56e5",
         "src-33f25ef72f5cac0f",
@@ -3037,7 +3037,7 @@
       "retrieval": {
         "documentId": "wiki:Shandong_University_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:c57202064e7fe6a89492d9160d3f630ce33ac111149aac58a6d7f4c5fa44718a",
+        "contentHash": "sha256:7717a610ac9c233c685eb8e48dcb76db8a6fb9f0d31cc382f1d0ae615c5ba9dd",
         "textFields": [
           "title",
           "aliases",
@@ -3058,7 +3058,7 @@
     {
       "slug": "Data_Silos_zh",
       "title": "数据孤岛",
-      "summary": "解释数据分布在不同持有者之间时的学习与评估问题。",
+      "summary": "数据共享受限时的跨机构学习与评估。",
       "language": "zh",
       "type": "研究概念",
       "tags": [
@@ -3068,17 +3068,17 @@
         "研究概念"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:5a9ef8f0796c6a6e5818894e93c6a2b241c6df834f9d5be05ff03858efaeaf66",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.837Z",
+      "contentHash": "sha256:0709d7516ccb1151356300f405ce288cd94f86c0d49a17db3ae04512c9b556cd",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Data_Silos_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:5a9ef8f0796c6a6e5818894e93c6a2b241c6df834f9d5be05ff03858efaeaf66",
+        "contentHash": "sha256:0709d7516ccb1151356300f405ce288cd94f86c0d49a17db3ae04512c9b556cd",
         "textFields": [
           "title",
           "aliases",
@@ -3099,7 +3099,7 @@
     {
       "slug": "Data_Selection_zh",
       "title": "数据选择",
-      "summary": "解释在可靠性约束下选择训练或评估数据的概念页。",
+      "summary": "可靠性约束下的训练与评估数据选择。",
       "language": "zh",
       "type": "研究概念",
       "tags": [
@@ -3109,17 +3109,17 @@
         "研究概念"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:f2f86de8a44e60f1923badf3e613b292b74546183791b33c64556111f7cb3f80",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.826Z",
+      "contentHash": "sha256:7a04836cb0ff56ee638c73e86fe0651fc744bf8d7bf66dc0145024ad1e0fdc80",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Data_Selection_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:f2f86de8a44e60f1923badf3e613b292b74546183791b33c64556111f7cb3f80",
+        "contentHash": "sha256:7a04836cb0ff56ee638c73e86fe0651fc744bf8d7bf66dc0145024ad1e0fdc80",
         "textFields": [
           "title",
           "aliases",
@@ -3150,17 +3150,17 @@
         "研究专题"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:b5ed150616b6bc664087f36dc9e5d5cdb8b191aa624cf0ed96b40dce31f72b12",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.824Z",
+      "contentHash": "sha256:224fd6fd4ec5bb06be49840dec076fb87251226fb434041d64efb30efa82a4ab",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Data_Centric_Machine_Learning_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:b5ed150616b6bc664087f36dc9e5d5cdb8b191aa624cf0ed96b40dce31f72b12",
+        "contentHash": "sha256:224fd6fd4ec5bb06be49840dec076fb87251226fb434041d64efb30efa82a4ab",
         "textFields": [
           "title",
           "aliases",
@@ -3181,7 +3181,7 @@
     {
       "slug": "Random_Forest_zh",
       "title": "随机森林",
-      "summary": "解释 DynFrs 所研究的随机森林模型类别。",
+      "summary": "随机化决策树集成模型及其在 DynFrs 中的高效维护。",
       "language": "zh",
       "type": "模型族",
       "tags": [
@@ -3191,17 +3191,17 @@
         "模型族"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:6d257e9e58d7a5cdcb995d7953ef20d0399f947e387488808ee5cc005c98eec8",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.933Z",
+      "contentHash": "sha256:e98384a8ad5a5aeb0d2009ccd0bcd9f8af7874eb942245997d6bf60699a8aae3",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Random_Forest_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:6d257e9e58d7a5cdcb995d7953ef20d0399f947e387488808ee5cc005c98eec8",
+        "contentHash": "sha256:e98384a8ad5a5aeb0d2009ccd0bcd9f8af7874eb942245997d6bf60699a8aae3",
         "textFields": [
           "title",
           "aliases",
@@ -3274,10 +3274,10 @@
         "iclr-2025"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-09-27T11:41:29.313Z",
-      "contentHash": "sha256:add6a727cffd2dd22754857f3844140488f9f71e8129e3934ba8e0828cf6c6dc",
-      "reviewedAt": "2026-09-27T11:41:45.577Z",
-      "reviewDue": "2026-12-26",
+      "modifiedAt": "2026-10-07T07:07:23.882Z",
+      "contentHash": "sha256:00c00ca3fe7465d2163921199a1c4f3dbefcebaa08eaf7f4b5f7e149ba1abb33",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-01-05",
       "sourceIds": [
         "src-508cc93a8723d9eb",
         "src-65d81b8aca549860",
@@ -3289,7 +3289,7 @@
       "retrieval": {
         "documentId": "wiki:Hessian_Free_Online_Certified_Unlearning_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:add6a727cffd2dd22754857f3844140488f9f71e8129e3934ba8e0828cf6c6dc",
+        "contentHash": "sha256:00c00ca3fe7465d2163921199a1c4f3dbefcebaa08eaf7f4b5f7e149ba1abb33",
         "textFields": [
           "title",
           "aliases",
@@ -3320,10 +3320,10 @@
         "公立研究型大学"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-07-13T20:54:38+08:00",
-      "contentHash": "sha256:cc7ee27875948d4bdac61d09c00a69b27a9675d8b85091248c40ab359ba356e3",
-      "reviewedAt": "2026-07-13T20:54:38+08:00",
-      "reviewDue": "2027-01-09",
+      "modifiedAt": "2026-10-07T07:07:23.982Z",
+      "contentHash": "sha256:f07d5a0032333d8027d0ba57bc87da503432763434d3daeba18b098a39582a0e",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-09fa966eeac1624e",
         "src-5dac6849a598aa84",
@@ -3347,7 +3347,7 @@
       "retrieval": {
         "documentId": "wiki:The_Chinese_University_of_Hong_Kong_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:cc7ee27875948d4bdac61d09c00a69b27a9675d8b85091248c40ab359ba356e3",
+        "contentHash": "sha256:f07d5a0032333d8027d0ba57bc87da503432763434d3daeba18b098a39582a0e",
         "textFields": [
           "title",
           "aliases",
@@ -3368,7 +3368,7 @@
     {
       "slug": "Projects_zh",
       "title": "项目",
-      "summary": "研究项目与项目簇。",
+      "summary": "AI 与网络、机器遗忘、合成数据及语言模型可靠性研究项目。",
       "language": "zh",
       "type": "项目概览",
       "tags": [
@@ -3378,17 +3378,17 @@
         "项目概览"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-09-26T03:14:39.300Z",
-      "contentHash": "sha256:62f3a053ce6b446e0e0c69fa958b2108fd9095d872e8947c80aaef5ccc0d6174",
-      "reviewedAt": "2026-09-26T03:15:12.636Z",
-      "reviewDue": "2026-12-25",
+      "modifiedAt": "2026-10-07T07:07:23.928Z",
+      "contentHash": "sha256:c979c5302e1791e3ca0d502436ed0d586e1458aa78b7d050c6acebd22b614ffa",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-01-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Projects_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:62f3a053ce6b446e0e0c69fa958b2108fd9095d872e8947c80aaef5ccc0d6174",
+        "contentHash": "sha256:c979c5302e1791e3ca0d502436ed0d586e1458aa78b7d050c6acebd22b614ffa",
         "textFields": [
           "title",
           "aliases",
@@ -3409,7 +3409,7 @@
     {
       "slug": "Collaborative_Evaluation_zh",
       "title": "协作评估",
-      "summary": "解释多方共同评估模型或数据过程的概念页。",
+      "summary": "利用多方证据评估模型与数据处理过程。",
       "language": "zh",
       "type": "研究概念",
       "tags": [
@@ -3419,17 +3419,17 @@
         "研究概念"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:4c416cdbc890f68f445c30e75c3233866340c0721cf1b433fd236987d5281868",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.814Z",
+      "contentHash": "sha256:ad442fd1332465ff099ad95e917cf558450b50e1c1c0c5f86ee076cdbebfe8ab",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Collaborative_Evaluation_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:4c416cdbc890f68f445c30e75c3233866340c0721cf1b433fd236987d5281868",
+        "contentHash": "sha256:ad442fd1332465ff099ad95e917cf558450b50e1c1c0c5f86ee076cdbebfe8ab",
         "textFields": [
           "title",
           "aliases",
@@ -3450,7 +3450,7 @@
     {
       "slug": "Research_zh",
       "title": "研究",
-      "summary": "乔鑫宝研究方向与相关专题页面概览。",
+      "summary": "乔鑫宝在数据中心机器学习、AI 与网络及可信 AI 领域的研究。",
       "language": "zh",
       "type": "研究概览",
       "tags": [
@@ -3460,17 +3460,17 @@
         "研究概览"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-06T15:56:02.592Z",
-      "contentHash": "sha256:a7dc125b460f4f07bbe42c085cbb978a1edda11624066928969a4d21fa47db8d",
-      "reviewedAt": "2026-10-06T15:56:41.019813+00:00",
-      "reviewDue": "2027-01-04",
+      "modifiedAt": "2026-10-07T07:07:23.947Z",
+      "contentHash": "sha256:6952f850efb2b43088f354239d8b3c1a7ec6ef1b0cc50fa9f714b107818ec08e",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-01-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Research_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:a7dc125b460f4f07bbe42c085cbb978a1edda11624066928969a4d21fa47db8d",
+        "contentHash": "sha256:6952f850efb2b43088f354239d8b3c1a7ec6ef1b0cc50fa9f714b107818ec08e",
         "textFields": [
           "title",
           "aliases",
@@ -3501,17 +3501,17 @@
         "研究经历"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-09-26T03:14:39.278Z",
-      "contentHash": "sha256:abbe9def10416e552a47169241635f5dcdb8ac8eba3ede2f5ba724de772aa016",
-      "reviewedAt": "2026-09-26T03:15:12.636Z",
-      "reviewDue": "2026-12-25",
+      "modifiedAt": "2026-10-07T07:07:23.874Z",
+      "contentHash": "sha256:ce7c8af59c0323e1e2c6f26cf9d4754c17275f32c72a9ae143edeaaec086677f",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-01-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Experience_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:abbe9def10416e552a47169241635f5dcdb8ac8eba3ede2f5ba724de772aa016",
+        "contentHash": "sha256:ce7c8af59c0323e1e2c6f26cf9d4754c17275f32c72a9ae143edeaaec086677f",
         "textFields": [
           "title",
           "aliases",
@@ -3532,7 +3532,7 @@
     {
       "slug": "Sample_Selection_Bias_zh",
       "title": "样本选择偏差",
-      "summary": "解释非代表性样本选择引入的分布偏差。",
+      "summary": "数据选择如何使训练或评估所依据的分布产生偏差。",
       "language": "zh",
       "type": "研究概念",
       "tags": [
@@ -3542,17 +3542,17 @@
         "研究概念"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:cc1aca2e7114303a2dad5668cb78a122c92d56ebbae3a31397a995c35a87af59",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.953Z",
+      "contentHash": "sha256:e04479cabd61bc3727aa0e1e90b8676c17d981039b5f2b067c623e1dc7da4700",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Sample_Selection_Bias_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:cc1aca2e7114303a2dad5668cb78a122c92d56ebbae3a31397a995c35a87af59",
+        "contentHash": "sha256:e04479cabd61bc3727aa0e1e90b8676c17d981039b5f2b067c623e1dc7da4700",
         "textFields": [
           "title",
           "aliases",
@@ -3585,10 +3585,10 @@
         "synthetic-data"
       ],
       "timestamp": "2026-06-02T22:56:50+08:00",
-      "modifiedAt": "2026-09-27T11:41:29.339Z",
-      "contentHash": "sha256:381b0a1efabd5ac09d483c339abc3169208ce35632b757c0adc91f069f3175d9",
-      "reviewedAt": "2026-09-27T11:41:45.575Z",
-      "reviewDue": "2027-09-27",
+      "modifiedAt": "2026-10-07T07:07:23.992Z",
+      "contentHash": "sha256:e72b3490b8b9a8ee9c8e6909e76559a1f48e7e98b3a8ae019a4092f1696a3fd3",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-10-07",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-4144e3776ac496d0",
@@ -3600,7 +3600,7 @@
       "retrieval": {
         "documentId": "wiki:When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:381b0a1efabd5ac09d483c339abc3169208ce35632b757c0adc91f069f3175d9",
+        "contentHash": "sha256:e72b3490b8b9a8ee9c8e6909e76559a1f48e7e98b3a8ae019a4092f1696a3fd3",
         "textFields": [
           "title",
           "aliases",
@@ -3621,7 +3621,7 @@
     {
       "slug": "Influence_Functions_zh",
       "title": "影响函数",
-      "summary": "解释估计训练样本如何影响学习模型的概念页。",
+      "summary": "估计训练样本对已训练模型影响的方法。",
       "language": "zh",
       "type": "研究概念",
       "tags": [
@@ -3631,17 +3631,17 @@
         "研究概念"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:647e43dc8868e7f86527f3026f7071cfd2aef1fa226e663e4b88c0d5a9098b33",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.896Z",
+      "contentHash": "sha256:c7fed546c9e8d06cd97aad2a3e901fcf3dcb18362b2c81347d7f5bc28ba79301",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Influence_Functions_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:647e43dc8868e7f86527f3026f7071cfd2aef1fa226e663e4b88c0d5a9098b33",
+        "contentHash": "sha256:c7fed546c9e8d06cd97aad2a3e901fcf3dcb18362b2c81347d7f5bc28ba79301",
         "textFields": [
           "title",
           "aliases",
@@ -3672,10 +3672,10 @@
         "academic-advisor"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:103093bd3886bfa0462229db2fd4d8557041ecd2ab27552727a5922d4bea88ed",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.914Z",
+      "contentHash": "sha256:7169d9dd45faa781ba51eb8c6268457f65670167edc5ccc24079947f5e385354",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-716564daa4b6397f"
       ],
@@ -3688,7 +3688,7 @@
       "retrieval": {
         "documentId": "wiki:Meng_Zhang_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:103093bd3886bfa0462229db2fd4d8557041ecd2ab27552727a5922d4bea88ed",
+        "contentHash": "sha256:7169d9dd45faa781ba51eb8c6268457f65670167edc5ccc24079947f5e385354",
         "textFields": [
           "title",
           "aliases",
@@ -3719,10 +3719,10 @@
         "academic-advisor"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-13T20:54:38+08:00",
-      "contentHash": "sha256:22a803b3c72aafc454d04b3465a3141ddefe539d0cb848d603c789683d6c4a40",
-      "reviewedAt": "2026-07-13T20:54:38+08:00",
-      "reviewDue": "2027-01-09",
+      "modifiedAt": "2026-10-07T07:07:23.802Z",
+      "contentHash": "sha256:9604d49f7c8c9ee69e0f4a1506becfd9cc831e42d10a57864488bedd850ae280",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-05cf85aef2ce8d53",
         "src-938ce85aed5a8a94",
@@ -3741,7 +3741,7 @@
       "retrieval": {
         "documentId": "wiki:Angela_Yingjun_Zhang_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:22a803b3c72aafc454d04b3465a3141ddefe539d0cb848d603c789683d6c4a40",
+        "contentHash": "sha256:9604d49f7c8c9ee69e0f4a1506becfd9cc831e42d10a57864488bedd850ae280",
         "textFields": [
           "title",
           "aliases",
@@ -3772,10 +3772,10 @@
         "公立研究型大学"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-12T22:06:12+08:00",
-      "contentHash": "sha256:b299fe56a1b40d6af75fd0dec521d43bbcce4f80812f3b644dc326f6d3e759e5",
-      "reviewedAt": "2026-07-12T22:06:12+08:00",
-      "reviewDue": "2027-01-08",
+      "modifiedAt": "2026-10-07T07:07:23.994Z",
+      "contentHash": "sha256:bb84c1e200a6d863a556c8c295e8e43403d58af38c99f96e848be1c6aefde274",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-575233d5188384df",
         "src-c051bd6dcf566058"
@@ -3789,7 +3789,7 @@
       "retrieval": {
         "documentId": "wiki:Zhejiang_University_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:b299fe56a1b40d6af75fd0dec521d43bbcce4f80812f3b644dc326f6d3e759e5",
+        "contentHash": "sha256:bb84c1e200a6d863a556c8c295e8e43403d58af38c99f96e848be1c6aefde274",
         "textFields": [
           "title",
           "aliases",
@@ -3810,7 +3810,7 @@
     {
       "slug": "Old_Homepage_Resources_zh",
       "title": "主页肖像资源",
-      "summary": "记录个人主页 infobox 使用的肖像图库。",
+      "summary": "乔鑫宝个人主页中的肖像与会议图片。",
       "language": "zh",
       "type": "资源记录",
       "tags": [
@@ -3820,17 +3820,17 @@
         "资源记录"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-07-18T04:24:40.205Z",
-      "contentHash": "sha256:82bba430782e8ac82d2afac3b574607ea08303043c86c0a12c4720064bfb896e",
-      "reviewedAt": "2026-07-18T12:25:05+08:00",
-      "reviewDue": "2027-07-18",
+      "modifiedAt": "2026-10-07T07:07:23.927Z",
+      "contentHash": "sha256:9dc5e758ccbf80c6cd8c0458418a22e23cea724a1a526c539ff96a45ba7ab633",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-10-07",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Old_Homepage_Resources_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:82bba430782e8ac82d2afac3b574607ea08303043c86c0a12c4720064bfb896e",
+        "contentHash": "sha256:9dc5e758ccbf80c6cd8c0458418a22e23cea724a1a526c539ff96a45ba7ab633",
         "textFields": [
           "title",
           "aliases",
@@ -3862,10 +3862,10 @@
         "ai-and-networks"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-06T15:55:58.146Z",
-      "contentHash": "sha256:bd6ddd0ef148f5e63e11caa1c97b4a5735eca6cf4b786df0feace503b685c345",
-      "reviewedAt": "2026-10-06T15:56:41.015397+00:00",
-      "reviewDue": "2027-04-04",
+      "modifiedAt": "2026-10-07T07:07:23.799Z",
+      "contentHash": "sha256:73e53146e74ce51d89671ab211abd86aae4388f24da57bdec6355a60c92d767a",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-5ffca2a581311c27",
         "src-766234e11681dad2"
@@ -3881,7 +3881,7 @@
       "retrieval": {
         "documentId": "wiki:AI_and_Networks_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:bd6ddd0ef148f5e63e11caa1c97b4a5735eca6cf4b786df0feace503b685c345",
+        "contentHash": "sha256:73e53146e74ce51d89671ab211abd86aae4388f24da57bdec6355a60c92d767a",
         "textFields": [
           "title",
           "aliases",
@@ -3913,17 +3913,17 @@
         "wasserstein"
       ],
       "timestamp": "2026-08-20T00:00:00+09:00",
-      "modifiedAt": "2026-10-06T16:11:19.215Z",
-      "contentHash": "sha256:eb13a956b4be7416bd126789760956dd81da840fea6123f5f89d102f5319fe9d",
-      "reviewedAt": "2026-10-06T16:12:11.433332+00:00",
-      "reviewDue": "2026-11-05",
+      "modifiedAt": "2026-10-07T07:07:23.845Z",
+      "contentHash": "sha256:04fdfda05e4b744c34a59465d5eee0fd05d53e9e2afdbecb953280812647b6ce",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2026-11-06",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:eb13a956b4be7416bd126789760956dd81da840fea6123f5f89d102f5319fe9d",
+        "contentHash": "sha256:04fdfda05e4b744c34a59465d5eee0fd05d53e9e2afdbecb953280812647b6ce",
         "textFields": [
           "title",
           "aliases",
@@ -3955,10 +3955,10 @@
         "iclr-2025"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-09-27T11:41:29.308Z",
-      "contentHash": "sha256:a7ffaacf234f60b7d49c78edd9f830f1f037b653e355e94cdaa456b1c91caca7",
-      "reviewedAt": "2026-09-27T11:41:45.577Z",
-      "reviewDue": "2026-12-26",
+      "modifiedAt": "2026-10-07T07:07:23.871Z",
+      "contentHash": "sha256:72fb15cc1d4f48d3016ce1675475b5714102b0eded54be33dadf70ee3cd1ba8b",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-01-05",
       "sourceIds": [
         "src-19cdc04d387acf77",
         "src-3234eea5652932e1",
@@ -3970,7 +3970,7 @@
       "retrieval": {
         "documentId": "wiki:DynFrs_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:a7ffaacf234f60b7d49c78edd9f830f1f037b653e355e94cdaa456b1c91caca7",
+        "contentHash": "sha256:72fb15cc1d4f48d3016ce1675475b5714102b0eded54be33dadf70ee3cd1ba8b",
         "textFields": [
           "title",
           "aliases",
@@ -4001,10 +4001,10 @@
         "研究院"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-09-26T03:14:39.297Z",
-      "contentHash": "sha256:c2f41cc5e190cfb587438f0dba43d1fdc14216dea025d6d482cdb9c13e14a383",
-      "reviewedAt": "2026-09-26T03:15:12.636Z",
-      "reviewDue": "2027-03-25",
+      "modifiedAt": "2026-10-07T07:07:23.926Z",
+      "contentHash": "sha256:1b7b32a379b014a3a3903ef2eb7b66cc726dbdec12db578fef03e12ca1226741",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-17dc8cb17c9da923",
         "src-5816cdaa92b5e41c",
@@ -4022,7 +4022,7 @@
       "retrieval": {
         "documentId": "wiki:NUSRI_CQ_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:c2f41cc5e190cfb587438f0dba43d1fdc14216dea025d6d482cdb9c13e14a383",
+        "contentHash": "sha256:1b7b32a379b014a3a3903ef2eb7b66cc726dbdec12db578fef03e12ca1226741",
         "textFields": [
           "title",
           "aliases",
@@ -4043,7 +4043,7 @@
     {
       "slug": "Wasserstein_Geometry_zh",
       "title": "Wasserstein 几何",
-      "summary": "解释使用最优传输几何进行分布比较的概念页。",
+      "summary": "利用最优传输几何比较概率分布。",
       "language": "zh",
       "type": "研究概念",
       "tags": [
@@ -4054,10 +4054,10 @@
         "wasserstein"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-07-02T20:03:20+08:00",
-      "contentHash": "sha256:23fe4ef251fbe9ab9ba250c9e19140bd8721c19357fc1d2d55f5e6fdf86e2845",
-      "reviewedAt": "2026-07-02T20:03:20+08:00",
-      "reviewDue": "2026-12-29",
+      "modifiedAt": "2026-10-07T07:07:23.985Z",
+      "contentHash": "sha256:76f33f274d62e0cdaef742b6b9f33a834dc354d082cfcc4f0de4930d20227f46",
+      "reviewedAt": "2026-10-07T07:07:51.129Z",
+      "reviewDue": "2027-04-05",
       "sourceIds": [
         "src-0d6548913a8c228f",
         "src-3157a848b3737221",
@@ -4076,7 +4076,7 @@
       "retrieval": {
         "documentId": "wiki:Wasserstein_Geometry_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:23fe4ef251fbe9ab9ba250c9e19140bd8721c19357fc1d2d55f5e6fdf86e2845",
+        "contentHash": "sha256:76f33f274d62e0cdaef742b6b9f33a834dc354d082cfcc4f0de4930d20227f46",
         "textFields": [
           "title",
           "aliases",

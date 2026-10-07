@@ -44,7 +44,7 @@ Recommended attribution: "Xinbao Qiao and Xinbaopedia contributors, Xinbaopedia,
 
 ### 模型族
 
-- [随机森林](concepts/Random_Forest_zh.md) - 解释 DynFrs 所研究的随机森林模型类别。
+- [随机森林](concepts/Random_Forest_zh.md) - 随机化决策树集成模型及其在 DynFrs 中的高效维护。
 
 ### 维护日志
 
@@ -52,29 +52,29 @@ Recommended attribution: "Xinbao Qiao and Xinbaopedia contributors, Xinbaopedia,
 
 ### 项目概览
 
-- [项目](concepts/Projects_zh.md) - 研究项目与项目簇。
+- [项目](concepts/Projects_zh.md) - AI 与网络、机器遗忘、合成数据及语言模型可靠性研究项目。
 
 ### 研究概览
 
-- [研究](concepts/Research_zh.md) - 乔鑫宝研究方向与相关专题页面概览。
+- [研究](concepts/Research_zh.md) - 乔鑫宝在数据中心机器学习、AI 与网络及可信 AI 领域的研究。
 
 ### 研究概念
 
-- [大语言模型可靠性](concepts/LLM_Reliability_zh.md) - 解释大语言模型系统可靠性问题的概念页。
-- [递归合成数据训练](concepts/Recursive_Synthetic_Data_Training_zh.md) - 解释模型反复使用早期模型生成数据进行训练的过程。
-- [分布式 Wasserstein Barycenter](concepts/Distributed_Wasserstein_Barycenter_zh.md) - 解释乔鑫宝关于从分布式局部测度计算 Wasserstein barycenter 的相关工作。
-- [分布式学习](concepts/Distributed_Learning_zh.md) - 解释数据、计算或通信去中心化条件下的学习问题。
-- [公平性与鲁棒性](concepts/Fairness_and_Robustness_zh.md) - 解释公平性与鲁棒性作为数据中心修正目标的概念页。
-- [合成数据（概念）](concepts/Synthetic_Data_zh.md) - 解释用于训练、评估或隐私友好协作的生成数据。
-- [可解释性](concepts/Interpretability_zh.md) - 解释模型行为和数据影响的概念页。
-- [模型坍缩](concepts/Model_Collapse_zh.md) - 解释递归模型训练中退化性分布漂移的概念页。
-- [认证数据删除](concepts/Certified_Data_Removal_zh.md) - 解释机器遗忘中删除保证的概念页。
-- [数据孤岛](concepts/Data_Silos_zh.md) - 解释数据分布在不同持有者之间时的学习与评估问题。
-- [数据选择](concepts/Data_Selection_zh.md) - 解释在可靠性约束下选择训练或评估数据的概念页。
-- [协作评估](concepts/Collaborative_Evaluation_zh.md) - 解释多方共同评估模型或数据过程的概念页。
-- [样本选择偏差](concepts/Sample_Selection_Bias_zh.md) - 解释非代表性样本选择引入的分布偏差。
-- [影响函数](concepts/Influence_Functions_zh.md) - 解释估计训练样本如何影响学习模型的概念页。
-- [Wasserstein 几何](concepts/Wasserstein_Geometry_zh.md) - 解释使用最优传输几何进行分布比较的概念页。
+- [大语言模型可靠性](concepts/LLM_Reliability_zh.md) - 大语言模型系统在真实使用中的可靠性。
+- [递归合成数据训练](concepts/Recursive_Synthetic_Data_Training_zh.md) - 反复使用前代模型生成的数据进行训练。
+- [分布式 Wasserstein Barycenter](concepts/Distributed_Wasserstein_Barycenter_zh.md) - 根据各方本地数据计算共享的 Wasserstein 参考分布。
+- [分布式学习](concepts/Distributed_Learning_zh.md) - 数据、计算或评估分散于多个参与方的学习方式。
+- [公平性与鲁棒性](concepts/Fairness_and_Robustness_zh.md) - 以公平性与鲁棒性为目标的数据驱动模型修正。
+- [合成数据（概念）](concepts/Synthetic_Data_zh.md) - 用于训练、评估与协作的生成数据。
+- [可解释性](concepts/Interpretability_zh.md) - 理解模型行为及训练数据的影响。
+- [模型坍缩](concepts/Model_Collapse_zh.md) - 递归模型训练中的分布退化。
+- [认证数据删除](concepts/Certified_Data_Removal_zh.md) - 机器遗忘中的数据删除保证。
+- [数据孤岛](concepts/Data_Silos_zh.md) - 数据共享受限时的跨机构学习与评估。
+- [数据选择](concepts/Data_Selection_zh.md) - 可靠性约束下的训练与评估数据选择。
+- [协作评估](concepts/Collaborative_Evaluation_zh.md) - 利用多方证据评估模型与数据处理过程。
+- [样本选择偏差](concepts/Sample_Selection_Bias_zh.md) - 数据选择如何使训练或评估所依据的分布产生偏差。
+- [影响函数](concepts/Influence_Functions_zh.md) - 估计训练样本对已训练模型影响的方法。
+- [Wasserstein 几何](concepts/Wasserstein_Geometry_zh.md) - 利用最优传输几何比较概率分布。
 
 ### 研究经历
 
@@ -94,7 +94,7 @@ Recommended attribution: "Xinbao Qiao and Xinbaopedia contributors, Xinbaopedia,
 
 ### 资源记录
 
-- [主页肖像资源](concepts/Old_Homepage_Resources_zh.md) - 记录个人主页 infobox 使用的肖像图库。
+- [主页肖像资源](concepts/Old_Homepage_Resources_zh.md) - 乔鑫宝个人主页中的肖像与会议图片。
 
 ### Academic advisor
 
@@ -121,7 +121,7 @@ Recommended attribution: "Xinbao Qiao and Xinbaopedia contributors, Xinbaopedia,
 
 ### Model family
 
-- [Random Forest](concepts/Random_Forest.md) - Concept page for random forests as the model class studied in DynFrs.
+- [Random Forest](concepts/Random_Forest.md) - Randomized tree ensembles and their efficient maintenance in DynFrs.
 
 ### PhD student
 
@@ -129,7 +129,7 @@ Recommended attribution: "Xinbao Qiao and Xinbaopedia contributors, Xinbaopedia,
 
 ### Project overview
 
-- [Projects](concepts/Projects.md) - Research projects and project clusters.
+- [Projects](concepts/Projects.md) - Research projects in AI and networks, machine unlearning, synthetic data, and reliable language models.
 
 ### Public research university
 
@@ -158,21 +158,21 @@ Recommended attribution: "Xinbao Qiao and Xinbaopedia contributors, Xinbaopedia,
 
 ### Research concept
 
-- [Certified Data Removal](concepts/Certified_Data_Removal.md) - Concept page for deletion guarantees in machine unlearning.
-- [Collaborative Evaluation](concepts/Collaborative_Evaluation.md) - Concept page for evaluating models or data processes across multiple parties.
-- [Data Selection](concepts/Data_Selection.md) - Concept page for choosing training or evaluation data under reliability constraints.
-- [Data Silos](concepts/Data_Silos.md) - Concept page for learning and evaluation when data are distributed across separate holders.
-- [Distributed Learning](concepts/Distributed_Learning.md) - Concept page for learning with decentralized data, computation, or communication.
-- [Distributed Wasserstein Barycenter](concepts/Distributed_Wasserstein_Barycenter.md) - Concept page for Qiao's work on computing Wasserstein barycenters from distributed local measures.
-- [Fairness and Robustness](concepts/Fairness_and_Robustness.md) - Concept page for fairness and robustness as data-centric correction objectives.
-- [Influence Functions](concepts/Influence_Functions.md) - Concept page for estimating how training examples affect learned models.
-- [Interpretability](concepts/Interpretability.md) - Concept page for explaining model behavior and data influence.
-- [LLM Reliability](concepts/LLM_Reliability.md) - Concept page for reliability issues in large language model systems.
-- [Model Collapse](concepts/Model_Collapse.md) - Concept page for degenerative distributional drift in recursive model training.
-- [Recursive Synthetic Data Training](concepts/Recursive_Synthetic_Data_Training.md) - Concept page for training models repeatedly on data generated by earlier models.
-- [Sample Selection Bias](concepts/Sample_Selection_Bias.md) - Concept page for distributional bias introduced by non-representative sample choice.
-- [Synthetic Data (concept)](concepts/Synthetic_Data.md) - Concept page for generated data used in training, evaluation, or privacy-preserving collaboration.
-- [Wasserstein Geometry](concepts/Wasserstein_Geometry.md) - Concept page for distributional comparison using optimal-transport geometry.
+- [Certified Data Removal](concepts/Certified_Data_Removal.md) - Deletion guarantees in machine unlearning.
+- [Collaborative Evaluation](concepts/Collaborative_Evaluation.md) - Evaluation of models and data processes using evidence from multiple parties.
+- [Data Selection](concepts/Data_Selection.md) - Selection of training or evaluation data under reliability constraints.
+- [Data Silos](concepts/Data_Silos.md) - Learning and evaluation across institutions with limited data sharing.
+- [Distributed Learning](concepts/Distributed_Learning.md) - Learning with data, computation, or evaluation distributed across participants.
+- [Distributed Wasserstein Barycenter](concepts/Distributed_Wasserstein_Barycenter.md) - Computing a shared Wasserstein reference distribution from locally held data.
+- [Fairness and Robustness](concepts/Fairness_and_Robustness.md) - Fairness and robustness as goals of data-driven model correction.
+- [Influence Functions](concepts/Influence_Functions.md) - Methods for estimating how training examples affect learned models.
+- [Interpretability](concepts/Interpretability.md) - Understanding model behavior and the influence of training data.
+- [LLM Reliability](concepts/LLM_Reliability.md) - Reliability of large language model systems in realistic use.
+- [Model Collapse](concepts/Model_Collapse.md) - Distributional degradation during recursive model training.
+- [Recursive Synthetic Data Training](concepts/Recursive_Synthetic_Data_Training.md) - Repeated training on data generated by earlier models.
+- [Sample Selection Bias](concepts/Sample_Selection_Bias.md) - How data selection can distort the distribution used for learning or evaluation.
+- [Synthetic Data (concept)](concepts/Synthetic_Data.md) - Generated data used for training, evaluation, and collaboration.
+- [Wasserstein Geometry](concepts/Wasserstein_Geometry.md) - Comparison of probability distributions using optimal-transport geometry.
 
 ### Research experience
 
@@ -184,7 +184,7 @@ Recommended attribution: "Xinbao Qiao and Xinbaopedia contributors, Xinbaopedia,
 
 ### Research overview
 
-- [Research](concepts/Research.md) - Overview of Xinbao Qiao's research directions and linked topic pages.
+- [Research](concepts/Research.md) - Xinbao Qiao's research on data-centric machine learning, AI and networks, and trustworthy AI.
 
 ### Research topic
 
@@ -196,7 +196,7 @@ Recommended attribution: "Xinbao Qiao and Xinbaopedia contributors, Xinbaopedia,
 
 ### Resource inventory
 
-- [Homepage Portrait Resources](concepts/Old_Homepage_Resources.md) - Record of the portrait gallery used by the main biography infobox.
+- [Homepage Portrait Resources](concepts/Old_Homepage_Resources.md) - Portraits and conference images on Xinbao Qiao's homepage.
 
 ### Technical skills
 

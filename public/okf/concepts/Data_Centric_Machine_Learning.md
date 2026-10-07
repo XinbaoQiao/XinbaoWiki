@@ -10,10 +10,10 @@ tags:
   - topic
   - research-topic
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:bcaecd59642ba0d6acba76857a5343801aa5f36e2826a75f8def334627b1de33'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-10-07T07:07:23.824Z'
+content_hash: 'sha256:67ec95dfc5667e24e7ec5f3934d13fc4699571a7d587fa70b57794a5ef439950'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 language: en
 aliases:
   - Data-Centric Machine Learning
@@ -22,8 +22,8 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-02T20:03:20+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-10-07T07:07:51.129Z'
+  reviewDue: '2027-04-05'
   pendingReview: false
   overdue: false
 retrieval:
@@ -32,15 +32,15 @@ retrieval:
 source_ids: []
 source_path: wiki/Data_Centric_Machine_Learning.md
 ---
-**Data Centric ML** is the short label used in this wiki for data-centric machine learning. It refers to research where changes to data, rather than only changes to model architecture, are treated as first-order interventions. The relevant operations include selection, pruning, weighting, deletion, synthesis, and cross-party evaluation.
+**Data Centric ML**, or data-centric machine learning, studies how changes to data can improve model behavior, treating data alongside model architecture as a central focus of improvement. The relevant operations include selection, pruning, weighting, deletion, synthesis, and cross-party evaluation.
 
 ## Introduction
 
-The page groups projects where the main intervention is a data operation. Some operations happen after training, such as deletion and reweighting; others happen before or during training, such as pruning, synthetic-data filtering, and cross-silo evaluation. The topic acts as a bridge between Qiao's machine-unlearning work and the newer AI-and-networks line.
+Data-centric ML studies interventions made through data operations. Some operations happen after training, such as deletion and reweighting; others happen before or during training, such as pruning, synthetic-data filtering, and cross-silo evaluation.
 
-## Role in this wiki
+## Research context
 
-This page is the conceptual bridge between Qiao's older machine-unlearning work and his current [AI and networks](./AI_and_Networks.md) direction. It explains why pages on [data selection](./Data_Selection.md), [sample selection bias](./Sample_Selection_Bias.md), [synthetic data](./Synthetic_Data.md), [machine unlearning](./Machine_Unlearning.md), and [collaborative evaluation](./Collaborative_Evaluation.md) belong to the same wiki. Each page asks how a model changes when the data process changes.
+Data-centric ML connects Qiao's earlier machine-unlearning work with his current [AI and networks](./AI_and_Networks.md) direction. Research on [data selection](./Data_Selection.md), [sample selection bias](./Sample_Selection_Bias.md), [synthetic data](./Synthetic_Data.md), [machine unlearning](./Machine_Unlearning.md), and [collaborative evaluation](./Collaborative_Evaluation.md) examines how a model changes when the data process changes.
 
 ## Publications
 

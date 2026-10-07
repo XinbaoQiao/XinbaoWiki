@@ -10,10 +10,10 @@ tags:
   - neurips-2026
   - llm-reliability
 timestamp: '2026-09-25T13:49:35+09:00'
-modified: '2026-09-27T11:41:29.315Z'
-content_hash: 'sha256:546696d1b623dedcb937d4a09511560a538b2bf5f85218169020988b32f226fa'
-reviewed_at: '2026-09-27T11:41:45.575Z'
-review_due: '2027-09-27'
+modified: '2026-10-07T07:07:23.888Z'
+content_hash: 'sha256:9f5b1aba471881db05fbe70afb44b584137bbb00b9cd7b37fc9362d35de3540b'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-10-07'
 name: 错觉模式感知驱动大语言模型的虚假推理
 language: zh
 summary: NeurIPS 2026 论文，研究错觉模式感知与大语言模型的虚假推理。
@@ -43,7 +43,7 @@ translation_of: Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_L
 
 ## 概述
 
-论文将错觉模式感知放在大语言模型可靠性问题中考察。提示可能看起来存在规律，但这种规律未必足以支持所要求的结论。相应的风险是，模型沿着表面模式作答，而没有充分评估与问题相关的证据。
+提示中看似存在的规律，未必足以支持所要求的结论。论文考察模型如何沿着这种表面规律作答，而未充分评估与问题相关的证据。
 
 ## 关键启示
 

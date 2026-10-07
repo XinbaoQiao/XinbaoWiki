@@ -1,9 +1,7 @@
 ---
 type: Research concept
 title: Distributed Wasserstein Barycenter
-description: >-
-  Concept page for Qiao's work on computing Wasserstein barycenters from
-  distributed local measures.
+description: Computing a shared Wasserstein reference distribution from locally held data.
 tags:
   - en
   - research
@@ -11,10 +9,10 @@ tags:
   - research-concept
   - wasserstein
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-06T15:56:02.294Z'
-content_hash: 'sha256:ea6642e396c17e813a98854bf2b5fe2fa7169bfa3c342c1789f0fe09b0305285'
-reviewed_at: '2026-10-06T15:56:41.016617+00:00'
-review_due: '2027-04-04'
+modified: '2026-10-07T07:07:23.871Z'
+content_hash: 'sha256:0cc32576ea6ab9dbb41a5cd044aec451883b92305a47942726591118ead54bdb'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 language: en
 aliases:
   - Distributed Wasserstein barycenters
@@ -25,8 +23,8 @@ lifecycle:
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-10-06T15:56:41.016617+00:00'
-  reviewDue: '2027-04-04'
+  reviewedAt: '2026-10-07T07:07:51.129Z'
+  reviewDue: '2027-04-05'
   pendingReview: false
   overdue: false
 retrieval:
@@ -37,7 +35,7 @@ source_ids:
   - src-3157a848b3737221
 source_path: wiki/Distributed_Wasserstein_Barycenter.md
 ---
-**Distributed Wasserstein Barycenter** is a concept page for [Xinbao Qiao](./Xinbao_Qiao.md)'s work within [AI and networks](./AI_and_Networks.md) and [data-centric ML](./Data_Centric_Machine_Learning.md). A Wasserstein barycenter is a probability measure that summarizes several input distributions under an optimal-transport distance. In a distributed setting, the input measures are held by different parties, so the problem is not only statistical but also networked: the system must compute or approximate a common reference while respecting communication and data-access constraints.[^barycenter]
+A **distributed Wasserstein barycenter** is a probability measure that summarizes distributions held by different parties under an optimal-transport distance. Computing or approximating this shared reference requires accounting for communication and data-access constraints.[^barycenter] [Xinbao Qiao](./Xinbao_Qiao.md) studies this problem within [AI and networks](./AI_and_Networks.md) and [data-centric ML](./Data_Centric_Machine_Learning.md).
 
 ## Definition
 
@@ -48,17 +46,15 @@ $$
 \sum_{k=1}^{K} \lambda_k W_p^p(\nu, \mu_k).
 $$
 
-In a centralized mathematical statement, all $\mu_k$ are available to the solver. In the distributed version relevant to this wiki, each $\mu_k$ may correspond to a local dataset, client, institution, or device. The research question therefore includes what information needs to move across the network, how much can be compressed, and whether the resulting barycenter is useful as a global distributional proxy.
+In a centralized mathematical statement, all $\mu_k$ are available to the solver. In a distributed setting, each $\mu_k$ may correspond to a local dataset, client, institution, or device. The research question therefore includes what information needs to move across the network, how much can be compressed, and whether the resulting barycenter is useful as a global distributional proxy.
 
-## Role in this wiki
+## Research context
 
-This page sits between [Wasserstein Geometry](./Wasserstein_Geometry.md), [Distributed Learning](./Distributed_Learning.md), and [Collaborative Evaluation](./Collaborative_Evaluation.md). It explains why a geometric concept appears in Qiao's AI-and-networks line: a barycenter can serve as a shared reference distribution when no party has the complete data distribution. Such a reference can support model evaluation, synthetic-data verification, sample scoring, or comparison across non-identically distributed clients.
-
-The page also follows the LLM-wiki pattern used by Xinbaopedia: instead of leaving "Wasserstein barycenter" as a transient phrase inside a biography, the concept gets its own node. Later papers, notes, or project updates can link back here and refine the local synthesis.
+Distributed barycenters connect [Wasserstein Geometry](./Wasserstein_Geometry.md), [Distributed Learning](./Distributed_Learning.md), and [Collaborative Evaluation](./Collaborative_Evaluation.md): a barycenter can serve as a shared reference distribution when no party has the complete data distribution. Such a reference can support model evaluation, synthetic-data verification, sample scoring, or comparison across non-identically distributed clients.
 
 ## Connection to Qiao's work
 
-Qiao's ICML 2026 work on [sample-selection bias and model collapse](./When_Sample_Selection_Bias_Precipitates_Model_Collapse.md) already uses collaborative Wasserstein-style signals to reason about synthetic-data failure under low-resource siloed access. Distributed Wasserstein barycenters continue that direction at the infrastructure level by asking how a reliable reference distribution can be computed when the evidence is split across the network, rather than assuming that evaluation data can be pooled first.
+Qiao's ICML 2026 work on [sample-selection bias and model collapse](./When_Sample_Selection_Bias_Precipitates_Model_Collapse.md) already uses collaboratively computed Wasserstein-based signals to reason about synthetic-data failure under low-resource siloed access. Distributed Wasserstein barycenters continue that direction at the infrastructure level by asking how a reliable reference distribution can be computed when the evidence is split across the network, rather than assuming that evaluation data can be pooled first.
 
 This connects to [AI and networks](./AI_and_Networks.md) because the computational object is shaped by the communication pattern. It connects to [Synthetic Data](./Synthetic_Data_and_Model_Collapse.md) because recursive generation needs distributional checks. It also connects to [Data Centric ML](./Data_Centric_Machine_Learning.md) because the barycenter can become a tool for deciding which data or samples matter across parties.
 

@@ -8,18 +8,18 @@ tags:
   - advisor
   - academic-advisor
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-07-13T20:54:38+08:00'
-content_hash: 'sha256:22a803b3c72aafc454d04b3465a3141ddefe539d0cb848d603c789683d6c4a40'
-reviewed_at: '2026-07-13T20:54:38+08:00'
-review_due: '2027-01-09'
+modified: '2026-10-07T07:07:23.802Z'
+content_hash: 'sha256:9604d49f7c8c9ee69e0f4a1506becfd9cc831e42d10a57864488bedd850ae280'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-13T20:54:38+08:00'
-  reviewDue: '2027-01-09'
+  reviewedAt: '2026-10-07T07:07:51.129Z'
+  reviewDue: '2027-04-05'
   pendingReview: false
   overdue: false
 retrieval:
@@ -39,11 +39,11 @@ source_path: wiki/Angela_Yingjun_Zhang_zh.md
 
 ## 研究
 
-其研究页面列出无线通信与网络作为主要方向，具体包括无线通信和网络中的机器学习与 AI、凸与非凸优化、可重构智能表面、大规模 MIMO、语义与任务导向通信，以及 5G/6G 无线技术。在本 wiki 中，这些主题构成乔鑫宝 [AI 与网络](./AI_and_Networks_zh.md) 方向的机构背景。
+其研究页面列出无线通信与网络作为主要方向，具体包括无线通信和网络中的机器学习与 AI、凸与非凸优化、可重构智能表面、大规模 MIMO、语义与任务导向通信，以及 5G/6G 无线技术。这些主题构成乔鑫宝 [AI 与网络](./AI_and_Networks_zh.md) 方向的机构背景。
 
 ## 与乔鑫宝的关系
 
-张颖珺是[乔鑫宝](./Qiao_Xinbao_zh.md)在 CUHK 的博士导师。该导师关系用于传记中连接乔鑫宝早期数据中心机器学习工作与博士阶段网络化 AI 系统、去中心化学习和通信感知可靠性方向。
+张颖珺是[乔鑫宝](./Qiao_Xinbao_zh.md)在香港中文大学的博士导师。乔鑫宝的博士研究关注网络化 AI 系统、去中心化学习，以及通信约束下的可靠性。
 
 ## 参见
 

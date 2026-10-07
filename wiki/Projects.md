@@ -1,34 +1,38 @@
 ---
 type: Project overview
 title: Projects
-description: Research projects and project clusters.
+description: >-
+  Research projects in AI and networks, machine unlearning, synthetic data, and
+  reliable language models.
 tags:
   - en
   - project
   - overview
   - project-overview
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-09-26T03:14:39.300Z'
-content_hash: 'sha256:66e161feecf5b81c952502aa0be768a4a692f649df2d4867a8801cfff69f8a2d'
-reviewed_at: '2026-09-26T03:15:12.636Z'
-review_due: '2026-12-25'
+modified: '2026-10-07T07:07:23.928Z'
+content_hash: 'sha256:fda4d8d5340b060e97ab1830e822325f8c58e4b446191dcfd155c7e4f703643e'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-01-05'
 name: Projects
-summary: Research projects and project clusters.
+summary: >-
+  Research projects in AI and networks, machine unlearning, synthetic data, and
+  reliable language models.
 occupation: Project overview
 ---
-## Research project clusters
+## Research projects
 
 ### AI and networks
 
-[[AI_and_Networks]] is the current primary project cluster. It includes AI for Networks, Networks for AI, data pruning for decentralized learning, communication-aware evaluation, cross-silo reliability, and distributed computation for Wasserstein-style distributional references.
+[[AI_and_Networks]] is a current research focus. It includes AI for Networks, Networks for AI, data pruning for decentralized learning, communication-aware evaluation, reliability across data silos, and distributed computation of Wasserstein-based reference distributions.
 
 ### Distributed Wasserstein barycenters
 
-[[Distributed_Wasserstein_Barycenter|Distributed Wasserstein barycenter]] is a technical project within the AI-and-networks cluster. It asks how multiple parties can compute or approximate a shared distributional reference from local empirical measures, with applications to collaborative evaluation, sample scoring, and synthetic-data verification.
+[[Distributed_Wasserstein_Barycenter|Distributed Wasserstein barycenter]] is part of this work on AI and networks. It asks how multiple parties can compute or approximate a shared distributional reference from local empirical measures, with applications to collaborative evaluation, sample scoring, and synthetic-data verification.
 
 ### Machine unlearning
 
-[[Machine_Unlearning]] includes both approximate certified unlearning for differentiable models and exact or efficient unlearning for tree ensembles. Project pages include [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]], [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]], and [[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]].
+[[Machine_Unlearning]] includes both approximate certified unlearning for differentiable models and exact or efficient unlearning for tree ensembles. Related work includes [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]], [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]], and [[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]].
 
 ### Collaborative evaluation
 
@@ -36,8 +40,8 @@ occupation: Project overview
 
 ### Synthetic data
 
-[[Synthetic_Data_and_Model_Collapse|Synthetic Data]] asks when generated data can safely replace or augment real data, and when recursive training amplifies bias or erodes diversity. The current emphasis is low-resource communities, where fragmented real-data coverage makes local filtering more likely to prune valid tail modes. The main paper page is [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]].
+[[Synthetic_Data_and_Model_Collapse|Synthetic Data]] asks when generated data can safely replace or augment real data, and when recursive training amplifies bias or erodes diversity. The current emphasis is low-resource communities, where fragmented real-data coverage makes local filtering more likely to prune valid tail modes. A central paper is [[When_Sample_Selection_Bias_Precipitates_Model_Collapse]].
 
 ### Trustworthy LLM systems
 
-[[LLM_Reliability]] examines whether language models use evidence appropriately when prompts suggest misleading patterns. The NeurIPS 2026 paper [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|Illusory Pattern Perception Drives Spurious Inference in Large Language Models]] provides a publication entry for this project cluster.
+[[LLM_Reliability]] examines whether language models use evidence appropriately when prompts suggest misleading patterns. The NeurIPS 2026 paper [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|Illusory Pattern Perception Drives Spurious Inference in Large Language Models]] studies how perceived prompt patterns can lead to unsupported inference.

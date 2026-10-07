@@ -144,10 +144,11 @@ const CHINESE_PERSONAL_SENSITIVE_PATTERN = /(?:乔鑫宝|鑫宝|他|你)(?:的)?
 const ENGLISH_CONTEXT_REFERENCE_PATTERN = /^(?:(?:and )?(?:this|that)(?: one| paper| work| project)?|it|what (?:is|s) (?:this|it)(?: about)?|what does (?:this|it)(?: paper| work| project)? do|what problems? does (?:this|it)(?: paper| work| project)? solve|why does (?:this|it)(?: paper| work| project)? matter|tell me about (?:this|it)(?: paper| work| project)?|(?:could|can|would) you (?:please )?(?:explain|summarize|tell me) (?:what (?:this|that|it)(?: paper| work| project)? does|(?:this|that)(?: paper| work| project)?))$/u;
 const CHINESE_CONTEXT_REFERENCE_PATTERN = /^(?:这篇|这个|这项工作|这项研究|这个项目|它)(?:呢|讲(?:了)?(?:啥|什么)|是什么|是做什么的|做什么|有什么用|解决什么|解决了什么|为什么重要)?$/u;
 const ENGLISH_PROFILE_INTENT_PATTERN = /^(?:tell me about (?:yourself|xinbao(?: qiao)?)|introduce (?:yourself|xinbao(?: qiao)?)|who (?:are you|is xinbao(?: qiao)?)|give me (?:your|xinbao(?: qiao)? s) introduction)$/u;
+const ENGLISH_STUDY_PROFILE_PATTERN = new RegExp(String.raw`^(?:who (?:are you|is xinbao(?: qiao)?) and )?(?:where (?:is|are) ${ENGLISH_PERSON} (?:currently )?studying|where (?:does|do) ${ENGLISH_PERSON} (?:currently )?study|(?:at )?which university (?:is|are) ${ENGLISH_PERSON} (?:currently )?studying at)$`, 'u');
 const ENGLISH_RECENT_WORK_INTENT_PATTERN = /^(?:whatever xinbao(?: qiao)? is cooking up lately|what (?:is|s) (?:xinbao(?: qiao)?|he) (?:working on|cooking up|researching)(?: lately| recently| now)?|what are you (?:working on|cooking up|researching)(?: lately| recently| now)?|what has (?:xinbao(?: qiao)?|he|you) been working on(?: lately| recently)?|what is (?:xinbao(?: qiao)?|he) up to(?: lately| recently| now)?)$/u;
 const ENGLISH_DOCTORAL_WORK_INTENT_PATTERN = /^(?:what did (?:xinbao(?: qiao)?|he|you) work on (?:during|in) (?:his|your|the) phd|what (?:is|was) (?:xinbao(?: qiao)? s|his|your) phd (?:work|research)(?: about)?|what (?:does|did) (?:xinbao(?: qiao)?|he|you) research (?:during|in) (?:his|your|the) phd)$/u;
 const ENGLISH_PUBLIC_CONTACT_INTENT_PATTERN = /^(?:(?:what(?: is|s)|give me|show me|share) (?:xinbao(?: qiao)? s|qiao xinbao s|his|your) (?:(?:public|work|academic) )?(?:email(?: address)?|contact (?:information|info|details))|how (?:can|do) i contact (?:xinbao(?: qiao)?|qiao xinbao|him|you))$/u;
-const ENGLISH_GENERAL_CONVERSATION_PATTERN = /^(?:what is (?:a |an )?(?:system prompt|authentication credential)|how are environment variables used|how does medical diagnosis work)$/u;
+const ENGLISH_GENERAL_CONVERSATION_PATTERN = /^(?:what is (?:a |an )?(?:system prompt|authentication credential)|how are (?:system|developer) prompts used(?: in ai systems)?|how are environment variables used|how does medical diagnosis work)$/u;
 
 const HOME_INTENT_TARGETS: Record<WikiRetrievalLanguage, Record<BoundedIntentKind, BoundedTarget[]>> = {
   en: {
@@ -158,7 +159,7 @@ const HOME_INTENT_TARGETS: Record<WikiRetrievalLanguage, Record<BoundedIntentKin
     ],
     'recent-work': [
       { slug: 'Xinbao_Qiao', sectionPattern: /Chinese University of Hong Kong \(2026-present\)|Academic projects/iu },
-      { slug: 'Projects', sectionPattern: /Research project clusters/iu },
+      { slug: 'Projects', sectionPattern: /Research projects/iu },
       { slug: 'Publications', sectionPattern: /Peer-reviewed and accepted papers/iu },
       { slug: 'log', sectionPattern: /^2026-/u, newestMatchingSection: true }
     ],
@@ -179,7 +180,7 @@ const HOME_INTENT_TARGETS: Record<WikiRetrievalLanguage, Record<BoundedIntentKin
     ],
     'recent-work': [
       { slug: 'Qiao_Xinbao_zh', sectionPattern: /香港中文大学博士阶段|学术项目/u },
-      { slug: 'Projects_zh', sectionPattern: /研究项目簇/u },
+      { slug: 'Projects_zh', sectionPattern: /研究项目/u },
       { slug: 'Publications_zh', sectionPattern: /已录用论文/u },
       { slug: 'log_zh', sectionPattern: /^2026-/u, newestMatchingSection: true }
     ],
@@ -259,7 +260,7 @@ function targetsSensitiveInformation(query: string) {
 function homepageIntent(query: string, language: WikiRetrievalLanguage): BoundedIntentKind | null {
   const normalized = normalizeText(query);
   if (language === 'en') {
-    if (ENGLISH_PROFILE_INTENT_PATTERN.test(normalized)) return 'profile';
+    if (ENGLISH_PROFILE_INTENT_PATTERN.test(normalized) || ENGLISH_STUDY_PROFILE_PATTERN.test(normalized)) return 'profile';
     if (ENGLISH_RECENT_WORK_INTENT_PATTERN.test(normalized)) return 'recent-work';
     if (ENGLISH_DOCTORAL_WORK_INTENT_PATTERN.test(normalized)) return 'doctoral-work';
     if (ENGLISH_PUBLIC_CONTACT_INTENT_PATTERN.test(normalized)) return 'public-contact';

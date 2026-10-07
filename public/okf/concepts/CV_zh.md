@@ -8,18 +8,18 @@ tags:
   - profile
   - cv-摘要
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-10-06T16:11:19.162Z'
-content_hash: 'sha256:3a3fb0a6ee4923f923acdbe935d29f47256446215a96fa958e357e473d5b4081'
-reviewed_at: '2026-10-06T16:12:11.431923+00:00'
-review_due: '2027-01-04'
+modified: '2026-10-07T07:07:23.816Z'
+content_hash: 'sha256:f3c8e5b6a399201f7a84b55fbb9d01144f998d35d8cee7e1c5aebc53b288eb90'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-01-05'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-06T16:12:11.431923+00:00'
-  reviewDue: '2027-01-04'
+  reviewedAt: '2026-10-07T07:07:51.129Z'
+  reviewDue: '2027-01-05'
   pendingReview: false
   overdue: false
 retrieval:
@@ -45,7 +45,7 @@ source_ids:
   - src-faaafad831fbefc5
 source_path: wiki/CV_zh.md
 ---
-本页为读者整理乔鑫宝的学术简历要点。可下载版本见 [résumé](/files/XinbaoQiao_CV.pdf)。
+[résumé](/files/XinbaoQiao_CV.pdf)。
 
 ## 联系方式
 
@@ -87,7 +87,7 @@ source_path: wiki/CV_zh.md
 
 ## 论文
 
-见 [论文](./Publications_zh.md)。简历列出已录用、已公开和在审的机器遗忘、去中心化学习、合成数据模型坍缩、联邦学习与 LLM 可靠性工作。最近录用且由乔鑫宝独立担任第一作者的论文列在首位；其余已录用论文按录用时间由近及远排列，在审论文列于末尾。
+乔鑫宝的[论文](./Publications_zh.md)涵盖机器遗忘、去中心化学习、合成数据模型坍缩、联邦学习与 LLM 可靠性。
 
 星号（*）表示共同第一作者；剑号（†）表示通讯作者。
 

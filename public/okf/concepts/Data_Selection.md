@@ -1,27 +1,25 @@
 ---
 type: Research concept
 title: Data Selection
-description: >-
-  Concept page for choosing training or evaluation data under reliability
-  constraints.
+description: Selection of training or evaluation data under reliability constraints.
 tags:
   - en
   - research
   - concept
   - research-concept
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:49f49a19d651a14750d02e8624e31c769fe7be63310cb06cfef96324f5a290b0'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-10-07T07:07:23.831Z'
+content_hash: 'sha256:5f6c2676592f1d2db8f81830e111c54f8b0d6ec3d0ff75b0d3335de981a2aac4'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-07-02T20:03:20+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-10-07T07:07:51.129Z'
+  reviewDue: '2027-04-05'
   pendingReview: false
   overdue: false
 retrieval:
@@ -30,11 +28,11 @@ retrieval:
 source_ids: []
 source_path: wiki/Data_Selection.md
 ---
-**Data Selection** is the process of choosing which examples are used for training, pruning, evaluation, or synthetic-data reuse. In this wiki it is treated as a central data-centric operation: selection can reduce cost and improve quality, but biased selection can also distort a model's view of the target distribution.
+**Data Selection** is the process of choosing which examples are used for training, pruning, evaluation, or synthetic-data reuse. Selection can reduce cost and improve quality, but biased selection can also distort a model's view of the target distribution.
 
-## Role in this wiki
+## Research context
 
-The page links [Data Centric ML](./Data_Centric_Machine_Learning.md) to both [AI and networks](./AI_and_Networks.md) and [Synthetic Data](./Synthetic_Data_and_Model_Collapse.md). In decentralized or siloed settings, selection is often local: each participant sees only part of the data and chooses examples according to local goals or constraints. That makes selection a networked problem rather than a purely statistical preprocessing step.
+Data selection is a shared problem in [Data Centric ML](./Data_Centric_Machine_Learning.md), [AI and networks](./AI_and_Networks.md), and [Synthetic Data](./Synthetic_Data_and_Model_Collapse.md). In decentralized or siloed settings, selection is often local: each participant sees only part of the data and chooses examples according to local goals or constraints. That makes selection a networked problem rather than a purely statistical preprocessing step.
 
 ## Connection to Qiao's work
 

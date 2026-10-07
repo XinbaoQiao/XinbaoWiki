@@ -11,10 +11,10 @@ tags:
   - research-topic
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-08-09T18:35:47.585Z'
-content_hash: 'sha256:8e10aaffd38b6de7d730ab148309b29754b1ece074005d16edbeb942f5c93887'
-reviewed_at: '2026-08-10T02:36:00+08:00'
-review_due: '2027-02-05'
+modified: '2026-10-07T07:07:23.970Z'
+content_hash: 'sha256:3ec58145d656d9cc7adf4493e8b851749546d1805d8e30fca3822fe5c2c0877f'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 name: Synthetic Data
 summary: >-
   Research topic on synthetic data, recursive training, low-resource
@@ -29,15 +29,15 @@ relations:
     target: Synthetic_Data
     label: concept foundation
 ---
-**Synthetic Data** is the short research-topic label for Qiao's work on generated data, recursive training, and model collapse. The full cluster remains broader than the label: it includes [[Recursive_Synthetic_Data_Training|recursive synthetic-data training]], [[Data_Selection|data selection]], [[Sample_Selection_Bias|sample selection bias]], [[Model_Collapse|model collapse]], [[Data_Silos|data silos]], and [[Wasserstein_Geometry|Wasserstein geometry]].
+Qiao's research on **synthetic data** examines generated data, recursive training, and model collapse. Related questions include [[Recursive_Synthetic_Data_Training|recursive synthetic-data training]], [[Data_Selection|data selection]], [[Sample_Selection_Bias|sample selection bias]], [[Model_Collapse|model collapse]], [[Data_Silos|data silos]], and [[Wasserstein_Geometry|Wasserstein geometry]].
 
 ## Introduction
 
-The topic treats synthetic data as both a resource and a risk. Generated samples can reduce data-access costs and support privacy-preserving workflows, but recursive use of selected synthetic data can also narrow the training distribution. Evidence for model collapse concerns indiscriminate recursive reuse rather than every use of synthetic data; retaining original data reduced degradation in the cited study.[^collapse] This page records that tension in the specific setting of low-resource verification, biased local selection, and collaborative evaluation.
+The topic treats synthetic data as both a resource and a risk. Generated samples can reduce data-access costs and support privacy-preserving workflows, but recursive use of selected synthetic data can also narrow the training distribution. Evidence for model collapse concerns indiscriminate recursive reuse rather than every use of synthetic data; retaining original data reduced degradation in the cited study.[^collapse] Low-resource verification, biased local selection, and collaborative evaluation shape this tradeoff.
 
-## Role in this wiki
+## Research context
 
-This page keeps the biography readable by giving the long technical background its own location. On the main page, "Synthetic Data" is enough to signal the topic. Here, the topic is unpacked as a research problem: generated samples can improve coverage or reduce access costs, but recursive use of generated data can amplify bias, erase modes, or distort the target distribution. The newer emphasis is that low-resource communities are not only short on data; they are also more exposed to tail loss when local verifiers mistake rare but valid samples for low-quality generations.
+Recursive selection can amplify bias and erase modes from the training distribution. Low-resource communities are particularly exposed to tail loss when local verifiers mistake rare but valid samples for low-quality generations.
 
 ## Publications
 

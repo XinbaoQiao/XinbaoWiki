@@ -1,26 +1,26 @@
 ---
 type: Research concept
 title: Collaborative Evaluation
-description: Concept page for evaluating models or data processes across multiple parties.
+description: Evaluation of models and data processes using evidence from multiple parties.
 tags:
   - en
   - research
   - concept
   - research-concept
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:8e9faf67f5ee31a4878fb7e692c8d5333fba5a60cbec15e95b72c457891e9436'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-10-07T07:07:23.816Z'
+content_hash: 'sha256:4e5e84fafa00db7b2bcb8408d677f1c2d4c3f6fcd8cb540ea75839f7dceab75c'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 name: Collaborative Evaluation
-summary: Concept page for evaluating models or data processes across multiple parties.
+summary: Evaluation of models and data processes using evidence from multiple parties.
 occupation: Research concept
 ---
-**Collaborative Evaluation** refers to evaluation procedures in which multiple parties contribute evidence about model behavior, data quality, or distributional drift. In this wiki the concept is used mainly for cross-silo settings, where each participant has local observations but no participant has complete access to the global distribution.
+**Collaborative Evaluation** refers to evaluation procedures in which multiple parties contribute evidence about model behavior, data quality, or distributional drift. In cross-silo settings, each participant has local observations but no participant has complete access to the global distribution.
 
-## Role in this wiki
+## Research context
 
-This page connects [[Data_Silos|data silos]] to [[Wasserstein_Geometry|Wasserstein geometry]] and [[AI_and_Networks|AI and networks]]. It explains why evaluation itself can be a networked problem. A centralized benchmark assumes that all relevant data can be gathered and labeled in one place. Collaborative evaluation instead asks what can be inferred from partial, possibly biased local signals, especially when some parties operate in low-resource conditions.
+Evaluation across [[Data_Silos|data silos]] is a networked problem, connecting [[Wasserstein_Geometry|Wasserstein geometry]] with [[AI_and_Networks|AI and networks]]. A centralized benchmark assumes that all relevant data can be gathered and labeled in one place. Collaborative evaluation instead asks what can be inferred from partial, possibly biased local signals, especially when some parties operate in low-resource conditions.
 
 ## Connection to Qiao's work
 

@@ -8,15 +8,15 @@ tags:
   - profile
   - cv-summary
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-10-06T16:11:19.173Z'
-content_hash: 'sha256:0a2bdf27e75aa7aa964a56e14450d24b9e49ae38f6c170711b204a2d7e6a9329'
-reviewed_at: '2026-10-06T16:12:11.431042+00:00'
-review_due: '2027-01-04'
+modified: '2026-10-07T07:07:23.817Z'
+content_hash: 'sha256:8dfb826b19aa8c3fe70b1bd41accb2c532b0b3b2d2c4682dddb2083a7add9a77'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-01-05'
 name: Curriculum Vitae
 summary: Academic CV summary for Xinbao Qiao.
 occupation: CV summary
 ---
-This page summarizes Xinbao Qiao's academic CV for wiki readers. A downloadable résumé is available as [résumé](/files/XinbaoQiao_CV.pdf).
+[résumé](/files/XinbaoQiao_CV.pdf).
 
 ## Contact
 
@@ -58,7 +58,7 @@ This page summarizes Xinbao Qiao's academic CV for wiki readers. A downloadable 
 
 ## Publications
 
-See [[Publications]]. The CV lists accepted, published, and under-review work in machine unlearning, decentralized learning, synthetic-data model collapse, federated learning, and LLM reliability. The newest accepted paper with Qiao as sole first author leads the list; other accepted papers follow acceptance recency, and manuscripts under review appear last.
+Qiao's [[Publications|publications]] cover machine unlearning, decentralized learning, synthetic-data model collapse, federated learning, and LLM reliability.
 
 Asterisks (*) denote co-first authorship; daggers (†) denote corresponding authors.
 

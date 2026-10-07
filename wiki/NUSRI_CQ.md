@@ -8,10 +8,10 @@ tags:
   - research
   - research-institute
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-09-26T03:14:39.298Z'
-content_hash: 'sha256:18d9a449d027da84f26e30cb6cd9b50a81fa7362f7fdda94e8e8710084b523ae'
-reviewed_at: '2026-09-26T03:15:12.636Z'
-review_due: '2027-03-25'
+modified: '2026-10-07T07:07:23.926Z'
+content_hash: 'sha256:649fb3f977d335514df8f862392095d574dc67f7dde46854e82fdf6d41ab4e97'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 name: NUSRI-CQ
 summary: Research internship institution of Xinbao Qiao.
 person:
@@ -30,11 +30,11 @@ links:
   - label: Vision and Mission
     url: 'https://en.nusricq.cn/about/yjysm'
 ---
-**NUSRI-CQ** refers to the NUS (Chongqing) Research Institute, where [[Xinbao_Qiao|Xinbao Qiao]] worked as a full-time research intern from June to December 2025. In this wiki the article records the institute as a research-experience node rather than a degree-granting institution in Qiao's education list. It sits between the [[Zhejiang_University|Zhejiang University]] master's phase and the [[The_Chinese_University_of_Hong_Kong|CUHK]] doctoral phase.
+**NUSRI-CQ** refers to the NUS (Chongqing) Research Institute, where [[Xinbao_Qiao|Xinbao Qiao]] worked as a full-time research intern from June to December 2025. This internship followed the [[Zhejiang_University|Zhejiang University]] master's phase and preceded the [[The_Chinese_University_of_Hong_Kong|CUHK]] doctoral phase.
 
 ## Program
 
-Qiao's internship work is summarized in the biography as trustworthy LLM systems and synthetic-data evaluation. The institute context is relevant because NUSRI-CQ presents itself as a platform for research, technology transfer, education, and innovation in Chongqing.[^nusri-intro] This mixed research-and-translation environment helps explain why the related wiki pages emphasize both methodological questions and deployment constraints.
+Qiao's internship work focused on trustworthy LLM systems and synthetic-data evaluation. NUSRI-CQ presents itself as a platform for research, technology transfer, education, and innovation in Chongqing.[^nusri-intro]
 
 ## Academic context
 
@@ -42,7 +42,7 @@ Public NUS material describes NUSRI-CQ as a joint effort between the National Un
 
 ## Connection to Qiao
 
-The NUSRI-CQ period is associated in this wiki with [[Synthetic_Data_and_Model_Collapse|synthetic data]], [[Collaborative_Evaluation|collaborative evaluation]], [[Wasserstein_Geometry|Wasserstein geometry]], and [[LLM_Reliability|LLM reliability]]. It provides the immediate research context for the ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]], especially the question of how low-resource distributed parties can diagnose data-generation failure without exposing all local data. The NeurIPS 2026 paper [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|Illusory Pattern Perception Drives Spurious Inference in Large Language Models]] addresses how perceived prompt patterns can lead to spurious inference.
+The NUSRI-CQ period involved research on [[Synthetic_Data_and_Model_Collapse|synthetic data]], [[Collaborative_Evaluation|collaborative evaluation]], [[Wasserstein_Geometry|Wasserstein geometry]], and [[LLM_Reliability|LLM reliability]]. Related work includes the ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]], which examines how distributed participants with limited resources can diagnose data-generation failures without exposing all local data. The NeurIPS 2026 paper [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|Illusory Pattern Perception Drives Spurious Inference in Large Language Models]] addresses how perceived prompt patterns can lead to spurious inference.
 
 ## See also
 

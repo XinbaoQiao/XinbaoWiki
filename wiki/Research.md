@@ -1,22 +1,26 @@
 ---
 type: Research overview
 title: Research
-description: Overview of Xinbao Qiao's research directions and linked topic pages.
+description: >-
+  Xinbao Qiao's research on data-centric machine learning, AI and networks, and
+  trustworthy AI.
 tags:
   - en
   - research
   - overview
   - research-overview
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-06T15:56:02.593Z'
-content_hash: 'sha256:797ad93d8b2eef1568048abaaeeab07b1c936b1b36eb3b082c8ebaf9b977bb07'
-reviewed_at: '2026-10-06T15:56:41.019106+00:00'
-review_due: '2027-01-04'
+modified: '2026-10-07T07:07:23.948Z'
+content_hash: 'sha256:30f689ed5a3dfb40a9804d100cce93fd9d4bbf7c12e7a8cc23ed60b4da778b24'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-01-05'
 name: Research
-summary: Overview of Xinbao Qiao's research directions and linked topic pages.
+summary: >-
+  Xinbao Qiao's research on data-centric machine learning, AI and networks, and
+  trustworthy AI.
 occupation: Research overview
 ---
-This page summarizes the main research directions in Qiao Xinbao's academic wiki. It functions as a compiled map of linked topic pages rather than a static list of interests. The current center of gravity is [[Data_Centric_Machine_Learning|data-centric ML]] and the two-way [[AI_and_Networks|AI-and-networks]] problem.
+Xinbao Qiao's current research focuses on [[Data_Centric_Machine_Learning|data-centric ML]] and [[AI_and_Networks|AI and networks]], including AI for Networks and Networks for AI.
 
 ## Research thesis
 
@@ -34,7 +38,7 @@ The under-review manuscript [[Decentralized_Free_Support_Wasserstein_Barycenter|
 
 ## Machine unlearning
 
-[[Machine_Unlearning]] studies certified data removal and low-cost update mechanisms after deletion requests. Related pages include [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]], [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]], [[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]], [[Influence_Functions]], and [[Certified_Data_Removal]].
+[[Machine_Unlearning]] studies certified data removal and low-cost update mechanisms after deletion requests. Related work includes [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]], [[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]], [[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]], [[Influence_Functions]], and [[Certified_Data_Removal]].
 
 ## Synthetic data
 

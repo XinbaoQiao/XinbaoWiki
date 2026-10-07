@@ -11,10 +11,10 @@ tags:
   - biography
   - phd-student
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-06T15:56:02.729Z'
-content_hash: 'sha256:15335c0a64ddb0ae4fe47e5140b1f6f9488b43ec06e56b57637b0e4a5d7e9d8a'
-reviewed_at: '2026-10-06T15:56:41.020410+00:00'
-review_due: '2027-01-04'
+modified: '2026-10-07T07:07:23.993Z'
+content_hash: 'sha256:f5142daf8bce2787124f0120522f50f75ede3a74df0b93a09401729b1231f907'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-01-05'
 name: Xinbao Qiao
 summary: >-
   PhD student in Information Engineering at The Chinese University of Hong Kong;
@@ -102,8 +102,6 @@ Within this stage, his recent work centers on [[Data_Centric_Machine_Learning|da
 
 ## Academic projects
 
-The project sections below group Qiao's work by research problem rather than by institution. They are meant to summarize the main technical threads while the preceding section records the chronological research timeline.
-
 ### AI and networks (2024-present)
 
 Qiao's current primary line, [[AI_and_Networks|AI and networks]], studies learning systems whose behavior depends on communication, locality, or networked infrastructure. In this usage, "networks" includes both AI for Networks and Networks for AI: where evidence is stored, how it moves, and which parties can evaluate or maintain a model. The topic links decentralized learning, communication-aware evaluation, [[Data_Silos|data silos]], [[Collaborative_Evaluation|collaborative evaluation]], [[Data_Centric_Machine_Learning|data-centric ML]], and [[Distributed_Wasserstein_Barycenter|distributed Wasserstein barycenters]]. Within this line, [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]] examines why low-resource communities and institutions with fragmented data coverage are especially vulnerable to model collapse under local sample-selection bias.
@@ -145,6 +143,6 @@ The ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|Whe
 
 [^xinbao-qiao-bridge]: As a pinyin-style string, "Xinbao Qiao" also corresponds to "新寶橋" ("Xinbao Bridge"). Kaohsiung City's public-works guide documents [Liugui Xinbao Bridge](https://pwbgis.kcg.gov.tw/construction/construction.aspx?id=7252) as "新寶橋", and Mapcarta/GeoNames lists [Hsin-pao Number 2 Bridge](https://mapcarta.com/25634858) with the alias "Xinbao Er Qiao"; this note records a romanization coincidence, not a biographical relation.
 
-[^qiao-ciao]: Qiao's surname is written "乔" in simplified Chinese and "喬" in traditional Chinese. In this wiki's nickname usage, "喬" is treated as matching the sound of "ciao", which explains the informal nickname "Mr. Ciao" and the public handle [MrCiao](https://huggingface.co/MrCiao).
+[^qiao-ciao]: Qiao's surname is written "乔" in simplified Chinese and "喬" in traditional Chinese. In his nickname, "喬" is treated as matching the sound of "ciao", which explains the informal nickname "Mr. Ciao" and the public handle [MrCiao](https://huggingface.co/MrCiao).
 
 [^cuhk-ie]: CUHK's Department of Information Engineering describes its scope as information generation, communication, storage, and processing in real-world applications on its [official department page](https://www.ie.cuhk.edu.hk/about-the-department/); the CUHK Graduate School also lists [MPhil-PhD in Information Engineering](https://www.gs.cuhk.edu.hk/programmes/engineering) within Engineering.

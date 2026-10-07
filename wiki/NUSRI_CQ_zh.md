@@ -8,10 +8,10 @@ tags:
   - research
   - 研究院
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-09-26T03:14:39.297Z'
-content_hash: 'sha256:c2f41cc5e190cfb587438f0dba43d1fdc14216dea025d6d482cdb9c13e14a383'
-reviewed_at: '2026-09-26T03:15:12.636Z'
-review_due: '2027-03-25'
+modified: '2026-10-07T07:07:23.926Z'
+content_hash: 'sha256:1b7b32a379b014a3a3903ef2eb7b66cc726dbdec12db578fef03e12ca1226741'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 name: NUSRI-CQ
 language: zh
 summary: 乔鑫宝研究实习阶段所在机构。
@@ -32,11 +32,11 @@ links:
     url: 'https://en.nusricq.cn/about/yjysm'
 translation_of: NUSRI_CQ
 ---
-**NUSRI-CQ** 指 NUS（重庆）研究院，[[Xinbao_Qiao|乔鑫宝]] 于 2025 年 6 月至 12 月在此担任全职研究实习生。在本 wiki 中，该页是研究经历节点，而不是教育经历中的授位机构；它位于 [[Zhejiang_University|浙江大学]] 硕士阶段与 [[The_Chinese_University_of_Hong_Kong|香港中文大学]] 博士阶段之间。
+**NUSRI-CQ** 指 NUS（重庆）研究院，[[Xinbao_Qiao|乔鑫宝]] 于 2025 年 6 月至 12 月在此担任全职研究实习生。这段实习位于 [[Zhejiang_University|浙江大学]] 硕士阶段与 [[The_Chinese_University_of_Hong_Kong|香港中文大学]] 博士阶段之间。
 
 ## 项目
 
-乔鑫宝的实习工作在传记中概括为可信 LLM 系统与合成数据评估。研究院背景相关，因为 NUSRI-CQ 将自身定位为重庆的研究、孵化、教育和创新平台。[^nusri-intro] 这种研究与转化并存的环境解释了为什么相关 wiki 页面同时强调方法问题和部署约束。
+乔鑫宝的实习工作聚焦于可信 LLM 系统与合成数据评估。NUSRI-CQ 将自身定位为重庆的研究、孵化、教育和创新平台。[^nusri-intro]
 
 ## 学术背景
 
@@ -44,7 +44,7 @@ translation_of: NUSRI_CQ
 
 ## 与乔鑫宝的关系
 
-NUSRI-CQ 阶段在本 wiki 中与 [[Synthetic_Data_and_Model_Collapse|合成数据]]、[[Collaborative_Evaluation|协作评估]]、[[Wasserstein_Geometry|Wasserstein 几何]]和[[LLM_Reliability|大语言模型可靠性]]相关。它为 ICML 2026 论文 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]] 提供了直接研究语境，尤其是低资源分布式参与方如何在不暴露全部本地数据的条件下诊断数据生成失效。获 NeurIPS 2026 录用的[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》]]研究感知到的提示模式如何导致虚假推理。
+NUSRI-CQ 阶段的研究涉及 [[Synthetic_Data_and_Model_Collapse|合成数据]]、[[Collaborative_Evaluation|协作评估]]、[[Wasserstein_Geometry|Wasserstein 几何]]和[[LLM_Reliability|大语言模型可靠性]]。相关工作包括 ICML 2026 论文 [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|样本选择偏差何以促成模型坍缩]]，关注资源有限的分布式参与方如何在不暴露全部本地数据的条件下诊断数据生成失效。获 NeurIPS 2026 录用的[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》]]研究感知到的提示模式如何导致虚假推理。
 
 ## 参见
 

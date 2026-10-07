@@ -9,18 +9,18 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T21:39:01+08:00'
-modified: '2026-09-27T11:41:29.310Z'
-content_hash: 'sha256:607d21b9f9d344e69559bb4d489b1137a36960067ecfb102f57ab822f885217f'
-reviewed_at: '2026-09-27T11:41:45.577Z'
-review_due: '2026-12-26'
+modified: '2026-10-07T07:07:23.872Z'
+content_hash: 'sha256:1b6691f31f55df4e55be20372c488f69dc0ad3daf113d0cf1380144f96bca4f1'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-01-05'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-09-27T11:41:45.577Z'
-  reviewDue: '2026-12-26'
+  reviewedAt: '2026-10-07T07:07:51.129Z'
+  reviewDue: '2027-01-05'
   pendingReview: false
   overdue: false
 retrieval:
@@ -55,10 +55,10 @@ DynFrs combines three mechanisms:
 
 ## Key takeaways
 
-- **Exact unlearning can be a data-structure problem.** For random forests, the central challenge is not gradient correction but how to organize tree membership and repair work so that deletion remains equivalent to retraining.
-- **Latency matters as much as final correctness.** A theoretically clean unlearning rule is incomplete if every request blocks prediction or forces broad reconstruction.
-- **Randomization can make models easier to maintain.** By controlling where samples appear and delaying unnecessary subtree work, the framework turns randomness into a maintenance tool rather than only a modeling choice.
-- **The broader message is that classical models also need lifecycle design.** Even non-neural models used in sensitive domains need update paths for deletion, insertion, and continued service.
+- **Exact unlearning can be a data-structure problem.** Tree membership and repair operations must preserve distributional equivalence to retraining after deletion.
+- **Update latency affects continued service.** An efficient deletion procedure limits the reconstruction work that could otherwise delay predictions.
+- **Randomization helps control maintenance costs.** Tree subsampling limits how many trees a sample affects, while lazy updates defer reconstruction until it is needed.
+- **Classical models also need support for changing data.** Deletion, insertion, and prediction must work together when a model serves an ongoing stream of requests.
 
 ## Results
 

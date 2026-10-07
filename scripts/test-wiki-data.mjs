@@ -1002,6 +1002,13 @@ const chunkById = new Map(retrievalIndex.chunks.map((chunk) => [chunk.chunkId, c
 const publicPages = new Map(okfPageIndex.pages.map((page) => [page.slug, page]));
 const cleanRetrieval = retrieveWikiContext('Who is Xinbao Qiao and where is he currently studying?', { language: 'en', limit: 8 });
 assert.ok(cleanRetrieval.sources.length > 0, 'citation-integrity fixture retrieves at least one source');
+for (const query of ['Where is Xinbao Qiao currently studying?', 'Where do you study?', 'Which university is he studying at?']) {
+  const studyProfile = retrieveWikiContext(query, { language: 'en' });
+  assert.equal(studyProfile.shouldAbstain, false, `current-study query retrieves public profile evidence: ${query}`);
+  assert.ok(studyProfile.sources.some((source) => source.slug === 'Xinbao_Qiao'), 'current-study queries include the canonical biography');
+  assert.match(studyProfile.context, /PhD student[\s\S]*Chinese University of Hong Kong/, 'current-study evidence contains the present doctoral affiliation');
+}
+assert.equal(retrieveWikiContext('Where is Ada Lovelace currently studying?', { language: 'en' }).shouldAbstain, true, 'current-study intent does not substitute Qiao for another person');
 for (const [query, language] of [
   ["What is Xinbao Qiao's email address?", 'en'],
   ['What is your email address?', 'en'],
@@ -1352,7 +1359,7 @@ assert.match(wikiMarkdownTsx, /function wikiUrlTransform\(value: string\)/, 'Mar
 assert.match(wikiMarkdownTsx, /\^tel:/, 'Markdown renderer preserves telephone links instead of rewriting them to #');
 assert.match(wikiMarkdownTsx, /urlTransform=\{wikiUrlTransform\}/, 'Markdown renderer passes the custom URL transform to ReactMarkdown');
 assert.match(wikiMarkdownTsx, /remarkPlugins=\{\[remarkGfm, remarkMath\]\}/, 'Markdown renderer enables GFM and math parsing');
-assert.match(wikiMarkdownTsx, /rehypePlugins=\{\[rehypeKatex\]\}/, 'Markdown renderer renders math through KaTeX');
+assert.match(wikiMarkdownTsx, /rehypePlugins=\{\[\[rehypeWikiOutline,[\s\S]*rehypeKatex\]\}/, 'Markdown renderer builds heading navigation and retains KaTeX math rendering');
 assert.match(languageToggle, /usePathname/, 'language toggle is route-aware');
 assert.match(languageToggle, /function activeSlug/, 'language toggle reads the active wiki slug');
 assert.match(languageToggle, /function chineseSlug/, 'language toggle can derive page-specific Chinese slugs');
@@ -2026,11 +2033,11 @@ assertCssRule(styles, '.wiki-title', [
   /color: var\(--site-theme-heading\);/
 ], 'article title uses restrained resolved-theme rules and heading ink');
 assertCssRule(styles, '.wiki-title-sub', [
-  /border-left: 3px solid var\(--site-theme-action-ink\);/,
-  /background: var\(--site-theme-chrome-surface\);/,
-  /font-size: 13px;/,
-  /line-height: 1\.58;/
-], 'article summary uses a shallow resolved-theme surface and action edge');
+  /max-width: 76ch;/,
+  /color: var\(--wiki-text-soft\);/,
+  /font-size: 14px;/,
+  /line-height: 1\.7;/
+], 'article summary reads as restrained text under the title');
 assertCssRule(styles, '.wiki-infobox-title', [
   /border-bottom: 1px solid var\(--site-theme-chrome-border\);/,
   /background: var\(--site-theme-chrome-surface-strong\);/,
@@ -2417,7 +2424,7 @@ for (const page of [
   'Wasserstein_Geometry.md'
 ]) {
   const body = read(page);
-  assert.match(body, /^## Role in this wiki$/m, `${page} explains its role in the wiki`);
+  assert.match(body, /^## Research context$/m, `${page} explains the research context`);
   assert.match(body, /^## Connection to Qiao's work$/m, `${page} connects the topic to Qiao's work`);
   const maxSourceNotes = page === 'LLM_Reliability.md' ? 2 : 1;
   assert.ok(footnoteRefs(body).length <= maxSourceNotes, `${page} avoids over-footnoting background`);
@@ -2479,7 +2486,7 @@ for (const page of researchTopicPages) {
   assert.equal(data.image, image, `${page} uses a custom topic illustration`);
   assert.match(data.image_caption, /topic diagram/, `${page} captions the topic illustration`);
   assert.doesNotMatch(`${data.image}\n${data.image_caption}`, /institutions|university|emblem|logo/i, `${page} does not reuse school imagery`);
-  assertSectionOrder(page, ['## Introduction', '## Role in this wiki', '## Publications', "## Connection to Qiao's work", '## See also']);
+  assertSectionOrder(page, ['## Introduction', '## Research context', '## Publications', "## Connection to Qiao's work", '## See also']);
   assert.match(body, /\| Paper \| Venue\/status \|/, `${page} uses the shared publications table heading`);
   assert.doesNotMatch(body, /Central paper|Central publication/i, `${page} avoids inconsistent central-paper phrasing`);
 }
@@ -2542,13 +2549,13 @@ assert.match(read('Qiao_Xinbao_zh.md'), /## 学术服务[\s\S]*- \*\*2026 年\*\
 assert.doesNotMatch(allPublicText, /reviewer for ICML 2026, NeurIPS 2025 and 2026|担任 ICML 2026、NeurIPS 2025 和 2026/, 'public content no longer compresses academic service into one mixed-year sentence');
 assert.doesNotMatch(allChineseMarkdown, /ZXQ|XQ0|当_ 抽样|软件_ Weightd|学习什么 内容|首尔首尔|大赦国际|高山模型|秋奥|\[\[\[/, 'Chinese markdown pages avoid broken machine-translation artifacts');
 assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /Data filtering is not automatically protective/, 'model-collapse page presents a high-level filtering takeaway');
-assert.match(read('Hessian_Free_Online_Certified_Unlearning.md'), /Unlearning needs an operational model/, 'Hessian-free page presents a high-level lifecycle takeaway');
+assert.match(read('Hessian_Free_Online_Certified_Unlearning.md'), /## Key takeaways[\s\S]*deletion requests[\s\S]*model lifecycle/, 'Hessian-free takeaways connect deletion requests to the model lifecycle');
 assert.match(read('DynFrs.md'), /Exact unlearning can be a data-structure problem/, 'DynFrs page presents a high-level data-structure takeaway');
-assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /Not every correction should be a deletion/, 'soft-weighted page presents a high-level correction takeaway');
+assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /## Key takeaways[\s\S]*Continuous weights[\s\S]*utility loss/, 'soft-weighted takeaways explain continuous control and utility loss');
 assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md'), /尾部覆盖/, 'Chinese model-collapse page presents a high-level tail-coverage takeaway');
-assert.match(read('Hessian_Free_Online_Certified_Unlearning_zh.md'), /模型生命周期准备/, 'Chinese Hessian-free page presents a high-level lifecycle takeaway');
+assert.match(read('Hessian_Free_Online_Certified_Unlearning_zh.md'), /## 关键启示[\s\S]*模型生命周期[\s\S]*删除请求/, 'Chinese Hessian-free takeaways connect lifecycle design to deletion requests');
 assert.match(read('DynFrs_zh.md'), /数据结构问题/, 'Chinese DynFrs page presents a high-level data-structure takeaway');
-assert.match(read('Soft_Weighted_Machine_Unlearning_zh.md'), /数据影响应当像旋钮/, 'Chinese soft-weighted page presents a high-level influence-control takeaway');
+assert.match(read('Soft_Weighted_Machine_Unlearning_zh.md'), /## 关键启示[\s\S]*连续权重[\s\S]*效用损失/, 'Chinese soft-weighted takeaways explain continuous control and utility loss');
 assert.doesNotMatch(allMarkdown, /backup\/old-homepage/, 'wiki no longer depends on backup-branch image URLs');
 assert.doesNotMatch(allMarkdown, /withheld\s+LLM\s+manuscript/i, 'withheld manuscript notes are not public content');
 

@@ -1,34 +1,30 @@
 ---
 type: 资源记录
 title: 主页肖像资源
-description: 记录个人主页 infobox 使用的肖像图库。
+description: 乔鑫宝个人主页中的肖像与会议图片。
 tags:
   - zh
   - resource
   - archive
   - 资源记录
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-07-18T04:24:40.205Z'
-content_hash: 'sha256:82bba430782e8ac82d2afac3b574607ea08303043c86c0a12c4720064bfb896e'
-reviewed_at: '2026-07-18T12:25:05+08:00'
-review_due: '2027-07-18'
+modified: '2026-10-07T07:07:23.927Z'
+content_hash: 'sha256:9dc5e758ccbf80c6cd8c0458418a22e23cea724a1a526c539ff96a45ba7ab633'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-10-07'
 name: 主页肖像资源
 language: zh
-summary: 记录个人主页 infobox 使用的肖像图库。
+summary: 乔鑫宝个人主页中的肖像与会议图片。
 occupation: 资源记录
 translation_of: Old_Homepage_Resources
 ---
-本页记录 wiki 的媒体策略。个人主页 infobox 使用一组由访客手动控制的小型肖像图库；每次进入页面都以无图注的棚拍肖像为默认图，不自动轮播，也不保存访客上次选择。
+主页肖像图库包含一张棚拍肖像、一张会议照片和一张 AI 生成的会议主题图片。
 
-## 保留资源
+## 肖像与会议图片
 
-- 默认棚拍肖像：images/Portrait.png
-- ICLR 2025 新加坡 EXPO 照片：images/Portrait-Singapore-ICLR-2025.jpg
-- AI 生成的 ICML 2026 首尔图片：images/Portrait-Seoul-ICML-2026.png
-
-两张活动图片使用事实性图注，其中首尔图片明确标注为 AI 生成。
-
-论文页不作为视觉图库使用。每个公开论文页最多保留一张整体示意图，并在有 poster 时保留一张 poster。详细结果曲线、消融图和次级实验图不进入公开 wiki 展示。
+- [棚拍肖像](/images/Portrait.png)
+- [ICLR 2025 新加坡 EXPO 照片](/images/Portrait-Singapore-ICLR-2025.jpg)
+- [AI 生成的 ICML 2026 首尔图片](/images/Portrait-Seoul-ICML-2026.png)
 
 ## 参见
 

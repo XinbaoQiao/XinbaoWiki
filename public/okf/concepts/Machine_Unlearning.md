@@ -9,18 +9,18 @@ tags:
   - research-topic
   - machine-unlearning
 timestamp: '2026-05-05T22:09:30+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:236de032e41b9ee4438821b3e08a80a8b44299c35558cb5dab318c3b206da375'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-10-07T06:42:08.576Z'
+content_hash: 'sha256:0a72575d856c00b9c4f8bc90d059a033ffa47da23652f498d9ae820cc26b6a45'
+reviewed_at: '2026-10-07T06:43:53.160Z'
+review_due: '2027-04-05'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-02T20:03:20+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-10-07T06:43:53.160Z'
+  reviewDue: '2027-04-05'
   pendingReview: false
   overdue: false
 retrieval:
@@ -29,15 +29,15 @@ retrieval:
 source_ids: []
 source_path: wiki/Machine_Unlearning.md
 ---
-**Machine Unlearning** studies how to remove, reduce, or correct the effect of selected training data after a model has already been trained. In this wiki it is treated as both a privacy topic and a data-centric systems topic: an unlearning method must say what it removes, how faithfully it approximates retraining, and how much computation or latency is saved.[^unlearning]
+**Machine Unlearning** studies how to remove, reduce, or correct the effect of selected training data after a model has already been trained. It addresses both privacy and data-centric systems questions: an unlearning method must say what it removes, how faithfully it approximates retraining, and how much computation or latency is saved.[^unlearning]
 
 ## Introduction
 
 The topic covers post-training data operations: certified deletion, exact removal in tree ensembles, and continuous reweighting for fairness or robustness correction. The shared question is whether a trained system can be revised after deployment without simply retraining from scratch each time the data record changes.
 
-## Role in this wiki
+## Research context
 
-This page organizes Qiao's publication line on post-training data operations. The line includes certified deletion, weighted correction, and tree-ensemble updates. It is closely connected to [Data Centric ML](./Data_Centric_Machine_Learning.md) because the central object is not a new model architecture, but a data operation that changes model behavior. It also connects to [Trustworthy AI](./Trustworthy_AI.md), since deletion requests, fairness corrections, and robustness interventions are forms of governance over a trained system.
+Qiao's research on post-training data operations includes certified deletion, weighted correction, and tree-ensemble updates. It is closely connected to [Data Centric ML](./Data_Centric_Machine_Learning.md) because the central object is not a new model architecture, but a data operation that changes model behavior. It also connects to [Trustworthy AI](./Trustworthy_AI.md), since deletion requests, fairness corrections, and robustness interventions are forms of governance over a trained system.
 
 ## Publications
 

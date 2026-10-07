@@ -8,18 +8,18 @@ tags:
   - education
   - 公立研究型大学
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:c57202064e7fe6a89492d9160d3f630ce33ac111149aac58a6d7f4c5fa44718a'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-10-07T07:07:23.959Z'
+content_hash: 'sha256:7717a610ac9c233c685eb8e48dcb76db8a6fb9f0d31cc382f1d0ae615c5ba9dd'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-02T20:03:20+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-10-07T07:07:51.129Z'
+  reviewDue: '2027-04-05'
   pendingReview: false
   overdue: false
 retrieval:
@@ -31,19 +31,19 @@ source_ids:
   - src-8207d2b85f96e6cb
 source_path: wiki/Shandong_University_zh.md
 ---
-**山东大学**（**SDU**）是 [乔鑫宝](./Qiao_Xinbao_zh.md) 本科阶段所在机构；他于 2022 年获得通信工程工学学士学位。在本 wiki 结构中，山东大学是乔鑫宝高等教育记录中的第一个正式学术阶段，并为后来 [AI 与网络](./AI_and_Networks_zh.md) 兴趣提供工程基础。[^sdu-about]
+**山东大学**（**SDU**）是 [乔鑫宝](./Qiao_Xinbao_zh.md) 本科阶段所在机构；他于 2022 年获得通信工程工学学士学位。本科阶段的学习为他后来的 [AI 与网络](./AI_and_Networks_zh.md) 研究提供了工程基础。[^sdu-about]
 
 ## 项目
 
-乔鑫宝本科专业为通信工程。该背景重要，因为它提供了后来研究主题的技术来源：通信约束、分布式系统、信号流和网络化数据处理。这些主题在 [分布式学习](./Distributed_Learning_zh.md)、[数据孤岛](./Data_Silos_zh.md) 和去中心化学习数据剪枝页面中再次出现。
+乔鑫宝本科专业为通信工程，为他后来的 [分布式学习](./Distributed_Learning_zh.md)、[数据孤岛](./Data_Silos_zh.md) 和去中心化学习数据剪枝研究提供了基础。
 
 ## 学术背景
 
-山东大学将其主体办学源头追溯至 1901 年创办的山东大学堂，并介绍其为中国现代高等教育的重要早期机构之一。学校是综合性大学，拥有济南、青岛、威海等校区。对本 wiki 而言，重点不是完整校史，而是工程教育和大型研究大学环境如何为乔鑫宝后来转向人工智能打下基础。
+山东大学将其主体办学源头追溯至 1901 年创办的山东大学堂，并介绍其为中国现代高等教育的重要早期机构之一。学校是综合性大学，拥有济南、青岛、威海等校区。
 
 ## 与乔鑫宝的关系
 
-山东大学阶段用于解释乔鑫宝后来机器学习工作的系统味道。从通信工程到 AI 的线索体现在 [AI 与网络](./AI_and_Networks_zh.md) 研究中：模型行为与通信、去中心化和基础设施一起被研究；也体现在 [机器遗忘](./Machine_Unlearning_zh.md) 工作中：延迟、更新成本和部署约束被当作一阶问题。
+乔鑫宝后来的 [AI 与网络](./AI_and_Networks_zh.md) 研究同时考察模型行为、通信约束、去中心化和基础设施。其 [机器遗忘](./Machine_Unlearning_zh.md) 工作也关注延迟、更新成本和部署约束。
 
 ## 参见
 

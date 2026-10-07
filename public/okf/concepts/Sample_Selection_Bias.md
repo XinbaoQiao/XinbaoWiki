@@ -2,26 +2,26 @@
 type: Research concept
 title: Sample Selection Bias
 description: >-
-  Concept page for distributional bias introduced by non-representative sample
-  choice.
+  How data selection can distort the distribution used for learning or
+  evaluation.
 tags:
   - en
   - research
   - concept
   - research-concept
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:24005e66c5a5ac72037a20b6868fb1935bc8e292c9fea0810c3a76c85b7c06a8'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-10-07T07:07:23.959Z'
+content_hash: 'sha256:a02db56ea6834971d3c1d619584632060ceb8e20e17b999fda1493a1d8f94d15'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-07-02T20:03:20+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-10-07T07:07:51.129Z'
+  reviewDue: '2027-04-05'
   pendingReview: false
   overdue: false
 retrieval:
@@ -30,15 +30,15 @@ retrieval:
 source_ids: []
 source_path: wiki/Sample_Selection_Bias.md
 ---
-**Sample Selection Bias** occurs when the data chosen for training or evaluation are not representative of the population or target distribution the model is expected to handle. In this wiki the concept is important because selection bias can compound when a model is repeatedly trained on generated or locally filtered data.
+**Sample Selection Bias** occurs when the data chosen for training or evaluation are not representative of the population or target distribution the model is expected to handle. Selection bias can compound when a model is repeatedly trained on generated or locally filtered data.
 
-## Role in this wiki
+## Research context
 
-The page explains a mechanism behind [Synthetic Data](./Synthetic_Data_and_Model_Collapse.md) failures. Selection bias is not merely a bad dataset label. It is a process: once a subset is preferred, missing modes may receive fewer examples, the model may generate them less often, and the next round of data may become even narrower. In low-resource networked settings, the same mechanism is sharper because rare modes may already be weakly represented before selection starts.
+Selection bias is one mechanism behind [Synthetic Data](./Synthetic_Data_and_Model_Collapse.md) failures. Selection bias is not merely a bad dataset label. It is a process: once a subset is preferred, missing modes may receive fewer examples, the model may generate them less often, and the next round of data may become even narrower. In low-resource networked settings, the same mechanism is sharper because rare modes may already be weakly represented before selection starts.
 
 ## Connection to Qiao's work
 
-The ICML 2026 paper [When Sample Selection Bias Precipitates Model Collapse](./When_Sample_Selection_Bias_Precipitates_Model_Collapse.md) places this concept in the title. The paper studies how local selection behavior can precipitate collapse in recursive synthetic-data training, especially when low-resource verifiers only see fragmented local evidence. This page is therefore one of the most direct background entries for Qiao's synthetic-data line and one of the bridges to [AI and networks](./AI_and_Networks.md).
+The ICML 2026 paper [When Sample Selection Bias Precipitates Model Collapse](./When_Sample_Selection_Bias_Precipitates_Model_Collapse.md) studies how local selection behavior can precipitate collapse in recursive synthetic-data training, especially when low-resource verifiers only see fragmented local evidence. This links Qiao's synthetic-data research with [AI and networks](./AI_and_Networks.md).
 
 ## See also
 

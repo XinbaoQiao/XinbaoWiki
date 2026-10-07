@@ -8,10 +8,10 @@ tags:
   - profile
   - education-timeline
 timestamp: '2026-05-06T23:05:52+08:00'
-modified: '2026-08-09T18:32:45.760Z'
-content_hash: 'sha256:d13ea461c354b9ee594e6839f086949cde6711fe80ea6a78a6302975b7316cc4'
-reviewed_at: '2026-08-10T02:34:00+08:00'
-review_due: '2027-02-05'
+modified: '2026-10-07T06:42:08.563Z'
+content_hash: 'sha256:6d886020cc64d21423a5d6c25db28081f7ad3f5e13281f28c2432c0ced3568b4'
+reviewed_at: '2026-10-07T06:43:53.160Z'
+review_due: '2027-04-05'
 name: Education
 summary: Education timeline for Qiao Xinbao.
 occupation: Education timeline
@@ -28,7 +28,3 @@ occupation: Education timeline
 - Secure Artificial Intelligence: 97.
 - Data and Computer Communications: 95.
 - Wireless Communications: 90.
-
-## Notes
-
-Education entries are ordered reverse-chronologically to match the biography infobox and Colarpedia-style profile layout.

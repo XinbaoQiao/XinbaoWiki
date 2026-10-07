@@ -8,10 +8,10 @@ tags:
   - biography
   - 博士生
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-06T15:56:02.564Z'
-content_hash: 'sha256:5b99f9a557560ac9f04425af5dfb90ae07970941db68a6c26fff23715545a837'
-reviewed_at: '2026-10-06T15:56:41.018163+00:00'
-review_due: '2027-01-04'
+modified: '2026-10-07T07:07:23.930Z'
+content_hash: 'sha256:67eab38e700924c9e843db40b2024cbc974c4d8e89e4d4654939d92aa82fc758'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-01-05'
 name: 乔鑫宝
 summary: 香港中文大学信息工程系博士生；研究方向包括数据中心 ML、AI for Networks、Networks for AI、机器遗忘和合成数据可靠性
 aliases:
@@ -98,8 +98,6 @@ nationality: 中国
 
 ## 学术项目
 
-下列项目段落按研究问题而非机构归类，用于概括主要技术线索；前一节则保留按时间排列的研究经历。
-
 ### AI 与网络（2024至今）
 
 乔鑫宝当前的主要研究主线是[[AI_and_Networks|AI 与网络]]，关注学习系统如何受到通信、局部性和网络基础设施的影响。这里的“网络”同时包括 AI for Networks 和 Networks for AI：证据存在哪里、如何流动，以及哪些参与方能够评估或维护模型。该主线连接去中心化学习、通信感知评估、[[Data_Silos|数据孤岛]]、[[Collaborative_Evaluation|协作评估]]、[[Data_Centric_Machine_Learning|数据中心 ML]]和[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]]。在这一主线下，[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]]研究低资源社区和数据覆盖碎片化机构为什么更容易在局部样本选择偏差下发生模型坍缩。
@@ -140,6 +138,6 @@ ICML 2026 论文[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sa
 
 [^xinbao-qiao-bridge-zh]: “Xinbao Qiao”作为拼音式拼写，也可对应“新寶橋”（Xinbao Bridge）。高雄市政府工务建设导览记录了[六龟新寶橋](https://pwbgis.kcg.gov.tw/construction/construction.aspx?id=7252)，Mapcarta/GeoNames 列出 [Hsin-pao Number 2 Bridge](https://mapcarta.com/25634858) 的别名“Xinbao Er Qiao”；此处仅为罗马化/拼写巧合，并非传记关联。
 
-[^qiao-ciao-zh]: “乔”的繁体为“喬”。在本 wiki 的昵称语境中，“喬”与“ciao”发音一致，因此也可以称乔鑫宝为“Mr. Ciao”；其公开 Hugging Face 账号也使用 [MrCiao](https://huggingface.co/MrCiao)。
+[^qiao-ciao-zh]: “乔”的繁体为“喬”。其昵称中，“喬”与“ciao”发音一致，因此也可以称乔鑫宝为“Mr. Ciao”；其公开 Hugging Face 账号也使用 [MrCiao](https://huggingface.co/MrCiao)。
 
 [^cuhk-ie-zh]: 香港中文大学信息工程系在[官方部门介绍](https://www.ie.cuhk.edu.hk/about-the-department/)中将研究范围概括为现实应用中的信息生成、通信、存储与处理；香港中文大学研究院也在工程学院项目列表中列出 [MPhil-PhD in Information Engineering](https://www.gs.cuhk.edu.hk/programmes/engineering)。

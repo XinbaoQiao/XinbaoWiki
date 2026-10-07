@@ -9,10 +9,10 @@ tags:
   - 研究专题
   - ai-and-networks
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-06T15:55:58.146Z'
-content_hash: 'sha256:bd6ddd0ef148f5e63e11caa1c97b4a5735eca6cf4b786df0feace503b685c345'
-reviewed_at: '2026-10-06T15:56:41.015397+00:00'
-review_due: '2027-04-04'
+modified: '2026-10-07T07:07:23.799Z'
+content_hash: 'sha256:73e53146e74ce51d89671ab211abd86aae4388f24da57bdec6355a60c92d767a'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 name: AI 与网络
 language: zh
 summary: 乔鑫宝当前主要研究专题，涵盖网络化数据与通信约束下的 AI 系统。
@@ -21,19 +21,19 @@ image: /topics/ai-and-networks.png
 image_caption: AI 与网络主题图
 translation_of: AI_and_Networks
 ---
-**AI 与网络** 是本 wiki 中描述 [[Xinbao_Qiao|乔鑫宝]] 当前研究重心的总括性标签。这里的“网络”并不只指通信网络本身，也包括数据所在位置、信息如何流动、哪些机构可以评估模型，以及学习系统在通信、隐私和数据孤岛约束下如何保持可靠。[^sources]
+**AI 与网络** 是 [[Xinbao_Qiao|乔鑫宝]] 当前的主要研究方向。这里的“网络”并不只指通信网络本身，也包括数据所在位置、信息如何流动、哪些机构可以评估模型，以及学习系统在通信、隐私和数据孤岛约束下如何保持可靠。[^sources]
 
 ## 引言
 
-在本 wiki 中，AI 与网络不是一个单独应用场景，而是一个组织研究脉络的框架。它关注学习过程如何被数据分布、通信成本、边缘设备、去中心化协作和跨机构评估所塑造。相关问题包括 AI for Networks、Networks for AI、分布式计算、去中心化学习中的数据剪枝、低资源或数据孤岛中的协作评估，以及合成数据在有限访问条件下的验证。
+AI 与网络研究关注学习过程如何被数据分布、通信成本、边缘设备、去中心化协作和跨机构评估所塑造。相关问题包括 AI for Networks、Networks for AI、分布式计算、去中心化学习中的数据剪枝、低资源或数据孤岛中的协作评估，以及合成数据在有限访问条件下的验证。
 
-## 在本 wiki 中的作用
+## 研究背景
 
-本页是乔鑫宝研究图谱中最上层的研究专题页面。它把本科通信工程背景、硕士阶段的数据中心机器学习工作，以及博士阶段的信息工程研究连接起来。若模型性能受数据位置和信息流动方式影响，那么算法设计就不能只看中心化训练精度，也要同时考虑通信延迟、局部偏差、隐私和部署代价。本页因此连接 [[Distributed_Learning|分布式学习]]、[[Data_Silos|数据孤岛]]、[[Collaborative_Evaluation|协作评估]]、[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]] 和去中心化训练的数据剪枝。
+乔鑫宝的本科通信工程背景、硕士阶段的数据中心机器学习工作与博士阶段的信息工程研究相互衔接。若模型性能受数据位置和信息流动方式影响，那么算法设计就不能只看中心化训练精度，也要同时考虑通信延迟、局部偏差、隐私和部署代价。相关问题包括 [[Distributed_Learning|分布式学习]]、[[Data_Silos|数据孤岛]]、[[Collaborative_Evaluation|协作评估]]、[[Distributed_Wasserstein_Barycenter|分布式 Wasserstein barycenter]] 和去中心化训练的数据剪枝。
 
 ## 当前博士阶段关注点
 
-在 CUHK 博士阶段，乔鑫宝近期在该方向下关注[[Data_Centric_Machine_Learning|数据中心 ML]]、AI for Networks 和 Networks for AI。重点是数据与评估证据受到通信、网络基础设施和去中心化访问塑造的学习系统，而不只是中心化统计目标。
+在 CUHK 博士阶段，乔鑫宝近期在该方向下关注[[Data_Centric_Machine_Learning|数据中心 ML]]、AI for Networks 和 Networks for AI。重点是通信、网络基础设施和去中心化访问如何影响学习系统的数据与评估，而不只关注中心化训练中的统计目标。
 
 ## 论文
 

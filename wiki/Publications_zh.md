@@ -8,18 +8,17 @@ tags:
   - index
   - 论文列表
 timestamp: '2026-06-01T22:04:00+08:00'
-modified: '2026-10-06T16:11:19.499Z'
-content_hash: 'sha256:ec1666f1d0f5ef00e813cb6a5ae6965ab6088f97b44d7d8e0fc7dc58030929d2'
-reviewed_at: '2026-10-06T16:12:11.435208+00:00'
-review_due: '2027-01-04'
+modified: '2026-10-07T06:42:08.606Z'
+content_hash: 'sha256:4530306087fd45f32510361481d7dc6fc5aaf279abbe95e83954629ec7ea8a0b'
+reviewed_at: '2026-10-07T06:43:53.160Z'
+review_due: '2027-01-05'
 name: 论文
 language: zh
 summary: 乔鑫宝的论文索引。
 occupation: 论文列表
+show_summary: false
 translation_of: Publications
 ---
-本页是乔鑫宝论文的整理索引。每篇论文都有独立 wiki 页面，并被放入相应研究专题；论文不应作为孤立条目存在。
-
 ## 已录用论文
 
 | 论文 | 会议 |

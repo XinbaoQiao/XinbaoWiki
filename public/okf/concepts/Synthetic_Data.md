@@ -1,9 +1,7 @@
 ---
 type: Research concept
 title: Synthetic Data (concept)
-description: >-
-  Concept page for generated data used in training, evaluation, or
-  privacy-preserving collaboration.
+description: 'Generated data used for training, evaluation, and collaboration.'
 tags:
   - en
   - research
@@ -11,18 +9,18 @@ tags:
   - research-concept
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-07-03T00:03:48+08:00'
-content_hash: 'sha256:bbe93fac97f4c9cdd3408c23951a3082bd7e098256861dfd64ad06fb01970f2a'
-reviewed_at: '2026-07-03T00:03:48+08:00'
-review_due: '2026-12-29'
+modified: '2026-10-07T07:07:23.981Z'
+content_hash: 'sha256:d82e3aff42533a29575db5055bba799019c7640c26267922953b7b15fbb65520'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-07-03T00:03:48+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-10-07T07:07:51.129Z'
+  reviewDue: '2027-04-05'
   pendingReview: false
   overdue: false
 retrieval:
@@ -33,9 +31,9 @@ source_path: wiki/Synthetic_Data.md
 ---
 **Synthetic Data** refers to generated examples that are used in place of, alongside, or as a proxy for real data. In machine learning, synthetic data can expand coverage, reduce annotation cost, protect privacy, or enable evaluation when real data are scarce. It can also introduce failure modes when generated samples are recursively reused without enough real-data anchoring.
 
-## Role in this wiki
+## Research context
 
-This page gives the narrow concept definition, while [Synthetic Data](./Synthetic_Data_and_Model_Collapse.md) with the broader cluster link covers Qiao's full research topic. The distinction is useful: synthetic data as a tool can be beneficial, but recursive synthetic-data training is a particular process with its own risks. The wiki links both meanings so readers can move from a simple definition to the model-collapse research thread.
+Synthetic data can be useful for augmentation and other applications, while recursive reuse introduces risks of its own. Qiao's [synthetic-data research](./Synthetic_Data_and_Model_Collapse.md) studies how those risks depend on selection and access to real data.
 
 ## Connection to Qiao's work
 

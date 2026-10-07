@@ -8,18 +8,18 @@ tags:
   - education
   - public-research-university
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:a27c4d78f158b9564e002f310e7e37f4ac2fa63d951f4b0521f8c330fa042e2a'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-10-07T07:07:23.983Z'
+content_hash: 'sha256:c77c7bbf6178291e65e15c442ee5c3940c3a286fe04489d1258176dfd2a78e6f'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-07-02T20:03:20+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-10-07T07:07:51.129Z'
+  reviewDue: '2027-04-05'
   pendingReview: false
   overdue: false
 retrieval:
@@ -34,7 +34,7 @@ source_ids:
   - src-f6cb0623675b4752
 source_path: wiki/The_Chinese_University_of_Hong_Kong.md
 ---
-**The Chinese University of Hong Kong** (**CUHK**) is the current doctoral institution of [Xinbao Qiao](./Xinbao_Qiao.md), who is affiliated with its Department of Information Engineering. In this wiki the CUHK page functions as an institutional context page rather than a general encyclopedia article: it records why the university matters to Qiao's research biography, how the information-engineering program frames his current work, and where the doctoral phase sits in relation to earlier training at [Zhejiang University](./Zhejiang_University.md) and [Shandong University](./Shandong_University.md).[^cuhk-intro]
+**The Chinese University of Hong Kong** (**CUHK**) is the current doctoral institution of [Xinbao Qiao](./Xinbao_Qiao.md), who is affiliated with its Department of Information Engineering.[^cuhk-intro]
 
 ## Program
 
@@ -42,11 +42,11 @@ Qiao's current program is Information Engineering within CUHK Engineering, advis
 
 ## Academic context
 
-The Department of Information Engineering was established in 1989 and describes itself as the first and only academic department of its kind in Hong Kong.[^cuhk-ie] Its stated scope includes the generation, transmission, storage, and processing of information in real-world applications. That framing is broader than conventional computer science: it gives institutional room for research that connects machine learning, data systems, communication networks, and trustworthy deployment.
+The Department of Information Engineering was established in 1989 and describes itself as the first and only academic department of its kind in Hong Kong.[^cuhk-ie] Its stated scope includes the generation, transmission, storage, and processing of information in real-world applications.
 
 ## Connection to Qiao
 
-Qiao's CUHK period begins after a master's phase focused on [data-centric ML](./Data_Centric_Machine_Learning.md) and [machine unlearning](./Machine_Unlearning.md). Under [Angela Yingjun Zhang](./Angela_Yingjun_Zhang.md)'s supervision, the doctoral phase emphasizes data-centric ML, AI for Networks, and Networks for AI: efficient decentralized learning, collaborative evaluation across [data silos](./Data_Silos.md), communication-aware reliability, and distributed methods such as [Wasserstein barycenter](./Distributed_Wasserstein_Barycenter.md) computation. The page is therefore linked from the biography infobox as the sole current affiliation, while past institutions remain under education and research experience.
+Qiao's CUHK period begins after a master's phase focused on [data-centric ML](./Data_Centric_Machine_Learning.md) and [machine unlearning](./Machine_Unlearning.md). Under [Angela Yingjun Zhang](./Angela_Yingjun_Zhang.md)'s supervision, the doctoral phase emphasizes data-centric ML, AI for Networks, and Networks for AI: efficient decentralized learning, collaborative evaluation across [data silos](./Data_Silos.md), communication-aware reliability, and distributed methods such as [Wasserstein barycenter](./Distributed_Wasserstein_Barycenter.md) computation.
 
 ## See also
 

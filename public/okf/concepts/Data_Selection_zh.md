@@ -1,25 +1,25 @@
 ---
 type: 研究概念
 title: 数据选择
-description: 解释在可靠性约束下选择训练或评估数据的概念页。
+description: 可靠性约束下的训练与评估数据选择。
 tags:
   - zh
   - research
   - concept
   - 研究概念
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-07-02T20:03:20+08:00'
-content_hash: 'sha256:f2f86de8a44e60f1923badf3e613b292b74546183791b33c64556111f7cb3f80'
-reviewed_at: '2026-07-02T20:03:20+08:00'
-review_due: '2026-12-29'
+modified: '2026-10-07T07:07:23.826Z'
+content_hash: 'sha256:7a04836cb0ff56ee638c73e86fe0651fc744bf8d7bf66dc0145024ad1e0fdc80'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2027-04-05'
 language: zh
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-07-02T20:03:20+08:00'
-  reviewDue: '2026-12-29'
+  reviewedAt: '2026-10-07T07:07:51.129Z'
+  reviewDue: '2027-04-05'
   pendingReview: false
   overdue: false
 retrieval:
@@ -28,11 +28,11 @@ retrieval:
 source_ids: []
 source_path: wiki/Data_Selection_zh.md
 ---
-**数据选择** 是为训练、剪枝、评估或合成数据复用选择样本的过程。在本 wiki 中，它是核心的数据中心操作：选择可以降低成本、提升质量，但有偏选择也会扭曲模型对目标分布的理解。
+**数据选择** 是为训练、剪枝、评估或合成数据复用选择样本的过程。选择可以降低成本、提升质量，但有偏选择也会扭曲模型对目标分布的理解。
 
-## 在本 wiki 中的作用
+## 研究背景
 
-本页把 [数据中心 ML](./Data_Centric_Machine_Learning_zh.md) 同 [AI 与网络](./AI_and_Networks_zh.md) 和 [合成数据](./Synthetic_Data_and_Model_Collapse_zh.md) 连接起来。在去中心化或数据孤岛设置中，选择通常是局部的：每个参与方只看到一部分数据，并按本地目标或约束选择样本。因此，选择不是单纯的统计预处理，而是网络化学习问题的一部分。
+数据选择是 [数据中心 ML](./Data_Centric_Machine_Learning_zh.md)、[AI 与网络](./AI_and_Networks_zh.md) 和 [合成数据](./Synthetic_Data_and_Model_Collapse_zh.md) 研究中的共同问题。在去中心化或数据孤岛设置中，选择通常是局部的：每个参与方只看到一部分数据，并按本地目标或约束选择样本。因此，选择不是单纯的统计预处理，而是网络化学习问题的一部分。
 
 ## 与乔鑫宝工作的关系
 

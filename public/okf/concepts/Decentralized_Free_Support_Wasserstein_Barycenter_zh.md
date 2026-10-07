@@ -9,18 +9,18 @@ tags:
   - under-review
   - wasserstein
 timestamp: '2026-08-20T00:00:00+09:00'
-modified: '2026-10-06T16:11:19.215Z'
-content_hash: 'sha256:eb13a956b4be7416bd126789760956dd81da840fea6123f5f89d102f5319fe9d'
-reviewed_at: '2026-10-06T16:12:11.433332+00:00'
-review_due: '2026-11-05'
+modified: '2026-10-07T07:07:23.845Z'
+content_hash: 'sha256:04fdfda05e4b744c34a59465d5eee0fd05d53e9e2afdbecb953280812647b6ce'
+reviewed_at: '2026-10-07T07:07:51.129Z'
+review_due: '2026-11-06'
 language: zh
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-10-06T16:12:11.433332+00:00'
-  reviewDue: '2026-11-05'
+  reviewedAt: '2026-10-07T07:07:51.129Z'
+  reviewDue: '2026-11-06'
   pendingReview: false
   overdue: false
 retrieval:
@@ -33,7 +33,7 @@ source_path: wiki/Decentralized_Free_Support_Wasserstein_Barycenter_zh.md
 
 ## 概览
 
-许多去中心化 Wasserstein 重心算法预先规定一套共同网格，只优化各位置上的质量。共同网格便于节点达成一致，却可能限制几何表达，或需要较大的表示规模。该稿件采用互补的选择：固定各原子的等量质量，连续优化其位置，而不同时优化质量和位置。
+许多去中心化 Wasserstein 重心算法预先规定一套共同网格，只优化各位置上的质量。共同网格便于节点达成一致，却可能限制几何表达，或需要较大的表示规模。该稿件固定各原子的等量质量，仅连续优化位置，使支撑点能够随分布几何调整。
 
 每个节点根据本地最优传输计划构造重心支撑点的更新目标，再通过邻居 gossip 通信，在 majorization–minimization 框架内聚合与支撑规模相应的更新变量。本地测度和传输计划保留在各自节点；这种数据访问边界本身并不构成形式化隐私保证。
 
@@ -46,7 +46,7 @@ source_path: wiki/Decentralized_Free_Support_Wasserstein_Barycenter_zh.md
 
 ## 证据与适用边界
 
-稿件在合成测度、图像分布和三维点云上，与代表性固定支撑去中心化算法进行比较，报告了较低的重心目标值、较好的几何保真度，以及所测设置中的显著计算和通信节省；同时评估了协作式分布鲁棒优化应用。这些结论来自当前在审稿件的实验报告。
+稿件在合成测度、图像分布和三维点云上，与代表性固定支撑去中心化算法进行比较，报告了较低的重心目标值、较好的几何保真度，以及所测设置中的显著计算和通信节省；同时评估了协作式分布鲁棒优化应用。
 
 在二次代价和精确本地最优传输计划的分析中，精确聚合给出单调下降与最佳迭代的 Clarke 驻点保证。固定 gossip 深度给出的则是依赖拓扑的节点分歧和网络平均运动界，不能据此推出驻点。满足稿件中的紧支撑和混合假设，并充分递增 gossip 深度使混合误差可求和时，节点分歧趋于零，聚点满足 Clarke 驻点条件。驻点结论不等于全局最优。正则化分析要求熵正则子问题被精确求解，不能直接用于证明有限次 Sinkhorn 迭代的保证。
 
