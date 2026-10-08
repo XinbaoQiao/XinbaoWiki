@@ -1047,6 +1047,10 @@ html[data-site-palette="text"] .chat-xinbao-message.user {
   margin-left: auto;
 }
 
+.wiki-tabs-mobile-tools {
+  display: none;
+}
+
 .wiki-tabs a {
   margin-right: 2px;
   padding: 8px 12px 7px;
@@ -3786,7 +3790,7 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 8px 12px;
-    padding-block: 8px;
+    padding: 8px 16px;
   }
 
   .wiki-logo {
@@ -3802,9 +3806,11 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
     grid-column: 2;
     grid-row: 1;
     justify-self: end;
+    min-height: 44px;
   }
 
   .wiki-search {
+    --wiki-search-control-size: 44px;
     grid-column: 1 / -1;
     grid-row: 2;
     width: 100%;
@@ -3813,12 +3819,248 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
   }
 
   .wiki-search-panel {
-    left: 36px;
+    left: 50px;
+  }
+
+  .wiki-topbar .wiki-search input,
+  .wiki-topbar .wiki-search-submit {
+    height: 44px;
+  }
+
+  .wiki-topbar .wiki-search input {
+    font-size: 16px;
   }
 
   .wiki-search-submit {
     min-width: 66px;
     padding: 0 10px;
+  }
+
+  .wiki-tabs-inner {
+    overflow: visible;
+  }
+
+  .wiki-tabs-content {
+    width: 100%;
+  }
+
+  .wiki-tabs-primary > .external,
+  .wiki-tabs-actions {
+    display: none;
+  }
+
+  .wiki-tabs a,
+  .wiki-tabs-mobile-tools > summary {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 8px 12px;
+  }
+
+  .wiki-tabs-mobile-tools {
+    display: block;
+    position: relative;
+    margin-left: auto;
+  }
+
+  .wiki-tabs-mobile-tools > summary,
+  .wiki-contents-mobile > summary {
+    cursor: pointer;
+    list-style: none;
+    color: var(--site-theme-action-ink);
+  }
+
+  .wiki-tabs-mobile-tools > summary::-webkit-details-marker,
+  .wiki-contents-mobile > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .wiki-tabs-mobile-tools > summary::after,
+  .wiki-contents-mobile > summary::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-right: 1px solid currentColor;
+    border-bottom: 1px solid currentColor;
+    margin-left: 12px;
+    transform: rotate(45deg) translateY(-2px);
+  }
+
+  .wiki-tabs-mobile-tools[open] > summary::after,
+  .wiki-contents-mobile[open] > summary::after {
+    transform: rotate(225deg) translate(-2px, -1px);
+  }
+
+  .wiki-tabs-mobile-tools > summary:focus-visible,
+  .wiki-contents-mobile > summary:focus-visible {
+    outline: 2px solid var(--site-theme-action-ink);
+    outline-offset: -2px;
+  }
+
+  .wiki-tabs-tools-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    z-index: 60;
+    width: 184px;
+    padding: 4px;
+    border: 1px solid var(--site-theme-chrome-border);
+    background: var(--wiki-bg);
+    box-shadow: 0 6px 18px rgba(32, 33, 34, .12);
+  }
+
+  .wiki-tabs-tools-menu a {
+    margin: 0;
+    border: 0;
+  }
+
+  .wiki-shell:has(.wiki-page) {
+    grid-template-columns: minmax(0, 1fr) 44px;
+    row-gap: 0;
+  }
+
+  .wiki-shell:has(.wiki-page) > .wiki-main {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+
+  .wiki-shell:has(.wiki-page) > .wiki-mobile-nav-toggle {
+    position: static;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    justify-self: end;
+    min-height: 44px;
+    width: 44px;
+    padding: 0;
+    justify-content: center;
+    font-size: 19px;
+  }
+
+  .wiki-shell:has(.wiki-page) .wiki-mobile-nav-label {
+    display: none;
+  }
+
+  .wiki-mobile-nav-header button {
+    width: 44px;
+    height: 44px;
+  }
+
+  .wiki-mobile-nav-dialog .wiki-sidebar-content a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+
+  .wiki-mobile-nav-dialog .wiki-sidebar-content li {
+    padding: 0;
+  }
+
+  .wiki-page {
+    font-size: 16px;
+    line-height: 1.72;
+  }
+
+  .wiki-page:lang(zh-CN) {
+    line-height: 1.8;
+  }
+
+  .wiki-page .edit-link {
+    display: none;
+  }
+
+  .wiki-page .wiki-title {
+    min-height: 44px;
+    padding-right: 60px;
+    line-height: 1.35;
+  }
+
+  .wiki-article-facts > summary {
+    min-height: 44px;
+    padding: 8px 0;
+    font-size: 14px;
+  }
+
+  .wiki-article-facts .wiki-infobox th,
+  .wiki-article-facts .wiki-infobox td {
+    padding: 10px 8px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .wiki-article-facts .wiki-infobox th {
+    width: 30%;
+    font-size: 12.5px;
+  }
+
+  .wiki-article-facts .wiki-infobox-image {
+    max-width: 220px;
+    margin: 4px auto 16px;
+  }
+
+  .wiki-article-facts .wiki-infobox-image > img {
+    max-height: 240px;
+  }
+
+  .wiki-article-facts .wiki-portrait-gallery-frame img {
+    height: 240px;
+  }
+
+  .wiki-article-facts .wiki-portrait-gallery-arrow {
+    width: 44px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .wiki-article-facts .wiki-portrait-gallery-count {
+    opacity: 1;
+  }
+
+  .wiki-page .wiki-article-contents {
+    display: block;
+    margin: 20px 0 24px;
+    padding-bottom: 0;
+    border-top: 1px solid var(--wiki-border-subtle);
+    font-size: 14px;
+  }
+
+  .wiki-contents-mobile > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 44px;
+    padding: 8px 0;
+    font-weight: 500;
+  }
+
+  .wiki-body .wiki-contents-mobile ol {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 16px;
+    padding: 0 0 8px;
+  }
+
+  .wiki-contents-mobile a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 8px 0;
+    overflow-wrap: anywhere;
+  }
+
+  .wiki-page:is([data-page-slug="Publications"], [data-page-slug="Publications_zh"]) .wiki-body table {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .wiki-page:is([data-page-slug="Publications"], [data-page-slug="Publications_zh"]) .wiki-body td:first-child > strong:first-child {
+    font-size: 16px;
+  }
+
+  .wiki-page:is([data-page-slug="Publications"], [data-page-slug="Publications_zh"]) .wiki-body td:nth-child(2) {
+    font-size: 13px;
   }
 
   .chat-xinbao-shell {

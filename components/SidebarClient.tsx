@@ -128,7 +128,7 @@ export function SidebarClient({ sections }: Props) {
         type="button"
       >
         <span aria-hidden="true">☰</span>
-        {sectionLabels.navigation[language]}
+        <span className="wiki-mobile-nav-label">{sectionLabels.navigation[language]}</span>
       </button>
 
       <dialog

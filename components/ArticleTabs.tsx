@@ -12,7 +12,9 @@ const labels = {
     source: 'View source',
     sourceTitle: 'View the source repository on GitHub',
     history: 'History',
-    historyTitle: "View this page's commit history"
+    historyTitle: "View this page's commit history",
+    tools: 'Page tools',
+    edit: 'Edit this page'
   },
   zh: {
     aria: '条目工具',
@@ -22,7 +24,9 @@ const labels = {
     source: '查看源代码',
     sourceTitle: '在 GitHub 上查看源码仓库',
     history: '历史',
-    historyTitle: '查看此页面的提交历史'
+    historyTitle: '查看此页面的提交历史',
+    tools: '条目工具',
+    edit: '编辑此页'
   }
 };
 
@@ -48,6 +52,7 @@ export function ArticleTabs() {
   const talk = `${GITHUB_BASE}/issues/new?title=${encodeURIComponent(`Talk: ${slug}`)}`;
   const source = GITHUB_BASE;
   const history = `${GITHUB_BASE}/commits/main/wiki/${encodeURIComponent(fileName)}`;
+  const edit = `${GITHUB_BASE}/edit/main/wiki/${encodeURIComponent(fileName)}`;
 
   return (
     <nav className="wiki-tabs" aria-label={copy.aria}>
@@ -85,6 +90,15 @@ export function ArticleTabs() {
               {copy.history}
             </a>
           </div>
+          <details className="wiki-tabs-mobile-tools">
+            <summary>{copy.tools}</summary>
+            <div className="wiki-tabs-tools-menu">
+              <a className="external" href={talk} target="_blank" rel="noreferrer" title={copy.talkTitle}>{copy.talk}</a>
+              <a className="external" href={edit} target="_blank" rel="noreferrer">{copy.edit}</a>
+              <a className="external" href={source} target="_blank" rel="noreferrer" title={copy.sourceTitle}>{copy.source}</a>
+              <a className="external" href={history} target="_blank" rel="noreferrer" title={copy.historyTitle}>{copy.history}</a>
+            </div>
+          </details>
         </div>
       </div>
     </nav>

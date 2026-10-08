@@ -3,6 +3,7 @@ import { Fragment, type ReactNode } from 'react';
 import rehypeKatex from 'rehype-katex';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
+import { ArticleContents } from '@/components/ArticleContents';
 import { pathWithBasePath } from '@/lib/wiki';
 import { rehypeWikiOutline } from '@/lib/wiki-outline';
 
@@ -52,6 +53,12 @@ export function WikiMarkdown({ editLabel, markdown, sourceHref }: Props) {
         rehypePlugins={[[rehypeWikiOutline, { label: editLabel === '编辑' ? '本页目录' : 'On this page' }], rehypeKatex]}
         urlTransform={wikiUrlTransform}
         components={{
+          nav({ children, className }) {
+            if (className === 'wiki-article-contents') {
+              return <ArticleContents label={editLabel === '编辑' ? '本页目录' : 'On this page'}>{children}</ArticleContents>;
+            }
+            return <nav className={className}>{children}</nav>;
+          },
           a({ href, children }) {
             const safe = href ? pathWithBasePath(href) : '#';
             const missing = safe.includes('missing=1');
