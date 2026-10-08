@@ -122,13 +122,19 @@ function localizeUrl(url: string, language: InfoboxLanguage) {
   return pathWithBasePath(`/wiki/${encodeURIComponent(localizedSlug)}/${suffix}`);
 }
 
+function linkLabel(label: string, url: string): ReactNode {
+  const atIndex = label.indexOf('@');
+  if (!url.startsWith('mailto:') || atIndex < 1) return label;
+  return <>{label.slice(0, atIndex + 1)}<wbr />{label.slice(atIndex + 1)}</>;
+}
+
 function scalar(value: string | number | boolean, language: InfoboxLanguage) {
   const text = String(value);
   const href = pathWithBasePath(text);
   if (/^https?:\/\//.test(text) || text.startsWith('mailto:') || text.startsWith('/')) {
     return (
       <a href={href} target={text.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
-        {text.replace(/^mailto:/, '')}
+        {linkLabel(text.replace(/^mailto:/, ''), text)}
       </a>
     );
   }
@@ -162,7 +168,7 @@ function render(value: unknown, language: InfoboxLanguage): ReactNode {
     return (
       <>
         <a href={localizeUrl(value.url, language)} target={value.url.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
-          {value.label}
+          {linkLabel(value.label, value.url)}
         </a>
         {value.detail && (
           <>

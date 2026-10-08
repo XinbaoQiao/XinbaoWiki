@@ -1335,7 +1335,8 @@ body:has(.wiki-portal) .wiki-topbar {
 
 .wiki-article-facts .wiki-infobox th,
 .wiki-article-facts .wiki-infobox td {
-  padding: 9px 0;
+  padding: 9px 8px;
+  overflow-wrap: anywhere;
   border: 0;
   border-bottom: 1px solid var(--wiki-border-subtle);
   background: transparent;
@@ -1588,6 +1589,7 @@ body:has(.wiki-portal) .wiki-topbar {
 
 .wiki-infobox table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
 }
 
