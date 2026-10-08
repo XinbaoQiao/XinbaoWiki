@@ -21,7 +21,7 @@ const unavailableAggregate = {
   uniqueBrowsersEstimate: null
 };
 
-const ownerTestPassword = 'playwright-owner-password';
+const testPass = 'playwright-owner-password';
 const activityPath = '/api/site-activity/v2/';
 const ownerPreferencePath = '/api/site-activity/preference/';
 
@@ -55,6 +55,41 @@ async function installRoutes(page, getResponse, {
   await page.route('**/api/site-activity', interceptSiteActivity);
   await page.route('**/api/site-activity/**', interceptSiteActivity);
 }
+
+test('background recorder counts articles and client navigation once without sending query strings', async ({ page }) => {
+  const posts = [];
+  await installRoutes(page, () => ({ body: JSON.stringify(aggregate), contentType: 'application/json', status: 200 }));
+  page.on('request', (request) => {
+    if (new URL(request.url()).pathname === activityPath && request.method() === 'POST') posts.push(request);
+  });
+  await page.goto('/wiki/CV/?query=never-store#private', { waitUntil: 'networkidle' });
+  await expect.poll(() => posts.length).toBe(1);
+  expect(posts[0].headers()['x-site-activity-page'].replace(/\/$/, '')).toBe('/wiki/CV');
+  expect(posts[0].postData()).toBe(null);
+  expect(JSON.stringify(posts[0].headers()['x-site-activity-referrer'])).not.toContain('never-store');
+  // Next.js Link navigation changes the route while retaining the shared recorder.
+  const publicationLink = page.locator('a[href="/wiki/Publications/"]').first();
+  await publicationLink.click();
+  await expect(page).toHaveURL(/\/wiki\/Publications\/$/);
+  await expect.poll(() => posts.length).toBe(2);
+  expect(posts[1].headers()['x-site-activity-page'].replace(/\/$/, '')).toBe('/wiki/Publications');
+  await page.goto('/', { waitUntil: 'networkidle' });
+  await expect.poll(() => posts.length).toBe(3);
+  // Opening the public map fetches its summary, never another recording ping.
+  await page.locator('#portal-activity > summary').click();
+  await expect(page.locator('#portal-activity')).toHaveAttribute('open', '');
+  expect(posts.length).toBe(3);
+});
+
+test('private activity reporting rejects anonymous requests and URL credentials', async ({ request }) => {
+  for (const path of ['/api/site-activity/summary/?days=7', '/api/site-activity/summary/?token=nope', '/api/site-activity/summary/?days=1000']) {
+    const response = await request.get(path);
+    expect(response.status()).toBe(401);
+    expect(response.headers()['cache-control']).toBe('private, no-store');
+    expect(response.headers()['x-robots-tag']).toBe('noindex, nofollow');
+    expect(await response.json()).toEqual({ error: 'Unauthorized.' });
+  }
+});
 
 function captureErrors(page, {
   allowSiteActivityAbort = false,
@@ -202,8 +237,13 @@ test('homepage visitor atlas is scoped, accessible, bilingual, and responsive', 
   expect(mapBounds.width / mapBounds.height).toBeCloseTo(672 / 276, 1);
   const legend = activity.locator('.wiki-visitor-atlas-legend');
   expectSingleLineLegend(await readLegendMetrics(legend));
-  const legendBounds = await legend.boundingBox();
-  const triggerBounds = await ownerTrigger.boundingBox();
+  // Read both rectangles in one frame after a viewport change; separate
+  // protocol calls can observe different frames while layout is settling.
+  const { legendBounds, triggerBounds } = await legend.evaluate((element) => {
+    const trigger = element.querySelector('.wiki-visitor-atlas-legend-trigger');
+    const bounds = (node) => node ? { x: node.getBoundingClientRect().x, width: node.getBoundingClientRect().width } : null;
+    return { legendBounds: bounds(element), triggerBounds: bounds(trigger) };
+  });
   expect(legendBounds).not.toBeNull();
   expect(triggerBounds).not.toBeNull();
   expect(triggerBounds.x).toBeGreaterThanOrEqual(legendBounds.x - 0.5);
@@ -397,7 +437,7 @@ test('correct owner password sets an exclusion cookie across simulated locations
   }]);
   await page.locator('.wiki-portal-name-button').click({ force: true });
   const { dialog } = await waitForOwnerDialogReady(page);
-  await page.locator('#visitor-atlas-owner-password').fill(ownerTestPassword);
+  await page.locator('#visitor-atlas-owner-password').fill(testPass);
   await dialog.getByRole('button', { name: 'Exclude this browser' }).click({ force: true });
   await expect(dialog.getByRole('status')).toHaveText('This browser is now excluded from future activity.');
   const exclusionCookie = (await context.cookies(page.url())).find((cookie) => cookie.name === 'xinbao_site_activity_excluded');
@@ -429,7 +469,7 @@ test('correct owner password sets an exclusion cookie across simulated locations
   ]);
   expect(activityStatuses.map((response) => response.status())).toEqual([204, 204]);
   await expect(dialog.getByRole('button', { name: 'Include this browser' })).toBeVisible();
-  await page.locator('#visitor-atlas-owner-password').fill(ownerTestPassword);
+  await page.locator('#visitor-atlas-owner-password').fill(testPass);
   await dialog.getByRole('button', { name: 'Include this browser' }).click({ force: true });
   await expect(dialog.getByRole('status')).toHaveText('This browser will be included in future activity.');
   const cookies = await context.cookies(page.url());
@@ -450,7 +490,7 @@ test('owner dialog surfaces rate-limit and unavailable responses without changin
     await page.goto('/', { waitUntil: 'networkidle' });
     await page.locator('.wiki-portal-name-button').click({ force: true });
     const { dialog } = await waitForOwnerDialogReady(page);
-    await page.locator('#visitor-atlas-owner-password').fill(ownerTestPassword);
+    await page.locator('#visitor-atlas-owner-password').fill(testPass);
     await dialog.getByRole('button', { name: 'Exclude this browser' }).click({ force: true });
     await expect(dialog.getByRole('alert')).toHaveText(scenario.message);
     expect((await context.cookies(page.url())).some((cookie) => cookie.name === 'xinbao_site_activity_excluded')).toBe(false);
@@ -460,7 +500,7 @@ test('owner dialog surfaces rate-limit and unavailable responses without changin
 test('owner endpoint rejects malformed JSON and cross-origin writes before authentication', async ({ request }) => {
   test.skip(Boolean(process.env.CUBE_GEOMETRY_BASE_URL), 'owner password fixture is local-only');
   const malformed = await request.post(ownerPreferencePath, {
-    data: JSON.stringify({ password: ownerTestPassword }),
+    data: JSON.stringify({ password: testPass }),
     headers: { 'content-type': 'application/json' }
   });
   expect(malformed.status()).toBe(400);
@@ -468,7 +508,7 @@ test('owner endpoint rejects malformed JSON and cross-origin writes before authe
   expect(malformed.headers()['set-cookie'] || '').not.toContain('xinbao_site_activity_excluded=');
 
   const crossOrigin = await request.post(ownerPreferencePath, {
-    data: JSON.stringify({ excluded: true, password: ownerTestPassword }),
+    data: JSON.stringify({ excluded: true, password: testPass }),
     headers: {
       'content-type': 'application/json',
       origin: 'https://attacker.invalid'

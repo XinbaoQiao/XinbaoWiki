@@ -25,6 +25,8 @@ import {
   SITE_ACTIVITY_EXCLUSION_COOKIE_NAME,
   SITE_ACTIVITY_VISITOR_COOKIE_NAME
 } from '@/lib/site-activity-preference';
+import { dailyVisitLabels, recordDailyActivity } from '@/lib/site-activity-daily';
+import { getPublicManifestSlugs } from '@/lib/wiki-manifest';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -44,12 +46,19 @@ type VisitorCookie = {
 };
 
 let redisClient: Redis | null = null;
+let publicActivityPaths: Set<string> | null = null;
+
+function activityPaths() {
+  const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
+  publicActivityPaths ??= new Set([basePath || '/', ...getPublicManifestSlugs().map((slug) => `${basePath}/wiki/${slug}`)]);
+  return publicActivityPaths;
+}
 
 function getRedis() {
   const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) return null;
-  redisClient ??= new Redis({ url, token });
+  const redisAuth = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !redisAuth) return null;
+  redisClient ??= new Redis({ url, token: redisAuth });
   return redisClient;
 }
 
@@ -252,22 +261,22 @@ export async function POST(request: NextRequest) {
   if (!sameOriginRequest(request)) return privateResponse(403);
   if (!(await acceptsEmptyBody(request))) return privateResponse(400);
 
-  const secret = process.env.RATE_LIMIT_SALT;
-  if (secret && isSiteActivityBrowserExcluded(request.cookies.get(SITE_ACTIVITY_EXCLUSION_COOKIE_NAME)?.value, secret)) {
+  const activitySalt = process.env.RATE_LIMIT_SALT;
+  if (activitySalt && isSiteActivityBrowserExcluded(request.cookies.get(SITE_ACTIVITY_EXCLUSION_COOKIE_NAME)?.value, activitySalt)) {
     return privateResponse(204);
   }
   const redis = getRedis();
-  if (!redis || !secret) return privateResponse(204);
+  if (!redis || !activitySalt) return privateResponse(204);
 
-  const visitor = getVisitorCookie(request, secret);
+  const visitor = getVisitorCookie(request, activitySalt);
   const cellId = requestCell(request);
 
   try {
-    if (visitor.requiresMintReservation && !(await reserveCookieMint(redis, request, secret))) {
+    if (visitor.requiresMintReservation && !(await reserveCookieMint(redis, request, activitySalt))) {
       return privateResponse(204);
     }
     try {
-      await migrateLegacySiteActivity(redis, secret, SITE_ACTIVITY_SINCE);
+      await migrateLegacySiteActivity(redis, activitySalt, SITE_ACTIVITY_SINCE);
     } catch {
       logSiteActivityIssue('legacy aggregate migration failed');
     }
@@ -286,6 +295,14 @@ export async function POST(request: NextRequest) {
 
   const response = privateResponse(204);
   setVisitorCookie(response, visitor);
+  try {
+    await recordDailyActivity(redis, visitor.digest, dailyVisitLabels(
+      request.headers, process.env.VERCEL === '1', new URL(request.url).hostname, activityPaths()
+    ));
+  } catch {
+    // Private metrics failure must not undo the existing lifetime count or cookie.
+    logSiteActivityIssue('daily aggregation failed');
+  }
   return response;
 }
 
@@ -295,11 +312,11 @@ export async function GET(request: NextRequest) {
   const now = new Date();
   const empty = emptyPayload(false, now);
   const redis = getRedis();
-  const secret = process.env.RATE_LIMIT_SALT;
-  if (!redis || !secret) return publicJson(empty);
+  const activitySalt = process.env.RATE_LIMIT_SALT;
+  if (!redis || !activitySalt) return publicJson(empty);
 
   try {
-    await migrateLegacySiteActivity(redis, secret, SITE_ACTIVITY_SINCE, now);
+    await migrateLegacySiteActivity(redis, activitySalt, SITE_ACTIVITY_SINCE, now);
   } catch {
     logSiteActivityIssue('legacy aggregate migration failed');
   }
@@ -307,7 +324,7 @@ export async function GET(request: NextRequest) {
   try {
     const activeCells = await redis.smembers(siteActivityAggregationKeys.lifetimeCellsIndex());
     const cellIds = [...new Set(activeCells.filter((cellId) => parseCellId(cellId)))]
-      .sort((left, right) => cellSelectionScore(left, secret).localeCompare(cellSelectionScore(right, secret)))
+      .sort((left, right) => cellSelectionScore(left, activitySalt).localeCompare(cellSelectionScore(right, activitySalt)))
       .slice(0, SITE_ACTIVITY_MAX_CELLS);
 
     const countPipeline = redis.pipeline();

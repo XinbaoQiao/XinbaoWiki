@@ -45,11 +45,21 @@ bounty program.
 The public homepage activity map uses a signed random first-party browser
 cookie, Redis HyperLogLog aggregates, and coarse geographic cells. The
 Xinbaopedia application does not store the raw request IP or the original
-IP-derived latitude/longitude for this feature. Geography is quantized before
+IP-derived latitude/longitude for this feature. Public map geography is quantized before
 storage, and totals and map cells remain suppressed until at least two signed
 browser identifiers have contributed. Versioned lifetime aggregate keys are
 retained until an explicit maintainer reset; they cannot enumerate or delete an
 individual browser digest.
+
+Private reporting also keeps daily page-view counters, browser-count HLLs and
+separate country/region/city, public-page, referring-hostname and coarse device
+summaries for the current and previous 89 calendar days in `Asia/Tokyo`.
+Each daily key has a fixed expiry; the atomic writer bounds dimension labels.
+These summaries contain no raw IPs, original coordinates, complete user agents,
+query strings or enumerable individual visit records. The private report endpoint
+requires the server-only maintainer bearer token and uses `private, no-store`;
+public map responses do not expose the daily dimensions. Retention or report
+authorization failures are in scope for security reports.
 
 To prevent trivial inflation by repeatedly discarding the browser cookie,
 Vercel requests use the trusted forwarding IP only long enough to derive a

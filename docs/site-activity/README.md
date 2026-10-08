@@ -25,7 +25,11 @@ it does not identify people.
 
 ## Data flow and retention
 
-1. The homepage sends a same-origin, bodyless `POST /api/site-activity/v2/`.
+1. A background recorder in the shared layout sends a same-origin, bodyless
+   `POST /api/site-activity/v2/` for the initial page and each client-side route
+   change. The map component no longer sends a second homepage ping. Only the
+   current pathname and the referring hostname are added as bounded headers;
+   query strings, fragments and the full external referring URL are not saved.
    The schema version is part of the route so a future incompatible payload can
    use a new endpoint without breaking an already-open page. The unversioned
    version 2 route remains available for pages opened before this change.
@@ -67,6 +71,61 @@ it does not identify people.
 6. The public `GET` response contains only the estimate, projected map
    positions, three-level intensity buckets, thresholds, and the collection
    start date.
+
+## Private daily reporting
+
+In addition to the lifetime map, accepted recording requests update independent
+daily aggregates under `xinbao-site-activity:daily:v1:<YYYY-MM-DD>`. Days follow
+`Asia/Tokyo` (UTC+09:00). Every daily key expires at midnight at the start of
+the date 90 days after its bucket date. This keeps the current calendar day and
+the previous 89 days; a visit late in a day does not extend its expiry.
+
+The stored metrics are:
+
+- Page-view pings and an approximate distinct signed-browser count per day.
+- Separate page-view counts for country, first-level region, city, public
+  page, referring hostname, coarse browser family, operating-system family
+  and device category. Geography is read only from Vercel system headers;
+  city strings are decoded, validated and capped. City labels retain their
+  country/region context to distinguish identically named cities.
+- Only published Wiki routes and the homepage are named. Other paths become
+  `other`, and absent page information becomes `unknown`. Full user-agent
+  strings, versions, original coordinates, raw IPs, URL query parameters,
+  passwords, search terms and event-level visitor rows are not stored.
+
+The dimensions are independent marginal summaries, not visitor profiles or
+joint location/page histories. A single browser can contribute multiple page
+views and appear in several dimension labels. Missing or suppressed referrers
+use `direct-or-unknown`; `document.referrer` is the document's source, not a
+reconstructed chain of client-side navigation. IP-derived city labels may
+reflect VPNs or network egress. Device categories are approximate UA families.
+
+One atomic Redis Lua script writes the daily counters and HLL, sets fixed
+expiry times, and caps each daily dimension at 256 explicit labels plus an
+`__other__` overflow bucket. No visitor digest is stored in an enumerable set
+or list. The report computes a multi-key `PFCOUNT` union across days, rather
+than adding daily unique-browser estimates. It reads at most seven days per
+REST pipeline. Daily storage failures soft-fail independently of the existing
+lifetime map and do not log request data.
+
+`GET /api/site-activity/summary/?days=7` returns a private report. The default
+is seven calendar days; `days` accepts 1–90. Alternatively, use
+`?start=2026-10-08&end=2026-10-08` with both dates inside the current retention
+window. The request requires `Authorization: Bearer <maintainer-token>` using
+the existing server-only `XINBAO_CHAT_ADMIN_TOKEN`; missing configuration or an
+invalid credential returns 401 before any Redis lookup. Credentials in URLs,
+the public owner-exclusion cookie and cross-origin browser access do not grant
+report access. Reports use `Cache-Control: private, no-store` and `noindex`.
+Use the existing named Harness credential profile in a scoped `credentialctl`
+child when querying this endpoint; never place its token in a command argument.
+
+The report contains daily counts, period-wide page views and a unique-browser
+estimate, plus page-view rankings for each dimension. `firstObservedDateInRange`
+is the earliest retained day with a recorded ping, not a deployment timestamp.
+No-data days cannot distinguish zero visits from an unavailable recorder.
+This dataset starts with the deployment of daily collection: existing lifetime
+HLLs cannot reconstruct past dates, pages, referring sources or city labels.
+The private fields are never added to the public map response or a public UI.
 
 ## Private maintainer exclusion
 

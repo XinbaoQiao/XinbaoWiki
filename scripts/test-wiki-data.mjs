@@ -1183,7 +1183,7 @@ assert.match(newWikiPageScript, /Review is intentionally incomplete/, 'new wiki 
 assert.match(wikiEvaluator, /chunkById\.get\(source\.chunkId\)/, 'citation validation resolves every returned chunk against the production index');
 
 function assertReviewFixtureRejected(name, frontmatterLines, expectedFailure) {
-  const fixtureRoot = path.join(root, '.codex', 'tmp');
+  const fixtureRoot = path.join(root, 'tmp', 'wiki-tests');
   fs.mkdirSync(fixtureRoot, { recursive: true });
   const fixture = fs.mkdtempSync(path.join(fixtureRoot, `${name}-`));
   const fixtureWiki = path.join(fixture, 'wiki');
@@ -2334,7 +2334,7 @@ assert.match(visitorAtlas, /role="img"[\s\S]*<title id="visitor-atlas-title">[\s
 assert.match(visitorAtlas, /<button[\s\S]*aria-controls="visitor-atlas-owner-dialog"[\s\S]*aria-expanded=\{ownerDialogOpen\}[\s\S]*aria-haspopup="dialog"[\s\S]*className="wiki-visitor-atlas-legend-trigger"[\s\S]*type="button"/, 'public intensity is a discreet native button with dialog semantics');
 assert.match(visitorAtlas, /<dialog[\s\S]*aria-describedby="visitor-atlas-owner-description"[\s\S]*aria-labelledby="visitor-atlas-owner-title"[\s\S]*aria-modal="true"[\s\S]*id="visitor-atlas-owner-dialog"[\s\S]*onCancel=\{closeOwnerDialog\}[\s\S]*onClose=\{closeOwnerDialog\}/, 'owner controls use a native modal dialog with Escape and close-state handling');
 assert.match(visitorAtlas, /<input[\s\S]*autoComplete="current-password"[\s\S]*id="visitor-atlas-owner-password"[\s\S]*type="password"/, 'owner dialog keeps the password in a masked, labeled, client-only field');
-assert.match(visitorAtlas, /body: JSON\.stringify\(\{ excluded: !ownerExcluded, password: ownerPassword \}\)[\s\S]*method: 'POST'/, 'owner dialog sends the password only in a same-origin POST body');
+assert.match(visitorAtlas, /body: JSON\.stringify\(\{ excluded: !ownerExcluded, password \}\)[\s\S]*method: 'POST'/, 'owner dialog sends the password only in a same-origin POST body');
 assert.match(visitorAtlas, /response\.status === 401[\s\S]*setOwnerGateStatus\('error'\)[\s\S]*response\.status === 429[\s\S]*setOwnerGateStatus\('rate-limited'\)[\s\S]*setOwnerGateStatus\('unavailable'\)/, 'owner dialog distinguishes only generic authentication, rate-limit, and unavailable states');
 assert.doesNotMatch(visitorAtlas, /localStorage|sessionStorage|document\.cookie|URLSearchParams/, 'owner password never enters browser persistence or a URL');
 assert.doesNotMatch(visitorAtlas, /navigator\.geolocation|Country \/ region ranking|国家.*排行/, 'visitor atlas neither requests browser geolocation nor publishes a region ranking');

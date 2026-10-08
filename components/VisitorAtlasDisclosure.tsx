@@ -186,25 +186,11 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
   const [ownerDialogOpen, setOwnerDialogOpen] = useState(false);
   const [ownerExcluded, setOwnerExcluded] = useState(false);
   const [ownerGateStatus, setOwnerGateStatus] = useState<OwnerGateStatus>('idle');
-  const [ownerPassword, setOwnerPassword] = useState('');
+  const [password, setOwnerPassword] = useState('');
   const ownerDialogRef = useRef<HTMLDialogElement>(null);
-  const recordedRef = useRef(false);
   const labels = copy[language];
   const apiPath = withBasePath(SITE_ACTIVITY_API_PATH);
   const preferencePath = withBasePath('/api/site-activity/preference/');
-
-  useEffect(() => {
-    if (recordedRef.current) return;
-    recordedRef.current = true;
-    void fetch(apiPath, {
-      cache: 'no-store',
-      credentials: 'same-origin',
-      keepalive: true,
-      method: 'POST'
-    }).catch(() => {
-      // Public statistics must never block or disturb the homepage.
-    });
-  }, [apiPath]);
 
   useEffect(() => {
     const dialog = ownerDialogRef.current;
@@ -245,7 +231,7 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
     setOwnerGateStatus('saving');
     try {
       const response = await fetch(preferencePath, {
-        body: JSON.stringify({ excluded: !ownerExcluded, password: ownerPassword }),
+        body: JSON.stringify({ excluded: !ownerExcluded, password }),
         cache: 'no-store',
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },
@@ -415,7 +401,7 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
                   onChange={(event) => setOwnerPassword(event.currentTarget.value)}
                   required
                   type="password"
-                  value={ownerPassword}
+                  value={password}
                 />
                 {ownerGateStatus === 'error' ? <p className="wiki-visitor-atlas-owner-message" role="alert">{labels.ownerInvalid}</p> : null}
                 {ownerGateStatus === 'rate-limited' ? <p className="wiki-visitor-atlas-owner-message" role="alert">{labels.ownerRateLimited}</p> : null}

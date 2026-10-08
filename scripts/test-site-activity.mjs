@@ -33,6 +33,7 @@ const preferenceRoute = fs.readFileSync('app/api/site-activity/preference/route.
 const ownerAuth = fs.readFileSync('lib/site-activity-owner-auth.ts', 'utf8');
 const aggregation = fs.readFileSync('lib/site-activity-aggregation.ts', 'utf8');
 const component = fs.readFileSync('components/VisitorAtlasDisclosure.tsx', 'utf8');
+const recorder = fs.readFileSync('components/SiteActivityRecorder.tsx', 'utf8');
 const playwrightConfig = fs.readFileSync('playwright.config.mjs', 'utf8');
 const shared = fs.readFileSync('lib/site-activity.ts', 'utf8');
 const map = fs.readFileSync('public/maps/world-land-dots.svg', 'utf8');
@@ -107,7 +108,7 @@ hasAll(route, [
   'transaction.incr(key)',
   'transaction.expire(key, COOKIE_MINT_TTL_SECONDS)',
   'mintCount <= COOKIE_MINT_LIMIT_PER_HOUR',
-  'visitor.requiresMintReservation && !(await reserveCookieMint(redis, request, secret))'
+  'visitor.requiresMintReservation && !(await reserveCookieMint(redis, request, activitySalt))'
 ], 'fresh signed-cookie issuance is bounded with a short-lived keyed Vercel-IP digest');
 hasAll(route, [
   'const COOKIE_NAME = SITE_ACTIVITY_VISITOR_COOKIE_NAME',
@@ -163,10 +164,10 @@ assert.match(preferenceRoute, /process\.env\.VERCEL === '1'[\s\S]*request\.heade
 assert.doesNotMatch(preferenceRoute, /console\.(?:log|error)\([^)]*password|console\.(?:log|error)\([^)]*request/i, 'owner endpoint does not log the password or request body');
 assert.doesNotMatch(`${component}\n${preferenceRoute}\n${ownerAuth}`, /NEXT_PUBLIC_[A-Z0-9_]*OWNER|SITE_ACTIVITY_OWNER_PASSWORD\s*[:=]\s*['"]/i, 'owner password configuration is server-only and never embedded as a plaintext assignment');
 hasAll(route, [
-  'const secret = process.env.RATE_LIMIT_SALT',
-  'isSiteActivityBrowserExcluded(request.cookies.get(SITE_ACTIVITY_EXCLUSION_COOKIE_NAME)?.value, secret)',
+  'const activitySalt = process.env.RATE_LIMIT_SALT',
+  'isSiteActivityBrowserExcluded(request.cookies.get(SITE_ACTIVITY_EXCLUSION_COOKIE_NAME)?.value, activitySalt)',
   'return privateResponse(204)',
-  'const visitor = getVisitorCookie(request, secret)',
+  'const visitor = getVisitorCookie(request, activitySalt)',
   'const cellId = requestCell(request)'
 ], 'a valid exclusion cookie stops recording before visitor minting or geographic lookup');
 assert.doesNotMatch(preferenceRoute, /x-vercel-ip|x-forwarded-for|latitude|longitude|country|region/i, 'browser exclusion cookie itself never depends on an IP or geographic allowlist');
@@ -189,7 +190,7 @@ hasAll(aggregation, [
   'migrationReceipt(), JSON.stringify(nextReceipt)'
 ], 'launch-period version 1 HLLs use a distributed lock, bounded batches, and a second catch-up pass');
 hasAll(route, [
-  'await migrateLegacySiteActivity(redis, secret, SITE_ACTIVITY_SINCE, now)',
+  'await migrateLegacySiteActivity(redis, activitySalt, SITE_ACTIVITY_SINCE, now)',
   "logSiteActivityIssue('legacy aggregate migration failed')",
   'const activeCells = await redis.smembers(siteActivityAggregationKeys.lifetimeCellsIndex())',
   'slice(0, SITE_ACTIVITY_MAX_CELLS)',
@@ -207,7 +208,7 @@ hasAll(versionedRoute, [
   'export const GET = getSiteActivity',
   'export const POST = recordSiteActivity'
 ], 'schema v2 has a stable versioned route while the unversioned handler remains available to older open pages');
-assert.match(route, /cellSelectionScore\(left, secret\).*cellSelectionScore\(right, secret\)/, 'active-cell overflow uses deterministic non-geographic sampling rather than lexicographic bias');
+assert.match(route, /cellSelectionScore\(left, activitySalt\).*cellSelectionScore\(right, activitySalt\)/, 'active-cell overflow uses deterministic non-geographic sampling rather than lexicographic bias');
 hasAll(route, [
   "'Cache-Control': 'public, max-age=0, s-maxage=300, stale-while-revalidate=900'",
   "'Cache-Control': 'private, no-store'"
@@ -217,8 +218,8 @@ hasAll(route, [
   'if (new URL(request.url).search) return privateResponse(400)'
 ], 'GET rejects query variants that would bypass the shared cache key');
 for (const expected of [
-  'if (!redis || !secret) return privateResponse(204)',
-  'if (!redis || !secret) return publicJson(empty)',
+  'if (!redis || !activitySalt) return privateResponse(204)',
+  'if (!redis || !activitySalt) return publicJson(empty)',
   "logSiteActivityIssue('visit aggregation failed')",
   "logSiteActivityIssue('public aggregation read failed')",
   'return privateResponse(503)'
@@ -247,7 +248,7 @@ for (const expected of [
   'const apiPath = withBasePath(SITE_ACTIVITY_API_PATH)',
   "href={withBasePath('/maps/world-land-dots.svg')}"
 ]) {
-  assert.ok(component.includes(expected), `homepage same-origin map flow is missing ${expected}`);
+  assert.ok((component + recorder).includes(expected), `site-wide same-origin map flow is missing ${expected}`);
 }
 hasAll(component, [
   "retry: 'Retry'",
@@ -265,13 +266,13 @@ assert.doesNotMatch(component, /Cells appear|Approximate IP|No map cell|30 compl
 assert.match(map, /world-atlas 2\.0\.2 \/ Natural Earth/, 'generated neutral map records its source geometry');
 assert.match(map, /<pattern id="dots"[\s\S]*<path[\s\S]*fill="url\(#dots\)"/, 'neutral map is a static dotted SVG silhouette');
 
-const ownerTestPassword = 'owner-test-password';
+const testPass = 'owner-test-password';
 const ownerTestHash = await createSiteActivityOwnerPasswordHash(
-  ownerTestPassword,
+  testPass,
   '00112233445566778899aabbccddeeff'
 );
 assert.equal(isSiteActivityOwnerPasswordHash(ownerTestHash), true, 'fixed test scrypt envelope is accepted');
-assert.equal(await verifySiteActivityOwnerPassword(ownerTestPassword, ownerTestHash), true, 'owner password verifier accepts the test password');
+assert.equal(await verifySiteActivityOwnerPassword(testPass, ownerTestHash), true, 'owner password verifier accepts the test password');
 assert.equal(await verifySiteActivityOwnerPassword('wrong-owner-password', ownerTestHash), false, 'owner password verifier rejects an incorrect password');
 assert.equal(isSiteActivityOwnerPasswordHash('owner-test-password'), false, 'plaintext owner password is not a valid deployment configuration');
 

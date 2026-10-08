@@ -4,6 +4,7 @@ import { ArticleTabs } from '@/components/ArticleTabs';
 import { LanguageToggle, SitePalette } from '@/components/LanguageToggle';
 import { Sidebar } from '@/components/Sidebar';
 import { WikiSearch } from '@/components/WikiSearch';
+import { SiteActivityRecorder } from '@/components/SiteActivityRecorder';
 import { pathWithBasePath } from '@/lib/wiki';
 import 'katex/dist/katex.min.css';
 import './globals.css';
@@ -52,6 +53,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html lang="en">
       <body>
+        <SiteActivityRecorder />
         <a className="skip-to-content" href="#main-content">Skip to content / 跳至正文</a>
         <SitePalette icons={sitePaletteIcons} />
         <header className="wiki-topbar">
