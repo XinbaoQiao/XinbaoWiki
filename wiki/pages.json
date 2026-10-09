@@ -249,10 +249,10 @@
         "cv-summary"
       ],
       "timestamp": "2026-07-02T19:37:18+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.817Z",
-      "contentHash": "sha256:8dfb826b19aa8c3fe70b1bd41accb2c532b0b3b2d2c4682dddb2083a7add9a77",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
+      "modifiedAt": "2026-10-09T05:51:11.226Z",
+      "contentHash": "sha256:9057001613b77f9fdb83abd48ffd1742fa0d1d819fe77c02f55b89b98e318b32",
+      "reviewedAt": "2026-10-09T05:51:42.578Z",
+      "reviewDue": "2027-01-07",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-0642a11373a83c47",
@@ -295,7 +295,7 @@
       "retrieval": {
         "documentId": "wiki:CV",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:8dfb826b19aa8c3fe70b1bd41accb2c532b0b3b2d2c4682dddb2083a7add9a77",
+        "contentHash": "sha256:9057001613b77f9fdb83abd48ffd1742fa0d1d819fe77c02f55b89b98e318b32",
         "textFields": [
           "title",
           "aliases",
@@ -1939,10 +1939,10 @@
         "phd-student"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.993Z",
-      "contentHash": "sha256:f5142daf8bce2787124f0120522f50f75ede3a74df0b93a09401729b1231f907",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
+      "modifiedAt": "2026-10-09T05:51:11.717Z",
+      "contentHash": "sha256:843b7db9a95eb06f502928ea4525c862169be5c709827ff5103c4293a4bd7250",
+      "reviewedAt": "2026-10-09T05:51:42.578Z",
+      "reviewDue": "2027-01-07",
       "sourceIds": [
         "src-264e39cbec8d2f89",
         "src-30f33d3201c476ab",
@@ -1982,7 +1982,7 @@
       "retrieval": {
         "documentId": "wiki:Xinbao_Qiao",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:f5142daf8bce2787124f0120522f50f75ede3a74df0b93a09401729b1231f907",
+        "contentHash": "sha256:843b7db9a95eb06f502928ea4525c862169be5c709827ff5103c4293a4bd7250",
         "textFields": [
           "title",
           "aliases",
@@ -2562,10 +2562,10 @@
         "cv-摘要"
       ],
       "timestamp": "2026-07-02T19:37:18+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.816Z",
-      "contentHash": "sha256:f3c8e5b6a399201f7a84b55fbb9d01144f998d35d8cee7e1c5aebc53b288eb90",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
+      "modifiedAt": "2026-10-09T05:51:11.225Z",
+      "contentHash": "sha256:7cb87495371a9c162206ab0b4180e06a8380c91b9af1f0604932afddbbf62e8e",
+      "reviewedAt": "2026-10-09T05:51:42.578Z",
+      "reviewDue": "2027-01-07",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-0642a11373a83c47",
@@ -2608,7 +2608,7 @@
       "retrieval": {
         "documentId": "wiki:CV_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:f3c8e5b6a399201f7a84b55fbb9d01144f998d35d8cee7e1c5aebc53b288eb90",
+        "contentHash": "sha256:7cb87495371a9c162206ab0b4180e06a8380c91b9af1f0604932afddbbf62e8e",
         "textFields": [
           "title",
           "aliases",
@@ -2862,10 +2862,10 @@
         "博士生"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.930Z",
-      "contentHash": "sha256:67eab38e700924c9e843db40b2024cbc974c4d8e89e4d4654939d92aa82fc758",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
+      "modifiedAt": "2026-10-09T05:51:11.560Z",
+      "contentHash": "sha256:0df60685047df44a25fd147323e04404656a8cbdba1e8abae23ba41fbe133eaa",
+      "reviewedAt": "2026-10-09T05:51:42.578Z",
+      "reviewDue": "2027-01-07",
       "sourceIds": [
         "src-264e39cbec8d2f89",
         "src-30f33d3201c476ab",
@@ -2905,7 +2905,7 @@
       "retrieval": {
         "documentId": "wiki:Qiao_Xinbao_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:67eab38e700924c9e843db40b2024cbc974c4d8e89e4d4654939d92aa82fc758",
+        "contentHash": "sha256:0df60685047df44a25fd147323e04404656a8cbdba1e8abae23ba41fbe133eaa",
         "textFields": [
           "title",
           "aliases",

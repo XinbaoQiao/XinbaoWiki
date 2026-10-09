@@ -1009,17 +1009,17 @@
         "slug": "CV",
         "title": "Curriculum Vitae",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.817Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-09T05:51:11.226Z",
+        "reviewedAt": "2026-10-09T05:51:42.578Z",
+        "reviewDue": "2027-01-07"
       },
       {
         "slug": "CV_zh",
         "title": "简历",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.816Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-09T05:51:11.225Z",
+        "reviewedAt": "2026-10-09T05:51:42.578Z",
+        "reviewDue": "2027-01-07"
       },
       {
         "slug": "Data_Centric_Machine_Learning",
@@ -1409,9 +1409,9 @@
         "slug": "Qiao_Xinbao_zh",
         "title": "乔鑫宝",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.930Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-09T05:51:11.560Z",
+        "reviewedAt": "2026-10-09T05:51:42.578Z",
+        "reviewDue": "2027-01-07"
       },
       {
         "slug": "Random_Forest",
@@ -1609,9 +1609,9 @@
         "slug": "Xinbao_Qiao",
         "title": "Xinbao Qiao",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.993Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-09T05:51:11.717Z",
+        "reviewedAt": "2026-10-09T05:51:42.578Z",
+        "reviewDue": "2027-01-07"
       },
       {
         "slug": "Zhejiang_University",

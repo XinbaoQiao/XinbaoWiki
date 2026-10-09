@@ -8,18 +8,18 @@ tags:
   - profile
   - cv-summary
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-10-07T07:07:23.817Z'
-content_hash: 'sha256:8dfb826b19aa8c3fe70b1bd41accb2c532b0b3b2d2c4682dddb2083a7add9a77'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-01-05'
+modified: '2026-10-09T05:51:11.226Z'
+content_hash: 'sha256:9057001613b77f9fdb83abd48ffd1742fa0d1d819fe77c02f55b89b98e318b32'
+reviewed_at: '2026-10-09T05:51:42.578Z'
+review_due: '2027-01-07'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-07T07:07:51.129Z'
-  reviewDue: '2027-01-05'
+  reviewedAt: '2026-10-09T05:51:42.578Z'
+  reviewDue: '2027-01-07'
   pendingReview: false
   overdue: false
 retrieval:
@@ -82,7 +82,7 @@ source_path: wiki/CV.md
 
 - **Research code releases**: maintains public code for accepted papers on certified unlearning, soft-weighted unlearning, and sample-selection model collapse.
 - **Xinbaopedia**: maintains a public academic homepage and wiki-style research archive with paper pages, figures, CV, and project notes.
-- **Academic service, 2026**: reviewer for ICML, NeurIPS, and AAAI.
+- **Academic service, 2026**: reviewer for ICML, NeurIPS, and AAAI. Recognized as a **Top Reviewer at NeurIPS 2026**.[^neurips-top-reviewer]
 - **Academic service, 2025**: reviewer for NeurIPS, ICLR, AAAI, and IEEE TNNLS.
 
 ## Publications
@@ -112,3 +112,5 @@ Asterisks (*) denote co-first authorship; daggers (†) denote corresponding aut
 - **Paper #7: Decentralized Free-Support Wasserstein Barycenter**.\
   **Xinbao Qiao**, Bokai Hou, Peihua Mai, Wenqian Li, Wenjing Yan, Ying-Jun Angela Zhang.\
   Under review. Details: [Decentralized Free-Support Wasserstein Barycenter](./Decentralized_Free_Support_Wasserstein_Barycenter.md).
+
+[^neurips-top-reviewer]: NeurIPS 2026 [reviewer certificate](/files/NeurIPS2026_TopReviewer_XinbaoQiao.pdf), dated October 8, 2026.

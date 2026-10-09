@@ -8,10 +8,10 @@ tags:
   - profile
   - cv-摘要
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-10-07T07:07:23.816Z'
-content_hash: 'sha256:f3c8e5b6a399201f7a84b55fbb9d01144f998d35d8cee7e1c5aebc53b288eb90'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-01-05'
+modified: '2026-10-09T05:51:11.225Z'
+content_hash: 'sha256:7cb87495371a9c162206ab0b4180e06a8380c91b9af1f0604932afddbbf62e8e'
+reviewed_at: '2026-10-09T05:51:42.578Z'
+review_due: '2027-01-07'
 name: 简历
 language: zh
 summary: 乔鑫宝的学术简历摘要。
@@ -55,7 +55,7 @@ translation_of: CV
 
 - **研究代码发布**：维护已录用论文的公开代码，包括认证遗忘、软加权机器遗忘和样本选择偏差导致模型坍缩等方向。
 - **Xinbaopedia**：维护公开学术主页和 wiki 式研究档案，包括论文页面、图表、CV 与项目记录。
-- **学术审稿，2026 年**：担任 ICML、NeurIPS 和 AAAI 审稿人。
+- **学术审稿，2026 年**：担任 ICML、NeurIPS 和 AAAI 审稿人。获 **NeurIPS 2026 Top Reviewer** 荣誉。[^neurips-top-reviewer-zh]
 - **学术审稿，2025 年**：担任 NeurIPS、ICLR、AAAI 和 IEEE TNNLS 审稿人。
 
 ## 论文
@@ -85,3 +85,5 @@ translation_of: CV
 - **Paper #7: Decentralized Free-Support Wasserstein Barycenter**。\
   **乔鑫宝**、Bokai Hou、Peihua Mai、Wenqian Li、Wenjing Yan、Ying-Jun Angela Zhang。\
   在审。详情见 [[Decentralized_Free_Support_Wasserstein_Barycenter|Decentralized Free-Support Wasserstein Barycenter]]。
+
+[^neurips-top-reviewer-zh]: NeurIPS 2026 [审稿证明](/files/NeurIPS2026_TopReviewer_XinbaoQiao.pdf)，签发日期为 2026 年 10 月 8 日。

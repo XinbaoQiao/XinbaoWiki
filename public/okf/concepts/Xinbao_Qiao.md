@@ -11,10 +11,10 @@ tags:
   - biography
   - phd-student
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-07T07:07:23.993Z'
-content_hash: 'sha256:f5142daf8bce2787124f0120522f50f75ede3a74df0b93a09401729b1231f907'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-01-05'
+modified: '2026-10-09T05:51:11.717Z'
+content_hash: 'sha256:843b7db9a95eb06f502928ea4525c862169be5c709827ff5103c4293a4bd7250'
+reviewed_at: '2026-10-09T05:51:42.578Z'
+review_due: '2027-01-07'
 language: en
 aliases:
   - Mr. Ciao
@@ -25,8 +25,8 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-07T07:07:51.129Z'
-  reviewDue: '2027-01-05'
+  reviewedAt: '2026-10-09T05:51:42.578Z'
+  reviewDue: '2027-01-07'
   pendingReview: false
   overdue: false
 retrieval:
@@ -101,7 +101,7 @@ The ICML 2026 paper [When Sample Selection Bias Precipitates Model Collapse](./W
 
 ## Academic service
 
-- **2026**: reviewer for ICML, NeurIPS, and AAAI.
+- **2026**: reviewer for ICML, NeurIPS, and AAAI. Recognized as a **Top Reviewer at NeurIPS 2026**.[^neurips-top-reviewer]
 - **2025**: reviewer for NeurIPS, ICLR, AAAI, and IEEE TNNLS.
 
 ## See also
@@ -129,3 +129,5 @@ The ICML 2026 paper [When Sample Selection Bias Precipitates Model Collapse](./W
 [^qiao-ciao]: Qiao's surname is written "乔" in simplified Chinese and "喬" in traditional Chinese. In his nickname, "喬" is treated as matching the sound of "ciao", which explains the informal nickname "Mr. Ciao" and the public handle [MrCiao](https://huggingface.co/MrCiao).
 
 [^cuhk-ie]: CUHK's Department of Information Engineering describes its scope as information generation, communication, storage, and processing in real-world applications on its [official department page](https://www.ie.cuhk.edu.hk/about-the-department/); the CUHK Graduate School also lists [MPhil-PhD in Information Engineering](https://www.gs.cuhk.edu.hk/programmes/engineering) within Engineering.
+
+[^neurips-top-reviewer]: NeurIPS 2026 [reviewer certificate](/files/NeurIPS2026_TopReviewer_XinbaoQiao.pdf), dated October 8, 2026.

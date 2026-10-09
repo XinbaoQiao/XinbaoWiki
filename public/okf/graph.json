@@ -707,7 +707,7 @@
         "src-da17eb3884244bd3",
         "src-faaafad831fbefc5"
       ],
-      "contentHash": "sha256:8dfb826b19aa8c3fe70b1bd41accb2c532b0b3b2d2c4682dddb2083a7add9a77",
+      "contentHash": "sha256:9057001613b77f9fdb83abd48ffd1742fa0d1d819fe77c02f55b89b98e318b32",
       "file": "CV.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -717,12 +717,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05",
+        "reviewedAt": "2026-10-09T05:51:42.578Z",
+        "reviewDue": "2027-01-07",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-07T07:07:23.817Z",
+      "modifiedAt": "2026-10-09T05:51:11.226Z",
       "outgoing": [
         "Decentralized_Free_Support_Wasserstein_Barycenter",
         "Publications",
@@ -761,12 +761,12 @@
       "timestamp": "2026-07-02T19:37:18+08:00",
       "title": "Curriculum Vitae",
       "type": "CV summary",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
+      "reviewedAt": "2026-10-09T05:51:42.578Z",
+      "reviewDue": "2027-01-07",
       "retrieval": {
         "documentId": "wiki:CV",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:8dfb826b19aa8c3fe70b1bd41accb2c532b0b3b2d2c4682dddb2083a7add9a77",
+        "contentHash": "sha256:9057001613b77f9fdb83abd48ffd1742fa0d1d819fe77c02f55b89b98e318b32",
         "textFields": [
           "title",
           "aliases",
@@ -811,7 +811,7 @@
         "src-da17eb3884244bd3",
         "src-faaafad831fbefc5"
       ],
-      "contentHash": "sha256:f3c8e5b6a399201f7a84b55fbb9d01144f998d35d8cee7e1c5aebc53b288eb90",
+      "contentHash": "sha256:7cb87495371a9c162206ab0b4180e06a8380c91b9af1f0604932afddbbf62e8e",
       "file": "CV_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -821,12 +821,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05",
+        "reviewedAt": "2026-10-09T05:51:42.578Z",
+        "reviewDue": "2027-01-07",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-07T07:07:23.816Z",
+      "modifiedAt": "2026-10-09T05:51:11.225Z",
       "outgoing": [
         "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "NUSRI_CQ_zh",
@@ -866,12 +866,12 @@
       "timestamp": "2026-07-02T19:37:18+08:00",
       "title": "简历",
       "type": "CV 摘要",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
+      "reviewedAt": "2026-10-09T05:51:42.578Z",
+      "reviewDue": "2027-01-07",
       "retrieval": {
         "documentId": "wiki:CV_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:f3c8e5b6a399201f7a84b55fbb9d01144f998d35d8cee7e1c5aebc53b288eb90",
+        "contentHash": "sha256:7cb87495371a9c162206ab0b4180e06a8380c91b9af1f0604932afddbbf62e8e",
         "textFields": [
           "title",
           "aliases",
@@ -4829,7 +4829,7 @@
         "src-e1d67502167d29ad",
         "src-f6009f51f54778f6"
       ],
-      "contentHash": "sha256:67eab38e700924c9e843db40b2024cbc974c4d8e89e4d4654939d92aa82fc758",
+      "contentHash": "sha256:0df60685047df44a25fd147323e04404656a8cbdba1e8abae23ba41fbe133eaa",
       "file": "Qiao_Xinbao_zh.md",
       "footnoteSourceIds": [
         "src-264e39cbec8d2f89",
@@ -4846,12 +4846,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05",
+        "reviewedAt": "2026-10-09T05:51:42.578Z",
+        "reviewDue": "2027-01-07",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-07T07:07:23.930Z",
+      "modifiedAt": "2026-10-09T05:51:11.560Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Angela_Yingjun_Zhang_zh",
@@ -4908,12 +4908,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "乔鑫宝",
       "type": "博士生",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
+      "reviewedAt": "2026-10-09T05:51:42.578Z",
+      "reviewDue": "2027-01-07",
       "retrieval": {
         "documentId": "wiki:Qiao_Xinbao_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:67eab38e700924c9e843db40b2024cbc974c4d8e89e4d4654939d92aa82fc758",
+        "contentHash": "sha256:0df60685047df44a25fd147323e04404656a8cbdba1e8abae23ba41fbe133eaa",
         "textFields": [
           "title",
           "aliases",
@@ -7138,7 +7138,7 @@
         "src-e1d67502167d29ad",
         "src-f6009f51f54778f6"
       ],
-      "contentHash": "sha256:f5142daf8bce2787124f0120522f50f75ede3a74df0b93a09401729b1231f907",
+      "contentHash": "sha256:843b7db9a95eb06f502928ea4525c862169be5c709827ff5103c4293a4bd7250",
       "file": "Xinbao_Qiao.md",
       "footnoteSourceIds": [
         "src-264e39cbec8d2f89",
@@ -7155,12 +7155,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05",
+        "reviewedAt": "2026-10-09T05:51:42.578Z",
+        "reviewDue": "2027-01-07",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-07T07:07:23.993Z",
+      "modifiedAt": "2026-10-09T05:51:11.717Z",
       "outgoing": [
         "AI_and_Networks",
         "Angela_Yingjun_Zhang",
@@ -7217,12 +7217,12 @@
       "timestamp": "2026-06-13T20:46:02+08:00",
       "title": "Xinbao Qiao",
       "type": "PhD student",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
+      "reviewedAt": "2026-10-09T05:51:42.578Z",
+      "reviewDue": "2027-01-07",
       "retrieval": {
         "documentId": "wiki:Xinbao_Qiao",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:f5142daf8bce2787124f0120522f50f75ede3a74df0b93a09401729b1231f907",
+        "contentHash": "sha256:843b7db9a95eb06f502928ea4525c862169be5c709827ff5103c4293a4bd7250",
         "textFields": [
           "title",
           "aliases",

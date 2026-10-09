@@ -60,6 +60,21 @@ function paperAcceptance({ date, dateTime, href, papers, venue }: PaperAcceptanc
 // Canonical ordered event data for both the homepage Updates disclosure and
 // the readable Latest updates page linked under Contribute.
 const siteUpdateEvents: readonly SiteUpdateEvent[] = [
+  {
+    dateTime: '2026-10',
+    en: {
+      date: 'Oct 2026',
+      detail: 'Recognition for contributions to peer review.',
+      href: '/wiki/Xinbao_Qiao/#section-academic-service',
+      title: 'Recognized as a NeurIPS 2026 Top Reviewer'
+    },
+    zh: {
+      date: '2026年10月',
+      detail: '乔鑫宝因 NeurIPS 2026 审稿贡献获得认可。',
+      href: '/wiki/Qiao_Xinbao_zh/#section-%E5%AD%A6%E6%9C%AF%E6%9C%8D%E5%8A%A1',
+      title: '获 NeurIPS 2026 Top Reviewer 荣誉'
+    }
+  },
   paperAcceptance({
     date: { en: 'Sep 2026', zh: '2026年9月' },
     dateTime: '2026-09',

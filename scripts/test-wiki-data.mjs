@@ -1717,8 +1717,8 @@ function footnoteDefs(body) {
   return [...body.matchAll(/^\[\^([^\]]+)\]:/gm)].map((match) => match[1]);
 }
 
-assert.deepEqual(footnoteDefs(home).sort(), ['cuhk-ie', 'qiao-ciao', 'xinbao-name', 'xinbao-qiao-bridge'].sort(), 'English biography keeps only essential footnotes');
-assert.deepEqual(footnoteDefs(zhHome).sort(), ['cuhk-ie-zh', 'qiao-ciao-zh', 'xinbao-name-zh', 'xinbao-qiao-bridge-zh'].sort(), 'Chinese biography keeps only essential footnotes');
+assert.deepEqual(footnoteDefs(home).sort(), ['cuhk-ie', 'neurips-top-reviewer', 'qiao-ciao', 'xinbao-name', 'xinbao-qiao-bridge'].sort(), 'English biography keeps only essential footnotes');
+assert.deepEqual(footnoteDefs(zhHome).sort(), ['cuhk-ie-zh', 'neurips-top-reviewer-zh', 'qiao-ciao-zh', 'xinbao-name-zh', 'xinbao-qiao-bridge-zh'].sort(), 'Chinese biography keeps only essential footnotes');
 assert.deepEqual(footnoteRefs(home).slice(0, 3), ['xinbao-name', 'qiao-ciao', 'xinbao-qiao-bridge'], 'English biography orders visible name footnotes as Xinbao, Ciao, bridge');
 assert.deepEqual(footnoteRefs(zhHome).slice(0, 3), ['xinbao-name-zh', 'qiao-ciao-zh', 'xinbao-qiao-bridge-zh'], 'Chinese biography orders visible name footnotes as Xinbao, Ciao, bridge');
 assert.match(home, /\*\*Xinbao Qiao\*\*\[\^xinbao-name\]\[\^qiao-ciao\]\[\^xinbao-qiao-bridge\]/, 'English biography attaches the reordered name footnotes to the romanized name');
@@ -2571,7 +2571,7 @@ assert.match(cvTex, /M\.Eng\. in Artificial Intelligence/, 'CV PDF source record
 assert.doesNotMatch(cvTex, /M\.Sc\. in Artificial Intelligence/, 'CV PDF source avoids the incorrect ZJU M.Sc. wording');
 assert.match(cvTex, /Open-Source Contributions and Academic Service/, 'CV PDF source labels service as academic service');
 assert.doesNotMatch(cvTex, /Open-Source Contributions and Services|Peer-Reviewing/, 'CV PDF source avoids vague service and peer-reviewing labels');
-assert.match(cvTex, /Academic service, 2026\}\{reviewer for ICML, NeurIPS, and AAAI\.\}/, 'CV PDF source lists 2026 academic service by year');
+assert.match(cvTex, /Academic service, 2026\}\{reviewer for ICML, NeurIPS, and AAAI[.;]/, 'CV PDF source lists 2026 academic service by year');
 assert.match(cvTex, /Academic service, 2025\}\{reviewer for NeurIPS, ICLR, AAAI, and IEEE TNNLS\.\}/, 'CV PDF source lists 2025 academic service by year');
 assert.match(cvTex, /When[\s\S]*Sample Selection Bias[\s\S]*Model Collapse[\s\S]*ICML,? 2026/, 'CV updates model-collapse paper status');
 assert.doesNotMatch(cvTex, /withheld\s+LLM\s+manuscript/i, 'CV omits withheld manuscript notes');
