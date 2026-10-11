@@ -147,7 +147,7 @@ docs/                    standards, deployment and chat operations
 ## Trust is a product feature
 
 - **Evidence boundary:** grounded answers require validated citations; conversational replies cannot invent numbered Wiki sources.
-- **Privacy boundary:** Xinbaopedia-owned Redis and logs do not store raw questions, chat history, raw IP addresses, original visitor coordinates, system prompts, private voice configuration, or API keys. The public activity map exposes lifetime signed-browser HLL aggregates and quantized, thresholded map cells. Private daily aggregates retain country/region/city, public-page, referring-hostname and coarse device counts for 90 calendar days, with maintainer-authenticated reporting; no individual visit history is stored. A server-verified browser exclusion follows that browser across regions. The hosting platform still processes request IPs under its policies. The current chat message is still sent to the configured provider under its policies. See the [site-activity data contract](docs/site-activity/README.md).
+- **Privacy boundary:** Xinbaopedia-owned Redis and logs do not store raw questions, chat history, original visitor coordinates, system prompts, private voice configuration, or API keys. The public activity map exposes lifetime signed-browser HLL aggregates and quantized, thresholded map cells. Private daily aggregates retain country/region/city, public-page, referring-hostname and coarse device counts for 90 calendar days. Separate maintainer-only visit records retain server receipt time, the trusted Vercel request IP when available, approximate region/city, public page, referring hostname and coarse device labels for 30 calendar days, capped at 2,000 records per day with reported overflow. These records are not public or a complete HTTP access log. A server-verified browser exclusion follows that browser across regions. The hosting platform still processes request IPs under its policies. The current chat message is still sent to the configured provider under its policies. See the [site-activity data contract](docs/site-activity/README.md).
 - **Knowledge boundary:** hidden pages never enter public routes, OKF, or LLM retrieval.
 - **Release boundary:** every production promotion must pass content, retrieval, grounded-answer, page-context, conversation, and sensitive-request canaries on an immutable preview.
 
@@ -311,7 +311,7 @@ docs/                    标准、部署和 AI 运维文档
 ## 可信本身就是产品能力
 
 - **证据边界：** grounded 回答必须通过引用验证；普通对话不能虚构带编号的 Wiki 来源。
-- **隐私边界：** Xinbaopedia 自有 Redis 与日志不保存原始问题、聊天历史、原始 IP、原始访客坐标、系统提示、私有语气配置或 API key。公开访问地图展示全历史签名浏览器的 HLL 聚合，以及经过量化和阈值保护的地图单元。私有按日汇总保留 90 个日历日的国家／地区、城市、公开页面、来源域名和粗略设备类别统计，仅允许管理员认证查询，不保存个人逐次访问轨迹。经服务端验证的浏览器排除设置会在更换地区后继续生效。托管平台仍会按其政策处理请求 IP。当前聊天消息仍会发送给配置的模型服务。详见[访问地图数据契约](docs/site-activity/README.md)。
+- **隐私边界：** Xinbaopedia 自有 Redis 与日志不保存原始问题、聊天历史、原始访客坐标、系统提示、私有语气配置或 API key。公开访问地图展示全历史签名浏览器的 HLL 聚合，以及经过量化和阈值保护的地图单元。私有按日汇总继续保留 90 个日历日。另有仅管理员可查询的逐次访问记录，保留服务端收到请求的时间、可用的 Vercel 可信请求 IP、推算地区／城市、公开页面、来源域名和粗略设备类别，保留 30 个日历日，每天最多 2,000 条并报告超限情况。这些记录不公开，也不是完整 HTTP 访问日志。经服务端验证的浏览器排除设置会在更换地区后继续生效。托管平台仍会按其政策处理请求 IP。当前聊天消息仍会发送给配置的模型服务。详见[访问地图数据契约](docs/site-activity/README.md)。
 - **知识边界：** 隐藏页不会进入公开路由、OKF 或 LLM 检索。
 - **发布边界：** 每次 production promotion 前必须在 immutable preview 上通过完整 canary。
 

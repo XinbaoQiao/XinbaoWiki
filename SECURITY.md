@@ -44,8 +44,8 @@ bounty program.
 
 The public homepage activity map uses a signed random first-party browser
 cookie, Redis HyperLogLog aggregates, and coarse geographic cells. The
-Xinbaopedia application does not store the raw request IP or the original
-IP-derived latitude/longitude for this feature. Public map geography is quantized before
+public map aggregates do not store the raw request IP or the original
+IP-derived latitude/longitude. Public map geography is quantized before
 storage, and totals and map cells remain suppressed until at least two signed
 browser identifiers have contributed. Versioned lifetime aggregate keys are
 retained until an explicit maintainer reset; they cannot enumerate or delete an
@@ -61,9 +61,23 @@ requires the server-only maintainer bearer token and uses `private, no-store`;
 public map responses do not expose the daily dimensions. Retention or report
 authorization failures are in scope for security reports.
 
+Separate private visit records store server receipt timestamps, the validated
+Vercel forwarding IP when available, approximate country/region/city, public
+page, referring hostname and coarse device labels. These are personal metadata,
+not anonymous data. They expire on a fixed Tokyo calendar-day boundary after
+30 days, with at most 2,000 records per day and an explicit overflow counter.
+Only the existing server-only maintainer bearer credential grants access;
+responses are private/no-store/noindex. No raw cookies, stable browser ID,
+complete user agent, coordinates, URL query/fragment, or authorization header
+is stored. Automation and verified owner exclusions precede event storage.
+Missing maintainer configuration disables event writes. Public map endpoints
+never expose these records. This change begins collecting only after deployment
+and cannot reconstruct earlier visits. See the event contract and query examples
+in `docs/site-activity/README.md`.
+
 To prevent trivial inflation by repeatedly discarding the browser cookie,
 Vercel requests use the trusted forwarding IP only long enough to derive a
-keyed one-hour rate-limit digest. The raw IP is not written to Redis or logs;
+keyed one-hour rate-limit digest. Rate-limit keys and application logs never contain raw IPs;
 the short-lived digest is pseudonymous abuse-control data and never appears in
 the public map response.
 
@@ -102,7 +116,8 @@ Examples of in-scope reports include:
 - practical bypasses of abuse controls that threaten service availability or
   cause material provider cost;
 - storage or disclosure of raw questions, chat history, raw IP addresses, or
-  other data outside the documented metadata policy;
+  other data outside the documented metadata policy, including public disclosure
+  or excessive retention of the private visit records;
 - cross-user disclosure or manipulation of Redis-backed quota or usage data;
 - prompt-injection or citation-integrity failures with a concrete
   confidentiality, integrity, or availability impact;

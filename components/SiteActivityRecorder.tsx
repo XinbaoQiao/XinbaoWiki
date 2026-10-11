@@ -17,12 +17,13 @@ export function SiteActivityRecorder() {
     lastPath.current = pathname;
     let referrer = '';
     try { referrer = new URL(document.referrer).hostname; } catch { /* Direct or suppressed referrer. */ }
+    const eventId = typeof crypto.randomUUID === 'function' ? crypto.randomUUID() : '';
     // Serialize pings so a quick navigation uses the cookie minted by the first.
     pending.current = pending.current.then(async () => {
       try {
         await fetch(`${basePath}${SITE_ACTIVITY_API_PATH}`, {
           cache: 'no-store', credentials: 'same-origin', keepalive: true, method: 'POST',
-          headers: { 'x-site-activity-page': pathname, 'x-site-activity-referrer': referrer },
+          headers: { 'x-site-activity-page': pathname, 'x-site-activity-referrer': referrer, 'x-site-activity-event-id': eventId },
           signal: AbortSignal.timeout(10_000)
         });
       } catch { /* Statistics must never block navigation. */ }

@@ -26,6 +26,7 @@ import {
   SITE_ACTIVITY_VISITOR_COOKIE_NAME
 } from '@/lib/site-activity-preference';
 import { dailyVisitLabels, recordDailyActivity } from '@/lib/site-activity-daily';
+import { createActivityEvent, recordActivityEvent } from '@/lib/site-activity-events';
 import { getPublicManifestSlugs } from '@/lib/wiki-manifest';
 
 export const dynamic = 'force-dynamic';
@@ -257,6 +258,7 @@ function logSiteActivityIssue(message: string) {
 }
 
 export async function POST(request: NextRequest) {
+  const receivedAt = new Date();
   if (!shouldRecordVisit(request)) return privateResponse(204);
   if (!sameOriginRequest(request)) return privateResponse(403);
   if (!(await acceptsEmptyBody(request))) return privateResponse(400);
@@ -298,10 +300,20 @@ export async function POST(request: NextRequest) {
   try {
     await recordDailyActivity(redis, visitor.digest, dailyVisitLabels(
       request.headers, process.env.VERCEL === '1', new URL(request.url).hostname, activityPaths()
-    ));
+    ), receivedAt);
   } catch {
     // Private metrics failure must not undo the existing lifetime count or cookie.
     logSiteActivityIssue('daily aggregation failed');
+  }
+  // Record details independently; failures must never block the page or map.
+  // Require a configured maintainer credential before storing private events.
+  if (process.env.XINBAO_CHAT_ADMIN_TOKEN) {
+    try {
+      await recordActivityEvent(redis, createActivityEvent(request.headers, process.env.VERCEL === '1',
+        new URL(request.url).hostname, activityPaths(), receivedAt), visitor.digest, activitySalt);
+    } catch {
+      logSiteActivityIssue('event recording failed');
+    }
   }
   return response;
 }

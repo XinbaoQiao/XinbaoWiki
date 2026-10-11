@@ -50,8 +50,9 @@ it does not identify people.
    version 1 cookies are reissued in the version 2 envelope with the same
    identifier, so the longer maximum age does not itself duplicate them.
    On Vercel, fresh-cookie issuance is limited per trusted forwarding IP. The
-   rate-limit key is an HMAC digest with a one-hour TTL; the raw IP is neither
-   written to Redis nor used as map data.
+   rate-limit key is an HMAC digest with a one-hour TTL; the raw IP is never
+   used as map data or embedded in rate-limit keys. Separate private event
+   retention is described below.
 3. On Vercel, the server reads platform-provided IP-derived latitude and
    longitude headers, validates them, immediately quantizes them, and discards
    the original values. Local and non-Vercel requests still contribute to the
@@ -127,6 +128,69 @@ This dataset starts with the deployment of daily collection: existing lifetime
 HLLs cannot reconstruct past dates, pages, referring sources or city labels.
 The private fields are never added to the public map response or a public UI.
 
+## Private visit records
+
+Accepted recorder pings also create private event rows when the server has a
+maintainer token configured. The default collector covers an initial page and
+client-side route changes, not every HTTP request, asset, click or second spent
+on a page. JavaScript-disabled visits, blocked or failed recorder requests,
+recognized automation and verified owner browsers can be absent. A bot that
+looks like an ordinary browser may still be recorded. A row is an observed
+browser page ping, not proof of a person or a unique IP.
+
+Each row contains a random event ID, server receipt time in ISO UTC, a validated
+IP from `x-vercel-forwarded-for` only on Vercel (otherwise `null`), approximate
+country/region/city, an allowed public pathname, referring hostname and coarse
+browser/OS/device labels. No coordinates, raw cookies, stable browser identifier,
+complete user agent, URL query/fragment, question text or credential is included.
+Page/referrer headers describe the browser ping and are not independently
+verified navigation history. VPNs, proxies and shared networks affect IP and
+location interpretation. Unknown metadata stays unknown.
+
+Rows are held in separate `xinbao-site-activity:events:v1:<YYYY-MM-DD>` daily
+lists and expire at Tokyo midnight 30 calendar days after the bucket date.
+The current and preceding 29 days are queryable. This is personal metadata,
+not anonymous data. An atomic Lua writer caps rows and deduplication keys at
+2,000 per day. It rejects a duplicate event ID within the same signed browser,
+using an HMAC of browser digest and event ID; the stable digest itself is not
+stored in event rows. Existing daily summaries still count accepted pings,
+including duplicates, and retain their independent 90-day contract.
+Once the cap is reached, a fixed-expiry `droppedPings` counter reports additional
+attempts. Storage failures are reported only as generic server log messages;
+they can also produce missing rows. No claim of complete delivery is made.
+
+`GET /api/site-activity/events/` defaults to today in `Asia/Tokyo`, newest stored
+rows first, and 100 rows per page. It accepts `date=YYYY-MM-DD`, `limit=1..200`,
+`offset=0..2000` and `snapshot=0..2000`. Use the returned `nextOffset` and the
+same `snapshot` on the next request; new rows do not shift the frozen pages.
+When `nextOffset` is `null`, that snapshot is exhausted. A snapshot that has
+expired or become unavailable returns an error, not an empty success.
+`totalStored` can include new arrivals outside a previously frozen snapshot.
+`droppedPings=0` does not establish recorder availability or complete delivery.
+
+Like the daily summary, access requires the server-only
+`XINBAO_CHAT_ADMIN_TOKEN` bearer credential, checked before storage access.
+Unknown, duplicated or credential-bearing query parameters are rejected.
+Responses use `private, no-store` and `noindex, nofollow`, with no cross-origin
+access. Use a named Harness credential profile in a scoped child, never a token
+in command arguments or a URL. These records are not added to the public map
+or knowledge exports. Recording starts after deployment; earlier aggregate
+data cannot be backfilled into event rows or raw IPs.
+
+The local report helper invokes the existing `xinbao-chat` credential profile
+in a child with a parent-enforced timeout. It performs only authenticated GETs:
+
+```powershell
+New-Item -ItemType Directory -Force .cache | Out-Null
+npm run activity:report -- events --date 2026-10-10 --limit 100 --output .cache/activity-events.json
+npm run activity:report -- summary --days 7 --output .cache/activity-summary.json
+```
+
+Use `--offset` and `--snapshot` from the previous response to continue event
+pagination. Private output files stay in ignored `.cache`, never in Wiki
+content, tracked documentation or public assets. The helper does not deploy code
+or change collection settings. Querying the new endpoint requires its deployment.
+
 ## Private maintainer exclusion
 
 The intensity heading below the atlas is an understated control rather than a
@@ -135,7 +199,7 @@ password is sent only in a same-origin JSON request and is verified against the
 server-only `SITE_ACTIVITY_OWNER_PASSWORD_HASH` scrypt envelope; plaintext is
 not included in the client bundle, URL, cookie, Redis, or application logs.
 Wrong attempts are limited to five per 15-minute window using a keyed digest of
-Vercel's trusted forwarding IP. The raw IP is not persisted, and a Redis or
+Vercel's trusted forwarding IP. Owner-password attempts do not persist raw IPs, and a Redis or
 configuration failure fails closed without creating an exclusion.
 
 Successful verification sets a signed `HttpOnly`, `SameSite=Strict`
@@ -167,8 +231,9 @@ date. Migration retains all 1,988 valid five-degree cells in 128-cell batches.
 Public reads are bounded to a deterministic non-geographic subset of 512 cells
 if the lifetime index ever exceeds that display ceiling.
 
-Xinbaopedia-owned Redis and application logs do not store the raw IP address or
-the original latitude/longitude for this feature. The lifetime HLLs cannot
+Public map aggregates and application logs do not store raw IP addresses or
+the original latitude/longitude. Private event rows retain request IPs only
+under the separate 30-day contract above. The lifetime HLLs cannot
 enumerate or delete individual browser digests; resetting the public history
 requires rotating the versioned key prefix and deleting the retired aggregate
 keys. The maintainer owns that reset decision, including any response to
