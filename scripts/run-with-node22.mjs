@@ -2,7 +2,7 @@
 
 import { execFileSync, spawn } from 'node:child_process';
 import { existsSync } from 'node:fs';
-import { delimiter, join } from 'node:path';
+import { delimiter, dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
@@ -13,8 +13,12 @@ if (args.length === 0) {
 }
 
 const requiredMajor = 22;
-const localBin = join(root, '.tools', 'node-v22', 'bin');
-const localNode = join(localBin, 'node');
+const posixNode = join(root, '.tools', 'node-v22', 'bin', 'node');
+const windowsNode = join(root, '.tools', 'runtime', 'node_modules', 'node', 'bin', 'node.exe');
+const localNode = existsSync(posixNode)
+  ? posixNode
+  : process.platform === 'win32' && existsSync(windowsNode) ? windowsNode : posixNode;
+const localBin = dirname(localNode);
 const activeMajor = Number.parseInt(process.versions.node, 10);
 const env = { ...process.env };
 

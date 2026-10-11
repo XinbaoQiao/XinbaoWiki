@@ -152,7 +152,10 @@ function resolveCachedVercelBin() {
     return localBin;
   }
 
-  const cacheRoot = process.env.npm_config_cache || join(homedir(), '.npm');
+  const defaultCache = process.platform === 'win32'
+    ? join(process.env.LOCALAPPDATA || join(homedir(), 'AppData', 'Local'), 'npm-cache')
+    : join(homedir(), '.npm');
+  const cacheRoot = process.env.npm_config_cache || process.env.NPM_CONFIG_CACHE || defaultCache;
   const npxRoot = join(cacheRoot, '_npx');
   if (!existsSync(npxRoot)) {
     return null;
