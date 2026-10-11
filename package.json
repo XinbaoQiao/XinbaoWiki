@@ -44,7 +44,7 @@
     "@upstash/redis": "^1.38.0",
     "gray-matter": "^4.0.3",
     "katex": "^0.16.45",
-    "next": "15.5.20",
+    "next": "15.5.27",
     "react": "19.2.7",
     "react-dom": "19.2.7",
     "react-markdown": "^10.0.0",
@@ -60,8 +60,8 @@
     "typescript": "^5.0.0"
   },
   "overrides": {
-    "js-yaml": "3.15.0",
-    "postcss": "^8.5.10"
+    "js-yaml": "3.15.2",
+    "postcss": "^8.5.23"
   },
   "license": "MIT",
   "repository": {

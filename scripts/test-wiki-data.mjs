@@ -1350,8 +1350,8 @@ for (const file of fs.readdirSync(wikiDir).filter((file) => file.endsWith('.md')
 assert.doesNotMatch(nextConfig, /output:\s*['"]export['"]/, 'Next config no longer forces static export');
 assert.match(nextConfig, /X-Content-Type-Options'[\s\S]*nosniff[\s\S]*X-Frame-Options'[\s\S]*SAMEORIGIN[\s\S]*Referrer-Policy'[\s\S]*strict-origin-when-cross-origin[\s\S]*Permissions-Policy'/, 'Next config applies baseline browser security headers');
 assert.equal(packageJson.engines?.node, '22.x', 'package.json pins the same Node major used by CI and production');
-assert.equal(packageJson.dependencies?.next, '15.5.20', 'package.json pins the patched Next.js 15 release');
-assert.equal(packageJson.overrides?.['js-yaml'], '3.15.0', 'package.json overrides the vulnerable transitive js-yaml release');
+assert.equal(packageJson.dependencies?.next, '15.5.27', 'package.json pins the patched Next.js 15 release');
+assert.equal(packageJson.overrides?.['js-yaml'], '3.15.2', 'package.json overrides the vulnerable transitive js-yaml release');
 assert.match(wikiMarkdownTsx, /import remarkMath from 'remark-math';/, 'Markdown renderer imports remark-math');
 assert.match(wikiMarkdownTsx, /import rehypeKatex from 'rehype-katex';/, 'Markdown renderer imports rehype-katex');
 assert.match(wikiMarkdownTsx, /defaultUrlTransform/, 'Markdown renderer uses react-markdown URL sanitation explicitly');
