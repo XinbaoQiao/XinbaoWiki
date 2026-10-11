@@ -452,6 +452,10 @@ assert.match(packageJson.scripts?.['check:node22'] || '', /lint:content/, 'Node 
 assert.match(packageJson.scripts?.['check:node22'] || '', /lint:okf/, 'Node 22 repository check includes the OKF conformance check');
 assert.match(packageJson.scripts?.['check:node22'] || '', /audit:wiki/, 'Node 22 repository check includes the source and review audit');
 assert.match(packageJson.scripts?.['check:node22'] || '', /eval:wiki-chat/, 'Node 22 repository check includes the production retrieval golden set');
+for (const counts of [wikiGraph.stats.types, maintenanceSchema.currentTypeCounts]) {
+  const types = Object.keys(counts);
+  assert.deepEqual(types, [...types].sort((a, b) => a.localeCompare(b, 'en')), 'generated bilingual type ordering is independent of the host locale');
+}
 assert.equal(pageIndex.schemaVersion, 4, 'wiki page index uses the generated content-maintenance schema');
 assert.equal(pageIndex.okfVersion, '0.1', 'wiki page index declares the OKF target version');
 assert.ok(pageIndex.pages.length >= 80, 'generated page index includes the visible wiki corpus');

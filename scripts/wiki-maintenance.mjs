@@ -5,6 +5,7 @@ import path from 'node:path';
 import process from 'node:process';
 import matter from 'gray-matter';
 
+// Pin collation so generated Wiki/OKF bytes agree on Windows and Linux.
 const root = process.cwd();
 const wikiDir = path.join(root, 'wiki');
 const publicDir = path.join(root, 'public');
@@ -156,7 +157,7 @@ function stableMarkdown(value) {
 function markdownFiles() {
   return fs.readdirSync(wikiDir)
     .filter((file) => file.endsWith('.md'))
-    .sort((a, b) => a.localeCompare(b));
+    .sort((a, b) => a.localeCompare(b, 'en'));
 }
 
 function normalizeSlug(slug) {
@@ -200,7 +201,7 @@ function countBy(items, keyFn) {
     const key = keyFn(item);
     counts[key] = (counts[key] || 0) + 1;
   }
-  return Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a.localeCompare(b)));
+  return Object.fromEntries(Object.entries(counts).sort(([a], [b]) => a.localeCompare(b, 'en')));
 }
 
 function hashString(value) {
@@ -212,7 +213,7 @@ function sortForHash(value) {
   if (!value || typeof value !== 'object') return value;
   return Object.fromEntries(
     Object.keys(value)
-      .sort((a, b) => a.localeCompare(b))
+      .sort((a, b) => a.localeCompare(b, 'en'))
       .map((key) => [key, sortForHash(value[key])])
   );
 }
@@ -373,7 +374,7 @@ function sourceEvidenceForPage(data, content) {
     const key = `${evidence.url}\0${evidence.location}\0${evidence.line || ''}`;
     unique.set(key, evidence);
   }
-  return [...unique.values()].sort((a, b) => `${a.url}:${a.location}:${a.line || 0}`.localeCompare(`${b.url}:${b.location}:${b.line || 0}`));
+  return [...unique.values()].sort((a, b) => `${a.url}:${a.location}:${a.line || 0}`.localeCompare(`${b.url}:${b.location}:${b.line || 0}`, 'en'));
 }
 
 function sourceId(url) {
@@ -423,9 +424,9 @@ function createSourceRegistry(pages, { publicMode = false, attachToPages = false
       pageEvidence.locations.add(evidence.location);
     }
     if (attachToPages) {
-      page.sourceIds = [...pageSourceIds].sort((a, b) => a.localeCompare(b));
-      page.citationSourceIds = [...pageCitationSourceIds].sort((a, b) => a.localeCompare(b));
-      page.footnoteSourceIds = [...pageFootnoteSourceIds].sort((a, b) => a.localeCompare(b));
+      page.sourceIds = [...pageSourceIds].sort((a, b) => a.localeCompare(b, 'en'));
+      page.citationSourceIds = [...pageCitationSourceIds].sort((a, b) => a.localeCompare(b, 'en'));
+      page.footnoteSourceIds = [...pageFootnoteSourceIds].sort((a, b) => a.localeCompare(b, 'en'));
     }
   }
 
@@ -434,11 +435,11 @@ function createSourceRegistry(pages, { publicMode = false, attachToPages = false
       const evidence = [...source.pages.entries()]
         .map(([slug, details]) => ({
           slug,
-          locations: [...details.locations].sort((a, b) => a.localeCompare(b)),
+          locations: [...details.locations].sort((a, b) => a.localeCompare(b, 'en')),
           citation: details.citation,
           footnote: details.footnote
         }))
-        .sort((a, b) => a.slug.localeCompare(b.slug));
+        .sort((a, b) => a.slug.localeCompare(b.slug, 'en'));
       return {
         id: source.id,
         url: source.url,
@@ -449,7 +450,7 @@ function createSourceRegistry(pages, { publicMode = false, attachToPages = false
         evidence
       };
     })
-    .sort((a, b) => a.id.localeCompare(b.id));
+    .sort((a, b) => a.id.localeCompare(b.id, 'en'));
 
   return {
     schemaVersion: SOURCE_REGISTRY_SCHEMA_VERSION,
@@ -573,7 +574,7 @@ function orderFrontmatter(data) {
   for (const key of FIELD_ORDER) {
     if (Object.prototype.hasOwnProperty.call(data, key)) ordered[key] = data[key];
   }
-  for (const key of Object.keys(data).sort((a, b) => a.localeCompare(b))) {
+  for (const key of Object.keys(data).sort((a, b) => a.localeCompare(b, 'en'))) {
     if (!Object.prototype.hasOwnProperty.call(ordered, key)) ordered[key] = data[key];
   }
   return ordered;
@@ -915,8 +916,8 @@ function collect() {
       language: page.language,
       lifecycle: page.lifecycle,
       modifiedAt: page.modifiedAt,
-      outgoing: [...outgoing].sort((a, b) => a.localeCompare(b)),
-      relationTypes: uniqueStrings(edges.filter((edge) => edge.from === page.slug).map((edge) => edge.relation)).sort((a, b) => a.localeCompare(b)),
+      outgoing: [...outgoing].sort((a, b) => a.localeCompare(b, 'en')),
+      relationTypes: uniqueStrings(edges.filter((edge) => edge.from === page.slug).map((edge) => edge.relation)).sort((a, b) => a.localeCompare(b, 'en')),
       slug: page.slug,
       sourceIds: page.sourceIds,
       summary: page.summary,
@@ -945,9 +946,9 @@ function collect() {
   const nodes = [...nodeMap.values()]
     .map((node) => ({
       ...node,
-      backlinks: [...(incoming.get(node.slug) || [])].sort((a, b) => a.localeCompare(b))
+      backlinks: [...(incoming.get(node.slug) || [])].sort((a, b) => a.localeCompare(b, 'en'))
     }))
-    .sort((a, b) => a.slug.localeCompare(b.slug));
+    .sort((a, b) => a.slug.localeCompare(b.slug, 'en'));
 
   for (const node of nodes) {
     if (node.hidden || HOME_SLUGS.has(node.slug)) continue;
@@ -1050,17 +1051,17 @@ function collect() {
     schemaVersion: GRAPH_SCHEMA_VERSION,
     okfVersion: OKF_VERSION,
     nodes,
-    edges: edges.sort((a, b) => `${a.from}:${a.to}:${a.relation}`.localeCompare(`${b.from}:${b.to}:${b.relation}`)),
+    edges: edges.sort((a, b) => `${a.from}:${a.to}:${a.relation}`.localeCompare(`${b.from}:${b.to}:${b.relation}`, 'en')),
     stats: {
       hiddenPages: nodes.filter((node) => node.hidden).length,
-      languages: Object.fromEntries(Object.entries(languageCounts).sort(([a], [b]) => a.localeCompare(b))),
+      languages: Object.fromEntries(Object.entries(languageCounts).sort(([a], [b]) => a.localeCompare(b, 'en'))),
       pages: nodes.length,
       publicPages: publicPages.length,
       relations: edges.length,
-      types: Object.fromEntries(Object.entries(typeCounts).sort(([a], [b]) => a.localeCompare(b))),
+      types: Object.fromEntries(Object.entries(typeCounts).sort(([a], [b]) => a.localeCompare(b, 'en'))),
       warnings: warnings.length
     },
-    warnings: warnings.sort((a, b) => a.localeCompare(b))
+    warnings: warnings.sort((a, b) => a.localeCompare(b, 'en'))
   };
 
   const qualityReport = createQualityReport({
@@ -1077,8 +1078,8 @@ function collect() {
     schemaVersion: PAGE_INDEX_SCHEMA_VERSION,
     okfVersion: OKF_VERSION,
     pages: publicPages.sort((a, b) => {
-      if (a.language !== b.language) return a.language.localeCompare(b.language);
-      return a.title.localeCompare(b.title) || a.slug.localeCompare(b.slug);
+      if (a.language !== b.language) return a.language.localeCompare(b.language, 'en');
+      return a.title.localeCompare(b.title, 'en') || a.slug.localeCompare(b.slug, 'en');
     })
   };
 
@@ -1109,11 +1110,11 @@ function createQualityReport({ duplicateTitles, graph, missingTranslationPairs, 
   const duplicateTitleGroups = [...duplicateTitles.entries()]
     .filter(([, files]) => files.length > 1)
     .map(([key, files]) => ({ key, files }))
-    .sort((a, b) => a.key.localeCompare(b.key));
+    .sort((a, b) => a.key.localeCompare(b.key, 'en'));
   const hiddenNodes = graph.nodes
     .filter((node) => node.hidden)
     .map((node) => ({ slug: node.slug, file: node.file, title: node.title, language: node.language }))
-    .sort((a, b) => a.slug.localeCompare(b.slug));
+    .sort((a, b) => a.slug.localeCompare(b.slug, 'en'));
   const pagesWithSources = visibleNodes.filter((node) => node.sourceIds.length > 0);
   const pagesWithBodyCitations = visibleNodes.filter((node) => node.citationSourceIds.length > 0);
   const pagesWithFootnoteCitations = visibleNodes.filter((node) => node.footnoteSourceIds.length > 0);
@@ -1133,7 +1134,7 @@ function createQualityReport({ duplicateTitles, graph, missingTranslationPairs, 
   const nextReviewDue = visibleNodes
     .map((node) => node.reviewDue)
     .filter((value) => value && value >= REVIEW_AS_OF)
-    .sort((a, b) => a.localeCompare(b))[0] || null;
+    .sort((a, b) => a.localeCompare(b, 'en'))[0] || null;
 
   return {
     schemaVersion: QUALITY_REPORT_SCHEMA_VERSION,
@@ -1158,12 +1159,12 @@ function createQualityReport({ duplicateTitles, graph, missingTranslationPairs, 
       ? missingTranslationPairs.filter((pair) => graph.nodes.some((node) => node.slug === pair.source && !node.hidden))
       : missingTranslationPairs,
     translationConsistency: {
-      warnings: publicMode ? [] : translationWarnings.sort((a, b) => a.localeCompare(b)),
+      warnings: publicMode ? [] : translationWarnings.sort((a, b) => a.localeCompare(b, 'en')),
       missingPairs: publicMode
         ? missingTranslationPairs.filter((pair) => graph.nodes.some((node) => node.slug === pair.source && !node.hidden))
         : missingTranslationPairs
     },
-    structuredRelationCounts: Object.fromEntries(Object.entries(structuredRelationCounts).sort(([a], [b]) => a.localeCompare(b))),
+    structuredRelationCounts: Object.fromEntries(Object.entries(structuredRelationCounts).sort(([a], [b]) => a.localeCompare(b, 'en'))),
     sourceCoverage: {
       pages: visibleNodes.length,
       pagesWithSources: pagesWithSources.length,
@@ -1365,9 +1366,9 @@ function createOkfIndex(index) {
     ''
   ];
 
-  for (const [type, pages] of [...byType.entries()].sort(([a], [b]) => a.localeCompare(b))) {
+  for (const [type, pages] of [...byType.entries()].sort(([a], [b]) => a.localeCompare(b, 'en'))) {
     lines.push(`### ${type}`, '');
-    for (const page of pages.sort((a, b) => a.title.localeCompare(b.title) || a.slug.localeCompare(b.slug))) {
+    for (const page of pages.sort((a, b) => a.title.localeCompare(b.title, 'en') || a.slug.localeCompare(b.slug, 'en'))) {
       lines.push(`- [${page.title}](concepts/${page.slug}.md) - ${page.summary}`);
     }
     lines.push('');
@@ -1387,7 +1388,7 @@ function createOkfBundle({ files, graph, index, pages, qualityReport, schema, so
   const publicSlugSet = new Set(publicPages.map((page) => page.slug));
   const sourceRegistry = createSourceRegistry(pages, { publicMode: true });
   const conceptFiles = {};
-  for (const page of publicPages.sort((a, b) => a.slug.localeCompare(b.slug))) {
+  for (const page of publicPages.sort((a, b) => a.slug.localeCompare(b.slug, 'en'))) {
     conceptFiles[`${page.slug}.md`] = createOkfConceptMarkdown(page, publicSlugSet);
   }
   const publicNodeSet = new Set(index.pages.map((page) => page.slug));
@@ -1422,7 +1423,7 @@ function createOkfBundle({ files, graph, index, pages, qualityReport, schema, so
     sourceRegistry,
     structuredRelationCounts: Object.fromEntries(
       [...STRUCTURED_RELATIONS]
-        .sort((a, b) => a.localeCompare(b))
+        .sort((a, b) => a.localeCompare(b, 'en'))
         .map((relation) => [relation, publicGraph.edges.filter((edge) => edge.relation === relation).length])
     ),
     translationWarnings: qualityReport.translationConsistency.warnings
