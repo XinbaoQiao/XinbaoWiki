@@ -2667,10 +2667,14 @@
     },
     {
       "aliases": [],
-      "citationSourceIds": [],
-      "contentHash": "sha256:e0d2648cb02319ac9826e60cda5da663655894e53eb671c1be8360a9335a6287",
+      "citationSourceIds": [
+        "src-af06ca5886446072"
+      ],
+      "contentHash": "sha256:5568279effa89e5b3bb57c8f94c85ba3100a14bc5d773b4520d0e04d5fa3c2cf",
       "file": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md",
-      "footnoteSourceIds": [],
+      "footnoteSourceIds": [
+        "src-af06ca5886446072"
+      ],
       "hidden": false,
       "language": "en",
       "lifecycle": {
@@ -2678,12 +2682,12 @@
         "confidence": 0.95,
         "review": "on venue/status change",
         "retention": "long-lived semantic memory",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07",
+        "reviewedAt": "2026-10-11T14:22:50.689Z",
+        "reviewDue": "2027-10-11",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-07T07:07:23.889Z",
+      "modifiedAt": "2026-10-11T14:22:08.132Z",
       "outgoing": [
         "LLM_Reliability",
         "Trustworthy_AI",
@@ -2694,10 +2698,13 @@
       ],
       "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
       "sourceIds": [
+        "src-19ed8d8ac2a744f7",
+        "src-2d7834852d5a70ca",
+        "src-af06ca5886446072",
         "src-b005562340a1c871",
         "src-d48b0fa9ae43a703"
       ],
-      "summary": "NeurIPS 2026 paper on illusory pattern perception and spurious inference in large language models.",
+      "summary": "NeurIPS 2026 paper comparing LLM and human illusory pattern perception across three psychological tasks, with sparse autoencoder feature analysis.",
       "tags": [
         "en",
         "publication",
@@ -2709,12 +2716,12 @@
       "timestamp": "2026-09-25T13:49:35+09:00",
       "title": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
       "type": "publication",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-10-07",
+      "reviewedAt": "2026-10-11T14:22:50.689Z",
+      "reviewDue": "2027-10-11",
       "retrieval": {
         "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:e0d2648cb02319ac9826e60cda5da663655894e53eb671c1be8360a9335a6287",
+        "contentHash": "sha256:5568279effa89e5b3bb57c8f94c85ba3100a14bc5d773b4520d0e04d5fa3c2cf",
         "textFields": [
           "title",
           "aliases",
@@ -2747,10 +2754,14 @@
     },
     {
       "aliases": [],
-      "citationSourceIds": [],
-      "contentHash": "sha256:9f5b1aba471881db05fbe70afb44b584137bbb00b9cd7b37fc9362d35de3540b",
+      "citationSourceIds": [
+        "src-af06ca5886446072"
+      ],
+      "contentHash": "sha256:6248b4d648481ac2ca59b50d984755a2510b7422b9359c59499eb38fc09a8167",
       "file": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md",
-      "footnoteSourceIds": [],
+      "footnoteSourceIds": [
+        "src-af06ca5886446072"
+      ],
       "hidden": false,
       "language": "zh",
       "lifecycle": {
@@ -2758,12 +2769,12 @@
         "confidence": 0.95,
         "review": "on venue/status change",
         "retention": "long-lived semantic memory",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07",
+        "reviewedAt": "2026-10-11T14:22:50.689Z",
+        "reviewDue": "2027-10-11",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-07T07:07:23.888Z",
+      "modifiedAt": "2026-10-11T14:22:08.131Z",
       "outgoing": [
         "LLM_Reliability_zh",
         "Qiao_Xinbao_zh",
@@ -2774,10 +2785,13 @@
       ],
       "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
       "sourceIds": [
+        "src-19ed8d8ac2a744f7",
+        "src-2d7834852d5a70ca",
+        "src-af06ca5886446072",
         "src-b005562340a1c871",
         "src-d48b0fa9ae43a703"
       ],
-      "summary": "NeurIPS 2026 论文，研究错觉模式感知与大语言模型的虚假推理。",
+      "summary": "NeurIPS 2026 论文，通过三个心理任务比较大语言模型与人类的错觉模式感知，并用稀疏自编码器分析相关特征。",
       "tags": [
         "zh",
         "publication",
@@ -2789,12 +2803,12 @@
       "timestamp": "2026-09-25T13:49:35+09:00",
       "title": "错觉模式感知驱动大语言模型的虚假推理",
       "type": "publication",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-10-07",
+      "reviewedAt": "2026-10-11T14:22:50.689Z",
+      "reviewDue": "2027-10-11",
       "retrieval": {
         "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:9f5b1aba471881db05fbe70afb44b584137bbb00b9cd7b37fc9362d35de3540b",
+        "contentHash": "sha256:6248b4d648481ac2ca59b50d984755a2510b7422b9359c59499eb38fc09a8167",
         "textFields": [
           "title",
           "aliases",
@@ -4631,12 +4645,15 @@
     {
       "aliases": [],
       "citationSourceIds": [
+        "src-19ed8d8ac2a744f7",
+        "src-2d7834852d5a70ca",
         "src-508cc93a8723d9eb",
         "src-766234e11681dad2",
         "src-998b6c4324199ad3",
+        "src-af06ca5886446072",
         "src-b005562340a1c871"
       ],
-      "contentHash": "sha256:5951475666a39aaf9dcf488bdd5553c8b52bc48a9e780e78c30effb25b36dd45",
+      "contentHash": "sha256:c4bf8438be358920f3c61d6013d38a60b5d65b3e0e3cc0151c5fd83197dacd63",
       "file": "Publications.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -4646,12 +4663,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-10-07T06:43:53.160Z",
-        "reviewDue": "2027-01-05",
+        "reviewedAt": "2026-10-11T14:22:50.689Z",
+        "reviewDue": "2027-01-09",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-07T06:42:08.606Z",
+      "modifiedAt": "2026-10-11T14:16:35.894Z",
       "outgoing": [
         "AI_and_Networks",
         "Data_Centric_Machine_Learning",
@@ -4672,9 +4689,12 @@
       ],
       "slug": "Publications",
       "sourceIds": [
+        "src-19ed8d8ac2a744f7",
+        "src-2d7834852d5a70ca",
         "src-508cc93a8723d9eb",
         "src-766234e11681dad2",
         "src-998b6c4324199ad3",
+        "src-af06ca5886446072",
         "src-b005562340a1c871"
       ],
       "summary": "Publication list for Qiao Xinbao.",
@@ -4687,12 +4707,12 @@
       "timestamp": "2026-06-01T22:00:31+08:00",
       "title": "Publications",
       "type": "Publication list",
-      "reviewedAt": "2026-10-07T06:43:53.160Z",
-      "reviewDue": "2027-01-05",
+      "reviewedAt": "2026-10-11T14:22:50.689Z",
+      "reviewDue": "2027-01-09",
       "retrieval": {
         "documentId": "wiki:Publications",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:5951475666a39aaf9dcf488bdd5553c8b52bc48a9e780e78c30effb25b36dd45",
+        "contentHash": "sha256:c4bf8438be358920f3c61d6013d38a60b5d65b3e0e3cc0151c5fd83197dacd63",
         "textFields": [
           "title",
           "aliases",
@@ -4721,12 +4741,15 @@
     {
       "aliases": [],
       "citationSourceIds": [
+        "src-19ed8d8ac2a744f7",
+        "src-2d7834852d5a70ca",
         "src-508cc93a8723d9eb",
         "src-766234e11681dad2",
         "src-998b6c4324199ad3",
+        "src-af06ca5886446072",
         "src-b005562340a1c871"
       ],
-      "contentHash": "sha256:4530306087fd45f32510361481d7dc6fc5aaf279abbe95e83954629ec7ea8a0b",
+      "contentHash": "sha256:ab5e4d6c2f6affa244649151bce59bd28568ee1a3242263807d1d48b290b99fb",
       "file": "Publications_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -4736,12 +4759,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-10-07T06:43:53.160Z",
-        "reviewDue": "2027-01-05",
+        "reviewedAt": "2026-10-11T14:22:50.689Z",
+        "reviewDue": "2027-01-09",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-07T06:42:08.606Z",
+      "modifiedAt": "2026-10-11T14:16:35.894Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -4762,9 +4785,12 @@
       ],
       "slug": "Publications_zh",
       "sourceIds": [
+        "src-19ed8d8ac2a744f7",
+        "src-2d7834852d5a70ca",
         "src-508cc93a8723d9eb",
         "src-766234e11681dad2",
         "src-998b6c4324199ad3",
+        "src-af06ca5886446072",
         "src-b005562340a1c871"
       ],
       "summary": "乔鑫宝的论文索引。",
@@ -4777,12 +4803,12 @@
       "timestamp": "2026-06-01T22:04:00+08:00",
       "title": "论文",
       "type": "论文列表",
-      "reviewedAt": "2026-10-07T06:43:53.160Z",
-      "reviewDue": "2027-01-05",
+      "reviewedAt": "2026-10-11T14:22:50.689Z",
+      "reviewDue": "2027-01-09",
       "retrieval": {
         "documentId": "wiki:Publications_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:4530306087fd45f32510361481d7dc6fc5aaf279abbe95e83954629ec7ea8a0b",
+        "contentHash": "sha256:ab5e4d6c2f6affa244649151bce59bd28568ee1a3242263807d1d48b290b99fb",
         "textFields": [
           "title",
           "aliases",

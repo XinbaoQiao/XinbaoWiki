@@ -33,7 +33,7 @@
     },
     "meaning": "Registry generation proves declaration and page association, not remote availability or factual correctness"
   },
-  "contentHash": "sha256:7a54065ea7964793d314f46cb46a01555a089d36b1d7f6429ec213972f3cc0dd",
+  "contentHash": "sha256:0f957c52c8e0b69e43c2714228a2665bca8df98dae1d02974776c9719ed5d605",
   "sources": [
     {
       "id": "src-03bf1b2f9af65762",
@@ -459,6 +459,63 @@
       ]
     },
     {
+      "id": "src-19ed8d8ac2a744f7",
+      "url": "https://github.com/NusIoraPrivacy/illusory",
+      "kind": "code-repository",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:19ed8d8ac2a744f7b95bd909bed68777867ef11013ffa30c16656e0716f4801e"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+        "Publications",
+        "Publications_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+          "locations": [
+            "frontmatter.links[4].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+          "locations": [
+            "frontmatter.links[4].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        }
+      ]
+    },
+    {
       "id": "src-264e39cbec8d2f89",
       "url": "https://huggingface.co/MrCiao",
       "kind": "public-profile",
@@ -533,6 +590,63 @@
             "frontmatter.links[0].url"
           ],
           "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-2d7834852d5a70ca",
+      "url": "https://arxiv.org/pdf/2610.07791",
+      "kind": "scholarly-publication",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:2d7834852d5a70caacc16d6a1662f670b55280f3f33cc1d87f7c37ce3a082f07"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+        "Publications",
+        "Publications_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+          "locations": [
+            "frontmatter.links[3].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+          "locations": [
+            "frontmatter.links[3].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
           "footnote": false
         }
       ]
@@ -1975,6 +2089,65 @@
             "frontmatter.links[2].url"
           ],
           "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-af06ca5886446072",
+      "url": "https://arxiv.org/abs/2610.07791",
+      "kind": "scholarly-publication",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:af06ca58864460721461d32eb92eb4adb311aafdd2f662327794ab181a7f6ca7"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+        "Publications",
+        "Publications_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
+          "locations": [
+            "body.footnote",
+            "frontmatter.links[2].url"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+          "locations": [
+            "body.footnote",
+            "frontmatter.links[2].url"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
           "footnote": false
         }
       ]

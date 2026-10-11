@@ -1,7 +1,7 @@
 ---
 type: publication
 title: 错觉模式感知驱动大语言模型的虚假推理
-description: NeurIPS 2026 论文，研究错觉模式感知与大语言模型的虚假推理。
+description: NeurIPS 2026 论文，通过三个心理任务比较大语言模型与人类的错觉模式感知，并用稀疏自编码器分析相关特征。
 tags:
   - zh
   - publication
@@ -10,13 +10,13 @@ tags:
   - neurips-2026
   - llm-reliability
 timestamp: '2026-09-25T13:49:35+09:00'
-modified: '2026-10-07T07:07:23.888Z'
-content_hash: 'sha256:9f5b1aba471881db05fbe70afb44b584137bbb00b9cd7b37fc9362d35de3540b'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-10-07'
+modified: '2026-10-11T14:22:08.131Z'
+content_hash: 'sha256:6248b4d648481ac2ca59b50d984755a2510b7422b9359c59499eb38fc09a8167'
+reviewed_at: '2026-10-11T14:22:50.689Z'
+review_due: '2027-10-11'
 name: 错觉模式感知驱动大语言模型的虚假推理
 language: zh
-summary: NeurIPS 2026 论文，研究错觉模式感知与大语言模型的虚假推理。
+summary: NeurIPS 2026 论文，通过三个心理任务比较大语言模型与人类的错觉模式感知，并用稀疏自编码器分析相关特征。
 dates: 2026年12月6日至12日
 authors:
   - Peihua Mai
@@ -35,21 +35,33 @@ links:
     url: 'https://neurips.cc/Conferences/2026'
   - label: OpenReview
     url: 'https://openreview.net/forum?id=VLcmdFfRQc'
+  - label: arXiv
+    url: 'https://arxiv.org/abs/2610.07791'
+  - label: PDF
+    url: 'https://arxiv.org/pdf/2610.07791'
+  - label: Code
+    url: 'https://github.com/NusIoraPrivacy/illusory'
 translation_of: Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models
 ---
-**《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》** 是 Peihua Mai\*、Zhuoyan Shao\*、**[[Xinbao_Qiao|乔鑫宝]]**\*、张萌、Xinyue Zhou 和 Yan Pang 的论文，已获 NeurIPS 2026 录用。论文研究提示中被感知到的模式如何使大语言模型作出缺乏充分证据支持的推理。
+**《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》** 是 Peihua Mai\*、Zhuoyan Shao\*、**[[Xinbao_Qiao|乔鑫宝]]**\*、张萌、Xinyue Zhou 和 Yan Pang 的论文，已获 NeurIPS 2026 录用。论文研究大语言模型如何从随机、无关或不足以支持关系的证据中推断出关联。[^paper]
 
 \* 共同第一作者。
 
 ## 概述
 
-提示中看似存在的规律，未必足以支持所要求的结论。论文考察模型如何沿着这种表面规律作答，而未充分评估与问题相关的证据。
+研究改编经典心理实验，设置社群关联（community correlation）、投资关联（investment correlation）和阴谋信念（conspiracy belief）三个任务，并直接比较大语言模型与人类参与者的行为。
+
+在两个关联任务中，正负信息的比例相同，但不同群体或公司的信息数量不同；阴谋信念任务考察对模糊事件之间因果联系的判断。受测模型经常表现出更强的错觉模式感知，但结果随模型与任务而变化。
+
+论文使用稀疏自编码器（SAE）分析成对提示下的内部特征变化，发现整体频率感知与分析性认知取向相关特征与错觉推理有关。[^paper]
 
 ## 关键启示
 
-- **表面规律不等于证据。** 提示所暗示的模式本身不能决定模型的结论。
-- **可靠推理需要证据支撑。** 当提示诱导模式补全时，应检查回答是否真正由可用证据支持。
-- **提示理解关系到大模型可靠性。** 这一失效模式把模型如何解读输入与输出是否可信联系起来。
+- **信息数量不等于关联证据。** 更常出现的群体或公司可能获得缺乏证据支持的正面关联。
+- **推理可靠性也取决于关系判断。** 准确的单条信息仍可能被组合成缺乏支持的因果解释。
+- **特征分析提供机制线索。** SAE 结果揭示与错觉推理相关的内部信号，结论应限于受测模型与任务。
+
+[^paper]: [arXiv:2610.07791](https://arxiv.org/abs/2610.07791).
 
 ## 定位
 

@@ -140,7 +140,7 @@ Recommended attribution: "Xinbao Qiao and Xinbaopedia contributors, Xinbaopedia,
 ### publication
 
 - [超越二元擦除：用于公平性与鲁棒性的软加权遗忘](concepts/Soft_Weighted_Machine_Unlearning_zh.md) - AAAI 2026 论文，研究用于公平性与鲁棒性修正的软加权机器遗忘。
-- [错觉模式感知驱动大语言模型的虚假推理](concepts/Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md) - NeurIPS 2026 论文，研究错觉模式感知与大语言模型的虚假推理。
+- [错觉模式感知驱动大语言模型的虚假推理](concepts/Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md) - NeurIPS 2026 论文，通过三个心理任务比较大语言模型与人类的错觉模式感知，并用稀疏自编码器分析相关特征。
 - [无 Hessian 在线认证遗忘](concepts/Hessian_Free_Online_Certified_Unlearning_zh.md) - ICLR 2025 论文，研究无显式 Hessian 求逆的高效认证机器遗忘。
 - [样本选择偏差何以促成模型坍缩](concepts/When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md) - ICML 2026 论文，研究低资源验证场景、样本选择偏差、模型坍缩与协作 Wasserstein 几何代理。
 - [Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness](concepts/Soft_Weighted_Machine_Unlearning.md) - AAAI 2026 paper on soft-weighted unlearning for fairness and robustness correction.
@@ -149,7 +149,7 @@ Recommended attribution: "Xinbao Qiao and Xinbaopedia contributors, Xinbaopedia,
 - [DynFrs: An Efficient Framework for Machine Unlearning in Random Forest](concepts/DynFrs.md) - ICLR 2025 paper on efficient machine unlearning for random forests.
 - [DynFrs：随机森林机器遗忘高效框架](concepts/DynFrs_zh.md) - ICLR 2025 论文，研究随机森林中的高效机器遗忘。
 - [Hessian-Free Online Certified Unlearning](concepts/Hessian_Free_Online_Certified_Unlearning.md) - ICLR 2025 paper on efficient Hessian-free certified machine unlearning.
-- [Illusory Pattern Perception Drives Spurious Inference in Large Language Models](concepts/Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md) - NeurIPS 2026 paper on illusory pattern perception and spurious inference in large language models.
+- [Illusory Pattern Perception Drives Spurious Inference in Large Language Models](concepts/Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md) - NeurIPS 2026 paper comparing LLM and human illusory pattern perception across three psychological tasks, with sparse autoencoder feature analysis.
 - [When Sample Selection Bias Precipitates Model Collapse](concepts/When_Sample_Selection_Bias_Precipitates_Model_Collapse.md) - ICML 2026 paper on low-resource verification regimes, sample-selection bias, model collapse, and collaborative Wasserstein-geometry proxies.
 
 ### Publication list

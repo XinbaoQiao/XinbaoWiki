@@ -445,12 +445,12 @@
       }
     ],
     "coverage": 0.4773,
-    "registeredSources": 55
+    "registeredSources": 58
   },
   "citationCoverage": {
     "pages": 88,
-    "pagesWithBodyCitations": 32,
-    "pagesWithFootnoteCitations": 28,
+    "pagesWithBodyCitations": 34,
+    "pagesWithFootnoteCitations": 30,
     "pagesWithoutBodyCitations": [
       {
         "slug": "Certified_Data_Removal",
@@ -643,22 +643,6 @@
         "modifiedAt": "2026-10-07T07:07:23.882Z",
         "reviewedAt": "2026-10-07T07:07:51.129Z",
         "reviewDue": "2027-01-05"
-      },
-      {
-        "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
-        "title": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
-        "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.889Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07"
-      },
-      {
-        "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
-        "title": "错觉模式感知驱动大语言模型的虚假推理",
-        "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.888Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07"
       },
       {
         "slug": "index",
@@ -901,8 +885,8 @@
         "reviewDue": "2027-10-07"
       }
     ],
-    "coverage": 0.3636,
-    "footnoteCoverage": 0.3182
+    "coverage": 0.3864,
+    "footnoteCoverage": 0.3409
   },
   "reviewFreshness": {
     "asOf": "2026-10-05",
@@ -1176,17 +1160,17 @@
         "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "title": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.889Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07"
+        "modifiedAt": "2026-10-11T14:22:08.132Z",
+        "reviewedAt": "2026-10-11T14:22:50.689Z",
+        "reviewDue": "2027-10-11"
       },
       {
         "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "title": "错觉模式感知驱动大语言模型的虚假推理",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.888Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07"
+        "modifiedAt": "2026-10-11T14:22:08.131Z",
+        "reviewedAt": "2026-10-11T14:22:50.689Z",
+        "reviewDue": "2027-10-11"
       },
       {
         "slug": "index",
@@ -1368,17 +1352,17 @@
         "slug": "Publications",
         "title": "Publications",
         "language": "en",
-        "modifiedAt": "2026-10-07T06:42:08.606Z",
-        "reviewedAt": "2026-10-07T06:43:53.160Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-11T14:16:35.894Z",
+        "reviewedAt": "2026-10-11T14:22:50.689Z",
+        "reviewDue": "2027-01-09"
       },
       {
         "slug": "Publications_zh",
         "title": "论文",
         "language": "zh",
-        "modifiedAt": "2026-10-07T06:42:08.606Z",
-        "reviewedAt": "2026-10-07T06:43:53.160Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-11T14:16:35.894Z",
+        "reviewedAt": "2026-10-11T14:22:50.689Z",
+        "reviewDue": "2027-01-09"
       },
       {
         "slug": "Qiao_Xinbao_zh",

@@ -831,7 +831,7 @@
     {
       "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
       "title": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
-      "summary": "NeurIPS 2026 paper on illusory pattern perception and spurious inference in large language models.",
+      "summary": "NeurIPS 2026 paper comparing LLM and human illusory pattern perception across three psychological tasks, with sparse autoencoder feature analysis.",
       "language": "en",
       "type": "publication",
       "tags": [
@@ -843,20 +843,27 @@
         "llm-reliability"
       ],
       "timestamp": "2026-09-25T13:49:35+09:00",
-      "modifiedAt": "2026-10-07T07:07:23.889Z",
-      "contentHash": "sha256:e0d2648cb02319ac9826e60cda5da663655894e53eb671c1be8360a9335a6287",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-10-07",
+      "modifiedAt": "2026-10-11T14:22:08.132Z",
+      "contentHash": "sha256:5568279effa89e5b3bb57c8f94c85ba3100a14bc5d773b4520d0e04d5fa3c2cf",
+      "reviewedAt": "2026-10-11T14:22:50.689Z",
+      "reviewDue": "2027-10-11",
       "sourceIds": [
+        "src-19ed8d8ac2a744f7",
+        "src-2d7834852d5a70ca",
+        "src-af06ca5886446072",
         "src-b005562340a1c871",
         "src-d48b0fa9ae43a703"
       ],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
+      "citationSourceIds": [
+        "src-af06ca5886446072"
+      ],
+      "footnoteSourceIds": [
+        "src-af06ca5886446072"
+      ],
       "retrieval": {
         "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:e0d2648cb02319ac9826e60cda5da663655894e53eb671c1be8360a9335a6287",
+        "contentHash": "sha256:5568279effa89e5b3bb57c8f94c85ba3100a14bc5d773b4520d0e04d5fa3c2cf",
         "textFields": [
           "title",
           "aliases",
@@ -1336,27 +1343,33 @@
         "publication-list"
       ],
       "timestamp": "2026-06-01T22:00:31+08:00",
-      "modifiedAt": "2026-10-07T06:42:08.606Z",
-      "contentHash": "sha256:5951475666a39aaf9dcf488bdd5553c8b52bc48a9e780e78c30effb25b36dd45",
-      "reviewedAt": "2026-10-07T06:43:53.160Z",
-      "reviewDue": "2027-01-05",
+      "modifiedAt": "2026-10-11T14:16:35.894Z",
+      "contentHash": "sha256:c4bf8438be358920f3c61d6013d38a60b5d65b3e0e3cc0151c5fd83197dacd63",
+      "reviewedAt": "2026-10-11T14:22:50.689Z",
+      "reviewDue": "2027-01-09",
       "sourceIds": [
+        "src-19ed8d8ac2a744f7",
+        "src-2d7834852d5a70ca",
         "src-508cc93a8723d9eb",
         "src-766234e11681dad2",
         "src-998b6c4324199ad3",
+        "src-af06ca5886446072",
         "src-b005562340a1c871"
       ],
       "citationSourceIds": [
+        "src-19ed8d8ac2a744f7",
+        "src-2d7834852d5a70ca",
         "src-508cc93a8723d9eb",
         "src-766234e11681dad2",
         "src-998b6c4324199ad3",
+        "src-af06ca5886446072",
         "src-b005562340a1c871"
       ],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Publications",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:5951475666a39aaf9dcf488bdd5553c8b52bc48a9e780e78c30effb25b36dd45",
+        "contentHash": "sha256:c4bf8438be358920f3c61d6013d38a60b5d65b3e0e3cc0151c5fd83197dacd63",
         "textFields": [
           "title",
           "aliases",
@@ -2098,7 +2111,7 @@
     {
       "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
       "title": "错觉模式感知驱动大语言模型的虚假推理",
-      "summary": "NeurIPS 2026 论文，研究错觉模式感知与大语言模型的虚假推理。",
+      "summary": "NeurIPS 2026 论文，通过三个心理任务比较大语言模型与人类的错觉模式感知，并用稀疏自编码器分析相关特征。",
       "language": "zh",
       "type": "publication",
       "tags": [
@@ -2110,20 +2123,27 @@
         "llm-reliability"
       ],
       "timestamp": "2026-09-25T13:49:35+09:00",
-      "modifiedAt": "2026-10-07T07:07:23.888Z",
-      "contentHash": "sha256:9f5b1aba471881db05fbe70afb44b584137bbb00b9cd7b37fc9362d35de3540b",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-10-07",
+      "modifiedAt": "2026-10-11T14:22:08.131Z",
+      "contentHash": "sha256:6248b4d648481ac2ca59b50d984755a2510b7422b9359c59499eb38fc09a8167",
+      "reviewedAt": "2026-10-11T14:22:50.689Z",
+      "reviewDue": "2027-10-11",
       "sourceIds": [
+        "src-19ed8d8ac2a744f7",
+        "src-2d7834852d5a70ca",
+        "src-af06ca5886446072",
         "src-b005562340a1c871",
         "src-d48b0fa9ae43a703"
       ],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
+      "citationSourceIds": [
+        "src-af06ca5886446072"
+      ],
+      "footnoteSourceIds": [
+        "src-af06ca5886446072"
+      ],
       "retrieval": {
         "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:9f5b1aba471881db05fbe70afb44b584137bbb00b9cd7b37fc9362d35de3540b",
+        "contentHash": "sha256:6248b4d648481ac2ca59b50d984755a2510b7422b9359c59499eb38fc09a8167",
         "textFields": [
           "title",
           "aliases",
@@ -2763,27 +2783,33 @@
         "论文列表"
       ],
       "timestamp": "2026-06-01T22:04:00+08:00",
-      "modifiedAt": "2026-10-07T06:42:08.606Z",
-      "contentHash": "sha256:4530306087fd45f32510361481d7dc6fc5aaf279abbe95e83954629ec7ea8a0b",
-      "reviewedAt": "2026-10-07T06:43:53.160Z",
-      "reviewDue": "2027-01-05",
+      "modifiedAt": "2026-10-11T14:16:35.894Z",
+      "contentHash": "sha256:ab5e4d6c2f6affa244649151bce59bd28568ee1a3242263807d1d48b290b99fb",
+      "reviewedAt": "2026-10-11T14:22:50.689Z",
+      "reviewDue": "2027-01-09",
       "sourceIds": [
+        "src-19ed8d8ac2a744f7",
+        "src-2d7834852d5a70ca",
         "src-508cc93a8723d9eb",
         "src-766234e11681dad2",
         "src-998b6c4324199ad3",
+        "src-af06ca5886446072",
         "src-b005562340a1c871"
       ],
       "citationSourceIds": [
+        "src-19ed8d8ac2a744f7",
+        "src-2d7834852d5a70ca",
         "src-508cc93a8723d9eb",
         "src-766234e11681dad2",
         "src-998b6c4324199ad3",
+        "src-af06ca5886446072",
         "src-b005562340a1c871"
       ],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Publications_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:4530306087fd45f32510361481d7dc6fc5aaf279abbe95e83954629ec7ea8a0b",
+        "contentHash": "sha256:ab5e4d6c2f6affa244649151bce59bd28568ee1a3242263807d1d48b290b99fb",
         "textFields": [
           "title",
           "aliases",
