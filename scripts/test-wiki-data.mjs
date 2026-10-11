@@ -1259,7 +1259,7 @@ const releaseStateScript = fs.readFileSync(path.join(root, 'scripts/lib/release-
 const releaseContractScript = fs.readFileSync(path.join(root, 'scripts/release-contract.mjs'), 'utf8');
 const releaseProductionScript = fs.readFileSync(path.join(root, 'scripts/release-production.mjs'), 'utf8');
 const pushMainScript = fs.readFileSync(path.join(root, 'scripts/push-main.mjs'), 'utf8');
-assert.match(ciWorkflow, /apt-get install -y --no-install-recommends imagemagick mupdf-tools/, 'CI installs ImageMagick and mutool for image and CV PDF checks');
+assert.match(ciWorkflow, /apt-get install -y --no-install-recommends imagemagick mupdf-tools poppler-utils/, 'CI installs ImageMagick, mutool and pdfinfo for image and CV PDF checks');
 assert.match(ciWorkflow, /npm audit --omit=dev --audit-level=high/, 'CI blocks high-severity production dependency advisories');
 assert.match(deployProductionScript, /const vercelCliVersion = '54\.18\.7';/, 'deployment wrapper pins a Vercel CLI version with VERCEL_TOKEN env support');
 assert.match(deployProductionScript, /VERCEL_TOKEN is required in the environment/, 'deployment wrapper requires the token through the environment');
