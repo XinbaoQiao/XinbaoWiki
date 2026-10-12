@@ -99,7 +99,8 @@
 \newcommand{\iconarxiv}[1]{\textcolor{#1}{\faSolidIcon{F187}}}
 \newcommand{\iconpaperlink}[1]{\textcolor{#1}{\faSolidIcon{F0C1}}}
 \newcommand{\iconlink}[2]{\href{#1}{#2}}
-\newcommand{\namediconlink}[3]{\href{#1}{\BeginAccSupp{method=escape,ActualText={#2}}#3\EndAccSupp{}}}
+\newcommand{\pubiconslot}[1]{\makebox[9.0pt][c]{#1}}
+\newcommand{\namediconlink}[3]{\pubiconslot{\href{#1}{\BeginAccSupp{method=escape,ActualText={#2}}#3\EndAccSupp{}}}}
 \newcommand{\legendicon}[1]{\BeginAccSupp{method=escape,ActualText={}}#1\EndAccSupp{}}
 \newcommand{\contactSolidIcon}[2]{\textcolor{#1}{\raisebox{0.18pt}{\scalebox{0.84}{{\faSolid\char"#2\relax}}}}}
 \newcommand{\contactBrandIcon}[2]{\textcolor{#1}{\raisebox{0.18pt}{\scalebox{0.84}{{\faBrands\char"#2\relax}}}}}
@@ -179,13 +180,15 @@
    \hspace{3.90pt}{\bfseries #2}, #3\par}%
   \vspace{0.35pt}
 }
-\newcommand{\plinksep}{\hspace{2.3pt}}
+\newcommand{\plinksep}{}
 \newcommand{\pubiconbox}[1]{\raisebox{-0.45pt}[0pt][0pt]{\fontsize{7.05}{7.55}\selectfont #1}}
 \newcommand{\pubright}[2]{%
   \raisebox{-7.95pt}[0pt][0pt]{%
     \makebox[\linewidth][r]{%
-      \if\relax\detokenize{#1}\relax\else{\pubiconbox{#1}}\hspace{6.0pt}\fi
-      {\sourceLight\mdseries\fontsize{8.05}{8.55}\selectfont\itshape\color{cvtext}#2}%
+      % Three 9pt centered icon slots, a 6pt gap, then a fixed left-aligned venue column.
+      % The enclosing right-aligned box preserves the existing outer right edge.
+      \makebox[27.0pt][l]{\pubiconbox{#1}}\hspace{6.0pt}%
+      \makebox[50.0pt][l]{\sourceLight\mdseries\fontsize{8.05}{8.55}\selectfont\itshape\color{cvtext}#2}%
     }%
   }%
 }
