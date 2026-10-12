@@ -32,9 +32,9 @@ const scope = 'xinbaopedia';
 const project = 'xinbaopedia';
 const productionUrl = 'https://xinbaopedia.top';
 const EXPECTED_CHAT_CONTRACT = Object.freeze({
-  backendVersion: 'xinbao-chat-api-v6',
+  backendVersion: 'xinbao-chat-api-v7',
   responsePolicyVersion: 'grounded-conversation-v4',
-  promptVersion: 'xinbao-grounded-conversation-v5',
+  promptVersion: 'xinbao-grounded-conversation-v7',
 });
 const vercelCliVersion = '54.18.7';
 const vercelCliPackage = `vercel@${vercelCliVersion}`;

@@ -21,14 +21,15 @@ hasAll(panel, ['const timeout = setTimeout(() => {', 'timedOut = true;', 'contro
 hasAll(panel, ['function cancelRequest()', 'activeRequestRef.current?.abort();'], 'client cancel button aborts the active request');
 hasAll(panel, ['if (!open) activeRequestRef.current?.abort();', '[open]'], 'closing the panel aborts the active request');
 hasAll(panel, ['setInput(message);', 'setRetryRequest({ message, language });'], 'failed requests preserve the current question and retry target');
-assert.ok(panel.includes('void sendMessage(retryRequest.message, retryRequest.language, false)'), 'one-click retry resends without duplicating the user bubble');
+assert.ok(panel.includes('function rollbackFailedUserMessage'), 'failed sends roll back the optimistic user bubble');
+assert.ok(panel.includes("void sendMessage(retryRequest.message, retryRequest.language, true)"), 'one-click retry re-appends after a failed-bubble rollback');
 hasAll(panel, ['networkError:', 'timeoutError:', 'cancelledError:'], 'client distinguishes network, timeout, and cancelled states');
 hasAll(panel, ['className="chat-xinbao-retry"', 'className="chat-xinbao-cancel"'], 'client exposes retry and cancel controls');
 hasAll(panel, ["typeof data?.limit === 'number'", "typeof data?.remaining === 'number'"], 'client preserves quota updates from all responses');
 
 assert.ok(route.includes("response.headers.set('Retry-After'"), '429 responses can include Retry-After');
-hasAll(route, ['export async function GET', 'let dailyUsage: number;', 'dailyUsage = await readDailyUsage', "logServerIssue('daily quota read failed');", 'return genericUnavailable(visitorCookie);', 'const diagnostic'], 'GET fails unavailable when its daily quota read fails');
-hasAll(route, ['export async function POST', 'let previousDailyCount: number;', 'previousDailyCount = await readDailyUsage', "logServerIssue('daily quota read failed');", 'return genericUnavailable(visitorCookie);', 'if (previousDailyCount >= DAILY_LIMIT)', 'reserveCooldown(redis, cooldownKey)'], 'POST fails unavailable before reservations when its daily quota read fails');
+hasAll(route, ['export async function GET', 'let dailyUsage: number;', 'dailyUsage = await readDailyUsage', "logServerIssue('daily quota read failed');", 'return genericUnavailable(visitorCookie, language);', 'const diagnostic'], 'GET fails unavailable when its daily quota read fails');
+hasAll(route, ['export async function POST', 'let previousDailyCount: number;', 'previousDailyCount = await readDailyUsage', "logServerIssue('daily quota read failed');", 'return genericUnavailable(visitorCookie, language);', 'if (previousDailyCount >= DAILY_LIMIT)', 'reserveCooldown(redis, cooldownKey)'], 'POST fails unavailable before reservations when its daily quota read fails');
 assert.equal(route.match(/logServerIssue\('daily quota read failed'\)/g)?.length, 2, 'GET and POST each log quota read failures without error details');
 const postQuotaReadStart = route.indexOf('let previousDailyCount: number;');
 const postQuotaReadEnd = route.indexOf('if (previousDailyCount >= DAILY_LIMIT)', postQuotaReadStart);
@@ -36,10 +37,10 @@ assert.ok(postQuotaReadStart !== -1 && postQuotaReadEnd > postQuotaReadStart, 'P
 const postQuotaReadBlock = route.slice(postQuotaReadStart, postQuotaReadEnd);
 assert.ok(!/reserveCooldown|refundDailyUsage|clearCooldown/.test(postQuotaReadBlock), 'POST quota-read failure performs no reservation cleanup before any reservation exists');
 hasAll(route, ['previousDailyCount >= DAILY_LIMIT', 'retryAfterSeconds: quotaTtl'], 'daily-limit 429 advertises the daily reset retry window');
-hasAll(route, ['reserveCooldown(redis, cooldownKey)', 'if (!cooldown) return genericUnavailable(visitorCookie);', 'retryAfterSeconds: cooldown.retryAfterSeconds'], 'cooldown Redis failures fail unavailable while cooldown 429 advertises the Redis TTL');
+hasAll(route, ['reserveCooldown(redis, cooldownKey)', 'if (!cooldown) return genericUnavailable(visitorCookie, language);', 'retryAfterSeconds: cooldown.retryAfterSeconds'], 'cooldown Redis failures fail unavailable while cooldown 429 advertises the Redis TTL');
 assert.ok(route.includes("logServerIssue('cooldown reservation failed')"), 'cooldown Redis exceptions are logged instead of converted to rate limits');
-hasAll(route, ['let hourlyIpCount: number;', "logServerIssue('hourly IP reservation failed')", 'await clearCooldown(chatRedis, cooldownKey);', 'return genericUnavailable(visitorCookie);', 'hourlyIpCount > HOURLY_IP_LIMIT', 'retryAfterSeconds:'], 'hourly IP Redis failures clear cooldown and rate-limit rejections still report retry windows');
-hasAll(route, ['let dailyCount: number;', "logServerIssue('daily quota reservation failed')", 'await clearCooldown(chatRedis, cooldownKey);', 'return genericUnavailable(visitorCookie);', 'dailyCount > DAILY_LIMIT', 'retryAfterSeconds: quotaTtl'], 'daily quota Redis failures clear cooldown and quota rejections report retry windows');
+hasAll(route, ['let hourlyIpCount: number;', "logServerIssue('hourly IP reservation failed')", 'await clearCooldown(chatRedis, cooldownKey);', 'return genericUnavailable(visitorCookie, language);', 'hourlyIpCount > HOURLY_IP_LIMIT', 'retryAfterSeconds:'], 'hourly IP Redis failures clear cooldown and rate-limit rejections still report retry windows');
+hasAll(route, ['let dailyCount: number;', "logServerIssue('daily quota reservation failed')", 'await clearCooldown(chatRedis, cooldownKey);', 'return genericUnavailable(visitorCookie, language);', 'dailyCount > DAILY_LIMIT', 'retryAfterSeconds: quotaTtl'], 'daily quota Redis failures clear cooldown and quota rejections report retry windows');
 hasAll(route, ["type ProviderReservationPolicy = 'release' | 'retain'", 'unavailableAfterProvider', "reservationPolicy: ProviderReservationPolicy = 'release'", "if (reservationPolicy === 'release')", 'refundDailyUsage(chatRedis, dailyKeys)', 'clearCooldown(chatRedis, cooldownKey)'], 'provider failure cleanup defaults to releasing quota and cooldown');
 hasAll(route, ["retrieval failed'", 'refundDailyUsage(chatRedis, dailyKeys)', 'clearCooldown(chatRedis, cooldownKey)'], 'internal retrieval failures refund quota and clear cooldown');
 hasAll(route, ['function requestIp', 'x-vercel-forwarded-for', "process.env.VERCEL === '1'", "CHAT_TRUST_PROXY_HEADERS === 'true'", 'x-forwarded-for', 'x-real-ip', 'anonymous-network'], 'proxy IP headers are trusted only inside explicit deployment or env boundaries');

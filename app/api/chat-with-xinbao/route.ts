@@ -18,7 +18,7 @@ export const runtime = 'nodejs';
 
 const MODEL = 'deepseek-v4-flash';
 const DEFAULT_BASE_URL = 'https://api.openlux.ai/v1';
-const CHAT_BACKEND_VERSION = 'xinbao-chat-api-v6';
+const CHAT_BACKEND_VERSION = 'xinbao-chat-api-v7';
 const DAILY_LIMIT = 10;
 const COOLDOWN_SECONDS = 4;
 const HOURLY_IP_LIMIT = 80;
@@ -30,10 +30,27 @@ const QUESTION_LOG_MAX_RECENT = 2_000;
 const QUESTION_LOG_RETENTION_DAYS = 90;
 const QUESTION_LOG_RETENTION_MS = 60 * 60 * 24 * 1_000 * QUESTION_LOG_RETENTION_DAYS;
 const COOKIE_NAME = 'xinbao_chat_vid';
-const UNAVAILABLE_MESSAGE = 'Xinbao AI is temporarily unavailable. Please try again later.';
-const DAILY_LIMIT_MESSAGE = 'Daily limit reached. Please come back tomorrow.';
+const ERROR_COPY = {
+  en: {
+    unavailable: 'Xinbao AI is temporarily unavailable. Please try again later.',
+    dailyLimit: 'Daily limit reached. Please come back tomorrow.',
+    cooldown: 'Please wait a few seconds before sending another message.',
+    hourly: 'Please wait before trying again.'
+  },
+  zh: {
+    unavailable: 'Xinbao AI 暂时不可用，请稍后重试。',
+    dailyLimit: '今日消息次数已用完，请明天再来。',
+    cooldown: '请稍等几秒再发送下一条消息。',
+    hourly: '请求过于频繁，请稍后再试。'
+  }
+} as const;
 
 type ChatLanguage = 'en' | 'zh';
+type ChatErrorKey = keyof typeof ERROR_COPY.en;
+
+function localizedError(language: ChatLanguage, key: ChatErrorKey) {
+  return ERROR_COPY[language][key];
+}
 type ChatResponseMode = 'model-grounded' | 'model-conversational' | 'deterministic-abstention';
 type ProviderReservationPolicy = 'release' | 'retain';
 type ParsedChatBody = { message?: unknown; language?: ChatLanguage };
@@ -126,8 +143,11 @@ function jsonResponse(
   return response;
 }
 
-function genericUnavailable(cookie?: { visitorId: string; shouldSet: boolean }) {
-  return jsonResponse({ error: UNAVAILABLE_MESSAGE }, 503, cookie);
+function genericUnavailable(
+  cookie?: { visitorId: string; shouldSet: boolean },
+  language: ChatLanguage = 'en'
+) {
+  return jsonResponse({ error: localizedError(language, 'unavailable') }, 503, cookie);
 }
 
 function getVisitorId(request: NextRequest) {
@@ -471,9 +491,16 @@ async function recordQuestionLog(
   }
 }
 
-function withXinbaoSignature(reply: string, language: ChatLanguage) {
-  const signature = language === 'zh' ? '喵~' : ' meow~';
+function withXinbaoSignature(
+  reply: string,
+  language: ChatLanguage,
+  tone: 'casual' | 'plain' = 'plain'
+) {
   const trimmed = reply.trim();
+  if (tone !== 'casual') return trimmed;
+  // Light brand sign-off for casual conversation only; never stack onto grounded academic answers.
+  const signature = language === 'zh' ? '喵~' : ' meow~';
+  if (/(?:喵~|meow~)\s*$/i.test(trimmed)) return trimmed;
   const unsigned = trimmed
     .replace(/\s*(?:喵~|meow~)\s*$/i, '')
     .trim()
@@ -484,27 +511,28 @@ function withXinbaoSignature(reply: string, language: ChatLanguage) {
 
 export async function GET(request: NextRequest) {
   const visitorCookie = getVisitorId(request);
+  const language = inferLanguage(request);
   const redis = getRedis();
   if (!redis || !process.env.RATE_LIMIT_SALT) {
     logServerIssue('missing quota configuration');
-    return genericUnavailable(visitorCookie);
+    return genericUnavailable(visitorCookie, language);
   }
 
   const identity = getRequestIdentity(request, visitorCookie.visitorId);
-  if (!identity) return genericUnavailable(visitorCookie);
+  if (!identity) return genericUnavailable(visitorCookie, language);
 
   let dailyUsage: number;
   try {
     dailyUsage = await readDailyUsage(redis, dailyQuotaKeys(tokyoDateKey(), identity));
   } catch {
     logServerIssue('daily quota read failed');
-    return genericUnavailable(visitorCookie);
+    return genericUnavailable(visitorCookie, language);
   }
   const diagnostic = new URL(request.url).searchParams.get('diagnostic') === 'retrieval';
   const modelConfiguration = modelApiConfiguration();
   if (diagnostic && !modelConfiguration.ready) {
     logServerIssue('missing model API configuration');
-    return genericUnavailable(visitorCookie);
+    return genericUnavailable(visitorCookie, language);
   }
   let retrievalHealth: Record<string, unknown> | undefined;
   if (diagnostic) {
@@ -517,7 +545,7 @@ export async function GET(request: NextRequest) {
       };
     } catch {
       logServerIssue('retrieval health failed');
-      return genericUnavailable(visitorCookie);
+      return genericUnavailable(visitorCookie, language);
     }
   }
   return jsonResponse(
@@ -542,26 +570,37 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   const visitorCookie = getVisitorId(request);
   const body = await parseBody(request);
+  const language: ChatLanguage = body?.language ?? inferLanguage(request);
   if (!body || typeof body.message !== 'string') {
-    return jsonResponse({ error: 'Invalid request.' }, 400, visitorCookie);
+    return jsonResponse({
+      error: language === 'zh' ? '请求无效。' : 'Invalid request.'
+    }, 400, visitorCookie);
   }
 
   const message = body.message.trim();
-  if (!message) return jsonResponse({ error: 'Message is required.' }, 400, visitorCookie);
+  if (!message) {
+    return jsonResponse({
+      error: language === 'zh' ? '请输入消息。' : 'Message is required.'
+    }, 400, visitorCookie);
+  }
   if (message.length > MAX_INPUT_LENGTH) {
-    return jsonResponse({ error: `Message must be ${MAX_INPUT_LENGTH} characters or fewer.` }, 400, visitorCookie);
+    return jsonResponse({
+      error: language === 'zh'
+        ? `消息请控制在 ${MAX_INPUT_LENGTH} 个字符以内。`
+        : `Message must be ${MAX_INPUT_LENGTH} characters or fewer.`
+    }, 400, visitorCookie);
   }
 
   const modelConfiguration = modelApiConfiguration();
   const redis = getRedis();
   if (!modelConfiguration.ready || !redis || !process.env.RATE_LIMIT_SALT) {
     logServerIssue('missing server configuration');
-    return genericUnavailable(visitorCookie);
+    return genericUnavailable(visitorCookie, language);
   }
   const chatRedis = redis;
 
   const identity = getRequestIdentity(request, visitorCookie.visitorId);
-  if (!identity) return genericUnavailable(visitorCookie);
+  if (!identity) return genericUnavailable(visitorCookie, language);
 
   const dateKey = tokyoDateKey();
   const dailyKeys = dailyQuotaKeys(dateKey, identity);
@@ -576,11 +615,11 @@ export async function POST(request: NextRequest) {
     previousDailyCount = await readDailyUsage(redis, dailyKeys);
   } catch {
     logServerIssue('daily quota read failed');
-    return genericUnavailable(visitorCookie);
+    return genericUnavailable(visitorCookie, language);
   }
   if (previousDailyCount >= DAILY_LIMIT) {
     return jsonResponse(
-      { error: DAILY_LIMIT_MESSAGE, remaining: 0, limit: DAILY_LIMIT },
+      { error: localizedError(language, 'dailyLimit'), remaining: 0, limit: DAILY_LIMIT },
       429,
       visitorCookie,
       { retryAfterSeconds: quotaTtl }
@@ -588,11 +627,11 @@ export async function POST(request: NextRequest) {
   }
 
   const cooldown = await reserveCooldown(redis, cooldownKey);
-  if (!cooldown) return genericUnavailable(visitorCookie);
+  if (!cooldown) return genericUnavailable(visitorCookie, language);
   if (!cooldown.reserved) {
     return jsonResponse(
       {
-        error: 'Please wait a few seconds before sending another message.',
+        error: localizedError(language, 'cooldown'),
         remaining: Math.max(0, DAILY_LIMIT - previousDailyCount),
         limit: DAILY_LIMIT
       },
@@ -609,12 +648,12 @@ export async function POST(request: NextRequest) {
   } catch {
     logServerIssue('hourly IP reservation failed');
     await clearCooldown(chatRedis, cooldownKey);
-    return genericUnavailable(visitorCookie);
+    return genericUnavailable(visitorCookie, language);
   }
   if (hourlyIpCount > HOURLY_IP_LIMIT) {
     await clearCooldown(chatRedis, cooldownKey);
     return jsonResponse(
-      { error: 'Please wait before trying again.', remaining: Math.max(0, DAILY_LIMIT - previousDailyCount), limit: DAILY_LIMIT },
+      { error: localizedError(language, 'hourly'), remaining: Math.max(0, DAILY_LIMIT - previousDailyCount), limit: DAILY_LIMIT },
       429,
       visitorCookie,
       { retryAfterSeconds: Math.max(1, 60 * 60 - (Math.floor(Date.now() / 1000) % (60 * 60))) }
@@ -627,12 +666,12 @@ export async function POST(request: NextRequest) {
   } catch {
     logServerIssue('daily quota reservation failed');
     await clearCooldown(chatRedis, cooldownKey);
-    return genericUnavailable(visitorCookie);
+    return genericUnavailable(visitorCookie, language);
   }
   if (dailyCount > DAILY_LIMIT) {
     await clearCooldown(chatRedis, cooldownKey);
     return jsonResponse(
-      { error: DAILY_LIMIT_MESSAGE, remaining: 0, limit: DAILY_LIMIT },
+      { error: localizedError(language, 'dailyLimit'), remaining: 0, limit: DAILY_LIMIT },
       429,
       visitorCookie,
       { retryAfterSeconds: quotaTtl }
@@ -641,7 +680,6 @@ export async function POST(request: NextRequest) {
 
   const { apiKey, baseUrl } = modelConfiguration;
   const provider = providerName(baseUrl);
-  const language = body.language ?? inferLanguage(request);
   const pagePath = sanitizeRefererPath(request);
   let retrieval: WikiRetrievalResult;
   try {
@@ -653,7 +691,7 @@ export async function POST(request: NextRequest) {
     logServerIssue('retrieval failed');
     await refundDailyUsage(chatRedis, dailyKeys);
     await clearCooldown(chatRedis, cooldownKey);
-    return genericUnavailable(visitorCookie);
+    return genericUnavailable(visitorCookie, language);
   }
 
   const traceId = crypto.randomUUID();
@@ -735,7 +773,7 @@ export async function POST(request: NextRequest) {
     observe('deterministic-abstention');
     return jsonResponse(
       {
-        reply: withXinbaoSignature(deterministicAbstentionReply(message, language), language),
+        reply: withXinbaoSignature(deterministicAbstentionReply(message, language), language, 'plain'),
         sources: [],
         remaining: Math.max(0, DAILY_LIMIT - dailyCount),
         limit: DAILY_LIMIT,
@@ -804,7 +842,7 @@ export async function POST(request: NextRequest) {
       await refundDailyUsage(chatRedis, dailyKeys);
       await clearCooldown(chatRedis, cooldownKey);
     }
-    return genericUnavailable(visitorCookie);
+    return genericUnavailable(visitorCookie, language);
   }
 
   try {
@@ -832,7 +870,7 @@ export async function POST(request: NextRequest) {
       observe('ok-conversational', { providerAttempts, usage: accumulatedUsage });
       return jsonResponse(
         {
-          reply: withXinbaoSignature(conversationalResult.reply, language),
+          reply: withXinbaoSignature(conversationalResult.reply, language, 'casual'),
           sources: [],
           remaining: Math.max(0, DAILY_LIMIT - dailyCount),
           limit: DAILY_LIMIT,
@@ -903,7 +941,7 @@ export async function POST(request: NextRequest) {
     });
     return jsonResponse(
       {
-        reply: withXinbaoSignature(groundedResult.response.reply, language),
+        reply: withXinbaoSignature(groundedResult.response.reply, language, 'plain'),
         sources: groundedResult.response.sources,
         remaining: Math.max(0, DAILY_LIMIT - dailyCount),
         limit: DAILY_LIMIT,

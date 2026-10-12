@@ -37,9 +37,9 @@ import {
 const root = fileURLToPath(new URL('..', import.meta.url));
 assert.equal(Number.parseInt(process.versions.node, 10), 22, 'release workflow tests execute under Node 22');
 const CHAT_CONTRACT_META = Object.freeze({
-  backendVersion: 'xinbao-chat-api-v6',
+  backendVersion: 'xinbao-chat-api-v7',
   responsePolicyVersion: 'grounded-conversation-v4',
-  promptVersion: 'xinbao-grounded-conversation-v5',
+  promptVersion: 'xinbao-grounded-conversation-v7',
   indexVersion: 'wiki-heading-lexical-v2:test',
 });
 
@@ -1010,7 +1010,11 @@ function testStagedControlFileGate() {
       });
       assert.fail(`control-file gate unexpectedly passed: ${result}`);
     } catch (error) {
+      if (error && (error.code === 'ENOENT' || /spawn(?:Sync)? .*ENOENT/i.test(String(error.message || '')))) {
+        assert.fail(`staged publish gate could not spawn a required tool (ENOENT): ${error.message || error}`);
+      }
       const output = `${error.stdout || ''}${error.stderr || ''}`;
+      assert.notEqual(output.trim(), '', `staged publish gate should emit a rejection message for ${file}`);
       assert.match(output, new RegExp(`${file.replaceAll('.', '\\.').replaceAll('/', '\\/')}: ${expected}`), `staged publish gate rejects ${file}`);
     } finally {
       rmSync(temp, { recursive: true, force: true });

@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 type Language = 'en' | 'zh';
 type Props = { language: Language };
@@ -20,10 +20,20 @@ export function ChatWithXinbao({ language }: Props) {
   const [hasOpened, setHasOpened] = useState(false);
   const [open, setOpen] = useState(false);
   const [restoreRequest, setRestoreRequest] = useState(0);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
+  function closeChat() {
+    setOpen(false);
+    requestAnimationFrame(() => {
+      triggerRef.current?.focus();
+    });
+  }
 
   return (
     <>
       <button
+        aria-expanded={open}
+        aria-haspopup="dialog"
         aria-label={openLabels[language]}
         className="chat-xinbao-trigger"
         onClick={() => {
@@ -31,6 +41,7 @@ export function ChatWithXinbao({ language }: Props) {
           setOpen(true);
           setRestoreRequest((current) => current + 1);
         }}
+        ref={triggerRef}
         type="button"
       >
         <span aria-hidden="true">AI</span>
@@ -38,7 +49,7 @@ export function ChatWithXinbao({ language }: Props) {
       {hasOpened && (
         <ChatWithXinbaoPanel
           language={language}
-          onClose={() => setOpen(false)}
+          onClose={closeChat}
           open={open}
           restoreRequest={restoreRequest}
         />

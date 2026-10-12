@@ -8,9 +8,9 @@ const SITE_URL = process.env.SITE_URL || process.argv[2] || DEFAULT_SITE_URL;
 const WIKI_SLUG = process.env.SMOKE_WIKI_SLUG || 'Xinbao_Qiao';
 const HIDDEN_SLUG = process.env.SMOKE_HIDDEN_SLUG || 'Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning';
 const EXPECTED_CHAT_CONTRACT = Object.freeze({
-  backendVersion: 'xinbao-chat-api-v6',
+  backendVersion: 'xinbao-chat-api-v7',
   responsePolicyVersion: 'grounded-conversation-v4',
-  promptVersion: 'xinbao-grounded-conversation-v5',
+  promptVersion: 'xinbao-grounded-conversation-v7',
 });
 
 function positiveIntegerEnv(name, fallback) {

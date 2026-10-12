@@ -21,7 +21,32 @@ const localNode = existsSync(posixNode)
 const localBin = dirname(localNode);
 const activeMajor = Number.parseInt(process.versions.node, 10);
 const env = { ...process.env };
+const isWindows = process.platform === 'win32';
 
+function readPathEnv(target) {
+  for (const key of Object.keys(target)) {
+    if (key.toLowerCase() === 'path') return target[key] || '';
+  }
+  return '';
+}
+
+function writePathEnv(target, value) {
+  for (const key of Object.keys(target)) {
+    if (key.toLowerCase() === 'path') delete target[key];
+  }
+  target.PATH = value;
+}
+
+function prependPath(target, entry) {
+  const current = readPathEnv(target);
+  const parts = current.split(delimiter).filter(Boolean);
+  if (!parts.some((part) => part.toLowerCase() === entry.toLowerCase())) {
+    parts.unshift(entry);
+  }
+  writePathEnv(target, parts.join(delimiter));
+}
+
+let selectedNode = process.execPath;
 if (activeMajor !== requiredMajor) {
   if (!existsSync(localNode)) {
     console.error('run-with-node22: Node 22 is not installed for this project; run `npm run setup:node22` once');
@@ -32,20 +57,31 @@ if (activeMajor !== requiredMajor) {
     console.error(`run-with-node22: expected Node 22 at ${localNode}, found ${localVersion}`);
     process.exit(1);
   }
-  env.PATH = `${localBin}${delimiter}${env.PATH || ''}`;
+  selectedNode = localNode;
+  prependPath(env, localBin);
   console.log(`run-with-node22: using project runtime ${localVersion}`);
 } else {
   console.log(`run-with-node22: using active runtime v${process.versions.node}`);
 }
 
-const child = spawn(args[0], args.slice(1), {
+const [command, ...commandArgs] = args;
+const isNodeCommand = command === 'node' || command === 'node.exe' || /[\\/]node(\.exe)?$/i.test(command);
+const resolvedCommand = isNodeCommand ? selectedNode : command;
+const useShell = isWindows && !isNodeCommand;
+
+const child = spawn(resolvedCommand, commandArgs, {
   cwd: root,
   env,
   stdio: 'inherit',
-  shell: process.platform === 'win32',
+  shell: useShell,
+  windowsHide: true,
 });
 child.on('error', (error) => {
-  console.error(`run-with-node22: ${error.message}`);
+  if (error && error.code === 'ENOENT') {
+    console.error(`run-with-node22: command not found (${resolvedCommand}). Check PATH and install the tool.`);
+  } else {
+    console.error(`run-with-node22: ${error.message}`);
+  }
   process.exit(1);
 });
 child.on('exit', (code, signal) => {
