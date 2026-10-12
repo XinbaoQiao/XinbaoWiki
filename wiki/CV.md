@@ -8,9 +8,9 @@ tags:
   - profile
   - cv-summary
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-10-12T09:29:53.205Z'
-content_hash: 'sha256:53adb5f2a3d9902418de06940e473865de9bd552efcc4f1d29a817f268e8b786'
-reviewed_at: '2026-10-12T09:33:56.179Z'
+modified: '2026-10-12T14:14:29.803Z'
+content_hash: 'sha256:07a684b46b2add99f7e6c9f377c1e21e9504e5e8930312b39fb267e4060d34a3'
+reviewed_at: '2026-10-12T14:15:25.457Z'
 review_due: '2027-01-10'
 name: Curriculum Vitae
 summary: Academic CV summary for Xinbao Qiao.
@@ -69,10 +69,10 @@ Link icons: OpenReview · arXiv · Code (GitHub) · Publisher.
   Forty-Third International Conference on Machine Learning, ICML, 2026. Links: [OpenReview](https://openreview.net/forum?id=FFXvnzM254), [arXiv](https://arxiv.org/abs/2606.13732), [GitHub](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse).
 - **Paper #2: Illusory Pattern Perception Drives Spurious Inference in Large Language Models**.\
   Peihua Mai\*, Zhuoyan Shao\*, **Xinbao Qiao**\*, Meng Zhang, Xinyue Zhou†, Yan Pang†.\
-  NeurIPS 2026, accepted. Links: [OpenReview](https://openreview.net/forum?id=VLcmdFfRQc), [arXiv](https://arxiv.org/abs/2610.07791).
+  NeurIPS 2026, accepted. Links: [OpenReview](https://openreview.net/forum?id=VLcmdFfRQc), [arXiv](https://arxiv.org/abs/2610.07791), [GitHub](https://github.com/NusIoraPrivacy/illusory).
 - **Paper #3: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**.\
   **Xinbao Qiao**, Ningning Ding, Yushi Cheng, Meng Zhang†.\
-  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026. Links: [arXiv](https://arxiv.org/abs/2505.18783), [AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681).
+  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026. Links: [OpenReview](https://openreview.net/forum?id=bCPJ6Jiqv7), [arXiv](https://arxiv.org/abs/2505.18783), [AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681).
 - **Paper #4: Hessian-Free Online Certified Unlearning**.\
   **Xinbao Qiao**, Meng Zhang†, Ming Tang, Ermin Wei.\
   Thirteenth International Conference on Learning Representations, ICLR, 2025. Links: [OpenReview](https://openreview.net/forum?id=C3TrHWanh5), [arXiv](https://arxiv.org/abs/2404.01712), [GitHub](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning).

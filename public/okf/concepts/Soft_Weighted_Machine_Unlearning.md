@@ -12,18 +12,18 @@ tags:
   - aaai-2026
   - machine-unlearning
 timestamp: '2026-05-05T21:39:01+08:00'
-modified: '2026-10-07T07:07:23.968Z'
-content_hash: 'sha256:6a442fefe80b6de9b6128ea4a2ac0d4e7b2f61ba27fa2882d6532008246686a0'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-10-07'
+modified: '2026-10-12T14:14:29.831Z'
+content_hash: 'sha256:315e50f6ccd9b1f9fe9e2640b16cdb70d5c2a89f1d93d6244ed2bb6c3427488b'
+reviewed_at: '2026-10-12T14:15:25.457Z'
+review_due: '2027-10-12'
 language: en
 lifecycle:
   status: confirmed
   confidence: 0.95
   review: on venue/status change
   retention: long-lived semantic memory
-  reviewedAt: '2026-10-07T07:07:51.129Z'
-  reviewDue: '2027-10-07'
+  reviewedAt: '2026-10-12T14:15:25.457Z'
+  reviewDue: '2027-10-12'
   pendingReview: false
   overdue: false
 retrieval:
@@ -33,6 +33,7 @@ source_ids:
   - src-0642a11373a83c47
   - src-53e1199f272a4df4
   - src-998b6c4324199ad3
+  - src-a78d76c8d4e4ee84
 source_path: wiki/Soft_Weighted_Machine_Unlearning.md
 ---
 **Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness** is an AAAI 2026 conference paper by **[Xinbao Qiao](./Xinbao_Qiao.md)**, Ningning Ding, Yushi Cheng, and Meng Zhang. It reframes unlearning as a continuous data-influence correction problem rather than only a binary erase-or-keep operation. The paper asks how much influence each sample should retain when the goal is to improve fairness or robustness while limiting utility loss.

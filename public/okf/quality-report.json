@@ -445,7 +445,7 @@
       }
     ],
     "coverage": 0.4773,
-    "registeredSources": 58
+    "registeredSources": 59
   },
   "citationCoverage": {
     "pages": 88,
@@ -824,17 +824,17 @@
         "slug": "Soft_Weighted_Machine_Unlearning",
         "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.968Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07"
+        "modifiedAt": "2026-10-12T14:14:29.831Z",
+        "reviewedAt": "2026-10-12T14:15:25.457Z",
+        "reviewDue": "2027-10-12"
       },
       {
         "slug": "Soft_Weighted_Machine_Unlearning_zh",
         "title": "超越二元擦除：用于公平性与鲁棒性的软加权遗忘",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.961Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07"
+        "modifiedAt": "2026-10-12T14:14:29.830Z",
+        "reviewedAt": "2026-10-12T14:15:25.457Z",
+        "reviewDue": "2027-10-12"
       },
       {
         "slug": "Synthetic_Data",
@@ -968,16 +968,16 @@
         "slug": "CV",
         "title": "Curriculum Vitae",
         "language": "en",
-        "modifiedAt": "2026-10-12T09:29:53.205Z",
-        "reviewedAt": "2026-10-12T09:33:56.179Z",
+        "modifiedAt": "2026-10-12T14:14:29.803Z",
+        "reviewedAt": "2026-10-12T14:15:25.457Z",
         "reviewDue": "2027-01-10"
       },
       {
         "slug": "CV_zh",
         "title": "简历",
         "language": "zh",
-        "modifiedAt": "2026-10-12T09:29:53.204Z",
-        "reviewedAt": "2026-10-12T09:33:56.179Z",
+        "modifiedAt": "2026-10-12T14:14:29.802Z",
+        "reviewedAt": "2026-10-12T14:15:25.457Z",
         "reviewDue": "2027-01-10"
       },
       {
@@ -1352,16 +1352,16 @@
         "slug": "Publications",
         "title": "Publications",
         "language": "en",
-        "modifiedAt": "2026-10-12T04:54:44.536Z",
-        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "modifiedAt": "2026-10-12T14:14:29.825Z",
+        "reviewedAt": "2026-10-12T14:15:25.457Z",
         "reviewDue": "2027-01-10"
       },
       {
         "slug": "Publications_zh",
         "title": "论文",
         "language": "zh",
-        "modifiedAt": "2026-10-12T04:54:44.528Z",
-        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "modifiedAt": "2026-10-12T14:14:29.825Z",
+        "reviewedAt": "2026-10-12T14:15:25.457Z",
         "reviewDue": "2027-01-10"
       },
       {
@@ -1472,17 +1472,17 @@
         "slug": "Soft_Weighted_Machine_Unlearning",
         "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.968Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07"
+        "modifiedAt": "2026-10-12T14:14:29.831Z",
+        "reviewedAt": "2026-10-12T14:15:25.457Z",
+        "reviewDue": "2027-10-12"
       },
       {
         "slug": "Soft_Weighted_Machine_Unlearning_zh",
         "title": "超越二元擦除：用于公平性与鲁棒性的软加权遗忘",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.961Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07"
+        "modifiedAt": "2026-10-12T14:14:29.830Z",
+        "reviewedAt": "2026-10-12T14:15:25.457Z",
+        "reviewDue": "2027-10-12"
       },
       {
         "slug": "Synthetic_Data",

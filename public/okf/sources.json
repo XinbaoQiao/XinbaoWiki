@@ -33,7 +33,7 @@
     },
     "meaning": "Registry generation proves declaration and page association, not remote availability or factual correctness"
   },
-  "contentHash": "sha256:c5ef71e756b3633b138135b08adb8ff9c9af54d465e1be9077fd771fbf6824b4",
+  "contentHash": "sha256:215cea1ee62b3f4cf2870fbf57e362f627a8356b17066ee7f552bcd7451afdb2",
   "sources": [
     {
       "id": "src-03bf1b2f9af65762",
@@ -54,6 +54,8 @@
       "pages": [
         "CV",
         "CV_zh",
+        "Publications",
+        "Publications_zh",
         "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
         "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh"
       ],
@@ -68,6 +70,22 @@
         },
         {
           "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
           "locations": [
             "body"
           ],
@@ -150,6 +168,8 @@
       "pages": [
         "CV",
         "CV_zh",
+        "Publications",
+        "Publications_zh",
         "Soft_Weighted_Machine_Unlearning",
         "Soft_Weighted_Machine_Unlearning_zh"
       ],
@@ -171,9 +191,25 @@
           "footnote": false
         },
         {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
           "slug": "Soft_Weighted_Machine_Unlearning",
           "locations": [
-            "frontmatter.links[1].url"
+            "frontmatter.links[2].url"
           ],
           "citation": false,
           "footnote": false
@@ -181,7 +217,7 @@
         {
           "slug": "Soft_Weighted_Machine_Unlearning_zh",
           "locations": [
-            "frontmatter.links[1].url"
+            "frontmatter.links[2].url"
           ],
           "citation": false,
           "footnote": false
@@ -421,7 +457,9 @@
         "CV",
         "CV_zh",
         "DynFrs",
-        "DynFrs_zh"
+        "DynFrs_zh",
+        "Publications",
+        "Publications_zh"
       ],
       "evidence": [
         {
@@ -455,6 +493,22 @@
           ],
           "citation": false,
           "footnote": false
+        },
+        {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
         }
       ]
     },
@@ -475,12 +529,30 @@
         "maxAgeDays": 90
       },
       "pages": [
+        "CV",
+        "CV_zh",
         "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "Publications",
         "Publications_zh"
       ],
       "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
         {
           "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
           "locations": [
@@ -612,9 +684,7 @@
       },
       "pages": [
         "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
-        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
-        "Publications",
-        "Publications_zh"
+        "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh"
       ],
       "evidence": [
         {
@@ -631,22 +701,6 @@
             "frontmatter.links[3].url"
           ],
           "citation": false,
-          "footnote": false
-        },
-        {
-          "slug": "Publications",
-          "locations": [
-            "body"
-          ],
-          "citation": true,
-          "footnote": false
-        },
-        {
-          "slug": "Publications_zh",
-          "locations": [
-            "body"
-          ],
-          "citation": true,
           "footnote": false
         }
       ]
@@ -767,7 +821,9 @@
         "CV",
         "CV_zh",
         "DynFrs",
-        "DynFrs_zh"
+        "DynFrs_zh",
+        "Publications",
+        "Publications_zh"
       ],
       "evidence": [
         {
@@ -800,6 +856,22 @@
             "frontmatter.links[2].url"
           ],
           "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
           "footnote": false
         }
       ]
@@ -976,6 +1048,8 @@
       "pages": [
         "CV",
         "CV_zh",
+        "Publications",
+        "Publications_zh",
         "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
         "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh"
       ],
@@ -990,6 +1064,22 @@
         },
         {
           "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
           "locations": [
             "body"
           ],
@@ -1147,6 +1237,8 @@
       "pages": [
         "CV",
         "CV_zh",
+        "Publications",
+        "Publications_zh",
         "Soft_Weighted_Machine_Unlearning",
         "Soft_Weighted_Machine_Unlearning_zh"
       ],
@@ -1168,9 +1260,25 @@
           "footnote": false
         },
         {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
           "slug": "Soft_Weighted_Machine_Unlearning",
           "locations": [
-            "frontmatter.links[2].url"
+            "frontmatter.links[3].url"
           ],
           "citation": false,
           "footnote": false
@@ -1178,7 +1286,7 @@
         {
           "slug": "Soft_Weighted_Machine_Unlearning_zh",
           "locations": [
-            "frontmatter.links[2].url"
+            "frontmatter.links[3].url"
           ],
           "citation": false,
           "footnote": false
@@ -1456,7 +1564,9 @@
         "CV",
         "CV_zh",
         "Hessian_Free_Online_Certified_Unlearning",
-        "Hessian_Free_Online_Certified_Unlearning_zh"
+        "Hessian_Free_Online_Certified_Unlearning_zh",
+        "Publications",
+        "Publications_zh"
       ],
       "evidence": [
         {
@@ -1489,6 +1599,22 @@
             "frontmatter.links[1].url"
           ],
           "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
           "footnote": false
         }
       ]
@@ -1843,6 +1969,8 @@
       "pages": [
         "CV",
         "CV_zh",
+        "Publications",
+        "Publications_zh",
         "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
         "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh"
       ],
@@ -1857,6 +1985,22 @@
         },
         {
           "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
           "locations": [
             "body"
           ],
@@ -2056,7 +2200,9 @@
         "CV",
         "CV_zh",
         "Hessian_Free_Online_Certified_Unlearning",
-        "Hessian_Free_Online_Certified_Unlearning_zh"
+        "Hessian_Free_Online_Certified_Unlearning_zh",
+        "Publications",
+        "Publications_zh"
       ],
       "evidence": [
         {
@@ -2087,6 +2233,97 @@
           "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
           "locations": [
             "frontmatter.links[2].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-a78d76c8d4e4ee84",
+      "url": "https://openreview.net/forum?id=bCPJ6Jiqv7",
+      "kind": "scholarly-publication",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:a78d76c8d4e4ee8486ada94f55da0c9fa2dad58356ff56f44f0b76fd90cb00df"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "CV",
+        "CV_zh",
+        "Publications",
+        "Publications_zh",
+        "Soft_Weighted_Machine_Unlearning",
+        "Soft_Weighted_Machine_Unlearning_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Soft_Weighted_Machine_Unlearning",
+          "locations": [
+            "frontmatter.links[1].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Soft_Weighted_Machine_Unlearning_zh",
+          "locations": [
+            "frontmatter.links[1].url"
           ],
           "citation": false,
           "footnote": false
@@ -2535,7 +2772,9 @@
         "CV",
         "CV_zh",
         "DynFrs",
-        "DynFrs_zh"
+        "DynFrs_zh",
+        "Publications",
+        "Publications_zh"
       ],
       "evidence": [
         {
@@ -2568,6 +2807,22 @@
             "frontmatter.links[3].url"
           ],
           "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
           "footnote": false
         }
       ]
@@ -2828,7 +3083,9 @@
         "CV",
         "CV_zh",
         "Hessian_Free_Online_Certified_Unlearning",
-        "Hessian_Free_Online_Certified_Unlearning_zh"
+        "Hessian_Free_Online_Certified_Unlearning_zh",
+        "Publications",
+        "Publications_zh"
       ],
       "evidence": [
         {
@@ -2861,6 +3118,22 @@
             "frontmatter.links[3].url"
           ],
           "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
           "footnote": false
         }
       ]

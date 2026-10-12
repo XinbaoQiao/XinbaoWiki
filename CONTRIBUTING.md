@@ -53,6 +53,10 @@ Wiki contributions should:
 - preserve required frontmatter, content hashes, review provenance, and OKF
   profile fields.
 
+### Publication resource icons
+
+Publication resource icons must use three distinct, real public resource types when three are available. Keep the bilingual CV, downloadable CV PDF and publication lists consistent with paper metadata. Select OpenReview, arXiv and Code first; when more than three types are available, OpenReview takes precedence over Publisher. Publisher may supply the third type when Code is unavailable. A conference homepage and a PDF download of the same arXiv paper do not count as additional types. Preserve supplementary source/download links on paper pages. Never duplicate targets, fabricate URLs, publish private repository links or change visibility to fill slots. If fewer than three public resources exist, keep only those available and report the missing types. Owner-provided links that cannot be independently read remain explicitly unverified in maintenance evidence; do not bypass access restrictions or claim successful verification. Run the publication-resource consistency checks in `npm run check`.
+
 A generated content hash proves repository freshness, not that a real-world
 claim remains true. Do not advance `reviewed_at` merely to make a check pass.
 Only a maintainer who reviewed the new revision and its evidence should approve

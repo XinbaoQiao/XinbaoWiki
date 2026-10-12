@@ -8,9 +8,9 @@ tags:
   - profile
   - cv-摘要
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-10-12T09:29:53.204Z'
-content_hash: 'sha256:0b422ff5d37dd0d9c25be72974670b1fc669b26fec12674a531635b4f2c330ac'
-reviewed_at: '2026-10-12T09:33:56.179Z'
+modified: '2026-10-12T14:14:29.802Z'
+content_hash: 'sha256:52895c25b0bf302c849bf2a19f2accd9ba21fa745f5c9b4e5fee99d990dd3177'
+reviewed_at: '2026-10-12T14:15:25.457Z'
 review_due: '2027-01-10'
 language: zh
 lifecycle:
@@ -18,7 +18,7 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-12T09:33:56.179Z'
+  reviewedAt: '2026-10-12T14:15:25.457Z'
   reviewDue: '2027-01-10'
   pendingReview: false
   overdue: false
@@ -30,6 +30,7 @@ source_ids:
   - src-0642a11373a83c47
   - src-18fe2e2db0ff8b6a
   - src-19cdc04d387acf77
+  - src-19ed8d8ac2a744f7
   - src-3234eea5652932e1
   - src-4144e3776ac496d0
   - src-53e1199f272a4df4
@@ -39,6 +40,7 @@ source_ids:
   - src-94b169d5c233e588
   - src-9b2be44d3f13005a
   - src-a0a9b7171dc028d2
+  - src-a78d76c8d4e4ee84
   - src-af06ca5886446072
   - src-b0de54fe614fa11d
   - src-cea294f51d3559e8
@@ -100,10 +102,10 @@ source_path: wiki/CV_zh.md
   Forty-Third International Conference on Machine Learning, ICML, 2026。链接：[OpenReview](https://openreview.net/forum?id=FFXvnzM254)、[arXiv](https://arxiv.org/abs/2606.13732)、[GitHub](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse)。
 - **Paper #2: Illusory Pattern Perception Drives Spurious Inference in Large Language Models**。\
   Peihua Mai\*、Zhuoyan Shao\*、**乔鑫宝**\*、张萌、Xinyue Zhou†、Yan Pang†。\
-  NeurIPS 2026，已录用。链接：[OpenReview](https://openreview.net/forum?id=VLcmdFfRQc)、[arXiv](https://arxiv.org/abs/2610.07791)。
+  NeurIPS 2026，已录用。链接：[OpenReview](https://openreview.net/forum?id=VLcmdFfRQc)、[arXiv](https://arxiv.org/abs/2610.07791), [GitHub](https://github.com/NusIoraPrivacy/illusory)。
 - **Paper #3: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**。\
   **乔鑫宝**、Ningning Ding、Yushi Cheng、张萌†。\
-  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026。链接：[arXiv](https://arxiv.org/abs/2505.18783)、[AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681)。
+  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026。链接：[OpenReview](https://openreview.net/forum?id=bCPJ6Jiqv7), [arXiv](https://arxiv.org/abs/2505.18783)、[AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681)。
 - **Paper #4: Hessian-Free Online Certified Unlearning**。\
   **乔鑫宝**、张萌†、Ming Tang、Ermin Wei。\
   Thirteenth International Conference on Learning Representations, ICLR, 2025。链接：[OpenReview](https://openreview.net/forum?id=C3TrHWanh5)、[arXiv](https://arxiv.org/abs/2404.01712)、[GitHub](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning)。

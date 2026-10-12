@@ -10,18 +10,18 @@ tags:
   - aaai-2026
   - machine-unlearning
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-07T07:07:23.961Z'
-content_hash: 'sha256:98d9d2923e94991072248dcee4fa65175455644381d64baaab900f00381572d6'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-10-07'
+modified: '2026-10-12T14:14:29.830Z'
+content_hash: 'sha256:c33dbeb4882ed5316af766a49c497252e784d8e95c1600e2208457a0d0af7e6e'
+reviewed_at: '2026-10-12T14:15:25.457Z'
+review_due: '2027-10-12'
 language: zh
 lifecycle:
   status: confirmed
   confidence: 0.95
   review: on venue/status change
   retention: long-lived semantic memory
-  reviewedAt: '2026-10-07T07:07:51.129Z'
-  reviewDue: '2027-10-07'
+  reviewedAt: '2026-10-12T14:15:25.457Z'
+  reviewDue: '2027-10-12'
   pendingReview: false
   overdue: false
 retrieval:
@@ -31,6 +31,7 @@ source_ids:
   - src-0642a11373a83c47
   - src-53e1199f272a4df4
   - src-998b6c4324199ad3
+  - src-a78d76c8d4e4ee84
 source_path: wiki/Soft_Weighted_Machine_Unlearning_zh.md
 ---
 **超越二元擦除：用于公平性与鲁棒性的软加权遗忘** 是 **[乔鑫宝](./Qiao_Xinbao_zh.md)**、Ningning Ding、Yushi Cheng 和张萌的 AAAI 2026 会议论文。它把机器遗忘重新表述为连续的数据影响修正问题，而不是只能执行“删除或保留”的二元操作。论文关注的是在改善公平性或鲁棒性时，每个样本应保留多少影响，才能避免不必要的效用损失。
