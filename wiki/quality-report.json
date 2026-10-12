@@ -993,16 +993,16 @@
         "slug": "CV",
         "title": "Curriculum Vitae",
         "language": "en",
-        "modifiedAt": "2026-10-12T04:54:44.188Z",
-        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "modifiedAt": "2026-10-12T09:29:53.205Z",
+        "reviewedAt": "2026-10-12T09:33:56.179Z",
         "reviewDue": "2027-01-10"
       },
       {
         "slug": "CV_zh",
         "title": "简历",
         "language": "zh",
-        "modifiedAt": "2026-10-12T04:54:44.178Z",
-        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "modifiedAt": "2026-10-12T09:29:53.204Z",
+        "reviewedAt": "2026-10-12T09:33:56.179Z",
         "reviewDue": "2027-01-10"
       },
       {

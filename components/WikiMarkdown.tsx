@@ -4,6 +4,7 @@ import rehypeKatex from 'rehype-katex';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import { ArticleContents } from '@/components/ArticleContents';
+import { PublicationLinkLegend, publicationLinkLegendTexts, publicationLinkTitle } from '@/components/PublicationLinkLegend';
 import { pathWithBasePath } from '@/lib/wiki';
 import { rehypeWikiOutline } from '@/lib/wiki-outline';
 
@@ -45,6 +46,7 @@ function renderTableLineBreaks(children: ReactNode): ReactNode {
 }
 
 export function WikiMarkdown({ editLabel, markdown, sourceHref }: Props) {
+  const legendLanguage = markdown.includes(publicationLinkLegendTexts.zh) ? 'zh' : markdown.includes(publicationLinkLegendTexts.en) ? 'en' : undefined;
   return (
     <div className="wiki-body">
       <ReactMarkdown
@@ -59,10 +61,11 @@ export function WikiMarkdown({ editLabel, markdown, sourceHref }: Props) {
             }
             return <nav className={className}>{children}</nav>;
           },
-          a({ href, children }) {
+          a({ href, children, title }) {
             const safe = href ? pathWithBasePath(href) : '#';
             const missing = safe.includes('missing=1');
             const ext = external(safe);
+            const iconTitle = legendLanguage ? publicationLinkTitle(safe, legendLanguage) : undefined;
             const className = [missing ? 'redlink' : '', ext ? 'external' : ''].filter(Boolean).join(' ') || undefined;
             return (
               <a
@@ -70,7 +73,8 @@ export function WikiMarkdown({ editLabel, markdown, sourceHref }: Props) {
                 className={className}
                 target={ext ? '_blank' : undefined}
                 rel={ext ? 'noreferrer' : undefined}
-                title={missing ? 'Page does not exist yet' : undefined}
+                title={missing ? 'Page does not exist yet' : title ?? iconTitle}
+                aria-label={iconTitle}
               >
                 {children}
               </a>
@@ -87,6 +91,8 @@ export function WikiMarkdown({ editLabel, markdown, sourceHref }: Props) {
             return <h3 id={id} tabIndex={tabIndex}>{children}{editLink(sourceHref, editLabel)}</h3>;
           },
           p({ children }) {
+            if (children === publicationLinkLegendTexts.en) return <PublicationLinkLegend language="en" />;
+            if (children === publicationLinkLegendTexts.zh) return <PublicationLinkLegend language="zh" />;
             const authorshipNote = children === '* Co-first authors.' || children === '* 共同第一作者。'
               || children === 'Asterisks (*) denote co-first authorship; daggers (†) denote corresponding authors.'
               || children === '星号（*）表示共同第一作者；剑号（†）表示通讯作者。';

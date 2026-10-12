@@ -8,9 +8,9 @@ tags:
   - profile
   - cv-摘要
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-10-12T04:54:44.178Z'
-content_hash: 'sha256:552a5e5c067e3565a11abe2e785f4c89b348f8277a182361c81ffd146705783a'
-reviewed_at: '2026-10-12T04:55:39.589Z'
+modified: '2026-10-12T09:29:53.204Z'
+content_hash: 'sha256:0b422ff5d37dd0d9c25be72974670b1fc669b26fec12674a531635b4f2c330ac'
+reviewed_at: '2026-10-12T09:33:56.179Z'
 review_due: '2027-01-10'
 name: 简历
 language: zh
@@ -63,6 +63,8 @@ translation_of: CV
 乔鑫宝的[[Publications|论文]]涵盖机器遗忘、去中心化学习、合成数据模型坍缩、联邦学习与 LLM 可靠性。
 
 星号（*）表示共同第一作者；剑号（†）表示通讯作者。
+
+链接图标：OpenReview · arXiv · 代码（GitHub）· 出版论文页。
 
 - **Paper #1: When Sample Selection Bias Precipitates Model Collapse**。\
   **乔鑫宝**†、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌†、Yan Pang†。\

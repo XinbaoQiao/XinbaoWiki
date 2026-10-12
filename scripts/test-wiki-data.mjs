@@ -2730,7 +2730,7 @@ for (const file of ['CV.md', 'CV_zh.md']) {
 assert.ok(read('CV.md').includes("Master's Research on Data-Centric ML Systems") && cvTex.includes("Master's Research on Data-Centric ML Systems"), 'CV identifies the verified ZJU master research phase');
 assert.ok(read('CV.md').includes('Research Internship on Trustworthy LLM Systems') && cvTex.includes('Research Internship on Trustworthy LLM Systems'), 'CV identifies the verified NUSRI research internship');
 assert.ok(read('CV_zh.md').includes('硕士阶段的数据中心机器学习系统研究') && read('CV_zh.md').includes('可信 LLM 系统科研实习'), 'Chinese CV preserves the same research phases');
-const cvTexUris = sortedUrls([...cvTex.matchAll(/\\(?:blackhref|linkish|iconlink)\{([^{}]+)\}/g)].map((match) => match[1]));
+const cvTexUris = sortedUrls([...cvTex.matchAll(/\\(?:blackhref|linkish|iconlink|namediconlink)\{([^{}]+)\}/g)].map((match) => match[1]));
 const cvPdfUriOutput = execFileSync('pdfinfo', ['-url', 'public/files/XinbaoQiao_CV.pdf'], { cwd: root, encoding: 'utf8' });
 const cvPdfUris = sortedUrls(cvPdfUriOutput.split(/\r?\n/).flatMap((line) => {
   const match = line.match(/^\s*\d+\s+Annotation\s+(.+)$/);

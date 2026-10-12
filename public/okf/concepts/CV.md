@@ -8,9 +8,9 @@ tags:
   - profile
   - cv-summary
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-10-12T04:54:44.188Z'
-content_hash: 'sha256:65d59cccbc07e3e3d479cae5f012f62e788b81a7b6bb5934eeb142a864c92332'
-reviewed_at: '2026-10-12T04:55:39.589Z'
+modified: '2026-10-12T09:29:53.205Z'
+content_hash: 'sha256:53adb5f2a3d9902418de06940e473865de9bd552efcc4f1d29a817f268e8b786'
+reviewed_at: '2026-10-12T09:33:56.179Z'
 review_due: '2027-01-10'
 language: en
 lifecycle:
@@ -18,7 +18,7 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-12T04:55:39.589Z'
+  reviewedAt: '2026-10-12T09:33:56.179Z'
   reviewDue: '2027-01-10'
   pendingReview: false
   overdue: false
@@ -92,6 +92,8 @@ source_path: wiki/CV.md
 Qiao's [publications](./Publications.md) cover machine unlearning, decentralized learning, synthetic-data model collapse, federated learning, and LLM reliability.
 
 Asterisks (*) denote co-first authorship; daggers (†) denote corresponding authors.
+
+Link icons: OpenReview · arXiv · Code (GitHub) · Publisher.
 
 - **Paper #1: When Sample Selection Bias Precipitates Model Collapse**.\
   **Xinbao Qiao**†, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang†, Yan Pang†.\

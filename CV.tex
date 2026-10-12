@@ -8,6 +8,7 @@
 \usepackage{tabularx}
 \usepackage{array}
 \usepackage{hyperref}
+\usepackage{accsupp}
 \usepackage{fancyhdr}
 \usepackage{fontspec}
 \usepackage{unicode-math}
@@ -98,6 +99,8 @@
 \newcommand{\iconarxiv}[1]{\textcolor{#1}{\faSolidIcon{F187}}}
 \newcommand{\iconpaperlink}[1]{\textcolor{#1}{\faSolidIcon{F0C1}}}
 \newcommand{\iconlink}[2]{\href{#1}{#2}}
+\newcommand{\namediconlink}[3]{\href{#1}{\BeginAccSupp{method=escape,ActualText={#2}}#3\EndAccSupp{}}}
+\newcommand{\legendicon}[1]{\BeginAccSupp{method=escape,ActualText={}}#1\EndAccSupp{}}
 \newcommand{\contactSolidIcon}[2]{\textcolor{#1}{\raisebox{0.18pt}{\scalebox{0.84}{{\faSolid\char"#2\relax}}}}}
 \newcommand{\contactBrandIcon}[2]{\textcolor{#1}{\raisebox{0.18pt}{\scalebox{0.84}{{\faBrands\char"#2\relax}}}}}
 \newcommand{\contactline}{%
@@ -242,6 +245,7 @@
 
 \cvsection{Selected Publications}
 \pubnote{Asterisks (*) denote co-first authorship; daggers (\textdagger) denote corresponding authors.}
+\pubnote{Link icons: \legendicon{\iconopenreview{cvblue}}~OpenReview \quad \legendicon{\iconarxiv{cvblue}}~arXiv \quad \legendicon{\icongithub{cvblue}}~Code (GitHub) \quad \legendicon{\iconpaperlink{cvblue}}~Publisher.}
 \vspace{-5.0pt}
 % The newest accepted sole-first-author paper leads; remaining accepted papers
 % follow acceptance recency, and manuscripts under review appear last.
@@ -249,27 +253,27 @@
 \pubentry{When \red{Sample Selection Bias} Precipitates \red{Model Collapse}}
 {\textbf{Xinbao Qiao}\corrauthor, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang\corrauthor, Yan Pang\corrauthor}
 {Shows how low-resource verification turns selection bias into persistent tail pruning and model collapse.}
-{\iconlink{https://openreview.net/forum?id=FFXvnzM254}{\iconopenreview{cvblue}}\plinksep\iconlink{https://arxiv.org/abs/2606.13732}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse}{\icongithub{cvblue}}}
+{\namediconlink{https://openreview.net/forum?id=FFXvnzM254}{OpenReview}{\iconopenreview{cvblue}}\plinksep\namediconlink{https://arxiv.org/abs/2606.13732}{arXiv}{\iconarxiv{cvblue}}\plinksep\namediconlink{https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse}{Code (GitHub)}{\icongithub{cvblue}}}
 {ICML 2026.}
 \pubentry{\red{Illusory Pattern Perception} Drives Spurious Inference in Large Language Models}
 {Peihua Mai\cofirst, Zhuoyan Shao\cofirst, \textbf{Xinbao Qiao}\cofirst, Meng Zhang, Xinyue Zhou\corrauthor, Yan Pang\corrauthor}
 {Compares LLM and human illusory pattern perception with SAE analysis of associated features.}
-{\iconlink{https://openreview.net/forum?id=VLcmdFfRQc}{\iconopenreview{cvblue}}\plinksep\iconlink{https://arxiv.org/abs/2610.07791}{\iconarxiv{cvblue}}}
+{\namediconlink{https://openreview.net/forum?id=VLcmdFfRQc}{OpenReview}{\iconopenreview{cvblue}}\plinksep\namediconlink{https://arxiv.org/abs/2610.07791}{arXiv}{\iconarxiv{cvblue}}}
 {NeurIPS 2026.}
 \pubentry{Beyond Binary Erasure: \red{Soft-Weighted Unlearning} for Fairness and Robustness}
 {\textbf{Xinbao Qiao}, Ningning Ding, Yushi Cheng, Meng Zhang\corrauthor}
 {Generalizes binary deletion into continuous influence control for targeted fairness and robustness interventions.}
-{\iconlink{https://arxiv.org/abs/2505.18783}{\iconarxiv{cvblue}}\plinksep\iconlink{https://ojs.aaai.org/index.php/AAAI/article/view/39681}{\iconpaperlink{cvblue}}}
+{\namediconlink{https://arxiv.org/abs/2505.18783}{arXiv}{\iconarxiv{cvblue}}\plinksep\namediconlink{https://ojs.aaai.org/index.php/AAAI/article/view/39681}{Publisher}{\iconpaperlink{cvblue}}}
 {AAAI 2026.}
 \pubentry{\red{Hessian-Free} Online Certified Unlearning}
 {\textbf{Xinbao Qiao}, Meng Zhang\corrauthor, Ming Tang, Ermin Wei}
 {Replaces explicit Hessian inversion with recollected trajectory statistics for scalable certified deletion.}
-{\iconlink{https://openreview.net/forum?id=C3TrHWanh5}{\iconopenreview{cvblue}}\plinksep\iconlink{https://arxiv.org/abs/2404.01712}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning}{\icongithub{cvblue}}}
+{\namediconlink{https://openreview.net/forum?id=C3TrHWanh5}{OpenReview}{\iconopenreview{cvblue}}\plinksep\namediconlink{https://arxiv.org/abs/2404.01712}{arXiv}{\iconarxiv{cvblue}}\plinksep\namediconlink{https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning}{Code (GitHub)}{\icongithub{cvblue}}}
 {ICLR 2025.}
 \pubentry{\red{DynFrs}: An Efficient Framework for Machine Unlearning in Random Forest}
 {Shurong Wang, Zhuoyang Shen, \textbf{Xinbao Qiao}, Tongning Zhang, Meng Zhang\corrauthor}
 {Updates affected tree statistics to deliver exact random-forest unlearning in dynamic environments.}
-{\iconlink{https://openreview.net/forum?id=nsCOeCLR8e}{\iconopenreview{cvblue}}\plinksep\iconlink{https://arxiv.org/abs/2410.01588}{\iconarxiv{cvblue}}\plinksep\iconlink{https://github.com/shurongwang/DynFrs}{\icongithub{cvblue}}}
+{\namediconlink{https://openreview.net/forum?id=nsCOeCLR8e}{OpenReview}{\iconopenreview{cvblue}}\plinksep\namediconlink{https://arxiv.org/abs/2410.01588}{arXiv}{\iconarxiv{cvblue}}\plinksep\namediconlink{https://github.com/shurongwang/DynFrs}{Code (GitHub)}{\icongithub{cvblue}}}
 {ICLR 2025.}
 \pubentry{\red{Federated Learning as Optimal Transport}: Barycentric Multi-Prototype Classification}
 {\textbf{Xinbao Qiao}, Wenjing Yan\corrauthor, Ying-Jun Angela Zhang}
