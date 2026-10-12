@@ -8,10 +8,10 @@ tags:
   - biography
   - 博士生
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-09T05:51:11.560Z'
-content_hash: 'sha256:0df60685047df44a25fd147323e04404656a8cbdba1e8abae23ba41fbe133eaa'
-reviewed_at: '2026-10-09T05:51:42.578Z'
-review_due: '2027-01-07'
+modified: '2026-10-12T04:54:44.543Z'
+content_hash: 'sha256:c588356cc19457ac263c1a5feabbdb71ced304ce3eb4406bd41180abe1d8d4ab'
+reviewed_at: '2026-10-12T04:55:39.589Z'
+review_due: '2027-01-10'
 name: 乔鑫宝
 summary: 香港中文大学信息工程系博士生；研究方向包括数据中心 ML、AI for Networks、Networks for AI、机器遗忘和合成数据可靠性
 aliases:
@@ -88,7 +88,7 @@ nationality: 中国
 
 2025年6月至12月，乔鑫宝在[[NUSRI_CQ|新加坡国立大学重庆研究院]]担任全职研究实习生。研究内容包括可信 LLM 系统和合成数据评估，尤其关注真实数据覆盖有限或碎片化时的低资源递归合成数据训练。
 
-这一时期的工作还包括获 NeurIPS 2026 录用的[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|Illusory Pattern Perception Drives Spurious Inference in Large Language Models]]，研究提示中的错觉模式如何使大语言模型偏离基于证据的推理。
+这一时期的工作还包括获 NeurIPS 2026 录用的[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|Illusory Pattern Perception Drives Spurious Inference in Large Language Models]]，比较大语言模型与人类在证据不足以支持所推断关系时的反应。
 
 ### 香港中文大学博士阶段（2026年8月1日至今）
 

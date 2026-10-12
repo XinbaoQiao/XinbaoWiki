@@ -207,17 +207,17 @@
         "slug": "Experience",
         "title": "Experience",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.874Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-12T04:54:44.305Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Experience_zh",
         "title": "研究经历",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.874Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-12T04:54:44.298Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Fairness_and_Robustness",
@@ -271,17 +271,17 @@
         "slug": "Interpretability",
         "title": "Interpretability",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.903Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-12T04:54:44.395Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-04-10"
       },
       {
         "slug": "Interpretability_zh",
         "title": "可解释性",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.901Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-12T04:54:44.388Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-04-10"
       },
       {
         "slug": "log",
@@ -335,17 +335,17 @@
         "slug": "Projects",
         "title": "Projects",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.928Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-12T04:54:44.521Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Projects_zh",
         "title": "项目",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.928Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-12T04:54:44.515Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Random_Forest",
@@ -367,17 +367,17 @@
         "slug": "Research",
         "title": "Research",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.948Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-12T04:54:44.583Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Research_zh",
         "title": "研究",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.947Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-12T04:54:44.575Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Sample_Selection_Bias",
@@ -431,17 +431,17 @@
         "slug": "Trustworthy_AI",
         "title": "Trustworthy AI",
         "language": "en",
-        "modifiedAt": "2026-10-07T06:42:08.636Z",
-        "reviewedAt": "2026-10-07T06:43:53.160Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-12T04:54:44.689Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-04-10"
       },
       {
         "slug": "Trustworthy_AI_zh",
         "title": "可信 AI",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.983Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-12T04:54:44.680Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-04-10"
       }
     ],
     "coverage": 0.4773,
@@ -600,17 +600,17 @@
         "slug": "Experience",
         "title": "Experience",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.874Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-12T04:54:44.305Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Experience_zh",
         "title": "研究经历",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.874Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-12T04:54:44.298Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Fairness_and_Robustness",
@@ -680,17 +680,17 @@
         "slug": "Interpretability",
         "title": "Interpretability",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.903Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-12T04:54:44.395Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-04-10"
       },
       {
         "slug": "Interpretability_zh",
         "title": "可解释性",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.901Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-12T04:54:44.388Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-04-10"
       },
       {
         "slug": "log",
@@ -744,17 +744,17 @@
         "slug": "Projects",
         "title": "Projects",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.928Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-12T04:54:44.521Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Projects_zh",
         "title": "项目",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.928Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-12T04:54:44.515Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Random_Forest",
@@ -776,17 +776,17 @@
         "slug": "Research",
         "title": "Research",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.948Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-12T04:54:44.583Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Research_zh",
         "title": "研究",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.947Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-12T04:54:44.575Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Sample_Selection_Bias",
@@ -856,17 +856,17 @@
         "slug": "Trustworthy_AI",
         "title": "Trustworthy AI",
         "language": "en",
-        "modifiedAt": "2026-10-07T06:42:08.636Z",
-        "reviewedAt": "2026-10-07T06:43:53.160Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-12T04:54:44.689Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-04-10"
       },
       {
         "slug": "Trustworthy_AI_zh",
         "title": "可信 AI",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.983Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-12T04:54:44.680Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-04-10"
       },
       {
         "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
@@ -889,7 +889,7 @@
     "footnoteCoverage": 0.3409
   },
   "reviewFreshness": {
-    "asOf": "2026-10-05",
+    "asOf": "2026-10-12",
     "policy": "review status is recalculated at the start of each UTC week",
     "currentPages": 88,
     "overduePages": [],
@@ -968,17 +968,17 @@
         "slug": "CV",
         "title": "Curriculum Vitae",
         "language": "en",
-        "modifiedAt": "2026-10-09T05:51:11.226Z",
-        "reviewedAt": "2026-10-09T05:51:42.578Z",
-        "reviewDue": "2027-01-07"
+        "modifiedAt": "2026-10-12T04:54:44.188Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "CV_zh",
         "title": "简历",
         "language": "zh",
-        "modifiedAt": "2026-10-09T05:51:11.225Z",
-        "reviewedAt": "2026-10-09T05:51:42.578Z",
-        "reviewDue": "2027-01-07"
+        "modifiedAt": "2026-10-12T04:54:44.178Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Data_Centric_Machine_Learning",
@@ -1112,17 +1112,17 @@
         "slug": "Experience",
         "title": "Experience",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.874Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-12T04:54:44.305Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Experience_zh",
         "title": "研究经历",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.874Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-12T04:54:44.298Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Fairness_and_Robustness",
@@ -1208,33 +1208,33 @@
         "slug": "Interpretability",
         "title": "Interpretability",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.903Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-12T04:54:44.395Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-04-10"
       },
       {
         "slug": "Interpretability_zh",
         "title": "可解释性",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.901Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-12T04:54:44.388Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-04-10"
       },
       {
         "slug": "LLM_Reliability",
         "title": "LLM Reliability",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.911Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-12T04:54:44.424Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-04-10"
       },
       {
         "slug": "LLM_Reliability_zh",
         "title": "大语言模型可靠性",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.909Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-12T04:54:44.413Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-04-10"
       },
       {
         "slug": "log",
@@ -1304,17 +1304,17 @@
         "slug": "NUSRI_CQ",
         "title": "NUSRI-CQ",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.926Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-12T04:54:44.497Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-04-10"
       },
       {
         "slug": "NUSRI_CQ_zh",
         "title": "NUSRI-CQ",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.926Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-12T04:54:44.489Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-04-10"
       },
       {
         "slug": "Old_Homepage_Resources",
@@ -1336,41 +1336,41 @@
         "slug": "Projects",
         "title": "Projects",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.928Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-12T04:54:44.521Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Projects_zh",
         "title": "项目",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.928Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-12T04:54:44.515Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Publications",
         "title": "Publications",
         "language": "en",
-        "modifiedAt": "2026-10-11T14:16:35.894Z",
-        "reviewedAt": "2026-10-11T14:22:50.689Z",
-        "reviewDue": "2027-01-09"
+        "modifiedAt": "2026-10-12T04:54:44.536Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Publications_zh",
         "title": "论文",
         "language": "zh",
-        "modifiedAt": "2026-10-11T14:16:35.894Z",
-        "reviewedAt": "2026-10-11T14:22:50.689Z",
-        "reviewDue": "2027-01-09"
+        "modifiedAt": "2026-10-12T04:54:44.528Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Qiao_Xinbao_zh",
         "title": "乔鑫宝",
         "language": "zh",
-        "modifiedAt": "2026-10-09T05:51:11.560Z",
-        "reviewedAt": "2026-10-09T05:51:42.578Z",
-        "reviewDue": "2027-01-07"
+        "modifiedAt": "2026-10-12T04:54:44.543Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Random_Forest",
@@ -1408,17 +1408,17 @@
         "slug": "Research",
         "title": "Research",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.948Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-12T04:54:44.583Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Research_zh",
         "title": "研究",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.947Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-12T04:54:44.575Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Sample_Selection_Bias",
@@ -1520,17 +1520,17 @@
         "slug": "Trustworthy_AI",
         "title": "Trustworthy AI",
         "language": "en",
-        "modifiedAt": "2026-10-07T06:42:08.636Z",
-        "reviewedAt": "2026-10-07T06:43:53.160Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-12T04:54:44.689Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-04-10"
       },
       {
         "slug": "Trustworthy_AI_zh",
         "title": "可信 AI",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.983Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-12T04:54:44.680Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-04-10"
       },
       {
         "slug": "Wasserstein_Geometry",
@@ -1568,9 +1568,9 @@
         "slug": "Xinbao_Qiao",
         "title": "Xinbao Qiao",
         "language": "en",
-        "modifiedAt": "2026-10-09T05:51:11.717Z",
-        "reviewedAt": "2026-10-09T05:51:42.578Z",
-        "reviewDue": "2027-01-07"
+        "modifiedAt": "2026-10-12T04:54:44.724Z",
+        "reviewedAt": "2026-10-12T04:55:39.589Z",
+        "reviewDue": "2027-01-10"
       },
       {
         "slug": "Zhejiang_University",

@@ -8,10 +8,10 @@ tags:
   - research
   - research-institute
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-10-07T07:07:23.926Z'
-content_hash: 'sha256:649fb3f977d335514df8f862392095d574dc67f7dde46854e82fdf6d41ab4e97'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-12T04:54:44.497Z'
+content_hash: 'sha256:723d96bea5747112188b5203b46bbdc19a40a08577eaa5b02a7715122091954e'
+reviewed_at: '2026-10-12T04:55:39.589Z'
+review_due: '2027-04-10'
 name: NUSRI-CQ
 summary: Research internship institution of Xinbao Qiao.
 person:
@@ -42,7 +42,7 @@ Public NUS material describes NUSRI-CQ as a joint effort between the National Un
 
 ## Connection to Qiao
 
-The NUSRI-CQ period involved research on [[Synthetic_Data_and_Model_Collapse|synthetic data]], [[Collaborative_Evaluation|collaborative evaluation]], [[Wasserstein_Geometry|Wasserstein geometry]], and [[LLM_Reliability|LLM reliability]]. Related work includes the ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]], which examines how distributed participants with limited resources can diagnose data-generation failures without exposing all local data. The NeurIPS 2026 paper [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|Illusory Pattern Perception Drives Spurious Inference in Large Language Models]] addresses how perceived prompt patterns can lead to spurious inference.
+The NUSRI-CQ period involved research on [[Synthetic_Data_and_Model_Collapse|synthetic data]], [[Collaborative_Evaluation|collaborative evaluation]], [[Wasserstein_Geometry|Wasserstein geometry]], and [[LLM_Reliability|LLM reliability]]. Related work includes the ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]], which examines how distributed participants with limited resources can diagnose data-generation failures without exposing all local data. The NeurIPS 2026 paper [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|Illusory Pattern Perception Drives Spurious Inference in Large Language Models]] compares how LLMs and humans infer relations from random, unrelated, or insufficient evidence.
 
 ## See also
 

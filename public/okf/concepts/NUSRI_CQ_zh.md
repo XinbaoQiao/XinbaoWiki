@@ -8,18 +8,18 @@ tags:
   - research
   - 研究院
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-10-07T07:07:23.926Z'
-content_hash: 'sha256:1b7b32a379b014a3a3903ef2eb7b66cc726dbdec12db578fef03e12ca1226741'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-12T04:54:44.489Z'
+content_hash: 'sha256:8eb38f6e39ca85f968eab4b71ce56af08bd699845d89028508dc55180c426891'
+reviewed_at: '2026-10-12T04:55:39.589Z'
+review_due: '2027-04-10'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-07T07:07:51.129Z'
-  reviewDue: '2027-04-05'
+  reviewedAt: '2026-10-12T04:55:39.589Z'
+  reviewDue: '2027-04-10'
   pendingReview: false
   overdue: false
 retrieval:
@@ -44,7 +44,7 @@ source_path: wiki/NUSRI_CQ_zh.md
 
 ## 与乔鑫宝的关系
 
-NUSRI-CQ 阶段的研究涉及 [合成数据](./Synthetic_Data_and_Model_Collapse_zh.md)、[协作评估](./Collaborative_Evaluation_zh.md)、[Wasserstein 几何](./Wasserstein_Geometry_zh.md)和[大语言模型可靠性](./LLM_Reliability_zh.md)。相关工作包括 ICML 2026 论文 [样本选择偏差何以促成模型坍缩](./When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md)，关注资源有限的分布式参与方如何在不暴露全部本地数据的条件下诊断数据生成失效。获 NeurIPS 2026 录用的[《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md)研究感知到的提示模式如何导致虚假推理。
+NUSRI-CQ 阶段的研究涉及 [合成数据](./Synthetic_Data_and_Model_Collapse_zh.md)、[协作评估](./Collaborative_Evaluation_zh.md)、[Wasserstein 几何](./Wasserstein_Geometry_zh.md)和[大语言模型可靠性](./LLM_Reliability_zh.md)。相关工作包括 ICML 2026 论文 [样本选择偏差何以促成模型坍缩](./When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md)，关注资源有限的分布式参与方如何在不暴露全部本地数据的条件下诊断数据生成失效。获 NeurIPS 2026 录用的[《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md)比较大语言模型与人类如何从随机、无关或不足的证据中推断关联。
 
 ## 参见
 

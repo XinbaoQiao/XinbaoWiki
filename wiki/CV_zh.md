@@ -8,10 +8,10 @@ tags:
   - profile
   - cv-摘要
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-10-09T05:51:11.225Z'
-content_hash: 'sha256:7cb87495371a9c162206ab0b4180e06a8380c91b9af1f0604932afddbbf62e8e'
-reviewed_at: '2026-10-09T05:51:42.578Z'
-review_due: '2027-01-07'
+modified: '2026-10-12T04:54:44.178Z'
+content_hash: 'sha256:552a5e5c067e3565a11abe2e785f4c89b348f8277a182361c81ffd146705783a'
+reviewed_at: '2026-10-12T04:55:39.589Z'
+review_due: '2027-01-10'
 name: 简历
 language: zh
 summary: 乔鑫宝的学术简历摘要。
@@ -43,13 +43,13 @@ translation_of: CV
 
 - **香港中文大学博士阶段研究**，2026 年 8 月 1 日至今，导师 [张颖珺](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/)。研究分布式 AI 系统中的数据生命周期管理，将数据生成、使用和删除问题与联邦表示几何联系起来。
   - Paper #6：提出联邦学习的最优传输视角，并构建面向通信受限表示几何的 barycentric multi-prototype classifier。
-- **数据中心机器学习系统研究**，2023-03 至 2025-12，导师 [张萌](https://person.zju.edu.cn/mengzhang) 教授，机构 [[Zhejiang_University|浙江大学]]。构建面向数据删除的机器遗忘方法，覆盖连续影响权重、在线认证更新和动态树集成模型。
+- **硕士阶段的数据中心机器学习系统研究**，2023-03 至 2025-12，导师 [张萌](https://person.zju.edu.cn/mengzhang) 教授，机构 [[Zhejiang_University|浙江大学]]。构建面向数据删除的机器遗忘方法，覆盖连续影响权重、在线认证更新和动态树集成模型。
   - Paper #3：提出面向连续影响权重的 soft-weighted unlearning，支持超越二元删除的公平性和鲁棒性干预。
   - Paper #4：提出基于 recollected trajectory statistics 的无 Hessian 在线认证遗忘，避免显式 Hessian 求逆并支持流式删除请求。
   - Paper #5：构建用于动态在线环境的精确高效随机森林遗忘框架，通过更新受影响的树统计量替代重训。
-- **可信 LLM 系统研究**，2025-06 至 2025-12，全职研究实习，导师 PANG Yan, James，机构 [[NUSRI_CQ|新加坡国立大学重庆研究院（NUSRI-CQ）]]。分析模型在递归选择的合成数据上训练，或从提示中推断虚假模式时出现的可靠性失效。
+- **可信 LLM 系统科研实习**，2025-06 至 2025-12，全职研究实习，导师 PANG Yan, James，机构 [[NUSRI_CQ|新加坡国立大学重庆研究院（NUSRI-CQ）]]。分析模型在递归选择的合成数据上训练，或作出缺乏支持的关系推断时出现的可靠性失效。
   - Paper #1：说明递归合成数据训练中的样本选择如何在低资源验证下剪除尾部样本并诱发模型坍缩。
-  - Paper #2：分析错觉模式感知如何成为 LLM 虚假推理机制，尤其是感知到的模式压过基于证据的推理时。
+  - Paper #2：通过三个心理任务比较 LLM 与人类的错觉模式感知，并分析相关 SAE 特征。
 
 ## 开源贡献与学术服务
 
@@ -69,7 +69,7 @@ translation_of: CV
   Forty-Third International Conference on Machine Learning, ICML, 2026。链接：[OpenReview](https://openreview.net/forum?id=FFXvnzM254)、[arXiv](https://arxiv.org/abs/2606.13732)、[GitHub](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse)。
 - **Paper #2: Illusory Pattern Perception Drives Spurious Inference in Large Language Models**。\
   Peihua Mai\*、Zhuoyan Shao\*、**乔鑫宝**\*、张萌、Xinyue Zhou†、Yan Pang†。\
-  NeurIPS 2026，已录用。
+  NeurIPS 2026，已录用。链接：[OpenReview](https://openreview.net/forum?id=VLcmdFfRQc)、[arXiv](https://arxiv.org/abs/2610.07791)。
 - **Paper #3: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**。\
   **乔鑫宝**、Ningning Ding、Yushi Cheng、张萌†。\
   Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026。链接：[arXiv](https://arxiv.org/abs/2505.18783)、[AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681)。

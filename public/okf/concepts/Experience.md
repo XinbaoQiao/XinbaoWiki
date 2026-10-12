@@ -8,18 +8,18 @@ tags:
   - profile
   - research-experience
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-07T07:07:23.874Z'
-content_hash: 'sha256:cfc5730177fb40659d99dab607b2e99ff66f5f836ee5daff2da47372ab937560'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-01-05'
+modified: '2026-10-12T04:54:44.305Z'
+content_hash: 'sha256:3c8add78a2c445ccee5511e7b47f1274323a88c96017d320dd7319a9760e27c8'
+reviewed_at: '2026-10-12T04:55:39.589Z'
+review_due: '2027-01-10'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-07T07:07:51.129Z'
-  reviewDue: '2027-01-05'
+  reviewedAt: '2026-10-12T04:55:39.589Z'
+  reviewDue: '2027-01-10'
   pendingReview: false
   overdue: false
 retrieval:
@@ -52,6 +52,6 @@ Related research: [Machine Unlearning](./Machine_Unlearning.md), [Influence Func
 
 **Full-time research intern**, 2025-06 to 2025-12. Advisor: Pang Yan, James, [NUSRI CQ](./NUSRI_CQ.md).
 
-This research line studies trustworthy model behavior and synthetic-data evaluation, including distributed Wasserstein methods for low-resource synthetic-data evaluation when real data are limited or fragmented. The period also includes the NeurIPS 2026 paper [Illusory Pattern Perception Drives Spurious Inference in Large Language Models](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md), which examines how perceived prompt patterns can displace evidence-grounded inference.
+This research line studies trustworthy model behavior and synthetic-data evaluation, including distributed Wasserstein methods for low-resource synthetic-data evaluation when real data are limited or fragmented. The period also includes the NeurIPS 2026 paper [Illusory Pattern Perception Drives Spurious Inference in Large Language Models](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md), which compares illusory pattern perception in LLMs and humans across three psychological tasks.
 
 Related research: [LLM Reliability](./LLM_Reliability.md), [Illusory Pattern Perception Drives Spurious Inference in Large Language Models](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md), [Synthetic Data](./Synthetic_Data_and_Model_Collapse.md), and [Wasserstein Geometry](./Wasserstein_Geometry.md).

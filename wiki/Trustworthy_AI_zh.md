@@ -8,10 +8,10 @@ tags:
   - topic
   - 研究专题
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-07T07:07:23.983Z'
-content_hash: 'sha256:f71b0e565c802ae4b658a8394cb98ecba9ebefeab9d13bdc1e1144390b05e000'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-12T04:54:44.680Z'
+content_hash: 'sha256:fbc4d28b2646b0ac9635e40a074e357c7b9541fb46a42e920f87156c018da8b1'
+reviewed_at: '2026-10-12T04:55:39.589Z'
+review_due: '2027-04-10'
 name: 可信 AI
 language: zh
 summary: 覆盖可靠性、删除、公平性、鲁棒性、可解释性和评估的研究专题。
@@ -26,7 +26,7 @@ translation_of: Trustworthy_AI
 
 ## 与乔鑫宝工作的关系
 
-乔鑫宝的相关研究涉及多个方面：机器遗忘论文提供删除或纠正数据影响的方法；合成数据工作研究递归训练如何失败以及分布式参与方如何检测失败；获 NeurIPS 2026 录用的[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》]]研究感知到的提示模式使推理偏离证据的风险；AI 与网络项目研究通信约束下可靠性和效率如何变化。
+乔鑫宝的相关研究涉及多个方面：机器遗忘论文提供删除或纠正数据影响的方法；合成数据工作研究递归训练如何失败以及分布式参与方如何检测失败；获 NeurIPS 2026 录用的[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》]]研究从随机、无关或不足的证据中作出无依据关系推断的风险；AI 与网络项目研究通信约束下可靠性和效率如何变化。
 
 ## 参见
 

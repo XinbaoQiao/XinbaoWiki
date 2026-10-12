@@ -249,10 +249,10 @@
         "cv-summary"
       ],
       "timestamp": "2026-07-02T19:37:18+08:00",
-      "modifiedAt": "2026-10-09T05:51:11.226Z",
-      "contentHash": "sha256:9057001613b77f9fdb83abd48ffd1742fa0d1d819fe77c02f55b89b98e318b32",
-      "reviewedAt": "2026-10-09T05:51:42.578Z",
-      "reviewDue": "2027-01-07",
+      "modifiedAt": "2026-10-12T04:54:44.188Z",
+      "contentHash": "sha256:65d59cccbc07e3e3d479cae5f012f62e788b81a7b6bb5934eeb142a864c92332",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-01-10",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-0642a11373a83c47",
@@ -267,8 +267,10 @@
         "src-94b169d5c233e588",
         "src-9b2be44d3f13005a",
         "src-a0a9b7171dc028d2",
+        "src-af06ca5886446072",
         "src-b0de54fe614fa11d",
         "src-cea294f51d3559e8",
+        "src-d48b0fa9ae43a703",
         "src-da17eb3884244bd3",
         "src-faaafad831fbefc5"
       ],
@@ -286,8 +288,10 @@
         "src-94b169d5c233e588",
         "src-9b2be44d3f13005a",
         "src-a0a9b7171dc028d2",
+        "src-af06ca5886446072",
         "src-b0de54fe614fa11d",
         "src-cea294f51d3559e8",
+        "src-d48b0fa9ae43a703",
         "src-da17eb3884244bd3",
         "src-faaafad831fbefc5"
       ],
@@ -295,7 +299,7 @@
       "retrieval": {
         "documentId": "wiki:CV",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:9057001613b77f9fdb83abd48ffd1742fa0d1d819fe77c02f55b89b98e318b32",
+        "contentHash": "sha256:65d59cccbc07e3e3d479cae5f012f62e788b81a7b6bb5934eeb142a864c92332",
         "textFields": [
           "title",
           "aliases",
@@ -671,17 +675,17 @@
         "research-experience"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.874Z",
-      "contentHash": "sha256:cfc5730177fb40659d99dab607b2e99ff66f5f836ee5daff2da47372ab937560",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
+      "modifiedAt": "2026-10-12T04:54:44.305Z",
+      "contentHash": "sha256:3c8add78a2c445ccee5511e7b47f1274323a88c96017d320dd7319a9760e27c8",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-01-10",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Experience",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:cfc5730177fb40659d99dab607b2e99ff66f5f836ee5daff2da47372ab937560",
+        "contentHash": "sha256:3c8add78a2c445ccee5511e7b47f1274323a88c96017d320dd7319a9760e27c8",
         "textFields": [
           "title",
           "aliases",
@@ -977,17 +981,17 @@
         "llm"
       ],
       "timestamp": "2026-05-05T20:55:21+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.903Z",
-      "contentHash": "sha256:2ac8a263a49bb7d1cc07ce83e65f860dc1b3b6febdfca5b3dd9839b14751620f",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-04-05",
+      "modifiedAt": "2026-10-12T04:54:44.395Z",
+      "contentHash": "sha256:729179897787cece7e8304fa607b34e309b54cf1979ea8304cd8c07d166bcd60",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-04-10",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Interpretability",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:2ac8a263a49bb7d1cc07ce83e65f860dc1b3b6febdfca5b3dd9839b14751620f",
+        "contentHash": "sha256:729179897787cece7e8304fa607b34e309b54cf1979ea8304cd8c07d166bcd60",
         "textFields": [
           "title",
           "aliases",
@@ -1019,10 +1023,10 @@
         "llm"
       ],
       "timestamp": "2026-05-05T20:55:21+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.911Z",
-      "contentHash": "sha256:d4e101ad467955c8334ea6306fbac54af8769922af9a346f8556eb583b3cc3b2",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-04-05",
+      "modifiedAt": "2026-10-12T04:54:44.424Z",
+      "contentHash": "sha256:949bc75d7ca94482fad27338a7d930a2bc02574494d5c1d374e08eba47fdaee1",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-04-10",
       "sourceIds": [
         "src-11be10768dbb7de0",
         "src-44708abf72c85407",
@@ -1041,7 +1045,7 @@
       "retrieval": {
         "documentId": "wiki:LLM_Reliability",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:d4e101ad467955c8334ea6306fbac54af8769922af9a346f8556eb583b3cc3b2",
+        "contentHash": "sha256:949bc75d7ca94482fad27338a7d930a2bc02574494d5c1d374e08eba47fdaee1",
         "textFields": [
           "title",
           "aliases",
@@ -1250,10 +1254,10 @@
         "research-institute"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.926Z",
-      "contentHash": "sha256:649fb3f977d335514df8f862392095d574dc67f7dde46854e82fdf6d41ab4e97",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-04-05",
+      "modifiedAt": "2026-10-12T04:54:44.497Z",
+      "contentHash": "sha256:723d96bea5747112188b5203b46bbdc19a40a08577eaa5b02a7715122091954e",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-04-10",
       "sourceIds": [
         "src-17dc8cb17c9da923",
         "src-5816cdaa92b5e41c",
@@ -1271,7 +1275,7 @@
       "retrieval": {
         "documentId": "wiki:NUSRI_CQ",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:649fb3f977d335514df8f862392095d574dc67f7dde46854e82fdf6d41ab4e97",
+        "contentHash": "sha256:723d96bea5747112188b5203b46bbdc19a40a08577eaa5b02a7715122091954e",
         "textFields": [
           "title",
           "aliases",
@@ -1302,17 +1306,17 @@
         "project-overview"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.928Z",
-      "contentHash": "sha256:fda4d8d5340b060e97ab1830e822325f8c58e4b446191dcfd155c7e4f703643e",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
+      "modifiedAt": "2026-10-12T04:54:44.521Z",
+      "contentHash": "sha256:1de0081d62f81710164c0badf94a42fe090541bbdde40a4c8bfc1661ff016557",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-01-10",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Projects",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:fda4d8d5340b060e97ab1830e822325f8c58e4b446191dcfd155c7e4f703643e",
+        "contentHash": "sha256:1de0081d62f81710164c0badf94a42fe090541bbdde40a4c8bfc1661ff016557",
         "textFields": [
           "title",
           "aliases",
@@ -1343,10 +1347,10 @@
         "publication-list"
       ],
       "timestamp": "2026-06-01T22:00:31+08:00",
-      "modifiedAt": "2026-10-11T14:16:35.894Z",
-      "contentHash": "sha256:c4bf8438be358920f3c61d6013d38a60b5d65b3e0e3cc0151c5fd83197dacd63",
-      "reviewedAt": "2026-10-11T14:22:50.689Z",
-      "reviewDue": "2027-01-09",
+      "modifiedAt": "2026-10-12T04:54:44.536Z",
+      "contentHash": "sha256:90d31af399dc24bbe7acff7a80efa2d19c01dbfb516f2c106e199d414c9e073f",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-01-10",
       "sourceIds": [
         "src-19ed8d8ac2a744f7",
         "src-2d7834852d5a70ca",
@@ -1354,7 +1358,8 @@
         "src-766234e11681dad2",
         "src-998b6c4324199ad3",
         "src-af06ca5886446072",
-        "src-b005562340a1c871"
+        "src-b005562340a1c871",
+        "src-d48b0fa9ae43a703"
       ],
       "citationSourceIds": [
         "src-19ed8d8ac2a744f7",
@@ -1363,13 +1368,14 @@
         "src-766234e11681dad2",
         "src-998b6c4324199ad3",
         "src-af06ca5886446072",
-        "src-b005562340a1c871"
+        "src-b005562340a1c871",
+        "src-d48b0fa9ae43a703"
       ],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Publications",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:c4bf8438be358920f3c61d6013d38a60b5d65b3e0e3cc0151c5fd83197dacd63",
+        "contentHash": "sha256:90d31af399dc24bbe7acff7a80efa2d19c01dbfb516f2c106e199d414c9e073f",
         "textFields": [
           "title",
           "aliases",
@@ -1489,17 +1495,17 @@
         "research-overview"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.948Z",
-      "contentHash": "sha256:30f689ed5a3dfb40a9804d100cce93fd9d4bbf7c12e7a8cc23ed60b4da778b24",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
+      "modifiedAt": "2026-10-12T04:54:44.583Z",
+      "contentHash": "sha256:63cbf4e7ccb60c15da2fcc9051d16de4cbd551929fb55557f6e86bb7e6ffa4ac",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-01-10",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Research",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:30f689ed5a3dfb40a9804d100cce93fd9d4bbf7c12e7a8cc23ed60b4da778b24",
+        "contentHash": "sha256:63cbf4e7ccb60c15da2fcc9051d16de4cbd551929fb55557f6e86bb7e6ffa4ac",
         "textFields": [
           "title",
           "aliases",
@@ -1809,17 +1815,17 @@
         "research-topic"
       ],
       "timestamp": "2026-05-05T20:55:21+08:00",
-      "modifiedAt": "2026-10-07T06:42:08.636Z",
-      "contentHash": "sha256:1a24126519061279056efd864675f4e806c6c191063728a33d3b0fdf7cabec25",
-      "reviewedAt": "2026-10-07T06:43:53.160Z",
-      "reviewDue": "2027-04-05",
+      "modifiedAt": "2026-10-12T04:54:44.689Z",
+      "contentHash": "sha256:2f17b01e2ef311dfec26c1e6b1504d4a20edf46ce8ef699baf8cf5bdcb553938",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-04-10",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Trustworthy_AI",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:1a24126519061279056efd864675f4e806c6c191063728a33d3b0fdf7cabec25",
+        "contentHash": "sha256:2f17b01e2ef311dfec26c1e6b1504d4a20edf46ce8ef699baf8cf5bdcb553938",
         "textFields": [
           "title",
           "aliases",
@@ -1952,10 +1958,10 @@
         "phd-student"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-09T05:51:11.717Z",
-      "contentHash": "sha256:843b7db9a95eb06f502928ea4525c862169be5c709827ff5103c4293a4bd7250",
-      "reviewedAt": "2026-10-09T05:51:42.578Z",
-      "reviewDue": "2027-01-07",
+      "modifiedAt": "2026-10-12T04:54:44.724Z",
+      "contentHash": "sha256:67ea308b2c9089528b45476c22a60a9cc29736b3d556145bdcd161ec003a0cb3",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-01-10",
       "sourceIds": [
         "src-264e39cbec8d2f89",
         "src-30f33d3201c476ab",
@@ -1995,7 +2001,7 @@
       "retrieval": {
         "documentId": "wiki:Xinbao_Qiao",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:843b7db9a95eb06f502928ea4525c862169be5c709827ff5103c4293a4bd7250",
+        "contentHash": "sha256:67ea308b2c9089528b45476c22a60a9cc29736b3d556145bdcd161ec003a0cb3",
         "textFields": [
           "title",
           "aliases",
@@ -2214,10 +2220,10 @@
         "研究院"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.926Z",
-      "contentHash": "sha256:1b7b32a379b014a3a3903ef2eb7b66cc726dbdec12db578fef03e12ca1226741",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-04-05",
+      "modifiedAt": "2026-10-12T04:54:44.489Z",
+      "contentHash": "sha256:8eb38f6e39ca85f968eab4b71ce56af08bd699845d89028508dc55180c426891",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-04-10",
       "sourceIds": [
         "src-17dc8cb17c9da923",
         "src-5816cdaa92b5e41c",
@@ -2235,7 +2241,7 @@
       "retrieval": {
         "documentId": "wiki:NUSRI_CQ_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:1b7b32a379b014a3a3903ef2eb7b66cc726dbdec12db578fef03e12ca1226741",
+        "contentHash": "sha256:8eb38f6e39ca85f968eab4b71ce56af08bd699845d89028508dc55180c426891",
         "textFields": [
           "title",
           "aliases",
@@ -2361,10 +2367,10 @@
         "博士生"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-09T05:51:11.560Z",
-      "contentHash": "sha256:0df60685047df44a25fd147323e04404656a8cbdba1e8abae23ba41fbe133eaa",
-      "reviewedAt": "2026-10-09T05:51:42.578Z",
-      "reviewDue": "2027-01-07",
+      "modifiedAt": "2026-10-12T04:54:44.543Z",
+      "contentHash": "sha256:c588356cc19457ac263c1a5feabbdb71ced304ce3eb4406bd41180abe1d8d4ab",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-01-10",
       "sourceIds": [
         "src-264e39cbec8d2f89",
         "src-30f33d3201c476ab",
@@ -2404,7 +2410,7 @@
       "retrieval": {
         "documentId": "wiki:Qiao_Xinbao_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:0df60685047df44a25fd147323e04404656a8cbdba1e8abae23ba41fbe133eaa",
+        "contentHash": "sha256:c588356cc19457ac263c1a5feabbdb71ced304ce3eb4406bd41180abe1d8d4ab",
         "textFields": [
           "title",
           "aliases",
@@ -2609,17 +2615,17 @@
         "研究专题"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.983Z",
-      "contentHash": "sha256:f71b0e565c802ae4b658a8394cb98ecba9ebefeab9d13bdc1e1144390b05e000",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-04-05",
+      "modifiedAt": "2026-10-12T04:54:44.680Z",
+      "contentHash": "sha256:fbc4d28b2646b0ac9635e40a074e357c7b9541fb46a42e920f87156c018da8b1",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-04-10",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Trustworthy_AI_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:f71b0e565c802ae4b658a8394cb98ecba9ebefeab9d13bdc1e1144390b05e000",
+        "contentHash": "sha256:fbc4d28b2646b0ac9635e40a074e357c7b9541fb46a42e920f87156c018da8b1",
         "textFields": [
           "title",
           "aliases",
@@ -2651,17 +2657,17 @@
         "llm"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.901Z",
-      "contentHash": "sha256:9391c55bdc02046528c646cfd101ff4a3138cc78b50f2959a6b6467b47f1ea85",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-04-05",
+      "modifiedAt": "2026-10-12T04:54:44.388Z",
+      "contentHash": "sha256:e59946df922bb29e2bbc3fac6253a3e9964165e98e897bc9e51a70added21001",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-04-10",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Interpretability_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:9391c55bdc02046528c646cfd101ff4a3138cc78b50f2959a6b6467b47f1ea85",
+        "contentHash": "sha256:e59946df922bb29e2bbc3fac6253a3e9964165e98e897bc9e51a70added21001",
         "textFields": [
           "title",
           "aliases",
@@ -2783,10 +2789,10 @@
         "llm"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.909Z",
-      "contentHash": "sha256:af816ed16b8daaba36aa9529f16e0f1d78392e0be36a597836823a11f807996e",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-04-05",
+      "modifiedAt": "2026-10-12T04:54:44.413Z",
+      "contentHash": "sha256:25a31123dec32422a6be825fa5e34b89c7a523d1a917885ee73716ba4557fa3a",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-04-10",
       "sourceIds": [
         "src-11be10768dbb7de0",
         "src-44708abf72c85407",
@@ -2805,7 +2811,7 @@
       "retrieval": {
         "documentId": "wiki:LLM_Reliability_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:af816ed16b8daaba36aa9529f16e0f1d78392e0be36a597836823a11f807996e",
+        "contentHash": "sha256:25a31123dec32422a6be825fa5e34b89c7a523d1a917885ee73716ba4557fa3a",
         "textFields": [
           "title",
           "aliases",
@@ -3546,17 +3552,17 @@
         "研究概览"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.947Z",
-      "contentHash": "sha256:6952f850efb2b43088f354239d8b3c1a7ec6ef1b0cc50fa9f714b107818ec08e",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
+      "modifiedAt": "2026-10-12T04:54:44.575Z",
+      "contentHash": "sha256:3d4a627ac5f70839c9d1d2bb34ed797a5f0cebbf31b3d24f75c73cf6aef5bed3",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-01-10",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Research_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:6952f850efb2b43088f354239d8b3c1a7ec6ef1b0cc50fa9f714b107818ec08e",
+        "contentHash": "sha256:3d4a627ac5f70839c9d1d2bb34ed797a5f0cebbf31b3d24f75c73cf6aef5bed3",
         "textFields": [
           "title",
           "aliases",
@@ -3587,17 +3593,17 @@
         "研究经历"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.874Z",
-      "contentHash": "sha256:ce7c8af59c0323e1e2c6f26cf9d4754c17275f32c72a9ae143edeaaec086677f",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
+      "modifiedAt": "2026-10-12T04:54:44.298Z",
+      "contentHash": "sha256:66cd91d0b4d90bc97eec9774dcbba4f434864e2a051db43f7c2b09f4da04ca11",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-01-10",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Experience_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:ce7c8af59c0323e1e2c6f26cf9d4754c17275f32c72a9ae143edeaaec086677f",
+        "contentHash": "sha256:66cd91d0b4d90bc97eec9774dcbba4f434864e2a051db43f7c2b09f4da04ca11",
         "textFields": [
           "title",
           "aliases",
@@ -3628,10 +3634,10 @@
         "cv-摘要"
       ],
       "timestamp": "2026-07-02T19:37:18+08:00",
-      "modifiedAt": "2026-10-09T05:51:11.225Z",
-      "contentHash": "sha256:7cb87495371a9c162206ab0b4180e06a8380c91b9af1f0604932afddbbf62e8e",
-      "reviewedAt": "2026-10-09T05:51:42.578Z",
-      "reviewDue": "2027-01-07",
+      "modifiedAt": "2026-10-12T04:54:44.178Z",
+      "contentHash": "sha256:552a5e5c067e3565a11abe2e785f4c89b348f8277a182361c81ffd146705783a",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-01-10",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-0642a11373a83c47",
@@ -3646,8 +3652,10 @@
         "src-94b169d5c233e588",
         "src-9b2be44d3f13005a",
         "src-a0a9b7171dc028d2",
+        "src-af06ca5886446072",
         "src-b0de54fe614fa11d",
         "src-cea294f51d3559e8",
+        "src-d48b0fa9ae43a703",
         "src-da17eb3884244bd3",
         "src-faaafad831fbefc5"
       ],
@@ -3665,8 +3673,10 @@
         "src-94b169d5c233e588",
         "src-9b2be44d3f13005a",
         "src-a0a9b7171dc028d2",
+        "src-af06ca5886446072",
         "src-b0de54fe614fa11d",
         "src-cea294f51d3559e8",
+        "src-d48b0fa9ae43a703",
         "src-da17eb3884244bd3",
         "src-faaafad831fbefc5"
       ],
@@ -3674,7 +3684,7 @@
       "retrieval": {
         "documentId": "wiki:CV_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:7cb87495371a9c162206ab0b4180e06a8380c91b9af1f0604932afddbbf62e8e",
+        "contentHash": "sha256:552a5e5c067e3565a11abe2e785f4c89b348f8277a182361c81ffd146705783a",
         "textFields": [
           "title",
           "aliases",
@@ -3788,10 +3798,10 @@
         "论文列表"
       ],
       "timestamp": "2026-06-01T22:04:00+08:00",
-      "modifiedAt": "2026-10-11T14:16:35.894Z",
-      "contentHash": "sha256:ab5e4d6c2f6affa244649151bce59bd28568ee1a3242263807d1d48b290b99fb",
-      "reviewedAt": "2026-10-11T14:22:50.689Z",
-      "reviewDue": "2027-01-09",
+      "modifiedAt": "2026-10-12T04:54:44.528Z",
+      "contentHash": "sha256:43231db042c6e849183920a3ef78eb7926baa3891f9d8fd1a49ff10f0e49a117",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-01-10",
       "sourceIds": [
         "src-19ed8d8ac2a744f7",
         "src-2d7834852d5a70ca",
@@ -3799,7 +3809,8 @@
         "src-766234e11681dad2",
         "src-998b6c4324199ad3",
         "src-af06ca5886446072",
-        "src-b005562340a1c871"
+        "src-b005562340a1c871",
+        "src-d48b0fa9ae43a703"
       ],
       "citationSourceIds": [
         "src-19ed8d8ac2a744f7",
@@ -3808,13 +3819,14 @@
         "src-766234e11681dad2",
         "src-998b6c4324199ad3",
         "src-af06ca5886446072",
-        "src-b005562340a1c871"
+        "src-b005562340a1c871",
+        "src-d48b0fa9ae43a703"
       ],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Publications_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:ab5e4d6c2f6affa244649151bce59bd28568ee1a3242263807d1d48b290b99fb",
+        "contentHash": "sha256:43231db042c6e849183920a3ef78eb7926baa3891f9d8fd1a49ff10f0e49a117",
         "textFields": [
           "title",
           "aliases",
@@ -4034,17 +4046,17 @@
         "项目概览"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.928Z",
-      "contentHash": "sha256:c979c5302e1791e3ca0d502436ed0d586e1458aa78b7d050c6acebd22b614ffa",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
+      "modifiedAt": "2026-10-12T04:54:44.515Z",
+      "contentHash": "sha256:1c4974953a9ae4e06f207022bfb3a08cbb88f7de6f4c953262714317fe19b860",
+      "reviewedAt": "2026-10-12T04:55:39.589Z",
+      "reviewDue": "2027-01-10",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Projects_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:c979c5302e1791e3ca0d502436ed0d586e1458aa78b7d050c6acebd22b614ffa",
+        "contentHash": "sha256:1c4974953a9ae4e06f207022bfb3a08cbb88f7de6f4c953262714317fe19b860",
         "textFields": [
           "title",
           "aliases",

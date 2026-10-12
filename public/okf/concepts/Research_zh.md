@@ -8,18 +8,18 @@ tags:
   - overview
   - 研究概览
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-07T07:07:23.947Z'
-content_hash: 'sha256:6952f850efb2b43088f354239d8b3c1a7ec6ef1b0cc50fa9f714b107818ec08e'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-01-05'
+modified: '2026-10-12T04:54:44.575Z'
+content_hash: 'sha256:3d4a627ac5f70839c9d1d2bb34ed797a5f0cebbf31b3d24f75c73cf6aef5bed3'
+reviewed_at: '2026-10-12T04:55:39.589Z'
+review_due: '2027-01-10'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-07T07:07:51.129Z'
-  reviewDue: '2027-01-05'
+  reviewedAt: '2026-10-12T04:55:39.589Z'
+  reviewDue: '2027-01-10'
   pendingReview: false
   overdue: false
 retrieval:
@@ -54,7 +54,7 @@ source_path: wiki/Research_zh.md
 
 ## 大语言模型可靠性
 
-[大语言模型可靠性](./LLM_Reliability_zh.md) 研究模型回答能否获得充分证据支持。获 NeurIPS 2026 录用的[《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md)将这一问题与可能诱发无依据推理的提示模式联系起来。
+[大语言模型可靠性](./LLM_Reliability_zh.md) 研究模型回答能否获得充分证据支持。获 NeurIPS 2026 录用的[《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md)通过三个心理任务比较大语言模型与人类的错觉模式感知。
 
 ## 数据中心 ML 与可信 AI
 

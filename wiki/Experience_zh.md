@@ -8,10 +8,10 @@ tags:
   - profile
   - 研究经历
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-07T07:07:23.874Z'
-content_hash: 'sha256:ce7c8af59c0323e1e2c6f26cf9d4754c17275f32c72a9ae143edeaaec086677f'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-01-05'
+modified: '2026-10-12T04:54:44.298Z'
+content_hash: 'sha256:66cd91d0b4d90bc97eec9774dcbba4f434864e2a051db43f7c2b09f4da04ca11'
+reviewed_at: '2026-10-12T04:55:39.589Z'
+review_due: '2027-01-10'
 name: 研究经历
 language: zh
 summary: 研究经历与机构关系。
@@ -42,6 +42,6 @@ translation_of: Experience
 
 **全职研究实习生**，2025-06 至 2025-12。导师：Pang Yan, James，[[NUSRI_CQ|NUSRI-CQ]]。
 
-该研究线关注可信模型行为和合成数据评估，包括在真实数据有限或碎片化时用于低资源合成数据评估的分布式 Wasserstein 方法。这一阶段还包括获 NeurIPS 2026 录用的[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》]]，研究感知到的提示模式如何使推理偏离证据。
+该研究线关注可信模型行为和合成数据评估，包括在真实数据有限或碎片化时用于低资源合成数据评估的分布式 Wasserstein 方法。这一阶段还包括获 NeurIPS 2026 录用的[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》]]，通过三个心理任务比较大语言模型与人类的错觉模式感知。
 
 相关研究：[[LLM_Reliability|大语言模型可靠性]]、[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|错觉模式感知论文]]、[[Synthetic_Data_and_Model_Collapse|合成数据]] 和 [[Wasserstein_Geometry|Wasserstein 几何]]。

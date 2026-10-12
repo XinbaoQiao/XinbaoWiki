@@ -9,10 +9,10 @@ tags:
   - 研究概念
   - llm
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-07T07:07:23.909Z'
-content_hash: 'sha256:af816ed16b8daaba36aa9529f16e0f1d78392e0be36a597836823a11f807996e'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-12T04:54:44.413Z'
+content_hash: 'sha256:25a31123dec32422a6be825fa5e34b89c7a523d1a917885ee73716ba4557fa3a'
+reviewed_at: '2026-10-12T04:55:39.589Z'
+review_due: '2027-04-10'
 name: 大语言模型可靠性
 language: zh
 summary: 大语言模型系统在真实使用中的可靠性。
@@ -29,7 +29,7 @@ translation_of: LLM_Reliability
 
 ## 与乔鑫宝工作的关系
 
-乔鑫宝的[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|NeurIPS 2026 论文]]研究提示中的错觉模式如何导致虚假推理。这项工作与其更广泛的研究关注相连：当证据有限、分散、由模型生成或可能具有误导性时，AI 系统能否基于充分证据作出结论。
+乔鑫宝的[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|NeurIPS 2026 论文]]比较大语言模型与人类从随机、无关或不足的证据中作出无依据关系推断的倾向。这项工作与其更广泛的研究关注相连：当证据有限、分散、由模型生成或可能具有误导性时，AI 系统能否基于充分证据作出结论。
 
 ## 参见
 

@@ -9,18 +9,18 @@ tags:
   - 研究概念
   - llm
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-07T07:07:23.909Z'
-content_hash: 'sha256:af816ed16b8daaba36aa9529f16e0f1d78392e0be36a597836823a11f807996e'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-12T04:54:44.413Z'
+content_hash: 'sha256:25a31123dec32422a6be825fa5e34b89c7a523d1a917885ee73716ba4557fa3a'
+reviewed_at: '2026-10-12T04:55:39.589Z'
+review_due: '2027-04-10'
 language: zh
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-10-07T07:07:51.129Z'
-  reviewDue: '2027-04-05'
+  reviewedAt: '2026-10-12T04:55:39.589Z'
+  reviewDue: '2027-04-10'
   pendingReview: false
   overdue: false
 retrieval:
@@ -42,7 +42,7 @@ source_path: wiki/LLM_Reliability_zh.md
 
 ## 与乔鑫宝工作的关系
 
-乔鑫宝的[NeurIPS 2026 论文](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md)研究提示中的错觉模式如何导致虚假推理。这项工作与其更广泛的研究关注相连：当证据有限、分散、由模型生成或可能具有误导性时，AI 系统能否基于充分证据作出结论。
+乔鑫宝的[NeurIPS 2026 论文](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md)比较大语言模型与人类从随机、无关或不足的证据中作出无依据关系推断的倾向。这项工作与其更广泛的研究关注相连：当证据有限、分散、由模型生成或可能具有误导性时，AI 系统能否基于充分证据作出结论。
 
 ## 参见
 

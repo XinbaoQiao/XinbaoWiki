@@ -8,18 +8,18 @@ tags:
   - profile
   - cv-summary
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-10-09T05:51:11.226Z'
-content_hash: 'sha256:9057001613b77f9fdb83abd48ffd1742fa0d1d819fe77c02f55b89b98e318b32'
-reviewed_at: '2026-10-09T05:51:42.578Z'
-review_due: '2027-01-07'
+modified: '2026-10-12T04:54:44.188Z'
+content_hash: 'sha256:65d59cccbc07e3e3d479cae5f012f62e788b81a7b6bb5934eeb142a864c92332'
+reviewed_at: '2026-10-12T04:55:39.589Z'
+review_due: '2027-01-10'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-09T05:51:42.578Z'
-  reviewDue: '2027-01-07'
+  reviewedAt: '2026-10-12T04:55:39.589Z'
+  reviewDue: '2027-01-10'
   pendingReview: false
   overdue: false
 retrieval:
@@ -39,8 +39,10 @@ source_ids:
   - src-94b169d5c233e588
   - src-9b2be44d3f13005a
   - src-a0a9b7171dc028d2
+  - src-af06ca5886446072
   - src-b0de54fe614fa11d
   - src-cea294f51d3559e8
+  - src-d48b0fa9ae43a703
   - src-da17eb3884244bd3
   - src-faaafad831fbefc5
 source_path: wiki/CV.md
@@ -70,13 +72,13 @@ source_path: wiki/CV.md
 
 - **Doctoral Research at The Chinese University of Hong Kong**, 2026-08-01-present, advised by [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/). Investigates data lifecycle management in distributed AI systems, connecting data generation, use, and deletion with federated representation geometry.
   - Paper #6: proposed an optimal-transport view of federated learning and a barycentric multi-prototype classifier for communication-constrained representation geometry.
-- **Research on Data-Centric ML Systems**, 03/2023 to 12/2025, advised by Prof. [Meng Zhang](https://person.zju.edu.cn/mengzhang) at [Zhejiang University](./Zhejiang_University.md). Built unlearning methods for data deletion across continuous influence weights, certified online updates, and dynamic tree ensembles.
+- **Master's Research on Data-Centric ML Systems**, 03/2023 to 12/2025, advised by Prof. [Meng Zhang](https://person.zju.edu.cn/mengzhang) at [Zhejiang University](./Zhejiang_University.md). Built unlearning methods for data deletion across continuous influence weights, certified online updates, and dynamic tree ensembles.
   - Paper #3: introduced soft-weighted unlearning for continuous influence weights, supporting fairness and robustness interventions beyond binary erasure.
   - Paper #4: developed Hessian-free online certified unlearning with recollected trajectory statistics, avoiding explicit Hessian inversion for streaming deletion requests.
   - Paper #5: built an exact and efficient random-forest unlearning framework for dynamic online environments, updating affected tree statistics instead of retraining.
-- **Research on Trustworthy LLM systems**, 06/2025 to 12/2025, full-time research intern advised by PANG Yan, James at the National University of Singapore. Analyzed reliability failures that emerge when models train on recursively selected synthetic data or infer spurious patterns from prompts.
+- **Research Internship on Trustworthy LLM Systems**, 06/2025 to 12/2025, full-time research intern advised by PANG Yan, James at the National University of Singapore. Analyzed reliability failures that emerge when models train on recursively selected synthetic data or make unsupported relational inferences.
   - Paper #1: showed that sample selection during recursive synthetic-data training can prune tail samples under low-resource verification and precipitate model collapse.
-  - Paper #2: analyzed illusory pattern perception as a mechanism for spurious LLM inference when perceived patterns override evidence-grounded reasoning.
+  - Paper #2: compared LLM and human illusory pattern perception across three psychological tasks and analyzed associated SAE features.
 
 ## Open-Source Contributions and Academic Service
 
@@ -96,7 +98,7 @@ Asterisks (*) denote co-first authorship; daggers (†) denote corresponding aut
   Forty-Third International Conference on Machine Learning, ICML, 2026. Links: [OpenReview](https://openreview.net/forum?id=FFXvnzM254), [arXiv](https://arxiv.org/abs/2606.13732), [GitHub](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse).
 - **Paper #2: Illusory Pattern Perception Drives Spurious Inference in Large Language Models**.\
   Peihua Mai\*, Zhuoyan Shao\*, **Xinbao Qiao**\*, Meng Zhang, Xinyue Zhou†, Yan Pang†.\
-  NeurIPS 2026, accepted.
+  NeurIPS 2026, accepted. Links: [OpenReview](https://openreview.net/forum?id=VLcmdFfRQc), [arXiv](https://arxiv.org/abs/2610.07791).
 - **Paper #3: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**.\
   **Xinbao Qiao**, Ningning Ding, Yushi Cheng, Meng Zhang†.\
   Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026. Links: [arXiv](https://arxiv.org/abs/2505.18783), [AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681).

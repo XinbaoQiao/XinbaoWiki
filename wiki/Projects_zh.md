@@ -8,10 +8,10 @@ tags:
   - overview
   - 项目概览
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-07T07:07:23.928Z'
-content_hash: 'sha256:c979c5302e1791e3ca0d502436ed0d586e1458aa78b7d050c6acebd22b614ffa'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-01-05'
+modified: '2026-10-12T04:54:44.515Z'
+content_hash: 'sha256:1c4974953a9ae4e06f207022bfb3a08cbb88f7de6f4c953262714317fe19b860'
+reviewed_at: '2026-10-12T04:55:39.589Z'
+review_due: '2027-01-10'
 name: 项目
 language: zh
 summary: AI 与网络、机器遗忘、合成数据及语言模型可靠性研究项目。
@@ -42,4 +42,4 @@ translation_of: Projects
 
 ### 可信大语言模型系统
 
-[[LLM_Reliability|大语言模型可靠性]] 研究提示中出现误导性模式时，语言模型能否恰当地使用证据。获 NeurIPS 2026 录用的[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》]]研究感知到的提示模式如何诱发缺乏证据支持的推理。
+[[LLM_Reliability|大语言模型可靠性]] 研究语言模型是否在缺乏充分证据时推断关联。获 NeurIPS 2026 录用的[[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》]]通过三个心理任务比较大语言模型与人类的错觉模式感知。

@@ -10,10 +10,10 @@ tags:
   - overview
   - project-overview
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-07T07:07:23.928Z'
-content_hash: 'sha256:fda4d8d5340b060e97ab1830e822325f8c58e4b446191dcfd155c7e4f703643e'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-01-05'
+modified: '2026-10-12T04:54:44.521Z'
+content_hash: 'sha256:1de0081d62f81710164c0badf94a42fe090541bbdde40a4c8bfc1661ff016557'
+reviewed_at: '2026-10-12T04:55:39.589Z'
+review_due: '2027-01-10'
 name: Projects
 summary: >-
   Research projects in AI and networks, machine unlearning, synthetic data, and
@@ -44,4 +44,4 @@ occupation: Project overview
 
 ### Trustworthy LLM systems
 
-[[LLM_Reliability]] examines whether language models use evidence appropriately when prompts suggest misleading patterns. The NeurIPS 2026 paper [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|Illusory Pattern Perception Drives Spurious Inference in Large Language Models]] studies how perceived prompt patterns can lead to unsupported inference.
+[[LLM_Reliability]] examines whether language models infer relations without adequate evidence. The NeurIPS 2026 paper [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|Illusory Pattern Perception Drives Spurious Inference in Large Language Models]] compares LLM and human illusory pattern perception across three psychological tasks.

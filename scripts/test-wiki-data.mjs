@@ -2718,6 +2718,18 @@ assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8
 assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV_zh.md'), 'utf8'), /2606\.13732[\s\S]*39681/, 'Chinese OKF CV concept links Paper #1 arXiv and Paper #3 AAAI article');
 assert.doesNotMatch(read('CV.md'), /citations\?user=nhC_OfEAAAAJ/, 'English CV page avoids exposing the Google Scholar author ID');
 assert.doesNotMatch(read('CV_zh.md'), /citations\?user=nhC_OfEAAAAJ/, 'Chinese CV page avoids exposing the Google Scholar author ID');
+for (const file of ['CV.md', 'CV_zh.md']) {
+  const cv = read(file);
+  const start = cv.indexOf('Paper #2: Illusory Pattern Perception');
+  const paper = cv.slice(start, cv.indexOf('Paper #3:', start));
+  for (const url of ['https://arxiv.org/abs/2610.07791', 'https://openreview.net/forum?id=VLcmdFfRQc']) {
+    assert.ok(paper.includes(url), file + ' includes both Paper #2 source links');
+    assert.ok(cvTex.includes(url), 'downloadable CV source includes the Paper #2 source link');
+  }
+}
+assert.ok(read('CV.md').includes("Master's Research on Data-Centric ML Systems") && cvTex.includes("Master's Research on Data-Centric ML Systems"), 'CV identifies the verified ZJU master research phase');
+assert.ok(read('CV.md').includes('Research Internship on Trustworthy LLM Systems') && cvTex.includes('Research Internship on Trustworthy LLM Systems'), 'CV identifies the verified NUSRI research internship');
+assert.ok(read('CV_zh.md').includes('硕士阶段的数据中心机器学习系统研究') && read('CV_zh.md').includes('可信 LLM 系统科研实习'), 'Chinese CV preserves the same research phases');
 const cvTexUris = sortedUrls([...cvTex.matchAll(/\\(?:blackhref|linkish|iconlink)\{([^{}]+)\}/g)].map((match) => match[1]));
 const cvPdfUriOutput = execFileSync('pdfinfo', ['-url', 'public/files/XinbaoQiao_CV.pdf'], { cwd: root, encoding: 'utf8' });
 const cvPdfUris = sortedUrls(cvPdfUriOutput.split(/\r?\n/).flatMap((line) => {

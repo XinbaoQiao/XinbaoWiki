@@ -11,10 +11,10 @@ tags:
   - biography
   - phd-student
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-09T05:51:11.717Z'
-content_hash: 'sha256:843b7db9a95eb06f502928ea4525c862169be5c709827ff5103c4293a4bd7250'
-reviewed_at: '2026-10-09T05:51:42.578Z'
-review_due: '2027-01-07'
+modified: '2026-10-12T04:54:44.724Z'
+content_hash: 'sha256:67ea308b2c9089528b45476c22a60a9cc29736b3d556145bdcd161ec003a0cb3'
+reviewed_at: '2026-10-12T04:55:39.589Z'
+review_due: '2027-01-10'
 language: en
 aliases:
   - Mr. Ciao
@@ -25,8 +25,8 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-09T05:51:42.578Z'
-  reviewDue: '2027-01-07'
+  reviewedAt: '2026-10-12T04:55:39.589Z'
+  reviewDue: '2027-01-10'
   pendingReview: false
   overdue: false
 retrieval:
@@ -75,7 +75,7 @@ This period includes work on [Hessian-Free Online Certified Unlearning](./Hessia
 
 From June to December 2025, Qiao worked as a full-time research intern at [NUSRI-CQ](./NUSRI_CQ.md). The research focused on trustworthy LLM systems and synthetic-data evaluation, especially low-resource recursive training where real-data coverage is limited or fragmented.
 
-This period also includes [Illusory Pattern Perception Drives Spurious Inference in Large Language Models](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md), accepted at NeurIPS 2026, which examines how perceived prompt patterns can steer an LLM away from evidence-grounded inference.
+This period also includes [Illusory Pattern Perception Drives Spurious Inference in Large Language Models](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md), accepted at NeurIPS 2026, which compares LLM and human responses when evidence does not support inferred relations.
 
 ### The Chinese University of Hong Kong (2026-08-01-present)
 

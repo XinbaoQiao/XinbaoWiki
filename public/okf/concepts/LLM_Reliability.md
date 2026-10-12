@@ -9,18 +9,18 @@ tags:
   - research-concept
   - llm
 timestamp: '2026-05-05T20:55:21+08:00'
-modified: '2026-10-07T07:07:23.911Z'
-content_hash: 'sha256:d4e101ad467955c8334ea6306fbac54af8769922af9a346f8556eb583b3cc3b2'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-12T04:54:44.424Z'
+content_hash: 'sha256:949bc75d7ca94482fad27338a7d930a2bc02574494d5c1d374e08eba47fdaee1'
+reviewed_at: '2026-10-12T04:55:39.589Z'
+review_due: '2027-04-10'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-10-07T07:07:51.129Z'
-  reviewDue: '2027-04-05'
+  reviewedAt: '2026-10-12T04:55:39.589Z'
+  reviewDue: '2027-04-10'
   pendingReview: false
   overdue: false
 retrieval:
@@ -42,7 +42,7 @@ Recent evidence sharpens two distinctions. First, false but fluent outputs are n
 
 ## Connection to Qiao's work
 
-Qiao's [NeurIPS 2026 paper](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md) examines how perceived prompt patterns can lead to spurious inference. It connects his LLM-reliability work to a broader research concern: whether AI systems ground their conclusions in adequate evidence when that evidence is limited, distributed, generated, or potentially misleading.
+Qiao's [NeurIPS 2026 paper](./Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md) compares LLM and human susceptibility to unsupported relational inference from random, unrelated, or insufficient evidence. It connects his LLM-reliability work to a broader research concern: whether AI systems ground their conclusions in adequate evidence when that evidence is limited, distributed, generated, or potentially misleading.
 
 ## See also
 

@@ -10,10 +10,10 @@ tags:
   - overview
   - research-overview
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-07T07:07:23.948Z'
-content_hash: 'sha256:30f689ed5a3dfb40a9804d100cce93fd9d4bbf7c12e7a8cc23ed60b4da778b24'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-01-05'
+modified: '2026-10-12T04:54:44.583Z'
+content_hash: 'sha256:63cbf4e7ccb60c15da2fcc9051d16de4cbd551929fb55557f6e86bb7e6ffa4ac'
+reviewed_at: '2026-10-12T04:55:39.589Z'
+review_due: '2027-01-10'
 name: Research
 summary: >-
   Xinbao Qiao's research on data-centric machine learning, AI and networks, and
@@ -46,7 +46,7 @@ The under-review manuscript [[Decentralized_Free_Support_Wasserstein_Barycenter|
 
 ## LLM reliability
 
-[[LLM_Reliability]] studies whether model responses remain grounded in adequate evidence. The NeurIPS 2026 paper [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|Illusory Pattern Perception Drives Spurious Inference in Large Language Models]] connects this question to prompt patterns that can invite unsupported inferences.
+[[LLM_Reliability]] studies whether model responses remain grounded in adequate evidence. The NeurIPS 2026 paper [[Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models|Illusory Pattern Perception Drives Spurious Inference in Large Language Models]] uses three psychological tasks to compare illusory pattern perception in LLMs and humans.
 
 ## Data centric ML and trustworthy AI
 
