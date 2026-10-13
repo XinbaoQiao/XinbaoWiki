@@ -828,7 +828,7 @@
         "src-da17eb3884244bd3",
         "src-faaafad831fbefc5"
       ],
-      "contentHash": "sha256:52895c25b0bf302c849bf2a19f2accd9ba21fa745f5c9b4e5fee99d990dd3177",
+      "contentHash": "sha256:c6ca518b3f1d979a237e1c30e944b3d959932b6a0bca5bca7292c244381995b5",
       "file": "CV_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -838,12 +838,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-10-12T14:15:25.457Z",
-        "reviewDue": "2027-01-10",
+        "reviewedAt": "2026-10-13T11:36:20.721Z",
+        "reviewDue": "2027-01-11",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-12T14:14:29.802Z",
+      "modifiedAt": "2026-10-13T11:36:20.721Z",
       "outgoing": [
         "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "NUSRI_CQ_zh",
@@ -887,12 +887,12 @@
       "timestamp": "2026-07-02T19:37:18+08:00",
       "title": "简历",
       "type": "CV 摘要",
-      "reviewedAt": "2026-10-12T14:15:25.457Z",
-      "reviewDue": "2027-01-10",
+      "reviewedAt": "2026-10-13T11:36:20.721Z",
+      "reviewDue": "2027-01-11",
       "retrieval": {
         "documentId": "wiki:CV_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:52895c25b0bf302c849bf2a19f2accd9ba21fa745f5c9b4e5fee99d990dd3177",
+        "contentHash": "sha256:c6ca518b3f1d979a237e1c30e944b3d959932b6a0bca5bca7292c244381995b5",
         "textFields": [
           "title",
           "aliases",
@@ -1498,7 +1498,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:04fdfda05e4b744c34a59465d5eee0fd05d53e9e2afdbecb953280812647b6ce",
+      "contentHash": "sha256:5080e7384b659bb4021914df5601284920f20e5b614b5ced0f611a0e4b239a3b",
       "file": "Decentralized_Free_Support_Wasserstein_Barycenter_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -1508,12 +1508,12 @@
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
         "retention": "semantic memory with quality warnings",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2026-11-06",
+        "reviewedAt": "2026-10-13T11:36:03.385Z",
+        "reviewDue": "2026-11-12",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-07T07:07:23.845Z",
+      "modifiedAt": "2026-10-13T11:36:03.385Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -1537,12 +1537,12 @@
       "timestamp": "2026-08-20T00:00:00+09:00",
       "title": "Decentralized Free-Support Wasserstein Barycenter",
       "type": "publication",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2026-11-06",
+      "reviewedAt": "2026-10-13T11:36:03.385Z",
+      "reviewDue": "2026-11-12",
       "retrieval": {
         "documentId": "wiki:Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:04fdfda05e4b744c34a59465d5eee0fd05d53e9e2afdbecb953280812647b6ce",
+        "contentHash": "sha256:5080e7384b659bb4021914df5601284920f20e5b614b5ced0f611a0e4b239a3b",
         "textFields": [
           "title",
           "aliases",
@@ -1994,7 +1994,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:72fb15cc1d4f48d3016ce1675475b5714102b0eded54be33dadf70ee3cd1ba8b",
+      "contentHash": "sha256:c7e4ad26cd18863c27162a0ad273d306fc2ada5de0f4b39e71f4c56a85ef831c",
       "file": "DynFrs_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -2004,12 +2004,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05",
+        "reviewedAt": "2026-10-13T11:36:03.385Z",
+        "reviewDue": "2027-01-11",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-07T07:07:23.871Z",
+      "modifiedAt": "2026-10-13T11:36:03.385Z",
       "outgoing": [
         "Hessian_Free_Online_Certified_Unlearning_zh",
         "Machine_Unlearning_zh",
@@ -2036,14 +2036,14 @@
         "iclr-2025"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "title": "DynFrs：随机森林机器遗忘高效框架",
+      "title": "DynFrs: An Efficient Framework for Machine Unlearning in Random Forest",
       "type": "publication",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
+      "reviewedAt": "2026-10-13T11:36:03.385Z",
+      "reviewDue": "2027-01-11",
       "retrieval": {
         "documentId": "wiki:DynFrs_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:72fb15cc1d4f48d3016ce1675475b5714102b0eded54be33dadf70ee3cd1ba8b",
+        "contentHash": "sha256:c7e4ad26cd18863c27162a0ad273d306fc2ada5de0f4b39e71f4c56a85ef831c",
         "textFields": [
           "title",
           "aliases",
@@ -2610,7 +2610,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:00c00ca3fe7465d2163921199a1c4f3dbefcebaa08eaf7f4b5f7e149ba1abb33",
+      "contentHash": "sha256:784f2f4f87def73219b668b747b48c1ff4eadd906d2a17fb8f3751b130f24f28",
       "file": "Hessian_Free_Online_Certified_Unlearning_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -2620,12 +2620,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05",
+        "reviewedAt": "2026-10-13T11:36:20.750Z",
+        "reviewDue": "2027-01-11",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-07T07:07:23.882Z",
+      "modifiedAt": "2026-10-13T11:36:20.750Z",
       "outgoing": [
         "Certified_Data_Removal_zh",
         "DynFrs_zh",
@@ -2652,14 +2652,14 @@
         "iclr-2025"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "title": "无 Hessian 在线认证遗忘",
+      "title": "Hessian-Free Online Certified Unlearning",
       "type": "publication",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
+      "reviewedAt": "2026-10-13T11:36:20.750Z",
+      "reviewDue": "2027-01-11",
       "retrieval": {
         "documentId": "wiki:Hessian_Free_Online_Certified_Unlearning_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:00c00ca3fe7465d2163921199a1c4f3dbefcebaa08eaf7f4b5f7e149ba1abb33",
+        "contentHash": "sha256:784f2f4f87def73219b668b747b48c1ff4eadd906d2a17fb8f3751b130f24f28",
         "textFields": [
           "title",
           "aliases",
@@ -2785,7 +2785,7 @@
       "citationSourceIds": [
         "src-af06ca5886446072"
       ],
-      "contentHash": "sha256:6248b4d648481ac2ca59b50d984755a2510b7422b9359c59499eb38fc09a8167",
+      "contentHash": "sha256:d658307f57dab094fea7fca7ea8aab996235d317ee95b2742644f8002f62f2d4",
       "file": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md",
       "footnoteSourceIds": [
         "src-af06ca5886446072"
@@ -2797,12 +2797,12 @@
         "confidence": 0.95,
         "review": "on venue/status change",
         "retention": "long-lived semantic memory",
-        "reviewedAt": "2026-10-11T14:22:50.689Z",
-        "reviewDue": "2027-10-11",
+        "reviewedAt": "2026-10-13T11:36:03.385Z",
+        "reviewDue": "2027-10-13",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-11T14:22:08.131Z",
+      "modifiedAt": "2026-10-13T11:36:03.385Z",
       "outgoing": [
         "LLM_Reliability_zh",
         "Qiao_Xinbao_zh",
@@ -2829,14 +2829,14 @@
         "llm-reliability"
       ],
       "timestamp": "2026-09-25T13:49:35+09:00",
-      "title": "错觉模式感知驱动大语言模型的虚假推理",
+      "title": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
       "type": "publication",
-      "reviewedAt": "2026-10-11T14:22:50.689Z",
-      "reviewDue": "2027-10-11",
+      "reviewedAt": "2026-10-13T11:36:03.385Z",
+      "reviewDue": "2027-10-13",
       "retrieval": {
         "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:6248b4d648481ac2ca59b50d984755a2510b7422b9359c59499eb38fc09a8167",
+        "contentHash": "sha256:d658307f57dab094fea7fca7ea8aab996235d317ee95b2742644f8002f62f2d4",
         "textFields": [
           "title",
           "aliases",
@@ -3240,7 +3240,7 @@
         "src-b1ff3281a22fa97a",
         "src-be823228318f0bc0"
       ],
-      "contentHash": "sha256:69a8db95981347fa9e4627959bca5c471ca4c96a4359d404065f2af1ea7619d2",
+      "contentHash": "sha256:2b4c43fbe096a30d8540bb214e71ad688a32eb1896205f5d4039b4d8a0aab214",
       "file": "Internet_Slang_2026.md",
       "footnoteSourceIds": [
         "src-03b02edf8ea59d6e",
@@ -3261,10 +3261,10 @@
         "retention": "exclude from public bundle until explicitly unhidden",
         "reviewedAt": "2026-07-14T23:17:11+08:00",
         "reviewDue": "2027-07-14",
-        "pendingReview": false,
+        "pendingReview": true,
         "overdue": false
       },
-      "modifiedAt": "2026-07-14T23:17:11+08:00",
+      "modifiedAt": "2026-10-13T11:20:15.915Z",
       "outgoing": [
         "AI_and_Networks",
         "CV",
@@ -3300,7 +3300,7 @@
       "retrieval": {
         "documentId": "wiki:Internet_Slang_2026",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:69a8db95981347fa9e4627959bca5c471ca4c96a4359d404065f2af1ea7619d2",
+        "contentHash": "sha256:2b4c43fbe096a30d8540bb214e71ad688a32eb1896205f5d4039b4d8a0aab214",
         "textFields": [
           "title",
           "aliases",
@@ -3336,7 +3336,7 @@
         "src-b1ff3281a22fa97a",
         "src-be823228318f0bc0"
       ],
-      "contentHash": "sha256:46307fcb93f697faed6dbcd91446395afe96d03629cfa003d105bbb7f555a0ee",
+      "contentHash": "sha256:ceeaa4c601ebbf315ec70800e7a536e8deacfdf814c248c91caab917b1b51ec7",
       "file": "Internet_Slang_2026_zh.md",
       "footnoteSourceIds": [
         "src-03b02edf8ea59d6e",
@@ -3357,10 +3357,10 @@
         "retention": "exclude from public bundle until explicitly unhidden",
         "reviewedAt": "2026-07-14T23:17:11+08:00",
         "reviewDue": "2027-07-14",
-        "pendingReview": false,
+        "pendingReview": true,
         "overdue": false
       },
-      "modifiedAt": "2026-07-14T23:17:11+08:00",
+      "modifiedAt": "2026-10-13T11:20:15.914Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "CV_zh",
@@ -3396,7 +3396,7 @@
       "retrieval": {
         "documentId": "wiki:Internet_Slang_2026_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:46307fcb93f697faed6dbcd91446395afe96d03629cfa003d105bbb7f555a0ee",
+        "contentHash": "sha256:ceeaa4c601ebbf315ec70800e7a536e8deacfdf814c248c91caab917b1b51ec7",
         "textFields": [
           "title",
           "aliases",
@@ -3628,7 +3628,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:15bf945ff1ae853db6b004210c7c4a64fb7e37c7c8ccb8ba5b4ad1bb91e2c4db",
+      "contentHash": "sha256:f196a3cc0b70b7b2c2e20724dd3fc6e1600c7b1ff139e6e6cc0d230a5d87c36b",
       "file": "Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning_zh.md",
       "footnoteSourceIds": [],
       "hidden": true,
@@ -3638,12 +3638,12 @@
         "confidence": 0.55,
         "review": "manual before publication",
         "retention": "exclude from public bundle until explicitly unhidden",
-        "reviewedAt": "2026-09-25T04:59:05.905Z",
-        "reviewDue": "2026-10-25",
+        "reviewedAt": "2026-10-13T11:36:03.385Z",
+        "reviewDue": "2026-11-12",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-08-09T18:32:45.771Z",
+      "modifiedAt": "2026-10-13T11:36:03.385Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -3664,14 +3664,14 @@
         "private"
       ],
       "timestamp": "2026-05-06T06:22:22+08:00",
-      "title": "Learn What Matters：高效去中心化学习的数据剪枝",
+      "title": "Learn What Matters: Data Pruning for Efficient Decentralized Learning",
       "type": "publication",
-      "reviewedAt": "2026-09-25T04:59:05.905Z",
-      "reviewDue": "2026-10-25",
+      "reviewedAt": "2026-10-13T11:36:03.385Z",
+      "reviewDue": "2026-11-12",
       "retrieval": {
         "documentId": "wiki:Learn_What_Matters_Data_Pruning_for_Efficient_Decentralized_Learning_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:15bf945ff1ae853db6b004210c7c4a64fb7e37c7c8ccb8ba5b4ad1bb91e2c4db",
+        "contentHash": "sha256:f196a3cc0b70b7b2c2e20724dd3fc6e1600c7b1ff139e6e6cc0d230a5d87c36b",
         "textFields": [
           "title",
           "aliases",
@@ -5138,7 +5138,7 @@
         "src-da17eb3884244bd3",
         "src-faaafad831fbefc5"
       ],
-      "contentHash": "sha256:687869a20b05b2db05a9578e96ecbe52722c8b491fef78b0d946abe768a7d48d",
+      "contentHash": "sha256:a8fc8276ffaa4c9f95b50db8d219caa70d218315b8ea1ac310cf43ff3209cfc6",
       "file": "Publications_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -5148,12 +5148,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-10-12T14:15:25.457Z",
-        "reviewDue": "2027-01-10",
+        "reviewedAt": "2026-10-13T11:36:20.781Z",
+        "reviewDue": "2027-01-11",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-12T14:14:29.825Z",
+      "modifiedAt": "2026-10-13T11:36:20.781Z",
       "outgoing": [
         "AI_and_Networks_zh",
         "Data_Centric_Machine_Learning_zh",
@@ -5204,12 +5204,12 @@
       "timestamp": "2026-06-01T22:04:00+08:00",
       "title": "论文",
       "type": "论文列表",
-      "reviewedAt": "2026-10-12T14:15:25.457Z",
-      "reviewDue": "2027-01-10",
+      "reviewedAt": "2026-10-13T11:36:20.781Z",
+      "reviewDue": "2027-01-11",
       "retrieval": {
         "documentId": "wiki:Publications_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:687869a20b05b2db05a9578e96ecbe52722c8b491fef78b0d946abe768a7d48d",
+        "contentHash": "sha256:a8fc8276ffaa4c9f95b50db8d219caa70d218315b8ea1ac310cf43ff3209cfc6",
         "textFields": [
           "title",
           "aliases",
@@ -6382,7 +6382,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:c33dbeb4882ed5316af766a49c497252e784d8e95c1600e2208457a0d0af7e6e",
+      "contentHash": "sha256:8763ffe73b76b3e2d1c0d94796f9ce325f26050d49e8a1488e1ddd61fc4cbbe2",
       "file": "Soft_Weighted_Machine_Unlearning_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -6392,12 +6392,12 @@
         "confidence": 0.95,
         "review": "on venue/status change",
         "retention": "long-lived semantic memory",
-        "reviewedAt": "2026-10-12T14:15:25.457Z",
-        "reviewDue": "2027-10-12",
+        "reviewedAt": "2026-10-13T11:36:03.385Z",
+        "reviewDue": "2027-10-13",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-12T14:14:29.830Z",
+      "modifiedAt": "2026-10-13T11:36:03.385Z",
       "outgoing": [
         "Fairness_and_Robustness_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
@@ -6426,14 +6426,14 @@
         "machine-unlearning"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "title": "超越二元擦除：用于公平性与鲁棒性的软加权遗忘",
+      "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
       "type": "publication",
-      "reviewedAt": "2026-10-12T14:15:25.457Z",
-      "reviewDue": "2027-10-12",
+      "reviewedAt": "2026-10-13T11:36:03.385Z",
+      "reviewDue": "2027-10-13",
       "retrieval": {
         "documentId": "wiki:Soft_Weighted_Machine_Unlearning_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:c33dbeb4882ed5316af766a49c497252e784d8e95c1600e2208457a0d0af7e6e",
+        "contentHash": "sha256:8763ffe73b76b3e2d1c0d94796f9ce325f26050d49e8a1488e1ddd61fc4cbbe2",
         "textFields": [
           "title",
           "aliases",
@@ -7453,7 +7453,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:e72b3490b8b9a8ee9c8e6909e76559a1f48e7e98b3a8ae019a4092f1696a3fd3",
+      "contentHash": "sha256:dd5def2dccc285b78a943ddbe68ed603ba6d531fbe363a022cd642320e878b54",
       "file": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -7463,12 +7463,12 @@
         "confidence": 0.95,
         "review": "on venue/status change",
         "retention": "long-lived semantic memory",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07",
+        "reviewedAt": "2026-10-13T11:36:20.803Z",
+        "reviewDue": "2027-10-13",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-07T07:07:23.992Z",
+      "modifiedAt": "2026-10-13T11:36:20.803Z",
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "Data_Selection_zh",
@@ -7501,14 +7501,14 @@
         "synthetic-data"
       ],
       "timestamp": "2026-06-02T22:56:50+08:00",
-      "title": "样本选择偏差何以促成模型坍缩",
+      "title": "When Sample Selection Bias Precipitates Model Collapse",
       "type": "publication",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-10-07",
+      "reviewedAt": "2026-10-13T11:36:20.803Z",
+      "reviewDue": "2027-10-13",
       "retrieval": {
         "documentId": "wiki:When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:e72b3490b8b9a8ee9c8e6909e76559a1f48e7e98b3a8ae019a4092f1696a3fd3",
+        "contentHash": "sha256:dd5def2dccc285b78a943ddbe68ed603ba6d531fbe363a022cd642320e878b54",
         "textFields": [
           "title",
           "aliases",
@@ -9201,7 +9201,7 @@
     },
     {
       "from": "DynFrs_zh",
-      "label": "无 Hessian 在线认证遗忘",
+      "label": "Hessian-Free Online Certified Unlearning",
       "relation": "wikilink",
       "source": "body",
       "to": "Hessian_Free_Online_Certified_Unlearning_zh"
@@ -12533,14 +12533,14 @@
     },
     {
       "from": "Publications_zh",
-      "label": "DynFrs：随机森林机器遗忘高效框架",
+      "label": "DynFrs: An Efficient Framework for Machine Unlearning in Random Forest",
       "relation": "wikilink",
       "source": "body",
       "to": "DynFrs_zh"
     },
     {
       "from": "Publications_zh",
-      "label": "无 Hessian 在线认证遗忘",
+      "label": "Hessian-Free Online Certified Unlearning",
       "relation": "wikilink",
       "source": "body",
       "to": "Hessian_Free_Online_Certified_Unlearning_zh"
@@ -12568,7 +12568,7 @@
     },
     {
       "from": "Publications_zh",
-      "label": "超越二元擦除：用于公平性与鲁棒性的软加权遗忘",
+      "label": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
       "relation": "wikilink",
       "source": "body",
       "to": "Soft_Weighted_Machine_Unlearning_zh"
@@ -12596,7 +12596,7 @@
     },
     {
       "from": "Publications_zh",
-      "label": "样本选择偏差何以促成模型坍缩",
+      "label": "When Sample Selection Bias Precipitates Model Collapse",
       "relation": "wikilink",
       "source": "body",
       "to": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh"
@@ -13849,7 +13849,7 @@
     },
     {
       "from": "Soft_Weighted_Machine_Unlearning_zh",
-      "label": "无 Hessian 在线认证遗忘",
+      "label": "Hessian-Free Online Certified Unlearning",
       "relation": "wikilink",
       "source": "body",
       "to": "Hessian_Free_Online_Certified_Unlearning_zh"

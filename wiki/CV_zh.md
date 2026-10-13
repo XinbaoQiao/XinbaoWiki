@@ -8,10 +8,10 @@ tags:
   - profile
   - cv-摘要
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-10-12T14:14:29.802Z'
-content_hash: 'sha256:52895c25b0bf302c849bf2a19f2accd9ba21fa745f5c9b4e5fee99d990dd3177'
-reviewed_at: '2026-10-12T14:15:25.457Z'
-review_due: '2027-01-10'
+modified: '2026-10-13T11:36:20.721Z'
+content_hash: 'sha256:c6ca518b3f1d979a237e1c30e944b3d959932b6a0bca5bca7292c244381995b5'
+reviewed_at: '2026-10-13T11:36:20.721Z'
+review_due: '2027-01-11'
 name: 简历
 language: zh
 summary: 乔鑫宝的学术简历摘要。
@@ -67,25 +67,25 @@ translation_of: CV
 链接图标：OpenReview · arXiv · 代码（GitHub）· 出版论文页。
 
 - **Paper #1: When Sample Selection Bias Precipitates Model Collapse**。\
-  **乔鑫宝**†、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌†、Yan Pang†。\
+  **乔鑫宝**†、杜相龙、刘巍、张婧琦、麦佩华、张萌†、庞严†。\
   Forty-Third International Conference on Machine Learning, ICML, 2026。链接：[OpenReview](https://openreview.net/forum?id=FFXvnzM254)、[arXiv](https://arxiv.org/abs/2606.13732)、[GitHub](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse)。
 - **Paper #2: Illusory Pattern Perception Drives Spurious Inference in Large Language Models**。\
-  Peihua Mai\*、Zhuoyan Shao\*、**乔鑫宝**\*、张萌、Xinyue Zhou†、Yan Pang†。\
+  麦佩华\*、邵卓妍\*、**乔鑫宝**\*、张萌、周欣悅†、庞严†。\
   NeurIPS 2026，已录用。链接：[OpenReview](https://openreview.net/forum?id=VLcmdFfRQc)、[arXiv](https://arxiv.org/abs/2610.07791), [GitHub](https://github.com/NusIoraPrivacy/illusory)。
 - **Paper #3: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**。\
-  **乔鑫宝**、Ningning Ding、Yushi Cheng、张萌†。\
+  **乔鑫宝**、丁宁宁、程雨诗、张萌†。\
   Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026。链接：[OpenReview](https://openreview.net/forum?id=bCPJ6Jiqv7), [arXiv](https://arxiv.org/abs/2505.18783)、[AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681)。
 - **Paper #4: Hessian-Free Online Certified Unlearning**。\
-  **乔鑫宝**、张萌†、Ming Tang、Ermin Wei。\
+  **乔鑫宝**、张萌†、唐茗、魏尔敏。\
   Thirteenth International Conference on Learning Representations, ICLR, 2025。链接：[OpenReview](https://openreview.net/forum?id=C3TrHWanh5)、[arXiv](https://arxiv.org/abs/2404.01712)、[GitHub](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning)。
 - **Paper #5: DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**。\
-  Shurong Wang、Zhuoyang Shen、**乔鑫宝**、Tongning Zhang、张萌†。\
+  汪树荣、Zhuoyang Shen、**乔鑫宝**、Tongning Zhang、张萌†。\
   Thirteenth International Conference on Learning Representations, ICLR, 2025。链接：[OpenReview](https://openreview.net/forum?id=nsCOeCLR8e)、[arXiv](https://arxiv.org/abs/2410.01588)、[GitHub](https://github.com/shurongwang/DynFrs)。
 - **Paper #6: Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification**。\
-  **乔鑫宝**、Wenjing Yan†、Ying-Jun Angela Zhang。\
+  **乔鑫宝**、闫文静†、张颖珺。\
   在审。
 - **Paper #7: Decentralized Free-Support Wasserstein Barycenter**。\
-  **乔鑫宝**、Bokai Hou、Peihua Mai、Wenqian Li、Wenjing Yan、Ying-Jun Angela Zhang。\
+  **乔鑫宝**、侯博凯、麦佩华、李文倩、闫文静、张颖珺。\
   在审。详情见 [[Decentralized_Free_Support_Wasserstein_Barycenter|Decentralized Free-Support Wasserstein Barycenter]]。
 
 [^neurips-top-reviewer-zh]: NeurIPS 2026 [审稿证明](/files/NeurIPS2026_TopReviewer_XinbaoQiao.pdf)，签发日期为 2026 年 10 月 8 日。

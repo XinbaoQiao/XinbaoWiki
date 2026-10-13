@@ -167,9 +167,9 @@
         "slug": "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "title": "Decentralized Free-Support Wasserstein Barycenter",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.845Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2026-11-06"
+        "modifiedAt": "2026-10-13T11:36:03.385Z",
+        "reviewedAt": "2026-10-13T11:36:03.385Z",
+        "reviewDue": "2026-11-12"
       },
       {
         "slug": "Distributed_Learning",
@@ -544,9 +544,9 @@
         "slug": "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "title": "Decentralized Free-Support Wasserstein Barycenter",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.845Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2026-11-06"
+        "modifiedAt": "2026-10-13T11:36:03.385Z",
+        "reviewedAt": "2026-10-13T11:36:03.385Z",
+        "reviewDue": "2026-11-12"
       },
       {
         "slug": "Distributed_Learning",
@@ -574,11 +574,11 @@
       },
       {
         "slug": "DynFrs_zh",
-        "title": "DynFrs：随机森林机器遗忘高效框架",
+        "title": "DynFrs: An Efficient Framework for Machine Unlearning in Random Forest",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.871Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-13T11:36:03.385Z",
+        "reviewedAt": "2026-10-13T11:36:03.385Z",
+        "reviewDue": "2027-01-11"
       },
       {
         "slug": "Education",
@@ -638,11 +638,11 @@
       },
       {
         "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
-        "title": "无 Hessian 在线认证遗忘",
+        "title": "Hessian-Free Online Certified Unlearning",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.882Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-13T11:36:20.750Z",
+        "reviewedAt": "2026-10-13T11:36:20.750Z",
+        "reviewDue": "2027-01-11"
       },
       {
         "slug": "index",
@@ -830,11 +830,11 @@
       },
       {
         "slug": "Soft_Weighted_Machine_Unlearning_zh",
-        "title": "超越二元擦除：用于公平性与鲁棒性的软加权遗忘",
+        "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
         "language": "zh",
-        "modifiedAt": "2026-10-12T14:14:29.830Z",
-        "reviewedAt": "2026-10-12T14:15:25.457Z",
-        "reviewDue": "2027-10-12"
+        "modifiedAt": "2026-10-13T11:36:03.385Z",
+        "reviewedAt": "2026-10-13T11:36:03.385Z",
+        "reviewDue": "2027-10-13"
       },
       {
         "slug": "Synthetic_Data",
@@ -878,11 +878,11 @@
       },
       {
         "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
-        "title": "样本选择偏差何以促成模型坍缩",
+        "title": "When Sample Selection Bias Precipitates Model Collapse",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.992Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07"
+        "modifiedAt": "2026-10-13T11:36:20.803Z",
+        "reviewedAt": "2026-10-13T11:36:20.803Z",
+        "reviewDue": "2027-10-13"
       }
     ],
     "coverage": 0.3864,
@@ -976,9 +976,9 @@
         "slug": "CV_zh",
         "title": "简历",
         "language": "zh",
-        "modifiedAt": "2026-10-12T14:14:29.802Z",
-        "reviewedAt": "2026-10-12T14:15:25.457Z",
-        "reviewDue": "2027-01-10"
+        "modifiedAt": "2026-10-13T11:36:20.721Z",
+        "reviewedAt": "2026-10-13T11:36:20.721Z",
+        "reviewDue": "2027-01-11"
       },
       {
         "slug": "Data_Centric_Machine_Learning",
@@ -1040,9 +1040,9 @@
         "slug": "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "title": "Decentralized Free-Support Wasserstein Barycenter",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.845Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2026-11-06"
+        "modifiedAt": "2026-10-13T11:36:03.385Z",
+        "reviewedAt": "2026-10-13T11:36:03.385Z",
+        "reviewDue": "2026-11-12"
       },
       {
         "slug": "Distributed_Learning",
@@ -1086,11 +1086,11 @@
       },
       {
         "slug": "DynFrs_zh",
-        "title": "DynFrs：随机森林机器遗忘高效框架",
+        "title": "DynFrs: An Efficient Framework for Machine Unlearning in Random Forest",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.871Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-13T11:36:03.385Z",
+        "reviewedAt": "2026-10-13T11:36:03.385Z",
+        "reviewDue": "2027-01-11"
       },
       {
         "slug": "Education",
@@ -1150,11 +1150,11 @@
       },
       {
         "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
-        "title": "无 Hessian 在线认证遗忘",
+        "title": "Hessian-Free Online Certified Unlearning",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.882Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-13T11:36:20.750Z",
+        "reviewedAt": "2026-10-13T11:36:20.750Z",
+        "reviewDue": "2027-01-11"
       },
       {
         "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
@@ -1166,11 +1166,11 @@
       },
       {
         "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
-        "title": "错觉模式感知驱动大语言模型的虚假推理",
+        "title": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
         "language": "zh",
-        "modifiedAt": "2026-10-11T14:22:08.131Z",
-        "reviewedAt": "2026-10-11T14:22:50.689Z",
-        "reviewDue": "2027-10-11"
+        "modifiedAt": "2026-10-13T11:36:03.385Z",
+        "reviewedAt": "2026-10-13T11:36:03.385Z",
+        "reviewDue": "2027-10-13"
       },
       {
         "slug": "index",
@@ -1360,9 +1360,9 @@
         "slug": "Publications_zh",
         "title": "论文",
         "language": "zh",
-        "modifiedAt": "2026-10-12T14:14:29.825Z",
-        "reviewedAt": "2026-10-12T14:15:25.457Z",
-        "reviewDue": "2027-01-10"
+        "modifiedAt": "2026-10-13T11:36:20.781Z",
+        "reviewedAt": "2026-10-13T11:36:20.781Z",
+        "reviewDue": "2027-01-11"
       },
       {
         "slug": "Qiao_Xinbao_zh",
@@ -1478,11 +1478,11 @@
       },
       {
         "slug": "Soft_Weighted_Machine_Unlearning_zh",
-        "title": "超越二元擦除：用于公平性与鲁棒性的软加权遗忘",
+        "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
         "language": "zh",
-        "modifiedAt": "2026-10-12T14:14:29.830Z",
-        "reviewedAt": "2026-10-12T14:15:25.457Z",
-        "reviewDue": "2027-10-12"
+        "modifiedAt": "2026-10-13T11:36:03.385Z",
+        "reviewedAt": "2026-10-13T11:36:03.385Z",
+        "reviewDue": "2027-10-13"
       },
       {
         "slug": "Synthetic_Data",
@@ -1558,11 +1558,11 @@
       },
       {
         "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
-        "title": "样本选择偏差何以促成模型坍缩",
+        "title": "When Sample Selection Bias Precipitates Model Collapse",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.992Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07"
+        "modifiedAt": "2026-10-13T11:36:20.803Z",
+        "reviewedAt": "2026-10-13T11:36:20.803Z",
+        "reviewDue": "2027-10-13"
       },
       {
         "slug": "Xinbao_Qiao",

@@ -9,18 +9,18 @@ tags:
   - under-review
   - wasserstein
 timestamp: '2026-08-20T00:00:00+09:00'
-modified: '2026-10-07T07:07:23.845Z'
-content_hash: 'sha256:04fdfda05e4b744c34a59465d5eee0fd05d53e9e2afdbecb953280812647b6ce'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2026-11-06'
+modified: '2026-10-13T11:36:03.385Z'
+content_hash: 'sha256:5080e7384b659bb4021914df5601284920f20e5b614b5ced0f611a0e4b239a3b'
+reviewed_at: '2026-10-13T11:36:03.385Z'
+review_due: '2026-11-12'
 language: zh
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-10-07T07:07:51.129Z'
-  reviewDue: '2026-11-06'
+  reviewedAt: '2026-10-13T11:36:03.385Z'
+  reviewDue: '2026-11-12'
   pendingReview: false
   overdue: false
 retrieval:
@@ -29,7 +29,7 @@ retrieval:
 source_ids: []
 source_path: wiki/Decentralized_Free_Support_Wasserstein_Barycenter_zh.md
 ---
-**Decentralized Free-Support Wasserstein Barycenter（去中心化自由支撑 Wasserstein 重心）** 是 **[乔鑫宝](./Qiao_Xinbao_zh.md)**、Bokai Hou、Peihua Mai、Wenqian Li、Wenjing Yan 和 Ying-Jun Angela Zhang 的稿件，目前**在审（under review）**。论文研究网络中的多个参与方如何构建共享分布参考，并让这一参考适应各方本地数据的几何结构。[^manuscript]
+**Decentralized Free-Support Wasserstein Barycenter** 是 **[乔鑫宝](./Qiao_Xinbao_zh.md)**、侯博凯、麦佩华、李文倩、闫文静 和 张颖珺 的稿件，目前**在审（under review）**。论文研究网络中的多个参与方如何构建共享分布参考，并让这一参考适应各方本地数据的几何结构。[^manuscript]
 
 ## 概览
 

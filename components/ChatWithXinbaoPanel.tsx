@@ -36,7 +36,7 @@ const copy = {
     minimize: 'Minimize',
     restore: 'Restore Chat with Xinbao',
     newChat: 'New chat',
-    greeting: 'Hey, you made it 👋 Looking for paper lore, a project rabbit hole, or a quick CV check-in? Ask away—I’ll bring the receipts when the wiki has them, and keep it real when it doesn’t.',
+    greeting: 'Hi — welcome to Xinbaopedia. I can walk you through Xinbao Qiao’s public research, papers, projects, or how to reach him. What would you like to open with?',
     quickPrompts: [
       { id: 'research', label: 'Research', message: 'What are Xinbao’s research interests?' },
       { id: 'papers', label: 'Papers', message: 'Which papers should I start with?' },
@@ -76,7 +76,7 @@ const copy = {
     minimize: '最小化',
     restore: '恢复 Chat with Xinbao',
     newChat: '新对话',
-    greeting: '嗨，来都来了 👋 想聊研究、论文、项目，还是简历或联系方式？直接问就行——有一说一，能查到的认真说，查不到的不硬编。',
+    greeting: '嗨，欢迎来 Xinbaopedia。想看乔鑫宝的研究方向、论文、项目，或怎么联系，直接点下面、或随口问我；我按公开 wiki 答。',
     quickPrompts: [
       { id: 'research', label: '研究', message: '乔鑫宝的研究方向是什么？' },
       { id: 'papers', label: '论文', message: '有哪些代表性论文可以先看？' },

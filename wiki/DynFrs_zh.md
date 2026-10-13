@@ -1,6 +1,6 @@
 ---
 type: publication
-title: DynFrs：随机森林机器遗忘高效框架
+title: 'DynFrs: An Efficient Framework for Machine Unlearning in Random Forest'
 description: ICLR 2025 论文，研究随机森林中的高效机器遗忘。
 tags:
   - zh
@@ -9,11 +9,11 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-07T07:07:23.871Z'
-content_hash: 'sha256:72fb15cc1d4f48d3016ce1675475b5714102b0eded54be33dadf70ee3cd1ba8b'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-01-05'
-name: DynFrs：随机森林机器遗忘高效框架
+modified: '2026-10-13T11:36:03.385Z'
+content_hash: 'sha256:c7e4ad26cd18863c27162a0ad273d306fc2ada5de0f4b39e71f4c56a85ef831c'
+reviewed_at: '2026-10-13T11:36:03.385Z'
+review_due: '2027-01-11'
+name: 'DynFrs: An Efficient Framework for Machine Unlearning in Random Forest'
 language: zh
 summary: ICLR 2025 论文，研究随机森林中的高效机器遗忘。
 dates: 2025年4月24日至28日
@@ -39,7 +39,7 @@ links:
     url: 'https://github.com/shurongwang/DynFrs'
 translation_of: DynFrs
 ---
-**DynFrs：随机森林机器遗忘高效框架** 是 Shurong Wang、Zhuoyang Shen、**[[Xinbao_Qiao|乔鑫宝]]**、Tongning Zhang 和张萌的 ICLR 2025 会议论文。该工作把随机森林遗忘视为动态数据结构问题：在保持与重新训练分布等价的同时，降低在线删除、插入和查询延迟。
+**DynFrs: An Efficient Framework for Machine Unlearning in Random Forest** 是 汪树荣、Zhuoyang Shen、**[[Xinbao_Qiao|乔鑫宝]]**、Tongning Zhang 和张萌的 ICLR 2025 会议论文。该工作把随机森林遗忘视为动态数据结构问题：在保持与重新训练分布等价的同时，降低在线删除、插入和查询延迟。
 
 ![DynFrs ICLR 2025 poster](/papers/dynfrs/poster.png)
 
@@ -74,4 +74,4 @@ OpenReview 论文报告 DynFrs 相比已有随机森林遗忘方法实现数量�
 
 ## 定位
 
-该工作属于 [[Machine_Unlearning|机器遗忘]]、[[Random_Forest|随机森林]] 和 [[Trustworthy_AI|可信 AI]]。在乔鑫宝的论文记录中，它与 [[Hessian_Free_Online_Certified_Unlearning|无 Hessian 在线认证遗忘]] 互补：前者关注树集成的精确遗忘，后者关注可微模型的近似认证遗忘。
+该工作属于 [[Machine_Unlearning|机器遗忘]]、[[Random_Forest|随机森林]] 和 [[Trustworthy_AI|可信 AI]]。在乔鑫宝的论文记录中，它与 [[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]] 互补：前者关注树集成的精确遗忘，后者关注可微模型的近似认证遗忘。

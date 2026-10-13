@@ -1,6 +1,6 @@
 ---
 type: publication
-title: 错觉模式感知驱动大语言模型的虚假推理
+title: Illusory Pattern Perception Drives Spurious Inference in Large Language Models
 description: NeurIPS 2026 论文，通过三个心理任务比较大语言模型与人类的错觉模式感知，并用稀疏自编码器分析相关特征。
 tags:
   - zh
@@ -10,18 +10,18 @@ tags:
   - neurips-2026
   - llm-reliability
 timestamp: '2026-09-25T13:49:35+09:00'
-modified: '2026-10-11T14:22:08.131Z'
-content_hash: 'sha256:6248b4d648481ac2ca59b50d984755a2510b7422b9359c59499eb38fc09a8167'
-reviewed_at: '2026-10-11T14:22:50.689Z'
-review_due: '2027-10-11'
+modified: '2026-10-13T11:36:03.385Z'
+content_hash: 'sha256:d658307f57dab094fea7fca7ea8aab996235d317ee95b2742644f8002f62f2d4'
+reviewed_at: '2026-10-13T11:36:03.385Z'
+review_due: '2027-10-13'
 language: zh
 lifecycle:
   status: confirmed
   confidence: 0.95
   review: on venue/status change
   retention: long-lived semantic memory
-  reviewedAt: '2026-10-11T14:22:50.689Z'
-  reviewDue: '2027-10-11'
+  reviewedAt: '2026-10-13T11:36:03.385Z'
+  reviewDue: '2027-10-13'
   pendingReview: false
   overdue: false
 retrieval:
@@ -37,7 +37,7 @@ source_ids:
 source_path: >-
   wiki/Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md
 ---
-**《Illusory Pattern Perception Drives Spurious Inference in Large Language Models》** 是 Peihua Mai\*、Zhuoyan Shao\*、**[乔鑫宝](./Qiao_Xinbao_zh.md)**\*、张萌、Xinyue Zhou 和 Yan Pang 的论文，已获 NeurIPS 2026 录用。论文研究大语言模型如何从随机、无关或不足以支持关系的证据中推断出关联。[^paper]
+**Illusory Pattern Perception Drives Spurious Inference in Large Language Models** 是 麦佩华\*、邵卓妍\*、**[乔鑫宝](./Qiao_Xinbao_zh.md)**\*、张萌、周欣悅 和 庞严 的论文，已获 NeurIPS 2026 录用。论文研究大语言模型如何从随机、无关或不足以支持关系的证据中推断出关联。[^paper]
 
 \* 共同第一作者。
 

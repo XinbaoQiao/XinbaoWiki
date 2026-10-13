@@ -86,7 +86,7 @@ type ScoredChunk = {
   matchedTerms: string[];
 };
 
-type BoundedIntentKind = 'profile' | 'recent-work' | 'doctoral-work' | 'public-contact';
+type BoundedIntentKind = 'profile' | 'research-overview' | 'publications' | 'projects' | 'recent-work' | 'doctoral-work' | 'public-contact';
 
 type BoundedTarget = {
   slug: string;
@@ -147,6 +147,9 @@ const ENGLISH_PROFILE_INTENT_PATTERN = /^(?:tell me about (?:yourself|xinbao(?: 
 const ENGLISH_STUDY_PROFILE_PATTERN = new RegExp(String.raw`^(?:who (?:are you|is xinbao(?: qiao)?) and )?(?:where (?:is|are) ${ENGLISH_PERSON} (?:currently )?studying|where (?:does|do) ${ENGLISH_PERSON} (?:currently )?study|(?:at )?which university (?:is|are) ${ENGLISH_PERSON} (?:currently )?studying at)$`, 'u');
 const ENGLISH_RECENT_WORK_INTENT_PATTERN = /^(?:whatever xinbao(?: qiao)? is cooking up lately|what (?:is|s) (?:xinbao(?: qiao)?|he) (?:working on|cooking up|researching)(?: lately| recently| now)?|what are you (?:working on|cooking up|researching)(?: lately| recently| now)?|what has (?:xinbao(?: qiao)?|he|you) been working on(?: lately| recently)?|what is (?:xinbao(?: qiao)?|he) up to(?: lately| recently| now)?)$/u;
 const ENGLISH_DOCTORAL_WORK_INTENT_PATTERN = /^(?:what did (?:xinbao(?: qiao)?|he|you) work on (?:during|in) (?:his|your|the) phd|what (?:is|was) (?:xinbao(?: qiao)? s|his|your) phd (?:work|research)(?: about)?|what (?:does|did) (?:xinbao(?: qiao)?|he|you) research (?:during|in) (?:his|your|the) phd)$/u;
+const ENGLISH_RESEARCH_OVERVIEW_INTENT_PATTERN = /^(?:what (?:are|is) (?:xinbao(?: qiao)?(?: s)?|qiao xinbao(?: s)?|his|your) research (?:interests?|directions?|focus|areas?)|what does (?:xinbao(?: qiao)?|he|you) research|tell me about (?:xinbao(?: qiao)?(?: s)?|his|your) research)$/u;
+const ENGLISH_PUBLICATIONS_INTENT_PATTERN = /^(?:which papers should i (?:start|begin) with|what (?:are|is) (?:xinbao(?: qiao)?(?: s)?|qiao xinbao(?: s)?|his|your) (?:key |main |representative )?(?:papers|publications)|show me (?:xinbao(?: qiao)?(?: s)?|his|your )?(?:papers|publications)|recommend (?:some )?(?:papers|publications)(?: to (?:start|begin) with)?)$/u;
+const ENGLISH_PROJECTS_INTENT_PATTERN = /^(?:what projects has (?:xinbao(?: qiao)?|he|you) worked on|what (?:are|is) (?:xinbao(?: qiao)?(?: s)?|qiao xinbao(?: s)?|his|your) projects|tell me about (?:xinbao(?: qiao)?(?: s)?|his|your) projects|which projects (?:has|have) (?:xinbao(?: qiao)?|he|you) (?:worked on|done))$/u;
 const ENGLISH_PUBLIC_CONTACT_INTENT_PATTERN = /^(?:(?:what(?: is|s)|give me|show me|share) (?:xinbao(?: qiao)? s|qiao xinbao s|his|your) (?:(?:public|work|academic) )?(?:email(?: address)?|contact (?:information|info|details))|how (?:can|do) i contact (?:xinbao(?: qiao)?|qiao xinbao|him|you))$/u;
 const ENGLISH_GENERAL_CONVERSATION_PATTERN = /^(?:what is (?:a |an )?(?:system prompt|authentication credential)|how are (?:system|developer) prompts used(?: in ai systems)?|how are environment variables used|how does medical diagnosis work)$/u;
 
@@ -156,6 +159,26 @@ const HOME_INTENT_TARGETS: Record<WikiRetrievalLanguage, Record<BoundedIntentKin
       { slug: 'Xinbao_Qiao', sectionPattern: /^Overview$/iu },
       { slug: 'Research', sectionPattern: /^Research thesis$/iu },
       { slug: 'Education', sectionPattern: /^Timeline$/iu }
+    ],
+    'research-overview': [
+      { slug: 'Research', sectionPattern: /^Research thesis$/iu },
+      { slug: 'Research', sectionPattern: /^Overview$/iu },
+      { slug: 'CV', sectionPattern: /^Research interests$/iu },
+      { slug: 'Research', sectionPattern: /^Machine unlearning$/iu },
+      { slug: 'Publications', sectionPattern: /Peer-reviewed and accepted papers/iu }
+    ],
+    publications: [
+      { slug: 'Publications', sectionPattern: /Peer-reviewed and accepted papers/iu },
+      { slug: 'Publications', sectionPattern: /^Overview$/iu },
+      { slug: 'CV', sectionPattern: /^Publications$/iu }
+    ],
+    projects: [
+      { slug: 'Projects', sectionPattern: /^Overview$/iu },
+      { slug: 'Projects', sectionPattern: /^Machine unlearning$/iu },
+      { slug: 'Projects', sectionPattern: /^AI and networks$/iu },
+      { slug: 'Projects', sectionPattern: /^Synthetic data$/iu },
+      { slug: 'Projects', sectionPattern: /Wasserstein/iu },
+      { slug: 'Projects', sectionPattern: /^Trustworthy LLM systems$/iu }
     ],
     'recent-work': [
       { slug: 'Xinbao_Qiao', sectionPattern: /Chinese University of Hong Kong \(2026-present\)|Academic projects/iu },
@@ -177,6 +200,26 @@ const HOME_INTENT_TARGETS: Record<WikiRetrievalLanguage, Record<BoundedIntentKin
       { slug: 'Qiao_Xinbao_zh', sectionPattern: /^概述$/u },
       { slug: 'Research_zh', sectionPattern: /^研究主线$/u },
       { slug: 'Education_zh', sectionPattern: /^时间线$/u }
+    ],
+    'research-overview': [
+      { slug: 'Research_zh', sectionPattern: /^研究主线$/u },
+      { slug: 'Research_zh', sectionPattern: /^概述$/u },
+      { slug: 'CV_zh', sectionPattern: /^研究兴趣$/u },
+      { slug: 'Research_zh', sectionPattern: /^机器遗忘$/u },
+      { slug: 'Publications_zh', sectionPattern: /已录用论文/u }
+    ],
+    publications: [
+      { slug: 'Publications_zh', sectionPattern: /已录用论文/u },
+      { slug: 'Publications_zh', sectionPattern: /^概述$/u },
+      { slug: 'CV_zh', sectionPattern: /^论文$/u }
+    ],
+    projects: [
+      { slug: 'Projects_zh', sectionPattern: /^概述$/u },
+      { slug: 'Projects_zh', sectionPattern: /^机器遗忘$/u },
+      { slug: 'Projects_zh', sectionPattern: /^AI 与网络$/u },
+      { slug: 'Projects_zh', sectionPattern: /^合成数据$/u },
+      { slug: 'Projects_zh', sectionPattern: /Wasserstein/u },
+      { slug: 'Projects_zh', sectionPattern: /^可信大语言模型系统$/u }
     ],
     'recent-work': [
       { slug: 'Qiao_Xinbao_zh', sectionPattern: /香港中文大学博士阶段|学术项目/u },
@@ -261,6 +304,9 @@ function homepageIntent(query: string, language: WikiRetrievalLanguage): Bounded
   const normalized = normalizeText(query);
   if (language === 'en') {
     if (ENGLISH_PROFILE_INTENT_PATTERN.test(normalized) || ENGLISH_STUDY_PROFILE_PATTERN.test(normalized)) return 'profile';
+    if (ENGLISH_RESEARCH_OVERVIEW_INTENT_PATTERN.test(normalized)) return 'research-overview';
+    if (ENGLISH_PUBLICATIONS_INTENT_PATTERN.test(normalized)) return 'publications';
+    if (ENGLISH_PROJECTS_INTENT_PATTERN.test(normalized)) return 'projects';
     if (ENGLISH_RECENT_WORK_INTENT_PATTERN.test(normalized)) return 'recent-work';
     if (ENGLISH_DOCTORAL_WORK_INTENT_PATTERN.test(normalized)) return 'doctoral-work';
     if (ENGLISH_PUBLIC_CONTACT_INTENT_PATTERN.test(normalized)) return 'public-contact';
@@ -269,6 +315,9 @@ function homepageIntent(query: string, language: WikiRetrievalLanguage): Bounded
 
   const compact = normalized.replace(/\s+/g, '');
   if (/^(?:介绍一下|说说)(?:你自己|乔鑫宝|鑫宝)$|^(?:你|乔鑫宝|鑫宝)是谁$/u.test(compact)) return 'profile';
+  if (/^(?:(?:乔鑫宝|鑫宝|他|你)的)?研究(?:方向|兴趣|领域|内容|主题)?(?:是什么|有哪些|呢)?$|^(?:介绍一下|说说)(?:一下)?(?:乔鑫宝|鑫宝)?的?研究(?:方向|兴趣|领域)?$/u.test(compact)) return 'research-overview';
+  if (/^(?:有哪些|哪些)?(?:代表性|主要|重要)?论文(?:可以|能|值得)?(?:先看|看看|读|读读)?(?:呢)?$|^(?:(?:乔鑫宝|鑫宝|他|你)的)?(?:论文|发表)(?:有哪些|是什么)?$/u.test(compact)) return 'publications';
+  if (/^(?:(?:乔鑫宝|鑫宝|他|你)(?:做过|做了|在做)?哪些项目|有哪些项目|(?:介绍一下|说说)(?:乔鑫宝|鑫宝)?的?项目)$/u.test(compact)) return 'projects';
   if (/^(?:看看)?(?:你|鑫宝|乔鑫宝|他)?(?:最近|现在)(?:又)?(?:在)?(?:折腾|搞|做|研究)(?:什么|啥)(?:工作|研究|项目|论文)?$/u.test(compact)) return 'recent-work';
   if (/^(?:你|鑫宝|乔鑫宝|他)?(?:在)?博士(?:期间|阶段)(?:主要)?(?:在)?(?:做|搞|研究)(?:什么|啥)(?:工作|研究|项目)?$/u.test(compact)) return 'doctoral-work';
   if (/^(?:(?:你|鑫宝|乔鑫宝|他)(?:的)?(?:(?:公开|工作|学术)?邮箱(?:地址)?|联系方式)(?:是什么|是多少|呢)?|(?:怎么|如何)(?:联系|联络)(?:你|鑫宝|乔鑫宝|他))$/u.test(compact)) return 'public-contact';
@@ -288,9 +337,12 @@ function requestedChineseTopicPhrase(query: string) {
   const suffixed = compact.match(/^(.+?)(?:是什么|有哪些(?:论文|研究|项目)?|怎么做|如何做)$/u);
   const rawTopic = prefixed?.[1] || suffixed?.[1];
   if (!rawTopic) return null;
-  const topic = rawTopic
+  let topic = rawTopic
     .replace(/(?:是什么|有哪些|有啥|怎么做|如何做)$/u, '')
+    .replace(/^(?:乔鑫宝|鑫宝|他|你)的?/u, '')
     .replace(/(?:相关)?(?:方法|论文|研究|项目|算法)$/u, '');
+  // Overview-style asks are handled by homepage intents; do not require a literal phrase hit.
+  if (/^(?:研究(?:方向|兴趣|领域|内容|主题)?|工作(?:方向|内容)?|论文|项目|联系方式)?$/u.test(topic)) return null;
   return topic.length >= 2 ? topic : null;
 }
 

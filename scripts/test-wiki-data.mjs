@@ -633,6 +633,27 @@ for (const id of [
 
 const { evaluateCase } = await import('./evaluate-wiki-chat.mjs');
 const { getWikiRetrievalIndex, retrieveWikiContext } = await import('../lib/wiki-retrieval.ts');
+
+// Quick-prompt grounding: Research/Papers/Projects/Contact must retrieve local wiki evidence.
+{
+  const zhResearch = retrieveWikiContext('乔鑫宝的研究方向是什么？', { language: 'zh', limit: 6 });
+  assert.equal(zhResearch.shouldAbstain, false, 'Chinese Research chip stays grounded');
+  assert.ok(zhResearch.sources.some((source) => source.slug === 'Research_zh'), 'Chinese Research chip hits Research_zh');
+  assert.match(zhResearch.context, /机器遗忘|数据|AI 与网络/, 'Chinese Research evidence mentions real research themes');
+
+  const enResearch = retrieveWikiContext("What are Xinbao's research interests?", { language: 'en', limit: 6 });
+  assert.equal(enResearch.shouldAbstain, false, 'English Research chip stays grounded');
+  assert.ok(enResearch.sources.some((source) => source.slug === 'Research' || source.slug === 'CV'), 'English Research chip hits Research/CV');
+  assert.match(enResearch.context, /unlearning|data-centric|lifecycle management/i, 'English Research evidence mentions real research themes');
+
+  const enPapers = retrieveWikiContext('Which papers should I start with?', { language: 'en', limit: 6 });
+  assert.equal(enPapers.shouldAbstain, false, 'English Papers chip stays grounded');
+  assert.ok(enPapers.sources.some((source) => source.slug === 'Publications'), 'English Papers chip hits Publications');
+
+  const enProjects = retrieveWikiContext('What projects has Xinbao worked on?', { language: 'en', limit: 6 });
+  assert.equal(enProjects.shouldAbstain, false, 'English Projects chip stays grounded');
+  assert.ok(enProjects.sources.some((source) => source.slug === 'Projects'), 'English Projects chip hits Projects');
+}
 const {
   WIKI_CHAT_RESPONSE_POLICY_VERSION,
   deterministicAbstentionReply,
@@ -1492,6 +1513,10 @@ assert.match(chatWithXinbaoPanel, /quickPrompts:[\s\S]*label: '研究'[\s\S]*lab
 assert.match(chatWithXinbaoPanel, /showQuickPrompts[\s\S]*chat-xinbao-quick-replies[\s\S]*sendQuickPrompt\(prompt\.message\)/, 'chat panel renders quick-start chips on the greeting turn and reuses sendMessage');
 assert.match(chatWithXinbaoPanel, /What are Xinbao.s research interests\?[\s\S]*Which papers should I start with\?[\s\S]*What projects has Xinbao worked on\?[\s\S]*How can I contact Xinbao\?/, 'chat panel English quick prompts send concrete starter questions');
 assert.match(chatWithXinbaoPanel, /乔鑫宝的研究方向是什么？[\s\S]*有哪些代表性论文可以先看？[\s\S]*乔鑫宝做过哪些项目？[\s\S]*怎么联系乔鑫宝？/, 'chat panel Chinese quick prompts send concrete starter questions');
+assert.match(wikiRetrieval, /research-overview/, 'wiki retrieval defines a research-overview homepage intent for Research chips');
+assert.match(wikiRetrieval, /ENGLISH_PUBLICATIONS_INTENT_PATTERN/, 'wiki retrieval defines a publications homepage intent for Papers chips');
+assert.match(wikiRetrieval, /ENGLISH_PROJECTS_INTENT_PATTERN/, 'wiki retrieval defines a projects homepage intent for Projects chips');
+
 assert.match(chatWithXinbaoPanel, /function sendQuickPrompt[\s\S]*sendMessage\(trimmed, language, true\)/, 'chat quick-start chips send immediately through the existing chat request path');
 assert.match(chatWithXinbaoPanel, /newChat: 'New chat'[\s\S]*newChat: '新对话'/, 'chat panel exposes bilingual new-chat actions');
 assert.match(chatWithXinbaoPanel, /function startNewChat[\s\S]*setMessages\(initialMessages\)/, 'chat panel can reset to the greeting turn');
@@ -1503,8 +1528,8 @@ assert.match(chatWithXinbaoPanel, /aria-busy=\{loading[\s\S]*aria-modal=\"true\"
 assert.match(chatWithXinbaoPanel, /event\.key === 'Escape'[\s\S]*onClose\(\)/, 'chat panel closes on Escape');
 assert.match(chatWithXinbaoPanel, /inputRef\.current\?\.focus\(\)/, 'chat panel focuses the composer when opened');
 
-assert.match(chatWithXinbaoPanel, /Hey, you made it 👋[\s\S]*paper lore[\s\S]*project rabbit hole[\s\S]*CV check-in[\s\S]*bring the receipts[\s\S]*keep it real/, 'chat opens with a memorable internet-native English welcome');
-assert.match(chatWithXinbaoPanel, /嗨，来都来了 👋[\s\S]*研究、论文、项目[\s\S]*简历或联系方式[\s\S]*有一说一，能查到的认真说，查不到的不硬编。/, 'chat opens with a memorable internet-native Chinese welcome');
+assert.match(chatWithXinbaoPanel, /welcome to Xinbaopedia[\s\S]*public research, papers, projects[\s\S]*how to reach him/, 'chat opens with a warm English welcome that points to public wiki topics');
+assert.match(chatWithXinbaoPanel, /欢迎来 Xinbaopedia[\s\S]*研究方向、论文、项目[\s\S]*按公开 wiki 答/, 'chat opens with a warm Chinese welcome that points to public wiki topics');
 assert.doesNotMatch(chatWithXinbaoPanel, /Hi, I’m the Xinbaopedia chat assistant|Ask me about Xinbao Qiao’s research|想快速了解乔鑫宝的话，可以直接问我/, 'chat no longer uses the directive-like legacy greetings');
 assert.match(chatWithXinbaoPanel, /MAX_INPUT_LENGTH = 1000/, 'chat client caps input length at 1000 characters');
 assert.match(chatWithXinbaoPanel, /\/api\/chat-with-xinbao/, 'chat client calls only the same-site API route');
@@ -1518,8 +1543,8 @@ assert.match(chatWithXinbaoPanel, /useState\(10\)/, 'chat client initializes the
 assert.doesNotMatch(chatWithXinbaoPanel, /Pseudonymous usage metadata|可能记录假名化的使用元数据/, 'chat client omits the bilingual telemetry notice from the visible panel');
 assert.match(chatWithXinbaoPanel, /Xinbao AI is temporarily unavailable\. Please try again later\./, 'chat client uses a generic model-error message');
 assert.match(chatWithXinbaoPanel, /language: Language/, 'chat client localizes UI from current wiki language');
-assert.match(chatWithXinbaoPanel, /paper lore[\s\S]*CV check-in[\s\S]*bring the receipts[\s\S]*keep it real/, 'chat client English greeting is playful, conversational, and evidence-bounded');
-assert.match(chatWithXinbaoPanel, /来都来了[\s\S]*研究、论文、项目[\s\S]*能查到的认真说[\s\S]*查不到的不硬编/, 'chat client Chinese greeting is playful, conversational, and evidence-bounded');
+assert.match(chatWithXinbaoPanel, /welcome to Xinbaopedia[\s\S]*public research, papers, projects[\s\S]*how to reach him/, 'chat client English greeting is warm, concise, and points to public wiki topics');
+assert.match(chatWithXinbaoPanel, /欢迎来 Xinbaopedia[\s\S]*研究方向、论文、项目[\s\S]*按公开 wiki 答/, 'chat client Chinese greeting is warm, concise, and points to public wiki topics');
 assert.doesNotMatch(chatWithXinbaoPanel, /digital-proxy skill distilled|蒸馏出来的数字分身 skill|哈基米 energy|讲清楚喵~/, 'chat client no longer uses forced technical persona language in the opening experience');
 assert.match(chatWithXinbaoPanel, /Checking Xinbaopedia notes[\s\S]*Looking through public pages[\s\S]*Almost ready/, 'chat client includes varied English typing messages');
 assert.match(chatWithXinbaoPanel, /正在查公开资料[\s\S]*正在整理相关页面[\s\S]*先看资料，不硬编[\s\S]*马上就好/, 'chat client includes natural Chinese typing messages');
@@ -2064,7 +2089,7 @@ assertCssRule(styles, '.wiki-title', [
 assertCssRule(styles, '.wiki-title-sub', [
   /max-width: 76ch;/,
   /color: var\(--wiki-text-soft\);/,
-  /font-size: 14px;/,
+  /font-size: var\(--fs-body\);/,
   /line-height: 1\.7;/
 ], 'article summary reads as restrained text under the title');
 assertCssRule(styles, '.wiki-infobox-title', [
@@ -2218,12 +2243,12 @@ assert.match(styles, /\.wiki-portal-collapsed \{[\s\S]*animation: wiki-portal-re
 assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.wiki-portal-collapsed[\s\S]*animation: none;[\s\S]*\.wiki-portal-collapsed \{[\s\S]*transform: none;[\s\S]*\}[\s\S]*\}/, 'homepage collapsed-state animation honors reduced-motion settings');
 assert.match(styles, /\.wiki-portal-block \{[\s\S]*--portal-section-accent: #36c;[\s\S]*--portal-section-accent-resolved: color-mix\(in srgb, var\(--portal-section-accent\) 72%, var\(--site-theme-accent\)\);[\s\S]*min-width: 0;[\s\S]*\}/, 'homepage browse taxonomy colors blend with the resolved site theme');
 assert.doesNotMatch(styles, /counter-reset: portal-section|counter\(portal-section|decimal-leading-zero|\.wiki-portal-block h3::before/, 'homepage browse top-level headings do not show numbered taxonomy badges');
-assert.match(styles, /\.wiki-portal-block h3 \{[\s\S]*padding: 7px 10px;[\s\S]*border-left: 4px solid var\(--portal-section-accent-resolved\);[\s\S]*background: color-mix\(in srgb, var\(--portal-section-accent-resolved\) 7%, var\(--wiki-bg-alt\)\);[\s\S]*font-family: var\(--font-serif\);[\s\S]*font-size: 16px;[\s\S]*font-weight: 700;[\s\S]*letter-spacing: \.01em;[\s\S]*\}/, 'homepage browse top-level headings blend taxonomy identity with the selected theme');
+assert.match(styles, /\.wiki-portal-block h3 \{[\s\S]*padding: 7px 10px;[\s\S]*border-left: 4px solid var\(--portal-section-accent-resolved\);[\s\S]*background: color-mix\(in srgb, var\(--portal-section-accent-resolved\) 7%, var\(--wiki-bg-alt\)\);[\s\S]*font-family: var\(--font-serif\);[\s\S]*font-size: var\(--fs-section\);[\s\S]*font-weight: 700;[\s\S]*letter-spacing: \.01em;[\s\S]*\}/, 'homepage browse top-level headings blend taxonomy identity with the selected theme');
 assert.doesNotMatch(styles, /\.wiki-portal-block h3 \{[\s\S]*font-variant-caps|transform: skewX\(-3deg\)/, 'homepage browse top-level headings avoid forced small caps and skewed text');
 assert.match(styles, /\.wiki-portal-block h3 span \{[\s\S]*display: block;[\s\S]*color: color-mix\(in srgb, var\(--portal-section-accent-resolved\) 38%, var\(--wiki-text\)\);[\s\S]*\}/, 'homepage browse title-band text keeps a restrained resolved-theme tint');
 assert.doesNotMatch(styles, /\.wiki-portal-block h3::after/, 'homepage title bands do not retain the old accent underline');
-assert.match(styles, /\.wiki-portal-group-label \{[\s\S]*display: inline-flex;[\s\S]*border-left: 3px solid var\(--portal-section-accent-resolved\);[\s\S]*color: color-mix\(in srgb, var\(--portal-section-accent-resolved\) 62%, var\(--wiki-text\)\);[\s\S]*font-size: 11px;[\s\S]*text-transform: uppercase;[\s\S]*\}/, 'homepage browse links are grouped with compact readable theme-blended taxonomy labels');
-assert.match(styles, /\.wiki-portal-block li > span \{[\s\S]*font-size: 12px;[\s\S]*\}/, 'homepage limits muted summary typography to link summaries');
+assert.match(styles, /\.wiki-portal-group-label \{[\s\S]*display: inline-flex;[\s\S]*border-left: 3px solid var\(--portal-section-accent-resolved\);[\s\S]*color: color-mix\(in srgb, var\(--portal-section-accent-resolved\) 62%, var\(--wiki-text\)\);[\s\S]*font-size: var\(--fs-xs\);[\s\S]*text-transform: uppercase;[\s\S]*\}/, 'homepage browse links are grouped with compact readable theme-blended taxonomy labels');
+assert.match(styles, /\.wiki-portal-block li > span \{[\s\S]*font-size: var\(--fs-xs\);[\s\S]*\}/, 'homepage limits muted summary typography to link summaries');
 assert.doesNotMatch(styles, /\.wiki-portal-block span \{/, 'homepage link-summary typography cannot override top-level heading spans');
 assert.match(styles, /\.wiki-portal-grid \{[\s\S]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);[\s\S]*\}/, 'homepage browse directory uses a three-column desktop layout');
 assert.match(styles, /\.wiki-shell:has\(\.wiki-portal\) \.wiki-sidebar \{[\s\S]*display: none;[\s\S]*\}/, 'homepage hides the article sidebar');
@@ -2336,7 +2361,7 @@ assert.match(styles, /\.wiki-portal-news\[open\] \.wiki-portal-news-preview \{[\
 assert.match(styles, /\.wiki-portal-updates-window \{[\s\S]*height: var\(--portal-updates-window-height, 316px\);[\s\S]*overflow-y: auto;[\s\S]*overscroll-behavior: contain;[\s\S]*scrollbar-gutter: stable;/, 'expanded Latest Updates uses a stable scroll window');
 assert.match(styles, /\.wiki-portal-news-list \{[\s\S]*grid-template-columns: 1fr;[\s\S]*padding: 0 12px 4px;/, 'homepage updates use one compact reading column at every breakpoint');
 assert.match(styles, /\.wiki-portal-news-list li \{[\s\S]*grid-template-columns: 80px minmax\(0, 1fr\);[\s\S]*align-items: start;[\s\S]*gap: 10px;[\s\S]*padding: 7px 0;/, 'homepage update dates and headlines share a compact stable first-line alignment');
-assert.match(styles, /\.wiki-portal-news-list time \{[\s\S]*padding-top: 2px;[\s\S]*font-size: 11px;[\s\S]*line-height: 1\.35;[\s\S]*\}[\s\S]*\.wiki-portal-news-list a \{[\s\S]*display: block;[\s\S]*font-size: 14px;[\s\S]*line-height: 1\.35;[\s\S]*text-wrap: balance;[\s\S]*\}[\s\S]*\.wiki-portal-news-list p \{[\s\S]*font-size: 12\.5px;[\s\S]*line-height: 1\.4;[\s\S]*text-wrap: balance;/, 'homepage updates retain readable typography and avoid orphaned short final lines');
+assert.match(styles, /\.wiki-portal-news-list time \{[\s\S]*padding-top: 2px;[\s\S]*font-size: var\(--fs-xs\);[\s\S]*line-height: 1\.35;[\s\S]*\}[\s\S]*\.wiki-portal-news-list a \{[\s\S]*display: block;[\s\S]*font-size: 14px;[\s\S]*line-height: 1\.35;[\s\S]*text-wrap: balance;[\s\S]*\}[\s\S]*\.wiki-portal-news-list p \{[\s\S]*font-size: 12\.5px;[\s\S]*line-height: 1\.4;[\s\S]*text-wrap: balance;/, 'homepage updates retain readable typography and avoid orphaned short final lines');
 assert.match(styles, /\.wiki-portal-directory \{[\s\S]*width: 100%;[\s\S]*\}[\s\S]*\.wiki-portal-directory summary \{[\s\S]*width: min\(100%, 620px\);[\s\S]*margin-inline: auto;/, 'homepage Browse restores a 920px expanded directory while retaining its original centered 620px summary');
 assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.wiki-portal-timeline \{[\s\S]*width: 100%;[\s\S]*margin-inline: 0;/, 'homepage timelines use the available width on small screens instead of inheriting narrow desktop search controls');
 assert.match(styles, /\.wiki-visitor-atlas-map \{[\s\S]*width: 100%;[\s\S]*height: auto;[\s\S]*aspect-ratio: 672 \/ 276;[\s\S]*overflow: hidden;/, 'visitor atlas uses one responsive, overflow-safe static map surface');
@@ -2375,7 +2400,7 @@ assert.match(siteUpdates, /Core research[\s\S]*Methods and geometry[\s\S]*Reliab
 assert.match(siteUpdates, /核心研究[\s\S]*方法与几何[\s\S]*可靠性与可信/, 'homepage research taxonomy has Chinese labels');
 assert.match(siteUpdates, /Indexes[\s\S]*Selected publications[\s\S]*Project pages/, 'homepage publication and project links are organized into a readable taxonomy');
 assert.match(siteUpdates, /Selected publications[\s\S]*When_Sample_Selection_Bias_Precipitates_Model_Collapse'[\s\S]*'DynFrs'[\s\S]*Project pages[\s\S]*AI_and_Networks[\s\S]*Collaborative_Evaluation/, 'publication and project groups keep publication pages and genuine project themes in their correct categories');
-assert.match(styles, /\.wiki-portal-grid-cube \.wiki-portal-group-label \{[\s\S]*border-left: 2px solid[\s\S]*font-size: 12px[\s\S]*font-weight: 820[\s\S]*letter-spacing: \.075em/, 'cube group headings are visibly stronger than link rows and clearly own the entries below them');
+assert.match(styles, /\.wiki-portal-grid-cube \.wiki-portal-group-label \{[\s\S]*border-left: 2px solid[\s\S]*font-size: var\(--fs-xs\)[\s\S]*font-weight: 820[\s\S]*letter-spacing: \.075em/, 'cube group headings are visibly stronger than link rows and clearly own the entries below them');
 assert.match(styles, /data-active-face="top"[\s\S]*data-cube-face="right"[\s\S]*\.wiki-portal-group-label \{[\s\S]*background:[\s\S]*box-shadow:[\s\S]*transform: none;/, 'every active cube face gives its group headings unmistakable theme-aware emphasis without reintroducing 3D hit geometry');
 assert.match(styles, /data-active-face="top"[\s\S]*data-cube-face="right"\] a \{[\s\S]*padding-block: 4px[\s\S]*font-size: 11\.5px/, 'all three reading faces use a larger direct-hit row while preserving the established typography scale');
 assert.match(siteUpdates, /索引[\s\S]*代表论文[\s\S]*项目页面/, 'homepage publication and project taxonomy has Chinese labels');
@@ -2669,10 +2694,10 @@ assert.match(read('CV.md'), /\*\*Xinbao Qiao\*\*†, Xianglong Du, Wei Liu, Jing
 assert.ok(read('CV.md').includes('Peihua Mai\\*, Zhuoyan Shao\\*, **Xinbao Qiao**\\*'), 'English wiki CV marks all three co-first authors of Paper #2');
 assert.match(read('CV.md'), /Xinyue Zhou†, Yan Pang†/, 'English wiki CV marks Paper #2 corresponding authors');
 assert.match(read('CV.md'), /Wenjing Yan†, Ying-Jun Angela Zhang/, 'English wiki CV marks Paper #6 corresponding author');
-assert.match(read('CV_zh.md'), /\*\*乔鑫宝\*\*†、Xianglong Du、Wei Liu、Jingqi Zhang、Peihua Mai、张萌†、Yan Pang†/, 'Chinese wiki CV marks Paper #1 corresponding authors');
-assert.ok(read('CV_zh.md').includes('Peihua Mai\\*、Zhuoyan Shao\\*、**乔鑫宝**\\*'), 'Chinese wiki CV marks all three co-first authors of Paper #2');
-assert.match(read('CV_zh.md'), /Xinyue Zhou†、Yan Pang†/, 'Chinese wiki CV marks Paper #2 corresponding authors');
-assert.match(read('CV_zh.md'), /Wenjing Yan†、Ying-Jun Angela Zhang/, 'Chinese wiki CV marks Paper #6 corresponding author');
+assert.match(read('CV_zh.md'), /\*\*乔鑫宝\*\*†、杜相龙、刘巍、张婧琦、麦佩华、张萌†、庞严†/, 'Chinese wiki CV marks Paper #1 corresponding authors');
+assert.ok(read('CV_zh.md').includes('麦佩华\\*、邵卓妍\\*、**乔鑫宝**\\*'), 'Chinese wiki CV marks all three co-first authors of Paper #2');
+assert.match(read('CV_zh.md'), /周欣悅†、庞严†/, 'Chinese wiki CV marks Paper #2 corresponding authors');
+assert.match(read('CV_zh.md'), /闫文静†、张颖珺/, 'Chinese wiki CV marks Paper #6 corresponding author');
 assert.match(read('CV.md'), /Paper #2: Illusory Pattern Perception Drives Spurious Inference in Large Language Models[\s\S]*NeurIPS 2026, accepted\./, 'English wiki CV records Paper #2 acceptance');
 assert.match(read('CV_zh.md'), /Paper #2: Illusory Pattern Perception Drives Spurious Inference in Large Language Models[\s\S]*NeurIPS 2026，已录用。/, 'Chinese wiki CV records Paper #2 acceptance');
 const cvWikiPublicationOrder = [
@@ -2692,7 +2717,7 @@ for (const page of ['CV.md', 'CV_zh.md']) {
   assert.ok(content.lastIndexOf(page === 'CV.md' ? 'Under review.' : '在审。') > positions.at(-1), page + ' places the under-review manuscript last');
 }
 assert.ok(read('Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md').includes('Peihua Mai\\*, Zhuoyan Shao\\*, **[[Xinbao_Qiao|Xinbao Qiao]]**\\*'), 'English paper page marks all three co-first authors');
-assert.ok(read('Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md').includes('Peihua Mai\\*、Zhuoyan Shao\\*、**[[Xinbao_Qiao|乔鑫宝]]**\\*'), 'Chinese paper page marks all three co-first authors');
+assert.ok(read('Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md').includes('麦佩华\\*、邵卓妍\\*、**[[Xinbao_Qiao|乔鑫宝]]**\\*'), 'Chinese paper page marks all three co-first authors');
 for (const zh of [false, true]) {
   const indexPage = zh ? 'Publications_zh.md' : 'Publications.md';
   const paperPage = `Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models${zh ? '_zh' : ''}.md`;
@@ -2716,7 +2741,7 @@ for (const zh of [false, true]) {
   }
 }
 assert.ok(read('Publications.md').includes('Peihua Mai\\*, Zhuoyan Shao\\*, **Xinbao Qiao**\\*'), 'English publication index marks three co-first authors');
-assert.ok(read('Publications_zh.md').includes('Peihua Mai\\*、Zhuoyan Shao\\*、**乔鑫宝**\\*'), 'Chinese publication index marks three co-first authors');
+assert.ok(read('Publications_zh.md').includes('麦佩华\\*、邵卓妍\\*、**乔鑫宝**\\*'), 'Chinese publication index marks three co-first authors');
 assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV.md'), 'utf8'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'English OKF CV concept labels the PDF link as résumé');
 assert.match(fs.readFileSync(path.join(root, 'public/okf/concepts/CV_zh.md'), 'utf8'), /\[résumé\]\(\/files\/XinbaoQiao_CV\.pdf\)/, 'Chinese OKF CV concept labels the PDF link as résumé');
 assert.match(read('CV.md'), /Open-Source Contributions and Academic Service/, 'English CV labels reviewing as academic service');

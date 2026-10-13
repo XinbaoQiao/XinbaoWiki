@@ -2146,6 +2146,54 @@
       }
     },
     {
+      "slug": "Soft_Weighted_Machine_Unlearning_zh",
+      "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
+      "summary": "AAAI 2026 论文，研究用于公平性与鲁棒性修正的软加权机器遗忘。",
+      "language": "zh",
+      "type": "publication",
+      "tags": [
+        "zh",
+        "publication",
+        "paper",
+        "accepted",
+        "aaai-2026",
+        "machine-unlearning"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-10-13T11:36:03.385Z",
+      "contentHash": "sha256:8763ffe73b76b3e2d1c0d94796f9ce325f26050d49e8a1488e1ddd61fc4cbbe2",
+      "reviewedAt": "2026-10-13T11:36:03.385Z",
+      "reviewDue": "2027-10-13",
+      "sourceIds": [
+        "src-0642a11373a83c47",
+        "src-53e1199f272a4df4",
+        "src-998b6c4324199ad3",
+        "src-a78d76c8d4e4ee84"
+      ],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Soft_Weighted_Machine_Unlearning_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:8763ffe73b76b3e2d1c0d94796f9ce325f26050d49e8a1488e1ddd61fc4cbbe2",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
       "slug": "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
       "title": "Decentralized Free-Support Wasserstein Barycenter",
       "summary": "在审稿件，研究可移动支撑点如何在去中心化通信约束下构建共享几何参考。",
@@ -2159,17 +2207,17 @@
         "wasserstein"
       ],
       "timestamp": "2026-08-20T00:00:00+09:00",
-      "modifiedAt": "2026-10-07T07:07:23.845Z",
-      "contentHash": "sha256:04fdfda05e4b744c34a59465d5eee0fd05d53e9e2afdbecb953280812647b6ce",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2026-11-06",
+      "modifiedAt": "2026-10-13T11:36:03.385Z",
+      "contentHash": "sha256:5080e7384b659bb4021914df5601284920f20e5b614b5ced0f611a0e4b239a3b",
+      "reviewedAt": "2026-10-13T11:36:03.385Z",
+      "reviewDue": "2026-11-12",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:04fdfda05e4b744c34a59465d5eee0fd05d53e9e2afdbecb953280812647b6ce",
+        "contentHash": "sha256:5080e7384b659bb4021914df5601284920f20e5b614b5ced0f611a0e4b239a3b",
         "textFields": [
           "title",
           "aliases",
@@ -2189,7 +2237,7 @@
     },
     {
       "slug": "DynFrs_zh",
-      "title": "DynFrs：随机森林机器遗忘高效框架",
+      "title": "DynFrs: An Efficient Framework for Machine Unlearning in Random Forest",
       "summary": "ICLR 2025 论文，研究随机森林中的高效机器遗忘。",
       "language": "zh",
       "type": "publication",
@@ -2201,10 +2249,10 @@
         "iclr-2025"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.871Z",
-      "contentHash": "sha256:72fb15cc1d4f48d3016ce1675475b5714102b0eded54be33dadf70ee3cd1ba8b",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
+      "modifiedAt": "2026-10-13T11:36:03.385Z",
+      "contentHash": "sha256:c7e4ad26cd18863c27162a0ad273d306fc2ada5de0f4b39e71f4c56a85ef831c",
+      "reviewedAt": "2026-10-13T11:36:03.385Z",
+      "reviewDue": "2027-01-11",
       "sourceIds": [
         "src-19cdc04d387acf77",
         "src-3234eea5652932e1",
@@ -2216,7 +2264,107 @@
       "retrieval": {
         "documentId": "wiki:DynFrs_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:72fb15cc1d4f48d3016ce1675475b5714102b0eded54be33dadf70ee3cd1ba8b",
+        "contentHash": "sha256:c7e4ad26cd18863c27162a0ad273d306fc2ada5de0f4b39e71f4c56a85ef831c",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
+      "title": "Hessian-Free Online Certified Unlearning",
+      "summary": "ICLR 2025 论文，研究无显式 Hessian 求逆的高效认证机器遗忘。",
+      "language": "zh",
+      "type": "publication",
+      "tags": [
+        "zh",
+        "publication",
+        "paper",
+        "iclr-2025-poster",
+        "iclr-2025"
+      ],
+      "timestamp": "2026-05-05T23:25:14+08:00",
+      "modifiedAt": "2026-10-13T11:36:20.750Z",
+      "contentHash": "sha256:784f2f4f87def73219b668b747b48c1ff4eadd906d2a17fb8f3751b130f24f28",
+      "reviewedAt": "2026-10-13T11:36:20.750Z",
+      "reviewDue": "2027-01-11",
+      "sourceIds": [
+        "src-508cc93a8723d9eb",
+        "src-65d81b8aca549860",
+        "src-a0a9b7171dc028d2",
+        "src-faaafad831fbefc5"
+      ],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:Hessian_Free_Online_Certified_Unlearning_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:784f2f4f87def73219b668b747b48c1ff4eadd906d2a17fb8f3751b130f24f28",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+      "title": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
+      "summary": "NeurIPS 2026 论文，通过三个心理任务比较大语言模型与人类的错觉模式感知，并用稀疏自编码器分析相关特征。",
+      "language": "zh",
+      "type": "publication",
+      "tags": [
+        "zh",
+        "publication",
+        "paper",
+        "accepted",
+        "neurips-2026",
+        "llm-reliability"
+      ],
+      "timestamp": "2026-09-25T13:49:35+09:00",
+      "modifiedAt": "2026-10-13T11:36:03.385Z",
+      "contentHash": "sha256:d658307f57dab094fea7fca7ea8aab996235d317ee95b2742644f8002f62f2d4",
+      "reviewedAt": "2026-10-13T11:36:03.385Z",
+      "reviewDue": "2027-10-13",
+      "sourceIds": [
+        "src-19ed8d8ac2a744f7",
+        "src-2d7834852d5a70ca",
+        "src-af06ca5886446072",
+        "src-b005562340a1c871",
+        "src-d48b0fa9ae43a703"
+      ],
+      "citationSourceIds": [
+        "src-af06ca5886446072"
+      ],
+      "footnoteSourceIds": [
+        "src-af06ca5886446072"
+      ],
+      "retrieval": {
+        "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:d658307f57dab094fea7fca7ea8aab996235d317ee95b2742644f8002f62f2d4",
         "textFields": [
           "title",
           "aliases",
@@ -2323,6 +2471,54 @@
         "documentId": "wiki:Wasserstein_Geometry_zh",
         "chunking": "markdown-heading-v1",
         "contentHash": "sha256:76f33f274d62e0cdaef742b6b9f33a834dc354d082cfcc4f0de4930d20227f46",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      }
+    },
+    {
+      "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
+      "title": "When Sample Selection Bias Precipitates Model Collapse",
+      "summary": "ICML 2026 论文，研究低资源验证场景、样本选择偏差、模型坍缩与协作 Wasserstein 几何代理。",
+      "language": "zh",
+      "type": "publication",
+      "tags": [
+        "zh",
+        "publication",
+        "paper",
+        "accepted",
+        "icml-2026",
+        "synthetic-data"
+      ],
+      "timestamp": "2026-06-02T22:56:50+08:00",
+      "modifiedAt": "2026-10-13T11:36:20.803Z",
+      "contentHash": "sha256:dd5def2dccc285b78a943ddbe68ed603ba6d531fbe363a022cd642320e878b54",
+      "reviewedAt": "2026-10-13T11:36:20.803Z",
+      "reviewDue": "2027-10-13",
+      "sourceIds": [
+        "src-03bf1b2f9af65762",
+        "src-4144e3776ac496d0",
+        "src-766234e11681dad2",
+        "src-94b169d5c233e588"
+      ],
+      "citationSourceIds": [],
+      "footnoteSourceIds": [],
+      "retrieval": {
+        "documentId": "wiki:When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:dd5def2dccc285b78a943ddbe68ed603ba6d531fbe363a022cd642320e878b54",
         "textFields": [
           "title",
           "aliases",
@@ -3252,53 +3448,6 @@
       }
     },
     {
-      "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
-      "title": "无 Hessian 在线认证遗忘",
-      "summary": "ICLR 2025 论文，研究无显式 Hessian 求逆的高效认证机器遗忘。",
-      "language": "zh",
-      "type": "publication",
-      "tags": [
-        "zh",
-        "publication",
-        "paper",
-        "iclr-2025-poster",
-        "iclr-2025"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.882Z",
-      "contentHash": "sha256:00c00ca3fe7465d2163921199a1c4f3dbefcebaa08eaf7f4b5f7e149ba1abb33",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
-      "sourceIds": [
-        "src-508cc93a8723d9eb",
-        "src-65d81b8aca549860",
-        "src-a0a9b7171dc028d2",
-        "src-faaafad831fbefc5"
-      ],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Hessian_Free_Online_Certified_Unlearning_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:00c00ca3fe7465d2163921199a1c4f3dbefcebaa08eaf7f4b5f7e149ba1abb33",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
       "slug": "log_zh",
       "title": "日志",
       "summary": "Wiki 的追加式维护日志。",
@@ -3405,54 +3554,6 @@
         "documentId": "wiki:Sample_Selection_Bias_zh",
         "chunking": "markdown-heading-v1",
         "contentHash": "sha256:e04479cabd61bc3727aa0e1e90b8676c17d981039b5f2b067c623e1dc7da4700",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
-      "title": "样本选择偏差何以促成模型坍缩",
-      "summary": "ICML 2026 论文，研究低资源验证场景、样本选择偏差、模型坍缩与协作 Wasserstein 几何代理。",
-      "language": "zh",
-      "type": "publication",
-      "tags": [
-        "zh",
-        "publication",
-        "paper",
-        "accepted",
-        "icml-2026",
-        "synthetic-data"
-      ],
-      "timestamp": "2026-06-02T22:56:50+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.992Z",
-      "contentHash": "sha256:e72b3490b8b9a8ee9c8e6909e76559a1f48e7e98b3a8ae019a4092f1696a3fd3",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-10-07",
-      "sourceIds": [
-        "src-03bf1b2f9af65762",
-        "src-4144e3776ac496d0",
-        "src-766234e11681dad2",
-        "src-94b169d5c233e588"
-      ],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:e72b3490b8b9a8ee9c8e6909e76559a1f48e7e98b3a8ae019a4092f1696a3fd3",
         "textFields": [
           "title",
           "aliases",
@@ -3661,10 +3762,10 @@
         "cv-摘要"
       ],
       "timestamp": "2026-07-02T19:37:18+08:00",
-      "modifiedAt": "2026-10-12T14:14:29.802Z",
-      "contentHash": "sha256:52895c25b0bf302c849bf2a19f2accd9ba21fa745f5c9b4e5fee99d990dd3177",
-      "reviewedAt": "2026-10-12T14:15:25.457Z",
-      "reviewDue": "2027-01-10",
+      "modifiedAt": "2026-10-13T11:36:20.721Z",
+      "contentHash": "sha256:c6ca518b3f1d979a237e1c30e944b3d959932b6a0bca5bca7292c244381995b5",
+      "reviewedAt": "2026-10-13T11:36:20.721Z",
+      "reviewDue": "2027-01-11",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-0642a11373a83c47",
@@ -3715,7 +3816,7 @@
       "retrieval": {
         "documentId": "wiki:CV_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:52895c25b0bf302c849bf2a19f2accd9ba21fa745f5c9b4e5fee99d990dd3177",
+        "contentHash": "sha256:c6ca518b3f1d979a237e1c30e944b3d959932b6a0bca5bca7292c244381995b5",
         "textFields": [
           "title",
           "aliases",
@@ -3829,10 +3930,10 @@
         "论文列表"
       ],
       "timestamp": "2026-06-01T22:04:00+08:00",
-      "modifiedAt": "2026-10-12T14:14:29.825Z",
-      "contentHash": "sha256:687869a20b05b2db05a9578e96ecbe52722c8b491fef78b0d946abe768a7d48d",
-      "reviewedAt": "2026-10-12T14:15:25.457Z",
-      "reviewDue": "2027-01-10",
+      "modifiedAt": "2026-10-13T11:36:20.781Z",
+      "contentHash": "sha256:a8fc8276ffaa4c9f95b50db8d219caa70d218315b8ea1ac310cf43ff3209cfc6",
+      "reviewedAt": "2026-10-13T11:36:20.781Z",
+      "reviewDue": "2027-01-11",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-0642a11373a83c47",
@@ -3879,55 +3980,7 @@
       "retrieval": {
         "documentId": "wiki:Publications_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:687869a20b05b2db05a9578e96ecbe52722c8b491fef78b0d946abe768a7d48d",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Soft_Weighted_Machine_Unlearning_zh",
-      "title": "超越二元擦除：用于公平性与鲁棒性的软加权遗忘",
-      "summary": "AAAI 2026 论文，研究用于公平性与鲁棒性修正的软加权机器遗忘。",
-      "language": "zh",
-      "type": "publication",
-      "tags": [
-        "zh",
-        "publication",
-        "paper",
-        "accepted",
-        "aaai-2026",
-        "machine-unlearning"
-      ],
-      "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-10-12T14:14:29.830Z",
-      "contentHash": "sha256:c33dbeb4882ed5316af766a49c497252e784d8e95c1600e2208457a0d0af7e6e",
-      "reviewedAt": "2026-10-12T14:15:25.457Z",
-      "reviewDue": "2027-10-12",
-      "sourceIds": [
-        "src-0642a11373a83c47",
-        "src-53e1199f272a4df4",
-        "src-998b6c4324199ad3",
-        "src-a78d76c8d4e4ee84"
-      ],
-      "citationSourceIds": [],
-      "footnoteSourceIds": [],
-      "retrieval": {
-        "documentId": "wiki:Soft_Weighted_Machine_Unlearning_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:c33dbeb4882ed5316af766a49c497252e784d8e95c1600e2208457a0d0af7e6e",
+        "contentHash": "sha256:a8fc8276ffaa4c9f95b50db8d219caa70d218315b8ea1ac310cf43ff3209cfc6",
         "textFields": [
           "title",
           "aliases",
@@ -3976,59 +4029,6 @@
         "documentId": "wiki:Recursive_Synthetic_Data_Training_zh",
         "chunking": "markdown-heading-v1",
         "contentHash": "sha256:ff333141baeb729c0abff1d4538893c15e0149a76ea8e59ba9e72603897fbe43",
-        "textFields": [
-          "title",
-          "aliases",
-          "summary",
-          "body"
-        ],
-        "metadataFields": [
-          "slug",
-          "language",
-          "type",
-          "tags",
-          "sourceIds",
-          "reviewedAt",
-          "reviewDue"
-        ]
-      }
-    },
-    {
-      "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
-      "title": "错觉模式感知驱动大语言模型的虚假推理",
-      "summary": "NeurIPS 2026 论文，通过三个心理任务比较大语言模型与人类的错觉模式感知，并用稀疏自编码器分析相关特征。",
-      "language": "zh",
-      "type": "publication",
-      "tags": [
-        "zh",
-        "publication",
-        "paper",
-        "accepted",
-        "neurips-2026",
-        "llm-reliability"
-      ],
-      "timestamp": "2026-09-25T13:49:35+09:00",
-      "modifiedAt": "2026-10-11T14:22:08.131Z",
-      "contentHash": "sha256:6248b4d648481ac2ca59b50d984755a2510b7422b9359c59499eb38fc09a8167",
-      "reviewedAt": "2026-10-11T14:22:50.689Z",
-      "reviewDue": "2027-10-11",
-      "sourceIds": [
-        "src-19ed8d8ac2a744f7",
-        "src-2d7834852d5a70ca",
-        "src-af06ca5886446072",
-        "src-b005562340a1c871",
-        "src-d48b0fa9ae43a703"
-      ],
-      "citationSourceIds": [
-        "src-af06ca5886446072"
-      ],
-      "footnoteSourceIds": [
-        "src-af06ca5886446072"
-      ],
-      "retrieval": {
-        "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
-        "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:6248b4d648481ac2ca59b50d984755a2510b7422b9359c59499eb38fc09a8167",
         "textFields": [
           "title",
           "aliases",

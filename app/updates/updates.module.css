@@ -25,7 +25,7 @@
   gap: 8px;
   margin: 18px 0 22px;
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: var(--fs-ui);
 }
 
 .languageNav a {
@@ -58,9 +58,9 @@
 
 .sectionSummary {
   min-height: 3.2em;
-  color: var(--wiki-text-soft);
+  color: color-mix(in srgb, var(--wiki-text) 78%, var(--wiki-text-soft));
   font-family: var(--font-sans);
-  font-size: 12.5px;
+  font-size: var(--fs-sm);
 }
 
 .list {
@@ -81,21 +81,21 @@
   padding-top: 2px;
   color: var(--wiki-text-soft);
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: var(--fs-xs);
   font-variant-numeric: tabular-nums;
 }
 
 .list a {
   font-family: var(--font-sans);
-  font-size: 14px;
+  font-size: var(--fs-body);
   font-weight: 700;
 }
 
 .list p {
   margin: 3px 0 0;
-  color: var(--wiki-text-soft);
+  color: color-mix(in srgb, var(--wiki-text) 78%, var(--wiki-text-soft));
   font-family: var(--font-sans);
-  font-size: 12.5px;
+  font-size: var(--fs-sm);
   line-height: 1.45;
 }
 
@@ -109,13 +109,13 @@
 
 .subscribe h2 {
   margin-top: 10px;
-  font-size: 1.22em;
+  font-size: var(--fs-h3);
 }
 
 .subscribe p {
   margin-bottom: 0;
   color: var(--wiki-text-soft);
-  font-size: 12.5px;
+  font-size: var(--fs-sm);
 }
 
 @media (max-width: 760px) {

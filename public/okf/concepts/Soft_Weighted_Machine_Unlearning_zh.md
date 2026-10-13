@@ -1,6 +1,6 @@
 ---
 type: publication
-title: 超越二元擦除：用于公平性与鲁棒性的软加权遗忘
+title: 'Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness'
 description: AAAI 2026 论文，研究用于公平性与鲁棒性修正的软加权机器遗忘。
 tags:
   - zh
@@ -10,18 +10,18 @@ tags:
   - aaai-2026
   - machine-unlearning
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-12T14:14:29.830Z'
-content_hash: 'sha256:c33dbeb4882ed5316af766a49c497252e784d8e95c1600e2208457a0d0af7e6e'
-reviewed_at: '2026-10-12T14:15:25.457Z'
-review_due: '2027-10-12'
+modified: '2026-10-13T11:36:03.385Z'
+content_hash: 'sha256:8763ffe73b76b3e2d1c0d94796f9ce325f26050d49e8a1488e1ddd61fc4cbbe2'
+reviewed_at: '2026-10-13T11:36:03.385Z'
+review_due: '2027-10-13'
 language: zh
 lifecycle:
   status: confirmed
   confidence: 0.95
   review: on venue/status change
   retention: long-lived semantic memory
-  reviewedAt: '2026-10-12T14:15:25.457Z'
-  reviewDue: '2027-10-12'
+  reviewedAt: '2026-10-13T11:36:03.385Z'
+  reviewDue: '2027-10-13'
   pendingReview: false
   overdue: false
 retrieval:
@@ -34,9 +34,9 @@ source_ids:
   - src-a78d76c8d4e4ee84
 source_path: wiki/Soft_Weighted_Machine_Unlearning_zh.md
 ---
-**超越二元擦除：用于公平性与鲁棒性的软加权遗忘** 是 **[乔鑫宝](./Qiao_Xinbao_zh.md)**、Ningning Ding、Yushi Cheng 和张萌的 AAAI 2026 会议论文。它把机器遗忘重新表述为连续的数据影响修正问题，而不是只能执行“删除或保留”的二元操作。论文关注的是在改善公平性或鲁棒性时，每个样本应保留多少影响，才能避免不必要的效用损失。
+**Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness** 是 **[乔鑫宝](./Qiao_Xinbao_zh.md)**、丁宁宁、程雨诗 和张萌的 AAAI 2026 会议论文。它把机器遗忘重新表述为连续的数据影响修正问题，而不是只能执行“删除或保留”的二元操作。论文关注的是在改善公平性或鲁棒性时，每个样本应保留多少影响，才能避免不必要的效用损失。
 
-![超越二元擦除：用于公平性与鲁棒性的软加权遗忘 AAAI 2026 poster](/papers/soft-weighted/poster.png)
+![Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness AAAI 2026 poster](/papers/soft-weighted/poster.png)
 
 ## 概述
 
@@ -71,4 +71,4 @@ source_path: wiki/Soft_Weighted_Machine_Unlearning_zh.md
 
 ## 定位
 
-该工作属于 [机器遗忘](./Machine_Unlearning_zh.md)、[公平性与鲁棒性](./Fairness_and_Robustness_zh.md)、[影响函数](./Influence_Functions_zh.md) 和 [可信 AI](./Trustworthy_AI_zh.md)。它补充了 [无 Hessian 在线认证遗忘](./Hessian_Free_Online_Certified_Unlearning_zh.md)：问题从隐私删除转向细粒度模型修正。
+该工作属于 [机器遗忘](./Machine_Unlearning_zh.md)、[公平性与鲁棒性](./Fairness_and_Robustness_zh.md)、[影响函数](./Influence_Functions_zh.md) 和 [可信 AI](./Trustworthy_AI_zh.md)。它补充了 [Hessian-Free Online Certified Unlearning](./Hessian_Free_Online_Certified_Unlearning_zh.md)：问题从隐私删除转向细粒度模型修正。
