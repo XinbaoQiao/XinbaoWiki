@@ -188,6 +188,7 @@ const indexNowScript = fs.readFileSync(path.join(root, 'scripts/submit-indexnow.
 assertFile('components/LanguageToggle.tsx');
 assertFile('components/ArticleTabs.tsx');
 assertFile('components/WikiSearch.tsx');
+assertFile('components/ArticleContents.tsx');
 assertFile('components/ChatWithXinbao.tsx');
 assertFile('components/ChatWithXinbaoPanel.tsx');
 assertFile('components/SidebarClient.tsx');
@@ -313,6 +314,7 @@ const articleTabs = fs.readFileSync(path.join(root, 'components/ArticleTabs.tsx'
 const wikiSearch = fs.readFileSync(path.join(root, 'components/WikiSearch.tsx'), 'utf8');
 const chatWithXinbao = fs.readFileSync(path.join(root, 'components/ChatWithXinbao.tsx'), 'utf8');
 const chatWithXinbaoPanel = fs.readFileSync(path.join(root, 'components/ChatWithXinbaoPanel.tsx'), 'utf8');
+const articleContents = fs.readFileSync(path.join(root, 'components/ArticleContents.tsx'), 'utf8');
 const sidebar = fs.readFileSync(path.join(root, 'components/Sidebar.tsx'), 'utf8');
 const sidebarClient = fs.readFileSync(path.join(root, 'components/SidebarClient.tsx'), 'utf8');
 const siteUpdates = fs.readFileSync(path.join(root, 'lib/site-navigation.ts'), 'utf8');
@@ -2247,7 +2249,7 @@ assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.wiki-portal-name \{
 assert.match(styles, /\.chat-xinbao-shell \{[\s\S]*bottom: max\(24px, env\(safe-area-inset-bottom\)\);[\s\S]*max-height: min\(660px, calc\(100dvh - 48px - env\(safe-area-inset-top\) - env\(safe-area-inset-bottom\)\)\);/, 'Chat with Xinbao respects iOS safe-area and dynamic viewport height');
 assert.match(styles, /\.wiki-mobile-nav-dialog\[open\] \{[\s\S]*padding: env\(safe-area-inset-top\) max\(18px, env\(safe-area-inset-right\)\) max\(28px, env\(safe-area-inset-bottom\)\) max\(18px, env\(safe-area-inset-left\)\);/, 'mobile navigation drawer clears notch and home-indicator safe areas');
 assert.match(styles, /padding: 16px 16px calc\(52px \+ env\(safe-area-inset-bottom\)\)/, 'mobile wiki shell leaves compact bottom room now that the palette is a quiet corner control');
-assert.match(layout, /export const viewport[\s\S]*viewportFit: 'cover'/, 'root layout enables viewport-fit=cover so safe-area insets apply on notched phones');
+assert.match(layout, /export const viewport[\s\S]*viewportFit: 'cover'[\s\S]*interactiveWidget: 'resizes-content'/, 'root layout enables viewport-fit=cover and keyboard-aware interactive-widget resizing');
 assert.match(styles, /@media \(max-width: 420px\) \{[\s\S]*\.wiki-portal-name \{[\s\S]*font-size: 72px;[\s\S]*\}[\s\S]*\}[\s\S]*@media \(max-width: 360px\) \{[\s\S]*\.wiki-portal-name \{[\s\S]*font-size: 64px;[\s\S]*\}/, 'homepage pure text signature has fixed small-screen sizes to avoid overflow');
 assert.match(styles, /\.wiki-portal-name-text \{[\s\S]*animation: wiki-name-write 2\.4s cubic-bezier\(\.33, 0, \.2, 1\) \.12s both;[\s\S]*color: var\(--signature-ink\);[\s\S]*\}/, 'homepage name reveal uses a deliberately slower handwriting-like animation speed without image chrome');
 assert.match(styles, /@supports \(\(background-clip: text\) or \(-webkit-background-clip: text\)\) \{[\s\S]*\.wiki-portal-name-text \{[\s\S]*background-size: 100% 100%;[\s\S]*-webkit-background-clip: text;[\s\S]*background-clip: text;[\s\S]*-webkit-text-fill-color: transparent;[\s\S]*\}/, 'homepage name uses a text-ink reveal instead of a clipped rectangle');
@@ -2265,7 +2267,16 @@ assert.match(styles, /\.wiki-search-language-seg \{[\s\S]*grid-template-columns:
 assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*--fs-body: 16px;[\s\S]*--wiki-search-control-size: 48px;/, 'phone layouts bump body type and search touch targets to 48px');
 assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.wiki-portal-search \{[\s\S]*border-radius: 18px;[\s\S]*box-shadow: 0 10px 28px/, 'homepage search becomes a distinct elevated card on phones');
 assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.wiki-search-portal \.wiki-search-fields \{[\s\S]*grid-template-areas:[\s\S]*"input submit"[\s\S]*"lang lang"/, 'homepage search stacks language onto a second row at phone widths');
-assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.chat-xinbao-shell \{[\s\S]*height: calc\(100dvh - max\(6px, env\(safe-area-inset-top\)\)\);[\s\S]*border-radius: 16px 16px 0 0;/, 'phone chat opens as a near-fullscreen bottom sheet by default at tablet-phone widths');
+assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.chat-xinbao-backdrop \{[\s\S]*display: block;[\s\S]*\.chat-xinbao-shell \{[\s\S]*--chat-keyboard-inset:[\s\S]*border-radius: 18px 18px 0 0;/, 'phone chat uses a dimmed backdrop and keyboard-aware bottom sheet');
+assert.match(styles, /\.chat-xinbao-composer-row \{[\s\S]*display: flex;[\s\S]*align-items: flex-end;/, 'chat composer keeps send beside the growing textarea');
+assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.chat-xinbao-quick-replies \{[\s\S]*flex-wrap: nowrap;[\s\S]*overflow-x: auto;/, 'phone quick-start chips scroll horizontally above the composer');
+assert.match(chatWithXinbaoPanel, /visualViewport[\s\S]*chat-xinbao-backdrop[\s\S]*chat-xinbao-grab[\s\S]*chat-xinbao-composer-row/, 'chat panel wires backdrop dismiss, grab handle, visualViewport inset, and composer row');
+assert.match(styles, /\.wiki-toc-return \{[\s\S]*position: fixed;[\s\S]*border-radius: 2px;/, 'articles expose a floating return-to-contents control');
+assert.match(styles, /@media \(min-width: 721px\) \{[\s\S]*\.wiki-article-contents \{[\s\S]*position: sticky;/, 'desktop Contents contents stay sticky while reading');
+assert.match(articleContents, /IntersectionObserver[\s\S]*wiki-on-this-page[\s\S]*wiki-toc-return/, 'ArticleContents shows a return control once the contents leave the viewport');
+assert.match(articleContents, /scrollIntoView\(\{ behavior:[\s\S]*smooth[\s\S]*\}\)/, 'Contents links smooth-scroll to headings');
+assert.match(styles, /@keyframes wiki-heading-flash/, 'heading flash animation is defined for Contents navigation');
+assert.match(styles, /@keyframes wiki-heading-flash[\s\S]*--site-theme-accent/, 'heading flash uses the active site theme accent');
 assert.match(styles, /@media \(max-width: 640px\) \{[\s\S]*Publications[\s\S]*\.wiki-body tr \{[\s\S]*padding: 14px 14px 12px;[\s\S]*border-radius: 14px;/, 'Publications mobile rows render as padded cards with radius');
 assert.match(styles, /Publications[\s\S]*td:nth-child\(2\) \{[\s\S]*margin-top: 8px;[\s\S]*color: var\(--wiki-text-soft\)/, 'Publications mobile card meta is quieter and spaced under the title');
 assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.wiki-portal-cube-stage-cube \{[\s\S]*height: 320px;/, 'homepage cube stage shrinks on phones so search and editions stay above the fold');

@@ -211,10 +211,11 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
   const [remaining, setRemaining] = useState<number | null>(null);
   const [limit, setLimit] = useState(10);
   const [mounted, setMounted] = useState(false);
-  const endRef = useRef<HTMLDivElement>(null);
+  const messagesRef = useRef<HTMLDivElement>(null);
   const shellRef = useRef<HTMLElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const activeRequestRef = useRef<AbortController | null>(null);
+  const dragStartY = useRef<number | null>(null);
   const quotaExhausted = remaining === 0;
   const composerDisabled = loading || quotaExhausted;
 
@@ -246,16 +247,42 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
 
   useEffect(() => {
     if (!open || minimized) return;
-    endRef.current?.scrollIntoView({ block: 'end' });
+    const scroller = messagesRef.current;
+    if (!scroller) return;
+    scroller.scrollTo({ top: scroller.scrollHeight, behavior: 'smooth' });
   }, [messages, loading, open, minimized]);
 
   useEffect(() => {
     if (!open || minimized) return;
+    const coarse = window.matchMedia('(hover: none), (pointer: coarse), (max-width: 720px)').matches;
+    if (coarse) return;
     const frame = requestAnimationFrame(() => {
       inputRef.current?.focus();
     });
     return () => cancelAnimationFrame(frame);
   }, [open, minimized, restoreRequest]);
+
+  useEffect(() => {
+    if (!open || minimized) return;
+    const viewport = window.visualViewport;
+    if (!viewport) return;
+
+    const apply = () => {
+      const shell = shellRef.current;
+      if (!shell) return;
+      const keyboardInset = Math.max(0, window.innerHeight - viewport.height - viewport.offsetTop);
+      shell.style.setProperty('--chat-keyboard-inset', `${keyboardInset}px`);
+    };
+
+    apply();
+    viewport.addEventListener('resize', apply);
+    viewport.addEventListener('scroll', apply);
+    return () => {
+      viewport.removeEventListener('resize', apply);
+      viewport.removeEventListener('scroll', apply);
+      shellRef.current?.style.removeProperty('--chat-keyboard-inset');
+    };
+  }, [open, minimized]);
 
   useEffect(() => {
     if (!open || minimized) return;
@@ -470,14 +497,40 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
         </button>
       )}
       {open && !minimized && (
+        <>
+        <button
+          aria-label={strings.close}
+          className="chat-xinbao-backdrop"
+          onClick={onClose}
+          type="button"
+        />
         <section
           aria-busy={loading || undefined}
           aria-label="Chat with Xinbao"
           aria-modal="true"
           className="chat-xinbao-shell"
+          onPointerDown={(event) => {
+            if ((event.target as HTMLElement).closest('.chat-xinbao-grab')) {
+              dragStartY.current = event.clientY;
+            }
+          }}
+          onPointerUp={(event) => {
+            if (dragStartY.current === null) return;
+            const delta = event.clientY - dragStartY.current;
+            dragStartY.current = null;
+            if (delta > 72) onClose();
+          }}
           ref={shellRef}
           role="dialog"
         >
+          <button
+            aria-label={strings.close}
+            className="chat-xinbao-grab"
+            onClick={onClose}
+            type="button"
+          >
+            <span aria-hidden="true" />
+          </button>
           <header className="chat-xinbao-header">
             <div>
               <h2><span aria-hidden="true" className="chat-xinbao-mark">AI</span>Chat with Xinbao</h2>
@@ -489,12 +542,32 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
               <button aria-label={strings.close} onClick={onClose} type="button">×</button>
             </div>
           </header>
-          <div className="chat-xinbao-messages">
+          <div className="chat-xinbao-messages" ref={messagesRef}>
             {messages.map((message, index) => (
               <div className={`chat-xinbao-message ${message.role}`} key={`${message.role}-${index}`}>
                 <ChatMessageContent message={message} sourcesLabel={strings.sources} />
               </div>
             ))}
+            {loading && (
+              <div className="chat-xinbao-typing" role="status">
+                <span>{typingMessage}</span>
+                <i />
+                <i />
+                <i />
+              </div>
+            )}
+          </div>
+          {visibleError && (
+            <div className="chat-xinbao-error" role="alert">
+              <span>{visibleError}</span>
+              {retryRequest && !quotaExhausted && (
+                <button className="chat-xinbao-retry" disabled={loading || Boolean(retryAfterSeconds)} onClick={retryLastRequest} type="button">
+                  {strings.retry}
+                </button>
+              )}
+            </div>
+          )}
+          <form className="chat-xinbao-composer" onSubmit={submit}>
             {showQuickPrompts && (
               <div aria-label={strings.quickPromptsLabel} className="chat-xinbao-quick-replies" role="group">
                 {strings.quickPrompts.map((prompt) => (
@@ -510,54 +583,39 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
                 ))}
               </div>
             )}
-            {loading && (
-              <div className="chat-xinbao-typing" role="status">
-                <span>{typingMessage}</span>
-                <i />
-                <i />
-                <i />
-              </div>
-            )}
-            <div ref={endRef} />
-          </div>
-          {visibleError && (
-            <div className="chat-xinbao-error" role="alert">
-              <span>{visibleError}</span>
-              {retryRequest && !quotaExhausted && (
-                <button className="chat-xinbao-retry" disabled={loading || Boolean(retryAfterSeconds)} onClick={retryLastRequest} type="button">
-                  {strings.retry}
-                </button>
-              )}
-            </div>
-          )}
-          <form className="chat-xinbao-composer" onSubmit={submit}>
             <label className="sr-only" htmlFor="chat-with-xinbao-input">{strings.inputLabel}</label>
-            <textarea
-              disabled={composerDisabled}
-              id="chat-with-xinbao-input"
-              maxLength={MAX_INPUT_LENGTH}
-              onChange={(event) => setInput(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter' && !event.shiftKey) {
-                  event.preventDefault();
-                  event.currentTarget.form?.requestSubmit();
-                }
-              }}
-              placeholder={strings.placeholder}
-              ref={inputRef}
-              rows={3}
-              value={input}
-            />
-            <div className="chat-xinbao-composer-footer">
-              <span>{MAX_INPUT_LENGTH - input.length}</span>
+            <div className="chat-xinbao-composer-row">
+              <textarea
+                disabled={composerDisabled}
+                enterKeyHint="send"
+                id="chat-with-xinbao-input"
+                maxLength={MAX_INPUT_LENGTH}
+                onChange={(event) => setInput(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) {
+                    const coarse = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+                    if (coarse) return;
+                    event.preventDefault();
+                    event.currentTarget.form?.requestSubmit();
+                  }
+                }}
+                placeholder={strings.placeholder}
+                ref={inputRef}
+                rows={1}
+                value={input}
+              />
               {loading ? (
                 <button className="chat-xinbao-cancel" onClick={cancelRequest} type="button">{strings.cancel}</button>
               ) : (
                 <button disabled={!input.trim() || quotaExhausted} type="submit">{strings.send}</button>
               )}
             </div>
+            <div className="chat-xinbao-composer-footer">
+              <span>{MAX_INPUT_LENGTH - input.length}</span>
+            </div>
           </form>
         </section>
+        </>
       )}
     </>,
     document.body

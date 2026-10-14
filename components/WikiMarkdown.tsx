@@ -52,12 +52,12 @@ export function WikiMarkdown({ editLabel, markdown, sourceHref }: Props) {
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkMath]}
         remarkRehypeOptions={{ footnoteLabel: editLabel === '编辑' ? '脚注' : 'Footnotes' }}
-        rehypePlugins={[[rehypeWikiOutline, { label: editLabel === '编辑' ? '本页目录' : 'On this page' }], rehypeKatex]}
+        rehypePlugins={[[rehypeWikiOutline, { label: editLabel === '编辑' ? '目录' : 'Contents' }], rehypeKatex]}
         urlTransform={wikiUrlTransform}
         components={{
           nav({ children, className }) {
             if (className === 'wiki-article-contents') {
-              return <ArticleContents label={editLabel === '编辑' ? '本页目录' : 'On this page'}>{children}</ArticleContents>;
+              return <ArticleContents label={editLabel === '编辑' ? '目录' : 'Contents'}>{children}</ArticleContents>;
             }
             return <nav className={className}>{children}</nav>;
           },

@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { rehypeWikiOutline } from '../lib/wiki-outline.ts';
 
-function render(markdown, label = 'On this page') {
+function render(markdown, label = 'Contents') {
   return renderToStaticMarkup(createElement(ReactMarkdown, {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [[rehypeWikiOutline, { label }]]
@@ -43,5 +43,5 @@ assert.ok(!outline.includes('Not a heading'), 'fenced code is not mistaken for a
 assert.ok(!outline.includes('A detail'), 'subheadings do not crowd the compact outline');
 assert.equal(html, render(fixture), 'IDs are deterministic and isolated between renders');
 assert.ok(!render('## One section').includes('<nav'), 'short pages omit unnecessary navigation');
-assert.match(render('## 一\n\n## 二', '本页目录'), /<nav class="wiki-article-contents" aria-label="本页目录">/);
+assert.match(render('## 一\n\n## 二', '目录'), /<nav class="wiki-article-contents" aria-label="目录">/);
 console.log('Wiki outline rendering tests passed');
