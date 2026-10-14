@@ -1,5 +1,8 @@
 'use client';
 
+import { WikiLink } from '@/components/WikiLink';
+import { clearWikiMorphIntent } from '@/lib/wiki-view-transition';
+import { wikiSlugFromHref } from '@/lib/wiki-view-transition';
 import type { CSSProperties, PointerEvent as ReactPointerEvent, TransitionEvent as ReactTransitionEvent } from 'react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { VisitorAtlasDisclosure } from '@/components/VisitorAtlasDisclosure';
@@ -11,7 +14,7 @@ type PortalPalette = 'text' | 'blue' | 'gold' | 'rose' | 'green' | 'violet' | 'c
 type BrowseView = 'list' | 'cube';
 type CubeFace = 'top' | 'front' | 'right';
 type TouchCubeAngle = 'top' | 'front' | 'right';
-type PortalEntry = { href: string; summary: string; title: string };
+type PortalEntry = { href: string; slug: string; summary: string; title: string };
 type PortalGroup = {
   label: LocalizedText;
   links: Record<SearchLanguage, PortalEntry[]>;
@@ -24,6 +27,7 @@ type LanguageEntry = {
   detail: string;
   href: string;
   label: string;
+  slug: string;
 };
 type Props = {
   directorySections: PortalSection[];
@@ -379,11 +383,9 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
           <ul>
             {group.links[language].map((item) => (
               <li key={item.href}>
-                <a
-                  href={item.href}
-                >
+                <WikiLink href={item.href} titleMorphSlug={item.slug} titleMorphDestTitle={item.title}>
                   {item.title}
-                </a>
+                </WikiLink>
                 {item.summary && <span>{item.summary}</span>}
               </li>
             ))}
@@ -469,10 +471,15 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
           />
           <nav className="wiki-portal-editions" aria-label={entriesLabel[language]}>
             {languageEntries.map((item) => (
-              <a className="wiki-portal-edition" href={item.href} key={item.href}>
+              <WikiLink
+                className="wiki-portal-edition"
+                href={item.href}
+                key={item.href}
+                onClick={() => clearWikiMorphIntent()}
+              >
                 <strong>{item.label}</strong>
                 <span>{item.detail}</span>
-              </a>
+              </WikiLink>
             ))}
           </nav>
         </div>
@@ -510,7 +517,7 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
                 <li key={`${item.dateTime}-${item.title}`}>
                   <time dateTime={item.dateTime}>{item.date}</time>
                   <div>
-                    <a href={withBasePath(item.href)}>{item.title}</a>
+                    <WikiLink href={withBasePath(item.href)} titleMorphSlug={wikiSlugFromHref(item.href)} titleMorphDestTitle={item.title}>{item.title}</WikiLink>
                     <p>{item.detail}</p>
                   </div>
                 </li>

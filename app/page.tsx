@@ -14,6 +14,7 @@ function entry(slug: string) {
   }
   return {
     href: wikiHref(slug),
+    slug,
     summary: page.summary,
     title: page.title
   };
@@ -23,7 +24,8 @@ export default function HomePage() {
   const portalLanguageEntries = languageEntries.map((item) => ({
     detail: item.detail,
     href: wikiHref(item.slug),
-    label: item.label
+    label: item.label,
+    slug: item.slug
   }));
   const portalDirectorySections = directorySections.map((section) => ({
     title: section.title,

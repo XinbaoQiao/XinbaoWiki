@@ -1,6 +1,7 @@
 'use client';
 
 import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
+import { WikiHrefLink } from '@/components/WikiHrefLink';
 import ReactMarkdown from 'react-markdown';
 import { createPortal } from 'react-dom';
 import rehypeKatex from 'rehype-katex';
@@ -176,9 +177,9 @@ function ChatMessageContent({ message, sourcesLabel }: { message: Message; sourc
             <ol>
               {message.sources.map((source) => (
                 <li key={source.chunkId}>
-                  <a href={source.href}>
+                  <WikiHrefLink href={source.href}>
                     {source.title}{source.section ? ` — ${source.section}` : ''}
-                  </a>
+                  </WikiHrefLink>
                 </li>
               ))}
             </ol>

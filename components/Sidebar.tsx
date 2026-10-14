@@ -19,7 +19,9 @@ function sidebarItem(slug: string) {
     slug,
     localizedSlug: { en: enSlug, zh: zhSlug },
     href: { en: wikiHref(enSlug), zh: wikiHref(zhSlug) },
-    label: navigationLabels[slug] ?? { en: enEntry.title, zh: zhEntry.title }
+    label: navigationLabels[slug] ?? { en: enEntry.title, zh: zhEntry.title },
+    // Real H1 titles gate morph (label must match dest / accepted alias).
+    pageTitle: { en: enEntry.title, zh: zhEntry.title }
   };
 }
 

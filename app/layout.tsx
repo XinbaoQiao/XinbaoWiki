@@ -5,7 +5,9 @@ import { LanguageToggle, SitePalette } from '@/components/LanguageToggle';
 import { Sidebar } from '@/components/Sidebar';
 import { WikiSearch } from '@/components/WikiSearch';
 import { SiteActivityRecorder } from '@/components/SiteActivityRecorder';
+import { WikiLink } from '@/components/WikiLink';
 import { pathWithBasePath } from '@/lib/wiki';
+import { ViewTransitions } from 'next-view-transitions';
 import 'katex/dist/katex.min.css';
 import './globals.css';
 
@@ -58,40 +60,47 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en">
-      <body>
-        <SiteActivityRecorder />
-        <a className="skip-to-content" href="#main-content">Skip to content / 跳至正文</a>
-        <SitePalette icons={sitePaletteIcons} />
-        <header className="wiki-topbar">
-          <div className="wiki-topbar-inner">
-            <a
-              className="wiki-logo"
-              href={pathWithBasePath('/')}
-            >
-              <span className="wiki-logo-word">Xinbaopedia</span>
-              <span className="wiki-logo-subtitle">The Academic Wiki</span>
-            </a>
-            <div className="wiki-topbar-controls">
-              <WikiSearch hideOnPortal />
-              <LanguageToggle />
+    <ViewTransitions>
+      <html lang="en">
+        <head>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap"
+            rel="stylesheet"
+          />
+        </head>
+        <body>
+          <SiteActivityRecorder />
+          <a className="skip-to-content" href="#main-content">Skip to content / 跳至正文</a>
+          <SitePalette icons={sitePaletteIcons} />
+          <header className="wiki-topbar">
+            <div className="wiki-topbar-inner">
+              <WikiLink className="wiki-logo" href={pathWithBasePath('/')}>
+                <span className="wiki-logo-word">Xinbaopedia</span>
+                <span className="wiki-logo-subtitle">The Academic Wiki</span>
+              </WikiLink>
+              <div className="wiki-topbar-controls">
+                <WikiSearch hideOnPortal />
+                <LanguageToggle />
+              </div>
             </div>
+          </header>
+          <ArticleTabs />
+          <div className="wiki-shell">
+            <Sidebar />
+            <main className="wiki-main" id="main-content">{children}</main>
           </div>
-        </header>
-        <ArticleTabs />
-        <div className="wiki-shell">
-          <Sidebar />
-          <main className="wiki-main" id="main-content">{children}</main>
-        </div>
-        <footer className="wiki-footer">
-          <p>This page is maintained as a personal academic wiki. Xinbaopedia is a stylistic tribute to Wikipedia and is not affiliated with the Wikimedia Foundation.</p>
-          <p>
-            <a className="external" href="mailto:xinbaoqiao@link.cuhk.edu.hk">Email</a>
-            {' · '}
-            <a className="external" href="https://github.com/XinbaoQiao" target="_blank" rel="noreferrer">GitHub</a>
-          </p>
-        </footer>
-      </body>
-    </html>
+          <footer className="wiki-footer">
+            <p>This page is maintained as a personal academic wiki. Xinbaopedia is a stylistic tribute to Wikipedia and is not affiliated with the Wikimedia Foundation.</p>
+            <p>
+              <a className="external" href="mailto:xinbaoqiao@link.cuhk.edu.hk">Email</a>
+              {' · '}
+              <a className="external" href="https://github.com/XinbaoQiao" target="_blank" rel="noreferrer">GitHub</a>
+            </p>
+          </footer>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

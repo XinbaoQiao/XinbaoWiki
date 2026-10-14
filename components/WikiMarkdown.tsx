@@ -4,15 +4,13 @@ import rehypeKatex from 'rehype-katex';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import { ArticleContents } from '@/components/ArticleContents';
+import { WikiHrefLink } from '@/components/WikiHrefLink';
 import { PublicationLinkLegend, publicationLinkLegendTexts, publicationLinkTitle } from '@/components/PublicationLinkLegend';
 import { pathWithBasePath } from '@/lib/wiki';
 import { rehypeWikiOutline } from '@/lib/wiki-outline';
 
 type Props = { editLabel: string; markdown: string; sourceHref?: string };
 
-function external(href: string) {
-  return /^https?:\/\//.test(href) || href.startsWith('mailto:');
-}
 
 function wikiUrlTransform(value: string) {
   if (/^tel:/i.test(value)) return value;
@@ -62,22 +60,21 @@ export function WikiMarkdown({ editLabel, markdown, sourceHref }: Props) {
             return <nav className={className}>{children}</nav>;
           },
           a({ href, children, title }) {
-            const safe = href ? pathWithBasePath(href) : '#';
-            const missing = safe.includes('missing=1');
-            const ext = external(safe);
-            const iconTitle = legendLanguage ? publicationLinkTitle(safe, legendLanguage) : undefined;
-            const className = [missing ? 'redlink' : '', ext ? 'external' : ''].filter(Boolean).join(' ') || undefined;
+            const raw = href || '#';
+            const missing = raw.includes('missing=1');
+            const iconTitle = legendLanguage && !raw.startsWith('#') ? publicationLinkTitle(pathWithBasePath(raw), legendLanguage) : undefined;
+            const className = [missing ? 'redlink' : ''].filter(Boolean).join(' ') || undefined;
+            const linkTitle = missing ? 'Page does not exist yet' : title ?? iconTitle;
+            // WikiHrefLink: # → local smooth-scroll color; /wiki → page morph; http → external.
             return (
-              <a
-                href={safe}
-                className={className}
-                target={ext ? '_blank' : undefined}
-                rel={ext ? 'noreferrer' : undefined}
-                title={missing ? 'Page does not exist yet' : title ?? iconTitle}
+              <WikiHrefLink
                 aria-label={iconTitle}
+                className={className}
+                href={raw}
+                title={linkTitle}
               >
                 {children}
-              </a>
+              </WikiHrefLink>
             );
           },
           img({ src, alt }) {

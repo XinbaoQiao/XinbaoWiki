@@ -1,9 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap");
+/* Alex Brush loaded via <link> in layout head (avoids CSS @import block). */
+@layer xinbaopedia.base;
 
 :root {
   --wiki-text: #202122;
   --wiki-text-soft: #54595d;
   --wiki-link: #0645ad;
+  --wiki-link-page: #0645ad;
+  --wiki-link-local: #0b6e99;
   --wiki-link-visited: #0b0080;
   --wiki-link-red: #ba0000;
   --wiki-bg: #ffffff;
@@ -172,6 +175,29 @@ a:visited {
 
 a:hover {
   text-decoration: underline;
+}
+
+a.wiki-link-page {
+  color: var(--wiki-link-page);
+}
+
+a.wiki-link-page:visited {
+  color: var(--wiki-link-visited);
+}
+
+a.wiki-link-local {
+  color: var(--wiki-link-local);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 500;
+}
+
+a.wiki-link-local:visited {
+  color: var(--wiki-link-local);
+}
+
+a.wiki-link-local:hover {
+  color: #085a7d;
 }
 
 .skip-to-content {
@@ -1478,6 +1504,24 @@ body:has(.wiki-portal) .wiki-topbar {
   text-decoration: none;
 }
 
+.wiki-article-contents a[href^="#"],
+.wiki-contents-mobile a[href^="#"] {
+  color: var(--wiki-link-local);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 500;
+}
+
+.wiki-article-contents a[href^="#"]:visited,
+.wiki-contents-mobile a[href^="#"]:visited {
+  color: var(--wiki-link-local);
+}
+
+.wiki-article-contents a[href^="#"]:hover,
+.wiki-contents-mobile a[href^="#"]:hover {
+  color: #085a7d;
+}
+
 .wiki-article-contents a:hover,
 .wiki-article-contents a:focus-visible {
   color: var(--wiki-link);
@@ -2477,6 +2521,27 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   border-color: var(--site-theme-action-ink);
   background: color-mix(in srgb, var(--site-theme-accent) 8%, var(--wiki-bg));
   text-decoration: none;
+}
+
+/* Homepage language card title (no morph — label is not the destination H1). */
+.wiki-portal-edition > .wiki-portal-edition-label {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+  color: var(--site-theme-action-ink);
+  font-size: var(--fs-section);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.wiki-portal-edition:hover > .wiki-portal-edition-label,
+.wiki-portal-edition:focus-visible > .wiki-portal-edition-label {
+  text-decoration: underline;
+}
+
+.wiki-search-result .wiki-vt-title {
+  font-weight: inherit;
 }
 
 .wiki-portal-edition:focus-visible {
@@ -5103,5 +5168,306 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
   .wiki-infobox {
     break-inside: avoid;
     page-break-inside: avoid;
+  }
+}
+
+/* wiki view transitions - Jim Nielsen style:
+   soft page crossfade + shared title name for position morph (link -> H1). */
+@view-transition {
+  navigation: auto;
+}
+
+.wiki-topbar {
+  view-transition-name: wiki-topbar;
+}
+
+.wiki-tabs {
+  view-transition-name: wiki-tabs;
+}
+
+.wiki-sidebar {
+  view-transition-name: wiki-sidebar;
+}
+
+.site-palette-switcher {
+  view-transition-name: site-palette;
+}
+
+/* Title chips: inline-block + fit-content so geometry morphs cleanly. */
+.wiki-vt-title,
+.wiki-title-morph {
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+  vertical-align: baseline;
+  view-transition-class: wiki-title-morph;
+}
+
+/* Body/content wiki links: chip stays one paint box for a clearer flight. */
+.wiki-main a.wiki-link-page > .wiki-vt-title {
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.wiki-main {
+  view-transition-name: wiki-main;
+}
+
+/* Pinned chrome: never crossfade old+new. animation:none on BOTH left them at
+   opacity 1 stacked — any 1px shift or active-state move read as full-sidebar ghost.
+   Always show only the new snapshot. */
+::view-transition-old(wiki-topbar),
+::view-transition-old(wiki-tabs),
+::view-transition-old(wiki-sidebar),
+::view-transition-old(site-palette) {
+  animation: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  mix-blend-mode: normal;
+}
+
+::view-transition-new(wiki-topbar),
+::view-transition-new(wiki-tabs),
+::view-transition-new(wiki-sidebar),
+::view-transition-new(site-palette) {
+  animation: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  mix-blend-mode: normal;
+}
+
+/* Morph: keep the same pin; source row still muted in live/new snapshot. */
+html[data-wiki-morph-to] ::view-transition-old(wiki-sidebar) {
+  animation: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+html[data-wiki-morph-to] ::view-transition-new(wiki-sidebar) {
+  animation: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+
+::view-transition-group(wiki-topbar),
+::view-transition-group(wiki-tabs),
+::view-transition-group(wiki-sidebar),
+::view-transition-group(site-palette),
+::view-transition-group(wiki-main) {
+  animation: none;
+}
+
+/* Body: soft fade under the title flight (chrome groups stay pinned). */
+::view-transition-old(wiki-main) {
+  animation: wiki-vt-fade-out 200ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+::view-transition-new(wiki-main) {
+  animation: wiki-vt-fade-in 260ms cubic-bezier(0.4, 0, 0.2, 1) 30ms both;
+}
+
+@keyframes wiki-vt-fade-out {
+  0% {
+    opacity: 1;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes wiki-vt-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/*
+ * Shared title morph: geometry flight with a short crossfade.
+ * No plus-lighter / blur - those stacked old+new as a ghost at both ends
+ * and cost frames mid-flight. Live source chip + H1 are muted in JS for
+ * the flight so chrome snapshots cannot paint a second copy underneath.
+ */
+::view-transition-group(.wiki-title-morph) {
+  z-index: 200;
+  animation-duration: 800ms;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-image-pair(.wiki-title-morph) {
+  animation-duration: 800ms;
+  isolation: isolate;
+  will-change: opacity, transform;
+}
+
+::view-transition-old(.wiki-title-morph) {
+  /* Do not force height:100%/overflow:clip - long body links stretch/clip and look weak.
+     Hide old immediately: old+new both sit at the origin at t=0, which was the
+     left-sidebar source ghost. Geometry flight is carried only by morph-new. */
+  mix-blend-mode: normal;
+  animation: none !important;
+  opacity: 0 !important;
+}
+
+::view-transition-new(.wiki-title-morph) {
+  mix-blend-mode: normal;
+  animation: wiki-title-morph-new 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  opacity: 1 !important;
+}
+
+/* Continuous handoff: morph-new stays fully opaque for the whole flight.
+   Live dest H1 is NOT hidden (see JS) — it sits under the overlay and remains
+   when the overlay tears down, so landing never vanishes/flashes. */
+@keyframes wiki-title-morph-old {
+  0% { opacity: 1; }
+  18% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+@keyframes wiki-title-morph-new {
+  0% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+/* Live DOM under the flying title:
+   - mute source chips, whole sidebar rows, and same-slug peers after old snapshot
+   - kill aria-current highlight that can read as a second copy at the origin
+   - do NOT hide live dest H1 (landing stays continuous under opaque morph-new) */
+[data-wiki-vt-muted="1"],
+[data-wiki-vt-dest-hide="1"],
+li[data-wiki-vt-muted="1"],
+a.wiki-link-page[data-wiki-vt-muted="1"],
+a.wiki-link-page[data-wiki-vt-muted="1"] .wiki-vt-title,
+.wiki-sidebar li[data-wiki-vt-muted="1"],
+.wiki-sidebar-content li[data-wiki-vt-muted="1"],
+.wiki-sidebar a.wiki-link-page[data-wiki-vt-muted="1"],
+.wiki-sidebar-content a.wiki-link-page[data-wiki-vt-muted="1"] {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  color: transparent !important;
+  text-shadow: none !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+}
+
+.wiki-sidebar a.wiki-link-page[data-wiki-vt-muted="1"][aria-current="page"],
+.wiki-sidebar-content a.wiki-link-page[data-wiki-vt-muted="1"][aria-current="page"],
+.wiki-sidebar a.wiki-link-page[data-wiki-vt-muted-active="1"],
+.wiki-sidebar-content a.wiki-link-page[data-wiki-vt-muted-active="1"] {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  background: transparent !important;
+  border-left-color: transparent !important;
+  font-weight: inherit !important;
+}
+
+/* (sidebar old hide: see pinned-chrome rules above) */
+
+
+/* Off-viewport morph: keep title end-geometry correct (JS instant-scrolled for the
+   snapshot) but ease wiki-main from the pre-scroll offset so the page feels like it
+   lifts into the titled view with the ~800ms title flight — not a hard jump. */
+html[data-wiki-morph-scroll] {
+  --wiki-morph-scroll-from: 0px;
+}
+
+/* Soft lift: wiki-main eases from pre-nav offset with the title flight.
+   Amplitude is capped in JS; keep opacity crossfade gentle to avoid jank. */
+html[data-wiki-morph-scroll] ::view-transition-old(wiki-main) {
+  animation: wiki-vt-morph-scroll-old 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html[data-wiki-morph-scroll] ::view-transition-new(wiki-main) {
+  animation: wiki-vt-morph-scroll-new 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes wiki-vt-morph-scroll-old {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+  18% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes wiki-vt-morph-scroll-new {
+  0% {
+    opacity: 0.12;
+    transform: translate3d(0, var(--wiki-morph-scroll-from), 0);
+  }
+  28% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Morph without off-viewport lift: keep main fade short so title flight isn't
+   fighting a long full-page opacity animation. */
+html[data-wiki-morph-to]:not([data-wiki-morph-scroll]) ::view-transition-old(wiki-main) {
+  animation: wiki-vt-fade-out 90ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+html[data-wiki-morph-to]:not([data-wiki-morph-scroll]) ::view-transition-new(wiki-main) {
+  animation: wiki-vt-fade-in 140ms cubic-bezier(0.33, 1, 0.68, 1) both;
+}
+
+html[data-wiki-morph-to][data-wiki-morph-scroll] ::view-transition-old(wiki-main) {
+  animation: wiki-vt-morph-scroll-old 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+html[data-wiki-morph-to][data-wiki-morph-scroll] ::view-transition-new(wiki-main) {
+  animation: wiki-vt-morph-scroll-new 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Soft page fade is enough when no title morph is armed (language toggle, etc.). */
+html:not([data-wiki-morph-to]) ::view-transition-old(wiki-main) {
+  animation: wiki-vt-fade-out 160ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+html:not([data-wiki-morph-to]) ::view-transition-new(wiki-main) {
+  animation: wiki-vt-fade-in 220ms cubic-bezier(0.33, 1, 0.68, 1) both;
+}
+
+/* Avoid unpaired title-class fades when a named H1 somehow appears without morph intent. */
+html:not([data-wiki-morph-to]) ::view-transition-old(.wiki-title-morph),
+html:not([data-wiki-morph-to]) ::view-transition-new(.wiki-title-morph) {
+  animation: none !important;
+  animation-duration: 0s !important;
+}
+
+::view-transition {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wiki-topbar,
+  .wiki-tabs,
+  .wiki-sidebar,
+  .site-palette-switcher,
+  .wiki-main,
+  .wiki-vt-title,
+  .wiki-title-morph,
+  .wiki-title-text {
+    view-transition-name: none !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+    animation-duration: 0s !important;
+    animation-delay: 0s !important;
   }
 }

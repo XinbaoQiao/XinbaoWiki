@@ -45,6 +45,7 @@
     "gray-matter": "^4.0.3",
     "katex": "^0.16.45",
     "next": "15.5.27",
+    "next-view-transitions": "^0.3.5",
     "react": "19.2.7",
     "react-dom": "19.2.7",
     "react-markdown": "^10.0.0",

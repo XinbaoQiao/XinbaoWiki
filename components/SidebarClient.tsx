@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { WikiLink } from '@/components/WikiLink';
 import { usePathname } from 'next/navigation';
 import type { LocalizedText, SiteLanguage } from '@/lib/site-navigation';
 
@@ -9,6 +10,7 @@ export type SidebarNavItem = {
   localizedSlug: Record<SiteLanguage, string>;
   href: Record<SiteLanguage, string>;
   label: LocalizedText;
+  pageTitle: LocalizedText;
 };
 
 export type SidebarNavSection = {
@@ -69,9 +71,15 @@ function SidebarSections({
           <ul>
             {section.links.map((item) => (
               <li key={item.slug}>
-                <a aria-current={currentPage(item)} href={withBasePath(item.href[language])} onClick={onNavigate}>
+                <WikiLink
+                  aria-current={currentPage(item)}
+                  href={withBasePath(item.href[language])}
+                  onClick={onNavigate}
+                  titleMorphSlug={item.localizedSlug[language]}
+                  titleMorphDestTitle={item.pageTitle[language]}
+                >
                   {item.label[language]}
-                </a>
+                </WikiLink>
               </li>
             ))}
           </ul>
@@ -80,7 +88,7 @@ function SidebarSections({
 
       <h4>{sectionLabels.updates[language]}</h4>
       <ul>
-        <li><a href={withBasePath('/updates/')} onClick={onNavigate}>{sectionLabels.feed[language]}</a></li>
+        <li><WikiLink href={withBasePath('/updates/')} onClick={onNavigate} titleMorphSlug="Updates">{sectionLabels.feed[language]}</WikiLink></li>
       </ul>
     </div>
   );
@@ -91,11 +99,18 @@ export function SidebarClient({ sections }: Props) {
   const currentSlug = activeSlug(pathname);
   const language: SidebarLanguage = isChineseSlug(currentSlug) ? 'zh' : 'en';
   const [mobileOpen, setMobileOpen] = useState(false);
+  // Defer mounting mobile nav links until first open — halves [data-wiki-title-vt]
+  // chips that prepareWikiTitleMorph / clearWikiTitleMorphPeers walk on every click.
+  const [mobileNavMounted, setMobileNavMounted] = useState(false);
   const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     setMobileOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    if (mobileOpen) setMobileNavMounted(true);
+  }, [mobileOpen]);
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -150,7 +165,9 @@ export function SidebarClient({ sections }: Props) {
             ×
           </button>
         </header>
-        <SidebarSections currentSlug={currentSlug} language={language} onNavigate={() => setMobileOpen(false)} sections={sections} />
+        {mobileNavMounted ? (
+          <SidebarSections currentSlug={currentSlug} language={language} onNavigate={() => setMobileOpen(false)} sections={sections} />
+        ) : null}
       </dialog>
     </>
   );

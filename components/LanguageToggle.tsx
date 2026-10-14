@@ -1,5 +1,7 @@
 'use client';
 
+import { WikiLink } from '@/components/WikiLink';
+import { clearWikiMorphIntent } from '@/lib/wiki-view-transition';
 import type { CSSProperties } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
@@ -48,17 +50,17 @@ export function LanguageToggle() {
   const accessibleLabel = isChinesePage ? 'Switch to English' : '切换至中文';
 
   return (
-    <a
+    <WikiLink
       aria-label={accessibleLabel}
       className="lang-toggle"
       href={withBasePath(href)}
       title={accessibleLabel}
+      onClick={() => clearWikiMorphIntent()}
     >
       {isChinesePage ? 'English' : '中文'}
-    </a>
+    </WikiLink>
   );
 }
-
 type SitePaletteName = 'text' | 'blue' | 'gold' | 'rose' | 'green' | 'violet' | 'charcoal';
 type SitePaletteMode = SitePaletteName | 'auto';
 

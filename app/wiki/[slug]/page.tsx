@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { hasInfoboxDetails, Infobox } from '@/components/Infobox';
 import { ArticleFacts } from '@/components/ArticleFacts';
 import { WikiMarkdown } from '@/components/WikiMarkdown';
+import { WikiTitleText } from '@/components/WikiTitleText';
 import {
   getPublicWikiSlugs,
   getWikiPageBySlug,
@@ -109,7 +110,9 @@ export default async function WikiPage({ params }: Props) {
       lang={language === 'zh' ? 'zh-CN' : 'en'}
     >
       <h1 className="wiki-title">
-        {page.title}
+        <WikiTitleText slug={page.slug}>
+          {page.title}
+        </WikiTitleText>
         <span className="edit-link">
           <a href={sourceHref} target="_blank" rel="noreferrer">{editLabel}</a>
         </span>

@@ -1,5 +1,8 @@
 'use client';
 
+import { WikiLink } from '@/components/WikiLink';
+import { prepareWikiTitleMorph } from '@/lib/wiki-view-transition';
+import { useTransitionRouter } from 'next-view-transitions';
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { ChatWithXinbao } from '@/components/ChatWithXinbao';
@@ -203,9 +206,20 @@ export function WikiSearch({
     return () => document.removeEventListener('pointerdown', onPointerDown);
   }, []);
 
+  const router = useTransitionRouter();
+
   function goTo(item: SearchIndexItem | undefined) {
     if (!item) return;
-    window.location.assign(item.href);
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const chip = document.querySelector<HTMLElement>(
+      `[data-wiki-title-vt][data-vt-slug="${typeof CSS !== 'undefined' && 'escape' in CSS ? CSS.escape(item.slug) : item.slug}"]`
+    );
+    prepareWikiTitleMorph(item.slug, chip, { labelText: item.title, destTitle: item.title });
+    if (reduceMotion || !('startViewTransition' in document)) {
+      window.location.assign(item.href);
+      return;
+    }
+    router.push(item.href);
   }
 
   if (hideOnPortal && isPortalPath(pathname)) return null;
@@ -319,7 +333,7 @@ export function WikiSearch({
             <div className="wiki-search-empty" role="status">{copy.unavailable}</div>
           ) : results.length ? (
             results.map((item, index) => (
-              <a
+              <WikiLink
                 aria-selected={index === active}
                 className="wiki-search-result"
                 href={item.href}
@@ -327,14 +341,16 @@ export function WikiSearch({
                 key={item.slug}
                 onMouseEnter={() => setActive(index)}
                 role="option"
+                titleMorphLabel={<span className="wiki-search-result-title">{item.title}</span>}
+                titleMorphSlug={item.slug}
+                titleMorphDestTitle={item.title}
               >
-                <span className="wiki-search-result-title">{item.title}</span>
                 <span className="wiki-search-result-meta">
                   <span>{item.language === 'zh' ? '中文' : 'English'}</span>
                   <span>{item.type}</span>
                 </span>
                 <span className="wiki-search-result-excerpt">{resultExcerpt(item, terms)}</span>
-              </a>
+              </WikiLink>
             ))
           ) : (
             <div className="wiki-search-empty">{copy.empty}</div>

@@ -1,5 +1,6 @@
 import { Fragment, type ReactNode } from 'react';
 import { PortraitGallery } from '@/components/PortraitGallery';
+import { WikiHrefLink } from '@/components/WikiHrefLink';
 import type { LinkItem, WikiFrontmatter, WikiImageItem } from '@/lib/wiki';
 import { pathWithBasePath, toChineseSlug, toEnglishSlug } from '@/lib/wiki';
 
@@ -130,12 +131,12 @@ function linkLabel(label: string, url: string): ReactNode {
 
 function scalar(value: string | number | boolean, language: InfoboxLanguage) {
   const text = String(value);
-  const href = pathWithBasePath(text);
-  if (/^https?:\/\//.test(text) || text.startsWith('mailto:') || text.startsWith('/')) {
+  if (/^https?:\/\//.test(text) || text.startsWith('mailto:') || text.startsWith('/') || text.startsWith('#')) {
+    const href = text.startsWith('/') ? localizeUrl(text, language) : text;
     return (
-      <a href={href} target={text.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
+      <WikiHrefLink applyBasePath={false} href={href}>
         {linkLabel(text.replace(/^mailto:/, ''), text)}
-      </a>
+      </WikiHrefLink>
     );
   }
   return text;
@@ -167,9 +168,9 @@ function render(value: unknown, language: InfoboxLanguage): ReactNode {
   if (isLink(value)) {
     return (
       <>
-        <a href={localizeUrl(value.url, language)} target={value.url.startsWith('http') ? '_blank' : undefined} rel="noreferrer">
+        <WikiHrefLink applyBasePath={false} href={localizeUrl(value.url, language)}>
           {linkLabel(value.label, value.url)}
-        </a>
+        </WikiHrefLink>
         {value.detail && (
           <>
             <br />

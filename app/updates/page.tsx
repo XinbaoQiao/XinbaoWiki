@@ -1,3 +1,6 @@
+import { WikiLink } from '@/components/WikiLink';
+import { WikiTitleText } from '@/components/WikiTitleText';
+import { wikiSlugFromHref } from '@/lib/wiki-view-transition';
 import type { Metadata } from 'next';
 import { siteUpdates } from '@/lib/site-updates';
 import { pathWithBasePath } from '@/lib/wiki';
@@ -17,7 +20,11 @@ const sectionCopy = {
 export default function UpdatesPage() {
   return (
     <article className={`wiki-page ${styles.page}`} data-page-slug="Updates">
-      <h1 className={`wiki-title ${styles.title}`}>Updates <span lang="zh-CN">/ 最新动态</span></h1>
+      <h1 className={`wiki-title ${styles.title}`}>
+        <WikiTitleText slug="Updates">
+          Updates <span lang="zh-CN">/ 最新动态</span>
+        </WikiTitleText>
+      </h1>
       <p className={styles.intro}>
         A readable archive of recent academic milestones and research news.
         <span lang="zh-CN">这里收录近期学术里程碑与研究动态。</span>
@@ -40,7 +47,7 @@ export default function UpdatesPage() {
                   <li key={`${item.dateTime}-${item.title}`}>
                     <time dateTime={item.dateTime}>{item.date}</time>
                     <div>
-                      <a href={pathWithBasePath(item.href)}>{item.title}</a>
+                      <WikiLink href={pathWithBasePath(item.href)} titleMorphSlug={wikiSlugFromHref(item.href)} titleMorphDestTitle={item.title}>{item.title}</WikiLink>
                       <p>{item.detail}</p>
                     </div>
                   </li>

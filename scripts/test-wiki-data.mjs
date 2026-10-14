@@ -376,6 +376,13 @@ assert.match(layout, /<SitePalette icons=\{sitePaletteIcons\} \/>/, 'layout moun
 assert.match(layout, /import 'katex\/dist\/katex\.min\.css';/, 'layout imports KaTeX CSS for rendered formulas');
 assert.doesNotMatch(layout, /wiki-logo-mark|<img className=/, 'topbar uses a text-only wordmark');
 assert.match(layout, /className="wiki-logo"[\s\S]*href=\{pathWithBasePath\('\/'\)\}[\s\S]*wiki-logo-word[\s\S]*Xinbaopedia[\s\S]*wiki-logo-subtitle[\s\S]*The Academic Wiki/, 'topbar wordmark links to the Wikipedia-style portal homepage');
+assert.match(layout, /from 'next-view-transitions'/, 'layout enables next-view-transitions for route animations');
+assert.match(layout, /<ViewTransitions>/, 'layout wraps the document in ViewTransitions');
+assertFile('components/WikiLink.tsx');
+assertFile('lib/wiki-view-transition.ts');
+assert.match(wikiPageTsx, /<WikiTitleText slug=\{page\.slug\}>/, 'article H1 wraps title text in WikiTitleText for morph');
+assert.match(fs.readFileSync(path.join(root, 'components/WikiTitleText.tsx'), 'utf8'), /wikiTitleViewTransitionName\(slug\)/, 'WikiTitleText assigns the shared title morph name for matching navigations');
+
 assert.match(layout, /<ArticleTabs \/>/, 'article tools stay isolated in the top-level layout');
 assert.match(layout, /import \{ WikiSearch \} from '@\/components\/WikiSearch';/, 'layout imports the interactive wiki search component');
 assert.match(layout, /import \{ pathWithBasePath \} from '@\/lib\/wiki';/, 'layout imports only the base-path helper from the wiki library');
@@ -1951,6 +1958,34 @@ for (const [page, expectedCount] of Object.entries({
 const infobox = fs.readFileSync(path.join(root, 'components/Infobox.tsx'), 'utf8');
 const portraitGallery = fs.readFileSync(path.join(root, 'components/PortraitGallery.tsx'), 'utf8');
 const styles = fs.readFileSync(path.join(root, 'app/globals.css'), 'utf8');
+assert.match(styles, /--wiki-link-page:/, 'cross-page link color token is defined');
+assert.match(styles, /--wiki-link-local:/, 'in-page link color token is defined');
+assert.match(styles, /a\.wiki-link-page/, 'cross-page links use wiki-link-page color class');
+assert.match(styles, /a\.wiki-link-local/, 'in-page links use wiki-link-local color class');
+
+assert.match(styles, /view-transition-name:\s*wiki-topbar/, 'topbar is pinned during view transitions');
+assert.match(styles, /@keyframes wiki-vt-fade-in/, 'main content crossfades during view transitions');
+assert.match(styles, /prefers-reduced-motion:\s*reduce[\s\S]*view-transition-name:\s*none/, 'view transitions disable under reduced motion');
+const wikiLink = fs.readFileSync(path.join(root, 'components/WikiLink.tsx'), 'utf8');
+assert.match(wikiLink, /prefers-reduced-motion/, 'WikiLink skips animated transitions when reduced motion is preferred');
+assert.match(wikiLink, /prepareWikiTitleMorph\(morphSlug|prepareWikiTitleMorph\(titleMorphSlug/, 'WikiLink assigns a unique title morph name on click');
+assertFile('lib/wiki-href.ts');
+assertFile('components/WikiHrefLink.tsx');
+const wikiHref = fs.readFileSync(path.join(root, 'lib/wiki-href.ts'), 'utf8');
+assert.match(wikiHref, /kind: 'local'/, 'classifyWikiHref distinguishes in-page hash links');
+assert.match(wikiHref, /morphSlug/, 'classifyWikiHref exposes morph slugs for cross-page wiki targets');
+assert.match(fs.readFileSync(path.join(root, 'components/Infobox.tsx'), 'utf8'), /WikiHrefLink/, 'Infobox routes URLs through WikiHrefLink');
+assert.match(fs.readFileSync(path.join(root, 'components/ChatWithXinbaoPanel.tsx'), 'utf8'), /WikiHrefLink/, 'chat sources use WikiHrefLink for cross-page morph');
+assert.match(fs.readFileSync(path.join(root, 'components/LanguageToggle.tsx'), 'utf8'), /clearWikiMorphIntent\(\)/, 'language toggle skips title morph on edition switches');
+assert.doesNotMatch(fs.readFileSync(path.join(root, 'components/Infobox.tsx'), 'utf8'), /<a href=\{localizeUrl/, 'Infobox no longer uses raw anchors for localized wiki URLs');
+
+assert.match(wikiLink, /data-wiki-title-vt/, 'WikiLink marks morphable title chips for shared element pairing');
+assert.match(fs.readFileSync(path.join(root, 'lib/wiki-view-transition.ts'), 'utf8'), /prepareWikiTitleMorph/, 'shared prepareWikiTitleMorph pairs clicked titles before navigation');
+assert.match(fs.readFileSync(path.join(root, 'components/WikiSearch.tsx'), 'utf8'), /titleMorphSlug=\{item\.slug\}/, 'search results participate in title morph');
+assert.match(fs.readFileSync(path.join(root, 'app/updates/page.tsx'), 'utf8'), /<WikiTitleText slug="Updates">/, 'Updates page exposes a title morph target via WikiTitleText');
+assert.match(styles, /view-transition-class:\s*wiki-title-morph/, 'title morph uses a view-transition-class for shared geometry');
+assert.match(styles, /::view-transition-group\(\.wiki-title-morph\)/, 'title morph group keeps a noticeable flight duration');
+
 assert.match(styles, /chat-xinbao-quick-replies[\s\S]*chat-xinbao-quick-reply/, 'chat styles include quick-start chip layout');
 const homePage = fs.readFileSync(path.join(root, 'app/page.tsx'), 'utf8');
 const homepagePortal = fs.readFileSync(path.join(root, 'components/HomepagePortal.tsx'), 'utf8');
@@ -1962,7 +1997,19 @@ function cssRuleBody(source, selector) {
     .split(/\s+/)
     .map((part) => part.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&'))
     .join('\\s+');
-  const ruleStart = new RegExp('(?:^|[;{}])\\s*' + selectorPattern + '[ \\t]*\\{').exec(source);
+  const finder = new RegExp('(?:^|[;{}])\\s*' + selectorPattern + '[ \\t]*\\{', 'g');
+  let ruleStart = null;
+  let match;
+  while ((match = finder.exec(source))) {
+    const openAt = match.index + match[0].lastIndexOf('{');
+    // Prefer a top-level rule whose selector begins at column 0 (not nested/indented).
+    const lineStart = source.lastIndexOf('\n', openAt) + 1;
+    const indent = source.slice(lineStart, openAt).match(/^([ \t]*)/)[1];
+    if (!ruleStart || indent.length === 0) {
+      ruleStart = match;
+      if (indent.length === 0) break;
+    }
+  }
   assert.ok(ruleStart, selector + ' CSS rule exists');
 
   const openBrace = ruleStart.index + ruleStart[0].lastIndexOf('{');
