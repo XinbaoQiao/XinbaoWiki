@@ -11,10 +11,10 @@ tags:
   - biography
   - phd-student
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-12T04:54:44.724Z'
-content_hash: 'sha256:67ea308b2c9089528b45476c22a60a9cc29736b3d556145bdcd161ec003a0cb3'
-reviewed_at: '2026-10-12T04:55:39.589Z'
-review_due: '2027-01-10'
+modified: '2026-10-14T05:06:00.884Z'
+content_hash: 'sha256:28e703f6f37846400529f5fad410a93ffecd9f88ddc67e4350ac5d254b287f8e'
+reviewed_at: '2026-10-14T05:08:10.591Z'
+review_due: '2027-01-12'
 name: Xinbao Qiao
 summary: >-
   PhD student in Information Engineering at The Chinese University of Hong Kong;
@@ -118,7 +118,7 @@ The ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|Whe
 
 ## Academic service
 
-- **2026**: reviewer for ICML, NeurIPS, and AAAI. Recognized as a **Top Reviewer at NeurIPS 2026**.[^neurips-top-reviewer]
+- **2026**: reviewer for ICML, NeurIPS, and AAAI. Recognized as a **[Top Reviewer at NeurIPS 2026](/files/NeurIPS2026_TopReviewer_XinbaoQiao.pdf)**.
 - **2025**: reviewer for NeurIPS, ICLR, AAAI, and IEEE TNNLS.
 
 ## See also
@@ -146,5 +146,3 @@ The ICML 2026 paper [[When_Sample_Selection_Bias_Precipitates_Model_Collapse|Whe
 [^qiao-ciao]: Qiao's surname is written "乔" in simplified Chinese and "喬" in traditional Chinese. In his nickname, "喬" is treated as matching the sound of "ciao", which explains the informal nickname "Mr. Ciao" and the public handle [MrCiao](https://huggingface.co/MrCiao).
 
 [^cuhk-ie]: CUHK's Department of Information Engineering describes its scope as information generation, communication, storage, and processing in real-world applications on its [official department page](https://www.ie.cuhk.edu.hk/about-the-department/); the CUHK Graduate School also lists [MPhil-PhD in Information Engineering](https://www.gs.cuhk.edu.hk/programmes/engineering) within Engineering.
-
-[^neurips-top-reviewer]: NeurIPS 2026 [reviewer certificate](/files/NeurIPS2026_TopReviewer_XinbaoQiao.pdf), dated October 8, 2026.

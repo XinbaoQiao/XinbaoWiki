@@ -8,18 +8,18 @@ tags:
   - profile
   - cv-摘要
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-10-13T11:36:20.721Z'
-content_hash: 'sha256:c6ca518b3f1d979a237e1c30e944b3d959932b6a0bca5bca7292c244381995b5'
-reviewed_at: '2026-10-13T11:36:20.721Z'
-review_due: '2027-01-11'
+modified: '2026-10-14T05:06:00.838Z'
+content_hash: 'sha256:193abd76b2ca1a3882bf170f4099ca4bd12de08da7f84591d359d6048da2fd17'
+reviewed_at: '2026-10-14T05:08:10.591Z'
+review_due: '2027-01-12'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-13T11:36:20.721Z'
-  reviewDue: '2027-01-11'
+  reviewedAt: '2026-10-14T05:08:10.591Z'
+  reviewDue: '2027-01-12'
   pendingReview: false
   overdue: false
 retrieval:
@@ -86,7 +86,7 @@ source_path: wiki/CV_zh.md
 
 - **研究代码发布**：维护已录用论文的公开代码，包括认证遗忘、软加权机器遗忘和样本选择偏差导致模型坍缩等方向。
 - **Xinbaopedia**：维护公开学术主页和 wiki 式研究档案，包括论文页面、图表、CV 与项目记录。
-- **学术审稿，2026 年**：担任 ICML、NeurIPS 和 AAAI 审稿人。获 **NeurIPS 2026 Top Reviewer** 荣誉。[^neurips-top-reviewer-zh]
+- **学术审稿，2026 年**：担任 ICML、NeurIPS 和 AAAI 审稿人。获 **[NeurIPS 2026 Top Reviewer](/files/NeurIPS2026_TopReviewer_XinbaoQiao.pdf)** 荣誉。
 - **学术审稿，2025 年**：担任 NeurIPS、ICLR、AAAI 和 IEEE TNNLS 审稿人。
 
 ## 论文
@@ -118,5 +118,3 @@ source_path: wiki/CV_zh.md
 - **Paper #7: Decentralized Free-Support Wasserstein Barycenter**。\
   **乔鑫宝**、侯博凯、麦佩华、李文倩、闫文静、张颖珺。\
   在审。详情见 [Decentralized Free-Support Wasserstein Barycenter](./Decentralized_Free_Support_Wasserstein_Barycenter_zh.md)。
-
-[^neurips-top-reviewer-zh]: NeurIPS 2026 [审稿证明](/files/NeurIPS2026_TopReviewer_XinbaoQiao.pdf)，签发日期为 2026 年 10 月 8 日。

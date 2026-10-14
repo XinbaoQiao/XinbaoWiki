@@ -8,18 +8,18 @@ tags:
   - profile
   - cv-summary
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-10-12T14:14:29.803Z'
-content_hash: 'sha256:07a684b46b2add99f7e6c9f377c1e21e9504e5e8930312b39fb267e4060d34a3'
-reviewed_at: '2026-10-12T14:15:25.457Z'
-review_due: '2027-01-10'
+modified: '2026-10-14T05:06:00.840Z'
+content_hash: 'sha256:b3e1b918876988936db63d76e47b8182b3802b4636d6a7900414b0977fc35760'
+reviewed_at: '2026-10-14T05:08:10.591Z'
+review_due: '2027-01-12'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-12T14:15:25.457Z'
-  reviewDue: '2027-01-10'
+  reviewedAt: '2026-10-14T05:08:10.591Z'
+  reviewDue: '2027-01-12'
   pendingReview: false
   overdue: false
 retrieval:
@@ -86,7 +86,7 @@ source_path: wiki/CV.md
 
 - **Research code releases**: maintains public code for accepted papers on certified unlearning, soft-weighted unlearning, and sample-selection model collapse.
 - **Xinbaopedia**: maintains a public academic homepage and wiki-style research archive with paper pages, figures, CV, and project notes.
-- **Academic service, 2026**: reviewer for ICML, NeurIPS, and AAAI. Recognized as a **Top Reviewer at NeurIPS 2026**.[^neurips-top-reviewer]
+- **Academic service, 2026**: reviewer for ICML, NeurIPS, and AAAI. Recognized as a **[Top Reviewer at NeurIPS 2026](/files/NeurIPS2026_TopReviewer_XinbaoQiao.pdf)**.
 - **Academic service, 2025**: reviewer for NeurIPS, ICLR, AAAI, and IEEE TNNLS.
 
 ## Publications
@@ -118,5 +118,3 @@ Link icons: OpenReview · arXiv · Code (GitHub) · Publisher.
 - **Paper #7: Decentralized Free-Support Wasserstein Barycenter**.\
   **Xinbao Qiao**, Bokai Hou, Peihua Mai, Wenqian Li, Wenjing Yan, Ying-Jun Angela Zhang.\
   Under review. Details: [Decentralized Free-Support Wasserstein Barycenter](./Decentralized_Free_Support_Wasserstein_Barycenter.md).
-
-[^neurips-top-reviewer]: NeurIPS 2026 [reviewer certificate](/files/NeurIPS2026_TopReviewer_XinbaoQiao.pdf), dated October 8, 2026.

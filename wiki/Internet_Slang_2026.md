@@ -13,8 +13,8 @@ tags:
 timestamp: '2026-05-07T17:34:07+08:00'
 modified: '2026-10-13T11:20:15.915Z'
 content_hash: 'sha256:2b4c43fbe096a30d8540bb214e71ad688a32eb1896205f5d4039b4d8a0aab214'
-reviewed_at: '2026-07-14T23:17:11+08:00'
-review_due: '2027-07-14'
+reviewed_at: '2026-10-14T05:08:10.591Z'
+review_due: '2027-10-14'
 name: Internet Slang 2026
 summary: >-
   A yearly, source-linked slang and meme-note page used to keep Chat with Xinbao

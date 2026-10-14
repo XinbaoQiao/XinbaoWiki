@@ -393,7 +393,9 @@ assert.match(languageToggle, /window\.setInterval\(applyPalette, 5 \* 60 \* 1000
 assert.match(languageToggle, /const active = mode === option\.mode;/, 'site palette marks only the chosen mode as active');
 assert.match(languageToggle, /option\.mode === 'text' \? 'site-palette-text' : ''/, 'pure-white text swatch receives a visible boundary class');
 assert.doesNotMatch(languageToggle, /activePalette|activePalette === option\.mode/, 'site palette no longer double-highlights Auto and the current time color');
-assert.match(languageToggle, /className="site-palette-switcher" aria-label="Site color theme" role="group"/, 'site palette keeps accessible manual color swatches as a grouped fallback control');
+assert.match(languageToggle, /aria-label="Site color theme"[\s\S]*className=\{\['site-palette-switcher', expanded \? 'is-expanded' : ''\]\.filter\(Boolean\)\.join\(' '\)\}[\s\S]*role="group"/, 'site palette keeps accessible manual color swatches as a grouped fallback control');
+assert.match(languageToggle, /prefersCoarsePalettePointer[\s\S]*setExpanded\(\(current\) => !current\)/, 'touch palette toggles expansion from the active swatch instead of staying fully open');
+assert.match(languageToggle, /aria-expanded=\{expanded\}/, 'site palette exposes expanded state for assistive technology');
 assert.match(wikiSearch, /hideOnPortal\?: boolean;/, 'search component exposes a homepage suppression prop for the topbar instance');
 assert.match(wikiSearch, /if \(hideOnPortal && isPortalPath\(pathname\)\) return null;/, 'topbar search can hide on the portal homepage');
 assert.doesNotMatch(wikiPageTsx, /Qiao Xinbao Academic Wiki/, 'article metadata no longer uses old Academic Wiki suffix');
@@ -1810,8 +1812,11 @@ function footnoteDefs(body) {
   return [...body.matchAll(/^\[\^([^\]]+)\]:/gm)].map((match) => match[1]);
 }
 
-assert.deepEqual(footnoteDefs(home).sort(), ['cuhk-ie', 'neurips-top-reviewer', 'qiao-ciao', 'xinbao-name', 'xinbao-qiao-bridge'].sort(), 'English biography keeps only essential footnotes');
-assert.deepEqual(footnoteDefs(zhHome).sort(), ['cuhk-ie-zh', 'neurips-top-reviewer-zh', 'qiao-ciao-zh', 'xinbao-name-zh', 'xinbao-qiao-bridge-zh'].sort(), 'Chinese biography keeps only essential footnotes');
+assert.deepEqual(footnoteDefs(home).sort(), ['cuhk-ie', 'qiao-ciao', 'xinbao-name', 'xinbao-qiao-bridge'].sort(), 'English biography keeps only essential footnotes');
+assert.match(home, /\*\*\[Top Reviewer at NeurIPS 2026\]\(\/files\/NeurIPS2026_TopReviewer_XinbaoQiao\.pdf\)\*\*/, 'English biography keeps the NeurIPS Top Reviewer PDF as an inline link');
+assert.doesNotMatch(home, /dated October 8, 2026/, 'English biography drops the NeurIPS certificate footnote copy');
+assert.deepEqual(footnoteDefs(zhHome).sort(), ['cuhk-ie-zh', 'qiao-ciao-zh', 'xinbao-name-zh', 'xinbao-qiao-bridge-zh'].sort(), 'Chinese biography keeps only essential footnotes');
+assert.match(zhHome, /\*\*\[NeurIPS 2026 Top Reviewer\]\(\/files\/NeurIPS2026_TopReviewer_XinbaoQiao\.pdf\)\*\*/, 'Chinese biography keeps the NeurIPS Top Reviewer PDF as an inline link');
 assert.deepEqual(footnoteRefs(home).slice(0, 3), ['xinbao-name', 'qiao-ciao', 'xinbao-qiao-bridge'], 'English biography orders visible name footnotes as Xinbao, Ciao, bridge');
 assert.deepEqual(footnoteRefs(zhHome).slice(0, 3), ['xinbao-name-zh', 'qiao-ciao-zh', 'xinbao-qiao-bridge-zh'], 'Chinese biography orders visible name footnotes as Xinbao, Ciao, bridge');
 assert.match(home, /\*\*Xinbao Qiao\*\*\[\^xinbao-name\]\[\^qiao-ciao\]\[\^xinbao-qiao-bridge\]/, 'English biography attaches the reordered name footnotes to the romanized name');
@@ -2207,6 +2212,7 @@ assertCssRule(styles, 'html[data-site-palette="text"]', [
 ], 'pure-text mode keeps the page and structural surfaces white or neutral with readable dark heading text');
 assert.match(styles, /\.site-palette-text \{[\s\S]*border-color: #a2a9b1;[\s\S]*background: #ffffff;[\s\S]*\}/, 'pure-white text swatch remains visible against the palette surface');
 assert.match(styles, /@media \(hover: hover\) and \(pointer: fine\) \{[\s\S]*\.site-palette-switcher \{[\s\S]*width: 30px;[\s\S]*\.site-palette-switcher:hover,[\s\S]*\.site-palette-switcher:focus-within \{[\s\S]*width: 198px;/, 'fine-pointer palette expands far enough for the text theme, six colors, and auto mode');
+assert.match(styles, /@media \(hover: none\), \(pointer: coarse\) \{[\s\S]*\.site-palette-switcher \{[\s\S]*width: 30px;[\s\S]*\.site-palette-switcher\.is-expanded \{[\s\S]*width: 198px;/, 'touch palette collapses to a single swatch and expands only when toggled');
 assert.match(styles, /\.site-palette-button\.is-active \{[\s\S]*order: -1;/, 'active palette swatch remains visible in the collapsed state');
 const expectedPortalTaglines = [
   ['text', 'Q is a lens: search the world, question the model.', '以 Q 为镜：探索世界，追问模型。'],
@@ -2237,7 +2243,11 @@ const signatureInteractionStyle = styles.match(/\.wiki-portal-name-button:hover,
 assert.ok(signatureInteractionStyle, 'homepage signature interaction style block exists');
 assert.match(signatureInteractionStyle[1], /border: 0;[\s\S]*outline: 0;[\s\S]*background: transparent;[\s\S]*box-shadow: none;/, 'homepage signature button removes the long rectangular browser frame in every interaction state');
 assert.match(styles, /\.wiki-portal-name-button::-moz-focus-inner \{[\s\S]*padding: 0;[\s\S]*border: 0;[\s\S]*\}/, 'homepage signature button removes Firefox inner focus border');
-assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.wiki-portal-name \{[\s\S]*font-size: 84px;[\s\S]*\}/, 'homepage keeps the pure text signature compact on mobile');
+assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.wiki-portal-name \{[\s\S]*font-size: clamp\(64px, 18vw, 78px\);[\s\S]*\}/, 'homepage keeps the pure text signature compact on mobile');
+assert.match(styles, /\.chat-xinbao-shell \{[\s\S]*bottom: max\(24px, env\(safe-area-inset-bottom\)\);[\s\S]*max-height: min\(660px, calc\(100dvh - 48px - env\(safe-area-inset-top\) - env\(safe-area-inset-bottom\)\)\);/, 'Chat with Xinbao respects iOS safe-area and dynamic viewport height');
+assert.match(styles, /\.wiki-mobile-nav-dialog\[open\] \{[\s\S]*padding: env\(safe-area-inset-top\) max\(18px, env\(safe-area-inset-right\)\) max\(28px, env\(safe-area-inset-bottom\)\) max\(18px, env\(safe-area-inset-left\)\);/, 'mobile navigation drawer clears notch and home-indicator safe areas');
+assert.match(styles, /padding: 16px 16px calc\(72px \+ env\(safe-area-inset-bottom\)\)/, 'mobile wiki shell leaves bottom room for the palette and home indicator');
+assert.match(layout, /export const viewport[\s\S]*viewportFit: 'cover'/, 'root layout enables viewport-fit=cover so safe-area insets apply on notched phones');
 assert.match(styles, /@media \(max-width: 420px\) \{[\s\S]*\.wiki-portal-name \{[\s\S]*font-size: 72px;[\s\S]*\}[\s\S]*\}[\s\S]*@media \(max-width: 360px\) \{[\s\S]*\.wiki-portal-name \{[\s\S]*font-size: 64px;[\s\S]*\}/, 'homepage pure text signature has fixed small-screen sizes to avoid overflow');
 assert.match(styles, /\.wiki-portal-name-text \{[\s\S]*animation: wiki-name-write 2\.4s cubic-bezier\(\.33, 0, \.2, 1\) \.12s both;[\s\S]*color: var\(--signature-ink\);[\s\S]*\}/, 'homepage name reveal uses a deliberately slower handwriting-like animation speed without image chrome');
 assert.match(styles, /@supports \(\(background-clip: text\) or \(-webkit-background-clip: text\)\) \{[\s\S]*\.wiki-portal-name-text \{[\s\S]*background-size: 100% 100%;[\s\S]*-webkit-background-clip: text;[\s\S]*background-clip: text;[\s\S]*-webkit-text-fill-color: transparent;[\s\S]*\}/, 'homepage name uses a text-ink reveal instead of a clipped rectangle');
@@ -2250,6 +2260,11 @@ assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.wiki-
 assert.doesNotMatch(styles, /\.wiki-portal-emblem/, 'homepage no longer styles an in-page portal icon');
 assert.match(styles, /\.wiki-search-portal input \{[\s\S]*height: 44px;[\s\S]*font-size: 16px;[\s\S]*\}/, 'homepage search input is larger than the topbar search');
 assert.match(styles, /\.wiki-search-portal \.wiki-search-language-select \{[\s\S]*width: 112px;[\s\S]*height: 44px;[\s\S]*\}/, 'homepage search includes a language selector');
+assert.match(wikiSearch, /variant === 'portal' \? 'EN' : 'English'/, 'homepage search uses abbreviated English label to reduce mobile crowding');
+assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.wiki-search-portal \.wiki-search-fields \{[\s\S]*grid-template-areas:[\s\S]*"input submit"[\s\S]*"lang lang"/, 'homepage search stacks language onto a second row at phone widths');
+assert.match(styles, /@media \(max-width: 480px\) \{[\s\S]*\.chat-xinbao-shell \{[\s\S]*height: calc\(100dvh - max\(8px, env\(safe-area-inset-top\)\)\);[\s\S]*border-radius: 14px 14px 0 0;/, 'phone chat opens as a near-fullscreen bottom sheet');
+assert.match(styles, /@media \(max-width: 640px\) \{[\s\S]*Publications[\s\S]*\.wiki-body tr \{[\s\S]*padding: 8px 0;/, 'Publications mobile cards use tighter vertical padding');
+assert.match(styles, /Publications[\s\S]*td:nth-child\(2\) \{[\s\S]*margin-top: 4px;/, 'Publications mobile card meta sits closer to the title');
 assert.match(styles, /\.wiki-search \{[\s\S]*--wiki-search-control-size: 32px;[\s\S]*\}/, 'shared search chrome defines the default square Chat with Xinbao trigger size');
 assert.match(styles, /\.wiki-search-portal \{[\s\S]*--wiki-search-control-size: 44px;[\s\S]*\}/, 'homepage search makes the square Chat with Xinbao trigger match the 44px search bar');
 assert.match(styles, /\.chat-xinbao-trigger \{[\s\S]*width: var\(--wiki-search-control-size\);[\s\S]*height: var\(--wiki-search-control-size\);[\s\S]*flex: 0 0 var\(--wiki-search-control-size\);[\s\S]*\}/, 'Chat with Xinbao trigger keeps a square footprint tied to the active search control height');

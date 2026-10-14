@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { ArticleTabs } from '@/components/ArticleTabs';
 import { LanguageToggle, SitePalette } from '@/components/LanguageToggle';
@@ -47,6 +47,12 @@ export const metadata: Metadata = {
     title: 'Xinbaopedia',
     description: siteDescription
   }
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover'
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {

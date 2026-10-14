@@ -454,9 +454,14 @@ function hiddenQueryPhrases() {
     const parsed = matter(fs.readFileSync(path.join(WIKI_DIR, file), 'utf8'));
     const data = parsed.data as Record<string, unknown>;
     if (data.hidden !== true) continue;
-    for (const value of [titleFor(data, slug), slug.replaceAll('_', ' '), ...stringList(data.aliases)]) {
+    const title = titleFor(data, slug);
+    const candidates = [title, slug.replaceAll('_', ' '), ...stringList(data.aliases)];
+    for (const value of candidates) {
       const phrase = normalizeText(value);
       if (phrase.length >= 4) phrases.add(phrase);
+      // Short title before an English/CJK colon so bilingual paraphrases still match.
+      const prefix = normalizeText(String(value).split(/[:：]/u, 2)[0] || '');
+      if (prefix.length >= 4) phrases.add(prefix);
     }
   }
   cachedHiddenQueryPhrases = [...phrases].sort();

@@ -506,7 +506,7 @@
       "query": "乔鑫宝的信息年龄研究是什么？",
       "expectedAbstain": true,
       "abstentionMode": "no-retrieval",
-      "expectedBlockedReason": null
+      "expectedBlockedReason": "insufficient-evidence"
     },
     {
       "id": "zh-conversational-system-prompt-concept",

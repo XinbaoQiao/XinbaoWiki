@@ -166,8 +166,8 @@ function validateGolden(golden) {
     }
     if (testCase.expectedBlockedReason !== undefined
       && testCase.expectedBlockedReason !== null
-      && !['hidden-page', 'sensitive-query'].includes(testCase.expectedBlockedReason)) {
-      throw new Error(`${testCase.id}: expectedBlockedReason must be hidden-page, sensitive-query, or null.`);
+      && !['hidden-page', 'sensitive-query', 'insufficient-evidence'].includes(testCase.expectedBlockedReason)) {
+      throw new Error(`${testCase.id}: expectedBlockedReason must be hidden-page, sensitive-query, insufficient-evidence, or null.`);
     }
     if (testCase.priorUserMessages !== undefined && (
       !Array.isArray(testCase.priorUserMessages)

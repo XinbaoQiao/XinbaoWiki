@@ -8,10 +8,10 @@ tags:
   - biography
   - 博士生
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-12T04:54:44.543Z'
-content_hash: 'sha256:c588356cc19457ac263c1a5feabbdb71ced304ce3eb4406bd41180abe1d8d4ab'
-reviewed_at: '2026-10-12T04:55:39.589Z'
-review_due: '2027-01-10'
+modified: '2026-10-14T05:06:00.870Z'
+content_hash: 'sha256:4c8e8635b293a8278c5da66b4fe70f85dad5da840e9e71b535d28ef89b3b0243'
+reviewed_at: '2026-10-14T05:08:10.591Z'
+review_due: '2027-01-12'
 language: zh
 aliases:
   - Mr. Ciao
@@ -23,8 +23,8 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-12T04:55:39.589Z'
-  reviewDue: '2027-01-10'
+  reviewedAt: '2026-10-14T05:08:10.591Z'
+  reviewDue: '2027-01-12'
   pendingReview: false
   overdue: false
 retrieval:
@@ -99,7 +99,7 @@ ICML 2026 论文[When Sample Selection Bias Precipitates Model Collapse](./When_
 
 ## 学术服务
 
-- **2026 年**：担任 ICML、NeurIPS 和 AAAI 审稿人。获 **NeurIPS 2026 Top Reviewer** 荣誉。[^neurips-top-reviewer-zh]
+- **2026 年**：担任 ICML、NeurIPS 和 AAAI 审稿人。获 **[NeurIPS 2026 Top Reviewer](/files/NeurIPS2026_TopReviewer_XinbaoQiao.pdf)** 荣誉。
 - **2025 年**：担任 NeurIPS、ICLR、AAAI 和 IEEE TNNLS 审稿人。
 
 ## 参见
@@ -126,5 +126,3 @@ ICML 2026 论文[When Sample Selection Bias Precipitates Model Collapse](./When_
 [^qiao-ciao-zh]: “乔”的繁体为“喬”。其昵称中，“喬”与“ciao”发音一致，因此也可以称乔鑫宝为“Mr. Ciao”；其公开 Hugging Face 账号也使用 [MrCiao](https://huggingface.co/MrCiao)。
 
 [^cuhk-ie-zh]: 香港中文大学信息工程系在[官方部门介绍](https://www.ie.cuhk.edu.hk/about-the-department/)中将研究范围概括为现实应用中的信息生成、通信、存储与处理；香港中文大学研究院也在工程学院项目列表中列出 [MPhil-PhD in Information Engineering](https://www.gs.cuhk.edu.hk/programmes/engineering)。
-
-[^neurips-top-reviewer-zh]: NeurIPS 2026 [审稿证明](/files/NeurIPS2026_TopReviewer_XinbaoQiao.pdf)，签发日期为 2026 年 10 月 8 日。

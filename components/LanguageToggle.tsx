@@ -1,7 +1,7 @@
 'use client';
 
 import type { CSSProperties } from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 function withBasePath(pathname: string) {
@@ -120,8 +120,15 @@ function updateSiteFavicon(href: string) {
   link.href = href;
 }
 
+function prefersCoarsePalettePointer() {
+  return typeof window !== 'undefined'
+    && window.matchMedia('(hover: none), (pointer: coarse)').matches;
+}
+
 export function SitePalette({ icons }: SitePaletteProps) {
   const [mode, setMode] = useState<SitePaletteMode>('auto');
+  const [expanded, setExpanded] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const savedMode = window.localStorage.getItem(sitePaletteStorageKey);
@@ -146,8 +153,30 @@ export function SitePalette({ icons }: SitePaletteProps) {
     return () => window.clearInterval(intervalId);
   }, [icons, mode]);
 
+  useEffect(() => {
+    if (!expanded) return;
+
+    function onPointerDown(event: PointerEvent) {
+      if (!rootRef.current?.contains(event.target as Node)) {
+        setExpanded(false);
+      }
+    }
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') setExpanded(false);
+    }
+
+    document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [expanded]);
+
   const chooseMode = (nextMode: SitePaletteMode) => {
     setMode(nextMode);
+    setExpanded(false);
 
     if (nextMode === 'auto') {
       window.localStorage.removeItem(sitePaletteStorageKey);
@@ -158,7 +187,13 @@ export function SitePalette({ icons }: SitePaletteProps) {
   };
 
   return (
-    <div className="site-palette-switcher" aria-label="Site color theme" role="group">
+    <div
+      ref={rootRef}
+      aria-expanded={expanded}
+      aria-label="Site color theme"
+      className={['site-palette-switcher', expanded ? 'is-expanded' : ''].filter(Boolean).join(' ')}
+      role="group"
+    >
       {sitePaletteOptions.map((option) => {
         const pressed = mode === option.mode;
         const active = mode === option.mode;
@@ -172,7 +207,14 @@ export function SitePalette({ icons }: SitePaletteProps) {
               .filter(Boolean)
               .join(' ')}
             key={option.mode}
-            onClick={() => chooseMode(option.mode)}
+            onClick={() => {
+              if (active && prefersCoarsePalettePointer()) {
+                setExpanded((current) => !current);
+                return;
+              }
+
+              chooseMode(option.mode);
+            }}
             style={style}
             title={option.title}
             type="button"

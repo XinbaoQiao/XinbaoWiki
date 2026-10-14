@@ -283,7 +283,7 @@ export function WikiSearch({
               }}
               value={activeLanguage}
             >
-              <option value="en">English</option>
+              <option value="en">{variant === 'portal' ? 'EN' : 'English'}</option>
               <option value="zh">中文</option>
             </select>
           )}
