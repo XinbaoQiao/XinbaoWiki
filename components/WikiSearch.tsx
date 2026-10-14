@@ -271,7 +271,28 @@ export function WikiSearch({
             type="search"
             value={query}
           />
-          {showLanguageSelect && (
+          {showLanguageSelect && variant === 'portal' ? (
+            <div aria-label={copy.languageAria} className="wiki-search-language-seg" role="group">
+              {([
+                ['en', 'EN'],
+                ['zh', '中文']
+              ] as const).map(([code, label]) => (
+                <button
+                  aria-pressed={activeLanguage === code}
+                  className={['wiki-search-language-seg-button', activeLanguage === code ? 'is-active' : ''].filter(Boolean).join(' ')}
+                  key={code}
+                  onClick={() => {
+                    setSelectedLanguage(code);
+                    onLanguageChange?.(code);
+                    setOpen(false);
+                  }}
+                  type="button"
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          ) : showLanguageSelect ? (
             <select
               aria-label={copy.languageAria}
               className="wiki-search-language-select"
@@ -283,10 +304,10 @@ export function WikiSearch({
               }}
               value={activeLanguage}
             >
-              <option value="en">{variant === 'portal' ? 'EN' : 'English'}</option>
+              <option value="en">English</option>
               <option value="zh">中文</option>
             </select>
-          )}
+          ) : null}
           <button className="wiki-search-submit" type="submit">{copy.submit}</button>
         </div>
       </form>
