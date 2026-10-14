@@ -773,7 +773,7 @@ export async function POST(request: NextRequest) {
     observe('deterministic-abstention');
     return jsonResponse(
       {
-        reply: withXinbaoSignature(deterministicAbstentionReply(message, language), language, 'plain'),
+        reply: withXinbaoSignature(deterministicAbstentionReply(message, language, retrieval.blockedReason), language, 'plain'),
         sources: [],
         remaining: Math.max(0, DAILY_LIMIT - dailyCount),
         limit: DAILY_LIMIT,

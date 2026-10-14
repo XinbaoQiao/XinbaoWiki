@@ -319,7 +319,18 @@ export async function resolveConversationalReply({
       };
 }
 
-export function deterministicAbstentionReply(_message: string, language: WikiChatResponseLanguage) {
+export type WikiChatAbstentionReason = 'hidden-page' | 'sensitive-query' | 'insufficient-evidence' | null;
+
+export function deterministicAbstentionReply(
+  _message: string,
+  language: WikiChatResponseLanguage,
+  blockedReason: WikiChatAbstentionReason = 'sensitive-query'
+) {
+  if (blockedReason === 'insufficient-evidence') {
+    return language === 'zh'
+      ? '公开 wiki 里我还不能足够有把握地回答这一点，所以不会编造研究方向或论文列表。可以打开研究/论文页面，或问得更具体一些（比如研究方向、先看哪些论文、有哪些项目）'
+      : 'I do not have enough public Xinbaopedia wiki evidence to answer that confidently, so I will not invent research directions or paper lists. Open the Research or Publications pages, or ask more specifically (for example: research interests, which papers to start with, or projects).';
+  }
   return language === 'zh'
     ? '这个请求涉及我不能提供的非公开、敏感或受保护信息；可以改问公开的研究、论文、项目、学术经历或联系方式'
     : 'I cannot provide non-public, sensitive, or otherwise protected information; you can ask about public research, papers, projects, academic background, or contact details instead';

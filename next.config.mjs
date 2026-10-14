@@ -17,6 +17,14 @@ const nextConfig = {
   async headers() {
     return [{ source: '/:path*', headers: securityHeaders }];
   },
+  async redirects() {
+    return [
+      { source: '/publications', destination: '/wiki/Publications/', permanent: true },
+      { source: '/publications/', destination: '/wiki/Publications/', permanent: true },
+      { source: '/zh/publications', destination: '/wiki/Publications_zh/', permanent: true },
+      { source: '/zh/publications/', destination: '/wiki/Publications_zh/', permanent: true },
+    ];
+  },
   ...(basePath ? { basePath, assetPrefix: `${basePath}/` } : {}),
 };
 export default nextConfig;

@@ -48,7 +48,7 @@ export type WikiRetrievalResult = {
   evidenceScore: number;
   queryCoverage: number;
   shouldAbstain: boolean;
-  blockedReason: 'hidden-page' | 'sensitive-query' | null;
+  blockedReason: 'hidden-page' | 'sensitive-query' | 'insufficient-evidence' | null;
 };
 
 type RetrievalOptions = {
@@ -145,10 +145,10 @@ const ENGLISH_CONTEXT_REFERENCE_PATTERN = /^(?:(?:and )?(?:this|that)(?: one| pa
 const CHINESE_CONTEXT_REFERENCE_PATTERN = /^(?:这篇|这个|这项工作|这项研究|这个项目|它)(?:呢|讲(?:了)?(?:啥|什么)|是什么|是做什么的|做什么|有什么用|解决什么|解决了什么|为什么重要)?$/u;
 const ENGLISH_PROFILE_INTENT_PATTERN = /^(?:tell me about (?:yourself|xinbao(?: qiao)?)|introduce (?:yourself|xinbao(?: qiao)?)|who (?:are you|is xinbao(?: qiao)?)|give me (?:your|xinbao(?: qiao)? s) introduction)$/u;
 const ENGLISH_STUDY_PROFILE_PATTERN = new RegExp(String.raw`^(?:who (?:are you|is xinbao(?: qiao)?) and )?(?:where (?:is|are) ${ENGLISH_PERSON} (?:currently )?studying|where (?:does|do) ${ENGLISH_PERSON} (?:currently )?study|(?:at )?which university (?:is|are) ${ENGLISH_PERSON} (?:currently )?studying at)$`, 'u');
-const ENGLISH_RECENT_WORK_INTENT_PATTERN = /^(?:whatever xinbao(?: qiao)? is cooking up lately|what (?:is|s) (?:xinbao(?: qiao)?|he) (?:working on|cooking up|researching)(?: lately| recently| now)?|what are you (?:working on|cooking up|researching)(?: lately| recently| now)?|what has (?:xinbao(?: qiao)?|he|you) been working on(?: lately| recently)?|what is (?:xinbao(?: qiao)?|he) up to(?: lately| recently| now)?)$/u;
+const ENGLISH_RECENT_WORK_INTENT_PATTERN = /^(?:whatever xinbao(?: qiao)? is cooking up lately|what (?:is|s) (?:xinbao(?: qiao)?|he) (?:working on|cooking up|researching)(?: lately| recently| now)?|what (?:does|do) (?:xinbao(?: qiao)?|he|you) work on(?: lately| recently| now)?|what are you (?:working on|cooking up|researching)(?: lately| recently| now)?|what has (?:xinbao(?: qiao)?|he|you) been working on(?: lately| recently)?|what is (?:xinbao(?: qiao)?|he) up to(?: lately| recently| now)?)$/u;
 const ENGLISH_DOCTORAL_WORK_INTENT_PATTERN = /^(?:what did (?:xinbao(?: qiao)?|he|you) work on (?:during|in) (?:his|your|the) phd|what (?:is|was) (?:xinbao(?: qiao)? s|his|your) phd (?:work|research)(?: about)?|what (?:does|did) (?:xinbao(?: qiao)?|he|you) research (?:during|in) (?:his|your|the) phd)$/u;
-const ENGLISH_RESEARCH_OVERVIEW_INTENT_PATTERN = /^(?:what (?:are|is) (?:xinbao(?: qiao)?(?: s)?|qiao xinbao(?: s)?|his|your) research (?:interests?|directions?|focus|areas?)|what does (?:xinbao(?: qiao)?|he|you) research|tell me about (?:xinbao(?: qiao)?(?: s)?|his|your) research)$/u;
-const ENGLISH_PUBLICATIONS_INTENT_PATTERN = /^(?:which papers should i (?:start|begin) with|what (?:are|is) (?:xinbao(?: qiao)?(?: s)?|qiao xinbao(?: s)?|his|your) (?:key |main |representative )?(?:papers|publications)|show me (?:xinbao(?: qiao)?(?: s)?|his|your )?(?:papers|publications)|recommend (?:some )?(?:papers|publications)(?: to (?:start|begin) with)?)$/u;
+const ENGLISH_RESEARCH_OVERVIEW_INTENT_PATTERN = /^(?:(?:give me |show me )?(?:a |an )?(?:quick )?research overview|what (?:are|is) (?:xinbao(?: qiao)?(?: s)?|qiao xinbao(?: s)?|his|your) research (?:interests?|directions?|focus|areas?|overview)|what does (?:xinbao(?: qiao)?|he|you) research|tell me about (?:xinbao(?: qiao)?(?: s)?|his|your) research(?: overview)?)$/u;
+const ENGLISH_PUBLICATIONS_INTENT_PATTERN = /^(?:which papers should i (?:start|begin) with|what (?:are|is) (?:xinbao(?: qiao)?(?: s)?|qiao xinbao(?: s)?|his|your) (?:key |main |representative |recent )?(?:papers|publications)|(?:show me |list |recommend )(?:some )?(?:xinbao(?: qiao)?(?: s)?|his|your )?(?:key |main |representative |recent )?(?:papers|publications)(?: to (?:start|begin) with)?|tell me about (?:(?:xinbao(?: qiao)?(?: s)?|his|your) )?(?:papers|publications)|recent (?:papers|publications))$/u;
 const ENGLISH_PROJECTS_INTENT_PATTERN = /^(?:what projects has (?:xinbao(?: qiao)?|he|you) worked on|what (?:are|is) (?:xinbao(?: qiao)?(?: s)?|qiao xinbao(?: s)?|his|your) projects|tell me about (?:xinbao(?: qiao)?(?: s)?|his|your) projects|which projects (?:has|have) (?:xinbao(?: qiao)?|he|you) (?:worked on|done))$/u;
 const ENGLISH_PUBLIC_CONTACT_INTENT_PATTERN = /^(?:(?:what(?: is|s)|give me|show me|share) (?:xinbao(?: qiao)? s|qiao xinbao s|his|your) (?:(?:public|work|academic) )?(?:email(?: address)?|contact (?:information|info|details))|how (?:can|do) i contact (?:xinbao(?: qiao)?|qiao xinbao|him|you))$/u;
 const ENGLISH_GENERAL_CONVERSATION_PATTERN = /^(?:what is (?:a |an )?(?:system prompt|authentication credential)|how are (?:system|developer) prompts used(?: in ai systems)?|how are environment variables used|how does medical diagnosis work)$/u;
@@ -315,8 +315,8 @@ function homepageIntent(query: string, language: WikiRetrievalLanguage): Bounded
 
   const compact = normalized.replace(/\s+/g, '');
   if (/^(?:介绍一下|说说)(?:你自己|乔鑫宝|鑫宝)$|^(?:你|乔鑫宝|鑫宝)是谁$/u.test(compact)) return 'profile';
-  if (/^(?:(?:乔鑫宝|鑫宝|他|你)的)?研究(?:方向|兴趣|领域|内容|主题)?(?:是什么|有哪些|呢)?$|^(?:介绍一下|说说)(?:一下)?(?:乔鑫宝|鑫宝)?的?研究(?:方向|兴趣|领域)?$/u.test(compact)) return 'research-overview';
-  if (/^(?:有哪些|哪些)?(?:代表性|主要|重要)?论文(?:可以|能|值得)?(?:先看|看看|读|读读)?(?:呢)?$|^(?:(?:乔鑫宝|鑫宝|他|你)的)?(?:论文|发表)(?:有哪些|是什么)?$/u.test(compact)) return 'publications';
+  if (/^(?:(?:乔鑫宝|鑫宝|他|你)的)?研究(?:方向|兴趣|领域|内容|主题|概览)?(?:是什么|有哪些|呢)?$|^(?:介绍一下|说说)(?:一下)?(?:乔鑫宝|鑫宝)?的?研究(?:方向|兴趣|领域|概览)?$/u.test(compact)) return 'research-overview';
+  if (/^(?:有哪些|哪些)?(?:近期|最近|代表性|主要|重要)?(?:论文|发表)(?:可以|能|值得)?(?:先看|看看|读|读读)?(?:呢)?$|^(?:(?:乔鑫宝|鑫宝|他|你)的)?(?:近期|最近)?(?:论文|发表)(?:有哪些|是什么|呢)?$|^(?:近期|最近)有什么论文$/u.test(compact)) return 'publications';
   if (/^(?:(?:乔鑫宝|鑫宝|他|你)(?:做过|做了|在做)?哪些项目|有哪些项目|(?:介绍一下|说说)(?:乔鑫宝|鑫宝)?的?项目)$/u.test(compact)) return 'projects';
   if (/^(?:看看)?(?:你|鑫宝|乔鑫宝|他)?(?:最近|现在)(?:又)?(?:在)?(?:折腾|搞|做|研究)(?:什么|啥)(?:工作|研究|项目|论文)?$/u.test(compact)) return 'recent-work';
   if (/^(?:你|鑫宝|乔鑫宝|他)?(?:在)?博士(?:期间|阶段)(?:主要)?(?:在)?(?:做|搞|研究)(?:什么|啥)(?:工作|研究|项目)?$/u.test(compact)) return 'doctoral-work';
@@ -867,6 +867,31 @@ function boundedRetrievalResult(index: WikiRetrievalIndex, selected: ScoredChunk
   };
 }
 
+function isXinbaoPublicTopicQuery(query: string, language: WikiRetrievalLanguage) {
+  const normalized = normalizeText(query);
+  if (language === 'en') {
+    const topic = /\b(?:research(?:es|ing)?|paper|papers|publication|publications|project|projects|phd|doctoral)\b/u.test(normalized)
+      || /\b(?:working on|work on|cooking up|up to)\b/u.test(normalized);
+    if (!topic) return false;
+    const personCue = /\b(?:xinbao|qiao|he|his|him|you|your)\b/u.test(normalized);
+    const homepageStyle = /^(?:(?:give me |show me )?(?:a |an )?(?:quick )?)?(?:research overview|recent (?:papers|publications)|representative (?:papers|publications))$/u.test(normalized)
+      || /^tell me about (?:his |your )?(?:papers|publications|projects|research)\b/u.test(normalized)
+      || /^what (?:does|do) (?:he|you) work on\b/u.test(normalized)
+      || /^recent (?:papers|publications)$/u.test(normalized);
+    return personCue || homepageStyle;
+  }
+
+  const compact = normalized.replace(/\s+/g, '');
+  if (isExplicitGeneralConversation(query, language)) return false;
+  const topic = /(?:研究(?:方向|兴趣|领域|概览|内容|主题)?|论文|发表|项目|博士)/u.test(compact);
+  if (!topic) return false;
+  const personCue = /(?:乔鑫宝|鑫宝|他|你)/u.test(compact);
+  const homepageStyle = /^(?:(?:乔鑫宝|鑫宝|他|你)的)?(?:研究(?:方向|兴趣|领域|概览|内容|主题)?|(?:近期|最近|代表性)?(?:论文|发表)|项目)(?:是什么|有哪些|呢)?$/u.test(compact)
+    || /^(?:介绍一下|说说)(?:一下)?(?:乔鑫宝|鑫宝)?的?(?:研究|论文|项目)/u.test(compact)
+    || /^(?:近期|最近)有什么论文$/u.test(compact);
+  return personCue || homepageStyle;
+}
+
 export function retrieveWikiContext(query: string, options: RetrievalOptions): WikiRetrievalResult {
   const index = getWikiRetrievalIndex();
   if (targetsHiddenPage(query)) return emptyRetrievalResult(index, 'hidden-page');
@@ -916,6 +941,9 @@ export function retrieveWikiContext(query: string, options: RetrievalOptions): W
   const shouldAbstain = selected.length === 0 || weakEvidence;
   const groundedSelection = shouldAbstain ? [] : selected;
   const packed = contextForSources(groundedSelection);
+  const blockedReason = shouldAbstain && isXinbaoPublicTopicQuery(query, options.language)
+    ? 'insufficient-evidence'
+    : null;
 
   return {
     indexVersion: index.indexVersion,
@@ -935,7 +963,7 @@ export function retrieveWikiContext(query: string, options: RetrievalOptions): W
     evidenceScore: Number(evidenceScore.toFixed(3)),
     queryCoverage: Number(queryCoverage.toFixed(3)),
     shouldAbstain,
-    blockedReason: null
+    blockedReason
   };
 }
 

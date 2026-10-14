@@ -182,6 +182,8 @@ const assetProvenance = fs.readFileSync(path.join(root, 'ASSET_PROVENANCE.md'), 
 const contributingGuide = fs.readFileSync(path.join(root, 'CONTRIBUTING.md'), 'utf8');
 const codeOfConduct = fs.readFileSync(path.join(root, 'CODE_OF_CONDUCT.md'), 'utf8');
 const nextConfig = fs.readFileSync(path.join(root, 'next.config.mjs'), 'utf8');
+assert.match(nextConfig, /async redirects\(\)[\s\S]*source: '\/publications\/'[\s\S]*destination: '\/wiki\/Publications\/'/, 'publications soft-404 path permanently redirects to wiki Publications');
+assert.match(nextConfig, /source: '\/zh\/publications\/'[\s\S]*destination: '\/wiki\/Publications_zh\/'/, 'zh publications soft-404 path permanently redirects to wiki Publications_zh');
 const indexNowScript = fs.readFileSync(path.join(root, 'scripts/submit-indexnow.mjs'), 'utf8');
 assertFile('components/LanguageToggle.tsx');
 assertFile('components/ArticleTabs.tsx');
@@ -653,6 +655,28 @@ const { getWikiRetrievalIndex, retrieveWikiContext } = await import('../lib/wiki
   const enProjects = retrieveWikiContext('What projects has Xinbao worked on?', { language: 'en', limit: 6 });
   assert.equal(enProjects.shouldAbstain, false, 'English Projects chip stays grounded');
   assert.ok(enProjects.sources.some((source) => source.slug === 'Projects'), 'English Projects chip hits Projects');
+
+  // Near-synonym research/publication queries must ground instead of conversational invention.
+  const enRecentPubs = retrieveWikiContext('Recent publications', { language: 'en', limit: 6 });
+  assert.equal(enRecentPubs.shouldAbstain, false, 'Recent publications near-synonym stays grounded');
+  assert.ok(enRecentPubs.sources.some((source) => source.slug === 'Publications'), 'Recent publications hits Publications');
+
+  const enTellPapers = retrieveWikiContext('Tell me about his papers', { language: 'en', limit: 6 });
+  assert.equal(enTellPapers.shouldAbstain, false, 'Tell me about his papers near-synonym stays grounded');
+  assert.ok(enTellPapers.sources.some((source) => source.slug === 'Publications'), 'Tell me about his papers hits Publications');
+
+  const enWorkLately = retrieveWikiContext('What does he work on lately', { language: 'en', limit: 6 });
+  assert.equal(enWorkLately.shouldAbstain, false, 'What does he work on lately near-synonym stays grounded');
+  assert.equal(enWorkLately.blockedReason, null, 'grounded recent-work near-synonym is not blocked');
+
+  const zhOverview = retrieveWikiContext('研究概览', { language: 'zh', limit: 6 });
+  assert.equal(zhOverview.shouldAbstain, false, 'Chinese research-overview near-synonym stays grounded');
+  assert.ok(zhOverview.sources.some((source) => source.slug === 'Research_zh'), 'Chinese research overview hits Research_zh');
+
+  const unsupportedTopic = retrieveWikiContext('List Xinbao Qiao papers about quantum teleportation', { language: 'en', limit: 6 });
+  assert.equal(unsupportedTopic.shouldAbstain, true, 'unsupported paper-topic paraphrase abstains instead of weak grounding');
+  assert.equal(unsupportedTopic.blockedReason, 'insufficient-evidence', 'unsupported public-topic paraphrase uses insufficient-evidence abstention, not conversational invention');
+  assert.equal(unsupportedTopic.sources.length, 0, 'insufficient-evidence abstention clears sources');
 }
 const {
   WIKI_CHAT_RESPONSE_POLICY_VERSION,
@@ -664,6 +688,21 @@ const {
   validateConversationalReplyResult,
 } = await import('../lib/wiki-chat-response.ts');
 assert.equal(WIKI_CHAT_RESPONSE_POLICY_VERSION, 'grounded-conversation-v4', 'chat response policy exposes a stable release version');
+assert.match(
+  deterministicAbstentionReply('x', 'en', 'insufficient-evidence'),
+  /will not invent research directions|Research or Publications/i,
+  'insufficient-evidence abstention copy refuses fabricated research directions'
+);
+assert.match(
+  deterministicAbstentionReply('x', 'zh', 'insufficient-evidence'),
+  /不会编造研究方向|研究\/论文/,
+  'Chinese insufficient-evidence abstention copy refuses fabricated research directions'
+);
+assert.match(
+  deterministicAbstentionReply("What is Xinbao Qiao's passport number?", 'en', 'sensitive-query'),
+  /non-public, sensitive, or otherwise protected/i,
+  'sensitive-query abstention copy stays on the protected-information wording'
+);
 const citationSources = [
   { chunkId: 'Alpha#overview', slug: 'Alpha', title: 'Alpha', section: 'Overview', href: '/wiki/Alpha/#overview' },
   { chunkId: 'Beta#results', slug: 'Beta', title: 'Beta', section: 'Results', href: '/wiki/Beta/#results' },
@@ -1591,7 +1630,7 @@ assert.doesNotMatch(providerRequestFunction, /discarded|firstAttempt|firstReply|
 assert.match(chatRoute, /CHAT_BACKEND_VERSION = 'xinbao-chat-api-v7'/, 'chat API exposes the long-voice false-positive repair backend version');
 assert.match(chatRoute, /responsePolicyVersion: WIKI_CHAT_RESPONSE_POLICY_VERSION[\s\S]*responseMode[\s\S]*citedChunks/, 'chat API returns versioned response-policy metadata');
 assert.match(chatRoute, /const responseMode: ChatResponseMode = retrieval\.blockedReason[\s\S]*'deterministic-abstention'[\s\S]*retrieval\.shouldAbstain[\s\S]*'model-conversational'[\s\S]*'model-grounded'/, 'chat API maps protected, weak-evidence, and grounded requests to three explicit modes');
-assert.match(chatRoute, /if \(responseMode === 'deterministic-abstention'\)[\s\S]*deterministicAbstentionReply\(message, language\)[\s\S]*responseMetadata\(0, 0\)/, 'protected requests are answered deterministically before provider setup');
+assert.match(chatRoute, /if \(responseMode === 'deterministic-abstention'\)[\s\S]*deterministicAbstentionReply\(message, language, retrieval\.blockedReason\)[\s\S]*responseMetadata\(0, 0\)/, 'protected requests are answered deterministically before provider setup');
 assert.match(chatRoute, /if \(responseMode === 'model-conversational'\)[\s\S]*resolveConversationalReply\(\{/, 'weak wiki evidence enters the tested one-call conversation resolver');
 assert.match(chatRoute, /const providerAbort = linkedRequestController\(request\.signal, REQUEST_TIMEOUT_MS\)[\s\S]*resolveConversationalReply\(\{[\s\S]*requestCompletion,[\s\S]*signal: providerAbort\.signal,[\s\S]*systemPrompt[\s\S]*\}\)/, 'conversation uses the shared linked request deadline signal');
 assert.match(chatRoute, /reply: withXinbaoSignature\(conversationalResult\.reply, language, 'casual'\)[\s\S]*sources: \[\][\s\S]*responseMetadata\(0, providerAttempts\)/, 'conversation returns a validated uncited provider reply');
@@ -1622,7 +1661,7 @@ assert.match(chatRoute, /tone !== 'casual'[\s\S]*language === 'zh' \? '喵~' : '
 assert.match(chatRoute, /meow~/, 'chat API appends the English meow signature on English pages');
 assert.match(chatRoute, /ERROR_COPY[\s\S]*dailyLimit[\s\S]*cooldown[\s\S]*unavailable[\s\S]*今日消息次数已用完/, 'chat API localizes quota and availability errors');
 assert.match(chatRoute, /localizedError\(language, 'cooldown'\)[\s\S]*localizedError\(language, 'hourly'\)/, 'chat API returns bilingual cooldown and hourly limit errors');
-assert.match(chatRoute, /withXinbaoSignature\(deterministicAbstentionReply\(message, language\), language, 'plain'\)/, 'protected abstention replies stay plain without casual sign-off');
+assert.match(chatRoute, /withXinbaoSignature\(deterministicAbstentionReply\(message, language, retrieval\.blockedReason\), language, 'plain'\)/, 'protected abstention replies stay plain without casual sign-off and use blockedReason copy');
 
 assert.match(chatRoute, /喵~/, 'chat API appends the Chinese meow signature on Chinese pages');
 assert.match(chatRoute, /Authorization: `Bearer \$\{apiKey\}`/, 'chat API proxies authorization only on the server');
@@ -1651,7 +1690,8 @@ assert.match(chatKnowledge, /Respond helpfully to greetings, casual conversation
 assert.match(chatKnowledge, /pseudonymous server-side usage metadata[\s\S]*salted one-way question fingerprint[\s\S]*Chat metadata and application logs do not store raw question text[\s\S]*maintainer-only site visit records[\s\S]*trusted request IP[\s\S]*30 calendar days[\s\S]*current user message is still sent to the configured model provider[\s\S]*not anonymous data/, 'persona accurately distinguishes private visit IP retention, chat telemetry and upstream processing');
 assert.doesNotMatch(chatKnowledge, /\u8dd1\u5802/, 'persona removes the disallowed catchphrase');
 assert.match(chatKnowledge, /must not claim to be the real Xinbao Qiao/, 'persona prevents impersonating Xinbao');
-assert.match(chatKnowledge, /Do not invent facts, preferences, opinions, current activities, or private details about Xinbao Qiao/, 'persona prevents unsupported personal claims in conversational mode');
+assert.match(chatKnowledge, /Do not invent facts, preferences, opinions, current activities, research directions, paper topics, venues, project themes, or private details about Xinbao Qiao/, 'persona prevents unsupported personal and research claims in conversational mode');
+assert.match(chatKnowledge, /Never fabricate an academic overview when local wiki evidence is missing/, 'persona forbids fabricated academic overviews without wiki evidence');
 assert.match(chatKnowledge, /XINBAO_CHAT_VOICE_STYLE/, 'chat knowledge builder supports a server-only private voice style layer');
 assert.match(chatKnowledge, /private voice notes/, 'persona prevents revealing private voice notes');
 assert.match(chatReadme, /Vercel deployment/, 'chat documentation explains Vercel deployment');

@@ -32,7 +32,7 @@ export function getXinbaoChatSystemPrompt(
     : [
         'This is a normal conversational answer because local Xinbaopedia retrieval did not provide sufficient evidence for a grounded answer.',
         'Respond helpfully to greetings, casual conversation, and general-knowledge questions. You may use stable general knowledge, but do not pretend to have live browsing, real-time observations, or current external verification.',
-        'Do not invent facts, preferences, opinions, current activities, or private details about Xinbao Qiao. If the user asks an unsupported personal question, explain the precise uncertainty naturally and, when useful, ask a brief clarifying question.',
+        'Do not invent facts, preferences, opinions, current activities, research directions, paper topics, venues, project themes, or private details about Xinbao Qiao. Never fabricate an academic overview when local wiki evidence is missing. If the user asks an unsupported personal or research question, explain the precise uncertainty naturally, point them to the public Research/Publications pages when useful, and ask at most one brief clarifying question.',
         'Do not emit numbered source markers such as [1]. No wiki sources will be attached to this response.'
       ];
 
