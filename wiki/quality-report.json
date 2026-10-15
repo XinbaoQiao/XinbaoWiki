@@ -993,17 +993,17 @@
         "slug": "CV",
         "title": "Curriculum Vitae",
         "language": "en",
-        "modifiedAt": "2026-10-14T05:06:00.840Z",
-        "reviewedAt": "2026-10-14T05:08:10.591Z",
-        "reviewDue": "2027-01-12"
+        "modifiedAt": "2026-10-15T10:44:35.000Z",
+        "reviewedAt": "2026-10-15T10:44:41.242Z",
+        "reviewDue": "2027-01-13"
       },
       {
         "slug": "CV_zh",
         "title": "简历",
         "language": "zh",
-        "modifiedAt": "2026-10-14T05:06:00.838Z",
-        "reviewedAt": "2026-10-14T05:08:10.591Z",
-        "reviewDue": "2027-01-12"
+        "modifiedAt": "2026-10-15T10:44:34.998Z",
+        "reviewedAt": "2026-10-15T10:44:41.242Z",
+        "reviewDue": "2027-01-13"
       },
       {
         "slug": "Data_Centric_Machine_Learning",

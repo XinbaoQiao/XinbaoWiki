@@ -250,10 +250,10 @@
         "cv-summary"
       ],
       "timestamp": "2026-07-02T19:37:18+08:00",
-      "modifiedAt": "2026-10-14T05:06:00.840Z",
-      "contentHash": "sha256:b3e1b918876988936db63d76e47b8182b3802b4636d6a7900414b0977fc35760",
-      "reviewedAt": "2026-10-14T05:08:10.591Z",
-      "reviewDue": "2027-01-12",
+      "modifiedAt": "2026-10-15T10:44:35.000Z",
+      "contentHash": "sha256:67403a3b04a7818ecf5b1c3cfcd95b623e9dea3af6a5ac3d00c8703f1aa4d804",
+      "reviewedAt": "2026-10-15T10:44:41.242Z",
+      "reviewDue": "2027-01-13",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-0642a11373a83c47",
@@ -304,7 +304,7 @@
       "retrieval": {
         "documentId": "wiki:CV",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:b3e1b918876988936db63d76e47b8182b3802b4636d6a7900414b0977fc35760",
+        "contentHash": "sha256:67403a3b04a7818ecf5b1c3cfcd95b623e9dea3af6a5ac3d00c8703f1aa4d804",
         "textFields": [
           "title",
           "aliases",
@@ -3762,10 +3762,10 @@
         "cv-摘要"
       ],
       "timestamp": "2026-07-02T19:37:18+08:00",
-      "modifiedAt": "2026-10-14T05:06:00.838Z",
-      "contentHash": "sha256:193abd76b2ca1a3882bf170f4099ca4bd12de08da7f84591d359d6048da2fd17",
-      "reviewedAt": "2026-10-14T05:08:10.591Z",
-      "reviewDue": "2027-01-12",
+      "modifiedAt": "2026-10-15T10:44:34.998Z",
+      "contentHash": "sha256:95b380a7828aa9d57367b12c01456d90b63da840dc2588c43ec9c8d3438222c3",
+      "reviewedAt": "2026-10-15T10:44:41.242Z",
+      "reviewDue": "2027-01-13",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-0642a11373a83c47",
@@ -3816,7 +3816,7 @@
       "retrieval": {
         "documentId": "wiki:CV_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:193abd76b2ca1a3882bf170f4099ca4bd12de08da7f84591d359d6048da2fd17",
+        "contentHash": "sha256:95b380a7828aa9d57367b12c01456d90b63da840dc2588c43ec9c8d3438222c3",
         "textFields": [
           "title",
           "aliases",

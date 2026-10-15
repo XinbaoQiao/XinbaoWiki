@@ -53,11 +53,22 @@ export function classifyWikiHref(rawHref: string, options?: { applyBasePath?: bo
   return { kind: 'external', href };
 }
 
-export function wikiLinkClassName(kind: WikiHrefKind, extra?: string | undefined) {
-  const base =
-    kind === 'local' ? 'wiki-link-local'
-      : kind === 'page' ? 'wiki-link-page'
-        : kind === 'external' ? 'external'
-          : undefined;
-  return [base, extra].filter(Boolean).join(' ') || undefined;
+function isPdfHref(href: string | undefined) {
+  if (!href) return false;
+  const pathOnly = href.split(/[?#]/)[0] || '';
+  return /\.pdf$/i.test(pathOnly);
+}
+
+export function wikiLinkClassName(kind: WikiHrefKind, extra?: string | undefined, href?: string) {
+  const classes: string[] = [];
+  if (kind === 'local') classes.push('wiki-link-local');
+  else if (kind === 'page') classes.push('wiki-link-page');
+  else if (kind === 'external') classes.push('external');
+
+  if ((kind === 'external' || kind === 'asset') && isPdfHref(href)) {
+    classes.push('wiki-link-pdf');
+  }
+
+  if (extra) classes.push(extra);
+  return classes.length ? classes.join(' ') : undefined;
 }

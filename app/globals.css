@@ -35,7 +35,7 @@
   --sidebar-width: 192px;
   --infobox-width: 300px;
   --article-gap: 28px;
-  /* Type scale — Chinese readable floor ~12px (--fs-xs). */
+  /* Type scale -- Chinese readable floor ~12px (--fs-xs). */
   --fs-xs: 12px;
   --fs-sm: 12.5px;
   --fs-ui: 13px;
@@ -247,6 +247,59 @@ a.external::after {
   vertical-align: baseline;
 }
 
+
+/* PDF assets (/files/*.pdf) and external PDF URLs: document glyph instead of plain text. */
+a.wiki-link-pdf {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+a.wiki-link-pdf::after {
+  content: "";
+  display: inline-block;
+  width: 11px;
+  height: 12px;
+  margin-left: 3px;
+  flex: 0 0 auto;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 14'><path fill='%230645ad' d='M2 .5h5.2L10.5 4v9.5H2V.5zm5 0v3.2h3.2L7 .5zM3.2 7.2h5.6v1H3.2v-1zm0 2.2h5.6v1H3.2v-1z'/></svg>") no-repeat center / contain;
+  vertical-align: -1px;
+}
+
+/* Prefer the PDF glyph over the generic external-link arrow when both apply. */
+a.external.wiki-link-pdf::after {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 14'><path fill='%230645ad' d='M2 .5h5.2L10.5 4v9.5H2V.5zm5 0v3.2h3.2L7 .5zM3.2 7.2h5.6v1H3.2v-1zm0 2.2h5.6v1H3.2v-1z'/></svg>") no-repeat center / contain;
+  width: 11px;
+  height: 12px;
+}
+
+/* Keep OpenReview / arXiv / GitHub / Publisher label + external glyph as one wrap unit.
+   Parent overflow-wrap:break-word otherwise splits mid-label (e.g. ar / Xiv). */
+.wiki-body a.publication-resource-link {
+  display: inline-flex;
+  align-items: baseline;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+/* CV / Publications: never mid-break OpenReview, arXiv, GitHub, publisher (or venue) labels. */
+.wiki-page:is(
+  [data-page-slug="CV"],
+  [data-page-slug="CV_zh"],
+  [data-page-slug="Publications"],
+  [data-page-slug="Publications_zh"]
+) .wiki-body a.external {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: nowrap;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
 .site-palette-switcher {
   position: fixed;
   right: auto;
@@ -308,6 +361,12 @@ a.external::after {
   .site-palette-switcher:focus-within {
     width: 198px;
   }
+
+  /* Collapsed: keep inactive swatches out of tab order / hit-testing. */
+  .site-palette-switcher:not(:hover):not(:focus-within) .site-palette-button:not(.is-active) {
+    visibility: hidden;
+    pointer-events: none;
+  }
 }
 
 @media (hover: none), (pointer: coarse) {
@@ -329,6 +388,11 @@ a.external::after {
     opacity: 1;
   }
 
+  .site-palette-switcher:not(.is-expanded) .site-palette-button:not(.is-active) {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
   .site-palette-button {
     width: 16px;
     height: 16px;
@@ -337,6 +401,11 @@ a.external::after {
 }
 
 .wiki-topbar {
+  /* Above wiki-main/wiki-tabs: those carry view-transition-name and form
+     sibling stacking contexts that otherwise paint over the absolute
+     .wiki-search-panel (results mixed with article title/body). */
+  position: relative;
+  z-index: 60;
   border-bottom: 1px solid var(--site-theme-chrome-border);
   background: var(--site-theme-chrome-surface);
   font-family: var(--font-sans);
@@ -538,6 +607,7 @@ a.external::after {
   top: calc(100% + 5px);
   right: 0;
   left: 36px;
+  z-index: 30;
   overflow-y: auto;
   max-height: min(420px, 70vh);
   border: 1px solid var(--wiki-border);
@@ -2054,19 +2124,33 @@ body:has(.wiki-portal) .wiki-topbar {
   table-layout: auto;
 }
 
-.wiki-body .publication-authorship-note {
-  margin: 4px 0 16px;
+.wiki-body .publication-authorship-note,
+.wiki-body .publication-link-legend {
+  margin: 4px 0 12px;
   color: var(--wiki-text-soft);
   font-family: var(--font-sans);
   font-size: var(--fs-xs);
   line-height: var(--lh-ui);
-  text-align: right;
+  text-align: left;
 }
 
-.wiki-body p:has(+ .publication-authorship-note) {
+.wiki-body .publication-link-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 1rem;
+}
+
+.wiki-body .publication-authorship-note + .publication-link-legend {
+  margin-top: 0;
+}
+
+.wiki-body p:has(+ .publication-authorship-note),
+.wiki-body p:has(+ .publication-link-legend) {
   margin-bottom: 4px;
 }
 
+/* Footnotes directly under publication tables. */
 .wiki-body table + .publication-authorship-note {
   margin-top: -12px;
 }
@@ -2493,6 +2577,8 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
 .wiki-portal-search {
   --portal-search-leading-width: 50px;
   --portal-search-submit-width: 96px;
+  position: relative;
+  z-index: 40;
   max-width: 690px;
   margin: 18px auto 0;
 }
@@ -2523,7 +2609,7 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   text-decoration: none;
 }
 
-/* Homepage language card title (no morph — label is not the destination H1). */
+/* Homepage language card title (no morph -- label is not the destination H1). */
 .wiki-portal-edition > .wiki-portal-edition-label {
   display: block;
   width: fit-content;
@@ -5214,7 +5300,7 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
 }
 
 /* Pinned chrome: never crossfade old+new. animation:none on BOTH left them at
-   opacity 1 stacked — any 1px shift or active-state move read as full-sidebar ghost.
+   opacity 1 stacked -- any 1px shift or active-state move read as full-sidebar ghost.
    Always show only the new snapshot. */
 ::view-transition-old(wiki-topbar),
 ::view-transition-old(wiki-tabs),
@@ -5318,7 +5404,7 @@ html[data-wiki-morph-to] ::view-transition-new(wiki-sidebar) {
 }
 
 /* Continuous handoff: morph-new stays fully opaque for the whole flight.
-   Live dest H1 is NOT hidden (see JS) — it sits under the overlay and remains
+   Live dest H1 is NOT hidden (see JS) -- it sits under the overlay and remains
    when the overlay tears down, so landing never vanishes/flashes. */
 @keyframes wiki-title-morph-old {
   0% { opacity: 1; }
@@ -5370,7 +5456,7 @@ a.wiki-link-page[data-wiki-vt-muted="1"] .wiki-vt-title,
 
 /* Off-viewport morph: keep title end-geometry correct (JS instant-scrolled for the
    snapshot) but ease wiki-main from the pre-scroll offset so the page feels like it
-   lifts into the titled view with the ~800ms title flight — not a hard jump. */
+   lifts into the titled view with the ~800ms title flight -- not a hard jump. */
 html[data-wiki-morph-scroll] {
   --wiki-morph-scroll-from: 0px;
 }

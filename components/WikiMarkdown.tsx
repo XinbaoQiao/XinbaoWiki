@@ -62,8 +62,9 @@ export function WikiMarkdown({ editLabel, markdown, sourceHref }: Props) {
           a({ href, children, title }) {
             const raw = href || '#';
             const missing = raw.includes('missing=1');
-            const iconTitle = legendLanguage && !raw.startsWith('#') ? publicationLinkTitle(pathWithBasePath(raw), legendLanguage) : undefined;
-            const className = [missing ? 'redlink' : ''].filter(Boolean).join(' ') || undefined;
+            const pageLanguage = legendLanguage ?? (editLabel === '编辑' ? 'zh' : 'en');
+            const iconTitle = !raw.startsWith('#') ? publicationLinkTitle(pathWithBasePath(raw), pageLanguage) : undefined;
+            const className = [missing ? 'redlink' : '', iconTitle ? 'publication-resource-link' : ''].filter(Boolean).join(' ') || undefined;
             const linkTitle = missing ? 'Page does not exist yet' : title ?? iconTitle;
             // WikiHrefLink: # → local smooth-scroll color; /wiki → page morph; http → external.
             return (

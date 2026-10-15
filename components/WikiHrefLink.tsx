@@ -29,7 +29,7 @@ export function WikiHrefLink({
   ...rest
 }: Props & { 'aria-label'?: string }) {
   const classified = classifyWikiHref(href, { applyBasePath });
-  const mergedClass = wikiLinkClassName(classified.kind, className);
+  const mergedClass = wikiLinkClassName(classified.kind, className, classified.href);
 
   if (classified.kind === 'local') {
     return (

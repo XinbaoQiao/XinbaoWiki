@@ -131,7 +131,11 @@ function resultExcerpt(item: SearchIndexItem, terms: string[]) {
 }
 
 function isPortalPath(pathname: string | null) {
-  return !decodeURIComponent(pathname || '').split('/').includes('wiki');
+  // Only the homepage uses the portal search; other non-wiki routes (e.g. /updates/)
+  // should keep the topbar search.
+  const cleaned = decodeURIComponent(pathname || '').replace(/\/+$/, '') || '/';
+  const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
+  return cleaned === '/' || cleaned === '' || (basePath !== '' && cleaned === basePath);
 }
 
 export function WikiSearch({

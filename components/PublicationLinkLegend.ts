@@ -43,7 +43,7 @@ export function publicationLinkTitle(href: string, language: 'en' | 'zh'): strin
 }
 
 export function PublicationLinkLegend({ language }: { language: 'en' | 'zh' }) {
-  return createElement('p', { className: 'publication-authorship-note', 'data-publication-link-legend': language, style: { display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.35rem 1rem' } },
+  return createElement('p', { className: 'publication-link-legend', 'data-publication-link-legend': language, style: { display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.35rem 1rem' } },
     createElement('span', null, language === 'zh' ? '链接图标：' : 'Link icons:'),
     ...icons.map((icon, index) => createElement('span', { key: icon.id, style: { display: 'inline-flex', alignItems: 'center', gap: '0.35em', whiteSpace: 'nowrap' } },
       createElement('svg', { viewBox: icon.viewBox, width: 14, height: 14, 'aria-hidden': true, focusable: 'false', 'data-link-icon': icon.id, style: { fill: 'currentColor', color: 'var(--site-theme-action-ink)' } }, createElement('path', { d: icon.path })),

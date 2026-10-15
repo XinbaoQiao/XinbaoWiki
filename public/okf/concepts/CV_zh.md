@@ -8,18 +8,18 @@ tags:
   - profile
   - cv-摘要
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-10-14T05:06:00.838Z'
-content_hash: 'sha256:193abd76b2ca1a3882bf170f4099ca4bd12de08da7f84591d359d6048da2fd17'
-reviewed_at: '2026-10-14T05:08:10.591Z'
-review_due: '2027-01-12'
+modified: '2026-10-15T10:44:34.998Z'
+content_hash: 'sha256:95b380a7828aa9d57367b12c01456d90b63da840dc2588c43ec9c8d3438222c3'
+reviewed_at: '2026-10-15T10:44:41.242Z'
+review_due: '2027-01-13'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-14T05:08:10.591Z'
-  reviewDue: '2027-01-12'
+  reviewedAt: '2026-10-15T10:44:41.242Z'
+  reviewDue: '2027-01-13'
   pendingReview: false
   overdue: false
 retrieval:
@@ -49,7 +49,7 @@ source_ids:
   - src-faaafad831fbefc5
 source_path: wiki/CV_zh.md
 ---
-[résumé](/files/XinbaoQiao_CV.pdf)。
+乔鑫宝的学术简历摘要，亦可下载 PDF [résumé](/files/XinbaoQiao_CV.pdf)。
 
 ## 联系方式
 
