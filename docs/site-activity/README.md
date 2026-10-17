@@ -193,14 +193,48 @@ or change collection settings. Querying the new endpoint requires its deployment
 
 ## Private maintainer exclusion
 
+The dialog shows the current browser's inclusion state before password entry.
+After entering the owner password, **Check this browser and IP** performs a
+read-only authenticated inspection: it returns the current request's trusted
+Vercel IP, approximate location, coarse browser/OS/device and check time without
+changing cookies or writing an action record. These fields never appear in the
+unauthenticated preference GET or the public map. Unknown IPs remain null.
+
+Successful password-verified exclusion and inclusion requests also attempt to
+save a separate private action receipt: random action ID, server receipt time,
+action, trusted request IP, approximate country/region/city and coarse device
+labels. No stable browser ID, cookie, password, full user agent, page or referrer
+is saved. Records expire at Tokyo midnight after 30 calendar days, capped at 200
+per day with reported overflow. They identify accepted setting requests, not
+unique devices, people, or a permanent list of excluded IPs. Earlier operations
+cannot be reconstructed. A storage failure does not prevent opting out; the
+dialog explicitly reports an unsaved receipt. After a setting change the dialog
+reads the browser cookie state back before claiming success. Inspection never
+uses the action writer, and failed password attempts never create these records.
+
+Administrators can read snapshot-paginated receipts through authenticated
+`GET /api/site-activity/exclusions/`, using the same `date`, `limit`, `offset`
+and `snapshot` rules as visit events (maximum snapshot/offset 200):
+
+```powershell
+npm run activity:report -- exclusions --date 2026-10-18 --limit 200 --output .cache/owner-actions.json
+```
+
+This endpoint uses the existing maintainer bearer credential, private/no-store
+and noindex headers, and no cross-origin access. The browser password grants
+inspection of that request only; it does not grant access to the action history.
+Private action receipts remain separate from visitor counts and page-view data.
+
 The intensity heading below the atlas is an understated control rather than a
 public settings link. Activating it opens a native password dialog. The
 password is sent only in a same-origin JSON request and is verified against the
 server-only `SITE_ACTIVITY_OWNER_PASSWORD_HASH` scrypt envelope; plaintext is
 not included in the client bundle, URL, cookie, Redis, or application logs.
 Wrong attempts are limited to five per 15-minute window using a keyed digest of
-Vercel's trusted forwarding IP. Owner-password attempts do not persist raw IPs, and a Redis or
-configuration failure fails closed without creating an exclusion.
+Vercel's trusted forwarding IP. Failed password attempts and rate-limit keys do
+not persist raw IPs. Successful setting requests have the separate private action
+receipts described above. A rate-limit or configuration failure fails closed
+without creating an exclusion.
 
 Successful verification sets a signed `HttpOnly`, `SameSite=Strict`
 first-party exclusion cookie. The recording route validates that marker before

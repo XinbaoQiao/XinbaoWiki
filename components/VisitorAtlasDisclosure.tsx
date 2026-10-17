@@ -18,6 +18,8 @@ type Props = {
 
 type ActivityStatus = 'empty' | 'error' | 'loading' | 'ready' | 'unavailable';
 type OwnerGateStatus = 'checking' | 'error' | 'idle' | 'rate-limited' | 'saving' | 'success' | 'unavailable';
+type OwnerNetwork = { ip: string | null; country: string; region: string; city: string | null; browser: string; os: string; device: string };
+type OwnerReceipt = { network: OwnerNetwork; checkedAt: string; auditSaved?: boolean; actionId?: string | null };
 
 type VisitorAtlasCopy = {
   error: string;
@@ -42,6 +44,15 @@ type VisitorAtlasCopy = {
   ownerTitle: string;
   ownerUnavailable: string;
   ownerWorking: string;
+  ownerInspect: string;
+  ownerCurrentIp: string;
+  ownerCurrentStatus: string;
+  ownerStatusExcluded: string;
+  ownerStatusIncluded: string;
+  ownerScope: string;
+  ownerAuditSaved: string;
+  ownerAuditMissing: string;
+  ownerUnknownIp: string;
   retry: string;
   summaryFallback: string;
   summaryLoading: string;
@@ -85,6 +96,15 @@ const copy = {
     ownerTitle: 'Activity controls',
     ownerUnavailable: 'Private controls are temporarily unavailable.',
     ownerWorking: 'Verifying…',
+    ownerInspect: 'Check this browser and IP',
+    ownerCurrentIp: 'Current public IP',
+    ownerCurrentStatus: 'This browser',
+    ownerStatusExcluded: 'Excluded from future visits',
+    ownerStatusIncluded: 'Included in future visits',
+    ownerScope: 'Applies to this browser across network changes. Other browsers need their own setting. Earlier visits remain recorded.',
+    ownerAuditSaved: 'Private action receipt saved for 30 calendar days.',
+    ownerAuditMissing: 'The browser setting was applied, but its private action receipt could not be saved.',
+    ownerUnknownIp: 'Unavailable for this request',
     retry: 'Retry',
     summaryFallback: 'All history',
     summaryLoading: 'All history · loading',
@@ -116,6 +136,15 @@ const copy = {
     ownerTitle: '访问统计设置',
     ownerUnavailable: '私密设置暂时不可用。',
     ownerWorking: '正在验证……',
+    ownerInspect: '核对本浏览器与 IP',
+    ownerCurrentIp: '当前公网 IP',
+    ownerCurrentStatus: '当前浏览器',
+    ownerStatusExcluded: '之后的访问已排除',
+    ownerStatusIncluded: '之后的访问仍计入',
+    ownerScope: '设置跟随本浏览器，更换网络后仍有效。其他浏览器需分别设置；之前的访问记录保留。',
+    ownerAuditSaved: '私密操作凭据已保存，保留 30 个日历日。',
+    ownerAuditMissing: '浏览器设置已生效，但本次私密操作凭据未能保存。',
+    ownerUnknownIp: '本次请求无法获取',
     retry: '重试',
     summaryFallback: '全部历史',
     summaryLoading: '全部历史 · 正在载入',
@@ -186,8 +215,10 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
   const [ownerDialogOpen, setOwnerDialogOpen] = useState(false);
   const [ownerExcluded, setOwnerExcluded] = useState(false);
   const [ownerGateStatus, setOwnerGateStatus] = useState<OwnerGateStatus>('idle');
+  const [ownerReceipt, setOwnerReceipt] = useState<OwnerReceipt | null>(null);
   const [password, setOwnerPassword] = useState('');
   const ownerDialogRef = useRef<HTMLDialogElement>(null);
+  const ownerRequestRef = useRef<AbortController | null>(null);
   const labels = copy[language];
   const apiPath = withBasePath(SITE_ACTIVITY_API_PATH);
   const preferencePath = withBasePath('/api/site-activity/preference/');
@@ -225,17 +256,21 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
     return () => controller.abort();
   }, [ownerDialogOpen, preferencePath]);
 
-  async function submitOwnerPreference(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  async function updateOwnerPreference(inspect = false) {
     if (ownerGateStatus === 'checking' || ownerGateStatus === 'saving') return;
     setOwnerGateStatus('saving');
+    setOwnerReceipt(null);
+    const controller = new AbortController();
+    ownerRequestRef.current?.abort();
+    ownerRequestRef.current = controller;
     try {
       const response = await fetch(preferencePath, {
-        body: JSON.stringify({ excluded: !ownerExcluded, password }),
+        body: inspect ? JSON.stringify({ inspect: true, password }) : JSON.stringify({ excluded: !ownerExcluded, password }),
         cache: 'no-store',
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },
-        method: 'POST'
+        method: 'POST',
+        signal: controller.signal
       });
       if (response.status === 401) {
         setOwnerGateStatus('error');
@@ -249,14 +284,28 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
         setOwnerGateStatus('unavailable');
         return;
       }
-      const next = await response.json() as { excluded?: boolean };
+      const next = await response.json() as { excluded?: boolean } & Partial<OwnerReceipt>;
       if (typeof next.excluded !== 'boolean') throw new Error('preference response invalid');
       setOwnerExcluded(next.excluded);
+      if (!inspect) {
+        const confirmation = await fetch(preferencePath, { cache: 'no-store', credentials: 'same-origin', signal: controller.signal });
+        if (!confirmation.ok) throw new Error('preference confirmation failed');
+        const confirmed = await confirmation.json() as { excluded?: boolean };
+        if (confirmed.excluded !== next.excluded) throw new Error('preference cookie not applied');
+      }
+      setOwnerReceipt(next.network && next.checkedAt ? { network: next.network, checkedAt: next.checkedAt,
+        auditSaved: next.auditSaved, actionId: next.actionId } : null);
       setOwnerPassword('');
       setOwnerGateStatus('success');
     } catch {
+      if (controller.signal.aborted) return;
       setOwnerGateStatus('unavailable');
     }
+  }
+
+  function submitOwnerPreference(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    void updateOwnerPreference();
   }
 
   function openOwnerDialog() {
@@ -265,8 +314,10 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
   }
 
   function closeOwnerDialog() {
+    ownerRequestRef.current?.abort();
     setOwnerDialogOpen(false);
     setOwnerPassword('');
+    setOwnerReceipt(null);
     setOwnerGateStatus('idle');
   }
 
@@ -381,7 +432,10 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
             className="wiki-visitor-atlas-owner-dialog"
             id="visitor-atlas-owner-dialog"
             onCancel={closeOwnerDialog}
-            onClose={closeOwnerDialog}
+            onClose={() => {
+              // A queued close event can arrive after a quick keyboard reopen.
+              if (!ownerDialogRef.current?.open) closeOwnerDialog();
+            }}
             ref={ownerDialogRef}
           >
             <form onSubmit={submitOwnerPreference}>
@@ -391,6 +445,10 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
               </header>
               <div className="wiki-visitor-atlas-owner-body">
                 <p id="visitor-atlas-owner-description">{labels.ownerDescription}</p>
+                {ownerGateStatus !== 'checking' && ownerGateStatus !== 'unavailable' ? (
+                  <p><strong>{labels.ownerCurrentStatus}：{ownerExcluded ? labels.ownerStatusExcluded : labels.ownerStatusIncluded}</strong></p>
+                ) : null}
+                <p>{labels.ownerScope}</p>
                 <label htmlFor="visitor-atlas-owner-password">{labels.ownerLabel}</label>
                 <input
                   autoComplete="current-password"
@@ -403,12 +461,23 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
                   type="password"
                   value={password}
                 />
+                <button disabled={password.length < 8 || ownerGateStatus === 'checking' || ownerGateStatus === 'saving' || ownerGateStatus === 'unavailable'}
+                  onClick={() => void updateOwnerPreference(true)} type="button">{labels.ownerInspect}</button>
+                {ownerReceipt ? (
+                  <div className="wiki-visitor-atlas-owner-receipt" aria-live="polite">
+                    <p>{labels.ownerCurrentIp}：<strong>{ownerReceipt.network.ip ?? labels.ownerUnknownIp}</strong></p>
+                    <p>{[ownerReceipt.network.country, ownerReceipt.network.city, ownerReceipt.network.browser, ownerReceipt.network.os].filter(Boolean).join(' · ')}</p>
+                    <p><time dateTime={ownerReceipt.checkedAt}>{new Date(ownerReceipt.checkedAt).toLocaleString(language === 'zh' ? 'zh-CN' : 'en-GB', { timeZoneName: 'short' })}</time></p>
+                    {typeof ownerReceipt.auditSaved === 'boolean' ? <p>{ownerReceipt.auditSaved ? labels.ownerAuditSaved : labels.ownerAuditMissing}</p> : null}
+                    {ownerReceipt.actionId ? <p><code>{ownerReceipt.actionId}</code></p> : null}
+                  </div>
+                ) : null}
                 {ownerGateStatus === 'error' ? <p className="wiki-visitor-atlas-owner-message" role="alert">{labels.ownerInvalid}</p> : null}
                 {ownerGateStatus === 'rate-limited' ? <p className="wiki-visitor-atlas-owner-message" role="alert">{labels.ownerRateLimited}</p> : null}
                 {ownerGateStatus === 'unavailable' ? <p className="wiki-visitor-atlas-owner-message" role="alert">{labels.ownerUnavailable}</p> : null}
                 {ownerGateStatus === 'success' ? (
                   <p aria-live="polite" className="wiki-visitor-atlas-owner-message is-success" role="status">
-                    {ownerExcluded ? labels.ownerExcluded : labels.ownerIncluded}
+                    {ownerReceipt && ownerReceipt.auditSaved === undefined ? labels.ownerCurrentStatus : ownerExcluded ? labels.ownerExcluded : labels.ownerIncluded}
                   </p>
                 ) : null}
               </div>

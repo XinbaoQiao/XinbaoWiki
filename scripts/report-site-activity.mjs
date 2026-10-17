@@ -10,10 +10,10 @@ const args = process.argv.slice(2);
 const child = args[0] === '--credential-child';
 if (child) args.shift();
 const mode = args.shift() || 'events';
-if (!['events', 'summary'].includes(mode)) throw new Error('Use events or summary.');
+if (!['events', 'summary', 'exclusions'].includes(mode)) throw new Error('Use events, summary or exclusions.');
 const query = new URLSearchParams();
 let output = '';
-const allowed = mode === 'events' ? ['date', 'limit', 'offset', 'snapshot'] : ['days', 'start', 'end'];
+const allowed = mode !== 'summary' ? ['date', 'limit', 'offset', 'snapshot'] : ['days', 'start', 'end'];
 for (let i = 0; i < args.length; i += 2) {
   const key = args[i].replace(/^--/, '');
   const value = args[i + 1];

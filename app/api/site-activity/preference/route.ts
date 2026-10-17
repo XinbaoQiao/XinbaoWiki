@@ -1,5 +1,6 @@
 import { Redis } from '@upstash/redis';
 import { NextRequest, NextResponse } from 'next/server';
+import { ownerNetworkContext, recordOwnerAction } from '@/lib/site-activity-owner-records';
 import {
   isSiteActivityBrowserExcluded,
   SITE_ACTIVITY_EXCLUSION_COOKIE_NAME,
@@ -19,14 +20,14 @@ export const runtime = 'nodejs';
 function privateJson(body: Record<string, unknown>, status = 200) {
   return NextResponse.json(body, {
     status,
-    headers: { 'Cache-Control': 'private, no-store' }
+    headers: { 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow' }
   });
 }
 
 function privateResponse(status: number, headers?: Record<string, string>) {
   return new NextResponse(null, {
     status,
-    headers: { 'Cache-Control': 'private, no-store', ...headers }
+    headers: { 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow', ...headers }
   });
 }
 
@@ -45,9 +46,9 @@ let redisClient: Redis | null = null;
 
 function getRedis() {
   const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) return null;
-  redisClient ??= new Redis({ url, token });
+  const redisAuth = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !redisAuth) return null;
+  redisClient ??= new Redis({ url, token: redisAuth, retry: false, signal: () => AbortSignal.timeout(2_000) });
   return redisClient;
 }
 
@@ -60,7 +61,7 @@ function preferenceConfigured() {
   );
 }
 
-type ParsedPreferenceBody = { password: string; excluded: boolean };
+type ParsedPreferenceBody = { password: string; excluded: boolean } | { password: string; inspect: true };
 
 async function readCappedBody(request: NextRequest, maximumBytes: number) {
   if (!request.body) return null;
@@ -96,12 +97,15 @@ async function parsePreferenceBody(request: NextRequest): Promise<ParsedPreferen
     const value: unknown = JSON.parse(text);
     if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
     const keys = Object.keys(value);
-    if (keys.length !== 2 || !keys.includes('password') || !keys.includes('excluded')) return null;
-    const parsed = value as { password?: unknown; excluded?: unknown };
-    if (typeof parsed.password !== 'string' || typeof parsed.excluded !== 'boolean') return null;
+    if (keys.length !== 2 || !keys.includes('password')) return null;
+    const parsed = value as { password?: unknown; excluded?: unknown; inspect?: unknown };
+    if (typeof parsed.password !== 'string') return null;
+    const inspecting = keys.includes('inspect') && parsed.inspect === true;
+    if (!inspecting && (!keys.includes('excluded') || typeof parsed.excluded !== 'boolean')) return null;
     const passwordLength = Buffer.byteLength(parsed.password, 'utf8');
     if (passwordLength < 8 || passwordLength > 256) return null;
-    return { password: parsed.password, excluded: parsed.excluded };
+    const { password, excluded } = parsed;
+    return inspecting ? { password, inspect: true } : { password, excluded: excluded as boolean };
   } catch {
     return null;
   }
@@ -118,9 +122,9 @@ function cookieOptions() {
 }
 
 export async function GET(request: NextRequest) {
-  const secret = process.env.RATE_LIMIT_SALT;
-  const excluded = secret
-    ? isSiteActivityBrowserExcluded(request.cookies.get(SITE_ACTIVITY_EXCLUSION_COOKIE_NAME)?.value, secret)
+  const activitySalt = process.env.RATE_LIMIT_SALT;
+  const excluded = activitySalt
+    ? isSiteActivityBrowserExcluded(request.cookies.get(SITE_ACTIVITY_EXCLUSION_COOKIE_NAME)?.value, activitySalt)
     : false;
   return privateJson({ enabled: preferenceConfigured(), excluded });
 }
@@ -129,9 +133,9 @@ export async function POST(request: NextRequest) {
   if (!sameOriginRequest(request)) return privateResponse(403);
   const body = await parsePreferenceBody(request);
   if (!body) return privateResponse(400);
-  const secret = process.env.RATE_LIMIT_SALT;
+  const activitySalt = process.env.RATE_LIMIT_SALT;
   const passwordHash = ownerPasswordHash();
-  if (!secret || !preferenceConfigured()) return privateResponse(503);
+  if (!activitySalt || !preferenceConfigured()) return privateResponse(503);
 
   if (process.env.VERCEL === '1') {
     const requestIp = request.headers.get('x-vercel-forwarded-for')?.split(',')[0]?.trim();
@@ -141,7 +145,7 @@ export async function POST(request: NextRequest) {
       const now = Date.now();
       const reservation = await reserveSiteActivityOwnerRateLimit(
         redis,
-        siteActivityOwnerRateLimitKey(requestIp, secret, now),
+        siteActivityOwnerRateLimitKey(requestIp, activitySalt, now),
         now
       );
       if (!reservation.allowed) {
@@ -160,13 +164,36 @@ export async function POST(request: NextRequest) {
   }
   if (!passwordAccepted) return privateResponse(401);
 
+  if ('inspect' in body) {
+    return privateJson({
+      excluded: isSiteActivityBrowserExcluded(request.cookies.get(SITE_ACTIVITY_EXCLUSION_COOKIE_NAME)?.value, activitySalt),
+      network: ownerNetworkContext(request.headers, process.env.VERCEL === '1'),
+      checkedAt: new Date().toISOString()
+    }, 200);
+  }
+
+  let auditSaved = false;
+  let actionId: string | null = null;
+  const checkedAt = new Date();
+  // Losing audit storage must never prevent a browser from opting out.
+  // Report that limitation explicitly instead of claiming the action was saved.
+  try {
+    const redis = getRedis();
+    if (redis) {
+      const audit = await recordOwnerAction(redis, request.headers, process.env.VERCEL === '1', body.excluded, checkedAt);
+      auditSaved = audit.saved;
+      actionId = audit.saved ? audit.record.id : null;
+    }
+  } catch { /* The preference still applies; the response discloses the missing receipt. */ }
+
   const response = NextResponse.json(
-    { excluded: body.excluded },
-    { headers: { 'Cache-Control': 'private, no-store' } }
+    { excluded: body.excluded, network: ownerNetworkContext(request.headers, process.env.VERCEL === '1'),
+      checkedAt: checkedAt.toISOString(), auditSaved, actionId },
+    { headers: { 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow' } }
   );
   response.cookies.set(
     SITE_ACTIVITY_EXCLUSION_COOKIE_NAME,
-    body.excluded ? siteActivityExclusionCookieValue(secret) : '',
+    body.excluded ? siteActivityExclusionCookieValue(activitySalt) : '',
     body.excluded ? cookieOptions() : { ...cookieOptions(), maxAge: 0 }
   );
   return response;

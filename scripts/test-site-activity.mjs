@@ -155,7 +155,7 @@ hasAll(preferenceRoute, [
   'verifySiteActivityOwnerPassword(body.password, passwordHash)',
   'return privateResponse(401)',
   "response.cookies.set(",
-  'siteActivityExclusionCookieValue(secret)',
+  'siteActivityExclusionCookieValue(activitySalt)',
   'body.excluded ? cookieOptions() : { ...cookieOptions(), maxAge: 0 }'
 ], 'owner preference endpoint is same-origin, private, hashed, rate-limited, and reversible');
 assert.match(route, /request\.arrayBuffer\(\)[\s\S]*byteLength === 0[\s\S]*await acceptsEmptyBody\(request\)/, 'recording consumes and rejects non-empty streamed or chunked request bodies even without Content-Length');
@@ -260,7 +260,7 @@ hasAll(component, [
   'void fetchSiteActivity(apiPath, controller.signal)',
   'setRequestVersion((version) => version + 1)'
 ], 'homepage retries transport and transient server failures before exposing a bilingual manual retry');
-assert.doesNotMatch(component, /country|region ranking|latitude|longitude|raw IP address/i, 'homepage exposes neither a geographic ranking nor raw location fields');
+assert.doesNotMatch(component.match(/<svg[\s\S]*?<\/svg>/)?.[0] || '', /country|region ranking|latitude|longitude|raw IP address|ownerReceipt/i, 'public map exposes neither owner metadata nor raw geographic fields');
 assert.match(component, /summaryFallback: 'All history'[\s\S]*uniqueBrowsers: \(count: number\) => `≈ \$\{count\.toLocaleString\('en'\)\} browsers · all history`/, 'homepage summary presents the complete collected history rather than a rolling window');
 assert.doesNotMatch(component, /Cells appear|Approximate IP|No map cell|30 complete|\u8fd1 30|wiki-visitor-atlas-note/, 'homepage removes visible threshold, approximation, empty-state, and rolling-window explanations');
 assert.match(map, /world-atlas 2\.0\.2 \/ Natural Earth/, 'generated neutral map records its source geometry');

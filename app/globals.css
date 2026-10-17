@@ -3091,6 +3091,32 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   font-weight: 700;
 }
 
+.wiki-visitor-atlas-owner-receipt {
+  min-width: 0;
+  padding: .65rem;
+  border: 1px solid var(--wiki-border);
+  overflow-wrap: anywhere;
+}
+
+.wiki-visitor-atlas-owner-receipt code {
+  font-size: .8em;
+}
+
+.wiki-visitor-atlas-owner-body > button {
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid var(--wiki-border);
+  background: var(--wiki-bg);
+  color: var(--wiki-text);
+  font: 700 12px/1.3 var(--font-sans);
+  cursor: pointer;
+}
+
+.wiki-visitor-atlas-owner-body > button:disabled {
+  opacity: .55;
+  cursor: default;
+}
+
 .wiki-visitor-atlas-owner-body input {
   width: 100%;
   min-height: 44px;

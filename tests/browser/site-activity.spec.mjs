@@ -25,6 +25,71 @@ const testPass = 'playwright-owner-password';
 const activityPath = '/api/site-activity/v2/';
 const ownerPreferencePath = '/api/site-activity/preference/';
 
+test('owner inspection authenticates without changing cookies and private history rejects public access', async ({ request }) => {
+  test.skip(Boolean(process.env.CUBE_GEOMETRY_BASE_URL), 'owner password fixture is local-only');
+  const before = await request.get(ownerPreferencePath);
+  expect(await before.json()).toEqual({ enabled: true, excluded: false });
+  const wrongPass = 'wrong-owner-password';
+  const denied = await request.post(ownerPreferencePath, { data: { password: wrongPass, inspect: true } });
+  expect(denied.status()).toBe(401);
+  expect(await denied.text()).not.toContain('network');
+  const inspected = await request.post(ownerPreferencePath, { data: { password: testPass, inspect: true } });
+  expect(inspected.status()).toBe(200);
+  expect(inspected.headers()['set-cookie']).toBeUndefined();
+  const body = await inspected.json();
+  expect(body.excluded).toBe(false);
+  expect(body.network.ip).toBe(null); // local headers never impersonate Vercel
+  expect(body.network.country).toBe('unknown');
+  expect(body.auditSaved).toBeUndefined();
+  expect(body.checkedAt).toMatch(/^\d{4}-\d{2}-\d{2}T/);
+  expect(inspected.headers()['cache-control']).toContain('no-store');
+  expect(inspected.headers()['x-robots-tag']).toContain('noindex');
+  const mixed = await request.post(ownerPreferencePath, { data: { password: testPass, inspect: true, excluded: true } });
+  expect(mixed.status()).toBe(400);
+  const after = await request.get(ownerPreferencePath);
+  expect(await after.json()).toEqual({ enabled: true, excluded: false });
+  const history = await request.get('/api/site-activity/exclusions/');
+  expect(history.status()).toBe(401);
+  expect(history.headers()['cache-control']).toContain('no-store');
+  expect(history.headers()['x-robots-tag']).toContain('noindex');
+});
+
+test('owner private IP inspection fits mobile and disappears when the dialog closes', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 812 });
+  await installRoutes(page, () => ({ body: JSON.stringify(aggregate), contentType: 'application/json', status: 200 }), {
+    preferencePostResponse: { contentType: 'application/json', status: 200, body: JSON.stringify({
+      excluded: false, network: { ip: '2001:db8:1234:5678:abcd:1234:5678:9012', country: 'HK', city: 'Sha Tin', browser: 'Edge', os: 'Android' },
+      checkedAt: '2026-10-18T03:00:00Z'
+    }) }
+  });
+  await page.goto('/', { waitUntil: 'networkidle' });
+  await page.locator('.wiki-portal-name-button').click({ force: true });
+  const { dialog } = await waitForOwnerDialogReady(page);
+  await expect(page.getByText('2001:db8:1234:5678:abcd:1234:5678:9012')).toHaveCount(0);
+  await page.locator('#visitor-atlas-owner-password').fill(testPass);
+  await dialog.getByRole('button', { name: 'Check this browser and IP' }).click();
+  await expect(dialog.getByText('Current public IP', { exact: false })).toContainText('2001:db8:1234:5678:abcd:1234:5678:9012');
+  await expect(dialog.getByRole('button', { name: 'Exclude this browser' })).toBeVisible();
+  const geometry = await dialog.evaluate(element => ({ width: element.getBoundingClientRect().width, client: element.clientWidth, scroll: element.scrollWidth }));
+  expect(geometry.width).toBeLessThanOrEqual(375);
+  expect(geometry.scroll).toBeLessThanOrEqual(geometry.client + 1);
+  await dialog.getByRole('button', { name: 'Cancel', exact: true }).click();
+  await expect(page.getByText('2001:db8:1234:5678:abcd:1234:5678:9012')).toHaveCount(0);
+});
+
+test('owner setting success requires cookie readback rather than only a POST receipt', async ({ page }) => {
+  await installRoutes(page, () => ({ body: JSON.stringify(aggregate), contentType: 'application/json', status: 200 }), {
+    preferencePostResponse: { contentType: 'application/json', status: 200, body: JSON.stringify({ excluded: true, auditSaved: true }) }
+  });
+  await page.goto('/', { waitUntil: 'networkidle' });
+  await page.locator('.wiki-portal-name-button').click({ force: true });
+  const { dialog } = await waitForOwnerDialogReady(page);
+  await page.locator('#visitor-atlas-owner-password').fill(testPass);
+  await dialog.getByRole('button', { name: 'Exclude this browser' }).click();
+  await expect(dialog.getByRole('alert')).toContainText('Private controls are temporarily unavailable.');
+  await expect(dialog.getByRole('status')).toHaveCount(0);
+});
+
 async function installRoutes(page, getResponse, {
   mockActivityPost = true,
   preferencePostResponse = null
@@ -222,7 +287,7 @@ test('homepage visitor atlas is scoped, accessible, bilingual, and responsive', 
   await expect(activity).not.toContainText('latitude');
   await expect(activity).not.toContainText('longitude');
 
-  await page.locator('.wiki-search-language-select').selectOption('zh');
+  await page.getByRole('group', { name: 'Search language', exact: true }).getByRole('button', { name: '中文', exact: true }).click();
   await expect(map).toHaveAccessibleName('访问足迹世界地图');
   await expect(activity.locator('summary')).toContainText('约 7 个浏览器 · 全部历史');
   await expect(page.locator('html')).toHaveAttribute('lang', 'zh-CN');
@@ -249,7 +314,7 @@ test('homepage visitor atlas is scoped, accessible, bilingual, and responsive', 
   expect(triggerBounds.x).toBeGreaterThanOrEqual(legendBounds.x - 0.5);
   expect(triggerBounds.x + triggerBounds.width).toBeLessThanOrEqual(legendBounds.x + legendBounds.width + 0.5);
 
-  await page.locator('.wiki-search-language-select').selectOption('en');
+  await page.getByRole('group', { name: '搜索语言', exact: true }).getByRole('button', { name: 'EN', exact: true }).click();
   expectSingleLineLegend(await readLegendMetrics(legend));
   expect(errors).toEqual([]);
 });

@@ -3,8 +3,8 @@ import fs from 'node:fs';
 import { registerHooks } from 'node:module';
 // Next resolves extensionless TS imports; native Node tests need this one mapping.
 registerHooks({ resolve(specifier, context, nextResolve) {
-  return nextResolve(specifier === './site-activity-daily' && context.parentURL?.endsWith('/lib/site-activity-events.ts')
-    ? './site-activity-daily.ts' : specifier, context);
+  return nextResolve(/^\.\/site-activity-(?:daily|events)$/.test(specifier) && /\/lib\/site-activity-(?:events|owner-records)\.ts$/.test(context.parentURL || '')
+    ? `${specifier}.ts` : specifier, context);
 } });
 const { activityEventKeys, createActivityEvent, trustedActivityIp, validActivityEventDate,
   recordActivityEvent, readActivityEvents, RECORD_ACTIVITY_EVENT_SCRIPT, READ_ACTIVITY_EVENTS_SCRIPT,
@@ -98,3 +98,39 @@ assert.ok(api.indexOf('if (!isActivityReportAuthorized') < api.indexOf('const re
 assert.match(api, /private, no-store/); assert.match(api, /noindex, nofollow/);
 assert.doesNotMatch(api, /Access-Control-Allow-Origin|searchParams\.get\('token'\)/);
 console.log('private activity event validation, retention, deduplication, pagination, limits and exclusions passed');
+
+const { ownerNetworkContext, recordOwnerAction, readOwnerActions, ownerActionKeys,
+  RECORD_OWNER_ACTION_SCRIPT, OWNER_RECORD_MAX_PER_DAY } = await import('../lib/site-activity-owner-records.ts');
+headers.set('x-vercel-forwarded-for', '203.0.113.7');
+assert.equal(ownerNetworkContext(headers, false).ip, null);
+assert.equal(ownerNetworkContext(headers, false).country, 'unknown');
+assert.equal(ownerNetworkContext(headers, true).ip, '203.0.113.7');
+const ownerStore = { async eval(script, keys, args) {
+  if (script === RECORD_OWNER_ACTION_SCRIPT) {
+    const [json, expiry, cap] = args; const list = lists.get(keys[0]) || [];
+    if (list.length >= cap) { drops.set(keys[1], (drops.get(keys[1]) || 0) + 1); expiries.set(keys[1], expiry); return 0; }
+    list.push(json); lists.set(keys[0], list); expiries.set(keys[0], expiry); return 1;
+  }
+  return store.eval(script, keys, args);
+} };
+const receipt = await recordOwnerAction(ownerStore, headers, true, true, now);
+assert.equal(receipt.saved, true);
+assert.equal(receipt.record.action, 'exclude');
+assert.doesNotMatch(JSON.stringify(receipt.record), /private-cookie|private-credential|must-not-store|page|referrer|visitor|latitude|Mozilla/);
+const ownerKeys = ownerActionKeys('2026-10-10');
+assert.notEqual(ownerKeys.rows, keys.rows, 'owner actions cannot pollute page views');
+assert.equal(new Date(expiries.get(ownerKeys.rows) * 1000).toISOString(), '2026-11-08T15:00:00.000Z');
+const ownerFirst = await readOwnerActions(ownerStore, '2026-10-10', 1, 0, undefined, now);
+await recordOwnerAction(ownerStore, headers, true, false, now);
+assert.equal((await readOwnerActions(ownerStore, '2026-10-10', 1, 0, ownerFirst.snapshot, now)).actions[0].action, 'exclude');
+assert.equal((await readOwnerActions(ownerStore, '2026-10-10', 1, 0, undefined, now)).actions[0].action, 'include');
+await assert.rejects(readOwnerActions(ownerStore, '2026-10-10', 1, 0, 3, now));
+await assert.rejects(readOwnerActions(ownerStore, '2026-09-10', 1, 0, undefined, now));
+lists.set(ownerKeys.rows, Array(OWNER_RECORD_MAX_PER_DAY).fill(JSON.stringify(receipt.record)));
+assert.equal((await recordOwnerAction(ownerStore, headers, true, true, now)).saved, false);
+assert.equal((await readOwnerActions(ownerStore, '2026-10-10', 200, 0, undefined, now)).droppedActions, 1);
+const ownerReportRoute = fs.readFileSync('app/api/site-activity/exclusions/route.ts', 'utf8');
+assert.ok(ownerReportRoute.indexOf('if (!isActivityReportAuthorized') < ownerReportRoute.indexOf('const redisUrl'));
+assert.match(ownerReportRoute, /private, no-store/);
+assert.match(ownerReportRoute, /noindex, nofollow/);
+console.log('private owner action metadata, separate storage, retention, snapshot and cap checks passed');
