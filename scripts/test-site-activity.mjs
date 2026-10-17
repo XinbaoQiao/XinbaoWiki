@@ -210,7 +210,7 @@ hasAll(versionedRoute, [
 ], 'schema v2 has a stable versioned route while the unversioned handler remains available to older open pages');
 assert.match(route, /cellSelectionScore\(left, activitySalt\).*cellSelectionScore\(right, activitySalt\)/, 'active-cell overflow uses deterministic non-geographic sampling rather than lexicographic bias');
 hasAll(route, [
-  "'Cache-Control': 'public, max-age=0, s-maxage=300, stale-while-revalidate=900'",
+  "'Cache-Control': 'public, max-age=0, s-maxage=30, stale-while-revalidate=30'",
   "'Cache-Control': 'private, no-store'"
 ], 'anonymous GET responses are briefly shared-cached while POST remains private and uncached');
 hasAll(route, [

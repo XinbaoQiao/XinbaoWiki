@@ -19,7 +19,8 @@ type Props = {
 type ActivityStatus = 'empty' | 'error' | 'loading' | 'ready' | 'unavailable';
 type OwnerGateStatus = 'checking' | 'error' | 'idle' | 'rate-limited' | 'saving' | 'success' | 'unavailable';
 type OwnerNetwork = { ip: string | null; country: string; region: string; city: string | null; browser: string; os: string; device: string };
-type OwnerReceipt = { network: OwnerNetwork; checkedAt: string; auditSaved?: boolean; actionId?: string | null };
+type OwnerReceipt = { network: OwnerNetwork; checkedAt: string; auditSaved?: boolean; actionId?: string | null;
+  historyCorrection?: 'registered' | 'restored' | 'not-registered' | 'identity-unavailable' | 'unavailable' };
 
 type VisitorAtlasCopy = {
   error: string;
@@ -53,6 +54,11 @@ type VisitorAtlasCopy = {
   ownerAuditSaved: string;
   ownerAuditMissing: string;
   ownerUnknownIp: string;
+  ownerHistoryRegistered: string;
+  ownerHistoryRestored: string;
+  ownerHistoryMissing: string;
+  ownerHistoryUnavailable: string;
+  ownerHistoryPending: string;
   retry: string;
   summaryFallback: string;
   summaryLoading: string;
@@ -101,10 +107,15 @@ const copy = {
     ownerCurrentStatus: 'This browser',
     ownerStatusExcluded: 'Excluded from future visits',
     ownerStatusIncluded: 'Included in future visits',
-    ownerScope: 'Applies to this browser across network changes. Other browsers need their own setting. Earlier visits remain recorded.',
+    ownerScope: 'Applies to this browser across network changes. The homepage total subtracts confirmed owner browser identities once each. Earlier map activity and page-view records remain unchanged.',
     ownerAuditSaved: 'Private action receipt saved for 30 calendar days.',
     ownerAuditMissing: 'The browser setting was applied, but its private action receipt could not be saved.',
     ownerUnknownIp: 'Unavailable for this request',
+    ownerHistoryRegistered: 'This browser is registered for the homepage total correction. Repeated exclusions do not subtract it again.',
+    ownerHistoryRestored: 'The homepage total correction for this browser has been removed.',
+    ownerHistoryMissing: 'No previously counted browser identity is available. Earlier identities cannot be recovered for the total correction.',
+    ownerHistoryUnavailable: 'The homepage total correction is unavailable. Refresh this browser to retry while excluded.',
+    ownerHistoryPending: 'This browser identity is not registered for the total correction. Refresh while excluded to register it.',
     retry: 'Retry',
     summaryFallback: 'All history',
     summaryLoading: 'All history · loading',
@@ -141,10 +152,15 @@ const copy = {
     ownerCurrentStatus: '当前浏览器',
     ownerStatusExcluded: '之后的访问已排除',
     ownerStatusIncluded: '之后的访问仍计入',
-    ownerScope: '设置跟随本浏览器，更换网络后仍有效。其他浏览器需分别设置；之前的访问记录保留。',
+    ownerScope: '设置跟随本浏览器，更换网络后仍有效。首页总数按已确认的本人浏览器身份各扣一次；历史地图与浏览明细保留原始记录。',
     ownerAuditSaved: '私密操作凭据已保存，保留 30 个日历日。',
     ownerAuditMissing: '浏览器设置已生效，但本次私密操作凭据未能保存。',
     ownerUnknownIp: '本次请求无法获取',
+    ownerHistoryRegistered: '已登记本浏览器的首页总数校正，重复排除不会再次扣数。',
+    ownerHistoryRestored: '已取消本浏览器的首页总数校正。',
+    ownerHistoryMissing: '没有可识别的历史浏览器身份，无法据此校正过去的总数。',
+    ownerHistoryUnavailable: '首页总数校正暂不可用。保持排除状态后刷新本浏览器可重试。',
+    ownerHistoryPending: '当前浏览器身份尚未登记总数校正，保持排除状态后刷新即可登记。',
     retry: '重试',
     summaryFallback: '全部历史',
     summaryLoading: '全部历史 · 正在载入',
@@ -294,7 +310,7 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
         if (confirmed.excluded !== next.excluded) throw new Error('preference cookie not applied');
       }
       setOwnerReceipt(next.network && next.checkedAt ? { network: next.network, checkedAt: next.checkedAt,
-        auditSaved: next.auditSaved, actionId: next.actionId } : null);
+        auditSaved: next.auditSaved, actionId: next.actionId, historyCorrection: next.historyCorrection } : null);
       setOwnerPassword('');
       setOwnerGateStatus('success');
     } catch {
@@ -470,6 +486,10 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
                     <p><time dateTime={ownerReceipt.checkedAt}>{new Date(ownerReceipt.checkedAt).toLocaleString(language === 'zh' ? 'zh-CN' : 'en-GB', { timeZoneName: 'short' })}</time></p>
                     {typeof ownerReceipt.auditSaved === 'boolean' ? <p>{ownerReceipt.auditSaved ? labels.ownerAuditSaved : labels.ownerAuditMissing}</p> : null}
                     {ownerReceipt.actionId ? <p><code>{ownerReceipt.actionId}</code></p> : null}
+                    {ownerReceipt.historyCorrection ? <p>{ownerReceipt.historyCorrection === 'registered' ? labels.ownerHistoryRegistered
+                      : ownerReceipt.historyCorrection === 'restored' ? labels.ownerHistoryRestored
+                        : ownerReceipt.historyCorrection === 'not-registered' ? labels.ownerHistoryPending
+                          : ownerReceipt.historyCorrection === 'identity-unavailable' ? labels.ownerHistoryMissing : labels.ownerHistoryUnavailable}</p> : null}
                   </div>
                 ) : null}
                 {ownerGateStatus === 'error' ? <p className="wiki-visitor-atlas-owner-message" role="alert">{labels.ownerInvalid}</p> : null}

@@ -134,3 +134,40 @@ assert.ok(ownerReportRoute.indexOf('if (!isActivityReportAuthorized') < ownerRep
 assert.match(ownerReportRoute, /private, no-store/);
 assert.match(ownerReportRoute, /noindex, nofollow/);
 console.log('private owner action metadata, separate storage, retention, snapshot and cap checks passed');
+
+const { existingCountedBrowser, ownerAdjustedEstimate, updateOwnerCount, UPDATE_OWNER_COUNT_SCRIPT } = await import('../lib/site-activity-owner-count.ts');
+const { createHmac } = await import('node:crypto');
+const identity = '12345678-1234-1234-1234-123456789abc';
+const cookieSig = createHmac('sha256', 'count-test-salt').update(`site-activity-cookie:${identity}`).digest('hex').slice(0, 32);
+const ownerCookie = `v2.${identity}.${cookieSig}`;
+assert.equal(existingCountedBrowser(ownerCookie, 'count-test-salt'), createHmac('sha256', 'count-test-salt').update(`site-activity-hll:${identity}`).digest('hex'));
+for (const value of [undefined, identity, `${identity}.${cookieSig}`, `${ownerCookie}0`]) assert.equal(existingCountedBrowser(value, 'count-test-salt'), null);
+assert.equal(existingCountedBrowser(ownerCookie, 'wrong-salt'), null);
+assert.equal(ownerAdjustedEstimate(177, 2), 175);
+assert.equal(ownerAdjustedEstimate(1, 2), 0);
+assert.throws(() => ownerAdjustedEstimate(177, 201));
+const correctionMembers = new Set(), correctionState = new Map(); let correctionCalls = 0;
+const correctionStore = { async eval(script, keys, args) {
+  assert.equal(script, UPDATE_OWNER_COUNT_SCRIPT); correctionCalls++;
+  const [digest, operation, cap] = args;
+  if (operation === 'auto' && correctionState.get(digest) === 'include') return 2;
+  if (!correctionState.has(digest) && correctionState.size >= cap) return -1;
+  if (operation === 'include') { correctionState.set(digest, 'include'); correctionMembers.delete(digest); return 2; }
+  correctionState.set(digest, 'exclude'); const existed = correctionMembers.has(digest); correctionMembers.add(digest); return existed ? 0 : 1;
+} };
+assert.equal(await updateOwnerCount(correctionStore, ownerCookie, 'count-test-salt', true), 'registered');
+await updateOwnerCount(correctionStore, ownerCookie, 'count-test-salt', true, true);
+assert.equal(correctionMembers.size, 1, 'repeat visits, IP changes and repeated exclusion deduct one browser only');
+assert.equal(await updateOwnerCount(correctionStore, ownerCookie, 'count-test-salt', false), 'restored');
+assert.equal(correctionMembers.size, 0);
+assert.equal(await updateOwnerCount(correctionStore, ownerCookie, 'count-test-salt', true, true), 'restored', 'a delayed old excluded request cannot undo explicit restoration');
+assert.equal(correctionMembers.size, 0);
+await updateOwnerCount(correctionStore, ownerCookie, 'count-test-salt', true);
+assert.equal(correctionMembers.size, 1, 'explicit re-exclusion overrides the restoration tombstone');
+const callsBeforeInvalid = correctionCalls;
+assert.equal(await updateOwnerCount(correctionStore, 'forged', 'count-test-salt', true), 'identity-unavailable');
+assert.equal(correctionCalls, callsBeforeInvalid, 'missing or invalid historical identity never contacts storage or invents a deduction');
+correctionState.clear();
+for (let i = 0; i < 200; i++) correctionState.set(`fixture-${i}`, 'include');
+assert.equal(await updateOwnerCount(correctionStore, ownerCookie, 'count-test-salt', true), 'unavailable');
+console.log('owner count identity validation, deduplication, restoration, late-request race and capacity checks passed');

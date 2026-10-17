@@ -1,9 +1,11 @@
 import { Redis } from '@upstash/redis';
 import { NextRequest, NextResponse } from 'next/server';
 import { ownerNetworkContext, recordOwnerAction } from '@/lib/site-activity-owner-records';
+import { readOwnerCountStatus, updateOwnerCount, type OwnerCountStatus } from '@/lib/site-activity-owner-count';
 import {
   isSiteActivityBrowserExcluded,
   SITE_ACTIVITY_EXCLUSION_COOKIE_NAME,
+  SITE_ACTIVITY_VISITOR_COOKIE_NAME,
   SITE_ACTIVITY_PREFERENCE_COOKIE_MAX_AGE_SECONDS,
   siteActivityExclusionCookieValue
 } from '@/lib/site-activity-preference';
@@ -165,16 +167,28 @@ export async function POST(request: NextRequest) {
   if (!passwordAccepted) return privateResponse(401);
 
   if ('inspect' in body) {
+    let historyCorrection: OwnerCountStatus = 'unavailable';
+    try {
+      const redis = getRedis();
+      if (redis) historyCorrection = await readOwnerCountStatus(redis,
+        request.cookies.get(SITE_ACTIVITY_VISITOR_COOKIE_NAME)?.value, activitySalt);
+    } catch { /* Inspection reports uncertainty without changing history. */ }
     return privateJson({
       excluded: isSiteActivityBrowserExcluded(request.cookies.get(SITE_ACTIVITY_EXCLUSION_COOKIE_NAME)?.value, activitySalt),
       network: ownerNetworkContext(request.headers, process.env.VERCEL === '1'),
-      checkedAt: new Date().toISOString()
+      checkedAt: new Date().toISOString(), historyCorrection
     }, 200);
   }
 
   let auditSaved = false;
   let actionId: string | null = null;
   const checkedAt = new Date();
+  let historyCorrection: OwnerCountStatus = 'unavailable';
+  try {
+    const redis = getRedis();
+    if (redis) historyCorrection = await updateOwnerCount(redis,
+      request.cookies.get(SITE_ACTIVITY_VISITOR_COOKIE_NAME)?.value, activitySalt, body.excluded);
+  } catch { /* Future opt-out still applies if historical correction is unavailable. */ }
   // Losing audit storage must never prevent a browser from opting out.
   // Report that limitation explicitly instead of claiming the action was saved.
   try {
@@ -188,7 +202,7 @@ export async function POST(request: NextRequest) {
 
   const response = NextResponse.json(
     { excluded: body.excluded, network: ownerNetworkContext(request.headers, process.env.VERCEL === '1'),
-      checkedAt: checkedAt.toISOString(), auditSaved, actionId },
+      checkedAt: checkedAt.toISOString(), auditSaved, actionId, historyCorrection },
     { headers: { 'Cache-Control': 'private, no-store', 'X-Robots-Tag': 'noindex, nofollow' } }
   );
   response.cookies.set(

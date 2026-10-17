@@ -12,7 +12,11 @@ it does not identify people.
   browsers, or automation can change the estimate.
 - The total remains hidden below two estimated browser identifiers. Once the
   threshold is reached, the public API returns the HyperLogLog estimate as an
-  integer; it is not a count of people.
+  integer; it is not a count of people. The homepage subtracts the number of
+  confirmed owner browser identities in its private correction registry from
+  this raw estimate, clamped to zero. The corrected value remains an estimate.
+  Raw lifetime HLLs, map-cell intensities and private daily/page-view records
+  remain unchanged; this is a reversible correction of the headline total only.
 - Geography is quantized to a 5-degree cell before storage. A cell is omitted
   below two estimated browser identifiers and is exposed only as low (2-4),
   medium (5-9), or high (10+) intensity. The public response contains no
@@ -252,11 +256,25 @@ private windows, or cleared cookies because the site has no owner-login
 identity. Each maintainer browser must be verified separately, and the marker
 must be renewed after at most 400 days.
 
-Redis HyperLogLog cannot remove one historical digest. Therefore the preference
-is forward-only: visits made before it is enabled remain in the lifetime total
-and any earlier map cells. Exact removal of prior maintainer activity requires
-rotating the aggregate key prefix and restarting the public collection period,
-which also discards other visitors' history.
+Redis HyperLogLog cannot remove one historical digest. A separate bounded
+owner correction registry therefore adjusts the displayed total without
+rewriting that aggregate or deleting other visitors. Successful owner exclusion
+registers the existing, signed v2 browser identity once; restoring inclusion
+removes that identity's correction. A refresh from an already excluded browser
+also registers it, so previously excluded devices need only refresh after the
+upgrade. Delayed old excluded requests cannot override an explicit restoration.
+Only v2 cookies issued after successful lifetime aggregation qualify. Missing,
+legacy or invalid cookies cause no invented subtraction or new identity. Older
+identities lost through cookie clearing cannot be recovered from IP records.
+
+This owner-only registry stores at most 200 salted one-way browser digests and
+exclude/include state, separately from the 30-day action receipts. It stores no
+IP, device label, page or cookie value, and persists alongside the lifetime
+aggregate so historical corrections do not silently expire. It is not a list
+of unique people or devices. Each valid identity is deducted once across IP
+changes; the raw HyperLogLog estimation error still applies. Public responses
+do not expose correction members or counts. Public cache freshness is shortened
+to 30 seconds plus at most 30 seconds of stale revalidation.
 
 Migration must be deployed before the version 1 daily keys from 2026-08-09
 expire; an HLL cannot reconstruct an already expired source. If that deadline

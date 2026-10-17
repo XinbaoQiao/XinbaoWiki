@@ -28,6 +28,7 @@ import {
 import { dailyVisitLabels, recordDailyActivity } from '@/lib/site-activity-daily';
 import { createActivityEvent, recordActivityEvent } from '@/lib/site-activity-events';
 import { getPublicManifestSlugs } from '@/lib/wiki-manifest';
+import { OWNER_COUNT_KEY, ownerAdjustedEstimate, updateOwnerCount } from '@/lib/site-activity-owner-count';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
@@ -205,7 +206,7 @@ function emptyPayload(enabled: boolean, now = new Date()): SiteActivityPayload {
 function publicJson(payload: SiteActivityPayload) {
   return NextResponse.json(payload, {
     headers: {
-      'Cache-Control': 'public, max-age=0, s-maxage=300, stale-while-revalidate=900'
+      'Cache-Control': 'public, max-age=0, s-maxage=30, stale-while-revalidate=30'
     }
   });
 }
@@ -265,6 +266,16 @@ export async function POST(request: NextRequest) {
 
   const activitySalt = process.env.RATE_LIMIT_SALT;
   if (activitySalt && isSiteActivityBrowserExcluded(request.cookies.get(SITE_ACTIVITY_EXCLUSION_COOKIE_NAME)?.value, activitySalt)) {
+    // Refreshing an already excluded browser can recover its historical v2
+    // identity without minting an ID, storing a visit, or looking up geography.
+    const url = process.env.UPSTASH_REDIS_REST_URL;
+    const redisAuth = process.env.UPSTASH_REDIS_REST_TOKEN;
+    if (url && redisAuth) {
+      try {
+        const ownerStore = new Redis({ url, token: redisAuth, retry: false, signal: () => AbortSignal.timeout(2_000) });
+        await updateOwnerCount(ownerStore, request.cookies.get(SITE_ACTIVITY_VISITOR_COOKIE_NAME)?.value, activitySalt, true, true);
+      } catch { /* Excluded visits remain excluded even when correction storage fails. */ }
+    }
     return privateResponse(204);
   }
   const redis = getRedis();
@@ -343,7 +354,8 @@ export async function GET(request: NextRequest) {
     countPipeline.pfcount(siteActivityAggregationKeys.lifetimeAll());
     for (const cellId of cellIds) countPipeline.pfcount(siteActivityAggregationKeys.lifetimeCell(cellId));
     const counts = await countPipeline.exec<number[]>();
-    const uniqueBrowsersEstimate = publicSiteActivityEstimate(Number(counts[0]) || 0);
+    const ownerCount = await redis.scard(OWNER_COUNT_KEY);
+    const uniqueBrowsersEstimate = publicSiteActivityEstimate(ownerAdjustedEstimate(Number(counts[0]) || 0, Number(ownerCount)));
     const cells = uniqueBrowsersEstimate === null
       ? []
       : cellIds
