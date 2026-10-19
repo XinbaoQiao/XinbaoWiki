@@ -101,7 +101,10 @@ for (const width of [1920, 1440, 1200]) {
         expect(layout.supporting.bottom).toBeLessThan(layout.resources.top);
         expect(layout.contentHeight).toBeLessThanOrEqual(layout.highlight.height + 1);
         expect(layout.panel.width).toBeLessThanOrEqual(1160);
-        for (const square of layout.squares) expect(Math.abs(square.width - square.height)).toBeLessThan(1);
+        for (const square of layout.squares) {
+          expect(Math.abs(square.width - square.height)).toBeLessThan(1);
+          expect(square.width).toBeLessThanOrEqual(128);
+        }
         layouts.push(layout);
         if (width === 1440 && slug.includes('Sample_Selection')) await capture(page, 'model-collapse-detailed.png');
         if (index + 1 < count) await batch.getByRole('button', { name: 'Next paper', exact: true }).click();
