@@ -90,15 +90,29 @@ The former Soft-Weighted poster and its preview were withdrawn at the author’s
 
 ## Generated research-topic illustrations
 
-The following files are recorded in Git history as generated concept
-illustrations, but the model, prompt, date, output terms, and human-authorship
-contribution are not documented. They are all **unresolved** and receive no
-downstream reuse permission:
+The following four illustrations were replaced on 2026-10-20 with qualitative
+academic mechanism diagrams generated using the built-in image-generation tool.
+The exact model version was not exposed. Author feedback rejected the initial
+decorative and overly uniform drafts; those drafts are not deployed. Human input selected
+topic-specific visual mechanisms, checked labels and arrows, and scoped the unlearning
+influence illustration. Prompts and source mechanisms are preserved in
+[research-topic-image-prompts.md](docs/research-topic-image-prompts.md).
+Exports were resized to 1400 × 933 and PNG-compressed for the website. These are
+illustrative schematics, not measured experimental results. Publication was
+requested by the site owner; output-terms and downstream licensing are not
+expanded by this record, and no downstream reuse permission is granted.
 
 - `public/topics/ai-and-networks.png`
 - `public/topics/data-centric-ml.png`
 - `public/topics/machine-unlearning.png`
 - `public/topics/synthetic-data.png`
+
+| Asset | SHA-256 |
+| --- | --- |
+| AI and Networks | `29dc9e52ca6f58110ddd60c539e34b362613a0bc57f1173fe81940c3fd7fa638` |
+| Machine Unlearning | `f8abc9d67804f5ee972c70b1a56b9e635d373907cf1f5e632408b8ccea105bca` |
+| Synthetic Data | `f94d4b3cc1b217ea528f442173f5c36c187b06a1d290687ecccadd0318f7e08c` |
+| Data Centric ML | `a21662269dca98c9de40c291c27d28683ab4e26ce66adb08b4cd6d232646be91` |
 
 ## Xinbaopedia brand assets
 

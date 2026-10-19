@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { WikiLink } from '@/components/WikiLink';
 import { usePathname } from 'next/navigation';
 import type { LocalizedText, SiteLanguage } from '@/lib/site-navigation';
@@ -62,9 +62,46 @@ function SidebarSections({
   sections: SidebarNavSection[];
 }) {
   const currentPage = (item: SidebarNavItem) => item.localizedSlug[language] === currentSlug ? 'page' : undefined;
+  const rootRef = useRef<HTMLDivElement>(null);
+  const pendingRef = useRef<HTMLAnchorElement | null>(null);
+  const previousRef = useRef<{ y: number; height: number } | null>(null);
+  const align = useCallback((motion: boolean, target?: HTMLAnchorElement | null) => {
+    const root = rootRef.current;
+    const link = target ?? pendingRef.current ?? root?.querySelector<HTMLAnchorElement>('a[aria-current="page"]');
+    if (!root || !link || !link.getClientRects().length) {
+      if (root) delete root.dataset.markerReady;
+      previousRef.current = null;
+      return;
+    }
+    const box = link.getBoundingClientRect();
+    const next = { y: box.top - root.getBoundingClientRect().top + root.scrollTop, height: box.height };
+    const previous = previousRef.current;
+    if (previous?.y === next.y && previous.height === next.height) return;
+    root.style.setProperty('--sidebar-marker-duration', motion && previous ? '320ms' : '0ms');
+    root.style.setProperty('--sidebar-marker-y', `${next.y}px`);
+    root.style.setProperty('--sidebar-marker-height', `${next.height}px`);
+    root.dataset.markerReady = '';
+    previousRef.current = next;
+  }, []);
+  useLayoutEffect(() => { pendingRef.current = null; align(true); }, [currentSlug, language, align]);
+  useLayoutEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const observer = new ResizeObserver(() => align(false));
+    observer.observe(root);
+    root.querySelectorAll('a').forEach(link => observer.observe(link));
+    return () => observer.disconnect();
+  }, [align]);
 
   return (
-    <div className="wiki-sidebar-content">
+    <div className="wiki-sidebar-content" ref={rootRef} onClickCapture={(event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.altKey || event.shiftKey) return;
+      const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('a');
+      if (!link || !event.currentTarget.contains(link)) return;
+      pendingRef.current = link;
+      align(true, link);
+    }}>
+      <span className="wiki-sidebar-current-marker" aria-hidden="true" />
       {sections.map((section) => (
         <div key={section.key}>
           <h4>{section.label[language]}</h4>
@@ -88,7 +125,7 @@ function SidebarSections({
 
       <h4>{sectionLabels.updates[language]}</h4>
       <ul>
-        <li><WikiLink href={withBasePath('/updates/')} onClick={onNavigate} titleMorphSlug="Updates">{sectionLabels.feed[language]}</WikiLink></li>
+        <li><WikiLink href={withBasePath('/updates/')} aria-current={currentSlug === 'Updates' ? 'page' : undefined} onClick={onNavigate} titleMorphSlug="Updates">{sectionLabels.feed[language]}</WikiLink></li>
       </ul>
     </div>
   );

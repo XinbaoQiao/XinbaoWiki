@@ -8,6 +8,7 @@ import type { PaperHighlightCatalog, PaperHighlightImage } from '@/lib/paper-hig
 import type { AcceptedPaper } from '@/lib/site-updates';
 import type { SiteLanguage } from '@/lib/site-navigation';
 import styles from './PaperAcceptancePreview.module.css';
+import { useAnimatedDisclosure } from '@/components/useAnimatedDisclosure';
 
 function withBasePath(pathname: string) {
   const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
@@ -23,6 +24,7 @@ export function PaperAcceptancePreview({ papers, language, defaultOpen = false, 
   visible?: boolean;
 }) {
   const [open, setOpen] = useState(defaultOpen);
+  const disclosure = useAnimatedDisclosure(open, setOpen);
   const [retainContent, setRetainContent] = useState(visible && defaultOpen);
   useEffect(() => {
     if (visible && open) { setRetainContent(true); return; }
@@ -49,8 +51,8 @@ export function PaperAcceptancePreview({ papers, language, defaultOpen = false, 
   }
 
   return (
-    <details className={styles.disclosure} data-paper-acceptance="" data-preview-view={view} open={open} onToggle={(event) => setOpen(event.currentTarget.open)}>
-      <summary>{detailed ? copy.details : copy.summary} <span>({papers.length})</span></summary>
+    <details ref={disclosure.ref} className={styles.disclosure} data-animated-disclosure="" data-paper-acceptance="" data-preview-view={view} open={open} onToggle={(event) => setOpen(event.currentTarget.open)}>
+      <summary onClick={(event) => { event.preventDefault(); disclosure.toggle(); }}>{detailed ? copy.details : copy.summary} <span>({papers.length})</span></summary>
       {detailed && papers.length > 1 && <div className={styles.navigation} role="group" aria-label={copy.navigation}>
         <button type="button" aria-label={copy.previous} aria-controls={galleryId} disabled={activePaper === 0} onClick={() => setActivePaper((index) => index - 1)}>
           <span aria-hidden="true">‹</span>

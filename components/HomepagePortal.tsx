@@ -10,6 +10,7 @@ import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
 import { getRecentSiteUpdates } from '@/lib/site-updates';
 import { PaperAcceptancePreview } from '@/components/PaperAcceptancePreview';
 import { SlidingSelection } from '@/components/SlidingSelection';
+import { useAnimatedDisclosure } from '@/components/useAnimatedDisclosure';
 import type { PaperHighlightCatalog } from '@/lib/paper-highlights';
 
 type LocalizedText = Record<SearchLanguage, string>;
@@ -167,14 +168,16 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
   const updatesWindowRef = useRef<HTMLDivElement>(null);
   const collapsibleSections = { activity: activityOpen, browse: browseOpen, news: newsOpen };
   const allSectionsClosed = Object.values(collapsibleSections).every((open) => !open);
-  const changeNewsOpen = (open: boolean) => {
+  const commitNewsOpen = (open: boolean) => {
     setNewsOpen(open);
     // Native paper disclosures retain manual state until the whole feed closes.
     if (!open) setAcceptanceResetKey((key) => key + 1);
   };
+  const newsDisclosure = useAnimatedDisclosure(newsOpen, commitNewsOpen);
+  const changeNewsOpen = newsDisclosure.change;
   const expandAllSections = () => {
     setBrowseOpen(true);
-    setNewsOpen(true);
+    changeNewsOpen(true);
     setActivityOpen(true);
   };
   const collapseAllSections = () => {
@@ -524,13 +527,15 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
           className="wiki-portal-news wiki-portal-timeline"
           data-updates-view={updatesView}
           id="portal-news"
+          ref={newsDisclosure.ref}
+          data-animated-disclosure=""
           onToggle={(event) => {
             if (event.target !== event.currentTarget) return;
             if (event.currentTarget.open !== newsOpen) changeNewsOpen(event.currentTarget.open);
           }}
           open={newsOpen}
         >
-          <summary>
+          <summary onClick={(event) => { event.preventDefault(); newsDisclosure.toggle(); }}>
             <span className="wiki-portal-timeline-heading">
               <strong>{updateLabels[language].title}</strong>
               <em>{recentUpdates.length} {language === 'zh' ? '条动态' : 'updates'}</em>

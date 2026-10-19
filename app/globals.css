@@ -1437,7 +1437,30 @@ html[data-site-palette="text"] .chat-xinbao-quick-reply {
 .wiki-sidebar a,
 .wiki-sidebar-content a {
   color: var(--wiki-link);
+  display: block;
+  margin-left: -8px;
+  padding: 2px 6px 2px 7px;
+  border-left: 3px solid transparent;
 }
+
+.wiki-sidebar-content { position: relative; }
+.wiki-sidebar-current-marker {
+  position: absolute;
+  top: 0;
+  left: -8px;
+  width: 3px;
+  height: var(--sidebar-marker-height, 0px);
+  transform: translateY(var(--sidebar-marker-y, 0px));
+  background: var(--site-theme-action-ink);
+  pointer-events: none;
+  visibility: hidden;
+  transition: transform var(--sidebar-marker-duration, 0ms) cubic-bezier(.22, 1, .36, 1), height var(--sidebar-marker-duration, 0ms) ease;
+}
+.wiki-sidebar-content[data-marker-ready] > .wiki-sidebar-current-marker { visibility: visible; }
+.wiki-sidebar-desktop { view-transition-name: sidebar-navigation; }
+::view-transition-old(sidebar-navigation) { display: none; }
+::view-transition-new(sidebar-navigation), ::view-transition-group(sidebar-navigation) { animation: none; mix-blend-mode: normal; }
+@media (prefers-reduced-motion: reduce) { .wiki-sidebar-current-marker { transition: none; } }
 
 .wiki-sidebar a:hover,
 .wiki-sidebar a:focus-visible,
@@ -1457,7 +1480,7 @@ html[data-site-palette="text"] .chat-xinbao-quick-reply {
   display: block;
   margin-left: -8px;
   padding: 2px 6px 2px 7px;
-  border-left: 3px solid var(--site-theme-action-ink);
+  border-left: 3px solid transparent;
   background: var(--site-theme-chrome-surface-strong);
   color: var(--site-theme-action-ink);
   font-weight: 700;
@@ -2764,18 +2787,31 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   background: color-mix(in srgb, var(--site-theme-accent) 5%, var(--wiki-bg-alt));
 }
 
-.wiki-portal-timeline[data-updates-view="detailed"][open] {
+.wiki-portal-timeline[data-updates-view="detailed"] {
   width: 100%;
   margin-inline: 0;
 }
 
-.wiki-shell:has(.wiki-portal-timeline[data-updates-view="detailed"][open]) {
+.wiki-shell:has(.wiki-portal-timeline[data-updates-view="detailed"]) {
   grid-template-columns: minmax(0, 1fr);
   max-width: 1114px;
 }
 
-.wiki-portal-disclosures:has(.wiki-portal-timeline[data-updates-view="detailed"][open]) {
+.wiki-portal-disclosures:has(.wiki-portal-timeline[data-updates-view="detailed"]) {
   max-width: 1034px;
+}
+
+.wiki-shell:has(.wiki-portal-timeline[data-updates-view="detailed"]) .wiki-main {
+  max-width: none;
+}
+
+/* The measured disclosure owns height; avoid a second native content transition. */
+.wiki-portal-disclosures > details[data-animated-disclosure]::details-content,
+details[data-animated-disclosure]::details-content {
+  block-size: auto;
+  opacity: 1;
+  transform: none;
+  transition: none;
 }
 
 @media (max-width: 760px) {

@@ -217,7 +217,7 @@ for (const width of [1440, 390, 320]) {
     }
     await newsSummary.click();
     await expect(news).not.toHaveAttribute('open', '');
-    expect(Math.abs((await news.boundingBox()).width - compactWidth)).toBeLessThanOrEqual(1);
+    expect(Math.abs((await news.boundingBox()).width - detailedWidth)).toBeLessThanOrEqual(1);
     await newsSummary.click();
     await expect(news).toHaveAttribute('data-updates-view', 'detailed');
     await expect(page.locator('#portal-news [data-paper-acceptance][open]')).toHaveCount(1);

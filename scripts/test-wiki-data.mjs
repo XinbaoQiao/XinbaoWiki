@@ -2135,7 +2135,7 @@ assertCssRule(styles, '.wiki-sidebar a,\n.wiki-sidebar-content a', [
   /color: var\(--wiki-link\);/
 ], 'sidebar ordinary links retain Wikipedia blue');
 assertCssRule(styles, '.wiki-sidebar a[aria-current="page"],\n.wiki-sidebar-content a[aria-current="page"]', [
-  /border-left: 3px solid var\(--site-theme-action-ink\);/,
+  /border-left: 3px solid transparent;/,
   /background: var\(--site-theme-chrome-surface-strong\);/,
   /color: var\(--site-theme-action-ink\);/
 ], 'sidebar marks only the current page with the resolved theme');
@@ -2489,7 +2489,7 @@ assert.match(homepagePortal, /const \[browseOpen, setBrowseOpen\] = useState\(fa
 assert.match(homepagePortal, /const \[newsOpen, setNewsOpen\] = useState\(false\);/, 'homepage News is collapsed by default');
 assert.match(homepagePortal, /const \[activityOpen, setActivityOpen\] = useState\(false\);/, 'homepage Site activity is collapsed by default');
 assert.match(homepagePortal, /const collapsibleSections = \{ activity: activityOpen, browse: browseOpen, news: newsOpen \};[\s\S]*const allSectionsClosed = Object\.values\(collapsibleSections\)\.every\(\(open\) => !open\);[\s\S]*wiki-portal-collapsed/, 'homepage computes collapsed state across all three peer disclosures');
-assert.match(homepagePortal, /const expandAllSections = \(\) => \{[\s\S]*setBrowseOpen\(true\);[\s\S]*setNewsOpen\(true\);[\s\S]*setActivityOpen\(true\);[\s\S]*\};[\s\S]*const collapseAllSections = \(\) => \{[\s\S]*setBrowseOpen\(false\);[\s\S]*changeNewsOpen\(false\);[\s\S]*setActivityOpen\(false\);[\s\S]*\};/, 'homepage signature button expands or collapses Updates, Site activity, and Browse together');
+assert.match(homepagePortal, /const expandAllSections = \(\) => \{[\s\S]*setBrowseOpen\(true\);[\s\S]*changeNewsOpen\(true\);[\s\S]*setActivityOpen\(true\);[\s\S]*\};[\s\S]*const collapseAllSections = \(\) => \{[\s\S]*setBrowseOpen\(false\);[\s\S]*changeNewsOpen\(false\);[\s\S]*setActivityOpen\(false\);[\s\S]*\};/, 'homepage signature button expands or collapses Updates, Site activity, and Browse together');
 assert.match(homepagePortal, /useLayoutEffect\(\(\) => \{[\s\S]*slice\(0, 5\)[\s\S]*--portal-updates-window-height[\s\S]*ResizeObserver[\s\S]*\}, \[language, newsOpen, recentUpdates.length, updatesView\]\);/, 'homepage sizes the scroll window from the first five recent updates and reacts to archive rollover');
 assert.match(homepagePortal, /className="wiki-portal-updates-window"[\s\S]*ref=\{updatesWindowRef\}[\s\S]*role="region"[\s\S]*tabIndex=\{0\}/, 'homepage update archive is a labeled keyboard-focusable scroll region');
 assert.match(homepagePortal, /<h1 className="wiki-portal-name" id="portal-title">[\s\S]*<\/h1>[\s\S]*<button[\s\S]*aria-label=\{allSectionsClosed \? sectionToggleLabels\[language\]\.expand : sectionToggleLabels\[language\]\.collapse\}[\s\S]*className="wiki-portal-name-button"[\s\S]*onClick=\{toggleAllSections\}[\s\S]*\/>/, 'homepage signature button is an empty named sibling overlay after the h1 title');
@@ -2510,7 +2510,7 @@ assert.doesNotMatch(visitorAtlas, /navigator\.geolocation|Country \/ region rank
 assert.match(visitorAtlas, /summaryFallback: 'All history'[\s\S]*summaryFallback: '全部历史'/, 'visitor atlas summarizes all collected history in both languages');
 assert.doesNotMatch(visitorAtlas, /Cells appear|Approximate IP|No map cell|wiki-visitor-atlas-note|至少 5|近 30 个完整日/, 'visitor atlas removes visible threshold, IP approximation, empty-state, and rolling-window explanations');
 assert.match(visitorAtlas, /<figcaption>[\s\S]*wiki-visitor-atlas-legend[\s\S]*<\/figcaption>[\s\S]*<dialog[\s\S]*visitor-atlas-owner-dialog/, 'visitor atlas keeps the one-row legend and hidden owner dialog in the same disclosure');
-assert.doesNotMatch(homepagePortal, /summary[\s\S]{0,120}preventDefault/, 'homepage summaries do not cancel native details activation');
+assert.match(homepagePortal, /newsDisclosure\.toggle\(\)/, 'measured Updates disclosure handles summary activation through its reversible animation');
 assert.match(siteUpdates, /Core research[\s\S]*Methods and geometry[\s\S]*Reliability and trust/, 'homepage research topics are organized into a readable taxonomy');
 assert.match(siteUpdates, /核心研究[\s\S]*方法与几何[\s\S]*可靠性与可信/, 'homepage research taxonomy has Chinese labels');
 assert.match(siteUpdates, /Indexes[\s\S]*Selected publications[\s\S]*Project pages/, 'homepage publication and project links are organized into a readable taxonomy');
