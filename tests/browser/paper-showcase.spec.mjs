@@ -87,6 +87,7 @@ for (const width of [1920, 1440, 1200]) {
             tldr: rect(highlight.querySelector('p')), primary: rect(root.querySelector('[data-paper-image="poster"], [data-paper-image="framework"]')),
             primaryRatio: (() => { const image = root.querySelector('[data-paper-image="poster"] img, [data-paper-image="framework"] img'); return image.naturalWidth / image.naturalHeight; })(),
             supporting: rect(root.querySelector('[data-paper-supporting-images]')), resources: rect(root.querySelector('[data-paper-resources]')),
+            resourceItems: [...root.querySelector('[data-paper-resources]').children].map(rect),
             squares: [...root.querySelectorAll('[data-paper-supporting-images] button')].map(rect),
             panel: rect(root.closest('#portal-news')),
             contentHeight: highlight.scrollHeight
@@ -97,20 +98,25 @@ for (const width of [1920, 1440, 1200]) {
         expect(Math.abs(layout.highlight.bottom - layout.page.bottom)).toBeLessThan(2);
         expect(layout.titleText.right).toBeLessThanOrEqual(layout.highlight.right + 1);
         expect(layout.titleText.height).toBeLessThanOrEqual(layout.titleLineHeight * 2 + 1);
-        expect(layout.page.width).toBeCloseTo(320, 0);
-        expect(layout.highlight.width).toBeCloseTo(420, 0);
+        expect(layout.page.width).toBeCloseTo(360, 0);
+        expect(layout.highlight.width).toBeCloseTo(500, 0);
+        expect(layout.primary.height).toBeGreaterThanOrEqual(190);
+        for (const item of layout.resourceItems) {
+          expect(item.right).toBeLessThanOrEqual(layout.resources.right + 1);
+          expect(Math.abs((item.top + item.bottom) / 2 - (layout.resources.top + layout.resources.bottom) / 2)).toBeLessThan(1);
+        }
         expect(layout.title.bottom).toBeLessThan(layout.tldr.top);
         expect(layout.primary.bottom).toBeLessThan(layout.supporting.top);
         expect(Math.abs(layout.primary.left - layout.supporting.left)).toBeLessThan(1);
         expect(Math.abs(layout.primary.right - layout.supporting.right)).toBeLessThan(1);
         expect(Math.abs(layout.primary.left - layout.highlight.left)).toBeLessThan(1);
         expect(Math.abs(layout.primary.right - layout.highlight.right)).toBeLessThan(1);
-        expect(layout.supporting.height).toBeCloseTo(96, 0);
+        expect(layout.supporting.height).toBeCloseTo(80, 0);
         expect(layout.supporting.bottom).toBeLessThan(layout.resources.top);
         expect(layout.contentHeight).toBeLessThanOrEqual(layout.highlight.height + 1);
-        expect(layout.panel.width).toBeLessThanOrEqual(914);
+        expect(layout.panel.width).toBeLessThanOrEqual(1034);
         for (const square of layout.squares) {
-          expect(square.height).toBeCloseTo(96, 0);
+          expect(square.height).toBeCloseTo(80, 0);
         }
         layouts.push(layout);
         if (width === 1440 && slug.includes('Sample_Selection')) await capture(page, 'model-collapse-detailed.png');
