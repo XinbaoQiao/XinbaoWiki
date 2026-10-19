@@ -96,7 +96,9 @@ for (const width of [1920, 1440, 1200]) {
         expect(Math.abs(layout.highlight.top - layout.page.top)).toBeLessThan(1);
         expect(Math.abs(layout.highlight.bottom - layout.page.bottom)).toBeLessThan(2);
         expect(layout.titleText.right).toBeLessThanOrEqual(layout.highlight.right + 1);
-        expect(layout.titleText.height).toBeLessThanOrEqual(layout.titleLineHeight + 1);
+        expect(layout.titleText.height).toBeLessThanOrEqual(layout.titleLineHeight * 2 + 1);
+        expect(layout.page.width).toBeCloseTo(320, 0);
+        expect(layout.highlight.width).toBeCloseTo(420, 0);
         expect(layout.title.bottom).toBeLessThan(layout.tldr.top);
         expect(layout.primary.bottom).toBeLessThan(layout.supporting.top);
         expect(Math.abs(layout.primary.left - layout.supporting.left)).toBeLessThan(1);
@@ -106,7 +108,7 @@ for (const width of [1920, 1440, 1200]) {
         expect(layout.supporting.height).toBeCloseTo(96, 0);
         expect(layout.supporting.bottom).toBeLessThan(layout.resources.top);
         expect(layout.contentHeight).toBeLessThanOrEqual(layout.highlight.height + 1);
-        expect(layout.panel.width).toBeLessThanOrEqual(1040);
+        expect(layout.panel.width).toBeLessThanOrEqual(914);
         for (const square of layout.squares) {
           expect(square.height).toBeCloseTo(96, 0);
         }
@@ -118,6 +120,8 @@ for (const width of [1920, 1440, 1200]) {
     expect(layouts).toHaveLength(5);
     expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
     expect(errors).toEqual([]);
+    fs.mkdirSync('.cache/right-column', { recursive: true });
+    fs.writeFileSync(`.cache/right-column/layouts-${width}.json`, JSON.stringify(layouts, null, 2));
     await testInfo.attach('paper-layouts', { body: Buffer.from(JSON.stringify(layouts, null, 2)), contentType: 'application/json' });
   });
 }

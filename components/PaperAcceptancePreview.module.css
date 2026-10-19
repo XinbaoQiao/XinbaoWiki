@@ -68,7 +68,8 @@
 .detailedGallery .paper {
   --paper-page-width: 320px;
   display: grid;
-  grid-template-columns: var(--paper-page-width) minmax(0, 1fr);
+  grid-template-columns: var(--paper-page-width) minmax(0, 420px);
+  max-width: 760px;
   column-gap: 18px;
   align-items: start;
 }
@@ -96,7 +97,7 @@
   margin: 0;
   color: var(--site-theme-action-ink);
   font-family: var(--font-sans);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.35;
   text-wrap: pretty;
 }
@@ -288,12 +289,6 @@
   .navigation button {
     width: 44px;
     min-height: 44px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .highlight .paperTitle {
-    white-space: nowrap;
   }
 }
 

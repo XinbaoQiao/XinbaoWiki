@@ -2771,11 +2771,11 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
 
 .wiki-shell:has(.wiki-portal-timeline[data-updates-view="detailed"][open]) {
   grid-template-columns: minmax(0, 1fr);
-  max-width: 1120px;
+  max-width: 994px;
 }
 
 .wiki-portal-disclosures:has(.wiki-portal-timeline[data-updates-view="detailed"][open]) {
-  max-width: 1040px;
+  max-width: 914px;
 }
 
 @media (max-width: 760px) {
