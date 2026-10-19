@@ -721,6 +721,45 @@ a.external.wiki-link-pdf::after {
   font-size: var(--fs-body);
 }
 
+.wiki-sliding-selection {
+  position: relative;
+  isolation: isolate;
+}
+
+.wiki-sliding-selection::before {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: var(--selection-width);
+  height: var(--selection-height);
+  border-radius: inherit;
+  background: color-mix(in srgb, var(--site-theme-accent) 10%, var(--wiki-bg));
+  content: '';
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(var(--selection-x), var(--selection-y));
+  transition:
+    transform var(--selection-duration, 0ms) cubic-bezier(.22, 1, .36, 1),
+    width var(--selection-duration, 0ms) cubic-bezier(.22, 1, .36, 1),
+    height var(--selection-duration, 0ms) cubic-bezier(.22, 1, .36, 1);
+}
+
+.wiki-sliding-selection[data-selection-ready]::before {
+  opacity: 1;
+}
+
+.wiki-sliding-selection > button {
+  position: relative;
+  z-index: 1;
+  transition: color .18s ease;
+}
+
+.wiki-sliding-selection[data-selection-ready] > button[aria-pressed="true"],
+.wiki-sliding-selection[data-selection-ready] > button:hover {
+  background: transparent;
+}
+
 .wiki-search-language-seg {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -5175,6 +5214,25 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
     transform: translate(-50%, -50%) scale(1.25);
   }
 
+  .wiki-sliding-selection-dots[data-selection-ready]::before {
+    z-index: 2;
+    width: 7.5px;
+    height: 7.5px;
+    border-radius: 999px;
+    background: var(--site-theme-action-ink);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--site-theme-action-ink) 10%, transparent);
+    transform: translate(
+      calc(var(--selection-x) + var(--selection-width) * .5 - 3.75px),
+      calc(var(--selection-y) + var(--selection-height) * .5 - 3.75px)
+    );
+  }
+
+  .wiki-sliding-selection-dots[data-selection-ready] > button::after {
+    background: color-mix(in srgb, var(--site-theme-action-ink) 32%, var(--wiki-border-light));
+    box-shadow: none;
+    transform: translate(-50%, -50%);
+  }
+
   .wiki-portal-cube-touch-angles button:focus-visible {
     border-radius: 999px;
     outline: 2px solid var(--site-theme-action-ink);
@@ -5199,6 +5257,12 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .wiki-sliding-selection::before,
+  .wiki-sliding-selection > button,
+  .wiki-portal-cube-touch-angles button::after {
+    transition: none;
+  }
+
   .chat-xinbao-shell,
   .chat-xinbao-typing i,
   .wiki-portal-name-logos,

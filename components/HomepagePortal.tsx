@@ -9,6 +9,7 @@ import { VisitorAtlasDisclosure } from '@/components/VisitorAtlasDisclosure';
 import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
 import { getRecentSiteUpdates } from '@/lib/site-updates';
 import { PaperAcceptancePreview } from '@/components/PaperAcceptancePreview';
+import { SlidingSelection } from '@/components/SlidingSelection';
 import type { PaperHighlightCatalog } from '@/lib/paper-highlights';
 
 type LocalizedText = Record<SearchLanguage, string>;
@@ -543,7 +544,7 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
             </span>}
           </summary>
           <div className="wiki-portal-view-switcher wiki-portal-updates-view-switcher" role="group" aria-label={updatesViewLabels[language].group}>
-            <div>
+            <SlidingSelection>
               {(['compact', 'detailed'] as const).map((view) => (
                 <button
                   aria-controls="portal-updates-window"
@@ -556,7 +557,7 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
                   {updatesViewLabels[language][view]}
                 </button>
               ))}
-            </div>
+            </SlidingSelection>
           </div>
           <div
             aria-label={updateLabels[language].window}
@@ -598,7 +599,7 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
           </summary>
           <div className="wiki-portal-view-switcher" role="group" aria-label={browseViewLabels[language].group}>
             <span>{browseViewLabels[language].group}</span>
-            <div>
+            <SlidingSelection>
               {(['list', 'cube'] as const).map((view) => (
                 <button
                   aria-pressed={browseView === view}
@@ -610,7 +611,7 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
                   {browseViewLabels[language][view]}
                 </button>
               ))}
-            </div>
+            </SlidingSelection>
           </div>
           <div
             className={'wiki-portal-cube-stage wiki-portal-cube-stage-' + browseView}
@@ -692,7 +693,7 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
               </div>
             )}
             {browseView === 'cube' && !activeCubeFace && (
-              <div className="wiki-portal-cube-touch-angles" role="group" aria-label={language === 'zh' ? '魔方观察角度' : 'Cube viewing angle'}>
+              <SlidingSelection className="wiki-portal-cube-touch-angles wiki-sliding-selection-dots" role="group" aria-label={language === 'zh' ? '魔方观察角度' : 'Cube viewing angle'}>
                 {touchCubeAngles.map((angle) => (
                   <button
                     aria-label={language === 'zh' ? `切换至${angle === 'top' ? '上方' : angle === 'front' ? '正面' : '右侧'}视角` : `Switch to ${angle} view`}
@@ -702,7 +703,7 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
                     type="button"
                   />
                 ))}
-              </div>
+              </SlidingSelection>
             )}
             {browseView === 'cube' && activeCubeFace && (
               <button

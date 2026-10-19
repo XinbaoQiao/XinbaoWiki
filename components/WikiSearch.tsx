@@ -1,6 +1,7 @@
 'use client';
 
 import { WikiLink } from '@/components/WikiLink';
+import { SlidingSelection } from '@/components/SlidingSelection';
 import { prepareWikiTitleMorph } from '@/lib/wiki-view-transition';
 import { useTransitionRouter } from 'next-view-transitions';
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
@@ -290,7 +291,7 @@ export function WikiSearch({
             value={query}
           />
           {showLanguageSelect && variant === 'portal' ? (
-            <div aria-label={copy.languageAria} className="wiki-search-language-seg" role="group">
+            <SlidingSelection aria-label={copy.languageAria} className="wiki-search-language-seg" role="group">
               {([
                 ['en', 'EN'],
                 ['zh', '中文']
@@ -309,7 +310,7 @@ export function WikiSearch({
                   {label}
                 </button>
               ))}
-            </div>
+            </SlidingSelection>
           ) : showLanguageSelect ? (
             <select
               aria-label={copy.languageAria}
