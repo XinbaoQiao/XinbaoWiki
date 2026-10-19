@@ -50,12 +50,16 @@ async function expectNoPageOverflow(page) {
 }
 
 for (const width of [1440, 390, 320]) {
-  test(`Latest Updates: four-year window, expandable pages and paper order at ${width}px`, async ({ page }) => {
+  test(`Latest Updates: collapse reset, wider view, four-year window and paper order at ${width}px`, async ({ page }) => {
     const errors = captureErrors(page);
     await page.setViewportSize({ width, height: 1000 });
     await page.clock.setFixedTime(new Date('2026-10-19T03:00:00Z'));
     await page.goto('/', { waitUntil: 'networkidle' });
-    await page.locator('#portal-news > summary').click();
+    const news = page.locator('#portal-news');
+    const newsSummary = page.locator('#portal-news > summary');
+    await newsSummary.click();
+    await expect(newsSummary).not.toContainText(/past 4 years/i);
+    await expect(news).toHaveAttribute('data-updates-view', 'compact');
     const rows = page.locator('.wiki-portal-news-list > li');
     await expect(rows).toHaveCount(8);
     await expect(page.locator('#portal-news time[datetime^="2022-"]')).toHaveCount(0);
@@ -83,7 +87,7 @@ for (const width of [1440, 390, 320]) {
     await expect(figures).toHaveCount(2);
     const geometry = await figures.evaluateAll(elements => elements.map(element => {
       const rect = element.getBoundingClientRect();
-      return { slug: element.dataset.paperSlug, left: rect.left, top: rect.top };
+      return { slug: element.dataset.paperSlug, left: rect.left, top: rect.top, width: rect.width };
     }));
     expect(geometry.map(item => item.slug)).toEqual(['Hessian_Free_Online_Certified_Unlearning', 'DynFrs']);
     expect(geometry[0].left).toBeLessThan(geometry[1].left);
@@ -112,10 +116,78 @@ for (const width of [1440, 390, 320]) {
       await iclr.scrollIntoViewIfNeeded();
       await captureScreenshot(page.locator('#portal-news'), 'homepage-paper-previews.png');
     }
-    await toggle.click();
+    // Closing the entire feed discards manual paper states, including a closed newest preview.
+    await latestAcceptance.locator('summary').click();
+    await expect(latestAcceptance.locator('[data-paper-acceptance]')).not.toHaveAttribute('open', '');
+    await newsSummary.click();
+    await expect(news).not.toHaveAttribute('open', '');
+    await expect(page.locator('#portal-news [data-paper-acceptance][open]')).toHaveCount(1);
+    await expect(latestAcceptance.locator('[data-paper-acceptance]')).toHaveAttribute('open', '');
     await expect(iclr.locator('[data-paper-acceptance]')).not.toHaveAttribute('open', '');
+    await newsSummary.click();
+    await expect(latestAcceptance.locator('[data-paper-acceptance]')).toHaveAttribute('open', '');
+
+    // The homepage-wide collapse control uses the same reset path.
+    await latestAcceptance.locator('summary').click();
+    await toggle.click();
+    await page.getByRole('button', { name: 'Collapse homepage sections', exact: true }).click();
+    await expect(news).not.toHaveAttribute('open', '');
+    await expect(page.locator('#portal-news [data-paper-acceptance][open]')).toHaveCount(1);
+    await expect(latestAcceptance.locator('[data-paper-acceptance]')).toHaveAttribute('open', '');
+    await expect(iclr.locator('[data-paper-acceptance]')).not.toHaveAttribute('open', '');
+    await newsSummary.click();
+
+    const compactWidth = (await news.boundingBox()).width;
+    const compactImageWidth = (await latestAcceptance.locator('img').boundingBox()).width;
+    const viewControls = page.getByRole('group', { name: 'Updates view', exact: true });
+    const detailedButton = viewControls.getByRole('button', { name: 'Detailed', exact: true });
+    await detailedButton.focus();
+    await page.keyboard.press('Enter');
+    await expect(detailedButton).toHaveAttribute('aria-pressed', 'true');
+    await expect(news).toHaveAttribute('open', '');
+    await expect(news).toHaveAttribute('data-updates-view', 'detailed');
+    const detailedWidth = (await news.boundingBox()).width;
+    const detailedImageWidth = (await latestAcceptance.locator('img').boundingBox()).width;
+    if (width === 1440) {
+      expect(detailedWidth).toBeGreaterThan(compactWidth * 1.5);
+    }
+    expect(detailedImageWidth).toBeGreaterThan(compactImageWidth * 1.3);
+    expect((await detailedButton.boundingBox()).height).toBeGreaterThanOrEqual(width <= 760 ? 44 : 30);
+    await latestAcceptance.locator('summary').click();
+    await toggle.click();
+    const detailedFigures = await figures.evaluateAll(elements => elements.map(element => {
+      const rect = element.getBoundingClientRect();
+      return { left: rect.left, top: rect.top, width: rect.width };
+    }));
+    expect(detailedFigures[0].left).toBeLessThan(detailedFigures[1].left);
+    expect(Math.abs(detailedFigures[0].top - detailedFigures[1].top)).toBeLessThanOrEqual(1);
+    expect(detailedFigures[0].width).toBeGreaterThan(geometry[0].width * (width === 1440 ? 1.3 : 1.1));
+    await expectNoPageOverflow(page);
+    fs.writeFileSync(path.join(qaDirectory, `updates-views-${width}.json`), JSON.stringify({
+      compactWidth, detailedWidth, compactImageWidth, detailedImageWidth, detailedFigures
+    }, null, 2));
+    if (width === 1440 || width === 320) {
+      await toggle.evaluate(element => element.blur());
+      await iclr.scrollIntoViewIfNeeded();
+      await captureScreenshot(news, width === 1440 ? 'homepage-detailed-paper-previews.png' : 'homepage-detailed-mobile.png');
+    }
+    await newsSummary.click();
+    await expect(news).not.toHaveAttribute('open', '');
+    expect(Math.abs((await news.boundingBox()).width - compactWidth)).toBeLessThanOrEqual(1);
+    await newsSummary.click();
+    await expect(news).toHaveAttribute('data-updates-view', 'detailed');
+    await expect(page.locator('#portal-news [data-paper-acceptance][open]')).toHaveCount(1);
+    await expect(latestAcceptance.locator('[data-paper-acceptance]')).toHaveAttribute('open', '');
+    await expect(iclr.locator('[data-paper-acceptance]')).not.toHaveAttribute('open', '');
+    await viewControls.getByRole('button', { name: 'Compact', exact: true }).click();
+    expect(Math.abs((await news.boundingBox()).width - compactWidth)).toBeLessThanOrEqual(1);
     await page.getByRole('group', { name: 'Search language', exact: true }).getByRole('button', { name: '中文', exact: true }).click();
-    await expect(page.locator('#portal-news > summary')).toContainText('近四年');
+    await expect(newsSummary).toContainText('8 条动态');
+    await expect(newsSummary).not.toContainText('近四年');
+    const chineseViewControls = page.getByRole('group', { name: '动态视图', exact: true });
+    await expect(chineseViewControls.getByRole('button', { name: '紧凑', exact: true })).toHaveAttribute('aria-pressed', 'true');
+    await chineseViewControls.getByRole('button', { name: '详细', exact: true }).click();
+    await expect(news).toHaveAttribute('data-updates-view', 'detailed');
     await expect(rows).toHaveCount(8);
     await expect(iclr.locator('summary')).toContainText('查看 Camera-Ready 首页');
     await expect(page.locator('#portal-news [data-paper-acceptance][open]')).toHaveCount(1);

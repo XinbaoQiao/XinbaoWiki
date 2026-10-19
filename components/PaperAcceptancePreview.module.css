@@ -50,14 +50,14 @@
 }
 
 .paper {
-  flex: 0 0 clamp(160px, calc((100% - 12px) / 2), 260px);
+  flex: 0 0 var(--portal-paper-preview-width, clamp(160px, calc((100% - 12px) / 2), 260px));
   min-width: 0;
   margin: 0;
   scroll-snap-align: start;
 }
 
 .paper:only-child {
-  flex-basis: min(100%, 300px);
+  flex-basis: var(--portal-paper-preview-single-width, min(100%, 300px));
 }
 
 .paper .imageLink {

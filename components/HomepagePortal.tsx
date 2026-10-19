@@ -13,6 +13,7 @@ import { PaperAcceptancePreview } from '@/components/PaperAcceptancePreview';
 type LocalizedText = Record<SearchLanguage, string>;
 type PortalPalette = 'text' | 'blue' | 'gold' | 'rose' | 'green' | 'violet' | 'charcoal';
 type BrowseView = 'list' | 'cube';
+type UpdatesView = 'compact' | 'detailed';
 type CubeFace = 'top' | 'front' | 'right';
 type TouchCubeAngle = 'top' | 'front' | 'right';
 type PortalEntry = { href: string; slug: string; summary: string; title: string };
@@ -132,6 +133,11 @@ const updateLabels = {
   }
 } satisfies Record<SearchLanguage, { title: string; window: string }>;
 
+const updatesViewLabels = {
+  en: { compact: 'Compact', detailed: 'Detailed', group: 'Updates view' },
+  zh: { compact: '紧凑', detailed: '详细', group: '动态视图' }
+} satisfies Record<SearchLanguage, Record<UpdatesView | 'group', string>>;
+
 function withBasePath(pathname: string) {
   const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
   return basePath ? `${basePath}${pathname}` : pathname;
@@ -149,6 +155,8 @@ export function HomepagePortal({ directorySections, languageEntries, updatesAsOf
   const [touchCubeDragDegrees, setTouchCubeDragDegrees] = useState(0);
   const [browseOpen, setBrowseOpen] = useState(false);
   const [newsOpen, setNewsOpen] = useState(false);
+  const [updatesView, setUpdatesView] = useState<UpdatesView>('compact');
+  const [acceptanceResetKey, setAcceptanceResetKey] = useState(0);
   const [activityOpen, setActivityOpen] = useState(false);
   const cubeHoverIntentRef = useRef<number | null>(null);
   const cubeStageRef = useRef<HTMLDivElement>(null);
@@ -156,6 +164,11 @@ export function HomepagePortal({ directorySections, languageEntries, updatesAsOf
   const updatesWindowRef = useRef<HTMLDivElement>(null);
   const collapsibleSections = { activity: activityOpen, browse: browseOpen, news: newsOpen };
   const allSectionsClosed = Object.values(collapsibleSections).every((open) => !open);
+  const changeNewsOpen = (open: boolean) => {
+    setNewsOpen(open);
+    // Native paper disclosures retain manual state until the whole feed closes.
+    if (!open) setAcceptanceResetKey((key) => key + 1);
+  };
   const expandAllSections = () => {
     setBrowseOpen(true);
     setNewsOpen(true);
@@ -163,7 +176,7 @@ export function HomepagePortal({ directorySections, languageEntries, updatesAsOf
   };
   const collapseAllSections = () => {
     setBrowseOpen(false);
-    setNewsOpen(false);
+    changeNewsOpen(false);
     setActivityOpen(false);
   };
   const toggleAllSections = () => {
@@ -388,7 +401,7 @@ export function HomepagePortal({ directorySections, languageEntries, updatesAsOf
       resizeObserver.disconnect();
       window.removeEventListener('resize', measureWindow);
     };
-  }, [language, newsOpen, recentUpdates.length]);
+  }, [language, newsOpen, recentUpdates.length, updatesView]);
 
   const renderPortalSectionContent = (section: PortalSection, headingId: string) => (
     <>
@@ -506,14 +519,18 @@ export function HomepagePortal({ directorySections, languageEntries, updatesAsOf
       <div className="wiki-portal-disclosures">
         <details
           className="wiki-portal-news wiki-portal-timeline"
+          data-updates-view={updatesView}
           id="portal-news"
-          onToggle={(event) => setNewsOpen(event.currentTarget.open)}
+          onToggle={(event) => {
+            if (event.target !== event.currentTarget) return;
+            if (event.currentTarget.open !== newsOpen) changeNewsOpen(event.currentTarget.open);
+          }}
           open={newsOpen}
         >
           <summary>
             <span className="wiki-portal-timeline-heading">
               <strong>{updateLabels[language].title}</strong>
-              <em>{recentUpdates.length} {language === 'zh' ? '条动态 · 近四年' : 'updates · past 4 years'}</em>
+              <em>{recentUpdates.length} {language === 'zh' ? '条动态' : 'updates'}</em>
             </span>
             {latestUpdate && <span className="wiki-portal-news-preview">
               <time dateTime={latestUpdate.dateTime}>{latestUpdate.date}</time>
@@ -523,9 +540,26 @@ export function HomepagePortal({ directorySections, languageEntries, updatesAsOf
               </span>
             </span>}
           </summary>
+          <div className="wiki-portal-view-switcher wiki-portal-updates-view-switcher" role="group" aria-label={updatesViewLabels[language].group}>
+            <div>
+              {(['compact', 'detailed'] as const).map((view) => (
+                <button
+                  aria-controls="portal-updates-window"
+                  aria-pressed={updatesView === view}
+                  className={updatesView === view ? 'is-active' : undefined}
+                  key={view}
+                  onClick={() => setUpdatesView(view)}
+                  type="button"
+                >
+                  {updatesViewLabels[language][view]}
+                </button>
+              ))}
+            </div>
+          </div>
           <div
             aria-label={updateLabels[language].window}
             className="wiki-portal-updates-window"
+            id="portal-updates-window"
             ref={updatesWindowRef}
             role="region"
             tabIndex={0}
@@ -537,7 +571,7 @@ export function HomepagePortal({ directorySections, languageEntries, updatesAsOf
                   <div>
                     <WikiLink href={withBasePath(item.href)} titleMorphSlug={wikiSlugFromHref(item.href)} titleMorphDestTitle={item.title}>{item.title}</WikiLink>
                     {!item.papers && <p>{item.detail}</p>}
-                    {item.papers && <PaperAcceptancePreview papers={item.papers} language={language} defaultOpen={item === latestAcceptance} />}
+                    {item.papers && <PaperAcceptancePreview key={acceptanceResetKey} papers={item.papers} language={language} defaultOpen={item === latestAcceptance} />}
                   </div>
                 </li>
               ))}

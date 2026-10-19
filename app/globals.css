@@ -2725,6 +2725,24 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   background: color-mix(in srgb, var(--site-theme-accent) 5%, var(--wiki-bg-alt));
 }
 
+.wiki-portal-timeline[data-updates-view="detailed"][open] {
+  --portal-paper-preview-width: clamp(160px, calc((100% - 12px) / 2), 360px);
+  --portal-paper-preview-single-width: min(100%, 400px);
+  width: 100%;
+  margin-inline: 0;
+}
+
+@media (max-width: 760px) {
+  .wiki-portal-timeline[data-updates-view="detailed"][open] {
+    --portal-paper-preview-width: min(80%, 300px);
+  }
+
+  .wiki-portal-timeline[data-updates-view="detailed"] .wiki-portal-news-list li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+}
+
 .wiki-portal-timeline > summary {
   display: block;
   padding: 11px 48px 11px 16px;
@@ -3365,6 +3383,18 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
 .wiki-portal-view-switcher button:focus-visible {
   outline: 2px solid var(--site-theme-action-ink);
   outline-offset: 1px;
+}
+
+.wiki-portal-updates-view-switcher {
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0 12px 6px;
+}
+
+@media (max-width: 760px), (pointer: coarse) {
+  .wiki-portal-updates-view-switcher button {
+    min-height: 44px;
+  }
 }
 
 .wiki-portal-cube-stage-cube {
