@@ -23,10 +23,11 @@ function captureErrors(page) {
   return errors;
 }
 
-async function openDetailed(page) {
+async function openDetailed(page, language = 'en') {
   await page.goto('/', { waitUntil: 'networkidle' });
+  if (language === 'zh') await page.getByRole('group', { name: 'Search language', exact: true }).getByRole('button', { name: '中文', exact: true }).click();
   await page.locator('#portal-news > summary').click();
-  await page.getByRole('group', { name: 'Updates view', exact: true }).getByRole('button', { name: 'Full', exact: true }).click();
+  await page.getByRole('group', { name: language === 'zh' ? '动态视图' : 'Updates view', exact: true }).getByRole('button', { name: language === 'zh' ? '详细' : 'Full', exact: true }).click();
 }
 
 let screenshotsAvailable = true;
@@ -41,15 +42,16 @@ async function capture(page, filename) {
   }
 }
 
-for (const width of [1920, 1440, 1200]) {
-  test(`Detailed papers: titles, equal-height media and canonical resource links at ${width}px`, async ({ page }, testInfo) => {
+for (const [width, language] of [[1920, 'en'], [1440, 'en'], [1200, 'en'], [1440, 'zh'], [1200, 'zh']]) {
+  test(`Detailed papers: ${language} titles, equal-height media and canonical resource links at ${width}px`, async ({ page }, testInfo) => {
     const errors = captureErrors(page);
     await page.setViewportSize({ width, height: 1100 });
-    await openDetailed(page);
+    await openDetailed(page, language);
     const batches = page.locator('#portal-news [data-paper-acceptance]');
     const layouts = [];
     for (const batch of await batches.all()) {
       if (await batch.getAttribute('open') === null) await batch.locator('summary').click();
+      await expect.poll(() => batch.evaluate(el => el.getAnimations().length)).toBe(0);
       const count = await batch.locator('figure').count();
       for (let index = 0; index < count; index++) {
         const paper = batch.locator('figure:not([hidden])');
@@ -64,7 +66,13 @@ for (const width of [1920, 1440, 1200]) {
         await expect(primary).toHaveAttribute('data-paper-image', source.paper_highlight.poster ? 'poster' : 'framework');
         await primary.scrollIntoViewIfNeeded();
         await paper.locator('[data-paper-supporting-images]').scrollIntoViewIfNeeded();
-        await expect.poll(() => paper.locator('img').evaluateAll(images => images.filter(image => !image.complete || image.naturalWidth < 800).map(image => ({ source: image.getAttribute('src'), complete: image.complete, width: image.naturalWidth }))), { message: slug }).toEqual([]);
+        // Bring each lazy image into the nested viewport before checking decode.
+        // Scrolling just the enclosing row can leave it outside the page viewport.
+        for (const image of await paper.locator('img').all()) {
+          await image.scrollIntoViewIfNeeded();
+          await expect(image).toBeInViewport();
+          await expect.poll(() => image.evaluate(el => el.complete && el.naturalWidth >= 800), { message: `${slug}: ${await image.getAttribute('src')}` }).toBe(true);
+        }
         const resources = paper.locator('[data-paper-resources] a');
         expect((await resources.first().getAttribute('href'))?.startsWith('https://')).toBe(true);
         const resourceUrls = await resources.evaluateAll(links => links.map(link => link.href));
@@ -97,9 +105,9 @@ for (const width of [1920, 1440, 1200]) {
         expect(Math.abs(layout.highlight.top - layout.page.top)).toBeLessThan(1);
         expect(Math.abs(layout.highlight.bottom - layout.page.bottom)).toBeLessThan(2);
         expect(layout.titleText.right).toBeLessThanOrEqual(layout.highlight.right + 1);
-        expect(layout.titleText.height).toBeLessThanOrEqual(layout.titleLineHeight * 2 + 1);
+        expect(layout.titleText.height).toBeLessThanOrEqual(layout.titleLineHeight + 1);
         expect(layout.page.width).toBeCloseTo(360, 0);
-        expect(layout.highlight.width).toBeCloseTo(500, 0);
+        expect(layout.highlight.width).toBeCloseTo(550, 0);
         expect(layout.primary.height).toBeGreaterThanOrEqual(190);
         for (const item of layout.resourceItems) {
           expect(item.right).toBeLessThanOrEqual(layout.resources.right + 1);
@@ -114,20 +122,20 @@ for (const width of [1920, 1440, 1200]) {
         expect(layout.supporting.height).toBeCloseTo(80, 0);
         expect(layout.supporting.bottom).toBeLessThan(layout.resources.top);
         expect(layout.contentHeight).toBeLessThanOrEqual(layout.highlight.height + 1);
-        expect(layout.panel.width).toBeLessThanOrEqual(1034);
+        expect(layout.panel.width).toBeLessThanOrEqual(1084);
         for (const square of layout.squares) {
           expect(square.height).toBeCloseTo(80, 0);
         }
         layouts.push(layout);
         if (width === 1440 && slug.includes('Sample_Selection')) await capture(page, 'model-collapse-detailed.png');
-        if (index + 1 < count) await batch.getByRole('button', { name: 'Next paper', exact: true }).click();
+        if (index + 1 < count) await batch.getByRole('button', { name: language === 'zh' ? '下一篇论文' : 'Next paper', exact: true }).click();
       }
     }
     expect(layouts).toHaveLength(5);
     expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
     expect(errors).toEqual([]);
     fs.mkdirSync('.cache/right-column', { recursive: true });
-    fs.writeFileSync(`.cache/right-column/layouts-${width}.json`, JSON.stringify(layouts, null, 2));
+    fs.writeFileSync(`.cache/right-column/layouts-${language}-${width}.json`, JSON.stringify(layouts, null, 2));
     await testInfo.attach('paper-layouts', { body: Buffer.from(JSON.stringify(layouts, null, 2)), contentType: 'application/json' });
   });
 }

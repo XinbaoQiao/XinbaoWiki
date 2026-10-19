@@ -8,11 +8,17 @@ export function useAnimatedDisclosure(open: boolean, commit: (open: boolean) => 
   const ref = useRef<HTMLDetailsElement>(null);
   const animation = useRef<Animation | null>(null);
   const closing = useRef(false);
-  useEffect(() => () => { animation.current?.cancel(); }, []);
+  const settlement = useRef<Animation[]>([]);
+  useEffect(() => () => {
+    animation.current?.cancel();
+    settlement.current.forEach(item => item.cancel());
+  }, []);
 
   function change(next: boolean) {
     const element = ref.current;
     if (!element) { commit(next); return; }
+    settlement.current.forEach(item => item.cancel());
+    settlement.current = [];
     const start = element.getBoundingClientRect().height;
     animation.current?.cancel();
     animation.current = null;
@@ -46,10 +52,24 @@ export function useAnimatedDisclosure(open: boolean, commit: (open: boolean) => 
     animation.current = current;
     current.onfinish = () => {
       if (animation.current !== current) return;
+      // Closing the feed also restores Compact and recenters the homepage.
+      // Animate those final layout changes from their actual outgoing positions.
+      const portal = !next && element.id === 'portal-news' ? element.closest<HTMLElement>('.wiki-portal') : null;
+      const items = portal ? [...portal.querySelectorAll<HTMLElement>('.wiki-portal-hero, .wiki-portal-disclosures > details')] : [];
+      const before = items.map(item => item.getBoundingClientRect());
+      if (portal) portal.dataset.measuredLayout = '';
       if (!next) flushSync(() => commit(false));
       closing.current = false;
       current.cancel();
       animation.current = null;
+      const after = items.map(item => item.getBoundingClientRect());
+      settlement.current = items.map((item, index) => {
+        const from = before[index], to = after[index];
+        return item.animate([
+          { transform: `translate(${from.left - to.left}px, ${from.top - to.top}px)`, width: `${from.width}px` },
+          { transform: 'translate(0, 0)', width: `${to.width}px` }
+        ], { duration: 280, easing: 'cubic-bezier(.22, 1, .36, 1)' });
+      });
     };
   }
 

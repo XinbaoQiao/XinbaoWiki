@@ -45,7 +45,7 @@
   overflow-x: auto;
   max-width: 100%;
   padding: 0 3px 2px;
-  overscroll-behavior-x: contain;
+  overscroll-behavior: auto;
   scroll-snap-type: x proximity;
 }
 
@@ -68,8 +68,8 @@
 .detailedGallery .paper {
   --paper-page-width: 360px;
   display: grid;
-  grid-template-columns: var(--paper-page-width) minmax(0, 500px);
-  max-width: 880px;
+  grid-template-columns: var(--paper-page-width) minmax(0, 550px);
+  max-width: 930px;
   column-gap: 18px;
   align-items: start;
 }
@@ -174,7 +174,7 @@
 .paper .resources {
   display: flex;
   align-items: center;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: 4px 12px;
   color: var(--wiki-text-soft);
   font-size: 12.5px;
@@ -187,6 +187,15 @@
   gap: 4px;
   font: inherit;
   white-space: nowrap;
+}
+
+.paper .resources > * {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+@media (min-width: 1200px) {
+  .paper .resources { flex-wrap: nowrap; }
 }
 
 .navigation {

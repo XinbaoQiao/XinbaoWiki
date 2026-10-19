@@ -201,7 +201,9 @@ for (const width of [1440, 390, 320]) {
     await expect(activeFigure.locator('[data-paper-highlight]')).toContainText('lazy tags');
     await expect(activeFigure.locator('[data-paper-image="poster"] img')).toHaveAttribute('src', /\/papers\/dynfrs\/poster-preview\.webp$/);
     await expect(activeFigure.locator('[data-paper-supporting-images] img')).toHaveCount(3);
-    await activeFigure.locator('[data-paper-image="poster"]').scrollIntoViewIfNeeded();
+    await expect.poll(() => iclr.locator('[data-paper-acceptance]').evaluate(el => el.getAnimations().length)).toBe(0);
+    await activeFigure.locator('[data-paper-image="poster"] img').scrollIntoViewIfNeeded();
+    await expect(activeFigure.locator('[data-paper-image="poster"] img')).toBeInViewport();
     await expect.poll(() => activeFigure.locator('[data-paper-image="poster"] img').evaluate(element => element.complete && element.naturalWidth >= 1000)).toBe(true);
     await previousPaper.click();
     await expect(activeFigure).toHaveAttribute('data-paper-slug', 'Hessian_Free_Online_Certified_Unlearning');
@@ -217,7 +219,7 @@ for (const width of [1440, 390, 320]) {
     }
     await newsSummary.click();
     await expect(news).not.toHaveAttribute('open', '');
-    expect(Math.abs((await news.boundingBox()).width - compactWidth)).toBeLessThanOrEqual(1);
+    await expect.poll(async () => Math.abs((await news.boundingBox()).width - compactWidth)).toBeLessThanOrEqual(1);
     await newsSummary.click();
     await expect(news).toHaveAttribute('data-updates-view', 'compact');
     await expect(viewControls.getByRole('button', { name: 'Compact', exact: true })).toHaveAttribute('aria-pressed', 'true');

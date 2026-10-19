@@ -9,7 +9,7 @@ for(const width of [1440,390]) test(`measured disclosure opening, closing and re
  const sample=async()=>news.evaluate(async el=>{
   const frames=[];const start=performance.now();
   el.querySelector(':scope > summary').click();
-  await new Promise(resolve=>{function frame(){frames.push({h:el.getBoundingClientRect().height,w:el.getBoundingClientRect().width,open:el.open,images:el.querySelectorAll('img').length});if(performance.now()-start<360)requestAnimationFrame(frame);else resolve();}requestAnimationFrame(frame);});
+  await new Promise(resolve=>{function frame(){frames.push({h:el.getBoundingClientRect().height,w:el.getBoundingClientRect().width,open:el.open,images:el.querySelectorAll('img').length});if(performance.now()-start<640)requestAnimationFrame(frame);else resolve();}requestAnimationFrame(frame);});
   return frames;
  });
  const opening=await sample();
@@ -21,6 +21,7 @@ for(const width of [1440,390]) test(`measured disclosure opening, closing and re
  expect(closing[0].images).toBeGreaterThan(0);
  expect(closing.at(-1).open).toBe(false);
  expect(Math.abs(initialWidth-closing.at(-1).w)).toBeLessThan(1);
+ if(width>1023) expect(closing.filter(f=>!f.open&&f.w>initialWidth+2&&f.w<closing[0].w-2).length).toBeGreaterThan(2);
  await expect(news).toHaveAttribute('data-updates-view','compact');
  expect(closing.filter(f=>f.h>closing.at(-1).h+2&&f.h<closing[0].h-2).length).toBeGreaterThan(2);
  await expect(news.locator('img')).toHaveCount(0);
@@ -35,7 +36,7 @@ for(const width of [1440,390]) test(`measured disclosure opening, closing and re
  await page.getByRole('button',{name:'Collapse homepage sections',exact:true}).click();
  await expect(news).not.toHaveAttribute('open','');
  await expect(news).toHaveAttribute('data-updates-view','compact');
- expect(Math.abs((await news.boundingBox()).width-initialWidth)).toBeLessThan(1);
+ await expect.poll(async()=>Math.abs((await news.boundingBox()).width-initialWidth)).toBeLessThan(1);
 });
 
 test('research topic images load in both languages',async({page})=>{

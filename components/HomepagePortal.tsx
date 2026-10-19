@@ -380,6 +380,39 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
     resetTouchCubeGesture();
   };
 
+  useEffect(() => {
+    const viewport = updatesWindowRef.current;
+    if (!viewport) return;
+    // Some engines latch wheel gestures inside nested details even with auto
+    // overscroll. Hand off only at a boundary; normal inner scrolling stays native.
+    const handoff = (event: WheelEvent) => {
+      if (event.ctrlKey || event.defaultPrevented || !event.cancelable || !event.deltaY || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+      const canScroll = (element: HTMLElement) => event.deltaY < 0
+        ? element.scrollTop > 1
+        : element.scrollTop + element.clientHeight < element.scrollHeight - 1;
+      if (canScroll(viewport)) return;
+      let nested = event.target instanceof Element ? event.target : null;
+      while (nested && nested !== viewport) {
+        if (nested instanceof HTMLElement && /auto|scroll/.test(getComputedStyle(nested).overflowY) && canScroll(nested)) return;
+        nested = nested.parentElement;
+      }
+      const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? viewport.clientHeight : 1);
+      let parent = viewport.parentElement;
+      while (parent && parent !== document.body) {
+        if (/auto|scroll/.test(getComputedStyle(parent).overflowY) && canScroll(parent)) {
+          event.preventDefault();
+          parent.scrollBy({ top: delta, behavior: 'instant' });
+          return;
+        }
+        parent = parent.parentElement;
+      }
+      event.preventDefault();
+      window.scrollBy({ top: delta, behavior: 'instant' });
+    };
+    viewport.addEventListener('wheel', handoff, { passive: false });
+    return () => viewport.removeEventListener('wheel', handoff);
+  }, []);
+
   useLayoutEffect(() => {
     const viewport = updatesWindowRef.current;
     if (!viewport || !newsOpen) return;

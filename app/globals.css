@@ -2440,6 +2440,13 @@ body:has(.wiki-portal) .wiki-topbar {
   transform: translateY(-2vh);
 }
 
+/* The disclosure's measured return owns recentering after a feed close. */
+.wiki-portal[data-measured-layout],
+.wiki-shell:has(.wiki-portal[data-measured-layout]) {
+  animation: none;
+  transition: none;
+}
+
 .wiki-portal-hero {
   max-width: 760px;
   margin: 0 auto 26px;
@@ -2794,11 +2801,11 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
 
 .wiki-shell:has(.wiki-portal-timeline[data-updates-view="detailed"]) {
   grid-template-columns: minmax(0, 1fr);
-  max-width: 1114px;
+  max-width: 1164px;
 }
 
 .wiki-portal-disclosures:has(.wiki-portal-timeline[data-updates-view="detailed"]) {
-  max-width: 1034px;
+  max-width: 1084px;
 }
 
 .wiki-shell:has(.wiki-portal-timeline[data-updates-view="detailed"]) .wiki-main {
@@ -2916,7 +2923,7 @@ details[data-animated-disclosure]::details-content {
 .wiki-portal-updates-window {
   height: var(--portal-updates-window-height, 316px);
   overflow-y: auto;
-  overscroll-behavior: contain;
+  overscroll-behavior: auto;
   scrollbar-gutter: stable;
 }
 
