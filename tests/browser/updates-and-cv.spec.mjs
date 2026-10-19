@@ -217,12 +217,14 @@ for (const width of [1440, 390, 320]) {
     }
     await newsSummary.click();
     await expect(news).not.toHaveAttribute('open', '');
-    expect(Math.abs((await news.boundingBox()).width - detailedWidth)).toBeLessThanOrEqual(1);
+    expect(Math.abs((await news.boundingBox()).width - compactWidth)).toBeLessThanOrEqual(1);
     await newsSummary.click();
-    await expect(news).toHaveAttribute('data-updates-view', 'detailed');
+    await expect(news).toHaveAttribute('data-updates-view', 'compact');
+    await expect(viewControls.getByRole('button', { name: 'Compact', exact: true })).toHaveAttribute('aria-pressed', 'true');
     await expect(page.locator('#portal-news [data-paper-acceptance][open]')).toHaveCount(1);
     await expect(latestAcceptance.locator('[data-paper-acceptance]')).toHaveAttribute('open', '');
     await expect(iclr.locator('[data-paper-acceptance]')).not.toHaveAttribute('open', '');
+    await viewControls.getByRole('button', { name: 'Full', exact: true }).click();
     await toggle.click();
     await expect(activeFigure).toHaveAttribute('data-paper-slug', 'Hessian_Free_Online_Certified_Unlearning');
     await expect(iclr.locator('output')).toHaveText('1 / 2');

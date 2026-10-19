@@ -171,7 +171,10 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
   const commitNewsOpen = (open: boolean) => {
     setNewsOpen(open);
     // Native paper disclosures retain manual state until the whole feed closes.
-    if (!open) setAcceptanceResetKey((key) => key + 1);
+    if (!open) {
+      setUpdatesView('compact');
+      setAcceptanceResetKey((key) => key + 1);
+    }
   };
   const newsDisclosure = useAnimatedDisclosure(newsOpen, commitNewsOpen);
   const changeNewsOpen = newsDisclosure.change;

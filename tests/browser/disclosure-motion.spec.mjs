@@ -5,6 +5,7 @@ for(const width of [1440,390]) test(`measured disclosure opening, closing and re
  await page.emulateMedia({reducedMotion:'no-preference'});
  await page.goto('/',{waitUntil:'networkidle'});
  const news=page.locator('#portal-news');
+ const initialWidth=(await news.boundingBox()).width;
  const sample=async()=>news.evaluate(async el=>{
   const frames=[];const start=performance.now();
   el.querySelector(':scope > summary').click();
@@ -19,15 +20,22 @@ for(const width of [1440,390]) test(`measured disclosure opening, closing and re
  expect(closing[0].open).toBe(true);
  expect(closing[0].images).toBeGreaterThan(0);
  expect(closing.at(-1).open).toBe(false);
- expect(Math.abs(closing[0].w-closing.at(-1).w)).toBeLessThan(1);
+ expect(Math.abs(initialWidth-closing.at(-1).w)).toBeLessThan(1);
+ await expect(news).toHaveAttribute('data-updates-view','compact');
  expect(closing.filter(f=>f.h>closing.at(-1).h+2&&f.h<closing[0].h-2).length).toBeGreaterThan(2);
  await expect(news.locator('img')).toHaveCount(0);
  await news.locator(':scope > summary').click();
  await expect.poll(()=>news.evaluate(el=>el.getAnimations().length)).toBe(0);
+ await page.getByRole('button',{name:'Full',exact:true}).click();
  await news.evaluate(async el=>{el.querySelector(':scope > summary').click();await new Promise(r=>setTimeout(r,80));el.querySelector(':scope > summary').click();});
  await expect.poll(()=>news.evaluate(el=>el.getAnimations().length)).toBe(0);
  await expect(news).toHaveAttribute('open','');
+ await expect(news).toHaveAttribute('data-updates-view','detailed');
  await expect(news.locator('img')).toHaveCount(5);
+ await page.getByRole('button',{name:'Collapse homepage sections',exact:true}).click();
+ await expect(news).not.toHaveAttribute('open','');
+ await expect(news).toHaveAttribute('data-updates-view','compact');
+ expect(Math.abs((await news.boundingBox()).width-initialWidth)).toBeLessThan(1);
 });
 
 test('research topic images load in both languages',async({page})=>{

@@ -222,6 +222,8 @@ test('closed and inactive paper previews release image nodes across repeated use
   await news.locator(':scope > summary').click();
   await expect(news.locator('img')).toHaveCount(0);
   await news.locator(':scope > summary').click();
+  await expect(news).toHaveAttribute('data-updates-view', 'compact');
+  await page.getByRole('button', { name: 'Full', exact: true }).click();
   await expect(news.locator('img')).toHaveCount(5);
   expect(errors).toEqual([]);
 });
