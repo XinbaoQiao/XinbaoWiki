@@ -35,6 +35,10 @@ concepts.
 
 ## Content Standards
 
+Start with the [shared content template](docs/content-template.md), including its
+reusable update prompt and acceptance checklist. Routine updates fill the existing
+template; layout changes require an explicit design request.
+
 Wiki contributions should:
 
 - use third-person, neutral, concise, Wikipedia-style academic prose;
@@ -55,7 +59,7 @@ Wiki contributions should:
 
 ### Publication resource icons
 
-Publication resource icons must use three distinct, real public resource types when three are available. Keep the bilingual CV, downloadable CV PDF and publication lists consistent with paper metadata. Select OpenReview, arXiv and Code first; when more than three types are available, OpenReview takes precedence over Publisher. Publisher may supply the third type when Code is unavailable. A conference homepage and a PDF download of the same arXiv paper do not count as additional types. Preserve supplementary source/download links on paper pages. Never duplicate targets, fabricate URLs, publish private repository links or change visibility to fill slots. If fewer than three public resources exist, keep only those available and report the missing types. Owner-provided links that cannot be independently read remain explicitly unverified in maintenance evidence; do not bypass access restrictions or claim successful verification. Run the publication-resource consistency checks in `npm run check`.
+The [resource and CV template](docs/content-template.md#6-资源索引与-cv) owns resource selection and line formatting. Compact CV/index entries prefer three distinct real types when available; detailed cards and paper pages retain all real public resources with duplicate URLs removed. Reuse shared icons. Do not fabricate URLs, count a conference homepage as an extra paper-resource type, publish private links, or change visibility to fill slots. Owner-provided links that cannot be read remain unverified in maintenance evidence. Run the publication-resource consistency checks in `npm run check`.
 
 A generated content hash proves repository freshness, not that a real-world
 claim remains true. Do not advance `reviewed_at` merely to make a check pass.

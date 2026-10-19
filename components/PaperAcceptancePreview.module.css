@@ -96,7 +96,7 @@
   margin: 0;
   color: var(--site-theme-action-ink);
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: 12.5px;
   line-height: 1.35;
   text-wrap: pretty;
 }

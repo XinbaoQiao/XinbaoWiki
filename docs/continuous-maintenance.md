@@ -53,6 +53,13 @@ rewrite the registry or establish a persistent verified status.
 
 ## When Content Changes
 
+Start with [the shared content template](content-template.md). It supplies the
+reusable update prompt, crop/asset rules, bilingual text structure and linked
+paper/CV/detail-page checklist. Update content within the approved presentation;
+do not re-open settled layout decisions. The current contract supersedes earlier
+experimental layouts in historical task notes. Its content review complements,
+rather than replaces, the lifecycle and evidence checks below.
+
 1. Verify the claim against an authoritative public source. Prefer the
    publisher, venue, institution, ORCID/OpenReview profile, or owner-approved
    primary material over aggregators.

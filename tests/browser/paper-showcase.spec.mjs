@@ -106,7 +106,7 @@ for (const width of [1920, 1440, 1200]) {
         expect(layout.supporting.height).toBeCloseTo(96, 0);
         expect(layout.supporting.bottom).toBeLessThan(layout.resources.top);
         expect(layout.contentHeight).toBeLessThanOrEqual(layout.highlight.height + 1);
-        expect(layout.panel.width).toBeLessThanOrEqual(1160);
+        expect(layout.panel.width).toBeLessThanOrEqual(1080);
         for (const square of layout.squares) {
           expect(square.height).toBeCloseTo(96, 0);
         }
