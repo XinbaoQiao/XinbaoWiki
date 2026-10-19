@@ -10,9 +10,9 @@ tags:
   - icml-2026
   - synthetic-data
 timestamp: '2026-06-02T22:56:50+08:00'
-modified: '2026-10-19T12:14:34.906Z'
-content_hash: 'sha256:066329c3a26653a74b629a75d66d854a54f4ae2fb8c8aad130b05cac14287c03'
-reviewed_at: '2026-10-19T12:15:20.548Z'
+modified: '2026-10-19T12:56:49.608Z'
+content_hash: 'sha256:20fb2a666af23b381532c7bb7e60b7430461e32836336a1610d1fd11c8904d7b'
+reviewed_at: '2026-10-19T12:58:04.614Z'
 review_due: '2027-10-19'
 name: When Sample Selection Bias Precipitates Model Collapse
 language: zh
@@ -48,9 +48,26 @@ paper_highlight:
     代理分布扩展验证依据，在不共享原始样本的条件下缓解递归训练中的多样性退化。
   image: /papers/model-collapse/overview.webp
   image_alt: 在分布式参考分布之间迭代构造 Wasserstein 重心的示意图。
-  image_caption: 协作重心估计：不交换原始数据，构建更广泛的验证参考。
   width: 1800
   height: 1626
+  poster:
+    image: /papers/model-collapse/poster-preview.webp
+    image_alt: 论文会议海报。
+    width: 2000
+    height: 1000
+  figures:
+    - image: /papers/model-collapse/theorem-1.webp
+      image_alt: 选择偏差导致模型崩塌：保留原文排版的定理 1。
+      width: 1049
+      height: 653
+    - image: /papers/model-collapse/overview.webp
+      image_alt: 协作 Wasserstein 重心构造方法。
+      width: 1800
+      height: 1626
+    - image: /papers/model-collapse/figure-1.webp
+      image_alt: 有偏样本筛选下多元高斯模型的崩塌现象（图 1）。
+      width: 840
+      height: 658
 translation_of: When_Sample_Selection_Bias_Precipitates_Model_Collapse
 ---
 **When Sample Selection Bias Precipitates Model Collapse** 是 **[[Xinbao_Qiao|乔鑫宝]]**、杜相龙、刘巍、张婧琦、麦佩华、张萌和 庞严 的 ICML 2026 会议论文。论文研究递归合成数据训练中的一种失效模式：当验证器只有少量本地参考数据时，它可能把稀有但有效的样本误判为低质量生成，使样本选择放大而不是抑制模型坍缩。论文通过协作 Wasserstein 几何代理，在无需汇集原始数据的情况下扩展评估所依据的分布参考。

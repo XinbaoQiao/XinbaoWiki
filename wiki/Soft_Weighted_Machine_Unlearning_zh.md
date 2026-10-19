@@ -10,9 +10,9 @@ tags:
   - aaai-2026
   - machine-unlearning
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-19T12:14:34.841Z'
-content_hash: 'sha256:9d93c3a04f14cd5538672f516f8b5a1c21ff53084eda53c321af4139f429b234'
-reviewed_at: '2026-10-19T12:15:20.548Z'
+modified: '2026-10-19T12:56:49.480Z'
+content_hash: 'sha256:e01d1112834a50e380f496e54e2319caf1c2a071e62e23257997cf9d46471b60'
+reviewed_at: '2026-10-19T12:58:04.614Z'
 review_due: '2027-10-19'
 name: 'Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness'
 language: zh
@@ -42,9 +42,26 @@ paper_highlight:
     用二元删除改善公平性或鲁棒性时，也可能丢失有用信息。软加权遗忘为每个样本分配有针对性的连续权重，在目标纠偏与模型效用之间进行细粒度权衡，减少过度遗忘带来的损失。
   image: /papers/soft-weighted/overview.webp
   image_alt: 硬加权与软加权在影响评估、数据重加权和模型修正三个阶段的对比。
-  image_caption: 软加权框架：通过连续样本权重协调纠偏目标与模型效用。
   width: 1398
   height: 396
+  poster:
+    image: /papers/soft-weighted/poster-preview.webp
+    image_alt: 论文会议海报。
+    width: 2000
+    height: 1000
+  figures:
+    - image: /papers/soft-weighted/overview.webp
+      image_alt: 软加权机器遗忘框架。
+      width: 1398
+      height: 396
+    - image: /papers/soft-weighted/figure-1.webp
+      image_alt: 效用与公平性或鲁棒性的实际变化（图 1）。
+      width: 1116
+      height: 707
+    - image: /papers/soft-weighted/figure-2.webp
+      image_alt: 不同数据集上的公平性与鲁棒性表现（图 2）。
+      width: 1778
+      height: 1400
 translation_of: Soft_Weighted_Machine_Unlearning
 ---
 **Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness** 是 **[[Xinbao_Qiao|乔鑫宝]]**、丁宁宁、程雨诗 和张萌的 AAAI 2026 会议论文。它把机器遗忘重新表述为连续的数据影响修正问题，而不是只能执行“删除或保留”的二元操作。论文关注的是在改善公平性或鲁棒性时，每个样本应保留多少影响，才能避免不必要的效用损失。

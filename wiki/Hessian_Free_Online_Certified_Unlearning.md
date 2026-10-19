@@ -9,9 +9,9 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T21:39:01+08:00'
-modified: '2026-10-19T12:14:34.536Z'
-content_hash: 'sha256:0d0d0739ca8340cda4f8e219850d638d89d01066c1c4f0f1092537b313871af3'
-reviewed_at: '2026-10-19T12:15:20.548Z'
+modified: '2026-10-19T12:56:48.828Z'
+content_hash: 'sha256:6e4e4b1eb03a9395ba3c5614116dd49b10ca18b3fe12a5e2d0f40c1baf24a961'
+reviewed_at: '2026-10-19T12:58:04.614Z'
 review_due: '2027-01-17'
 name: Hessian-Free Online Certified Unlearning
 summary: ICLR 2025 paper on efficient Hessian-free certified machine unlearning.
@@ -46,11 +46,30 @@ paper_highlight:
   image_alt: >-
     Poster comparison of empirical-risk-minimizer reweighting and
     model-update-trajectory reweighting.
-  image_caption: >-
-    Method comparison from the poster: training-trajectory reweighting replaces
-    explicit Hessian inversion.
   width: 1441
   height: 494
+  poster:
+    image: /papers/hessian-free/poster-preview.webp
+    image_alt: Conference paper poster.
+    width: 2000
+    height: 1325
+  figures:
+    - image: /papers/hessian-free/unlearning-guarantee.webp
+      image_alt: >-
+        Assumptions, lemmas and the unlearning guarantee (Theorem 4), in
+        original typesetting.
+      width: 1800
+      height: 1071
+    - image: /papers/hessian-free/overview.webp
+      image_alt: Comparison of empirical-risk and training-trajectory reweighting.
+      width: 1441
+      height: 494
+    - image: /papers/hessian-free/figure-1.webp
+      image_alt: >-
+        Unlearning verification experiments on logistic regression and CNNs
+        (Figure 1).
+      width: 1800
+      height: 449
 ---
 **Hessian-Free Online Certified Unlearning** is an ICLR 2025 conference paper by **[[Xinbao_Qiao|Xinbao Qiao]]**, Meng Zhang, Ming Tang, and Ermin Wei. The paper develops a certified unlearning procedure for stochastic training pipelines where explicit Hessian storage, inversion, or repeated retraining would be too costly. Its main contribution is to turn deletion into an online vector update after a trajectory-based precomputation stage.
 

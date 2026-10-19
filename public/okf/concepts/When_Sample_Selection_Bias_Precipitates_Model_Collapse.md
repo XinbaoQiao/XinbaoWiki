@@ -12,9 +12,9 @@ tags:
   - icml-2026
   - synthetic-data
 timestamp: '2026-06-02T22:56:50+08:00'
-modified: '2026-10-19T12:14:34.907Z'
-content_hash: 'sha256:31255435153ef18bef7a1a1720d167c7b1bf421985768925d40b1b66a2c876c1'
-reviewed_at: '2026-10-19T12:15:20.548Z'
+modified: '2026-10-19T12:56:49.610Z'
+content_hash: 'sha256:07e21ab0bf1dc37cc58243654e02e8fcc44f94d355361298b10f4c67504e88d3'
+reviewed_at: '2026-10-19T12:58:04.614Z'
 review_due: '2027-10-19'
 language: en
 lifecycle:
@@ -22,7 +22,7 @@ lifecycle:
   confidence: 0.95
   review: on venue/status change
   retention: long-lived semantic memory
-  reviewedAt: '2026-10-19T12:15:20.548Z'
+  reviewedAt: '2026-10-19T12:58:04.614Z'
   reviewDue: '2027-10-19'
   pendingReview: false
   overdue: false

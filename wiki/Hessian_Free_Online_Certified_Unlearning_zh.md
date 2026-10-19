@@ -9,9 +9,9 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-19T12:14:34.535Z'
-content_hash: 'sha256:d6ee8fd5b2624db247df8a928f267ad5fcbc17691696754a51868f7168a1c8e3'
-reviewed_at: '2026-10-19T12:15:20.548Z'
+modified: '2026-10-19T12:56:48.823Z'
+content_hash: 'sha256:3f13d2ccfce7b596ceecaaaec917fd183ec79de296626437a736731ba14e10b4'
+reviewed_at: '2026-10-19T12:58:04.614Z'
 review_due: '2027-01-17'
 name: Hessian-Free Online Certified Unlearning
 language: zh
@@ -42,9 +42,26 @@ paper_highlight:
     Hessian，并在论文假设下提供相对重训练的认证近似保证。
   image: /papers/hessian-free/overview.webp
   image_alt: 论文海报中经验风险最小化器重加权与模型更新轨迹重加权的方法对比。
-  image_caption: 海报中的方法对比：利用训练轨迹重加权，避免显式求逆 Hessian。
   width: 1441
   height: 494
+  poster:
+    image: /papers/hessian-free/poster-preview.webp
+    image_alt: 论文会议海报。
+    width: 2000
+    height: 1325
+  figures:
+    - image: /papers/hessian-free/unlearning-guarantee.webp
+      image_alt: 保留原文排版的假设、引理与遗忘保证（定理 4）。
+      width: 1800
+      height: 1071
+    - image: /papers/hessian-free/overview.webp
+      image_alt: 经验风险重加权与训练轨迹重加权的对比。
+      width: 1441
+      height: 494
+    - image: /papers/hessian-free/figure-1.webp
+      image_alt: 逻辑回归与卷积神经网络上的遗忘验证实验（图 1）。
+      width: 1800
+      height: 449
 translation_of: Hessian_Free_Online_Certified_Unlearning
 ---
 **Hessian-Free Online Certified Unlearning** 是 **[[Xinbao_Qiao|乔鑫宝]]**、张萌、唐茗 和 魏尔敏 的 ICLR 2025 会议论文。论文提出一种面向随机训练流程的认证机器遗忘方法，目标是在显式存储 Hessian、求逆 Hessian 或反复重新训练代价过高时，仍能把删除请求转化为在线向量更新。

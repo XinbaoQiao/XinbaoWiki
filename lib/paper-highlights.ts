@@ -1,12 +1,18 @@
 import type { SiteLanguage } from '@/lib/site-navigation';
 
-export type PaperHighlight = {
-  tldr: string;
+export type PaperHighlightImage = {
   image: string;
   image_alt: string;
-  image_caption: string;
   width: number;
   height: number;
 };
 
-export type PaperHighlightCatalog = Record<string, Record<SiteLanguage, PaperHighlight>>;
+export type PaperHighlight = PaperHighlightImage & {
+  tldr: string;
+  poster?: PaperHighlightImage;
+  figures: PaperHighlightImage[];
+};
+
+export type PaperHighlightCatalog = Record<string, Record<SiteLanguage, PaperHighlight & {
+  resources: { label: string; url: string }[];
+}>>;

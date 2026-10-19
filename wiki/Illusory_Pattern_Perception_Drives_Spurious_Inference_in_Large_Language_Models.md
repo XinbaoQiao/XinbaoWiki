@@ -12,9 +12,9 @@ tags:
   - neurips-2026
   - llm-reliability
 timestamp: '2026-09-25T13:49:35+09:00'
-modified: '2026-10-19T12:14:34.538Z'
-content_hash: 'sha256:42ca9f1f861b9a245f6f77f0affa57b06f5b56f558e3981a358034cc42e1ba8f'
-reviewed_at: '2026-10-19T12:15:20.548Z'
+modified: '2026-10-19T12:56:48.833Z'
+content_hash: 'sha256:c45e86c02c78acb93d00759765b0a832bc0b5c055dd1f4bfba1ecb2f2ee825ab'
+reviewed_at: '2026-10-19T12:58:04.614Z'
 review_due: '2027-10-19'
 name: Illusory Pattern Perception Drives Spurious Inference in Large Language Models
 summary: >-
@@ -55,9 +55,21 @@ paper_highlight:
   image_alt: >-
     Study overview of three psychological tasks and sparse-autoencoder feature
     analysis.
-  image_caption: 'Three behavioral tasks, human comparisons, and SAE feature-shift analysis.'
   width: 1800
   height: 839
+  figures:
+    - image: /papers/illusory-pattern/human-comparison.webp
+      image_alt: Human and LLM responses across three tasks (Table 1).
+      width: 1787
+      height: 796
+    - image: /papers/illusory-pattern/figure-2.webp
+      image_alt: Human and LLM responses with chain-of-thought prompting (Figure 2).
+      width: 1791
+      height: 547
+    - image: /papers/illusory-pattern/figure-3.webp
+      image_alt: Pooled activation changes by SAE feature category (Figure 3).
+      width: 1796
+      height: 662
 ---
 **Illusory Pattern Perception Drives Spurious Inference in Large Language Models** is a paper by Peihua Mai\*, Zhuoyan Shao\*, **[[Xinbao_Qiao|Xinbao Qiao]]**\*, Meng Zhang, Xinyue Zhou, and Yan Pang, accepted at NeurIPS 2026. It studies unsupported relational inference from random, unrelated, or insufficient evidence.[^paper]
 

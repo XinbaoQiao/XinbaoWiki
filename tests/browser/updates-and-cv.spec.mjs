@@ -148,7 +148,7 @@ for (const width of [1440, 390, 320]) {
     await expect(news).toHaveAttribute('open', '');
     await expect(news).toHaveAttribute('data-updates-view', 'detailed');
     const detailedWidth = (await news.boundingBox()).width;
-    const latestFirstPage = latestAcceptance.locator('[data-paper-slug] > a > img');
+    const latestFirstPage = latestAcceptance.locator('[data-paper-image="first-page"] img');
     const detailedImageWidth = (await latestFirstPage.boundingBox()).width;
     if (width === 1440) {
       expect(detailedWidth).toBeGreaterThan(compactWidth * 1.5);
@@ -157,18 +157,21 @@ for (const width of [1440, 390, 320]) {
     expect((await detailedButton.boundingBox()).height).toBeGreaterThanOrEqual((width <= 760 ? 44 : 30) - .1);
     const latestHighlight = latestAcceptance.locator('[data-paper-highlight]');
     await expect(latestHighlight).toContainText('random or insufficient evidence');
-    await latestHighlight.locator('img').scrollIntoViewIfNeeded();
-    await expect.poll(() => latestHighlight.locator('img').evaluate(element => element.complete && element.naturalWidth >= 1000)).toBe(true);
+    await latestHighlight.locator('[data-paper-image="framework"]').scrollIntoViewIfNeeded();
+    await expect(latestHighlight.locator('img')).toHaveCount(4);
+    await expect.poll(() => latestHighlight.locator('img').evaluateAll(elements => elements.every(element => element.complete && element.naturalWidth >= 800))).toBe(true);
+    await expect(latestAcceptance.locator('figcaption')).toHaveCount(0);
     const overviewGeometry = await latestAcceptance.locator('[data-paper-slug]').evaluate(element => {
       const rect = target => {
         const box = target.getBoundingClientRect();
         return { left: box.left, right: box.right, top: box.top, bottom: box.bottom, width: box.width };
       };
-      return { page: rect(element.querySelector(':scope > a')), highlight: rect(element.querySelector('[data-paper-highlight]')) };
+      return { page: rect(element.querySelector('[data-paper-image="first-page"]')), highlight: rect(element.querySelector('[data-paper-highlight]')) };
     });
     if (width > 760) {
       expect(overviewGeometry.highlight.left).toBeGreaterThan(overviewGeometry.page.right + 12);
       expect(Math.abs(overviewGeometry.highlight.top - overviewGeometry.page.top)).toBeLessThan(1);
+      expect(Math.abs(overviewGeometry.highlight.bottom - overviewGeometry.page.bottom)).toBeLessThan(2);
     } else {
       expect(overviewGeometry.highlight.top).toBeGreaterThan(overviewGeometry.page.bottom);
       expect(Math.abs(overviewGeometry.highlight.left - overviewGeometry.page.left)).toBeLessThan(1);
@@ -193,11 +196,12 @@ for (const width of [1440, 390, 320]) {
     await expect(iclr.locator('output')).toHaveText('2 / 2');
     await expect(nextPaper).toBeDisabled();
     await expect(previousPaper).toBeEnabled();
-    await expect(activeFigure.locator(':scope > a > img')).toHaveAttribute('src', /\/papers\/dynfrs\/camera-ready-first-page\.webp$/);
+    await expect(activeFigure.locator('[data-paper-image="first-page"] img')).toHaveAttribute('src', /\/papers\/dynfrs\/camera-ready-first-page\.webp$/);
     await expect(activeFigure.locator('[data-paper-highlight]')).toContainText('lazy tags');
-    await expect(activeFigure.locator('[data-paper-highlight] img')).toHaveAttribute('src', /\/papers\/dynfrs\/overview\.webp$/);
-    await activeFigure.locator('[data-paper-highlight] img').scrollIntoViewIfNeeded();
-    await expect.poll(() => activeFigure.locator('[data-paper-highlight] img').evaluate(element => element.complete && element.naturalWidth >= 1000)).toBe(true);
+    await expect(activeFigure.locator('[data-paper-image="poster"] img')).toHaveAttribute('src', /\/papers\/dynfrs\/poster-preview\.webp$/);
+    await expect(activeFigure.locator('[data-paper-supporting-images] img')).toHaveCount(3);
+    await activeFigure.locator('[data-paper-image="poster"]').scrollIntoViewIfNeeded();
+    await expect.poll(() => activeFigure.locator('[data-paper-image="poster"] img').evaluate(element => element.complete && element.naturalWidth >= 1000)).toBe(true);
     await previousPaper.click();
     await expect(activeFigure).toHaveAttribute('data-paper-slug', 'Hessian_Free_Online_Certified_Unlearning');
     await nextPaper.click();

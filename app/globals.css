@@ -2769,6 +2769,15 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   margin-inline: 0;
 }
 
+.wiki-shell:has(.wiki-portal-timeline[data-updates-view="detailed"][open]) {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 1560px;
+}
+
+.wiki-portal-disclosures:has(.wiki-portal-timeline[data-updates-view="detailed"][open]) {
+  max-width: 1480px;
+}
+
 @media (max-width: 760px) {
   .wiki-portal-timeline[data-updates-view="detailed"] .wiki-portal-news-list li {
     grid-template-columns: minmax(0, 1fr);

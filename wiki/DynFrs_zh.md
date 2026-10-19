@@ -9,9 +9,9 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-19T12:14:34.489Z'
-content_hash: 'sha256:891a9e2467eb2b40bbb8962b8c17dca7ea8d6fe7c6ecb04d39f06f599f100528'
-reviewed_at: '2026-10-19T12:15:20.548Z'
+modified: '2026-10-19T12:56:48.729Z'
+content_hash: 'sha256:11fa6485acb0d9ea323cc21db698287ac503fcc689a2496641298f662be5dfa1'
+reviewed_at: '2026-10-19T12:58:04.614Z'
 review_due: '2027-01-17'
 name: 'DynFrs: An Efficient Framework for Machine Unlearning in Random Forest'
 language: zh
@@ -42,9 +42,26 @@ paper_highlight:
     随机森林的精确遗忘可以转化为动态数据结构维护：通过树子采样限制每个样本影响的范围，再用惰性标记把子树重建推迟到实际查询时。这样能同时支持删除、插入和预测，并保持与重训练的分布等价性。
   image: /papers/dynfrs/overview.webp
   image_alt: DynFrs 惰性标记策略：删除节点、标记节点与延迟子树重建。
-  image_caption: 惰性标记：把子树重建推迟到查询实际访问受影响路径时。
   width: 1008
   height: 252
+  poster:
+    image: /papers/dynfrs/poster-preview.webp
+    image_alt: 论文会议海报。
+    width: 2000
+    height: 1125
+  figures:
+    - image: /papers/dynfrs/complexity-guarantees.webp
+      image_alt: DynFrs 训练与更新的复杂度保证（定理 2 和定理 3）。
+      width: 1800
+      height: 947
+    - image: /papers/dynfrs/overview.webp
+      image_alt: 利用惰性标记延迟子树重建的方法。
+      width: 1008
+      height: 252
+    - image: /papers/dynfrs/figure-2.webp
+      image_alt: 不同树子采样比例下的预测精度（图 2）。
+      width: 889
+      height: 702
 translation_of: DynFrs
 ---
 **DynFrs: An Efficient Framework for Machine Unlearning in Random Forest** 是汪树荣、沈卓洋、**[[Xinbao_Qiao|乔鑫宝]]**、Tongning Zhang 和张萌的 ICLR 2025 会议论文。该工作把随机森林遗忘视为动态数据结构问题：在保持与重新训练分布等价的同时，降低在线删除、插入和查询延迟。

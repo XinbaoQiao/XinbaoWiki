@@ -9,9 +9,9 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T21:39:01+08:00'
-modified: '2026-10-19T12:14:34.490Z'
-content_hash: 'sha256:adc66189e7906948260f0a8866e55f242a9ccf600d81313affe184695e89dab7'
-reviewed_at: '2026-10-19T12:15:20.548Z'
+modified: '2026-10-19T12:56:48.731Z'
+content_hash: 'sha256:9cf63909ba50a853f850f836d1e29b8b836f45547b450155e8e9c705b308faa5'
+reviewed_at: '2026-10-19T12:58:04.614Z'
 review_due: '2027-01-17'
 name: 'DynFrs: An Efficient Framework for Machine Unlearning in Random Forest'
 summary: ICLR 2025 paper on efficient machine unlearning for random forests.
@@ -47,11 +47,28 @@ paper_highlight:
   image_alt: >-
     DynFrs lazy-tag strategy: deleted nodes, tagged nodes and deferred subtree
     reconstruction.
-  image_caption: >-
-    Lazy tags defer subtree reconstruction until a query needs the affected
-    path.
   width: 1008
   height: 252
+  poster:
+    image: /papers/dynfrs/poster-preview.webp
+    image_alt: Conference paper poster.
+    width: 2000
+    height: 1125
+  figures:
+    - image: /papers/dynfrs/complexity-guarantees.webp
+      image_alt: DynFrs training and update complexity guarantees (Theorems 2 and 3).
+      width: 1800
+      height: 947
+    - image: /papers/dynfrs/overview.webp
+      image_alt: Lazy-tag strategy for deferred subtree rebuilding.
+      width: 1008
+      height: 252
+    - image: /papers/dynfrs/figure-2.webp
+      image_alt: >-
+        Predictive accuracy for different tree-subsampling proportions (Figure
+        2).
+      width: 889
+      height: 702
 ---
 **DynFrs: An Efficient Framework for Machine Unlearning in Random Forest** is an ICLR 2025 conference paper by Shurong Wang, Zhuoyang Shen, **[[Xinbao_Qiao|Xinbao Qiao]]**, Tongning Zhang, and Meng Zhang. The work treats random-forest unlearning as a dynamic data-structure problem: it seeks exact distributional equivalence to retraining while keeping online deletion, insertion, and query latency low.
 

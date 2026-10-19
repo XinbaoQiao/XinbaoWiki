@@ -12,9 +12,9 @@ tags:
   - icml-2026
   - synthetic-data
 timestamp: '2026-06-02T22:56:50+08:00'
-modified: '2026-10-19T12:14:34.907Z'
-content_hash: 'sha256:31255435153ef18bef7a1a1720d167c7b1bf421985768925d40b1b66a2c876c1'
-reviewed_at: '2026-10-19T12:15:20.548Z'
+modified: '2026-10-19T12:56:49.610Z'
+content_hash: 'sha256:07e21ab0bf1dc37cc58243654e02e8fcc44f94d355361298b10f4c67504e88d3'
+reviewed_at: '2026-10-19T12:58:04.614Z'
 review_due: '2027-10-19'
 name: When Sample Selection Bias Precipitates Model Collapse
 summary: >-
@@ -55,11 +55,30 @@ paper_highlight:
   image_alt: >-
     Iterative Wasserstein barycenter construction across distributed reference
     distributions.
-  image_caption: >-
-    Collaborative barycenter estimation builds a broader reference without
-    exchanging raw data.
   width: 1800
   height: 1626
+  poster:
+    image: /papers/model-collapse/poster-preview.webp
+    image_alt: Conference paper poster.
+    width: 2000
+    height: 1000
+  figures:
+    - image: /papers/model-collapse/theorem-1.webp
+      image_alt: >-
+        Selection bias precipitates collapse: Theorem 1 in its original
+        typesetting.
+      width: 1049
+      height: 653
+    - image: /papers/model-collapse/overview.webp
+      image_alt: Collaborative Wasserstein barycenter construction.
+      width: 1800
+      height: 1626
+    - image: /papers/model-collapse/figure-1.webp
+      image_alt: >-
+        Multivariate Gaussian model collapse under biased sample selection
+        (Figure 1).
+      width: 840
+      height: 658
 ---
 **When Sample Selection Bias Precipitates Model Collapse** is an ICML 2026 conference paper by **[[Xinbao_Qiao|Xinbao Qiao]]**, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, and Yan Pang. It studies a failure mode in recursive synthetic-data training: a verifier with only local, low-resource evidence can mistake rare but valid samples for low-quality generations, causing sample selection to amplify model collapse rather than prevent it. The paper frames collaborative Wasserstein-geometry proxies as a way to evaluate synthetic samples against a broader distributional reference without pooling raw data.
 
