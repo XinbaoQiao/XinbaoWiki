@@ -7,7 +7,7 @@ import { clearWikiTitleMorphPeers, ensureWikiTitleCache, installWikiTitleMorphHo
 
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
 
-function collectWarmupHrefs(limit = 24): string[] {
+function collectWarmupHrefs(limit = 4): string[] {
   if (typeof document === 'undefined') return [];
   const seen = new Set<string>();
   const out: string[] = [];
@@ -30,8 +30,10 @@ function collectWarmupHrefs(limit = 24): string[] {
 
   document
     .querySelectorAll<HTMLAnchorElement>('aside.wiki-sidebar-desktop a.wiki-link-page, .wiki-main a.wiki-link-page')
-    .forEach((anchor) => add(anchor.getAttribute('href')));
-  add(`${basePath}/updates/`);
+    .forEach((anchor) => {
+      const bounds = anchor.getBoundingClientRect();
+      if (bounds.width && bounds.height && bounds.bottom > 0 && bounds.top < window.innerHeight) add(anchor.getAttribute('href'));
+    });
   return out;
 }
 
@@ -63,20 +65,21 @@ export function SiteActivityRecorder() {
     const timers: number[] = [];
 
     const warm = () => {
-      if (cancelled) return;
+      const connection = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
+      if (cancelled || document.hidden || connection?.saveData || /(^|-)2g$/.test(connection?.effectiveType ?? '')) return;
       void ensureWikiTitleCache();
-      const hrefs = collectWarmupHrefs(24);
+      const hrefs = collectWarmupHrefs();
       hrefs.forEach((href, index) => {
         if (warmed.current.has(href)) return;
-        warmed.current.add(href);
         const id = window.setTimeout(() => {
-          if (cancelled) return;
+          if (cancelled || document.hidden) return;
           try {
             router.prefetch(href);
+            warmed.current.add(href);
           } catch {
             /* Prefetch must never block UI. */
           }
-        }, index * 35);
+        }, index * 150);
         timers.push(id);
       });
     };

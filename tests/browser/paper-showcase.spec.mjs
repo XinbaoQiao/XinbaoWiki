@@ -26,7 +26,7 @@ function captureErrors(page) {
 async function openDetailed(page) {
   await page.goto('/', { waitUntil: 'networkidle' });
   await page.locator('#portal-news > summary').click();
-  await page.getByRole('group', { name: 'Updates view', exact: true }).getByRole('button', { name: 'Detailed', exact: true }).click();
+  await page.getByRole('group', { name: 'Updates view', exact: true }).getByRole('button', { name: 'Full', exact: true }).click();
 }
 
 let screenshotsAvailable = true;
@@ -199,3 +199,30 @@ test('image dialog respects reduced motion', async ({ page }) => {
   await expect(dialog).toHaveCount(0);
   expect(errors).toEqual([]);
 });
+
+test('closed and inactive paper previews release image nodes across repeated use', async ({ page }) => {
+  const errors = captureErrors(page);
+  await page.goto('/', { waitUntil: 'networkidle' });
+  const news = page.locator('#portal-news');
+  await expect(news.locator('img')).toHaveCount(0);
+  await news.locator(':scope > summary').click();
+  await page.getByRole('button', { name: 'Full', exact: true }).click();
+  await expect(news.locator('img')).toHaveCount(5);
+  const pair = news.locator('[data-paper-acceptance]').filter({ has: page.locator('figure[data-paper-slug="DynFrs"]') });
+  await pair.locator('summary').click();
+  for (let i = 0; i < 6; i++) {
+    await pair.getByRole('button', { name: 'Next paper', exact: true }).click();
+    await expect(pair.locator('figure[hidden] img')).toHaveCount(0);
+    await expect(pair.locator('img')).toHaveCount(5);
+    await pair.getByRole('button', { name: 'Previous paper', exact: true }).click();
+    await expect(pair.locator('figure[hidden] img')).toHaveCount(0);
+  }
+  await pair.locator('summary').click();
+  await expect(pair.locator('img')).toHaveCount(0);
+  await news.locator(':scope > summary').click();
+  await expect(news.locator('img')).toHaveCount(0);
+  await news.locator(':scope > summary').click();
+  await expect(news.locator('img')).toHaveCount(5);
+  expect(errors).toEqual([]);
+});
+

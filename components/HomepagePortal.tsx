@@ -137,7 +137,7 @@ const updateLabels = {
 } satisfies Record<SearchLanguage, { title: string; window: string }>;
 
 const updatesViewLabels = {
-  en: { compact: 'Compact', detailed: 'Detailed', group: 'Updates view' },
+  en: { compact: 'Compact', detailed: 'Full', group: 'Updates view' },
   zh: { compact: '紧凑', detailed: '详细', group: '动态视图' }
 } satisfies Record<SearchLanguage, Record<UpdatesView | 'group', string>>;
 
@@ -574,7 +574,7 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
                   <div>
                     <WikiLink href={withBasePath(item.href)} titleMorphSlug={wikiSlugFromHref(item.href)} titleMorphDestTitle={item.title}>{item.title}</WikiLink>
                     {!item.papers && <p>{item.detail}</p>}
-                    {item.papers && <PaperAcceptancePreview key={acceptanceResetKey} papers={item.papers} language={language} defaultOpen={item === latestAcceptance} view={updatesView} highlights={paperHighlights} />}
+                    {item.papers && <PaperAcceptancePreview key={acceptanceResetKey} papers={item.papers} language={language} defaultOpen={item === latestAcceptance} view={updatesView} highlights={paperHighlights} visible={newsOpen} />}
                   </div>
                 </li>
               ))}

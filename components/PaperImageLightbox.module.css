@@ -96,13 +96,13 @@
 }
 
 @keyframes backdrop-open {
-  from { background: rgb(20 22 26 / 0); backdrop-filter: blur(0); }
-  to { background: rgb(20 22 26 / .32); backdrop-filter: blur(8px); }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 @keyframes backdrop-close {
-  from { background: rgb(20 22 26 / .32); backdrop-filter: blur(8px); }
-  to { background: rgb(20 22 26 / 0); backdrop-filter: blur(0); }
+  from { opacity: 1; }
+  to { opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

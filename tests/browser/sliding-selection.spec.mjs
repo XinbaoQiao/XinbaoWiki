@@ -103,7 +103,7 @@ test.describe('Shared selection motion', () => {
     await page.locator('#portal-news > summary').click();
     await page.locator('#portal-news > summary').click();
     await expectAligned(updates);
-    await expect(updates.getByRole('button', { name: 'Detailed', exact: true })).toHaveAttribute('aria-pressed', 'true');
+    await expect(updates.getByRole('button', { name: 'Full', exact: true })).toHaveAttribute('aria-pressed', 'true');
 
     await page.locator('#portal-directory > summary').click();
     const browse = page.locator('#portal-directory .wiki-portal-view-switcher .wiki-sliding-selection');
@@ -173,3 +173,4 @@ test('reduced motion snaps the selection into place', async ({ page }) => {
   await expectAligned(updates);
   expect(errors).toEqual([]);
 });
+

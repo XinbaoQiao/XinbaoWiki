@@ -1,6 +1,6 @@
 'use client';
 
-import { useId, useState, type CSSProperties } from 'react';
+import { useEffect, useId, useState, type CSSProperties } from 'react';
 import { WikiLink } from '@/components/WikiLink';
 import { PublicationLinkIcon, publicationLinkTitle } from '@/components/PublicationLinkLegend';
 import { PaperImageLightbox, type ExpandedPaperImage } from '@/components/PaperImageLightbox';
@@ -14,13 +14,22 @@ function withBasePath(pathname: string) {
   return `${basePath}${pathname}`;
 }
 
-export function PaperAcceptancePreview({ papers, language, defaultOpen = false, view = 'compact', highlights }: {
+export function PaperAcceptancePreview({ papers, language, defaultOpen = false, view = 'compact', highlights, visible = true }: {
   papers: readonly AcceptedPaper[];
   language: SiteLanguage;
   defaultOpen?: boolean;
   view?: 'compact' | 'detailed';
   highlights?: PaperHighlightCatalog;
+  visible?: boolean;
 }) {
+  const [open, setOpen] = useState(defaultOpen);
+  const [retainContent, setRetainContent] = useState(visible && defaultOpen);
+  useEffect(() => {
+    if (visible && open) { setRetainContent(true); return; }
+    // Keep the outgoing content through the parent's 240 ms collapse animation.
+    const timer = window.setTimeout(() => setRetainContent(false), 260);
+    return () => window.clearTimeout(timer);
+  }, [visible, open]);
   const [activePaper, setActivePaper] = useState(0);
   const [expandedImage, setExpandedImage] = useState<ExpandedPaperImage | null>(null);
   const galleryId = useId();
@@ -40,7 +49,7 @@ export function PaperAcceptancePreview({ papers, language, defaultOpen = false, 
   }
 
   return (
-    <details className={styles.disclosure} data-paper-acceptance="" data-preview-view={view} open={defaultOpen}>
+    <details className={styles.disclosure} data-paper-acceptance="" data-preview-view={view} open={open} onToggle={(event) => setOpen(event.currentTarget.open)}>
       <summary>{detailed ? copy.details : copy.summary} <span>({papers.length})</span></summary>
       {detailed && papers.length > 1 && <div className={styles.navigation} role="group" aria-label={copy.navigation}>
         <button type="button" aria-label={copy.previous} aria-controls={galleryId} disabled={activePaper === 0} onClick={() => setActivePaper((index) => index - 1)}>
@@ -59,6 +68,7 @@ export function PaperAcceptancePreview({ papers, language, defaultOpen = false, 
             .filter((resource, index, links) => links.findIndex(link => link.url === resource.url) === index) : [];
           return (
             <figure className={styles.paper} key={paper.slug} data-paper-slug={paper.slug} hidden={detailed && activePaper !== index} style={{ '--paper-page-scale': paper.height / paper.width } as CSSProperties}>
+              {((visible && open) || retainContent) && (!detailed || activePaper === index) && <>
               {imageButton({ image: paper.image, width: paper.width, height: paper.height, image_alt: `${paper.title} — ${copy.page}` }, paper, styles.imageLink, 'first-page')}
               {detailed && highlight && <div className={styles.highlight} data-paper-highlight="">
                 <h3 className={styles.paperTitle} data-paper-title=""><WikiLink href={withBasePath(`/wiki/${slug}/`)} titleMorphSlug={slug} titleMorphDestTitle={paper.title}>{paper.title}</WikiLink></h3>
@@ -81,6 +91,7 @@ export function PaperAcceptancePreview({ papers, language, defaultOpen = false, 
                 <WikiLink href={withBasePath(`/wiki/${slug}/`)} titleMorphSlug={slug} titleMorphDestTitle={paper.title}>{paper.title}</WikiLink>
                 <span>{copy.page} · <a href={paper.pdf} target="_blank" rel="noopener noreferrer">PDF ↗</a></span>
               </figcaption>}
+              </>}
             </figure>
           );
         })}

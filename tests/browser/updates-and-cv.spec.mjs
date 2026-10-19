@@ -141,7 +141,7 @@ for (const width of [1440, 390, 320]) {
     const compactWidth = (await news.boundingBox()).width;
     const compactImageWidth = (await latestAcceptance.locator('img').boundingBox()).width;
     const viewControls = page.getByRole('group', { name: 'Updates view', exact: true });
-    const detailedButton = viewControls.getByRole('button', { name: 'Detailed', exact: true });
+    const detailedButton = viewControls.getByRole('button', { name: 'Full', exact: true });
     await detailedButton.focus();
     await page.keyboard.press('Enter');
     await expect(detailedButton).toHaveAttribute('aria-pressed', 'true');
@@ -298,6 +298,9 @@ test('Updates archive retains the older bilingual events and all five previews',
   await expect(page.locator('time[datetime="2022-09"]')).toHaveCount(2);
   await expect(page.locator('time[datetime="2022-07"]')).toHaveCount(2);
   await expect(page.locator('[data-paper-acceptance]')).toHaveCount(8);
+  await expect(page.locator('[data-paper-acceptance] img')).toHaveCount(0);
+  for (const disclosure of await page.locator('[data-paper-acceptance]').all()) await disclosure.locator('summary').click();
   await expect(page.locator('[data-paper-acceptance] img')).toHaveCount(10);
   expect(errors).toEqual([]);
 });
+
