@@ -121,9 +121,9 @@
         "machine-unlearning"
       ],
       "timestamp": "2026-05-05T21:39:01+08:00",
-      "modifiedAt": "2026-10-19T12:56:49.482Z",
-      "contentHash": "sha256:5a30b0a3b71e0b4e23d449454041548584c8fa62a062c0c5fd2cea13a2c5eab0",
-      "reviewedAt": "2026-10-19T12:58:04.614Z",
+      "modifiedAt": "2026-10-19T14:23:38.100Z",
+      "contentHash": "sha256:8085d63383f4e827ef0a5461a51aab034eeeaa82d1fb65075d36b1b83d4f18cf",
+      "reviewedAt": "2026-10-19T14:23:56.706Z",
       "reviewDue": "2027-10-19",
       "sourceIds": [
         "src-0642a11373a83c47",
@@ -136,7 +136,7 @@
       "retrieval": {
         "documentId": "wiki:Soft_Weighted_Machine_Unlearning",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:5a30b0a3b71e0b4e23d449454041548584c8fa62a062c0c5fd2cea13a2c5eab0",
+        "contentHash": "sha256:8085d63383f4e827ef0a5461a51aab034eeeaa82d1fb65075d36b1b83d4f18cf",
         "textFields": [
           "title",
           "aliases",
@@ -2160,9 +2160,9 @@
         "machine-unlearning"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-10-19T12:56:49.480Z",
-      "contentHash": "sha256:e01d1112834a50e380f496e54e2319caf1c2a071e62e23257997cf9d46471b60",
-      "reviewedAt": "2026-10-19T12:58:04.614Z",
+      "modifiedAt": "2026-10-19T14:23:38.099Z",
+      "contentHash": "sha256:467c1707ea648ef4153c24503cf681950bf83ba58b0c8036d018d446e472b6d5",
+      "reviewedAt": "2026-10-19T14:23:56.706Z",
       "reviewDue": "2027-10-19",
       "sourceIds": [
         "src-0642a11373a83c47",
@@ -2175,7 +2175,7 @@
       "retrieval": {
         "documentId": "wiki:Soft_Weighted_Machine_Unlearning_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:e01d1112834a50e380f496e54e2319caf1c2a071e62e23257997cf9d46471b60",
+        "contentHash": "sha256:467c1707ea648ef4153c24503cf681950bf83ba58b0c8036d018d446e472b6d5",
         "textFields": [
           "title",
           "aliases",

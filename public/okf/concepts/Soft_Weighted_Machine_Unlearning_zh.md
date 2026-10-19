@@ -10,9 +10,9 @@ tags:
   - aaai-2026
   - machine-unlearning
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-19T12:56:49.480Z'
-content_hash: 'sha256:e01d1112834a50e380f496e54e2319caf1c2a071e62e23257997cf9d46471b60'
-reviewed_at: '2026-10-19T12:58:04.614Z'
+modified: '2026-10-19T14:23:38.099Z'
+content_hash: 'sha256:467c1707ea648ef4153c24503cf681950bf83ba58b0c8036d018d446e472b6d5'
+reviewed_at: '2026-10-19T14:23:56.706Z'
 review_due: '2027-10-19'
 language: zh
 lifecycle:
@@ -20,7 +20,7 @@ lifecycle:
   confidence: 0.95
   review: on venue/status change
   retention: long-lived semantic memory
-  reviewedAt: '2026-10-19T12:58:04.614Z'
+  reviewedAt: '2026-10-19T14:23:56.706Z'
   reviewDue: '2027-10-19'
   pendingReview: false
   overdue: false
@@ -35,8 +35,6 @@ source_ids:
 source_path: wiki/Soft_Weighted_Machine_Unlearning_zh.md
 ---
 **Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness** 是 **[乔鑫宝](./Qiao_Xinbao_zh.md)**、丁宁宁、程雨诗 和张萌的 AAAI 2026 会议论文。它把机器遗忘重新表述为连续的数据影响修正问题，而不是只能执行“删除或保留”的二元操作。论文关注的是在改善公平性或鲁棒性时，每个样本应保留多少影响，才能避免不必要的效用损失。
-
-![Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness AAAI 2026 poster](/papers/soft-weighted/poster.png)
 
 ## 概述
 

@@ -12,9 +12,9 @@ tags:
   - aaai-2026
   - machine-unlearning
 timestamp: '2026-05-05T21:39:01+08:00'
-modified: '2026-10-19T12:56:49.482Z'
-content_hash: 'sha256:5a30b0a3b71e0b4e23d449454041548584c8fa62a062c0c5fd2cea13a2c5eab0'
-reviewed_at: '2026-10-19T12:58:04.614Z'
+modified: '2026-10-19T14:23:38.100Z'
+content_hash: 'sha256:8085d63383f4e827ef0a5461a51aab034eeeaa82d1fb65075d36b1b83d4f18cf'
+reviewed_at: '2026-10-19T14:23:56.706Z'
 review_due: '2027-10-19'
 name: 'Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness'
 summary: >-
@@ -52,11 +52,6 @@ paper_highlight:
     reweighting and model correction.
   width: 1398
   height: 396
-  poster:
-    image: /papers/soft-weighted/poster-preview.webp
-    image_alt: Conference paper poster.
-    width: 2000
-    height: 1000
   figures:
     - image: /papers/soft-weighted/overview.webp
       image_alt: Soft-weighted unlearning framework.
@@ -72,8 +67,6 @@ paper_highlight:
       height: 1400
 ---
 **Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness** is an AAAI 2026 conference paper by **[[Xinbao_Qiao|Xinbao Qiao]]**, Ningning Ding, Yushi Cheng, and Meng Zhang. It reframes unlearning as a continuous data-influence correction problem rather than only a binary erase-or-keep operation. The paper asks how much influence each sample should retain when the goal is to improve fairness or robustness while limiting utility loss.
-
-![AAAI 2026 poster for Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness](/papers/soft-weighted/poster.png)
 
 ## Overview
 

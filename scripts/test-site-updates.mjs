@@ -55,7 +55,7 @@ for (const paper of papers) {
       assert.equal(media.format, 'webp');
       assert.ok(media.width >= 800, 'Supporting figures retain original labels for in-page enlargement');
     }
-    assert.equal(Boolean(highlight.poster), !paper.slug.startsWith('Illusory_'), 'Use existing posters, with the NeurIPS framework as the fallback');
+    assert.equal(Boolean(highlight.poster), !paper.slug.startsWith('Illusory_') && paper.slug !== 'Soft_Weighted_Machine_Unlearning', 'Use approved posters; NeurIPS and Soft-Weighted use framework fallbacks');
     if (language === 'en') englishImage = highlight.image;
     else assert.equal(highlight.image, englishImage, 'Both languages use the same authoritative figure');
   }

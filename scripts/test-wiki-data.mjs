@@ -1929,14 +1929,12 @@ assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), 
 assert.match(read('DynFrs.md'), /!\[[^\]]+\]\(\/papers\/dynfrs\/lazy-tags\.png\)/, 'DynFrs paper page displays a figure');
 assert.match(read('Hessian_Free_Online_Certified_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/hessian-free\/poster\.png\)/, 'Hessian-free paper page includes poster image');
 assert.match(read('DynFrs.md'), /!\[[^\]]+\]\(\/papers\/dynfrs\/poster\.png\)/, 'DynFrs paper page includes poster image');
-assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/soft-weighted\/poster\.png\)/, 'soft-weighted paper page includes poster image');
 assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/soft-weighted\/framework\.png\)/, 'soft-weighted paper page includes framework image');
 assert.deepEqual(publicationImages('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), ['/papers/model-collapse/poster.png', '/papers/model-collapse/teaser.png'], 'model-collapse paper places the poster before the overview teaser');
 assert.deepEqual(publicationImages('Hessian_Free_Online_Certified_Unlearning.md'), ['/papers/hessian-free/poster.png'], 'Hessian-free paper removes the experimental curve and keeps only the poster');
 assert.deepEqual(publicationImages('DynFrs.md'), ['/papers/dynfrs/poster.png', '/papers/dynfrs/lazy-tags.png'], 'DynFrs paper places the poster before the method schematic');
-assert.deepEqual(publicationImages('Soft_Weighted_Machine_Unlearning.md'), ['/papers/soft-weighted/poster.png', '/papers/soft-weighted/framework.png'], 'soft-weighted paper places the poster before the framework schematic');
+assert.deepEqual(publicationImages('Soft_Weighted_Machine_Unlearning.md'), ['/papers/soft-weighted/framework.png'], 'soft-weighted paper uses the approved framework without the rejected poster');
 assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /\/papers\/model-collapse\/poster\.png\)[\s\S]*## Overview[\s\S]*\/papers\/model-collapse\/teaser\.png\)/, 'model-collapse paper separates the poster from the teaser with overview text');
-assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /\/papers\/soft-weighted\/poster\.png\)[\s\S]*## Overview[\s\S]*## Method[\s\S]*\/papers\/soft-weighted\/framework\.png\)/, 'soft-weighted paper separates the poster from the framework schematic with article text');
 for (const page of ['When_Sample_Selection_Bias_Precipitates_Model_Collapse.md', 'DynFrs.md', 'Soft_Weighted_Machine_Unlearning.md']) {
   assert.doesNotMatch(read(page), /poster\.png\)\n\n!\[[^\]]+\]\(\/papers\//, `${page} does not place a non-poster figure immediately after the poster`);
 }
@@ -1947,8 +1945,8 @@ for (const [page, expectedCount] of Object.entries({
   'Hessian_Free_Online_Certified_Unlearning_zh.md': 1,
   'DynFrs.md': 2,
   'DynFrs_zh.md': 2,
-  'Soft_Weighted_Machine_Unlearning.md': 2,
-  'Soft_Weighted_Machine_Unlearning_zh.md': 2,
+  'Soft_Weighted_Machine_Unlearning.md': 1,
+  'Soft_Weighted_Machine_Unlearning_zh.md': 1,
 })) {
   const images = publicationImages(page);
   assert.equal(images.length, expectedCount, `${page} keeps only overview and poster-class publication images`);
@@ -2928,7 +2926,6 @@ for (const file of [
   'public/papers/model-collapse/poster.png',
   'public/papers/model-collapse/teaser.png',
   'public/papers/hessian-free/poster.png',
-  'public/papers/soft-weighted/poster.png',
   'public/papers/soft-weighted/framework.png',
   'public/papers/dynfrs/lazy-tags.png',
   'public/papers/dynfrs/poster.png'
@@ -2947,3 +2944,10 @@ for (const removedImage of [
 }
 
 console.log('Wiki data tests passed.');
+
+for (const suffix of ['', '_zh']) {
+  assert.doesNotMatch(read(`Soft_Weighted_Machine_Unlearning${suffix}.md`), /soft-weighted\/poster/, 'Rejected Soft-Weighted poster must not return to either language');
+}
+for (const name of ['poster.png', 'poster-preview.webp']) {
+  assert.ok(!fs.existsSync(path.join(root, 'public/papers/soft-weighted', name)), 'Rejected poster assets are not publicly served');
+}

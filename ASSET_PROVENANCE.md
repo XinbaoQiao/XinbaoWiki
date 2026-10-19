@@ -82,7 +82,11 @@ license, or generation manifest recorded in the repository. They are all
 - `public/papers/model-collapse/poster.png`
 - `public/papers/model-collapse/teaser.png`
 - `public/papers/soft-weighted/framework.png`
-- `public/papers/soft-weighted/poster.png`
+
+
+## Withdrawn paper media
+
+The former Soft-Weighted poster and its preview were withdrawn at the author’s request on 2026-10-19 because they were not the original poster. They are no longer public assets and must not be restored from historical copies. The author-selected framework is the current leading visual; this selection does not grant downstream reuse rights. A newly created poster requires explicit author approval and provenance before replacing it.
 
 ## Generated research-topic illustrations
 

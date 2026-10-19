@@ -6295,7 +6295,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:5a30b0a3b71e0b4e23d449454041548584c8fa62a062c0c5fd2cea13a2c5eab0",
+      "contentHash": "sha256:8085d63383f4e827ef0a5461a51aab034eeeaa82d1fb65075d36b1b83d4f18cf",
       "file": "Soft_Weighted_Machine_Unlearning.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -6305,12 +6305,12 @@
         "confidence": 0.95,
         "review": "on venue/status change",
         "retention": "long-lived semantic memory",
-        "reviewedAt": "2026-10-19T12:58:04.614Z",
+        "reviewedAt": "2026-10-19T14:23:56.706Z",
         "reviewDue": "2027-10-19",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-19T12:56:49.482Z",
+      "modifiedAt": "2026-10-19T14:23:38.100Z",
       "outgoing": [
         "Fairness_and_Robustness",
         "Hessian_Free_Online_Certified_Unlearning",
@@ -6341,12 +6341,12 @@
       "timestamp": "2026-05-05T21:39:01+08:00",
       "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
       "type": "publication",
-      "reviewedAt": "2026-10-19T12:58:04.614Z",
+      "reviewedAt": "2026-10-19T14:23:56.706Z",
       "reviewDue": "2027-10-19",
       "retrieval": {
         "documentId": "wiki:Soft_Weighted_Machine_Unlearning",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:5a30b0a3b71e0b4e23d449454041548584c8fa62a062c0c5fd2cea13a2c5eab0",
+        "contentHash": "sha256:8085d63383f4e827ef0a5461a51aab034eeeaa82d1fb65075d36b1b83d4f18cf",
         "textFields": [
           "title",
           "aliases",
@@ -6382,7 +6382,7 @@
     {
       "aliases": [],
       "citationSourceIds": [],
-      "contentHash": "sha256:e01d1112834a50e380f496e54e2319caf1c2a071e62e23257997cf9d46471b60",
+      "contentHash": "sha256:467c1707ea648ef4153c24503cf681950bf83ba58b0c8036d018d446e472b6d5",
       "file": "Soft_Weighted_Machine_Unlearning_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -6392,12 +6392,12 @@
         "confidence": 0.95,
         "review": "on venue/status change",
         "retention": "long-lived semantic memory",
-        "reviewedAt": "2026-10-19T12:58:04.614Z",
+        "reviewedAt": "2026-10-19T14:23:56.706Z",
         "reviewDue": "2027-10-19",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-19T12:56:49.480Z",
+      "modifiedAt": "2026-10-19T14:23:38.099Z",
       "outgoing": [
         "Fairness_and_Robustness_zh",
         "Hessian_Free_Online_Certified_Unlearning_zh",
@@ -6428,12 +6428,12 @@
       "timestamp": "2026-05-05T23:25:14+08:00",
       "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
       "type": "publication",
-      "reviewedAt": "2026-10-19T12:58:04.614Z",
+      "reviewedAt": "2026-10-19T14:23:56.706Z",
       "reviewDue": "2027-10-19",
       "retrieval": {
         "documentId": "wiki:Soft_Weighted_Machine_Unlearning_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:e01d1112834a50e380f496e54e2319caf1c2a071e62e23257997cf9d46471b60",
+        "contentHash": "sha256:467c1707ea648ef4153c24503cf681950bf83ba58b0c8036d018d446e472b6d5",
         "textFields": [
           "title",
           "aliases",
