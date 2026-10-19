@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
+import type { PaperHighlight } from '@/lib/paper-highlights';
 import { isChineseSlug, toChineseSlug, toEnglishSlug, wikiConceptType, wikiPageSummary, wikiPageTitle } from '@/lib/wiki-metadata';
 import { getManifestSearchIndex, getManifestWikiPage, getPublicManifestSlugs } from '@/lib/wiki-manifest';
 
@@ -39,6 +40,7 @@ export type WikiFrontmatter = {
   image_alt?: string;
   image_caption?: string;
   image_gallery?: WikiImageItem[];
+  paper_highlight?: PaperHighlight;
   type?: string;
   authors?: string[];
   venue?: string;

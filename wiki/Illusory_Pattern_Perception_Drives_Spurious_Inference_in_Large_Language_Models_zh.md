@@ -10,10 +10,10 @@ tags:
   - neurips-2026
   - llm-reliability
 timestamp: '2026-09-25T13:49:35+09:00'
-modified: '2026-10-13T11:36:03.385Z'
-content_hash: 'sha256:d658307f57dab094fea7fca7ea8aab996235d317ee95b2742644f8002f62f2d4'
-reviewed_at: '2026-10-13T11:36:03.385Z'
-review_due: '2027-10-13'
+modified: '2026-10-19T12:14:34.537Z'
+content_hash: 'sha256:2aa3f287142b4859f9d8c87277edb1e0e9b0db3ca7737e56c89a4af6a281b1b2'
+reviewed_at: '2026-10-19T12:15:20.548Z'
+review_due: '2027-10-19'
 name: Illusory Pattern Perception Drives Spurious Inference in Large Language Models
 language: zh
 summary: NeurIPS 2026 论文，通过三个心理任务比较大语言模型与人类的错觉模式感知，并用稀疏自编码器分析相关特征。
@@ -41,6 +41,14 @@ links:
     url: 'https://arxiv.org/pdf/2610.07791'
   - label: Code
     url: 'https://github.com/NusIoraPrivacy/illusory'
+paper_highlight:
+  tldr: >-
+    大语言模型可能在随机或不足的证据中推断关联，甚至构造因果叙事。论文通过三个心理任务比较模型与人类，并结合稀疏自编码器分析相关内部特征，揭示这类错觉如何影响推理可靠性。
+  image: /papers/illusory-pattern/overview.webp
+  image_alt: 三个心理任务、模型与人类比较，以及稀疏自编码器特征分析的研究框架。
+  image_caption: 研究框架：行为任务、人类对照与 SAE 特征变化分析。
+  width: 1800
+  height: 839
 translation_of: Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models
 ---
 **Illusory Pattern Perception Drives Spurious Inference in Large Language Models** 是 麦佩华\*、邵卓妍\*、**[[Xinbao_Qiao|乔鑫宝]]**\*、张萌、周欣悅 和 庞严 的论文，已获 NeurIPS 2026 录用。论文研究大语言模型如何从随机、无关或不足以支持关系的证据中推断出关联。[^paper]

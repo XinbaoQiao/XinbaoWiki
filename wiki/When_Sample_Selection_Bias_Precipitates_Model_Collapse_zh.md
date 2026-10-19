@@ -10,10 +10,10 @@ tags:
   - icml-2026
   - synthetic-data
 timestamp: '2026-06-02T22:56:50+08:00'
-modified: '2026-10-13T11:36:20.803Z'
-content_hash: 'sha256:dd5def2dccc285b78a943ddbe68ed603ba6d531fbe363a022cd642320e878b54'
-reviewed_at: '2026-10-13T11:36:20.803Z'
-review_due: '2027-10-13'
+modified: '2026-10-19T12:14:34.906Z'
+content_hash: 'sha256:066329c3a26653a74b629a75d66d854a54f4ae2fb8c8aad130b05cac14287c03'
+reviewed_at: '2026-10-19T12:15:20.548Z'
+review_due: '2027-10-19'
 name: When Sample Selection Bias Precipitates Model Collapse
 language: zh
 summary: ICML 2026 论文，研究低资源验证场景、样本选择偏差、模型坍缩与协作 Wasserstein 几何代理。
@@ -42,6 +42,15 @@ links:
       https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse
   - label: ICML 2026 conference
     url: 'https://icml.cc/Conferences/2026'
+paper_highlight:
+  tldr: >-
+    当验证器只能看到少量且有偏的参考数据时，筛选合成样本反而可能加速模型崩塌。论文通过跨数据孤岛的 Wasserstein
+    代理分布扩展验证依据，在不共享原始样本的条件下缓解递归训练中的多样性退化。
+  image: /papers/model-collapse/overview.webp
+  image_alt: 在分布式参考分布之间迭代构造 Wasserstein 重心的示意图。
+  image_caption: 协作重心估计：不交换原始数据，构建更广泛的验证参考。
+  width: 1800
+  height: 1626
 translation_of: When_Sample_Selection_Bias_Precipitates_Model_Collapse
 ---
 **When Sample Selection Bias Precipitates Model Collapse** 是 **[[Xinbao_Qiao|乔鑫宝]]**、杜相龙、刘巍、张婧琦、麦佩华、张萌和 庞严 的 ICML 2026 会议论文。论文研究递归合成数据训练中的一种失效模式：当验证器只有少量本地参考数据时，它可能把稀有但有效的样本误判为低质量生成，使样本选择放大而不是抑制模型坍缩。论文通过协作 Wasserstein 几何代理，在无需汇集原始数据的情况下扩展评估所依据的分布参考。

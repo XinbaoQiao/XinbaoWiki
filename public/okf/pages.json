@@ -121,10 +121,10 @@
         "machine-unlearning"
       ],
       "timestamp": "2026-05-05T21:39:01+08:00",
-      "modifiedAt": "2026-10-12T14:14:29.831Z",
-      "contentHash": "sha256:315e50f6ccd9b1f9fe9e2640b16cdb70d5c2a89f1d93d6244ed2bb6c3427488b",
-      "reviewedAt": "2026-10-12T14:15:25.457Z",
-      "reviewDue": "2027-10-12",
+      "modifiedAt": "2026-10-19T12:14:34.842Z",
+      "contentHash": "sha256:00d1796e6746055c6849645380d1a8c19ba9d905e33011a3b2c6287dc114886b",
+      "reviewedAt": "2026-10-19T12:15:20.548Z",
+      "reviewDue": "2027-10-19",
       "sourceIds": [
         "src-0642a11373a83c47",
         "src-53e1199f272a4df4",
@@ -136,7 +136,7 @@
       "retrieval": {
         "documentId": "wiki:Soft_Weighted_Machine_Unlearning",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:315e50f6ccd9b1f9fe9e2640b16cdb70d5c2a89f1d93d6244ed2bb6c3427488b",
+        "contentHash": "sha256:00d1796e6746055c6849645380d1a8c19ba9d905e33011a3b2c6287dc114886b",
         "textFields": [
           "title",
           "aliases",
@@ -593,10 +593,10 @@
         "iclr-2025"
       ],
       "timestamp": "2026-05-05T21:39:01+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.872Z",
-      "contentHash": "sha256:1b6691f31f55df4e55be20372c488f69dc0ad3daf113d0cf1380144f96bca4f1",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
+      "modifiedAt": "2026-10-19T12:14:34.490Z",
+      "contentHash": "sha256:adc66189e7906948260f0a8866e55f242a9ccf600d81313affe184695e89dab7",
+      "reviewedAt": "2026-10-19T12:15:20.548Z",
+      "reviewDue": "2027-01-17",
       "sourceIds": [
         "src-19cdc04d387acf77",
         "src-3234eea5652932e1",
@@ -608,7 +608,7 @@
       "retrieval": {
         "documentId": "wiki:DynFrs",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:1b6691f31f55df4e55be20372c488f69dc0ad3daf113d0cf1380144f96bca4f1",
+        "contentHash": "sha256:adc66189e7906948260f0a8866e55f242a9ccf600d81313affe184695e89dab7",
         "textFields": [
           "title",
           "aliases",
@@ -763,10 +763,10 @@
         "iclr-2025"
       ],
       "timestamp": "2026-05-05T21:39:01+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.883Z",
-      "contentHash": "sha256:809a45415e206a5078ad9191c1422a3b97cf19fd566acdfb8e87577fff96e1c4",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-01-05",
+      "modifiedAt": "2026-10-19T12:14:34.536Z",
+      "contentHash": "sha256:0d0d0739ca8340cda4f8e219850d638d89d01066c1c4f0f1092537b313871af3",
+      "reviewedAt": "2026-10-19T12:15:20.548Z",
+      "reviewDue": "2027-01-17",
       "sourceIds": [
         "src-508cc93a8723d9eb",
         "src-65d81b8aca549860",
@@ -778,7 +778,7 @@
       "retrieval": {
         "documentId": "wiki:Hessian_Free_Online_Certified_Unlearning",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:809a45415e206a5078ad9191c1422a3b97cf19fd566acdfb8e87577fff96e1c4",
+        "contentHash": "sha256:0d0d0739ca8340cda4f8e219850d638d89d01066c1c4f0f1092537b313871af3",
         "textFields": [
           "title",
           "aliases",
@@ -852,10 +852,10 @@
         "llm-reliability"
       ],
       "timestamp": "2026-09-25T13:49:35+09:00",
-      "modifiedAt": "2026-10-11T14:22:08.132Z",
-      "contentHash": "sha256:5568279effa89e5b3bb57c8f94c85ba3100a14bc5d773b4520d0e04d5fa3c2cf",
-      "reviewedAt": "2026-10-11T14:22:50.689Z",
-      "reviewDue": "2027-10-11",
+      "modifiedAt": "2026-10-19T12:14:34.538Z",
+      "contentHash": "sha256:42ca9f1f861b9a245f6f77f0affa57b06f5b56f558e3981a358034cc42e1ba8f",
+      "reviewedAt": "2026-10-19T12:15:20.548Z",
+      "reviewDue": "2027-10-19",
       "sourceIds": [
         "src-19ed8d8ac2a744f7",
         "src-2d7834852d5a70ca",
@@ -872,7 +872,7 @@
       "retrieval": {
         "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:5568279effa89e5b3bb57c8f94c85ba3100a14bc5d773b4520d0e04d5fa3c2cf",
+        "contentHash": "sha256:42ca9f1f861b9a245f6f77f0affa57b06f5b56f558e3981a358034cc42e1ba8f",
         "textFields": [
           "title",
           "aliases",
@@ -1939,10 +1939,10 @@
         "synthetic-data"
       ],
       "timestamp": "2026-06-02T22:56:50+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.992Z",
-      "contentHash": "sha256:8c296d38b0b975003b0af814841b1887241505ace4386e7f0d13b9b9dbfff9cb",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-10-07",
+      "modifiedAt": "2026-10-19T12:14:34.907Z",
+      "contentHash": "sha256:31255435153ef18bef7a1a1720d167c7b1bf421985768925d40b1b66a2c876c1",
+      "reviewedAt": "2026-10-19T12:15:20.548Z",
+      "reviewDue": "2027-10-19",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-4144e3776ac496d0",
@@ -1954,7 +1954,7 @@
       "retrieval": {
         "documentId": "wiki:When_Sample_Selection_Bias_Precipitates_Model_Collapse",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:8c296d38b0b975003b0af814841b1887241505ace4386e7f0d13b9b9dbfff9cb",
+        "contentHash": "sha256:31255435153ef18bef7a1a1720d167c7b1bf421985768925d40b1b66a2c876c1",
         "textFields": [
           "title",
           "aliases",
@@ -2160,10 +2160,10 @@
         "machine-unlearning"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-10-13T11:36:03.385Z",
-      "contentHash": "sha256:8763ffe73b76b3e2d1c0d94796f9ce325f26050d49e8a1488e1ddd61fc4cbbe2",
-      "reviewedAt": "2026-10-13T11:36:03.385Z",
-      "reviewDue": "2027-10-13",
+      "modifiedAt": "2026-10-19T12:14:34.841Z",
+      "contentHash": "sha256:9d93c3a04f14cd5538672f516f8b5a1c21ff53084eda53c321af4139f429b234",
+      "reviewedAt": "2026-10-19T12:15:20.548Z",
+      "reviewDue": "2027-10-19",
       "sourceIds": [
         "src-0642a11373a83c47",
         "src-53e1199f272a4df4",
@@ -2175,7 +2175,7 @@
       "retrieval": {
         "documentId": "wiki:Soft_Weighted_Machine_Unlearning_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:8763ffe73b76b3e2d1c0d94796f9ce325f26050d49e8a1488e1ddd61fc4cbbe2",
+        "contentHash": "sha256:9d93c3a04f14cd5538672f516f8b5a1c21ff53084eda53c321af4139f429b234",
         "textFields": [
           "title",
           "aliases",
@@ -2249,9 +2249,9 @@
         "iclr-2025"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-10-19T10:47:59.463Z",
-      "contentHash": "sha256:f0fffa1f7e388290676ace81761c7671ded58ba50ebc45c27afef8e62bbd03bd",
-      "reviewedAt": "2026-10-19T10:48:47.060Z",
+      "modifiedAt": "2026-10-19T12:14:34.489Z",
+      "contentHash": "sha256:891a9e2467eb2b40bbb8962b8c17dca7ea8d6fe7c6ecb04d39f06f599f100528",
+      "reviewedAt": "2026-10-19T12:15:20.548Z",
       "reviewDue": "2027-01-17",
       "sourceIds": [
         "src-19cdc04d387acf77",
@@ -2264,7 +2264,7 @@
       "retrieval": {
         "documentId": "wiki:DynFrs_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:f0fffa1f7e388290676ace81761c7671ded58ba50ebc45c27afef8e62bbd03bd",
+        "contentHash": "sha256:891a9e2467eb2b40bbb8962b8c17dca7ea8d6fe7c6ecb04d39f06f599f100528",
         "textFields": [
           "title",
           "aliases",
@@ -2296,10 +2296,10 @@
         "iclr-2025"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-10-13T11:36:20.750Z",
-      "contentHash": "sha256:784f2f4f87def73219b668b747b48c1ff4eadd906d2a17fb8f3751b130f24f28",
-      "reviewedAt": "2026-10-13T11:36:20.750Z",
-      "reviewDue": "2027-01-11",
+      "modifiedAt": "2026-10-19T12:14:34.535Z",
+      "contentHash": "sha256:d6ee8fd5b2624db247df8a928f267ad5fcbc17691696754a51868f7168a1c8e3",
+      "reviewedAt": "2026-10-19T12:15:20.548Z",
+      "reviewDue": "2027-01-17",
       "sourceIds": [
         "src-508cc93a8723d9eb",
         "src-65d81b8aca549860",
@@ -2311,7 +2311,7 @@
       "retrieval": {
         "documentId": "wiki:Hessian_Free_Online_Certified_Unlearning_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:784f2f4f87def73219b668b747b48c1ff4eadd906d2a17fb8f3751b130f24f28",
+        "contentHash": "sha256:d6ee8fd5b2624db247df8a928f267ad5fcbc17691696754a51868f7168a1c8e3",
         "textFields": [
           "title",
           "aliases",
@@ -2344,10 +2344,10 @@
         "llm-reliability"
       ],
       "timestamp": "2026-09-25T13:49:35+09:00",
-      "modifiedAt": "2026-10-13T11:36:03.385Z",
-      "contentHash": "sha256:d658307f57dab094fea7fca7ea8aab996235d317ee95b2742644f8002f62f2d4",
-      "reviewedAt": "2026-10-13T11:36:03.385Z",
-      "reviewDue": "2027-10-13",
+      "modifiedAt": "2026-10-19T12:14:34.537Z",
+      "contentHash": "sha256:2aa3f287142b4859f9d8c87277edb1e0e9b0db3ca7737e56c89a4af6a281b1b2",
+      "reviewedAt": "2026-10-19T12:15:20.548Z",
+      "reviewDue": "2027-10-19",
       "sourceIds": [
         "src-19ed8d8ac2a744f7",
         "src-2d7834852d5a70ca",
@@ -2364,7 +2364,7 @@
       "retrieval": {
         "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:d658307f57dab094fea7fca7ea8aab996235d317ee95b2742644f8002f62f2d4",
+        "contentHash": "sha256:2aa3f287142b4859f9d8c87277edb1e0e9b0db3ca7737e56c89a4af6a281b1b2",
         "textFields": [
           "title",
           "aliases",
@@ -2503,10 +2503,10 @@
         "synthetic-data"
       ],
       "timestamp": "2026-06-02T22:56:50+08:00",
-      "modifiedAt": "2026-10-13T11:36:20.803Z",
-      "contentHash": "sha256:dd5def2dccc285b78a943ddbe68ed603ba6d531fbe363a022cd642320e878b54",
-      "reviewedAt": "2026-10-13T11:36:20.803Z",
-      "reviewDue": "2027-10-13",
+      "modifiedAt": "2026-10-19T12:14:34.906Z",
+      "contentHash": "sha256:066329c3a26653a74b629a75d66d854a54f4ae2fb8c8aad130b05cac14287c03",
+      "reviewedAt": "2026-10-19T12:15:20.548Z",
+      "reviewDue": "2027-10-19",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-4144e3776ac496d0",
@@ -2518,7 +2518,7 @@
       "retrieval": {
         "documentId": "wiki:When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:dd5def2dccc285b78a943ddbe68ed603ba6d531fbe363a022cd642320e878b54",
+        "contentHash": "sha256:066329c3a26653a74b629a75d66d854a54f4ae2fb8c8aad130b05cac14287c03",
         "textFields": [
           "title",
           "aliases",

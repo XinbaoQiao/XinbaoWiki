@@ -9,6 +9,7 @@ import { VisitorAtlasDisclosure } from '@/components/VisitorAtlasDisclosure';
 import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
 import { getRecentSiteUpdates } from '@/lib/site-updates';
 import { PaperAcceptancePreview } from '@/components/PaperAcceptancePreview';
+import type { PaperHighlightCatalog } from '@/lib/paper-highlights';
 
 type LocalizedText = Record<SearchLanguage, string>;
 type PortalPalette = 'text' | 'blue' | 'gold' | 'rose' | 'green' | 'violet' | 'charcoal';
@@ -34,6 +35,7 @@ type LanguageEntry = {
 type Props = {
   directorySections: PortalSection[];
   languageEntries: LanguageEntry[];
+  paperHighlights: PaperHighlightCatalog;
   updatesAsOf: string;
 };
 
@@ -143,7 +145,7 @@ function withBasePath(pathname: string) {
   return basePath ? `${basePath}${pathname}` : pathname;
 }
 
-export function HomepagePortal({ directorySections, languageEntries, updatesAsOf }: Props) {
+export function HomepagePortal({ directorySections, languageEntries, paperHighlights, updatesAsOf }: Props) {
   const [language, setLanguage] = useState<SearchLanguage>('en');
   const [updatesAsOfDate, setUpdatesAsOfDate] = useState(updatesAsOf);
   const [browseView, setBrowseView] = useState<BrowseView>('list');
@@ -571,7 +573,7 @@ export function HomepagePortal({ directorySections, languageEntries, updatesAsOf
                   <div>
                     <WikiLink href={withBasePath(item.href)} titleMorphSlug={wikiSlugFromHref(item.href)} titleMorphDestTitle={item.title}>{item.title}</WikiLink>
                     {!item.papers && <p>{item.detail}</p>}
-                    {item.papers && <PaperAcceptancePreview key={acceptanceResetKey} papers={item.papers} language={language} defaultOpen={item === latestAcceptance} />}
+                    {item.papers && <PaperAcceptancePreview key={acceptanceResetKey} papers={item.papers} language={language} defaultOpen={item === latestAcceptance} view={updatesView} highlights={paperHighlights} />}
                   </div>
                 </li>
               ))}

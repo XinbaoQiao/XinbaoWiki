@@ -10,18 +10,18 @@ tags:
   - aaai-2026
   - machine-unlearning
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-13T11:36:03.385Z'
-content_hash: 'sha256:8763ffe73b76b3e2d1c0d94796f9ce325f26050d49e8a1488e1ddd61fc4cbbe2'
-reviewed_at: '2026-10-13T11:36:03.385Z'
-review_due: '2027-10-13'
+modified: '2026-10-19T12:14:34.841Z'
+content_hash: 'sha256:9d93c3a04f14cd5538672f516f8b5a1c21ff53084eda53c321af4139f429b234'
+reviewed_at: '2026-10-19T12:15:20.548Z'
+review_due: '2027-10-19'
 language: zh
 lifecycle:
   status: confirmed
   confidence: 0.95
   review: on venue/status change
   retention: long-lived semantic memory
-  reviewedAt: '2026-10-13T11:36:03.385Z'
-  reviewDue: '2027-10-13'
+  reviewedAt: '2026-10-19T12:15:20.548Z'
+  reviewDue: '2027-10-19'
   pendingReview: false
   overdue: false
 retrieval:

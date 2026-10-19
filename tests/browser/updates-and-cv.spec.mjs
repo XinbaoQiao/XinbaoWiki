@@ -148,24 +148,62 @@ for (const width of [1440, 390, 320]) {
     await expect(news).toHaveAttribute('open', '');
     await expect(news).toHaveAttribute('data-updates-view', 'detailed');
     const detailedWidth = (await news.boundingBox()).width;
-    const detailedImageWidth = (await latestAcceptance.locator('img').boundingBox()).width;
+    const latestFirstPage = latestAcceptance.locator('[data-paper-slug] > a > img');
+    const detailedImageWidth = (await latestFirstPage.boundingBox()).width;
     if (width === 1440) {
       expect(detailedWidth).toBeGreaterThan(compactWidth * 1.5);
     }
-    expect(detailedImageWidth).toBeGreaterThan(compactImageWidth * 1.3);
+    expect(detailedImageWidth).toBeGreaterThan(compactImageWidth * 1.1);
     expect((await detailedButton.boundingBox()).height).toBeGreaterThanOrEqual((width <= 760 ? 44 : 30) - .1);
+    const latestHighlight = latestAcceptance.locator('[data-paper-highlight]');
+    await expect(latestHighlight).toContainText('random or insufficient evidence');
+    await latestHighlight.locator('img').scrollIntoViewIfNeeded();
+    await expect.poll(() => latestHighlight.locator('img').evaluate(element => element.complete && element.naturalWidth >= 1000)).toBe(true);
+    const overviewGeometry = await latestAcceptance.locator('[data-paper-slug]').evaluate(element => {
+      const rect = target => {
+        const box = target.getBoundingClientRect();
+        return { left: box.left, right: box.right, top: box.top, bottom: box.bottom, width: box.width };
+      };
+      return { page: rect(element.querySelector(':scope > a')), highlight: rect(element.querySelector('[data-paper-highlight]')) };
+    });
+    if (width > 760) {
+      expect(overviewGeometry.highlight.left).toBeGreaterThan(overviewGeometry.page.right + 12);
+      expect(Math.abs(overviewGeometry.highlight.top - overviewGeometry.page.top)).toBeLessThan(1);
+    } else {
+      expect(overviewGeometry.highlight.top).toBeGreaterThan(overviewGeometry.page.bottom);
+      expect(Math.abs(overviewGeometry.highlight.left - overviewGeometry.page.left)).toBeLessThan(1);
+    }
+    if (width === 1440 || width === 320) {
+      await latestAcceptance.scrollIntoViewIfNeeded();
+      await captureScreenshot(news, `homepage-overview-${width}.png`);
+    }
     await latestAcceptance.locator('summary').click();
     await toggle.click();
-    const detailedFigures = await figures.evaluateAll(elements => elements.map(element => {
-      const rect = element.getBoundingClientRect();
-      return { left: rect.left, top: rect.top, width: rect.width };
-    }));
-    expect(detailedFigures[0].left).toBeLessThan(detailedFigures[1].left);
-    expect(Math.abs(detailedFigures[0].top - detailedFigures[1].top)).toBeLessThanOrEqual(1);
-    expect(detailedFigures[0].width).toBeGreaterThan(geometry[0].width * (width === 1440 ? 1.3 : 1.1));
+    const activeFigure = iclr.locator('figure:not([hidden])');
+    await expect(activeFigure).toHaveCount(1);
+    await expect(activeFigure).toHaveAttribute('data-paper-slug', 'Hessian_Free_Online_Certified_Unlearning');
+    await expect(activeFigure.locator('[data-paper-highlight]')).toContainText('trajectory statistics');
+    const previousPaper = iclr.getByRole('button', { name: 'Previous paper', exact: true });
+    const nextPaper = iclr.getByRole('button', { name: 'Next paper', exact: true });
+    await expect(previousPaper).toBeDisabled();
+    await expect(iclr.locator('output')).toHaveText('1 / 2');
+    await nextPaper.focus();
+    await page.keyboard.press('Enter');
+    await expect(activeFigure).toHaveAttribute('data-paper-slug', 'DynFrs');
+    await expect(iclr.locator('output')).toHaveText('2 / 2');
+    await expect(nextPaper).toBeDisabled();
+    await expect(previousPaper).toBeEnabled();
+    await expect(activeFigure.locator(':scope > a > img')).toHaveAttribute('src', /\/papers\/dynfrs\/camera-ready-first-page\.webp$/);
+    await expect(activeFigure.locator('[data-paper-highlight]')).toContainText('lazy tags');
+    await expect(activeFigure.locator('[data-paper-highlight] img')).toHaveAttribute('src', /\/papers\/dynfrs\/overview\.webp$/);
+    await activeFigure.locator('[data-paper-highlight] img').scrollIntoViewIfNeeded();
+    await expect.poll(() => activeFigure.locator('[data-paper-highlight] img').evaluate(element => element.complete && element.naturalWidth >= 1000)).toBe(true);
+    await previousPaper.click();
+    await expect(activeFigure).toHaveAttribute('data-paper-slug', 'Hessian_Free_Online_Certified_Unlearning');
+    await nextPaper.click();
     await expectNoPageOverflow(page);
     fs.writeFileSync(path.join(qaDirectory, `updates-views-${width}.json`), JSON.stringify({
-      compactWidth, detailedWidth, compactImageWidth, detailedImageWidth, detailedFigures
+      compactWidth, detailedWidth, compactImageWidth, detailedImageWidth, overviewGeometry
     }, null, 2));
     if (width === 1440 || width === 320) {
       await toggle.evaluate(element => element.blur());
@@ -180,6 +218,11 @@ for (const width of [1440, 390, 320]) {
     await expect(page.locator('#portal-news [data-paper-acceptance][open]')).toHaveCount(1);
     await expect(latestAcceptance.locator('[data-paper-acceptance]')).toHaveAttribute('open', '');
     await expect(iclr.locator('[data-paper-acceptance]')).not.toHaveAttribute('open', '');
+    await toggle.click();
+    await expect(activeFigure).toHaveAttribute('data-paper-slug', 'Hessian_Free_Online_Certified_Unlearning');
+    await expect(iclr.locator('output')).toHaveText('1 / 2');
+    await expect(previousPaper).toBeDisabled();
+    await toggle.click();
     await viewControls.getByRole('button', { name: 'Compact', exact: true }).click();
     expect(Math.abs((await news.boundingBox()).width - compactWidth)).toBeLessThanOrEqual(1);
     await page.getByRole('group', { name: 'Search language', exact: true }).getByRole('button', { name: '中文', exact: true }).click();
@@ -190,9 +233,16 @@ for (const width of [1440, 390, 320]) {
     await chineseViewControls.getByRole('button', { name: '详细', exact: true }).click();
     await expect(news).toHaveAttribute('data-updates-view', 'detailed');
     await expect(rows).toHaveCount(8);
-    await expect(iclr.locator('summary')).toContainText('查看 Camera-Ready 首页');
+    await expect(iclr.locator('summary')).toContainText('查看论文与简介');
     await expect(page.locator('#portal-news [data-paper-acceptance][open]')).toHaveCount(1);
     await expect(latestAcceptance.locator('[data-paper-acceptance]')).toHaveAttribute('open', '');
+    await expect(latestHighlight).toContainText('大语言模型可能');
+    await iclr.locator('summary').click();
+    await iclr.getByRole('button', { name: '下一篇论文', exact: true }).click();
+    await expect(activeFigure).toHaveAttribute('data-paper-slug', 'DynFrs');
+    await expect(activeFigure.locator('[data-paper-highlight]')).toContainText('惰性标记');
+    await iclr.getByRole('button', { name: '上一篇论文', exact: true }).click();
+    await expect(activeFigure).toHaveAttribute('data-paper-slug', 'Hessian_Free_Online_Certified_Unlearning');
     await expectNoPageOverflow(page);
     expect(errors).toEqual([]);
   });

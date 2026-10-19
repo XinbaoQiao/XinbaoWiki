@@ -9,10 +9,10 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T21:39:01+08:00'
-modified: '2026-10-07T07:07:23.872Z'
-content_hash: 'sha256:1b6691f31f55df4e55be20372c488f69dc0ad3daf113d0cf1380144f96bca4f1'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-01-05'
+modified: '2026-10-19T12:14:34.490Z'
+content_hash: 'sha256:adc66189e7906948260f0a8866e55f242a9ccf600d81313affe184695e89dab7'
+reviewed_at: '2026-10-19T12:15:20.548Z'
+review_due: '2027-01-17'
 name: 'DynFrs: An Efficient Framework for Machine Unlearning in Random Forest'
 summary: ICLR 2025 paper on efficient machine unlearning for random forests.
 dates: 24-28 April 2025
@@ -36,6 +36,22 @@ links:
     url: 'https://arxiv.org/abs/2410.01588'
   - label: Code
     url: 'https://github.com/shurongwang/DynFrs'
+paper_highlight:
+  tldr: >-
+    Exact unlearning for random forests can be designed as a dynamic
+    data-structure problem. Tree subsampling limits the reach of each sample,
+    while lazy tags postpone subtree rebuilding until needed, keeping deletion,
+    insertion and prediction efficient while preserving distributional
+    equivalence to retraining.
+  image: /papers/dynfrs/overview.webp
+  image_alt: >-
+    DynFrs lazy-tag strategy: deleted nodes, tagged nodes and deferred subtree
+    reconstruction.
+  image_caption: >-
+    Lazy tags defer subtree reconstruction until a query needs the affected
+    path.
+  width: 1008
+  height: 252
 ---
 **DynFrs: An Efficient Framework for Machine Unlearning in Random Forest** is an ICLR 2025 conference paper by Shurong Wang, Zhuoyang Shen, **[[Xinbao_Qiao|Xinbao Qiao]]**, Tongning Zhang, and Meng Zhang. The work treats random-forest unlearning as a dynamic data-structure problem: it seeks exact distributional equivalence to retraining while keeping online deletion, insertion, and query latency low.
 

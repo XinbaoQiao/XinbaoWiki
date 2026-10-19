@@ -10,18 +10,18 @@ tags:
   - icml-2026
   - synthetic-data
 timestamp: '2026-06-02T22:56:50+08:00'
-modified: '2026-10-13T11:36:20.803Z'
-content_hash: 'sha256:dd5def2dccc285b78a943ddbe68ed603ba6d531fbe363a022cd642320e878b54'
-reviewed_at: '2026-10-13T11:36:20.803Z'
-review_due: '2027-10-13'
+modified: '2026-10-19T12:14:34.906Z'
+content_hash: 'sha256:066329c3a26653a74b629a75d66d854a54f4ae2fb8c8aad130b05cac14287c03'
+reviewed_at: '2026-10-19T12:15:20.548Z'
+review_due: '2027-10-19'
 language: zh
 lifecycle:
   status: confirmed
   confidence: 0.95
   review: on venue/status change
   retention: long-lived semantic memory
-  reviewedAt: '2026-10-13T11:36:20.803Z'
-  reviewDue: '2027-10-13'
+  reviewedAt: '2026-10-19T12:15:20.548Z'
+  reviewDue: '2027-10-19'
   pendingReview: false
   overdue: false
 retrieval:

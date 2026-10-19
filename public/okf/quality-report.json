@@ -568,16 +568,16 @@
         "slug": "DynFrs",
         "title": "DynFrs: An Efficient Framework for Machine Unlearning in Random Forest",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.872Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-19T12:14:34.490Z",
+        "reviewedAt": "2026-10-19T12:15:20.548Z",
+        "reviewDue": "2027-01-17"
       },
       {
         "slug": "DynFrs_zh",
         "title": "DynFrs: An Efficient Framework for Machine Unlearning in Random Forest",
         "language": "zh",
-        "modifiedAt": "2026-10-19T10:47:59.463Z",
-        "reviewedAt": "2026-10-19T10:48:47.060Z",
+        "modifiedAt": "2026-10-19T12:14:34.489Z",
+        "reviewedAt": "2026-10-19T12:15:20.548Z",
         "reviewDue": "2027-01-17"
       },
       {
@@ -632,17 +632,17 @@
         "slug": "Hessian_Free_Online_Certified_Unlearning",
         "title": "Hessian-Free Online Certified Unlearning",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.883Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-19T12:14:34.536Z",
+        "reviewedAt": "2026-10-19T12:15:20.548Z",
+        "reviewDue": "2027-01-17"
       },
       {
         "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
         "title": "Hessian-Free Online Certified Unlearning",
         "language": "zh",
-        "modifiedAt": "2026-10-13T11:36:20.750Z",
-        "reviewedAt": "2026-10-13T11:36:20.750Z",
-        "reviewDue": "2027-01-11"
+        "modifiedAt": "2026-10-19T12:14:34.535Z",
+        "reviewedAt": "2026-10-19T12:15:20.548Z",
+        "reviewDue": "2027-01-17"
       },
       {
         "slug": "index",
@@ -824,17 +824,17 @@
         "slug": "Soft_Weighted_Machine_Unlearning",
         "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
         "language": "en",
-        "modifiedAt": "2026-10-12T14:14:29.831Z",
-        "reviewedAt": "2026-10-12T14:15:25.457Z",
-        "reviewDue": "2027-10-12"
+        "modifiedAt": "2026-10-19T12:14:34.842Z",
+        "reviewedAt": "2026-10-19T12:15:20.548Z",
+        "reviewDue": "2027-10-19"
       },
       {
         "slug": "Soft_Weighted_Machine_Unlearning_zh",
         "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
         "language": "zh",
-        "modifiedAt": "2026-10-13T11:36:03.385Z",
-        "reviewedAt": "2026-10-13T11:36:03.385Z",
-        "reviewDue": "2027-10-13"
+        "modifiedAt": "2026-10-19T12:14:34.841Z",
+        "reviewedAt": "2026-10-19T12:15:20.548Z",
+        "reviewDue": "2027-10-19"
       },
       {
         "slug": "Synthetic_Data",
@@ -872,17 +872,17 @@
         "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
         "title": "When Sample Selection Bias Precipitates Model Collapse",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.992Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07"
+        "modifiedAt": "2026-10-19T12:14:34.907Z",
+        "reviewedAt": "2026-10-19T12:15:20.548Z",
+        "reviewDue": "2027-10-19"
       },
       {
         "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
         "title": "When Sample Selection Bias Precipitates Model Collapse",
         "language": "zh",
-        "modifiedAt": "2026-10-13T11:36:20.803Z",
-        "reviewedAt": "2026-10-13T11:36:20.803Z",
-        "reviewDue": "2027-10-13"
+        "modifiedAt": "2026-10-19T12:14:34.906Z",
+        "reviewedAt": "2026-10-19T12:15:20.548Z",
+        "reviewDue": "2027-10-19"
       }
     ],
     "coverage": 0.3864,
@@ -1080,16 +1080,16 @@
         "slug": "DynFrs",
         "title": "DynFrs: An Efficient Framework for Machine Unlearning in Random Forest",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.872Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-19T12:14:34.490Z",
+        "reviewedAt": "2026-10-19T12:15:20.548Z",
+        "reviewDue": "2027-01-17"
       },
       {
         "slug": "DynFrs_zh",
         "title": "DynFrs: An Efficient Framework for Machine Unlearning in Random Forest",
         "language": "zh",
-        "modifiedAt": "2026-10-19T10:47:59.463Z",
-        "reviewedAt": "2026-10-19T10:48:47.060Z",
+        "modifiedAt": "2026-10-19T12:14:34.489Z",
+        "reviewedAt": "2026-10-19T12:15:20.548Z",
         "reviewDue": "2027-01-17"
       },
       {
@@ -1144,33 +1144,33 @@
         "slug": "Hessian_Free_Online_Certified_Unlearning",
         "title": "Hessian-Free Online Certified Unlearning",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.883Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-01-05"
+        "modifiedAt": "2026-10-19T12:14:34.536Z",
+        "reviewedAt": "2026-10-19T12:15:20.548Z",
+        "reviewDue": "2027-01-17"
       },
       {
         "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
         "title": "Hessian-Free Online Certified Unlearning",
         "language": "zh",
-        "modifiedAt": "2026-10-13T11:36:20.750Z",
-        "reviewedAt": "2026-10-13T11:36:20.750Z",
-        "reviewDue": "2027-01-11"
+        "modifiedAt": "2026-10-19T12:14:34.535Z",
+        "reviewedAt": "2026-10-19T12:15:20.548Z",
+        "reviewDue": "2027-01-17"
       },
       {
         "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "title": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
         "language": "en",
-        "modifiedAt": "2026-10-11T14:22:08.132Z",
-        "reviewedAt": "2026-10-11T14:22:50.689Z",
-        "reviewDue": "2027-10-11"
+        "modifiedAt": "2026-10-19T12:14:34.538Z",
+        "reviewedAt": "2026-10-19T12:15:20.548Z",
+        "reviewDue": "2027-10-19"
       },
       {
         "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "title": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
         "language": "zh",
-        "modifiedAt": "2026-10-13T11:36:03.385Z",
-        "reviewedAt": "2026-10-13T11:36:03.385Z",
-        "reviewDue": "2027-10-13"
+        "modifiedAt": "2026-10-19T12:14:34.537Z",
+        "reviewedAt": "2026-10-19T12:15:20.548Z",
+        "reviewDue": "2027-10-19"
       },
       {
         "slug": "index",
@@ -1472,17 +1472,17 @@
         "slug": "Soft_Weighted_Machine_Unlearning",
         "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
         "language": "en",
-        "modifiedAt": "2026-10-12T14:14:29.831Z",
-        "reviewedAt": "2026-10-12T14:15:25.457Z",
-        "reviewDue": "2027-10-12"
+        "modifiedAt": "2026-10-19T12:14:34.842Z",
+        "reviewedAt": "2026-10-19T12:15:20.548Z",
+        "reviewDue": "2027-10-19"
       },
       {
         "slug": "Soft_Weighted_Machine_Unlearning_zh",
         "title": "Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness",
         "language": "zh",
-        "modifiedAt": "2026-10-13T11:36:03.385Z",
-        "reviewedAt": "2026-10-13T11:36:03.385Z",
-        "reviewDue": "2027-10-13"
+        "modifiedAt": "2026-10-19T12:14:34.841Z",
+        "reviewedAt": "2026-10-19T12:15:20.548Z",
+        "reviewDue": "2027-10-19"
       },
       {
         "slug": "Synthetic_Data",
@@ -1552,17 +1552,17 @@
         "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
         "title": "When Sample Selection Bias Precipitates Model Collapse",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.992Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07"
+        "modifiedAt": "2026-10-19T12:14:34.907Z",
+        "reviewedAt": "2026-10-19T12:15:20.548Z",
+        "reviewDue": "2027-10-19"
       },
       {
         "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
         "title": "When Sample Selection Bias Precipitates Model Collapse",
         "language": "zh",
-        "modifiedAt": "2026-10-13T11:36:20.803Z",
-        "reviewedAt": "2026-10-13T11:36:20.803Z",
-        "reviewDue": "2027-10-13"
+        "modifiedAt": "2026-10-19T12:14:34.906Z",
+        "reviewedAt": "2026-10-19T12:15:20.548Z",
+        "reviewDue": "2027-10-19"
       },
       {
         "slug": "Xinbao_Qiao",

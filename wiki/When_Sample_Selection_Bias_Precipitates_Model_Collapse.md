@@ -12,10 +12,10 @@ tags:
   - icml-2026
   - synthetic-data
 timestamp: '2026-06-02T22:56:50+08:00'
-modified: '2026-10-07T07:07:23.992Z'
-content_hash: 'sha256:8c296d38b0b975003b0af814841b1887241505ace4386e7f0d13b9b9dbfff9cb'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-10-07'
+modified: '2026-10-19T12:14:34.907Z'
+content_hash: 'sha256:31255435153ef18bef7a1a1720d167c7b1bf421985768925d40b1b66a2c876c1'
+reviewed_at: '2026-10-19T12:15:20.548Z'
+review_due: '2027-10-19'
 name: When Sample Selection Bias Precipitates Model Collapse
 summary: >-
   ICML 2026 paper on low-resource verification regimes, sample-selection bias,
@@ -45,6 +45,21 @@ links:
       https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse
   - label: ICML 2026 conference
     url: 'https://icml.cc/Conferences/2026'
+paper_highlight:
+  tldr: >-
+    Filtering synthetic data can accelerate model collapse when a verifier sees
+    only a small, biased reference set. Collaborative Wasserstein proxies
+    combine distributional evidence across data silos without sharing raw
+    samples, helping preserve diversity in recursive training.
+  image: /papers/model-collapse/overview.webp
+  image_alt: >-
+    Iterative Wasserstein barycenter construction across distributed reference
+    distributions.
+  image_caption: >-
+    Collaborative barycenter estimation builds a broader reference without
+    exchanging raw data.
+  width: 1800
+  height: 1626
 ---
 **When Sample Selection Bias Precipitates Model Collapse** is an ICML 2026 conference paper by **[[Xinbao_Qiao|Xinbao Qiao]]**, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang, and Yan Pang. It studies a failure mode in recursive synthetic-data training: a verifier with only local, low-resource evidence can mistake rare but valid samples for low-quality generations, causing sample selection to amplify model collapse rather than prevent it. The paper frames collaborative Wasserstein-geometry proxies as a way to evaluate synthetic samples against a broader distributional reference without pooling raw data.
 

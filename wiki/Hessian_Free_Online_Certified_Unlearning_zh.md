@@ -9,10 +9,10 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-13T11:36:20.750Z'
-content_hash: 'sha256:784f2f4f87def73219b668b747b48c1ff4eadd906d2a17fb8f3751b130f24f28'
-reviewed_at: '2026-10-13T11:36:20.750Z'
-review_due: '2027-01-11'
+modified: '2026-10-19T12:14:34.535Z'
+content_hash: 'sha256:d6ee8fd5b2624db247df8a928f267ad5fcbc17691696754a51868f7168a1c8e3'
+reviewed_at: '2026-10-19T12:15:20.548Z'
+review_due: '2027-01-17'
 name: Hessian-Free Online Certified Unlearning
 language: zh
 summary: ICLR 2025 论文，研究无显式 Hessian 求逆的高效认证机器遗忘。
@@ -36,6 +36,15 @@ links:
     url: 'https://arxiv.org/abs/2404.01712'
   - label: Code
     url: 'https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning'
+paper_highlight:
+  tldr: >-
+    在训练过程中记录样本的轨迹影响，可将后续删除转化为向量相加。该方法利用 Hessian 向量积避免显式构造或求逆
+    Hessian，并在论文假设下提供相对重训练的认证近似保证。
+  image: /papers/hessian-free/overview.webp
+  image_alt: 论文海报中经验风险最小化器重加权与模型更新轨迹重加权的方法对比。
+  image_caption: 海报中的方法对比：利用训练轨迹重加权，避免显式求逆 Hessian。
+  width: 1441
+  height: 494
 translation_of: Hessian_Free_Online_Certified_Unlearning
 ---
 **Hessian-Free Online Certified Unlearning** 是 **[[Xinbao_Qiao|乔鑫宝]]**、张萌、唐茗 和 魏尔敏 的 ICLR 2025 会议论文。论文提出一种面向随机训练流程的认证机器遗忘方法，目标是在显式存储 Hessian、求逆 Hessian 或反复重新训练代价过高时，仍能把删除请求转化为在线向量更新。

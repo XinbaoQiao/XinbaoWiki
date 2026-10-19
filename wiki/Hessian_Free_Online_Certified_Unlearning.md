@@ -9,10 +9,10 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T21:39:01+08:00'
-modified: '2026-10-07T07:07:23.883Z'
-content_hash: 'sha256:809a45415e206a5078ad9191c1422a3b97cf19fd566acdfb8e87577fff96e1c4'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-01-05'
+modified: '2026-10-19T12:14:34.536Z'
+content_hash: 'sha256:0d0d0739ca8340cda4f8e219850d638d89d01066c1c4f0f1092537b313871af3'
+reviewed_at: '2026-10-19T12:15:20.548Z'
+review_due: '2027-01-17'
 name: Hessian-Free Online Certified Unlearning
 summary: ICLR 2025 paper on efficient Hessian-free certified machine unlearning.
 dates: 24-28 April 2025
@@ -35,6 +35,22 @@ links:
     url: 'https://arxiv.org/abs/2404.01712'
   - label: Code
     url: 'https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning'
+paper_highlight:
+  tldr: >-
+    Planning for deletion during training can make later unlearning a
+    lightweight vector update. The method stores per-sample trajectory
+    statistics and uses Hessian-vector products, avoiding explicit Hessian
+    construction or inversion while providing certified approximation guarantees
+    under its assumptions.
+  image: /papers/hessian-free/overview.webp
+  image_alt: >-
+    Poster comparison of empirical-risk-minimizer reweighting and
+    model-update-trajectory reweighting.
+  image_caption: >-
+    Method comparison from the poster: training-trajectory reweighting replaces
+    explicit Hessian inversion.
+  width: 1441
+  height: 494
 ---
 **Hessian-Free Online Certified Unlearning** is an ICLR 2025 conference paper by **[[Xinbao_Qiao|Xinbao Qiao]]**, Meng Zhang, Ming Tang, and Ermin Wei. The paper develops a certified unlearning procedure for stochastic training pipelines where explicit Hessian storage, inversion, or repeated retraining would be too costly. Its main contribution is to turn deletion into an online vector update after a trajectory-based precomputation stage.
 

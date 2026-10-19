@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import sharp from 'sharp';
+import matter from 'gray-matter';
 import { getRecentSiteUpdates, siteUpdates } from '../lib/site-updates.ts';
 
 const current = new Date('2026-10-19T03:00:00Z');
@@ -32,5 +33,20 @@ for (const paper of papers) {
   assert.equal(metadata.height, paper.height);
   assert.ok(metadata.width >= 1200, 'A full-page preview remains readable when enlarged');
   assert.ok(fs.existsSync(`wiki/${paper.slug}.md`) && fs.existsSync(`wiki/${paper.slug}_zh.md`));
+  let englishImage;
+  for (const language of ['en', 'zh']) {
+    const slug = language === 'zh' ? `${paper.slug}_zh` : paper.slug;
+    const { data } = matter(fs.readFileSync(`wiki/${slug}.md`, 'utf8'));
+    const highlight = data.paper_highlight;
+    assert.ok(highlight?.tldr?.length >= 60, `${slug}: a substantive canonical TL;DR is required`);
+    assert.ok(highlight.image.startsWith('/papers/') && highlight.image_alt && highlight.image_caption);
+    const figure = await sharp(`public${highlight.image}`).metadata();
+    assert.equal(figure.width, highlight.width);
+    assert.equal(figure.height, highlight.height);
+    assert.equal(figure.format, 'webp');
+    assert.ok(figure.width >= 1000, 'Paper diagrams stay readable when opened at full size');
+    if (language === 'en') englishImage = highlight.image;
+    else assert.equal(highlight.image, englishImage, 'Both languages use the same authoritative figure');
+  }
 }
 console.log('Updates: rolling four-year boundaries, full bilingual archive, five full-page assets and shared-acceptance order passed.');

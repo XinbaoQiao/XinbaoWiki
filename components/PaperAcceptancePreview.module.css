@@ -50,14 +50,121 @@
 }
 
 .paper {
-  flex: 0 0 var(--portal-paper-preview-width, clamp(160px, calc((100% - 12px) / 2), 260px));
+  flex: 0 0 clamp(160px, calc((100% - 12px) / 2), 260px);
   min-width: 0;
   margin: 0;
   scroll-snap-align: start;
 }
 
 .paper:only-child {
-  flex-basis: var(--portal-paper-preview-single-width, min(100%, 300px));
+  flex-basis: min(100%, 300px);
+}
+
+.detailedGallery {
+  display: block;
+  overflow-x: visible;
+}
+
+.detailedGallery .paper {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 16px;
+  align-items: start;
+}
+
+.detailedGallery .paper[hidden] {
+  display: none;
+}
+
+.detailedGallery .imageLink {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.detailedGallery .paper > figcaption {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.highlight {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  min-width: 0;
+}
+
+.highlight .tldr {
+  display: grid;
+  gap: 6px;
+  margin: 0 0 12px;
+  color: var(--wiki-text);
+  font-size: 14px;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.tldr strong {
+  color: var(--site-theme-action-ink);
+  font-size: 12px;
+  letter-spacing: .04em;
+}
+
+.paper .teaserLink {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--wiki-border-light);
+  border-radius: 2px;
+  background: white;
+  cursor: zoom-in;
+}
+
+.teaserImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.highlight .teaserCaption {
+  margin: 6px 0 0;
+  color: var(--wiki-text-soft);
+  font-size: 12px;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  margin: 0 3px 6px;
+}
+
+.navigation button {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  min-height: 32px;
+  padding: 0;
+  border: 1px solid var(--wiki-border-light);
+  border-radius: 2px;
+  background: var(--wiki-bg);
+  color: var(--site-theme-action-ink);
+  cursor: pointer;
+  font: inherit;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.navigation button:disabled {
+  opacity: .4;
+  cursor: default;
+}
+
+.navigation output {
+  min-width: 40px;
+  color: var(--wiki-text-soft);
+  font-size: 12px;
+  text-align: center;
 }
 
 .paper .imageLink {
@@ -105,6 +212,7 @@
 
 .disclosure > summary:focus-visible,
 .gallery:focus-visible,
+.navigation button:focus-visible,
 .paper a:focus-visible {
   outline: 2px solid var(--site-theme-action-ink);
   outline-offset: 2px;
@@ -113,6 +221,23 @@
 @media (max-width: 760px), (pointer: coarse) {
   .disclosure > summary {
     min-height: 44px;
+  }
+
+  .navigation button {
+    width: 44px;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 760px) {
+  .detailedGallery .paper {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .highlight {
+    grid-column: 1;
+    grid-row: 3;
+    margin-top: 12px;
   }
 }
 

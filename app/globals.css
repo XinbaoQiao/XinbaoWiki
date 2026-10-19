@@ -2726,17 +2726,11 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
 }
 
 .wiki-portal-timeline[data-updates-view="detailed"][open] {
-  --portal-paper-preview-width: clamp(160px, calc((100% - 12px) / 2), 360px);
-  --portal-paper-preview-single-width: min(100%, 400px);
   width: 100%;
   margin-inline: 0;
 }
 
 @media (max-width: 760px) {
-  .wiki-portal-timeline[data-updates-view="detailed"][open] {
-    --portal-paper-preview-width: min(80%, 300px);
-  }
-
   .wiki-portal-timeline[data-updates-view="detailed"] .wiki-portal-news-list li {
     grid-template-columns: minmax(0, 1fr);
     gap: 4px;
