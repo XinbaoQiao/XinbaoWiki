@@ -101,13 +101,14 @@ for (const width of [1920, 1440, 1200]) {
         expect(layout.primary.bottom).toBeLessThan(layout.supporting.top);
         expect(Math.abs(layout.primary.left - layout.supporting.left)).toBeLessThan(1);
         expect(Math.abs(layout.primary.right - layout.supporting.right)).toBeLessThan(1);
-        expect(Math.abs(layout.primary.width / layout.primary.height - layout.primaryRatio)).toBeLessThan(.03);
+        expect(Math.abs(layout.primary.left - layout.highlight.left)).toBeLessThan(1);
+        expect(Math.abs(layout.primary.right - layout.highlight.right)).toBeLessThan(1);
+        expect(layout.supporting.height).toBeCloseTo(96, 0);
         expect(layout.supporting.bottom).toBeLessThan(layout.resources.top);
         expect(layout.contentHeight).toBeLessThanOrEqual(layout.highlight.height + 1);
         expect(layout.panel.width).toBeLessThanOrEqual(1160);
         for (const square of layout.squares) {
-          expect(Math.abs(square.width - square.height)).toBeLessThan(1);
-          expect(square.width).toBeLessThanOrEqual(128);
+          expect(square.height).toBeCloseTo(96, 0);
         }
         layouts.push(layout);
         if (width === 1440 && slug.includes('Sample_Selection')) await capture(page, 'model-collapse-detailed.png');
