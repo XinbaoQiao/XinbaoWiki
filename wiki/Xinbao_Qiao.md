@@ -11,10 +11,10 @@ tags:
   - biography
   - phd-student
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-14T05:06:00.884Z'
-content_hash: 'sha256:28e703f6f37846400529f5fad410a93ffecd9f88ddc67e4350ac5d254b287f8e'
-reviewed_at: '2026-10-14T05:08:10.591Z'
-review_due: '2027-01-12'
+modified: '2026-10-19T10:48:00.002Z'
+content_hash: 'sha256:8a01a8179513a7fc482676981924257cd0b57c890412325fea0a032d1351f250'
+reviewed_at: '2026-10-19T10:48:47.060Z'
+review_due: '2027-01-17'
 name: Xinbao Qiao
 summary: >-
   PhD student in Information Engineering at The Chinese University of Hong Kong;
@@ -64,9 +64,9 @@ links:
     url: 'https://github.com/XinbaoQiao'
 nationality: Chinese
 ---
-**Xinbao Qiao**[^xinbao-name][^qiao-ciao][^xinbao-qiao-bridge] (Chinese: **乔鑫宝**; born September 2000 in Xishuangbanna, Yunnan) is a Chinese PhD student in the Department of Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]]. His research primarily studies lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are generated, used, and deleted. His recent work aims to improve the reliability, interpretability, and controllability of AI models in heterogeneous, computation-constrained, and communication-constrained environments.
+**Xinbao Qiao**[^xinbao-name][^qiao-ciao][^xinbao-qiao-bridge] (Chinese: **乔鑫宝**; born September 2000 in Xishuangbanna, Yunnan) is a Chinese PhD student in the Department of Information Engineering at [[The_Chinese_University_of_Hong_Kong|The Chinese University of Hong Kong]]. His research primarily studies lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are acquired, used, and deleted. His recent work aims to improve the reliability, interpretability, and controllability of AI models in heterogeneous, computation-constrained, and communication-constrained environments.
 
-1. In data generation, he studies synthetic data and its effects on quality, privacy, and generalization.
+1. In data acquisition, he studies synthetic data generation and its effects on quality, privacy, and generalization.
 2. In data use, he focuses on data modeling, collaborative optimization, and system design in distributed learning, AI for Networks, and Networks for AI.
 3. In data deletion, he studies machine unlearning and data influence evaluation, exploring how to preserve model performance while protecting privacy and satisfying deletion requests.
 

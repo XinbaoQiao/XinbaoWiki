@@ -250,10 +250,10 @@
         "cv-summary"
       ],
       "timestamp": "2026-07-02T19:37:18+08:00",
-      "modifiedAt": "2026-10-15T10:44:35.000Z",
-      "contentHash": "sha256:67403a3b04a7818ecf5b1c3cfcd95b623e9dea3af6a5ac3d00c8703f1aa4d804",
-      "reviewedAt": "2026-10-15T10:44:41.242Z",
-      "reviewDue": "2027-01-13",
+      "modifiedAt": "2026-10-19T10:47:25.475Z",
+      "contentHash": "sha256:2b2f78bff36adbfbc896613e68b76b5860b070bb029a5453af263e8bda57672c",
+      "reviewedAt": "2026-10-19T10:48:47.060Z",
+      "reviewDue": "2027-01-17",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-0642a11373a83c47",
@@ -304,7 +304,7 @@
       "retrieval": {
         "documentId": "wiki:CV",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:67403a3b04a7818ecf5b1c3cfcd95b623e9dea3af6a5ac3d00c8703f1aa4d804",
+        "contentHash": "sha256:2b2f78bff36adbfbc896613e68b76b5860b070bb029a5453af263e8bda57672c",
         "textFields": [
           "title",
           "aliases",
@@ -1522,17 +1522,17 @@
         "research-overview"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-12T04:54:44.583Z",
-      "contentHash": "sha256:63cbf4e7ccb60c15da2fcc9051d16de4cbd551929fb55557f6e86bb7e6ffa4ac",
-      "reviewedAt": "2026-10-12T04:55:39.589Z",
-      "reviewDue": "2027-01-10",
+      "modifiedAt": "2026-10-19T10:47:59.840Z",
+      "contentHash": "sha256:dd17959c2b7620eee4619b882746cac782812f38374ec6e3659ebebb4d1ee945",
+      "reviewedAt": "2026-10-19T10:48:47.060Z",
+      "reviewDue": "2027-01-17",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Research",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:63cbf4e7ccb60c15da2fcc9051d16de4cbd551929fb55557f6e86bb7e6ffa4ac",
+        "contentHash": "sha256:dd17959c2b7620eee4619b882746cac782812f38374ec6e3659ebebb4d1ee945",
         "textFields": [
           "title",
           "aliases",
@@ -1985,10 +1985,10 @@
         "phd-student"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-14T05:06:00.884Z",
-      "contentHash": "sha256:28e703f6f37846400529f5fad410a93ffecd9f88ddc67e4350ac5d254b287f8e",
-      "reviewedAt": "2026-10-14T05:08:10.591Z",
-      "reviewDue": "2027-01-12",
+      "modifiedAt": "2026-10-19T10:48:00.002Z",
+      "contentHash": "sha256:8a01a8179513a7fc482676981924257cd0b57c890412325fea0a032d1351f250",
+      "reviewedAt": "2026-10-19T10:48:47.060Z",
+      "reviewDue": "2027-01-17",
       "sourceIds": [
         "src-264e39cbec8d2f89",
         "src-30f33d3201c476ab",
@@ -2028,7 +2028,7 @@
       "retrieval": {
         "documentId": "wiki:Xinbao_Qiao",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:28e703f6f37846400529f5fad410a93ffecd9f88ddc67e4350ac5d254b287f8e",
+        "contentHash": "sha256:8a01a8179513a7fc482676981924257cd0b57c890412325fea0a032d1351f250",
         "textFields": [
           "title",
           "aliases",
@@ -2249,10 +2249,10 @@
         "iclr-2025"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-10-13T11:36:03.385Z",
-      "contentHash": "sha256:c7e4ad26cd18863c27162a0ad273d306fc2ada5de0f4b39e71f4c56a85ef831c",
-      "reviewedAt": "2026-10-13T11:36:03.385Z",
-      "reviewDue": "2027-01-11",
+      "modifiedAt": "2026-10-19T10:47:59.463Z",
+      "contentHash": "sha256:f0fffa1f7e388290676ace81761c7671ded58ba50ebc45c27afef8e62bbd03bd",
+      "reviewedAt": "2026-10-19T10:48:47.060Z",
+      "reviewDue": "2027-01-17",
       "sourceIds": [
         "src-19cdc04d387acf77",
         "src-3234eea5652932e1",
@@ -2264,7 +2264,7 @@
       "retrieval": {
         "documentId": "wiki:DynFrs_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:c7e4ad26cd18863c27162a0ad273d306fc2ada5de0f4b39e71f4c56a85ef831c",
+        "contentHash": "sha256:f0fffa1f7e388290676ace81761c7671ded58ba50ebc45c27afef8e62bbd03bd",
         "textFields": [
           "title",
           "aliases",
@@ -2590,10 +2590,10 @@
         "博士生"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-14T05:06:00.870Z",
-      "contentHash": "sha256:4c8e8635b293a8278c5da66b4fe70f85dad5da840e9e71b535d28ef89b3b0243",
-      "reviewedAt": "2026-10-14T05:08:10.591Z",
-      "reviewDue": "2027-01-12",
+      "modifiedAt": "2026-10-19T10:47:59.805Z",
+      "contentHash": "sha256:bd317fa3efed3cd318ccedb8cf51d3a0bae940286b1d0f83035503946b2b8341",
+      "reviewedAt": "2026-10-19T10:48:47.060Z",
+      "reviewDue": "2027-01-17",
       "sourceIds": [
         "src-264e39cbec8d2f89",
         "src-30f33d3201c476ab",
@@ -2633,7 +2633,7 @@
       "retrieval": {
         "documentId": "wiki:Qiao_Xinbao_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:4c8e8635b293a8278c5da66b4fe70f85dad5da840e9e71b535d28ef89b3b0243",
+        "contentHash": "sha256:bd317fa3efed3cd318ccedb8cf51d3a0bae940286b1d0f83035503946b2b8341",
         "textFields": [
           "title",
           "aliases",
@@ -3680,17 +3680,17 @@
         "研究概览"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-12T04:54:44.575Z",
-      "contentHash": "sha256:3d4a627ac5f70839c9d1d2bb34ed797a5f0cebbf31b3d24f75c73cf6aef5bed3",
-      "reviewedAt": "2026-10-12T04:55:39.589Z",
-      "reviewDue": "2027-01-10",
+      "modifiedAt": "2026-10-19T10:47:59.839Z",
+      "contentHash": "sha256:a7d8eea64a34f6b41d28249ecee28e4636f853142782310099ac5bbf6f60472c",
+      "reviewedAt": "2026-10-19T10:48:47.060Z",
+      "reviewDue": "2027-01-17",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Research_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:3d4a627ac5f70839c9d1d2bb34ed797a5f0cebbf31b3d24f75c73cf6aef5bed3",
+        "contentHash": "sha256:a7d8eea64a34f6b41d28249ecee28e4636f853142782310099ac5bbf6f60472c",
         "textFields": [
           "title",
           "aliases",
@@ -3762,10 +3762,10 @@
         "cv-摘要"
       ],
       "timestamp": "2026-07-02T19:37:18+08:00",
-      "modifiedAt": "2026-10-15T10:44:34.998Z",
-      "contentHash": "sha256:95b380a7828aa9d57367b12c01456d90b63da840dc2588c43ec9c8d3438222c3",
-      "reviewedAt": "2026-10-15T10:44:41.242Z",
-      "reviewDue": "2027-01-13",
+      "modifiedAt": "2026-10-19T10:47:25.474Z",
+      "contentHash": "sha256:9ad7adea040b48bcf794ae0921c8b24225280f6d2d94e985b2dc5fac62fce2a6",
+      "reviewedAt": "2026-10-19T10:48:47.060Z",
+      "reviewDue": "2027-01-17",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-0642a11373a83c47",
@@ -3816,7 +3816,7 @@
       "retrieval": {
         "documentId": "wiki:CV_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:95b380a7828aa9d57367b12c01456d90b63da840dc2588c43ec9c8d3438222c3",
+        "contentHash": "sha256:9ad7adea040b48bcf794ae0921c8b24225280f6d2d94e985b2dc5fac62fce2a6",
         "textFields": [
           "title",
           "aliases",
@@ -3930,10 +3930,10 @@
         "论文列表"
       ],
       "timestamp": "2026-06-01T22:04:00+08:00",
-      "modifiedAt": "2026-10-13T11:36:20.781Z",
-      "contentHash": "sha256:a8fc8276ffaa4c9f95b50db8d219caa70d218315b8ea1ac310cf43ff3209cfc6",
-      "reviewedAt": "2026-10-13T11:36:20.781Z",
-      "reviewDue": "2027-01-11",
+      "modifiedAt": "2026-10-19T10:47:59.791Z",
+      "contentHash": "sha256:acdeaad9e7bcf63748d9fef9850eb247b850c9030563f425e59f8bd723666185",
+      "reviewedAt": "2026-10-19T10:48:47.060Z",
+      "reviewDue": "2027-01-17",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-0642a11373a83c47",
@@ -3980,7 +3980,7 @@
       "retrieval": {
         "documentId": "wiki:Publications_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:a8fc8276ffaa4c9f95b50db8d219caa70d218315b8ea1ac310cf43ff3209cfc6",
+        "contentHash": "sha256:acdeaad9e7bcf63748d9fef9850eb247b850c9030563f425e59f8bd723666185",
         "textFields": [
           "title",
           "aliases",

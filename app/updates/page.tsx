@@ -1,5 +1,6 @@
 import { WikiLink } from '@/components/WikiLink';
 import { WikiTitleText } from '@/components/WikiTitleText';
+import { PaperAcceptancePreview } from '@/components/PaperAcceptancePreview';
 import { wikiSlugFromHref } from '@/lib/wiki-view-transition';
 import type { Metadata } from 'next';
 import { siteUpdates } from '@/lib/site-updates';
@@ -13,8 +14,8 @@ export const metadata: Metadata = {
 };
 
 const sectionCopy = {
-  en: { heading: 'English', label: 'English updates', summary: 'Selected academic milestones and research news, listed newest first.' },
-  zh: { heading: '中文', label: '中文动态', summary: '精选学术里程碑与研究动态，按时间倒序排列。' }
+  en: { heading: 'English', label: 'English updates', summary: 'Academic milestones and research news, listed newest first.' },
+  zh: { heading: '中文', label: '中文动态', summary: '学术里程碑与研究动态，按时间倒序排列。' }
 } as const;
 
 export default function UpdatesPage() {
@@ -26,8 +27,8 @@ export default function UpdatesPage() {
         </WikiTitleText>
       </h1>
       <p className={styles.intro}>
-        A readable archive of recent academic milestones and research news.
-        <span lang="zh-CN">这里收录近期学术里程碑与研究动态。</span>
+        Academic updates archive.
+        <span lang="zh-CN">学术动态归档。</span>
       </p>
 
       <nav className={styles.languageNav} aria-label="Update languages / 动态语言">
@@ -49,6 +50,7 @@ export default function UpdatesPage() {
                     <div>
                       <WikiLink href={pathWithBasePath(item.href)} titleMorphSlug={wikiSlugFromHref(item.href)} titleMorphDestTitle={item.title}>{item.title}</WikiLink>
                       <p>{item.detail}</p>
+                      {item.papers && <PaperAcceptancePreview papers={item.papers} language={language} />}
                     </div>
                   </li>
                 ))}

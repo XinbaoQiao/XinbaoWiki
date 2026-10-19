@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
-import { PublicationLinkLegend, publicationLinkTitle } from '../components/PublicationLinkLegend.ts';
+import { PublicationLinkIcon, PublicationLinkLegend, publicationLinkTitle } from '../components/PublicationLinkLegend.ts';
 
 for (const language of ['en', 'zh']) {
   const html = renderToStaticMarkup(createElement(PublicationLinkLegend, { language }));
@@ -17,4 +17,15 @@ assert.equal(publicationLinkTitle('https://arxiv.org/pdf/2610.07791', 'zh'), 'ar
 assert.equal(publicationLinkTitle('https://github.com/XinbaoQiao/DynFrs', 'en'), 'Code on GitHub');
 assert.equal(publicationLinkTitle('https://ojs.aaai.org/index.php/AAAI/article/view/39681', 'zh'), '出版论文页（AAAI）');
 for (const href of ['https://github.com/XinbaoQiao', 'https://neurips.cc/Conferences/2026', '/files/XinbaoQiao_CV.pdf', 'javascript:alert(1)', 'not a URL']) assert.equal(publicationLinkTitle(href, 'en'), undefined, 'Non-paper targets are not relabeled as code or publisher pages');
+for (const [href, kind] of [
+  ['https://openreview.net/forum?id=VLcmdFfRQc', 'openreview'],
+  ['https://arxiv.org/abs/2610.07791', 'arxiv'],
+  ['https://github.com/NusIoraPrivacy/illusory', 'code'],
+  ['https://ojs.aaai.org/index.php/AAAI/article/view/39681', 'publisher']
+]) {
+  const html = renderToStaticMarkup(createElement(PublicationLinkIcon, { href }));
+  assert.ok(html.includes(`data-link-icon="${kind}"`));
+  assert.ok(html.includes('aria-hidden="true"'), 'The readable link retains its accessible name');
+}
+assert.equal(renderToStaticMarkup(createElement(PublicationLinkIcon, { href: 'https://github.com/XinbaoQiao' })), '', 'A profile link is not given a paper-code icon');
 console.log('Bilingual publication icon legend and scoped accessible-name tests passed');

@@ -286,6 +286,16 @@ a.external.wiki-link-pdf::after {
   word-break: normal;
 }
 
+.wiki-body .publication-resource-icon {
+  flex: 0 0 auto;
+  align-self: center;
+  width: .9em;
+  height: .9em;
+  margin-right: .35em;
+  color: var(--site-theme-action-ink);
+  fill: currentColor;
+}
+
 /* CV / Publications: never mid-break OpenReview, arXiv, GitHub, publisher (or venue) labels. */
 .wiki-page:is(
   [data-page-slug="CV"],
@@ -2715,14 +2725,14 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   background: color-mix(in srgb, var(--site-theme-accent) 5%, var(--wiki-bg-alt));
 }
 
-.wiki-portal-timeline summary {
+.wiki-portal-timeline > summary {
   display: block;
   padding: 11px 48px 11px 16px;
   cursor: pointer;
   list-style: none;
 }
 
-.wiki-portal-timeline summary::-webkit-details-marker {
+.wiki-portal-timeline > summary::-webkit-details-marker {
   display: none;
 }
 
@@ -2749,7 +2759,7 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   transform: translateY(-50%) rotate(90deg);
 }
 
-.wiki-portal-timeline summary strong {
+.wiki-portal-timeline > summary strong {
   color: var(--site-theme-heading);
   font-family: var(--font-serif);
   font-size: 17px;
@@ -2757,7 +2767,7 @@ html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
   line-height: 1.22;
 }
 
-.wiki-portal-timeline summary em {
+.wiki-portal-timeline > summary em {
   margin-left: auto;
   color: var(--wiki-text-soft);
   font-size: 11.5px;

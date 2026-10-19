@@ -8,10 +8,10 @@ tags:
   - index
   - 论文列表
 timestamp: '2026-06-01T22:04:00+08:00'
-modified: '2026-10-13T11:36:20.781Z'
-content_hash: 'sha256:a8fc8276ffaa4c9f95b50db8d219caa70d218315b8ea1ac310cf43ff3209cfc6'
-reviewed_at: '2026-10-13T11:36:20.781Z'
-review_due: '2027-01-11'
+modified: '2026-10-19T10:47:59.791Z'
+content_hash: 'sha256:acdeaad9e7bcf63748d9fef9850eb247b850c9030563f425e59f8bd723666185'
+reviewed_at: '2026-10-19T10:48:47.060Z'
+review_due: '2027-01-17'
 name: 论文
 language: zh
 summary: 乔鑫宝的论文索引。
@@ -27,7 +27,7 @@ translation_of: Publications
 | **[[When_Sample_Selection_Bias_Precipitates_Model_Collapse|When Sample Selection Bias Precipitates Model Collapse]]**。<br />**乔鑫宝**、杜相龙、刘巍、张婧琦、麦佩华、张萌、庞严。<br />*研究低资源验证机制如何把局部样本选择变成持续的尾部剪枝。*<br />[OpenReview](https://openreview.net/forum?id=FFXvnzM254) · [arXiv](https://arxiv.org/abs/2606.13732) · [Code](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse) | [ICML 2026](https://icml.cc/Conferences/2026)，<br />2026年7月6日至11日，<br />韩国首尔。 |
 | **[[Soft_Weighted_Machine_Unlearning|Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness]]**。<br />**乔鑫宝**、丁宁宁、程雨诗、张萌。<br />*研究面向非二元公平性与鲁棒性干预的软加权修正遗忘。*<br />[OpenReview](https://openreview.net/forum?id=bCPJ6Jiqv7) · [arXiv](https://arxiv.org/abs/2505.18783) · [Publisher](https://ojs.aaai.org/index.php/AAAI/article/view/39681) | [AAAI 2026](https://aaai.org/conference/aaai/aaai-26/)，<br />2026年1月20日至27日，<br />新加坡。 |
 | **[[Hessian_Free_Online_Certified_Unlearning|Hessian-Free Online Certified Unlearning]]**。<br />**乔鑫宝**、张萌、唐茗、魏尔敏。<br />*研究不显式求逆 Hessian 的认证遗忘，以及基于轨迹统计的高效删除。*<br />[OpenReview](https://openreview.net/forum?id=C3TrHWanh5) · [arXiv](https://arxiv.org/abs/2404.01712) · [Code](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning) | [ICLR 2025](https://iclr.cc/Conferences/2025)，<br />2025年4月24日至28日，<br />新加坡。 |
-| **[[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]]**。<br />汪树荣、Zhuoyang Shen、**乔鑫宝**、Tongning Zhang、张萌。<br />*研究动态环境中随机森林的精确高效遗忘。*<br />[OpenReview](https://openreview.net/forum?id=nsCOeCLR8e) · [arXiv](https://arxiv.org/abs/2410.01588) · [Code](https://github.com/shurongwang/DynFrs) | [ICLR 2025](https://iclr.cc/Conferences/2025)，<br />2025年4月24日至28日，<br />新加坡。 |
+| **[[DynFrs|DynFrs: An Efficient Framework for Machine Unlearning in Random Forest]]**。<br />汪树荣、沈卓洋、**乔鑫宝**、Tongning Zhang、张萌。<br />*研究动态环境中随机森林的精确高效遗忘。*<br />[OpenReview](https://openreview.net/forum?id=nsCOeCLR8e) · [arXiv](https://arxiv.org/abs/2410.01588) · [Code](https://github.com/shurongwang/DynFrs) | [ICLR 2025](https://iclr.cc/Conferences/2025)，<br />2025年4月24日至28日，<br />新加坡。 |
 
 \* 共同第一作者。
 

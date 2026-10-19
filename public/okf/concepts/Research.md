@@ -10,18 +10,18 @@ tags:
   - overview
   - research-overview
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-12T04:54:44.583Z'
-content_hash: 'sha256:63cbf4e7ccb60c15da2fcc9051d16de4cbd551929fb55557f6e86bb7e6ffa4ac'
-reviewed_at: '2026-10-12T04:55:39.589Z'
-review_due: '2027-01-10'
+modified: '2026-10-19T10:47:59.840Z'
+content_hash: 'sha256:dd17959c2b7620eee4619b882746cac782812f38374ec6e3659ebebb4d1ee945'
+reviewed_at: '2026-10-19T10:48:47.060Z'
+review_due: '2027-01-17'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-12T04:55:39.589Z'
-  reviewDue: '2027-01-10'
+  reviewedAt: '2026-10-19T10:48:47.060Z'
+  reviewDue: '2027-01-17'
   pendingReview: false
   overdue: false
 retrieval:
@@ -34,9 +34,9 @@ Xinbao Qiao's current research focuses on [data-centric ML](./Data_Centric_Machi
 
 ## Research thesis
 
-Qiao's work primarily studies lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are generated, used, and deleted. The related work aims to improve the reliability, interpretability, and controllability of AI models in heterogeneous, computation-constrained, and communication-constrained environments.
+Qiao's work primarily studies lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are acquired, used, and deleted. The related work aims to improve the reliability, interpretability, and controllability of AI models in heterogeneous, computation-constrained, and communication-constrained environments.
 
-1. In data generation, it studies synthetic data and its effects on quality, privacy, and generalization.
+1. In data acquisition, it studies synthetic data generation and its effects on quality, privacy, and generalization.
 2. In data use, it focuses on data modeling, collaborative optimization, and system design in distributed/federated learning, AI for Networks, and Networks for AI.
 3. In data deletion, it studies machine unlearning and data influence evaluation, exploring how to preserve model performance while protecting privacy and satisfying deletion requests.
 

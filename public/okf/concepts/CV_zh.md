@@ -8,18 +8,18 @@ tags:
   - profile
   - cv-摘要
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-10-15T10:44:34.998Z'
-content_hash: 'sha256:95b380a7828aa9d57367b12c01456d90b63da840dc2588c43ec9c8d3438222c3'
-reviewed_at: '2026-10-15T10:44:41.242Z'
-review_due: '2027-01-13'
+modified: '2026-10-19T10:47:25.474Z'
+content_hash: 'sha256:9ad7adea040b48bcf794ae0921c8b24225280f6d2d94e985b2dc5fac62fce2a6'
+reviewed_at: '2026-10-19T10:48:47.060Z'
+review_due: '2027-01-17'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-15T10:44:41.242Z'
-  reviewDue: '2027-01-13'
+  reviewedAt: '2026-10-19T10:48:47.060Z'
+  reviewDue: '2027-01-17'
   pendingReview: false
   overdue: false
 retrieval:
@@ -68,11 +68,11 @@ source_path: wiki/CV_zh.md
 
 ## 研究兴趣
 
-- 乔鑫宝的研究主要关注 AI 模型中数据的生命周期管理，重点研究数据在生成、使用和删除过程中产生的理论方法和实际问题。其近期工作旨在提升异构、计算受限和通信受限环境中 AI 模型的可靠性、可解释性和可控性。
+- 乔鑫宝的研究主要关注 AI 模型中数据的生命周期管理，重点研究数据在获取、使用和删除过程中产生的理论方法和实际问题。其近期工作旨在提升异构、计算受限和通信受限环境中 AI 模型的可靠性、可解释性和可控性。
 
 ## 研究经历
 
-- **香港中文大学博士阶段研究**，2026 年 8 月 1 日至今，导师 [张颖珺](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/)。研究分布式 AI 系统中的数据生命周期管理，将数据生成、使用和删除问题与联邦表示几何联系起来。
+- **香港中文大学博士阶段研究**，2026 年 8 月 1 日至今，导师 [张颖珺](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/)。研究分布式 AI 系统中的数据生命周期管理，将数据获取、使用和删除问题与联邦表示几何联系起来。
   - Paper #6：提出联邦学习的最优传输视角，并构建面向通信受限表示几何的 barycentric multi-prototype classifier。
 - **硕士阶段的数据中心机器学习系统研究**，2023-03 至 2025-12，导师 [张萌](https://person.zju.edu.cn/mengzhang) 教授，机构 [浙江大学](./Zhejiang_University_zh.md)。构建面向数据删除的机器遗忘方法，覆盖连续影响权重、在线认证更新和动态树集成模型。
   - Paper #3：提出面向连续影响权重的 soft-weighted unlearning，支持超越二元删除的公平性和鲁棒性干预。
@@ -99,19 +99,24 @@ source_path: wiki/CV_zh.md
 
 - **Paper #1: When Sample Selection Bias Precipitates Model Collapse**。\
   **乔鑫宝**†、杜相龙、刘巍、张婧琦、麦佩华、张萌†、庞严†。\
-  Forty-Third International Conference on Machine Learning, ICML, 2026。链接：[OpenReview](https://openreview.net/forum?id=FFXvnzM254)、[arXiv](https://arxiv.org/abs/2606.13732)、[GitHub](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse)。
+  Forty-Third International Conference on Machine Learning, ICML, 2026。\
+  链接：[OpenReview](https://openreview.net/forum?id=FFXvnzM254)、[arXiv](https://arxiv.org/abs/2606.13732)、[GitHub](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse)。
 - **Paper #2: Illusory Pattern Perception Drives Spurious Inference in Large Language Models**。\
   麦佩华\*、邵卓妍\*、**乔鑫宝**\*、张萌、周欣悅†、庞严†。\
-  NeurIPS 2026，已录用。链接：[OpenReview](https://openreview.net/forum?id=VLcmdFfRQc)、[arXiv](https://arxiv.org/abs/2610.07791), [GitHub](https://github.com/NusIoraPrivacy/illusory)。
+  NeurIPS 2026，已录用。\
+  链接：[OpenReview](https://openreview.net/forum?id=VLcmdFfRQc)、[arXiv](https://arxiv.org/abs/2610.07791)、[GitHub](https://github.com/NusIoraPrivacy/illusory)。
 - **Paper #3: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**。\
   **乔鑫宝**、丁宁宁、程雨诗、张萌†。\
-  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026。链接：[OpenReview](https://openreview.net/forum?id=bCPJ6Jiqv7), [arXiv](https://arxiv.org/abs/2505.18783)、[AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681)。
+  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026。\
+  链接：[OpenReview](https://openreview.net/forum?id=bCPJ6Jiqv7)、[arXiv](https://arxiv.org/abs/2505.18783)、[AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681)。
 - **Paper #4: Hessian-Free Online Certified Unlearning**。\
   **乔鑫宝**、张萌†、唐茗、魏尔敏。\
-  Thirteenth International Conference on Learning Representations, ICLR, 2025。链接：[OpenReview](https://openreview.net/forum?id=C3TrHWanh5)、[arXiv](https://arxiv.org/abs/2404.01712)、[GitHub](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning)。
+  Thirteenth International Conference on Learning Representations, ICLR, 2025。\
+  链接：[OpenReview](https://openreview.net/forum?id=C3TrHWanh5)、[arXiv](https://arxiv.org/abs/2404.01712)、[GitHub](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning)。
 - **Paper #5: DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**。\
-  汪树荣、Zhuoyang Shen、**乔鑫宝**、Tongning Zhang、张萌†。\
-  Thirteenth International Conference on Learning Representations, ICLR, 2025。链接：[OpenReview](https://openreview.net/forum?id=nsCOeCLR8e)、[arXiv](https://arxiv.org/abs/2410.01588)、[GitHub](https://github.com/shurongwang/DynFrs)。
+  汪树荣、沈卓洋、**乔鑫宝**、Tongning Zhang、张萌†。\
+  Thirteenth International Conference on Learning Representations, ICLR, 2025。\
+  链接：[OpenReview](https://openreview.net/forum?id=nsCOeCLR8e)、[arXiv](https://arxiv.org/abs/2410.01588)、[GitHub](https://github.com/shurongwang/DynFrs)。
 - **Paper #6: Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification**。\
   **乔鑫宝**、闫文静†、张颖珺。\
   在审。

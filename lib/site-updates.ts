@@ -6,6 +6,16 @@ export type SiteUpdate = {
   detail: string;
   href: string;
   title: string;
+  papers?: readonly AcceptedPaper[];
+};
+
+export type AcceptedPaper = {
+  slug: string;
+  title: string;
+  image: string;
+  width: number;
+  height: number;
+  pdf: string;
 };
 
 type LocalizedUpdate = Omit<SiteUpdate, 'dateTime'>;
@@ -20,7 +30,7 @@ type PaperAcceptance = {
   date: Record<SiteLanguage, string>;
   dateTime: string;
   href: Record<SiteLanguage, string>;
-  papers: readonly string[];
+  papers: readonly AcceptedPaper[];
   venue: string;
 };
 
@@ -37,22 +47,25 @@ function joinChineseTitles(titles: readonly string[]) {
 }
 
 function paperAcceptance({ date, dateTime, href, papers, venue }: PaperAcceptance): SiteUpdateEvent {
-  if (!papers.length || papers.some((paper) => !paper.trim())) {
+  if (!papers.length || papers.some((paper) => !paper.title.trim() || !paper.image || !paper.pdf)) {
     throw new Error(`Paper acceptance at ${venue} must list every paper's full title.`);
   }
+  const titles = papers.map((paper) => paper.title);
   return {
     dateTime,
     en: {
       date: date.en,
       detail: papers.length === 1 ? `Accepted paper at ${venue}.` : `${papers.length} papers accepted at ${venue}.`,
       href: href.en,
-      title: `${joinEnglishTitles(papers)} accepted at ${venue}`
+      title: `${joinEnglishTitles(titles)} accepted at ${venue}`,
+      papers
     },
     zh: {
       date: date.zh,
       detail: papers.length === 1 ? `${venue} 录用论文。` : `${venue} 录用的 ${papers.length} 篇论文。`,
       href: href.zh,
-      title: `${joinChineseTitles(papers)}获 ${venue} 录用`
+      title: `${joinChineseTitles(titles)}获 ${venue} 录用`,
+      papers
     }
   };
 }
@@ -82,7 +95,15 @@ const siteUpdateEvents: readonly SiteUpdateEvent[] = [
       en: '/wiki/Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models/',
       zh: '/wiki/Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh/'
     },
-    papers: ['Illusory Pattern Perception Drives Spurious Inference in Large Language Models'],
+    papers: [{
+      slug: 'Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models',
+      title: 'Illusory Pattern Perception Drives Spurious Inference in Large Language Models',
+      image: '/papers/illusory-pattern/camera-ready-first-page.webp',
+      width: 1400,
+      height: 1812,
+      // Author-confirmed Camera-Ready version, 2026-10-19.
+      pdf: 'https://arxiv.org/pdf/2610.07791'
+    }],
     venue: 'NeurIPS 2026'
   }),
   {
@@ -107,7 +128,14 @@ const siteUpdateEvents: readonly SiteUpdateEvent[] = [
       en: '/wiki/When_Sample_Selection_Bias_Precipitates_Model_Collapse/',
       zh: '/wiki/When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh/'
     },
-    papers: ['When Sample Selection Bias Precipitates Model Collapse'],
+    papers: [{
+      slug: 'When_Sample_Selection_Bias_Precipitates_Model_Collapse',
+      title: 'When Sample Selection Bias Precipitates Model Collapse',
+      image: '/papers/model-collapse/camera-ready-first-page.webp',
+      width: 1400,
+      height: 1812,
+      pdf: 'https://raw.githubusercontent.com/mlresearch/v306/main/assets/qiao26c/qiao26c.pdf'
+    }],
     venue: 'ICML 2026'
   }),
   {
@@ -122,7 +150,14 @@ const siteUpdateEvents: readonly SiteUpdateEvent[] = [
       en: '/wiki/Soft_Weighted_Machine_Unlearning/',
       zh: '/wiki/Soft_Weighted_Machine_Unlearning_zh/'
     },
-    papers: ['Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness'],
+    papers: [{
+      slug: 'Soft_Weighted_Machine_Unlearning',
+      title: 'Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness',
+      image: '/papers/soft-weighted/camera-ready-first-page.webp',
+      width: 1400,
+      height: 1812,
+      pdf: 'https://ojs.aaai.org/index.php/AAAI/article/view/39681/43642'
+    }],
     venue: 'AAAI 2026'
   }),
   {
@@ -135,8 +170,22 @@ const siteUpdateEvents: readonly SiteUpdateEvent[] = [
     dateTime: '2025-01',
     href: { en: '/wiki/Publications/', zh: '/wiki/Publications_zh/' },
     papers: [
-      'Hessian-Free Online Certified Unlearning',
-      'DynFrs: An Efficient Framework for Machine Unlearning in Random Forest'
+      {
+        slug: 'Hessian_Free_Online_Certified_Unlearning',
+        title: 'Hessian-Free Online Certified Unlearning',
+        image: '/papers/hessian-free/camera-ready-first-page.webp',
+        width: 1400,
+        height: 1812,
+        pdf: 'https://proceedings.iclr.cc/paper_files/paper/2025/file/50ee6db59fca8643dc625829d4a0eab9-Paper-Conference.pdf'
+      },
+      {
+        slug: 'DynFrs',
+        title: 'DynFrs: An Efficient Framework for Machine Unlearning in Random Forest',
+        image: '/papers/dynfrs/camera-ready-first-page.webp',
+        width: 1400,
+        height: 1812,
+        pdf: 'https://proceedings.iclr.cc/paper_files/paper/2025/file/1caf09c9f4e6b0150b06a07e77f2710c-Paper-Conference.pdf'
+      }
     ],
     venue: 'ICLR 2025'
   }),
@@ -160,3 +209,23 @@ export const siteUpdates: Record<SiteLanguage, SiteUpdate[]> = {
   en: updatesFor('en'),
   zh: updatesFor('zh')
 };
+
+// Keep the full archive above. Month-only events describe a whole month, so
+// they remain recent until that month lies entirely outside the four-year window.
+export function getRecentSiteUpdates(language: SiteLanguage, asOf = new Date()): SiteUpdate[] {
+  const today = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit'
+  }).format(asOf);
+  const [year, month, day] = today.split('-').map(Number);
+  const cutoffYear = year - 4;
+  const cutoffDay = Math.min(day, new Date(Date.UTC(cutoffYear, month, 0)).getUTCDate());
+  const cutoff = Date.UTC(cutoffYear, month - 1, cutoffDay);
+  const endOfToday = Date.UTC(year, month - 1, day);
+
+  return siteUpdates[language].filter((item) => {
+    const [eventYear, eventMonth, eventDay] = item.dateTime.split('-').map(Number);
+    const start = Date.UTC(eventYear, eventMonth - 1, eventDay || 1);
+    const end = eventDay ? start : Date.UTC(eventYear, eventMonth, 0);
+    return end >= cutoff && start <= endOfToday;
+  });
+}

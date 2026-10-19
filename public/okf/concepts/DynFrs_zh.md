@@ -9,18 +9,18 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-13T11:36:03.385Z'
-content_hash: 'sha256:c7e4ad26cd18863c27162a0ad273d306fc2ada5de0f4b39e71f4c56a85ef831c'
-reviewed_at: '2026-10-13T11:36:03.385Z'
-review_due: '2027-01-11'
+modified: '2026-10-19T10:47:59.463Z'
+content_hash: 'sha256:f0fffa1f7e388290676ace81761c7671ded58ba50ebc45c27afef8e62bbd03bd'
+reviewed_at: '2026-10-19T10:48:47.060Z'
+review_due: '2027-01-17'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-13T11:36:03.385Z'
-  reviewDue: '2027-01-11'
+  reviewedAt: '2026-10-19T10:48:47.060Z'
+  reviewDue: '2027-01-17'
   pendingReview: false
   overdue: false
 retrieval:
@@ -33,7 +33,7 @@ source_ids:
   - src-da17eb3884244bd3
 source_path: wiki/DynFrs_zh.md
 ---
-**DynFrs: An Efficient Framework for Machine Unlearning in Random Forest** 是 汪树荣、Zhuoyang Shen、**[乔鑫宝](./Qiao_Xinbao_zh.md)**、Tongning Zhang 和张萌的 ICLR 2025 会议论文。该工作把随机森林遗忘视为动态数据结构问题：在保持与重新训练分布等价的同时，降低在线删除、插入和查询延迟。
+**DynFrs: An Efficient Framework for Machine Unlearning in Random Forest** 是汪树荣、沈卓洋、**[乔鑫宝](./Qiao_Xinbao_zh.md)**、Tongning Zhang 和张萌的 ICLR 2025 会议论文。该工作把随机森林遗忘视为动态数据结构问题：在保持与重新训练分布等价的同时，降低在线删除、插入和查询延迟。
 
 ![DynFrs ICLR 2025 poster](/papers/dynfrs/poster.png)
 

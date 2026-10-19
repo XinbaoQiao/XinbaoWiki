@@ -42,6 +42,7 @@ export default function HomePage() {
     <HomepagePortal
       directorySections={portalDirectorySections}
       languageEntries={portalLanguageEntries}
+      updatesAsOf={new Date().toISOString()}
     />
   );
 }

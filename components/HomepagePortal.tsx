@@ -7,7 +7,8 @@ import type { CSSProperties, PointerEvent as ReactPointerEvent, TransitionEvent 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { VisitorAtlasDisclosure } from '@/components/VisitorAtlasDisclosure';
 import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
-import { siteUpdates } from '@/lib/site-updates';
+import { getRecentSiteUpdates } from '@/lib/site-updates';
+import { PaperAcceptancePreview } from '@/components/PaperAcceptancePreview';
 
 type LocalizedText = Record<SearchLanguage, string>;
 type PortalPalette = 'text' | 'blue' | 'gold' | 'rose' | 'green' | 'violet' | 'charcoal';
@@ -32,6 +33,7 @@ type LanguageEntry = {
 type Props = {
   directorySections: PortalSection[];
   languageEntries: LanguageEntry[];
+  updatesAsOf: string;
 };
 
 const browseLabels: LocalizedText = {
@@ -135,8 +137,9 @@ function withBasePath(pathname: string) {
   return basePath ? `${basePath}${pathname}` : pathname;
 }
 
-export function HomepagePortal({ directorySections, languageEntries }: Props) {
+export function HomepagePortal({ directorySections, languageEntries, updatesAsOf }: Props) {
   const [language, setLanguage] = useState<SearchLanguage>('en');
+  const [updatesAsOfDate, setUpdatesAsOfDate] = useState(updatesAsOf);
   const [browseView, setBrowseView] = useState<BrowseView>('list');
   const [activeCubeFace, setActiveCubeFace] = useState<CubeFace | null>(null);
   const [cubeFaceSettled, setCubeFaceSettled] = useState(false);
@@ -171,7 +174,16 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
     collapseAllSections();
   };
   const portalClassName = ['wiki-portal', allSectionsClosed ? 'wiki-portal-collapsed' : ''].filter(Boolean).join(' ');
-  const latestUpdate = siteUpdates[language][0];
+  const recentUpdates = getRecentSiteUpdates(language, new Date(updatesAsOfDate));
+  const latestUpdate = recentUpdates[0];
+  const latestAcceptance = recentUpdates.find((item) => item.papers?.length);
+
+  useEffect(() => {
+    const refresh = () => setUpdatesAsOfDate(new Date().toISOString());
+    refresh();
+    const timer = window.setInterval(refresh, 60 * 60 * 1000);
+    return () => window.clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
@@ -351,26 +363,32 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
     if (!viewport || !newsOpen) return;
     const list = viewport.querySelector('ol');
     if (!list) return;
-    const visibleItems = Array.from(list.children).slice(0, 5) as HTMLElement[];
+    const allItems = Array.from(list.children) as HTMLElement[];
+    const visibleItems = allItems.slice(0, 5);
     if (!visibleItems.length) return;
 
     const measureWindow = () => {
       const lastItem = visibleItems.at(-1);
       if (!lastItem) return;
-      const height = lastItem.getBoundingClientRect().bottom - list.getBoundingClientRect().top;
-      viewport.style.setProperty('--portal-updates-window-height', `${Math.ceil(height)}px`);
+      const firstFiveHeight = lastItem.getBoundingClientRect().bottom - list.getBoundingClientRect().top;
+      const expandedHeight = Math.max(0, ...allItems
+        .filter((item) => item.querySelector('details[open]'))
+        .map((item) => item.getBoundingClientRect().height + 8));
+      const height = Math.max(firstFiveHeight, expandedHeight);
+      const boundedHeight = Math.min(Math.ceil(height), Math.max(316, Math.floor(window.innerHeight * .75)));
+      viewport.style.setProperty('--portal-updates-window-height', `${boundedHeight}px`);
     };
 
     viewport.scrollTop = 0;
     const resizeObserver = new ResizeObserver(measureWindow);
-    visibleItems.forEach((item) => resizeObserver.observe(item));
+    allItems.forEach((item) => resizeObserver.observe(item));
     window.addEventListener('resize', measureWindow);
     measureWindow();
     return () => {
       resizeObserver.disconnect();
       window.removeEventListener('resize', measureWindow);
     };
-  }, [language, newsOpen]);
+  }, [language, newsOpen, recentUpdates.length]);
 
   const renderPortalSectionContent = (section: PortalSection, headingId: string) => (
     <>
@@ -495,15 +513,15 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
           <summary>
             <span className="wiki-portal-timeline-heading">
               <strong>{updateLabels[language].title}</strong>
-              <em>{siteUpdates[language].length} {language === 'zh' ? '条动态' : 'updates'}</em>
+              <em>{recentUpdates.length} {language === 'zh' ? '条动态 · 近四年' : 'updates · past 4 years'}</em>
             </span>
-            <span className="wiki-portal-news-preview">
+            {latestUpdate && <span className="wiki-portal-news-preview">
               <time dateTime={latestUpdate.dateTime}>{latestUpdate.date}</time>
               <span>
                 <b>{latestUpdate.title}</b>
                 <small>{latestUpdate.detail}</small>
               </span>
-            </span>
+            </span>}
           </summary>
           <div
             aria-label={updateLabels[language].window}
@@ -513,12 +531,13 @@ export function HomepagePortal({ directorySections, languageEntries }: Props) {
             tabIndex={0}
           >
             <ol className="wiki-portal-news-list">
-              {siteUpdates[language].map((item) => (
+              {recentUpdates.map((item) => (
                 <li key={`${item.dateTime}-${item.title}`}>
                   <time dateTime={item.dateTime}>{item.date}</time>
                   <div>
                     <WikiLink href={withBasePath(item.href)} titleMorphSlug={wikiSlugFromHref(item.href)} titleMorphDestTitle={item.title}>{item.title}</WikiLink>
-                    <p>{item.detail}</p>
+                    {!item.papers && <p>{item.detail}</p>}
+                    {item.papers && <PaperAcceptancePreview papers={item.papers} language={language} defaultOpen={item === latestAcceptance} />}
                   </div>
                 </li>
               ))}

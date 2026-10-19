@@ -8,18 +8,18 @@ tags:
   - profile
   - cv-summary
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-10-15T10:44:35.000Z'
-content_hash: 'sha256:67403a3b04a7818ecf5b1c3cfcd95b623e9dea3af6a5ac3d00c8703f1aa4d804'
-reviewed_at: '2026-10-15T10:44:41.242Z'
-review_due: '2027-01-13'
+modified: '2026-10-19T10:47:25.475Z'
+content_hash: 'sha256:2b2f78bff36adbfbc896613e68b76b5860b070bb029a5453af263e8bda57672c'
+reviewed_at: '2026-10-19T10:48:47.060Z'
+review_due: '2027-01-17'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-15T10:44:41.242Z'
-  reviewDue: '2027-01-13'
+  reviewedAt: '2026-10-19T10:48:47.060Z'
+  reviewDue: '2027-01-17'
   pendingReview: false
   overdue: false
 retrieval:
@@ -68,11 +68,11 @@ Academic CV summary for Xinbao Qiao, with a downloadable PDF [résumé](/files/X
 
 ## Research interests
 
-- Qiao's research primarily studies lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are generated, used, and deleted. His recent work aims to improve the reliability, interpretability, and controllability of AI models in heterogeneous, computation-constrained, and communication-constrained environments.
+- Qiao's research primarily studies lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are acquired, used, and deleted. His recent work aims to improve the reliability, interpretability, and controllability of AI models in heterogeneous, computation-constrained, and communication-constrained environments.
 
 ## Research experience
 
-- **Doctoral Research at The Chinese University of Hong Kong**, 2026-08-01-present, advised by [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/). Investigates data lifecycle management in distributed AI systems, connecting data generation, use, and deletion with federated representation geometry.
+- **Doctoral Research at The Chinese University of Hong Kong**, 2026-08-01-present, advised by [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/). Investigates data lifecycle management in distributed AI systems, connecting data acquisition, use, and deletion with federated representation geometry.
   - Paper #6: proposed an optimal-transport view of federated learning and a barycentric multi-prototype classifier for communication-constrained representation geometry.
 - **Master's Research on Data-Centric ML Systems**, 03/2023 to 12/2025, advised by Prof. [Meng Zhang](https://person.zju.edu.cn/mengzhang) at [Zhejiang University](./Zhejiang_University.md). Built unlearning methods for data deletion across continuous influence weights, certified online updates, and dynamic tree ensembles.
   - Paper #3: introduced soft-weighted unlearning for continuous influence weights, supporting fairness and robustness interventions beyond binary erasure.
@@ -99,19 +99,24 @@ Link icons: OpenReview · arXiv · Code (GitHub) · Publisher.
 
 - **Paper #1: When Sample Selection Bias Precipitates Model Collapse**.\
   **Xinbao Qiao**†, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang†, Yan Pang†.\
-  Forty-Third International Conference on Machine Learning, ICML, 2026. Links: [OpenReview](https://openreview.net/forum?id=FFXvnzM254), [arXiv](https://arxiv.org/abs/2606.13732), [GitHub](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse).
+  Forty-Third International Conference on Machine Learning, ICML, 2026.\
+  Links: [OpenReview](https://openreview.net/forum?id=FFXvnzM254), [arXiv](https://arxiv.org/abs/2606.13732), [GitHub](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse).
 - **Paper #2: Illusory Pattern Perception Drives Spurious Inference in Large Language Models**.\
   Peihua Mai\*, Zhuoyan Shao\*, **Xinbao Qiao**\*, Meng Zhang, Xinyue Zhou†, Yan Pang†.\
-  NeurIPS 2026, accepted. Links: [OpenReview](https://openreview.net/forum?id=VLcmdFfRQc), [arXiv](https://arxiv.org/abs/2610.07791), [GitHub](https://github.com/NusIoraPrivacy/illusory).
+  NeurIPS 2026, accepted.\
+  Links: [OpenReview](https://openreview.net/forum?id=VLcmdFfRQc), [arXiv](https://arxiv.org/abs/2610.07791), [GitHub](https://github.com/NusIoraPrivacy/illusory).
 - **Paper #3: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**.\
   **Xinbao Qiao**, Ningning Ding, Yushi Cheng, Meng Zhang†.\
-  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026. Links: [OpenReview](https://openreview.net/forum?id=bCPJ6Jiqv7), [arXiv](https://arxiv.org/abs/2505.18783), [AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681).
+  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026.\
+  Links: [OpenReview](https://openreview.net/forum?id=bCPJ6Jiqv7), [arXiv](https://arxiv.org/abs/2505.18783), [AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681).
 - **Paper #4: Hessian-Free Online Certified Unlearning**.\
   **Xinbao Qiao**, Meng Zhang†, Ming Tang, Ermin Wei.\
-  Thirteenth International Conference on Learning Representations, ICLR, 2025. Links: [OpenReview](https://openreview.net/forum?id=C3TrHWanh5), [arXiv](https://arxiv.org/abs/2404.01712), [GitHub](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning).
+  Thirteenth International Conference on Learning Representations, ICLR, 2025.\
+  Links: [OpenReview](https://openreview.net/forum?id=C3TrHWanh5), [arXiv](https://arxiv.org/abs/2404.01712), [GitHub](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning).
 - **Paper #5: DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**.\
   Shurong Wang, Zhuoyang Shen, **Xinbao Qiao**, Tongning Zhang, Meng Zhang†.\
-  Thirteenth International Conference on Learning Representations, ICLR, 2025. Links: [OpenReview](https://openreview.net/forum?id=nsCOeCLR8e), [arXiv](https://arxiv.org/abs/2410.01588), [GitHub](https://github.com/shurongwang/DynFrs).
+  Thirteenth International Conference on Learning Representations, ICLR, 2025.\
+  Links: [OpenReview](https://openreview.net/forum?id=nsCOeCLR8e), [arXiv](https://arxiv.org/abs/2410.01588), [GitHub](https://github.com/shurongwang/DynFrs).
 - **Paper #6: Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification**.\
   **Xinbao Qiao**, Wenjing Yan†, Ying-Jun Angela Zhang.\
   Under review.

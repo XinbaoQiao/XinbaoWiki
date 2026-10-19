@@ -5,7 +5,7 @@ import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import { ArticleContents } from '@/components/ArticleContents';
 import { WikiHrefLink } from '@/components/WikiHrefLink';
-import { PublicationLinkLegend, publicationLinkLegendTexts, publicationLinkTitle } from '@/components/PublicationLinkLegend';
+import { PublicationLinkIcon, PublicationLinkLegend, publicationLinkLegendTexts, publicationLinkTitle } from '@/components/PublicationLinkLegend';
 import { pathWithBasePath } from '@/lib/wiki';
 import { rehypeWikiOutline } from '@/lib/wiki-outline';
 
@@ -74,6 +74,7 @@ export function WikiMarkdown({ editLabel, markdown, sourceHref }: Props) {
                 href={raw}
                 title={linkTitle}
               >
+                {legendLanguage && iconTitle && <PublicationLinkIcon href={raw} />}
                 {children}
               </WikiHrefLink>
             );

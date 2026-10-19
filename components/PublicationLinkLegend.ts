@@ -42,6 +42,18 @@ export function publicationLinkTitle(href: string, language: 'en' | 'zh'): strin
   return undefined;
 }
 
+export function PublicationLinkIcon({ href }: { href: string }) {
+  if (!publicationLinkTitle(href, 'en')) return null;
+  const hostname = new URL(href).hostname;
+  const kind = hostname === 'openreview.net' ? 'openreview'
+    : hostname === 'arxiv.org' ? 'arxiv' : hostname === 'github.com' ? 'code' : 'publisher';
+  const icon = icons.find((entry) => entry.id === kind)!;
+  return createElement('svg', {
+    className: 'publication-resource-icon', viewBox: icon.viewBox,
+    width: 14, height: 14, 'aria-hidden': true, focusable: 'false', 'data-link-icon': icon.id
+  }, createElement('path', { d: icon.path }));
+}
+
 export function PublicationLinkLegend({ language }: { language: 'en' | 'zh' }) {
   return createElement('p', { className: 'publication-link-legend', 'data-publication-link-legend': language, style: { display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.35rem 1rem' } },
     createElement('span', null, language === 'zh' ? '链接图标：' : 'Link icons:'),
