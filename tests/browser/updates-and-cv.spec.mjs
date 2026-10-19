@@ -97,7 +97,8 @@ for (const width of [1440, 390, 320]) {
       await expect.poll(() => image.evaluate(element => element.complete && element.naturalWidth === 1400)).toBe(true);
       expect(await image.evaluate(element => Math.abs(element.width / element.height - element.naturalWidth / element.naturalHeight))).toBeLessThan(.01);
     }
-    expect((await toggle.boundingBox()).height).toBeGreaterThanOrEqual(width <= 760 ? 44 : 26);
+    // Transformed ancestors can put a CSS-pixel boundary just below its integer value.
+    expect((await toggle.boundingBox()).height).toBeGreaterThanOrEqual((width <= 760 ? 44 : 26) - .1);
     const spacing = await iclr.evaluate(element => {
       const details = element.querySelector('[data-paper-acceptance]');
       const figure = details.querySelector('figure');
@@ -152,7 +153,7 @@ for (const width of [1440, 390, 320]) {
       expect(detailedWidth).toBeGreaterThan(compactWidth * 1.5);
     }
     expect(detailedImageWidth).toBeGreaterThan(compactImageWidth * 1.3);
-    expect((await detailedButton.boundingBox()).height).toBeGreaterThanOrEqual(width <= 760 ? 44 : 30);
+    expect((await detailedButton.boundingBox()).height).toBeGreaterThanOrEqual((width <= 760 ? 44 : 30) - .1);
     await latestAcceptance.locator('summary').click();
     await toggle.click();
     const detailedFigures = await figures.evaluateAll(elements => elements.map(element => {
