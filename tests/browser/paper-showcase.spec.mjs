@@ -41,7 +41,7 @@ async function capture(page, filename) {
   }
 }
 
-for (const width of [1440, 1200]) {
+for (const width of [1920, 1440, 1200]) {
   test(`Detailed papers: titles, equal-height media and canonical resource links at ${width}px`, async ({ page }, testInfo) => {
     const errors = captureErrors(page);
     await page.setViewportSize({ width, height: 1100 });
@@ -86,6 +86,8 @@ for (const width of [1440, 1200]) {
             titleLineHeight: parseFloat(getComputedStyle(title).lineHeight),
             tldr: rect(highlight.querySelector('p')), primary: rect(root.querySelector('[data-paper-image="poster"], [data-paper-image="framework"]')),
             supporting: rect(root.querySelector('[data-paper-supporting-images]')), resources: rect(root.querySelector('[data-paper-resources]')),
+            squares: [...root.querySelectorAll('[data-paper-supporting-images] button')].map(rect),
+            panel: rect(root.closest('#portal-news')),
             contentHeight: highlight.scrollHeight
           };
         });
@@ -98,6 +100,8 @@ for (const width of [1440, 1200]) {
         expect(layout.primary.bottom).toBeLessThan(layout.supporting.top);
         expect(layout.supporting.bottom).toBeLessThan(layout.resources.top);
         expect(layout.contentHeight).toBeLessThanOrEqual(layout.highlight.height + 1);
+        expect(layout.panel.width).toBeLessThanOrEqual(1160);
+        for (const square of layout.squares) expect(Math.abs(square.width - square.height)).toBeLessThan(1);
         layouts.push(layout);
         if (width === 1440 && slug.includes('Sample_Selection')) await capture(page, 'model-collapse-detailed.png');
         if (index + 1 < count) await batch.getByRole('button', { name: 'Next paper', exact: true }).click();

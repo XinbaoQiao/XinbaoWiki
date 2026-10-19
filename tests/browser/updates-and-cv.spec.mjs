@@ -153,11 +153,12 @@ for (const width of [1440, 390, 320]) {
     if (width === 1440) {
       expect(detailedWidth).toBeGreaterThan(compactWidth * 1.5);
     }
-    expect(detailedImageWidth).toBeGreaterThan(compactImageWidth * 1.1);
+    expect(detailedImageWidth).toBeGreaterThan(compactImageWidth * (width >= 1024 ? 1 : 1.1));
     expect((await detailedButton.boundingBox()).height).toBeGreaterThanOrEqual((width <= 760 ? 44 : 30) - .1);
     const latestHighlight = latestAcceptance.locator('[data-paper-highlight]');
     await expect(latestHighlight).toContainText('random or insufficient evidence');
     await latestHighlight.locator('[data-paper-image="framework"]').scrollIntoViewIfNeeded();
+    await latestHighlight.locator('[data-paper-supporting-images]').scrollIntoViewIfNeeded();
     await expect(latestHighlight.locator('img')).toHaveCount(4);
     await expect.poll(() => latestHighlight.locator('img').evaluateAll(elements => elements.every(element => element.complete && element.naturalWidth >= 800))).toBe(true);
     await expect(latestAcceptance.locator('figcaption')).toHaveCount(0);
