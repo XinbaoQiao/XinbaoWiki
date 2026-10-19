@@ -85,6 +85,7 @@ for (const width of [1920, 1440, 1200]) {
             highlight: rect(highlight), title: rect(title), titleText: rect(range),
             titleLineHeight: parseFloat(getComputedStyle(title).lineHeight),
             tldr: rect(highlight.querySelector('p')), primary: rect(root.querySelector('[data-paper-image="poster"], [data-paper-image="framework"]')),
+            primaryRatio: (() => { const image = root.querySelector('[data-paper-image="poster"] img, [data-paper-image="framework"] img'); return image.naturalWidth / image.naturalHeight; })(),
             supporting: rect(root.querySelector('[data-paper-supporting-images]')), resources: rect(root.querySelector('[data-paper-resources]')),
             squares: [...root.querySelectorAll('[data-paper-supporting-images] button')].map(rect),
             panel: rect(root.closest('#portal-news')),
@@ -98,6 +99,9 @@ for (const width of [1920, 1440, 1200]) {
         expect(layout.titleText.height).toBeLessThanOrEqual(layout.titleLineHeight + 1);
         expect(layout.title.bottom).toBeLessThan(layout.tldr.top);
         expect(layout.primary.bottom).toBeLessThan(layout.supporting.top);
+        expect(Math.abs(layout.primary.left - layout.supporting.left)).toBeLessThan(1);
+        expect(Math.abs(layout.primary.right - layout.supporting.right)).toBeLessThan(1);
+        expect(Math.abs(layout.primary.width / layout.primary.height - layout.primaryRatio)).toBeLessThan(.03);
         expect(layout.supporting.bottom).toBeLessThan(layout.resources.top);
         expect(layout.contentHeight).toBeLessThanOrEqual(layout.highlight.height + 1);
         expect(layout.panel.width).toBeLessThanOrEqual(1160);

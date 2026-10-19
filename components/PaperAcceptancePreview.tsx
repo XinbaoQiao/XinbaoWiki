@@ -55,6 +55,7 @@ export function PaperAcceptancePreview({ papers, language, defaultOpen = false, 
         {papers.map((paper, index) => {
           const slug = language === 'zh' ? `${paper.slug}_zh` : paper.slug;
           const highlight = highlights?.[paper.slug]?.[language];
+          const leading = highlight?.poster ?? highlight;
           const resources = highlight ? [{ label: 'PDF', url: paper.pdf }, ...highlight.resources]
             .filter((resource, index, links) => links.findIndex(link => link.url === resource.url) === index) : [];
           return (
@@ -63,10 +64,12 @@ export function PaperAcceptancePreview({ papers, language, defaultOpen = false, 
               {detailed && highlight && <div className={styles.highlight} data-paper-highlight="">
                 <h3 className={styles.paperTitle} data-paper-title=""><WikiLink href={withBasePath(`/wiki/${slug}/`)} titleMorphSlug={slug} titleMorphDestTitle={paper.title}>{paper.title}</WikiLink></h3>
                 <p className={styles.tldr}><strong>TL;DR</strong><span>{highlight.tldr}</span></p>
+                <div className={styles.mediaSlot}><div className={styles.media} style={{ '--media-factor': leading ? 1 / (leading.height / leading.width + 1 / 3) : 1, '--leading-ratio': leading ? leading.width / leading.height : 1 } as CSSProperties}>
                 {imageButton(highlight.poster ?? highlight, paper, styles.leadingImage, highlight.poster ? 'poster' : 'framework')}
                 <div className={styles.supportingImages} data-paper-supporting-images="">
                   {highlight.figures.map((image) => <div key={image.image}>{imageButton(image, paper, styles.supportingImage, 'supporting')}</div>)}
                 </div>
+                </div></div>
                 <div className={styles.resources} data-paper-resources="">
                   <span>{copy.links}</span>
                   {resources.map((resource) => <a className="publication-resource-link" key={resource.url} href={resource.url} target="_blank" rel="noopener noreferrer" title={publicationLinkTitle(resource.url, language)}>
