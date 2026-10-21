@@ -369,7 +369,7 @@ a.external.wiki-link-pdf::after {
 
   .site-palette-switcher:hover,
   .site-palette-switcher:focus-within {
-    width: 198px;
+    width: 228px;
   }
 
   /* Collapsed: keep inactive swatches out of tab order / hit-testing. */
@@ -393,7 +393,7 @@ a.external.wiki-link-pdf::after {
   }
 
   .site-palette-switcher.is-expanded {
-    width: 198px;
+    width: 228px;
     border-radius: 12px;
     opacity: 1;
   }
@@ -1782,6 +1782,9 @@ body:has(.wiki-portal) .wiki-topbar {
 }
 
 .wiki-toc-return {
+  /* Own VT name so fixed Contents chip is not painted into wiki-main snapshots
+     (which can leave a ghost 目录/Contents on the homepage during transitions). */
+  view-transition-name: wiki-toc-return;
   position: fixed;
   z-index: 70;
   right: max(16px, env(safe-area-inset-right));
@@ -1813,6 +1816,11 @@ body:has(.wiki-portal) .wiki-topbar {
 .wiki-toc-return:focus-visible {
   outline: 1px solid var(--wiki-link);
   outline-offset: 1px;
+}
+
+/* Homepage portal: never show the floating Contents / 目录 return chip. */
+body:has(.wiki-portal) .wiki-toc-return {
+  display: none !important;
 }
 
 @media (min-width: 721px) {
@@ -5490,7 +5498,8 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
 ::view-transition-old(wiki-topbar),
 ::view-transition-old(wiki-tabs),
 ::view-transition-old(wiki-sidebar),
-::view-transition-old(site-palette) {
+::view-transition-old(site-palette),
+::view-transition-old(wiki-toc-return) {
   animation: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
@@ -5500,7 +5509,8 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
 ::view-transition-new(wiki-topbar),
 ::view-transition-new(wiki-tabs),
 ::view-transition-new(wiki-sidebar),
-::view-transition-new(site-palette) {
+::view-transition-new(site-palette),
+::view-transition-new(wiki-toc-return) {
   animation: none !important;
   opacity: 1 !important;
   visibility: visible !important;
@@ -5524,6 +5534,7 @@ html[data-wiki-morph-to] ::view-transition-new(wiki-sidebar) {
 ::view-transition-group(wiki-tabs),
 ::view-transition-group(wiki-sidebar),
 ::view-transition-group(site-palette),
+::view-transition-group(wiki-toc-return),
 ::view-transition-group(wiki-main) {
   animation: none;
 }
@@ -5740,5 +5751,455 @@ html:not([data-wiki-morph-to]) ::view-transition-new(.wiki-title-morph) {
     animation: none !important;
     animation-duration: 0s !important;
     animation-delay: 0s !important;
+  }
+}
+
+/* --- Custom background wallpaper (client-only; coexists with accent palette) --- */
+.site-palette-root {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 80;
+  pointer-events: none;
+}
+
+.site-palette-root > * {
+  pointer-events: auto;
+}
+
+.site-custom-bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--site-page-bg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: var(--site-custom-bg-position, center);
+  opacity: 0;
+  transform: translate3d(0, var(--site-custom-bg-parallax, 0px), 0) scale(1);
+  transition: opacity .28s ease;
+}
+
+.site-custom-bg-layer.is-active {
+  opacity: 1;
+}
+
+.site-custom-bg-layer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: rgb(var(--site-custom-bg-scrim-rgb, 255 255 255) / var(--site-custom-bg-overlay, .40));
+  opacity: 1;
+  transition: opacity .2s ease, background-color .2s ease;
+}
+
+/* At 0% overlay: no scrim at all — wallpaper must be fully clear. */
+html[data-site-custom-bg-overlay="0"] .site-custom-bg-layer::after {
+  opacity: 0;
+  background: transparent;
+  transition: none;
+}
+
+html[data-site-custom-bg="on"] {
+  --site-custom-bg-panel: 0;
+}
+
+html[data-site-custom-bg="on"],
+html[data-site-custom-bg="on"] body {
+  background: transparent;
+}
+
+html[data-site-custom-bg-mode="soft-fade"] .site-custom-bg-layer::after {
+  background:
+    radial-gradient(
+      ellipse 78% 70% at center,
+      rgb(var(--site-custom-bg-scrim-rgb, 255 255 255) / var(--site-custom-bg-overlay, .40)) 0%,
+      rgb(var(--site-custom-bg-scrim-rgb, 255 255 255) / calc(var(--site-custom-bg-overlay, .40) * .55)) 58%,
+      rgb(var(--site-custom-bg-scrim-rgb, 255 255 255) / calc(var(--site-custom-bg-overlay, .40) * .12)) 100%
+    );
+}
+
+html[data-site-custom-bg-mode="tile"] .site-custom-bg-layer {
+  background-size: 220px auto;
+  background-repeat: repeat;
+  background-position: top left;
+  transform: none;
+}
+
+html[data-site-custom-bg-mode="depth"] .site-custom-bg-layer.is-active {
+  transform: translate3d(0, var(--site-custom-bg-parallax, 0px), 0) scale(1.06);
+  transform-origin: center center;
+  will-change: transform;
+}
+
+html[data-site-custom-bg-position="top"] .site-custom-bg-layer {
+  background-position: center top;
+}
+
+html[data-site-custom-bg-position="center"] .site-custom-bg-layer {
+  background-position: center center;
+}
+
+html[data-site-custom-bg-position="bottom"] .site-custom-bg-layer {
+  background-position: center bottom;
+}
+
+/* Content reading-board wash removed: wallpaper + overlay scrim + ink only. */
+
+.site-palette-custom {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  border-color: #a2a9b1;
+  background: #f8f9fa;
+  color: var(--site-theme-action-ink);
+}
+
+.site-palette-custom-glyph {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  opacity: .88;
+}
+
+.site-palette-custom-glyph svg {
+  display: block;
+}
+
+.site-palette-custom.is-custom-on {
+  box-shadow: 0 0 0 2px var(--wiki-bg), 0 0 0 4px var(--site-theme-accent);
+}
+
+.site-palette-custom.is-panel-trigger {
+  outline: 2px solid var(--site-theme-accent);
+  outline-offset: 2px;
+}
+
+.site-custom-bg-panel {
+  position: fixed;
+  left: max(14px, env(safe-area-inset-left));
+  bottom: calc(max(14px, env(safe-area-inset-bottom)) + 44px);
+  z-index: 81;
+  width: min(280px, calc(100vw - 28px));
+  padding: 10px 11px 11px;
+  border: 1px solid var(--site-theme-accent-border);
+  border-radius: 8px;
+  background: var(--site-theme-surface);
+  box-shadow: 0 8px 24px rgba(32, 33, 34, .12);
+  backdrop-filter: blur(12px);
+  color: var(--wiki-text);
+  font-family: var(--font-sans);
+  font-size: var(--fs-sm);
+  line-height: 1.45;
+}
+
+.site-custom-bg-panel-head {
+  margin: 0 0 8px;
+  padding: 0 0 8px;
+  border-bottom: 1px solid var(--site-theme-chrome-border);
+}
+
+.site-custom-bg-panel-title {
+  margin: 0 0 2px;
+  color: var(--site-theme-heading);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+}
+
+
+.site-custom-bg-panel-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.site-custom-bg-action {
+  appearance: none;
+  padding: 5px 9px;
+  border: 1px solid var(--site-theme-chrome-border);
+  border-radius: 4px;
+  background: var(--wiki-bg);
+  color: var(--site-theme-action-ink);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.site-custom-bg-action:hover,
+.site-custom-bg-action:focus-visible {
+  outline: 2px solid var(--site-theme-accent);
+  outline-offset: 1px;
+}
+
+.site-custom-bg-action:disabled {
+  opacity: .55;
+  cursor: progress;
+}
+
+.site-custom-bg-action-muted {
+  color: var(--wiki-text-soft);
+  font-weight: 600;
+}
+
+.site-custom-bg-thumb {
+  width: 100%;
+  height: 72px;
+  margin-bottom: 8px;
+  border: 1px solid var(--site-theme-chrome-border);
+  border-radius: 4px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.site-custom-bg-controls {
+  display: grid;
+  gap: 0;
+}
+
+.site-custom-bg-field {
+  display: grid;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.site-custom-bg-field-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--wiki-text-soft);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+
+.site-custom-bg-field-value {
+  color: var(--site-theme-action-ink);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.site-custom-bg-field select,
+.site-custom-bg-field input[type="range"] {
+  width: 100%;
+  accent-color: var(--site-theme-accent);
+}
+
+.site-custom-bg-field select {
+  padding: 5px 7px;
+  border: 1px solid var(--site-theme-chrome-border);
+  border-radius: 4px;
+  background: var(--wiki-bg);
+  color: var(--wiki-text);
+  font: inherit;
+  font-size: 12px;
+}
+
+.site-custom-bg-field input[type="range"] {
+  height: 24px;
+  margin: 0;
+}
+
+.site-custom-bg-error {
+  margin: 0;
+  color: #b32424;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site-palette-root .site-palette-switcher {
+    width: 30px;
+  }
+
+  .site-palette-root .site-palette-switcher:hover,
+  .site-palette-root .site-palette-switcher:focus-within,
+  .site-palette-root.is-panel-open .site-palette-switcher {
+    width: 228px;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .site-palette-root {
+    left: auto;
+    right: 0;
+  }
+
+  .site-custom-bg-panel {
+    right: max(10px, env(safe-area-inset-right));
+    left: auto;
+    bottom: calc(max(10px, env(safe-area-inset-bottom)) + 42px);
+  }
+
+  .site-palette-root .site-palette-switcher.is-expanded,
+  .site-palette-root.is-panel-open .site-palette-switcher {
+    width: 228px;
+  }
+}
+
+/* Dark wallpaper + low overlay: light ink for the full scroll height.
+   Higher specificity than palette heading tokens. Content wash floors
+   readability on long pages without fully erasing the wallpaper. */
+html[data-site-custom-bg-tone="dark"] {
+  --site-custom-bg-scrim-rgb: 8 10 12;
+}
+
+html[data-site-custom-bg-tone="light"] {
+  --site-custom-bg-scrim-rgb: 255 255 255;
+}
+
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] {
+  --wiki-text: #f2f4f6;
+  --wiki-text-soft: #c5cad0;
+  --wiki-link: #9ec1ff;
+  --wiki-link-page: #9ec1ff;
+  --wiki-link-local: #7fd0ef;
+  --wiki-link-visited: #d2b4ff;
+  --wiki-link-red: #ff8e8e;
+  --wiki-bg: rgb(17 19 21 / .78);
+  --wiki-bg-alt: rgb(27 30 33 / .84);
+  --wiki-bg-chrome: rgb(22 24 26 / .86);
+  --wiki-border: #6a727a;
+  --wiki-border-light: #555c64;
+  --wiki-border-subtle: #3d4349;
+  --site-theme-heading: #f6f7f9;
+  --site-theme-surface: rgb(20 22 24 / .88);
+  --site-theme-action-ink: color-mix(in srgb, var(--site-theme-accent) 28%, #e7efff);
+  --site-theme-chrome-border: color-mix(in srgb, var(--site-theme-accent) 24%, #5a626a);
+  --site-theme-chrome-surface: color-mix(in srgb, var(--site-theme-accent) 8%, rgb(18 20 22 / .86));
+  --site-theme-chrome-surface-strong: color-mix(in srgb, var(--site-theme-accent) 14%, rgb(28 31 34 / .9));
+  color-scheme: dark;
+}
+
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] body,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-shell,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-main,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-page,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-body,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-sidebar,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-footer {
+  color: var(--wiki-text);
+}
+
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] :is(
+  .wiki-main,
+  .wiki-page,
+  .wiki-body,
+  .wiki-sidebar,
+  .wiki-footer,
+  .wiki-portal
+) :is(h1, h2, h3, h4, h5, h6, .wiki-title, .wiki-vt-title, .wiki-contents-label) {
+  color: var(--site-theme-heading);
+}
+
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] :is(
+  .wiki-main,
+  .wiki-body,
+  .wiki-sidebar,
+  .wiki-footer,
+  .wiki-portal
+) :is(p, li, td, th, dd, dt, figcaption, summary, label, small, time, .wiki-page-meta, .wiki-text-soft) {
+  color: inherit;
+}
+
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-text-soft,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-page-meta,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-logo-subtitle,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-footer {
+  color: var(--wiki-text-soft);
+}
+
+/* No reading-board behind prose. Keep only interactive chrome surfaces. */
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-shell,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-main,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-page,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-body,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-sidebar,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-footer,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-topbar,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-tabs {
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+html[data-site-custom-bg="on"] .wiki-main,
+html[data-site-custom-bg="on"] .wiki-page,
+html[data-site-custom-bg="on"] .wiki-body {
+  background: transparent;
+}
+
+/* Soft glyph edge for long pages without a content box. */
+/* Dark wallpaper + light ink: soft dark halo. */
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-main {
+  text-shadow: 0 1px 2px rgb(0 0 0 / .5);
+}
+
+/* Light wallpaper + dark ink: soft light halo so glyphs stay crisp on bright photos. */
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="dark"] .wiki-main {
+  text-shadow: 0 1px 2px rgb(255 255 255 / .4);
+}
+
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] :is(
+  .wiki-search input,
+  .wiki-search-panel,
+  .chat-with-owner-panel,
+  .site-custom-bg-panel,
+  .wiki-mobile-nav-dialog,
+  .site-palette-switcher
+) {
+  background: rgb(18 20 22 / .92);
+  color: var(--wiki-text);
+  border-color: var(--wiki-border-light);
+}
+
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .site-palette-switcher {
+  background: rgb(20 22 24 / .92);
+  border-color: var(--wiki-border-light);
+}
+
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .site-custom-bg-action {
+  background: rgb(24 26 28);
+  color: var(--site-theme-action-ink);
+}
+
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .lang-toggle {
+  color: var(--wiki-text);
+  border-color: var(--wiki-border-light);
+}
+
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] a {
+  color: var(--wiki-link);
+}
+
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] a:visited {
+  color: var(--wiki-link-visited);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .site-custom-bg-panel {
+    background: var(--wiki-bg);
+    backdrop-filter: none;
+  }
+
+  /* Never force a floor over a user-chosen 0% overlay. */
+  html[data-site-custom-bg="on"]:not([data-site-custom-bg-overlay="0"]) .site-custom-bg-layer::after {
+    background: rgb(var(--site-custom-bg-scrim-rgb, 255 255 255) / max(var(--site-custom-bg-overlay, .40), .62));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-custom-bg-layer,
+  html[data-site-custom-bg-mode="depth"] .site-custom-bg-layer.is-active {
+    transition: none;
+    transform: none;
   }
 }
