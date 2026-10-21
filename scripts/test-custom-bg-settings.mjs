@@ -1,15 +1,13 @@
-﻿import assert from 'node:assert/strict';
+import assert from 'node:assert/strict';
 
 const DEFAULT = {
   enabled: false,
   mode: 'cover',
-  overlay: 48,
+  overlay: 40,
   position: 'center'
 };
 
-const MODES = new Set(['cover', 'soft-fade', 'tile', 'depth']);
-const POSITIONS = new Set(['top', 'center', 'bottom']);
-const CUSTOM_BG_INK_OVERLAY_THRESHOLD = 42;
+const CUSTOM_BG_LUMINANCE_TONE_THRESHOLD = 0.45;
 
 function clampOverlay(value) {
   if (!Number.isFinite(value)) return DEFAULT.overlay;
@@ -24,21 +22,30 @@ function panelAlphaForOverlay(overlayPercent) {
 
 function toneFromLuminance(luminance) {
   if (!Number.isFinite(luminance)) return 'light';
-  return luminance < 0.45 ? 'dark' : 'light';
+  return luminance < CUSTOM_BG_LUMINANCE_TONE_THRESHOLD ? 'dark' : 'light';
 }
 
-function inkForCustomBg(active, tone, overlayPercent) {
+function inkForCustomBg(active, tone, _overlayPercent) {
   if (!active || !tone) return 'none';
-  if (tone === 'light') return 'dark';
-  return clampOverlay(overlayPercent) >= CUSTOM_BG_INK_OVERLAY_THRESHOLD ? 'dark' : 'light';
+  return tone === 'light' ? 'dark' : 'light';
 }
 
+function scrimRgbForTone(tone) {
+  return tone === 'dark' ? '8 10 12' : '255 255 255';
+}
+
+assert.equal(DEFAULT.overlay, 40);
 assert.equal(toneFromLuminance(0.2), 'dark');
+assert.equal(toneFromLuminance(0.44), 'dark');
+assert.equal(toneFromLuminance(0.45), 'light');
 assert.equal(toneFromLuminance(0.7), 'light');
 assert.equal(inkForCustomBg(true, 'dark', 0), 'light');
-assert.equal(inkForCustomBg(true, 'dark', 42), 'dark');
+assert.equal(inkForCustomBg(true, 'dark', 100), 'light');
 assert.equal(inkForCustomBg(true, 'light', 0), 'dark');
+assert.equal(inkForCustomBg(true, 'light', 100), 'dark');
 assert.equal(inkForCustomBg(false, 'dark', 0), 'none');
+assert.equal(scrimRgbForTone('dark'), '8 10 12');
+assert.equal(scrimRgbForTone('light'), '255 255 255');
 assert.equal(panelAlphaForOverlay(0), 0);
 assert.ok(Math.abs(panelAlphaForOverlay(100) - 0.92) < 1e-9);
 

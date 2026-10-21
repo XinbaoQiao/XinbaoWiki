@@ -5770,7 +5770,7 @@ html:not([data-wiki-morph-to]) ::view-transition-new(.wiki-title-morph) {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: rgb(var(--site-custom-bg-scrim-rgb, 255 255 255) / var(--site-custom-bg-overlay, .48));
+  background: rgb(var(--site-custom-bg-scrim-rgb, 255 255 255) / var(--site-custom-bg-overlay, .40));
   opacity: 1;
   transition: opacity .2s ease, background-color .2s ease;
 }
@@ -5795,9 +5795,9 @@ html[data-site-custom-bg-mode="soft-fade"] .site-custom-bg-layer::after {
   background:
     radial-gradient(
       ellipse 78% 70% at center,
-      rgb(var(--site-custom-bg-scrim-rgb, 255 255 255) / var(--site-custom-bg-overlay, .48)) 0%,
-      rgb(var(--site-custom-bg-scrim-rgb, 255 255 255) / calc(var(--site-custom-bg-overlay, .48) * .55)) 58%,
-      rgb(var(--site-custom-bg-scrim-rgb, 255 255 255) / calc(var(--site-custom-bg-overlay, .48) * .12)) 100%
+      rgb(var(--site-custom-bg-scrim-rgb, 255 255 255) / var(--site-custom-bg-overlay, .40)) 0%,
+      rgb(var(--site-custom-bg-scrim-rgb, 255 255 255) / calc(var(--site-custom-bg-overlay, .40) * .55)) 58%,
+      rgb(var(--site-custom-bg-scrim-rgb, 255 255 255) / calc(var(--site-custom-bg-overlay, .40) * .12)) 100%
     );
 }
 
@@ -6040,8 +6040,15 @@ html[data-site-custom-bg-position="bottom"] .site-custom-bg-layer {
 /* Dark wallpaper + low overlay: light ink for the full scroll height.
    Higher specificity than palette heading tokens. Content wash floors
    readability on long pages without fully erasing the wallpaper. */
-html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] {
+html[data-site-custom-bg-tone="dark"] {
   --site-custom-bg-scrim-rgb: 8 10 12;
+}
+
+html[data-site-custom-bg-tone="light"] {
+  --site-custom-bg-scrim-rgb: 255 255 255;
+}
+
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] {
   --wiki-text: #f2f4f6;
   --wiki-text-soft: #c5cad0;
   --wiki-link: #9ec1ff;
@@ -6123,12 +6130,14 @@ html[data-site-custom-bg="on"] .wiki-body {
 }
 
 /* Soft glyph edge for long pages without a content box. */
+/* Dark wallpaper + light ink: soft dark halo. */
 html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-main {
-  text-shadow: 0 1px 2px rgb(0 0 0 / .45);
+  text-shadow: 0 1px 2px rgb(0 0 0 / .5);
 }
 
+/* Light wallpaper + dark ink: soft light halo so glyphs stay crisp on bright photos. */
 html[data-site-custom-bg="on"][data-site-custom-bg-ink="dark"] .wiki-main {
-  text-shadow: 0 1px 1px rgb(255 255 255 / .28);
+  text-shadow: 0 1px 2px rgb(255 255 255 / .4);
 }
 
 html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] :is(
@@ -6175,7 +6184,7 @@ html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] a:visited {
 
   /* Never force a floor over a user-chosen 0% overlay. */
   html[data-site-custom-bg="on"]:not([data-site-custom-bg-overlay="0"]) .site-custom-bg-layer::after {
-    background: rgb(var(--site-custom-bg-scrim-rgb, 255 255 255) / max(var(--site-custom-bg-overlay, .48), .62));
+    background: rgb(var(--site-custom-bg-scrim-rgb, 255 255 255) / max(var(--site-custom-bg-overlay, .40), .62));
   }
 }
 

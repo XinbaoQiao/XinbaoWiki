@@ -17,7 +17,7 @@ export const CUSTOM_BG_IMAGE_KEY = 'wallpaper';
 export const DEFAULT_CUSTOM_BG_SETTINGS: CustomBgSettings = {
   enabled: false,
   mode: 'cover',
-  overlay: 48,
+  overlay: 40,
   position: 'center'
 };
 
@@ -217,25 +217,42 @@ export async function compressImageFile(file: File): Promise<Blob> {
 export function panelAlphaForOverlay(overlayPercent: number): number {
   const overlay = clampOverlay(overlayPercent) / 100;
   if (overlay <= 0) return 0;
-  // Map low overlay to a light reading wash; 0% keeps wallpaper fully clear.
+  // Legacy helper (content reading-board retired). Kept for tests / back-compat.
   return Math.min(0.92, 0.22 + overlay * 0.7);
 }
 
 export type CustomBgTone = 'light' | 'dark';
 export type CustomBgInk = 'dark' | 'light';
 
-/** Overlay at/above this keeps default dark text even on dark wallpapers. */
-export const CUSTOM_BG_INK_OVERLAY_THRESHOLD = 42;
+/**
+ * Tone / ink / scrim policy (custom wallpaper only):
+ * - Luminance < 0.45 => dark wallpaper.
+ * - Dark wallpaper: dark scrim (near-black) + light ink at every overlay.
+ *   Raising overlay deepens the dark wash; body text stays light.
+ * - Light wallpaper: white scrim + dark ink at every overlay.
+ *   Never switch to light text on light photos.
+ * - Default overlay for new uploads / first enable: 40%.
+ * Overlay strength only scales scrim opacity; it does not flip ink by tone.
+ */
+export const CUSTOM_BG_LUMINANCE_TONE_THRESHOLD = 0.45;
+
+/** @deprecated Ink is tone-driven; overlay no longer flips ink. Kept for call-site clarity. */
+export const CUSTOM_BG_INK_OVERLAY_THRESHOLD = 40;
 
 export function toneFromLuminance(luminance: number): CustomBgTone {
   if (!Number.isFinite(luminance)) return 'light';
-  return luminance < 0.45 ? 'dark' : 'light';
+  return luminance < CUSTOM_BG_LUMINANCE_TONE_THRESHOLD ? 'dark' : 'light';
 }
 
-export function inkForCustomBg(active: boolean, tone: CustomBgTone | null, overlayPercent: number): CustomBgInk | 'none' {
+export function inkForCustomBg(active: boolean, tone: CustomBgTone | null, _overlayPercent: number): CustomBgInk | 'none' {
   if (!active || !tone) return 'none';
-  if (tone === 'light') return 'dark';
-  return clampOverlay(overlayPercent) >= CUSTOM_BG_INK_OVERLAY_THRESHOLD ? 'dark' : 'light';
+  // Light photos: always dark ink. Dark photos: always light ink.
+  return tone === 'light' ? 'dark' : 'light';
+}
+
+export function scrimRgbForTone(tone: CustomBgTone | null): string {
+  // space-separated RGB for css `rgb(var(--site-custom-bg-scrim-rgb) / a)`
+  return tone === 'dark' ? '8 10 12' : '255 255 255';
 }
 
 /** Average relative luminance of an image blob via a tiny canvas downsample. */
@@ -298,6 +315,7 @@ export function applyCustomBgDocumentState(
   root.style.setProperty('--site-custom-bg-overlay', String(overlay));
   root.style.setProperty('--site-custom-bg-panel', String(panel));
   root.style.setProperty('--site-custom-bg-position', settings.position);
+  root.style.setProperty('--site-custom-bg-scrim-rgb', scrimRgbForTone(active ? tone : null));
 }
 
 export function revokeObjectUrl(url: string | null | undefined): void {

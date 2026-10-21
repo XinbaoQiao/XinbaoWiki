@@ -412,6 +412,8 @@ export function SitePalette({ icons }: SitePaletteProps) {
       persistCustom({
         ...customSettings,
         enabled: true,
+        // New upload / first enable uses the 40% default overlay.
+        overlay: customSettings.enabled ? customSettings.overlay : DEFAULT_CUSTOM_BG_SETTINGS.overlay,
         mode: customSettings.mode === 'depth' && !isDesktopPointer ? 'cover' : customSettings.mode
       });
     } catch (cause) {
