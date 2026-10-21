@@ -159,7 +159,28 @@ export async function compressImageFile(file: File): Promise<Blob> {
     throw new Error('Unsupported image type');
   }
 
-  const bitmap = await createImageBitmap(file);
+  let bitmap: ImageBitmap;
+  {
+    const probe = await createImageBitmap(file);
+    const scale = Math.min(1, MAX_EDGE / Math.max(probe.width, probe.height));
+    const targetW = Math.max(1, Math.round(probe.width * scale));
+    const targetH = Math.max(1, Math.round(probe.height * scale));
+    const alreadySmall = probe.width === targetW && probe.height === targetH;
+    if (alreadySmall) {
+      bitmap = probe;
+    } else {
+      probe.close();
+      try {
+        bitmap = await createImageBitmap(file, {
+          resizeWidth: targetW,
+          resizeHeight: targetH,
+          resizeQuality: 'high'
+        });
+      } catch {
+        bitmap = await createImageBitmap(file);
+      }
+    }
+  }
   try {
     const scale = Math.min(1, MAX_EDGE / Math.max(bitmap.width, bitmap.height));
     const width = Math.max(1, Math.round(bitmap.width * scale));

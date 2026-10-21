@@ -365,6 +365,13 @@ export function SitePalette({ icons }: SitePaletteProps) {
       writeCustomBgSettings(enabled);
       applyCustomBgDocumentState(enabled, true, customTone);
     }
+
+    window.setTimeout(() => {
+      const root = rootRef.current;
+      if (!root) return;
+      const focusable = root.querySelector<HTMLElement>('.site-custom-bg-action:not(:disabled), .site-custom-bg-panel select:not(:disabled), .site-custom-bg-panel input[type="range"]:not(:disabled)');
+      focusable?.focus();
+    }, 0);
   };
 
   const onCustomButtonClick = () => {
@@ -438,12 +445,9 @@ export function SitePalette({ icons }: SitePaletteProps) {
     mode: isChinese ? '适配方式' : 'Fit mode',
     overlay: isChinese ? '遮罩强度' : 'Overlay strength',
     position: isChinese ? '焦点位置' : 'Focus position',
-    hint: isChinese
-      ? '仅保存在本机浏览器。'
-      : 'Stored only in this browser.',
     depthNote: isChinese
-      ? '固定景深受桌面指针设备支持；手机自动回退为铺满。'
-      : 'Fixed depth is desktop-only; phones fall back to cover.',
+      ? '桌面可用'
+      : 'Desktop only',
     busy: isChinese ? '处理中…' : 'Working…'
   };
 
@@ -527,7 +531,6 @@ export function SitePalette({ icons }: SitePaletteProps) {
         >
           <div className="site-custom-bg-panel-head">
             <p className="site-custom-bg-panel-title">{copy.custom}</p>
-            <p className="site-custom-bg-panel-hint">{copy.hint}</p>
           </div>
 
           <div className="site-custom-bg-panel-row">
@@ -567,6 +570,8 @@ export function SitePalette({ icons }: SitePaletteProps) {
             />
           ) : null}
 
+          {customImageUrl ? (
+            <div className="site-custom-bg-controls">
           <label className="site-custom-bg-field">
             <span className="site-custom-bg-field-label">{copy.mode}</span>
             <select
@@ -637,6 +642,9 @@ export function SitePalette({ icons }: SitePaletteProps) {
               ))}
             </select>
           </label>
+
+            </div>
+          ) : null}
 
           {error ? <p className="site-custom-bg-error" role="alert">{error}</p> : null}
         </div>
