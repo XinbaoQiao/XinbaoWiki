@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { ArticleTabs } from '@/components/ArticleTabs';
 import { LanguageToggle, SitePalette } from '@/components/LanguageToggle';
 import { Sidebar } from '@/components/Sidebar';
@@ -7,6 +7,19 @@ import { WikiSearch } from '@/components/WikiSearch';
 import { SiteActivityRecorder } from '@/components/SiteActivityRecorder';
 import { WikiLink } from '@/components/WikiLink';
 import { pathWithBasePath } from '@/lib/wiki';
+import {
+  sharedBackgroundHtmlDataset,
+  sharedBackgroundInlineStyle,
+  type SharedSiteBackgroundPublic
+} from '@/lib/site-wallpaper-shared';
+import {
+  readSharedSiteBackground,
+  siteBackgroundBlobConfigured,
+  siteBackgroundLocalFallbackEnabled,
+  siteBackgroundPasswordRequired,
+  siteBackgroundSharedConfigured,
+  siteBackgroundWritableConfigured
+} from '@/lib/site-wallpaper-store';
 import { ViewTransitions } from 'next-view-transitions';
 import 'katex/dist/katex.min.css';
 import './globals.css';
@@ -58,10 +71,41 @@ export const viewport: Viewport = {
   interactiveWidget: 'resizes-content'
 };
 
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+async function loadInitialSharedBackground(): Promise<SharedSiteBackgroundPublic | null> {
+  try {
+    const shared = await readSharedSiteBackground();
+    return {
+      ...shared,
+      shared: siteBackgroundSharedConfigured(),
+      writable: siteBackgroundWritableConfigured(),
+      blob: siteBackgroundBlobConfigured(),
+      localFallback: siteBackgroundLocalFallbackEnabled(),
+      passwordRequired: siteBackgroundPasswordRequired()
+    };
+  } catch {
+    return null;
+  }
+}
+
+export default async function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+  const initialSharedBackground = await loadInitialSharedBackground();
+  const sharedDataset = initialSharedBackground
+    ? sharedBackgroundHtmlDataset(initialSharedBackground)
+    : ({ 'data-site-custom-bg': 'off' } as Record<string, string>);
+  const sharedStyle = initialSharedBackground ? sharedBackgroundInlineStyle(initialSharedBackground) : '';
+  const htmlStyle = (sharedStyle
+    ? Object.fromEntries(
+        sharedStyle.split(';').map((part) => {
+          const idx = part.indexOf(':');
+          if (idx < 0) return null;
+          return [part.slice(0, idx).trim(), part.slice(idx + 1).trim()];
+        }).filter(Boolean) as Array<[string, string]>
+      )
+    : undefined) as CSSProperties | undefined;
+
   return (
     <ViewTransitions>
-      <html lang="en">
+      <html lang="en" {...sharedDataset} style={htmlStyle}>
         <head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -72,8 +116,8 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         </head>
         <body>
           <SiteActivityRecorder />
-          <a className="skip-to-content" href="#main-content">Skip to content / 跳至正文</a>
-          <SitePalette icons={sitePaletteIcons} />
+          <a className="skip-to-content" href="#main-content">Skip to content / 跳到正文</a>
+          <SitePalette icons={sitePaletteIcons} initialSharedBackground={initialSharedBackground} />
           <header className="wiki-topbar">
             <div className="wiki-topbar-inner">
               <WikiLink className="wiki-logo" href={pathWithBasePath('/')}>

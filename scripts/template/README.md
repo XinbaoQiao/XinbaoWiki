@@ -54,3 +54,7 @@ Pipeline: install ? sanitize + leak check ? `npm ci` + `npm run check:node22` + 
 - New personal strings in code: add them to `denylist.txt` and a replacement or patch to `rules.mjs`.
 - CI says `patch drifted`: update the search text of that rule in `rules.mjs`.
 - CI says `override drift`: port the change into `template-overrides/`, run `--update-lock`, commit.
+
+## Site-wide custom background
+
+Main can publish a wallpaper via Vercel Blob + Upstash Redis. The template keeps the same code paths but starts with an empty shared background; `public/site-wallpaper/` is deleted from the template tree and denied by the leak check so personal photos cannot land on the public `template` branch. Template adopters configure their own `the Vercel Blob RW token env`, Redis, and `SITE_ACTIVITY_OWNER_PASSWORD_HASH` (see `docs/site-wallpaper/README.md`).

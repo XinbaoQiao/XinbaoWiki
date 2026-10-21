@@ -3,7 +3,7 @@
 // Tracked paths removed from the template (prefix match on POSIX paths).
 export const deletePaths = [
   'public/okf/', 'public/papers/', 'public/files/', 'public/images/', 'public/institutions/',
-  'public/readme/', 'public/topics/', 'public/site-logos/', 'public/site-icons/',
+  'public/readme/', 'public/topics/', 'public/site-logos/', 'public/site-icons/', 'public/site-wallpaper/',
   'public/xinbaopedia-icon.png', 'public/xinbaopedia-icon.svg', 'public/977ab55cdd7bd5149d5143f5be4a88cc.txt',
   'CV.tex', 'assets/', 'wiki/', 'evals/', 'docs/demo/', 'docs/design/', '.preview-shots/',
   'docs/chat/persona-prompt.md', 'docs/chat/meme-voice-notes.md', 'docs/research-topic-image-prompts.md',

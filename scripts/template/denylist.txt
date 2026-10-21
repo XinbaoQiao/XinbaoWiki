@@ -48,3 +48,6 @@ mrciao
 sha tin
 persona-prompt
 meme-voice
+vercel-storage\.com/site-wallpaper
+xinbao-site-wallpaper
+public/site-wallpaper/

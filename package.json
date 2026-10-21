@@ -38,10 +38,11 @@
     "typecheck": "node scripts/prepare-typecheck.mjs && tsc --noEmit",
     "check": "node scripts/run-with-node22.mjs npm run check:node22",
     "check:node22": "npm run typecheck && npm run lint:wiki && npm run lint:content && npm run lint:okf && npm run test:features && npm run test:wiki && npm run audit:wiki && npm run eval:wiki-chat && npm run test:release",
-    "test:features": "node scripts/test-content-manifest.mjs && node scripts/test-chat-hardening.mjs && node scripts/test-site-activity.mjs && node scripts/test-site-activity-daily.mjs && node scripts/test-site-activity-events.mjs && node scripts/test-wiki-outline.mjs && node scripts/test-publication-link-legend.mjs && node scripts/test-publication-resources.mjs && node scripts/test-site-updates.mjs && node scripts/test-custom-bg-settings.mjs"
+    "test:features": "node scripts/test-content-manifest.mjs && node scripts/test-chat-hardening.mjs && node scripts/test-site-activity.mjs && node scripts/test-site-activity-daily.mjs && node scripts/test-site-activity-events.mjs && node scripts/test-wiki-outline.mjs && node scripts/test-publication-link-legend.mjs && node scripts/test-publication-resources.mjs && node scripts/test-site-updates.mjs && node scripts/test-custom-bg-settings.mjs && node scripts/test-site-wallpaper.mjs"
   },
   "dependencies": {
     "@upstash/redis": "^1.38.0",
+    "@vercel/blob": "^2.8.2",
     "gray-matter": "^4.0.3",
     "katex": "^0.16.45",
     "next": "15.5.27",

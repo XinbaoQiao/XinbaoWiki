@@ -1795,11 +1795,13 @@ body:has(.wiki-portal) .wiki-topbar {
   max-width: 9em;
   min-height: 34px;
   padding: 4px 10px;
-  border: 1px solid var(--wiki-border);
-  border-radius: 2px;
-  background: var(--wiki-bg);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .12);
-  color: var(--wiki-text);
+  border: 1px solid color-mix(in srgb, var(--wiki-border) 55%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--wiki-bg) 72%, transparent);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .06);
+  backdrop-filter: blur(10px) saturate(1.05);
+  -webkit-backdrop-filter: blur(10px) saturate(1.05);
+  color: color-mix(in srgb, var(--wiki-text) 88%, transparent);
   cursor: pointer;
   font-family: var(--font-sans);
   font-size: var(--fs-xs);
@@ -1808,8 +1810,8 @@ body:has(.wiki-portal) .wiki-topbar {
 
 .wiki-toc-return:hover,
 .wiki-toc-return:focus-visible {
-  border-color: color-mix(in srgb, var(--site-theme-accent) 40%, var(--wiki-border));
-  background: var(--wiki-bg-alt);
+  border-color: color-mix(in srgb, var(--site-theme-accent) 35%, transparent);
+  background: color-mix(in srgb, var(--wiki-bg) 82%, transparent);
   color: var(--site-theme-action-ink);
 }
 
@@ -1818,7 +1820,20 @@ body:has(.wiki-portal) .wiki-topbar {
   outline-offset: 1px;
 }
 
-/* Homepage portal: never show the floating Contents / 目录 return chip. */
+/* Homepage portal: never show the floating Contents
+
+html[data-site-custom-bg="on"] .wiki-toc-return {
+  background: color-mix(in srgb, var(--wiki-bg) 55%, transparent);
+  border-color: color-mix(in srgb, var(--wiki-border) 40%, transparent);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .05);
+}
+
+html[data-site-custom-bg="on"] .wiki-article-contents {
+  background: color-mix(in srgb, var(--wiki-bg) 58%, transparent);
+  backdrop-filter: blur(8px) saturate(1.05);
+  -webkit-backdrop-filter: blur(8px) saturate(1.05);
+  border-bottom-color: color-mix(in srgb, var(--wiki-border-subtle) 70%, transparent);
+} / 目录 return chip. */
 body:has(.wiki-portal) .wiki-toc-return {
   display: none !important;
 }
@@ -1831,9 +1846,11 @@ body:has(.wiki-portal) .wiki-toc-return {
     margin-top: 16px;
     padding: 8px 0 10px;
     border: 0;
-    border-bottom: 1px solid var(--wiki-border-subtle);
+    border-bottom: 1px solid color-mix(in srgb, var(--wiki-border-subtle) 80%, transparent);
     border-radius: 0;
-    background: var(--wiki-bg);
+    background: color-mix(in srgb, var(--wiki-bg) 78%, transparent);
+    backdrop-filter: blur(8px) saturate(1.04);
+    -webkit-backdrop-filter: blur(8px) saturate(1.04);
     box-shadow: none;
   }
 }
@@ -5774,6 +5791,7 @@ html:not([data-wiki-morph-to]) ::view-transition-new(.wiki-title-morph) {
 
 .site-custom-bg-layer.is-active {
   opacity: 1;
+  background-image: var(--site-custom-bg-image, none);
 }
 
 .site-custom-bg-layer::after {
@@ -5902,6 +5920,23 @@ html[data-site-custom-bg-position="bottom"] .site-custom-bg-layer {
   text-transform: uppercase;
 }
 
+.site-custom-bg-panel-note {
+  margin: 0;
+  color: var(--wiki-text-soft);
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.site-custom-bg-password {
+  width: 100%;
+  padding: 5px 7px;
+  border: 1px solid var(--site-theme-chrome-border);
+  border-radius: 4px;
+  background: var(--wiki-bg);
+  color: var(--wiki-text);
+  font: inherit;
+  font-size: 12px;
+}
 
 .site-custom-bg-panel-row {
   display: flex;

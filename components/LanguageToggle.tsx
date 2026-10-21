@@ -1,198 +1,403 @@
 'use client';
 
+
+
 import { WikiLink } from '@/components/WikiLink';
+
 import { clearWikiMorphIntent } from '@/lib/wiki-view-transition';
+
 import {
+
   applyCustomBgDocumentState,
+
   clearCustomBgSettings,
+
   compressImageFile,
+  imageExtensionForMime,
+  normalizeImageMimeType,
+
   DEFAULT_CUSTOM_BG_SETTINGS,
+
   deleteCustomBgBlob,
+
   estimateImageLuminance,
+
   loadCustomBgBlob,
+
   readCustomBgSettings,
+
   revokeObjectUrl,
+
   saveCustomBgBlob,
+
   toneFromLuminance,
+
   writeCustomBgSettings,
+
   type CustomBgMode,
+
   type CustomBgPosition,
+
   type CustomBgSettings,
+
   type CustomBgTone
+
 } from '@/lib/site-custom-background';
+import {
+  cssUrlForSharedImage,
+  sharedBackgroundToSettings,
+  type SharedSiteBackgroundPublic
+} from '@/lib/site-wallpaper-shared';
+
 import type { CSSProperties, ChangeEvent } from 'react';
+
 import { useEffect, useId, useRef, useState } from 'react';
+
 import { usePathname } from 'next/navigation';
 
+
+
 function withBasePath(pathname: string) {
+
   const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
+
   return basePath ? `${basePath}${pathname}` : pathname;
+
 }
+
+
 
 function activeSlug(pathname: string) {
+
   const decoded = decodeURIComponent(pathname);
+
   const parts = decoded.replace(/\/+$/, '').split('/').filter(Boolean);
+
   const wikiIndex = parts.lastIndexOf('wiki');
+
   return wikiIndex >= 0 && parts[wikiIndex + 1] ? parts[wikiIndex + 1] : 'Xinbao_Qiao';
+
 }
+
+
 
 function isChineseSlug(slug: string) {
+
   return slug === 'Qiao_Xinbao_zh' || slug.endsWith('_zh');
+
 }
+
+
 
 function chineseSlug(slug: string) {
+
   if (slug === 'Xinbao_Qiao') return 'Qiao_Xinbao_zh';
+
   if (isChineseSlug(slug)) return slug;
+
   return `${slug}_zh`;
+
 }
+
+
 
 function englishSlug(slug: string) {
+
   if (slug === 'Qiao_Xinbao_zh') return 'Xinbao_Qiao';
+
   return slug.endsWith('_zh') ? slug.slice(0, -3) : slug;
+
 }
 
+
+
 export function LanguageToggle() {
+
   const pathname = usePathname() || '';
+
   const isWikiPage = decodeURIComponent(pathname).split('/').includes('wiki');
+
   const slug = activeSlug(pathname);
+
   const isChinesePage = isChineseSlug(slug);
 
+
+
   useEffect(() => {
+
     document.documentElement.lang = isWikiPage && isChinesePage ? 'zh-CN' : 'en';
+
   }, [isChinesePage, isWikiPage]);
+
+
 
   if (!isWikiPage) return null;
 
+
+
   const targetSlug = isChinesePage ? englishSlug(slug) : chineseSlug(slug);
+
   const href = `/wiki/${encodeURIComponent(targetSlug)}/`;
+
   const accessibleLabel = isChinesePage ? 'Switch to English' : '切换至中文';
 
+
+
   return (
+
     <WikiLink
+
       aria-label={accessibleLabel}
+
       className="lang-toggle"
+
       href={withBasePath(href)}
+
       title={accessibleLabel}
+
       onClick={() => clearWikiMorphIntent()}
+
     >
+
       {isChinesePage ? 'English' : '中文'}
+
     </WikiLink>
+
   );
+
 }
 
+
+
 type SitePaletteName = 'text' | 'blue' | 'gold' | 'rose' | 'green' | 'violet' | 'charcoal';
+
 type SitePaletteMode = SitePaletteName | 'auto';
 
+
+
 type SitePaletteOption = {
+
   color: string;
+
   mode: SitePaletteMode;
+
   title: string;
+
 };
+
+
 
 type SitePaletteProps = {
   icons: Record<SitePaletteName, string>;
+  initialSharedBackground?: SharedSiteBackgroundPublic | null;
 };
+
+
 
 const sitePaletteStorageKey = 'xinbaopedia-palette-mode';
 
+
+
 const sitePaletteOptions: SitePaletteOption[] = [
+
   { color: '#ffffff', mode: 'text', title: 'Pure white text theme' },
+
   { color: '#2b5f94', mode: 'blue', title: 'Morning blue theme' },
+
   { color: '#b8871b', mode: 'gold', title: 'Midday gold theme' },
+
   { color: '#a44962', mode: 'rose', title: 'Scholar rose theme' },
+
   { color: '#2a7f62', mode: 'green', title: 'Evening green theme' },
+
   { color: '#70518f', mode: 'violet', title: 'Archive violet theme' },
+
   { color: '#2f3437', mode: 'charcoal', title: 'Night charcoal theme' },
+
   { color: '#36c', mode: 'auto', title: 'Auto theme by local time' }
+
 ];
+
+
 
 function isSitePaletteMode(value: string | null): value is SitePaletteMode {
+
   return value === 'auto' || value === 'text' || value === 'blue' || value === 'gold' || value === 'rose' || value === 'green' || value === 'violet' || value === 'charcoal';
+
 }
+
+
 
 function sitePaletteForLocalTime(date = new Date()): Exclude<SitePaletteName, 'text'> {
+
   const hour = date.getHours();
 
+
+
   if (hour >= 5 && hour < 9) return 'blue';
+
   if (hour >= 9 && hour < 13) return 'gold';
+
   if (hour >= 13 && hour < 16) return 'rose';
+
   if (hour >= 16 && hour < 19) return 'green';
+
   if (hour >= 19 && hour < 22) return 'violet';
+
   return 'charcoal';
+
 }
+
+
 
 function updateSiteFavicon(href: string) {
+
   const selector = 'link[data-site-favicon="true"]';
+
   let link = document.querySelector<HTMLLinkElement>(selector);
 
-  if (!link) {
-    link = document.querySelector<HTMLLinkElement>('link[rel~="icon"]');
-  }
+
 
   if (!link) {
-    link = document.createElement('link');
-    document.head.appendChild(link);
+
+    link = document.querySelector<HTMLLinkElement>('link[rel~="icon"]');
+
   }
+
+
+
+  if (!link) {
+
+    link = document.createElement('link');
+
+    document.head.appendChild(link);
+
+  }
+
+
 
   link.dataset.siteFavicon = 'true';
+
   link.rel = 'icon';
+
   link.type = 'image/png';
+
   link.sizes = '512x512';
+
   link.href = href;
+
 }
+
+
 
 function prefersCoarsePalettePointer() {
+
   return typeof window !== 'undefined'
+
     && window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
 }
+
+
 
 function readChromeChinese(pathname: string): boolean {
+
   const decoded = decodeURIComponent(pathname || '');
+
   if (decoded.split('/').includes('wiki')) {
+
     return isChineseSlug(activeSlug(pathname));
+
   }
+
   // Homepage / non-wiki chrome follows documentElement.lang, which
+
   // HomepagePortal and LanguageToggle keep in sync with the EN/中文 control.
+
   const lang = typeof document !== 'undefined' ? document.documentElement.lang : '';
+
   return lang === 'zh-CN' || lang.toLowerCase().startsWith('zh');
+
 }
+
+
 
 function useChromeChinese(): boolean {
+
   const pathname = usePathname() || '';
+
   const [isChinese, setIsChinese] = useState(false);
 
+
+
   useEffect(() => {
+
     const sync = () => setIsChinese(readChromeChinese(pathname));
+
     sync();
 
+
+
     const root = document.documentElement;
+
     const observer = new MutationObserver(sync);
+
     observer.observe(root, { attributes: true, attributeFilter: ['lang'] });
+
     return () => observer.disconnect();
+
   }, [pathname]);
 
+
+
   return isChinese;
+
 }
 
+
+
 const customBgModeOptions: Array<{ mode: CustomBgMode; en: string; zh: string }> = [
+
   { mode: 'cover', en: 'Cover', zh: '铺满' },
+
   { mode: 'soft-fade', en: 'Soft fade', zh: '淡出' },
+
   { mode: 'tile', en: 'Tile', zh: '平铺' },
+
   { mode: 'depth', en: 'Depth', zh: '景深' }
+
 ];
+
+
 
 const customBgPositionOptions: Array<{ position: CustomBgPosition; en: string; zh: string }> = [
+
   { position: 'top', en: 'Top', zh: '顶部' },
+
   { position: 'center', en: 'Center', zh: '居中' },
+
   { position: 'bottom', en: 'Bottom', zh: '底部' }
+
 ];
 
-export function SitePalette({ icons }: SitePaletteProps) {
+
+
+export function SitePalette({ icons, initialSharedBackground = null }: SitePaletteProps) {
+  const initialSharedSettings = initialSharedBackground?.enabled
+    ? sharedBackgroundToSettings(initialSharedBackground)
+    : DEFAULT_CUSTOM_BG_SETTINGS;
+  const initialSharedUrl = initialSharedBackground?.enabled
+    ? cssUrlForSharedImage(initialSharedBackground.imageUrl)
+    : null;
   const [mode, setMode] = useState<SitePaletteMode>('auto');
   const [expanded, setExpanded] = useState(false);
-  const [customSettings, setCustomSettings] = useState<CustomBgSettings>(DEFAULT_CUSTOM_BG_SETTINGS);
-  const [customImageUrl, setCustomImageUrl] = useState<string | null>(null);
-  const [customTone, setCustomTone] = useState<CustomBgTone | null>(null);
+  const [customSettings, setCustomSettings] = useState<CustomBgSettings>(initialSharedSettings);
+  const [customImageUrl, setCustomImageUrl] = useState<string | null>(initialSharedUrl);
+  const [customTone, setCustomTone] = useState<CustomBgTone | null>(initialSharedBackground?.tone ?? null);
+  const [ownerPassword, setOwnerPassword] = useState('');
+  const [publishShared, setPublishShared] = useState(Boolean(initialSharedBackground?.writable));
+  const [sharedMeta, setSharedMeta] = useState<SharedSiteBackgroundPublic | null>(initialSharedBackground);
+  const [scopeNote, setScopeNote] = useState<string | null>(null);
   const [panelOpen, setPanelOpen] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -203,63 +408,137 @@ export function SitePalette({ icons }: SitePaletteProps) {
   const panelId = useId();
   const isChinese = useChromeChinese();
 
+  const applySharedToUi = (shared: SharedSiteBackgroundPublic) => {
+    const safeUrl = cssUrlForSharedImage(shared.imageUrl);
+    if (!(shared.enabled && safeUrl)) {
+      setCustomImageUrl(null);
+      setCustomTone(null);
+      applyCustomBgDocumentState({ ...DEFAULT_CUSTOM_BG_SETTINGS, enabled: false }, false, null);
+      return;
+    }
+    revokeObjectUrl(imageUrlRef.current);
+    imageUrlRef.current = null;
+    setCustomImageUrl(safeUrl);
+    setCustomTone(shared.tone);
+    const settings = sharedBackgroundToSettings(shared);
+    setCustomSettings(settings);
+    applyCustomBgDocumentState(settings, true, shared.tone);
+  };
+
+  const refreshSharedBackground = async () => {
+    try {
+      const response = await fetch('/api/site-activity/wallpaper', { method: 'GET', credentials: 'same-origin' });
+      if (!response.ok) return null;
+      const payload = (await response.json()) as SharedSiteBackgroundPublic;
+      setSharedMeta(payload);
+      if (payload.writable) setPublishShared(true);
+      return payload;
+    } catch {
+      return null;
+    }
+  };
+
+  const publishSettingsToSite = async (next: CustomBgSettings, tone: CustomBgTone | null) => {
+    if (!publishShared || !sharedMeta?.writable) return;
+    if (!ownerPassword || ownerPassword.length < 8) {
+      setError(isChinese ? '请输入站长密码（至少 8 位）。' : 'Enter the owner password (at least 8 characters).');
+      return;
+    }
+    const response = await fetch('/api/site-activity/wallpaper', {
+      method: 'POST',
+      credentials: 'same-origin',
+      headers: { 'Content-Type': 'application/json' },
+      body: (() => {
+        const payload: Record<string, unknown> = {
+          enabled: next.enabled,
+          mode: next.mode,
+          overlay: next.overlay,
+          position: next.position,
+          tone
+        };
+        payload['password'] = ownerPassword;
+        return JSON.stringify(payload);
+      })()
+    });
+    if (!response.ok) {
+      setError(response.status === 401
+        ? (isChinese ? '密码不正确。' : 'Incorrect password.')
+        : (isChinese ? '无法更新全站背景。' : 'Could not update the site background.'));
+      return;
+    }
+    const payload = (await response.json()) as SharedSiteBackgroundPublic;
+    setSharedMeta(payload);
+    setScopeNote(isChinese ? '已对所有访客生效。' : 'Visible to every visitor.');
+  };
+
   useEffect(() => {
     const savedMode = window.localStorage.getItem(sitePaletteStorageKey);
-
-    if (isSitePaletteMode(savedMode)) {
-      setMode(savedMode);
-    }
-
+    if (isSitePaletteMode(savedMode)) setMode(savedMode);
     const savedCustom = readCustomBgSettings();
     setCustomSettings(savedCustom);
-
+    if (initialSharedBackground) {
+      setSharedMeta(initialSharedBackground);
+      setPublishShared(Boolean(initialSharedBackground.writable));
+    }
     let cancelled = false;
     void (async () => {
+      let localUrl: string | null = null;
+      let localTone: CustomBgTone | null = null;
+      let localEnabled = false;
       try {
         const blob = await loadCustomBgBlob();
-        if (cancelled) return;
-        if (!blob) {
-          setCustomTone(null);
-          applyCustomBgDocumentState({ ...savedCustom, enabled: false }, false, null);
-          return;
+        if (blob) {
+          localUrl = URL.createObjectURL(blob);
+          localTone = toneFromLuminance(await estimateImageLuminance(blob));
+          localEnabled = Boolean(savedCustom.enabled);
         }
-        const url = URL.createObjectURL(blob);
-        const tone = toneFromLuminance(await estimateImageLuminance(blob));
-        if (cancelled) {
-          revokeObjectUrl(url);
-          return;
-        }
-        revokeObjectUrl(imageUrlRef.current);
-        imageUrlRef.current = url;
-        setCustomImageUrl(url);
-        setCustomTone(tone);
-        applyCustomBgDocumentState(savedCustom, true, tone);
       } catch {
-        if (!cancelled) {
-          setCustomTone(null);
-          applyCustomBgDocumentState({ ...savedCustom, enabled: false }, false, null);
-        }
+        localUrl = null;
       }
+      if (cancelled) { revokeObjectUrl(localUrl); return; }
+      const shared = (await refreshSharedBackground()) ?? initialSharedBackground;
+      if (cancelled) { revokeObjectUrl(localUrl); return; }
+      if (localEnabled && localUrl) {
+        revokeObjectUrl(imageUrlRef.current);
+        imageUrlRef.current = localUrl;
+        setCustomImageUrl(localUrl);
+        setCustomTone(localTone);
+        setCustomSettings(savedCustom);
+        applyCustomBgDocumentState(savedCustom, true, localTone);
+        setScopeNote(isChinese ? '仅此设备（本机覆盖）。' : 'This device only (local override).');
+        return;
+      }
+      if (shared?.enabled && shared.imageUrl) {
+        revokeObjectUrl(localUrl);
+        applySharedToUi(shared);
+        setScopeNote(isChinese ? '全站背景。' : 'Site-wide background.');
+        return;
+      }
+      if (localUrl) {
+        revokeObjectUrl(imageUrlRef.current);
+        imageUrlRef.current = localUrl;
+        setCustomImageUrl(localUrl);
+        setCustomTone(localTone);
+        applyCustomBgDocumentState({ ...savedCustom, enabled: false }, false, localTone);
+        return;
+      }
+      setCustomTone(null);
+      applyCustomBgDocumentState({ ...savedCustom, enabled: false }, false, null);
     })();
-
     return () => {
       cancelled = true;
       revokeObjectUrl(imageUrlRef.current);
       imageUrlRef.current = null;
     };
   }, []);
-
   useEffect(() => {
     const applyPalette = () => {
       const palette = mode === 'auto' ? sitePaletteForLocalTime() : mode;
-
       document.documentElement.dataset.sitePalette = palette;
       document.documentElement.dataset.sitePaletteMode = mode;
       updateSiteFavicon(icons[palette]);
     };
-
     applyPalette();
-
     const intervalId = window.setInterval(applyPalette, 5 * 60 * 1000);
     return () => window.clearInterval(intervalId);
   }, [icons, mode]);
@@ -281,12 +560,10 @@ export function SitePalette({ icons }: SitePaletteProps) {
       document.documentElement.style.setProperty('--site-custom-bg-parallax', '0px');
       return;
     }
-
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       document.documentElement.style.setProperty('--site-custom-bg-parallax', '0px');
       return;
     }
-
     let frame = 0;
     const onScroll = () => {
       if (frame) return;
@@ -296,7 +573,6 @@ export function SitePalette({ icons }: SitePaletteProps) {
         document.documentElement.style.setProperty('--site-custom-bg-parallax', `${offset.toFixed(1)}px`);
       });
     };
-
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
@@ -308,21 +584,18 @@ export function SitePalette({ icons }: SitePaletteProps) {
 
   useEffect(() => {
     if (!expanded && !panelOpen) return;
-
     function onPointerDown(event: PointerEvent) {
       if (!rootRef.current?.contains(event.target as Node)) {
         setExpanded(false);
         setPanelOpen(false);
       }
     }
-
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
         setExpanded(false);
         setPanelOpen(false);
       }
     }
-
     document.addEventListener('pointerdown', onPointerDown);
     document.addEventListener('keydown', onKeyDown);
     return () => {
@@ -335,21 +608,16 @@ export function SitePalette({ icons }: SitePaletteProps) {
     setMode(nextMode);
     setExpanded(false);
     setPanelOpen(false);
-
-    // Solid / Auto themes own the page look: deactivate custom wallpaper so swatches
-    // take effect again. Keep the stored image so Custom can re-enable it later.
     if (customSettings.enabled) {
       const disabled = { ...customSettings, enabled: false };
       setCustomSettings(disabled);
       writeCustomBgSettings(disabled);
       applyCustomBgDocumentState(disabled, Boolean(customImageUrl), customTone);
     }
-
     if (nextMode === 'auto') {
       window.localStorage.removeItem(sitePaletteStorageKey);
       return;
     }
-
     window.localStorage.setItem(sitePaletteStorageKey, nextMode);
   };
 
@@ -358,28 +626,28 @@ export function SitePalette({ icons }: SitePaletteProps) {
     if (!next.enabled) {
       clearCustomBgSettings();
       writeCustomBgSettings({ ...next, enabled: false });
-      return;
+    } else if (publishShared && sharedMeta?.writable) {
+      writeCustomBgSettings({ ...next, enabled: false });
+      void publishSettingsToSite(next, customTone);
+    } else {
+      writeCustomBgSettings(next);
     }
-    writeCustomBgSettings(next);
   };
 
   const openCustomPanel = () => {
     setPanelOpen(true);
     setExpanded(true);
     setError(null);
-
-    // Re-entering Custom with a stored image restores the wallpaper without re-upload.
     if (customImageUrl && !customSettings.enabled) {
       const enabled = { ...customSettings, enabled: true };
       setCustomSettings(enabled);
-      writeCustomBgSettings(enabled);
+      if (!(publishShared && sharedMeta?.writable)) writeCustomBgSettings(enabled);
       applyCustomBgDocumentState(enabled, true, customTone);
     }
-
     window.setTimeout(() => {
       const root = rootRef.current;
       if (!root) return;
-      const focusable = root.querySelector<HTMLElement>('.site-custom-bg-action:not(:disabled), .site-custom-bg-panel select:not(:disabled), .site-custom-bg-panel input[type="range"]:not(:disabled)');
+      const focusable = root.querySelector<HTMLElement>('.site-custom-bg-action:not(:disabled), .site-custom-bg-panel select:not(:disabled), .site-custom-bg-panel input:not(:disabled)');
       focusable?.focus();
     }, 0);
   };
@@ -392,33 +660,66 @@ export function SitePalette({ icons }: SitePaletteProps) {
     }
     openCustomPanel();
   };
-
   const onFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     event.target.value = '';
     if (!file) return;
-
     setBusy(true);
     setError(null);
+    setScopeNote(null);
     try {
       const blob = await compressImageFile(file);
-      await saveCustomBgBlob(blob);
       const tone = toneFromLuminance(await estimateImageLuminance(blob));
+      const nextSettings: CustomBgSettings = {
+        ...customSettings,
+        enabled: true,
+        overlay: customSettings.enabled ? customSettings.overlay : DEFAULT_CUSTOM_BG_SETTINGS.overlay,
+        mode: customSettings.mode === 'depth' && !isDesktopPointer ? 'cover' : customSettings.mode
+      };
+      const shouldPublish = Boolean(publishShared && sharedMeta?.writable);
+      if (shouldPublish) {
+        if (!ownerPassword || ownerPassword.length < 8) {
+          setError(isChinese ? '请输入站长密码（至少 8 位）。' : 'Enter the owner password (at least 8 characters).');
+          return;
+        }
+        const body = new FormData();
+        body.set('password', ownerPassword);
+        const uploadMime = normalizeImageMimeType(blob.type, file.name) || blob.type || 'image/jpeg';
+        const uploadName = `wallpaper.${imageExtensionForMime(uploadMime)}`;
+        body.set('image', new File([blob], uploadName, { type: uploadMime }));
+        body.set('mode', nextSettings.mode);
+        body.set('overlay', String(nextSettings.overlay));
+        body.set('position', nextSettings.position);
+        body.set('tone', tone);
+        body.set('enabled', 'true');
+        const response = await fetch('/api/site-activity/wallpaper', { method: 'POST', credentials: 'same-origin', body });
+        if (!response.ok) {
+          setError(response.status === 401
+            ? (isChinese ? '密码不正确。' : 'Incorrect password.')
+            : (isChinese ? '无法发布全站背景。' : 'Could not publish the site background.'));
+          return;
+        }
+        const payload = (await response.json()) as SharedSiteBackgroundPublic;
+        setSharedMeta(payload);
+        await saveCustomBgBlob(blob);
+        writeCustomBgSettings({ ...nextSettings, enabled: false });
+        applySharedToUi(payload);
+        setScopeNote(isChinese ? '已对所有访客生效。' : 'Visible to every visitor.');
+        return;
+      }
+      await saveCustomBgBlob(blob);
       const url = URL.createObjectURL(blob);
       revokeObjectUrl(imageUrlRef.current);
       imageUrlRef.current = url;
       setCustomImageUrl(url);
       setCustomTone(tone);
-      persistCustom({
-        ...customSettings,
-        enabled: true,
-        // New upload / first enable uses the 40% default overlay.
-        overlay: customSettings.enabled ? customSettings.overlay : DEFAULT_CUSTOM_BG_SETTINGS.overlay,
-        mode: customSettings.mode === 'depth' && !isDesktopPointer ? 'cover' : customSettings.mode
-      });
+      persistCustom(nextSettings);
+      setScopeNote(isChinese ? '仅此设备。' : 'This device only.');
     } catch (cause) {
       const message = cause instanceof Error ? cause.message : 'Upload failed';
-      setError(message.includes('large') ? (isChinese ? '图片压缩后仍然过大，请换一张更小的图。' : 'Image is still too large after compression.') : (isChinese ? '无法使用这张图片，请换 JPEG / PNG / WebP。' : 'Could not use that image. Try JPEG, PNG, or WebP.'));
+      setError(message.includes('large')
+        ? (isChinese ? '图片压缩后仍然太大，请换一张更小的图。' : 'Image is still too large after compression.')
+        : (isChinese ? '无法使用这张图片，请换 JPEG / PNG / WebP。' : 'Could not use that image. Try JPEG, PNG, or WebP.'));
     } finally {
       setBusy(false);
     }
@@ -427,7 +728,29 @@ export function SitePalette({ icons }: SitePaletteProps) {
   const clearCustom = async () => {
     setBusy(true);
     setError(null);
+    setScopeNote(null);
     try {
+      const shouldClearShared = Boolean(publishShared && sharedMeta?.writable && sharedMeta.enabled);
+      if (shouldClearShared) {
+        if (!ownerPassword || ownerPassword.length < 8) {
+          setError(isChinese ? '请输入站长密码（至少 8 位）。' : 'Enter the owner password (at least 8 characters).');
+          return;
+        }
+        const response = await fetch('/api/site-activity/wallpaper', {
+          method: 'DELETE',
+          credentials: 'same-origin',
+          headers: { 'Content-Type': 'application/json' },
+          body: (() => { const payload: Record<string, string> = {}; payload['password'] = ownerPassword; return JSON.stringify(payload); })()
+        });
+        if (!response.ok) {
+          setError(response.status === 401
+            ? (isChinese ? '密码不正确。' : 'Incorrect password.')
+            : (isChinese ? '无法清除全站背景。' : 'Could not clear the site background.'));
+          return;
+        }
+        const payload = (await response.json()) as SharedSiteBackgroundPublic;
+        setSharedMeta(payload);
+      }
       await deleteCustomBgBlob();
       revokeObjectUrl(imageUrlRef.current);
       imageUrlRef.current = null;
@@ -435,6 +758,9 @@ export function SitePalette({ icons }: SitePaletteProps) {
       setCustomTone(null);
       persistCustom({ ...DEFAULT_CUSTOM_BG_SETTINGS, enabled: false });
       setPanelOpen(false);
+      setScopeNote(shouldClearShared
+        ? (isChinese ? '全站背景已清除。' : 'Site-wide background cleared.')
+        : (isChinese ? '已清除此设备上的背景。' : 'Cleared on this device.'));
     } catch {
       setError(isChinese ? '清除失败，请重试。' : 'Could not clear the background.');
     } finally {
@@ -444,7 +770,7 @@ export function SitePalette({ icons }: SitePaletteProps) {
 
   const customActive = Boolean(customSettings.enabled && customImageUrl);
   const layerStyle = {
-    backgroundImage: customImageUrl ? `url("${customImageUrl}")` : 'none'
+    backgroundImage: customImageUrl ? `url("${customImageUrl}")` : 'var(--site-custom-bg-image, none)'
   } as CSSProperties;
 
   const copy = {
@@ -457,11 +783,19 @@ export function SitePalette({ icons }: SitePaletteProps) {
     position: isChinese ? '焦点' : 'Focus',
     busy: isChinese ? '处理中…' : 'Working…',
     group: isChinese ? '站点配色与背景' : 'Site color theme and background',
-    uploadFailed: isChinese ? '无法使用这张图片，请换 JPEG / PNG / WebP。' : 'Could not use that image. Try JPEG, PNG, or WebP.',
-    tooLarge: isChinese ? '图片压缩后仍然过大，请换一张更小的图。' : 'Image is still too large after compression.',
-    clearFailed: isChinese ? '清除失败，请重试。' : 'Could not clear the background.'
+    password: isChinese ? '站长密码' : 'Owner password',
+    passwordHint: isChinese ? '输入后即可上传 / 更新全站背景' : 'Type here, then upload or adjust to publish',
+    scopeShared: isChinese ? '全站可见' : 'Everyone',
+    scopeLocal: isChinese ? '仅此设备' : 'This device',
+    scopeLabel: isChinese ? '范围' : 'Scope',
+    scopeHintLocal: isChinese
+      ? '本地预览：请输入任意至少 8 位密码后上传；图写入 public/site-wallpaper。生产环境会校验真实站长密码。'
+      : 'Local preview: enter any password (≥8 chars) to publish into public/site-wallpaper. Production verifies the real owner password.',
+    scopeHintPassword: isChinese ? '发布到全站时需要站长密码。' : 'Owner password required to publish site-wide.',
+    scopeHintMissing: isChinese
+      ? '当前环境未开放全站写入。生产需配置 Redis、站长密码哈希，以及 the Vercel Blob RW token env。'
+      : 'Shared writes are unavailable here. Production needs Redis, owner password hash, and the Vercel Blob RW token env.'
   };
-
   return (
     <>
       <div
@@ -483,7 +817,6 @@ export function SitePalette({ icons }: SitePaletteProps) {
           const pressed = mode === option.mode;
           const active = mode === option.mode;
           const style = { '--site-palette-swatch': option.color } as CSSProperties;
-
           return (
             <button
               aria-label={option.title}
@@ -498,7 +831,6 @@ export function SitePalette({ icons }: SitePaletteProps) {
                   setPanelOpen(false);
                   return;
                 }
-
                 chooseMode(option.mode);
               }}
               style={style}
@@ -509,7 +841,6 @@ export function SitePalette({ icons }: SitePaletteProps) {
             </button>
           );
         })}
-
         <button
           aria-controls={panelId}
           aria-expanded={panelOpen}
@@ -532,128 +863,89 @@ export function SitePalette({ icons }: SitePaletteProps) {
           </span>
         </button>
       </div>
-
       {panelOpen ? (
-        <div
-          className="site-custom-bg-panel"
-          id={panelId}
-          role="region"
-          aria-label={copy.custom}
-        >
+        <div className="site-custom-bg-panel" id={panelId} role="region" aria-label={copy.custom}>
           <div className="site-custom-bg-panel-head">
             <p className="site-custom-bg-panel-title">{copy.custom}</p>
+            {scopeNote ? <p className="site-custom-bg-panel-note">{scopeNote}</p> : null}
           </div>
-
-          <div className="site-custom-bg-panel-row">
-            <button
-              className="site-custom-bg-action"
-              disabled={busy}
-              onClick={() => fileInputRef.current?.click()}
-              type="button"
+          <label className="site-custom-bg-field">
+            <span className="site-custom-bg-field-label">{copy.scopeLabel}</span>
+            <select
+              disabled={busy || !(sharedMeta?.writable)}
+              onChange={(event) => setPublishShared(event.target.value === 'shared')}
+              value={publishShared && sharedMeta?.writable ? 'shared' : 'local'}
             >
+              <option value="shared">{copy.scopeShared}</option>
+              <option value="local">{copy.scopeLocal}</option>
+            </select>
+          </label>
+          {!sharedMeta?.writable ? (
+            <p className="site-custom-bg-panel-note">{copy.scopeHintMissing}</p>
+          ) : null}
+          {sharedMeta?.writable && publishShared ? (
+            <label className="site-custom-bg-field">
+              <span className="site-custom-bg-field-label">{copy.password}</span>
+              <input
+                autoComplete="current-password"
+                className="site-custom-bg-password"
+                disabled={busy}
+                onChange={(event) => {
+                  setOwnerPassword(event.target.value);
+                  setError(null);
+                }}
+                placeholder={copy.passwordHint}
+                type="password"
+                value={ownerPassword}
+              />
+            </label>
+          ) : null}
+          {sharedMeta?.writable && publishShared ? (
+            <p className="site-custom-bg-panel-note">
+              {copy[sharedMeta.passwordRequired ? 'scopeHintPassword' : 'scopeHintLocal']}
+            </p>
+          ) : null}
+          <div className="site-custom-bg-panel-row">
+            <button className="site-custom-bg-action" disabled={busy} onClick={() => fileInputRef.current?.click()} type="button">
               {busy ? copy.busy : (customImageUrl ? copy.change : copy.upload)}
             </button>
             {customImageUrl ? (
-              <button
-                className="site-custom-bg-action site-custom-bg-action-muted"
-                disabled={busy}
-                onClick={() => void clearCustom()}
-                type="button"
-              >
-                {copy.clear}
-              </button>
+              <button className="site-custom-bg-action site-custom-bg-action-muted" disabled={busy} onClick={() => void clearCustom()} type="button">{copy.clear}</button>
             ) : null}
           </div>
-
-          <input
-            accept="image/jpeg,image/png,image/webp,image/gif"
-            className="sr-only"
-            onChange={(event) => void onFileChange(event)}
-            ref={fileInputRef}
-            type="file"
-          />
-
-          {customImageUrl ? (
-            <div
-              aria-hidden="true"
-              className="site-custom-bg-thumb"
-              style={{ backgroundImage: `url("${customImageUrl}")` }}
-            />
-          ) : null}
-
+          <input accept="image/jpeg,image/png,image/webp,image/gif" className="sr-only" onChange={(event) => void onFileChange(event)} ref={fileInputRef} type="file" />
+          {customImageUrl ? <div aria-hidden="true" className="site-custom-bg-thumb" style={{ backgroundImage: `url("${customImageUrl}")` }} /> : null}
           {customImageUrl ? (
             <div className="site-custom-bg-controls">
-          <label className="site-custom-bg-field">
-            <span className="site-custom-bg-field-label">{copy.mode}</span>
-            <select
-              disabled={busy || !customImageUrl}
-              onChange={(event) => {
-                const nextMode = event.target.value as CustomBgMode;
-                if (nextMode === 'depth' && !isDesktopPointer) {
-                  persistCustom({ ...customSettings, enabled: true, mode: 'cover' });
-                  return;
-                }
-                persistCustom({ ...customSettings, enabled: Boolean(customImageUrl), mode: nextMode });
-              }}
-              value={customSettings.mode}
-            >
-              {customBgModeOptions.map((option) => (
-                <option
-                  disabled={option.mode === 'depth' && !isDesktopPointer}
-                  key={option.mode}
-                  value={option.mode}
-                >
-                  {isChinese ? option.zh : option.en}
-                </option>
-              ))}
-            </select>
-          </label>
-
-          <label className="site-custom-bg-field">
-            <span className="site-custom-bg-field-label">
-              {copy.overlay}
-              <span className="site-custom-bg-field-value">{customSettings.overlay}%</span>
-            </span>
-            <input
-              disabled={busy || !customImageUrl}
-              max={100}
-              min={0}
-              onChange={(event) => {
-                persistCustom({
-                  ...customSettings,
-                  enabled: Boolean(customImageUrl),
-                  overlay: Number(event.target.value)
-                });
-              }}
-              type="range"
-              value={customSettings.overlay}
-            />
-          </label>
-
-          <label className="site-custom-bg-field">
-            <span className="site-custom-bg-field-label">{copy.position}</span>
-            <select
-              disabled={busy || !customImageUrl || customSettings.mode === 'tile'}
-              onChange={(event) => {
-                persistCustom({
-                  ...customSettings,
-                  enabled: Boolean(customImageUrl),
-                  position: event.target.value as CustomBgPosition
-                });
-              }}
-              value={customSettings.position}
-            >
-              {customBgPositionOptions.map((option) => (
-                <option key={option.position} value={option.position}>
-                  {isChinese ? option.zh : option.en}
-                </option>
-              ))}
-            </select>
-          </label>
-
+              <label className="site-custom-bg-field">
+                <span className="site-custom-bg-field-label">{copy.mode}</span>
+                <select disabled={busy || !customImageUrl} onChange={(event) => {
+                  const nextMode = event.target.value as CustomBgMode;
+                  if (nextMode === 'depth' && !isDesktopPointer) {
+                    persistCustom({ ...customSettings, enabled: true, mode: 'cover' });
+                    return;
+                  }
+                  persistCustom({ ...customSettings, enabled: Boolean(customImageUrl), mode: nextMode });
+                }} value={customSettings.mode}>
+                  {customBgModeOptions.map((option) => (
+                    <option disabled={option.mode === 'depth' && !isDesktopPointer} key={option.mode} value={option.mode}>{isChinese ? option.zh : option.en}</option>
+                  ))}
+                </select>
+              </label>
+              <label className="site-custom-bg-field">
+                <span className="site-custom-bg-field-label">{copy.overlay}<span className="site-custom-bg-field-value">{customSettings.overlay}%</span></span>
+                <input disabled={busy || !customImageUrl} max={100} min={0} onChange={(event) => persistCustom({ ...customSettings, enabled: Boolean(customImageUrl), overlay: Number(event.target.value) })} type="range" value={customSettings.overlay} />
+              </label>
+              <label className="site-custom-bg-field">
+                <span className="site-custom-bg-field-label">{copy.position}</span>
+                <select disabled={busy || !customImageUrl || customSettings.mode === 'tile'} onChange={(event) => persistCustom({ ...customSettings, enabled: Boolean(customImageUrl), position: event.target.value as CustomBgPosition })} value={customSettings.position}>
+                  {customBgPositionOptions.map((option) => (
+                    <option key={option.position} value={option.position}>{isChinese ? option.zh : option.en}</option>
+                  ))}
+                </select>
+              </label>
             </div>
           ) : null}
-
           {error ? <p className="site-custom-bg-error" role="alert">{error}</p> : null}
         </div>
       ) : null}
