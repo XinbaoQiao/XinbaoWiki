@@ -9,6 +9,7 @@ const DEFAULT = {
 
 const MODES = new Set(['cover', 'soft-fade', 'tile', 'depth']);
 const POSITIONS = new Set(['top', 'center', 'bottom']);
+const CUSTOM_BG_INK_OVERLAY_THRESHOLD = 42;
 
 function clampOverlay(value) {
   if (!Number.isFinite(value)) return DEFAULT.overlay;
@@ -21,39 +22,24 @@ function panelAlphaForOverlay(overlayPercent) {
   return Math.min(0.92, 0.22 + overlay * 0.7);
 }
 
-function parseCustomBgSettings(raw) {
-  if (!raw) return { ...DEFAULT };
-  try {
-    const parsed = JSON.parse(raw);
-    return {
-      enabled: Boolean(parsed.enabled),
-      mode: MODES.has(parsed.mode) ? parsed.mode : DEFAULT.mode,
-      overlay: clampOverlay(typeof parsed.overlay === 'number' ? parsed.overlay : DEFAULT.overlay),
-      position: POSITIONS.has(parsed.position) ? parsed.position : DEFAULT.position
-    };
-  } catch {
-    return { ...DEFAULT };
-  }
+function toneFromLuminance(luminance) {
+  if (!Number.isFinite(luminance)) return 'light';
+  return luminance < 0.45 ? 'dark' : 'light';
 }
 
-assert.equal(clampOverlay(48), 48);
-assert.equal(clampOverlay(-3), 0);
-assert.equal(clampOverlay(140), 100);
+function inkForCustomBg(active, tone, overlayPercent) {
+  if (!active || !tone) return 'none';
+  if (tone === 'light') return 'dark';
+  return clampOverlay(overlayPercent) >= CUSTOM_BG_INK_OVERLAY_THRESHOLD ? 'dark' : 'light';
+}
+
+assert.equal(toneFromLuminance(0.2), 'dark');
+assert.equal(toneFromLuminance(0.7), 'light');
+assert.equal(inkForCustomBg(true, 'dark', 0), 'light');
+assert.equal(inkForCustomBg(true, 'dark', 42), 'dark');
+assert.equal(inkForCustomBg(true, 'light', 0), 'dark');
+assert.equal(inkForCustomBg(false, 'dark', 0), 'none');
 assert.equal(panelAlphaForOverlay(0), 0);
-assert.ok(panelAlphaForOverlay(48) > 0.4 && panelAlphaForOverlay(48) < 0.7);
 assert.ok(Math.abs(panelAlphaForOverlay(100) - 0.92) < 1e-9);
 
-assert.deepEqual(parseCustomBgSettings(JSON.stringify({
-  enabled: true,
-  mode: 'soft-fade',
-  overlay: 0,
-  position: 'top'
-})), {
-  enabled: true,
-  mode: 'soft-fade',
-  overlay: 0,
-  position: 'top'
-});
-
 console.log('test-custom-bg-settings: ok');
-

@@ -8,14 +8,17 @@ import {
   compressImageFile,
   DEFAULT_CUSTOM_BG_SETTINGS,
   deleteCustomBgBlob,
+  estimateImageLuminance,
   loadCustomBgBlob,
   readCustomBgSettings,
   revokeObjectUrl,
   saveCustomBgBlob,
+  toneFromLuminance,
   writeCustomBgSettings,
   type CustomBgMode,
   type CustomBgPosition,
-  type CustomBgSettings
+  type CustomBgSettings,
+  type CustomBgTone
 } from '@/lib/site-custom-background';
 import type { CSSProperties, ChangeEvent } from 'react';
 import { useEffect, useId, useRef, useState } from 'react';
@@ -179,6 +182,7 @@ export function SitePalette({ icons }: SitePaletteProps) {
   const [expanded, setExpanded] = useState(false);
   const [customSettings, setCustomSettings] = useState<CustomBgSettings>(DEFAULT_CUSTOM_BG_SETTINGS);
   const [customImageUrl, setCustomImageUrl] = useState<string | null>(null);
+  const [customTone, setCustomTone] = useState<CustomBgTone | null>(null);
   const [panelOpen, setPanelOpen] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -205,17 +209,25 @@ export function SitePalette({ icons }: SitePaletteProps) {
         const blob = await loadCustomBgBlob();
         if (cancelled) return;
         if (!blob) {
-          applyCustomBgDocumentState({ ...savedCustom, enabled: false }, false);
+          setCustomTone(null);
+          applyCustomBgDocumentState({ ...savedCustom, enabled: false }, false, null);
           return;
         }
         const url = URL.createObjectURL(blob);
+        const tone = toneFromLuminance(await estimateImageLuminance(blob));
+        if (cancelled) {
+          revokeObjectUrl(url);
+          return;
+        }
         revokeObjectUrl(imageUrlRef.current);
         imageUrlRef.current = url;
         setCustomImageUrl(url);
-        applyCustomBgDocumentState(savedCustom, true);
+        setCustomTone(tone);
+        applyCustomBgDocumentState(savedCustom, true, tone);
       } catch {
         if (!cancelled) {
-          applyCustomBgDocumentState({ ...savedCustom, enabled: false }, false);
+          setCustomTone(null);
+          applyCustomBgDocumentState({ ...savedCustom, enabled: false }, false, null);
         }
       }
     })();
@@ -243,8 +255,8 @@ export function SitePalette({ icons }: SitePaletteProps) {
   }, [icons, mode]);
 
   useEffect(() => {
-    applyCustomBgDocumentState(customSettings, Boolean(customImageUrl));
-  }, [customSettings, customImageUrl]);
+    applyCustomBgDocumentState(customSettings, Boolean(customImageUrl), customTone);
+  }, [customSettings, customImageUrl, customTone]);
 
   useEffect(() => {
     const media = window.matchMedia('(hover: hover) and (pointer: fine)');
@@ -320,7 +332,7 @@ export function SitePalette({ icons }: SitePaletteProps) {
       const disabled = { ...customSettings, enabled: false };
       setCustomSettings(disabled);
       writeCustomBgSettings(disabled);
-      applyCustomBgDocumentState(disabled, Boolean(customImageUrl));
+      applyCustomBgDocumentState(disabled, Boolean(customImageUrl), customTone);
     }
 
     if (nextMode === 'auto') {
@@ -351,7 +363,7 @@ export function SitePalette({ icons }: SitePaletteProps) {
       const enabled = { ...customSettings, enabled: true };
       setCustomSettings(enabled);
       writeCustomBgSettings(enabled);
-      applyCustomBgDocumentState(enabled, true);
+      applyCustomBgDocumentState(enabled, true, customTone);
     }
   };
 
@@ -374,10 +386,12 @@ export function SitePalette({ icons }: SitePaletteProps) {
     try {
       const blob = await compressImageFile(file);
       await saveCustomBgBlob(blob);
+      const tone = toneFromLuminance(await estimateImageLuminance(blob));
       const url = URL.createObjectURL(blob);
       revokeObjectUrl(imageUrlRef.current);
       imageUrlRef.current = url;
       setCustomImageUrl(url);
+      setCustomTone(tone);
       persistCustom({
         ...customSettings,
         enabled: true,
@@ -401,6 +415,7 @@ export function SitePalette({ icons }: SitePaletteProps) {
       revokeObjectUrl(imageUrlRef.current);
       imageUrlRef.current = null;
       setCustomImageUrl(null);
+      setCustomTone(null);
       persistCustom({ ...DEFAULT_CUSTOM_BG_SETTINGS, enabled: false });
       setPanelOpen(false);
     } catch {
@@ -424,8 +439,8 @@ export function SitePalette({ icons }: SitePaletteProps) {
     overlay: isChinese ? '遮罩强度' : 'Overlay strength',
     position: isChinese ? '焦点位置' : 'Focus position',
     hint: isChinese
-      ? '图片只保存在本机。遮罩 0% 时壁纸完全清晰；需要读正文时再提高遮罩。'
-      : 'Images stay on this device. At 0% overlay the wallpaper is fully clear; raise overlay for reading contrast.',
+      ? '图片只保存在本机。深色壁纸在低遮罩时会自动换成浅色正文；提高遮罩后恢复常规深色文字。'
+      : 'Images stay on this device. Dark wallpapers switch to light text at low overlay; raise overlay to restore normal dark text.',
     depthNote: isChinese
       ? '固定景深受桌面指针设备支持；手机自动回退为铺满。'
       : 'Fixed depth is desktop-only; phones fall back to cover.',
