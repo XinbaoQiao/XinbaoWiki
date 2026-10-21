@@ -146,19 +146,29 @@ function prefersCoarsePalettePointer() {
     && window.matchMedia('(hover: none), (pointer: coarse)').matches;
 }
 
+function readChromeChinese(pathname: string): boolean {
+  const decoded = decodeURIComponent(pathname || '');
+  if (decoded.split('/').includes('wiki')) {
+    return isChineseSlug(activeSlug(pathname));
+  }
+  // Homepage / non-wiki chrome follows documentElement.lang, which
+  // HomepagePortal and LanguageToggle keep in sync with the EN/中文 control.
+  const lang = typeof document !== 'undefined' ? document.documentElement.lang : '';
+  return lang === 'zh-CN' || lang.toLowerCase().startsWith('zh');
+}
+
 function useChromeChinese(): boolean {
   const pathname = usePathname() || '';
   const [isChinese, setIsChinese] = useState(false);
 
   useEffect(() => {
-    const fromPath = (() => {
-      const decoded = decodeURIComponent(pathname);
-      if (decoded.split('/').includes('wiki')) {
-        return isChineseSlug(activeSlug(pathname));
-      }
-      return document.documentElement.lang === 'zh-CN';
-    })();
-    setIsChinese(fromPath);
+    const sync = () => setIsChinese(readChromeChinese(pathname));
+    sync();
+
+    const root = document.documentElement;
+    const observer = new MutationObserver(sync);
+    observer.observe(root, { attributes: true, attributeFilter: ['lang'] });
+    return () => observer.disconnect();
   }, [pathname]);
 
   return isChinese;
@@ -166,9 +176,9 @@ function useChromeChinese(): boolean {
 
 const customBgModeOptions: Array<{ mode: CustomBgMode; en: string; zh: string }> = [
   { mode: 'cover', en: 'Cover', zh: '铺满' },
-  { mode: 'soft-fade', en: 'Soft fade', zh: '柔和淡出' },
+  { mode: 'soft-fade', en: 'Soft fade', zh: '淡出' },
   { mode: 'tile', en: 'Tile', zh: '平铺' },
-  { mode: 'depth', en: 'Depth (desktop)', zh: '景深（桌面）' }
+  { mode: 'depth', en: 'Depth', zh: '景深' }
 ];
 
 const customBgPositionOptions: Array<{ position: CustomBgPosition; en: string; zh: string }> = [
@@ -406,9 +416,7 @@ export function SitePalette({ icons }: SitePaletteProps) {
       });
     } catch (cause) {
       const message = cause instanceof Error ? cause.message : 'Upload failed';
-      setError(isChinese
-        ? (message.includes('large') ? '图片压缩后仍然过大，请换一张更小的图。' : '无法使用这张图片，请换 JPEG / PNG / WebP。')
-        : (message.includes('large') ? 'Image is still too large after compression.' : 'Could not use that image. Try JPEG, PNG, or WebP.'));
+      setError(message.includes('large') ? (isChinese ? '图片压缩后仍然过大，请换一张更小的图。' : 'Image is still too large after compression.') : (isChinese ? '无法使用这张图片，请换 JPEG / PNG / WebP。' : 'Could not use that image. Try JPEG, PNG, or WebP.'));
     } finally {
       setBusy(false);
     }
@@ -441,14 +449,16 @@ export function SitePalette({ icons }: SitePaletteProps) {
     custom: isChinese ? '自定义背景' : 'Custom background',
     upload: isChinese ? '上传图片' : 'Upload image',
     change: isChinese ? '更换图片' : 'Change image',
-    clear: isChinese ? '清除自定义' : 'Clear custom',
-    mode: isChinese ? '适配方式' : 'Fit mode',
-    overlay: isChinese ? '遮罩强度' : 'Overlay strength',
-    position: isChinese ? '焦点位置' : 'Focus position',
-    depthNote: isChinese
-      ? '桌面可用'
-      : 'Desktop only',
-    busy: isChinese ? '处理中…' : 'Working…'
+    clear: isChinese ? '清除' : 'Clear',
+    mode: isChinese ? '适配' : 'Fit',
+    overlay: isChinese ? '遮罩' : 'Overlay',
+    position: isChinese ? '焦点' : 'Focus',
+    depthNote: isChinese ? '仅桌面' : 'Desktop only',
+    busy: isChinese ? '处理中…' : 'Working…',
+    group: isChinese ? '站点配色与背景' : 'Site color theme and background',
+    uploadFailed: isChinese ? '无法使用这张图片，请换 JPEG / PNG / WebP。' : 'Could not use that image. Try JPEG, PNG, or WebP.',
+    tooLarge: isChinese ? '图片压缩后仍然过大，请换一张更小的图。' : 'Image is still too large after compression.',
+    clearFailed: isChinese ? '清除失败，请重试。' : 'Could not clear the background.'
   };
 
   return (
@@ -464,7 +474,7 @@ export function SitePalette({ icons }: SitePaletteProps) {
       >
       <div
         aria-expanded={expanded || panelOpen}
-        aria-label={isChinese ? '站点配色与背景' : 'Site color theme and background'}
+        aria-label={copy.group}
         className={['site-palette-switcher', (expanded || panelOpen) ? 'is-expanded' : ''].filter(Boolean).join(' ')}
         role="group"
       >
