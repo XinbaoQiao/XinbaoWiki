@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 3,
+  "okfVersion": "0.1",
+  "profile": {
+    "id": "mywiki-okf-profile",
+    "version": "1.0",
+    "base": "Google Cloud Open Knowledge Format v0.1 draft"
+  },
+  "name": "MyWiki public knowledge bundle",
+  "description": "Public, agent-readable OKF export of Your Name academic wiki content.",
+  "source": {
+    "directory": "wiki",
+    "files": 35,
+    "contentHash": "a2605a946729f80fed4a0002ffb58ebb964e45848d5ac7e4478c8ed602ccb853",
+    "hashAlgorithm": "sha256"
+  },
+  "bundle": {
+    "root": "public/okf",
+    "concepts": "concepts/*.md",
+    "hiddenPagesExcluded": 1,
+    "publicPages": 34,
+    "sources": 3,
+    "sourceRegistry": "sources.json"
+  },
+  "maintenance": {
+    "command": "npm run maintain:wiki",
+    "check": "npm run lint:content",
+    "schema": "schema.json",
+    "graph": "graph.json",
+    "pages": "pages.json",
+    "sources": "sources.json",
+    "qualityReport": "quality-report.json",
+    "reviewAsOf": "2026-10-19"
+  }
+}

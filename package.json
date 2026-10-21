@@ -1,0 +1,70 @@
+{
+  "name": "llm-wiki-homepage-template",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Template: a bilingual, searchable academic homepage built as an LLM Wiki, with page-grounded AI answers.",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "setup:node22": "node scripts/bootstrap-node22.mjs",
+    "dev": "node scripts/run-with-node22.mjs next dev",
+    "start": "node scripts/run-with-node22.mjs next start",
+    "build": "node scripts/run-with-node22.mjs next build",
+    "export": "npm run build",
+    "lint:wiki": "node scripts/lint-wikilinks.mjs",
+    "lint:okf": "node scripts/okf-conformance.mjs",
+    "lint:content": "node scripts/wiki-maintenance.mjs --check",
+    "generate:site-activity-map": "node scripts/run-with-node22.mjs node scripts/generate-site-activity-map.mjs",
+    "maintain:wiki": "node scripts/run-with-node22.mjs node scripts/wiki-maintenance.mjs --standardize --write",
+    "new:wiki": "node scripts/new-wiki-page.mjs",
+    "test:cube-geometry": "node scripts/run-with-node22.mjs playwright test tests/browser/cube-geometry.spec.mjs",
+    "test:site-activity": "node scripts/run-with-node22.mjs playwright test tests/browser/site-activity.spec.mjs",
+    "typecheck": "node scripts/prepare-typecheck.mjs && tsc --noEmit",
+    "check": "node scripts/run-with-node22.mjs npm run check:node22",
+    "check:node22": "npm run typecheck && npm run lint:wiki && npm run lint:content && npm run lint:okf && npm run test:features",
+    "test:features": "node scripts/test-chat-hardening.mjs && node scripts/test-site-activity.mjs && node scripts/test-site-activity-daily.mjs && node scripts/test-site-activity-events.mjs && node scripts/test-wiki-outline.mjs"
+  },
+  "dependencies": {
+    "@upstash/redis": "^1.38.0",
+    "gray-matter": "^4.0.3",
+    "katex": "^0.16.45",
+    "next": "15.5.27",
+    "next-view-transitions": "^0.3.5",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "react-markdown": "^10.0.0",
+    "rehype-katex": "^7.0.1",
+    "remark-gfm": "^4.0.0",
+    "remark-math": "^6.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.0.0"
+  },
+  "overrides": {
+    "js-yaml": "3.15.2",
+    "postcss": "^8.5.23"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/your-wiki.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/your-wiki/issues"
+  },
+  "keywords": [
+    "academic-wiki",
+    "bilingual",
+    "knowledge-graph",
+    "llm",
+    "nextjs",
+    "rag",
+    "typescript"
+  ]
+}

@@ -1,0 +1,230 @@
+'use client';
+
+import { WikiLink } from '@/components/WikiLink';
+import { clearWikiMorphIntent } from '@/lib/wiki-view-transition';
+import type { CSSProperties } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
+
+function withBasePath(pathname: string) {
+  const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
+  return basePath ? `${basePath}${pathname}` : pathname;
+}
+
+function activeSlug(pathname: string) {
+  const decoded = decodeURIComponent(pathname);
+  const parts = decoded.replace(/\/+$/, '').split('/').filter(Boolean);
+  const wikiIndex = parts.lastIndexOf('wiki');
+  return wikiIndex >= 0 && parts[wikiIndex + 1] ? parts[wikiIndex + 1] : 'Your_Name';
+}
+
+function isChineseSlug(slug: string) {
+  return slug === 'Your_Name_zh' || slug.endsWith('_zh');
+}
+
+function chineseSlug(slug: string) {
+  if (slug === 'Your_Name') return 'Your_Name_zh';
+  if (isChineseSlug(slug)) return slug;
+  return `${slug}_zh`;
+}
+
+function englishSlug(slug: string) {
+  if (slug === 'Your_Name_zh') return 'Your_Name';
+  return slug.endsWith('_zh') ? slug.slice(0, -3) : slug;
+}
+
+export function LanguageToggle() {
+  const pathname = usePathname() || '';
+  const isWikiPage = decodeURIComponent(pathname).split('/').includes('wiki');
+  const slug = activeSlug(pathname);
+  const isChinesePage = isChineseSlug(slug);
+
+  useEffect(() => {
+    document.documentElement.lang = isWikiPage && isChinesePage ? 'zh-CN' : 'en';
+  }, [isChinesePage, isWikiPage]);
+
+  if (!isWikiPage) return null;
+
+  const targetSlug = isChinesePage ? englishSlug(slug) : chineseSlug(slug);
+  const href = `/wiki/${encodeURIComponent(targetSlug)}/`;
+  const accessibleLabel = isChinesePage ? 'Switch to English' : '切换至中文';
+
+  return (
+    <WikiLink
+      aria-label={accessibleLabel}
+      className="lang-toggle"
+      href={withBasePath(href)}
+      title={accessibleLabel}
+      onClick={() => clearWikiMorphIntent()}
+    >
+      {isChinesePage ? 'English' : '中文'}
+    </WikiLink>
+  );
+}
+type SitePaletteName = 'text' | 'blue' | 'gold' | 'rose' | 'green' | 'violet' | 'charcoal';
+type SitePaletteMode = SitePaletteName | 'auto';
+
+type SitePaletteOption = {
+  color: string;
+  mode: SitePaletteMode;
+  title: string;
+};
+
+type SitePaletteProps = {
+  icons: Record<SitePaletteName, string>;
+};
+
+const sitePaletteStorageKey = 'mywiki-palette-mode';
+
+const sitePaletteOptions: SitePaletteOption[] = [
+  { color: '#ffffff', mode: 'text', title: 'Pure white text theme' },
+  { color: '#2b5f94', mode: 'blue', title: 'Morning blue theme' },
+  { color: '#b8871b', mode: 'gold', title: 'Midday gold theme' },
+  { color: '#a44962', mode: 'rose', title: 'Scholar rose theme' },
+  { color: '#2a7f62', mode: 'green', title: 'Evening green theme' },
+  { color: '#70518f', mode: 'violet', title: 'Archive violet theme' },
+  { color: '#2f3437', mode: 'charcoal', title: 'Night charcoal theme' },
+  { color: '#36c', mode: 'auto', title: 'Auto theme by local time' }
+];
+
+function isSitePaletteMode(value: string | null): value is SitePaletteMode {
+  return value === 'auto' || value === 'text' || value === 'blue' || value === 'gold' || value === 'rose' || value === 'green' || value === 'violet' || value === 'charcoal';
+}
+
+function sitePaletteForLocalTime(date = new Date()): Exclude<SitePaletteName, 'text'> {
+  const hour = date.getHours();
+
+  if (hour >= 5 && hour < 9) return 'blue';
+  if (hour >= 9 && hour < 13) return 'gold';
+  if (hour >= 13 && hour < 16) return 'rose';
+  if (hour >= 16 && hour < 19) return 'green';
+  if (hour >= 19 && hour < 22) return 'violet';
+  return 'charcoal';
+}
+
+function updateSiteFavicon(href: string) {
+  const selector = 'link[data-site-favicon="true"]';
+  let link = document.querySelector<HTMLLinkElement>(selector);
+
+  if (!link) {
+    link = document.querySelector<HTMLLinkElement>('link[rel~="icon"]');
+  }
+
+  if (!link) {
+    link = document.createElement('link');
+    document.head.appendChild(link);
+  }
+
+  link.dataset.siteFavicon = 'true';
+  link.rel = 'icon';
+  link.type = 'image/png';
+  link.sizes = '512x512';
+  link.href = href;
+}
+
+function prefersCoarsePalettePointer() {
+  return typeof window !== 'undefined'
+    && window.matchMedia('(hover: none), (pointer: coarse)').matches;
+}
+
+export function SitePalette({ icons }: SitePaletteProps) {
+  const [mode, setMode] = useState<SitePaletteMode>('auto');
+  const [expanded, setExpanded] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const savedMode = window.localStorage.getItem(sitePaletteStorageKey);
+
+    if (isSitePaletteMode(savedMode)) {
+      setMode(savedMode);
+    }
+  }, []);
+
+  useEffect(() => {
+    const applyPalette = () => {
+      const palette = mode === 'auto' ? sitePaletteForLocalTime() : mode;
+
+      document.documentElement.dataset.sitePalette = palette;
+      document.documentElement.dataset.sitePaletteMode = mode;
+      updateSiteFavicon(icons[palette]);
+    };
+
+    applyPalette();
+
+    const intervalId = window.setInterval(applyPalette, 5 * 60 * 1000);
+    return () => window.clearInterval(intervalId);
+  }, [icons, mode]);
+
+  useEffect(() => {
+    if (!expanded) return;
+
+    function onPointerDown(event: PointerEvent) {
+      if (!rootRef.current?.contains(event.target as Node)) {
+        setExpanded(false);
+      }
+    }
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') setExpanded(false);
+    }
+
+    document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [expanded]);
+
+  const chooseMode = (nextMode: SitePaletteMode) => {
+    setMode(nextMode);
+    setExpanded(false);
+
+    if (nextMode === 'auto') {
+      window.localStorage.removeItem(sitePaletteStorageKey);
+      return;
+    }
+
+    window.localStorage.setItem(sitePaletteStorageKey, nextMode);
+  };
+
+  return (
+    <div
+      ref={rootRef}
+      aria-expanded={expanded}
+      aria-label="Site color theme"
+      className={['site-palette-switcher', expanded ? 'is-expanded' : ''].filter(Boolean).join(' ')}
+      role="group"
+    >
+      {sitePaletteOptions.map((option) => {
+        const pressed = mode === option.mode;
+        const active = mode === option.mode;
+        const style = { '--site-palette-swatch': option.color } as CSSProperties;
+
+        return (
+          <button
+            aria-label={option.title}
+            aria-pressed={pressed}
+            className={['site-palette-button', active ? 'is-active' : '', option.mode === 'text' ? 'site-palette-text' : '', option.mode === 'auto' ? 'site-palette-auto' : '']
+              .filter(Boolean)
+              .join(' ')}
+            key={option.mode}
+            onClick={() => {
+              if (active && prefersCoarsePalettePointer()) {
+                setExpanded((current) => !current);
+                return;
+              }
+
+              chooseMode(option.mode);
+            }}
+            style={style}
+            title={option.title}
+            type="button"
+          >
+            <span className="sr-only">{option.title}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}

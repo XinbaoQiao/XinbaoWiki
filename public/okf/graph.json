@@ -1,0 +1,3727 @@
+{
+  "schemaVersion": 4,
+  "okfVersion": "0.1",
+  "nodes": [
+    {
+      "aliases": [],
+      "citationSourceIds": [
+        "src-5627303e2b401dcc"
+      ],
+      "contentHash": "sha256:1e6a6ec5da3a4479bf39138fdfe550a5866dfe48a210319ed0c610d7457cb162",
+      "file": "CV.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:00.154Z",
+      "outgoing": [
+        "Example_Lab",
+        "Example_Paper",
+        "Example_University",
+        "Research_Area_1",
+        "Research_Area_2",
+        "Research_Area_3"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "CV",
+      "sourceIds": [
+        "src-5627303e2b401dcc"
+      ],
+      "summary": "Academic CV summary (template sample).",
+      "tags": [
+        "en",
+        "cv",
+        "profile"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "Curriculum Vitae",
+      "type": "CV summary",
+      "reviewedAt": "2026-10-21T06:35:02.000Z",
+      "reviewDue": "2027-01-19",
+      "retrieval": {
+        "documentId": "wiki:CV",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:1e6a6ec5da3a4479bf39138fdfe550a5866dfe48a210319ed0c610d7457cb162",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "index",
+        "Your_Name"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [
+        "src-5627303e2b401dcc"
+      ],
+      "contentHash": "sha256:170d970bcfc9c97e1bc2da2b9302a41330bb2370508474c2430b4b93b16f8db0",
+      "file": "CV_zh.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:00.151Z",
+      "outgoing": [
+        "Example_Lab_zh",
+        "Example_Paper_zh",
+        "Example_University_zh",
+        "Research_Area_1_zh",
+        "Research_Area_2_zh",
+        "Research_Area_3_zh"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "CV_zh",
+      "sourceIds": [
+        "src-5627303e2b401dcc"
+      ],
+      "summary": "学术简历摘要（模板示例）。",
+      "tags": [
+        "zh",
+        "cv",
+        "profile"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "简历",
+      "type": "CV 摘要",
+      "reviewedAt": "2026-10-21T06:35:02.000Z",
+      "reviewDue": "2027-01-19",
+      "retrieval": {
+        "documentId": "wiki:CV_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:170d970bcfc9c97e1bc2da2b9302a41330bb2370508474c2430b4b93b16f8db0",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "index_zh",
+        "Your_Name_zh"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:6736c7840dcdeeb92f5ce6bae256913c773dcd999a65d06d5134272b78a9b6f5",
+      "file": "Education.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-20T17:43:05.000Z",
+        "reviewDue": "2027-04-18",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-20T17:43:03.220Z",
+      "outgoing": [
+        "Example_Advisor",
+        "Example_University"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Education",
+      "sourceIds": [],
+      "summary": "Education timeline (template sample).",
+      "tags": [
+        "en",
+        "education",
+        "profile"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "Education",
+      "type": "Education timeline",
+      "reviewedAt": "2026-10-20T17:43:05.000Z",
+      "reviewDue": "2027-04-18",
+      "retrieval": {
+        "documentId": "wiki:Education",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:6736c7840dcdeeb92f5ce6bae256913c773dcd999a65d06d5134272b78a9b6f5",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "index",
+        "Your_Name"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:df6ac2e41d46e5d43ff2765cc697fd5ac0891c015316d8603524f31b955ab26f",
+      "file": "Education_zh.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-20T19:58:23.000Z",
+        "reviewDue": "2027-04-18",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-20T19:58:21.544Z",
+      "outgoing": [
+        "Example_Advisor_zh",
+        "Example_University_zh"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Education_zh",
+      "sourceIds": [],
+      "summary": "教育时间线（模板示例）。",
+      "tags": [
+        "zh",
+        "education",
+        "profile"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "教育经历",
+      "type": "教育时间线",
+      "reviewedAt": "2026-10-20T19:58:23.000Z",
+      "reviewDue": "2027-04-18",
+      "retrieval": {
+        "documentId": "wiki:Education_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:df6ac2e41d46e5d43ff2765cc697fd5ac0891c015316d8603524f31b955ab26f",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "index_zh",
+        "Your_Name_zh"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:7e7490c58612c8050cbe1f4c3a0c7cbd22987580c0853bac7839c61fc98a9935",
+      "file": "Example_Advisor.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-20T17:43:05.000Z",
+        "reviewDue": "2027-04-18",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-20T17:43:03.225Z",
+      "outgoing": [
+        "Example_University",
+        "Your_Name"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Example_Advisor",
+      "sourceIds": [
+        "src-0f115db062b7c0dd"
+      ],
+      "summary": "Sample advisor page.",
+      "tags": [
+        "en",
+        "person",
+        "advisor"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "Example Advisor",
+      "type": "Academic advisor",
+      "reviewedAt": "2026-10-20T17:43:05.000Z",
+      "reviewDue": "2027-04-18",
+      "retrieval": {
+        "documentId": "wiki:Example_Advisor",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:7e7490c58612c8050cbe1f4c3a0c7cbd22987580c0853bac7839c61fc98a9935",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "Education",
+        "Example_Paper",
+        "Example_University",
+        "index",
+        "Publications",
+        "Your_Name"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:e67022bfe27e8932169c288b1bd1a76cdec4ae67be99c2c217957fead5c51611",
+      "file": "Example_Advisor_zh.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-20T19:58:23.000Z",
+        "reviewDue": "2027-04-18",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-20T19:58:21.555Z",
+      "outgoing": [
+        "Example_University_zh",
+        "Your_Name_zh"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Example_Advisor_zh",
+      "sourceIds": [
+        "src-0f115db062b7c0dd"
+      ],
+      "summary": "示例导师页面。",
+      "tags": [
+        "zh",
+        "person",
+        "advisor"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "示例导师",
+      "type": "Academic advisor",
+      "reviewedAt": "2026-10-20T19:58:23.000Z",
+      "reviewDue": "2027-04-18",
+      "retrieval": {
+        "documentId": "wiki:Example_Advisor_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:e67022bfe27e8932169c288b1bd1a76cdec4ae67be99c2c217957fead5c51611",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "Education_zh",
+        "Example_Paper_zh",
+        "Example_University_zh",
+        "index_zh",
+        "Publications_zh",
+        "Your_Name_zh"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:e624d9df27ee184747804dab762ce4d64f3a1389627bb862ae39fd4f30a1cf86",
+      "file": "Example_Concept.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-04-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:00.161Z",
+      "outgoing": [
+        "Research_Area_2",
+        "Research_Area_3"
+      ],
+      "relationTypes": [
+        "related",
+        "wikilink"
+      ],
+      "slug": "Example_Concept",
+      "sourceIds": [],
+      "summary": "Vector representations of graph nodes; an example research-concept page.",
+      "tags": [
+        "en",
+        "research",
+        "concept"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "Example Concept",
+      "type": "Research concept",
+      "reviewedAt": "2026-10-21T06:35:02.000Z",
+      "reviewDue": "2027-04-19",
+      "retrieval": {
+        "documentId": "wiki:Example_Concept",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:e624d9df27ee184747804dab762ce4d64f3a1389627bb862ae39fd4f30a1cf86",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "Research",
+        "Research_Area_1",
+        "Research_Area_2",
+        "Research_Area_3"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:b531528bf1d2f590d88afbdb900f8e59fbe1753fe1496a769b20b1eeff662742",
+      "file": "Example_Concept_zh.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.8,
+        "review": "periodic or when linked evidence changes",
+        "retention": "semantic memory with quality warnings",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-04-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:00.159Z",
+      "outgoing": [
+        "Research_Area_2_zh",
+        "Research_Area_3_zh"
+      ],
+      "relationTypes": [
+        "related",
+        "wikilink"
+      ],
+      "slug": "Example_Concept_zh",
+      "sourceIds": [],
+      "summary": "图节点的向量表示；研究概念页面示例。",
+      "tags": [
+        "zh",
+        "research",
+        "concept"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "示例概念",
+      "type": "研究概念",
+      "reviewedAt": "2026-10-21T06:35:02.000Z",
+      "reviewDue": "2027-04-19",
+      "retrieval": {
+        "documentId": "wiki:Example_Concept_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:b531528bf1d2f590d88afbdb900f8e59fbe1753fe1496a769b20b1eeff662742",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "Research_Area_1_zh",
+        "Research_Area_2_zh",
+        "Research_Area_3_zh",
+        "Research_zh"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:41d13143163ff33792372d5587c3d679dc826628ce7c95e22c182a6278bc5aa3",
+      "file": "Example_Lab.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-04-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:00.164Z",
+      "outgoing": [
+        "Example_Paper"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Example_Lab",
+      "sourceIds": [
+        "src-0f115db062b7c0dd"
+      ],
+      "summary": "Sample research-experience institution page.",
+      "tags": [
+        "en",
+        "institution",
+        "research"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "Example Lab",
+      "type": "Research institute",
+      "reviewedAt": "2026-10-21T06:35:02.000Z",
+      "reviewDue": "2027-04-19",
+      "retrieval": {
+        "documentId": "wiki:Example_Lab",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:41d13143163ff33792372d5587c3d679dc826628ce7c95e22c182a6278bc5aa3",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "CV",
+        "Experience",
+        "index",
+        "Your_Name"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:73b520d55ec6cc7997499cb3c154293e927816f796e2f5845454bb74ce4195d4",
+      "file": "Example_Lab_zh.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-20T19:58:23.000Z",
+        "reviewDue": "2027-04-18",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-20T19:58:21.570Z",
+      "outgoing": [
+        "Example_Paper_zh"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Example_Lab_zh",
+      "sourceIds": [
+        "src-0f115db062b7c0dd"
+      ],
+      "summary": "示例研究经历机构页面。",
+      "tags": [
+        "zh",
+        "institution",
+        "research"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "示例实验室",
+      "type": "研究院",
+      "reviewedAt": "2026-10-20T19:58:23.000Z",
+      "reviewDue": "2027-04-18",
+      "retrieval": {
+        "documentId": "wiki:Example_Lab_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:73b520d55ec6cc7997499cb3c154293e927816f796e2f5845454bb74ce4195d4",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "CV_zh",
+        "Experience_zh",
+        "index_zh",
+        "Your_Name_zh"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:5027f84315e3ec3c23938025b34e780ef1ae7e1e85db8825ea4dcff3bcb216ce",
+      "file": "Example_Paper.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "en",
+      "lifecycle": {
+        "status": "confirmed",
+        "confidence": 0.95,
+        "review": "on venue/status change",
+        "retention": "long-lived semantic memory",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-10-21",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:00.167Z",
+      "outgoing": [
+        "Example_Advisor",
+        "Publications",
+        "Research_Area_1",
+        "Your_Name"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Example_Paper",
+      "sourceIds": [
+        "src-28bacb8b68411b9d",
+        "src-5627303e2b401dcc"
+      ],
+      "summary": "Sample publication page showing the paper-highlight card.",
+      "tags": [
+        "en",
+        "publication",
+        "paper"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "An Example Paper Title for Your Template",
+      "type": "publication",
+      "reviewedAt": "2026-10-21T06:35:02.000Z",
+      "reviewDue": "2027-10-21",
+      "retrieval": {
+        "documentId": "wiki:Example_Paper",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:5027f84315e3ec3c23938025b34e780ef1ae7e1e85db8825ea4dcff3bcb216ce",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "CV",
+        "Example_Lab",
+        "Experience",
+        "index",
+        "Publications",
+        "Research_Area_1",
+        "Research_Area_2",
+        "Research_Area_3",
+        "Your_Name"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:7dc681d603d999eb2d1cc2fee848cf61fa2edc6c6eb482a82c1b2eec0d06c9a2",
+      "file": "Example_Paper_zh.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:00.166Z",
+      "outgoing": [
+        "Example_Advisor_zh",
+        "Publications_zh",
+        "Research_Area_1_zh",
+        "Your_Name_zh"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Example_Paper_zh",
+      "sourceIds": [
+        "src-28bacb8b68411b9d",
+        "src-5627303e2b401dcc"
+      ],
+      "summary": "展示论文亮点卡片的示例论文页。",
+      "tags": [
+        "zh",
+        "publication",
+        "paper"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "一篇示例论文标题",
+      "type": "publication",
+      "reviewedAt": "2026-10-21T06:35:02.000Z",
+      "reviewDue": "2027-01-19",
+      "retrieval": {
+        "documentId": "wiki:Example_Paper_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:7dc681d603d999eb2d1cc2fee848cf61fa2edc6c6eb482a82c1b2eec0d06c9a2",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "CV_zh",
+        "Example_Lab_zh",
+        "Experience_zh",
+        "index_zh",
+        "Publications_zh",
+        "Research_Area_1_zh",
+        "Research_Area_2_zh",
+        "Research_Area_3_zh",
+        "Your_Name_zh"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:b4ea8d76f05c4fe023c4622d3f1ba44492f485a18f91da399056ebef423354aa",
+      "file": "Example_University.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-04-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:00.169Z",
+      "outgoing": [
+        "Example_Advisor"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Example_University",
+      "sourceIds": [
+        "src-0f115db062b7c0dd"
+      ],
+      "summary": "Sample institution page.",
+      "tags": [
+        "en",
+        "institution",
+        "education"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "Example University",
+      "type": "Public research university",
+      "reviewedAt": "2026-10-21T06:35:02.000Z",
+      "reviewDue": "2027-04-19",
+      "retrieval": {
+        "documentId": "wiki:Example_University",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:b4ea8d76f05c4fe023c4622d3f1ba44492f485a18f91da399056ebef423354aa",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "CV",
+        "Education",
+        "Example_Advisor",
+        "Experience",
+        "index",
+        "Your_Name"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:35c4f11ff5c7f48a4380634a80de1889a268ef34bb73a8b9a00df0e78760ef2a",
+      "file": "Example_University_zh.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-04-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:00.168Z",
+      "outgoing": [
+        "Example_Advisor_zh"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Example_University_zh",
+      "sourceIds": [
+        "src-0f115db062b7c0dd"
+      ],
+      "summary": "示例机构页面。",
+      "tags": [
+        "zh",
+        "institution",
+        "education"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "示例大学",
+      "type": "公立研究型大学",
+      "reviewedAt": "2026-10-21T06:35:02.000Z",
+      "reviewDue": "2027-04-19",
+      "retrieval": {
+        "documentId": "wiki:Example_University_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:35c4f11ff5c7f48a4380634a80de1889a268ef34bb73a8b9a00df0e78760ef2a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "CV_zh",
+        "Education_zh",
+        "Example_Advisor_zh",
+        "Experience_zh",
+        "index_zh",
+        "Your_Name_zh"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:25a3832172699db23a681d7d4baea41ade4d44b25ca4a9ce791b8b01bee3fdd5",
+      "file": "Experience.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:00.170Z",
+      "outgoing": [
+        "Example_Lab",
+        "Example_Paper",
+        "Example_University",
+        "Research_Area_1"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Experience",
+      "sourceIds": [],
+      "summary": "Research experience (template sample).",
+      "tags": [
+        "en",
+        "experience",
+        "profile"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "Experience",
+      "type": "Research experience",
+      "reviewedAt": "2026-10-21T06:35:02.000Z",
+      "reviewDue": "2027-01-19",
+      "retrieval": {
+        "documentId": "wiki:Experience",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:25a3832172699db23a681d7d4baea41ade4d44b25ca4a9ce791b8b01bee3fdd5",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "index"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:0ef33165ba934fd6655e00f740e54dbc05b45ef21ef8a6e3af9f5e05ba167063",
+      "file": "Experience_zh.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:00.170Z",
+      "outgoing": [
+        "Example_Lab_zh",
+        "Example_Paper_zh",
+        "Example_University_zh",
+        "Research_Area_1_zh"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Experience_zh",
+      "sourceIds": [],
+      "summary": "研究经历（模板示例）。",
+      "tags": [
+        "zh",
+        "experience",
+        "profile"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "研究经历",
+      "type": "研究经历",
+      "reviewedAt": "2026-10-21T06:35:02.000Z",
+      "reviewDue": "2027-01-19",
+      "retrieval": {
+        "documentId": "wiki:Experience_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:0ef33165ba934fd6655e00f740e54dbc05b45ef21ef8a6e3af9f5e05ba167063",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "index_zh"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:e77300309aa85fe72cd2ef2118b9b54eccdda9e66edc373ef196d602a7fcd0f8",
+      "file": "index.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-10-21",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:00.172Z",
+      "outgoing": [
+        "CV",
+        "Education",
+        "Example_Advisor",
+        "Example_Lab",
+        "Example_Paper",
+        "Example_University",
+        "Experience",
+        "log",
+        "Projects",
+        "Publications",
+        "Research",
+        "Research_Area_1",
+        "Research_Area_2",
+        "Research_Area_3",
+        "Your_Name",
+        "Your_Name_zh"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "index",
+      "sourceIds": [],
+      "summary": "Navigation index for public pages.",
+      "tags": [
+        "en",
+        "index",
+        "navigation"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "Index",
+      "type": "Wiki index",
+      "reviewedAt": "2026-10-21T06:35:02.000Z",
+      "reviewDue": "2027-10-21",
+      "retrieval": {
+        "documentId": "wiki:index",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:e77300309aa85fe72cd2ef2118b9b54eccdda9e66edc373ef196d602a7fcd0f8",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": []
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:1b8df215f6debd7f7fb4f3048c4abf1b9226d2bb2acc07a8e27f6b1bd962ce4a",
+      "file": "index_zh.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-10-21",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:00.171Z",
+      "outgoing": [
+        "CV_zh",
+        "Education_zh",
+        "Example_Advisor_zh",
+        "Example_Lab_zh",
+        "Example_Paper_zh",
+        "Example_University_zh",
+        "Experience_zh",
+        "log_zh",
+        "Projects_zh",
+        "Publications_zh",
+        "Research_Area_1_zh",
+        "Research_Area_2_zh",
+        "Research_Area_3_zh",
+        "Research_zh",
+        "Your_Name_zh"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "index_zh",
+      "sourceIds": [],
+      "summary": "公开页面导航索引。",
+      "tags": [
+        "zh",
+        "index",
+        "navigation"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "索引",
+      "type": "Wiki 索引",
+      "reviewedAt": "2026-10-21T06:35:02.000Z",
+      "reviewDue": "2027-10-21",
+      "retrieval": {
+        "documentId": "wiki:index_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:1b8df215f6debd7f7fb4f3048c4abf1b9226d2bb2acc07a8e27f6b1bd962ce4a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": []
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:6a8634e4b42e56a75cdf717019ad0363f01df486d44d4f0f1c37ac4e26ce9862",
+      "file": "log.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-20T17:43:05.000Z",
+        "reviewDue": "2027-10-20",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-20T17:43:03.274Z",
+      "outgoing": [],
+      "relationTypes": [],
+      "slug": "log",
+      "sourceIds": [],
+      "summary": "Append-only maintenance log for the wiki.",
+      "tags": [
+        "en",
+        "maintenance",
+        "log"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "Log",
+      "type": "Maintenance log",
+      "reviewedAt": "2026-10-20T17:43:05.000Z",
+      "reviewDue": "2027-10-20",
+      "retrieval": {
+        "documentId": "wiki:log",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:6a8634e4b42e56a75cdf717019ad0363f01df486d44d4f0f1c37ac4e26ce9862",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "index"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:8279a51432862294356c6bc3209a8033d3e2e00c041a143f5f40297ef547151b",
+      "file": "log_zh.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-20T19:58:23.000Z",
+        "reviewDue": "2027-10-20",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-20T19:58:21.971Z",
+      "outgoing": [],
+      "relationTypes": [],
+      "slug": "log_zh",
+      "sourceIds": [],
+      "summary": "Wiki 的追加式维护日志。",
+      "tags": [
+        "zh",
+        "maintenance",
+        "log"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "日志",
+      "type": "维护日志",
+      "reviewedAt": "2026-10-20T19:58:23.000Z",
+      "reviewDue": "2027-10-20",
+      "retrieval": {
+        "documentId": "wiki:log_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:8279a51432862294356c6bc3209a8033d3e2e00c041a143f5f40297ef547151b",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "index_zh"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:0f6edefb2aef52cdae044885edefe7a1aceafcad7f827d284b849a79f0b8f0e6",
+      "file": "Projects.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:00.175Z",
+      "outgoing": [
+        "Research_Area_1",
+        "Research_Area_2",
+        "Research_Area_3"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Projects",
+      "sourceIds": [],
+      "summary": "Research and engineering projects (template sample).",
+      "tags": [
+        "en",
+        "project",
+        "overview"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "Projects",
+      "type": "Project overview",
+      "reviewedAt": "2026-10-21T06:35:02.000Z",
+      "reviewDue": "2027-01-19",
+      "retrieval": {
+        "documentId": "wiki:Projects",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:0f6edefb2aef52cdae044885edefe7a1aceafcad7f827d284b849a79f0b8f0e6",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "index",
+        "Research_Area_1",
+        "Research_Area_2",
+        "Research_Area_3",
+        "Your_Name"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:b6bbc4e232cbb52117e66fd9b01c61404fb0667f6770aabe54a08fd7e42f71ad",
+      "file": "Projects_zh.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:59:18.000Z",
+        "reviewDue": "2027-01-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:59:16.831Z",
+      "outgoing": [
+        "Research_Area_1_zh",
+        "Research_Area_2_zh",
+        "Research_Area_3_zh"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Projects_zh",
+      "sourceIds": [],
+      "summary": "研究与工程项目（模板示例）。",
+      "tags": [
+        "zh",
+        "project",
+        "overview"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "项目",
+      "type": "项目概览",
+      "reviewedAt": "2026-10-21T06:59:18.000Z",
+      "reviewDue": "2027-01-19",
+      "retrieval": {
+        "documentId": "wiki:Projects_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:b6bbc4e232cbb52117e66fd9b01c61404fb0667f6770aabe54a08fd7e42f71ad",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "index_zh",
+        "Research_Area_1_zh",
+        "Research_Area_2_zh",
+        "Research_Area_3_zh",
+        "Your_Name_zh"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [
+        "src-28bacb8b68411b9d",
+        "src-5627303e2b401dcc"
+      ],
+      "contentHash": "sha256:d20ec23890d874a150c3af73036f5308e501ecbd43fa0c54dd207c209c486893",
+      "file": "Publications.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:00.178Z",
+      "outgoing": [
+        "Example_Advisor",
+        "Example_Paper",
+        "Research_Area_1",
+        "Research_Area_2",
+        "Research_Area_3"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Publications",
+      "sourceIds": [
+        "src-28bacb8b68411b9d",
+        "src-5627303e2b401dcc"
+      ],
+      "summary": "Publication list (template sample).",
+      "tags": [
+        "en",
+        "publication",
+        "index"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "Publications",
+      "type": "Publication list",
+      "reviewedAt": "2026-10-21T06:35:02.000Z",
+      "reviewDue": "2027-01-19",
+      "retrieval": {
+        "documentId": "wiki:Publications",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:d20ec23890d874a150c3af73036f5308e501ecbd43fa0c54dd207c209c486893",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "Example_Paper",
+        "index",
+        "Research_Area_1",
+        "Research_Area_2",
+        "Research_Area_3",
+        "Your_Name"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [
+        "src-28bacb8b68411b9d",
+        "src-5627303e2b401dcc"
+      ],
+      "contentHash": "sha256:6b18c067304d5ea8aa03f1929cc34b16981835cf0d7567940e7260ec2f5e156f",
+      "file": "Publications_zh.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:00.176Z",
+      "outgoing": [
+        "Example_Advisor_zh",
+        "Example_Paper_zh",
+        "Research_Area_1_zh",
+        "Research_Area_2_zh",
+        "Research_Area_3_zh"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Publications_zh",
+      "sourceIds": [
+        "src-28bacb8b68411b9d",
+        "src-5627303e2b401dcc"
+      ],
+      "summary": "论文列表（模板示例）。",
+      "tags": [
+        "zh",
+        "publication",
+        "index"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "论文",
+      "type": "论文列表",
+      "reviewedAt": "2026-10-21T06:35:02.000Z",
+      "reviewDue": "2027-01-19",
+      "retrieval": {
+        "documentId": "wiki:Publications_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:6b18c067304d5ea8aa03f1929cc34b16981835cf0d7567940e7260ec2f5e156f",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "Example_Paper_zh",
+        "index_zh",
+        "Research_Area_1_zh",
+        "Research_Area_2_zh",
+        "Research_Area_3_zh",
+        "Your_Name_zh"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:fc2dd027d6e4b89914f42dcb3e382c67818c6fb7301fa880479785e60ab16e44",
+      "file": "Research.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-01-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:30.475Z",
+      "outgoing": [
+        "Example_Concept",
+        "Research_Area_1",
+        "Research_Area_2",
+        "Research_Area_3"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Research",
+      "sourceIds": [],
+      "summary": "Overview of the research program (template sample).",
+      "tags": [
+        "en",
+        "research",
+        "overview"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "Research",
+      "type": "Research overview",
+      "reviewedAt": "2026-10-21T06:35:32.000Z",
+      "reviewDue": "2027-01-19",
+      "retrieval": {
+        "documentId": "wiki:Research",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:fc2dd027d6e4b89914f42dcb3e382c67818c6fb7301fa880479785e60ab16e44",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "index",
+        "Your_Name"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:a608ac7f6a1206271a2f2649b5cc541c416573f15417d62f5006da413c101742",
+      "file": "Research_Area_1.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:30.470Z",
+      "outgoing": [
+        "Example_Concept",
+        "Example_Paper",
+        "Projects",
+        "Publications",
+        "Research_Area_2",
+        "Research_Area_3"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Research_Area_1",
+      "sourceIds": [],
+      "summary": "A placeholder for one of your research areas. Rename it and describe the question you study.",
+      "tags": [
+        "en",
+        "research",
+        "topic"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "Research Area 1",
+      "type": "Research topic",
+      "reviewedAt": "2026-10-21T06:35:32.000Z",
+      "reviewDue": "2027-04-19",
+      "retrieval": {
+        "documentId": "wiki:Research_Area_1",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:a608ac7f6a1206271a2f2649b5cc541c416573f15417d62f5006da413c101742",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "CV",
+        "Example_Paper",
+        "Experience",
+        "index",
+        "Projects",
+        "Publications",
+        "Research",
+        "Research_Area_2",
+        "Research_Area_3",
+        "Your_Name"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:cce140752b47d977238b3c4853da257c6fa10474a3ce5536d6aed174dd52b549",
+      "file": "Research_Area_1_zh.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:30.470Z",
+      "outgoing": [
+        "Example_Concept_zh",
+        "Example_Paper_zh",
+        "Projects_zh",
+        "Publications_zh",
+        "Research_Area_2_zh",
+        "Research_Area_3_zh"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Research_Area_1_zh",
+      "sourceIds": [],
+      "summary": "研究方向占位页。改成你自己的方向名，并写下你在研究的问题。",
+      "tags": [
+        "zh",
+        "research",
+        "topic"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "研究方向一",
+      "type": "研究主题",
+      "reviewedAt": "2026-10-21T06:35:32.000Z",
+      "reviewDue": "2027-04-19",
+      "retrieval": {
+        "documentId": "wiki:Research_Area_1_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:cce140752b47d977238b3c4853da257c6fa10474a3ce5536d6aed174dd52b549",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "CV_zh",
+        "Example_Paper_zh",
+        "Experience_zh",
+        "index_zh",
+        "Projects_zh",
+        "Publications_zh",
+        "Research_Area_2_zh",
+        "Research_Area_3_zh",
+        "Research_zh",
+        "Your_Name_zh"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:8222dea9a89281247dbdcab82f4dbd5d720bf519d82a7b12ad61edb88c1505aa",
+      "file": "Research_Area_2.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:30.472Z",
+      "outgoing": [
+        "Example_Concept",
+        "Example_Paper",
+        "Projects",
+        "Publications",
+        "Research_Area_1",
+        "Research_Area_3"
+      ],
+      "relationTypes": [
+        "depends-on",
+        "wikilink"
+      ],
+      "slug": "Research_Area_2",
+      "sourceIds": [],
+      "summary": "A placeholder for one of your research areas. Rename it and describe the question you study.",
+      "tags": [
+        "en",
+        "research",
+        "topic"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "Research Area 2",
+      "type": "Research topic",
+      "reviewedAt": "2026-10-21T06:35:32.000Z",
+      "reviewDue": "2027-04-19",
+      "retrieval": {
+        "documentId": "wiki:Research_Area_2",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:8222dea9a89281247dbdcab82f4dbd5d720bf519d82a7b12ad61edb88c1505aa",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "CV",
+        "Example_Concept",
+        "index",
+        "Projects",
+        "Publications",
+        "Research",
+        "Research_Area_1",
+        "Research_Area_3",
+        "Your_Name"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:d0dd9a7c663b75820da82a833d1d7119a92789cbacc28f8543fb16419e65b173",
+      "file": "Research_Area_2_zh.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:30.471Z",
+      "outgoing": [
+        "Example_Concept_zh",
+        "Example_Paper_zh",
+        "Projects_zh",
+        "Publications_zh",
+        "Research_Area_1_zh",
+        "Research_Area_3_zh"
+      ],
+      "relationTypes": [
+        "depends-on",
+        "wikilink"
+      ],
+      "slug": "Research_Area_2_zh",
+      "sourceIds": [],
+      "summary": "研究方向占位页。改成你自己的方向名，并写下你在研究的问题。",
+      "tags": [
+        "zh",
+        "research",
+        "topic"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "研究方向二",
+      "type": "研究主题",
+      "reviewedAt": "2026-10-21T06:35:32.000Z",
+      "reviewDue": "2027-04-19",
+      "retrieval": {
+        "documentId": "wiki:Research_Area_2_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:d0dd9a7c663b75820da82a833d1d7119a92789cbacc28f8543fb16419e65b173",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "CV_zh",
+        "Example_Concept_zh",
+        "index_zh",
+        "Projects_zh",
+        "Publications_zh",
+        "Research_Area_1_zh",
+        "Research_Area_3_zh",
+        "Research_zh",
+        "Your_Name_zh"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:7c7e2ab9fe093d73c6c80784f39752a0cfffe16acc25e87b9a686dbe33c50c4a",
+      "file": "Research_Area_3.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:30.473Z",
+      "outgoing": [
+        "Example_Concept",
+        "Example_Paper",
+        "Projects",
+        "Publications",
+        "Research_Area_1",
+        "Research_Area_2"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Research_Area_3",
+      "sourceIds": [],
+      "summary": "A placeholder for one of your research areas. Rename it and describe the question you study.",
+      "tags": [
+        "en",
+        "research",
+        "topic"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "Research Area 3",
+      "type": "Research topic",
+      "reviewedAt": "2026-10-21T06:35:32.000Z",
+      "reviewDue": "2027-04-19",
+      "retrieval": {
+        "documentId": "wiki:Research_Area_3",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:7c7e2ab9fe093d73c6c80784f39752a0cfffe16acc25e87b9a686dbe33c50c4a",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "CV",
+        "Example_Concept",
+        "index",
+        "Projects",
+        "Publications",
+        "Research",
+        "Research_Area_1",
+        "Research_Area_2",
+        "Your_Name"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:e2a71580f5d4c7ca8efde1f5f9af83eb1452eee6ef07f69d5c50a7567c289396",
+      "file": "Research_Area_3_zh.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:30.473Z",
+      "outgoing": [
+        "Example_Concept_zh",
+        "Example_Paper_zh",
+        "Projects_zh",
+        "Publications_zh",
+        "Research_Area_1_zh",
+        "Research_Area_2_zh"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Research_Area_3_zh",
+      "sourceIds": [],
+      "summary": "研究方向占位页。改成你自己的方向名，并写下你在研究的问题。",
+      "tags": [
+        "zh",
+        "research",
+        "topic"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "研究方向三",
+      "type": "研究主题",
+      "reviewedAt": "2026-10-21T06:35:32.000Z",
+      "reviewDue": "2027-04-19",
+      "retrieval": {
+        "documentId": "wiki:Research_Area_3_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:e2a71580f5d4c7ca8efde1f5f9af83eb1452eee6ef07f69d5c50a7567c289396",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "CV_zh",
+        "Example_Concept_zh",
+        "index_zh",
+        "Projects_zh",
+        "Publications_zh",
+        "Research_Area_1_zh",
+        "Research_Area_2_zh",
+        "Research_zh",
+        "Your_Name_zh"
+      ]
+    },
+    {
+      "aliases": [],
+      "citationSourceIds": [],
+      "contentHash": "sha256:7e270e1dd9dc2989ff5e45bf0db7f11454dd8ab079eddb097a3e0e3fb4fd64ae",
+      "file": "Research_zh.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-01-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:30.474Z",
+      "outgoing": [
+        "Example_Concept_zh",
+        "Research_Area_1_zh",
+        "Research_Area_2_zh",
+        "Research_Area_3_zh"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Research_zh",
+      "sourceIds": [],
+      "summary": "研究方向总览（模板示例）。",
+      "tags": [
+        "zh",
+        "research",
+        "overview"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "研究",
+      "type": "研究概览",
+      "reviewedAt": "2026-10-21T06:35:32.000Z",
+      "reviewDue": "2027-01-19",
+      "retrieval": {
+        "documentId": "wiki:Research_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:7e270e1dd9dc2989ff5e45bf0db7f11454dd8ab079eddb097a3e0e3fb4fd64ae",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "index_zh",
+        "Your_Name_zh"
+      ]
+    },
+    {
+      "aliases": [
+        "Your Nickname"
+      ],
+      "citationSourceIds": [
+        "src-5627303e2b401dcc"
+      ],
+      "contentHash": "sha256:4a9aa4abcaebfac6b451283859131f8ddb270351a87f4ee7886cb8368598e985",
+      "file": "Your_Name.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "en",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-01-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:30.477Z",
+      "outgoing": [
+        "CV",
+        "Education",
+        "Example_Advisor",
+        "Example_Lab",
+        "Example_Paper",
+        "Example_University",
+        "Projects",
+        "Publications",
+        "Research",
+        "Research_Area_1",
+        "Research_Area_2",
+        "Research_Area_3",
+        "Your_Name_zh"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Your_Name",
+      "sourceIds": [
+        "src-5627303e2b401dcc"
+      ],
+      "summary": "PhD student at Example University working on Research Area 1 and Research Area 2. Replace this one-sentence summary with your own.",
+      "tags": [
+        "en",
+        "person",
+        "biography",
+        "phd-student"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "Your Name",
+      "type": "PhD student",
+      "reviewedAt": "2026-10-21T06:35:32.000Z",
+      "reviewDue": "2027-01-19",
+      "retrieval": {
+        "documentId": "wiki:Your_Name",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:4a9aa4abcaebfac6b451283859131f8ddb270351a87f4ee7886cb8368598e985",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "Example_Advisor",
+        "Example_Paper",
+        "index"
+      ]
+    },
+    {
+      "aliases": [
+        "你的昵称"
+      ],
+      "citationSourceIds": [
+        "src-5627303e2b401dcc"
+      ],
+      "contentHash": "sha256:aecd21e161f49cc90e4c5d6507fa453c861b36429b959437454b69274f6decbf",
+      "file": "Your_Name_zh.md",
+      "footnoteSourceIds": [],
+      "hidden": false,
+      "language": "zh",
+      "lifecycle": {
+        "status": "active",
+        "confidence": 0.9,
+        "review": "periodic",
+        "retention": "semantic memory",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-01-19",
+        "pendingReview": false,
+        "overdue": false
+      },
+      "modifiedAt": "2026-10-21T06:35:30.476Z",
+      "outgoing": [
+        "CV_zh",
+        "Education_zh",
+        "Example_Advisor_zh",
+        "Example_Lab_zh",
+        "Example_Paper_zh",
+        "Example_University_zh",
+        "Projects_zh",
+        "Publications_zh",
+        "Research_Area_1_zh",
+        "Research_Area_2_zh",
+        "Research_Area_3_zh",
+        "Research_zh",
+        "Your_Name_zh"
+      ],
+      "relationTypes": [
+        "wikilink"
+      ],
+      "slug": "Your_Name_zh",
+      "sourceIds": [
+        "src-5627303e2b401dcc"
+      ],
+      "summary": "示例大学博士生，研究方向一与研究方向二。请替换为你自己的一句话简介。",
+      "tags": [
+        "zh",
+        "person",
+        "biography",
+        "博士生"
+      ],
+      "timestamp": "2026-01-01T00:00:00+00:00",
+      "title": "你的名字",
+      "type": "博士生",
+      "reviewedAt": "2026-10-21T06:35:32.000Z",
+      "reviewDue": "2027-01-19",
+      "retrieval": {
+        "documentId": "wiki:Your_Name_zh",
+        "chunking": "markdown-heading-v1",
+        "contentHash": "sha256:aecd21e161f49cc90e4c5d6507fa453c861b36429b959437454b69274f6decbf",
+        "textFields": [
+          "title",
+          "aliases",
+          "summary",
+          "body"
+        ],
+        "metadataFields": [
+          "slug",
+          "language",
+          "type",
+          "tags",
+          "sourceIds",
+          "reviewedAt",
+          "reviewDue"
+        ]
+      },
+      "backlinks": [
+        "Example_Advisor_zh",
+        "Example_Paper_zh",
+        "index",
+        "index_zh",
+        "Your_Name",
+        "Your_Name_zh"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "CV_zh",
+      "label": "示例实验室",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Lab_zh"
+    },
+    {
+      "from": "CV_zh",
+      "label": "一篇示例论文标题",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Paper_zh"
+    },
+    {
+      "from": "CV_zh",
+      "label": "示例大学",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_University_zh"
+    },
+    {
+      "from": "CV_zh",
+      "label": "研究方向一",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1_zh"
+    },
+    {
+      "from": "CV_zh",
+      "label": "研究方向二",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2_zh"
+    },
+    {
+      "from": "CV_zh",
+      "label": "研究方向三",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3_zh"
+    },
+    {
+      "from": "CV",
+      "label": "Example Lab",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Lab"
+    },
+    {
+      "from": "CV",
+      "label": "An Example Paper Title for Your Template",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Paper"
+    },
+    {
+      "from": "CV",
+      "label": "Example University",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_University"
+    },
+    {
+      "from": "CV",
+      "label": "Research Area 1",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1"
+    },
+    {
+      "from": "CV",
+      "label": "Research Area 2",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2"
+    },
+    {
+      "from": "CV",
+      "label": "Research Area 3",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3"
+    },
+    {
+      "from": "Education_zh",
+      "label": "示例导师",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Advisor_zh"
+    },
+    {
+      "from": "Education_zh",
+      "label": "示例大学",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_University_zh"
+    },
+    {
+      "from": "Education",
+      "label": "Example Advisor",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Advisor"
+    },
+    {
+      "from": "Education",
+      "label": "Example University",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_University"
+    },
+    {
+      "from": "Example_Advisor_zh",
+      "label": "示例大学",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_University_zh"
+    },
+    {
+      "from": "Example_Advisor_zh",
+      "label": "你的名字",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Your_Name_zh"
+    },
+    {
+      "from": "Example_Advisor",
+      "label": "Example University",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_University"
+    },
+    {
+      "from": "Example_Advisor",
+      "label": "Your Name",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Your_Name"
+    },
+    {
+      "from": "Example_Concept_zh",
+      "label": "method used by",
+      "relation": "related",
+      "source": "frontmatter",
+      "to": "Research_Area_2_zh"
+    },
+    {
+      "from": "Example_Concept_zh",
+      "label": "研究方向二",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2_zh"
+    },
+    {
+      "from": "Example_Concept_zh",
+      "label": "研究方向三",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3_zh"
+    },
+    {
+      "from": "Example_Concept",
+      "label": "method used by",
+      "relation": "related",
+      "source": "frontmatter",
+      "to": "Research_Area_2"
+    },
+    {
+      "from": "Example_Concept",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2"
+    },
+    {
+      "from": "Example_Concept",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3"
+    },
+    {
+      "from": "Example_Lab_zh",
+      "label": "一篇示例论文标题",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Paper_zh"
+    },
+    {
+      "from": "Example_Lab",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Paper"
+    },
+    {
+      "from": "Example_Paper_zh",
+      "label": "示例导师",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Advisor_zh"
+    },
+    {
+      "from": "Example_Paper_zh",
+      "label": "论文",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Publications_zh"
+    },
+    {
+      "from": "Example_Paper_zh",
+      "label": "研究方向一",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1_zh"
+    },
+    {
+      "from": "Example_Paper_zh",
+      "label": "你的名字",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Your_Name_zh"
+    },
+    {
+      "from": "Example_Paper",
+      "label": "Example Advisor",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Advisor"
+    },
+    {
+      "from": "Example_Paper",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Publications"
+    },
+    {
+      "from": "Example_Paper",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1"
+    },
+    {
+      "from": "Example_Paper",
+      "label": "Your Name",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Your_Name"
+    },
+    {
+      "from": "Example_University_zh",
+      "label": "示例导师",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Advisor_zh"
+    },
+    {
+      "from": "Example_University",
+      "label": "Example Advisor",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Advisor"
+    },
+    {
+      "from": "Experience_zh",
+      "label": "示例实验室",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Lab_zh"
+    },
+    {
+      "from": "Experience_zh",
+      "label": "一篇示例论文标题",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Paper_zh"
+    },
+    {
+      "from": "Experience_zh",
+      "label": "示例大学",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_University_zh"
+    },
+    {
+      "from": "Experience_zh",
+      "label": "研究方向一",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1_zh"
+    },
+    {
+      "from": "Experience",
+      "label": "Example Lab",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Lab"
+    },
+    {
+      "from": "Experience",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Paper"
+    },
+    {
+      "from": "Experience",
+      "label": "Example University",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_University"
+    },
+    {
+      "from": "Experience",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1"
+    },
+    {
+      "from": "index_zh",
+      "label": "简历",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "CV_zh"
+    },
+    {
+      "from": "index_zh",
+      "label": "教育经历",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Education_zh"
+    },
+    {
+      "from": "index_zh",
+      "label": "示例导师",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Advisor_zh"
+    },
+    {
+      "from": "index_zh",
+      "label": "示例实验室",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Lab_zh"
+    },
+    {
+      "from": "index_zh",
+      "label": "一篇示例论文标题",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Paper_zh"
+    },
+    {
+      "from": "index_zh",
+      "label": "示例大学",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_University_zh"
+    },
+    {
+      "from": "index_zh",
+      "label": "研究经历",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Experience_zh"
+    },
+    {
+      "from": "index_zh",
+      "label": "日志",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "log_zh"
+    },
+    {
+      "from": "index_zh",
+      "label": "项目",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Projects_zh"
+    },
+    {
+      "from": "index_zh",
+      "label": "论文",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Publications_zh"
+    },
+    {
+      "from": "index_zh",
+      "label": "研究方向一",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1_zh"
+    },
+    {
+      "from": "index_zh",
+      "label": "研究方向二",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2_zh"
+    },
+    {
+      "from": "index_zh",
+      "label": "研究方向三",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3_zh"
+    },
+    {
+      "from": "index_zh",
+      "label": "研究",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_zh"
+    },
+    {
+      "from": "index_zh",
+      "label": "你的名字",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Your_Name_zh"
+    },
+    {
+      "from": "index",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "CV"
+    },
+    {
+      "from": "index",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Education"
+    },
+    {
+      "from": "index",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Advisor"
+    },
+    {
+      "from": "index",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Lab"
+    },
+    {
+      "from": "index",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Paper"
+    },
+    {
+      "from": "index",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_University"
+    },
+    {
+      "from": "index",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Experience"
+    },
+    {
+      "from": "index",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "log"
+    },
+    {
+      "from": "index",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Projects"
+    },
+    {
+      "from": "index",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Publications"
+    },
+    {
+      "from": "index",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1"
+    },
+    {
+      "from": "index",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2"
+    },
+    {
+      "from": "index",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3"
+    },
+    {
+      "from": "index",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research"
+    },
+    {
+      "from": "index",
+      "label": "你的名字",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Your_Name_zh"
+    },
+    {
+      "from": "index",
+      "label": "Your Name",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Your_Name"
+    },
+    {
+      "from": "Projects_zh",
+      "label": "研究方向一",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1_zh"
+    },
+    {
+      "from": "Projects_zh",
+      "label": "研究方向二",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2_zh"
+    },
+    {
+      "from": "Projects_zh",
+      "label": "研究方向三",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3_zh"
+    },
+    {
+      "from": "Projects",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1"
+    },
+    {
+      "from": "Projects",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2"
+    },
+    {
+      "from": "Projects",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3"
+    },
+    {
+      "from": "Publications_zh",
+      "label": "示例导师",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Advisor_zh"
+    },
+    {
+      "from": "Publications_zh",
+      "label": "一篇示例论文标题",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Paper_zh"
+    },
+    {
+      "from": "Publications_zh",
+      "label": "研究方向一",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1_zh"
+    },
+    {
+      "from": "Publications_zh",
+      "label": "研究方向二",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2_zh"
+    },
+    {
+      "from": "Publications_zh",
+      "label": "研究方向三",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3_zh"
+    },
+    {
+      "from": "Publications",
+      "label": "Example Advisor",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Advisor"
+    },
+    {
+      "from": "Publications",
+      "label": "An Example Paper Title for Your Template",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Paper"
+    },
+    {
+      "from": "Publications",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1"
+    },
+    {
+      "from": "Publications",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2"
+    },
+    {
+      "from": "Publications",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3"
+    },
+    {
+      "from": "Research_Area_1_zh",
+      "label": "示例概念",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Concept_zh"
+    },
+    {
+      "from": "Research_Area_1_zh",
+      "label": "示例论文",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Paper_zh"
+    },
+    {
+      "from": "Research_Area_1_zh",
+      "label": "项目",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Projects_zh"
+    },
+    {
+      "from": "Research_Area_1_zh",
+      "label": "论文",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Publications_zh"
+    },
+    {
+      "from": "Research_Area_1_zh",
+      "label": "研究方向二",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2_zh"
+    },
+    {
+      "from": "Research_Area_1_zh",
+      "label": "研究方向三",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3_zh"
+    },
+    {
+      "from": "Research_Area_1",
+      "label": "an example concept",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Concept"
+    },
+    {
+      "from": "Research_Area_1",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Paper"
+    },
+    {
+      "from": "Research_Area_1",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Projects"
+    },
+    {
+      "from": "Research_Area_1",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Publications"
+    },
+    {
+      "from": "Research_Area_1",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2"
+    },
+    {
+      "from": "Research_Area_1",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3"
+    },
+    {
+      "from": "Research_Area_2_zh",
+      "label": "概念基础",
+      "relation": "depends-on",
+      "source": "frontmatter",
+      "to": "Example_Concept_zh"
+    },
+    {
+      "from": "Research_Area_2_zh",
+      "label": "示例概念",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Concept_zh"
+    },
+    {
+      "from": "Research_Area_2_zh",
+      "label": "示例论文",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Paper_zh"
+    },
+    {
+      "from": "Research_Area_2_zh",
+      "label": "项目",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Projects_zh"
+    },
+    {
+      "from": "Research_Area_2_zh",
+      "label": "论文",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Publications_zh"
+    },
+    {
+      "from": "Research_Area_2_zh",
+      "label": "研究方向一",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1_zh"
+    },
+    {
+      "from": "Research_Area_2_zh",
+      "label": "研究方向三",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3_zh"
+    },
+    {
+      "from": "Research_Area_2",
+      "label": "concept foundation",
+      "relation": "depends-on",
+      "source": "frontmatter",
+      "to": "Example_Concept"
+    },
+    {
+      "from": "Research_Area_2",
+      "label": "an example concept",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Concept"
+    },
+    {
+      "from": "Research_Area_2",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Paper"
+    },
+    {
+      "from": "Research_Area_2",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Projects"
+    },
+    {
+      "from": "Research_Area_2",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Publications"
+    },
+    {
+      "from": "Research_Area_2",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1"
+    },
+    {
+      "from": "Research_Area_2",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3"
+    },
+    {
+      "from": "Research_Area_3_zh",
+      "label": "示例概念",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Concept_zh"
+    },
+    {
+      "from": "Research_Area_3_zh",
+      "label": "示例论文",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Paper_zh"
+    },
+    {
+      "from": "Research_Area_3_zh",
+      "label": "项目",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Projects_zh"
+    },
+    {
+      "from": "Research_Area_3_zh",
+      "label": "论文",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Publications_zh"
+    },
+    {
+      "from": "Research_Area_3_zh",
+      "label": "研究方向一",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1_zh"
+    },
+    {
+      "from": "Research_Area_3_zh",
+      "label": "研究方向二",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2_zh"
+    },
+    {
+      "from": "Research_Area_3",
+      "label": "an example concept",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Concept"
+    },
+    {
+      "from": "Research_Area_3",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Paper"
+    },
+    {
+      "from": "Research_Area_3",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Projects"
+    },
+    {
+      "from": "Research_Area_3",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Publications"
+    },
+    {
+      "from": "Research_Area_3",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1"
+    },
+    {
+      "from": "Research_Area_3",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2"
+    },
+    {
+      "from": "Research_zh",
+      "label": "示例概念",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Concept_zh"
+    },
+    {
+      "from": "Research_zh",
+      "label": "研究方向一",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1_zh"
+    },
+    {
+      "from": "Research_zh",
+      "label": "研究方向一",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1_zh"
+    },
+    {
+      "from": "Research_zh",
+      "label": "研究方向二",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2_zh"
+    },
+    {
+      "from": "Research_zh",
+      "label": "研究方向二",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2_zh"
+    },
+    {
+      "from": "Research_zh",
+      "label": "研究方向三",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3_zh"
+    },
+    {
+      "from": "Research_zh",
+      "label": "研究方向三",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3_zh"
+    },
+    {
+      "from": "Research",
+      "label": "an example concept",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Concept"
+    },
+    {
+      "from": "Research",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1"
+    },
+    {
+      "from": "Research",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1"
+    },
+    {
+      "from": "Research",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2"
+    },
+    {
+      "from": "Research",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2"
+    },
+    {
+      "from": "Research",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3"
+    },
+    {
+      "from": "Research",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3"
+    },
+    {
+      "from": "Your_Name_zh",
+      "label": "简历",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "CV_zh"
+    },
+    {
+      "from": "Your_Name_zh",
+      "label": "简历",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "CV_zh"
+    },
+    {
+      "from": "Your_Name_zh",
+      "label": "教育经历",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Education_zh"
+    },
+    {
+      "from": "Your_Name_zh",
+      "label": "示例导师",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Advisor_zh"
+    },
+    {
+      "from": "Your_Name_zh",
+      "label": "示例实验室",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Lab_zh"
+    },
+    {
+      "from": "Your_Name_zh",
+      "label": "一篇示例论文标题",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Paper_zh"
+    },
+    {
+      "from": "Your_Name_zh",
+      "label": "示例大学",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_University_zh"
+    },
+    {
+      "from": "Your_Name_zh",
+      "label": "项目",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Projects_zh"
+    },
+    {
+      "from": "Your_Name_zh",
+      "label": "项目",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Projects_zh"
+    },
+    {
+      "from": "Your_Name_zh",
+      "label": "项目",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Projects_zh"
+    },
+    {
+      "from": "Your_Name_zh",
+      "label": "论文",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Publications_zh"
+    },
+    {
+      "from": "Your_Name_zh",
+      "label": "论文",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Publications_zh"
+    },
+    {
+      "from": "Your_Name_zh",
+      "label": "研究方向一",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1_zh"
+    },
+    {
+      "from": "Your_Name_zh",
+      "label": "研究方向一",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1_zh"
+    },
+    {
+      "from": "Your_Name_zh",
+      "label": "研究方向二",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2_zh"
+    },
+    {
+      "from": "Your_Name_zh",
+      "label": "研究方向三",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3_zh"
+    },
+    {
+      "from": "Your_Name_zh",
+      "label": "研究",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_zh"
+    },
+    {
+      "from": "Your_Name_zh",
+      "label": "Your Name",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Your_Name_zh"
+    },
+    {
+      "from": "Your_Name",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "CV"
+    },
+    {
+      "from": "Your_Name",
+      "label": "Résumé",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "CV"
+    },
+    {
+      "from": "Your_Name",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Education"
+    },
+    {
+      "from": "Your_Name",
+      "label": "Example Advisor",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Advisor"
+    },
+    {
+      "from": "Your_Name",
+      "label": "Example Lab",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Lab"
+    },
+    {
+      "from": "Your_Name",
+      "label": "An Example Paper Title for Your Template",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_Paper"
+    },
+    {
+      "from": "Your_Name",
+      "label": "Example University",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Example_University"
+    },
+    {
+      "from": "Your_Name",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Projects"
+    },
+    {
+      "from": "Your_Name",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Projects"
+    },
+    {
+      "from": "Your_Name",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Projects"
+    },
+    {
+      "from": "Your_Name",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Publications"
+    },
+    {
+      "from": "Your_Name",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Publications"
+    },
+    {
+      "from": "Your_Name",
+      "label": "Research Area 1",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1"
+    },
+    {
+      "from": "Your_Name",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_1"
+    },
+    {
+      "from": "Your_Name",
+      "label": "Research Area 2",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_2"
+    },
+    {
+      "from": "Your_Name",
+      "label": "Research Area 3",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research_Area_3"
+    },
+    {
+      "from": "Your_Name",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Research"
+    },
+    {
+      "from": "Your_Name",
+      "label": "你的名字",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "Your_Name_zh"
+    }
+  ],
+  "stats": {
+    "hiddenPages": 0,
+    "languages": {
+      "en": 17,
+      "zh": 17
+    },
+    "pages": 34,
+    "publicPages": 34,
+    "relations": 181,
+    "types": {
+      "Academic advisor": 2,
+      "CV summary": 1,
+      "CV 摘要": 1,
+      "Education timeline": 1,
+      "Maintenance log": 1,
+      "PhD student": 1,
+      "Project overview": 1,
+      "Public research university": 1,
+      "publication": 2,
+      "Publication list": 1,
+      "Research concept": 1,
+      "Research experience": 1,
+      "Research institute": 1,
+      "Research overview": 1,
+      "Research topic": 3,
+      "Wiki index": 1,
+      "Wiki 索引": 1,
+      "公立研究型大学": 1,
+      "博士生": 1,
+      "教育时间线": 1,
+      "研究主题": 3,
+      "研究概念": 1,
+      "研究概览": 1,
+      "研究经历": 1,
+      "研究院": 1,
+      "维护日志": 1,
+      "论文列表": 1,
+      "项目概览": 1
+    },
+    "warnings": 0
+  },
+  "warnings": []
+}

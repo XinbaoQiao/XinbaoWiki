@@ -1,0 +1,717 @@
+'use client';
+
+import { WikiLink } from '@/components/WikiLink';
+import { siteConfig } from '@/lib/site-config';
+import { clearWikiMorphIntent } from '@/lib/wiki-view-transition';
+import { wikiSlugFromHref } from '@/lib/wiki-view-transition';
+import type { CSSProperties, PointerEvent as ReactPointerEvent, TransitionEvent as ReactTransitionEvent } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { VisitorAtlasDisclosure } from '@/components/VisitorAtlasDisclosure';
+import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
+import { getRecentSiteUpdates } from '@/lib/site-updates';
+import { PaperAcceptancePreview } from '@/components/PaperAcceptancePreview';
+import { SlidingSelection } from '@/components/SlidingSelection';
+import { useAnimatedDisclosure } from '@/components/useAnimatedDisclosure';
+import type { PaperHighlightCatalog } from '@/lib/paper-highlights';
+
+type LocalizedText = Record<SearchLanguage, string>;
+type PortalPalette = 'text' | 'blue' | 'gold' | 'rose' | 'green' | 'violet' | 'charcoal';
+type BrowseView = 'list' | 'cube';
+type UpdatesView = 'compact' | 'detailed';
+type CubeFace = 'top' | 'front' | 'right';
+type TouchCubeAngle = 'top' | 'front' | 'right';
+type PortalEntry = { href: string; slug: string; summary: string; title: string };
+type PortalGroup = {
+  label: LocalizedText;
+  links: Record<SearchLanguage, PortalEntry[]>;
+};
+type PortalSection = {
+  title: LocalizedText;
+  groups: PortalGroup[];
+};
+type LanguageEntry = {
+  detail: string;
+  href: string;
+  label: string;
+  slug: string;
+};
+type Props = {
+  directorySections: PortalSection[];
+  languageEntries: LanguageEntry[];
+  paperHighlights: PaperHighlightCatalog;
+  updatesAsOf: string;
+};
+
+const browseLabels: LocalizedText = {
+  en: 'Browse MyWiki',
+  zh: '浏览 MyWiki'
+};
+
+const browseViewLabels = {
+  en: { cube: 'Cube', group: 'Browse view', list: 'List' },
+  zh: { cube: '魔方', group: '浏览视图', list: '列表' }
+} satisfies Record<SearchLanguage, Record<BrowseView | 'group', string>>;
+
+const cubePinLabels = {
+  en: { pin: 'Pin current face', unpin: 'Pin: unpin current face' },
+  zh: { pin: 'Pin：固定当前面', unpin: 'Pin：取消固定当前面' }
+} satisfies Record<SearchLanguage, { pin: string; unpin: string }>;
+
+const cubeReturnLabels = {
+  en: { label: 'Back', ariaLabel: 'Return to the initial cube' },
+  zh: { label: '返回', ariaLabel: '返回初始魔方' }
+} satisfies Record<SearchLanguage, { ariaLabel: string; label: string }>;
+
+const cubeFaceNames = ['top', 'front', 'right'] as const;
+const touchCubeAngles = ['top', 'front', 'right'] as const;
+const cubeHoverIntentMs = 150;
+const touchCubeDragThresholdPx = 10;
+const touchCubeSwipeThresholdPx = 34;
+
+type TouchCubeGesture = {
+  face: CubeFace | null;
+  lastX: number;
+  lastY: number;
+  mode: 'pending' | 'rotate' | 'scroll';
+  pointerId: number;
+  startX: number;
+  startY: number;
+};
+
+const entriesLabel: LocalizedText = {
+  en: 'Primary academic entries',
+  zh: '主要学术条目'
+};
+
+const sectionToggleLabels = {
+  en: {
+    collapse: 'Collapse homepage sections',
+    expand: 'Expand homepage sections'
+  },
+  zh: {
+    collapse: '折叠首页板块',
+    expand: '展开首页板块'
+  }
+} satisfies Record<SearchLanguage, { collapse: string; expand: string }>;
+
+const portalPalettes: PortalPalette[] = ['text', 'blue', 'gold', 'rose', 'green', 'violet', 'charcoal'];
+
+const portalTaglines: Record<PortalPalette, LocalizedText> = siteConfig.taglines;
+
+const updateLabels = {
+  en: {
+    title: 'Latest Updates',
+    window: 'Scrollable latest updates'
+  },
+  zh: {
+    title: '最新动态',
+    window: '可滚动的最新动态'
+  }
+} satisfies Record<SearchLanguage, { title: string; window: string }>;
+
+const updatesViewLabels = {
+  en: { compact: 'Compact', detailed: 'Full', group: 'Updates view' },
+  zh: { compact: '紧凑', detailed: '详细', group: '动态视图' }
+} satisfies Record<SearchLanguage, Record<UpdatesView | 'group', string>>;
+
+function withBasePath(pathname: string) {
+  const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
+  return basePath ? `${basePath}${pathname}` : pathname;
+}
+
+export function HomepagePortal({ directorySections, languageEntries, paperHighlights, updatesAsOf }: Props) {
+  const [language, setLanguage] = useState<SearchLanguage>('en');
+  const [updatesAsOfDate, setUpdatesAsOfDate] = useState(updatesAsOf);
+  const [browseView, setBrowseView] = useState<BrowseView>('list');
+  const [activeCubeFace, setActiveCubeFace] = useState<CubeFace | null>(null);
+  const [cubeFaceSettled, setCubeFaceSettled] = useState(false);
+  const [pinnedCubeFace, setPinnedCubeFace] = useState<CubeFace | null>(null);
+  const [touchCubeAngle, setTouchCubeAngle] = useState<TouchCubeAngle>('front');
+  const [touchCubeDragging, setTouchCubeDragging] = useState(false);
+  const [touchCubeDragDegrees, setTouchCubeDragDegrees] = useState(0);
+  const [browseOpen, setBrowseOpen] = useState(false);
+  const [newsOpen, setNewsOpen] = useState(false);
+  const [updatesView, setUpdatesView] = useState<UpdatesView>('compact');
+  const [acceptanceResetKey, setAcceptanceResetKey] = useState(0);
+  const [activityOpen, setActivityOpen] = useState(false);
+  const cubeHoverIntentRef = useRef<number | null>(null);
+  const cubeStageRef = useRef<HTMLDivElement>(null);
+  const touchCubeGestureRef = useRef<TouchCubeGesture | null>(null);
+  const updatesWindowRef = useRef<HTMLDivElement>(null);
+  const collapsibleSections = { activity: activityOpen, browse: browseOpen, news: newsOpen };
+  const allSectionsClosed = Object.values(collapsibleSections).every((open) => !open);
+  const commitNewsOpen = (open: boolean) => {
+    setNewsOpen(open);
+    // Native paper disclosures retain manual state until the whole feed closes.
+    if (!open) {
+      setUpdatesView('compact');
+      setAcceptanceResetKey((key) => key + 1);
+    }
+  };
+  const newsDisclosure = useAnimatedDisclosure(newsOpen, commitNewsOpen);
+  const changeNewsOpen = newsDisclosure.change;
+  const expandAllSections = () => {
+    setBrowseOpen(true);
+    changeNewsOpen(true);
+    setActivityOpen(true);
+  };
+  const collapseAllSections = () => {
+    setBrowseOpen(false);
+    changeNewsOpen(false);
+    setActivityOpen(false);
+  };
+  const toggleAllSections = () => {
+    if (allSectionsClosed) {
+      expandAllSections();
+      return;
+    }
+    collapseAllSections();
+  };
+  const portalClassName = ['wiki-portal', allSectionsClosed ? 'wiki-portal-collapsed' : ''].filter(Boolean).join(' ');
+  const recentUpdates = getRecentSiteUpdates(language, new Date(updatesAsOfDate));
+  const latestUpdate = recentUpdates[0];
+  const latestAcceptance = recentUpdates.find((item) => item.papers?.length);
+
+  useEffect(() => {
+    const refresh = () => setUpdatesAsOfDate(new Date().toISOString());
+    refresh();
+    const timer = window.setInterval(refresh, 60 * 60 * 1000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
+  }, [language]);
+
+  useEffect(() => {
+    try {
+      const savedView = window.localStorage.getItem('mywiki-browse-view');
+      if (savedView === 'list' || savedView === 'cube') setBrowseView(savedView);
+      const savedPinnedFace = window.localStorage.getItem('mywiki-cube-pinned-face') as CubeFace | null;
+      if (savedView === 'cube' && savedPinnedFace && cubeFaceNames.includes(savedPinnedFace)) {
+        setPinnedCubeFace(savedPinnedFace);
+        setActiveCubeFace(savedPinnedFace);
+      }
+    } catch {
+      // Storage can be unavailable in privacy-restricted browsing contexts.
+    }
+  }, []);
+
+  useEffect(() => () => {
+    if (cubeHoverIntentRef.current !== null) window.clearTimeout(cubeHoverIntentRef.current);
+  }, []);
+
+  useEffect(() => {
+    setCubeFaceSettled(false);
+    if (!activeCubeFace) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) setCubeFaceSettled(true);
+  }, [activeCubeFace]);
+
+  const completeCubeFaceTurn = (event: ReactTransitionEvent<HTMLDivElement>) => {
+    if (!activeCubeFace || event.target !== event.currentTarget || event.propertyName !== 'transform') return;
+    setCubeFaceSettled(true);
+  };
+
+  const clearCubeHoverIntent = () => {
+    if (cubeHoverIntentRef.current === null) return;
+    window.clearTimeout(cubeHoverIntentRef.current);
+    cubeHoverIntentRef.current = null;
+  };
+
+  const scheduleCubeFace = (face: CubeFace) => {
+    clearCubeHoverIntent();
+    if (pinnedCubeFace || face === activeCubeFace) return;
+    cubeHoverIntentRef.current = window.setTimeout(() => {
+      setActiveCubeFace(face);
+      cubeHoverIntentRef.current = null;
+    }, cubeHoverIntentMs);
+  };
+
+  const selectBrowseView = (nextView: BrowseView) => {
+    clearCubeHoverIntent();
+    setBrowseView(nextView);
+    setActiveCubeFace(null);
+    setPinnedCubeFace(null);
+    setTouchCubeAngle('front');
+    try {
+      window.localStorage.setItem('mywiki-browse-view', nextView);
+      window.localStorage.removeItem('mywiki-cube-pinned-face');
+    } catch {
+      // The view remains usable for this session when persistence is unavailable.
+    }
+  };
+
+  const togglePinnedCubeFace = (face: CubeFace) => {
+    clearCubeHoverIntent();
+    const nextPinnedFace = pinnedCubeFace === face ? null : face;
+    setPinnedCubeFace(nextPinnedFace);
+    setActiveCubeFace(face);
+    try {
+      if (nextPinnedFace) {
+        window.localStorage.setItem('mywiki-cube-pinned-face', nextPinnedFace);
+      } else {
+        window.localStorage.removeItem('mywiki-cube-pinned-face');
+      }
+    } catch {
+      // Pinning still works for this session when persistence is unavailable.
+    }
+  };
+
+  const resetTouchCubeGesture = () => {
+    touchCubeGestureRef.current = null;
+    setTouchCubeDragging(false);
+    setTouchCubeDragDegrees(0);
+  };
+
+  const returnTouchCubeToInitial = () => {
+    clearCubeHoverIntent();
+    resetTouchCubeGesture();
+    setActiveCubeFace(null);
+    setPinnedCubeFace(null);
+    setTouchCubeAngle('front');
+    try {
+      window.localStorage.removeItem('mywiki-cube-pinned-face');
+    } catch {
+      // Returning to the touch cube remains available without storage access.
+    }
+  };
+
+  useEffect(() => {
+    if (!activeCubeFace) return;
+    const returnToCube = (event: PointerEvent) => {
+      if (event.pointerType !== 'touch' && event.pointerType !== 'pen') return;
+      if (cubeStageRef.current?.contains(event.target as Node)) return;
+      returnTouchCubeToInitial();
+    };
+    document.addEventListener('pointerdown', returnToCube, true);
+    return () => document.removeEventListener('pointerdown', returnToCube, true);
+  }, [activeCubeFace]);
+
+  const isDirectPointer = (event: ReactPointerEvent) => event.pointerType === 'touch' || event.pointerType === 'pen';
+
+  const beginTouchCubeGesture = (event: ReactPointerEvent<HTMLDivElement>) => {
+    if (!isDirectPointer(event) || !event.isPrimary || browseView !== 'cube') return;
+    if ((event.target as HTMLElement).closest('button')) return;
+    if (activeCubeFace) {
+      const targetPanel = (event.target as HTMLElement).closest<HTMLElement>('.wiki-portal-cube-panel');
+      if (!targetPanel) returnTouchCubeToInitial();
+      return;
+    }
+    const targetFace = (event.target as HTMLElement).closest<HTMLElement>('[data-cube-hover-face]')?.dataset.cubeHoverFace as CubeFace | undefined;
+    touchCubeGestureRef.current = {
+      face: targetFace && cubeFaceNames.includes(targetFace) ? targetFace : null,
+      lastX: event.clientX,
+      lastY: event.clientY,
+      mode: 'pending',
+      pointerId: event.pointerId,
+      startX: event.clientX,
+      startY: event.clientY,
+    };
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch {
+      // Some embedded browsers provide implicit capture without exposing the method.
+    }
+  };
+
+  const moveTouchCubeGesture = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const gesture = touchCubeGestureRef.current;
+    if (!gesture || gesture.pointerId !== event.pointerId) return;
+    gesture.lastX = event.clientX;
+    gesture.lastY = event.clientY;
+    const deltaX = event.clientX - gesture.startX;
+    const deltaY = event.clientY - gesture.startY;
+    if (gesture.mode === 'pending') {
+      if (Math.max(Math.abs(deltaX), Math.abs(deltaY)) < touchCubeDragThresholdPx) return;
+      if (Math.abs(deltaY) > Math.abs(deltaX) * 1.1) {
+        gesture.mode = 'scroll';
+        return;
+      }
+      gesture.mode = 'rotate';
+      setTouchCubeDragging(true);
+    }
+    if (gesture.mode !== 'rotate') return;
+    event.preventDefault();
+    setTouchCubeDragDegrees(Math.max(-15, Math.min(15, deltaX * .12)));
+  };
+
+  const finishTouchCubeGesture = (event: ReactPointerEvent<HTMLDivElement>) => {
+    const gesture = touchCubeGestureRef.current;
+    if (!gesture || gesture.pointerId !== event.pointerId) return;
+    const deltaX = gesture.lastX - gesture.startX;
+    if (gesture.mode === 'rotate') {
+      if (Math.abs(deltaX) >= touchCubeSwipeThresholdPx) {
+        const currentIndex = touchCubeAngles.indexOf(touchCubeAngle);
+        const direction = deltaX < 0 ? 1 : -1;
+        setTouchCubeAngle(touchCubeAngles[(currentIndex + direction + touchCubeAngles.length) % touchCubeAngles.length]);
+      }
+    } else if (gesture.mode === 'pending' && gesture.face) {
+      clearCubeHoverIntent();
+      setActiveCubeFace(gesture.face);
+    }
+    resetTouchCubeGesture();
+  };
+
+  useEffect(() => {
+    const viewport = updatesWindowRef.current;
+    if (!viewport) return;
+    // Some engines latch wheel gestures inside nested details even with auto
+    // overscroll. Hand off only at a boundary; normal inner scrolling stays native.
+    const handoff = (event: WheelEvent) => {
+      if (event.ctrlKey || event.defaultPrevented || !event.cancelable || !event.deltaY || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+      const canScroll = (element: HTMLElement) => event.deltaY < 0
+        ? element.scrollTop > 1
+        : element.scrollTop + element.clientHeight < element.scrollHeight - 1;
+      if (canScroll(viewport)) return;
+      let nested = event.target instanceof Element ? event.target : null;
+      while (nested && nested !== viewport) {
+        if (nested instanceof HTMLElement && /auto|scroll/.test(getComputedStyle(nested).overflowY) && canScroll(nested)) return;
+        nested = nested.parentElement;
+      }
+      const delta = event.deltaY * (event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? viewport.clientHeight : 1);
+      let parent = viewport.parentElement;
+      while (parent && parent !== document.body) {
+        if (/auto|scroll/.test(getComputedStyle(parent).overflowY) && canScroll(parent)) {
+          event.preventDefault();
+          parent.scrollBy({ top: delta, behavior: 'instant' });
+          return;
+        }
+        parent = parent.parentElement;
+      }
+      event.preventDefault();
+      window.scrollBy({ top: delta, behavior: 'instant' });
+    };
+    viewport.addEventListener('wheel', handoff, { passive: false });
+    return () => viewport.removeEventListener('wheel', handoff);
+  }, []);
+
+  useLayoutEffect(() => {
+    const viewport = updatesWindowRef.current;
+    if (!viewport || !newsOpen) return;
+    const list = viewport.querySelector('ol');
+    if (!list) return;
+    const allItems = Array.from(list.children) as HTMLElement[];
+    const visibleItems = allItems.slice(0, 5);
+    if (!visibleItems.length) return;
+
+    const measureWindow = () => {
+      const lastItem = visibleItems.at(-1);
+      if (!lastItem) return;
+      const firstFiveHeight = lastItem.getBoundingClientRect().bottom - list.getBoundingClientRect().top;
+      const expandedHeight = Math.max(0, ...allItems
+        .filter((item) => item.querySelector('details[open]'))
+        .map((item) => item.getBoundingClientRect().height + 8));
+      const height = Math.max(firstFiveHeight, expandedHeight);
+      const boundedHeight = Math.min(Math.ceil(height), Math.max(316, Math.floor(window.innerHeight * .75)));
+      viewport.style.setProperty('--portal-updates-window-height', `${boundedHeight}px`);
+    };
+
+    viewport.scrollTop = 0;
+    const resizeObserver = new ResizeObserver(measureWindow);
+    allItems.forEach((item) => resizeObserver.observe(item));
+    window.addEventListener('resize', measureWindow);
+    measureWindow();
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener('resize', measureWindow);
+    };
+  }, [language, newsOpen, recentUpdates.length, updatesView]);
+
+  const renderPortalSectionContent = (section: PortalSection, headingId: string) => (
+    <>
+      <h3 id={headingId}>
+        <span>{section.title[language]}</span>
+      </h3>
+      {section.groups.map((group) => (
+        <div className="wiki-portal-group" key={group.label.en}>
+          <p className="wiki-portal-group-label">{group.label[language]}</p>
+          <ul>
+            {group.links[language].map((item) => (
+              <li key={item.href}>
+                <WikiLink href={item.href} titleMorphSlug={item.slug} titleMorphDestTitle={item.title}>
+                  {item.title}
+                </WikiLink>
+                {item.summary && <span>{item.summary}</span>}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </>
+  );
+
+  return (
+    <article className={portalClassName} data-page-slug="Your_Name">
+      <section className="wiki-portal-hero" aria-labelledby="portal-title">
+        <div className="wiki-portal-masthead">
+          <div className="wiki-portal-brand">
+            <div className="wiki-portal-name-wrap">
+              <h1 className="wiki-portal-name" id="portal-title">
+                <span className="wiki-portal-name-text">{siteConfig.ownerName[language]}</span>
+              </h1>
+              <button
+                type="button"
+                aria-controls="portal-news portal-activity portal-directory"
+                aria-expanded={!allSectionsClosed}
+                aria-label={allSectionsClosed ? sectionToggleLabels[language].expand : sectionToggleLabels[language].collapse}
+                className="wiki-portal-name-button"
+                onClick={toggleAllSections}
+              />
+            </div>
+          </div>
+        </div>
+        <p aria-atomic="true" aria-live="polite" className="wiki-portal-tagline">
+          {portalPalettes.map((palette) => (
+            <span className={`wiki-portal-tagline-copy wiki-portal-tagline-${palette}`} key={palette}>
+              {portalTaglines[palette][language]}
+            </span>
+          ))}
+        </p>
+        <div className="wiki-portal-search">
+          <WikiSearch
+            language={language}
+            onLanguageChange={setLanguage}
+            showLanguageSelect
+            variant="portal"
+          />
+          <nav className="wiki-portal-editions" aria-label={entriesLabel[language]}>
+            {languageEntries.map((item) => (
+              <WikiLink
+                className="wiki-portal-edition"
+                href={item.href}
+                key={item.href}
+                onClick={() => clearWikiMorphIntent()}
+              >
+                <strong>{item.label}</strong>
+                <span>{item.detail}</span>
+              </WikiLink>
+            ))}
+          </nav>
+        </div>
+      </section>
+
+      <div className="wiki-portal-disclosures">
+        <details
+          className="wiki-portal-news wiki-portal-timeline"
+          data-updates-view={updatesView}
+          id="portal-news"
+          ref={newsDisclosure.ref}
+          data-animated-disclosure=""
+          onToggle={(event) => {
+            if (event.target !== event.currentTarget) return;
+            if (event.currentTarget.open !== newsOpen) changeNewsOpen(event.currentTarget.open);
+          }}
+          open={newsOpen}
+        >
+          <summary onClick={(event) => { event.preventDefault(); newsDisclosure.toggle(); }}>
+            <span className="wiki-portal-timeline-heading">
+              <strong>{updateLabels[language].title}</strong>
+              <em>{recentUpdates.length} {language === 'zh' ? '条动态' : 'updates'}</em>
+            </span>
+            {latestUpdate && <span className="wiki-portal-news-preview">
+              <time dateTime={latestUpdate.dateTime}>{latestUpdate.date}</time>
+              <span>
+                <b>{latestUpdate.title}</b>
+                <small>{latestUpdate.detail}</small>
+              </span>
+            </span>}
+          </summary>
+          <div className="wiki-portal-view-switcher wiki-portal-updates-view-switcher" role="group" aria-label={updatesViewLabels[language].group}>
+            <SlidingSelection>
+              {(['compact', 'detailed'] as const).map((view) => (
+                <button
+                  aria-controls="portal-updates-window"
+                  aria-pressed={updatesView === view}
+                  className={updatesView === view ? 'is-active' : undefined}
+                  key={view}
+                  onClick={() => setUpdatesView(view)}
+                  type="button"
+                >
+                  {updatesViewLabels[language][view]}
+                </button>
+              ))}
+            </SlidingSelection>
+          </div>
+          <div
+            aria-label={updateLabels[language].window}
+            className="wiki-portal-updates-window"
+            id="portal-updates-window"
+            ref={updatesWindowRef}
+            role="region"
+            tabIndex={0}
+          >
+            <ol className="wiki-portal-news-list">
+              {recentUpdates.map((item) => (
+                <li key={`${item.dateTime}-${item.title}`}>
+                  <time dateTime={item.dateTime}>{item.date}</time>
+                  <div>
+                    <WikiLink href={withBasePath(item.href)} titleMorphSlug={wikiSlugFromHref(item.href)} titleMorphDestTitle={item.title}>{item.title}</WikiLink>
+                    {!item.papers && <p>{item.detail}</p>}
+                    {item.papers && <PaperAcceptancePreview key={acceptanceResetKey} papers={item.papers} language={language} defaultOpen={item === latestAcceptance} view={updatesView} highlights={paperHighlights} visible={newsOpen} />}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </details>
+
+        <VisitorAtlasDisclosure
+          language={language}
+          onOpenChange={setActivityOpen}
+          open={activityOpen}
+        />
+
+        <details
+          className="wiki-portal-directory"
+          id="portal-directory"
+          onToggle={(event) => setBrowseOpen(event.currentTarget.open)}
+          open={browseOpen}
+        >
+          <summary>
+            <span>{browseLabels[language]}</span>
+          </summary>
+          <div className="wiki-portal-view-switcher" role="group" aria-label={browseViewLabels[language].group}>
+            <span>{browseViewLabels[language].group}</span>
+            <SlidingSelection>
+              {(['list', 'cube'] as const).map((view) => (
+                <button
+                  aria-pressed={browseView === view}
+                  className={browseView === view ? 'is-active' : undefined}
+                  key={view}
+                  onClick={() => selectBrowseView(view)}
+                  type="button"
+                >
+                  {browseViewLabels[language][view]}
+                </button>
+              ))}
+            </SlidingSelection>
+          </div>
+          <div
+            className={'wiki-portal-cube-stage wiki-portal-cube-stage-' + browseView}
+            data-active-face={browseView === 'cube' ? activeCubeFace ?? undefined : undefined}
+            data-face-settled={browseView === 'cube' && activeCubeFace && cubeFaceSettled ? '' : undefined}
+            data-touch-cube-angle={browseView === 'cube' ? touchCubeAngle : undefined}
+            data-touch-cube-dragging={browseView === 'cube' && touchCubeDragging ? '' : undefined}
+            onBlurCapture={(event) => {
+              if (!pinnedCubeFace && !event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                clearCubeHoverIntent();
+                setActiveCubeFace(null);
+              }
+            }}
+            onFocusCapture={(event) => {
+              if (pinnedCubeFace) return;
+              clearCubeHoverIntent();
+              const face = (event.target as HTMLElement).closest<HTMLElement>('[data-cube-face]')?.dataset.cubeFace as CubeFace | undefined;
+              if (face && cubeFaceNames.includes(face)) setActiveCubeFace(face);
+            }}
+            onPointerCancel={resetTouchCubeGesture}
+            onPointerDown={beginTouchCubeGesture}
+            onPointerLeave={(event) => {
+              if (isDirectPointer(event)) return;
+              clearCubeHoverIntent();
+              if (!pinnedCubeFace) setActiveCubeFace(null);
+            }}
+            onPointerMove={moveTouchCubeGesture}
+            onPointerOver={(event) => {
+              if (event.pointerType !== 'mouse' || browseView !== 'cube' || activeCubeFace || pinnedCubeFace) return;
+              const targetFace = (event.target as HTMLElement).closest<HTMLElement>('[data-cube-face]');
+              const relatedFace = (event.relatedTarget as HTMLElement | null)?.closest?.<HTMLElement>('[data-cube-face]');
+              const face = targetFace?.dataset.cubeFace as CubeFace | undefined;
+              if (targetFace === relatedFace || !face || !cubeFaceNames.includes(face)) return;
+              scheduleCubeFace(face);
+            }}
+            onPointerUp={finishTouchCubeGesture}
+            ref={cubeStageRef}
+          >
+            <div
+              className={'wiki-portal-grid wiki-portal-grid-' + browseView}
+              data-active-face={activeCubeFace ?? undefined}
+              data-browse-view={browseView}
+              data-face-settled={cubeFaceSettled ? '' : undefined}
+              data-pinned-face={pinnedCubeFace ?? undefined}
+              data-touch-cube-angle={touchCubeAngle}
+              onTransitionEnd={completeCubeFaceTurn}
+              style={browseView === 'cube' && !activeCubeFace ? {
+                '--portal-touch-drag-y': `${touchCubeDragDegrees}deg`,
+              } as CSSProperties : undefined}
+            >
+              {directorySections.map((section, sectionIndex) => {
+                const sectionId = `portal-${section.title.en.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
+                const cubeFace = cubeFaceNames[sectionIndex];
+                return (
+                <section
+                  className={'wiki-portal-block wiki-portal-cube-panel wiki-portal-cube-face-' + cubeFace}
+                  aria-labelledby={sectionId}
+                  data-cube-face={cubeFace}
+                  key={section.title.en}
+                >
+                  {renderPortalSectionContent(section, sectionId)}
+                </section>
+                );
+              })}
+            </div>
+            {browseView === 'cube' && !activeCubeFace && (
+              <div aria-hidden="true" className="wiki-portal-cube-hover-zones">
+                {cubeFaceNames.map((face) => (
+                  <span
+                    className={'wiki-portal-cube-hover-zone wiki-portal-cube-hover-zone-' + face}
+                    data-cube-hover-face={face}
+                    key={'cube-hover-' + face}
+                    onPointerEnter={(event) => {
+                      if (event.pointerType === 'mouse') scheduleCubeFace(face);
+                    }}
+                    onPointerLeave={clearCubeHoverIntent}
+                  />
+                ))}
+              </div>
+            )}
+            {browseView === 'cube' && !activeCubeFace && (
+              <SlidingSelection className="wiki-portal-cube-touch-angles wiki-sliding-selection-dots" role="group" aria-label={language === 'zh' ? '魔方观察角度' : 'Cube viewing angle'}>
+                {touchCubeAngles.map((angle) => (
+                  <button
+                    aria-label={language === 'zh' ? `切换至${angle === 'top' ? '上方' : angle === 'front' ? '正面' : '右侧'}视角` : `Switch to ${angle} view`}
+                    aria-pressed={touchCubeAngle === angle}
+                    key={angle}
+                    onClick={() => setTouchCubeAngle(angle)}
+                    type="button"
+                  />
+                ))}
+              </SlidingSelection>
+            )}
+            {browseView === 'cube' && activeCubeFace && (
+              <button
+                aria-label={cubeReturnLabels[language].ariaLabel}
+                className="wiki-portal-cube-touch-return"
+                onClick={returnTouchCubeToInitial}
+                type="button"
+              >
+                <svg aria-hidden="true" viewBox="0 0 24 24">
+                  <path d="M10 6 4 12l6 6M4 12h10.5a5.5 5.5 0 0 1 5.5 5.5V19" />
+                </svg>
+                <span>{cubeReturnLabels[language].label}</span>
+              </button>
+            )}
+            {browseView === 'cube' && activeCubeFace && cubeFaceSettled && (
+              <button
+                aria-label={pinnedCubeFace === activeCubeFace ? cubePinLabels[language].unpin : cubePinLabels[language].pin}
+                aria-pressed={pinnedCubeFace === activeCubeFace}
+                className="wiki-portal-cube-pin"
+                data-cube-face={activeCubeFace}
+                onClick={() => togglePinnedCubeFace(activeCubeFace)}
+                type="button"
+              >
+                <svg aria-hidden="true" className="wiki-portal-cube-pin-icon" viewBox="0 0 32 40">
+                  <ellipse className="wiki-portal-cube-pin-head" cx="16" cy="7" rx="10" ry="4" />
+                  <path className="wiki-portal-cube-pin-body" d="M8 8h16l-4.5 11h-7Z" />
+                  <ellipse className="wiki-portal-cube-pin-collar" cx="16" cy="19" rx="5" ry="2.2" />
+                  <path className="wiki-portal-cube-pin-needle" d="M16 20v15" />
+                  <ellipse className="wiki-portal-cube-pin-highlight" cx="13" cy="5.8" rx="3.2" ry="1.2" />
+                </svg>
+              </button>
+            )}
+          </div>
+        </details>
+      </div>
+    </article>
+  );
+}

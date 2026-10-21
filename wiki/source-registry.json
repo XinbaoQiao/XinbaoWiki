@@ -1,0 +1,266 @@
+{
+  "schemaVersion": 1,
+  "okfVersion": "0.1",
+  "profile": {
+    "id": "mywiki-okf-profile",
+    "version": "1.0"
+  },
+  "identity": {
+    "strategy": "src- plus the first 16 hexadecimal characters of SHA-256(canonical URL)",
+    "canonicalization": "WHATWG URL normalization; fragments and common tracking parameters are removed"
+  },
+  "hashSemantics": {
+    "identity": "hash.value is SHA-256 of the canonical URL and is stable across page associations",
+    "content": "check.contentHash remains null until a scheduled or manual source snapshot audit records remote content"
+  },
+  "checkPolicy": {
+    "defaultMethod": "scheduled-http-head-or-get",
+    "uncheckedStatus": "not-checked",
+    "allowedStatuses": [
+      "not-checked",
+      "ok",
+      "redirected",
+      "unavailable",
+      "error"
+    ],
+    "maxAgeDaysByKind": {
+      "conference-site": 30,
+      "code-repository": 90,
+      "institutional-source": 90,
+      "public-profile": 90,
+      "researcher-profile": 90,
+      "default": 180
+    },
+    "meaning": "Registry generation proves declaration and page association, not remote availability or factual correctness"
+  },
+  "contentHash": "sha256:b8873b15b1fc70e16fa161beb3093651f8cad783e58b9d6df8166460eeeda0f7",
+  "sources": [
+    {
+      "id": "src-0f115db062b7c0dd",
+      "url": "https://example.com/",
+      "kind": "web-reference",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:0f115db062b7c0dd030b16878c99dea5c354b49dc37b38eb8846179c7783e9d7"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "Example_Advisor",
+        "Example_Advisor_zh",
+        "Example_Lab",
+        "Example_Lab_zh",
+        "Example_University",
+        "Example_University_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Example_Advisor",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Example_Advisor_zh",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Example_Lab",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Example_Lab_zh",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Example_University",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Example_University_zh",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-28bacb8b68411b9d",
+      "url": "https://arxiv.org/",
+      "kind": "scholarly-publication",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:28bacb8b68411b9d16906af58605647a993fe46a9be08e0bd1f197da46f5d8f2"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "Example_Paper",
+        "Example_Paper_zh",
+        "Publications",
+        "Publications_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Example_Paper",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Example_Paper_zh",
+          "locations": [
+            "frontmatter.links[0].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-5627303e2b401dcc",
+      "url": "https://github.com/your-username",
+      "kind": "code-repository",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:5627303e2b401dccde1ae9757df765b4eea95b602d69a42bc0ea7f84376291ae"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 90
+      },
+      "pages": [
+        "CV",
+        "CV_zh",
+        "Example_Paper",
+        "Example_Paper_zh",
+        "Publications",
+        "Publications_zh",
+        "Your_Name",
+        "Your_Name_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "CV",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "CV_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Example_Paper",
+          "locations": [
+            "frontmatter.links[1].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Example_Paper_zh",
+          "locations": [
+            "frontmatter.links[1].url"
+          ],
+          "citation": false,
+          "footnote": false
+        },
+        {
+          "slug": "Publications",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Publications_zh",
+          "locations": [
+            "body"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Your_Name",
+          "locations": [
+            "body",
+            "frontmatter.links[1].url"
+          ],
+          "citation": true,
+          "footnote": false
+        },
+        {
+          "slug": "Your_Name_zh",
+          "locations": [
+            "body",
+            "frontmatter.links[1].url"
+          ],
+          "citation": true,
+          "footnote": false
+        }
+      ]
+    }
+  ]
+}

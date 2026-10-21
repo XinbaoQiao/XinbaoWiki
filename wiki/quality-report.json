@@ -1,0 +1,739 @@
+{
+  "schemaVersion": 2,
+  "okfVersion": "0.1",
+  "counts": {
+    "pages": 35,
+    "publicPages": 34,
+    "hiddenPages": 1,
+    "edges": 181,
+    "warnings": 0,
+    "languages": {
+      "en": 18,
+      "zh": 17
+    },
+    "types": {
+      "Academic advisor": 2,
+      "CV summary": 1,
+      "CV 摘要": 1,
+      "Education timeline": 1,
+      "Maintenance log": 1,
+      "PhD student": 1,
+      "Project overview": 1,
+      "Public research university": 1,
+      "publication": 2,
+      "Publication list": 1,
+      "Research concept": 2,
+      "Research experience": 1,
+      "Research institute": 1,
+      "Research overview": 1,
+      "Research topic": 3,
+      "Wiki index": 1,
+      "Wiki 索引": 1,
+      "公立研究型大学": 1,
+      "博士生": 1,
+      "教育时间线": 1,
+      "研究主题": 3,
+      "研究概念": 1,
+      "研究概览": 1,
+      "研究经历": 1,
+      "研究院": 1,
+      "维护日志": 1,
+      "论文列表": 1,
+      "项目概览": 1
+    }
+  },
+  "warnings": [],
+  "hiddenPages": {
+    "count": 1,
+    "pages": [
+      {
+        "slug": "Draft_Example",
+        "file": "Draft_Example.md",
+        "title": "Draft Example",
+        "language": "en"
+      }
+    ]
+  },
+  "duplicateTitleGroups": [],
+  "orphanPages": [],
+  "noOutgoingPages": [],
+  "missingTranslationPairs": [],
+  "translationConsistency": {
+    "warnings": [],
+    "missingPairs": []
+  },
+  "structuredRelationCounts": {
+    "cites": 0,
+    "contradicts": 0,
+    "depends-on": 2,
+    "derived-from": 0,
+    "related": 2,
+    "supersedes": 0,
+    "uses": 0
+  },
+  "sourceCoverage": {
+    "pages": 34,
+    "pagesWithSources": 14,
+    "pagesWithoutSources": [
+      {
+        "slug": "Education",
+        "title": "Education",
+        "language": "en",
+        "modifiedAt": "2026-10-20T17:43:03.220Z",
+        "reviewedAt": "2026-10-20T17:43:05.000Z",
+        "reviewDue": "2027-04-18"
+      },
+      {
+        "slug": "Education_zh",
+        "title": "教育经历",
+        "language": "zh",
+        "modifiedAt": "2026-10-20T19:58:21.544Z",
+        "reviewedAt": "2026-10-20T19:58:23.000Z",
+        "reviewDue": "2027-04-18"
+      },
+      {
+        "slug": "Example_Concept",
+        "title": "Example Concept",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:00.161Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Example_Concept_zh",
+        "title": "示例概念",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:00.159Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Experience",
+        "title": "Experience",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:00.170Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "Experience_zh",
+        "title": "研究经历",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:00.170Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "index",
+        "title": "Index",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:00.172Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-10-21"
+      },
+      {
+        "slug": "index_zh",
+        "title": "索引",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:00.171Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-10-21"
+      },
+      {
+        "slug": "log",
+        "title": "Log",
+        "language": "en",
+        "modifiedAt": "2026-10-20T17:43:03.274Z",
+        "reviewedAt": "2026-10-20T17:43:05.000Z",
+        "reviewDue": "2027-10-20"
+      },
+      {
+        "slug": "log_zh",
+        "title": "日志",
+        "language": "zh",
+        "modifiedAt": "2026-10-20T19:58:21.971Z",
+        "reviewedAt": "2026-10-20T19:58:23.000Z",
+        "reviewDue": "2027-10-20"
+      },
+      {
+        "slug": "Projects",
+        "title": "Projects",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:00.175Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "Projects_zh",
+        "title": "项目",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:59:16.831Z",
+        "reviewedAt": "2026-10-21T06:59:18.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "Research",
+        "title": "Research",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:30.475Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "Research_Area_1",
+        "title": "Research Area 1",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:30.470Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Research_Area_1_zh",
+        "title": "研究方向一",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:30.470Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Research_Area_2",
+        "title": "Research Area 2",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:30.472Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Research_Area_2_zh",
+        "title": "研究方向二",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:30.471Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Research_Area_3",
+        "title": "Research Area 3",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:30.473Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Research_Area_3_zh",
+        "title": "研究方向三",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:30.473Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Research_zh",
+        "title": "研究",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:30.474Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-01-19"
+      }
+    ],
+    "coverage": 0.4118,
+    "registeredSources": 3
+  },
+  "citationCoverage": {
+    "pages": 34,
+    "pagesWithBodyCitations": 6,
+    "pagesWithFootnoteCitations": 0,
+    "pagesWithoutBodyCitations": [
+      {
+        "slug": "Education",
+        "title": "Education",
+        "language": "en",
+        "modifiedAt": "2026-10-20T17:43:03.220Z",
+        "reviewedAt": "2026-10-20T17:43:05.000Z",
+        "reviewDue": "2027-04-18"
+      },
+      {
+        "slug": "Education_zh",
+        "title": "教育经历",
+        "language": "zh",
+        "modifiedAt": "2026-10-20T19:58:21.544Z",
+        "reviewedAt": "2026-10-20T19:58:23.000Z",
+        "reviewDue": "2027-04-18"
+      },
+      {
+        "slug": "Example_Advisor",
+        "title": "Example Advisor",
+        "language": "en",
+        "modifiedAt": "2026-10-20T17:43:03.225Z",
+        "reviewedAt": "2026-10-20T17:43:05.000Z",
+        "reviewDue": "2027-04-18"
+      },
+      {
+        "slug": "Example_Advisor_zh",
+        "title": "示例导师",
+        "language": "zh",
+        "modifiedAt": "2026-10-20T19:58:21.555Z",
+        "reviewedAt": "2026-10-20T19:58:23.000Z",
+        "reviewDue": "2027-04-18"
+      },
+      {
+        "slug": "Example_Concept",
+        "title": "Example Concept",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:00.161Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Example_Concept_zh",
+        "title": "示例概念",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:00.159Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Example_Lab",
+        "title": "Example Lab",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:00.164Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Example_Lab_zh",
+        "title": "示例实验室",
+        "language": "zh",
+        "modifiedAt": "2026-10-20T19:58:21.570Z",
+        "reviewedAt": "2026-10-20T19:58:23.000Z",
+        "reviewDue": "2027-04-18"
+      },
+      {
+        "slug": "Example_Paper",
+        "title": "An Example Paper Title for Your Template",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:00.167Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-10-21"
+      },
+      {
+        "slug": "Example_Paper_zh",
+        "title": "一篇示例论文标题",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:00.166Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "Example_University",
+        "title": "Example University",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:00.169Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Example_University_zh",
+        "title": "示例大学",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:00.168Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Experience",
+        "title": "Experience",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:00.170Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "Experience_zh",
+        "title": "研究经历",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:00.170Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "index",
+        "title": "Index",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:00.172Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-10-21"
+      },
+      {
+        "slug": "index_zh",
+        "title": "索引",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:00.171Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-10-21"
+      },
+      {
+        "slug": "log",
+        "title": "Log",
+        "language": "en",
+        "modifiedAt": "2026-10-20T17:43:03.274Z",
+        "reviewedAt": "2026-10-20T17:43:05.000Z",
+        "reviewDue": "2027-10-20"
+      },
+      {
+        "slug": "log_zh",
+        "title": "日志",
+        "language": "zh",
+        "modifiedAt": "2026-10-20T19:58:21.971Z",
+        "reviewedAt": "2026-10-20T19:58:23.000Z",
+        "reviewDue": "2027-10-20"
+      },
+      {
+        "slug": "Projects",
+        "title": "Projects",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:00.175Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "Projects_zh",
+        "title": "项目",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:59:16.831Z",
+        "reviewedAt": "2026-10-21T06:59:18.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "Research",
+        "title": "Research",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:30.475Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "Research_Area_1",
+        "title": "Research Area 1",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:30.470Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Research_Area_1_zh",
+        "title": "研究方向一",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:30.470Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Research_Area_2",
+        "title": "Research Area 2",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:30.472Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Research_Area_2_zh",
+        "title": "研究方向二",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:30.471Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Research_Area_3",
+        "title": "Research Area 3",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:30.473Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Research_Area_3_zh",
+        "title": "研究方向三",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:30.473Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Research_zh",
+        "title": "研究",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:30.474Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-01-19"
+      }
+    ],
+    "coverage": 0.1765,
+    "footnoteCoverage": 0
+  },
+  "reviewFreshness": {
+    "asOf": "2026-10-19",
+    "policy": "review status is recalculated at the start of each UTC week",
+    "currentPages": 34,
+    "overduePages": [],
+    "pendingReviewPages": [],
+    "nextReviewDue": "2027-01-19"
+  },
+  "typedRelationCoverage": {
+    "pages": 34,
+    "pagesWithTypedRelations": 4,
+    "pagesWithoutTypedRelations": [
+      {
+        "slug": "CV",
+        "title": "Curriculum Vitae",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:00.154Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "CV_zh",
+        "title": "简历",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:00.151Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "Education",
+        "title": "Education",
+        "language": "en",
+        "modifiedAt": "2026-10-20T17:43:03.220Z",
+        "reviewedAt": "2026-10-20T17:43:05.000Z",
+        "reviewDue": "2027-04-18"
+      },
+      {
+        "slug": "Education_zh",
+        "title": "教育经历",
+        "language": "zh",
+        "modifiedAt": "2026-10-20T19:58:21.544Z",
+        "reviewedAt": "2026-10-20T19:58:23.000Z",
+        "reviewDue": "2027-04-18"
+      },
+      {
+        "slug": "Example_Advisor",
+        "title": "Example Advisor",
+        "language": "en",
+        "modifiedAt": "2026-10-20T17:43:03.225Z",
+        "reviewedAt": "2026-10-20T17:43:05.000Z",
+        "reviewDue": "2027-04-18"
+      },
+      {
+        "slug": "Example_Advisor_zh",
+        "title": "示例导师",
+        "language": "zh",
+        "modifiedAt": "2026-10-20T19:58:21.555Z",
+        "reviewedAt": "2026-10-20T19:58:23.000Z",
+        "reviewDue": "2027-04-18"
+      },
+      {
+        "slug": "Example_Lab",
+        "title": "Example Lab",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:00.164Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Example_Lab_zh",
+        "title": "示例实验室",
+        "language": "zh",
+        "modifiedAt": "2026-10-20T19:58:21.570Z",
+        "reviewedAt": "2026-10-20T19:58:23.000Z",
+        "reviewDue": "2027-04-18"
+      },
+      {
+        "slug": "Example_Paper",
+        "title": "An Example Paper Title for Your Template",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:00.167Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-10-21"
+      },
+      {
+        "slug": "Example_Paper_zh",
+        "title": "一篇示例论文标题",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:00.166Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "Example_University",
+        "title": "Example University",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:00.169Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Example_University_zh",
+        "title": "示例大学",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:00.168Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Experience",
+        "title": "Experience",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:00.170Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "Experience_zh",
+        "title": "研究经历",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:00.170Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "index",
+        "title": "Index",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:00.172Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-10-21"
+      },
+      {
+        "slug": "index_zh",
+        "title": "索引",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:00.171Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-10-21"
+      },
+      {
+        "slug": "log",
+        "title": "Log",
+        "language": "en",
+        "modifiedAt": "2026-10-20T17:43:03.274Z",
+        "reviewedAt": "2026-10-20T17:43:05.000Z",
+        "reviewDue": "2027-10-20"
+      },
+      {
+        "slug": "log_zh",
+        "title": "日志",
+        "language": "zh",
+        "modifiedAt": "2026-10-20T19:58:21.971Z",
+        "reviewedAt": "2026-10-20T19:58:23.000Z",
+        "reviewDue": "2027-10-20"
+      },
+      {
+        "slug": "Projects",
+        "title": "Projects",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:00.175Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "Projects_zh",
+        "title": "项目",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:59:16.831Z",
+        "reviewedAt": "2026-10-21T06:59:18.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "Publications",
+        "title": "Publications",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:00.178Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "Publications_zh",
+        "title": "论文",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:00.176Z",
+        "reviewedAt": "2026-10-21T06:35:02.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "Research",
+        "title": "Research",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:30.475Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "Research_Area_1",
+        "title": "Research Area 1",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:30.470Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Research_Area_1_zh",
+        "title": "研究方向一",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:30.470Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Research_Area_3",
+        "title": "Research Area 3",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:30.473Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Research_Area_3_zh",
+        "title": "研究方向三",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:30.473Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-04-19"
+      },
+      {
+        "slug": "Research_zh",
+        "title": "研究",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:30.474Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "Your_Name",
+        "title": "Your Name",
+        "language": "en",
+        "modifiedAt": "2026-10-21T06:35:30.477Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-01-19"
+      },
+      {
+        "slug": "Your_Name_zh",
+        "title": "你的名字",
+        "language": "zh",
+        "modifiedAt": "2026-10-21T06:35:30.476Z",
+        "reviewedAt": "2026-10-21T06:35:32.000Z",
+        "reviewDue": "2027-01-19"
+      }
+    ],
+    "coverage": 0.1176,
+    "structuredEdges": 4,
+    "totalEdges": 181
+  },
+  "retrievalReadiness": {
+    "pages": 34,
+    "readyPages": 34,
+    "missingMetadataPages": [],
+    "coverage": 1,
+    "contract": "markdown-heading-v1 with stable wiki:<slug> document IDs and content hashes"
+  }
+}

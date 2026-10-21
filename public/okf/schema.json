@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 5,
+  "okfVersion": "0.1",
+  "purpose": "Schema contract for maintaining MyWiki as an agent-readable academic wiki.",
+  "profile": {
+    "id": "mywiki-okf-profile",
+    "version": "1.0",
+    "base": "Google Cloud Open Knowledge Format v0.1 draft",
+    "conformance": "strict project profile layered on OKF v0.1; profile extensions use additional frontmatter and generated JSON fields",
+    "compatibility": "OKF consumers may ignore unknown MyWiki profile fields"
+  },
+  "source": {
+    "canonicalDirectory": "wiki",
+    "conceptFiles": "wiki/*.md",
+    "requiredFrontmatter": [
+      "type",
+      "title",
+      "description",
+      "tags",
+      "timestamp"
+    ],
+    "recommendedFrontmatter": [
+      "modified",
+      "content_hash",
+      "reviewed_at",
+      "review_due",
+      "resource",
+      "aliases",
+      "links",
+      "summary",
+      "hidden",
+      "language",
+      "relations"
+    ],
+    "fieldSemantics": {
+      "timestamp": "Initial knowledge-record timestamp retained for OKF v0.1 compatibility; it is not a last-modified field.",
+      "modified": "Last substantive edit time. On a canonical content-hash change it advances strictly beyond every prior review, forcing the new revision into pending review.",
+      "content_hash": "SHA-256 of canonical frontmatter plus body after generated maintenance fields are removed.",
+      "reviewed_at": "Explicit maintainer assertion that the current substantive content received editorial review. Existing values created by the 2026 lifecycle migration remain migration baselines and do not prove remote-source revalidation. New pages and later reviews must set this field explicitly; maintenance never infers it.",
+      "review_due": "Derived date for the next review, based on page type and reviewed_at."
+    },
+    "reservedSiteSlugs": [
+      "index",
+      "index_zh",
+      "log",
+      "log_zh"
+    ]
+  },
+  "lifecycle": {
+    "conceptLevelFields": [
+      "status",
+      "confidence",
+      "review",
+      "retention",
+      "modified",
+      "content_hash",
+      "reviewed_at",
+      "review_due"
+    ],
+    "policy": "Content changed after reviewed_at is a hard error. Pages past review_due become warnings and fail the default check. Review status is evaluated at the start of each UTC week; WIKI_REVIEW_AS_OF may pin an audit date.",
+    "migration": "The completed 2026 migration initialized existing modified and reviewed_at values from Git/source timestamps. That historical bootstrap does not verify remote sources and is not applied to new or repaired pages.",
+    "statuses": [
+      "active",
+      "confirmed",
+      "private"
+    ]
+  },
+  "sources": {
+    "registry": "wiki/source-registry.json",
+    "publicRegistry": "public/okf/sources.json",
+    "identity": "Stable source IDs derive from canonical URL SHA-256 and do not depend on page associations.",
+    "verificationBoundary": "Generated status not-checked proves only that a URL was declared and associated; scheduled or manual HTTP audits establish availability and remote content hashes."
+  },
+  "retrieval": {
+    "documentId": "wiki:<slug>",
+    "chunking": "markdown-heading-v1",
+    "requiredMetadata": [
+      "slug",
+      "language",
+      "type",
+      "tags",
+      "contentHash",
+      "sourceIds",
+      "reviewedAt",
+      "reviewDue"
+    ]
+  },
+  "relations": {
+    "frontmatterShape": [
+      {
+        "type": "depends-on",
+        "target": "Synthetic_Data",
+        "label": "optional human note"
+      }
+    ],
+    "supported": [
+      "cites",
+      "contradicts",
+      "depends-on",
+      "derived-from",
+      "markdown-link",
+      "related",
+      "supersedes",
+      "uses",
+      "wikilink"
+    ],
+    "structured": [
+      "cites",
+      "contradicts",
+      "depends-on",
+      "derived-from",
+      "related",
+      "supersedes",
+      "uses"
+    ]
+  },
+  "qualityGates": [
+    "Every source markdown file must parse as YAML frontmatter plus markdown body.",
+    "Every source concept must have explicit OKF-compatible type/title/description/tags/timestamp.",
+    "Every check run must finish with zero warnings; use --allow-warnings only for local diagnosis.",
+    "Hidden pages must be excluded from public page indexes and public OKF bundle exports.",
+    "Internal WikiLinks and markdown links must resolve.",
+    "Structured frontmatter relations must use a supported relation type and resolve to a source page.",
+    "Every content hash must exclude generated maintenance fields and match canonical page content.",
+    "Missing reviewed_at is a hard error; maintenance never infers review completion.",
+    "Content modified after reviewed_at must be reviewed before checks pass.",
+    "Source IDs must resolve through the generated registry; not-checked sources are declarations, not verified facts.",
+    "Generated graph, page index, schema, and OKF export must be fresh."
+  ],
+  "generatedArtifacts": [
+    "wiki/pages.json",
+    "wiki/graph.json",
+    "wiki/maintenance-schema.json",
+    "wiki/quality-report.json",
+    "wiki/source-registry.json",
+    "public/okf/index.md",
+    "public/okf/log.md",
+    "public/okf/manifest.json",
+    "public/okf/pages.json",
+    "public/okf/graph.json",
+    "public/okf/quality-report.json",
+    "public/okf/schema.json",
+    "public/okf/sources.json",
+    "public/okf/concepts/*.md"
+  ],
+  "currentTypeCounts": {
+    "Academic advisor": 2,
+    "CV summary": 1,
+    "CV 摘要": 1,
+    "Education timeline": 1,
+    "Maintenance log": 1,
+    "PhD student": 1,
+    "Project overview": 1,
+    "Public research university": 1,
+    "publication": 2,
+    "Publication list": 1,
+    "Research concept": 2,
+    "Research experience": 1,
+    "Research institute": 1,
+    "Research overview": 1,
+    "Research topic": 3,
+    "Wiki index": 1,
+    "Wiki 索引": 1,
+    "公立研究型大学": 1,
+    "博士生": 1,
+    "教育时间线": 1,
+    "研究主题": 3,
+    "研究概念": 1,
+    "研究概览": 1,
+    "研究经历": 1,
+    "研究院": 1,
+    "维护日志": 1,
+    "论文列表": 1,
+    "项目概览": 1
+  }
+}

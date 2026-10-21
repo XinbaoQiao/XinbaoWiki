@@ -1,0 +1,173 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { registerHooks } from 'node:module';
+// Next resolves extensionless TS imports; native Node tests need this one mapping.
+registerHooks({ resolve(specifier, context, nextResolve) {
+  return nextResolve(/^\.\/site-activity-(?:daily|events)$/.test(specifier) && /\/lib\/site-activity-(?:events|owner-records)\.ts$/.test(context.parentURL || '')
+    ? `${specifier}.ts` : specifier, context);
+} });
+const { activityEventKeys, createActivityEvent, trustedActivityIp, validActivityEventDate,
+  recordActivityEvent, readActivityEvents, RECORD_ACTIVITY_EVENT_SCRIPT, READ_ACTIVITY_EVENTS_SCRIPT,
+  SITE_ACTIVITY_EVENT_MAX_PER_DAY } = await import('../lib/site-activity-events.ts');
+
+const now = new Date('2026-10-10T14:30:00Z');
+const headers = new Headers({
+  'x-vercel-forwarded-for': '203.0.113.7', 'x-forwarded-for': '198.51.100.99',
+  'x-vercel-ip-country': 'CN', 'x-vercel-ip-country-region': 'HE', 'x-vercel-ip-city': '%E7%9F%B3%E5%AE%B6%E5%BA%84',
+  'x-site-activity-page': '/wiki/CV/?q=must-not-store#private',
+  'x-site-activity-referrer': 'https://google.com/search?q=must-not-store',
+  'x-site-activity-event-id': '12345678-1234-1234-1234-123456789abc',
+  'user-agent': 'Mozilla/5.0 (Windows NT 10.0) Chrome/140.0',
+  cookie: 'private-cookie-value', authorization: 'Bearer private-credential-value',
+  'x-vercel-ip-latitude': '38.12345',
+});
+const paths = new Set(['/', '/wiki/CV']);
+const event = createActivityEvent(headers, true, 'example.com', paths, now);
+assert.equal(event.ip, '203.0.113.7');
+assert.equal(event.recordedAt, now.toISOString());
+assert.equal(event.page, '/wiki/CV');
+assert.equal(event.referrer, 'google.com');
+assert.equal(event.city, '石家庄');
+assert.equal(event.region, 'CN-HE');
+assert.equal(event.id, '12345678-1234-1234-1234-123456789abc');
+assert.doesNotMatch(JSON.stringify(event), /must-not-store|private-cookie|private-credential|38\.12345|198\.51\.100\.99/);
+assert.equal(trustedActivityIp(headers, false), null, 'untrusted local headers never supply an IP');
+headers.delete('x-vercel-forwarded-for');
+assert.equal(trustedActivityIp(headers, true), null, 'generic forwarding header is never a fallback');
+for (const value of ['not-an-ip', '203.0.113.7:1234', 'https://example.com', '1.2.3.999']) {
+  headers.set('x-vercel-forwarded-for', value); assert.equal(trustedActivityIp(headers, true), null);
+}
+headers.set('x-vercel-forwarded-for', '2001:DB8::1');
+assert.equal(trustedActivityIp(headers, true), '2001:db8::1');
+assert.equal(createActivityEvent(headers, false, 'example.com', paths, now).city, null);
+headers.set('x-site-activity-event-id', 'not-a-uuid');
+assert.match(createActivityEvent(headers, false, 'example.com', paths, now).id, /^[a-f0-9-]{36}$/);
+assert.equal(validActivityEventDate('2026-09-11', now), true);
+for (const date of ['2026-09-10', '2026-10-11', '2026-02-30', 'bad']) assert.equal(validActivityEventDate(date, now), false);
+assert.equal(validActivityEventDate('2026-09-11', new Date('2026-10-10T15:00:00Z')), false, 'retention follows Tokyo midnight');
+
+// Model the Redis commands to exercise serialization, snapshot pagination,
+// deduplication, fixed expiry and cap reporting. Real Lua is integration-tested
+// separately when a local Redis runtime is available.
+const lists = new Map(), hashes = new Map(), drops = new Map(), expiries = new Map();
+const store = { async eval(script, keys, args) {
+  if (script === RECORD_ACTIVITY_EVENT_SCRIPT) {
+    const [rows, seen, dropped] = keys; const [id, json, expiry, cap] = args;
+    const list = lists.get(rows) || []; const hash = hashes.get(seen) || new Set();
+    if (hash.has(id)) return 0;
+    if (list.length >= cap) { drops.set(dropped, (drops.get(dropped) || 0) + 1); expiries.set(dropped, expiry); return -1; }
+    hash.add(id); list.push(json); lists.set(rows, list); hashes.set(seen, hash);
+    expiries.set(rows, expiry); expiries.set(seen, expiry); return 1;
+  }
+  assert.equal(script, READ_ACTIVITY_EVENTS_SCRIPT);
+  const list = lists.get(keys[0]) || []; const [requested, offset, limit] = args;
+  const snapshot = requested < 0 ? list.length : requested;
+  if (snapshot > list.length) return [-1];
+  const last = snapshot - offset;
+  const result = last > 0 ? list.slice(Math.max(0, last - limit), last).reverse() : [];
+  return [list.length, snapshot, offset + result.length, drops.get(keys[1]) || 0, ...result];
+} };
+assert.equal(await recordActivityEvent(store, event, 'browser-a', 'test-only-secret'), 1);
+assert.equal(await recordActivityEvent(store, event, 'browser-a', 'test-only-secret'), 0);
+assert.equal(await recordActivityEvent(store, event, 'browser-b', 'test-only-secret'), 1, 'one browser cannot consume another browser event ID');
+const keys = activityEventKeys('2026-10-10');
+assert.equal(new Date(expiries.get(keys.rows) * 1000).toISOString(), '2026-11-08T15:00:00.000Z');
+assert.equal([...hashes.get(keys.seen)].some(value => value.includes('browser-a')), false);
+const first = await readActivityEvents(store, '2026-10-10', 1, 0, undefined, now);
+assert.equal(first.totalStored, 2); assert.equal(first.nextOffset, 1); assert.equal(first.events[0].ip, event.ip);
+await recordActivityEvent(store, { ...event, id: '12345678-1234-1234-1234-123456789abd', recordedAt: '2026-10-10T14:59:00Z' }, 'browser-a', 'test-only-secret');
+const second = await readActivityEvents(store, '2026-10-10', 1, first.nextOffset, first.snapshot, now);
+assert.equal(second.snapshot, 2); assert.equal(second.totalStored, 3); assert.equal(second.nextOffset, null);
+assert.equal(second.events[0].id, event.id, 'concurrent append does not displace the frozen second page');
+assert.equal(new Date(expiries.get(keys.rows) * 1000).toISOString(), '2026-11-08T15:00:00.000Z', 'late pings never extend retention');
+for (const args of [['2026-09-10', 1, 0], ['2026-10-10', 201, 0], ['2026-10-10', 1, -1], ['2026-10-10', 1, 2, 1]]) {
+  await assert.rejects(readActivityEvents(store, ...args, ...(args.length === 3 ? [undefined, now] : [now])));
+}
+await assert.rejects(readActivityEvents(store, '2026-10-10', 1, 0, 4, now), /snapshot unavailable/);
+lists.set(keys.rows, Array(SITE_ACTIVITY_EVENT_MAX_PER_DAY).fill(JSON.stringify(event)));
+assert.equal(await recordActivityEvent(store, { ...event, id: '12345678-1234-1234-1234-123456789abe' }, 'browser-a', 'test-only-secret'), -1);
+const capped = await readActivityEvents(store, '2026-10-10', 1, 0, undefined, now);
+assert.equal(capped.droppedPings, 1); assert.equal(capped.totalStored, SITE_ACTIVITY_EVENT_MAX_PER_DAY);
+const empty = await readActivityEvents(store, '2026-10-09', 100, 0, undefined, now);
+assert.deepEqual(empty.events, []); assert.equal(empty.nextOffset, null);
+const route = fs.readFileSync('app/api/site-activity/route.ts', 'utf8');
+const api = fs.readFileSync('app/api/site-activity/events/route.ts', 'utf8');
+assert.ok(route.indexOf('if (!shouldRecordVisit(request))') < route.indexOf('await recordActivityEvent'));
+assert.ok(route.indexOf('isSiteActivityBrowserExcluded(request.cookies') < route.indexOf('await recordActivityEvent'));
+assert.ok(api.indexOf('if (!isActivityReportAuthorized') < api.indexOf('const redisUrl'));
+assert.match(api, /private, no-store/); assert.match(api, /noindex, nofollow/);
+assert.doesNotMatch(api, /Access-Control-Allow-Origin|searchParams\.get\('token'\)/);
+console.log('private activity event validation, retention, deduplication, pagination, limits and exclusions passed');
+
+const { ownerNetworkContext, recordOwnerAction, readOwnerActions, ownerActionKeys,
+  RECORD_OWNER_ACTION_SCRIPT, OWNER_RECORD_MAX_PER_DAY } = await import('../lib/site-activity-owner-records.ts');
+headers.set('x-vercel-forwarded-for', '203.0.113.7');
+assert.equal(ownerNetworkContext(headers, false).ip, null);
+assert.equal(ownerNetworkContext(headers, false).country, 'unknown');
+assert.equal(ownerNetworkContext(headers, true).ip, '203.0.113.7');
+const ownerStore = { async eval(script, keys, args) {
+  if (script === RECORD_OWNER_ACTION_SCRIPT) {
+    const [json, expiry, cap] = args; const list = lists.get(keys[0]) || [];
+    if (list.length >= cap) { drops.set(keys[1], (drops.get(keys[1]) || 0) + 1); expiries.set(keys[1], expiry); return 0; }
+    list.push(json); lists.set(keys[0], list); expiries.set(keys[0], expiry); return 1;
+  }
+  return store.eval(script, keys, args);
+} };
+const receipt = await recordOwnerAction(ownerStore, headers, true, true, now);
+assert.equal(receipt.saved, true);
+assert.equal(receipt.record.action, 'exclude');
+assert.doesNotMatch(JSON.stringify(receipt.record), /private-cookie|private-credential|must-not-store|page|referrer|visitor|latitude|Mozilla/);
+const ownerKeys = ownerActionKeys('2026-10-10');
+assert.notEqual(ownerKeys.rows, keys.rows, 'owner actions cannot pollute page views');
+assert.equal(new Date(expiries.get(ownerKeys.rows) * 1000).toISOString(), '2026-11-08T15:00:00.000Z');
+const ownerFirst = await readOwnerActions(ownerStore, '2026-10-10', 1, 0, undefined, now);
+await recordOwnerAction(ownerStore, headers, true, false, now);
+assert.equal((await readOwnerActions(ownerStore, '2026-10-10', 1, 0, ownerFirst.snapshot, now)).actions[0].action, 'exclude');
+assert.equal((await readOwnerActions(ownerStore, '2026-10-10', 1, 0, undefined, now)).actions[0].action, 'include');
+await assert.rejects(readOwnerActions(ownerStore, '2026-10-10', 1, 0, 3, now));
+await assert.rejects(readOwnerActions(ownerStore, '2026-09-10', 1, 0, undefined, now));
+lists.set(ownerKeys.rows, Array(OWNER_RECORD_MAX_PER_DAY).fill(JSON.stringify(receipt.record)));
+assert.equal((await recordOwnerAction(ownerStore, headers, true, true, now)).saved, false);
+assert.equal((await readOwnerActions(ownerStore, '2026-10-10', 200, 0, undefined, now)).droppedActions, 1);
+const ownerReportRoute = fs.readFileSync('app/api/site-activity/exclusions/route.ts', 'utf8');
+assert.ok(ownerReportRoute.indexOf('if (!isActivityReportAuthorized') < ownerReportRoute.indexOf('const redisUrl'));
+assert.match(ownerReportRoute, /private, no-store/);
+assert.match(ownerReportRoute, /noindex, nofollow/);
+console.log('private owner action metadata, separate storage, retention, snapshot and cap checks passed');
+
+const { existingCountedBrowser, ownerAdjustedEstimate, updateOwnerCount, UPDATE_OWNER_COUNT_SCRIPT } = await import('../lib/site-activity-owner-count.ts');
+const { createHmac } = await import('node:crypto');
+const identity = '12345678-1234-1234-1234-123456789abc';
+const cookieSig = createHmac('sha256', 'count-test-salt').update(`site-activity-cookie:${identity}`).digest('hex').slice(0, 32);
+const ownerCookie = `v2.${identity}.${cookieSig}`;
+assert.equal(existingCountedBrowser(ownerCookie, 'count-test-salt'), createHmac('sha256', 'count-test-salt').update(`site-activity-hll:${identity}`).digest('hex'));
+for (const value of [undefined, identity, `${identity}.${cookieSig}`, `${ownerCookie}0`]) assert.equal(existingCountedBrowser(value, 'count-test-salt'), null);
+assert.equal(existingCountedBrowser(ownerCookie, 'wrong-salt'), null);
+assert.equal(ownerAdjustedEstimate(177, 2), 175);
+assert.equal(ownerAdjustedEstimate(1, 2), 0);
+assert.throws(() => ownerAdjustedEstimate(177, 201));
+const correctionMembers = new Set(), correctionState = new Map(); let correctionCalls = 0;
+const correctionStore = { async eval(script, keys, args) {
+  assert.equal(script, UPDATE_OWNER_COUNT_SCRIPT); correctionCalls++;
+  const [digest, operation, cap] = args;
+  if (operation === 'auto' && correctionState.get(digest) === 'include') return 2;
+  if (!correctionState.has(digest) && correctionState.size >= cap) return -1;
+  if (operation === 'include') { correctionState.set(digest, 'include'); correctionMembers.delete(digest); return 2; }
+  correctionState.set(digest, 'exclude'); const existed = correctionMembers.has(digest); correctionMembers.add(digest); return existed ? 0 : 1;
+} };
+assert.equal(await updateOwnerCount(correctionStore, ownerCookie, 'count-test-salt', true), 'registered');
+await updateOwnerCount(correctionStore, ownerCookie, 'count-test-salt', true, true);
+assert.equal(correctionMembers.size, 1, 'repeat visits, IP changes and repeated exclusion deduct one browser only');
+assert.equal(await updateOwnerCount(correctionStore, ownerCookie, 'count-test-salt', false), 'restored');
+assert.equal(correctionMembers.size, 0);
+assert.equal(await updateOwnerCount(correctionStore, ownerCookie, 'count-test-salt', true, true), 'restored', 'a delayed old excluded request cannot undo explicit restoration');
+assert.equal(correctionMembers.size, 0);
+await updateOwnerCount(correctionStore, ownerCookie, 'count-test-salt', true);
+assert.equal(correctionMembers.size, 1, 'explicit re-exclusion overrides the restoration tombstone');
+const callsBeforeInvalid = correctionCalls;
+assert.equal(await updateOwnerCount(correctionStore, 'forged', 'count-test-salt', true), 'identity-unavailable');
+assert.equal(correctionCalls, callsBeforeInvalid, 'missing or invalid historical identity never contacts storage or invents a deduction');
+correctionState.clear();
+for (let i = 0; i < 200; i++) correctionState.set(`fixture-${i}`, 'include');
+assert.equal(await updateOwnerCount(correctionStore, ownerCookie, 'count-test-salt', true), 'unavailable');
+console.log('owner count identity validation, deduplication, restoration, late-request race and capacity checks passed');
