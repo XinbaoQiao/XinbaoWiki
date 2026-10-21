@@ -5891,18 +5891,6 @@ html[data-site-custom-bg-position="bottom"] .site-custom-bg-layer {
   text-transform: uppercase;
 }
 
-.site-custom-bg-panel-note {
-  margin: 0;
-  color: var(--wiki-text-soft);
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 1.4;
-}
-
-.site-custom-bg-panel-note {
-  display: block;
-  margin-top: 4px;
-}
 
 .site-custom-bg-panel-row {
   display: flex;

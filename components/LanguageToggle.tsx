@@ -455,7 +455,6 @@ export function SitePalette({ icons }: SitePaletteProps) {
     mode: isChinese ? '适配' : 'Fit',
     overlay: isChinese ? '遮罩' : 'Overlay',
     position: isChinese ? '焦点' : 'Focus',
-    depthNote: isChinese ? '仅桌面' : 'Desktop only',
     busy: isChinese ? '处理中…' : 'Working…',
     group: isChinese ? '站点配色与背景' : 'Site color theme and background',
     uploadFailed: isChinese ? '无法使用这张图片，请换 JPEG / PNG / WebP。' : 'Could not use that image. Try JPEG, PNG, or WebP.',
@@ -608,9 +607,6 @@ export function SitePalette({ icons }: SitePaletteProps) {
                 </option>
               ))}
             </select>
-            {customSettings.mode === 'depth' ? (
-              <span className="site-custom-bg-panel-note">{copy.depthNote}</span>
-            ) : null}
           </label>
 
           <label className="site-custom-bg-field">
