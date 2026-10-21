@@ -402,9 +402,9 @@ assert.match(languageToggle, /window\.setInterval\(applyPalette, 5 \* 60 \* 1000
 assert.match(languageToggle, /const active = mode === option\.mode;/, 'site palette marks only the chosen mode as active');
 assert.match(languageToggle, /option\.mode === 'text' \? 'site-palette-text' : ''/, 'pure-white text swatch receives a visible boundary class');
 assert.doesNotMatch(languageToggle, /activePalette|activePalette === option\.mode/, 'site palette no longer double-highlights Auto and the current time color');
-assert.match(languageToggle, /aria-label="Site color theme"[\s\S]*className=\{\['site-palette-switcher', expanded \? 'is-expanded' : ''\]\.filter\(Boolean\)\.join\(' '\)\}[\s\S]*role="group"/, 'site palette keeps accessible manual color swatches as a grouped fallback control');
+assert.match(languageToggle, /group: isChinese \? '[^']+' : 'Site color theme and background'[\s\S]*aria-label=\{copy\.group\}[\s\S]*className=\{\['site-palette-switcher', \(expanded \|\| panelOpen\) \? 'is-expanded' : ''\]\.filter\(Boolean\)\.join\(' '\)\}[\s\S]*role="group"/, 'site palette keeps accessible manual color swatches as a grouped fallback control');
 assert.match(languageToggle, /prefersCoarsePalettePointer[\s\S]*setExpanded\(\(current\) => !current\)/, 'touch palette toggles expansion from the active swatch instead of staying fully open');
-assert.match(languageToggle, /aria-expanded=\{expanded\}/, 'site palette exposes expanded state for assistive technology');
+assert.match(languageToggle, /aria-expanded=\{expanded \|\| panelOpen\}/, 'site palette exposes expanded state for assistive technology');
 assert.match(wikiSearch, /hideOnPortal\?: boolean;/, 'search component exposes a homepage suppression prop for the topbar instance');
 assert.match(wikiSearch, /if \(hideOnPortal && isPortalPath\(pathname\)\) return null;/, 'topbar search can hide on the portal homepage');
 assert.doesNotMatch(wikiPageTsx, /Qiao Xinbao Academic Wiki/, 'article metadata no longer uses old Academic Wiki suffix');
@@ -2258,8 +2258,8 @@ assertCssRule(styles, 'html[data-site-palette="text"]', [
   /--site-theme-chrome-surface-strong: var\(--wiki-bg-alt\);/
 ], 'pure-text mode keeps the page and structural surfaces white or neutral with readable dark heading text');
 assert.match(styles, /\.site-palette-text \{[\s\S]*border-color: #a2a9b1;[\s\S]*background: #ffffff;[\s\S]*\}/, 'pure-white text swatch remains visible against the palette surface');
-assert.match(styles, /@media \(hover: hover\) and \(pointer: fine\) \{[\s\S]*\.site-palette-switcher \{[\s\S]*width: 30px;[\s\S]*\.site-palette-switcher:hover,[\s\S]*\.site-palette-switcher:focus-within \{[\s\S]*width: 198px;/, 'fine-pointer palette expands far enough for the text theme, six colors, and auto mode');
-assert.match(styles, /@media \(hover: none\), \(pointer: coarse\) \{[\s\S]*\.site-palette-switcher \{[\s\S]*right: max\(10px, env\(safe-area-inset-right\)\);[\s\S]*width: 28px;[\s\S]*opacity: \.48;[\s\S]*\.site-palette-switcher\.is-expanded \{[\s\S]*width: 198px;[\s\S]*opacity: 1;/, 'touch palette docks quietly to the bottom-right as a low-contrast single swatch');
+assert.match(styles, /@media \(hover: hover\) and \(pointer: fine\) \{[\s\S]*\.site-palette-switcher \{[\s\S]*width: 30px;[\s\S]*\.site-palette-switcher:hover,[\s\S]*\.site-palette-switcher:focus-within \{[\s\S]*width: 228px;/, 'fine-pointer palette expands far enough for the text theme, six colors, and auto mode');
+assert.match(styles, /@media \(hover: none\), \(pointer: coarse\) \{[\s\S]*\.site-palette-switcher \{[\s\S]*right: max\(10px, env\(safe-area-inset-right\)\);[\s\S]*width: 28px;[\s\S]*opacity: \.48;[\s\S]*\.site-palette-switcher\.is-expanded \{[\s\S]*width: 228px;[\s\S]*opacity: 1;/, 'touch palette docks quietly to the bottom-right as a low-contrast single swatch');
 assert.match(styles, /\.site-palette-button\.is-active \{[\s\S]*order: -1;/, 'active palette swatch remains visible in the collapsed state');
 const expectedPortalTaglines = [
   ['text', 'Q is a lens: search the world, question the model.', '以 Q 为镜：探索世界，追问模型。'],
