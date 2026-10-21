@@ -1,0 +1,73 @@
+name: Sync template branch
+
+# Regenerates the de-personalized `template` branch from main.
+# The sanitizer (scripts/template/**) and this workflow are never copied into template.
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-template
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build sanitized template and run leak check
+        run: node scripts/template/build-template.mjs --out "$GITHUB_WORKSPACE/.tmp/template-build"
+
+      - name: Check and build template site
+        working-directory: .tmp/template-build
+        run: |
+          npm ci
+          npm run check:node22
+          npm run build
+
+      - name: Commit to template branch
+        env:
+          SOURCE_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          OUT="$GITHUB_WORKSPACE/.tmp/template-build"
+          rm -rf "$OUT/node_modules" "$OUT/.next" "$OUT/tsconfig.tsbuildinfo"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          WT="$RUNNER_TEMP/template-wt"
+          if git ls-remote --exit-code --heads origin template >/dev/null; then
+            git fetch origin template:refs/remotes/origin/template
+            git worktree add "$WT" -B template origin/template
+          else
+            git worktree add --detach "$WT"
+            git -C "$WT" checkout --orphan template
+          fi
+          find "$WT" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -a "$OUT/." "$WT/"
+          cd "$WT"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "template already up to date"
+            exit 0
+          fi
+          git commit -m "Sync template from main ${SOURCE_SHA::7}"
+          git push origin template

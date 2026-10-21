@@ -111,6 +111,7 @@ async function main() {
   const trackingHead = await run('git', ['rev-parse', `origin/${branch}`]);
   if (trackingHead !== head) throw new Error(`local tracking ref mismatch: expected ${head.slice(0, 12)}, got ${trackingHead.slice(0, 12)}`);
   console.log(`push-main: origin/${branch} verified at ${head}`);
+  console.log('push-main: GitHub Actions workflow "Sync template branch" will regenerate origin/template from this commit (every main push; no path filters). Watch Actions, then https://github.com/XinbaoQiao/XinbaoWiki/tree/template');
 }
 
 main().catch((error) => fail(error.message));

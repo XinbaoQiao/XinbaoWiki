@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="750" viewBox="0 0 600 750" role="img" aria-label="Placeholder portrait">
+  <rect width="600" height="750" fill="#e8eef4"/>
+  <circle cx="300" cy="290" r="130" fill="#b9c8d8"/>
+  <path d="M90 750c0-130 94-230 210-230s210 100 210 230z" fill="#b9c8d8"/>
+  <text x="300" y="705" font-family="Georgia, serif" font-size="34" text-anchor="middle" fill="#4f6d8c">Replace with your photo</text>
+</svg>

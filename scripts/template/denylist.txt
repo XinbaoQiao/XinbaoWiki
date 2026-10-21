@@ -1,0 +1,50 @@
+# One case-insensitive JavaScript regex per line. The template build FAILS if any
+# line matches any file (text or binary) in the generated template tree.
+# Kept on main only; never copied into the template output.
+xinbao
+qiao
+鑫宝
+乔鑫
+ciao
+xishuangbanna
+西双版纳
+cuhk
+chinese university of hong kong
+香港中文大学
+zhejiang
+浙江大学
+\bzju\b
+shandong
+山东大学
+nusri
+meng zhang
+张萌
+angela
+yingjun
+dynfrs
+hessian.free
+soft.weighted
+illusory pattern
+sample selection bias precipitates
+wasserstein barycenter
+peihua
+zhuoyang
+shurong
+70141618
+nhC_OfEAAAAJ
+0009-0007-8359-7701
+374/6619
+huggingface\.co/mrciao
+977ab55cdd7bd5149d5143f5be4a88cc
+harness credential
+codex_workspace_root
+d:\\codex
+c:\\users\\
+新宝
+乔新
+xin[ _.-]?bao
+qiao[ _.-]?x
+mrciao
+sha tin
+persona-prompt
+meme-voice

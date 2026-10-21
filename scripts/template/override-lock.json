@@ -1,0 +1,13 @@
+{
+  ".gitignore": "69879d794e8d5da250ee987fee15ffed743fb722",
+  "CONTRIBUTING.md": "dc61731b280445bc2b1c0e98319f8c5cd81e47d6",
+  "LICENSING.md": "a535a4f0c852401f554ca5ca82b8cf12637cbe38",
+  "README.md": "26aaa16c695daf1a22372014d9eaa9e5d000aac9",
+  "THIRD_PARTY_NOTICES.md": "22ef350d806ae005acd8f5b7c251b556832bdcd0",
+  "docs/chat/README.md": "061610046e863ab751fb4103ebd27f48afbcaf0d",
+  "docs/chat/env.example": "6d5568720bcc3a67f765cbf0256efe7fd14ece5c",
+  "docs/content-template.md": "6cf82c01572b3a52e0b049f53e24537f9b41bf93",
+  "docs/site-activity/README.md": "ed222d71033152c56b77588613c11d5bc4449ba4",
+  "docs/standards-and-conformance.md": "c241cc49540d068e490d8a1024b880312fdb35db",
+  "lib/site-navigation.ts": "708efc8bdbea5edb408dd82f38f7a872085e0e58"
+}
