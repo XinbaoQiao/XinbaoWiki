@@ -5826,38 +5826,7 @@ html[data-site-custom-bg-position="bottom"] .site-custom-bg-layer {
   background-position: center bottom;
 }
 
-html[data-site-custom-bg="on"] .wiki-topbar,
-html[data-site-custom-bg="on"] .wiki-tabs,
-html[data-site-custom-bg="on"] .wiki-footer {
-  background: color-mix(in srgb, var(--wiki-bg) calc(var(--site-custom-bg-panel) * 100%), transparent);
-  backdrop-filter: blur(calc(var(--site-custom-bg-panel) * 10px));
-}
-
-html[data-site-custom-bg="on"] .wiki-shell {
-  background: color-mix(in srgb, var(--wiki-bg) calc(var(--site-custom-bg-panel) * 100%), transparent);
-  border: 1px solid color-mix(in srgb, var(--site-theme-accent) calc(var(--site-custom-bg-panel) * 18%), transparent);
-  border-radius: calc(var(--site-custom-bg-panel) * 14px);
-  box-shadow: 0 10px 36px rgb(32 33 34 / calc(var(--site-custom-bg-panel) * .08));
-  backdrop-filter: blur(calc(var(--site-custom-bg-panel) * 8px));
-}
-
-html[data-site-custom-bg="on"] .wiki-shell:has(.wiki-portal) {
-  border-color: transparent;
-  box-shadow: none;
-  background: color-mix(in srgb, var(--wiki-bg) calc(var(--site-custom-bg-panel) * 92%), transparent);
-}
-
-html[data-site-custom-bg="on"] .wiki-sidebar {
-  background: transparent;
-}
-
-html[data-site-custom-bg="on"][data-site-custom-bg-overlay]:not([data-site-custom-bg-overlay="0"]) .wiki-portal-disclosures > details,
-html[data-site-custom-bg="on"][data-site-custom-bg-overlay]:not([data-site-custom-bg-overlay="0"]) .wiki-portal-directory,
-html[data-site-custom-bg="on"][data-site-custom-bg-overlay]:not([data-site-custom-bg-overlay="0"]) .wiki-search input,
-html[data-site-custom-bg="on"][data-site-custom-bg-overlay]:not([data-site-custom-bg-overlay="0"]) .wiki-infobox,
-html[data-site-custom-bg="on"][data-site-custom-bg-overlay]:not([data-site-custom-bg-overlay="0"]) .chat-with-xinbao-panel {
-  background: color-mix(in srgb, var(--wiki-bg) 92%, transparent);
-}
+/* Content reading-board wash removed: wallpaper + overlay scrim + ink only. */
 
 .site-palette-custom {
   position: relative;
@@ -6092,7 +6061,6 @@ html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] {
   --site-theme-chrome-border: color-mix(in srgb, var(--site-theme-accent) 24%, #5a626a);
   --site-theme-chrome-surface: color-mix(in srgb, var(--site-theme-accent) 8%, rgb(18 20 22 / .86));
   --site-theme-chrome-surface-strong: color-mix(in srgb, var(--site-theme-accent) 14%, rgb(28 31 34 / .9));
-  --site-custom-bg-content-wash: max(var(--site-custom-bg-panel), .48);
   color-scheme: dark;
 }
 
@@ -6134,58 +6102,46 @@ html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-footer {
   color: var(--wiki-text-soft);
 }
 
-html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-topbar,
-html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-tabs,
+/* No reading-board behind prose. Keep only interactive chrome surfaces. */
 html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-shell,
-html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-footer {
-  background: color-mix(in srgb, rgb(14 16 18) calc(var(--site-custom-bg-content-wash) * 100%), transparent);
-  border-color: color-mix(in srgb, var(--site-theme-accent) 20%, #4a5158);
-  backdrop-filter: blur(10px);
-}
-
 html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-main,
-html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-page {
-  background: color-mix(in srgb, rgb(14 16 18) calc(var(--site-custom-bg-content-wash) * 100%), transparent);
-  border-radius: 8px;
-}
-
-html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-shell:has(.wiki-portal) {
-  background: color-mix(in srgb, rgb(14 16 18) calc(max(var(--site-custom-bg-content-wash) - .08, .28) * 100%), transparent);
-  border-color: transparent;
-  box-shadow: none;
-}
-
-html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-shell:has(.wiki-portal) .wiki-main,
-html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-shell:has(.wiki-portal) .wiki-page {
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-page,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-body,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-sidebar,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-footer,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-topbar,
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-tabs {
   background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+html[data-site-custom-bg="on"] .wiki-main,
+html[data-site-custom-bg="on"] .wiki-page,
+html[data-site-custom-bg="on"] .wiki-body {
+  background: transparent;
+}
+
+/* Soft glyph edge for long pages without a content box. */
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-main {
+  text-shadow: 0 1px 2px rgb(0 0 0 / .45);
+}
+
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="dark"] .wiki-main {
+  text-shadow: 0 1px 1px rgb(255 255 255 / .28);
 }
 
 html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] :is(
   .wiki-search input,
   .wiki-search-panel,
-  .wiki-portal-disclosures > details,
-  .wiki-portal-directory,
-  .wiki-infobox,
-  .wiki-article-contents,
-  .wiki-contents-mobile,
   .chat-with-xinbao-panel,
   .site-custom-bg-panel,
   .wiki-mobile-nav-dialog,
-  pre,
-  code,
-  blockquote,
-  table,
-  .wiki-footnotes,
-  .wiki-article-facts
+  .site-palette-switcher
 ) {
-  background: rgb(18 20 22 / .9);
+  background: rgb(18 20 22 / .92);
   color: var(--wiki-text);
   border-color: var(--wiki-border-light);
-}
-
-html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] :is(th, .wiki-infobox th, .wiki-contents-label) {
-  background: rgb(28 31 34 / .94);
-  color: var(--site-theme-heading);
 }
 
 html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .site-palette-switcher {
@@ -6212,15 +6168,6 @@ html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] a:visited {
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  html[data-site-custom-bg="on"]:not([data-site-custom-bg-overlay="0"]) {
-    --site-custom-bg-panel: 1;
-  }
-
-  html[data-site-custom-bg="on"]:not([data-site-custom-bg-overlay="0"]) .wiki-topbar,
-  html[data-site-custom-bg="on"]:not([data-site-custom-bg-overlay="0"]) .wiki-tabs,
-  html[data-site-custom-bg="on"]:not([data-site-custom-bg-overlay="0"]) .wiki-footer,
-  html[data-site-custom-bg="on"]:not([data-site-custom-bg-overlay="0"]) .wiki-shell,
-  html[data-site-custom-bg="on"]:not([data-site-custom-bg-overlay="0"]) .wiki-shell:has(.wiki-portal),
   .site-custom-bg-panel {
     background: var(--wiki-bg);
     backdrop-filter: none;

@@ -279,7 +279,7 @@ export function applyCustomBgDocumentState(
   const active = Boolean(settings.enabled && hasImage);
   const overlayPct = clampOverlay(settings.overlay);
   const overlay = overlayPct / 100;
-  const panel = active ? panelAlphaForOverlay(overlayPct) : 0;
+  const panel = 0;
   const ink = inkForCustomBg(active, tone, overlayPct);
   root.dataset.siteCustomBg = active ? 'on' : 'off';
   root.dataset.siteCustomBgMode = active ? settings.mode : 'none';
