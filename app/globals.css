@@ -1782,6 +1782,9 @@ body:has(.wiki-portal) .wiki-topbar {
 }
 
 .wiki-toc-return {
+  /* Own VT name so fixed Contents chip is not painted into wiki-main snapshots
+     (which can leave a ghost 目录/Contents on the homepage during transitions). */
+  view-transition-name: wiki-toc-return;
   position: fixed;
   z-index: 70;
   right: max(16px, env(safe-area-inset-right));
@@ -1813,6 +1816,11 @@ body:has(.wiki-portal) .wiki-topbar {
 .wiki-toc-return:focus-visible {
   outline: 1px solid var(--wiki-link);
   outline-offset: 1px;
+}
+
+/* Homepage portal: never show the floating Contents / 目录 return chip. */
+body:has(.wiki-portal) .wiki-toc-return {
+  display: none !important;
 }
 
 @media (min-width: 721px) {
@@ -5481,7 +5489,8 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
 ::view-transition-old(wiki-topbar),
 ::view-transition-old(wiki-tabs),
 ::view-transition-old(wiki-sidebar),
-::view-transition-old(site-palette) {
+::view-transition-old(site-palette),
+::view-transition-old(wiki-toc-return) {
   animation: none !important;
   opacity: 0 !important;
   visibility: hidden !important;
@@ -5491,7 +5500,8 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
 ::view-transition-new(wiki-topbar),
 ::view-transition-new(wiki-tabs),
 ::view-transition-new(wiki-sidebar),
-::view-transition-new(site-palette) {
+::view-transition-new(site-palette),
+::view-transition-new(wiki-toc-return) {
   animation: none !important;
   opacity: 1 !important;
   visibility: visible !important;
@@ -5515,6 +5525,7 @@ html[data-wiki-morph-to] ::view-transition-new(wiki-sidebar) {
 ::view-transition-group(wiki-tabs),
 ::view-transition-group(wiki-sidebar),
 ::view-transition-group(site-palette),
+::view-transition-group(wiki-toc-return),
 ::view-transition-group(wiki-main) {
   animation: none;
 }

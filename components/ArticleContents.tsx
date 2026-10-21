@@ -1,16 +1,24 @@
 'use client';
 
 import { Children, isValidElement, useEffect, useRef, useState, type ReactNode } from 'react';
+import { usePathname } from 'next/navigation';
 
 function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
 export function ArticleContents({ children, label }: { children: ReactNode; label: string }) {
+  const pathname = usePathname();
+  const onWikiArticle = pathname === '/wiki' || pathname.startsWith('/wiki/');
   const [compact, setCompact] = useState(false);
   const [showReturn, setShowReturn] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const flashTimerRef = useRef<number | null>(null);
+
+  // Floating return is wiki-article only — never on homepage / portal routes.
+  useEffect(() => {
+    if (!onWikiArticle) setShowReturn(false);
+  }, [onWikiArticle]);
 
   useEffect(() => {
     const mobile = window.matchMedia('(max-width: 720px)');
@@ -26,13 +34,14 @@ export function ArticleContents({ children, label }: { children: ReactNode; labe
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setShowReturn(!entry.isIntersecting);
+        // Homepage / non-wiki routes must never show the floating Contents control.
+        setShowReturn(onWikiArticle && !entry.isIntersecting);
       },
       { root: null, rootMargin: '-64px 0px 0px 0px', threshold: 0 }
     );
     observer.observe(nav);
     return () => observer.disconnect();
-  }, []);
+  }, [onWikiArticle]);
 
   useEffect(() => {
     const contentsNav = navRef.current;
@@ -129,7 +138,7 @@ export function ArticleContents({ children, label }: { children: ReactNode; labe
           </details>
         ) : children}
       </nav>
-      {showReturn ? (
+      {showReturn && onWikiArticle ? (
         <button
           aria-controls="wiki-on-this-page"
           aria-label={label}
