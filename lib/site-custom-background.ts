@@ -193,14 +193,26 @@ export async function compressImageFile(file: File): Promise<Blob> {
   }
 }
 
+export function panelAlphaForOverlay(overlayPercent: number): number {
+  const overlay = clampOverlay(overlayPercent) / 100;
+  if (overlay <= 0) return 0;
+  // Map low overlay to a light reading wash; 0% keeps wallpaper fully clear.
+  return Math.min(0.92, 0.22 + overlay * 0.7);
+}
+
 export function applyCustomBgDocumentState(settings: CustomBgSettings, hasImage: boolean): void {
   if (typeof document === 'undefined') return;
   const root = document.documentElement;
   const active = Boolean(settings.enabled && hasImage);
+  const overlayPct = clampOverlay(settings.overlay);
+  const overlay = overlayPct / 100;
+  const panel = active ? panelAlphaForOverlay(overlayPct) : 0;
   root.dataset.siteCustomBg = active ? 'on' : 'off';
   root.dataset.siteCustomBgMode = active ? settings.mode : 'none';
   root.dataset.siteCustomBgPosition = active ? settings.position : 'center';
-  root.style.setProperty('--site-custom-bg-overlay', String(clampOverlay(settings.overlay) / 100));
+  root.dataset.siteCustomBgOverlay = active ? String(overlayPct) : '0';
+  root.style.setProperty('--site-custom-bg-overlay', String(overlay));
+  root.style.setProperty('--site-custom-bg-panel', String(panel));
   root.style.setProperty('--site-custom-bg-position', settings.position);
 }
 

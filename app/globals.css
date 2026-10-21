@@ -5769,12 +5769,21 @@ html:not([data-wiki-morph-to]) ::view-transition-new(.wiki-title-morph) {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgb(255 255 255 / var(--site-custom-bg-overlay, .48));
   pointer-events: none;
+  background: rgb(255 255 255 / var(--site-custom-bg-overlay, .48));
+  opacity: 1;
+  transition: opacity .2s ease, background-color .2s ease;
+}
+
+/* At 0% overlay: no scrim at all — wallpaper must be fully clear. */
+html[data-site-custom-bg-overlay="0"] .site-custom-bg-layer::after {
+  opacity: 0;
+  background: transparent;
+  transition: none;
 }
 
 html[data-site-custom-bg="on"] {
-  --site-custom-bg-panel: .84;
+  --site-custom-bg-panel: 0;
 }
 
 html[data-site-custom-bg="on"],
@@ -5786,9 +5795,9 @@ html[data-site-custom-bg-mode="soft-fade"] .site-custom-bg-layer::after {
   background:
     radial-gradient(
       ellipse 78% 70% at center,
-      rgb(255 255 255 / calc(var(--site-custom-bg-overlay, .48) + .18)) 0%,
+      rgb(255 255 255 / var(--site-custom-bg-overlay, .48)) 0%,
       rgb(255 255 255 / calc(var(--site-custom-bg-overlay, .48) * .55)) 58%,
-      rgb(255 255 255 / .12) 100%
+      rgb(255 255 255 / calc(var(--site-custom-bg-overlay, .48) * .12)) 100%
     );
 }
 
@@ -5820,52 +5829,55 @@ html[data-site-custom-bg="on"] .wiki-topbar,
 html[data-site-custom-bg="on"] .wiki-tabs,
 html[data-site-custom-bg="on"] .wiki-footer {
   background: color-mix(in srgb, var(--wiki-bg) calc(var(--site-custom-bg-panel) * 100%), transparent);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(calc(var(--site-custom-bg-panel) * 10px));
 }
 
 html[data-site-custom-bg="on"] .wiki-shell {
   background: color-mix(in srgb, var(--wiki-bg) calc(var(--site-custom-bg-panel) * 100%), transparent);
-  border: 1px solid color-mix(in srgb, var(--site-theme-accent) 16%, transparent);
-  border-radius: 14px;
-  box-shadow: 0 10px 36px rgba(32, 33, 34, .08);
-  backdrop-filter: blur(8px);
+  border: 1px solid color-mix(in srgb, var(--site-theme-accent) calc(var(--site-custom-bg-panel) * 18%), transparent);
+  border-radius: calc(var(--site-custom-bg-panel) * 14px);
+  box-shadow: 0 10px 36px rgb(32 33 34 / calc(var(--site-custom-bg-panel) * .08));
+  backdrop-filter: blur(calc(var(--site-custom-bg-panel) * 8px));
 }
 
 html[data-site-custom-bg="on"] .wiki-shell:has(.wiki-portal) {
   border-color: transparent;
   box-shadow: none;
-  background: color-mix(in srgb, var(--wiki-bg) calc((var(--site-custom-bg-panel) - .08) * 100%), transparent);
+  background: color-mix(in srgb, var(--wiki-bg) calc(var(--site-custom-bg-panel) * 92%), transparent);
 }
 
 html[data-site-custom-bg="on"] .wiki-sidebar {
   background: transparent;
 }
 
-html[data-site-custom-bg="on"] .wiki-portal-disclosures > details,
-html[data-site-custom-bg="on"] .wiki-portal-directory,
-html[data-site-custom-bg="on"] .wiki-search input,
-html[data-site-custom-bg="on"] .wiki-infobox,
-html[data-site-custom-bg="on"] .chat-with-xinbao-panel {
+html[data-site-custom-bg="on"][data-site-custom-bg-overlay]:not([data-site-custom-bg-overlay="0"]) .wiki-portal-disclosures > details,
+html[data-site-custom-bg="on"][data-site-custom-bg-overlay]:not([data-site-custom-bg-overlay="0"]) .wiki-portal-directory,
+html[data-site-custom-bg="on"][data-site-custom-bg-overlay]:not([data-site-custom-bg-overlay="0"]) .wiki-search input,
+html[data-site-custom-bg="on"][data-site-custom-bg-overlay]:not([data-site-custom-bg-overlay="0"]) .wiki-infobox,
+html[data-site-custom-bg="on"][data-site-custom-bg-overlay]:not([data-site-custom-bg-overlay="0"]) .chat-with-xinbao-panel {
   background: color-mix(in srgb, var(--wiki-bg) 92%, transparent);
 }
 
 .site-palette-custom {
   position: relative;
-  border-color: #a2a9b1;
+  display: inline-grid;
+  place-items: center;
+  border-color: color-mix(in srgb, var(--site-theme-accent) 28%, #a2a9b1);
   background:
-    linear-gradient(135deg, #dfe3e8 0 46%, transparent 46% 54%, #dfe3e8 54% 100%),
-    linear-gradient(45deg, #f4f6f8, #c8ced6);
+    linear-gradient(180deg, color-mix(in srgb, var(--site-theme-accent) 10%, #ffffff), #f3f5f7);
+  color: var(--site-theme-action-ink);
 }
 
 .site-palette-custom-glyph {
-  position: absolute;
-  inset: 3px;
-  border-radius: 2px;
-  background:
-    radial-gradient(circle at 30% 35%, #fff 0 22%, transparent 23%),
-    linear-gradient(180deg, transparent 58%, #5a6570 58% 100%),
-    linear-gradient(135deg, #8aa0b5, #5f7f96);
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
   opacity: .92;
+}
+
+.site-palette-custom-glyph svg {
+  display: block;
 }
 
 .site-palette-custom.is-custom-on {
@@ -5880,30 +5892,62 @@ html[data-site-custom-bg="on"] .chat-with-xinbao-panel {
 .site-custom-bg-panel {
   position: fixed;
   left: max(14px, env(safe-area-inset-left));
-  bottom: calc(max(14px, env(safe-area-inset-bottom)) + 44px);
+  bottom: calc(max(14px, env(safe-area-inset-bottom)) + 46px);
   z-index: 81;
-  width: min(320px, calc(100vw - 28px));
+  width: min(336px, calc(100vw - 28px));
   padding: 12px;
   border: 1px solid var(--site-theme-accent-border);
   border-radius: 12px;
-  background: color-mix(in srgb, var(--wiki-bg) 94%, transparent);
-  box-shadow: 0 12px 36px rgba(32, 33, 34, .16);
-  backdrop-filter: blur(14px);
+  background: color-mix(in srgb, var(--site-theme-surface) 92%, #ffffff);
+  box-shadow: 0 14px 40px rgba(32, 33, 34, .16);
+  backdrop-filter: blur(16px);
   color: var(--wiki-text);
   font-family: var(--font-sans);
   font-size: var(--fs-sm);
   line-height: 1.45;
 }
 
+.site-custom-bg-panel-head {
+  margin-bottom: 10px;
+}
+
+.site-custom-bg-panel-title-wrap {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.site-custom-bg-panel-mark {
+  display: grid;
+  place-items: center;
+  flex: 0 0 28px;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--site-theme-accent-border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--site-theme-accent) 8%, var(--wiki-bg));
+  color: var(--site-theme-action-ink);
+}
+
+.site-custom-bg-panel-title {
+  margin: 0 0 2px;
+  color: var(--site-theme-heading);
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: .01em;
+}
+
 .site-custom-bg-panel-hint,
 .site-custom-bg-panel-note {
-  margin: 0 0 10px;
+  margin: 0;
   color: var(--wiki-text-soft);
-  font-size: var(--fs-xs);
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.45;
 }
 
 .site-custom-bg-panel-note {
-  margin-top: -4px;
+  margin-top: 6px;
 }
 
 .site-custom-bg-panel-row {
@@ -5915,13 +5959,14 @@ html[data-site-custom-bg="on"] .chat-with-xinbao-panel {
 
 .site-custom-bg-action {
   appearance: none;
-  padding: 7px 11px;
+  padding: 7px 12px;
   border: 1px solid var(--site-theme-accent-border);
   border-radius: 8px;
-  background: var(--wiki-bg);
+  background: color-mix(in srgb, var(--site-theme-accent) 8%, var(--wiki-bg));
   color: var(--site-theme-action-ink);
   font: inherit;
-  font-weight: 650;
+  font-size: 12.5px;
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -5937,28 +5982,44 @@ html[data-site-custom-bg="on"] .chat-with-xinbao-panel {
 }
 
 .site-custom-bg-action-muted {
+  background: var(--wiki-bg);
   color: var(--wiki-text-soft);
-  font-weight: 600;
+  font-weight: 650;
 }
 
 .site-custom-bg-thumb {
   width: 100%;
-  height: 88px;
-  margin-bottom: 10px;
+  height: 96px;
+  margin-bottom: 12px;
   border: 1px solid var(--site-theme-chrome-border);
-  border-radius: 8px;
+  border-radius: 10px;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / .35);
 }
 
 .site-custom-bg-field {
   display: grid;
-  gap: 5px;
-  margin-bottom: 10px;
-  font-size: var(--fs-xs);
-  font-weight: 650;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.site-custom-bg-field-label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
   color: var(--site-theme-heading);
+  font-size: 11.5px;
+  font-weight: 750;
+  letter-spacing: .02em;
+}
+
+.site-custom-bg-field-value {
+  color: var(--site-theme-action-ink);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
 }
 
 .site-custom-bg-field select,
@@ -5967,20 +6028,68 @@ html[data-site-custom-bg="on"] .chat-with-xinbao-panel {
   accent-color: var(--site-theme-accent);
 }
 
-.site-custom-bg-field select {
-  padding: 6px 8px;
+.site-custom-bg-field input[type="range"] {
+  height: 28px;
+  margin: 0;
+}
+
+.site-custom-bg-range-ends {
+  display: flex;
+  justify-content: space-between;
+  color: var(--wiki-text-soft);
+  font-size: 10.5px;
+  font-weight: 600;
+}
+
+.site-custom-bg-seg {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  padding: 3px;
   border: 1px solid var(--site-theme-chrome-border);
-  border-radius: 8px;
-  background: var(--wiki-bg);
-  color: var(--wiki-text);
+  border-radius: 9px;
+  background: color-mix(in srgb, var(--wiki-bg-alt) 70%, var(--wiki-bg));
+}
+
+.site-custom-bg-seg-compact {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.site-custom-bg-seg-btn {
+  appearance: none;
+  min-height: 28px;
+  padding: 5px 4px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--wiki-text-soft);
   font: inherit;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.site-custom-bg-seg-btn.is-selected {
+  background: var(--wiki-bg);
+  color: var(--site-theme-action-ink);
+  box-shadow: 0 1px 2px rgba(32, 33, 34, .08);
+}
+
+.site-custom-bg-seg-btn:disabled {
+  opacity: .42;
+  cursor: not-allowed;
+}
+
+.site-custom-bg-seg-btn:focus-visible {
+  outline: 2px solid var(--site-theme-accent);
+  outline-offset: 1px;
 }
 
 .site-custom-bg-error {
   margin: 0;
   color: #b32424;
-  font-size: var(--fs-xs);
-  font-weight: 650;
+  font-size: 11.5px;
+  font-weight: 700;
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -6014,21 +6123,22 @@ html[data-site-custom-bg="on"] .chat-with-xinbao-panel {
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  html[data-site-custom-bg="on"] {
+  html[data-site-custom-bg="on"]:not([data-site-custom-bg-overlay="0"]) {
     --site-custom-bg-panel: 1;
   }
 
-  html[data-site-custom-bg="on"] .wiki-topbar,
-  html[data-site-custom-bg="on"] .wiki-tabs,
-  html[data-site-custom-bg="on"] .wiki-footer,
-  html[data-site-custom-bg="on"] .wiki-shell,
-  html[data-site-custom-bg="on"] .wiki-shell:has(.wiki-portal),
+  html[data-site-custom-bg="on"]:not([data-site-custom-bg-overlay="0"]) .wiki-topbar,
+  html[data-site-custom-bg="on"]:not([data-site-custom-bg-overlay="0"]) .wiki-tabs,
+  html[data-site-custom-bg="on"]:not([data-site-custom-bg-overlay="0"]) .wiki-footer,
+  html[data-site-custom-bg="on"]:not([data-site-custom-bg-overlay="0"]) .wiki-shell,
+  html[data-site-custom-bg="on"]:not([data-site-custom-bg-overlay="0"]) .wiki-shell:has(.wiki-portal),
   .site-custom-bg-panel {
     background: var(--wiki-bg);
     backdrop-filter: none;
   }
 
-  .site-custom-bg-layer::after {
+  /* Never force a floor over a user-chosen 0% overlay. */
+  html[data-site-custom-bg="on"]:not([data-site-custom-bg-overlay="0"]) .site-custom-bg-layer::after {
     background: rgb(255 255 255 / max(var(--site-custom-bg-overlay, .48), .62));
   }
 }
@@ -6040,4 +6150,3 @@ html[data-site-custom-bg="on"] .chat-with-xinbao-panel {
     transform: none;
   }
 }
-

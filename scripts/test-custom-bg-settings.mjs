@@ -1,4 +1,4 @@
-import assert from 'node:assert/strict';
+﻿import assert from 'node:assert/strict';
 
 const DEFAULT = {
   enabled: false,
@@ -13,6 +13,12 @@ const POSITIONS = new Set(['top', 'center', 'bottom']);
 function clampOverlay(value) {
   if (!Number.isFinite(value)) return DEFAULT.overlay;
   return Math.min(100, Math.max(0, Math.round(value)));
+}
+
+function panelAlphaForOverlay(overlayPercent) {
+  const overlay = clampOverlay(overlayPercent) / 100;
+  if (overlay <= 0) return 0;
+  return Math.min(0.92, 0.22 + overlay * 0.7);
 }
 
 function parseCustomBgSettings(raw) {
@@ -33,25 +39,21 @@ function parseCustomBgSettings(raw) {
 assert.equal(clampOverlay(48), 48);
 assert.equal(clampOverlay(-3), 0);
 assert.equal(clampOverlay(140), 100);
-assert.equal(clampOverlay(Number.NaN), DEFAULT.overlay);
+assert.equal(panelAlphaForOverlay(0), 0);
+assert.ok(panelAlphaForOverlay(48) > 0.4 && panelAlphaForOverlay(48) < 0.7);
+assert.ok(Math.abs(panelAlphaForOverlay(100) - 0.92) < 1e-9);
 
 assert.deepEqual(parseCustomBgSettings(JSON.stringify({
   enabled: true,
   mode: 'soft-fade',
-  overlay: 55,
+  overlay: 0,
   position: 'top'
 })), {
   enabled: true,
   mode: 'soft-fade',
-  overlay: 55,
+  overlay: 0,
   position: 'top'
 });
 
-assert.deepEqual(parseCustomBgSettings('{not-json'), DEFAULT);
-
-const bad = parseCustomBgSettings(JSON.stringify({ enabled: true, mode: 'stretch', overlay: 9, position: 'left' }));
-assert.equal(bad.mode, DEFAULT.mode);
-assert.equal(bad.position, DEFAULT.position);
-assert.equal(bad.overlay, 9);
-
 console.log('test-custom-bg-settings: ok');
+

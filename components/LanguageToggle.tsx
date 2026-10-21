@@ -162,10 +162,10 @@ function useChromeChinese(): boolean {
 }
 
 const customBgModeOptions: Array<{ mode: CustomBgMode; en: string; zh: string }> = [
-  { mode: 'cover', en: 'Cover + reading panel', zh: '铺满 + 阅读板' },
-  { mode: 'soft-fade', en: 'Soft fade', zh: '柔和淡出' },
-  { mode: 'tile', en: 'Tile pattern', zh: '平铺纹理' },
-  { mode: 'depth', en: 'Fixed depth (desktop)', zh: '固定景深（桌面）' }
+  { mode: 'cover', en: 'Cover', zh: '铺满' },
+  { mode: 'soft-fade', en: 'Fade', zh: '淡出' },
+  { mode: 'tile', en: 'Tile', zh: '平铺' },
+  { mode: 'depth', en: 'Depth', zh: '景深' }
 ];
 
 const customBgPositionOptions: Array<{ position: CustomBgPosition; en: string; zh: string }> = [
@@ -314,6 +314,15 @@ export function SitePalette({ icons }: SitePaletteProps) {
     setExpanded(false);
     setPanelOpen(false);
 
+    // Solid / Auto themes own the page look: deactivate custom wallpaper so swatches
+    // take effect again. Keep the stored image so Custom can re-enable it later.
+    if (customSettings.enabled) {
+      const disabled = { ...customSettings, enabled: false };
+      setCustomSettings(disabled);
+      writeCustomBgSettings(disabled);
+      applyCustomBgDocumentState(disabled, Boolean(customImageUrl));
+    }
+
     if (nextMode === 'auto') {
       window.localStorage.removeItem(sitePaletteStorageKey);
       return;
@@ -336,6 +345,14 @@ export function SitePalette({ icons }: SitePaletteProps) {
     setPanelOpen(true);
     setExpanded(true);
     setError(null);
+
+    // Re-entering Custom with a stored image restores the wallpaper without re-upload.
+    if (customImageUrl && !customSettings.enabled) {
+      const enabled = { ...customSettings, enabled: true };
+      setCustomSettings(enabled);
+      writeCustomBgSettings(enabled);
+      applyCustomBgDocumentState(enabled, true);
+    }
   };
 
   const onCustomButtonClick = () => {
@@ -407,8 +424,8 @@ export function SitePalette({ icons }: SitePaletteProps) {
     overlay: isChinese ? '遮罩强度' : 'Overlay strength',
     position: isChinese ? '焦点位置' : 'Focus position',
     hint: isChinese
-      ? '图片仅保存在本机浏览器。默认铺满当前屏幕，并用半透明阅读板保证正文可读。'
-      : 'Images stay in this browser only. Default cover fills the viewport with a translucent reading panel.',
+      ? '图片只保存在本机。遮罩 0% 时壁纸完全清晰；需要读正文时再提高遮罩。'
+      : 'Images stay on this device. At 0% overlay the wallpaper is fully clear; raise overlay for reading contrast.',
     depthNote: isChinese
       ? '固定景深受桌面指针设备支持；手机自动回退为铺满。'
       : 'Fixed depth is desktop-only; phones fall back to cover.',
@@ -476,7 +493,13 @@ export function SitePalette({ icons }: SitePaletteProps) {
           type="button"
         >
           <span className="sr-only">{copy.custom}</span>
-          <span aria-hidden="true" className="site-palette-custom-glyph" />
+          <span aria-hidden="true" className="site-palette-custom-glyph">
+            <svg viewBox="0 0 16 16" width="12" height="12" focusable="false">
+              <rect x="1.5" y="2.5" width="13" height="11" rx="2" fill="none" stroke="currentColor" strokeWidth="1.25" />
+              <circle cx="5.5" cy="6" r="1.25" fill="currentColor" />
+              <path d="M2.75 12.2 6.1 8.4a.7.7 0 0 1 1.02-.02L9.2 10.4l1.2-1.3a.7.7 0 0 1 1.04.02L13.4 12.2" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </span>
         </button>
       </div>
 
@@ -487,7 +510,21 @@ export function SitePalette({ icons }: SitePaletteProps) {
           role="region"
           aria-label={copy.custom}
         >
-          <p className="site-custom-bg-panel-hint">{copy.hint}</p>
+          <div className="site-custom-bg-panel-head">
+            <div className="site-custom-bg-panel-title-wrap">
+              <span aria-hidden="true" className="site-custom-bg-panel-mark">
+                <svg viewBox="0 0 16 16" width="14" height="14" focusable="false">
+                  <rect x="1.5" y="2.5" width="13" height="11" rx="2" fill="none" stroke="currentColor" strokeWidth="1.25" />
+                  <circle cx="5.5" cy="6" r="1.25" fill="currentColor" />
+                  <path d="M2.75 12.2 6.1 8.4a.7.7 0 0 1 1.02-.02L9.2 10.4l1.2-1.3a.7.7 0 0 1 1.04.02L13.4 12.2" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+              <div>
+                <p className="site-custom-bg-panel-title">{copy.custom}</p>
+                <p className="site-custom-bg-panel-hint">{copy.hint}</p>
+              </div>
+            </div>
+          </div>
 
           <div className="site-custom-bg-panel-row">
             <button
@@ -526,38 +563,46 @@ export function SitePalette({ icons }: SitePaletteProps) {
             />
           ) : null}
 
-          <label className="site-custom-bg-field">
-            <span>{copy.mode}</span>
-            <select
-              disabled={busy || !customImageUrl}
-              onChange={(event) => {
-                const nextMode = event.target.value as CustomBgMode;
-                if (nextMode === 'depth' && !isDesktopPointer) {
-                  persistCustom({ ...customSettings, enabled: true, mode: 'cover' });
-                  return;
-                }
-                persistCustom({ ...customSettings, enabled: Boolean(customImageUrl), mode: nextMode });
-              }}
-              value={customSettings.mode}
-            >
-              {customBgModeOptions.map((option) => (
-                <option key={option.mode} value={option.mode}>
-                  {isChinese ? option.zh : option.en}
-                </option>
-              ))}
-            </select>
-          </label>
+          <div className="site-custom-bg-field">
+            <span className="site-custom-bg-field-label">{copy.mode}</span>
+            <div className="site-custom-bg-seg" role="group" aria-label={copy.mode}>
+              {customBgModeOptions.map((option) => {
+                const selected = customSettings.mode === option.mode;
+                const disabled = busy || !customImageUrl || (option.mode === 'depth' && !isDesktopPointer);
+                return (
+                  <button
+                    aria-pressed={selected}
+                    className={['site-custom-bg-seg-btn', selected ? 'is-selected' : ''].filter(Boolean).join(' ')}
+                    disabled={disabled}
+                    key={option.mode}
+                    onClick={() => {
+                      if (option.mode === 'depth' && !isDesktopPointer) {
+                        persistCustom({ ...customSettings, enabled: true, mode: 'cover' });
+                        return;
+                      }
+                      persistCustom({ ...customSettings, enabled: Boolean(customImageUrl), mode: option.mode });
+                    }}
+                    type="button"
+                  >
+                    {isChinese ? option.zh : option.en}
+                  </button>
+                );
+              })}
+            </div>
+            {customSettings.mode === 'depth' ? (
+              <p className="site-custom-bg-panel-note">{copy.depthNote}</p>
+            ) : null}
+          </div>
 
-          {customSettings.mode === 'depth' ? (
-            <p className="site-custom-bg-panel-note">{copy.depthNote}</p>
-          ) : null}
-
           <label className="site-custom-bg-field">
-            <span>{copy.overlay} ({customSettings.overlay}%)</span>
+            <span className="site-custom-bg-field-label">
+              {copy.overlay}
+              <span className="site-custom-bg-field-value">{customSettings.overlay}%</span>
+            </span>
             <input
               disabled={busy || !customImageUrl}
-              max={80}
-              min={20}
+              max={100}
+              min={0}
               onChange={(event) => {
                 persistCustom({
                   ...customSettings,
@@ -568,28 +613,38 @@ export function SitePalette({ icons }: SitePaletteProps) {
               type="range"
               value={customSettings.overlay}
             />
+            <span className="site-custom-bg-range-ends" aria-hidden="true">
+              <span>{isChinese ? '清晰' : 'Clear'}</span>
+              <span>{isChinese ? '护眼' : 'Readable'}</span>
+            </span>
           </label>
 
-          <label className="site-custom-bg-field">
-            <span>{copy.position}</span>
-            <select
-              disabled={busy || !customImageUrl || customSettings.mode === 'tile'}
-              onChange={(event) => {
-                persistCustom({
-                  ...customSettings,
-                  enabled: Boolean(customImageUrl),
-                  position: event.target.value as CustomBgPosition
-                });
-              }}
-              value={customSettings.position}
-            >
-              {customBgPositionOptions.map((option) => (
-                <option key={option.position} value={option.position}>
-                  {isChinese ? option.zh : option.en}
-                </option>
-              ))}
-            </select>
-          </label>
+          <div className="site-custom-bg-field">
+            <span className="site-custom-bg-field-label">{copy.position}</span>
+            <div className="site-custom-bg-seg site-custom-bg-seg-compact" role="group" aria-label={copy.position}>
+              {customBgPositionOptions.map((option) => {
+                const selected = customSettings.position === option.position;
+                return (
+                  <button
+                    aria-pressed={selected}
+                    className={['site-custom-bg-seg-btn', selected ? 'is-selected' : ''].filter(Boolean).join(' ')}
+                    disabled={busy || !customImageUrl || customSettings.mode === 'tile'}
+                    key={option.position}
+                    onClick={() => {
+                      persistCustom({
+                        ...customSettings,
+                        enabled: Boolean(customImageUrl),
+                        position: option.position
+                      });
+                    }}
+                    type="button"
+                  >
+                    {isChinese ? option.zh : option.en}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
 
           {error ? <p className="site-custom-bg-error" role="alert">{error}</p> : null}
         </div>
