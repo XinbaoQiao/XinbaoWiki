@@ -121,10 +121,10 @@
         "machine-unlearning"
       ],
       "timestamp": "2026-05-05T21:39:01+08:00",
-      "modifiedAt": "2026-10-19T14:23:38.100Z",
-      "contentHash": "sha256:8085d63383f4e827ef0a5461a51aab034eeeaa82d1fb65075d36b1b83d4f18cf",
-      "reviewedAt": "2026-10-19T14:23:56.706Z",
-      "reviewDue": "2027-10-19",
+      "modifiedAt": "2026-10-22T18:17:12.393Z",
+      "contentHash": "sha256:33668dd6ccbf435f53306ab7b9095feae324c745977188ea93d85c524f4d3e44",
+      "reviewedAt": "2026-10-22T18:17:42.233Z",
+      "reviewDue": "2027-10-22",
       "sourceIds": [
         "src-0642a11373a83c47",
         "src-53e1199f272a4df4",
@@ -136,7 +136,7 @@
       "retrieval": {
         "documentId": "wiki:Soft_Weighted_Machine_Unlearning",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:8085d63383f4e827ef0a5461a51aab034eeeaa82d1fb65075d36b1b83d4f18cf",
+        "contentHash": "sha256:33668dd6ccbf435f53306ab7b9095feae324c745977188ea93d85c524f4d3e44",
         "textFields": [
           "title",
           "aliases",
@@ -2160,10 +2160,10 @@
         "machine-unlearning"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-10-19T14:23:38.099Z",
-      "contentHash": "sha256:467c1707ea648ef4153c24503cf681950bf83ba58b0c8036d018d446e472b6d5",
-      "reviewedAt": "2026-10-19T14:23:56.706Z",
-      "reviewDue": "2027-10-19",
+      "modifiedAt": "2026-10-22T18:17:12.392Z",
+      "contentHash": "sha256:e4c0f87303b1329af8754a69c06efa5be4dfc4bde48a94c3e36c33cb27a18095",
+      "reviewedAt": "2026-10-22T18:17:42.236Z",
+      "reviewDue": "2027-10-22",
       "sourceIds": [
         "src-0642a11373a83c47",
         "src-53e1199f272a4df4",
@@ -2175,7 +2175,7 @@
       "retrieval": {
         "documentId": "wiki:Soft_Weighted_Machine_Unlearning_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:467c1707ea648ef4153c24503cf681950bf83ba58b0c8036d018d446e472b6d5",
+        "contentHash": "sha256:e4c0f87303b1329af8754a69c06efa5be4dfc4bde48a94c3e36c33cb27a18095",
         "textFields": [
           "title",
           "aliases",

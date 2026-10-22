@@ -375,8 +375,8 @@ const hiddenSourceSlugs = fs.readdirSync(wikiDir)
 const internetSlang2026 = read('Internet_Slang_2026.md');
 const internetSlang2026Zh = read('Internet_Slang_2026_zh.md');
 const questionLogFunction = chatRoute.match(/async function recordQuestionLog[\s\S]*?\r?\n}\r?\n\r?\nfunction withXinbaoSignature/)?.[0] || '';
-const providerRequestFunction = chatRoute.match(/  async function requestCompletion[\s\S]*?\n  }\n\n  async function unavailableAfterProvider/)?.[0] || '';
-const providerFailureFunction = chatRoute.match(/  async function unavailableAfterProvider[\s\S]*?\n  }\n\n  try \{/)?.[0] || '';
+const providerRequestFunction = chatRoute.match(/  async function requestCompletion[\s\S]*?\r?\n  }\r?\n\r?\n  async function unavailableAfterProvider/)?.[0] || '';
+const providerFailureFunction = chatRoute.match(/  async function unavailableAfterProvider[\s\S]*?\r?\n  }\r?\n\r?\n  try \{/)?.[0] || '';
 assert.equal(siteIcon.toString('ascii', 1, 4), 'PNG', 'site icon uses the new PNG app-style mark');
 assert.ok(siteIcon.length > 100000, 'site icon keeps enough raster detail for portal and favicon rendering');
 assert.match(layout, /metadataBase: new URL\('https:\/\/xinbaopedia\.top'\)/, 'site metadata resolves canonical URLs against the production domain');
@@ -1652,7 +1652,14 @@ assert.doesNotMatch(chatRoute, /retrievalQuery/, 'chat history cannot contaminat
 assert.doesNotMatch(chatRoute, /sanitizeHistory|body\.history|\.\.\.history/, 'chat API never trusts client history or forwards it to the model provider');
 assert.match(providerRequestFunction, /messages: \[[\s\S]*\{ role: 'system', content: prompt \}[\s\S]*\{ role: 'user', content: message \}[\s\S]*\]/, 'every provider attempt contains only its server-authored system prompt and the current user question');
 assert.doesNotMatch(providerRequestFunction, /discarded|firstAttempt|firstReply|draft/i, 'provider request construction has no path for forwarding a discarded model draft');
-assert.match(chatRoute, /CHAT_BACKEND_VERSION = 'xinbao-chat-api-v7'/, 'chat API exposes the long-voice false-positive repair backend version');
+assert.match(chatWithXinbaoPanel, /modelApiConfigured/, 'chat client health gate reads modelApiConfigured from GET meta');
+assert.match(chatWithXinbaoPanel, /serviceAvailable/, 'chat client tracks service availability separately from a single failed POST');
+assert.match(chatWithXinbaoPanel, /setServiceAvailable\(true\)/, 'chat client keeps quick-asks usable after a non-quota POST failure');
+assert.match(chatRoute, /CHAT_BACKEND_VERSION = 'xinbao-chat-api-v8'/, 'chat API exposes the soft-grounded-fallback backend version');
+assert.match(chatRoute, /function softGroundedFallbackReply/, 'chat API defines a soft grounded fallback reply that is not an outage banner');
+assert.match(chatRoute, /groundedResult\.kind === 'protected-output'[\s\S]*groundedResult\.kind === 'retry-rate-limited'[\s\S]*groundedResult\.kind === 'invalid-citations'[\s\S]*resolveConversationalReply\(\{[\s\S]*softGroundedFallbackReply\(language\)/, 'soft grounded failures fall back to conversation or a deterministic retry hint instead of genericUnavailable');
+assert.doesNotMatch(chatRoute, /if \(groundedResult\.kind === 'invalid-citations'\) \{[\s\S]*return unavailableAfterProvider\('invalid-citations'/, 'invalid-citations no longer maps directly to the temporary-unavailable banner');
+
 assert.match(chatRoute, /responsePolicyVersion: WIKI_CHAT_RESPONSE_POLICY_VERSION[\s\S]*responseMode[\s\S]*citedChunks/, 'chat API returns versioned response-policy metadata');
 assert.match(chatRoute, /const responseMode: ChatResponseMode = retrieval\.blockedReason[\s\S]*'deterministic-abstention'[\s\S]*retrieval\.shouldAbstain[\s\S]*'model-conversational'[\s\S]*'model-grounded'/, 'chat API maps protected, weak-evidence, and grounded requests to three explicit modes');
 assert.match(chatRoute, /if \(responseMode === 'deterministic-abstention'\)[\s\S]*deterministicAbstentionReply\(message, language, retrieval\.blockedReason\)[\s\S]*responseMetadata\(0, 0\)/, 'protected requests are answered deterministically before provider setup');
@@ -1943,11 +1950,11 @@ assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), 
 assert.match(read('DynFrs.md'), /!\[[^\]]+\]\(\/papers\/dynfrs\/lazy-tags\.png\)/, 'DynFrs paper page displays a figure');
 assert.match(read('Hessian_Free_Online_Certified_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/hessian-free\/poster\.png\)/, 'Hessian-free paper page includes poster image');
 assert.match(read('DynFrs.md'), /!\[[^\]]+\]\(\/papers\/dynfrs\/poster\.png\)/, 'DynFrs paper page includes poster image');
-assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/soft-weighted\/framework\.png\)/, 'soft-weighted paper page includes framework image');
+assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/soft-weighted\/framework\.webp\)/, 'soft-weighted paper page includes framework image');
 assert.deepEqual(publicationImages('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), ['/papers/model-collapse/poster.png', '/papers/model-collapse/teaser.png'], 'model-collapse paper places the poster before the overview teaser');
 assert.deepEqual(publicationImages('Hessian_Free_Online_Certified_Unlearning.md'), ['/papers/hessian-free/poster.png'], 'Hessian-free paper removes the experimental curve and keeps only the poster');
 assert.deepEqual(publicationImages('DynFrs.md'), ['/papers/dynfrs/poster.png', '/papers/dynfrs/lazy-tags.png'], 'DynFrs paper places the poster before the method schematic');
-assert.deepEqual(publicationImages('Soft_Weighted_Machine_Unlearning.md'), ['/papers/soft-weighted/framework.png'], 'soft-weighted paper uses the approved framework without the rejected poster');
+assert.deepEqual(publicationImages('Soft_Weighted_Machine_Unlearning.md'), ['/papers/soft-weighted/framework.webp'], 'soft-weighted paper uses the approved framework without the rejected poster');
 assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /\/papers\/model-collapse\/poster\.png\)[\s\S]*## Overview[\s\S]*\/papers\/model-collapse\/teaser\.png\)/, 'model-collapse paper separates the poster from the teaser with overview text');
 for (const page of ['When_Sample_Selection_Bias_Precipitates_Model_Collapse.md', 'DynFrs.md', 'Soft_Weighted_Machine_Unlearning.md']) {
   assert.doesNotMatch(read(page), /poster\.png\)\n\n!\[[^\]]+\]\(\/papers\//, `${page} does not place a non-poster figure immediately after the poster`);
@@ -2945,7 +2952,7 @@ for (const file of [
   'public/papers/model-collapse/poster.png',
   'public/papers/model-collapse/teaser.png',
   'public/papers/hessian-free/poster.png',
-  'public/papers/soft-weighted/framework.png',
+  'public/papers/soft-weighted/framework.webp',
   'public/papers/dynfrs/lazy-tags.png',
   'public/papers/dynfrs/poster.png'
 ]) {

@@ -4,6 +4,8 @@
 export const deletePaths = [
   'public/okf/', 'public/papers/', 'public/files/', 'public/images/', 'public/institutions/',
   'public/readme/', 'public/topics/', 'public/site-logos/', 'public/site-icons/', 'public/site-wallpaper/',
+  'docs/site-wallpaper/',
+  'scripts/test-site-wallpaper.mjs',
   'public/xinbaopedia-icon.png', 'public/xinbaopedia-icon.svg', 'public/977ab55cdd7bd5149d5143f5be4a88cc.txt',
   'CV.tex', 'assets/', 'wiki/', 'evals/', 'docs/demo/', 'docs/design/', '.preview-shots/',
   'docs/chat/persona-prompt.md', 'docs/chat/meme-voice-notes.md', 'docs/research-topic-image-prompts.md',
@@ -89,11 +91,57 @@ export const patches = [
   ['lib/wiki-retrieval.ts', '(?:your name(?: s)?|your name(?: s)?|his|your)', '(?:your name(?: s)?|his|your)'],
   ['lib/wiki-retrieval.ts', '(?:你的名字|你的名字|他|你)', '(?:你的名字|他|你)'],
   // ---- Owner-specific UI copy comes from lib/site-config.ts (template override) ----
+  ['lib/site-wallpaper-shared.ts', "['xinbao', 'site-wallpaper', 'v1']", "['site', 'wallpaper', 'v1']"],
   ['components/HomepagePortal.tsx', "import { WikiLink } from '@/components/WikiLink';\n", "import { WikiLink } from '@/components/WikiLink';\nimport { siteConfig } from '@/lib/site-config';\n"],
   ['components/HomepagePortal.tsx', /const portalTaglines = \{[\s\S]*?\} satisfies Record<PortalPalette, LocalizedText>;/, 'const portalTaglines: Record<PortalPalette, LocalizedText> = siteConfig.taglines;'],
   // Text wordmark tinted by the palette accent replaces the per-palette PNG wordmarks.
-  ['components/HomepagePortal.tsx', /\n *<span className="wiki-portal-name-logos" aria-hidden="true">[\s\S]*?\n *<\/span>\n( *)<span className="wiki-portal-name-text">Your Name<\/span>/, '\n$1<span className="wiki-portal-name-text">{siteConfig.ownerName[language]}</span>'],
-  ['app/globals.css', /html\[data-site-palette="blue"\] \.wiki-portal-name-text,\n[\s\S]*?html\[data-site-palette="charcoal"\] \.wiki-portal-name-text \{\n  display: none;\n\}/, 'html[data-site-palette="blue"] .wiki-portal-name-text,\nhtml[data-site-palette="gold"] .wiki-portal-name-text,\nhtml[data-site-palette="rose"] .wiki-portal-name-text,\nhtml[data-site-palette="green"] .wiki-portal-name-text,\nhtml[data-site-palette="violet"] .wiki-portal-name-text,\nhtml[data-site-palette="charcoal"] .wiki-portal-name-text {\n  --signature-ink: var(--site-theme-accent);\n}\n\n/* Template text wordmark: scales down and wraps so any name length fits on small screens. */\n.wiki-portal-name .wiki-portal-name-text {\n  font-size: min(1em, 12vw);\n  padding-inline: .2em;\n  white-space: normal;\n  text-align: center;\n  overflow-wrap: anywhere;\n}'],
+  ['components/HomepagePortal.tsx', /\n *<span\n *aria-hidden="true"\n *className="wiki-portal-name-logos"[\s\S]*?\n *<\/span>\n( *)<span className="wiki-portal-name-text">Your Name<\/span>/, '\n$1<span className="wiki-portal-name-text">{siteConfig.ownerName[language]}</span>'],
+  ['app/globals.css', /\.wiki-portal-name-logos,[\s\S]*?html\[data-site-palette="text"\] \.wiki-portal-name-text \{[\s\S]*?\}\n\}/, `.wiki-portal-name-logos,
+.wiki-portal-name-logo {
+  display: none !important;
+}
+
+.wiki-portal-name-text {
+  --signature-ink: var(--site-theme-accent);
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  clip: auto;
+  overflow: visible;
+  white-space: normal;
+  max-width: 100%;
+  display: inline-block;
+  color: var(--signature-ink);
+  line-height: .95;
+  font-size: min(1em, 12vw);
+  padding-inline: .2em;
+  text-align: center;
+  overflow-wrap: anywhere;
+  transform-origin: center center;
+  animation: wiki-name-write 2.4s cubic-bezier(.33, 0, .2, 1) .12s both;
+}
+
+html[data-site-palette="blue"] .wiki-portal-name-text,
+html[data-site-palette="gold"] .wiki-portal-name-text,
+html[data-site-palette="rose"] .wiki-portal-name-text,
+html[data-site-palette="green"] .wiki-portal-name-text,
+html[data-site-palette="violet"] .wiki-portal-name-text,
+html[data-site-palette="charcoal"] .wiki-portal-name-text,
+html[data-site-palette="text"] .wiki-portal-name-text {
+  --signature-ink: var(--site-theme-accent);
+}
+
+@supports ((background-clip: text) or (-webkit-background-clip: text)) {
+  .wiki-portal-name-text {
+    background-image: linear-gradient(90deg, var(--signature-ink), var(--signature-ink));
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}`],
   ['components/ChatWithOwnerPanel.tsx', "import { WikiHrefLink } from '@/components/WikiHrefLink';\n", "import { WikiHrefLink } from '@/components/WikiHrefLink';\nimport { siteConfig } from '@/lib/site-config';\n"],
   ['components/ChatWithOwnerPanel.tsx', /    greeting: 'Hi — welcome to MyWiki\.[^\n]*\n    quickPrompts: \[\n[\s\S]*?\n    \] as QuickPrompt\[\],/, '    greeting: siteConfig.chat.en.greeting,\n    quickPrompts: [...siteConfig.chat.en.quickPrompts] as QuickPrompt[],'],
   ['components/ChatWithOwnerPanel.tsx', /    greeting: '嗨，欢迎来 MyWiki。[^\n]*\n    quickPrompts: \[\n[\s\S]*?\n    \] as QuickPrompt\[\],/, '    greeting: siteConfig.chat.zh.greeting,\n    quickPrompts: [...siteConfig.chat.zh.quickPrompts] as QuickPrompt[],'],

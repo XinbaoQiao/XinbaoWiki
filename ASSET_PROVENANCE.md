@@ -82,6 +82,7 @@ license, or generation manifest recorded in the repository. They are all
 - `public/papers/model-collapse/poster.png`
 - `public/papers/model-collapse/teaser.png`
 - `public/papers/soft-weighted/framework.png`
+- `public/papers/soft-weighted/framework.webp`
 
 
 ## Withdrawn paper media
@@ -121,14 +122,19 @@ grant trademark rights or permission to imply an official fork, affiliation,
 or endorsement:
 
 - `public/site-icons/xinbaopedia-blue.png`
+- `public/site-icons/xinbaopedia-blue.webp`
 - `public/site-icons/xinbaopedia-charcoal.png`
+- `public/site-icons/xinbaopedia-charcoal.webp`
 - `public/site-icons/xinbaopedia-gold.png`
+- `public/site-icons/xinbaopedia-gold.webp`
 - `public/site-icons/xinbaopedia-green.png`
+- `public/site-icons/xinbaopedia-green.webp`
 - `public/site-logos/wordmark/xinbao-qiao-blue.png`
 - `public/site-logos/wordmark/xinbao-qiao-charcoal.png`
 - `public/site-logos/wordmark/xinbao-qiao-gold.png`
 - `public/site-logos/wordmark/xinbao-qiao-green.png`
 - `public/xinbaopedia-icon.png`
+- `public/xinbaopedia-icon.webp`
 
 ## Closing an unresolved record
 

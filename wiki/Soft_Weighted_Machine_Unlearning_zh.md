@@ -10,10 +10,10 @@ tags:
   - aaai-2026
   - machine-unlearning
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-19T14:23:38.099Z'
-content_hash: 'sha256:467c1707ea648ef4153c24503cf681950bf83ba58b0c8036d018d446e472b6d5'
-reviewed_at: '2026-10-19T14:23:56.706Z'
-review_due: '2027-10-19'
+modified: '2026-10-22T18:17:12.392Z'
+content_hash: 'sha256:e4c0f87303b1329af8754a69c06efa5be4dfc4bde48a94c3e36c33cb27a18095'
+reviewed_at: '2026-10-22T18:17:42.236Z'
+review_due: '2027-10-22'
 name: 'Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness'
 language: zh
 summary: AAAI 2026 论文，研究用于公平性与鲁棒性修正的软加权机器遗忘。
@@ -77,7 +77,7 @@ translation_of: Soft_Weighted_Machine_Unlearning
 2. 求解连续权重，使目标指标改善，同时约束效用损失；
 3. 应用加权模型校正，而不是删除固定 top-k 样本集合。
 
-![软加权机器遗忘框架](/papers/soft-weighted/framework.png)
+![软加权机器遗忘框架](/papers/soft-weighted/framework.webp)
 
 ## 关键启示
 

@@ -387,14 +387,83 @@ function withTimeout<T>(promise: Promise<T>, timeoutMs: number, message: string)
   });
 }
 
+async function canvasSupportsWebp(): Promise<boolean> {
+  try {
+    const canvas = document.createElement('canvas');
+    canvas.width = 2;
+    canvas.height = 2;
+    const blob = await canvasToBlob(canvas, 'image/webp', 0.8);
+    return blob.type === 'image/webp' && blob.size > 0;
+  } catch {
+    return false;
+  }
+}
+
+async function encodeWallpaperBlob(
+  bitmap: ImageBitmap,
+  normalizedType: string,
+  preferAlpha: boolean
+): Promise<Blob> {
+  const scale = Math.min(1, MAX_EDGE / Math.max(bitmap.width, bitmap.height));
+  const width = Math.max(1, Math.round(bitmap.width * scale));
+  const height = Math.max(1, Math.round(bitmap.height * scale));
+  const canvas = document.createElement('canvas');
+  canvas.width = width;
+  canvas.height = height;
+  const keepAlpha = preferAlpha && (normalizedType === 'image/png' || normalizedType === 'image/webp' || normalizedType === 'image/gif');
+  const context = canvas.getContext('2d', { alpha: keepAlpha, desynchronized: true });
+  if (!context) throw new Error('Canvas unavailable');
+  if (!keepAlpha) {
+    context.fillStyle = '#ffffff';
+    context.fillRect(0, 0, width, height);
+  }
+  context.drawImage(bitmap, 0, 0, width, height);
+
+  // Prefer WebP for shared wallpaper - often much smaller than PNG on photos/UI shots.
+  if (await canvasSupportsWebp()) {
+    let quality = 0.82;
+    let best: Blob | null = null;
+    while (quality >= 0.55) {
+      const webp = await canvasToBlob(canvas, 'image/webp', quality);
+      best = webp;
+      if (webp.size <= MAX_BYTES) return webp;
+      quality -= 0.09;
+    }
+    if (best && best.size <= MAX_BYTES * 1.15) return best;
+  }
+
+  // Never re-encode large canvases as PNG - toBlob('image/png') can hang for seconds.
+  const pixelCount = width * height;
+  const tryLossless =
+    keepAlpha && (normalizedType === 'image/png' || normalizedType === 'image/gif') && pixelCount <= 640 * 640;
+  if (tryLossless) {
+    const png = await canvasToBlob(canvas, 'image/png');
+    if (png.size <= MAX_BYTES) return png;
+  }
+
+  let quality = 0.82;
+  let best: Blob | null = null;
+  while (quality >= 0.48) {
+    const jpeg = await canvasToBlob(canvas, 'image/jpeg', quality);
+    best = jpeg;
+    if (jpeg.size <= MAX_BYTES) return jpeg;
+    quality -= 0.1;
+  }
+
+  if (best && best.size <= MAX_BYTES * 1.15) return best;
+  throw new Error('Image is still too large after compression');
+}
+
 async function compressImageFileInner(file: File): Promise<Blob> {
   const normalizedType = normalizeImageMimeType(file.type, file.name);
   if (!normalizedType) {
     throw new Error('Unsupported image type');
   }
 
-  // Fast path: already within budget — avoid canvas decode/encode (large PNG encode hangs).
-  if (ACCEPT_TYPES.has(normalizedType) && file.size > 0 && file.size <= MAX_BYTES) {
+  // Tiny already-WebP assets can skip re-encode. Bulky PNG/JPEG still recompresses to WebP.
+  const tinyWebp =
+    normalizedType === 'image/webp' && file.size > 0 && file.size <= 96 * 1024;
+  if (tinyWebp) {
     try {
       const probe = await createImageBitmap(file);
       const maxDim = Math.max(probe.width, probe.height);
@@ -431,40 +500,7 @@ async function compressImageFileInner(file: File): Promise<Blob> {
       }
     }
     try {
-      const scale = Math.min(1, MAX_EDGE / Math.max(bitmap.width, bitmap.height));
-      const width = Math.max(1, Math.round(bitmap.width * scale));
-      const height = Math.max(1, Math.round(bitmap.height * scale));
-      const canvas = document.createElement('canvas');
-      canvas.width = width;
-      canvas.height = height;
-      // alpha:false is faster; JPEG path does not need alpha.
-      const context = canvas.getContext('2d', { alpha: false, desynchronized: true });
-      if (!context) throw new Error('Canvas unavailable');
-      context.fillStyle = '#ffffff';
-      context.fillRect(0, 0, width, height);
-      context.drawImage(bitmap, 0, 0, width, height);
-
-      // Never re-encode large canvases as PNG — toBlob('image/png') can hang for seconds
-      // on megapixel photos and leaves the UI spinner stuck.
-      const pixelCount = width * height;
-      const tryLossless =
-        (normalizedType === 'image/png' || normalizedType === 'image/gif') && pixelCount <= 640 * 640;
-      if (tryLossless) {
-        const png = await canvasToBlob(canvas, 'image/png');
-        if (png.size <= MAX_BYTES) return png;
-      }
-
-      let quality = 0.82;
-      let best: Blob | null = null;
-      while (quality >= 0.48) {
-        const jpeg = await canvasToBlob(canvas, 'image/jpeg', quality);
-        best = jpeg;
-        if (jpeg.size <= MAX_BYTES) return jpeg;
-        quality -= 0.1;
-      }
-
-      if (best && best.size <= MAX_BYTES * 1.15) return best;
-      throw new Error('Image is still too large after compression');
+      return await encodeWallpaperBlob(bitmap, normalizedType, true);
     } finally {
       bitmap.close();
     }

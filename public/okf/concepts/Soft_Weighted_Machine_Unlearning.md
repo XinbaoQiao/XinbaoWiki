@@ -12,18 +12,18 @@ tags:
   - aaai-2026
   - machine-unlearning
 timestamp: '2026-05-05T21:39:01+08:00'
-modified: '2026-10-19T14:23:38.100Z'
-content_hash: 'sha256:8085d63383f4e827ef0a5461a51aab034eeeaa82d1fb65075d36b1b83d4f18cf'
-reviewed_at: '2026-10-19T14:23:56.706Z'
-review_due: '2027-10-19'
+modified: '2026-10-22T18:17:12.393Z'
+content_hash: 'sha256:33668dd6ccbf435f53306ab7b9095feae324c745977188ea93d85c524f4d3e44'
+reviewed_at: '2026-10-22T18:17:42.233Z'
+review_due: '2027-10-22'
 language: en
 lifecycle:
   status: confirmed
   confidence: 0.95
   review: on venue/status change
   retention: long-lived semantic memory
-  reviewedAt: '2026-10-19T14:23:56.706Z'
-  reviewDue: '2027-10-19'
+  reviewedAt: '2026-10-22T18:17:42.233Z'
+  reviewDue: '2027-10-22'
   pendingReview: false
   overdue: false
 retrieval:
@@ -54,7 +54,7 @@ The three-stage workflow is:
 2. solve for continuous weights that improve the target metric while constraining utility loss;
 3. apply a weighted model correction instead of deleting a fixed top-k set.
 
-![Soft-weighted unlearning framework](/papers/soft-weighted/framework.png)
+![Soft-weighted unlearning framework](/papers/soft-weighted/framework.webp)
 
 ## Key takeaways
 
