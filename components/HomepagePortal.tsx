@@ -8,13 +8,17 @@ import type { CSSProperties, PointerEvent as ReactPointerEvent, TransitionEvent 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
 import { getRecentSiteUpdates } from '@/lib/site-updates';
-import { PaperAcceptancePreview } from '@/components/PaperAcceptancePreview';
 import { SlidingSelection } from '@/components/SlidingSelection';
 import { useAnimatedDisclosure } from '@/components/useAnimatedDisclosure';
 import type { PaperHighlightCatalog } from '@/lib/paper-highlights';
 
 const VisitorAtlasDisclosure = dynamic(
   () => import('@/components/VisitorAtlasDisclosure').then((module) => module.VisitorAtlasDisclosure),
+  { ssr: false }
+);
+
+const PaperAcceptancePreview = dynamic(
+  () => import('@/components/PaperAcceptancePreview').then((module) => module.PaperAcceptancePreview),
   { ssr: false }
 );
 
@@ -506,7 +510,7 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
                   <span
                     className="wiki-portal-name-logo wiki-portal-name-logo-tinted"
                     style={{
-                      '--portal-wordmark-mask': `url("${withBasePath('/site-logos/wordmark/xinbao-qiao-charcoal.png')}")`
+                      '--portal-wordmark-mask': `url("${withBasePath('/site-logos/wordmark/xinbao-qiao-charcoal.webp')}")`
                     } as CSSProperties}
                   />
                 </span>

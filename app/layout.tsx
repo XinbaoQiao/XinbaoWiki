@@ -8,6 +8,7 @@ import { SiteActivityRecorder } from '@/components/SiteActivityRecorder';
 import { WikiLink } from '@/components/WikiLink';
 import { pathWithBasePath } from '@/lib/wiki';
 import {
+  cssUrlForSharedImage,
   sharedBackgroundHtmlDataset,
   sharedBackgroundInlineStyle,
   type SharedSiteBackgroundPublic
@@ -111,10 +112,10 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <link
             rel="preload"
             as="style"
-            href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=optional"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=optional"
             rel="stylesheet"
             media="print"
             data-alex-brush-font=""
@@ -125,11 +126,24 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
                 '(function(){var l=document.querySelector("link[data-alex-brush-font]");if(!l)return;var r=function(){l.media="all"};if(l.sheet)r();else l.addEventListener("load",r);})();'
             }}
           />
-          <noscript>
-            <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet" />
-          </noscript>
+          {initialSharedBackground?.enabled && cssUrlForSharedImage(initialSharedBackground.imageUrl) ? (
+            <link
+              rel="preload"
+              as="image"
+              href={cssUrlForSharedImage(initialSharedBackground.imageUrl)!}
+              fetchPriority="low"
+            />
+          ) : null}
         </head>
         <body>
+          {initialSharedBackground?.enabled && cssUrlForSharedImage(initialSharedBackground.imageUrl) ? (
+            <div
+              aria-hidden="true"
+              className="site-custom-bg-layer is-active"
+              data-ssr-wallpaper=""
+              style={{ backgroundImage: `url("${cssUrlForSharedImage(initialSharedBackground.imageUrl)}")` }}
+            />
+          ) : null}
           <SiteActivityRecorder />
           <a className="skip-to-content" href="#main-content">Skip to content / 跳到正文</a>
           <SitePalette icons={sitePaletteIcons} initialSharedBackground={initialSharedBackground} />

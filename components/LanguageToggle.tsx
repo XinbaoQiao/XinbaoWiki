@@ -55,7 +55,7 @@ const WALLPAPER_UPLOAD_TIMEOUT_MS = 45_000;
 
 import type { CSSProperties, ChangeEvent } from 'react';
 
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useRef, useState, useLayoutEffect } from 'react';
 
 import { usePathname } from 'next/navigation';
 
@@ -797,6 +797,19 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
   };
 
   const customActive = Boolean(customSettings.enabled && customImageUrl);
+  const [ssrWallpaperAdopted, setSsrWallpaperAdopted] = useState(() => {
+    if (initialSharedBackground?.enabled && cssUrlForSharedImage(initialSharedBackground.imageUrl)) return true;
+    return typeof document !== 'undefined' && Boolean(document.querySelector('[data-ssr-wallpaper]'));
+  });
+  useLayoutEffect(() => {
+    const ssr = document.querySelector<HTMLElement>('[data-ssr-wallpaper]');
+    if (!ssr) return;
+    ssr.className = ['site-custom-bg-layer', customActive ? 'is-active' : ''].filter(Boolean).join(' ');
+    ssr.style.backgroundImage = customImageUrl
+      ? `url("${customImageUrl}")`
+      : 'var(--site-custom-bg-image, none)';
+    setSsrWallpaperAdopted(true);
+  }, [customActive, customImageUrl]);
   const layerStyle = {
     backgroundImage: customImageUrl ? `url("${customImageUrl}")` : 'var(--site-custom-bg-image, none)'
   } as CSSProperties;
@@ -824,11 +837,13 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
   };
   return (
     <>
-      <div
-        aria-hidden="true"
-        className={['site-custom-bg-layer', customActive ? 'is-active' : ''].filter(Boolean).join(' ')}
-        style={layerStyle}
-      />
+      {!ssrWallpaperAdopted && (
+        <div
+          aria-hidden="true"
+          className={['site-custom-bg-layer', customActive ? 'is-active' : ''].filter(Boolean).join(' ')}
+          style={layerStyle}
+        />
+      )}
       <div
         ref={rootRef}
         className={['site-palette-root', panelOpen ? 'is-panel-open' : ''].filter(Boolean).join(' ')}

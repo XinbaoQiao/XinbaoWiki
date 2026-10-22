@@ -6236,6 +6236,22 @@ html[data-site-custom-bg="on"] .wiki-body {
   background: transparent;
 }
 
+/* Wallpaper on: drop remaining chrome blurs that repaint the full viewport on scroll. */
+html[data-site-custom-bg="on"] .site-palette-switcher,
+html[data-site-custom-bg="on"] .wiki-search-panel,
+html[data-site-custom-bg="on"] .wiki-topbar {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* Long wiki prose: skip offscreen layout/paint until near viewport. */
+.wiki-body > section,
+.wiki-body > h2,
+.wiki-body > h3 {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 320px;
+}
+
 /* Soft glyph edge: only titles — full-main text-shadow paints every glyph and lags long pages. */
 html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-main :is(h1, h2, h3, .wiki-title) {
   text-shadow: 0 1px 1px rgb(0 0 0 / .35);
