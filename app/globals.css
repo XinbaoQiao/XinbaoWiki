@@ -2508,73 +2508,45 @@ body:has(.wiki-portal) .wiki-toc-return {
   margin: 0 auto;
 }
 
-/* Soft invite: breath + faint underline + bilingual hint (name-only default). */
-.wiki-portal-name-hint {
-  display: none;
-  margin: 18px 0 0;
-  color: var(--wiki-text-soft);
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.08em;
-  line-height: 1.4;
-  text-transform: none;
-  pointer-events: none;
-  user-select: none;
-}
-
-.wiki-portal-name-only .wiki-portal-name-hint {
-  display: block;
-  animation: wiki-portal-hint-breathe 3.2s ease-in-out infinite;
-}
-
+/* Soft visual invite (name-only): breathing underline + subtle hover scale. No CTA copy. */
 .wiki-portal-name-only .wiki-portal-name-wrap::after {
   content: "";
   position: absolute;
-  left: 12%;
-  right: 12%;
-  bottom: -10px;
+  left: 14%;
+  right: 14%;
+  bottom: -12px;
   height: 1px;
   background: linear-gradient(
     90deg,
     transparent 0%,
-    color-mix(in srgb, var(--site-theme-heading) 42%, transparent) 50%,
+    color-mix(in srgb, var(--site-theme-heading) 48%, transparent) 50%,
     transparent 100%
   );
-  opacity: 0.45;
+  opacity: 0.4;
+  transform-origin: center;
   pointer-events: none;
-  animation: wiki-portal-underline-breathe 3.2s ease-in-out infinite;
+  animation: wiki-portal-underline-breathe 3.4s ease-in-out infinite;
 }
 
 .wiki-portal-name-wrap:has(.wiki-portal-name-button:hover)::after,
 .wiki-portal-name-wrap:has(.wiki-portal-name-button:focus-visible)::after {
-  opacity: 0.85;
-  animation: none;
-}
-
-.wiki-portal-name-only .wiki-portal-name-wrap:has(.wiki-portal-name-button:hover) .wiki-portal-name-hint,
-.wiki-portal-name-only .wiki-portal-name-wrap:has(.wiki-portal-name-button:focus-visible) .wiki-portal-name-hint {
-  opacity: 0.92;
+  opacity: 0.88;
+  transform: scaleX(1);
   animation: none;
 }
 
 .wiki-portal-name-wrap:has(.wiki-portal-name-button:hover) .wiki-portal-name,
 .wiki-portal-name-wrap:has(.wiki-portal-name-button:focus-visible) .wiki-portal-name {
-  transform: scale(1.012);
+  transform: scale(1.014);
 }
 
 .wiki-portal-name {
   transition: transform 0.28s ease;
 }
 
-@keyframes wiki-portal-hint-breathe {
-  0%, 100% { opacity: 0.42; }
-  50% { opacity: 0.78; }
-}
-
 @keyframes wiki-portal-underline-breathe {
-  0%, 100% { opacity: 0.28; transform: scaleX(0.92); }
-  50% { opacity: 0.62; transform: scaleX(1); }
+  0%, 100% { opacity: 0.22; transform: scaleX(0.9); }
+  50% { opacity: 0.58; transform: scaleX(1); }
 }
 
 .wiki-portal-masthead {
@@ -5441,16 +5413,8 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
   .wiki-portal-tagline-copy,
   .wiki-portal-name-text,
   .wiki-portal-collapsed,
-  .wiki-portal-name-hint,
   .wiki-portal-name-only .wiki-portal-name-wrap::after {
     animation: none;
-  }
-
-  .wiki-portal-name-only .wiki-portal-name-hint {
-    opacity: 0.62;
-  }
-
-  .wiki-portal-name-only .wiki-portal-name-wrap::after {
     opacity: 0.45;
     transform: none;
   }
