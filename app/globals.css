@@ -2482,6 +2482,32 @@ body:has(.wiki-portal) .wiki-toc-return {
   margin-bottom: 0;
 }
 
+/* Extreme fold: only the centered name remains. */
+.wiki-portal-name-only .wiki-portal-tagline,
+.wiki-portal-name-only .wiki-portal-search,
+.wiki-portal-name-only .wiki-portal-disclosures {
+  display: none;
+}
+
+.wiki-shell:has(.wiki-portal-name-only) {
+  place-items: center;
+  align-content: center;
+  min-height: 100svh;
+  padding: clamp(24px, 10vh, 96px) 24px;
+}
+
+.wiki-portal-name-only {
+  transform: none;
+}
+
+.wiki-portal-name-only .wiki-portal-hero {
+  margin: 0 auto;
+}
+
+.wiki-portal-name-only .wiki-portal-masthead {
+  margin: 0 auto;
+}
+
 .wiki-portal-masthead {
   display: grid;
   justify-items: center;
