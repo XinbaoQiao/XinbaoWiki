@@ -51,7 +51,7 @@ const expectations = [
   ['route', 'GET', 'POST', 'DELETE', 'SITE_ACTIVITY_OWNER_PASSWORD_HASH', 'form-data', 'sniffImageMimeType'],
   ['store', '@vercel/blob', 'SITE_BACKGROUND_REDIS_KEY', 'SITE_BACKGROUND_BLOB_PATHNAME', 'siteBackgroundLocalFallbackEnabled', 'siteBackgroundPasswordRequired', 'blobReadWriteTokenEnv'],
   ['shared', "join(':')", 'site-wallpaper', 'wallpaper', 'sharedBackgroundInlineStyle', 'sniffImageMimeType', 'isAcceptedSiteBackgroundMime'],
-  ['toggle', '/api/site-activity/wallpaper', 'publishShared', '全站可见', '仅此设备', 'imageExtensionForMime', 'normalizeImageMimeType'],
+  ['toggle', '/api/site-activity/wallpaper/', 'SITE_WALLPAPER_API', 'AbortController', 'compressImageFile', 'publishShared', '全站可见', '仅此设备', 'imageExtensionForMime', 'normalizeImageMimeType'],
   ['layout', 'initialSharedBackground', 'sharedBackgroundInlineStyle', 'loadInitialSharedBackground'],
   ['css', 'html[data-site-custom-bg="on"] .wiki-toc-return', 'backdrop-filter: blur(10px)', 'site-custom-bg-password'],
   ['deny', 'vercel-storage\\.com/site-wallpaper', 'public/site-wallpaper/'],
@@ -70,5 +70,11 @@ const forbiddenPath = ['site', 'background'].join('-');
 const forbiddenBlobEnv = ['BLOB', 'READ', 'WRITE', 'TOKEN'].join('_');
 assert.equal(files.route.includes(forbiddenPath), false);
 assert.equal(files.store.includes(forbiddenBlobEnv), false);
+
+
+const customBg = fs.readFileSync('lib/site-custom-background.ts', 'utf8');
+assert.match(customBg, /Image compression timed out/);
+assert.match(customBg, /withTimeout/);
+assert.doesNotMatch(customBg, /preferPng[\s\S]{0,80}canvasToBlob\(canvas, 'image\/png'\)/);
 
 console.log('test-site-wallpaper: ok');

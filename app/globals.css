@@ -5784,9 +5784,12 @@ html:not([data-wiki-morph-to]) ::view-transition-new(.wiki-title-morph) {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: var(--site-custom-bg-position, center);
+  background-attachment: scroll;
   opacity: 0;
   transform: translate3d(0, var(--site-custom-bg-parallax, 0px), 0) scale(1);
   transition: opacity .28s ease;
+  contain: paint;
+  content-visibility: auto;
 }
 
 .site-custom-bg-layer.is-active {
@@ -5840,7 +5843,7 @@ html[data-site-custom-bg-mode="tile"] .site-custom-bg-layer {
 html[data-site-custom-bg-mode="depth"] .site-custom-bg-layer.is-active {
   transform: translate3d(0, var(--site-custom-bg-parallax, 0px), 0) scale(1.06);
   transform-origin: center center;
-  will-change: transform;
+  /* Avoid permanent will-change — it keeps a large compositor layer and feels laggy. */
 }
 
 html[data-site-custom-bg-position="top"] .site-custom-bg-layer {
@@ -6163,15 +6166,13 @@ html[data-site-custom-bg="on"] .wiki-body {
   background: transparent;
 }
 
-/* Soft glyph edge for long pages without a content box. */
-/* Dark wallpaper + light ink: soft dark halo. */
-html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-main {
-  text-shadow: 0 1px 2px rgb(0 0 0 / .5);
+/* Soft glyph edge: only titles — full-main text-shadow paints every glyph and lags long pages. */
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-main :is(h1, h2, h3, .wiki-title) {
+  text-shadow: 0 1px 1px rgb(0 0 0 / .35);
 }
 
-/* Light wallpaper + dark ink: soft light halo so glyphs stay crisp on bright photos. */
-html[data-site-custom-bg="on"][data-site-custom-bg-ink="dark"] .wiki-main {
-  text-shadow: 0 1px 2px rgb(255 255 255 / .4);
+html[data-site-custom-bg="on"][data-site-custom-bg-ink="dark"] .wiki-main :is(h1, h2, h3, .wiki-title) {
+  text-shadow: 0 1px 1px rgb(255 255 255 / .28);
 }
 
 html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] :is(

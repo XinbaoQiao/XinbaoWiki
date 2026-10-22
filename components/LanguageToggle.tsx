@@ -49,6 +49,10 @@ import {
   type SharedSiteBackgroundPublic
 } from '@/lib/site-wallpaper-shared';
 
+const SITE_WALLPAPER_API = '/api/site-activity/wallpaper/';
+const WALLPAPER_UPLOAD_TIMEOUT_MS = 45_000;
+
+
 import type { CSSProperties, ChangeEvent } from 'react';
 
 import { useEffect, useId, useRef, useState } from 'react';
@@ -427,7 +431,7 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
 
   const refreshSharedBackground = async () => {
     try {
-      const response = await fetch('/api/site-activity/wallpaper', { method: 'GET', credentials: 'same-origin' });
+      const response = await fetch(SITE_WALLPAPER_API, { method: 'GET', credentials: 'same-origin' });
       if (!response.ok) return null;
       const payload = (await response.json()) as SharedSiteBackgroundPublic;
       setSharedMeta(payload);
@@ -444,7 +448,7 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
       setError(isChinese ? '请输入站长密码（至少 8 位）。' : 'Enter the owner password (at least 8 characters).');
       return;
     }
-    const response = await fetch('/api/site-activity/wallpaper', {
+    const response = await fetch(SITE_WALLPAPER_API, {
       method: 'POST',
       credentials: 'same-origin',
       headers: { 'Content-Type': 'application/json' },
@@ -565,12 +569,16 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
       return;
     }
     let frame = 0;
+    let lastOffset = Number.NaN;
     const onScroll = () => {
       if (frame) return;
       frame = window.requestAnimationFrame(() => {
         frame = 0;
         const offset = Math.max(-24, Math.min(24, window.scrollY * 0.04));
-        document.documentElement.style.setProperty('--site-custom-bg-parallax', `${offset.toFixed(1)}px`);
+        const rounded = Math.round(offset * 2) / 2;
+        if (rounded === lastOffset) return;
+        lastOffset = rounded;
+        document.documentElement.style.setProperty('--site-custom-bg-parallax', `${rounded.toFixed(1)}px`);
       });
     };
     onScroll();
@@ -666,9 +674,12 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
     if (!file) return;
     setBusy(true);
     setError(null);
-    setScopeNote(null);
+    setScopeNote(isChinese ? '正在处理图片…' : 'Preparing image…');
+    const uploadController = new AbortController();
+    const uploadTimer = window.setTimeout(() => uploadController.abort(), WALLPAPER_UPLOAD_TIMEOUT_MS);
     try {
       const blob = await compressImageFile(file);
+      setScopeNote(isChinese ? '正在分析亮度…' : 'Checking brightness…');
       const tone = toneFromLuminance(await estimateImageLuminance(blob));
       const nextSettings: CustomBgSettings = {
         ...customSettings,
@@ -680,8 +691,10 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
       if (shouldPublish) {
         if (!ownerPassword || ownerPassword.length < 8) {
           setError(isChinese ? '请输入站长密码（至少 8 位）。' : 'Enter the owner password (at least 8 characters).');
+          setScopeNote(null);
           return;
         }
+        setScopeNote(isChinese ? '正在上传全站背景…' : 'Uploading site-wide background…');
         const body = new FormData();
         body.set('password', ownerPassword);
         const uploadMime = normalizeImageMimeType(blob.type, file.name) || blob.type || 'image/jpeg';
@@ -692,11 +705,23 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
         body.set('position', nextSettings.position);
         body.set('tone', tone);
         body.set('enabled', 'true');
-        const response = await fetch('/api/site-activity/wallpaper', { method: 'POST', credentials: 'same-origin', body });
+        const response = await fetch(SITE_WALLPAPER_API, {
+          method: 'POST',
+          credentials: 'same-origin',
+          body,
+          signal: uploadController.signal
+        });
         if (!response.ok) {
-          setError(response.status === 401
-            ? (isChinese ? '密码不正确。' : 'Incorrect password.')
-            : (isChinese ? '无法发布全站背景。' : 'Could not publish the site background.'));
+          const fail =
+            response.status === 401
+              ? (isChinese ? '密码不正确。' : 'Incorrect password.')
+              : response.status === 413
+                ? (isChinese ? '图片太大，请换更小的图或先压缩。' : 'Image too large. Try a smaller file.')
+                : response.status === 415 || response.status === 400
+                  ? (isChinese ? '不支持的图片格式，请用 JPEG / PNG / WebP。' : 'Unsupported image type. Use JPEG, PNG, or WebP.')
+                  : (isChinese ? '无法发布全站背景。' : 'Could not publish the site background.');
+          setError(fail);
+          setScopeNote(null);
           return;
         }
         const payload = (await response.json()) as SharedSiteBackgroundPublic;
@@ -717,10 +742,17 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
       setScopeNote(isChinese ? '仅此设备。' : 'This device only.');
     } catch (cause) {
       const message = cause instanceof Error ? cause.message : 'Upload failed';
-      setError(message.includes('large')
-        ? (isChinese ? '图片压缩后仍然太大，请换一张更小的图。' : 'Image is still too large after compression.')
-        : (isChinese ? '无法使用这张图片，请换 JPEG / PNG / WebP。' : 'Could not use that image. Try JPEG, PNG, or WebP.'));
+      const aborted = cause instanceof DOMException && cause.name === 'AbortError';
+      if (aborted || /timed out/i.test(message)) {
+        setError(isChinese ? '上传超时，请换一张更小的图后重试。' : 'Upload timed out. Try a smaller image.');
+      } else if (/large/i.test(message)) {
+        setError(isChinese ? '图片压缩后仍然太大，请换一张更小的图。' : 'Image is still too large after compression.');
+      } else {
+        setError(isChinese ? '无法使用这张图片，请试 JPEG / PNG / WebP。' : 'Could not use that image. Try JPEG, PNG, or WebP.');
+      }
+      setScopeNote(null);
     } finally {
+      window.clearTimeout(uploadTimer);
       setBusy(false);
     }
   };
@@ -736,7 +768,7 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
           setError(isChinese ? '请输入站长密码（至少 8 位）。' : 'Enter the owner password (at least 8 characters).');
           return;
         }
-        const response = await fetch('/api/site-activity/wallpaper', {
+        const response = await fetch(SITE_WALLPAPER_API, {
           method: 'DELETE',
           credentials: 'same-origin',
           headers: { 'Content-Type': 'application/json' },
