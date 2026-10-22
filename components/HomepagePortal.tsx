@@ -224,7 +224,7 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
         : sectionToggleLabels[language].collapse;
   const portalClassName = [
     'wiki-portal',
-    layoutMode === 'collapsed' || layoutMode === 'nameOnly' ? 'wiki-portal-collapsed' : '',
+    layoutMode === 'collapsed' ? 'wiki-portal-collapsed' : '',
     layoutMode === 'nameOnly' ? 'wiki-portal-name-only' : ''
   ].filter(Boolean).join(' ');
   const recentUpdates = getRecentSiteUpdates(language, new Date(updatesAsOfDate));
@@ -506,7 +506,14 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
           <div className="wiki-portal-brand">
             <div className="wiki-portal-name-wrap">
               <h1 className="wiki-portal-name" id="portal-title">
-                <span className="wiki-portal-name-logos" aria-hidden="true">
+                <span
+                  aria-hidden="true"
+                  className="wiki-portal-name-logos"
+                  onAnimationEnd={(event) => {
+                    if (event.target !== event.currentTarget) return;
+                    event.currentTarget.setAttribute('data-intro-done', '');
+                  }}
+                >
                   <span
                     className="wiki-portal-name-logo wiki-portal-name-logo-tinted"
                     style={{
