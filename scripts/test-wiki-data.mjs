@@ -283,6 +283,19 @@ for (const iconPath of themedSiteIcons) {
   assert.equal(themedIcon.toString('ascii', 1, 4), 'PNG', `${iconPath} is a PNG favicon candidate`);
   assert.ok(themedIcon.length > 100000, `${iconPath} keeps enough raster detail for browser favicon rendering`);
 }
+const themedSiteIconsWebp = [
+  'public/xinbaopedia-icon.webp',
+  'public/site-icons/xinbaopedia-blue.webp',
+  'public/site-icons/xinbaopedia-gold.webp',
+  'public/site-icons/xinbaopedia-green.webp',
+  'public/site-icons/xinbaopedia-charcoal.webp'
+];
+for (const iconPath of themedSiteIconsWebp) {
+  assertFile(iconPath);
+  const themedIcon = fs.readFileSync(path.join(root, iconPath));
+  assert.equal(themedIcon.toString('ascii', 0, 4), 'RIFF', `${iconPath} is a WebP favicon candidate`);
+  assert.ok(themedIcon.length > 1000 && themedIcon.length < 30000, `${iconPath} stays compact for fast favicon delivery`);
+}
 const themedSiteWordmarks = [
   'public/site-logos/wordmark/xinbao-qiao-blue.png',
   'public/site-logos/wordmark/xinbao-qiao-gold.png',
@@ -368,8 +381,8 @@ assert.equal(siteIcon.toString('ascii', 1, 4), 'PNG', 'site icon uses the new PN
 assert.ok(siteIcon.length > 100000, 'site icon keeps enough raster detail for portal and favicon rendering');
 assert.match(layout, /metadataBase: new URL\('https:\/\/xinbaopedia\.top'\)/, 'site metadata resolves canonical URLs against the production domain');
 assert.match(layout, /default: 'Xinbaopedia'[\s\S]*template: '%s \| Xinbaopedia'/, 'site metadata keeps a canonical title and article title template');
-assert.match(layout, /text: pathWithBasePath\('\/xinbaopedia-icon\.png'\)/, 'layout restores the pure-text theme favicon entry');
-assert.match(layout, /const sitePaletteIcons = \{[\s\S]*text: pathWithBasePath\('\/xinbaopedia-icon\.png'\)[\s\S]*blue: pathWithBasePath\('\/site-icons\/xinbaopedia-blue\.png'\)[\s\S]*gold: pathWithBasePath\('\/site-icons\/xinbaopedia-gold\.png'\)[\s\S]*rose: pathWithBasePath\('\/site-icons\/xinbaopedia-gold\.png'\)[\s\S]*green: pathWithBasePath\('\/site-icons\/xinbaopedia-green\.png'\)[\s\S]*violet: pathWithBasePath\('\/site-icons\/xinbaopedia-blue\.png'\)[\s\S]*charcoal: pathWithBasePath\('\/site-icons\/xinbaopedia-charcoal\.png'\)[\s\S]*\}/, 'layout defines base-path-aware favicon fallbacks for every themed palette');
+assert.match(layout, /text: pathWithBasePath\('\/xinbaopedia-icon\.webp'\)/, 'layout restores the pure-text theme favicon entry');
+assert.match(layout, /const sitePaletteIcons = \{[\s\S]*text: pathWithBasePath\('\/xinbaopedia-icon\.webp'\)[\s\S]*blue: pathWithBasePath\('\/site-icons\/xinbaopedia-blue\.webp'\)[\s\S]*gold: pathWithBasePath\('\/site-icons\/xinbaopedia-gold\.webp'\)[\s\S]*rose: pathWithBasePath\('\/site-icons\/xinbaopedia-gold\.webp'\)[\s\S]*green: pathWithBasePath\('\/site-icons\/xinbaopedia-green\.webp'\)[\s\S]*violet: pathWithBasePath\('\/site-icons\/xinbaopedia-blue\.webp'\)[\s\S]*charcoal: pathWithBasePath\('\/site-icons\/xinbaopedia-charcoal\.webp'\)[\s\S]*\}/, 'layout defines base-path-aware favicon fallbacks for every themed palette');
 assert.match(layout, /icons: \{ icon: sitePaletteIcons\.blue \}/, 'site metadata defaults to the morning-blue favicon before client-side time selection');
 assert.match(layout, /import \{ LanguageToggle, SitePalette \} from '@\/components\/LanguageToggle';/, 'layout imports the shared site palette controller');
 assert.match(layout, /<SitePalette icons=\{sitePaletteIcons\}(?: initialSharedBackground=\{initialSharedBackground\})? \/>/, 'layout mounts the site palette controller once for every page');
