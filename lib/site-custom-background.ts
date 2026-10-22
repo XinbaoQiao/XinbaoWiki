@@ -36,7 +36,7 @@ export const DEFAULT_CUSTOM_BG_SETTINGS: CustomBgSettings = {
 
   mode: 'cover',
 
-  overlay: 40,
+  overlay: 50,
 
   position: 'center'
 
@@ -516,7 +516,7 @@ export type CustomBgInk = 'dark' | 'light';
 
  *   Never switch to light text on light photos.
 
- * - Default overlay for new uploads / first enable: 40%.
+ * - Default overlay for new uploads / first enable: 50%.
 
  * Overlay strength only scales scrim opacity; it does not flip ink by tone.
 

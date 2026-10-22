@@ -442,38 +442,6 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
     }
   };
 
-  const publishSettingsToSite = async (next: CustomBgSettings, tone: CustomBgTone | null) => {
-    if (!publishShared || !sharedMeta?.writable) return;
-    if (!ownerPassword || ownerPassword.length < 8) {
-      setError(isChinese ? '请输入站长密码（至少 8 位）。' : 'Enter the owner password (at least 8 characters).');
-      return;
-    }
-    const response = await fetch(SITE_WALLPAPER_API, {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: { 'Content-Type': 'application/json' },
-      body: (() => {
-        const payload: Record<string, unknown> = {
-          enabled: next.enabled,
-          mode: next.mode,
-          overlay: next.overlay,
-          position: next.position,
-          tone
-        };
-        payload['password'] = ownerPassword;
-        return JSON.stringify(payload);
-      })()
-    });
-    if (!response.ok) {
-      setError(response.status === 401
-        ? (isChinese ? '密码不正确。' : 'Incorrect password.')
-        : (isChinese ? '无法更新全站背景。' : 'Could not update the site background.'));
-      return;
-    }
-    const payload = (await response.json()) as SharedSiteBackgroundPublic;
-    setSharedMeta(payload);
-    setScopeNote(isChinese ? '已对所有访客生效。' : 'Visible to every visitor.');
-  };
 
   useEffect(() => {
     const savedMode = window.localStorage.getItem(sitePaletteStorageKey);
@@ -630,13 +598,12 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
   };
 
   const persistCustom = (next: CustomBgSettings) => {
+    // Overlay / mode / position are always local preferences.
+    // Only site-wide image upload (and clear) require the owner password.
     setCustomSettings(next);
     if (!next.enabled) {
       clearCustomBgSettings();
       writeCustomBgSettings({ ...next, enabled: false });
-    } else if (publishShared && sharedMeta?.writable) {
-      writeCustomBgSettings({ ...next, enabled: false });
-      void publishSettingsToSite(next, customTone);
     } else {
       writeCustomBgSettings(next);
     }
@@ -816,14 +783,12 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
     busy: isChinese ? '处理中…' : 'Working…',
     group: isChinese ? '站点配色与背景' : 'Site color theme and background',
     password: isChinese ? '站长密码' : 'Owner password',
-    passwordHint: isChinese ? '输入后即可上传 / 更新全站背景' : 'Type here, then upload or adjust to publish',
+    passwordHint: isChinese ? '仅全站上传图片时需要' : 'Required only to upload a site-wide image',
     scopeShared: isChinese ? '全站可见' : 'Everyone',
     scopeLocal: isChinese ? '仅此设备' : 'This device',
     scopeLabel: isChinese ? '范围' : 'Scope',
-    scopeHintLocal: isChinese
-      ? '本地预览：请输入任意至少 8 位密码后上传；图写入 public/site-wallpaper。生产环境会校验真实站长密码。'
-      : 'Local preview: enter any password (≥8 chars) to publish into public/site-wallpaper. Production verifies the real owner password.',
-    scopeHintPassword: isChinese ? '发布到全站时需要站长密码。' : 'Owner password required to publish site-wide.',
+    scopeHintLocal: isChinese ? '本地预览：输入任意密码（≥ 8 位）可将图片写入 public/site-wallpaper。透明度等控件无需密码。' : 'Local preview: enter any password (≥8 chars) only to publish the image into public/site-wallpaper. Overlay and other controls need no password.',
+    scopeHintPassword: isChinese ? '仅全站上传或清除背景图时需要站长密码；透明度、模式等可自由调整。' : 'Owner password is only for uploading or clearing the site-wide image. Overlay, mode, and position stay free.',
     scopeHintMissing: isChinese
       ? '当前环境未开放全站写入。生产需配置 Redis、站长密码哈希，以及 the Vercel Blob RW token env。'
       : 'Shared writes are unavailable here. Production needs Redis, owner password hash, and the Vercel Blob RW token env.'

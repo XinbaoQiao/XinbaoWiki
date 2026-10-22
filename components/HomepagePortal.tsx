@@ -86,14 +86,16 @@ const sectionToggleLabels = {
   en: {
     collapse: 'Collapse homepage sections',
     foldExtreme: 'Show only the name Xinbao Qiao',
-    restoreFolded: 'Restore the folded homepage'
+    restoreFolded: 'Restore the folded homepage',
+    enterHint: 'Click to enter'
   },
   zh: {
     collapse: '折叠首页板块',
     foldExtreme: '极限折叠，仅显示 Xinbao Qiao',
-    restoreFolded: '恢复为折叠状态'
+    restoreFolded: '恢复为折叠状态',
+    enterHint: '点击进入'
   }
-} satisfies Record<SearchLanguage, { collapse: string; foldExtreme: string; restoreFolded: string }>;
+} satisfies Record<SearchLanguage, { collapse: string; enterHint: string; foldExtreme: string; restoreFolded: string }>;
 
 const portalPalettes: PortalPalette[] = ['text', 'blue', 'gold', 'rose', 'green', 'violet', 'charcoal'];
 
@@ -159,11 +161,11 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
   const [touchCubeAngle, setTouchCubeAngle] = useState<TouchCubeAngle>('front');
   const [touchCubeDragging, setTouchCubeDragging] = useState(false);
   const [touchCubeDragDegrees, setTouchCubeDragDegrees] = useState(0);
-  const [browseOpen, setBrowseOpen] = useState(true);
-  const [newsOpen, setNewsOpen] = useState(true);
+  const [browseOpen, setBrowseOpen] = useState(false);
+  const [newsOpen, setNewsOpen] = useState(false);
   const [updatesView, setUpdatesView] = useState<UpdatesView>('compact');
   const [acceptanceResetKey, setAcceptanceResetKey] = useState(0);
-  const [activityOpen, setActivityOpen] = useState(true);
+  const [activityOpen, setActivityOpen] = useState(false);
   const cubeHoverIntentRef = useRef<number | null>(null);
   const cubeStageRef = useRef<HTMLDivElement>(null);
   const touchCubeGestureRef = useRef<TouchCubeGesture | null>(null);
@@ -180,7 +182,7 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
   };
   const newsDisclosure = useAnimatedDisclosure(newsOpen, commitNewsOpen);
   const changeNewsOpen = newsDisclosure.change;
-  const [layoutMode, setLayoutMode] = useState<'expanded' | 'collapsed' | 'nameOnly'>('expanded');
+  const [layoutMode, setLayoutMode] = useState<'expanded' | 'collapsed' | 'nameOnly'>('nameOnly');
   const collapseAllSections = () => {
     setBrowseOpen(false);
     changeNewsOpen(false);
@@ -545,6 +547,9 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
                 className="wiki-portal-name-button"
                 onClick={cyclePortalLayout}
               />
+              <span aria-hidden="true" className="wiki-portal-name-hint">
+                {sectionToggleLabels[language].enterHint}
+              </span>
             </div>
           </div>
         </div>

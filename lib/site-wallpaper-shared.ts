@@ -64,7 +64,7 @@ export const EMPTY_SHARED_SITE_BACKGROUND: SharedSiteBackground = {
   enabled: false,
   imageUrl: null,
   mode: 'cover',
-  overlay: 40,
+  overlay: 50,
   position: 'center',
   tone: null,
   updatedAt: null
@@ -85,7 +85,7 @@ export function parseSharedSiteBackground(value: unknown): SharedSiteBackground 
     enabled,
     imageUrl: enabled ? imageUrl : null,
     mode: isCustomBgMode(raw.mode) ? raw.mode : 'cover',
-    overlay: clampOverlay(typeof raw.overlay === 'number' ? raw.overlay : 40),
+    overlay: clampOverlay(typeof raw.overlay === 'number' ? raw.overlay : 50),
     position: isCustomBgPosition(raw.position) ? raw.position : 'center',
     tone: isTone(raw.tone) ? raw.tone : null,
     updatedAt: typeof raw.updatedAt === 'string' ? raw.updatedAt : null

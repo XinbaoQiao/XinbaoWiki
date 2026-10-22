@@ -8,7 +8,7 @@ function clampOverlay(value) {
 
 function parseSharedSiteBackground(value) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) {
-    return { enabled: false, imageUrl: null, mode: 'cover', overlay: 40, position: 'center', tone: null, updatedAt: null };
+    return { enabled: false, imageUrl: null, mode: 'cover', overlay: 50, position: 'center', tone: null, updatedAt: null };
   }
   const imageUrl = typeof value.imageUrl === 'string' && value.imageUrl.trim() ? value.imageUrl.trim() : null;
   const enabled = Boolean(value.enabled) && Boolean(imageUrl);
@@ -16,7 +16,7 @@ function parseSharedSiteBackground(value) {
     enabled,
     imageUrl: enabled ? imageUrl : null,
     mode: value.mode === 'soft-fade' || value.mode === 'tile' || value.mode === 'depth' || value.mode === 'cover' ? value.mode : 'cover',
-    overlay: clampOverlay(typeof value.overlay === 'number' ? value.overlay : 40),
+    overlay: clampOverlay(typeof value.overlay === 'number' ? value.overlay : 50),
     position: value.position === 'top' || value.position === 'bottom' || value.position === 'center' ? value.position : 'center',
     tone: value.tone === 'light' || value.tone === 'dark' ? value.tone : null,
     updatedAt: typeof value.updatedAt === 'string' ? value.updatedAt : null

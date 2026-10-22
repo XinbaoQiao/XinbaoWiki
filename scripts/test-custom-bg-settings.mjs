@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 const DEFAULT = {
   enabled: false,
   mode: 'cover',
-  overlay: 40,
+  overlay: 50,
   position: 'center'
 };
 
@@ -34,7 +34,7 @@ function scrimRgbForTone(tone) {
   return tone === 'dark' ? '8 10 12' : '255 255 255';
 }
 
-assert.equal(DEFAULT.overlay, 40);
+assert.equal(DEFAULT.overlay, 50);
 assert.equal(toneFromLuminance(0.2), 'dark');
 assert.equal(toneFromLuminance(0.44), 'dark');
 assert.equal(toneFromLuminance(0.45), 'light');
