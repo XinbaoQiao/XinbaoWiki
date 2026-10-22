@@ -2730,18 +2730,14 @@ html[data-site-palette="charcoal"] .wiki-portal-name-logos {
   display: block;
   animation: wiki-logo-write 2.4s cubic-bezier(.33, 0, .2, 1) .12s both;
   transform-origin: left center;
-  will-change: clip-path;
 }
 
-html[data-site-palette="blue"] .wiki-portal-name-logo-blue,
-html[data-site-palette="gold"] .wiki-portal-name-logo-gold,
-html[data-site-palette="green"] .wiki-portal-name-logo-green,
-html[data-site-palette="charcoal"] .wiki-portal-name-logo-charcoal {
-  display: block;
-}
-
+html[data-site-palette="blue"] .wiki-portal-name-logo-tinted,
+html[data-site-palette="gold"] .wiki-portal-name-logo-tinted,
 html[data-site-palette="rose"] .wiki-portal-name-logo-tinted,
-html[data-site-palette="violet"] .wiki-portal-name-logo-tinted {
+html[data-site-palette="green"] .wiki-portal-name-logo-tinted,
+html[data-site-palette="violet"] .wiki-portal-name-logo-tinted,
+html[data-site-palette="charcoal"] .wiki-portal-name-logo-tinted {
   display: block;
 }
 
@@ -5415,7 +5411,7 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
   .wiki-portal-collapsed,
   .wiki-portal-name-only .wiki-portal-name-wrap::after {
     animation: none;
-    opacity: 0.45;
+    opacity: 1;
     transform: none;
   }
 
@@ -5864,7 +5860,6 @@ html:not([data-wiki-morph-to]) ::view-transition-new(.wiki-title-morph) {
   transform: translate3d(0, var(--site-custom-bg-parallax, 0px), 0) scale(1);
   transition: opacity .28s ease;
   contain: paint;
-  content-visibility: auto;
 }
 
 .site-custom-bg-layer.is-active {

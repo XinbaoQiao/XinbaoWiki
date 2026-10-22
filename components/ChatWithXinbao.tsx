@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 type Language = 'en' | 'zh';
 type Props = { language: Language };
@@ -16,11 +16,26 @@ const openLabels: Record<Language, string> = {
   zh: '打开 Chat with Xinbao'
 };
 
+function ensureKatexStylesheet() {
+  if (typeof document === 'undefined') return;
+  if (document.querySelector('link[data-katex-css]')) return;
+  const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
+  const link = document.createElement('link');
+  link.rel = 'stylesheet';
+  link.href = `${basePath}/vendor/katex.min.css`;
+  link.dataset.katexCss = '';
+  document.head.appendChild(link);
+}
+
 export function ChatWithXinbao({ language }: Props) {
   const [hasOpened, setHasOpened] = useState(false);
   const [open, setOpen] = useState(false);
   const [restoreRequest, setRestoreRequest] = useState(0);
   const triggerRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (hasOpened) ensureKatexStylesheet();
+  }, [hasOpened]);
 
   function closeChat() {
     setOpen(false);

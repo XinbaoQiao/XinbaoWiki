@@ -451,9 +451,14 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
     if (initialSharedBackground) {
       setSharedMeta(initialSharedBackground);
       setPublishShared(Boolean(initialSharedBackground.writable));
+      // Paint SSR wallpaper immediately; do not wait on network or IndexedDB.
+      if (initialSharedBackground.enabled && initialSharedBackground.imageUrl) {
+        applySharedToUi(initialSharedBackground);
+        setScopeNote(isChinese ? '全站背景。' : 'Site-wide background.');
+      }
     }
     let cancelled = false;
-    void (async () => {
+    const finishLocalAndShared = async () => {
       let localUrl: string | null = null;
       let localTone: CustomBgTone | null = null;
       let localEnabled = false;
@@ -468,7 +473,18 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
         localUrl = null;
       }
       if (cancelled) { revokeObjectUrl(localUrl); return; }
-      const shared = (await refreshSharedBackground()) ?? initialSharedBackground;
+      // Prefer already-known SSR shared; refresh in the background for writable/meta only.
+      const shared = initialSharedBackground ?? (await refreshSharedBackground());
+      if (!initialSharedBackground) {
+        /* already refreshed */
+      } else {
+        void refreshSharedBackground().then((payload) => {
+          if (cancelled || !payload) return;
+          if (!(localEnabled && imageUrlRef.current?.startsWith('blob:'))) {
+            if (payload.enabled && payload.imageUrl) applySharedToUi(payload);
+          }
+        });
+      }
       if (cancelled) { revokeObjectUrl(localUrl); return; }
       if (localEnabled && localUrl) {
         revokeObjectUrl(imageUrlRef.current);
@@ -494,9 +510,22 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
         applyCustomBgDocumentState({ ...savedCustom, enabled: false }, false, localTone);
         return;
       }
-      setCustomTone(null);
-      applyCustomBgDocumentState({ ...savedCustom, enabled: false }, false, null);
-    })();
+      if (!initialSharedBackground?.enabled) {
+        setCustomTone(null);
+        applyCustomBgDocumentState({ ...savedCustom, enabled: false }, false, null);
+      }
+    };
+    // Defer IDB + luminance off the first paint when SSR already supplied the wallpaper.
+    if (initialSharedBackground?.enabled && initialSharedBackground.imageUrl && typeof requestIdleCallback === 'function') {
+      const idleId = requestIdleCallback(() => { void finishLocalAndShared(); }, { timeout: 1800 });
+      return () => {
+        cancelled = true;
+        cancelIdleCallback(idleId);
+        revokeObjectUrl(imageUrlRef.current);
+        imageUrlRef.current = null;
+      };
+    }
+    void finishLocalAndShared();
     return () => {
       cancelled = true;
       revokeObjectUrl(imageUrlRef.current);

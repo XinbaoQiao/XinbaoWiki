@@ -1,17 +1,22 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { WikiLink } from '@/components/WikiLink';
 import { clearWikiMorphIntent } from '@/lib/wiki-view-transition';
 import { wikiSlugFromHref } from '@/lib/wiki-view-transition';
 import type { CSSProperties, PointerEvent as ReactPointerEvent, TransitionEvent as ReactTransitionEvent } from 'react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { VisitorAtlasDisclosure } from '@/components/VisitorAtlasDisclosure';
 import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
 import { getRecentSiteUpdates } from '@/lib/site-updates';
 import { PaperAcceptancePreview } from '@/components/PaperAcceptancePreview';
 import { SlidingSelection } from '@/components/SlidingSelection';
 import { useAnimatedDisclosure } from '@/components/useAnimatedDisclosure';
 import type { PaperHighlightCatalog } from '@/lib/paper-highlights';
+
+const VisitorAtlasDisclosure = dynamic(
+  () => import('@/components/VisitorAtlasDisclosure').then((module) => module.VisitorAtlasDisclosure),
+  { ssr: false }
+);
 
 type LocalizedText = Record<SearchLanguage, string>;
 type PortalPalette = 'text' | 'blue' | 'gold' | 'rose' | 'green' | 'violet' | 'charcoal';
@@ -181,6 +186,7 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
   const newsDisclosure = useAnimatedDisclosure(newsOpen, commitNewsOpen);
   const changeNewsOpen = newsDisclosure.change;
   const [layoutMode, setLayoutMode] = useState<'expanded' | 'collapsed' | 'nameOnly'>('nameOnly');
+  const [portalBodyMounted, setPortalBodyMounted] = useState(false);
   const collapseAllSections = () => {
     setBrowseOpen(false);
     changeNewsOpen(false);
@@ -202,6 +208,7 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
       return;
     }
     // nameOnly -> folded (never back to full expand via this click)
+    setPortalBodyMounted(true);
     collapseAllSections();
     setLayoutMode('collapsed');
   };
@@ -496,38 +503,6 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
             <div className="wiki-portal-name-wrap">
               <h1 className="wiki-portal-name" id="portal-title">
                 <span className="wiki-portal-name-logos" aria-hidden="true">
-                  <img
-                    alt=""
-                    className="wiki-portal-name-logo wiki-portal-name-logo-blue"
-                    decoding="async"
-                    height={158}
-                    src={withBasePath('/site-logos/wordmark/xinbao-qiao-blue.png')}
-                    width={641}
-                  />
-                  <img
-                    alt=""
-                    className="wiki-portal-name-logo wiki-portal-name-logo-gold"
-                    decoding="async"
-                    height={158}
-                    src={withBasePath('/site-logos/wordmark/xinbao-qiao-gold.png')}
-                    width={641}
-                  />
-                  <img
-                    alt=""
-                    className="wiki-portal-name-logo wiki-portal-name-logo-green"
-                    decoding="async"
-                    height={158}
-                    src={withBasePath('/site-logos/wordmark/xinbao-qiao-green.png')}
-                    width={641}
-                  />
-                  <img
-                    alt=""
-                    className="wiki-portal-name-logo wiki-portal-name-logo-charcoal"
-                    decoding="async"
-                    height={158}
-                    src={withBasePath('/site-logos/wordmark/xinbao-qiao-charcoal.png')}
-                    width={641}
-                  />
                   <span
                     className="wiki-portal-name-logo wiki-portal-name-logo-tinted"
                     style={{
@@ -548,6 +523,8 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
             </div>
           </div>
         </div>
+        {portalBodyMounted && (
+          <>
         <p aria-atomic="true" aria-live="polite" className="wiki-portal-tagline">
           {portalPalettes.map((palette) => (
             <span className={`wiki-portal-tagline-copy wiki-portal-tagline-${palette}`} key={palette}>
@@ -576,8 +553,11 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
             ))}
           </nav>
         </div>
+          </>
+        )}
       </section>
 
+      {portalBodyMounted && (
       <div className="wiki-portal-disclosures">
         <details
           className="wiki-portal-news wiki-portal-timeline"
@@ -800,6 +780,7 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
           </div>
         </details>
       </div>
+      )}
     </article>
   );
 }

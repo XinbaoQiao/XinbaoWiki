@@ -21,7 +21,6 @@ import {
   siteBackgroundWritableConfigured
 } from '@/lib/site-wallpaper-store';
 import { ViewTransitions } from 'next-view-transitions';
-import 'katex/dist/katex.min.css';
 import './globals.css';
 
 const sitePaletteIcons = {
@@ -110,9 +109,25 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
           <link
+            rel="preload"
+            as="style"
+            href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap"
+          />
+          <link
             href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap"
             rel="stylesheet"
+            media="print"
+            data-alex-brush-font=""
           />
+          <script
+            dangerouslySetInnerHTML={{
+              __html:
+                '(function(){var l=document.querySelector("link[data-alex-brush-font]");if(!l)return;var r=function(){l.media="all"};if(l.sheet)r();else l.addEventListener("load",r);})();'
+            }}
+          />
+          <noscript>
+            <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap" rel="stylesheet" />
+          </noscript>
         </head>
         <body>
           <SiteActivityRecorder />
