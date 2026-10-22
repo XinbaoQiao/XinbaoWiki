@@ -189,8 +189,7 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
   };
   const newsDisclosure = useAnimatedDisclosure(newsOpen, commitNewsOpen);
   const changeNewsOpen = newsDisclosure.change;
-  const [layoutMode, setLayoutMode] = useState<'expanded' | 'collapsed' | 'nameOnly'>('nameOnly');
-  const [portalBodyMounted, setPortalBodyMounted] = useState(false);
+  const [layoutMode, setLayoutMode] = useState<'expanded' | 'collapsed' | 'nameOnly'>('collapsed');
   const collapseAllSections = () => {
     setBrowseOpen(false);
     changeNewsOpen(false);
@@ -212,7 +211,6 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
       return;
     }
     // nameOnly -> folded (never back to full expand via this click)
-    setPortalBodyMounted(true);
     collapseAllSections();
     setLayoutMode('collapsed');
   };
@@ -534,8 +532,6 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
             </div>
           </div>
         </div>
-        {portalBodyMounted && (
-          <>
         <p aria-atomic="true" aria-live="polite" className="wiki-portal-tagline">
           {portalPalettes.map((palette) => (
             <span className={`wiki-portal-tagline-copy wiki-portal-tagline-${palette}`} key={palette}>
@@ -564,11 +560,8 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
             ))}
           </nav>
         </div>
-          </>
-        )}
       </section>
 
-      {portalBodyMounted && (
       <div className="wiki-portal-disclosures">
         <details
           className="wiki-portal-news wiki-portal-timeline"
@@ -791,7 +784,6 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
           </div>
         </details>
       </div>
-      )}
     </article>
   );
 }
