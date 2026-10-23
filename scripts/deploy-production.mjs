@@ -32,7 +32,7 @@ const scope = 'xinbaopedia';
 const project = 'xinbaopedia';
 const productionUrl = 'https://xinbaopedia.top';
 const EXPECTED_CHAT_CONTRACT = Object.freeze({
-  backendVersion: 'xinbao-chat-api-v7',
+  backendVersion: 'xinbao-chat-api-v8',
   responsePolicyVersion: 'grounded-conversation-v4',
   promptVersion: 'xinbao-grounded-conversation-v7',
 });
