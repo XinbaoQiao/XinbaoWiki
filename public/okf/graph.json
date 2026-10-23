@@ -2686,7 +2686,7 @@
       "citationSourceIds": [
         "src-af06ca5886446072"
       ],
-      "contentHash": "sha256:c45e86c02c78acb93d00759765b0a832bc0b5c055dd1f4bfba1ecb2f2ee825ab",
+      "contentHash": "sha256:02743affe3205f227d48cd9c4cd5f08102c8ccc5753a199775dacc9faadb7cd4",
       "file": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models.md",
       "footnoteSourceIds": [
         "src-af06ca5886446072"
@@ -2698,12 +2698,12 @@
         "confidence": 0.95,
         "review": "on venue/status change",
         "retention": "long-lived semantic memory",
-        "reviewedAt": "2026-10-19T12:58:04.614Z",
-        "reviewDue": "2027-10-19",
+        "reviewedAt": "2026-10-23T18:05:33.029Z",
+        "reviewDue": "2027-10-23",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-19T12:56:48.833Z",
+      "modifiedAt": "2026-10-23T18:05:19.101Z",
       "outgoing": [
         "LLM_Reliability",
         "Trustworthy_AI",
@@ -2732,12 +2732,12 @@
       "timestamp": "2026-09-25T13:49:35+09:00",
       "title": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
       "type": "publication",
-      "reviewedAt": "2026-10-19T12:58:04.614Z",
-      "reviewDue": "2027-10-19",
+      "reviewedAt": "2026-10-23T18:05:33.029Z",
+      "reviewDue": "2027-10-23",
       "retrieval": {
         "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:c45e86c02c78acb93d00759765b0a832bc0b5c055dd1f4bfba1ecb2f2ee825ab",
+        "contentHash": "sha256:02743affe3205f227d48cd9c4cd5f08102c8ccc5753a199775dacc9faadb7cd4",
         "textFields": [
           "title",
           "aliases",
@@ -2773,7 +2773,7 @@
       "citationSourceIds": [
         "src-af06ca5886446072"
       ],
-      "contentHash": "sha256:419846454cc15b95d45b6caf287f072c3c7009aa9b4b78293d943dcb36f89639",
+      "contentHash": "sha256:f607770eef1fbb746210d3260201b18fbb2e44d889bd24a2835cbcdd4fa21bc2",
       "file": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh.md",
       "footnoteSourceIds": [
         "src-af06ca5886446072"
@@ -2785,12 +2785,12 @@
         "confidence": 0.95,
         "review": "on venue/status change",
         "retention": "long-lived semantic memory",
-        "reviewedAt": "2026-10-19T12:58:04.614Z",
-        "reviewDue": "2027-10-19",
+        "reviewedAt": "2026-10-23T18:05:33.029Z",
+        "reviewDue": "2027-10-23",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-19T12:56:48.831Z",
+      "modifiedAt": "2026-10-23T18:05:19.100Z",
       "outgoing": [
         "LLM_Reliability_zh",
         "Qiao_Xinbao_zh",
@@ -2819,12 +2819,12 @@
       "timestamp": "2026-09-25T13:49:35+09:00",
       "title": "Illusory Pattern Perception Drives Spurious Inference in Large Language Models",
       "type": "publication",
-      "reviewedAt": "2026-10-19T12:58:04.614Z",
-      "reviewDue": "2027-10-19",
+      "reviewedAt": "2026-10-23T18:05:33.029Z",
+      "reviewDue": "2027-10-23",
       "retrieval": {
         "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:419846454cc15b95d45b6caf287f072c3c7009aa9b4b78293d943dcb36f89639",
+        "contentHash": "sha256:f607770eef1fbb746210d3260201b18fbb2e44d889bd24a2835cbcdd4fa21bc2",
         "textFields": [
           "title",
           "aliases",

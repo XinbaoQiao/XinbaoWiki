@@ -121,10 +121,6 @@ npm run build
 
 [xinbaopedia.top](https://xinbaopedia.top) is the production site built from `main`. Use it to understand the product; build your own site from `template`.
 
-<p align="center">
-  <a href="https://xinbaopedia.top/"><img src="public/readme/xinbaopedia-tour-en.gif" width="100%" alt="Short walkthrough of Xinbaopedia: homepage, themes, browse, search, and cited chat." /></a>
-</p>
-
 ### What’s inside
 
 Folded summaries below form the outline. Expand a section for a full description of that part of the system.
@@ -306,10 +302,6 @@ npm run build
 ### 在线示例
 
 [xinbaopedia.top](https://xinbaopedia.top) 是由 `main` 构建的正式站。用它了解产品形态；搭建自己的站点请基于 `template`。
-
-<p align="center">
-  <a href="https://xinbaopedia.top/"><img src="public/readme/xinbaopedia-tour-zh.gif" width="100%" alt="新宝百科演示：首页、主题、浏览、检索与带引用的对话。" /></a>
-</p>
 
 ### 内容结构
 

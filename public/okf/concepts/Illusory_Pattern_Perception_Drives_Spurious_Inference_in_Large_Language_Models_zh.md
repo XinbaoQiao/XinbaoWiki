@@ -10,18 +10,18 @@ tags:
   - neurips-2026
   - llm-reliability
 timestamp: '2026-09-25T13:49:35+09:00'
-modified: '2026-10-19T12:56:48.831Z'
-content_hash: 'sha256:419846454cc15b95d45b6caf287f072c3c7009aa9b4b78293d943dcb36f89639'
-reviewed_at: '2026-10-19T12:58:04.614Z'
-review_due: '2027-10-19'
+modified: '2026-10-23T18:05:19.100Z'
+content_hash: 'sha256:f607770eef1fbb746210d3260201b18fbb2e44d889bd24a2835cbcdd4fa21bc2'
+reviewed_at: '2026-10-23T18:05:33.029Z'
+review_due: '2027-10-23'
 language: zh
 lifecycle:
   status: confirmed
   confidence: 0.95
   review: on venue/status change
   retention: long-lived semantic memory
-  reviewedAt: '2026-10-19T12:58:04.614Z'
-  reviewDue: '2027-10-19'
+  reviewedAt: '2026-10-23T18:05:33.029Z'
+  reviewDue: '2027-10-23'
   pendingReview: false
   overdue: false
 retrieval:

@@ -852,10 +852,10 @@
         "llm-reliability"
       ],
       "timestamp": "2026-09-25T13:49:35+09:00",
-      "modifiedAt": "2026-10-19T12:56:48.833Z",
-      "contentHash": "sha256:c45e86c02c78acb93d00759765b0a832bc0b5c055dd1f4bfba1ecb2f2ee825ab",
-      "reviewedAt": "2026-10-19T12:58:04.614Z",
-      "reviewDue": "2027-10-19",
+      "modifiedAt": "2026-10-23T18:05:19.101Z",
+      "contentHash": "sha256:02743affe3205f227d48cd9c4cd5f08102c8ccc5753a199775dacc9faadb7cd4",
+      "reviewedAt": "2026-10-23T18:05:33.029Z",
+      "reviewDue": "2027-10-23",
       "sourceIds": [
         "src-19ed8d8ac2a744f7",
         "src-2d7834852d5a70ca",
@@ -872,7 +872,7 @@
       "retrieval": {
         "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:c45e86c02c78acb93d00759765b0a832bc0b5c055dd1f4bfba1ecb2f2ee825ab",
+        "contentHash": "sha256:02743affe3205f227d48cd9c4cd5f08102c8ccc5753a199775dacc9faadb7cd4",
         "textFields": [
           "title",
           "aliases",
@@ -2344,10 +2344,10 @@
         "llm-reliability"
       ],
       "timestamp": "2026-09-25T13:49:35+09:00",
-      "modifiedAt": "2026-10-19T12:56:48.831Z",
-      "contentHash": "sha256:419846454cc15b95d45b6caf287f072c3c7009aa9b4b78293d943dcb36f89639",
-      "reviewedAt": "2026-10-19T12:58:04.614Z",
-      "reviewDue": "2027-10-19",
+      "modifiedAt": "2026-10-23T18:05:19.100Z",
+      "contentHash": "sha256:f607770eef1fbb746210d3260201b18fbb2e44d889bd24a2835cbcdd4fa21bc2",
+      "reviewedAt": "2026-10-23T18:05:33.029Z",
+      "reviewDue": "2027-10-23",
       "sourceIds": [
         "src-19ed8d8ac2a744f7",
         "src-2d7834852d5a70ca",
@@ -2364,7 +2364,7 @@
       "retrieval": {
         "documentId": "wiki:Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:419846454cc15b95d45b6caf287f072c3c7009aa9b4b78293d943dcb36f89639",
+        "contentHash": "sha256:f607770eef1fbb746210d3260201b18fbb2e44d889bd24a2835cbcdd4fa21bc2",
         "textFields": [
           "title",
           "aliases",

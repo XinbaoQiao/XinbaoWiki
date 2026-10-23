@@ -12,10 +12,10 @@ tags:
   - neurips-2026
   - llm-reliability
 timestamp: '2026-09-25T13:49:35+09:00'
-modified: '2026-10-19T12:56:48.833Z'
-content_hash: 'sha256:c45e86c02c78acb93d00759765b0a832bc0b5c055dd1f4bfba1ecb2f2ee825ab'
-reviewed_at: '2026-10-19T12:58:04.614Z'
-review_due: '2027-10-19'
+modified: '2026-10-23T18:05:19.101Z'
+content_hash: 'sha256:02743affe3205f227d48cd9c4cd5f08102c8ccc5753a199775dacc9faadb7cd4'
+reviewed_at: '2026-10-23T18:05:33.029Z'
+review_due: '2027-10-23'
 name: Illusory Pattern Perception Drives Spurious Inference in Large Language Models
 summary: >-
   NeurIPS 2026 paper comparing LLM and human illusory pattern perception across
@@ -60,16 +60,16 @@ paper_highlight:
   figures:
     - image: /papers/illusory-pattern/human-comparison.webp
       image_alt: Human and LLM responses across three tasks (Table 1).
-      width: 1787
-      height: 796
+      width: 1740
+      height: 778
     - image: /papers/illusory-pattern/figure-2.webp
       image_alt: Human and LLM responses with chain-of-thought prompting (Figure 2).
-      width: 1791
-      height: 547
+      width: 1657
+      height: 479
     - image: /papers/illusory-pattern/figure-3.webp
       image_alt: Pooled activation changes by SAE feature category (Figure 3).
-      width: 1796
-      height: 662
+      width: 1723
+      height: 617
 ---
 **Illusory Pattern Perception Drives Spurious Inference in Large Language Models** is a paper by Peihua Mai\*, Zhuoyan Shao\*, **[[Xinbao_Qiao|Xinbao Qiao]]**\*, Meng Zhang, Xinyue Zhou, and Yan Pang, accepted at NeurIPS 2026. It studies unsupported relational inference from random, unrelated, or insufficient evidence.[^paper]
 

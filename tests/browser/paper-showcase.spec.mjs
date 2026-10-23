@@ -119,12 +119,12 @@ for (const [width, language] of [[1920, 'en'], [1440, 'en'], [1200, 'en'], [1440
         expect(Math.abs(layout.primary.right - layout.supporting.right)).toBeLessThan(1);
         expect(Math.abs(layout.primary.left - layout.highlight.left)).toBeLessThan(1);
         expect(Math.abs(layout.primary.right - layout.highlight.right)).toBeLessThan(1);
-        expect(layout.supporting.height).toBeCloseTo(80, 0);
+        expect(layout.supporting.height).toBeCloseTo(128, 0);
         expect(layout.supporting.bottom).toBeLessThan(layout.resources.top);
         expect(layout.contentHeight).toBeLessThanOrEqual(layout.highlight.height + 1);
         expect(layout.panel.width).toBeLessThanOrEqual(1084);
         for (const square of layout.squares) {
-          expect(square.height).toBeCloseTo(80, 0);
+          expect(square.height).toBeCloseTo(128, 0);
         }
         layouts.push(layout);
         if (width === 1440 && slug.includes('Sample_Selection')) await capture(page, 'model-collapse-detailed.png');
