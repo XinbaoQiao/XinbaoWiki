@@ -658,7 +658,9 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
     if (customImageUrl && !customSettings.enabled) {
       const enabled = { ...customSettings, enabled: true };
       setCustomSettings(enabled);
-      if (!(publishShared && sharedMeta?.writable)) writeCustomBgSettings(enabled);
+      // Always persist local opt-in so image mode sticks on this device.
+      // Shared upload/clear still require the owner password; this flag is device-local.
+      writeCustomBgSettings(enabled);
       applyCustomBgDocumentState(enabled, true, customTone);
     }
     window.setTimeout(() => {
@@ -810,11 +812,19 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
   };
 
   const customActive = Boolean(customSettings.enabled && customImageUrl);
+  // Only treat SSR wallpaper as adopted when the layout actually rendered that node.
+  // Shared wallpaper may be enabled server-side while visitors still default to mixed;
+  // in that case we must mount the client layer or opt-in never paints an image.
   const [ssrWallpaperAdopted, setSsrWallpaperAdopted] = useState(() => {
-    if (initialSharedBackground?.enabled && cssUrlForSharedImage(initialSharedBackground.imageUrl)) return true;
     return typeof document !== 'undefined' && Boolean(document.querySelector('[data-ssr-wallpaper]'));
   });
   useLayoutEffect(() => {
+    const root = document.documentElement;
+    if (customImageUrl) {
+      root.style.setProperty('--site-custom-bg-image', `url("${customImageUrl}")`);
+    } else {
+      root.style.removeProperty('--site-custom-bg-image');
+    }
     const ssr = document.querySelector<HTMLElement>('[data-ssr-wallpaper]');
     if (!ssr) return;
     ssr.className = ['site-custom-bg-layer', customActive ? 'is-active' : ''].filter(Boolean).join(' ');
