@@ -83,7 +83,8 @@ export function parseSharedSiteBackground(value: unknown): SharedSiteBackground 
   const enabled = Boolean(raw.enabled) && Boolean(imageUrl);
   return {
     enabled,
-    imageUrl: enabled ? imageUrl : null,
+    // Keep URL even when disabled so visitors can switch TO the stored wallpaper.
+    imageUrl,
     mode: isCustomBgMode(raw.mode) ? raw.mode : 'cover',
     overlay: clampOverlay(typeof raw.overlay === 'number' ? raw.overlay : 50),
     position: isCustomBgPosition(raw.position) ? raw.position : 'center',
