@@ -10,14 +10,14 @@
 
   # LLM Wiki Academic Homepage — Template
 
-  **Bilingual, Wikipedia-style personal academic homepage: Markdown pages people can browse, and an AI can cite.**
+  **A bilingual, Wikipedia-style personal academic homepage: Markdown pages people can browse, and an AI that can cite them.**
 
-  **双语、维基风格的个人学术主页模板：互相链接的 Markdown，既给人看，也能给 AI 引用。**
+  **双语、百科式的个人学术主页：用 Markdown 写页面，人也好读，也可让 AI 引用。**
 </div>
 
-> This is the `template` branch. **No personal data** — names, pages, images, and links are placeholders (“Your Name”, “Example University”, `you@example.com`). Swap them for yours.
+> This is the `template` branch. **No personal data** — names, pages, images, and links are placeholders (“Your Name”, “Example University”, `you@example.com`). Replace them with your own.
 >
-> 这是 `template` 分支。**不含个人信息** — 姓名、页面、图片、链接都是占位内容，请换成你自己的。
+> 这是 `template` 分支。**不含个人数据** — 姓名、页面、图片、链接都是占位内容，请改成你自己的。
 
 ---
 
@@ -27,40 +27,44 @@
 
 ### What’s in the box
 
-Folded = outline. Open what you need.
+Folded summaries form the outline. Expand a section for the full description.
 
 <details>
-<summary><strong>A. Wiki & reading</strong> — Markdown pages, bilingual twins, TOC, infobox, KaTeX, paper cards</summary>
+<summary><strong>A. Wiki &amp; reading</strong> — Markdown pages, bilingual twins, TOC, infobox, KaTeX, paper cards</summary>
 
-- `wiki/*.md` with YAML frontmatter; `[[Wikilinks]]` between pages
-- Every `Foo.md` has a Chinese twin `Foo_zh.md`
-- Sidebar, homepage directory, title morph between pages
-- TOC, infobox, paper highlight cards, KaTeX
+<p>Site content lives in <code>wiki/*.md</code> with YAML frontmatter. Pages link to one another through <code>[[Wikilinks]]</code>. Every English page <code>Foo.md</code> has a Chinese twin <code>Foo_zh.md</code>.</p>
+
+<p>The reading surface includes a sidebar, a homepage directory, title morphing between pages, a table of contents, an optional infobox, paper highlight cards, and KaTeX mathematics. Together these pieces make long-form academic notes readable without leaving the Wiki model.</p>
 
 </details>
 
 <details>
-<summary><strong>B. Browse & search</strong> — themes, cube, site search</summary>
+<summary><strong>B. Browse &amp; search</strong> — themes, cube view, site search</summary>
 
-- Theme palette (blue / gold / green / charcoal / …)
-- Browse cube view
-- Search over titles, aliases, summaries, and bodies
+<p>Theme palettes (blue, gold, green, charcoal, and automatic) recolor the chrome consistently. A browse cube view complements the list layout when a denser overview helps.</p>
 
-</details>
-
-<details>
-<summary><strong>C. Optional AI & map</strong> — page AI with citations, visitor atlas</summary>
-
-- Page AI (optional): grounded answers with numbered citations via any OpenAI-compatible endpoint
-- Visitor atlas (optional): Upstash Redis; empty map if unset
+<p>Site search indexes titles, aliases, summaries, and body text so visitors can find pages without memorizing the directory structure.</p>
 
 </details>
 
 <details>
-<summary><strong>D. Export & checks</strong> — OKF bundle, content lint</summary>
+<summary><strong>C. Optional AI &amp; map</strong> — page AI with citations, visitor atlas</summary>
 
-- `public/okf/**` — agent-readable export from the Wiki
-- `npm run maintain:wiki` / `lint:wiki` / `lint:content` / `lint:okf`
+<p>Page AI is optional. When an OpenAI-compatible endpoint is configured, answers are grounded in the current Wiki page and return numbered citations a reader can check. Without credentials, the rest of the site still builds; only the assistant stays off.</p>
+
+<p>Visitor atlas is likewise optional and uses Upstash Redis. If those variables are unset, the map remains empty rather than failing the build.</p>
+
+</details>
+
+<details>
+<summary><strong>D. Export &amp; checks</strong> — OKF bundle, content lint</summary>
+
+<p><code>public/okf/**</code> is an agent-readable export regenerated from the Wiki. After you edit Markdown sources, run maintenance and lint so the export and frontmatter stay consistent:</p>
+
+```bash
+npm run maintain:wiki
+npm run lint:wiki && npm run lint:content && npm run lint:okf
+```
 
 </details>
 
@@ -76,11 +80,11 @@ npm run build      # production build
 ### Make it yours
 
 <details>
-<summary><strong>1. Name & site copy</strong> — <code>lib/site-config.ts</code></summary>
+<summary><strong>1. Name &amp; site copy</strong> — <code>lib/site-config.ts</code></summary>
 
-One file for owner-specific data: name (wordmark, metadata, chat), subtitle, description, palette taglines, research areas, concept pages, institutions, people, selected papers, footer links, chat greeting and quick-start buttons.
+<p>Owner-specific strings live in one configuration file: display name (wordmark, metadata, chat), subtitle, description, palette taglines, research areas, concept pages, institutions, people, selected papers, footer links, chat greeting, and quick-start buttons.</p>
 
-Sidebar and homepage directory are derived from this config by `lib/site-navigation.ts`. Missing pages are skipped; empty groups hide themselves.
+<p>The sidebar and homepage directory are derived from this config by <code>lib/site-navigation.ts</code>. Missing pages are skipped; empty groups hide themselves so incomplete setups do not leave broken navigation.</p>
 
 </details>
 
@@ -91,23 +95,23 @@ Sidebar and homepage directory are derived from this config by `lib/site-navigat
 | --- | --- |
 | Home | `wiki/Your_Name.md` + `Your_Name_zh.md` — display name from `title` / `name` |
 | Topics / papers / CV / … | Other `wiki/*.md`; create with `npm run new:wiki` |
-| Research areas | Rename `Research_Area_1`–`3` (+ `_zh`), then update slugs in `researchAreas` |
+| Research areas | Rename `Research_Area_1`–`3` (and `_zh`), then update slugs in `researchAreas` |
 
-Examples to copy: `Example_Concept.md` (math, figure, `relations`), `Example_Paper.md` (paper card), `Example_University.md` (institution infobox), `Your_Name.md` (person + gallery), `Draft_Example.md` (`hidden: true`).
+<p>Useful examples to copy: <code>Example_Concept.md</code> (math, figure, <code>relations</code>), <code>Example_Paper.md</code> (paper card), <code>Example_University.md</code> (institution infobox), <code>Your_Name.md</code> (person + gallery), and <code>Draft_Example.md</code> (<code>hidden: true</code>).</p>
 
-After edits:
+<p>After edits:</p>
 
 ```bash
 npm run maintain:wiki
 npm run lint:wiki && npm run lint:content && npm run lint:okf
 ```
 
-Each page needs `reviewed_at` later than `modified`. Writing guide: `docs/content-template.md`.
+<p>Each page needs <code>reviewed_at</code> later than <code>modified</code>. Writing guide: <code>docs/content-template.md</code>.</p>
 
 </details>
 
 <details>
-<summary><strong>3. Assets & branding</strong> — <code>public/</code>, GitHub links, “MyWiki”</summary>
+<summary><strong>3. Assets &amp; branding</strong> — <code>public/</code>, GitHub links, “MyWiki”</summary>
 
 | What | Where |
 | --- | --- |
@@ -120,9 +124,9 @@ Each page needs `reviewed_at` later than `modified`. Writing guide: `docs/conten
 </details>
 
 <details>
-<summary><strong>4. Env vars (all optional)</strong> — AI, map, URL</summary>
+<summary><strong>4. Environment variables (all optional)</strong> — AI, map, URL</summary>
 
-Without them the site still builds; AI / atlas just stay off. See `docs/chat/env.example`, `docs/chat/README.md`, `docs/site-activity/README.md`.
+<p>Without these variables the site still builds; AI and atlas simply stay off. See <code>docs/chat/env.example</code>, <code>docs/chat/README.md</code>, and <code>docs/site-activity/README.md</code>.</p>
 
 | Variable | Purpose |
 | --- | --- |
@@ -138,16 +142,16 @@ Without them the site still builds; AI / atlas just stay off. See `docs/chat/env
 | `NEXT_PUBLIC_SITE_URL` | Canonical URL (default `https://example.com`) |
 | `NEXT_PUBLIC_BASE_PATH` | Sub-path deploys (e.g. GitHub Pages) |
 
-Never commit `.env*` or real keys.
+<p>Never commit <code>.env*</code> files or real keys.</p>
 
 </details>
 
 <details>
 <summary><strong>5. Deploy</strong> — Vercel recommended</summary>
 
-- Import as Next.js 15, add env vars, deploy. API routes (AI, atlas) need a server runtime — pure static export turns them off.
-- Point your domain and set `NEXT_PUBLIC_SITE_URL`, then redeploy.
-- CI (`.github/workflows/ci.yml`) checks and builds on pushes / PRs when you keep it.
+<p>Import the project as Next.js 15, add environment variables, and deploy. API routes (AI, atlas) need a server runtime; a pure static export turns those features off.</p>
+
+<p>Point your domain at the deployment, set <code>NEXT_PUBLIC_SITE_URL</code>, and redeploy. CI (<code>.github/workflows/ci.yml</code>) checks and builds on pushes and pull requests when you keep it enabled.</p>
 
 </details>
 
@@ -159,42 +163,46 @@ Never commit `.env*` or real keys.
 
 ## 简体中文
 
-### 模板里有什么
+### 箱子里有什么
 
-折叠时 = 大纲。需要再展开。
+折叠时看大纲；展开后是完整说明。
 
 <details>
-<summary><strong>A. Wiki 与阅读</strong> — Markdown、双语页、目录、信息框、KaTeX、论文卡</summary>
+<summary><strong>A. Wiki 与阅读</strong> — Markdown、双语双页、目录、信息框、KaTeX、论文卡片</summary>
 
-- `wiki/*.md` + YAML；`[[Wikilink]]` 连页
-- 每个 `Foo.md` 有中文页 `Foo_zh.md`
-- 侧栏、首页目录、跨页标题动画
-- 目录、信息框、论文高亮卡、KaTeX
+<p>站点内容写在 <code>wiki/*.md</code> 中，并带有 YAML frontmatter。页面之间通过 <code>[[Wikilinks]]</code> 互链。每个英文页 <code>Foo.md</code> 都有中文双页 <code>Foo_zh.md</code>。</p>
+
+<p>阅读界面包含侧栏、首页目录、页面间标题过渡、正文目录、可选信息框、论文高亮卡片，以及 KaTeX 公式。这些能力合在一起，使长篇学术笔记仍可按 Wiki 方式阅读，而不必改成博客结构。</p>
 
 </details>
 
 <details>
-<summary><strong>B. 浏览与搜索</strong> — 主题色、立方体、站内搜索</summary>
+<summary><strong>B. 浏览与检索</strong> — 主题配色、立方体视图、站内检索</summary>
 
-- 主题色板（蓝 / 金 / 绿 / 炭灰 …）
-- Browse 立方体
-- 按标题、别名、摘要、正文搜索
+<p>主题配色（蓝、金、绿、炭灰，以及自动模式）会统一作用于站点框架。立方体视图在需要更密总览时，与列表布局互补。</p>
+
+<p>站内检索覆盖标题、别名、摘要与正文，使访客不必记住目录结构也能找到页面。</p>
 
 </details>
 
 <details>
 <summary><strong>C. 可选 AI 与地图</strong> — 带引用的页内 AI、访客地图</summary>
 
-- 页内 AI（可选）：基于当前页作答，带编号引用；任意 OpenAI 兼容接口
-- 访客地图（可选）：Upstash Redis；未配置则空图
+<p>页内 AI 为可选项。配置 OpenAI 兼容接口后，回答会尽量依据当前 Wiki 页面，并给出可核对的编号引用。未配置时，站点其余部分仍可构建，仅助手不可用。</p>
+
+<p>访客地图同样可选，依赖 Upstash Redis。未设置相关变量时地图保持为空，而不会导致构建失败。</p>
 
 </details>
 
 <details>
-<summary><strong>D. 导出与检查</strong> — OKF、内容检查</summary>
+<summary><strong>D. 导出与检查</strong> — OKF 包、内容检查</summary>
 
-- `public/okf/**` — 从 Wiki 生成的 agent 可读包
-- `npm run maintain:wiki` / `lint:wiki` / `lint:content` / `lint:okf`
+<p><code>public/okf/**</code> 是由 Wiki 重新生成的、便于 agent 阅读的导出包。修改 Markdown 源文件后，请运行维护与检查，使导出与 frontmatter 保持一致：</p>
+
+```bash
+npm run maintain:wiki
+npm run lint:wiki && npm run lint:content && npm run lint:okf
+```
 
 </details>
 
@@ -212,9 +220,9 @@ npm run build      # 生产构建
 <details>
 <summary><strong>1. 姓名与站点文案</strong> — <code>lib/site-config.ts</code></summary>
 
-站长相关数据集中在这一文件：姓名（字标、元数据、聊天）、副标题、描述、各色板标语、研究方向、概念页、机构、人物、精选论文、页脚链接、聊天开场与快捷按钮。
+<p>与站主相关的字符串集中在这一份配置里：显示名（字标、元数据、对话）、副标题、描述、配色标语、研究领域、概念页、机构、人物、精选论文、页脚链接，以及对话问候语与快捷提问按钮。</p>
 
-侧栏和首页目录由 `lib/site-navigation.ts` 根据该配置生成。不存在的页面会跳过，空分组会隐藏。
+<p>侧栏与首页目录由 <code>lib/site-navigation.ts</code> 根据该配置推导。缺失页面会被跳过；空分组会自行隐藏，因此半成品配置不会留下断裂导航。</p>
 
 </details>
 
@@ -224,65 +232,65 @@ npm run build      # 生产构建
 | 页面 | 说明 |
 | --- | --- |
 | 主页 | `wiki/Your_Name.md` + `Your_Name_zh.md` — 显示名来自 `title` / `name` |
-| 主题 / 论文 / CV … | 其他 `wiki/*.md`；用 `npm run new:wiki` 新建 |
-| 研究方向 | 重命名 `Research_Area_1`–`3`（及 `_zh`），再改 `researchAreas` 里的 slug |
+| 主题 / 论文 / CV / … | 其他 `wiki/*.md`；可用 `npm run new:wiki` 创建 |
+| 研究领域 | 重命名 `Research_Area_1`–`3`（及 `_zh`），并更新 `researchAreas` 中的 slug |
 
-可参考：`Example_Concept.md`（公式、图、`relations`）、`Example_Paper.md`（论文卡）、`Example_University.md`（机构信息框）、`Your_Name.md`（人物 + 相册）、`Draft_Example.md`（`hidden: true`）。
+<p>可参考的示例：<code>Example_Concept.md</code>（公式、插图、<code>relations</code>）、<code>Example_Paper.md</code>（论文卡片）、<code>Example_University.md</code>（机构信息框）、<code>Your_Name.md</code>（人物 + 图集），以及 <code>Draft_Example.md</code>（<code>hidden: true</code>）。</p>
 
-改完后：
+<p>修改后请运行：</p>
 
 ```bash
 npm run maintain:wiki
 npm run lint:wiki && npm run lint:content && npm run lint:okf
 ```
 
-每页的 `reviewed_at` 需晚于 `modified`。写作说明：`docs/content-template.md`。
+<p>每个页面的 <code>reviewed_at</code> 应晚于 <code>modified</code>。写作约定见 <code>docs/content-template.md</code>。</p>
 
 </details>
 
 <details>
-<summary><strong>3. 资源与品牌</strong> — <code>public/</code>、GitHub 链接、“MyWiki”</summary>
+<summary><strong>3. 资源与品牌</strong> — <code>public/</code>、GitHub 链接、「MyWiki」</summary>
 
 | 内容 | 位置 |
 | --- | --- |
-| 头像、图标、论文配图 | `public/images/`、`public/site-icons/`、`public/mywiki-icon.png`、`public/papers/<id>/` |
-| “在 GitHub 编辑” | `components/ArticleTabs.tsx`、`app/wiki/[slug]/page.tsx`（`your-username/your-wiki`） |
-| 站名 “MyWiki” | 全库搜索 `MyWiki` |
-| 更新 / 论文卡 | `lib/site-updates.ts`（论文需完整 `paper_highlight`） |
-| 版权人 | `LICENSE`、`LICENSING.md` |
+| 头像、图标、论文插图 | `public/images/`、`public/site-icons/`、`public/mywiki-icon.png`、`public/papers/<id>/` |
+| 「在 GitHub 上编辑」 | `components/ArticleTabs.tsx`、`app/wiki/[slug]/page.tsx`（改为 `your-username/your-wiki`） |
+| 站点名「MyWiki」 | 在仓库中搜索 `MyWiki` |
+| 动态 / 论文卡片 | `lib/site-updates.ts`（论文需完整的 `paper_highlight`） |
+| 许可权利人 | `LICENSE`、`LICENSING.md` |
 
 </details>
 
 <details>
-<summary><strong>4. 环境变量（均可选）</strong> — AI、地图、URL</summary>
+<summary><strong>4. 环境变量（全部可选）</strong> — AI、地图、URL</summary>
 
-不配也能构建；AI / 地图会自动关掉。详见 `docs/chat/env.example`、`docs/chat/README.md`、`docs/site-activity/README.md`。
+<p>不配置这些变量时站点仍可构建；AI 与访客地图只会保持关闭。详见 <code>docs/chat/env.example</code>、<code>docs/chat/README.md</code>、<code>docs/site-activity/README.md</code>。</p>
 
 | 变量 | 用途 |
 | --- | --- |
 | `YUNWU_API_KEY`、`YUNWU_API_BASE_URL`、`CHAT_MODEL` | 页内 AI 的 OpenAI 兼容接口 |
-| `SITE_OWNER_NAME` | 助手谈及的名字 |
-| `NEXT_PUBLIC_SITE_OWNER_NAME`、`NEXT_PUBLIC_SITE_OWNER_NAME_ZH` | 字标 / 元数据 / 聊天文案（也可改 `lib/site-config.ts`） |
+| `SITE_OWNER_NAME` | 助手谈论的姓名 |
+| `NEXT_PUBLIC_SITE_OWNER_NAME`、`NEXT_PUBLIC_SITE_OWNER_NAME_ZH` | 字标 / 元数据 / 对话文案（也可改 `lib/site-config.ts`） |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | 页脚 Email |
 | `SITE_CHAT_VOICE_STYLE`、`SITE_CHAT_SIGNATURE_EN`、`SITE_CHAT_SIGNATURE_ZH` | 可选语气 / 落款 |
 | `UPSTASH_REDIS_REST_URL`、`UPSTASH_REDIS_REST_TOKEN` | 限流 + 访客地图 |
-| `RATE_LIMIT_SALT` | 匿名哈希盐 |
-| `SITE_CHAT_ADMIN_TOKEN` | 私有访问报告 Bearer |
-| `SITE_ACTIVITY_OWNER_PASSWORD_HASH` | 站长访问排除 |
-| `NEXT_PUBLIC_SITE_URL` | 正式地址（默认 `https://example.com`） |
-| `NEXT_PUBLIC_BASE_PATH` | 子路径部署（如 GitHub Pages） |
+| `RATE_LIMIT_SALT` | 伪匿名哈希盐 |
+| `SITE_CHAT_ADMIN_TOKEN` | 私有活动报告 Bearer |
+| `SITE_ACTIVITY_OWNER_PASSWORD_HASH` | 排除站主访问 |
+| `NEXT_PUBLIC_SITE_URL` | 规范站点 URL（默认 `https://example.com`） |
+| `NEXT_PUBLIC_BASE_PATH` | 子路径部署（例如 GitHub Pages） |
 
-不要提交 `.env*` 或真实密钥。
+<p>切勿提交 <code>.env*</code> 或真实密钥。</p>
 
 </details>
 
 <details>
 <summary><strong>5. 部署</strong> — 推荐 Vercel</summary>
 
-- 按 Next.js 15 导入，配置环境变量后部署。AI / 地图需要服务端；纯静态导出时会关掉。
-- 绑自己的域名，设好 `NEXT_PUBLIC_SITE_URL`，再重新部署。
-- 若保留 CI（`.github/workflows/ci.yml`），推送 / PR 会跑检查与构建。
+<p>按 Next.js 15 导入项目，配置环境变量后部署。AI / 地图等 API 路由需要服务端运行时；纯静态导出会使这些功能关闭。</p>
+
+<p>绑定你的域名，设置 <code>NEXT_PUBLIC_SITE_URL</code>，然后重新部署。保留 CI（<code>.github/workflows/ci.yml</code>）时，推送 / PR 会跑检查与构建。</p>
 
 </details>
 
-<p align="right"><a href="#top">返回顶部</a></p>
+<p align="right"><a href="#top">回到顶部</a></p>
