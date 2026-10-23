@@ -16,7 +16,7 @@ const nextConfig = {
   },
   async headers() {
     const year = 'public, max-age=31536000, immutable';
-    const day = 'public, max-age=86400, stale-while-revalidate=604800';
+    const day = 'public, max-age=604800, stale-while-revalidate=2592000';
     return [
       { source: '/:path*', headers: securityHeaders },
       { source: '/vendor/:path*', headers: [{ key: 'Cache-Control', value: year }] },
@@ -26,6 +26,10 @@ const nextConfig = {
       { source: '/images/:path*', headers: [{ key: 'Cache-Control', value: day }] },
       { source: '/topics/:path*', headers: [{ key: 'Cache-Control', value: day }] },
       { source: '/readme/:path*', headers: [{ key: 'Cache-Control', value: day }] },
+      { source: '/institutions/:path*', headers: [{ key: 'Cache-Control', value: day }] },
+      { source: '/files/:path*', headers: [{ key: 'Cache-Control', value: day }] },
+      { source: '/mywiki-icon.png', headers: [{ key: 'Cache-Control', value: year }] },
+      { source: '/mywiki-icon.webp', headers: [{ key: 'Cache-Control', value: year }] },
       { source: '/okf/:path*', headers: [{ key: 'Cache-Control', value: day }] },
     ];
   },

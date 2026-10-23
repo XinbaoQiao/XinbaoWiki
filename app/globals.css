@@ -2438,7 +2438,7 @@ body:has(.wiki-portal) .wiki-toc-return {
   background: var(--wiki-bg);
 }
 
-.wiki-body img[src$="poster.png"] {
+.wiki-body img[src$="poster.webp"] {
   max-width: min(100%, 720px);
   max-height: 640px;
 }
