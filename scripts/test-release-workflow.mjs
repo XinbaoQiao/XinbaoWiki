@@ -37,7 +37,7 @@ import {
 const root = fileURLToPath(new URL('..', import.meta.url));
 assert.equal(Number.parseInt(process.versions.node, 10), 22, 'release workflow tests execute under Node 22');
 const CHAT_CONTRACT_META = Object.freeze({
-  backendVersion: 'xinbao-chat-api-v8',
+  backendVersion: 'xinbao-chat-api-v9',
   responsePolicyVersion: 'grounded-conversation-v4',
   promptVersion: 'xinbao-grounded-conversation-v7',
   indexVersion: 'wiki-heading-lexical-v2:test',

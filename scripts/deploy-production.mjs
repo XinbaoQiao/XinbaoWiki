@@ -32,7 +32,7 @@ const scope = 'xinbaopedia';
 const project = 'xinbaopedia';
 const productionUrl = 'https://xinbaopedia.top';
 const EXPECTED_CHAT_CONTRACT = Object.freeze({
-  backendVersion: 'xinbao-chat-api-v8',
+  backendVersion: 'xinbao-chat-api-v9',
   responsePolicyVersion: 'grounded-conversation-v4',
   promptVersion: 'xinbao-grounded-conversation-v7',
 });
@@ -369,11 +369,11 @@ async function runStagedSmoke(vercelCommand, routes, stagedUrl) {
   let preferredRouteName;
   const stagedChatCanaryAttempts = Math.max(
     1,
-    Number.parseInt(process.env.STAGED_CHAT_CANARY_ATTEMPTS || '5', 10) || 5
+    Number.parseInt(process.env.STAGED_CHAT_CANARY_ATTEMPTS || '8', 10) || 5
   );
   const stagedChatCanaryRetryDelayMs = Math.max(
     250,
-    Number.parseInt(process.env.STAGED_CHAT_CANARY_RETRY_DELAY_MS || '1500', 10) || 1500
+    Number.parseInt(process.env.STAGED_CHAT_CANARY_RETRY_DELAY_MS || '2500', 10) || 1500
   );
 
   function isChatProviderCanary(check) {

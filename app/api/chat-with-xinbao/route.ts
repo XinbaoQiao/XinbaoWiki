@@ -18,14 +18,14 @@ export const runtime = 'nodejs';
 
 const MODEL = 'deepseek-v4-flash';
 const DEFAULT_BASE_URL = 'https://api.openlux.ai/v1';
-const CHAT_BACKEND_VERSION = 'xinbao-chat-api-v8';
+const CHAT_BACKEND_VERSION = 'xinbao-chat-api-v9';
 const DAILY_LIMIT = 10;
 const COOLDOWN_SECONDS = 4;
 const HOURLY_IP_LIMIT = 80;
 const HOURLY_IP_RETRY_LIMIT = 20;
 const MAX_INPUT_LENGTH = 1000;
 const MAX_OUTPUT_TOKENS = 450;
-const REQUEST_TIMEOUT_MS = 20_000;
+const REQUEST_TIMEOUT_MS = 45_000;
 const QUESTION_LOG_MAX_RECENT = 2_000;
 const QUESTION_LOG_RETENTION_DAYS = 90;
 const QUESTION_LOG_RETENTION_MS = 60 * 60 * 24 * 1_000 * QUESTION_LOG_RETENTION_DAYS;
@@ -812,11 +812,16 @@ export async function POST(request: NextRequest) {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
+      // OpenLux/deepseek-v4-flash silently drops long (and often any) system-role
+      // content (prompt_tokens collapses to ~user-only). Fold the prompt into the
+      // user message so grounded evidence actually reaches the model.
       body: JSON.stringify({
         model: MODEL,
         messages: [
-          { role: 'system', content: prompt },
-          { role: 'user', content: message }
+          {
+            role: 'user',
+            content: `${prompt}\n\n---\nUser question:\n${message}`
+          }
         ],
         temperature,
         max_tokens: MAX_OUTPUT_TOKENS,
@@ -924,37 +929,8 @@ export async function POST(request: NextRequest) {
         upstreamStatus: groundedResult.kind === 'upstream-error' ? groundedResult.status : undefined
       };
 
-      // Soft grounded failures must not look like a full outage: try one conversational
-      // fallback, then a deterministic retry hint. Keep the daily reservation either way.
-      const conversationalSystemPrompt = getXinbaoChatSystemPrompt(language, retrieval, 'conversational');
-      const conversationalFallback = await resolveConversationalReply({
-        requestCompletion,
-        signal: providerAbort.signal,
-        systemPrompt: conversationalSystemPrompt
-      });
-      if (conversationalFallback.kind !== 'upstream-error') {
-        accumulatedUsage = conversationalFallback.usage ?? accumulatedUsage;
-      }
-
-      if (conversationalFallback.kind === 'ok') {
-        observe('ok-conversational', {
-          ...softBase,
-          providerAttempts,
-          usage: accumulatedUsage
-        });
-        return jsonResponse(
-          {
-            reply: withXinbaoSignature(conversationalFallback.reply, language, 'casual'),
-            sources: [],
-            remaining: Math.max(0, DAILY_LIMIT - dailyCount),
-            limit: DAILY_LIMIT,
-            meta: responseMetadata(0, providerAttempts, groundedResult.retryReason)
-          },
-          200,
-          visitorCookie
-        );
-      }
-
+      // Soft grounded failures must not look like a full outage: return a deterministic
+      // retry hint instead of a conversational guess that can invent papers.
       observe(groundedResult.kind === 'empty' ? 'empty-reply' : groundedResult.kind, {
         ...softBase,
         providerAttempts,

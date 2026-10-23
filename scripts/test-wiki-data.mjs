@@ -1634,7 +1634,7 @@ assert.match(chatRoute, /MAX_INPUT_LENGTH = 1000/, 'chat API validates input len
 assert.doesNotMatch(chatRoute, /MAX_HISTORY_MESSAGES|type ChatRole|type ChatMessage/, 'chat API has no client-history provider path');
 assert.match(chatRoute, /MAX_OUTPUT_TOKENS = 450/, 'chat API caps model output tokens');
 assert.match(chatRoute, /thinking: \{ type: 'disabled' \}/, 'chat API disables model thinking output so the 450-token cap is reserved for the final answer');
-assert.match(chatRoute, /REQUEST_TIMEOUT_MS = 20_000/, 'chat API has a bounded backend timeout with upstream latency headroom');
+assert.match(chatRoute, /REQUEST_TIMEOUT_MS = 45_000/, 'chat API has a bounded backend timeout with upstream latency headroom');
 assert.match(chatRoute, /QUESTION_LOG_MAX_RECENT = 2_000/, 'chat API caps the retained recent question log');
 assert.match(chatRoute, /QUESTION_LOG_RETENTION_DAYS = 90/, 'chat API expires daily question logs after 90 days');
 assert.match(chatRoute, /function questionFingerprint[\s\S]*hashIdentity\(`question:/, 'chat API converts accepted questions to a salted one-way fingerprint');
@@ -1650,14 +1650,16 @@ assert.match(chatRoute, /body\.language === 'en' \|\| body\.language === 'zh'/, 
 assert.match(chatRoute, /retrieveWikiContext\(message[\s\S]*getXinbaoChatSystemPrompt\([\s\S]*language,[\s\S]*retrieval,/, 'chat API gates retrieval on the current question only');
 assert.doesNotMatch(chatRoute, /retrievalQuery/, 'chat history cannot contaminate the current question evidence gate');
 assert.doesNotMatch(chatRoute, /sanitizeHistory|body\.history|\.\.\.history/, 'chat API never trusts client history or forwards it to the model provider');
-assert.match(providerRequestFunction, /messages: \[[\s\S]*\{ role: 'system', content: prompt \}[\s\S]*\{ role: 'user', content: message \}[\s\S]*\]/, 'every provider attempt contains only its server-authored system prompt and the current user question');
+assert.match(providerRequestFunction, /messages: \[[\s\S]*role: 'user'[\s\S]*User question:[\s\S]*\]/, 'chat completions fold the grounded prompt into a single user message for OpenLux');
 assert.doesNotMatch(providerRequestFunction, /discarded|firstAttempt|firstReply|draft/i, 'provider request construction has no path for forwarding a discarded model draft');
 assert.match(chatWithXinbaoPanel, /modelApiConfigured/, 'chat client health gate reads modelApiConfigured from GET meta');
 assert.match(chatWithXinbaoPanel, /serviceAvailable/, 'chat client tracks service availability separately from a single failed POST');
 assert.match(chatWithXinbaoPanel, /setServiceAvailable\(true\)/, 'chat client keeps quick-asks usable after a non-quota POST failure');
-assert.match(chatRoute, /CHAT_BACKEND_VERSION = 'xinbao-chat-api-v8'/, 'chat API exposes the soft-grounded-fallback backend version');
+assert.match(chatRoute, /CHAT_BACKEND_VERSION = 'xinbao-chat-api-v9'/, 'chat API exposes the soft-grounded-fallback backend version');
 assert.match(chatRoute, /function softGroundedFallbackReply/, 'chat API defines a soft grounded fallback reply that is not an outage banner');
-assert.match(chatRoute, /groundedResult\.kind === 'protected-output'[\s\S]*groundedResult\.kind === 'retry-rate-limited'[\s\S]*groundedResult\.kind === 'invalid-citations'[\s\S]*resolveConversationalReply\(\{[\s\S]*softGroundedFallbackReply\(language\)/, 'soft grounded failures fall back to conversation or a deterministic retry hint instead of genericUnavailable');
+assert.match(chatRoute, /groundedResult\.kind === 'protected-output'[\s\S]*groundedResult\.kind === 'retry-rate-limited'[\s\S]*groundedResult\.kind === 'invalid-citations'[\s\S]*softGroundedFallbackReply\(language\)/, 'soft grounded failures return a deterministic retry hint instead of genericUnavailable');
+assert.match(chatRoute, /User question:/, 'provider requests fold system prompt into the user message for OpenLux compatibility');
+assert.doesNotMatch(chatRoute, /role: 'system', content: prompt/, 'provider requests must not rely on system-role prompts that OpenLux drops');
 assert.doesNotMatch(chatRoute, /if \(groundedResult\.kind === 'invalid-citations'\) \{[\s\S]*return unavailableAfterProvider\('invalid-citations'/, 'invalid-citations no longer maps directly to the temporary-unavailable banner');
 
 assert.match(chatRoute, /responsePolicyVersion: WIKI_CHAT_RESPONSE_POLICY_VERSION[\s\S]*responseMode[\s\S]*citedChunks/, 'chat API returns versioned response-policy metadata');
