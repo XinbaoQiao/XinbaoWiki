@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import type { ReactNode } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { ArticleTabs } from '@/components/ArticleTabs';
 import { LanguageToggle, SitePalette } from '@/components/LanguageToggle';
 import { Sidebar } from '@/components/Sidebar';
@@ -8,18 +8,31 @@ import { SiteActivityRecorder } from '@/components/SiteActivityRecorder';
 import { WikiLink } from '@/components/WikiLink';
 import { pathWithBasePath } from '@/lib/wiki';
 import { siteConfig } from '@/lib/site-config';
+import {
+  cssUrlForSharedImage,
+  sharedBackgroundHtmlDataset,
+  sharedBackgroundInlineStyle,
+  type SharedSiteBackgroundPublic
+} from '@/lib/site-wallpaper-shared';
+import {
+  readSharedSiteBackground,
+  siteBackgroundBlobConfigured,
+  siteBackgroundLocalFallbackEnabled,
+  siteBackgroundPasswordRequired,
+  siteBackgroundSharedConfigured,
+  siteBackgroundWritableConfigured
+} from '@/lib/site-wallpaper-store';
 import { ViewTransitions } from 'next-view-transitions';
-import 'katex/dist/katex.min.css';
 import './globals.css';
 
 const sitePaletteIcons = {
-  text: pathWithBasePath('/mywiki-icon.png'),
-  blue: pathWithBasePath('/site-icons/mywiki-blue.png'),
-  gold: pathWithBasePath('/site-icons/mywiki-gold.png'),
-  rose: pathWithBasePath('/site-icons/mywiki-gold.png'),
-  green: pathWithBasePath('/site-icons/mywiki-green.png'),
-  violet: pathWithBasePath('/site-icons/mywiki-blue.png'),
-  charcoal: pathWithBasePath('/site-icons/mywiki-charcoal.png')
+  text: pathWithBasePath('/mywiki-icon.webp'),
+  blue: pathWithBasePath('/site-icons/mywiki-blue.webp'),
+  gold: pathWithBasePath('/site-icons/mywiki-gold.webp'),
+  rose: pathWithBasePath('/site-icons/mywiki-gold.webp'),
+  green: pathWithBasePath('/site-icons/mywiki-green.webp'),
+  violet: pathWithBasePath('/site-icons/mywiki-blue.webp'),
+  charcoal: pathWithBasePath('/site-icons/mywiki-charcoal.webp')
 };
 
 const siteDescription = siteConfig.description;
@@ -59,22 +72,82 @@ export const viewport: Viewport = {
   interactiveWidget: 'resizes-content'
 };
 
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+async function loadInitialSharedBackground(): Promise<SharedSiteBackgroundPublic | null> {
+  try {
+    const shared = await readSharedSiteBackground();
+    return {
+      ...shared,
+      shared: siteBackgroundSharedConfigured(),
+      writable: siteBackgroundWritableConfigured(),
+      blob: siteBackgroundBlobConfigured(),
+      localFallback: siteBackgroundLocalFallbackEnabled(),
+      passwordRequired: siteBackgroundPasswordRequired()
+    };
+  } catch {
+    return null;
+  }
+}
+
+export default async function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+  const initialSharedBackground = await loadInitialSharedBackground();
+  const sharedDataset = initialSharedBackground
+    ? sharedBackgroundHtmlDataset(initialSharedBackground)
+    : ({ 'data-site-custom-bg': 'off' } as Record<string, string>);
+  const sharedStyle = initialSharedBackground ? sharedBackgroundInlineStyle(initialSharedBackground) : '';
+  const htmlStyle = (sharedStyle
+    ? Object.fromEntries(
+        sharedStyle.split(';').map((part) => {
+          const idx = part.indexOf(':');
+          if (idx < 0) return null;
+          return [part.slice(0, idx).trim(), part.slice(idx + 1).trim()];
+        }).filter(Boolean) as Array<[string, string]>
+      )
+    : undefined) as CSSProperties | undefined;
+
   return (
     <ViewTransitions>
-      <html lang="en">
+      <html lang="en" {...sharedDataset} style={htmlStyle}>
         <head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
           <link
-            href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap"
-            rel="stylesheet"
+            rel="preload"
+            as="style"
+            href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=optional"
           />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=optional"
+            rel="stylesheet"
+            media="print"
+            data-alex-brush-font=""
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html:
+                '(function(){var l=document.querySelector("link[data-alex-brush-font]");if(!l)return;var r=function(){l.media="all"};if(l.sheet)r();else l.addEventListener("load",r);})();'
+            }}
+          />
+          {initialSharedBackground?.enabled && cssUrlForSharedImage(initialSharedBackground.imageUrl) ? (
+            <link
+              rel="preload"
+              as="image"
+              href={cssUrlForSharedImage(initialSharedBackground.imageUrl)!}
+              fetchPriority="low"
+            />
+          ) : null}
         </head>
         <body>
+          {initialSharedBackground?.enabled && cssUrlForSharedImage(initialSharedBackground.imageUrl) ? (
+            <div
+              aria-hidden="true"
+              className="site-custom-bg-layer is-active"
+              data-ssr-wallpaper=""
+              style={{ backgroundImage: `url("${cssUrlForSharedImage(initialSharedBackground.imageUrl)}")` }}
+            />
+          ) : null}
           <SiteActivityRecorder />
-          <a className="skip-to-content" href="#main-content">Skip to content / 跳至正文</a>
-          <SitePalette icons={sitePaletteIcons} />
+          <a className="skip-to-content" href="#main-content">Skip to content / 跳到正文</a>
+          <SitePalette icons={sitePaletteIcons} initialSharedBackground={initialSharedBackground} />
           <header className="wiki-topbar">
             <div className="wiki-topbar-inner">
               <WikiLink className="wiki-logo" href={pathWithBasePath('/')}>

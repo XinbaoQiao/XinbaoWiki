@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@upstash/redis": "^1.38.0",
+    "@vercel/blob": "^2.8.2",
     "gray-matter": "^4.0.3",
     "katex": "^0.16.45",
     "next": "15.5.27",

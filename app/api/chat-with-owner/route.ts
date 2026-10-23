@@ -18,7 +18,7 @@ export const runtime = 'nodejs';
 
 const MODEL = process.env.CHAT_MODEL?.trim() || 'deepseek-v4-flash';
 const DEFAULT_BASE_URL = 'https://api.openlux.ai/v1';
-const CHAT_BACKEND_VERSION = 'site-chat-api-v7';
+const CHAT_BACKEND_VERSION = 'site-chat-api-v8';
 const DAILY_LIMIT = 10;
 const COOLDOWN_SECONDS = 4;
 const HOURLY_IP_LIMIT = 80;
@@ -50,6 +50,12 @@ type ChatErrorKey = keyof typeof ERROR_COPY.en;
 
 function localizedError(language: ChatLanguage, key: ChatErrorKey) {
   return ERROR_COPY[language][key];
+}
+
+function softGroundedFallbackReply(language: ChatLanguage) {
+  return language === 'zh'
+    ? '刚才这次没能把公开 wiki 证据整理成可核对的回答。可以再试一次，或先打开研究 / 论文 / 项目页面浏览。'
+    : 'I could not assemble a citation-checked answer from the public wiki just now. Please try again, or browse the Research, Publications, or Projects pages.';
 }
 type ChatResponseMode = 'model-grounded' | 'model-conversational' | 'deterministic-abstention';
 type ProviderReservationPolicy = 'release' | 'retain';
@@ -914,25 +920,67 @@ export async function POST(request: NextRequest) {
         retryReason: groundedResult.retryReason
       });
     }
-    if (groundedResult.kind === 'protected-output') {
-      return unavailableAfterProvider('protected-output', {
-        finalValidationFailure: groundedResult.finalValidationFailure,
+    if (
+      groundedResult.kind === 'protected-output' ||
+      groundedResult.kind === 'retry-rate-limited' ||
+      groundedResult.kind === 'invalid-citations'
+    ) {
+      const softBase = {
+        finalValidationFailure:
+          groundedResult.kind === 'retry-rate-limited'
+            ? undefined
+            : groundedResult.finalValidationFailure,
         retryOutcome,
         retryReason: groundedResult.retryReason
+      };
+
+      // Soft grounded failures must not look like a full outage: try one conversational
+      // fallback, then a deterministic retry hint. Keep the daily reservation either way.
+      const conversationalSystemPrompt = getOwnerChatSystemPrompt(language, retrieval, 'conversational');
+      const conversationalFallback = await resolveConversationalReply({
+        requestCompletion,
+        signal: providerAbort.signal,
+        systemPrompt: conversationalSystemPrompt
       });
-    }
-    if (groundedResult.kind === 'retry-rate-limited') {
-      return unavailableAfterProvider('retry-rate-limited', {
-        retryOutcome,
-        retryReason: groundedResult.retryReason
+      if (conversationalFallback.kind !== 'upstream-error') {
+        accumulatedUsage = conversationalFallback.usage ?? accumulatedUsage;
+      }
+
+      if (conversationalFallback.kind === 'ok') {
+        observe('ok-conversational', {
+          ...softBase,
+          providerAttempts,
+          usage: accumulatedUsage
+        });
+        return jsonResponse(
+          {
+            reply: withOwnerSignature(conversationalFallback.reply, language, 'casual'),
+            sources: [],
+            remaining: Math.max(0, DAILY_LIMIT - dailyCount),
+            limit: DAILY_LIMIT,
+            meta: responseMetadata(0, providerAttempts, groundedResult.retryReason)
+          },
+          200,
+          visitorCookie
+        );
+      }
+
+      observe(groundedResult.kind, {
+        ...softBase,
+        providerAttempts,
+        usage: accumulatedUsage
       });
-    }
-    if (groundedResult.kind === 'invalid-citations') {
-      return unavailableAfterProvider('invalid-citations', {
-        finalValidationFailure: groundedResult.finalValidationFailure,
-        retryOutcome,
-        retryReason: groundedResult.retryReason
-      });
+      return jsonResponse(
+        {
+          reply: withOwnerSignature(softGroundedFallbackReply(language), language, 'plain'),
+          sources: [],
+          remaining: Math.max(0, DAILY_LIMIT - dailyCount),
+          limit: DAILY_LIMIT,
+          meta: responseMetadata(0, providerAttempts, groundedResult.retryReason)
+        },
+        200,
+        visitorCookie
+      );
     }
 
     observe('ok', {

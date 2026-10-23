@@ -1,6 +1,7 @@
 import ReactMarkdown, { defaultUrlTransform } from 'react-markdown';
 import { Fragment, type ReactNode } from 'react';
 import rehypeKatex from 'rehype-katex';
+import 'katex/dist/katex.min.css';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import { ArticleContents } from '@/components/ArticleContents';

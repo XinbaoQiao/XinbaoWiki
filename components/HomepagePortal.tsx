@@ -1,18 +1,27 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import { WikiLink } from '@/components/WikiLink';
 import { siteConfig } from '@/lib/site-config';
 import { clearWikiMorphIntent } from '@/lib/wiki-view-transition';
 import { wikiSlugFromHref } from '@/lib/wiki-view-transition';
 import type { CSSProperties, PointerEvent as ReactPointerEvent, TransitionEvent as ReactTransitionEvent } from 'react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { VisitorAtlasDisclosure } from '@/components/VisitorAtlasDisclosure';
 import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
 import { getRecentSiteUpdates } from '@/lib/site-updates';
-import { PaperAcceptancePreview } from '@/components/PaperAcceptancePreview';
 import { SlidingSelection } from '@/components/SlidingSelection';
 import { useAnimatedDisclosure } from '@/components/useAnimatedDisclosure';
 import type { PaperHighlightCatalog } from '@/lib/paper-highlights';
+
+const VisitorAtlasDisclosure = dynamic(
+  () => import('@/components/VisitorAtlasDisclosure').then((module) => module.VisitorAtlasDisclosure),
+  { ssr: false }
+);
+
+const PaperAcceptancePreview = dynamic(
+  () => import('@/components/PaperAcceptancePreview').then((module) => module.PaperAcceptancePreview),
+  { ssr: false }
+);
 
 type LocalizedText = Record<SearchLanguage, string>;
 type PortalPalette = 'text' | 'blue' | 'gold' | 'rose' | 'green' | 'violet' | 'charcoal';
@@ -86,13 +95,15 @@ const entriesLabel: LocalizedText = {
 const sectionToggleLabels = {
   en: {
     collapse: 'Collapse homepage sections',
-    expand: 'Expand homepage sections'
+    foldExtreme: 'Show only the name Your Name',
+    restoreFolded: 'Restore the folded homepage'
   },
   zh: {
     collapse: '折叠首页板块',
-    expand: '展开首页板块'
+    foldExtreme: '极限折叠，仅显示 Your Name',
+    restoreFolded: '恢复为折叠状态'
   }
-} satisfies Record<SearchLanguage, { collapse: string; expand: string }>;
+} satisfies Record<SearchLanguage, { collapse: string; foldExtreme: string; restoreFolded: string }>;
 
 const portalPalettes: PortalPalette[] = ['text', 'blue', 'gold', 'rose', 'green', 'violet', 'charcoal'];
 
@@ -150,24 +161,42 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
   };
   const newsDisclosure = useAnimatedDisclosure(newsOpen, commitNewsOpen);
   const changeNewsOpen = newsDisclosure.change;
-  const expandAllSections = () => {
-    setBrowseOpen(true);
-    changeNewsOpen(true);
-    setActivityOpen(true);
-  };
+  const [layoutMode, setLayoutMode] = useState<'expanded' | 'collapsed' | 'nameOnly'>('collapsed');
   const collapseAllSections = () => {
     setBrowseOpen(false);
     changeNewsOpen(false);
     setActivityOpen(false);
   };
-  const toggleAllSections = () => {
-    if (allSectionsClosed) {
-      expandAllSections();
+  // Keep layoutMode in sync when the user opens/closes individual disclosures.
+  useEffect(() => {
+    if (layoutMode === 'nameOnly') return;
+    setLayoutMode(allSectionsClosed ? 'collapsed' : 'expanded');
+  }, [allSectionsClosed, layoutMode]);
+  const cyclePortalLayout = () => {
+    if (layoutMode === 'expanded' || !allSectionsClosed) {
+      collapseAllSections();
+      setLayoutMode('collapsed');
       return;
     }
+    if (layoutMode === 'collapsed') {
+      setLayoutMode('nameOnly');
+      return;
+    }
+    // nameOnly -> folded (never back to full expand via this click)
     collapseAllSections();
+    setLayoutMode('collapsed');
   };
-  const portalClassName = ['wiki-portal', allSectionsClosed ? 'wiki-portal-collapsed' : ''].filter(Boolean).join(' ');
+  const portalLayoutLabel =
+    layoutMode === 'nameOnly'
+      ? sectionToggleLabels[language].restoreFolded
+      : layoutMode === 'collapsed'
+        ? sectionToggleLabels[language].foldExtreme
+        : sectionToggleLabels[language].collapse;
+  const portalClassName = [
+    'wiki-portal',
+    layoutMode === 'collapsed' ? 'wiki-portal-collapsed' : '',
+    layoutMode === 'nameOnly' ? 'wiki-portal-name-only' : ''
+  ].filter(Boolean).join(' ');
   const recentUpdates = getRecentSiteUpdates(language, new Date(updatesAsOfDate));
   const latestUpdate = recentUpdates[0];
   const latestAcceptance = recentUpdates.find((item) => item.papers?.length);
@@ -452,10 +481,10 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
               <button
                 type="button"
                 aria-controls="portal-news portal-activity portal-directory"
-                aria-expanded={!allSectionsClosed}
-                aria-label={allSectionsClosed ? sectionToggleLabels[language].expand : sectionToggleLabels[language].collapse}
+                aria-expanded={layoutMode === 'expanded'}
+                aria-label={portalLayoutLabel}
                 className="wiki-portal-name-button"
-                onClick={toggleAllSections}
+                onClick={cyclePortalLayout}
               />
             </div>
           </div>

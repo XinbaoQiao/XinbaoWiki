@@ -15,7 +15,19 @@ const nextConfig = {
     staticGenerationMinPagesPerWorker: 10,
   },
   async headers() {
-    return [{ source: '/:path*', headers: securityHeaders }];
+    const year = 'public, max-age=31536000, immutable';
+    const day = 'public, max-age=86400, stale-while-revalidate=604800';
+    return [
+      { source: '/:path*', headers: securityHeaders },
+      { source: '/vendor/:path*', headers: [{ key: 'Cache-Control', value: year }] },
+      { source: '/site-logos/:path*', headers: [{ key: 'Cache-Control', value: year }] },
+      { source: '/site-icons/:path*', headers: [{ key: 'Cache-Control', value: year }] },
+      { source: '/papers/:path*', headers: [{ key: 'Cache-Control', value: day }] },
+      { source: '/images/:path*', headers: [{ key: 'Cache-Control', value: day }] },
+      { source: '/topics/:path*', headers: [{ key: 'Cache-Control', value: day }] },
+      { source: '/readme/:path*', headers: [{ key: 'Cache-Control', value: day }] },
+      { source: '/okf/:path*', headers: [{ key: 'Cache-Control', value: day }] },
+    ];
   },
   async redirects() {
     return [

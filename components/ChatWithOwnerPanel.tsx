@@ -201,6 +201,7 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
   const [retryAfterSeconds, setRetryAfterSeconds] = useState<number | null>(null);
   const [retryRequest, setRetryRequest] = useState<RetryRequest | null>(null);
   const [remaining, setRemaining] = useState<number | null>(null);
+  const [serviceAvailable, setServiceAvailable] = useState(true);
   const [limit, setLimit] = useState(10);
   const [mounted, setMounted] = useState(false);
   const messagesRef = useRef<HTMLDivElement>(null);
@@ -209,7 +210,7 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
   const activeRequestRef = useRef<AbortController | null>(null);
   const dragStartY = useRef<number | null>(null);
   const quotaExhausted = remaining === 0;
-  const composerDisabled = loading || quotaExhausted;
+  const composerDisabled = loading || quotaExhausted || !serviceAvailable;
 
   useEffect(() => {
     setMounted(true);
@@ -322,10 +323,32 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
     async function refreshQuota() {
       try {
         const response = await fetch(chatEndpoint(), { method: 'GET' });
-        const data = await response.json().catch(() => null) as { remaining?: unknown; limit?: unknown } | null;
-        if (cancelled || !response.ok) return;
+        const data = await response.json().catch(() => null) as {
+          remaining?: unknown;
+          limit?: unknown;
+          meta?: { modelApiConfigured?: unknown };
+          error?: unknown;
+        } | null;
+        if (cancelled) return;
+        if (!response.ok) {
+          if (response.status === 503) {
+            setServiceAvailable(false);
+            setError(typeof data?.error === 'string' && data.error.trim() ? data.error : strings.genericError);
+          }
+          return;
+        }
         if (typeof data?.limit === 'number') setLimit(data.limit);
         if (typeof data?.remaining === 'number') setRemaining(data.remaining);
+        const configured = data?.meta?.modelApiConfigured;
+        if (configured === false) {
+          setServiceAvailable(false);
+          setError(strings.genericError);
+          return;
+        }
+        if (configured === true) {
+          setServiceAvailable(true);
+          setError((current) => (current === strings.genericError ? '' : current));
+        }
       } catch {
         // Keep the neutral quota label if the quota endpoint is temporarily unavailable.
       }
@@ -396,6 +419,10 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
           : (serverError || strings.genericError);
         setRetryRequest({ message, language });
         setError(visibleError);
+        // A single POST failure is not a health verdict. Keep quick-asks usable when quota remains.
+        if (response.status !== 429 && (typeof data?.remaining === 'number' ? data.remaining > 0 : remaining === null || remaining > 0)) {
+          setServiceAvailable(true);
+        }
         return;
       }
 
@@ -407,6 +434,7 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
         return;
       }
 
+      setServiceAvailable(true);
       setMessages((current) => [...current, {
         role: 'assistant',
         content: reply,
@@ -464,6 +492,23 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
     setRetryAfterSeconds(null);
     setRetryRequest(null);
     setMessages(initialMessages);
+    void (async () => {
+      try {
+        const response = await fetch(chatEndpoint(), { method: 'GET' });
+        const data = await response.json().catch(() => null) as {
+          remaining?: unknown;
+          limit?: unknown;
+          meta?: { modelApiConfigured?: unknown };
+        } | null;
+        if (!response.ok) return;
+        if (typeof data?.limit === 'number') setLimit(data.limit);
+        if (typeof data?.remaining === 'number') setRemaining(data.remaining);
+        if (data?.meta?.modelApiConfigured === true) setServiceAvailable(true);
+        if (data?.meta?.modelApiConfigured === false) setServiceAvailable(false);
+      } catch {
+        // ignore health refresh failures on new chat
+      }
+    })();
     requestAnimationFrame(() => inputRef.current?.focus());
   }
 

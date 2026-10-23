@@ -7,7 +7,7 @@ import { clearWikiTitleMorphPeers, ensureWikiTitleCache, installWikiTitleMorphHo
 
 const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
 
-function collectWarmupHrefs(limit = 4): string[] {
+function collectWarmupHrefs(limit = 2): string[] {
   if (typeof document === 'undefined') return [];
   const seen = new Set<string>();
   const out: string[] = [];
@@ -79,7 +79,7 @@ export function SiteActivityRecorder() {
           } catch {
             /* Prefetch must never block UI. */
           }
-        }, index * 150);
+        }, 400 + index * 250);
         timers.push(id);
       });
     };
