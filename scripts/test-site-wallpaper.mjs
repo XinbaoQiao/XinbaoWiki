@@ -14,7 +14,7 @@ function parseSharedSiteBackground(value) {
   const enabled = Boolean(value.enabled) && Boolean(imageUrl);
   return {
     enabled,
-    imageUrl: enabled ? imageUrl : null,
+    imageUrl,
     mode: value.mode === 'soft-fade' || value.mode === 'tile' || value.mode === 'depth' || value.mode === 'cover' ? value.mode : 'cover',
     overlay: clampOverlay(typeof value.overlay === 'number' ? value.overlay : 50),
     position: value.position === 'top' || value.position === 'bottom' || value.position === 'center' ? value.position : 'center',
@@ -32,6 +32,8 @@ function cssUrlForSharedImage(imageUrl) {
 assert.equal(parseSharedSiteBackground(null).enabled, false);
 assert.equal(parseSharedSiteBackground({ enabled: true }).enabled, false);
 assert.equal(parseSharedSiteBackground({ enabled: true, imageUrl: 'https://example.com/a.jpg', overlay: 120 }).overlay, 100);
+assert.equal(parseSharedSiteBackground({ enabled: false, imageUrl: 'https://example.com/a.jpg' }).imageUrl, 'https://example.com/a.jpg', 'keeps imageUrl when disabled');
+assert.equal(parseSharedSiteBackground({ enabled: false, imageUrl: 'https://example.com/a.jpg' }).enabled, false);
 assert.equal(cssUrlForSharedImage('javascript:alert(1)'), null);
 assert.equal(cssUrlForSharedImage('https://blob.vercel-storage.com/x.jpg'), 'https://blob.vercel-storage.com/x.jpg');
 
@@ -52,7 +54,7 @@ const expectations = [
   ['store', '@vercel/blob', 'SITE_BACKGROUND_REDIS_KEY', 'SITE_BACKGROUND_BLOB_PATHNAME', 'siteBackgroundLocalFallbackEnabled', 'siteBackgroundPasswordRequired', 'blobReadWriteTokenEnv'],
   ['shared', "join(':')", 'site-wallpaper', 'wallpaper', 'sharedBackgroundInlineStyle', 'sniffImageMimeType', 'isAcceptedSiteBackgroundMime'],
   ['toggle', '/api/site-activity/wallpaper/', 'SITE_WALLPAPER_API', 'AbortController', 'compressImageFile', 'publishShared', '全站可见', '仅此设备', 'imageExtensionForMime', 'normalizeImageMimeType'],
-  ['layout', 'initialSharedBackground', 'sharedBackgroundInlineStyle', 'loadInitialSharedBackground'],
+  ['layout', 'initialSharedBackground', 'loadInitialSharedBackground', 'data-site-custom-bg'],
   ['css', 'html[data-site-custom-bg="on"] .wiki-toc-return', 'backdrop-filter: blur(10px)', 'site-custom-bg-password'],
   ['deny', 'vercel-storage\\.com/site-wallpaper', 'public/site-wallpaper/'],
   ['rules', "'public/site-wallpaper/'"],

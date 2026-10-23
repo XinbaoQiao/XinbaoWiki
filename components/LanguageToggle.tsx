@@ -387,12 +387,11 @@ const customBgPositionOptions: Array<{ position: CustomBgPosition; en: string; z
 
 
 export function SitePalette({ icons, initialSharedBackground = null }: SitePaletteProps) {
-  const initialSharedSettings = initialSharedBackground?.enabled
-    ? sharedBackgroundToSettings(initialSharedBackground)
+  // Keep shared wallpaper URL available, but do not force it on first open.
+  const initialSharedUrl = cssUrlForSharedImage(initialSharedBackground?.imageUrl ?? null);
+  const initialSharedSettings = initialSharedUrl
+    ? { ...sharedBackgroundToSettings(initialSharedBackground!), enabled: false }
     : DEFAULT_CUSTOM_BG_SETTINGS;
-  const initialSharedUrl = initialSharedBackground?.enabled
-    ? cssUrlForSharedImage(initialSharedBackground.imageUrl)
-    : null;
   const [mode, setMode] = useState<SitePaletteMode>('auto');
   const [expanded, setExpanded] = useState(false);
   const [customSettings, setCustomSettings] = useState<CustomBgSettings>(initialSharedSettings);
@@ -412,9 +411,25 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
   const panelId = useId();
   const isChinese = useChromeChinese();
 
-  const applySharedToUi = (shared: SharedSiteBackgroundPublic) => {
+  const loadSharedImageOnly = (shared: SharedSiteBackgroundPublic) => {
     const safeUrl = cssUrlForSharedImage(shared.imageUrl);
-    if (!(shared.enabled && safeUrl)) {
+    if (!safeUrl) {
+      setCustomImageUrl(null);
+      setCustomTone(null);
+      return false;
+    }
+    revokeObjectUrl(imageUrlRef.current);
+    imageUrlRef.current = null;
+    setCustomImageUrl(safeUrl);
+    setCustomTone(shared.tone);
+    setCustomSettings({ ...sharedBackgroundToSettings(shared), enabled: false });
+    applyCustomBgDocumentState({ ...sharedBackgroundToSettings(shared), enabled: false }, false, shared.tone);
+    return true;
+  };
+
+  const applySharedToUi = (shared: SharedSiteBackgroundPublic, forceOn = true) => {
+    const safeUrl = cssUrlForSharedImage(shared.imageUrl);
+    if (!safeUrl) {
       setCustomImageUrl(null);
       setCustomTone(null);
       applyCustomBgDocumentState({ ...DEFAULT_CUSTOM_BG_SETTINGS, enabled: false }, false, null);
@@ -424,9 +439,9 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
     imageUrlRef.current = null;
     setCustomImageUrl(safeUrl);
     setCustomTone(shared.tone);
-    const settings = sharedBackgroundToSettings(shared);
+    const settings = { ...sharedBackgroundToSettings(shared), enabled: forceOn };
     setCustomSettings(settings);
-    applyCustomBgDocumentState(settings, true, shared.tone);
+    applyCustomBgDocumentState(settings, forceOn, shared.tone);
   };
 
   const refreshSharedBackground = async () => {
@@ -451,10 +466,10 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
     if (initialSharedBackground) {
       setSharedMeta(initialSharedBackground);
       setPublishShared(Boolean(initialSharedBackground.writable));
-      // Paint SSR wallpaper immediately; do not wait on network or IndexedDB.
-      if (initialSharedBackground.enabled && initialSharedBackground.imageUrl) {
-        applySharedToUi(initialSharedBackground);
-        setScopeNote(isChinese ? '全站背景。' : 'Site-wide background.');
+      // Default: mixed/auto palette. Keep shared wallpaper URL for opt-in switch.
+      if (initialSharedBackground.imageUrl) {
+        loadSharedImageOnly(initialSharedBackground);
+        setScopeNote(isChinese ? '已保存全站壁纸，点击可切换。' : 'Saved site wallpaper available — click to switch.');
       }
     }
     let cancelled = false;
@@ -473,19 +488,23 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
         localUrl = null;
       }
       if (cancelled) { revokeObjectUrl(localUrl); return; }
-      // Prefer already-known SSR shared; refresh in the background for writable/meta only.
       const shared = initialSharedBackground ?? (await refreshSharedBackground());
-      if (!initialSharedBackground) {
-        /* already refreshed */
-      } else {
+      if (initialSharedBackground) {
         void refreshSharedBackground().then((payload) => {
           if (cancelled || !payload) return;
-          if (!(localEnabled && imageUrlRef.current?.startsWith('blob:'))) {
-            if (payload.enabled && payload.imageUrl) applySharedToUi(payload);
+          if (localEnabled && imageUrlRef.current?.startsWith('blob:')) return;
+          if (payload.imageUrl) {
+            if (savedCustom.enabled) {
+              applySharedToUi(payload, true);
+              setScopeNote(isChinese ? '已切换到全站壁纸。' : 'Using saved site wallpaper.');
+            } else {
+              loadSharedImageOnly(payload);
+            }
           }
         });
       }
       if (cancelled) { revokeObjectUrl(localUrl); return; }
+      // Local opt-in only — never force shared wallpaper on first open.
       if (localEnabled && localUrl) {
         revokeObjectUrl(imageUrlRef.current);
         imageUrlRef.current = localUrl;
@@ -496,10 +515,16 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
         setScopeNote(isChinese ? '仅此设备（本机覆盖）。' : 'This device only (local override).');
         return;
       }
-      if (shared?.enabled && shared.imageUrl) {
+      if (savedCustom.enabled && shared?.imageUrl) {
         revokeObjectUrl(localUrl);
-        applySharedToUi(shared);
-        setScopeNote(isChinese ? '全站背景。' : 'Site-wide background.');
+        applySharedToUi(shared, true);
+        setScopeNote(isChinese ? '已切换到全站壁纸。' : 'Using saved site wallpaper.');
+        return;
+      }
+      if (shared?.imageUrl) {
+        revokeObjectUrl(localUrl);
+        loadSharedImageOnly(shared);
+        setScopeNote(isChinese ? '已保存全站壁纸，点击可切换。' : 'Saved site wallpaper available — click to switch.');
         return;
       }
       if (localUrl) {
@@ -510,21 +535,9 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
         applyCustomBgDocumentState({ ...savedCustom, enabled: false }, false, localTone);
         return;
       }
-      if (!initialSharedBackground?.enabled) {
-        setCustomTone(null);
-        applyCustomBgDocumentState({ ...savedCustom, enabled: false }, false, null);
-      }
+      setCustomTone(null);
+      applyCustomBgDocumentState({ ...savedCustom, enabled: false }, false, null);
     };
-    // Defer IDB + luminance off the first paint when SSR already supplied the wallpaper.
-    if (initialSharedBackground?.enabled && initialSharedBackground.imageUrl && typeof requestIdleCallback === 'function') {
-      const idleId = requestIdleCallback(() => { void finishLocalAndShared(); }, { timeout: 1800 });
-      return () => {
-        cancelled = true;
-        cancelIdleCallback(idleId);
-        revokeObjectUrl(imageUrlRef.current);
-        imageUrlRef.current = null;
-      };
-    }
     void finishLocalAndShared();
     return () => {
       cancelled = true;
