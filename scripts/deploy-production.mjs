@@ -367,62 +367,112 @@ async function runStagedSmoke(vercelCommand, routes, stagedUrl) {
   ];
   const attempts = [];
   let preferredRouteName;
+  const stagedChatCanaryAttempts = Math.max(
+    1,
+    Number.parseInt(process.env.STAGED_CHAT_CANARY_ATTEMPTS || '5', 10) || 5
+  );
+  const stagedChatCanaryRetryDelayMs = Math.max(
+    250,
+    Number.parseInt(process.env.STAGED_CHAT_CANARY_RETRY_DELAY_MS || '1500', 10) || 1500
+  );
+
+  function isChatProviderCanary(check) {
+    const label = check.label || check.path || '';
+    return check.path?.startsWith('/api/chat-with-xinbao') && check.method === 'POST';
+  }
+
+  function isRetryableChatCanaryBody(body) {
+    if (typeof body !== 'string' || body.length === 0) return true;
+    if (/"error"\s*:/.test(body) && !/"responseMode"\s*:/.test(body)) return true;
+    if (/temporarily unavailable/i.test(body)) return true;
+    if (/"sources"\s*:\s*\[\s*\]/.test(body) && /"responseMode"\s*:\s*"model-grounded"/.test(body)) return true;
+    return false;
+  }
 
   for (const check of checks) {
     const label = check.label || check.path;
+    const maxAttempts = isChatProviderCanary(check) ? stagedChatCanaryAttempts : 1;
     let body;
-    const failures = [];
-    for (const route of preferStagedSmokeRoute(routes, preferredRouteName)) {
-      try {
-        const requestBudget = stagedSmokeRequestBudget(route, routes.length);
-        const requestArgs = ['--silent', '--show-error', '--max-time', String(requestBudget.curlSeconds)];
-        if (check.includeHeaders) requestArgs.push('--dump-header', '-');
-        if (check.method === 'POST') {
-          requestArgs.push(
-            '--request', 'POST',
-            '--header', 'Content-Type: application/json',
-            '--header', `user-agent: ${check.userAgent}`,
+    let contentError;
+    for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+      body = undefined;
+      contentError = undefined;
+      const failures = [];
+      for (const route of preferStagedSmokeRoute(routes, preferredRouteName)) {
+        try {
+          const requestBudget = stagedSmokeRequestBudget(route, routes.length);
+          const requestArgs = ['--silent', '--show-error', '--max-time', String(requestBudget.curlSeconds)];
+          if (check.includeHeaders) requestArgs.push('--dump-header', '-');
+          if (check.method === 'POST') {
+            requestArgs.push(
+              '--request', 'POST',
+              '--header', 'Content-Type: application/json',
+              '--header', `user-agent: ${check.userAgent}-a${attempt}`,
+            );
+            for (const header of check.headers || []) requestArgs.push('--header', header);
+            requestArgs.push('--data', check.data);
+          }
+          body = await runCapture(
+            vercelCommand,
+            vercelArgs('curl', [
+              check.path,
+              '--deployment', stagedUrl,
+              '--yes',
+              '--', ...requestArgs,
+            ]),
+            route.env,
+            { timeoutMs: requestBudget.parentMs }
           );
-          for (const header of check.headers || []) requestArgs.push('--header', header);
-          requestArgs.push('--data', check.data);
+          attempts.push({ label, path: check.path, route: route.name, status: 'fetched', attempt });
+          preferredRouteName = route.name;
+          console.log(`deploy-production: staged ${label} fetched via ${route.name} (attempt ${attempt}/${maxAttempts})`);
+          break;
+        } catch (error) {
+          const kind = error.kind || 'request_error';
+          attempts.push({ kind, label, path: check.path, route: route.name, status: 'failed', attempt });
+          failures.push(`${route.name}=${kind}`);
+          console.warn(`deploy-production: staged ${label} failed via ${route.name}: ${kind}`);
         }
-        body = await runCapture(
-          vercelCommand,
-          vercelArgs('curl', [
-            check.path,
-            '--deployment', stagedUrl,
-            '--yes',
-            '--', ...requestArgs,
-          ]),
-          route.env,
-          { timeoutMs: requestBudget.parentMs }
-        );
-        attempts.push({ label, path: check.path, route: route.name, status: 'passed' });
-        preferredRouteName = route.name;
-        console.log(`deploy-production: staged ${label} passed via ${route.name}`);
-        break;
-      } catch (error) {
-        const kind = error.kind || 'request_error';
-        attempts.push({ kind, label, path: check.path, route: route.name, status: 'failed' });
-        failures.push(`${route.name}=${kind}`);
-        console.warn(`deploy-production: staged ${label} failed via ${route.name}: ${kind}`);
       }
-    }
 
-    if (body === undefined) {
-      throw new Error(`staged smoke failed for ${label} across ${failures.join(', ')}`);
-    }
-    for (const pattern of check.patterns) {
-      if (!pattern.test(body)) {
-        throw new Error(`staged smoke content mismatch for ${label}: missing ${pattern}`);
+      if (body === undefined) {
+        contentError = new Error(`staged smoke failed for ${label} across ${failures.join(', ')}`);
+      } else {
+        try {
+          for (const pattern of check.patterns) {
+            if (!pattern.test(body)) {
+              throw new Error(`staged smoke content mismatch for ${label}: missing ${pattern}`);
+            }
+          }
+          for (const pattern of check.forbiddenPatterns || []) {
+            if (pattern.test(body)) {
+              throw new Error(`staged smoke content mismatch for ${label}: unexpected ${pattern}`);
+            }
+          }
+          if (check.validateBody) check.validateBody(body);
+          console.log(`deploy-production: staged ${label} passed via ${preferredRouteName}`);
+          contentError = undefined;
+          break;
+        } catch (error) {
+          contentError = error;
+          const snippet = String(body).replace(/\s+/g, ' ').slice(0, 240);
+          console.warn(`deploy-production: staged ${label} content check failed on attempt ${attempt}/${maxAttempts}: ${error.message}; body=${snippet}`);
+          if (attempt < maxAttempts && isRetryableChatCanaryBody(body)) {
+            await new Promise((resolve) => setTimeout(resolve, stagedChatCanaryRetryDelayMs * attempt));
+            continue;
+          }
+        }
+      }
+
+      if (contentError) {
+        if (attempt < maxAttempts && (body === undefined || isRetryableChatCanaryBody(body))) {
+          await new Promise((resolve) => setTimeout(resolve, stagedChatCanaryRetryDelayMs * attempt));
+          continue;
+        }
+        throw contentError;
       }
     }
-    for (const pattern of check.forbiddenPatterns || []) {
-      if (pattern.test(body)) {
-        throw new Error(`staged smoke content mismatch for ${label}: unexpected ${pattern}`);
-      }
-    }
-    if (check.validateBody) check.validateBody(body);
+    if (contentError) throw contentError;
   }
 
   console.log(`deploy-production: staged smoke passed for ${stagedUrl}`);
