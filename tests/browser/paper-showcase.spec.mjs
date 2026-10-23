@@ -103,7 +103,9 @@ for (const [width, language] of [[1920, 'en'], [1440, 'en'], [1200, 'en'], [1440
         });
         expect(layout.highlight.left).toBeGreaterThan(layout.page.right + 12);
         expect(Math.abs(layout.highlight.top - layout.page.top)).toBeLessThan(1);
-        expect(Math.abs(layout.highlight.bottom - layout.page.bottom)).toBeLessThan(2);
+        // Right column is +48px taller so the top-right poster stays uncompressed while supporting figures are 128px.
+        expect(layout.highlight.bottom - layout.page.bottom).toBeGreaterThanOrEqual(46);
+        expect(layout.highlight.bottom - layout.page.bottom).toBeLessThanOrEqual(50);
         expect(layout.titleText.right).toBeLessThanOrEqual(layout.highlight.right + 1);
         expect(layout.titleText.height).toBeLessThanOrEqual(layout.titleLineHeight + 1);
         expect(layout.page.width).toBeCloseTo(360, 0);
