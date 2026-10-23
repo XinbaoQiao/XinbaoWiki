@@ -34,7 +34,7 @@ const productionUrl = 'https://xinbaopedia.top';
 const EXPECTED_CHAT_CONTRACT = Object.freeze({
   backendVersion: 'xinbao-chat-api-v10',
   responsePolicyVersion: 'grounded-conversation-v4',
-  promptVersion: 'xinbao-grounded-conversation-v7',
+  promptVersion: 'xinbao-grounded-conversation-v8',
 });
 const vercelCliVersion = '54.18.7';
 const vercelCliPackage = `vercel@${vercelCliVersion}`;

@@ -39,7 +39,7 @@ assert.equal(Number.parseInt(process.versions.node, 10), 22, 'release workflow t
 const CHAT_CONTRACT_META = Object.freeze({
   backendVersion: 'xinbao-chat-api-v10',
   responsePolicyVersion: 'grounded-conversation-v4',
-  promptVersion: 'xinbao-grounded-conversation-v7',
+  promptVersion: 'xinbao-grounded-conversation-v8',
   indexVersion: 'wiki-heading-lexical-v2:test',
 });
 
