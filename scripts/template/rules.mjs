@@ -170,4 +170,4 @@ export function transformPackageJson(p) {
 }
 
 // Binary files allowed in the output (everything else binary fails the leak check).
-export const allowedBinaryPrefixes = ['public/images/', 'public/papers/example-paper/', 'public/site-icons/', 'public/site-logos/', 'public/mywiki-icon.png', 'public/maps/'];
+export const allowedBinaryPrefixes = ['public/images/', 'public/papers/example-paper/', 'public/site-icons/', 'public/site-logos/', 'public/mywiki-icon.png', 'public/mywiki-icon.webp', 'public/maps/'];
