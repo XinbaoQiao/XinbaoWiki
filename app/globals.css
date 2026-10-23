@@ -866,6 +866,7 @@ a.external.wiki-link-pdf::after {
   bottom: max(24px, env(safe-area-inset-bottom));
   z-index: 80;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr) auto auto;
   overflow: hidden;
   width: min(420px, calc(100vw - 32px - env(safe-area-inset-left) - env(safe-area-inset-right)));
@@ -6290,4 +6291,12 @@ html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] a:visited {
     transition: none;
     transform: none;
   }
+}
+/* The notice is visible before a message is sent, including on narrow screens. */
+.chat-xinbao-audit-notice {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: var(--muted, #666);
+  overflow-wrap: anywhere;
 }

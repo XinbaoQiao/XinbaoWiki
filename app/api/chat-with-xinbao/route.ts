@@ -13,12 +13,16 @@ import {
   type ProviderUsage
 } from '@/lib/wiki-chat-response';
 import { getWikiRetrievalIndex, retrieveWikiContext, WIKI_RETRIEVAL_INDEX_VERSION, type WikiRetrievalResult } from '@/lib/wiki-retrieval';
+import {
+  createChatAuditEvent, completeChatAuditEvent, startChatAudit, finishChatAudit,
+  reserveChatProviderAttempt, ChatProviderBudgetExceeded, type ChatAuditAttempt,
+} from '@/lib/chat-audit';
 
 export const runtime = 'nodejs';
 
 const MODEL = 'deepseek-v4-flash';
 const DEFAULT_BASE_URL = 'https://api.openlux.ai/v1';
-const CHAT_BACKEND_VERSION = 'xinbao-chat-api-v9';
+const CHAT_BACKEND_VERSION = 'xinbao-chat-api-v10';
 const DAILY_LIMIT = 10;
 const COOLDOWN_SECONDS = 4;
 const HOURLY_IP_LIMIT = 80;
@@ -59,7 +63,7 @@ function softGroundedFallbackReply(language: ChatLanguage) {
 }
 type ChatResponseMode = 'model-grounded' | 'model-conversational' | 'deterministic-abstention';
 type ProviderReservationPolicy = 'release' | 'retain';
-type ParsedChatBody = { message?: unknown; language?: ChatLanguage };
+type ParsedChatBody = { message?: unknown; language?: ChatLanguage; conversationId?: unknown };
 type CompletionResponse = {
   choices?: Array<{ message?: { content?: unknown } }>;
   usage?: ProviderUsage;
@@ -92,7 +96,7 @@ type QuestionLogEntry = {
 
 type ChatObservation = {
   traceId: string;
-  outcome: 'ok' | 'ok-conversational' | 'deterministic-abstention' | 'invalid-citations' | 'protected-output' | 'retry-rate-limited' | 'invalid-conversational-reply' | 'upstream-error' | 'empty-reply' | 'timeout' | 'client-aborted' | 'request-error';
+  outcome: 'ok' | 'ok-conversational' | 'deterministic-abstention' | 'invalid-citations' | 'protected-output' | 'retry-rate-limited' | 'invalid-conversational-reply' | 'upstream-error' | 'empty-reply' | 'timeout' | 'client-aborted' | 'request-error' | 'site-budget-exhausted';
   provider: string;
   model: string;
   promptVersion: string;
@@ -345,12 +349,29 @@ function inferLanguage(request: NextRequest): ChatLanguage {
 
 async function parseBody(request: NextRequest) {
   try {
-    const value = await request.json() as unknown;
+    if (Number(request.headers.get('content-length')) > 16_384) return null;
+    const reader = request.body?.getReader();
+    if (!reader) return null;
+    const decoder = new TextDecoder('utf-8', { fatal: true });
+    let bytes = 0;
+    let text = '';
+    try {
+      while (true) {
+        const chunk = await reader.read();
+        if (chunk.done) break;
+        bytes += chunk.value.byteLength;
+        if (bytes > 16_384) { await reader.cancel(); return null; }
+        text += decoder.decode(chunk.value, { stream: true });
+      }
+      text += decoder.decode();
+    } finally { reader.releaseLock(); }
+    const value = JSON.parse(text) as unknown;
     if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
     const body = value as Record<string, unknown>;
     return {
       message: body.message,
-      language: body.language === 'en' || body.language === 'zh' ? body.language : undefined
+      language: body.language === 'en' || body.language === 'zh' ? body.language : undefined,
+      conversationId: body.conversationId,
     } satisfies ParsedChatBody;
   } catch {
     return null;
@@ -574,39 +595,58 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  const traceId = crypto.randomUUID();
+  const requestStartedAt = Date.now();
   const visitorCookie = getVisitorId(request);
   const body = await parseBody(request);
   const language: ChatLanguage = body?.language ?? inferLanguage(request);
+  async function reject(response: NextResponse, reason: string) {
+    response.headers.set('x-chat-request-id', traceId);
+    try {
+      const store = getRedis();
+      if (store) {
+        const event = createChatAuditEvent(request.headers, {
+          id: traceId, now: new Date(requestStartedAt), kind: 'rejected',
+          message: typeof body?.message === 'string' ? body.message : '', language,
+          conversationId: body?.conversationId, pagePath: sanitizeRefererPath(request),
+          identity: getRequestIdentity(request, visitorCookie.visitorId), model: MODEL,
+        });
+        completeChatAuditEvent(event, { outcome: reason, status: response.status });
+        if (!await startChatAudit(store, event)) logServerIssue('rejection audit capacity reached');
+      }
+    } catch { logServerIssue('rejection audit write failed'); }
+    return response;
+  }
   if (!body || typeof body.message !== 'string') {
-    return jsonResponse({
+    return reject(jsonResponse({
       error: language === 'zh' ? '请求无效。' : 'Invalid request.'
-    }, 400, visitorCookie);
+    }, 400, visitorCookie), 'invalid-request');
   }
 
   const message = body.message.trim();
   if (!message) {
-    return jsonResponse({
+    return reject(jsonResponse({
       error: language === 'zh' ? '请输入消息。' : 'Message is required.'
-    }, 400, visitorCookie);
+    }, 400, visitorCookie), 'empty-message');
   }
   if (message.length > MAX_INPUT_LENGTH) {
-    return jsonResponse({
+    return reject(jsonResponse({
       error: language === 'zh'
         ? `消息请控制在 ${MAX_INPUT_LENGTH} 个字符以内。`
         : `Message must be ${MAX_INPUT_LENGTH} characters or fewer.`
-    }, 400, visitorCookie);
+    }, 400, visitorCookie), 'input-too-long');
   }
 
   const modelConfiguration = modelApiConfiguration();
   const redis = getRedis();
-  if (!modelConfiguration.ready || !redis || !process.env.RATE_LIMIT_SALT) {
+  if (!modelConfiguration.ready || !redis || !process.env.RATE_LIMIT_SALT || !process.env.XINBAO_CHAT_ADMIN_TOKEN) {
     logServerIssue('missing server configuration');
-    return genericUnavailable(visitorCookie, language);
+    return reject(genericUnavailable(visitorCookie, language), 'server-unavailable');
   }
   const chatRedis = redis;
 
   const identity = getRequestIdentity(request, visitorCookie.visitorId);
-  if (!identity) return genericUnavailable(visitorCookie, language);
+  if (!identity) return reject(genericUnavailable(visitorCookie, language), 'identity-unavailable');
 
   const dateKey = tokyoDateKey();
   const dailyKeys = dailyQuotaKeys(dateKey, identity);
@@ -621,21 +661,21 @@ export async function POST(request: NextRequest) {
     previousDailyCount = await readDailyUsage(redis, dailyKeys);
   } catch {
     logServerIssue('daily quota read failed');
-    return genericUnavailable(visitorCookie, language);
+    return reject(genericUnavailable(visitorCookie, language), 'quota-read-failed');
   }
   if (previousDailyCount >= DAILY_LIMIT) {
-    return jsonResponse(
+    return reject(jsonResponse(
       { error: localizedError(language, 'dailyLimit'), remaining: 0, limit: DAILY_LIMIT },
       429,
       visitorCookie,
       { retryAfterSeconds: quotaTtl }
-    );
+    ), 'daily-limit');
   }
 
   const cooldown = await reserveCooldown(redis, cooldownKey);
-  if (!cooldown) return genericUnavailable(visitorCookie, language);
+  if (!cooldown) return reject(genericUnavailable(visitorCookie, language), 'cooldown-unavailable');
   if (!cooldown.reserved) {
-    return jsonResponse(
+    return reject(jsonResponse(
       {
         error: localizedError(language, 'cooldown'),
         remaining: Math.max(0, DAILY_LIMIT - previousDailyCount),
@@ -644,7 +684,7 @@ export async function POST(request: NextRequest) {
       429,
       visitorCookie,
       { retryAfterSeconds: cooldown.retryAfterSeconds }
-    );
+    ), 'cooldown');
   }
 
   let hourlyIpCount: number;
@@ -654,16 +694,16 @@ export async function POST(request: NextRequest) {
   } catch {
     logServerIssue('hourly IP reservation failed');
     await clearCooldown(chatRedis, cooldownKey);
-    return genericUnavailable(visitorCookie, language);
+    return reject(genericUnavailable(visitorCookie, language), 'hourly-reservation-failed');
   }
   if (hourlyIpCount > HOURLY_IP_LIMIT) {
     await clearCooldown(chatRedis, cooldownKey);
-    return jsonResponse(
+    return reject(jsonResponse(
       { error: localizedError(language, 'hourly'), remaining: Math.max(0, DAILY_LIMIT - previousDailyCount), limit: DAILY_LIMIT },
       429,
       visitorCookie,
       { retryAfterSeconds: Math.max(1, 60 * 60 - (Math.floor(Date.now() / 1000) % (60 * 60))) }
-    );
+    ), 'hourly-limit');
   }
 
   let dailyCount: number;
@@ -672,16 +712,16 @@ export async function POST(request: NextRequest) {
   } catch {
     logServerIssue('daily quota reservation failed');
     await clearCooldown(chatRedis, cooldownKey);
-    return genericUnavailable(visitorCookie, language);
+    return reject(genericUnavailable(visitorCookie, language), 'daily-reservation-failed');
   }
   if (dailyCount > DAILY_LIMIT) {
     await clearCooldown(chatRedis, cooldownKey);
-    return jsonResponse(
+    return reject(jsonResponse(
       { error: localizedError(language, 'dailyLimit'), remaining: 0, limit: DAILY_LIMIT },
       429,
       visitorCookie,
       { retryAfterSeconds: quotaTtl }
-    );
+    ), 'daily-limit');
   }
 
   const { apiKey, baseUrl } = modelConfiguration;
@@ -697,20 +737,32 @@ export async function POST(request: NextRequest) {
     logServerIssue('retrieval failed');
     await refundDailyUsage(chatRedis, dailyKeys);
     await clearCooldown(chatRedis, cooldownKey);
-    return genericUnavailable(visitorCookie, language);
+    return reject(genericUnavailable(visitorCookie, language), 'retrieval-failed');
   }
 
-  const traceId = crypto.randomUUID();
-  const requestStartedAt = Date.now();
   const responseMode: ChatResponseMode = retrieval.blockedReason
     ? 'deterministic-abstention'
     : retrieval.shouldAbstain
       ? 'model-conversational'
       : 'model-grounded';
+  const auditEvent = createChatAuditEvent(request.headers, {
+    id: traceId, now: new Date(requestStartedAt), message, language, conversationId: body.conversationId,
+    pagePath, identity, model: MODEL, provider, promptVersion: XINBAO_CHAT_PROMPT_VERSION,
+    indexVersion: retrieval.indexVersion, indexFingerprint: retrieval.indexFingerprint,
+    sourceSlugs: retrieval.sources.map(source => source.slug), sourceChunkIds: retrieval.sources.map(source => source.chunkId), responseMode,
+  });
+  try {
+    if (!await startChatAudit(chatRedis, auditEvent)) throw new Error('audit capacity');
+  } catch {
+    logServerIssue('paid-call audit admission failed');
+    await refundDailyUsage(chatRedis, dailyKeys);
+    await clearCooldown(chatRedis, cooldownKey);
+    return reject(genericUnavailable(visitorCookie, language), 'audit-admission-failed');
+  }
   after(() => recordQuestionLog(redis, identity, message, pagePath, dateKey, language, retrieval, provider, responseMode));
   let terminalObserved = false;
 
-  function observe(
+  async function observe(
     outcome: ChatObservation['outcome'],
     details: {
       finalValidationFailure?: ProviderValidationFailure;
@@ -719,10 +771,19 @@ export async function POST(request: NextRequest) {
       retryReason?: CitationRetryReason;
       upstreamStatus?: number;
       usage?: ProviderUsage;
+      reply?: string;
+      status?: number;
     } = {}
   ) {
     if (terminalObserved) return;
     terminalObserved = true;
+    completeChatAuditEvent(auditEvent, { outcome, status: details.status ?? 200, reply: details.reply,
+      durationMs: Date.now() - requestStartedAt, retryReason: details.retryReason,
+      retryOutcome: details.retryOutcome, finalValidationFailure: details.finalValidationFailure,
+      upstreamStatus: details.upstreamStatus,
+    });
+    try { await finishChatAudit(chatRedis, auditEvent); }
+    catch { logServerIssue('chat audit finalization failed'); }
     logChatObservation({
       traceId,
       outcome,
@@ -776,10 +837,11 @@ export async function POST(request: NextRequest) {
   }
 
   if (responseMode === 'deterministic-abstention') {
-    observe('deterministic-abstention');
+    const reply = withXinbaoSignature(deterministicAbstentionReply(message, language, retrieval.blockedReason), language, 'plain');
+    await observe('deterministic-abstention', { reply });
     return jsonResponse(
       {
-        reply: withXinbaoSignature(deterministicAbstentionReply(message, language, retrieval.blockedReason), language, 'plain'),
+        reply,
         sources: [],
         remaining: Math.max(0, DAILY_LIMIT - dailyCount),
         limit: DAILY_LIMIT,
@@ -805,7 +867,16 @@ export async function POST(request: NextRequest) {
     temperature: number,
     signal: AbortSignal
   ): Promise<ProviderCompletionAttempt> {
+    // Persist each reservation before any upstream request, including the citation retry.
+    if (signal.aborted) throw new DOMException('Aborted', 'AbortError');
+    const attempt: ChatAuditAttempt = { number: providerAttempts + 1, startedAt: new Date().toISOString(), outcome: 'started', usageReported: false };
+    auditEvent.attempts.push(attempt);
+    auditEvent.providerAttempts = auditEvent.attempts.length;
+    auditEvent.usageComplete = false;
+    try { await reserveChatProviderAttempt(chatRedis, auditEvent); }
+    catch (error) { auditEvent.attempts.pop(); auditEvent.providerAttempts = providerAttempts; throw error; }
     providerAttempts += 1;
+    try {
     const response = await fetch(`${baseUrl}/chat/completions`, {
       method: 'POST',
       headers: {
@@ -830,12 +901,20 @@ export async function POST(request: NextRequest) {
       }),
       signal
     });
-    if (!response.ok) return { kind: 'upstream-error', status: response.status };
+    attempt.status = response.status;
+    if (!response.ok) { attempt.outcome = 'upstream-error'; return { kind: 'upstream-error', status: response.status }; }
     const data = (await response.json()) as CompletionResponse;
+    attempt.promptTokens = numericUsage(data.usage?.prompt_tokens);
+    attempt.completionTokens = numericUsage(data.usage?.completion_tokens);
+    attempt.totalTokens = numericUsage(data.usage?.total_tokens);
+    attempt.usageReported = attempt.promptTokens !== undefined && attempt.completionTokens !== undefined && attempt.totalTokens !== undefined;
     accumulatedUsage = combinedUsage(accumulatedUsage, data.usage);
     const reply = data.choices?.[0]?.message?.content;
-    if (typeof reply !== 'string' || !reply.trim()) return { kind: 'empty', usage: data.usage };
+    if (typeof reply !== 'string' || !reply.trim()) { attempt.outcome = 'empty'; return { kind: 'empty', usage: data.usage }; }
+    attempt.outcome = 'ok';
     return { kind: 'ok', reply, usage: data.usage };
+    } catch (error) { attempt.outcome = 'request-error'; throw error; }
+    finally { attempt.finishedAt = new Date().toISOString(); }
   }
 
   async function unavailableAfterProvider(
@@ -848,12 +927,14 @@ export async function POST(request: NextRequest) {
     } = {},
     reservationPolicy: ProviderReservationPolicy = 'release'
   ) {
-    observe(outcome, { ...details, providerAttempts, usage: accumulatedUsage });
+    await observe(outcome, { ...details, providerAttempts, usage: accumulatedUsage, status: 503 });
     if (reservationPolicy === 'release') {
       await refundDailyUsage(chatRedis, dailyKeys);
       await clearCooldown(chatRedis, cooldownKey);
     }
-    return genericUnavailable(visitorCookie, language);
+    const response = genericUnavailable(visitorCookie, language);
+    response.headers.set('x-chat-request-id', traceId);
+    return response;
   }
 
   try {
@@ -878,10 +959,11 @@ export async function POST(request: NextRequest) {
         });
       }
 
-      observe('ok-conversational', { providerAttempts, usage: accumulatedUsage });
+      const reply = withXinbaoSignature(conversationalResult.reply, language, 'casual');
+      await observe('ok-conversational', { providerAttempts, usage: accumulatedUsage, reply });
       return jsonResponse(
         {
-          reply: withXinbaoSignature(conversationalResult.reply, language, 'casual'),
+          reply,
           sources: [],
           remaining: Math.max(0, DAILY_LIMIT - dailyCount),
           limit: DAILY_LIMIT,
@@ -931,14 +1013,16 @@ export async function POST(request: NextRequest) {
 
       // Soft grounded failures must not look like a full outage: return a deterministic
       // retry hint instead of a conversational guess that can invent papers.
-      observe(groundedResult.kind === 'empty' ? 'empty-reply' : groundedResult.kind, {
+      const reply = withXinbaoSignature(softGroundedFallbackReply(language), language, 'plain');
+      await observe(groundedResult.kind === 'empty' ? 'empty-reply' : groundedResult.kind, {
         ...softBase,
         providerAttempts,
-        usage: accumulatedUsage
+        usage: accumulatedUsage,
+        reply,
       });
       return jsonResponse(
         {
-          reply: withXinbaoSignature(softGroundedFallbackReply(language), language, 'plain'),
+          reply,
           sources: [],
           remaining: Math.max(0, DAILY_LIMIT - dailyCount),
           limit: DAILY_LIMIT,
@@ -949,15 +1033,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    observe('ok', {
+    const reply = withXinbaoSignature(groundedResult.response.reply, language, 'plain');
+    await observe('ok', {
       providerAttempts,
       retryOutcome,
       retryReason: groundedResult.retryReason,
-      usage: accumulatedUsage
+      usage: accumulatedUsage,
+      reply,
     });
     return jsonResponse(
       {
-        reply: withXinbaoSignature(groundedResult.response.reply, language, 'plain'),
+        reply,
         sources: groundedResult.response.sources,
         remaining: Math.max(0, DAILY_LIMIT - dailyCount),
         limit: DAILY_LIMIT,
@@ -967,6 +1053,14 @@ export async function POST(request: NextRequest) {
       visitorCookie
     );
   } catch (error) {
+    if (error instanceof ChatProviderBudgetExceeded) {
+      await observe('site-budget-exhausted', { providerAttempts, usage: accumulatedUsage, status: 429 });
+      await refundDailyUsage(chatRedis, dailyKeys);
+      await clearCooldown(chatRedis, cooldownKey);
+      const response = jsonResponse({ error: localizedError(language, 'hourly') }, 429, visitorCookie, { retryAfterSeconds: quotaTtl });
+      response.headers.set('x-chat-request-id', traceId);
+      return response;
+    }
     const aborted = error instanceof DOMException && error.name === 'AbortError';
     const providerFailureDetails = {
       retryOutcome: activeRetryReason ? 'failed' : 'not-attempted',

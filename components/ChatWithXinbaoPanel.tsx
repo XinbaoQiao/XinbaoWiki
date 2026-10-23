@@ -70,7 +70,8 @@ const copy = {
     quotaUnknown: '10 messages/day',
     quota: (remaining: number, limit: number) => `${remaining}/${limit} messages left today`,
     empty: 'Please enter a question.',
-    tooLong: `Please keep the message within ${MAX_INPUT_LENGTH} characters.`
+    tooLong: `Please keep the message within ${MAX_INPUT_LENGTH} characters.`,
+    auditNotice: 'For abuse and cost investigation, questions, replies, IP, browser and usage records are kept privately for up to 365 days. Do not send passwords or secrets.'
   },
   zh: {
     close: '关闭',
@@ -109,7 +110,8 @@ const copy = {
     quotaUnknown: '每天 10 条消息',
     quota: (remaining: number, limit: number) => `今天还剩 ${remaining}/${limit} 条消息`,
     empty: '请输入一个问题。',
-    tooLong: `请将消息控制在 ${MAX_INPUT_LENGTH} 个字符以内。`
+    tooLong: `请将消息控制在 ${MAX_INPUT_LENGTH} 个字符以内。`,
+    auditNotice: '为追查滥用和用量，提问、回复、IP、浏览器及调用记录会私下保留最多 365 天。请勿发送密码或密钥。'
   }
 };
 
@@ -217,6 +219,7 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
   const shellRef = useRef<HTMLElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const activeRequestRef = useRef<AbortController | null>(null);
+  const conversationIdRef = useRef('');
   const dragStartY = useRef<number | null>(null);
   const quotaExhausted = remaining === 0;
   const composerDisabled = loading || quotaExhausted || !serviceAvailable;
@@ -245,6 +248,7 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
     setRetryAfterSeconds(null);
     setRetryRequest(null);
     setMessages(initialMessages);
+    conversationIdRef.current = crypto.randomUUID();
   }, [initialMessages]);
 
   useEffect(() => {
@@ -408,7 +412,7 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
       const response = await fetch(chatEndpoint(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message, language }),
+        body: JSON.stringify({ message, language, conversationId: conversationIdRef.current || (conversationIdRef.current = crypto.randomUUID()) }),
         signal: controller.signal
       });
       const data = await response.json().catch(() => null) as
@@ -494,6 +498,7 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
   }
 
   function startNewChat() {
+    conversationIdRef.current = crypto.randomUUID();
     activeRequestRef.current?.abort();
     setLoading(false);
     setInput('');
@@ -614,6 +619,7 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
             </div>
           )}
           <form className="chat-xinbao-composer" onSubmit={submit}>
+            <p className="chat-xinbao-audit-notice">{strings.auditNotice}</p>
             {showQuickPrompts && (
               <div aria-label={strings.quickPromptsLabel} className="chat-xinbao-quick-replies" role="group">
                 {strings.quickPrompts.map((prompt) => (

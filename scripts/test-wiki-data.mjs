@@ -748,7 +748,7 @@ assert.equal(
 const publicPromptIdentity = 'You are Chat with Xinbao, Xinbaopedia’s academic-homepage assistant for Xinbao Qiao.';
 const productionIdentityRule = 'You must not claim to be the real Xinbao Qiao. When identity matters, say that you are an AI assistant for the homepage.';
 const productionWelcomeInstruction = 'Welcome visitors like a concise, warm, witty human host. Scope honestly (public research, papers, projects, CV, contact), invite one concrete next step, and avoid a mechanical customer-service pitch or a long capability list.';
-const productionDataPolicyInstruction = "Accepted requests may produce data-minimized, pseudonymous server-side usage metadata for reliability and retrieval evaluation. If asked, state this transparently: a salted one-way question fingerprint, page path, language, timestamp, message length, pseudonymous one-way visitor/browser/IP hashes, and retrieved source IDs may be stored for at most 90 days; Chat metadata and application logs do not store raw question text, chat history, raw IPs, system prompts, private voice notes, or API keys for new requests. Separate maintainer-only site visit records may retain a trusted request IP, receipt time, approximate location, page and coarse device labels for 30 calendar days; these records are personal metadata and are not public. The current user message is still sent to the configured model provider to generate a reply, and upstream processing is governed by that provider's policy. The hashes reduce direct identifiability but are not anonymous data.";
+const productionDataPolicyInstruction = "Private abuse and cost audit records may retain the current question and delivered reply, a validated request IP, bounded user agent, approximate location, page, conversation/request identifiers, outcomes, provider attempts and reported token usage for up to 365 Tokyo calendar days. Obvious credential-shaped strings are redacted. These personal records are accessible only to the maintainer, never published. Older pseudonymous question metadata remains subject to its 90-day window; separate maintainer-only site visit records retain trusted IP metadata for 30 calendar days. The service does not save system prompts, private voice notes, authentication headers, API keys or rejected raw model outputs. Full earlier chat history is not transmitted; each new user message is sent to the configured model provider, whose policy governs upstream processing. Treat all identities as pseudonymous or personal data, not anonymous data.";
 assert.ok(chatKnowledge.includes(productionIdentityRule), 'prompt-leak fixture uses the exact production identity rule');
 assert.ok(chatKnowledge.includes(productionWelcomeInstruction), 'prompt-leak fixture uses the exact production welcome instruction');
 assert.ok(chatKnowledge.includes(productionDataPolicyInstruction), 'prompt-leak fixture uses the exact production data-policy instruction');
@@ -847,7 +847,7 @@ assert.equal(
   'I am an AI assistant for the homepage.',
   'the identity statement explicitly requested by the production prompt remains answerable'
 );
-const publicDataPolicyReply = "Xinbaopedia's own Redis and logs do not store raw questions or chat history, but the current message is sent to the configured model provider, whose policy governs its processing.";
+const publicDataPolicyReply = "Private abuse and cost audit records may retain the current question and delivered reply, a validated request IP and reported token usage for up to 365 Tokyo calendar days. These personal records are accessible only to the maintainer, never published.";
 assert.equal(
   validateConversationalReply(publicDataPolicyReply, protectedPromptFixture),
   publicDataPolicyReply,
@@ -1580,14 +1580,14 @@ assert.match(chatWithXinbaoPanel, /欢迎来 Xinbaopedia[\s\S]*研究方向、�
 assert.doesNotMatch(chatWithXinbaoPanel, /Hi, I’m the Xinbaopedia chat assistant|Ask me about Xinbao Qiao’s research|想快速了解乔鑫宝的话，可以直接问我/, 'chat no longer uses the directive-like legacy greetings');
 assert.match(chatWithXinbaoPanel, /MAX_INPUT_LENGTH = 1000/, 'chat client caps input length at 1000 characters');
 assert.match(chatWithXinbaoPanel, /\/api\/chat-with-xinbao/, 'chat client calls only the same-site API route');
-assert.match(chatWithXinbaoPanel, /JSON\.stringify\(\{ message, language \}\)/, 'chat client sends only the current message and selected portal language');
+assert.match(chatWithXinbaoPanel, /JSON\.stringify\(\{ message, language, conversationId:/, 'chat client sends the current message, language and bounded conversation grouping identifier');
 assert.doesNotMatch(chatWithXinbaoPanel, /JSON\.stringify\(\{ message, history|const history = messages/, 'chat client keeps visible history local instead of transmitting it');
 assert.match(chatWithXinbaoPanel, /method: 'GET'/, 'chat client refreshes quota from the backend when the chat opens');
 assert.match(chatWithXinbaoPanel, /remaining.*limit/s, 'chat client displays remaining daily quota');
 assert.match(chatWithXinbaoPanel, /quotaUnknown: '10 messages\/day'/, 'chat client English quota fallback uses the 10-message daily limit');
 assert.match(chatWithXinbaoPanel, /quotaUnknown: '每天 10 条消息'/, 'chat client Chinese quota fallback uses the 10-message daily limit');
 assert.match(chatWithXinbaoPanel, /useState\(10\)/, 'chat client initializes the quota display to 10');
-assert.doesNotMatch(chatWithXinbaoPanel, /Pseudonymous usage metadata|可能记录假名化的使用元数据/, 'chat client omits the bilingual telemetry notice from the visible panel');
+assert.match(chatWithXinbaoPanel, /auditNotice:[\s\S]*365 days[\s\S]*auditNotice:[\s\S]*365 天[\s\S]*strings\.auditNotice/, 'chat client shows the bilingual private audit notice before sending');
 assert.match(chatWithXinbaoPanel, /Xinbao AI is temporarily unavailable\. Please try again later\./, 'chat client uses a generic model-error message');
 assert.match(chatWithXinbaoPanel, /language: Language/, 'chat client localizes UI from current wiki language');
 assert.match(chatWithXinbaoPanel, /welcome to Xinbaopedia[\s\S]*public research, papers, projects[\s\S]*how to reach him/, 'chat client English greeting is warm, concise, and points to public wiki topics');
@@ -1638,7 +1638,7 @@ assert.doesNotMatch(providerRequestFunction, /discarded|firstAttempt|firstReply|
 assert.match(chatWithXinbaoPanel, /modelApiConfigured/, 'chat client health gate reads modelApiConfigured from GET meta');
 assert.match(chatWithXinbaoPanel, /serviceAvailable/, 'chat client tracks service availability separately from a single failed POST');
 assert.match(chatWithXinbaoPanel, /setServiceAvailable\(true\)/, 'chat client keeps quick-asks usable after a non-quota POST failure');
-assert.match(chatRoute, /CHAT_BACKEND_VERSION = 'xinbao-chat-api-v9'/, 'chat API exposes the soft-grounded-fallback backend version');
+assert.match(chatRoute, /CHAT_BACKEND_VERSION = 'xinbao-chat-api-v10'/, 'chat API exposes the soft-grounded-fallback backend version');
 assert.match(chatRoute, /function softGroundedFallbackReply/, 'chat API defines a soft grounded fallback reply that is not an outage banner');
 assert.match(chatRoute, /groundedResult\.kind === 'protected-output'[\s\S]*groundedResult\.kind === 'retry-rate-limited'[\s\S]*groundedResult\.kind === 'invalid-citations'[\s\S]*softGroundedFallbackReply\(language\)/, 'soft grounded failures return a deterministic retry hint instead of genericUnavailable');
 assert.match(chatRoute, /User question:/, 'provider requests fold system prompt into the user message for OpenLux compatibility');
@@ -1650,10 +1650,10 @@ assert.match(chatRoute, /const responseMode: ChatResponseMode = retrieval\.block
 assert.match(chatRoute, /if \(responseMode === 'deterministic-abstention'\)[\s\S]*deterministicAbstentionReply\(message, language, retrieval\.blockedReason\)[\s\S]*responseMetadata\(0, 0\)/, 'protected requests are answered deterministically before provider setup');
 assert.match(chatRoute, /if \(responseMode === 'model-conversational'\)[\s\S]*resolveConversationalReply\(\{/, 'weak wiki evidence enters the tested one-call conversation resolver');
 assert.match(chatRoute, /const providerAbort = linkedRequestController\(request\.signal, REQUEST_TIMEOUT_MS\)[\s\S]*resolveConversationalReply\(\{[\s\S]*requestCompletion,[\s\S]*signal: providerAbort\.signal,[\s\S]*systemPrompt[\s\S]*\}\)/, 'conversation uses the shared linked request deadline signal');
-assert.match(chatRoute, /reply: withXinbaoSignature\(conversationalResult\.reply, language, 'casual'\)[\s\S]*sources: \[\][\s\S]*responseMetadata\(0, providerAttempts\)/, 'conversation returns a validated uncited provider reply');
+assert.match(chatRoute, /const reply = withXinbaoSignature\(conversationalResult\.reply, language, 'casual'\)[\s\S]*await observe\('ok-conversational'[\s\S]*sources: \[\][\s\S]*responseMetadata\(0, providerAttempts\)/, 'conversation audits and returns the validated uncited provider reply');
 assert.match(chatRoute, /beforeRetry: async \(reason\)[\s\S]*reserveHourlyRetry\(chatRedis, hourlyRetryKey\)/, 'grounded repair passes through the hourly retry budget');
 assert.match(chatRoute, /requestCompletion,[\s\S]*signal: providerAbort\.signal,[\s\S]*sources: retrieval\.sources,[\s\S]*systemPrompt/, 'grounded repair freezes its sources and shares the linked request deadline signal');
-assert.match(chatRoute, /reply: withXinbaoSignature\(groundedResult\.response\.reply, language, 'plain'\)[\s\S]*sources: groundedResult\.response\.sources/, 'grounded success returns only the resolver\'s validated reply and cited sources without casual sign-off');
+assert.match(chatRoute, /const reply = withXinbaoSignature\(groundedResult\.response\.reply, language, 'plain'\)[\s\S]*await observe\('ok'[\s\S]*sources: groundedResult\.response\.sources/, 'grounded success audits and returns only the validated reply and cited sources');
 assert.doesNotMatch(chatRoute, /validateAndCompactCitations\(/, 'the route cannot bypass typed grounded validation or retry protected output');
 assert.equal((chatRoute.match(/new AbortController\(\)/g) || []).length, 1, 'both provider attempts share the route\'s only AbortController');
 assert.match(chatRoute, /function linkedRequestController\(requestSignal: AbortSignal, timeoutMs: number\)[\s\S]*const timeout = setTimeout\(\(\) => abort\('timeout'\), timeoutMs\)[\s\S]*cleanup\(\)/, 'both provider paths share one linked timeout with cleanup');
@@ -1696,7 +1696,7 @@ assert.match(chatQuestionsRoute, /Cache-Control': 'private, no-store'/, 'questio
 assert.doesNotMatch(chatQuestionsRoute, /console\.log|console\.error|YUNWU_API_KEY/, 'question-log export route does not log or reference unrelated model secrets');
 assert.match(chatKnowledge, /import 'server-only';/, 'chat knowledge builder is server-only');
 assert.match(chatKnowledge, /WikiRetrievalResult/, 'chat prompt accepts the production retrieval result contract');
-assert.match(chatKnowledge, /XINBAO_CHAT_PROMPT_VERSION = 'xinbao-grounded-conversation-v7'/, 'chat prompt exposes the current response-policy version for observability');
+assert.match(chatKnowledge, /XINBAO_CHAT_PROMPT_VERSION = 'xinbao-grounded-conversation-v8'/, 'chat prompt exposes the current response-policy version for observability');
 assert.doesNotMatch(chatKnowledge, /TOTAL_CONTEXT_LIMIT|PRIORITY_SLUGS|cachedKnowledge|buildKnowledge|project\.md/, 'chat prompt no longer stuffs a fixed full-wiki context');
 assert.match(chatKnowledge, /academic-homepage assistant[\s\S]*must not claim to be the real Xinbao Qiao/, 'persona identifies the assistant without impersonation');
 assert.match(chatKnowledge, /warm, witty human host[\s\S]*paper lore[\s\S]*bring the receipts[\s\S]*keep it real/, 'persona retains a concise internet-native English voice');
@@ -1704,7 +1704,7 @@ assert.match(chatKnowledge, /来都来了[\s\S]*有一说一[\s\S]*能查到的�
 assert.match(chatKnowledge, /Style rules: default to short paragraphs[\s\S]*Ask at most one clarifying question/, 'persona includes executable reply-length and clarifying-question style rules');
 assert.match(chatKnowledge, /numbered evidence blocks as \[1\][\s\S]*Never fabricate a citation/, 'persona requires numbered citations for factual answers');
 assert.match(chatKnowledge, /Respond helpfully to greetings, casual conversation, and general-knowledge questions[\s\S]*Do not emit numbered source markers/, 'persona permits normal uncited conversation when wiki retrieval is insufficient');
-assert.match(chatKnowledge, /pseudonymous server-side usage metadata[\s\S]*salted one-way question fingerprint[\s\S]*Chat metadata and application logs do not store raw question text[\s\S]*maintainer-only site visit records[\s\S]*trusted request IP[\s\S]*30 calendar days[\s\S]*current user message is still sent to the configured model provider[\s\S]*not anonymous data/, 'persona accurately distinguishes private visit IP retention, chat telemetry and upstream processing');
+assert.match(chatKnowledge, /Private abuse and cost audit records[\s\S]*365 Tokyo calendar days[\s\S]*maintainer-only site visit records[\s\S]*30 calendar days[\s\S]*new user message is sent to the configured model provider[\s\S]*not anonymous data/, 'persona accurately distinguishes private visit IP retention, chat telemetry and upstream processing');
 assert.doesNotMatch(chatKnowledge, /\u8dd1\u5802/, 'persona removes the disallowed catchphrase');
 assert.match(chatKnowledge, /must not claim to be the real Xinbao Qiao/, 'persona prevents impersonating Xinbao');
 assert.match(chatKnowledge, /Do not invent facts, preferences, opinions, current activities, research directions, paper topics, venues, project themes, or private details about Xinbao Qiao/, 'persona prevents unsupported personal and research claims in conversational mode');
@@ -1720,7 +1720,7 @@ for (const envName of ['YUNWU_API_KEY', 'YUNWU_API_BASE_URL', 'UPSTASH_REDIS_RES
 assert.match(chatPersona, /You are Chat with Xinbao/, 'persona prompt template documents assistant identity');
 assert.match(chatPersona, /XINBAO_CHAT_VOICE_STYLE/, 'persona prompt template documents the private voice style layer');
 assert.match(chatPersona, /Brand sign-off[\s\S]*conversational[\s\S]*喵~[\s\S]*meow~[\s\S]*grounded academic/, 'persona documents casual-only brand sign-off');
-assert.match(chatPersona, /pseudonymous server-side metadata[\s\S]*one-way question fingerprint[\s\S]*Chat metadata and application logs do not store raw question text[\s\S]*maintainer-only site visit records[\s\S]*30 calendar days[\s\S]*current user message is still sent to the configured model provider[\s\S]*not anonymous data/, 'persona prompt template documents private visit retention and chat processing transparently');
+assert.match(chatPersona, /Private abuse and cost audit records[\s\S]*365 Tokyo calendar days[\s\S]*maintainer-only site visit records[\s\S]*30 calendar days[\s\S]*new user message is sent to the configured model provider[\s\S]*not anonymous data/, 'persona prompt template documents private visit retention and chat processing transparently');
 assert.match(chatPersona, /homepage chat assistant[\s\S]*not claim to be the real Xinbao Qiao[\s\S]*do not call yourself a distilled skill or digital persona/, 'persona prompt template documents homepage-assistant identity with technical-label boundaries');
 assert.match(chatPersona, /do not repeat one fixed meme[\s\S]*想快速了解乔鑫宝可以直接问我[\s\S]*我会尽量说人话[\s\S]*主打一个资料准[\s\S]*never use memes to cover missing evidence/, 'persona prompt template documents natural casual wording with factual boundaries');
 assert.match(chatPersona, /Modern meme-guide voice[\s\S]*情绪价值[\s\S]*City不City[\s\S]*YYDS[\s\S]*爱你老己[\s\S]*做完你的做你的/, 'persona prompt template documents current meme-guide wording');
