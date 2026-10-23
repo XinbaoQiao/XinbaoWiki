@@ -90,7 +90,8 @@
   grid-template-rows: auto auto minmax(0, 1fr) auto;
   gap: 8px;
   min-width: 0;
-  height: calc(var(--paper-page-width) * var(--paper-page-scale));
+  /* +48px keeps the top-right poster uncompressed when the supporting row is 128px (was 80px). */
+  height: calc(var(--paper-page-width) * var(--paper-page-scale) + 48px);
 }
 
 .highlight .paperTitle {
@@ -146,6 +147,12 @@
   object-fit: fill;
 }
 
+.supportingImage img {
+  /* Fill the taller row; crop sides instead of letterboxing wide figures. */
+  object-fit: cover;
+  object-position: center;
+  background: white;
+}
 
 .mediaSlot {
   min-height: 0;
