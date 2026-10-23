@@ -9,10 +9,10 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T21:39:01+08:00'
-modified: '2026-10-19T12:56:48.828Z'
-content_hash: 'sha256:6e4e4b1eb03a9395ba3c5614116dd49b10ca18b3fe12a5e2d0f40c1baf24a961'
-reviewed_at: '2026-10-19T12:58:04.614Z'
-review_due: '2027-01-17'
+modified: '2026-10-23T16:06:41.634Z'
+content_hash: 'sha256:cad7ba023baa9a217654210c7c629d33b32da4694fb4572bf04f8ec5b1a65894'
+reviewed_at: '2026-10-23T16:06:41.634Z'
+review_due: '2027-01-21'
 name: Hessian-Free Online Certified Unlearning
 summary: ICLR 2025 paper on efficient Hessian-free certified machine unlearning.
 dates: 24-28 April 2025
@@ -51,8 +51,8 @@ paper_highlight:
   poster:
     image: /papers/hessian-free/poster-preview.webp
     image_alt: Conference paper poster.
-    width: 2000
-    height: 1325
+    width: 1200
+    height: 795
   figures:
     - image: /papers/hessian-free/unlearning-guarantee.webp
       image_alt: >-
@@ -73,7 +73,7 @@ paper_highlight:
 ---
 **Hessian-Free Online Certified Unlearning** is an ICLR 2025 conference paper by **[[Xinbao_Qiao|Xinbao Qiao]]**, Meng Zhang, Ming Tang, and Ermin Wei. The paper develops a certified unlearning procedure for stochastic training pipelines where explicit Hessian storage, inversion, or repeated retraining would be too costly. Its main contribution is to turn deletion into an online vector update after a trajectory-based precomputation stage.
 
-![ICLR 2025 poster for Hessian-Free Online Certified Unlearning](/papers/hessian-free/poster.png)
+![ICLR 2025 poster for Hessian-Free Online Certified Unlearning](/papers/hessian-free/poster.webp)
 
 ## Overview
 

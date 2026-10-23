@@ -10,10 +10,10 @@ tags:
   - topic
   - research-topic
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-10-07T07:07:23.824Z'
-content_hash: 'sha256:67ec95dfc5667e24e7ec5f3934d13fc4699571a7d587fa70b57794a5ef439950'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-23T16:06:41.634Z'
+content_hash: 'sha256:757c53f77b6c26b3643eba976171fe33c987c81b7a2de400e021f5152e10ded4'
+reviewed_at: '2026-10-23T16:06:41.634Z'
+review_due: '2027-04-21'
 name: Data Centric ML
 summary: >-
   Research topic focused on data quality, selection, valuation, correction, and
@@ -21,7 +21,7 @@ summary: >-
 aliases:
   - Data-Centric Machine Learning
 occupation: Research topic
-image: /topics/data-centric-ml.png
+image: /topics/data-centric-ml.webp
 image_caption: Data centric ML topic diagram
 ---
 **Data Centric ML**, or data-centric machine learning, studies how changes to data can improve model behavior, treating data alongside model architecture as a central focus of improvement. The relevant operations include selection, pruning, weighting, deletion, synthesis, and cross-party evaluation.

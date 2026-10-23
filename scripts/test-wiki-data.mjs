@@ -107,9 +107,9 @@ assert.doesNotMatch(bio, /^birth_place:/m, 'birthplace is kept in prose rather t
 assert.match(bio, /born: \|\n\s+September 2000 \(age 25\)\n\s+Xishuangbanna, Yunnan\n/, 'English Born row uses the requested month-and-place format');
 assert.doesNotMatch(bio, /30 September 2000|Xishuangbanna, Yunnan, China/, 'English Born row omits day and country');
 assert.deepEqual(bioData.occupation, ['PhD student'], 'occupation uses PhD student');
-assert.equal(bioData.image, '/images/Portrait.png', 'English portrait gallery keeps the studio portrait as its default');
+assert.equal(bioData.image, '/images/Portrait.webp', 'English portrait gallery keeps the studio portrait as its default');
 assert.equal(bioData.image_caption, undefined, 'English default portrait has no visible caption');
-assert.deepEqual(bioData.image_gallery.map((item) => item.src), ['/images/Portrait-Singapore-ICLR-2025.jpg', '/images/Portrait-Seoul-ICML-2026.png'], 'English portrait gallery keeps Singapore before Seoul');
+assert.deepEqual(bioData.image_gallery.map((item) => item.src), ['/images/Portrait-Singapore-ICLR-2025.webp', '/images/Portrait-Seoul-ICML-2026.webp'], 'English portrait gallery keeps Singapore before Seoul');
 assert.equal(bioData.image_gallery[0].caption, 'Photograph taken at ICLR 2025, Singapore EXPO', 'English Singapore caption uses the photograph-taken format');
 assert.equal(bioData.image_gallery[1].caption, 'Photograph generated for ICML 2026, Seoul COEX', 'English Seoul caption uses the photograph-generated format');
 assert.equal(bioData.image_gallery[1].alt, 'AI-generated ICML 2026 Tech Walk scene in Seoul', 'English Seoul alt text remains AI-specific but provider-neutral');
@@ -129,9 +129,9 @@ assert.doesNotMatch(zhAffiliation, /新加坡国立大学重庆研究院/, 'Chin
 assert.doesNotMatch(zhBio, /^native_name:/m, 'Chinese infobox follows Colarpedia by folding English name into Born');
 assert.doesNotMatch(zhBio, /^birth_place:/m, 'Chinese birthplace is kept in prose rather than the infobox');
 assert.match(zhBio, /born: \|\n\s+乔鑫宝 \(Xinbao Qiao\)\n\s+2000年9月30日 \(25岁\)\n\s+中国云南西双版纳/, 'Chinese Born row is a multiline Colarpedia-style value');
-assert.equal(zhBioData.image, '/images/Portrait.png', 'Chinese portrait gallery keeps the studio portrait as its default');
+assert.equal(zhBioData.image, '/images/Portrait.webp', 'Chinese portrait gallery keeps the studio portrait as its default');
 assert.equal(zhBioData.image_caption, undefined, 'Chinese default portrait has no visible caption');
-assert.deepEqual(zhBioData.image_gallery.map((item) => item.src), ['/images/Portrait-Singapore-ICLR-2025.jpg', '/images/Portrait-Seoul-ICML-2026.png'], 'Chinese portrait gallery keeps Singapore before Seoul');
+assert.deepEqual(zhBioData.image_gallery.map((item) => item.src), ['/images/Portrait-Singapore-ICLR-2025.webp', '/images/Portrait-Seoul-ICML-2026.webp'], 'Chinese portrait gallery keeps Singapore before Seoul');
 assert.equal(zhBioData.image_gallery[0].caption, 'Photograph taken at ICLR 2025, Singapore EXPO', 'Chinese page reuses the photograph-taken event label');
 assert.equal(zhBioData.image_gallery[1].caption, 'Photograph generated for ICML 2026, Seoul COEX', 'Chinese page reuses the photograph-generated event label');
 assert.equal(zhBioData.image_gallery[1].alt, 'AI 生成的 ICML 2026 首尔 Tech Walk 场景', 'Chinese Seoul alt text remains AI-specific but provider-neutral');
@@ -439,7 +439,7 @@ for (const policyFile of ['LICENSING.md', 'THIRD_PARTY_NOTICES.md', 'ASSET_PROVE
 }
 assert.match(thirdPartyNotices, /Roboto[\s\S]*Source Sans Pro[\s\S]*Font Awesome 5 Free[\s\S]*Latin Modern Math/, 'third-party notices preserve every bundled or embedded font family');
 assert.match(thirdPartyNotices, /\[ASSET_PROVENANCE\.md\]\(ASSET_PROVENANCE\.md\)/, 'third-party notices link the per-file asset register');
-assert.match(assetProvenance, /Portrait\.png[\s\S]*gpt-image 2\.0[\s\S]*not been signature-verified[\s\S]*Portrait-Seoul-ICML-2026\.png/, 'asset register records embedded portrait provenance claims without overstating verification');
+assert.match(assetProvenance, /Portrait\.webp[\s\S]*gpt-image 2\.0[\s\S]*not been signature-verified[\s\S]*Portrait-Seoul-ICML-2026\.webp/, 'asset register records embedded portrait provenance claims without overstating verification');
 assert.match(contributingGuide, /Code contributions are accepted under the MIT License;[\s\S]*original text contributions are accepted under CC BY 4\.0/, 'contribution terms match the mixed repository license');
 assert.match(contributingGuide, /npm ci/, 'contributor setup uses the lockfile-reproducible install path');
 assert.doesNotMatch(codeOfConduct, /\[INSERT CONTACT METHOD\]/, 'Contributor Covenant has a private enforcement contact');
@@ -1947,17 +1947,17 @@ for (const page of publicMarkdownFiles) {
 assert.doesNotMatch(fs.readFileSync(path.join(wikiDir, 'pages.json'), 'utf8'), hiddenManuscriptPattern, 'manual page index does not surface the hidden under-review manuscript');
 
 const publicationImages = (page) => [...read(page).matchAll(/!\[[^\]]+\]\(([^)]+)\)/g)].map((match) => match[1]);
-assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /!\[[^\]]+\]\(\/papers\/model-collapse\/poster\.png\)/, 'model-collapse paper page includes poster image');
+assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /!\[[^\]]+\]\(\/papers\/model-collapse\/poster\.webp\)/, 'model-collapse paper page includes poster image');
 assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /!\[[^\]]+\]\(\/papers\/model-collapse\/teaser\.png\)/, 'model-collapse paper page displays a local teaser figure');
 assert.match(read('DynFrs.md'), /!\[[^\]]+\]\(\/papers\/dynfrs\/lazy-tags\.png\)/, 'DynFrs paper page displays a figure');
-assert.match(read('Hessian_Free_Online_Certified_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/hessian-free\/poster\.png\)/, 'Hessian-free paper page includes poster image');
-assert.match(read('DynFrs.md'), /!\[[^\]]+\]\(\/papers\/dynfrs\/poster\.png\)/, 'DynFrs paper page includes poster image');
+assert.match(read('Hessian_Free_Online_Certified_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/hessian-free\/poster\.webp\)/, 'Hessian-free paper page includes poster image');
+assert.match(read('DynFrs.md'), /!\[[^\]]+\]\(\/papers\/dynfrs\/poster\.webp\)/, 'DynFrs paper page includes poster image');
 assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/soft-weighted\/framework\.webp\)/, 'soft-weighted paper page includes framework image');
-assert.deepEqual(publicationImages('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), ['/papers/model-collapse/poster.png', '/papers/model-collapse/teaser.png'], 'model-collapse paper places the poster before the overview teaser');
-assert.deepEqual(publicationImages('Hessian_Free_Online_Certified_Unlearning.md'), ['/papers/hessian-free/poster.png'], 'Hessian-free paper removes the experimental curve and keeps only the poster');
-assert.deepEqual(publicationImages('DynFrs.md'), ['/papers/dynfrs/poster.png', '/papers/dynfrs/lazy-tags.png'], 'DynFrs paper places the poster before the method schematic');
+assert.deepEqual(publicationImages('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), ['/papers/model-collapse/poster.webp', '/papers/model-collapse/teaser.png'], 'model-collapse paper places the poster before the overview teaser');
+assert.deepEqual(publicationImages('Hessian_Free_Online_Certified_Unlearning.md'), ['/papers/hessian-free/poster.webp'], 'Hessian-free paper removes the experimental curve and keeps only the poster');
+assert.deepEqual(publicationImages('DynFrs.md'), ['/papers/dynfrs/poster.webp', '/papers/dynfrs/lazy-tags.png'], 'DynFrs paper places the poster before the method schematic');
 assert.deepEqual(publicationImages('Soft_Weighted_Machine_Unlearning.md'), ['/papers/soft-weighted/framework.webp'], 'soft-weighted paper uses the approved framework without the rejected poster');
-assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /\/papers\/model-collapse\/poster\.png\)[\s\S]*## Overview[\s\S]*\/papers\/model-collapse\/teaser\.png\)/, 'model-collapse paper separates the poster from the teaser with overview text');
+assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /\/papers\/model-collapse\/poster\.webp\)[\s\S]*## Overview[\s\S]*\/papers\/model-collapse\/teaser\.png\)/, 'model-collapse paper separates the poster from the teaser with overview text');
 for (const page of ['When_Sample_Selection_Bias_Precipitates_Model_Collapse.md', 'DynFrs.md', 'Soft_Weighted_Machine_Unlearning.md']) {
   assert.doesNotMatch(read(page), /poster\.png\)\n\n!\[[^\]]+\]\(\/papers\//, `${page} does not place a non-poster figure immediately after the poster`);
 }
@@ -2240,7 +2240,7 @@ assert.match(styles, /\.wiki-main table \{[\s\S]*max-width: 100%;[\s\S]*\}/, 'ar
 assert.match(styles, /\.wiki-body p:has\(> img:only-child\) \{[\s\S]*display: flow-root;[\s\S]*text-align: center;[\s\S]*\}/, 'article image paragraphs avoid floated infobox overlap without adding a large clear gap');
 assert.doesNotMatch(styles, /\.wiki-body p:has\(> img:only-child\) \{[\s\S]*clear: both;[\s\S]*\}/, 'article image paragraphs do not force images below floated infoboxes');
 assert.match(styles, /\.wiki-body img \{[\s\S]*max-width: min\(100%, 520px\);[\s\S]*max-height: 380px;[\s\S]*object-fit: contain;[\s\S]*\}/, 'article images use a medium paper-figure size');
-assert.match(styles, /\.wiki-body img\[src\$="poster\.png"\] \{[\s\S]*max-width: min\(100%, 720px\);[\s\S]*max-height: 640px;[\s\S]*\}/, 'poster images use a larger article display size');
+assert.match(styles, /\.wiki-body img\[src\$="poster.webp"\] \{[\s\S]*max-width: min\(100%, 720px\);[\s\S]*max-height: 640px;[\s\S]*\}/, 'poster images use a larger article display size');
 assert.match(styles, /\.wiki-body img\[src\$="\.svg"\] \{[\s\S]*max-height: 440px;[\s\S]*\}/, 'SVG article diagrams keep a readable height');
 assert.match(styles, /\.wiki-body \.katex-display \{[\s\S]*overflow-x: auto;[\s\S]*\}/, 'display formulas can scroll horizontally on narrow screens');
 assert.match(infobox, /<PortraitGallery items=\{galleryItems\} language=\{language\} \/>/, 'infobox delegates multi-image biographies to the portrait gallery');
@@ -2669,10 +2669,10 @@ const researchTopicPages = [
 ];
 
 const researchTopicImages = new Map([
-  ['AI_and_Networks.md', '/topics/ai-and-networks.png'],
-  ['Machine_Unlearning.md', '/topics/machine-unlearning.png'],
-  ['Synthetic_Data_and_Model_Collapse.md', '/topics/synthetic-data.png'],
-  ['Data_Centric_Machine_Learning.md', '/topics/data-centric-ml.png']
+  ['AI_and_Networks.md', '/topics/ai-and-networks.webp'],
+  ['Machine_Unlearning.md', '/topics/machine-unlearning.webp'],
+  ['Synthetic_Data_and_Model_Collapse.md', '/topics/synthetic-data.webp'],
+  ['Data_Centric_Machine_Learning.md', '/topics/data-centric-ml.webp']
 ]);
 
 for (const page of researchTopicPages) {
@@ -2689,17 +2689,17 @@ for (const page of researchTopicPages) {
 }
 
 const generatedConceptImages = [
-  'public/topics/ai-and-networks.png',
-  'public/topics/machine-unlearning.png',
-  'public/topics/synthetic-data.png',
-  'public/topics/data-centric-ml.png',
+  'public/topics/ai-and-networks.webp',
+  'public/topics/machine-unlearning.webp',
+  'public/topics/synthetic-data.webp',
+  'public/topics/data-centric-ml.webp',
   'public/papers/model-collapse/teaser.png'
 ];
 
 for (const file of generatedConceptImages) {
   assertFile(file);
   const { size } = fs.statSync(path.join(root, file));
-  assert.ok(size > 100_000, `${file} is a generated raster illustration, not a tiny placeholder`);
+  assert.ok(size > 15_000, `${file} is a generated raster illustration, not a tiny placeholder`);
   assert.ok(size < 600_000, `${file} is compressed enough for static-page delivery`);
 }
 
@@ -2932,31 +2932,31 @@ const cvPdfUris = sortedUrls(cvPdfUriOutput.split(/\r?\n/).flatMap((line) => {
 assert.deepEqual(cvPdfUris, cvTexUris, 'CV PDF URI annotations match CV.tex hyperlink targets');
 
 const publicImages = fs.readdirSync(path.join(root, 'public/images')).filter((file) => /\.(png|jpe?g|gif|webp|svg|ico)$/i.test(file)).sort();
-assert.deepEqual(publicImages, ['Portrait-Seoul-ICML-2026.png', 'Portrait-Singapore-ICLR-2025.jpg', 'Portrait.png'], 'public biography uses exactly the three approved portrait-gallery images');
+assert.deepEqual(publicImages, ['Portrait-Seoul-ICML-2026.webp', 'Portrait-Singapore-ICLR-2025.webp', 'Portrait.webp'], 'public biography uses exactly the three approved portrait-gallery images');
 
 for (const file of [
-  'public/images/Portrait.png',
-  'public/images/Portrait-Singapore-ICLR-2025.jpg',
-  'public/images/Portrait-Seoul-ICML-2026.png',
+  'public/images/Portrait.webp',
+  'public/images/Portrait-Singapore-ICLR-2025.webp',
+  'public/images/Portrait-Seoul-ICML-2026.webp',
   'public/institutions/cuhk-emblem.svg',
   'public/institutions/zhejiang-university-logo.png',
   'public/institutions/shandong-university-logo.png',
   'public/institutions/nusri-cq-logo.svg',
-  'public/topics/ai-and-networks.png',
-  'public/topics/machine-unlearning.png',
-  'public/topics/synthetic-data.png',
-  'public/topics/data-centric-ml.png',
+  'public/topics/ai-and-networks.webp',
+  'public/topics/machine-unlearning.webp',
+  'public/topics/synthetic-data.webp',
+  'public/topics/data-centric-ml.webp',
   'public/site-logos/wordmark/xinbao-qiao-blue.png',
   'public/site-logos/wordmark/xinbao-qiao-gold.png',
   'public/site-logos/wordmark/xinbao-qiao-green.png',
   'public/site-logos/wordmark/xinbao-qiao-charcoal.png',
   'public/files/XinbaoQiao_CV.pdf',
-  'public/papers/model-collapse/poster.png',
+  'public/papers/model-collapse/poster.webp',
   'public/papers/model-collapse/teaser.png',
-  'public/papers/hessian-free/poster.png',
+  'public/papers/hessian-free/poster.webp',
   'public/papers/soft-weighted/framework.webp',
   'public/papers/dynfrs/lazy-tags.png',
-  'public/papers/dynfrs/poster.png'
+  'public/papers/dynfrs/poster.webp'
 ]) {
   assertFile(file);
 }

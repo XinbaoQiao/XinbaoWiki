@@ -11,10 +11,10 @@ tags:
   - biography
   - phd-student
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-10-19T10:48:00.002Z'
-content_hash: 'sha256:8a01a8179513a7fc482676981924257cd0b57c890412325fea0a032d1351f250'
-reviewed_at: '2026-10-19T10:48:47.060Z'
-review_due: '2027-01-17'
+modified: '2026-10-23T16:06:41.634Z'
+content_hash: 'sha256:0b4cb742bd6a00717170430bc7e3c842027b7f6fd0e88f621ec2c8e48196ce11'
+reviewed_at: '2026-10-23T16:06:41.634Z'
+review_due: '2027-01-21'
 language: en
 aliases:
   - Mr. Ciao
@@ -25,8 +25,8 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-19T10:48:47.060Z'
-  reviewDue: '2027-01-17'
+  reviewedAt: '2026-10-23T16:06:41.634Z'
+  reviewDue: '2027-01-21'
   pendingReview: false
   overdue: false
 retrieval:

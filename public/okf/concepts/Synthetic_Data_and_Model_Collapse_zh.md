@@ -9,10 +9,10 @@ tags:
   - 研究专题
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-10-07T07:07:23.969Z'
-content_hash: 'sha256:a22933a5d45f0e375b50a54086443668327831bb3b3c977863be22bf80f02b71'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-23T16:06:41.634Z'
+content_hash: 'sha256:244fb83a2fb5b29b620e8771f05e4ba05909e538dd9207e842a376d3a9e08ed6'
+reviewed_at: '2026-10-23T16:06:41.634Z'
+review_due: '2027-04-21'
 language: zh
 aliases:
   - Synthetic Data and Model Collapse
@@ -25,8 +25,8 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-07T07:07:51.129Z'
-  reviewDue: '2027-04-05'
+  reviewedAt: '2026-10-23T16:06:41.634Z'
+  reviewDue: '2027-04-21'
   pendingReview: false
   overdue: false
 retrieval:

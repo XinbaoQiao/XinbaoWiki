@@ -10,10 +10,10 @@ tags:
   - icml-2026
   - synthetic-data
 timestamp: '2026-06-02T22:56:50+08:00'
-modified: '2026-10-19T12:56:49.608Z'
-content_hash: 'sha256:20fb2a666af23b381532c7bb7e60b7430461e32836336a1610d1fd11c8904d7b'
-reviewed_at: '2026-10-19T12:58:04.614Z'
-review_due: '2027-10-19'
+modified: '2026-10-23T16:06:41.634Z'
+content_hash: 'sha256:b6bf8bfb4eafa2a47b19e527f16bd5c6d01da44ce04edebc6b6c8360d33ce297'
+reviewed_at: '2026-10-23T16:06:41.634Z'
+review_due: '2027-10-23'
 name: When Sample Selection Bias Precipitates Model Collapse
 language: zh
 summary: ICML 2026 论文，研究低资源验证场景、样本选择偏差、模型坍缩与协作 Wasserstein 几何代理。
@@ -53,8 +53,8 @@ paper_highlight:
   poster:
     image: /papers/model-collapse/poster-preview.webp
     image_alt: 论文会议海报。
-    width: 2000
-    height: 1000
+    width: 1200
+    height: 600
   figures:
     - image: /papers/model-collapse/theorem-1.webp
       image_alt: 选择偏差导致模型崩塌：保留原文排版的定理 1。
@@ -72,7 +72,7 @@ translation_of: When_Sample_Selection_Bias_Precipitates_Model_Collapse
 ---
 **When Sample Selection Bias Precipitates Model Collapse** 是 **[[Xinbao_Qiao|乔鑫宝]]**、杜相龙、刘巍、张婧琦、麦佩华、张萌和 庞严 的 ICML 2026 会议论文。论文研究递归合成数据训练中的一种失效模式：当验证器只有少量本地参考数据时，它可能把稀有但有效的样本误判为低质量生成，使样本选择放大而不是抑制模型坍缩。论文通过协作 Wasserstein 几何代理，在无需汇集原始数据的情况下扩展评估所依据的分布参考。
 
-![When Sample Selection Bias Precipitates Model Collapse ICML 2026 poster](/papers/model-collapse/poster.png)
+![When Sample Selection Bias Precipitates Model Collapse ICML 2026 poster](/papers/model-collapse/poster.webp)
 
 ## 概述
 

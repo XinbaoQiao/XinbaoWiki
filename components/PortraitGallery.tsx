@@ -27,6 +27,11 @@ export function PortraitGallery({ items, language }: Props) {
         <img
           src={current.src}
           alt={current.alt}
+          loading={index === 0 ? 'eager' : 'lazy'}
+          decoding="async"
+          fetchPriority={index === 0 ? 'high' : 'low'}
+          width={560}
+          height={700}
           style={{ objectFit: current.fit || 'cover', objectPosition: current.position || '50% 38%' }}
         />
         <button

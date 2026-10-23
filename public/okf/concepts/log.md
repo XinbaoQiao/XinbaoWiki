@@ -8,18 +8,18 @@ tags:
   - log
   - maintenance-log
 timestamp: '2026-06-13T20:46:02+08:00'
-modified: '2026-09-26T03:14:39.293Z'
-content_hash: 'sha256:3809ec757a887c700c6bdd6aa3f7cc471d4ba1bfac51f493e9eaaf6bc11413e4'
-reviewed_at: '2026-09-26T03:15:12.636Z'
-review_due: '2027-09-26'
+modified: '2026-10-23T16:06:41.634Z'
+content_hash: 'sha256:f3cb0f31b73fa57f20be02a1153f727fd45f68b930f5ecb9dcf1c2c68c058441'
+reviewed_at: '2026-10-23T16:06:41.634Z'
+review_due: '2027-10-23'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-09-26T03:15:12.636Z'
-  reviewDue: '2027-09-26'
+  reviewedAt: '2026-10-23T16:06:41.634Z'
+  reviewDue: '2027-10-23'
   pendingReview: false
   overdue: false
 retrieval:
@@ -107,7 +107,7 @@ source_path: wiki/log.md
 - Added compressed ICLR 2025 poster images for [Hessian-Free Online Certified Unlearning](./Hessian_Free_Online_Certified_Unlearning.md) and [DynFrs: An Efficient Framework for Machine Unlearning in Random Forest](./DynFrs.md), plus the soft-weighted unlearning framework figure.
 - Rebuilt the local `XinbaoWiki` project as a Next.js 15 static-export wiki using `react-markdown` and `gray-matter`.
 - Updated the page framework toward the Colarpedia/Wikipedia layout: left navigation sections, article tabs, right-side infobox, source/history links, and encyclopedia-style body typography.
-- Retained one old-homepage portrait in `public/images/Portrait.png`; paper-specific figures are stored separately under `public/papers`.
+- Retained one old-homepage portrait in `public/images/Portrait.webp`; paper-specific figures are stored separately under `public/papers`.
 - Linked the local CV PDF from [CV](./CV.md) and refreshed [Xinbao Qiao](./Xinbao_Qiao.md), [Publications](./Publications.md), and the main publication pages with date/status notes.
 - Added `scripts/test-wiki-data.mjs` and wired it into `npm run check` to guard required pages, local assets, CV links, and backup URL removal.
 - Tightened the page framework to match Colarpedia class names and structure, and reduced displayed media to one portrait image.

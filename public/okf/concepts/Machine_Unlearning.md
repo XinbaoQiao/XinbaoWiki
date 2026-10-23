@@ -9,18 +9,18 @@ tags:
   - research-topic
   - machine-unlearning
 timestamp: '2026-05-05T22:09:30+08:00'
-modified: '2026-10-07T06:42:08.576Z'
-content_hash: 'sha256:0a72575d856c00b9c4f8bc90d059a033ffa47da23652f498d9ae820cc26b6a45'
-reviewed_at: '2026-10-07T06:43:53.160Z'
-review_due: '2027-04-05'
+modified: '2026-10-23T16:06:41.634Z'
+content_hash: 'sha256:afffaa03ea50a36c2d7452fce82b194c708df93d05347707d0dec2e34f172647'
+reviewed_at: '2026-10-23T16:06:41.634Z'
+review_due: '2027-04-21'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-07T06:43:53.160Z'
-  reviewDue: '2027-04-05'
+  reviewedAt: '2026-10-23T16:06:41.634Z'
+  reviewDue: '2027-04-21'
   pendingReview: false
   overdue: false
 retrieval:

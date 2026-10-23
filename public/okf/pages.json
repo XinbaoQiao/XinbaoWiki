@@ -16,10 +16,10 @@
         "ai-and-networks"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.801Z",
-      "contentHash": "sha256:78bc4eec7153f9a602c35e00f370aadc195bf4c8d76657fd9f13f6bde180bbe8",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-04-05",
+      "modifiedAt": "2026-10-23T16:06:41.634Z",
+      "contentHash": "sha256:c28a605b314c06a338435a613fa53f7e7d497bd6d9229acc468b1dfeb16d5e99",
+      "reviewedAt": "2026-10-23T16:06:41.634Z",
+      "reviewDue": "2027-04-21",
       "sourceIds": [
         "src-5ffca2a581311c27",
         "src-766234e11681dad2"
@@ -35,7 +35,7 @@
       "retrieval": {
         "documentId": "wiki:AI_and_Networks",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:78bc4eec7153f9a602c35e00f370aadc195bf4c8d76657fd9f13f6bde180bbe8",
+        "contentHash": "sha256:c28a605b314c06a338435a613fa53f7e7d497bd6d9229acc468b1dfeb16d5e99",
         "textFields": [
           "title",
           "aliases",
@@ -335,17 +335,17 @@
         "research-topic"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.824Z",
-      "contentHash": "sha256:67ec95dfc5667e24e7ec5f3934d13fc4699571a7d587fa70b57794a5ef439950",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-04-05",
+      "modifiedAt": "2026-10-23T16:06:41.634Z",
+      "contentHash": "sha256:757c53f77b6c26b3643eba976171fe33c987c81b7a2de400e021f5152e10ded4",
+      "reviewedAt": "2026-10-23T16:06:41.634Z",
+      "reviewDue": "2027-04-21",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Data_Centric_Machine_Learning",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:67ec95dfc5667e24e7ec5f3934d13fc4699571a7d587fa70b57794a5ef439950",
+        "contentHash": "sha256:757c53f77b6c26b3643eba976171fe33c987c81b7a2de400e021f5152e10ded4",
         "textFields": [
           "title",
           "aliases",
@@ -593,10 +593,10 @@
         "iclr-2025"
       ],
       "timestamp": "2026-05-05T21:39:01+08:00",
-      "modifiedAt": "2026-10-19T12:56:48.731Z",
-      "contentHash": "sha256:9cf63909ba50a853f850f836d1e29b8b836f45547b450155e8e9c705b308faa5",
-      "reviewedAt": "2026-10-19T12:58:04.614Z",
-      "reviewDue": "2027-01-17",
+      "modifiedAt": "2026-10-23T16:06:41.634Z",
+      "contentHash": "sha256:cd98afaa9746b78fa41e485631ebfd4ad84251f532c714e63985bc381a3b547f",
+      "reviewedAt": "2026-10-23T16:06:41.634Z",
+      "reviewDue": "2027-01-21",
       "sourceIds": [
         "src-19cdc04d387acf77",
         "src-3234eea5652932e1",
@@ -608,7 +608,7 @@
       "retrieval": {
         "documentId": "wiki:DynFrs",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:9cf63909ba50a853f850f836d1e29b8b836f45547b450155e8e9c705b308faa5",
+        "contentHash": "sha256:cd98afaa9746b78fa41e485631ebfd4ad84251f532c714e63985bc381a3b547f",
         "textFields": [
           "title",
           "aliases",
@@ -763,10 +763,10 @@
         "iclr-2025"
       ],
       "timestamp": "2026-05-05T21:39:01+08:00",
-      "modifiedAt": "2026-10-19T12:56:48.828Z",
-      "contentHash": "sha256:6e4e4b1eb03a9395ba3c5614116dd49b10ca18b3fe12a5e2d0f40c1baf24a961",
-      "reviewedAt": "2026-10-19T12:58:04.614Z",
-      "reviewDue": "2027-01-17",
+      "modifiedAt": "2026-10-23T16:06:41.634Z",
+      "contentHash": "sha256:cad7ba023baa9a217654210c7c629d33b32da4694fb4572bf04f8ec5b1a65894",
+      "reviewedAt": "2026-10-23T16:06:41.634Z",
+      "reviewDue": "2027-01-21",
       "sourceIds": [
         "src-508cc93a8723d9eb",
         "src-65d81b8aca549860",
@@ -778,7 +778,7 @@
       "retrieval": {
         "documentId": "wiki:Hessian_Free_Online_Certified_Unlearning",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:6e4e4b1eb03a9395ba3c5614116dd49b10ca18b3fe12a5e2d0f40c1baf24a961",
+        "contentHash": "sha256:cad7ba023baa9a217654210c7c629d33b32da4694fb4572bf04f8ec5b1a65894",
         "textFields": [
           "title",
           "aliases",
@@ -809,17 +809,17 @@
         "resource-inventory"
       ],
       "timestamp": "2026-05-05T01:10:50+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.927Z",
-      "contentHash": "sha256:06959ca4b2134d8826a63aadb3c8d62f52cd6c5a21ec68e9a285c1514a38d8dd",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-10-07",
+      "modifiedAt": "2026-10-23T16:06:41.634Z",
+      "contentHash": "sha256:1e13f4bab9737b206c1e3f77cdfe3cf14e55a50ffe5d26fc0b19259dbeb845a4",
+      "reviewedAt": "2026-10-23T16:06:41.634Z",
+      "reviewDue": "2027-10-23",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Old_Homepage_Resources",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:06959ca4b2134d8826a63aadb3c8d62f52cd6c5a21ec68e9a285c1514a38d8dd",
+        "contentHash": "sha256:1e13f4bab9737b206c1e3f77cdfe3cf14e55a50ffe5d26fc0b19259dbeb845a4",
         "textFields": [
           "title",
           "aliases",
@@ -1081,17 +1081,17 @@
         "maintenance-log"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-09-26T03:14:39.293Z",
-      "contentHash": "sha256:3809ec757a887c700c6bdd6aa3f7cc471d4ba1bfac51f493e9eaaf6bc11413e4",
-      "reviewedAt": "2026-09-26T03:15:12.636Z",
-      "reviewDue": "2027-09-26",
+      "modifiedAt": "2026-10-23T16:06:41.634Z",
+      "contentHash": "sha256:f3cb0f31b73fa57f20be02a1153f727fd45f68b930f5ecb9dcf1c2c68c058441",
+      "reviewedAt": "2026-10-23T16:06:41.634Z",
+      "reviewDue": "2027-10-23",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:log",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:3809ec757a887c700c6bdd6aa3f7cc471d4ba1bfac51f493e9eaaf6bc11413e4",
+        "contentHash": "sha256:f3cb0f31b73fa57f20be02a1153f727fd45f68b930f5ecb9dcf1c2c68c058441",
         "textFields": [
           "title",
           "aliases",
@@ -1123,17 +1123,17 @@
         "machine-unlearning"
       ],
       "timestamp": "2026-05-05T22:09:30+08:00",
-      "modifiedAt": "2026-10-07T06:42:08.576Z",
-      "contentHash": "sha256:0a72575d856c00b9c4f8bc90d059a033ffa47da23652f498d9ae820cc26b6a45",
-      "reviewedAt": "2026-10-07T06:43:53.160Z",
-      "reviewDue": "2027-04-05",
+      "modifiedAt": "2026-10-23T16:06:41.634Z",
+      "contentHash": "sha256:afffaa03ea50a36c2d7452fce82b194c708df93d05347707d0dec2e34f172647",
+      "reviewedAt": "2026-10-23T16:06:41.634Z",
+      "reviewDue": "2027-04-21",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Machine_Unlearning",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:0a72575d856c00b9c4f8bc90d059a033ffa47da23652f498d9ae820cc26b6a45",
+        "contentHash": "sha256:afffaa03ea50a36c2d7452fce82b194c708df93d05347707d0dec2e34f172647",
         "textFields": [
           "title",
           "aliases",
@@ -1695,10 +1695,10 @@
         "synthetic-data"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.970Z",
-      "contentHash": "sha256:3ec58145d656d9cc7adf4493e8b851749546d1805d8e30fca3822fe5c2c0877f",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-04-05",
+      "modifiedAt": "2026-10-23T16:06:41.634Z",
+      "contentHash": "sha256:5f20b4a2837c72d84d7e8163796ed6587875bd1e7fc3982c4318749ff3e342c6",
+      "reviewedAt": "2026-10-23T16:06:41.634Z",
+      "reviewDue": "2027-04-21",
       "sourceIds": [
         "src-3e9d5d7dceceebc1"
       ],
@@ -1711,7 +1711,7 @@
       "retrieval": {
         "documentId": "wiki:Synthetic_Data_and_Model_Collapse",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:3ec58145d656d9cc7adf4493e8b851749546d1805d8e30fca3822fe5c2c0877f",
+        "contentHash": "sha256:5f20b4a2837c72d84d7e8163796ed6587875bd1e7fc3982c4318749ff3e342c6",
         "textFields": [
           "title",
           "aliases",
@@ -1939,10 +1939,10 @@
         "synthetic-data"
       ],
       "timestamp": "2026-06-02T22:56:50+08:00",
-      "modifiedAt": "2026-10-19T12:56:49.610Z",
-      "contentHash": "sha256:07e21ab0bf1dc37cc58243654e02e8fcc44f94d355361298b10f4c67504e88d3",
-      "reviewedAt": "2026-10-19T12:58:04.614Z",
-      "reviewDue": "2027-10-19",
+      "modifiedAt": "2026-10-23T16:06:41.634Z",
+      "contentHash": "sha256:143b10f1d65eaf0277ee8f07538e6e989370b116dc4208980c9c4484b516d37e",
+      "reviewedAt": "2026-10-23T16:06:41.634Z",
+      "reviewDue": "2027-10-23",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-4144e3776ac496d0",
@@ -1954,7 +1954,7 @@
       "retrieval": {
         "documentId": "wiki:When_Sample_Selection_Bias_Precipitates_Model_Collapse",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:07e21ab0bf1dc37cc58243654e02e8fcc44f94d355361298b10f4c67504e88d3",
+        "contentHash": "sha256:143b10f1d65eaf0277ee8f07538e6e989370b116dc4208980c9c4484b516d37e",
         "textFields": [
           "title",
           "aliases",
@@ -1985,10 +1985,10 @@
         "phd-student"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-19T10:48:00.002Z",
-      "contentHash": "sha256:8a01a8179513a7fc482676981924257cd0b57c890412325fea0a032d1351f250",
-      "reviewedAt": "2026-10-19T10:48:47.060Z",
-      "reviewDue": "2027-01-17",
+      "modifiedAt": "2026-10-23T16:06:41.634Z",
+      "contentHash": "sha256:0b4cb742bd6a00717170430bc7e3c842027b7f6fd0e88f621ec2c8e48196ce11",
+      "reviewedAt": "2026-10-23T16:06:41.634Z",
+      "reviewDue": "2027-01-21",
       "sourceIds": [
         "src-264e39cbec8d2f89",
         "src-30f33d3201c476ab",
@@ -2028,7 +2028,7 @@
       "retrieval": {
         "documentId": "wiki:Xinbao_Qiao",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:8a01a8179513a7fc482676981924257cd0b57c890412325fea0a032d1351f250",
+        "contentHash": "sha256:0b4cb742bd6a00717170430bc7e3c842027b7f6fd0e88f621ec2c8e48196ce11",
         "textFields": [
           "title",
           "aliases",
@@ -2108,10 +2108,10 @@
         "ai-and-networks"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.799Z",
-      "contentHash": "sha256:73e53146e74ce51d89671ab211abd86aae4388f24da57bdec6355a60c92d767a",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-04-05",
+      "modifiedAt": "2026-10-23T16:06:41.634Z",
+      "contentHash": "sha256:fa2e7a8d55bd3659e24743dd504ece0cbc3f35eb8d05b5191aa5f092650635d6",
+      "reviewedAt": "2026-10-23T16:06:41.634Z",
+      "reviewDue": "2027-04-21",
       "sourceIds": [
         "src-5ffca2a581311c27",
         "src-766234e11681dad2"
@@ -2127,7 +2127,7 @@
       "retrieval": {
         "documentId": "wiki:AI_and_Networks_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:73e53146e74ce51d89671ab211abd86aae4388f24da57bdec6355a60c92d767a",
+        "contentHash": "sha256:fa2e7a8d55bd3659e24743dd504ece0cbc3f35eb8d05b5191aa5f092650635d6",
         "textFields": [
           "title",
           "aliases",
@@ -2249,10 +2249,10 @@
         "iclr-2025"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-10-19T12:56:48.729Z",
-      "contentHash": "sha256:11fa6485acb0d9ea323cc21db698287ac503fcc689a2496641298f662be5dfa1",
-      "reviewedAt": "2026-10-19T12:58:04.614Z",
-      "reviewDue": "2027-01-17",
+      "modifiedAt": "2026-10-23T16:06:41.634Z",
+      "contentHash": "sha256:a4d6f93efbbfbf36d03a245ffc8ec5e48d46a73171844028f22c6c4a89fcdc12",
+      "reviewedAt": "2026-10-23T16:06:41.634Z",
+      "reviewDue": "2027-01-21",
       "sourceIds": [
         "src-19cdc04d387acf77",
         "src-3234eea5652932e1",
@@ -2264,7 +2264,7 @@
       "retrieval": {
         "documentId": "wiki:DynFrs_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:11fa6485acb0d9ea323cc21db698287ac503fcc689a2496641298f662be5dfa1",
+        "contentHash": "sha256:a4d6f93efbbfbf36d03a245ffc8ec5e48d46a73171844028f22c6c4a89fcdc12",
         "textFields": [
           "title",
           "aliases",
@@ -2296,10 +2296,10 @@
         "iclr-2025"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-10-19T12:56:48.823Z",
-      "contentHash": "sha256:3f13d2ccfce7b596ceecaaaec917fd183ec79de296626437a736731ba14e10b4",
-      "reviewedAt": "2026-10-19T12:58:04.614Z",
-      "reviewDue": "2027-01-17",
+      "modifiedAt": "2026-10-23T16:06:41.634Z",
+      "contentHash": "sha256:550413b174689c5de03ca39a2543c9a7aede8e504c67afd542b1619ab7fb827b",
+      "reviewedAt": "2026-10-23T16:06:41.634Z",
+      "reviewDue": "2027-01-21",
       "sourceIds": [
         "src-508cc93a8723d9eb",
         "src-65d81b8aca549860",
@@ -2311,7 +2311,7 @@
       "retrieval": {
         "documentId": "wiki:Hessian_Free_Online_Certified_Unlearning_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:3f13d2ccfce7b596ceecaaaec917fd183ec79de296626437a736731ba14e10b4",
+        "contentHash": "sha256:550413b174689c5de03ca39a2543c9a7aede8e504c67afd542b1619ab7fb827b",
         "textFields": [
           "title",
           "aliases",
@@ -2503,10 +2503,10 @@
         "synthetic-data"
       ],
       "timestamp": "2026-06-02T22:56:50+08:00",
-      "modifiedAt": "2026-10-19T12:56:49.608Z",
-      "contentHash": "sha256:20fb2a666af23b381532c7bb7e60b7430461e32836336a1610d1fd11c8904d7b",
-      "reviewedAt": "2026-10-19T12:58:04.614Z",
-      "reviewDue": "2027-10-19",
+      "modifiedAt": "2026-10-23T16:06:41.634Z",
+      "contentHash": "sha256:b6bf8bfb4eafa2a47b19e527f16bd5c6d01da44ce04edebc6b6c8360d33ce297",
+      "reviewedAt": "2026-10-23T16:06:41.634Z",
+      "reviewDue": "2027-10-23",
       "sourceIds": [
         "src-03bf1b2f9af65762",
         "src-4144e3776ac496d0",
@@ -2518,7 +2518,7 @@
       "retrieval": {
         "documentId": "wiki:When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:20fb2a666af23b381532c7bb7e60b7430461e32836336a1610d1fd11c8904d7b",
+        "contentHash": "sha256:b6bf8bfb4eafa2a47b19e527f16bd5c6d01da44ce04edebc6b6c8360d33ce297",
         "textFields": [
           "title",
           "aliases",
@@ -2549,17 +2549,17 @@
         "资源记录"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.927Z",
-      "contentHash": "sha256:9dc5e758ccbf80c6cd8c0458418a22e23cea724a1a526c539ff96a45ba7ab633",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-10-07",
+      "modifiedAt": "2026-10-23T16:06:41.634Z",
+      "contentHash": "sha256:8a519a62b52161e53a9202f5a4455c32b64ebb7a932bdfaa3081a55ab228c063",
+      "reviewedAt": "2026-10-23T16:06:41.634Z",
+      "reviewDue": "2027-10-23",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Old_Homepage_Resources_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:9dc5e758ccbf80c6cd8c0458418a22e23cea724a1a526c539ff96a45ba7ab633",
+        "contentHash": "sha256:8a519a62b52161e53a9202f5a4455c32b64ebb7a932bdfaa3081a55ab228c063",
         "textFields": [
           "title",
           "aliases",
@@ -2590,10 +2590,10 @@
         "博士生"
       ],
       "timestamp": "2026-06-13T20:46:02+08:00",
-      "modifiedAt": "2026-10-19T10:47:59.805Z",
-      "contentHash": "sha256:bd317fa3efed3cd318ccedb8cf51d3a0bae940286b1d0f83035503946b2b8341",
-      "reviewedAt": "2026-10-19T10:48:47.060Z",
-      "reviewDue": "2027-01-17",
+      "modifiedAt": "2026-10-23T16:06:41.634Z",
+      "contentHash": "sha256:7db8c260e7b80b97e57759b84ddc60d856e0c8eec1b9cab281fbf567572af018",
+      "reviewedAt": "2026-10-23T16:06:41.634Z",
+      "reviewDue": "2027-01-21",
       "sourceIds": [
         "src-264e39cbec8d2f89",
         "src-30f33d3201c476ab",
@@ -2633,7 +2633,7 @@
       "retrieval": {
         "documentId": "wiki:Qiao_Xinbao_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:bd317fa3efed3cd318ccedb8cf51d3a0bae940286b1d0f83035503946b2b8341",
+        "contentHash": "sha256:7db8c260e7b80b97e57759b84ddc60d856e0c8eec1b9cab281fbf567572af018",
         "textFields": [
           "title",
           "aliases",
@@ -2922,10 +2922,10 @@
         "synthetic-data"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.969Z",
-      "contentHash": "sha256:a22933a5d45f0e375b50a54086443668327831bb3b3c977863be22bf80f02b71",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-04-05",
+      "modifiedAt": "2026-10-23T16:06:41.634Z",
+      "contentHash": "sha256:244fb83a2fb5b29b620e8771f05e4ba05909e538dd9207e842a376d3a9e08ed6",
+      "reviewedAt": "2026-10-23T16:06:41.634Z",
+      "reviewDue": "2027-04-21",
       "sourceIds": [
         "src-3e9d5d7dceceebc1"
       ],
@@ -2938,7 +2938,7 @@
       "retrieval": {
         "documentId": "wiki:Synthetic_Data_and_Model_Collapse_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:a22933a5d45f0e375b50a54086443668327831bb3b3c977863be22bf80f02b71",
+        "contentHash": "sha256:244fb83a2fb5b29b620e8771f05e4ba05909e538dd9207e842a376d3a9e08ed6",
         "textFields": [
           "title",
           "aliases",
@@ -3337,17 +3337,17 @@
         "研究专题"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.824Z",
-      "contentHash": "sha256:224fd6fd4ec5bb06be49840dec076fb87251226fb434041d64efb30efa82a4ab",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-04-05",
+      "modifiedAt": "2026-10-23T16:06:41.634Z",
+      "contentHash": "sha256:c18da584d1a0af325445d9078939e8de1a5b33ca52deb5d58092fe411a685d85",
+      "reviewedAt": "2026-10-23T16:06:41.634Z",
+      "reviewDue": "2027-04-21",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Data_Centric_Machine_Learning_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:224fd6fd4ec5bb06be49840dec076fb87251226fb434041d64efb30efa82a4ab",
+        "contentHash": "sha256:c18da584d1a0af325445d9078939e8de1a5b33ca52deb5d58092fe411a685d85",
         "textFields": [
           "title",
           "aliases",
@@ -3502,17 +3502,17 @@
         "machine-unlearning"
       ],
       "timestamp": "2026-05-05T23:25:14+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.913Z",
-      "contentHash": "sha256:1c4a33c10b5fec9bdad7ae8523f3bfe3936d4e74cc559acc1eaabec056cb8d84",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-04-05",
+      "modifiedAt": "2026-10-23T16:06:41.634Z",
+      "contentHash": "sha256:1e2899a3cb7b4f7b2cb15976c010654c90b9d23573f581fc9c9316ae3e21f787",
+      "reviewedAt": "2026-10-23T16:06:41.634Z",
+      "reviewDue": "2027-04-21",
       "sourceIds": [],
       "citationSourceIds": [],
       "footnoteSourceIds": [],
       "retrieval": {
         "documentId": "wiki:Machine_Unlearning_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:1c4a33c10b5fec9bdad7ae8523f3bfe3936d4e74cc559acc1eaabec056cb8d84",
+        "contentHash": "sha256:1e2899a3cb7b4f7b2cb15976c010654c90b9d23573f581fc9c9316ae3e21f787",
         "textFields": [
           "title",
           "aliases",

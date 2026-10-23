@@ -9,10 +9,10 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T21:39:01+08:00'
-modified: '2026-10-19T12:56:48.731Z'
-content_hash: 'sha256:9cf63909ba50a853f850f836d1e29b8b836f45547b450155e8e9c705b308faa5'
-reviewed_at: '2026-10-19T12:58:04.614Z'
-review_due: '2027-01-17'
+modified: '2026-10-23T16:06:41.634Z'
+content_hash: 'sha256:cd98afaa9746b78fa41e485631ebfd4ad84251f532c714e63985bc381a3b547f'
+reviewed_at: '2026-10-23T16:06:41.634Z'
+review_due: '2027-01-21'
 name: 'DynFrs: An Efficient Framework for Machine Unlearning in Random Forest'
 summary: ICLR 2025 paper on efficient machine unlearning for random forests.
 dates: 24-28 April 2025
@@ -52,8 +52,8 @@ paper_highlight:
   poster:
     image: /papers/dynfrs/poster-preview.webp
     image_alt: Conference paper poster.
-    width: 2000
-    height: 1125
+    width: 1200
+    height: 675
   figures:
     - image: /papers/dynfrs/complexity-guarantees.webp
       image_alt: DynFrs training and update complexity guarantees (Theorems 2 and 3).
@@ -72,7 +72,7 @@ paper_highlight:
 ---
 **DynFrs: An Efficient Framework for Machine Unlearning in Random Forest** is an ICLR 2025 conference paper by Shurong Wang, Zhuoyang Shen, **[[Xinbao_Qiao|Xinbao Qiao]]**, Tongning Zhang, and Meng Zhang. The work treats random-forest unlearning as a dynamic data-structure problem: it seeks exact distributional equivalence to retraining while keeping online deletion, insertion, and query latency low.
 
-![ICLR 2025 poster for DynFrs](/papers/dynfrs/poster.png)
+![ICLR 2025 poster for DynFrs](/papers/dynfrs/poster.webp)
 
 ## Overview
 

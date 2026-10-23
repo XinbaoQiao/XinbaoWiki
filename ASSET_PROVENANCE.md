@@ -48,9 +48,9 @@ The component notices and full local license texts are linked from
 
 | Path | Evidence | Status |
 | --- | --- | --- |
-| `public/images/Portrait.png` | An embedded C2PA claim names OpenAI Media Service, gpt-image 2.0, creation date 2026-07-15, and trained algorithmic media. The claim has not been signature-verified with a C2PA validator; prompt, human creator or transformation history, output-terms review, and likeness consent are not recorded. | **Unresolved.** No downstream reuse permission. |
-| `public/images/Portrait-Singapore-ICLR-2025.jpg` | Event photograph. Photographer, original source, license or permission, and subject-consent record are not stored here. | **Unresolved.** No downstream reuse permission. |
-| `public/images/Portrait-Seoul-ICML-2026.png` | An embedded C2PA claim names OpenAI Media Service, gpt-image 2.0, creation date 2026-07-15, and trained algorithmic media. Older repository notes named another provider, so current public copy is provider-neutral. The C2PA claim has not been signature-verified; prompt, human creator or transformation history, output-terms review, and likeness consent are not recorded. | **Unresolved.** No downstream reuse permission. |
+| `public/images/Portrait.webp` | An embedded C2PA claim names OpenAI Media Service, gpt-image 2.0, creation date 2026-07-15, and trained algorithmic media. The claim has not been signature-verified with a C2PA validator; prompt, human creator or transformation history, output-terms review, and likeness consent are not recorded. | **Unresolved.** No downstream reuse permission. |
+| `public/images/Portrait-Singapore-ICLR-2025.webp` | Event photograph. Photographer, original source, license or permission, and subject-consent record are not stored here. | **Unresolved.** No downstream reuse permission. |
+| `public/images/Portrait-Seoul-ICML-2026.webp` | An embedded C2PA claim names OpenAI Media Service, gpt-image 2.0, creation date 2026-07-15, and trained algorithmic media. Older repository notes named another provider, so current public copy is provider-neutral. The C2PA claim has not been signature-verified; prompt, human creator or transformation history, output-terms review, and likeness consent are not recorded. | **Unresolved.** No downstream reuse permission. |
 
 ## Institutional insignia
 
@@ -77,9 +77,9 @@ license, or generation manifest recorded in the repository. They are all
 **unresolved** and receive no downstream reuse permission:
 
 - `public/papers/dynfrs/lazy-tags.png`
-- `public/papers/dynfrs/poster.png`
-- `public/papers/hessian-free/poster.png`
-- `public/papers/model-collapse/poster.png`
+- `public/papers/dynfrs/poster.webp`
+- `public/papers/hessian-free/poster.webp`
+- `public/papers/model-collapse/poster.webp`
 - `public/papers/model-collapse/teaser.png`
 - `public/papers/soft-weighted/framework.png`
 - `public/papers/soft-weighted/framework.webp`
@@ -98,22 +98,22 @@ decorative and overly uniform drafts; those drafts are not deployed. Human input
 topic-specific visual mechanisms, checked labels and arrows, and scoped the unlearning
 influence illustration. Prompts and source mechanisms are preserved in
 [research-topic-image-prompts.md](docs/research-topic-image-prompts.md).
-Exports were resized to 1400 × 933 and PNG-compressed for the website. These are
+Exports were resized and served as WebP for the website (display width capped near 1000px). These are
 illustrative schematics, not measured experimental results. Publication was
 requested by the site owner; output-terms and downstream licensing are not
 expanded by this record, and no downstream reuse permission is granted.
 
-- `public/topics/ai-and-networks.png`
-- `public/topics/data-centric-ml.png`
-- `public/topics/machine-unlearning.png`
-- `public/topics/synthetic-data.png`
+- `public/topics/ai-and-networks.webp`
+- `public/topics/data-centric-ml.webp`
+- `public/topics/machine-unlearning.webp`
+- `public/topics/synthetic-data.webp`
 
 | Asset | SHA-256 |
 | --- | --- |
-| AI and Networks | `29dc9e52ca6f58110ddd60c539e34b362613a0bc57f1173fe81940c3fd7fa638` |
-| Machine Unlearning | `f8abc9d67804f5ee972c70b1a56b9e635d373907cf1f5e632408b8ccea105bca` |
-| Synthetic Data | `f94d4b3cc1b217ea528f442173f5c36c187b06a1d290687ecccadd0318f7e08c` |
-| Data Centric ML | `a21662269dca98c9de40c291c27d28683ab4e26ce66adb08b4cd6d232646be91` |
+| AI and Networks | `375f0f6c00573248ed1c020042c608bf9124e1809f817b4aa377ec8270518609` |
+| Machine Unlearning | `4b2b5edd8d4abef8c834ea6fd44761a6c7284f3e7c265aea203c84d60c54bc3f` |
+| Synthetic Data | `02824b1ec6d14458637ced9a4ba6d5e84a0fa56160c54674cb1123d778fc074a` |
+| Data Centric ML | `123ab3423e05712d7730fbeab3e84b7ae01ae7f40d250841a850777efe07b071` |
 
 ## Xinbaopedia brand assets
 

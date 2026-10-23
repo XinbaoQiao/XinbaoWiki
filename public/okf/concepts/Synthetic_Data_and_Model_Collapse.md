@@ -11,10 +11,10 @@ tags:
   - research-topic
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-10-07T07:07:23.970Z'
-content_hash: 'sha256:3ec58145d656d9cc7adf4493e8b851749546d1805d8e30fca3822fe5c2c0877f'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-23T16:06:41.634Z'
+content_hash: 'sha256:5f20b4a2837c72d84d7e8163796ed6587875bd1e7fc3982c4318749ff3e342c6'
+reviewed_at: '2026-10-23T16:06:41.634Z'
+review_due: '2027-04-21'
 language: en
 aliases:
   - Synthetic Data and Model Collapse
@@ -27,8 +27,8 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-07T07:07:51.129Z'
-  reviewDue: '2027-04-05'
+  reviewedAt: '2026-10-23T16:06:41.634Z'
+  reviewDue: '2027-04-21'
   pendingReview: false
   overdue: false
 retrieval:

@@ -9,18 +9,18 @@ tags:
   - 研究专题
   - machine-unlearning
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-07T07:07:23.913Z'
-content_hash: 'sha256:1c4a33c10b5fec9bdad7ae8523f3bfe3936d4e74cc559acc1eaabec056cb8d84'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-23T16:06:41.634Z'
+content_hash: 'sha256:1e2899a3cb7b4f7b2cb15976c010654c90b9d23573f581fc9c9316ae3e21f787'
+reviewed_at: '2026-10-23T16:06:41.634Z'
+review_due: '2027-04-21'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-07T07:07:51.129Z'
-  reviewDue: '2027-04-05'
+  reviewedAt: '2026-10-23T16:06:41.634Z'
+  reviewDue: '2027-04-21'
   pendingReview: false
   overdue: false
 retrieval:

@@ -99,8 +99,8 @@ const siteUpdateEvents: readonly SiteUpdateEvent[] = [
       slug: 'Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models',
       title: 'Illusory Pattern Perception Drives Spurious Inference in Large Language Models',
       image: '/papers/illusory-pattern/camera-ready-first-page.webp',
-      width: 1400,
-      height: 1812,
+      width: 1200,
+      height: 1553,
       // Author-confirmed Camera-Ready version, 2026-10-19.
       pdf: 'https://arxiv.org/pdf/2610.07791'
     }],
@@ -132,8 +132,8 @@ const siteUpdateEvents: readonly SiteUpdateEvent[] = [
       slug: 'When_Sample_Selection_Bias_Precipitates_Model_Collapse',
       title: 'When Sample Selection Bias Precipitates Model Collapse',
       image: '/papers/model-collapse/camera-ready-first-page.webp',
-      width: 1400,
-      height: 1812,
+      width: 1200,
+      height: 1553,
       pdf: 'https://raw.githubusercontent.com/mlresearch/v306/main/assets/qiao26c/qiao26c.pdf'
     }],
     venue: 'ICML 2026'
@@ -154,8 +154,8 @@ const siteUpdateEvents: readonly SiteUpdateEvent[] = [
       slug: 'Soft_Weighted_Machine_Unlearning',
       title: 'Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness',
       image: '/papers/soft-weighted/camera-ready-first-page.webp',
-      width: 1400,
-      height: 1812,
+      width: 1200,
+      height: 1553,
       pdf: 'https://ojs.aaai.org/index.php/AAAI/article/view/39681/43642'
     }],
     venue: 'AAAI 2026'
@@ -174,16 +174,16 @@ const siteUpdateEvents: readonly SiteUpdateEvent[] = [
         slug: 'Hessian_Free_Online_Certified_Unlearning',
         title: 'Hessian-Free Online Certified Unlearning',
         image: '/papers/hessian-free/camera-ready-first-page.webp',
-        width: 1400,
-        height: 1812,
+        width: 1200,
+        height: 1553,
         pdf: 'https://proceedings.iclr.cc/paper_files/paper/2025/file/50ee6db59fca8643dc625829d4a0eab9-Paper-Conference.pdf'
       },
       {
         slug: 'DynFrs',
         title: 'DynFrs: An Efficient Framework for Machine Unlearning in Random Forest',
         image: '/papers/dynfrs/camera-ready-first-page.webp',
-        width: 1400,
-        height: 1812,
+        width: 1200,
+        height: 1553,
         pdf: 'https://proceedings.iclr.cc/paper_files/paper/2025/file/1caf09c9f4e6b0150b06a07e77f2710c-Paper-Conference.pdf'
       }
     ],

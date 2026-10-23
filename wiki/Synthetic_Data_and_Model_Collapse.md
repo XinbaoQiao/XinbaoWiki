@@ -11,10 +11,10 @@ tags:
   - research-topic
   - synthetic-data
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-10-07T07:07:23.970Z'
-content_hash: 'sha256:3ec58145d656d9cc7adf4493e8b851749546d1805d8e30fca3822fe5c2c0877f'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-23T16:06:41.634Z'
+content_hash: 'sha256:5f20b4a2837c72d84d7e8163796ed6587875bd1e7fc3982c4318749ff3e342c6'
+reviewed_at: '2026-10-23T16:06:41.634Z'
+review_due: '2027-04-21'
 name: Synthetic Data
 summary: >-
   Research topic on synthetic data, recursive training, low-resource
@@ -22,7 +22,7 @@ summary: >-
 aliases:
   - Synthetic Data and Model Collapse
 occupation: Research topic
-image: /topics/synthetic-data.png
+image: /topics/synthetic-data.webp
 image_caption: Synthetic data topic diagram
 relations:
   - type: depends-on

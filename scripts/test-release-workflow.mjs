@@ -85,7 +85,7 @@ async function testSmokeRetry() {
       return;
     }
     if (req.url?.startsWith('/wiki/Xinbao_Qiao/')) {
-      res.end('Xinbao wiki-page Portrait.png Portrait-Singapore-ICLR-2025.jpg Portrait-Seoul-ICML-2026.png Photograph taken at ICLR 2025, Singapore EXPO Photograph generated for ICML 2026, Seoul COEX');
+      res.end('Xinbao wiki-page Portrait.webp Portrait-Singapore-ICLR-2025.webp Portrait-Seoul-ICML-2026.webp Photograph taken at ICLR 2025, Singapore EXPO Photograph generated for ICML 2026, Seoul COEX');
       return;
     }
     if (req.url?.startsWith('/okf/manifest') || req.url?.startsWith('/okf/schema')) {

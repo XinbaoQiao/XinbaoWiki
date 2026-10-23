@@ -136,17 +136,17 @@
         "slug": "Data_Centric_Machine_Learning",
         "title": "Data Centric ML",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.824Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-04-21"
       },
       {
         "slug": "Data_Centric_Machine_Learning_zh",
         "title": "数据中心 ML",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.824Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-04-21"
       },
       {
         "slug": "Data_Selection",
@@ -312,9 +312,9 @@
         "slug": "log",
         "title": "Log",
         "language": "en",
-        "modifiedAt": "2026-09-26T03:14:39.293Z",
-        "reviewedAt": "2026-09-26T03:15:12.636Z",
-        "reviewDue": "2027-09-26"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-10-23"
       },
       {
         "slug": "log_zh",
@@ -328,33 +328,33 @@
         "slug": "Machine_Unlearning",
         "title": "Machine Unlearning",
         "language": "en",
-        "modifiedAt": "2026-10-07T06:42:08.576Z",
-        "reviewedAt": "2026-10-07T06:43:53.160Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-04-21"
       },
       {
         "slug": "Machine_Unlearning_zh",
         "title": "机器遗忘",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.913Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-04-21"
       },
       {
         "slug": "Old_Homepage_Resources",
         "title": "Homepage Portrait Resources",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.927Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-10-23"
       },
       {
         "slug": "Old_Homepage_Resources_zh",
         "title": "主页肖像资源",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.927Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-10-23"
       },
       {
         "slug": "Projects",
@@ -513,17 +513,17 @@
         "slug": "Data_Centric_Machine_Learning",
         "title": "Data Centric ML",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.824Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-04-21"
       },
       {
         "slug": "Data_Centric_Machine_Learning_zh",
         "title": "数据中心 ML",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.824Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-04-21"
       },
       {
         "slug": "Data_Selection",
@@ -593,17 +593,17 @@
         "slug": "DynFrs",
         "title": "DynFrs: An Efficient Framework for Machine Unlearning in Random Forest",
         "language": "en",
-        "modifiedAt": "2026-10-19T12:56:48.731Z",
-        "reviewedAt": "2026-10-19T12:58:04.614Z",
-        "reviewDue": "2027-01-17"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-01-21"
       },
       {
         "slug": "DynFrs_zh",
         "title": "DynFrs: An Efficient Framework for Machine Unlearning in Random Forest",
         "language": "zh",
-        "modifiedAt": "2026-10-19T12:56:48.729Z",
-        "reviewedAt": "2026-10-19T12:58:04.614Z",
-        "reviewDue": "2027-01-17"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-01-21"
       },
       {
         "slug": "Education",
@@ -657,17 +657,17 @@
         "slug": "Hessian_Free_Online_Certified_Unlearning",
         "title": "Hessian-Free Online Certified Unlearning",
         "language": "en",
-        "modifiedAt": "2026-10-19T12:56:48.828Z",
-        "reviewedAt": "2026-10-19T12:58:04.614Z",
-        "reviewDue": "2027-01-17"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-01-21"
       },
       {
         "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
         "title": "Hessian-Free Online Certified Unlearning",
         "language": "zh",
-        "modifiedAt": "2026-10-19T12:56:48.823Z",
-        "reviewedAt": "2026-10-19T12:58:04.614Z",
-        "reviewDue": "2027-01-17"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-01-21"
       },
       {
         "slug": "index",
@@ -721,9 +721,9 @@
         "slug": "log",
         "title": "Log",
         "language": "en",
-        "modifiedAt": "2026-09-26T03:14:39.293Z",
-        "reviewedAt": "2026-09-26T03:15:12.636Z",
-        "reviewDue": "2027-09-26"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-10-23"
       },
       {
         "slug": "log_zh",
@@ -737,33 +737,33 @@
         "slug": "Machine_Unlearning",
         "title": "Machine Unlearning",
         "language": "en",
-        "modifiedAt": "2026-10-07T06:42:08.576Z",
-        "reviewedAt": "2026-10-07T06:43:53.160Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-04-21"
       },
       {
         "slug": "Machine_Unlearning_zh",
         "title": "机器遗忘",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.913Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-04-21"
       },
       {
         "slug": "Old_Homepage_Resources",
         "title": "Homepage Portrait Resources",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.927Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-10-23"
       },
       {
         "slug": "Old_Homepage_Resources_zh",
         "title": "主页肖像资源",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.927Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-10-23"
       },
       {
         "slug": "Projects",
@@ -897,17 +897,17 @@
         "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
         "title": "When Sample Selection Bias Precipitates Model Collapse",
         "language": "en",
-        "modifiedAt": "2026-10-19T12:56:49.610Z",
-        "reviewedAt": "2026-10-19T12:58:04.614Z",
-        "reviewDue": "2027-10-19"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-10-23"
       },
       {
         "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
         "title": "When Sample Selection Bias Precipitates Model Collapse",
         "language": "zh",
-        "modifiedAt": "2026-10-19T12:56:49.608Z",
-        "reviewedAt": "2026-10-19T12:58:04.614Z",
-        "reviewDue": "2027-10-19"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-10-23"
       }
     ],
     "coverage": 0.3864,
@@ -929,17 +929,17 @@
         "slug": "AI_and_Networks",
         "title": "AI and Networks",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.801Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-04-21"
       },
       {
         "slug": "AI_and_Networks_zh",
         "title": "AI 与网络",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.799Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-04-21"
       },
       {
         "slug": "Angela_Yingjun_Zhang",
@@ -1009,17 +1009,17 @@
         "slug": "Data_Centric_Machine_Learning",
         "title": "Data Centric ML",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.824Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-04-21"
       },
       {
         "slug": "Data_Centric_Machine_Learning_zh",
         "title": "数据中心 ML",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.824Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-04-21"
       },
       {
         "slug": "Data_Selection",
@@ -1105,17 +1105,17 @@
         "slug": "DynFrs",
         "title": "DynFrs: An Efficient Framework for Machine Unlearning in Random Forest",
         "language": "en",
-        "modifiedAt": "2026-10-19T12:56:48.731Z",
-        "reviewedAt": "2026-10-19T12:58:04.614Z",
-        "reviewDue": "2027-01-17"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-01-21"
       },
       {
         "slug": "DynFrs_zh",
         "title": "DynFrs: An Efficient Framework for Machine Unlearning in Random Forest",
         "language": "zh",
-        "modifiedAt": "2026-10-19T12:56:48.729Z",
-        "reviewedAt": "2026-10-19T12:58:04.614Z",
-        "reviewDue": "2027-01-17"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-01-21"
       },
       {
         "slug": "Education",
@@ -1169,17 +1169,17 @@
         "slug": "Hessian_Free_Online_Certified_Unlearning",
         "title": "Hessian-Free Online Certified Unlearning",
         "language": "en",
-        "modifiedAt": "2026-10-19T12:56:48.828Z",
-        "reviewedAt": "2026-10-19T12:58:04.614Z",
-        "reviewDue": "2027-01-17"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-01-21"
       },
       {
         "slug": "Hessian_Free_Online_Certified_Unlearning_zh",
         "title": "Hessian-Free Online Certified Unlearning",
         "language": "zh",
-        "modifiedAt": "2026-10-19T12:56:48.823Z",
-        "reviewedAt": "2026-10-19T12:58:04.614Z",
-        "reviewDue": "2027-01-17"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-01-21"
       },
       {
         "slug": "Illusory_Pattern_Perception_Drives_Spurious_Inference_in_Large_Language_Models",
@@ -1265,9 +1265,9 @@
         "slug": "log",
         "title": "Log",
         "language": "en",
-        "modifiedAt": "2026-09-26T03:14:39.293Z",
-        "reviewedAt": "2026-09-26T03:15:12.636Z",
-        "reviewDue": "2027-09-26"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-10-23"
       },
       {
         "slug": "log_zh",
@@ -1281,17 +1281,17 @@
         "slug": "Machine_Unlearning",
         "title": "Machine Unlearning",
         "language": "en",
-        "modifiedAt": "2026-10-07T06:42:08.576Z",
-        "reviewedAt": "2026-10-07T06:43:53.160Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-04-21"
       },
       {
         "slug": "Machine_Unlearning_zh",
         "title": "机器遗忘",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.913Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-04-21"
       },
       {
         "slug": "Meng_Zhang",
@@ -1345,17 +1345,17 @@
         "slug": "Old_Homepage_Resources",
         "title": "Homepage Portrait Resources",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.927Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-10-23"
       },
       {
         "slug": "Old_Homepage_Resources_zh",
         "title": "主页肖像资源",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.927Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-10-07"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-10-23"
       },
       {
         "slug": "Projects",
@@ -1393,9 +1393,9 @@
         "slug": "Qiao_Xinbao_zh",
         "title": "乔鑫宝",
         "language": "zh",
-        "modifiedAt": "2026-10-19T10:47:59.805Z",
-        "reviewedAt": "2026-10-19T10:48:47.060Z",
-        "reviewDue": "2027-01-17"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-01-21"
       },
       {
         "slug": "Random_Forest",
@@ -1577,25 +1577,25 @@
         "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse",
         "title": "When Sample Selection Bias Precipitates Model Collapse",
         "language": "en",
-        "modifiedAt": "2026-10-19T12:56:49.610Z",
-        "reviewedAt": "2026-10-19T12:58:04.614Z",
-        "reviewDue": "2027-10-19"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-10-23"
       },
       {
         "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh",
         "title": "When Sample Selection Bias Precipitates Model Collapse",
         "language": "zh",
-        "modifiedAt": "2026-10-19T12:56:49.608Z",
-        "reviewedAt": "2026-10-19T12:58:04.614Z",
-        "reviewDue": "2027-10-19"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-10-23"
       },
       {
         "slug": "Xinbao_Qiao",
         "title": "Xinbao Qiao",
         "language": "en",
-        "modifiedAt": "2026-10-19T10:48:00.002Z",
-        "reviewedAt": "2026-10-19T10:48:47.060Z",
-        "reviewDue": "2027-01-17"
+        "modifiedAt": "2026-10-23T16:06:41.634Z",
+        "reviewedAt": "2026-10-23T16:06:41.634Z",
+        "reviewDue": "2027-01-21"
       },
       {
         "slug": "Zhejiang_University",

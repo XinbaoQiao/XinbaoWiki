@@ -79,7 +79,7 @@
 - Added compressed ICLR 2025 poster images for [Hessian-Free Online Certified Unlearning](./Hessian_Free_Online_Certified_Unlearning.md) and [DynFrs: An Efficient Framework for Machine Unlearning in Random Forest](./DynFrs.md), plus the soft-weighted unlearning framework figure.
 - Rebuilt the local `XinbaoWiki` project as a Next.js 15 static-export wiki using `react-markdown` and `gray-matter`.
 - Updated the page framework toward the Colarpedia/Wikipedia layout: left navigation sections, article tabs, right-side infobox, source/history links, and encyclopedia-style body typography.
-- Retained one old-homepage portrait in `public/images/Portrait.png`; paper-specific figures are stored separately under `public/papers`.
+- Retained one old-homepage portrait in `public/images/Portrait.webp`; paper-specific figures are stored separately under `public/papers`.
 - Linked the local CV PDF from [CV](./CV.md) and refreshed [Xinbao Qiao](./Xinbao_Qiao.md), [Publications](./Publications.md), and the main publication pages with date/status notes.
 - Added `scripts/test-wiki-data.mjs` and wired it into `npm run check` to guard required pages, local assets, CV links, and backup URL removal.
 - Tightened the page framework to match Colarpedia class names and structure, and reduced displayed media to one portrait image.

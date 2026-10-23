@@ -8,17 +8,17 @@ tags:
   - topic
   - 研究专题
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-10-07T07:07:23.824Z'
-content_hash: 'sha256:224fd6fd4ec5bb06be49840dec076fb87251226fb434041d64efb30efa82a4ab'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-23T16:06:41.634Z'
+content_hash: 'sha256:c18da584d1a0af325445d9078939e8de1a5b33ca52deb5d58092fe411a685d85'
+reviewed_at: '2026-10-23T16:06:41.634Z'
+review_due: '2027-04-21'
 name: 数据中心 ML
 language: zh
 summary: 关注数据质量、选择、估值、修正和治理的研究专题。
 aliases:
   - Data-Centric Machine Learning
 occupation: 研究专题
-image: /topics/data-centric-ml.png
+image: /topics/data-centric-ml.webp
 image_caption: 数据中心 ML 主题图
 translation_of: Data_Centric_Machine_Learning
 ---

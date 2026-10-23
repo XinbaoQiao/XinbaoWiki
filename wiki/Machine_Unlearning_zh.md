@@ -9,15 +9,15 @@ tags:
   - 研究专题
   - machine-unlearning
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-07T07:07:23.913Z'
-content_hash: 'sha256:1c4a33c10b5fec9bdad7ae8523f3bfe3936d4e74cc559acc1eaabec056cb8d84'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-23T16:06:41.634Z'
+content_hash: 'sha256:1e2899a3cb7b4f7b2cb15976c010654c90b9d23573f581fc9c9316ae3e21f787'
+reviewed_at: '2026-10-23T16:06:41.634Z'
+review_due: '2027-04-21'
 name: 机器遗忘
 language: zh
 summary: 研究如何从已训练模型中删除、降低或纠正数据影响。
 occupation: 研究专题
-image: /topics/machine-unlearning.png
+image: /topics/machine-unlearning.webp
 image_caption: 机器遗忘主题图
 translation_of: Machine_Unlearning
 ---
