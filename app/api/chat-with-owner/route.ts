@@ -907,31 +907,23 @@ export async function POST(request: NextRequest) {
         ? groundedResult.kind === 'ok' ? 'succeeded' : 'failed'
         : 'not-attempted';
 
-    if (groundedResult.kind === 'upstream-error') {
-      return unavailableAfterProvider('upstream-error', {
-        retryOutcome,
-        retryReason: groundedResult.retryReason,
-        upstreamStatus: groundedResult.status
-      });
-    }
-    if (groundedResult.kind === 'empty') {
-      return unavailableAfterProvider('empty-reply', {
-        retryOutcome,
-        retryReason: groundedResult.retryReason
-      });
-    }
     if (
+      groundedResult.kind === 'upstream-error' ||
+      groundedResult.kind === 'empty' ||
       groundedResult.kind === 'protected-output' ||
       groundedResult.kind === 'retry-rate-limited' ||
       groundedResult.kind === 'invalid-citations'
     ) {
       const softBase = {
         finalValidationFailure:
-          groundedResult.kind === 'retry-rate-limited'
+          groundedResult.kind === 'retry-rate-limited' ||
+          groundedResult.kind === 'upstream-error' ||
+          groundedResult.kind === 'empty'
             ? undefined
             : groundedResult.finalValidationFailure,
         retryOutcome,
-        retryReason: groundedResult.retryReason
+        retryReason: groundedResult.retryReason,
+        upstreamStatus: groundedResult.kind === 'upstream-error' ? groundedResult.status : undefined
       };
 
       // Soft grounded failures must not look like a full outage: try one conversational
@@ -965,7 +957,7 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      observe(groundedResult.kind, {
+      observe(groundedResult.kind === 'empty' ? 'empty-reply' : groundedResult.kind, {
         ...softBase,
         providerAttempts,
         usage: accumulatedUsage
