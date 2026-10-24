@@ -9,10 +9,10 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T21:39:01+08:00'
-modified: '2026-10-23T16:06:41.634Z'
-content_hash: 'sha256:cd98afaa9746b78fa41e485631ebfd4ad84251f532c714e63985bc381a3b547f'
-reviewed_at: '2026-10-23T16:06:41.634Z'
-review_due: '2027-01-21'
+modified: '2026-10-24T12:24:21.641Z'
+content_hash: 'sha256:abbe594649911eaf8873a676ba6edcf12d5ff47e92a79a8ee03ac428830abd87'
+reviewed_at: '2026-10-24T12:24:35.447Z'
+review_due: '2027-01-22'
 name: 'DynFrs: An Efficient Framework for Machine Unlearning in Random Forest'
 summary: ICLR 2025 paper on efficient machine unlearning for random forests.
 dates: 24-28 April 2025
@@ -88,7 +88,7 @@ DynFrs combines three mechanisms:
 - **LZY**, a lazy-tag mechanism that postpones subtree reconstruction until a later query actually traverses the affected path;
 - **ERT**, an Extremely Randomized Tree base learner, chosen because randomized split candidates make the structure less sensitive to local sample changes.
 
-![DynFrs lazy-tag strategy](/papers/dynfrs/lazy-tags.png)
+![DynFrs lazy-tag strategy](/papers/dynfrs/lazy-tags.webp)
 
 ## Key takeaways
 

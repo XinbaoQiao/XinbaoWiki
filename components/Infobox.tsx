@@ -223,7 +223,7 @@ export function Infobox({ data, language = 'en' }: Props) {
         <PortraitGallery items={galleryItems} language={language} />
       ) : image && (
         <div className="wiki-infobox-image">
-          <img src={pathWithBasePath(image)} alt={imageAlt} loading="eager" decoding="async" fetchPriority="high" />
+          <img src={pathWithBasePath(image)} alt={imageAlt} loading="eager" decoding="async" fetchPriority="high" sizes="(max-width: 720px) 42vw, 280px" width={560} height={700} />
           {caption && <div className="wiki-infobox-caption">{caption}</div>}
         </div>
       )}

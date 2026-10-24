@@ -58,8 +58,8 @@ The component notices and full local license texts are linked from
 | --- | --- | --- |
 | `public/institutions/cuhk-emblem.svg` | Binary identity matches the Wikimedia Commons CUHK emblem file; the source page marks it as public-domain material and warns about official-insignia restrictions. | **Unresolved for downstream brand use.** Follow the upstream page and CUHK policy. |
 | `public/institutions/nusri-cq-logo.svg` | Used as an NUS/NUSRI identifier; no source-specific license or permission record is stored here. | **Unresolved.** No downstream reuse permission. |
-| `public/institutions/shandong-university-logo.png` | Official identifier; no source-specific license or permission record is stored here. | **Unresolved.** No downstream reuse permission. |
-| `public/institutions/zhejiang-university-logo.png` | Official identifier; no source-specific license or permission record is stored here. | **Unresolved.** No downstream reuse permission. |
+| `public/institutions/shandong-university-logo.webp` | Official identifier; no source-specific license or permission record is stored here. | **Unresolved.** No downstream reuse permission. |
+| `public/institutions/zhejiang-university-logo.webp` | Official identifier; no source-specific license or permission record is stored here. | **Unresolved.** No downstream reuse permission. |
 
 Official names and insignia may remain restricted even when an image file is
 in the public domain.
@@ -76,11 +76,11 @@ The following files have no per-file source, co-author approval, publisher
 license, or generation manifest recorded in the repository. They are all
 **unresolved** and receive no downstream reuse permission:
 
-- `public/papers/dynfrs/lazy-tags.png`
+- `public/papers/dynfrs/lazy-tags.webp`
 - `public/papers/dynfrs/poster.webp`
 - `public/papers/hessian-free/poster.webp`
 - `public/papers/model-collapse/poster.webp`
-- `public/papers/model-collapse/teaser.png`
+- `public/papers/model-collapse/teaser.webp`
 - `public/papers/soft-weighted/framework.png`
 - `public/papers/soft-weighted/framework.webp`
 

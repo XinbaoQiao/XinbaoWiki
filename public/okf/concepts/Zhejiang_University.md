@@ -8,18 +8,18 @@ tags:
   - education
   - public-research-university
 timestamp: '2026-05-05T21:15:18+08:00'
-modified: '2026-10-07T07:07:23.994Z'
-content_hash: 'sha256:dd5afd256301754d53f932f2eae3fbe925caf40c26f4c2a82417c08cedbd1eb1'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-24T12:24:21.673Z'
+content_hash: 'sha256:0f8c7ab6d9887450c4386dc83a0b6c6ecb3c08fd50a755844165443096c8f77b'
+reviewed_at: '2026-10-24T12:24:35.447Z'
+review_due: '2027-04-22'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-07T07:07:51.129Z'
-  reviewDue: '2027-04-05'
+  reviewedAt: '2026-10-24T12:24:35.447Z'
+  reviewDue: '2027-04-22'
   pendingReview: false
   overdue: false
 retrieval:

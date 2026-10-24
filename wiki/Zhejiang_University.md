@@ -8,10 +8,10 @@ tags:
   - education
   - public-research-university
 timestamp: '2026-05-05T21:15:18+08:00'
-modified: '2026-10-07T07:07:23.994Z'
-content_hash: 'sha256:dd5afd256301754d53f932f2eae3fbe925caf40c26f4c2a82417c08cedbd1eb1'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-24T12:24:21.673Z'
+content_hash: 'sha256:0f8c7ab6d9887450c4386dc83a0b6c6ecb3c08fd50a755844165443096c8f77b'
+reviewed_at: '2026-10-24T12:24:35.447Z'
+review_due: '2027-04-22'
 name: Zhejiang University
 summary: Master's institution of Xinbao Qiao.
 person:
@@ -22,7 +22,7 @@ school: Graduate study in artificial intelligence
 dates: 2022-2025
 place: 'Hangzhou, Zhejiang, China'
 focus: Data centric ML; machine unlearning
-image: /institutions/zhejiang-university-logo.png
+image: /institutions/zhejiang-university-logo.webp
 image_caption: Seal of Zhejiang University
 links:
   - label: Zhejiang University

@@ -54,6 +54,8 @@
   min-width: 0;
   margin: 0;
   scroll-snap-align: start;
+  content-visibility: auto;
+  contain-intrinsic-size: 220px 320px;
 }
 
 .paper:only-child {

@@ -1931,16 +1931,16 @@ assert.doesNotMatch(fs.readFileSync(path.join(wikiDir, 'pages.json'), 'utf8'), h
 
 const publicationImages = (page) => [...read(page).matchAll(/!\[[^\]]+\]\(([^)]+)\)/g)].map((match) => match[1]);
 assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /!\[[^\]]+\]\(\/papers\/model-collapse\/poster\.webp\)/, 'model-collapse paper page includes poster image');
-assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /!\[[^\]]+\]\(\/papers\/model-collapse\/teaser\.png\)/, 'model-collapse paper page displays a local teaser figure');
-assert.match(read('DynFrs.md'), /!\[[^\]]+\]\(\/papers\/dynfrs\/lazy-tags\.png\)/, 'DynFrs paper page displays a figure');
+assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /!\[[^\]]+\]\(\/papers\/model-collapse\/teaser\.webp\)/, 'model-collapse paper page displays a local teaser figure');
+assert.match(read('DynFrs.md'), /!\[[^\]]+\]\(\/papers\/dynfrs\/lazy-tags\.webp\)/, 'DynFrs paper page displays a figure');
 assert.match(read('Hessian_Free_Online_Certified_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/hessian-free\/poster\.webp\)/, 'Hessian-free paper page includes poster image');
 assert.match(read('DynFrs.md'), /!\[[^\]]+\]\(\/papers\/dynfrs\/poster\.webp\)/, 'DynFrs paper page includes poster image');
 assert.match(read('Soft_Weighted_Machine_Unlearning.md'), /!\[[^\]]+\]\(\/papers\/soft-weighted\/framework\.webp\)/, 'soft-weighted paper page includes framework image');
-assert.deepEqual(publicationImages('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), ['/papers/model-collapse/poster.webp', '/papers/model-collapse/teaser.png'], 'model-collapse paper places the poster before the overview teaser');
+assert.deepEqual(publicationImages('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), ['/papers/model-collapse/poster.webp', '/papers/model-collapse/teaser.webp'], 'model-collapse paper places the poster before the overview teaser');
 assert.deepEqual(publicationImages('Hessian_Free_Online_Certified_Unlearning.md'), ['/papers/hessian-free/poster.webp'], 'Hessian-free paper removes the experimental curve and keeps only the poster');
-assert.deepEqual(publicationImages('DynFrs.md'), ['/papers/dynfrs/poster.webp', '/papers/dynfrs/lazy-tags.png'], 'DynFrs paper places the poster before the method schematic');
+assert.deepEqual(publicationImages('DynFrs.md'), ['/papers/dynfrs/poster.webp', '/papers/dynfrs/lazy-tags.webp'], 'DynFrs paper places the poster before the method schematic');
 assert.deepEqual(publicationImages('Soft_Weighted_Machine_Unlearning.md'), ['/papers/soft-weighted/framework.webp'], 'soft-weighted paper uses the approved framework without the rejected poster');
-assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /\/papers\/model-collapse\/poster\.webp\)[\s\S]*## Overview[\s\S]*\/papers\/model-collapse\/teaser\.png\)/, 'model-collapse paper separates the poster from the teaser with overview text');
+assert.match(read('When_Sample_Selection_Bias_Precipitates_Model_Collapse.md'), /\/papers\/model-collapse\/poster\.webp\)[\s\S]*## Overview[\s\S]*\/papers\/model-collapse\/teaser\.webp\)/, 'model-collapse paper separates the poster from the teaser with overview text');
 for (const page of ['When_Sample_Selection_Bias_Precipitates_Model_Collapse.md', 'DynFrs.md', 'Soft_Weighted_Machine_Unlearning.md']) {
   assert.doesNotMatch(read(page), /poster\.png\)\n\n!\[[^\]]+\]\(\/papers\//, `${page} does not place a non-poster figure immediately after the poster`);
 }
@@ -2676,7 +2676,7 @@ const generatedConceptImages = [
   'public/topics/machine-unlearning.webp',
   'public/topics/synthetic-data.webp',
   'public/topics/data-centric-ml.webp',
-  'public/papers/model-collapse/teaser.png'
+  'public/papers/model-collapse/teaser.webp'
 ];
 
 for (const file of generatedConceptImages) {
@@ -2922,8 +2922,8 @@ for (const file of [
   'public/images/Portrait-Singapore-ICLR-2025.webp',
   'public/images/Portrait-Seoul-ICML-2026.webp',
   'public/institutions/cuhk-emblem.svg',
-  'public/institutions/zhejiang-university-logo.png',
-  'public/institutions/shandong-university-logo.png',
+  'public/institutions/zhejiang-university-logo.webp',
+  'public/institutions/shandong-university-logo.webp',
   'public/institutions/nusri-cq-logo.svg',
   'public/topics/ai-and-networks.webp',
   'public/topics/machine-unlearning.webp',
@@ -2935,10 +2935,10 @@ for (const file of [
   'public/site-logos/wordmark/xinbao-qiao-charcoal.png',
   'public/files/XinbaoQiao_CV.pdf',
   'public/papers/model-collapse/poster.webp',
-  'public/papers/model-collapse/teaser.png',
+  'public/papers/model-collapse/teaser.webp',
   'public/papers/hessian-free/poster.webp',
   'public/papers/soft-weighted/framework.webp',
-  'public/papers/dynfrs/lazy-tags.png',
+  'public/papers/dynfrs/lazy-tags.webp',
   'public/papers/dynfrs/poster.webp'
 ]) {
   assertFile(file);

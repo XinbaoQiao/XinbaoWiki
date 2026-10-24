@@ -10,18 +10,18 @@ tags:
   - icml-2026
   - synthetic-data
 timestamp: '2026-06-02T22:56:50+08:00'
-modified: '2026-10-23T16:06:41.634Z'
-content_hash: 'sha256:b6bf8bfb4eafa2a47b19e527f16bd5c6d01da44ce04edebc6b6c8360d33ce297'
-reviewed_at: '2026-10-23T16:06:41.634Z'
-review_due: '2027-10-23'
+modified: '2026-10-24T12:24:21.670Z'
+content_hash: 'sha256:ee377d6c91c6ffa3203c4df44eaa83293aa371d911ce4581eae9e5cf618e3c19'
+reviewed_at: '2026-10-24T12:24:35.447Z'
+review_due: '2027-10-24'
 language: zh
 lifecycle:
   status: confirmed
   confidence: 0.95
   review: on venue/status change
   retention: long-lived semantic memory
-  reviewedAt: '2026-10-23T16:06:41.634Z'
-  reviewDue: '2027-10-23'
+  reviewedAt: '2026-10-24T12:24:35.447Z'
+  reviewDue: '2027-10-24'
   pendingReview: false
   overdue: false
 retrieval:
@@ -44,7 +44,7 @@ source_path: wiki/When_Sample_Selection_Bias_Precipitates_Model_Collapse_zh.md
 
 论文关注参考数据有限且分散于不同机构的场景。医疗联合体、银行或专有机构可能因为原始数据不能汇集，只能使用自身有限参考数据评估合成样本。选择因此变成一种确认偏差机制：接近本地视角的样本被保留，而稀有但有效的模式被剪掉。低资源社区对此尤其脆弱：尾部区域在合成数据增强开始前就已经代表不足，本地过滤会把数据稀缺放大为持续性的覆盖损失。
 
-![局部选择偏差会收窄递归合成数据；协作 Wasserstein 验证有助于保持多样性](/papers/model-collapse/teaser.png)
+![局部选择偏差会收窄递归合成数据；协作 Wasserstein 验证有助于保持多样性](/papers/model-collapse/teaser.webp)
 
 ## 方法
 

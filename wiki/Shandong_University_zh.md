@@ -8,10 +8,10 @@ tags:
   - education
   - 公立研究型大学
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-07T07:07:23.959Z'
-content_hash: 'sha256:7717a610ac9c233c685eb8e48dcb76db8a6fb9f0d31cc382f1d0ae615c5ba9dd'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-24T12:24:21.663Z'
+content_hash: 'sha256:032dd723a8a56ec05012ab76faf1b2386d39a45f3f71ca2a5dc3c1e4713daf05'
+reviewed_at: '2026-10-24T12:24:35.447Z'
+review_due: '2027-04-22'
 name: 山东大学
 language: zh
 summary: 乔鑫宝本科阶段所在机构。
@@ -23,7 +23,7 @@ school: 本科工程教育
 dates: 2018-2022
 place: 中国山东
 focus: 通信工程；信号与网络基础
-image: /institutions/shandong-university-logo.png
+image: /institutions/shandong-university-logo.webp
 image_caption: 山东大学校徽与校名
 links:
   - label: Shandong University

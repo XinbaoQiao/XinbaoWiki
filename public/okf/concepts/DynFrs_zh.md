@@ -9,18 +9,18 @@ tags:
   - iclr-2025-poster
   - iclr-2025
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-23T16:06:41.634Z'
-content_hash: 'sha256:a4d6f93efbbfbf36d03a245ffc8ec5e48d46a73171844028f22c6c4a89fcdc12'
-reviewed_at: '2026-10-23T16:06:41.634Z'
-review_due: '2027-01-21'
+modified: '2026-10-24T12:24:21.639Z'
+content_hash: 'sha256:d82cefd5ecd7343399e511e58aa4799727f451097135941056dbe6a297a95f29'
+reviewed_at: '2026-10-24T12:24:35.447Z'
+review_due: '2027-01-22'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-23T16:06:41.634Z'
-  reviewDue: '2027-01-21'
+  reviewedAt: '2026-10-24T12:24:35.447Z'
+  reviewDue: '2027-01-22'
   pendingReview: false
   overdue: false
 retrieval:
@@ -51,7 +51,7 @@ DynFrs 结合三种机制：
 - **LZY**：延迟标记（lazy-tag）机制，将子树重建推迟到后续查询真正经过受影响路径时；
 - **ERT**：使用极端随机树（Extremely Randomized Tree）作为基学习器，通过随机划分候选降低树结构对局部样本变化的敏感性。
 
-![DynFrs lazy-tag 策略](/papers/dynfrs/lazy-tags.png)
+![DynFrs lazy-tag 策略](/papers/dynfrs/lazy-tags.webp)
 
 ## 关键启示
 

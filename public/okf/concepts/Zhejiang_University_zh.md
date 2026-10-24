@@ -8,18 +8,18 @@ tags:
   - education
   - 公立研究型大学
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-07T07:07:23.994Z'
-content_hash: 'sha256:bb84c1e200a6d863a556c8c295e8e43403d58af38c99f96e848be1c6aefde274'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-24T12:24:21.672Z'
+content_hash: 'sha256:647c11716d95b06eb7dad5dc94ab7a1e6a24e2649e870701bd78802ab847eddd'
+reviewed_at: '2026-10-24T12:24:35.447Z'
+review_due: '2027-04-22'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-07T07:07:51.129Z'
-  reviewDue: '2027-04-05'
+  reviewedAt: '2026-10-24T12:24:35.447Z'
+  reviewDue: '2027-04-22'
   pendingReview: false
   overdue: false
 retrieval:

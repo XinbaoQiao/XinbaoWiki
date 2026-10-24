@@ -8,10 +8,10 @@ tags:
   - education
   - 公立研究型大学
 timestamp: '2026-05-05T23:25:14+08:00'
-modified: '2026-10-07T07:07:23.994Z'
-content_hash: 'sha256:bb84c1e200a6d863a556c8c295e8e43403d58af38c99f96e848be1c6aefde274'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-24T12:24:21.672Z'
+content_hash: 'sha256:647c11716d95b06eb7dad5dc94ab7a1e6a24e2649e870701bd78802ab847eddd'
+reviewed_at: '2026-10-24T12:24:35.447Z'
+review_due: '2027-04-22'
 name: 浙江大学
 language: zh
 summary: 乔鑫宝硕士阶段所在机构。
@@ -23,7 +23,7 @@ school: 人工智能方向研究生阶段
 dates: 2022-2025
 place: 中国浙江杭州
 focus: 数据中心 ML；机器遗忘
-image: /institutions/zhejiang-university-logo.png
+image: /institutions/zhejiang-university-logo.webp
 image_caption: 浙江大学校徽
 links:
   - label: Zhejiang University

@@ -12,18 +12,18 @@ tags:
   - icml-2026
   - synthetic-data
 timestamp: '2026-06-02T22:56:50+08:00'
-modified: '2026-10-23T16:06:41.634Z'
-content_hash: 'sha256:143b10f1d65eaf0277ee8f07538e6e989370b116dc4208980c9c4484b516d37e'
-reviewed_at: '2026-10-23T16:06:41.634Z'
-review_due: '2027-10-23'
+modified: '2026-10-24T12:24:21.671Z'
+content_hash: 'sha256:5304eab3f3a264aa918eb8152811a03bb32702536ef2600708fba5e749786ee9'
+reviewed_at: '2026-10-24T12:24:35.447Z'
+review_due: '2027-10-24'
 language: en
 lifecycle:
   status: confirmed
   confidence: 0.95
   review: on venue/status change
   retention: long-lived semantic memory
-  reviewedAt: '2026-10-23T16:06:41.634Z'
-  reviewDue: '2027-10-23'
+  reviewedAt: '2026-10-24T12:24:35.447Z'
+  reviewDue: '2027-10-24'
   pendingReview: false
   overdue: false
 retrieval:
@@ -46,7 +46,7 @@ The paper studies [model collapse](./Model_Collapse.md) in recursive synthetic-d
 
 The motivating setting is a low-resource data-silo environment. A hospital consortium, bank, or proprietary institution may evaluate synthetic samples against its own limited reference data because raw data cannot be pooled. Selection then becomes a confirmation-bias mechanism: samples close to the local view are retained, while rare but valid modes are pruned away. Low-resource communities are especially vulnerable: tail regions are already weakly represented before synthetic augmentation begins, so local filtering can turn scarcity into persistent coverage loss.
 
-![Teaser: local selection bias narrows recursive synthetic data, while collaborative Wasserstein verification preserves diversity](/papers/model-collapse/teaser.png)
+![Teaser: local selection bias narrows recursive synthetic data, while collaborative Wasserstein verification preserves diversity](/papers/model-collapse/teaser.webp)
 
 ## Method
 

@@ -8,10 +8,10 @@ tags:
   - education
   - public-research-university
 timestamp: '2026-05-05T20:55:21+08:00'
-modified: '2026-10-07T07:07:23.960Z'
-content_hash: 'sha256:42cad85bbe657d1f8d41723fd2b79fc3f715dd276d9e1a7fbf4aa878a15746b5'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-24T12:24:21.664Z'
+content_hash: 'sha256:41d02ba1505714a719cb1dce061af668009dc9c8ebc9e3ff8148cfeb1c5f23cd'
+reviewed_at: '2026-10-24T12:24:35.447Z'
+review_due: '2027-04-22'
 name: Shandong University
 summary: Undergraduate institution of Xinbao Qiao.
 person:
@@ -22,7 +22,7 @@ school: Undergraduate engineering study
 dates: 2018-2022
 place: 'Shandong, China'
 focus: Communication engineering; signal and network foundations
-image: /institutions/shandong-university-logo.png
+image: /institutions/shandong-university-logo.webp
 image_caption: Seal and lettering of Shandong University
 links:
   - label: Shandong University
