@@ -1884,9 +1884,9 @@
         "wasserstein"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-10-24T14:48:31.203Z",
-      "contentHash": "sha256:f09cdb31d7722809a1227f7a810111f1d6b3e0501adc8d2824fb2c682e11e8b0",
-      "reviewedAt": "2026-10-24T14:48:55.704Z",
+      "modifiedAt": "2026-10-24T14:59:41.556Z",
+      "contentHash": "sha256:5ae13964b06355d703b0972831e085abefe650c86d44050a92a209c73928d06f",
+      "reviewedAt": "2026-10-24T14:59:43.820Z",
       "reviewDue": "2027-04-22",
       "sourceIds": [
         "src-de7219537378d237"
@@ -1900,7 +1900,7 @@
       "retrieval": {
         "documentId": "wiki:Wasserstein_Geometry",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:f09cdb31d7722809a1227f7a810111f1d6b3e0501adc8d2824fb2c682e11e8b0",
+        "contentHash": "sha256:5ae13964b06355d703b0972831e085abefe650c86d44050a92a209c73928d06f",
         "textFields": [
           "title",
           "aliases",
@@ -2442,9 +2442,9 @@
         "wasserstein"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-10-24T14:48:31.202Z",
-      "contentHash": "sha256:b8fdcae57019a61197cbe5c39dbbee0fe7dd1840d7b5f723f9afec89f54aa560",
-      "reviewedAt": "2026-10-24T14:48:55.704Z",
+      "modifiedAt": "2026-10-24T14:59:41.555Z",
+      "contentHash": "sha256:53c78ab17e6411febd4e2fbab3379fc1dcbfbd2977568a54f79f27c052079854",
+      "reviewedAt": "2026-10-24T14:59:43.820Z",
       "reviewDue": "2027-04-22",
       "sourceIds": [
         "src-de7219537378d237"
@@ -2458,7 +2458,7 @@
       "retrieval": {
         "documentId": "wiki:Wasserstein_Geometry_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:b8fdcae57019a61197cbe5c39dbbee0fe7dd1840d7b5f723f9afec89f54aa560",
+        "contentHash": "sha256:53c78ab17e6411febd4e2fbab3379fc1dcbfbd2977568a54f79f27c052079854",
         "textFields": [
           "title",
           "aliases",

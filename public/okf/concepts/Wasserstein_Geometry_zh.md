@@ -9,9 +9,9 @@ tags:
   - 研究概念
   - wasserstein
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-10-24T14:48:31.202Z'
-content_hash: 'sha256:b8fdcae57019a61197cbe5c39dbbee0fe7dd1840d7b5f723f9afec89f54aa560'
-reviewed_at: '2026-10-24T14:48:55.704Z'
+modified: '2026-10-24T14:59:41.555Z'
+content_hash: 'sha256:53c78ab17e6411febd4e2fbab3379fc1dcbfbd2977568a54f79f27c052079854'
+reviewed_at: '2026-10-24T14:59:43.820Z'
 review_due: '2027-04-22'
 language: zh
 lifecycle:
@@ -19,7 +19,7 @@ lifecycle:
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-10-24T14:48:55.704Z'
+  reviewedAt: '2026-10-24T14:59:43.820Z'
   reviewDue: '2027-04-22'
   pendingReview: false
   overdue: false
@@ -52,4 +52,4 @@ ICML 2026 论文 [样本选择偏差何以促成模型坍缩](./When_Sample_Sele
 - [模型坍缩](./Model_Collapse_zh.md)
 - [数据孤岛](./Data_Silos_zh.md)
 
-[^rwefm]: Doron Haviv、Edward De Brouwer、Rishabh Anand、Rex Ying、Aïcha Bentaieb、Gabriele Scalia 与 Hector Corrada Bravo，"[When Riemann flows with Wasserstein: Generative Modeling of Probability Distributions on Manifolds](https://arxiv.org/abs/2609.25659)"，arXiv:2609.25659，2026。上图来自该论文（其关于 Riemannian Wasserstein Entropic Flow Matching 与 McCann 插值的概览图），此处仅作示意并保留署名，并非乔鑫宝的工作成果。
+[^rwefm]: 图来自 Haviv 等，"[When Riemann flows with Wasserstein: Generative Modeling of Probability Distributions on Manifolds](https://arxiv.org/abs/2609.25659)"，arXiv:2609.25659。

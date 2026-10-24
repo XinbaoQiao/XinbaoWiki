@@ -9,9 +9,9 @@ tags:
   - research-concept
   - wasserstein
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-10-24T14:48:31.203Z'
-content_hash: 'sha256:f09cdb31d7722809a1227f7a810111f1d6b3e0501adc8d2824fb2c682e11e8b0'
-reviewed_at: '2026-10-24T14:48:55.704Z'
+modified: '2026-10-24T14:59:41.556Z'
+content_hash: 'sha256:5ae13964b06355d703b0972831e085abefe650c86d44050a92a209c73928d06f'
+reviewed_at: '2026-10-24T14:59:43.820Z'
 review_due: '2027-04-22'
 language: en
 lifecycle:
@@ -19,7 +19,7 @@ lifecycle:
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-10-24T14:48:55.704Z'
+  reviewedAt: '2026-10-24T14:59:43.820Z'
   reviewDue: '2027-04-22'
   pendingReview: false
   overdue: false
@@ -52,4 +52,4 @@ The ICML 2026 paper [When Sample Selection Bias Precipitates Model Collapse](./W
 - [Model Collapse](./Model_Collapse.md)
 - [Data Silos](./Data_Silos.md)
 
-[^rwefm]: Doron Haviv, Edward De Brouwer, Rishabh Anand, Rex Ying, Aïcha Bentaieb, Gabriele Scalia, and Hector Corrada Bravo, "[When Riemann flows with Wasserstein: Generative Modeling of Probability Distributions on Manifolds](https://arxiv.org/abs/2609.25659)", arXiv:2609.25659, 2026. The figure above is from that paper (their overview of Riemannian Wasserstein Entropic Flow Matching and McCann interpolants) and is shown here for illustration with attribution; it is not a result of Qiao's work.
+[^rwefm]: Figure from Haviv et al., "[When Riemann flows with Wasserstein: Generative Modeling of Probability Distributions on Manifolds](https://arxiv.org/abs/2609.25659)", arXiv:2609.25659.

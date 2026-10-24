@@ -7174,7 +7174,7 @@
       "citationSourceIds": [
         "src-de7219537378d237"
       ],
-      "contentHash": "sha256:f09cdb31d7722809a1227f7a810111f1d6b3e0501adc8d2824fb2c682e11e8b0",
+      "contentHash": "sha256:5ae13964b06355d703b0972831e085abefe650c86d44050a92a209c73928d06f",
       "file": "Wasserstein_Geometry.md",
       "footnoteSourceIds": [
         "src-de7219537378d237"
@@ -7186,12 +7186,12 @@
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
         "retention": "semantic memory with quality warnings",
-        "reviewedAt": "2026-10-24T14:48:55.704Z",
+        "reviewedAt": "2026-10-24T14:59:43.820Z",
         "reviewDue": "2027-04-22",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-24T14:48:31.203Z",
+      "modifiedAt": "2026-10-24T14:59:41.556Z",
       "outgoing": [
         "Collaborative_Evaluation",
         "Data_Silos",
@@ -7218,12 +7218,12 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Wasserstein Geometry",
       "type": "Research concept",
-      "reviewedAt": "2026-10-24T14:48:55.704Z",
+      "reviewedAt": "2026-10-24T14:59:43.820Z",
       "reviewDue": "2027-04-22",
       "retrieval": {
         "documentId": "wiki:Wasserstein_Geometry",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:f09cdb31d7722809a1227f7a810111f1d6b3e0501adc8d2824fb2c682e11e8b0",
+        "contentHash": "sha256:5ae13964b06355d703b0972831e085abefe650c86d44050a92a209c73928d06f",
         "textFields": [
           "title",
           "aliases",
@@ -7260,7 +7260,7 @@
       "citationSourceIds": [
         "src-de7219537378d237"
       ],
-      "contentHash": "sha256:b8fdcae57019a61197cbe5c39dbbee0fe7dd1840d7b5f723f9afec89f54aa560",
+      "contentHash": "sha256:53c78ab17e6411febd4e2fbab3379fc1dcbfbd2977568a54f79f27c052079854",
       "file": "Wasserstein_Geometry_zh.md",
       "footnoteSourceIds": [
         "src-de7219537378d237"
@@ -7272,12 +7272,12 @@
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
         "retention": "semantic memory with quality warnings",
-        "reviewedAt": "2026-10-24T14:48:55.704Z",
+        "reviewedAt": "2026-10-24T14:59:43.820Z",
         "reviewDue": "2027-04-22",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-24T14:48:31.202Z",
+      "modifiedAt": "2026-10-24T14:59:41.555Z",
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "Data_Silos_zh",
@@ -7304,12 +7304,12 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Wasserstein 几何",
       "type": "研究概念",
-      "reviewedAt": "2026-10-24T14:48:55.704Z",
+      "reviewedAt": "2026-10-24T14:59:43.820Z",
       "reviewDue": "2027-04-22",
       "retrieval": {
         "documentId": "wiki:Wasserstein_Geometry_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:b8fdcae57019a61197cbe5c39dbbee0fe7dd1840d7b5f723f9afec89f54aa560",
+        "contentHash": "sha256:53c78ab17e6411febd4e2fbab3379fc1dcbfbd2977568a54f79f27c052079854",
         "textFields": [
           "title",
           "aliases",
