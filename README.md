@@ -10,9 +10,9 @@
 
   # XinbaoWiki
 
-  **A bilingual academic homepage organized as a Wiki: browseable, searchable, and askable—with citations.**
+  **A bilingual academic homepage organized as a Wiki: you can browse it, search it, and ask questions about a page—with citations.**
 
-  **双语学术主页，按 Wiki 组织：可浏览、可检索，也可带着引用来提问。**
+  **双语学术主页，按 Wiki 来组织：可以浏览、可以搜索，也可以就某一页提问，并看到引用来源。**
 
   <p>
     <a href="https://github.com/XinbaoQiao/XinbaoWiki/tree/template"><img src="https://img.shields.io/badge/START_HERE-template%20branch-1d1d1f?style=for-the-badge" height="31" alt="Open the template branch" /></a>
@@ -32,30 +32,34 @@
 
 ## English
 
-### Branches
+This README is meant for someone who has not used the project before. Read the headings in order for the overall flow; expand a section when you need that step’s detail.
 
-| Branch | Role |
+### Which branch to use
+
+| Branch | What it is |
 | --- | --- |
-| [`template`](https://github.com/XinbaoQiao/XinbaoWiki/tree/template) | **Public starter.** Placeholders only (“Your Name”, sample pages, no owner photos). |
-| [`main`](https://github.com/XinbaoQiao/XinbaoWiki/tree/main) | **Live site source** for [xinbaopedia.top](https://xinbaopedia.top). |
+| [`template`](https://github.com/XinbaoQiao/XinbaoWiki/tree/template) | **Public starter.** Placeholder text only (“Your Name”, sample pages, no owner photos). |
+| [`main`](https://github.com/XinbaoQiao/XinbaoWiki/tree/main) | **Source of the live site** at [xinbaopedia.top](https://xinbaopedia.top). |
 
-If you want your own site, start from **`template`**, not from `main`.
+To build your own site, start from **`template`**, not from `main`. Open `main` only when you want to study or contribute to the live example.
 
-### How to use the template
+### How to start
+
+Pick **one** way to get the `template` files, then run the site locally and replace the placeholders. The three paths below are different ways to obtain the files—not three names for the same action.
 
 <details>
-<summary><strong>1. Open the <code>template</code> branch</strong></summary>
+<summary><strong>Path A — Open on GitHub</strong> (read first)</summary>
 
-<p>On GitHub, open the repository, open the branch dropdown, and select <code>template</code>. You can also go directly to <a href="https://github.com/XinbaoQiao/XinbaoWiki/tree/template">github.com/XinbaoQiao/XinbaoWiki/tree/template</a>.</p>
+<p>Open the repository and switch the branch menu to <code>template</code>, or go directly to <a href="https://github.com/XinbaoQiao/XinbaoWiki/tree/template">github.com/XinbaoQiao/XinbaoWiki/tree/template</a>.</p>
 
-<p>You should see placeholder copy such as “Your Name” and “Example University”. If you instead see a personal CV, photos, or a live domain, you are still on <code>main</code>.</p>
+<p>You should see placeholder wording such as “Your Name” and “Example University”. If you still see a personal CV, owner photos, or a live domain, you are still looking at <code>main</code>.</p>
 
 </details>
 
 <details>
-<summary><strong>2. Clone only <code>template</code></strong></summary>
+<summary><strong>Path B — Clone only <code>template</code></strong></summary>
 
-<p>Clone a single branch so your working tree starts from the sanitized starter:</p>
+<p>Clone a single branch so your working copy starts from the cleaned starter:</p>
 
 ```bash
 git clone -b template --single-branch https://github.com/XinbaoQiao/XinbaoWiki.git my-wiki
@@ -72,25 +76,25 @@ git checkout template
 </details>
 
 <details>
-<summary><strong>3. Fork, then switch to <code>template</code></strong></summary>
+<summary><strong>Path C — Fork, then switch to <code>template</code></strong></summary>
 
-<p>Fork the repository on GitHub. In your fork, select branch <strong><code>template</code></strong> (or create a working branch from it). Clone <em>your</em> fork and check that branch out before you edit content.</p>
+<p>Fork the repository on GitHub. In <em>your</em> fork, select branch <strong><code>template</code></strong> (or create a working branch from it), clone that fork, and check the branch out before you edit.</p>
 
-<p>Starting from <code>main</code> will copy personal Wiki pages and media into your project. Prefer <code>template</code> unless you deliberately want that material.</p>
+<p>Starting from <code>main</code> copies personal Wiki pages and media into your project. Prefer <code>template</code> unless you deliberately want that material.</p>
 
 </details>
 
 <details>
-<summary><strong>4. Run locally</strong></summary>
+<summary><strong>Then — Run locally</strong></summary>
 
-<p>Use Node 22 (see <code>.nvmrc</code>). Install dependencies, then start the development server:</p>
+<p>Use Node 22 (see <code>.nvmrc</code>). Install dependencies and start the development server:</p>
 
 ```bash
 npm ci
 npm run dev        # http://localhost:3000
 ```
 
-<p>Before you deploy, regenerate derived Wiki artifacts and run the checks:</p>
+<p>Before you deploy, refresh generated Wiki files and run the checks:</p>
 
 ```bash
 npm run maintain:wiki
@@ -101,88 +105,104 @@ npm run build
 </details>
 
 <details>
-<summary><strong>5. Replace placeholders</strong></summary>
+<summary><strong>Then — Replace the placeholders</strong></summary>
 
-<p>Most personalization lives in a small set of files. Change identity and navigation first, then replace sample Wiki pages and public assets.</p>
+<p>Most personalization sits in a few places. Change your identity and site wording first, then replace sample Wiki pages and images.</p>
 
-| Goal | Edit |
+| Goal | Where to edit |
 | --- | --- |
-| Name, taglines, research areas, chat starters | `lib/site-config.ts` |
+| Name, short taglines, research areas, chat starters | `lib/site-config.ts` |
 | Wiki pages (English + Chinese) | `wiki/*.md` — each `Foo.md` has a twin `Foo_zh.md` |
 | Canonical site URL | `NEXT_PUBLIC_SITE_URL` |
 | Avatar, icons, figures | `public/` |
-| Optional page AI / visitor map | env vars — see `docs/chat/README.md` and `docs/site-activity/README.md` |
+| Optional page assistant / visitor map | environment variables — see `docs/chat/README.md` and `docs/site-activity/README.md` |
 
-<p>After Wiki edits, run <code>npm run maintain:wiki</code>. The longer checklist lives in the README on the <code>template</code> branch itself.</p>
+<p>After you change Wiki pages, run <code>npm run maintain:wiki</code>. A longer checklist is in the README on the <code>template</code> branch itself.</p>
 
 </details>
 
 ### Live example
 
-[xinbaopedia.top](https://xinbaopedia.top) is the production site built from `main`. Use it to understand the product; build your own site from `template`.
+[xinbaopedia.top](https://xinbaopedia.top) is the production site built from `main`. Use it to see how the finished product feels; build your own site from `template`.
 
-### What’s inside
+### What you get
 
-Folded summaries below form the outline. Expand a section for a full description of that part of the system.
+These are the main things that set the site apart for a visitor. Expand a section for a short description.
 
 <details>
-<summary><strong>A. Home &amp; reading</strong> — wordmark, themes, updates, Wiki article layout</summary>
+<summary><strong>A. Browse and read</strong> — homepage and Wiki articles</summary>
 
-<p>The homepage centers on a wordmark that expands and collapses the surrounding content, so a visitor can move between a compact view and a full reading surface without leaving the page. Theme palettes (blue, gold, green, charcoal, and an automatic option) recolor chrome and accents consistently across the site.</p>
+<p>The homepage centers on a wordmark. Visitors can expand or collapse the surrounding content, so they move between a compact view and a full reading view without leaving the page. Several color themes (blue, gold, green, charcoal, plus an automatic option) keep the chrome and accents consistent. Latest updates can show in a compact or a fuller layout.</p>
 
-<p>Latest updates appear in compact or full form. Wiki articles are rendered from <code>wiki/*.md</code> with a sidebar, table of contents, KaTeX mathematics, and paper highlight cards where frontmatter provides them. Open any <code>/wiki/...</code> route on the live example to see the reading layout in context.</p>
+<p>Wiki articles are ordinary Markdown files under <code>wiki/</code>. On the site they appear with a sidebar, a table of contents, math rendering, and paper highlight cards when a page provides them. Open any <code>/wiki/...</code> route on the live example to see the reading layout.</p>
 
 </details>
 
 <details>
-<summary><strong>B. Browse &amp; search</strong> — directory, cube view, bilingual retrieval</summary>
+<summary><strong>B. Find your way</strong> — directory, overview view, and bilingual search</summary>
 
-<p>A curated directory groups people, topics, papers, and institutions so the site can be explored without relying only on free-text search. A browse “cube” view complements the list layout when a visitor wants a denser overview of the same graph.</p>
+<p>A curated directory groups people, topics, papers, and institutions, so visitors can explore without relying only on free-text search. An overview “cube” view sits alongside the list layout when a denser map of the same pages is useful.</p>
 
-<p>Site search covers titles, aliases, summaries, and body text in both English and Chinese. Results stay tied to Wiki pages, so navigation and retrieval share one content model rather than a separate CMS index.</p>
-
-</details>
-
-<details>
-<summary><strong>C. Ask with citations</strong> — optional page AI</summary>
-
-<p>When configured, page AI answers questions against the current Wiki page and returns numbered citations a reader can verify. Questions that fall outside the page fall back to ordinary chat rather than inventing unsupported claims.</p>
-
-<p>The feature expects an OpenAI-compatible endpoint. Setup notes, environment variables, and operational details are documented under <code>docs/chat/</code>. Without those variables, the rest of the site continues to build and run; only the assistant stays unavailable.</p>
+<p>Site search covers titles, alternative names, summaries, and body text in both English and Chinese. Results always lead back to Wiki pages, so browsing and searching share one set of sources.</p>
 
 </details>
 
 <details>
-<summary><strong>D. Optional extras</strong> — visitor atlas, wallpaper, OKF export</summary>
+<summary><strong>C. Ask about the current page</strong> — answers with citations</summary>
 
-<p>Visitor atlas uses Upstash Redis when credentials are present and shows an empty map otherwise. Owner wallpaper and mixed palette modes are available in settings; first-time visitors default to the mixed background so the site does not preload a heavy image.</p>
+<p>When this feature is configured, a visitor can ask questions about the page they are reading. Answers try to stay on that page’s content and include numbered citations the reader can check. Questions that go beyond the page fall back to ordinary chat instead of inventing unsupported claims.</p>
 
-<p><code>public/okf/**</code> is an agent-readable export regenerated from the Wiki. Treat it as a derived bundle: edit Markdown sources, then regenerate, rather than hand-editing the export.</p>
+<p>Setup needs an OpenAI-compatible API endpoint. Notes and environment variables are under <code>docs/chat/</code>. Without those settings, the rest of the site still builds and runs; only the assistant stays off.</p>
 
 </details>
 
 <details>
-<summary><strong>E. Content model</strong> — page types, twins, and relations</summary>
+<summary><strong>D. Optional extras</strong> — visitor map, wallpaper, export for agents</summary>
 
-<p>Content is organized as a small taxonomy rather than a flat blog. A typical hierarchy looks like this:</p>
+<p>A visitor map appears when Redis credentials (Upstash) are present; otherwise it shows empty. Settings also offer an owner wallpaper and mixed background modes. First-time visitors default to the mixed background so the site does not preload a heavy image.</p>
+
+<p>The folder <code>public/okf/</code> is a machine-readable export rebuilt from the Wiki. Treat it as generated output: edit the Markdown sources, then regenerate, rather than hand-editing the export.</p>
+
+</details>
+
+### How pages are organized
+
+Pages are Markdown files, each labeled with a page kind so the site can group them sensibly. In plain terms the library looks like the tree below. (The technical label stored at the top of each file is shown in parentheses where it helps.) Hidden or draft pages may stay out of public navigation.
 
 ```text
-Person / Home
-├── Research topics
-├── Papers & projects
-├── Institutions & people
-└── Notes / drafts (may be hidden)
+Wiki home index
+├── About the person
+│   ├── Biography / person page (PhD student)
+│   ├── CV summary
+│   ├── Education timeline
+│   ├── Research experience
+│   └── Technical skills
+├── Research
+│   ├── Research overview
+│   ├── Research topics
+│   ├── Research concepts (key ideas on their own pages)
+│   └── Model families
+├── Papers and projects
+│   ├── Publication list
+│   ├── Individual paper pages (publication)
+│   └── Project overviews
+├── Institutions and advisors
+│   ├── Universities (Public research university)
+│   ├── Research institutes
+│   └── Academic advisors
+└── Site notes (optional)
+    ├── Resource inventory
+    ├── Maintenance log
+    └── Style notes
 ```
 
-<p>Each idea lives in one Markdown file. The Chinese twin uses the same stem with a <code>_zh</code> suffix. In-body links use <code>[[Wikilinks]]</code>. Stronger typed links live in frontmatter <code>relations</code> (<code>related</code>, <code>uses</code>, <code>depends-on</code>, <code>cites</code>, and related keys); see <a href="docs/relation-taxonomy.md">docs/relation-taxonomy.md</a>. Writing conventions are summarized in <a href="docs/content-template.md">docs/content-template.md</a>.</p>
-
-</details>
+Each topic lives in one Markdown file. The Chinese twin uses the same filename stem with a `_zh` suffix, and points back to the English page. Inside the prose, links between pages use double-bracket **Wikilinks** (`[[Like This]]`). Stronger typed links (related, uses, cites, and similar) sit in the page header metadata; see [docs/relation-taxonomy.md](docs/relation-taxonomy.md). Writing conventions are in [docs/content-template.md](docs/content-template.md).
 
 ### How `template` stays current
 
-Every push to `main` runs [Sync template branch](https://github.com/XinbaoQiao/XinbaoWiki/actions/workflows/sync-template.yml). The workflow sanitizes `main` (removing personal paths, rewriting owner strings, and overlaying sample Wiki pages and images), runs a leak check, then installs and builds the sanitized tree before updating the public `template` branch.
+Every push to `main` runs [Sync template branch](https://github.com/XinbaoQiao/XinbaoWiki/actions/workflows/sync-template.yml). The workflow cleans `main` (removes personal paths, rewrites owner strings, and overlays sample Wiki pages and images), runs a leak check, then installs and builds the cleaned tree before updating the public `template` branch.
 
-You can also run the workflow manually from Actions → **Sync template branch** → Run workflow. Confirm success on [tree/template](https://github.com/XinbaoQiao/XinbaoWiki/tree/template); commit messages look like `Sync template from main <sha>`.
+You can also run the workflow by hand from Actions → **Sync template branch** → Run workflow. Confirm success on [tree/template](https://github.com/XinbaoQiao/XinbaoWiki/tree/template); commit messages look like `Sync template from main <sha>`.
 
 <details>
 <summary><strong>Repository map</strong></summary>
@@ -190,10 +210,10 @@ You can also run the workflow manually from Actions → **Sync template branch**
 ```text
 app/           pages and same-site API routes
 components/    Wiki, search, theme, and chat UI
-lib/           parsing, retrieval, prompts, navigation
+lib/           parsing, search helpers, prompts, navigation
 wiki/          bilingual Markdown source
-public/okf/    generated agent-readable bundle
-scripts/       maintenance, eval, release; template sanitizer (main only)
+public/okf/    generated export for agents
+scripts/       maintenance, checks, release; template cleaner (main only)
 docs/          content, chat, and deployment notes
 ```
 
@@ -214,30 +234,34 @@ docs/          content, chat, and deployment notes
 
 ## 简体中文
 
-### 分支
+这份说明面向第一次接触本项目的人。按标题顺序阅读，就能把握整体流程；需要某一步的细节时，再展开对应小节。
 
-| 分支 | 作用 |
+### 用哪个分支
+
+| 分支 | 是什么 |
 | --- | --- |
-| [`template`](https://github.com/XinbaoQiao/XinbaoWiki/tree/template) | **公开起步包。** 仅含占位内容（「Your Name」、示例页面，无站主照片）。 |
+| [`template`](https://github.com/XinbaoQiao/XinbaoWiki/tree/template) | **公开起步包。** 只有占位内容（「Your Name」、示例页面，无站主照片）。 |
 | [`main`](https://github.com/XinbaoQiao/XinbaoWiki/tree/main) | **正式站源码**，对应 [xinbaopedia.top](https://xinbaopedia.top)。 |
 
-若要搭建自己的站点，请从 **`template`** 开始，不要直接以 `main` 为底稿。
+搭建自己的站点，请从 **`template`** 开始，不要直接以 `main` 为底稿。只有在研究或贡献正式站示例时，才以 `main` 为工作底稿。
 
-### 使用模板
+### 如何开始
+
+用下面 **三种方式之一** 取得 `template` 文件，再在本地运行并替换占位内容。三条路径区分的是「如何拿到文件」，不是同一操作的三种叫法。
 
 <details>
-<summary><strong>1. 打开 <code>template</code> 分支</strong></summary>
+<summary><strong>路径 A — 在 GitHub 上打开</strong>（先阅读）</summary>
 
-<p>在 GitHub 打开本仓库，点开分支下拉菜单并选择 <code>template</code>；也可直接访问 <a href="https://github.com/XinbaoQiao/XinbaoWiki/tree/template">github.com/XinbaoQiao/XinbaoWiki/tree/template</a>。</p>
+<p>打开本仓库，在分支菜单中选择 <code>template</code>；也可直接访问 <a href="https://github.com/XinbaoQiao/XinbaoWiki/tree/template">github.com/XinbaoQiao/XinbaoWiki/tree/template</a>。</p>
 
-<p>页面上应出现「Your Name」「Example University」一类占位文案。若仍是个人简历、照片或真实域名，说明当前仍在 <code>main</code>。</p>
+<p>页面上应出现「Your Name」「Example University」一类占位文案。若仍是个人简历、站主照片或真实域名，说明当前仍在 <code>main</code>。</p>
 
 </details>
 
 <details>
-<summary><strong>2. 只克隆 <code>template</code></strong></summary>
+<summary><strong>路径 B — 只克隆 <code>template</code></strong></summary>
 
-<p>建议只克隆该分支，使工作区从去个性化后的起步包开始：</p>
+<p>建议只克隆该分支，使本地工作区从清理后的起步包开始：</p>
 
 ```bash
 git clone -b template --single-branch https://github.com/XinbaoQiao/XinbaoWiki.git my-wiki
@@ -254,16 +278,16 @@ git checkout template
 </details>
 
 <details>
-<summary><strong>3. 先 Fork，再切到 <code>template</code></strong></summary>
+<summary><strong>路径 C — 先 Fork，再切到 <code>template</code></strong></summary>
 
-<p>在 GitHub 上 Fork 本仓库。进入你的 fork 后，选择分支 <strong><code>template</code></strong>（或基于它再建工作分支）。克隆<strong>你的</strong> fork，并确认已 checkout 到该分支后再改内容。</p>
+<p>在 GitHub 上 Fork 本仓库。进入<strong>你的</strong> fork 后，选择分支 <strong><code>template</code></strong>（或基于它再建工作分支），克隆该 fork，并确认已切换到该分支后再改内容。</p>
 
 <p>从 <code>main</code> 起步会把个人 Wiki 与媒体一并带入项目。除非你有意保留这些材料，否则请优先使用 <code>template</code>。</p>
 
 </details>
 
 <details>
-<summary><strong>4. 本地运行</strong></summary>
+<summary><strong>然后 — 在本地运行</strong></summary>
 
 <p>请使用 Node 22（见 <code>.nvmrc</code>）。安装依赖后启动开发服务器：</p>
 
@@ -272,7 +296,7 @@ npm ci
 npm run dev        # http://localhost:3000
 ```
 
-<p>部署前请重新生成 Wiki 派生文件并完成检查：</p>
+<p>部署前请刷新由 Wiki 生成的文件，并完成检查：</p>
 
 ```bash
 npm run maintain:wiki
@@ -283,17 +307,17 @@ npm run build
 </details>
 
 <details>
-<summary><strong>5. 替换占位内容</strong></summary>
+<summary><strong>然后 — 替换占位内容</strong></summary>
 
-<p>个性化主要集中在少数文件：先改身份与导航，再替换示例 Wiki 页面与静态资源。</p>
+<p>个性化主要集中在少数位置：先改身份与站点文案，再替换示例 Wiki 页面与图片。</p>
 
 | 目标 | 修改处 |
 | --- | --- |
-| 姓名、标语、研究领域、快捷提问 | `lib/site-config.ts` |
+| 姓名、短标语、研究领域、快捷提问 | `lib/site-config.ts` |
 | Wiki 页面（中英文） | `wiki/*.md` — 每个 `Foo.md` 对应 `Foo_zh.md` |
 | 站点规范 URL | `NEXT_PUBLIC_SITE_URL` |
 | 头像、图标、插图 | `public/` |
-| 可选页内 AI / 访客地图 | 环境变量 — 见 `docs/chat/README.md`、`docs/site-activity/README.md` |
+| 可选页内助手 / 访客地图 | 环境变量 — 见 `docs/chat/README.md`、`docs/site-activity/README.md` |
 
 <p>修改 Wiki 后请运行 <code>npm run maintain:wiki</code>。更完整的清单见 <code>template</code> 分支上的 README。</p>
 
@@ -301,68 +325,84 @@ npm run build
 
 ### 在线示例
 
-[xinbaopedia.top](https://xinbaopedia.top) 是由 `main` 构建的正式站。用它了解产品形态；搭建自己的站点请基于 `template`。
+[xinbaopedia.top](https://xinbaopedia.top) 是由 `main` 构建的正式站。用它感受成品效果；搭建自己的站点请基于 `template`。
 
-### 内容结构
+### 你会得到什么
 
-折叠时只看大纲；展开后是对应模块的完整说明。
+下面是访客能直接感受到的主要特点。需要细节时再展开。
 
 <details>
-<summary><strong>A. 首页与阅读</strong> — 字标、主题、动态、Wiki 正文布局</summary>
+<summary><strong>A. 浏览与阅读</strong> — 首页与 Wiki 正文</summary>
 
-<p>首页以字标为中心，可展开或收起周围内容，使访客在紧凑视图与完整阅读面之间切换而无需离开页面。主题配色（蓝、金、绿、炭灰，以及自动模式）会统一作用于站点框架与强调色。</p>
+<p>首页以字标为中心。访客可以展开或收起周围内容，在紧凑视图与完整阅读视图之间切换，而无需离开页面。多种配色主题（蓝、金、绿、炭灰，以及自动模式）会统一作用于站点框架与强调色。最新动态支持紧凑或更完整的展示。</p>
 
-<p>最新动态支持紧凑或完整展示。Wiki 正文由 <code>wiki/*.md</code> 渲染，并带有侧栏、目录、KaTeX 公式，以及在 frontmatter 提供时出现的论文卡片。可在正式站任意打开 <code>/wiki/...</code> 页面查看阅读布局。</p>
+<p>Wiki 正文是 <code>wiki/</code> 下的普通 Markdown 文件。在站点上会带有侧栏、目录、数学公式渲染，以及在页面提供时出现的论文卡片。可在正式站任意打开 <code>/wiki/...</code> 页面查看阅读布局。</p>
 
 </details>
 
 <details>
-<summary><strong>B. 浏览与检索</strong> — 目录、立方体视图、双语检索</summary>
+<summary><strong>B. 找到内容</strong> — 目录、总览视图与双语搜索</summary>
 
-<p>结构化目录按人物、主题、论文与机构分组，使站点不必只依赖自由文本搜索即可浏览。立方体视图在需要更密的总览时，与列表布局互补。</p>
+<p>结构化目录按人物、主题、论文与机构分组，访客不必只靠自由文本搜索也能浏览。总览用的「立方体」视图与列表布局并列，适合需要更密的一览时使用。</p>
 
-<p>站内检索覆盖标题、别名、摘要与正文，并同时支持中英文。结果始终落回 Wiki 页面，因此导航与检索共用同一套内容模型，而不是另起一套 CMS 索引。</p>
-
-</details>
-
-<details>
-<summary><strong>C. 带引用的提问</strong> — 可选页内 AI</summary>
-
-<p>配置完成后，页内 AI 会尽量依据当前 Wiki 页面作答，并给出可核对的编号引用。超出页面范围的问题会回退到普通对话，而不是编造无依据的结论。</p>
-
-<p>该功能需要 OpenAI 兼容接口。环境变量与运维说明见 <code>docs/chat/</code>。未配置时，站点其余部分仍可构建与运行，仅助手不可用。</p>
+<p>站内搜索覆盖标题、别名、摘要与正文，并同时支持中英文。结果始终回到 Wiki 页面，因此浏览与搜索共用同一套内容来源。</p>
 
 </details>
 
 <details>
-<summary><strong>D. 可选扩展</strong> — 访客地图、壁纸、OKF 导出</summary>
+<summary><strong>C. 就当前页提问</strong> — 带引用的回答</summary>
 
-<p>访客地图在提供 Upstash Redis 凭证时启用，否则显示空图。设置中可切换站主壁纸与混合配色；首次访客默认使用混合背景，以避免预加载过大的图片。</p>
+<p>配置完成后，访客可以就正在阅读的页面提问。回答会尽量依据该页内容，并给出可核对的编号引用。超出页面范围的问题会回到普通对话，而不是编造无依据的结论。</p>
 
-<p><code>public/okf/**</code> 是由 Wiki 重新生成的、便于 agent 阅读的导出包。请把它视为派生结果：修改 Markdown 源文件后再生成，而不要直接手改导出内容。</p>
+<p>启用该功能需要 OpenAI 兼容的接口。说明与环境变量见 <code>docs/chat/</code>。未配置时，站点其余部分仍可构建与运行，只是助手不可用。</p>
 
 </details>
 
 <details>
-<summary><strong>E. 内容模型</strong> — 页面类型、中英双页与关系</summary>
+<summary><strong>D. 可选附加功能</strong> — 访客地图、壁纸、供工具读取的导出</summary>
 
-<p>内容按小型分类体系组织，而不是扁平博客。常见层级如下：</p>
+<p>提供 Redis（Upstash）凭证时会显示访客地图，否则为空图。设置中还可切换站主壁纸与混合背景；首次访客默认使用混合背景，以免预加载过大的图片。</p>
+
+<p><code>public/okf/</code> 是由 Wiki 重新生成、便于程序读取的导出目录。请把它视为生成结果：修改 Markdown 源文件后再生成，而不要直接手改导出内容。</p>
+
+</details>
+
+### 页面如何组织
+
+页面都是 Markdown 文件，并带有页面种类标记，方便站点分组展示。用日常说法，内容库大致如下。（必要时在括号里注明文件顶部保存的技术类型名。）隐藏或草稿页可以不进入公开导航。
 
 ```text
-人物 / 主页
-├── 研究主题
+Wiki 首页索引
+├── 关于本人
+│   ├── 人物 / 传记页（博士生）
+│   ├── CV 摘要
+│   ├── 教育时间线
+│   ├── 研究经历
+│   └── 技术技能
+├── 研究
+│   ├── 研究概览
+│   ├── 研究专题
+│   ├── 研究概念（单独成页的关键想法）
+│   └── 模型族
 ├── 论文与项目
-├── 机构与人物
-└── 笔记 / 草稿（可隐藏）
+│   ├── 论文列表
+│   ├── 单篇论文页（publication）
+│   └── 项目概览
+├── 机构与导师
+│   ├── 大学（公立研究型大学）
+│   ├── 研究院
+│   └── 学术导师
+└── 站点说明（可选）
+    ├── 资源记录
+    ├── 维护日志
+    └── 文风说明
 ```
 
-<p>每个主题对应一个 Markdown 文件；中文双页使用相同词干并加 <code>_zh</code> 后缀。正文内链使用 <code>[[Wikilinks]]</code>。更强的类型化链接写在 frontmatter 的 <code>relations</code> 中（如 <code>related</code>、<code>uses</code>、<code>depends-on</code>、<code>cites</code> 等），详见 <a href="docs/relation-taxonomy.md">docs/relation-taxonomy.md</a>。写作约定见 <a href="docs/content-template.md">docs/content-template.md</a>。</p>
-
-</details>
+每个主题对应一个 Markdown 文件；中文双页使用相同词干并加 `_zh` 后缀，并指向对应的英文页。正文里用双方括号的 **Wikilink**（如 `[[这样写]]`）互链。更强的类型化链接（相关、使用、引用等）写在页面开头的元数据里，详见 [docs/relation-taxonomy.md](docs/relation-taxonomy.md)。写作约定见 [docs/content-template.md](docs/content-template.md)。
 
 ### `template` 如何保持更新
 
-每次向 `main` 推送都会触发 [Sync template branch](https://github.com/XinbaoQiao/XinbaoWiki/actions/workflows/sync-template.yml)。工作流会净化 `main`（删除个人路径、改写站主字符串，并覆盖示例 Wiki 与图片），执行泄漏检查，再在净化后的目录中安装依赖并构建，最后更新公开的 `template` 分支。
+每次向 `main` 推送都会触发 [Sync template branch](https://github.com/XinbaoQiao/XinbaoWiki/actions/workflows/sync-template.yml)。工作流会清理 `main`（删除个人路径、改写站主字符串，并覆盖示例 Wiki 与图片），执行泄漏检查，再在清理后的目录中安装依赖并构建，最后更新公开的 `template` 分支。
 
 也可在 Actions → **Sync template branch** → Run workflow 手动运行。成功后请到 [tree/template](https://github.com/XinbaoQiao/XinbaoWiki/tree/template) 确认，提交信息形如 `Sync template from main <sha>`。
 
@@ -371,11 +411,11 @@ npm run build
 
 ```text
 app/           页面与同站 API
-components/    Wiki、检索、主题与对话界面
-lib/           解析、检索、提示词与导航
+components/    Wiki、搜索、主题与对话界面
+lib/           解析、搜索辅助、提示词与导航
 wiki/          双语 Markdown 源
-public/okf/    生成的 agent 可读导出
-scripts/       维护、评测、发布；模板净化脚本（仅 main）
+public/okf/    生成的、供工具读取的导出
+scripts/       维护、检查、发布；模板清理脚本（仅 main）
 docs/          内容、对话与部署说明
 ```
 
