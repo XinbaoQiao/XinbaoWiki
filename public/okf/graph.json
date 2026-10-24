@@ -6835,16 +6835,12 @@
     {
       "aliases": [],
       "citationSourceIds": [
-        "src-0d6548913a8c228f",
-        "src-3157a848b3737221",
-        "src-3b3968d201c7ab67"
+        "src-de7219537378d237"
       ],
-      "contentHash": "sha256:42e4fd8c66b3c167e945107307eb5766a39851c47626736d11673f95b24f5daf",
+      "contentHash": "sha256:f09cdb31d7722809a1227f7a810111f1d6b3e0501adc8d2824fb2c682e11e8b0",
       "file": "Wasserstein_Geometry.md",
       "footnoteSourceIds": [
-        "src-0d6548913a8c228f",
-        "src-3157a848b3737221",
-        "src-3b3968d201c7ab67"
+        "src-de7219537378d237"
       ],
       "hidden": false,
       "language": "en",
@@ -6853,12 +6849,12 @@
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
         "retention": "semantic memory with quality warnings",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05",
+        "reviewedAt": "2026-10-24T14:48:55.704Z",
+        "reviewDue": "2027-04-22",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-07T07:07:23.991Z",
+      "modifiedAt": "2026-10-24T14:48:31.203Z",
       "outgoing": [
         "Collaborative_Evaluation",
         "Data_Silos",
@@ -6872,9 +6868,7 @@
       ],
       "slug": "Wasserstein_Geometry",
       "sourceIds": [
-        "src-0d6548913a8c228f",
-        "src-3157a848b3737221",
-        "src-3b3968d201c7ab67"
+        "src-de7219537378d237"
       ],
       "summary": "Comparison of probability distributions using optimal-transport geometry.",
       "tags": [
@@ -6887,12 +6881,12 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Wasserstein Geometry",
       "type": "Research concept",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-04-05",
+      "reviewedAt": "2026-10-24T14:48:55.704Z",
+      "reviewDue": "2027-04-22",
       "retrieval": {
         "documentId": "wiki:Wasserstein_Geometry",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:42e4fd8c66b3c167e945107307eb5766a39851c47626736d11673f95b24f5daf",
+        "contentHash": "sha256:f09cdb31d7722809a1227f7a810111f1d6b3e0501adc8d2824fb2c682e11e8b0",
         "textFields": [
           "title",
           "aliases",
@@ -6927,16 +6921,12 @@
     {
       "aliases": [],
       "citationSourceIds": [
-        "src-0d6548913a8c228f",
-        "src-3157a848b3737221",
-        "src-3b3968d201c7ab67"
+        "src-de7219537378d237"
       ],
-      "contentHash": "sha256:76f33f274d62e0cdaef742b6b9f33a834dc354d082cfcc4f0de4930d20227f46",
+      "contentHash": "sha256:b8fdcae57019a61197cbe5c39dbbee0fe7dd1840d7b5f723f9afec89f54aa560",
       "file": "Wasserstein_Geometry_zh.md",
       "footnoteSourceIds": [
-        "src-0d6548913a8c228f",
-        "src-3157a848b3737221",
-        "src-3b3968d201c7ab67"
+        "src-de7219537378d237"
       ],
       "hidden": false,
       "language": "zh",
@@ -6945,12 +6935,12 @@
         "confidence": 0.8,
         "review": "periodic or when linked evidence changes",
         "retention": "semantic memory with quality warnings",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05",
+        "reviewedAt": "2026-10-24T14:48:55.704Z",
+        "reviewDue": "2027-04-22",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-07T07:07:23.985Z",
+      "modifiedAt": "2026-10-24T14:48:31.202Z",
       "outgoing": [
         "Collaborative_Evaluation_zh",
         "Data_Silos_zh",
@@ -6964,9 +6954,7 @@
       ],
       "slug": "Wasserstein_Geometry_zh",
       "sourceIds": [
-        "src-0d6548913a8c228f",
-        "src-3157a848b3737221",
-        "src-3b3968d201c7ab67"
+        "src-de7219537378d237"
       ],
       "summary": "利用最优传输几何比较概率分布。",
       "tags": [
@@ -6979,12 +6967,12 @@
       "timestamp": "2026-05-27T17:56:27+08:00",
       "title": "Wasserstein 几何",
       "type": "研究概念",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-04-05",
+      "reviewedAt": "2026-10-24T14:48:55.704Z",
+      "reviewDue": "2027-04-22",
       "retrieval": {
         "documentId": "wiki:Wasserstein_Geometry_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:76f33f274d62e0cdaef742b6b9f33a834dc354d082cfcc4f0de4930d20227f46",
+        "contentHash": "sha256:b8fdcae57019a61197cbe5c39dbbee0fe7dd1840d7b5f723f9afec89f54aa560",
         "textFields": [
           "title",
           "aliases",

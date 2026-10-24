@@ -9,34 +9,36 @@ tags:
   - research-concept
   - wasserstein
 timestamp: '2026-05-27T17:56:27+08:00'
-modified: '2026-10-07T07:07:23.991Z'
-content_hash: 'sha256:42e4fd8c66b3c167e945107307eb5766a39851c47626736d11673f95b24f5daf'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2027-04-05'
+modified: '2026-10-24T14:48:31.203Z'
+content_hash: 'sha256:f09cdb31d7722809a1227f7a810111f1d6b3e0501adc8d2824fb2c682e11e8b0'
+reviewed_at: '2026-10-24T14:48:55.704Z'
+review_due: '2027-04-22'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-10-07T07:07:51.129Z'
-  reviewDue: '2027-04-05'
+  reviewedAt: '2026-10-24T14:48:55.704Z'
+  reviewDue: '2027-04-22'
   pendingReview: false
   overdue: false
 retrieval:
   document_id: 'wiki:Wasserstein_Geometry'
   chunking: markdown-heading-v1
 source_ids:
-  - src-0d6548913a8c228f
-  - src-3157a848b3737221
-  - src-3b3968d201c7ab67
+  - src-de7219537378d237
 source_path: wiki/Wasserstein_Geometry.md
 ---
-**Wasserstein Geometry** refers to the use of optimal-transport distances and related geometric ideas to compare probability distributions. Unlike pointwise metrics, Wasserstein distances account for the cost of moving probability mass from one distribution to another, which makes them useful for reasoning about distribution shift and generated data.[^ot]
+**Wasserstein Geometry** refers to the use of optimal-transport distances and related geometric ideas to compare probability distributions. Unlike pointwise metrics, Wasserstein distances account for the cost of moving probability mass from one distribution to another, which makes them useful for reasoning about distribution shift and generated data.
 
 ## Research context
 
 Wasserstein geometry supports [synthetic-data analysis](./Synthetic_Data_and_Model_Collapse.md), [collaborative evaluation](./Collaborative_Evaluation.md), and [distributed barycenter computation](./Distributed_Wasserstein_Barycenter.md). When data are split across silos, a distributional comparison can be more informative than a single scalar accuracy score. Wasserstein-style measures provide a language for describing how generated data drift across classes, modes, or visual features.
+
+This geometry is not limited to Euclidean domains. Recent work on generative modeling over Wasserstein spaces of Riemannian manifolds illustrates how McCann displacement interpolants connect probability measures on a base manifold $(\mathcal{M}, d_g)$ to a geodesic path in the Wasserstein manifold $(\mathcal{P}_2(\mathcal{M}), W_2)$ above it—the same transport geometry used to compare and combine distributions.[^rwefm]
+
+![McCann interpolant between measures on a Riemannian manifold and its lift in Wasserstein space](/related/rwefm/mccann-interpolant.webp)
 
 ## Connection to Qiao's work
 
@@ -50,4 +52,4 @@ The ICML 2026 paper [When Sample Selection Bias Precipitates Model Collapse](./W
 - [Model Collapse](./Model_Collapse.md)
 - [Data Silos](./Data_Silos.md)
 
-[^ot]: Agueh and Carlier's SIAM paper on [barycenters in Wasserstein space](https://epubs.siam.org/doi/10.1137/100805741), Cuturi and Doucet's ICML paper on [fast Wasserstein barycenter computation](https://proceedings.mlr.press/v32/cuturi14.html), and Arjovsky, Chintala, and Bottou's [Wasserstein GAN](https://arxiv.org/abs/1701.07875) provide relevant background.
+[^rwefm]: Doron Haviv, Edward De Brouwer, Rishabh Anand, Rex Ying, Aïcha Bentaieb, Gabriele Scalia, and Hector Corrada Bravo, "[When Riemann flows with Wasserstein: Generative Modeling of Probability Distributions on Manifolds](https://arxiv.org/abs/2609.25659)", arXiv:2609.25659, 2026. The figure above is from that paper (their overview of Riemannian Wasserstein Entropic Flow Matching and McCann interpolants) and is shown here for illustration with attribution; it is not a result of Qiao's work.

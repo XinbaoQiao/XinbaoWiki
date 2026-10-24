@@ -1,6 +1,6 @@
 # Asset provenance register
 
-Last reviewed: 2026-08-09
+Last reviewed: 2026-10-24
 
 This register records the evidence currently available for non-code assets in
 Xinbaopedia. It is an audit surface, not a license grant. The governing reuse
@@ -88,6 +88,12 @@ license, or generation manifest recorded in the repository. They are all
 ## Withdrawn paper media
 
 The former Soft-Weighted poster and its preview were withdrawn at the author’s request on 2026-10-19 because they were not the original poster. They are no longer public assets and must not be restored from historical copies. The author-selected framework is the current leading visual; this selection does not grant downstream reuse rights. A newly created poster requires explicit author approval and provenance before replacing it.
+
+## Related external paper figures
+
+| Path | Evidence | Status |
+| --- | --- | --- |
+| `public/related/rwefm/mccann-interpolant.webp` | Adapted for site display (WebP, 819×956, quality 82) from an author-provided screenshot of Figure 1 in Doron Haviv, Edward De Brouwer, Rishabh Anand, Rex Ying, Aïcha Bentaieb, Gabriele Scalia, and Hector Corrada Bravo, "When Riemann flows with Wasserstein: Generative Modeling of Probability Distributions on Manifolds", [arXiv:2609.25659](https://arxiv.org/abs/2609.25659) (2026). Source PNG retained at `.cache/related-rwefm/mccann-interpolant-source.png` (SHA-256 `662ace80c9d5de4e3abf24b92b5f5ea6b9ded7510bfab0e7cdd4b926af7919a9`). Public WebP SHA-256 `c16f8cef536f408195e6699842984985c66aaa5921375a5e2e75b631775d23fe`. Added to the wiki on 2026-10-24 with inline attribution and footnote citation on [[Wasserstein_Geometry]]. | **Unresolved for downstream reuse.** Academic illustration with attribution only; no publisher license or author redistribution grant is recorded here. Do not treat site hosting as permission to reuse outside Xinbaopedia. |
 
 ## Generated research-topic illustrations
 

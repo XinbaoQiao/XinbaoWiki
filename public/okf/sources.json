@@ -33,7 +33,7 @@
     },
     "meaning": "Registry generation proves declaration and page association, not remote availability or factual correctness"
   },
-  "contentHash": "sha256:215cea1ee62b3f4cf2870fbf57e362f627a8356b17066ee7f552bcd7451afdb2",
+  "contentHash": "sha256:bfd71d5cc617d082dc37f4591b323c5ccfc8fb93ec65c5dc5cf79175a2e64b2a",
   "sources": [
     {
       "id": "src-03bf1b2f9af65762",
@@ -281,9 +281,7 @@
       },
       "pages": [
         "Distributed_Wasserstein_Barycenter",
-        "Distributed_Wasserstein_Barycenter_zh",
-        "Wasserstein_Geometry",
-        "Wasserstein_Geometry_zh"
+        "Distributed_Wasserstein_Barycenter_zh"
       ],
       "evidence": [
         {
@@ -296,22 +294,6 @@
         },
         {
           "slug": "Distributed_Wasserstein_Barycenter_zh",
-          "locations": [
-            "body.footnote"
-          ],
-          "citation": true,
-          "footnote": true
-        },
-        {
-          "slug": "Wasserstein_Geometry",
-          "locations": [
-            "body.footnote"
-          ],
-          "citation": true,
-          "footnote": true
-        },
-        {
-          "slug": "Wasserstein_Geometry_zh",
           "locations": [
             "body.footnote"
           ],
@@ -762,9 +744,7 @@
       },
       "pages": [
         "Distributed_Wasserstein_Barycenter",
-        "Distributed_Wasserstein_Barycenter_zh",
-        "Wasserstein_Geometry",
-        "Wasserstein_Geometry_zh"
+        "Distributed_Wasserstein_Barycenter_zh"
       ],
       "evidence": [
         {
@@ -777,22 +757,6 @@
         },
         {
           "slug": "Distributed_Wasserstein_Barycenter_zh",
-          "locations": [
-            "body.footnote"
-          ],
-          "citation": true,
-          "footnote": true
-        },
-        {
-          "slug": "Wasserstein_Geometry",
-          "locations": [
-            "body.footnote"
-          ],
-          "citation": true,
-          "footnote": true
-        },
-        {
-          "slug": "Wasserstein_Geometry_zh",
           "locations": [
             "body.footnote"
           ],
@@ -912,45 +876,6 @@
           ],
           "citation": false,
           "footnote": false
-        }
-      ]
-    },
-    {
-      "id": "src-3b3968d201c7ab67",
-      "url": "https://arxiv.org/abs/1701.07875",
-      "kind": "scholarly-publication",
-      "hash": {
-        "algorithm": "sha256",
-        "scope": "canonical-url",
-        "value": "sha256:3b3968d201c7ab675384b5e606d92332e120cf7e2c26ae0a059b04e6d6d90f3c"
-      },
-      "check": {
-        "method": "scheduled-http-head-or-get",
-        "status": "not-checked",
-        "checkedAt": null,
-        "contentHash": null,
-        "maxAgeDays": 180
-      },
-      "pages": [
-        "Wasserstein_Geometry",
-        "Wasserstein_Geometry_zh"
-      ],
-      "evidence": [
-        {
-          "slug": "Wasserstein_Geometry",
-          "locations": [
-            "body.footnote"
-          ],
-          "citation": true,
-          "footnote": true
-        },
-        {
-          "slug": "Wasserstein_Geometry_zh",
-          "locations": [
-            "body.footnote"
-          ],
-          "citation": true,
-          "footnote": true
         }
       ]
     },
@@ -2865,6 +2790,45 @@
           ],
           "citation": true,
           "footnote": false
+        }
+      ]
+    },
+    {
+      "id": "src-de7219537378d237",
+      "url": "https://arxiv.org/abs/2609.25659",
+      "kind": "scholarly-publication",
+      "hash": {
+        "algorithm": "sha256",
+        "scope": "canonical-url",
+        "value": "sha256:de7219537378d23713ec97917071046dcc4d3282808fcd7131de3605bf06ef0d"
+      },
+      "check": {
+        "method": "scheduled-http-head-or-get",
+        "status": "not-checked",
+        "checkedAt": null,
+        "contentHash": null,
+        "maxAgeDays": 180
+      },
+      "pages": [
+        "Wasserstein_Geometry",
+        "Wasserstein_Geometry_zh"
+      ],
+      "evidence": [
+        {
+          "slug": "Wasserstein_Geometry",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
+        },
+        {
+          "slug": "Wasserstein_Geometry_zh",
+          "locations": [
+            "body.footnote"
+          ],
+          "citation": true,
+          "footnote": true
         }
       ]
     },

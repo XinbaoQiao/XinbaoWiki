@@ -1536,17 +1536,17 @@
         "slug": "Wasserstein_Geometry",
         "title": "Wasserstein Geometry",
         "language": "en",
-        "modifiedAt": "2026-10-07T07:07:23.991Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-24T14:48:31.203Z",
+        "reviewedAt": "2026-10-24T14:48:55.704Z",
+        "reviewDue": "2027-04-22"
       },
       {
         "slug": "Wasserstein_Geometry_zh",
         "title": "Wasserstein 几何",
         "language": "zh",
-        "modifiedAt": "2026-10-07T07:07:23.985Z",
-        "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2027-04-05"
+        "modifiedAt": "2026-10-24T14:48:31.202Z",
+        "reviewedAt": "2026-10-24T14:48:55.704Z",
+        "reviewDue": "2027-04-22"
       },
       {
         "slug": "When_Sample_Selection_Bias_Precipitates_Model_Collapse",

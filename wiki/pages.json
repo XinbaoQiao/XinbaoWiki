@@ -1884,29 +1884,23 @@
         "wasserstein"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.991Z",
-      "contentHash": "sha256:42e4fd8c66b3c167e945107307eb5766a39851c47626736d11673f95b24f5daf",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-04-05",
+      "modifiedAt": "2026-10-24T14:48:31.203Z",
+      "contentHash": "sha256:f09cdb31d7722809a1227f7a810111f1d6b3e0501adc8d2824fb2c682e11e8b0",
+      "reviewedAt": "2026-10-24T14:48:55.704Z",
+      "reviewDue": "2027-04-22",
       "sourceIds": [
-        "src-0d6548913a8c228f",
-        "src-3157a848b3737221",
-        "src-3b3968d201c7ab67"
+        "src-de7219537378d237"
       ],
       "citationSourceIds": [
-        "src-0d6548913a8c228f",
-        "src-3157a848b3737221",
-        "src-3b3968d201c7ab67"
+        "src-de7219537378d237"
       ],
       "footnoteSourceIds": [
-        "src-0d6548913a8c228f",
-        "src-3157a848b3737221",
-        "src-3b3968d201c7ab67"
+        "src-de7219537378d237"
       ],
       "retrieval": {
         "documentId": "wiki:Wasserstein_Geometry",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:42e4fd8c66b3c167e945107307eb5766a39851c47626736d11673f95b24f5daf",
+        "contentHash": "sha256:f09cdb31d7722809a1227f7a810111f1d6b3e0501adc8d2824fb2c682e11e8b0",
         "textFields": [
           "title",
           "aliases",
@@ -2448,29 +2442,23 @@
         "wasserstein"
       ],
       "timestamp": "2026-05-27T17:56:27+08:00",
-      "modifiedAt": "2026-10-07T07:07:23.985Z",
-      "contentHash": "sha256:76f33f274d62e0cdaef742b6b9f33a834dc354d082cfcc4f0de4930d20227f46",
-      "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2027-04-05",
+      "modifiedAt": "2026-10-24T14:48:31.202Z",
+      "contentHash": "sha256:b8fdcae57019a61197cbe5c39dbbee0fe7dd1840d7b5f723f9afec89f54aa560",
+      "reviewedAt": "2026-10-24T14:48:55.704Z",
+      "reviewDue": "2027-04-22",
       "sourceIds": [
-        "src-0d6548913a8c228f",
-        "src-3157a848b3737221",
-        "src-3b3968d201c7ab67"
+        "src-de7219537378d237"
       ],
       "citationSourceIds": [
-        "src-0d6548913a8c228f",
-        "src-3157a848b3737221",
-        "src-3b3968d201c7ab67"
+        "src-de7219537378d237"
       ],
       "footnoteSourceIds": [
-        "src-0d6548913a8c228f",
-        "src-3157a848b3737221",
-        "src-3b3968d201c7ab67"
+        "src-de7219537378d237"
       ],
       "retrieval": {
         "documentId": "wiki:Wasserstein_Geometry_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:76f33f274d62e0cdaef742b6b9f33a834dc354d082cfcc4f0de4930d20227f46",
+        "contentHash": "sha256:b8fdcae57019a61197cbe5c39dbbee0fe7dd1840d7b5f723f9afec89f54aa560",
         "textFields": [
           "title",
           "aliases",
