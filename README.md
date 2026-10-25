@@ -41,11 +41,11 @@ This README is meant for someone who has not used the project before. Read the h
 | [`template`](https://github.com/XinbaoQiao/XinbaoWiki/tree/template) | **Public starter.** Placeholder text only (“Your Name”, sample pages, no owner photos). |
 | [`main`](https://github.com/XinbaoQiao/XinbaoWiki/tree/main) | **Source of the live site** at [xinbaopedia.top](https://xinbaopedia.top). |
 
-To build your own site, start from **`template`**, not from `main`. Open `main` only when you want to study or contribute to the live example.
+To build your own site, start from **`template`**. Use `main` when you want to study or contribute to the live example.
 
 ### How to start
 
-Pick **one** way to get the `template` files, then run the site locally and replace the placeholders. The three paths below are different ways to obtain the files—not three names for the same action.
+Pick **one** way to get the `template` files, then run the site locally and replace the placeholders. The three paths below differ in how you obtain the files.
 
 <details>
 <summary><strong>Path A — Open on GitHub</strong> (read first)</summary>
@@ -80,7 +80,7 @@ git checkout template
 
 <p>Fork the repository on GitHub. In <em>your</em> fork, select branch <strong><code>template</code></strong> (or create a working branch from it), clone that fork, and check the branch out before you edit.</p>
 
-<p>Starting from <code>main</code> copies personal Wiki pages and media into your project. Prefer <code>template</code> unless you deliberately want that material.</p>
+<p>Starting from <code>main</code> also copies personal Wiki pages and media. For a clean starter, use <code>template</code>.</p>
 
 </details>
 
@@ -132,7 +132,7 @@ These are the main things that set the site apart for a visitor. Expand a sectio
 <details>
 <summary><strong>A. Browse and read</strong> — homepage and Wiki articles</summary>
 
-<p>The homepage centers on a wordmark. Visitors can expand or collapse the surrounding content, so they move between a compact view and a full reading view without leaving the page. Several color themes (blue, gold, green, charcoal, plus an automatic option) keep the chrome and accents consistent. Latest updates can show in a compact or a fuller layout.</p>
+<p>The homepage centers on a wordmark. Visitors can expand or collapse the surrounding content to move between a compact view and a full reading view on the same page. Several color themes (blue, gold, green, charcoal, plus an automatic option) keep the chrome and accents consistent. Latest updates can show in a compact or a fuller layout.</p>
 
 <p>Wiki articles are ordinary Markdown files under <code>wiki/</code>. On the site they appear with a sidebar, a table of contents, math rendering, and paper highlight cards when a page provides them. Open any <code>/wiki/...</code> route on the live example to see the reading layout.</p>
 
@@ -141,7 +141,7 @@ These are the main things that set the site apart for a visitor. Expand a sectio
 <details>
 <summary><strong>B. Find your way</strong> — directory, overview view, and bilingual search</summary>
 
-<p>A curated directory groups people, topics, papers, and institutions, so visitors can explore without relying only on free-text search. An overview “cube” view sits alongside the list layout when a denser map of the same pages is useful.</p>
+<p>A curated directory groups people, topics, papers, and institutions for structured browsing. An overview “cube” view sits alongside the list layout when a denser map of the same pages is useful.</p>
 
 <p>Site search covers titles, alternative names, summaries, and body text in both English and Chinese. Results always lead back to Wiki pages, so browsing and searching share one set of sources.</p>
 
@@ -150,18 +150,18 @@ These are the main things that set the site apart for a visitor. Expand a sectio
 <details>
 <summary><strong>C. Ask about the current page</strong> — answers with citations</summary>
 
-<p>When this feature is configured, a visitor can ask questions about the page they are reading. Answers try to stay on that page’s content and include numbered citations the reader can check. Questions that go beyond the page fall back to ordinary chat instead of inventing unsupported claims.</p>
+<p>When this feature is configured, a visitor can ask questions about the page they are reading. Answers stay with that page’s content and include numbered citations the reader can check. Questions beyond the page continue in ordinary chat.</p>
 
-<p>Setup needs an OpenAI-compatible API endpoint. Notes and environment variables are under <code>docs/chat/</code>. Without those settings, the rest of the site still builds and runs; only the assistant stays off.</p>
+<p>Setup needs an OpenAI-compatible API endpoint. Notes and environment variables are under <code>docs/chat/</code>. The rest of the site builds and runs on its own; the assistant turns on after those settings are in place.</p>
 
 </details>
 
 <details>
 <summary><strong>D. Optional extras</strong> — visitor map, wallpaper, export for agents</summary>
 
-<p>A visitor map appears when Redis credentials (Upstash) are present; otherwise it shows empty. Settings also offer an owner wallpaper and mixed background modes. First-time visitors default to the mixed background so the site does not preload a heavy image.</p>
+<p>A visitor map appears when Redis credentials (Upstash) are present; with no credentials it shows an empty map. Settings also offer an owner wallpaper and mixed background modes. First-time visitors start with the mixed background to keep the initial load light.</p>
 
-<p>The folder <code>public/okf/</code> is a machine-readable export rebuilt from the Wiki. Treat it as generated output: edit the Markdown sources, then regenerate, rather than hand-editing the export.</p>
+<p>The folder <code>public/okf/</code> is a machine-readable export rebuilt from the Wiki. Edit the Markdown sources, then regenerate this folder as derived output.</p>
 
 </details>
 
@@ -243,11 +243,11 @@ docs/          content, chat, and deployment notes
 | [`template`](https://github.com/XinbaoQiao/XinbaoWiki/tree/template) | **公开起步包。** 只有占位内容（「Your Name」、示例页面，无站主照片）。 |
 | [`main`](https://github.com/XinbaoQiao/XinbaoWiki/tree/main) | **正式站源码**，对应 [xinbaopedia.top](https://xinbaopedia.top)。 |
 
-搭建自己的站点，请从 **`template`** 开始，不要直接以 `main` 为底稿。只有在研究或贡献正式站示例时，才以 `main` 为工作底稿。
+搭建自己的站点，请从 **`template`** 开始。研究或贡献正式站示例时，再以 `main` 为工作底稿。
 
 ### 如何开始
 
-用下面 **三种方式之一** 取得 `template` 文件，再在本地运行并替换占位内容。三条路径区分的是「如何拿到文件」，不是同一操作的三种叫法。
+用下面 **三种方式之一** 取得 `template` 文件，再在本地运行并替换占位内容。三条路径分别对应不同的取文件方式。
 
 <details>
 <summary><strong>路径 A — 在 GitHub 上打开</strong>（先阅读）</summary>
@@ -282,7 +282,7 @@ git checkout template
 
 <p>在 GitHub 上 Fork 本仓库。进入<strong>你的</strong> fork 后，选择分支 <strong><code>template</code></strong>（或基于它再建工作分支），克隆该 fork，并确认已切换到该分支后再改内容。</p>
 
-<p>从 <code>main</code> 起步会把个人 Wiki 与媒体一并带入项目。除非你有意保留这些材料，否则请优先使用 <code>template</code>。</p>
+<p>从 <code>main</code> 起步会一并带入个人 Wiki 与媒体。需要干净起步包时，请使用 <code>template</code>。</p>
 
 </details>
 
@@ -334,7 +334,7 @@ npm run build
 <details>
 <summary><strong>A. 浏览与阅读</strong> — 首页与 Wiki 正文</summary>
 
-<p>首页以字标为中心。访客可以展开或收起周围内容，在紧凑视图与完整阅读视图之间切换，而无需离开页面。多种配色主题（蓝、金、绿、炭灰，以及自动模式）会统一作用于站点框架与强调色。最新动态支持紧凑或更完整的展示。</p>
+<p>首页以字标为中心。访客可以展开或收起周围内容，在同一页上于紧凑视图与完整阅读视图之间切换。多种配色主题（蓝、金、绿、炭灰，以及自动模式）会统一作用于站点框架与强调色。最新动态支持紧凑或更完整的展示。</p>
 
 <p>Wiki 正文是 <code>wiki/</code> 下的普通 Markdown 文件。在站点上会带有侧栏、目录、数学公式渲染，以及在页面提供时出现的论文卡片。可在正式站任意打开 <code>/wiki/...</code> 页面查看阅读布局。</p>
 
@@ -343,7 +343,7 @@ npm run build
 <details>
 <summary><strong>B. 找到内容</strong> — 目录、总览视图与双语搜索</summary>
 
-<p>结构化目录按人物、主题、论文与机构分组，访客不必只靠自由文本搜索也能浏览。总览用的「立方体」视图与列表布局并列，适合需要更密的一览时使用。</p>
+<p>结构化目录按人物、主题、论文与机构分组，便于按类别浏览。总览用的「立方体」视图与列表布局并列，适合需要更密的一览时使用。</p>
 
 <p>站内搜索覆盖标题、别名、摘要与正文，并同时支持中英文。结果始终回到 Wiki 页面，因此浏览与搜索共用同一套内容来源。</p>
 
@@ -352,18 +352,18 @@ npm run build
 <details>
 <summary><strong>C. 就当前页提问</strong> — 带引用的回答</summary>
 
-<p>配置完成后，访客可以就正在阅读的页面提问。回答会尽量依据该页内容，并给出可核对的编号引用。超出页面范围的问题会回到普通对话，而不是编造无依据的结论。</p>
+<p>配置完成后，访客可以就正在阅读的页面提问。回答依据该页内容，并给出可核对的编号引用。超出页面范围的问题进入普通对话。</p>
 
-<p>启用该功能需要 OpenAI 兼容的接口。说明与环境变量见 <code>docs/chat/</code>。未配置时，站点其余部分仍可构建与运行，只是助手不可用。</p>
+<p>启用该功能需要 OpenAI 兼容的接口。说明与环境变量见 <code>docs/chat/</code>。站点其余部分可独立构建与运行；配置完成后即可使用助手。</p>
 
 </details>
 
 <details>
 <summary><strong>D. 可选附加功能</strong> — 访客地图、壁纸、供工具读取的导出</summary>
 
-<p>提供 Redis（Upstash）凭证时会显示访客地图，否则为空图。设置中还可切换站主壁纸与混合背景；首次访客默认使用混合背景，以免预加载过大的图片。</p>
+<p>提供 Redis（Upstash）凭证时会显示访客地图；未配置时显示空图。设置中还可切换站主壁纸与混合背景；首次访客默认使用混合背景，以减轻初次加载。</p>
 
-<p><code>public/okf/</code> 是由 Wiki 重新生成、便于程序读取的导出目录。请把它视为生成结果：修改 Markdown 源文件后再生成，而不要直接手改导出内容。</p>
+<p><code>public/okf/</code> 是由 Wiki 重新生成、便于程序读取的导出目录。修改 Markdown 源文件后重新生成即可，该目录为派生结果。</p>
 
 </details>
 

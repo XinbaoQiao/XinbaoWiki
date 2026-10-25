@@ -204,10 +204,10 @@ assert.ok(!fs.existsSync(path.join(root, 'README.zh-CN.md')), 'README keeps Engl
 assert.match(rootReadme, /href="#english"[\s\S]*href="#simplified-chinese"/, 'README exposes same-page English and Chinese navigation');
 assert.match(rootReadme, /<a id="english"><\/a>[\s\S]*## English[\s\S]*### Which branch to use[\s\S]*### How to start[\s\S]*git clone -b template --single-branch[\s\S]*How `template` stays current[\s\S]*sync-template\.yml[\s\S]*<a id="simplified-chinese"><\/a>/, 'README teaches the template branch in the English section');
 assert.match(rootReadme, /github\.com\/XinbaoQiao\/XinbaoWiki\/tree\/template/, 'README links the public template branch');
-assert.match(rootReadme, /start from \*\*`template`\*\*, not from `main`/, 'README tells builders to start from template, not main');
+assert.match(rootReadme, /start from \*\*`template`\*\*\. Use `main`/, 'README tells builders to start from template and use main for the live example');
 assert.match(rootReadme, /lib\/site-config\.ts/, 'README points builders at site-config for owner copy');
 assert.match(rootReadme, /<a id="simplified-chinese"><\/a>[\s\S]*## 简体中文[\s\S]*### 用哪个分支[\s\S]*### 如何开始[\s\S]*git clone -b template --single-branch[\s\S]*### `template` 如何保持更新/, 'README teaches the template branch in the Chinese section');
-assert.match(rootReadme, /请从 \*\*`template`\*\* 开始，不要直接以 `main` 为底稿/, 'Chinese README tells builders to start from template');
+assert.match(rootReadme, /请从 \*\*`template`\*\* 开始。研究或贡献正式站示例时，再以 `main` 为工作底稿/, 'Chinese README tells builders to start from template');
 assert.match(rootReadme, /https:\/\/xinbaopedia\.top/, 'README still points at the live example site');
 assert.doesNotMatch(rootReadme, /xinbaopedia-tour-(?:en|zh)\.gif|xinbaopedia-cta\.svg|Stop publishing pages\. Start shipping knowledge\./, 'README no longer centers personal product tour GIFs or the old CTA slogan');
 assert.doesNotMatch(rootReadme, /84[\s\S]*public agent-readable concepts|68[\s\S]*bilingual retrieval test cases/, 'README does not advertise personal-site proof stats as the product');
