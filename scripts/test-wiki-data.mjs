@@ -1587,7 +1587,7 @@ assert.match(chatWithXinbaoPanel, /remaining.*limit/s, 'chat client displays rem
 assert.match(chatWithXinbaoPanel, /quotaUnknown: '10 messages\/day'/, 'chat client English quota fallback uses the 10-message daily limit');
 assert.match(chatWithXinbaoPanel, /quotaUnknown: '每天 10 条消息'/, 'chat client Chinese quota fallback uses the 10-message daily limit');
 assert.match(chatWithXinbaoPanel, /useState\(10\)/, 'chat client initializes the quota display to 10');
-assert.match(chatWithXinbaoPanel, /auditNotice:[\s\S]*365 days[\s\S]*auditNotice:[\s\S]*365 天[\s\S]*strings\.auditNotice/, 'chat client shows the bilingual private audit notice before sending');
+assert.doesNotMatch(chatWithXinbaoPanel, /auditNotice|chat-xinbao-audit-notice|For abuse and cost investigation|为追查滥用和用量/, 'chat client no longer shows the private audit retention disclaimer in the UI');
 assert.match(chatWithXinbaoPanel, /Xinbao AI is temporarily unavailable\. Please try again later\./, 'chat client uses a generic model-error message');
 assert.match(chatWithXinbaoPanel, /language: Language/, 'chat client localizes UI from current wiki language');
 assert.match(chatWithXinbaoPanel, /welcome to Xinbaopedia[\s\S]*public research, papers, projects[\s\S]*how to reach him/, 'chat client English greeting is warm, concise, and points to public wiki topics');

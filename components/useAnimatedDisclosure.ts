@@ -46,12 +46,18 @@ export function useAnimatedDisclosure(open: boolean, commit: (open: boolean) => 
       end = probe.getBoundingClientRect().height;
       probe.remove();
     }
+    element.style.willChange = 'height';
     const current = element.animate([{ height: `${start}px`, overflow: 'clip' }, { height: `${end}px`, overflow: 'clip' }], {
       duration: 260, easing: 'cubic-bezier(.22, 1, .36, 1)', fill: 'both'
     });
     animation.current = current;
+    const clearHeightHint = () => {
+      if (element.style.willChange === 'height') element.style.willChange = '';
+    };
+    current.oncancel = clearHeightHint;
     current.onfinish = () => {
       if (animation.current !== current) return;
+      clearHeightHint();
       // Closing the feed also restores Compact and recenters the homepage.
       // Animate those final layout changes from their actual outgoing positions.
       const portal = !next && element.id === 'portal-news' ? element.closest<HTMLElement>('.wiki-portal') : null;

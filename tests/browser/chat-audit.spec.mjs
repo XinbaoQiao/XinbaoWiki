@@ -8,7 +8,7 @@ for (const scenario of [
   { width: 1440, language: 'en' }, { width: 375, language: 'en' },
   { width: 375, language: 'zh' }, { width: 320, language: 'zh' },
 ]) {
-  test(`private audit notice and conversation grouping at ${scenario.width}px ${scenario.language}`, async ({ page }) => {
+  test(`chat conversation grouping at ${scenario.width}px ${scenario.language}`, async ({ page }) => {
     await page.setViewportSize({ width: scenario.width, height: 900 });
     const errors = [];
     page.on('pageerror', error => errors.push(error.message));
@@ -35,22 +35,8 @@ for (const scenario of [
     if (scenario.language === 'zh') await page.getByRole('group', { name: 'Search language', exact: true }).getByRole('button', { name: '中文', exact: true }).click();
     await page.locator('.chat-xinbao-trigger').click();
     const dialog = page.getByRole('dialog', { name: 'Chat with Xinbao', exact: true });
-    const notice = dialog.locator('.chat-xinbao-audit-notice');
-    await expect(notice).toBeVisible();
-    await expect(notice).toContainText(scenario.language === 'zh' ? '365 天' : '365 days');
+    await expect(dialog.locator('.chat-xinbao-audit-notice')).toHaveCount(0);
     expect(requests).toHaveLength(0);
-    const geometry = await notice.evaluate(node => {
-      const rect = node.getBoundingClientRect();
-      const style = getComputedStyle(node);
-      return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom, viewportHeight: innerHeight,
-        viewportWidth: innerWidth, visibility: style.visibility, display: style.display,
-        overflow: document.documentElement.scrollWidth > innerWidth + 1 };
-    });
-    expect(geometry.left).toBeGreaterThanOrEqual(0);
-    expect(geometry.right).toBeLessThanOrEqual(geometry.viewportWidth);
-    expect(geometry.top).toBeGreaterThanOrEqual(0);
-    expect(geometry.bottom).toBeLessThanOrEqual(geometry.viewportHeight);
-    expect(geometry.overflow).toBe(false);
     await dialog.locator('textarea').fill('First audit browser fixture');
     await dialog.getByRole('button', { name: scenario.language === 'zh' ? '发送' : 'Send', exact: true }).click();
     await expect(dialog).toContainText('Local audit interaction fixture.');

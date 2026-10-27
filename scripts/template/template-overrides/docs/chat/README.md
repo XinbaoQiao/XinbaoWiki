@@ -31,7 +31,7 @@ docs/chat/
 
 New requests create maintainer-only audit records for **365 Tokyo calendar days**.
 Each bucket expires at Tokyo midnight 365 days after its date; later completions
-do not extend its retention. The browser shows this data notice before sending.
+do not extend its retention. The chat UI does not show a retention disclaimer; audit storage remains maintainer-only.
 The audit stores the current question (up to 1,000 characters), delivered reply
 (up to 6,000 characters), validated Vercel forwarding IP, approximate region,
 bounded user agent, public page path, request ID, optional conversation ID,

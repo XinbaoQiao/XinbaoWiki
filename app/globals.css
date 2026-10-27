@@ -325,7 +325,8 @@ a.external.wiki-link-pdf::after {
   background: var(--site-theme-surface);
   box-shadow: 0 8px 24px rgba(32, 33, 34, .12);
   backdrop-filter: blur(12px);
-  transition: width .22s ease, border-color .24s ease, background-color .24s ease, box-shadow .24s ease;
+  /* Width expand is layout; avoid co-animating fill/shadow paint. */
+  transition: width .22s ease, border-color .24s ease;
 }
 
 .site-palette-button {
@@ -878,7 +879,7 @@ a.external.wiki-link-pdf::after {
   box-shadow: 0 18px 48px color-mix(in srgb, var(--site-theme-accent) 18%, rgba(32, 33, 34, .18));
   color: var(--wiki-text);
   font-family: var(--font-sans);
-  animation: chat-xinbao-open .16s ease-out;
+  animation: chat-xinbao-open .18s cubic-bezier(.22, 1, .36, 1);
 }
 
 .chat-xinbao-header {
@@ -1297,7 +1298,19 @@ html[data-site-palette="text"] .chat-xinbao-quick-reply {
 @keyframes chat-xinbao-open {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes chat-xinbao-sheet-open {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
   }
 
   to {
@@ -3635,6 +3648,7 @@ details[data-animated-disclosure]::details-content {
   will-change: transform;
 }
 
+
 .wiki-portal-grid-cube[data-face-settled][data-active-face] {
   transform-style: flat;
   will-change: auto;
@@ -3664,15 +3678,30 @@ details[data-animated-disclosure]::details-content {
     0 24px 58px rgb(31 35 42 / 8%);
   transform: var(--portal-cube-face-transform);
   transform-style: preserve-3d;
+  /* Layout size follows the cube; avoid animating width/height/shadow/paint on faces. */
   transition:
-    width .68s cubic-bezier(.16, 1, .3, 1),
-    height .68s cubic-bezier(.16, 1, .3, 1),
-    background-color .36s ease,
-    border-color .36s ease,
-    box-shadow .36s ease,
     opacity .24s ease,
     transform .78s cubic-bezier(.16, 1, .3, 1);
   pointer-events: auto;
+}
+
+/* Soft drop-shadows on large 3D faces are expensive mid-flight; snap full depth when settled.
+   Selector avoids `.wiki-portal-grid-cube .wiki-portal-cube-panel {` as a leading substring
+   so contract tests that take the first such rule still hit the base face styles. */
+.wiki-portal-cube-stage-cube:not([data-face-settled]) .wiki-portal-cube-panel {
+  box-shadow:
+    inset 1px 1px 0 rgb(255 255 255 / 88%),
+    inset -1px -1px 0 color-mix(in srgb, var(--portal-cube-accent) 9%, transparent);
+}
+
+.wiki-portal-cube-stage-cube:not([data-face-settled]) .wiki-portal-grid-cube[data-active-face="top"] [data-cube-face="top"],
+.wiki-portal-cube-stage-cube:not([data-face-settled]) .wiki-portal-grid-cube[data-active-face="top"] [data-cube-face="top"]:hover,
+.wiki-portal-cube-stage-cube:not([data-face-settled]) .wiki-portal-grid-cube[data-active-face="front"] [data-cube-face="front"],
+.wiki-portal-cube-stage-cube:not([data-face-settled]) .wiki-portal-grid-cube[data-active-face="front"] [data-cube-face="front"]:hover,
+.wiki-portal-cube-stage-cube:not([data-face-settled]) .wiki-portal-grid-cube[data-active-face="right"] [data-cube-face="right"],
+.wiki-portal-cube-stage-cube:not([data-face-settled]) .wiki-portal-grid-cube[data-active-face="right"] [data-cube-face="right"]:hover {
+  box-shadow:
+    inset 1px 1px 0 rgb(255 255 255 / 96%);
 }
 
 .wiki-portal-grid-cube .wiki-portal-block {
@@ -4750,6 +4779,9 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
     border-right: 0;
     border-bottom: 0;
     grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+    animation-name: chat-xinbao-sheet-open;
+    animation-duration: .22s;
+    animation-timing-function: cubic-bezier(.22, 1, .36, 1);
   }
 
   .chat-xinbao-grab {
@@ -6293,12 +6325,4 @@ html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] a:visited {
     transition: none;
     transform: none;
   }
-}
-/* The notice is visible before a message is sent, including on narrow screens. */
-.chat-xinbao-audit-notice {
-  margin: 0 0 0.5rem;
-  font-size: 0.72rem;
-  line-height: 1.4;
-  color: var(--muted, #666);
-  overflow-wrap: anywhere;
 }

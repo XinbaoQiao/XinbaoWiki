@@ -914,7 +914,7 @@
     "footnoteCoverage": 0.3409
   },
   "reviewFreshness": {
-    "asOf": "2026-10-19",
+    "asOf": "2026-10-26",
     "policy": "review status is recalculated at the start of each UTC week",
     "currentPages": 88,
     "overduePages": [],

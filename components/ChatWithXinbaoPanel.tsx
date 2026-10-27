@@ -70,8 +70,7 @@ const copy = {
     quotaUnknown: '10 messages/day',
     quota: (remaining: number, limit: number) => `${remaining}/${limit} messages left today`,
     empty: 'Please enter a question.',
-    tooLong: `Please keep the message within ${MAX_INPUT_LENGTH} characters.`,
-    auditNotice: 'For abuse and cost investigation, questions, replies, IP, browser and usage records are kept privately for up to 365 days. Do not send passwords or secrets.'
+    tooLong: `Please keep the message within ${MAX_INPUT_LENGTH} characters.`
   },
   zh: {
     close: '关闭',
@@ -110,8 +109,7 @@ const copy = {
     quotaUnknown: '每天 10 条消息',
     quota: (remaining: number, limit: number) => `今天还剩 ${remaining}/${limit} 条消息`,
     empty: '请输入一个问题。',
-    tooLong: `请将消息控制在 ${MAX_INPUT_LENGTH} 个字符以内。`,
-    auditNotice: '为追查滥用和用量，提问、回复、IP、浏览器及调用记录会私下保留最多 365 天。请勿发送密码或密钥。'
+    tooLong: `请将消息控制在 ${MAX_INPUT_LENGTH} 个字符以内。`
   }
 };
 
@@ -619,7 +617,6 @@ export function ChatWithXinbaoPanel({ language, onClose, open, restoreRequest }:
             </div>
           )}
           <form className="chat-xinbao-composer" onSubmit={submit}>
-            <p className="chat-xinbao-audit-notice">{strings.auditNotice}</p>
             {showQuickPrompts && (
               <div aria-label={strings.quickPromptsLabel} className="chat-xinbao-quick-replies" role="group">
                 {strings.quickPrompts.map((prompt) => (
