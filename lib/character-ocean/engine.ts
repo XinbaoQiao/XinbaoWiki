@@ -646,62 +646,79 @@ export class CharacterOceanEngine {
       ctx.font = prevFont;
     }
 
-    // Splash ripples — analytic decaying circular wave train (pond physics-ish).
-    // Refs: mysimulator.uk Water Ripples (2D): h = amp·sin(kr−ωt)·exp(−d·age)·exp(−c·r)
-    //       Alexander Smith Pool / webdevpuneet FD wave: eye reads slope/crests, not raw height
-    // Overlay aesthetic: soft crest/trough annuli from the envelope (no opaque heightfield).
+    // Splash ripples -- pixelated wave train (chunky concentric rings).
+    // Same pond-physics envelope as before (expanding front, multi-crest damp),
+    // but drawn as stepped pixel tiles instead of smooth Material radial gradients.
     const splashDuration = 3400;
     const cutoff = now - splashDuration;
     this.splashLife = this.splashLife.filter((s) => s.born > cutoff);
     while (this.splashLife.length > 4) this.splashLife.shift();
     const WAVE_SPEED = 108; // px/s leading front
-    const WAVELENGTH = 26; // crest-to-crest
+    const WAVELENGTH = 28; // crest-to-crest (snaps onto PIXEL grid below)
     const DAMP_TIME = 0.95;
     const DAMP_DIST = 0.0095;
+    const PIXEL = 4; // chunk size; rings expand in PIXEL steps
+    const prevSmooth = ctx.imageSmoothingEnabled;
+    ctx.imageSmoothingEnabled = false;
     for (const s of this.splashLife) {
       const ageMs = now - s.born;
       const age = ageMs / 1000;
       const lifeT = ageMs / splashDuration;
       if (lifeT >= 1) continue;
-      const base = wash ? 0.55 : 0.78;
+      const base = wash ? 0.62 : 0.88;
       const ink = wash ? '24,42,68' : '190,220,250';
-      const trough = wash ? '10,16,28' : '120,160,200';
-      const front = WAVE_SPEED * age;
-      // Center drop dimple — brief depression that blooms into the first crest.
-      if (age < 0.28) {
-        const bt = age / 0.28;
-        const ease = 1 - Math.pow(1 - bt, 2.4);
-        const blotR = 3 + ease * 16;
-        const blotGrad = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, blotR);
-        blotGrad.addColorStop(0, `rgba(${trough},${0.5 * (1 - bt) * base})`);
-        blotGrad.addColorStop(0.45, `rgba(${ink},${0.22 * (1 - bt) * base})`);
-        blotGrad.addColorStop(1, `rgba(${ink},0)`);
-        ctx.globalAlpha = 1;
-        ctx.fillStyle = blotGrad;
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, blotR, 0, Math.PI * 2);
-        ctx.fill();
+      const trough = wash ? '10,16,28' : '100,140,180';
+      // Quantize origin so tiles lock to a stable grid across frames.
+      const ox = Math.round(s.x / PIXEL) * PIXEL;
+      const oy = Math.round(s.y / PIXEL) * PIXEL;
+      const frontRaw = WAVE_SPEED * age;
+      const front = Math.max(PIXEL, Math.round(frontRaw / PIXEL) * PIXEL);
+
+      const paintPixelDisk = (
+        radius: number,
+        rgb: string,
+        alpha: number,
+        hollowInner = 0,
+      ) => {
+        if (alpha < 0.02 || radius < PIXEL * 0.5) return;
+        const rMax = Math.ceil(radius / PIXEL) * PIXEL;
+        const rInner = Math.max(0, hollowInner);
+        const gap = Math.max(1, PIXEL - 1); // 1px gutter keeps the chunky look
+        ctx.fillStyle = `rgba(${rgb},${Math.min(1, alpha)})`;
+        for (let py = -rMax; py <= rMax; py += PIXEL) {
+          for (let px = -rMax; px <= rMax; px += PIXEL) {
+            const cx = px + PIXEL * 0.5;
+            const cy = py + PIXEL * 0.5;
+            const d = Math.hypot(cx, cy);
+            if (d > radius + PIXEL * 0.35) continue;
+            if (d < rInner - PIXEL * 0.15) continue;
+            ctx.fillRect(ox + px, oy + py, gap, gap);
+          }
+        }
+      };
+
+      // Center impact blot -- brief chunky dimple that blooms into the first crest.
+      if (age < 0.3) {
+        const bt = age / 0.3;
+        const ease = 1 - Math.pow(1 - bt, 2.2);
+        const blotR = PIXEL * (1 + Math.round(ease * 4));
+        paintPixelDisk(blotR, trough, 0.55 * (1 - bt) * base);
+        paintPixelDisk(blotR + PIXEL, ink, 0.28 * (1 - bt) * base, blotR * 0.35);
       }
-      // Soft radial wash under the train (energy still in the disturbed disc).
-      if (front > 8 && lifeT < 0.85) {
-        const washR = Math.min(front * 0.92, 160);
+
+      // Soft energy disc under the train (pixel wash, flat alpha).
+      if (front > PIXEL * 2 && lifeT < 0.85) {
+        const washR = Math.min(front * 0.9, 160);
         const energy = Math.exp(-DAMP_TIME * age) * (1 - lifeT * 0.55);
-        const wg = ctx.createRadialGradient(s.x, s.y, washR * 0.05, s.x, s.y, washR);
-        wg.addColorStop(0, `rgba(${ink},0)`);
-        wg.addColorStop(0.55, `rgba(${ink},${0.045 * energy * base})`);
-        wg.addColorStop(1, `rgba(${ink},0)`);
-        ctx.globalAlpha = 1;
-        ctx.fillStyle = wg;
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, washR, 0, Math.PI * 2);
-        ctx.fill();
+        paintPixelDisk(washR, ink, 0.05 * energy * base, washR * 0.35);
       }
-      // Multi-crest / trough pairs behind the leading front (wavelength decay).
+
+      // Multi-crest / trough pixel rings behind the leading front.
       const maxCrests = 6;
       for (let n = 0; n < maxCrests; n++) {
-        const r = front - n * WAVELENGTH;
-        if (r < 3 || r > front + 2) continue;
-        // amp · exp(-damp·t) · exp(-c·r) · mild geometric falloff — mysimulator form
+        const rRaw = frontRaw - n * WAVELENGTH;
+        const r = Math.round(rRaw / PIXEL) * PIXEL;
+        if (r < PIXEL * 2 || r > front + PIXEL) continue;
         const amp =
           Math.exp(-DAMP_TIME * age) *
           Math.exp(-DAMP_DIST * r) *
@@ -709,40 +726,22 @@ export class CharacterOceanEngine {
           (1 - lifeT * 0.35);
         if (amp < 0.02) continue;
         const isCrest = n % 2 === 0;
-        const band = Math.max(1.6, (5.8 - n * 0.45) * (0.85 + amp * 0.4));
-        const peak = Math.min(1, amp * (isCrest ? 1.15 : 0.7)) * base * (1 - n * 0.06);
-        if (peak < 0.015) continue;
+        // Band thickness in whole pixels -- thicker near impact, thinner outward.
+        const bandPx = Math.max(PIXEL, (isCrest ? 2 : 1) * PIXEL - (n > 2 ? PIXEL : 0));
+        const peak = Math.min(1, amp * (isCrest ? 1.2 : 0.75)) * base * (1 - n * 0.06);
+        if (peak < 0.02) continue;
         const color = isCrest ? ink : trough;
-        const inner = Math.max(0.4, r - band);
-        const outer = r + band * 0.95;
-        const g = ctx.createRadialGradient(s.x, s.y, inner, s.x, s.y, outer);
-        g.addColorStop(0, `rgba(${color},0)`);
-        g.addColorStop(0.32, `rgba(${color},${0.12 * peak})`);
-        g.addColorStop(0.52, `rgba(${color},${0.95 * peak})`);
-        g.addColorStop(0.72, `rgba(${color},${0.28 * peak})`);
-        g.addColorStop(1, `rgba(${color},0)`);
-        ctx.globalAlpha = 1;
-        ctx.fillStyle = g;
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, outer, 0, Math.PI * 2);
-        ctx.fill();
-        // Leading-edge slope glint (Pool insight: eye reads tilt, not height).
-        if (isCrest && n < 3 && peak > 0.08) {
-          ctx.globalAlpha = peak * 0.42;
-          ctx.strokeStyle = `rgba(${ink},0.95)`;
-          ctx.lineWidth = Math.max(0.45, 1.35 * (1 - lifeT * 0.55) * (1 - n * 0.18));
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, r + band * 0.15, 0, Math.PI * 2);
-          ctx.stroke();
-          ctx.globalAlpha = peak * 0.18;
-          ctx.strokeStyle = `rgba(${trough},0.9)`;
-          ctx.lineWidth = Math.max(0.35, 0.9 * (1 - lifeT));
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, Math.max(1, r - band * 0.35), 0, Math.PI * 2);
-          ctx.stroke();
+        const inner = Math.max(0, r - bandPx * 0.55);
+        const outer = r + bandPx * 0.55;
+        paintPixelDisk(outer, color, peak * (isCrest ? 0.95 : 0.7), inner);
+        // Leading-edge glint as a 1-pixel ring (still chunky).
+        if (isCrest && n < 3 && peak > 0.1) {
+          const glintR = r + PIXEL;
+          paintPixelDisk(glintR + PIXEL * 0.15, ink, peak * 0.55, glintR - PIXEL * 0.35);
         }
       }
     }
+    ctx.imageSmoothingEnabled = prevSmooth;
 
     ctx.globalAlpha = 1;
   }
