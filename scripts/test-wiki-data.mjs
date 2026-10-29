@@ -399,9 +399,9 @@ assert.match(languageToggle, /window\.setInterval\(applyPalette, 5 \* 60 \* 1000
 assert.match(languageToggle, /const active = mode === option\.mode;/, 'site palette marks only the chosen mode as active');
 assert.match(languageToggle, /option\.mode === 'text' \? 'site-palette-text' : ''/, 'pure-white text swatch receives a visible boundary class');
 assert.doesNotMatch(languageToggle, /activePalette|activePalette === option\.mode/, 'site palette no longer double-highlights Auto and the current time color');
-assert.match(languageToggle, /group: isChinese \? '[^']+' : 'Site color theme and background'[\s\S]*aria-label=\{copy\.group\}[\s\S]*className=\{\['site-palette-switcher', \(expanded \|\| panelOpen\) \? 'is-expanded' : ''\]\.filter\(Boolean\)\.join\(' '\)\}[\s\S]*role="group"/, 'site palette keeps accessible manual color swatches as a grouped fallback control');
+assert.match(languageToggle, /group: isChinese \? '[^']+' : 'Site color theme and background'[\s\S]*aria-label=\{copy\.group\}[\s\S]*className=\{\['site-palette-switcher', \(expanded \|\| panelOpen \|\| oceanPanelOpen \|\| colorMenuOpen\) \? 'is-expanded' : ''\]\.filter\(Boolean\)\.join\(' '\)\}[\s\S]*role="group"/, 'site palette keeps accessible manual color swatches as a grouped fallback control');
 assert.match(languageToggle, /prefersCoarsePalettePointer[\s\S]*setExpanded\(\(current\) => !current\)/, 'touch palette toggles expansion from the active swatch instead of staying fully open');
-assert.match(languageToggle, /aria-expanded=\{expanded \|\| panelOpen\}/, 'site palette exposes expanded state for assistive technology');
+assert.match(languageToggle, /aria-expanded=\{expanded \|\| panelOpen \|\| oceanPanelOpen \|\| colorMenuOpen\}/, 'site palette exposes expanded state for assistive technology');
 assert.match(wikiSearch, /hideOnPortal\?: boolean;/, 'search component exposes a homepage suppression prop for the topbar instance');
 assert.match(wikiSearch, /if \(hideOnPortal && isPortalPath\(pathname\)\) return null;/, 'topbar search can hide on the portal homepage');
 assert.doesNotMatch(wikiPageTsx, /Qiao Xinbao Academic Wiki/, 'article metadata no longer uses old Academic Wiki suffix');
@@ -1772,7 +1772,7 @@ assert.match(sidebarClient, /<dialog[\s\S]*id="wiki-mobile-navigation"[\s\S]*onC
 assert.match(sidebarClient, /function SidebarSections[\s\S]*sections: SidebarNavSection\[\];[\s\S]*<SidebarSections currentSlug=\{currentSlug\} language=\{language\} sections=\{sections\} \/>[\s\S]*<SidebarSections currentSlug=\{currentSlug\} language=\{language\} onNavigate=\{\(\) => setMobileOpen\(false\)\} sections=\{sections\} \/>/, 'desktop and mobile navigation reuse one localized section tree with the active slug');
 assert.match(sidebarClient, /const currentPage = \(item: SidebarNavItem\) => item\.localizedSlug\[language\] === currentSlug \? 'page' : undefined;[\s\S]*aria-current=\{currentPage\(item\)\}/, 'localized sidebar links expose aria-current on the active English or Chinese page');
 assert.match(sidebarClient, /document\.body\.style\.overflow = 'hidden'[\s\S]*document\.body\.style\.overflow = previousOverflow/, 'mobile navigation prevents background scrolling and restores it after closing');
-assert.match(languageToggle, /document\.documentElement\.lang = isWikiPage && isChinesePage \? 'zh-CN' : 'en'/, 'article routes synchronize the document language with the localized page');
+assert.match(languageToggle, /if \(!isWikiPage\) return;[\s\S]*document\.documentElement\.lang = isChinesePage \? 'zh-CN' : 'en'/, 'article routes synchronize the document language with the localized page');
 assert.doesNotMatch(sidebarClient, /function NavSection|className="nav-section"|<section className="nav-section">/, 'sidebar uses flat Colarpedia h4 plus ul blocks');
 assert.match(sidebar, /localizedSlug: \{ en: enSlug, zh: zhSlug \}/, 'server sidebar builds localized article links');
 assert.match(siteUpdates, /navigationLabels[\s\S]*Xinbao_Qiao: \{ en: 'Main page', zh: '主页' \}/, 'sidebar keeps the homepage label compact and localized');
@@ -1993,6 +1993,8 @@ assert.match(styles, /::view-transition-group\(\.wiki-title-morph\)/, 'title mor
 assert.match(styles, /chat-xinbao-quick-replies[\s\S]*chat-xinbao-quick-reply/, 'chat styles include quick-start chip layout');
 const homePage = fs.readFileSync(path.join(root, 'app/page.tsx'), 'utf8');
 const homepagePortal = fs.readFileSync(path.join(root, 'components/HomepagePortal.tsx'), 'utf8');
+const homeScrollIntro = fs.readFileSync(path.join(root, 'components', 'HomeScrollIntro.tsx'), 'utf8');
+const siteHomeIntro = fs.readFileSync(path.join(root, 'lib', 'site-home-intro.ts'), 'utf8');
 const visitorAtlas = fs.readFileSync(path.join(root, 'components/VisitorAtlasDisclosure.tsx'), 'utf8');
 
 function cssRuleBody(source, selector) {
@@ -2264,8 +2266,8 @@ assertCssRule(styles, 'html[data-site-palette="text"]', [
   /--site-theme-chrome-surface-strong: var\(--wiki-bg-alt\);/
 ], 'pure-text mode keeps the page and structural surfaces white or neutral with readable dark heading text');
 assert.match(styles, /\.site-palette-text \{[\s\S]*border-color: #a2a9b1;[\s\S]*background: #ffffff;[\s\S]*\}/, 'pure-white text swatch remains visible against the palette surface');
-assert.match(styles, /@media \(hover: hover\) and \(pointer: fine\) \{[\s\S]*\.site-palette-switcher \{[\s\S]*width: 30px;[\s\S]*\.site-palette-switcher:hover,[\s\S]*\.site-palette-switcher:focus-within \{[\s\S]*width: 228px;/, 'fine-pointer palette expands far enough for the text theme, six colors, and auto mode');
-assert.match(styles, /@media \(hover: none\), \(pointer: coarse\) \{[\s\S]*\.site-palette-switcher \{[\s\S]*right: max\(10px, env\(safe-area-inset-right\)\);[\s\S]*width: 28px;[\s\S]*opacity: \.48;[\s\S]*\.site-palette-switcher\.is-expanded \{[\s\S]*width: 228px;[\s\S]*opacity: 1;/, 'touch palette docks quietly to the bottom-right as a low-contrast single swatch');
+assert.match(styles, /Three-square palette bar: Color \| Wallpaper \| Ocean[\s\S]*\.site-palette-color-menu \{[\s\S]*Final: three-square palette bar[\s\S]*@media \(hover: hover\) and \(pointer: fine\) \{[\s\S]*\.site-palette-root \.site-palette-switcher[\s\S]*width: auto !important;/, 'fine-pointer palette keeps the three-square Color|Wallpaper|Ocean bar with presets in a color menu');
+assert.match(styles, /@media \(hover: none\), \(pointer: coarse\) \{[\s\S]*\.site-palette-root \.site-palette-switcher[\s\S]*width: auto !important;[\s\S]*opacity: 1 !important;/, 'touch palette keeps the three-square bar visible instead of collapsing to one swatch');
 assert.match(styles, /\.site-palette-button\.is-active \{[\s\S]*order: -1;/, 'active palette swatch remains visible in the collapsed state');
 const expectedPortalTaglines = [
   ['text', 'Q is a lens: search the world, question the model.', '以 Q 为镜：探索世界，追问模型。'],
@@ -2349,7 +2351,7 @@ assert.match(styles, /\.chat-xinbao-message\.assistant \{[\s\S]*border-left: 3px
 assert.match(styles, /html\[data-site-palette="text"\] \.chat-xinbao-trigger,[\s\S]*html\[data-site-palette="text"\] \.chat-xinbao-minimized \{[\s\S]*background: #ffffff;[\s\S]*\}/, 'pure text mode keeps every Chat with Xinbao surface white');
 assert.match(styles, /\.wiki-portal-search \{[\s\S]*--portal-search-leading-width: 50px;[\s\S]*--portal-search-submit-width: 96px;[\s\S]*\}/, 'homepage records the search leading control and submit widths for aligned content');
 assert.match(styles, /\.wiki-portal-editions \{[\s\S]*grid-template-columns: repeat\(2, minmax\(0, 1fr\)\);[\s\S]*width: calc\(100% - var\(--portal-search-leading-width\) - var\(--portal-search-submit-width\)\);[\s\S]*margin: 14px 0 0 var\(--portal-search-leading-width\);[\s\S]*\}/, 'homepage aligns profile language entries with the white search fields');
-assert.match(homepagePortal, /<div className="wiki-portal-search">[\s\S]*<WikiSearch[\s\S]*<nav className="wiki-portal-editions"/, 'homepage groups profile language entries with the search geometry they align to');
+assert.doesNotMatch(homepagePortal, /wiki-portal-editions|wiki-portal-edition|languageEntries/, 'homepage no longer renders dual English/Chinese entry cards; intro language follows the search toggle');
 assert.match(styles, /\.wiki-portal-edition \{[\s\S]*border-top: 2px solid color-mix\(in srgb, var\(--site-theme-accent\) 62%, var\(--wiki-border-light\)\);[\s\S]*background: color-mix\(in srgb, var\(--site-theme-accent\) 3%, var\(--wiki-bg\)\);[\s\S]*\}[\s\S]*\.wiki-portal-edition strong \{[\s\S]*color: var\(--site-theme-action-ink\);/, 'homepage profile entries use restrained theme structure and accessible action text');
 assert.match(styles, /\.wiki-portal-edition:focus-visible \{[\s\S]*outline: 2px solid var\(--site-theme-action-ink\);[\s\S]*outline-offset: 2px;/, 'homepage profile entries retain a clear keyboard focus outline');
 assert.doesNotMatch(homepagePortal + styles, /quickLinkLabels|wiki-portal-quicklinks|feedHref/, 'homepage removes the redundant Latest, All updates, and Topics shortcut row without leaving dead styles or data');
@@ -2375,7 +2377,7 @@ assert.doesNotMatch(styles, /\.wiki-portal-block span \{/, 'homepage link-summar
 assert.match(styles, /\.wiki-portal-grid \{[\s\S]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);[\s\S]*\}/, 'homepage browse directory uses a three-column desktop layout');
 assert.match(styles, /\.wiki-shell:has\(\.wiki-portal\) \.wiki-sidebar \{[\s\S]*display: none;[\s\S]*\}/, 'homepage hides the article sidebar');
 assert.match(homePage, /import \{ HomepagePortal \} from '@\/components\/HomepagePortal';/, 'homepage delegates interactive portal state to a client component');
-assert.match(homePage, /import \{ directorySections, languageEntries \} from '@\/lib\/site-navigation';[\s\S]*getWikiManifestEntry/, 'homepage uses shared site update metadata and manifest entries instead of duplicating page data');
+assert.match(homePage, /import \{ directorySections \} from '@\/lib\/site-navigation';[\s\S]*getWikiManifestEntry/, 'homepage uses shared site update metadata and manifest entries instead of duplicating page data');
 assert.doesNotMatch(homePage, hiddenManuscriptPattern, 'homepage directory does not expose the hidden under-review manuscript');
 assert.match(homePage, /if \(!page\) \{[\s\S]*throw new Error\(`Homepage directory slug must resolve to a public wiki page: \$\{slug\}`\);[\s\S]*\}/, 'homepage directory refuses missing or hidden wiki pages instead of generating fallback links');
 assert.doesNotMatch(homePage, /slug\.replaceAll\('_', ' '\)/, 'homepage directory does not fall back to slug text for missing pages');
@@ -2384,6 +2386,9 @@ assert.match(homepagePortal, /className="wiki-portal-name"[\s\S]*Xinbao Qiao/, '
 assert.match(homepagePortal, /wiki-portal-name-text[\s\S]*Xinbao Qiao/, 'homepage keeps the pure text signature as the central name');
 assert.match(siteUpdates, /Academic biography and research overview[\s\S]*个人学术条目与研究概览/, 'shared homepage metadata keeps primary English and Chinese profile labels');
 assert.match(homepagePortal, /<WikiSearch[\s\S]*language=\{language\}[\s\S]*onLanguageChange=\{setLanguage\}[\s\S]*showLanguageSelect[\s\S]*variant="portal"/, 'homepage search controls the portal language state');
+assert.match(homepagePortal, /<HomeScrollIntro language=\{language\} withBasePath=\{withBasePath\} \/>/, 'homepage scroll-down intro destination language follows the portal search language toggle');
+assert.match(homeScrollIntro + siteHomeIntro, /HOME_SCROLL_INTRO_BY_LANG/, 'scroll intro resolves EN/ZH wiki paths from the shared bilingual destination map');
+assert.match(siteHomeIntro, /Qiao_Xinbao_zh/, 'Chinese scroll intro targets the Chinese biography page');
 assert.doesNotMatch(homepagePortal, /searchIndex|items=\{/, 'homepage does not receive or serialize the full search index');
 assert.match(homepagePortal, /function withBasePath\(pathname: string\)/, 'homepage portal keeps static logo assets base-path aware');
 assert.match(homepagePortal, /withBasePath\('\/site-logos\/wordmark\/xinbao-qiao-charcoal\.webp'\)/, 'homepage tinted wordmark mask is base-path aware');

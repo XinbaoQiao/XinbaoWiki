@@ -81,7 +81,7 @@ for (const slug of new Set(curatedSlugs.filter((slug) => !slug.endsWith('_zh')))
   assert.equal(existsPublic(slug), true, `${slug} exists as a public English navigation target`);
   assert.equal(existsPublic(chineseSlug(slug)), true, `${slug} has a public Chinese navigation target`);
 }
-assert.match(pageSource, /directorySections, languageEntries.+@\/lib\/site-navigation/s, 'homepage reuses curated shared navigation slugs');
+assert.match(pageSource, /directorySections.+@\/lib\/site-navigation/s, 'homepage reuses curated shared navigation slugs');
 assert.match(pageSource, /getWikiManifestEntry\(slug\)/, 'homepage entries resolve through the public manifest');
 assert.doesNotMatch(pageSource, /getWikiPageBySlug/, 'homepage no longer rereads wiki files per curated link');
 assert.match(sidebarSource, /getWikiManifestEntry/, 'sidebar server wrapper validates links against the public manifest');

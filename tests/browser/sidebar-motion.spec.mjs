@@ -16,7 +16,7 @@ test('sidebar marker moves through intermediate positions and aligns after back 
   const frames = await page.locator('.wiki-sidebar-desktop').evaluate(async root => {
     const marker = root.querySelector('.wiki-sidebar-current-marker');
     const before = marker.getBoundingClientRect().top;
-    const link = root.querySelector('a[href*="Machine_Unlearning"]');
+    const link = root.querySelector('a[href*="Data_Centric_Machine_Learning"]');
     const target = link.getBoundingClientRect().top;
     const values = [];
     link.click();
@@ -28,7 +28,7 @@ test('sidebar marker moves through intermediate positions and aligns after back 
     return { before, target, values };
   });
   expect(frames.values.filter(y => y > Math.min(frames.before, frames.target) + 2 && y < Math.max(frames.before, frames.target) - 2).length).toBeGreaterThan(2);
-  await expect(page).toHaveURL(/Machine_Unlearning/);
+  await expect(page).toHaveURL(/Data_Centric_Machine_Learning/);
   await aligned(page);
   await page.goBack();
   await aligned(page);

@@ -2,7 +2,6 @@
 
 import dynamic from 'next/dynamic';
 import { WikiLink } from '@/components/WikiLink';
-import { clearWikiMorphIntent } from '@/lib/wiki-view-transition';
 import { wikiSlugFromHref } from '@/lib/wiki-view-transition';
 import type { CSSProperties, PointerEvent as ReactPointerEvent, TransitionEvent as ReactTransitionEvent } from 'react';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
@@ -10,6 +9,7 @@ import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
 import { getRecentSiteUpdates } from '@/lib/site-updates';
 import { SlidingSelection } from '@/components/SlidingSelection';
 import { useAnimatedDisclosure } from '@/components/useAnimatedDisclosure';
+import { HomeScrollIntro } from '@/components/HomeScrollIntro';
 import type { PaperHighlightCatalog } from '@/lib/paper-highlights';
 
 const VisitorAtlasDisclosure = dynamic(
@@ -37,15 +37,8 @@ type PortalSection = {
   title: LocalizedText;
   groups: PortalGroup[];
 };
-type LanguageEntry = {
-  detail: string;
-  href: string;
-  label: string;
-  slug: string;
-};
 type Props = {
   directorySections: PortalSection[];
-  languageEntries: LanguageEntry[];
   paperHighlights: PaperHighlightCatalog;
   updatesAsOf: string;
 };
@@ -86,10 +79,6 @@ type TouchCubeGesture = {
   startY: number;
 };
 
-const entriesLabel: LocalizedText = {
-  en: 'Primary academic entries',
-  zh: '主要学术条目'
-};
 
 const sectionToggleLabels = {
   en: {
@@ -158,7 +147,7 @@ function withBasePath(pathname: string) {
   return basePath ? `${basePath}${pathname}` : pathname;
 }
 
-export function HomepagePortal({ directorySections, languageEntries, paperHighlights, updatesAsOf }: Props) {
+export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf }: Props) {
   const [language, setLanguage] = useState<SearchLanguage>('en');
   const [updatesAsOfDate, setUpdatesAsOfDate] = useState(updatesAsOf);
   const [browseView, setBrowseView] = useState<BrowseView>('list');
@@ -546,19 +535,6 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
             showLanguageSelect
             variant="portal"
           />
-          <nav className="wiki-portal-editions" aria-label={entriesLabel[language]}>
-            {languageEntries.map((item) => (
-              <WikiLink
-                className="wiki-portal-edition"
-                href={item.href}
-                key={item.href}
-                onClick={() => clearWikiMorphIntent()}
-              >
-                <strong>{item.label}</strong>
-                <span>{item.detail}</span>
-              </WikiLink>
-            ))}
-          </nav>
         </div>
       </section>
 
@@ -784,6 +760,7 @@ export function HomepagePortal({ directorySections, languageEntries, paperHighli
           </div>
         </details>
       </div>
+      <HomeScrollIntro language={language} withBasePath={withBasePath} />
     </article>
   );
 }

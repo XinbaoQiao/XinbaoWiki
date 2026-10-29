@@ -120,7 +120,7 @@ export const sidebarSections = [
   {
     key: 'researchTopics',
     label: { en: 'Research topics', zh: '研究主题' },
-    links: ['AI_and_Networks', 'Machine_Unlearning', 'Synthetic_Data_and_Model_Collapse', 'Data_Centric_Machine_Learning']
+    links: ['AI_and_Networks', 'Data_Centric_Machine_Learning']
   },
   {
     key: 'education',
