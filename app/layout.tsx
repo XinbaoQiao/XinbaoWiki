@@ -22,6 +22,7 @@ import {
 import { ViewTransitions } from 'next-view-transitions';
 import './globals.css';
 
+
 const sitePaletteIcons = {
   text: pathWithBasePath('/xinbaopedia-icon.webp'),
   blue: pathWithBasePath('/site-icons/xinbaopedia-blue.webp'),

@@ -94,9 +94,29 @@ export type Shark = {
   orbitDir: 1 | -1;
   orbitRadius: number;
   depth: number;
+  /** 0..1 leftover of sprint spike; multiplies cruise while decaying. */
+  rippleBoost: number;
+  /** Bitmask / stamp of last ripple bornMs that already fired a spike (edge). */
+  rippleHitStamp: number;
 };
 
+/** Shared with engine ripple paint so hit-test matches the visible ring. */
+export const RIPPLE_WAVE_SPEED = 108; // px/s leading front
+export const RIPPLE_DURATION_MS = 3400;
+/**
+ * On ring contact: sprint toward cruise * RIPPLE_SPEED_CAP (hard ceiling).
+ * Re-hits refresh toward the cap but never stack past it. Speed-only.
+ */
+export const RIPPLE_SPEED_CAP = 4;
+/** Addend so (1 + peak) == RIPPLE_SPEED_CAP when boost=1. */
+export const RIPPLE_BOOST_PEAK = RIPPLE_SPEED_CAP - 1;
+/** Seconds for rippleBoost 1 → 0 (slow coast-down after the sprint spike). */
+export const RIPPLE_BOOST_DECAY_S = 3.6;
+/** Only slam to cap when leftover boost is below this (spam re-hits only refresh decay). */
+export const RIPPLE_SPIKE_GATE = 0.28;
+
 export type WorldEvent = { kind: 'splash'; x: number; y: number };
+export type SplashRipple = { x: number; y: number; bornMs: number };
 
 const FISH_SEPARATION_K = 380;
 const FISH_ALIGN_K = 2.05;
@@ -111,6 +131,8 @@ export class World {
   fish: Fish[] = [];
   sharks: Shark[] = [];
   events: WorldEvent[] = [];
+  /** Active click ripples (wall-clock) — expand at RIPPLE_WAVE_SPEED for shark hits. */
+  ripples: SplashRipple[] = [];
   pointer = { x: 0, y: 0, active: false };
 
   private perception = 60;
@@ -151,7 +173,7 @@ export class World {
     const next = kinds.length ? [...new Set(kinds)] : DEFAULT_SHARKS.map((s) => s.kind);
     const same =
       next.length === this.allowedKinds.length &&
-      next.every((k, i) => k === this.allowedKinds[i]);
+      next.every((k) => this.allowedKinds.includes(k));
     if (same) return;
     this.allowedKinds = next;
     this.rebuildSharkSpecs();
@@ -247,6 +269,8 @@ export class World {
         orbitDir,
         orbitRadius,
         depth: size,
+        rippleBoost: 0,
+        rippleHitStamp: 0,
       });
     }
     this.sharks.sort((a, b) => a.length - b.length);
@@ -312,7 +336,12 @@ export class World {
 
   splash(x: number, y: number) {
     this.events.push({ kind: 'splash', x, y });
+    // Wall-clock birth so expanding front stays locked to the painted ripple.
+    this.ripples.push({ x, y, bornMs: performance.now() });
+    while (this.ripples.length > 4) this.ripples.shift();
     // Stronger local impulse so the school visibly parts under a click ripple.
+    // Big fish (sharks) are not impulsed here — they get a brief cruise boost
+    // when the expanding ring contacts their silhouette (see applyRippleBoosts).
     const r = 280;
     for (const f of this.fish) {
       if (!f.alive) continue;
@@ -330,10 +359,60 @@ export class World {
   step(dt: number) {
     this.time += dt;
     this.rebuildHash();
+    this.applyRippleBoosts(dt);
     this.stepFish(dt);
     this.stepSharks(dt);
     this.respawn();
     if (this.events.length > 12) this.events.splice(0, this.events.length - 12);
+  }
+
+  /** When a painted ripple ring crosses a shark body, raise cruise briefly. */
+  private applyRippleBoosts(dt: number) {
+    const now = performance.now();
+    this.ripples = this.ripples.filter((r) => now - r.bornMs < RIPPLE_DURATION_MS);
+    for (const sh of this.sharks) {
+      // Slow coast-down of leftover sprint energy.
+      if (sh.rippleBoost > 0) {
+        sh.rippleBoost = Math.max(0, sh.rippleBoost - dt / RIPPLE_BOOST_DECAY_S);
+      }
+      if (this.ripples.length === 0) continue;
+      const nodes = sh.nodes;
+      const L = sh.length;
+      const band = Math.max(22, L * 0.14);
+      const gentle =
+        sh.kind === 'manta' || sh.kind === 'whaleshark' || sh.kind === 'sunfish';
+      const pace = sh.kind === 'sunfish' ? 0.63 : gentle ? 0.8 : 1;
+      const baseCruise = (30 + L * 0.04) * pace;
+      for (const r of this.ripples) {
+        // One sprint spike per ripple per shark (edge), not continuous re-bump while ring sweeps.
+        if (r.bornMs === sh.rippleHitStamp) continue;
+        const front = RIPPLE_WAVE_SPEED * ((now - r.bornMs) / 1000);
+        if (front < 4) continue;
+        let hit = false;
+        for (let k = 0; k < SHARK_NODES; k += 2) {
+          const dx = nodes[k * 2]! - r.x;
+          const dy = nodes[k * 2 + 1]! - r.y;
+          const d = Math.hypot(dx, dy);
+          if (Math.abs(d - front) <= band) {
+            hit = true;
+            break;
+          }
+        }
+        if (!hit) continue;
+        sh.rippleHitStamp = r.bornMs;
+        const capped = baseCruise * RIPPLE_SPEED_CAP;
+        // Cold / near-cruise: one readable sprint spike.
+        // Already sprinting: only refresh decay so spam-clicks stay smooth (no speed slam).
+        if (sh.rippleBoost < RIPPLE_SPIKE_GATE) {
+          sh.speed = Math.min(capped, Math.max(sh.speed, capped));
+        } else {
+          // Soft pull toward cap — continuous under rapid re-hits.
+          sh.speed += (capped - sh.speed) * 0.06;
+          if (sh.speed > capped) sh.speed = capped;
+        }
+        sh.rippleBoost = 1;
+      }
+    }
   }
 
   private rebuildHash() {
@@ -672,8 +751,18 @@ export class World {
       const gentle =
         sh.kind === 'manta' || sh.kind === 'whaleshark' || sh.kind === 'sunfish';
       const pace = sh.kind === 'sunfish' ? 0.63 : gentle ? 0.8 : 1;
-      const cruise = (30 + L * 0.04) * pace;
-      sh.speed += (cruise - sh.speed) * Math.min(1, dt * 1.1);
+      // After ripple sprint: target follows decaying boost (capped); soft pull = long decelerate.
+      const baseCruiseStep = (30 + L * 0.04) * pace;
+      const cruise = Math.min(
+        baseCruiseStep * RIPPLE_SPEED_CAP,
+        baseCruiseStep * (1 + RIPPLE_BOOST_PEAK * sh.rippleBoost),
+      );
+      const settle = sh.rippleBoost > 0.02 ? 0.55 : 1.1; // slower ease while coasting down
+      sh.speed += (cruise - sh.speed) * Math.min(1, dt * settle);
+      // Hard ceiling so repeated clicks cannot stack past ~4× cruise.
+      if (sh.speed > baseCruiseStep * RIPPLE_SPEED_CAP) {
+        sh.speed = baseCruiseStep * RIPPLE_SPEED_CAP;
+      }
       sh.phase += dt * (2 + sh.speed / 24);
 
       nodes[0] = hx + Math.cos(sh.heading) * sh.speed * dt;
@@ -759,6 +848,8 @@ export class World {
     sh.orbitDir = Math.random() < 0.5 ? 1 : -1;
     sh.orbitRadius = minSide * rand(0.42, 0.58);
     sh.depth = size;
+    sh.rippleBoost = 0;
+    sh.rippleHitStamp = 0;
 
     const nodes = sh.nodes;
     const seg = length / (SHARK_NODES - 1);

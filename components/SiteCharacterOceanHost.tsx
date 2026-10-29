@@ -1,7 +1,7 @@
 "use client";
 
+import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import { SiteCharacterOcean } from '@/components/SiteCharacterOcean';
 import {
   CHARACTER_OCEAN_STORAGE_KEY,
   DEFAULT_CHARACTER_OCEAN,
@@ -12,6 +12,26 @@ import {
   type CharacterOceanSettings,
 } from '@/lib/site-character-ocean';
 import type { ActiveOceanStyle } from '@/lib/character-ocean/alphabets';
+
+/** Heavy engine/canvas — load only when ocean actually mounts (desktop + style on). */
+const SiteCharacterOcean = dynamic(
+  () =>
+    import('@/components/SiteCharacterOcean').then((m) => ({
+      default: m.SiteCharacterOcean,
+    })),
+  { ssr: false },
+);
+
+function settingsEqual(a: CharacterOceanSettings, b: CharacterOceanSettings): boolean {
+  if (a.style !== b.style) return false;
+  if (Math.abs(a.density - b.density) >= 0.001) return false;
+  if (Math.abs(a.opacity - b.opacity) >= 0.001) return false;
+  if (a.kinds.length !== b.kinds.length) return false;
+  const as = [...a.kinds].sort();
+  const bs = [...b.kinds].sort();
+  return as.every((k, i) => k === bs[i]);
+}
+
 
 function readLanguage(): CharacterOceanLanguage {
   if (typeof document === 'undefined') return 'en';
@@ -78,8 +98,12 @@ export function SiteCharacterOceanHost() {
     setReady(true);
 
     const mo = new MutationObserver(() => {
-      setSettings(readSettings());
-      setLanguage(readLanguage());
+      const next = readSettings();
+      setSettings((prev) => (settingsEqual(prev, next) ? prev : next));
+      setLanguage((prev) => {
+        const lang = readLanguage();
+        return prev === lang ? prev : lang;
+      });
     });
     mo.observe(document.documentElement, {
       attributes: true,
@@ -94,7 +118,9 @@ export function SiteCharacterOceanHost() {
     });
 
     const onStorage = (e: StorageEvent) => {
-      if (e.key === CHARACTER_OCEAN_STORAGE_KEY) setSettings(readSettings());
+      if (e.key !== CHARACTER_OCEAN_STORAGE_KEY) return;
+      const next = readSettings();
+      setSettings((prev) => (settingsEqual(prev, next) ? prev : next));
     };
     window.addEventListener('storage', onStorage);
     return () => {

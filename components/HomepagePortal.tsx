@@ -4,11 +4,16 @@ import dynamic from 'next/dynamic';
 import { WikiLink } from '@/components/WikiLink';
 import { wikiSlugFromHref } from '@/lib/wiki-view-transition';
 import type { CSSProperties, PointerEvent as ReactPointerEvent, TransitionEvent as ReactTransitionEvent } from 'react';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { WikiSearch, type SearchLanguage } from '@/components/WikiSearch';
 import { getRecentSiteUpdates } from '@/lib/site-updates';
 import { SlidingSelection } from '@/components/SlidingSelection';
-import { useAnimatedDisclosure } from '@/components/useAnimatedDisclosure';
+import {
+  useAnimatedDisclosure,
+  DISCLOSURE_HEIGHT_MS,
+  DISCLOSURE_HEIGHT_EASE,
+  type DisclosureHeightAnimateInfo
+} from '@/components/useAnimatedDisclosure';
 import { HomeScrollIntro } from '@/components/HomeScrollIntro';
 import type { PaperHighlightCatalog } from '@/lib/paper-highlights';
 
@@ -168,6 +173,143 @@ export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf
   const updatesWindowRef = useRef<HTMLDivElement>(null);
   const collapsibleSections = { activity: activityOpen, browse: browseOpen, news: newsOpen };
   const allSectionsClosed = Object.values(collapsibleSections).every((open) => !open);
+  const [layoutMode, setLayoutMode] = useState<'expanded' | 'collapsed' | 'nameOnly'>('collapsed');
+  const portalRef = useRef<HTMLElement>(null);
+  const layoutFlipFromRef = useRef<DOMRect | null>(null);
+  const layoutFlipAnimRef = useRef<Animation | null>(null);
+  const portalCenterAnimRef = useRef<Animation | null>(null);
+  const layoutModeRef = useRef(layoutMode);
+  layoutModeRef.current = layoutMode;
+  const openFlagsRef = useRef({ news: newsOpen, browse: browseOpen, activity: activityOpen });
+  openFlagsRef.current = { news: newsOpen, browse: browseOpen, activity: activityOpen };
+
+  const readTranslateY = (el: HTMLElement) => {
+    const transform = getComputedStyle(el).transform;
+    if (!transform || transform === 'none') return 0;
+    try {
+      return new DOMMatrixReadOnly(transform).m42;
+    } catch {
+      return 0;
+    }
+  };
+
+  const computeCollapsedCenterY = (portal: HTMLElement, heightOverride?: number) => {
+    const height = heightOverride ?? portal.getBoundingClientRect().height;
+    if (height <= 0) return 0;
+    const currentY = readTranslateY(portal);
+    const layoutTop = portal.getBoundingClientRect().top - currentY;
+    const desiredTop = Math.max(0, (window.innerHeight - height) / 2);
+    return Math.max(0, desiredTop - layoutTop);
+  };
+
+  const portalCenterRafRef = useRef<number | null>(null);
+  const stopPortalCenterSync = () => {
+    if (portalCenterRafRef.current != null) {
+      cancelAnimationFrame(portalCenterRafRef.current);
+      portalCenterRafRef.current = null;
+    }
+  };
+
+  const applyPortalCenterForHeight = (portal: HTMLElement, height: number) => {
+    // Visual vertical center for current height; clamps to top when taller than viewport.
+    const y = computeCollapsedCenterY(portal, height);
+    portal.style.transform = y === 0 ? 'none' : `translateY(${y}px)`;
+    return y;
+  };
+
+  const onPortalHeightAnimate = useCallback((info: DisclosureHeightAnimateInfo) => {
+    if (layoutModeRef.current === 'nameOnly') return;
+    const portal = portalRef.current;
+    if (!portal) return;
+    stopPortalCenterSync();
+    portalCenterAnimRef.current?.cancel();
+    portalCenterAnimRef.current = null;
+
+    const flags = openFlagsRef.current;
+    const openCount = [flags.news, flags.browse, flags.activity].filter(Boolean).length;
+    const closingLast = !info.next && openCount <= 1;
+    const shouldTrack = info.next || closingLast;
+    if (!shouldTrack) return;
+
+    portal.dataset.measuredLayout = '';
+
+    const settleOpen = () => {
+      const el = portalRef.current;
+      stopPortalCenterSync();
+      portalCenterAnimRef.current = null;
+      if (!el) return;
+      applyPortalCenterForHeight(el, el.getBoundingClientRect().height);
+      if (layoutModeRef.current !== 'nameOnly' && layoutModeRef.current !== 'expanded') {
+        setLayoutMode('expanded');
+      }
+      if (el.dataset.measuredLayout === '') delete el.dataset.measuredLayout;
+    };
+
+    const settleClose = () => {
+      const el = portalRef.current;
+      stopPortalCenterSync();
+      portalCenterAnimRef.current = null;
+      if (!el) return;
+      applyPortalCenterForHeight(el, el.getBoundingClientRect().height);
+      if (layoutModeRef.current !== 'nameOnly' && layoutModeRef.current !== 'collapsed') {
+        setLayoutMode('collapsed');
+      }
+      if (el.dataset.measuredLayout === '') delete el.dataset.measuredLayout;
+    };
+
+    const portalH0 = portal.getBoundingClientRect().height;
+    const portalH1 = portalH0 - info.startHeight + info.endHeight;
+    const currentY = readTranslateY(portal);
+    const layoutTop = portal.getBoundingClientRect().top - currentY;
+
+    const yForHeight = (h: number) => {
+      const desiredTop = Math.max(0, (window.innerHeight - h) / 2);
+      return Math.max(0, desiredTop - layoutTop);
+    };
+
+    if (info.reducedMotion || info.duration <= 0 || !portal.animate) {
+      applyPortalCenterForHeight(portal, portalH1);
+      if (info.next) settleOpen();
+      else settleClose();
+      return;
+    }
+
+    // Multi-keyframe translateY with the SAME duration/easing as height WAAPI.
+    // offsets are in eased progress space, so ty(h(t)) stays centered without rAF lag.
+    const steps = 16;
+    const keyframes: Keyframe[] = [];
+    for (let i = 0; i <= steps; i += 1) {
+      const progress = i / steps;
+      const h = portalH0 + (portalH1 - portalH0) * progress;
+      const y = yForHeight(h);
+      keyframes.push({
+        offset: progress,
+        transform: y === 0 ? 'translateY(0px)' : `translateY(${y}px)`
+      });
+    }
+
+    const anim = portal.animate(keyframes, {
+      duration: info.duration,
+      easing: info.easing,
+      fill: 'forwards'
+    });
+    portalCenterAnimRef.current = anim;
+    const finish = () => {
+      const el = portalRef.current;
+      if (el) {
+        // Persist final center as inline style, then drop WAAPI fill.
+        applyPortalCenterForHeight(el, portalH1);
+      }
+      anim.cancel();
+      if (info.next) settleOpen();
+      else settleClose();
+    };
+    anim.onfinish = finish;
+    anim.oncancel = () => {
+      portalCenterAnimRef.current = null;
+    };
+  }, []);
+
   const commitNewsOpen = (open: boolean) => {
     setNewsOpen(open);
     // Native paper disclosures retain manual state until the whole feed closes.
@@ -176,32 +318,134 @@ export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf
       setAcceptanceResetKey((key) => key + 1);
     }
   };
-  const newsDisclosure = useAnimatedDisclosure(newsOpen, commitNewsOpen);
+  const newsDisclosure = useAnimatedDisclosure(newsOpen, commitNewsOpen, { onHeightAnimate: onPortalHeightAnimate });
   const changeNewsOpen = newsDisclosure.change;
-  const [layoutMode, setLayoutMode] = useState<'expanded' | 'collapsed' | 'nameOnly'>('collapsed');
-  const collapseAllSections = () => {
-    setBrowseOpen(false);
-    changeNewsOpen(false);
-    setActivityOpen(false);
+  const browseDisclosure = useAnimatedDisclosure(browseOpen, setBrowseOpen, { onHeightAnimate: onPortalHeightAnimate });
+  const changeBrowseOpen = browseDisclosure.change;
+  const activityDisclosure = useAnimatedDisclosure(activityOpen, setActivityOpen, { onHeightAnimate: onPortalHeightAnimate });
+  const changeActivityOpen = activityDisclosure.change;
+
+  const applyLayoutMode = (next: 'expanded' | 'collapsed' | 'nameOnly') => {
+    if (next === layoutMode) return;
+    // Collapsed/expanded share top-anchored shell geometry; only nameOnly recenters via place-items.
+    // Collapsed vertical center is an animatable translateY synced with disclosure height.
+    const needsFlip = layoutMode === 'nameOnly' || next === 'nameOnly';
+    layoutFlipFromRef.current = needsFlip
+      ? (portalRef.current?.getBoundingClientRect() ?? null)
+      : null;
+    setLayoutMode(next);
   };
-  // Keep layoutMode in sync when the user opens/closes individual disclosures.
+
+  const collapseAllSections = () => {
+    changeBrowseOpen(false);
+    changeNewsOpen(false);
+    changeActivityOpen(false);
+  };
+  // layoutMode collapsed/expanded is settled by onPortalHeightAnimate after height WAAPI
+  // so React class flips do not contend with the first animation frames. Fallback for
+  // non-animated state changes (e.g. reduced-motion already settled inside the callback).
   useEffect(() => {
     if (layoutMode === 'nameOnly') return;
-    setLayoutMode(allSectionsClosed ? 'collapsed' : 'expanded');
-  }, [allSectionsClosed, layoutMode]);
+    if (portalCenterAnimRef.current) return;
+    // Height pin / WAAPI still running: do not flip collapsed class mid-flight.
+    const portal = portalRef.current;
+    if (portal?.querySelector("details[data-animated-disclosure][style*='height']")) return;
+    const next = allSectionsClosed ? 'collapsed' : 'expanded';
+    if (next === layoutMode) return;
+    applyLayoutMode(next);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional: only react to section open state
+  }, [allSectionsClosed]);
+
+  // Resting center (collapsed) + FLIP only when entering/leaving nameOnly (place-items cannot interpolate).
+  useLayoutEffect(() => {
+    const el = portalRef.current;
+    const from = layoutFlipFromRef.current;
+    layoutFlipFromRef.current = null;
+    layoutFlipAnimRef.current?.cancel();
+    layoutFlipAnimRef.current = null;
+    const releaseMeasured = () => {
+      if (el?.dataset.measuredLayout === "") delete el.dataset.measuredLayout;
+    };
+    if (!el) return;
+
+    // Do not fight a disclosure-synced center animation mid-flight.
+    if (!portalCenterAnimRef.current) {
+      if (layoutMode === 'collapsed' || layoutMode === 'expanded') {
+        applyPortalCenterForHeight(el, el.getBoundingClientRect().height);
+      } else {
+        el.style.transform = '';
+      }
+    }
+
+    if (!from) {
+      releaseMeasured();
+      return;
+    }
+    el.dataset.measuredLayout = "";
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      releaseMeasured();
+      return;
+    }
+    const to = el.getBoundingClientRect();
+    const dx = from.left - to.left;
+    const dy = from.top - to.top;
+    if (Math.abs(dx) < 0.5 && Math.abs(dy) < 0.5) {
+      releaseMeasured();
+      return;
+    }
+    const finalTransform = getComputedStyle(el).transform;
+    const endTransform = finalTransform === "none" ? "translate(0px, 0px)" : finalTransform;
+    const startTransform =
+      endTransform === "translate(0px, 0px)"
+        ? `translate(${dx}px, ${dy}px)`
+        : `translate(${dx}px, ${dy}px) ${endTransform}`;
+    const anim = el.animate(
+      [{ transform: startTransform }, { transform: endTransform }],
+      { duration: DISCLOSURE_HEIGHT_MS, easing: DISCLOSURE_HEIGHT_EASE, fill: "none" }
+    );
+    layoutFlipAnimRef.current = anim;
+    anim.onfinish = releaseMeasured;
+    anim.oncancel = releaseMeasured;
+  }, [layoutMode]);
+
+  // Keep collapsed portal visually centered across viewport resizes and content size changes.
+  useEffect(() => {
+    const recenter = () => {
+      if (layoutModeRef.current !== 'collapsed' && layoutModeRef.current !== 'expanded') return;
+      if (portalCenterAnimRef.current) return;
+      const el = portalRef.current;
+      if (!el) return;
+      // Disclosure height pin / WAAPI sets will-change:height while open/close runs.
+      if (el.querySelector("details[data-animated-disclosure][style*='height']")) return;
+      const y = computeCollapsedCenterY(el);
+      el.style.transform = y === 0 ? 'none' : `translateY(${y}px)`;
+    };
+    window.addEventListener('resize', recenter);
+    const el = portalRef.current;
+    let ro: ResizeObserver | null = null;
+    if (el && typeof ResizeObserver !== 'undefined') {
+      ro = new ResizeObserver(() => recenter());
+      ro.observe(el);
+    }
+    return () => {
+      window.removeEventListener('resize', recenter);
+      ro?.disconnect();
+    };
+  }, []);
+
   const cyclePortalLayout = () => {
     if (layoutMode === 'expanded' || !allSectionsClosed) {
       collapseAllSections();
-      setLayoutMode('collapsed');
+      applyLayoutMode('collapsed');
       return;
     }
     if (layoutMode === 'collapsed') {
-      setLayoutMode('nameOnly');
+      applyLayoutMode('nameOnly');
       return;
     }
     // nameOnly -> folded (never back to full expand via this click)
     collapseAllSections();
-    setLayoutMode('collapsed');
+    applyLayoutMode('collapsed');
   };
   const portalLayoutLabel =
     layoutMode === 'nameOnly'
@@ -487,7 +731,7 @@ export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf
   );
 
   return (
-    <article className={portalClassName} data-page-slug="Xinbao_Qiao">
+    <article ref={portalRef} className={portalClassName} data-page-slug="Xinbao_Qiao">
       <section className="wiki-portal-hero" aria-labelledby="portal-title">
         <div className="wiki-portal-masthead">
           <div className="wiki-portal-brand">
@@ -605,17 +849,23 @@ export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf
 
         <VisitorAtlasDisclosure
           language={language}
-          onOpenChange={setActivityOpen}
+          onOpenChange={changeActivityOpen}
           open={activityOpen}
+          detailsRef={activityDisclosure.ref}
         />
 
         <details
           className="wiki-portal-directory"
           id="portal-directory"
-          onToggle={(event) => setBrowseOpen(event.currentTarget.open)}
+          ref={browseDisclosure.ref}
+          data-animated-disclosure=""
+          onToggle={(event) => {
+            if (event.target !== event.currentTarget) return;
+            if (event.currentTarget.open !== browseOpen) changeBrowseOpen(event.currentTarget.open);
+          }}
           open={browseOpen}
         >
-          <summary>
+          <summary onClick={(event) => { event.preventDefault(); browseDisclosure.toggle(); }}>
             <span>{browseLabels[language]}</span>
           </summary>
           <div className="wiki-portal-view-switcher" role="group" aria-label={browseViewLabels[language].group}>

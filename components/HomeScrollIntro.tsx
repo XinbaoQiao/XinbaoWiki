@@ -25,7 +25,7 @@ type Props = {
 const WHEEL_THRESHOLD = 160;
 const TOUCH_THRESHOLD = 90;
 /** Soft leave: fade + upward drift before route change. */
-const SOFT_DELAY_MS = 780;
+const SOFT_DELAY_MS = 980;
 const BODY_LEAVE_CLASS = 'is-home-leaving-intro';
 const PORTAL_LEAVE_CLASS = 'is-leaving-to-intro';
 

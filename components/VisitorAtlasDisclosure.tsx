@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent, type Ref } from 'react';
 import type { SearchLanguage } from '@/components/WikiSearch';
 import {
   parseSiteActivityPayload,
@@ -14,6 +14,7 @@ type Props = {
   language: SearchLanguage;
   onOpenChange: (open: boolean) => void;
   open: boolean;
+  detailsRef?: Ref<HTMLDetailsElement>;
 };
 
 type ActivityStatus = 'empty' | 'error' | 'loading' | 'ready' | 'unavailable';
@@ -224,7 +225,7 @@ async function fetchSiteActivity(apiPath: string, signal: AbortSignal) {
   throw new Error('site activity response failed');
 }
 
-export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) {
+export function VisitorAtlasDisclosure({ language, onOpenChange, open, detailsRef }: Props) {
   const [payload, setPayload] = useState<SiteActivityPayload | null>(null);
   const [status, setStatus] = useState<ActivityStatus>('loading');
   const [requestVersion, setRequestVersion] = useState(0);
@@ -377,10 +378,15 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open }: Props) 
     <details
       className="wiki-portal-activity wiki-portal-timeline"
       id="portal-activity"
-      onToggle={(event) => onOpenChange(event.currentTarget.open)}
+      ref={detailsRef}
+      data-animated-disclosure=""
+      onToggle={(event) => {
+        if (event.target !== event.currentTarget) return;
+        if (event.currentTarget.open !== open) onOpenChange(event.currentTarget.open);
+      }}
       open={open}
     >
-      <summary>
+      <summary onClick={(event) => { event.preventDefault(); onOpenChange(!open); }}>
         <span className="wiki-portal-timeline-heading">
           <strong>{labels.title}</strong>
           <em>{summary}</em>

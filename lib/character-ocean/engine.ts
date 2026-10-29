@@ -39,7 +39,12 @@ import {
   CHARACTER_OCEAN_MOBILE_MAX_WIDTH,
   type CharacterOceanLanguage,
 } from '@/lib/site-character-ocean';
-import { World, type SharkKind } from '@/lib/character-ocean/world';
+import {
+  World,
+  RIPPLE_DURATION_MS,
+  RIPPLE_WAVE_SPEED,
+  type SharkKind,
+} from '@/lib/character-ocean/world';
 
 export type OceanEngineOptions = {
   style: ActiveOceanStyle;
@@ -97,6 +102,8 @@ export class CharacterOceanEngine {
   private onPointerMove: ((e: PointerEvent) => void) | null = null;
   private onPointerDown: ((e: PointerEvent) => void) | null = null;
   private onPointerLeave: (() => void) | null = null;
+  private motionMq: MediaQueryList | null = null;
+  private onMotionChange: (() => void) | null = null;
 
   private sharkFlag = new Uint8Array(0);
   private sharkShade = new Float32Array(0);
@@ -129,7 +136,7 @@ export class CharacterOceanEngine {
     this.bind();
     this.applyThemeFilter();
     // Settle schools briefly so first paint is not empty/jerky
-    for (let i = 0; i < 90; i++) this.world.step(STEP);
+    for (let i = 0; i < 48; i++) this.world.step(STEP);
     this.last = performance.now();
     if (this.opts.reducedMotion) {
       this.drawStill();
@@ -147,13 +154,19 @@ export class CharacterOceanEngine {
 
   setOptions(partial: Partial<OceanEngineOptions>) {
     const prevMotion = this.opts.reducedMotion;
+    const prevDens = this.opts.density ?? 1;
     this.opts = { ...this.opts, ...partial };
     this.applyThemeFilter();
     this.applyFieldOpacity();
     this.world.setAllowedKinds(this.opts.kinds ?? []);
     this.world.setDensity(this.opts.density ?? 1);
+    const prevMobile = this.mobile;
     this.detectMobile();
-    this.resize();
+    const densChanged = Math.abs((this.opts.density ?? 1) - prevDens) >= 0.001;
+    // Skip canvas buffer rebuild when only style/opacity/language/kinds cosmetics changed.
+    if (densChanged || prevMobile !== this.mobile) {
+      this.resize();
+    }
     if (this.opts.reducedMotion) {
       cancelAnimationFrame(this.raf);
       this.raf = 0;
@@ -209,6 +222,12 @@ export class CharacterOceanEngine {
       attributeFilter: ['data-theme', 'class', 'style'],
     });
 
+    this.motionMq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    this.onMotionChange = () => {
+      this.setOptions({ reducedMotion: !!this.motionMq?.matches });
+    };
+    this.motionMq.addEventListener('change', this.onMotionChange);
+
     this.onPointerMove = (e) => {
       const r = this.canvas.getBoundingClientRect();
       const x = e.clientX - r.left;
@@ -241,6 +260,11 @@ export class CharacterOceanEngine {
     this.ro?.disconnect();
     this.io?.disconnect();
     this.themeObserver?.disconnect();
+    if (this.motionMq && this.onMotionChange) {
+      this.motionMq.removeEventListener('change', this.onMotionChange);
+    }
+    this.motionMq = null;
+    this.onMotionChange = null;
     if (this.onVis) document.removeEventListener('visibilitychange', this.onVis);
     if (this.onPointerMove) window.removeEventListener('pointermove', this.onPointerMove);
     if (this.onPointerDown) window.removeEventListener('pointerdown', this.onPointerDown);
@@ -248,6 +272,7 @@ export class CharacterOceanEngine {
       window.removeEventListener('pointerup', this.onPointerLeave);
       window.removeEventListener('pointercancel', this.onPointerLeave);
     }
+    this.splashLife.length = 0;
   }
 
   private isLightTheme(): boolean {
@@ -278,7 +303,7 @@ export class CharacterOceanEngine {
     const h = Math.max(1, parent.clientHeight || window.innerHeight);
     this.viewW = w;
     this.viewH = h;
-    this.dpr = Math.min(window.devicePixelRatio || 1, this.mobile ? 1.5 : 2);
+    this.dpr = Math.min(window.devicePixelRatio || 1, 1.5);
 
     // Density pulls cell pitch: higher = finer grid (busier field), lower = chunkier glyphs.
     const dens = clamp(this.opts.density ?? 1, 0.35, 2);
@@ -649,11 +674,11 @@ export class CharacterOceanEngine {
     // Splash ripples -- pixelated wave train (chunky concentric rings).
     // Same pond-physics envelope as before (expanding front, multi-crest damp),
     // but drawn as stepped pixel tiles instead of smooth Material radial gradients.
-    const splashDuration = 3400;
+    const splashDuration = RIPPLE_DURATION_MS;
     const cutoff = now - splashDuration;
     this.splashLife = this.splashLife.filter((s) => s.born > cutoff);
     while (this.splashLife.length > 4) this.splashLife.shift();
-    const WAVE_SPEED = 108; // px/s leading front
+    const WAVE_SPEED = RIPPLE_WAVE_SPEED; // px/s leading front
     const WAVELENGTH = 28; // crest-to-crest (snaps onto PIXEL grid below)
     const DAMP_TIME = 0.95;
     const DAMP_DIST = 0.0095;

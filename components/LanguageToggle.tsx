@@ -403,6 +403,36 @@ const customBgPositionOptions: Array<{ position: CustomBgPosition; en: string; z
 
 
 
+function useAnimatedPanelMount(open: boolean, panelSelector: string, rootRef: { current: HTMLDivElement | null }) {
+  const [mounted, setMounted] = useState(open);
+  useEffect(() => {
+    if (open) {
+      setMounted(true);
+      return;
+    }
+    if (!mounted) return;
+    const root = rootRef.current?.querySelector(panelSelector) as HTMLElement | null;
+    if (!root || (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+      setMounted(false);
+      return;
+    }
+    root.dataset.closing = "";
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      setMounted(false);
+    };
+    root.addEventListener("animationend", finish, { once: true });
+    const timer = window.setTimeout(finish, 340);
+    return () => {
+      window.clearTimeout(timer);
+      root.removeEventListener("animationend", finish);
+    };
+  }, [open, mounted, panelSelector, rootRef]);
+  return mounted;
+}
+
 export function SitePalette({ icons, initialSharedBackground = null }: SitePaletteProps) {
   // Keep shared wallpaper URL available, but do not force it on first open.
   const initialSharedUrl = cssUrlForSharedImage(initialSharedBackground?.imageUrl ?? null);
@@ -428,6 +458,8 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
   const [error, setError] = useState<string | null>(null);
   const [isDesktopPointer, setIsDesktopPointer] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const oceanPanelMounted = useAnimatedPanelMount(oceanPanelOpen, ".site-ocean-panel", rootRef);
+  const customPanelMounted = useAnimatedPanelMount(panelOpen, ".site-custom-bg-panel", rootRef);
   const colorMenuCloseTimerRef = useRef<number | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageUrlRef = useRef<string | null>(null);
@@ -1165,7 +1197,7 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
         </button>
         ) : null}
       </div>
-      {panelOpen ? (
+      {customPanelMounted ? (
         <div className="site-custom-bg-panel" id={panelId} role="region" aria-label={copy.custom}>
           <div className="site-custom-bg-panel-head">
             <p className="site-custom-bg-panel-title">{copy.custom}</p>
@@ -1251,7 +1283,7 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
           {error ? <p className="site-custom-bg-error" role="alert">{error}</p> : null}
         </div>
       ) : null}
-      {oceanPanelOpen && !oceanMobileOff ? (
+      {oceanPanelMounted && !oceanMobileOff ? (
         <div className="site-ocean-panel" id={oceanPanelId} role="region" aria-label={copy.oceanGroup}>
           <div className="site-ocean-panel-head">
             <p className="site-ocean-panel-title">{copy.oceanGroup}</p>
