@@ -682,10 +682,13 @@ export class World {
       dx += Math.cos(sh.heading + sh.wander) * 0.45;
       dy += Math.sin(sh.heading + sh.wander) * 0.45;
 
-      // Click/leave ripples: keep the sprint boost, but steer AWAY from the epicenter
-      // (surge out of the ring, never dive into it). Small fish use splash() instead.
+      // Click ripples: keep the sprint boost, but steer AWAY from the epicenter.
+      // Cap influence (modest ring reach) and brake when still aimed inward so the
+      // 4x surge cannot charge through the center before the turn catches up.
+      // Small fish keep splash() impulse only.
       {
         const now = performance.now();
+        const reachCap = Math.min(W, H) * 0.36;
         for (const ripple of this.ripples) {
           const age = (now - ripple.bornMs) / 1000;
           if (age < 0 || age * 1000 > RIPPLE_DURATION_MS) continue;
@@ -693,12 +696,28 @@ export class World {
           const rx = hx - ripple.x;
           const ry = hy - ripple.y;
           const d = Math.hypot(rx, ry) || 1e-3;
-          const reach = Math.max(front * 1.2, L * 0.85);
+          const reach = Math.min(Math.max(front * 1.08, L * 0.75), reachCap);
           if (d >= reach) continue;
-          const falloff = 1 - d / reach;
-          const urgency = falloff * falloff * (1.15 + 1.55 * sh.rippleBoost);
-          dx += (rx / d) * urgency * 2.4;
-          dy += (ry / d) * urgency * 2.4;
+          const ox = rx / d;
+          const oy = ry / d;
+          const nearCore = d < Math.max(72, L * 0.5);
+          const crestBand = Math.max(40, L * 0.22);
+          const nearCrest = Math.abs(d - front) <= crestBand;
+          if (!nearCore && !nearCrest) continue;
+          const falloff = nearCore
+            ? 1 - d / Math.max(72, L * 0.5)
+            : 1 - Math.abs(d - front) / crestBand;
+          let urgency = Math.max(0, falloff) * Math.max(0, falloff) * (1.2 + 1.45 * sh.rippleBoost);
+          // Heading into the epicenter (against outward) → stronger flee + soft brake.
+          const inward = Math.cos(sh.heading) * -ox + Math.sin(sh.heading) * -oy;
+          if (inward > 0.08) {
+            urgency *= 1.55 + inward * 0.9;
+            if (d < front * 0.92 || nearCore) {
+              sh.speed *= 1 - Math.min(0.32, inward * 0.28);
+            }
+          }
+          dx += ox * urgency * 2.55;
+          dy += oy * urgency * 2.55;
         }
       }
 
