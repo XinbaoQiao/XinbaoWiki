@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { WikiImageItem } from '@/lib/wiki';
 
 type Props = {
@@ -21,6 +21,27 @@ export function PortraitGallery({ items, language }: Props) {
     setIndex((currentIndex) => (currentIndex + offset + items.length) % items.length);
   }
 
+  useEffect(() => {
+    if (items.length < 2) return;
+    const warm = () => {
+      const next = items[(index + 1) % items.length];
+      const prev = items[(index - 1 + items.length) % items.length];
+      for (const item of [next, prev]) {
+        if (!item?.src) continue;
+        const img = new Image();
+        img.decoding = 'async';
+        img.src = item.src;
+      }
+    };
+    const ric = (window as Window & { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback;
+    if (ric) {
+      const id = ric(warm, { timeout: 1200 });
+      return () => (window as Window & { cancelIdleCallback?: (id: number) => void }).cancelIdleCallback?.(id);
+    }
+    const timer = window.setTimeout(warm, 400);
+    return () => window.clearTimeout(timer);
+  }, [index, items]);
+
   return (
     <div className="wiki-infobox-image wiki-portrait-gallery">
       <div className="wiki-portrait-gallery-frame">
@@ -30,6 +51,7 @@ export function PortraitGallery({ items, language }: Props) {
           loading={index === 0 ? 'eager' : 'lazy'}
           decoding="async"
           fetchPriority={index === 0 ? 'high' : 'low'}
+          sizes="(max-width: 720px) 42vw, 280px"
           width={560}
           height={700}
           style={{ objectFit: current.fit || 'cover', objectPosition: current.position || '50% 38%' }}

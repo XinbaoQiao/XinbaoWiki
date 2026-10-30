@@ -33,7 +33,7 @@ test('sidebar marker moves through intermediate positions and aligns after back 
   await page.goBack();
   await aligned(page);
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.locator('.wiki-sidebar-desktop a[href*="AI_and_Networks"]').click();
+  await page.locator('.wiki-sidebar-desktop a[href*="Research_Area_2"]').click();
   await aligned(page);
   expect(await page.locator('.wiki-sidebar-current-marker').first().evaluate(el => getComputedStyle(el).transitionDuration)).toBe('0s');
 });

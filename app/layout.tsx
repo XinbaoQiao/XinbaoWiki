@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import { ArticleTabs } from '@/components/ArticleTabs';
 import { LanguageToggle, SitePalette } from '@/components/LanguageToggle';
+import { SiteCharacterOceanHost } from '@/components/SiteCharacterOceanHost';
 import { Sidebar } from '@/components/Sidebar';
 import { WikiSearch } from '@/components/WikiSearch';
 import { SiteActivityRecorder } from '@/components/SiteActivityRecorder';
@@ -21,6 +22,7 @@ import {
 } from '@/lib/site-wallpaper-store';
 import { ViewTransitions } from 'next-view-transitions';
 import './globals.css';
+
 
 const sitePaletteIcons = {
   text: pathWithBasePath('/mywiki-icon.webp'),
@@ -118,6 +120,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <body>
 
           <SiteActivityRecorder />
+          <SiteCharacterOceanHost />
           <a className="skip-to-content" href="#main-content">Skip to content / 跳到正文</a>
           <SitePalette icons={sitePaletteIcons} initialSharedBackground={initialSharedBackground} />
           <header className="wiki-topbar">

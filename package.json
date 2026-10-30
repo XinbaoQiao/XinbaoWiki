@@ -17,6 +17,7 @@
     "lint:okf": "node scripts/okf-conformance.mjs",
     "lint:content": "node scripts/wiki-maintenance.mjs --check",
     "generate:site-activity-map": "node scripts/run-with-node22.mjs node scripts/generate-site-activity-map.mjs",
+    "chat:report": "node scripts/run-with-node22.mjs node scripts/report-chat-audit.mjs",
     "maintain:wiki": "node scripts/run-with-node22.mjs node scripts/wiki-maintenance.mjs --standardize --write",
     "new:wiki": "node scripts/new-wiki-page.mjs",
     "test:cube-geometry": "node scripts/run-with-node22.mjs playwright test tests/browser/cube-geometry.spec.mjs",
@@ -24,7 +25,8 @@
     "typecheck": "node scripts/prepare-typecheck.mjs && tsc --noEmit",
     "check": "node scripts/run-with-node22.mjs npm run check:node22",
     "check:node22": "npm run typecheck && npm run lint:wiki && npm run lint:content && npm run lint:okf && npm run test:features",
-    "test:features": "node scripts/test-chat-hardening.mjs && node scripts/test-site-activity.mjs && node scripts/test-site-activity-daily.mjs && node scripts/test-site-activity-events.mjs && node scripts/test-wiki-outline.mjs"
+    "test:features": "node scripts/test-chat-hardening.mjs && node scripts/test-site-activity.mjs && node scripts/test-site-activity-daily.mjs && node scripts/test-site-activity-events.mjs && node scripts/test-wiki-outline.mjs",
+    "verify:template": "node scripts/run-with-node22.mjs node scripts/template/build-template.mjs --out .tmp/template-build"
   },
   "dependencies": {
     "@upstash/redis": "^1.38.0",

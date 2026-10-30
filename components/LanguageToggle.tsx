@@ -10,7 +10,6 @@ import {
 
   applyCustomBgDocumentState,
 
-  clearCustomBgSettings,
 
   compressImageFile,
   imageExtensionForMime,
@@ -48,6 +47,22 @@ import {
   sharedBackgroundToSettings,
   type SharedSiteBackgroundPublic
 } from '@/lib/site-wallpaper-shared';
+import {
+  CHARACTER_OCEAN_ACTIVE_STYLES,
+  CHARACTER_OCEAN_STORAGE_KEY,
+  DEFAULT_CHARACTER_OCEAN,
+  DEFAULT_OCEAN_SHARK_KINDS,
+  OCEAN_SHARK_KINDS,
+  characterOceanLabels,
+  characterOceanMobileMediaQuery,
+  clampOceanDensity,
+  clampOceanOpacity,
+  parseCharacterOceanSettings,
+  siteBackgroundComposeMode,
+  type CharacterOceanSettings,
+  type CharacterOceanStyle,
+  type OceanSharkKind
+} from '@/lib/site-character-ocean';
 
 const SITE_WALLPAPER_API = '/api/site-activity/wallpaper/';
 const WALLPAPER_UPLOAD_TIMEOUT_MS = 45_000;
@@ -128,9 +143,10 @@ export function LanguageToggle() {
 
 
   useEffect(() => {
-
-    document.documentElement.lang = isWikiPage && isChinesePage ? 'zh-CN' : 'en';
-
+    // Wiki pages own document lang from the slug. Homepage / non-wiki chrome
+    // is owned by HomepagePortal — do not force 'en' here or ZH ocean glyphs never arm.
+    if (!isWikiPage) return;
+    document.documentElement.lang = isChinesePage ? 'zh-CN' : 'en';
   }, [isChinesePage, isWikiPage]);
 
 
@@ -386,6 +402,36 @@ const customBgPositionOptions: Array<{ position: CustomBgPosition; en: string; z
 
 
 
+function useAnimatedPanelMount(open: boolean, panelSelector: string, rootRef: { current: HTMLDivElement | null }) {
+  const [mounted, setMounted] = useState(open);
+  useEffect(() => {
+    if (open) {
+      setMounted(true);
+      return;
+    }
+    if (!mounted) return;
+    const root = rootRef.current?.querySelector(panelSelector) as HTMLElement | null;
+    if (!root || (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches)) {
+      setMounted(false);
+      return;
+    }
+    root.dataset.closing = "";
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      setMounted(false);
+    };
+    root.addEventListener("animationend", finish, { once: true });
+    const timer = window.setTimeout(finish, 340);
+    return () => {
+      window.clearTimeout(timer);
+      root.removeEventListener("animationend", finish);
+    };
+  }, [open, mounted, panelSelector, rootRef]);
+  return mounted;
+}
+
 export function SitePalette({ icons, initialSharedBackground = null }: SitePaletteProps) {
   // Keep shared wallpaper URL available, but do not force it on first open.
   const initialSharedUrl = cssUrlForSharedImage(initialSharedBackground?.imageUrl ?? null);
@@ -393,7 +439,12 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
     ? { ...sharedBackgroundToSettings(initialSharedBackground!), enabled: false }
     : DEFAULT_CUSTOM_BG_SETTINGS;
   const [mode, setMode] = useState<SitePaletteMode>('auto');
+  const [characterOcean, setCharacterOcean] = useState<CharacterOceanSettings>({ ...DEFAULT_CHARACTER_OCEAN, kinds: [...DEFAULT_CHARACTER_OCEAN.kinds] });
+  const [oceanPanelOpen, setOceanPanelOpen] = useState(false);
+  const [oceanMobileOff, setOceanMobileOff] = useState(false);
+  const [oceanStyleBeforeOff, setOceanStyleBeforeOff] = useState<Exclude<CharacterOceanStyle, 'off'>>('ascii');
   const [expanded, setExpanded] = useState(false);
+  const [colorMenuOpen, setColorMenuOpen] = useState(false);
   const [customSettings, setCustomSettings] = useState<CustomBgSettings>(initialSharedSettings);
   const [customImageUrl, setCustomImageUrl] = useState<string | null>(initialSharedUrl);
   const [customTone, setCustomTone] = useState<CustomBgTone | null>(initialSharedBackground?.tone ?? null);
@@ -406,9 +457,13 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
   const [error, setError] = useState<string | null>(null);
   const [isDesktopPointer, setIsDesktopPointer] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+  const oceanPanelMounted = useAnimatedPanelMount(oceanPanelOpen, ".site-ocean-panel", rootRef);
+  const customPanelMounted = useAnimatedPanelMount(panelOpen, ".site-custom-bg-panel", rootRef);
+  const colorMenuCloseTimerRef = useRef<number | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const imageUrlRef = useRef<string | null>(null);
   const panelId = useId();
+  const oceanPanelId = useId();
   const isChinese = useChromeChinese();
 
   const loadSharedImageOnly = (shared: SharedSiteBackgroundPublic) => {
@@ -461,6 +516,11 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
   useEffect(() => {
     const savedMode = window.localStorage.getItem(sitePaletteStorageKey);
     if (isSitePaletteMode(savedMode)) setMode(savedMode);
+      const savedOcean = window.localStorage.getItem(CHARACTER_OCEAN_STORAGE_KEY);
+      const loadedOcean = parseCharacterOceanSettings(savedOcean);
+      // Default is on (ascii). Honor an explicit off saved in localStorage.
+      setCharacterOcean(loadedOcean);
+      if (loadedOcean.style !== 'off') setOceanStyleBeforeOff(loadedOcean.style);
     const savedCustom = readCustomBgSettings();
     setCustomSettings(savedCustom);
     if (initialSharedBackground) {
@@ -570,6 +630,18 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
   }, []);
 
   useEffect(() => {
+    const media = window.matchMedia(characterOceanMobileMediaQuery());
+    const sync = () => {
+      const off = media.matches;
+      setOceanMobileOff(off);
+      if (off) setOceanPanelOpen(false);
+    };
+    sync();
+    media.addEventListener('change', sync);
+    return () => media.removeEventListener('change', sync);
+  }, []);
+
+  useEffect(() => {
     if (!customSettings.enabled || customSettings.mode !== 'depth' || !customImageUrl || !isDesktopPointer) {
       document.documentElement.style.setProperty('--site-custom-bg-parallax', '0px');
       return;
@@ -601,17 +673,29 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
   }, [customSettings.enabled, customSettings.mode, customImageUrl, isDesktopPointer]);
 
   useEffect(() => {
-    if (!expanded && !panelOpen) return;
+    if (!expanded && !panelOpen && !oceanPanelOpen && !colorMenuOpen) return;
+    function clearColorMenuTimer() {
+      if (colorMenuCloseTimerRef.current != null) {
+        window.clearTimeout(colorMenuCloseTimerRef.current);
+        colorMenuCloseTimerRef.current = null;
+      }
+    }
     function onPointerDown(event: PointerEvent) {
       if (!rootRef.current?.contains(event.target as Node)) {
+        clearColorMenuTimer();
         setExpanded(false);
         setPanelOpen(false);
+        setOceanPanelOpen(false);
+        setColorMenuOpen(false);
       }
     }
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
+        clearColorMenuTimer();
         setExpanded(false);
         setPanelOpen(false);
+        setOceanPanelOpen(false);
+        setColorMenuOpen(false);
       }
     }
     document.addEventListener('pointerdown', onPointerDown);
@@ -620,12 +704,25 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
       document.removeEventListener('pointerdown', onPointerDown);
       document.removeEventListener('keydown', onKeyDown);
     };
-  }, [expanded, panelOpen]);
+  }, [expanded, panelOpen, oceanPanelOpen, colorMenuOpen]);
+
+  useEffect(() => () => {
+    if (colorMenuCloseTimerRef.current != null) {
+      window.clearTimeout(colorMenuCloseTimerRef.current);
+      colorMenuCloseTimerRef.current = null;
+    }
+  }, []);
 
   const chooseMode = (nextMode: SitePaletteMode) => {
     setMode(nextMode);
     setExpanded(false);
     setPanelOpen(false);
+    setOceanPanelOpen(false);
+    if (colorMenuCloseTimerRef.current != null) {
+      window.clearTimeout(colorMenuCloseTimerRef.current);
+      colorMenuCloseTimerRef.current = null;
+    }
+    setColorMenuOpen(false);
     if (customSettings.enabled) {
       const disabled = { ...customSettings, enabled: false };
       setCustomSettings(disabled);
@@ -640,31 +737,25 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
   };
 
   const persistCustom = (next: CustomBgSettings) => {
-    // Overlay / mode / position are always local preferences.
+    // Overlay / mode / position / enabled are always local preferences.
     // Only site-wide image upload (and clear) require the owner password.
+    // Keep settings (incl. enabled:false) so toggling wallpaper off does not lose the image or prefs.
     setCustomSettings(next);
-    if (!next.enabled) {
-      clearCustomBgSettings();
-      writeCustomBgSettings({ ...next, enabled: false });
-    } else {
-      writeCustomBgSettings(next);
-    }
+    writeCustomBgSettings(next);
   };
 
   const openCustomPanel = () => {
+    setOceanPanelOpen(false);
     setPanelOpen(true);
     setExpanded(true);
     setError(null);
-    if (customImageUrl && !customSettings.enabled) {
-      const enabled = { ...customSettings, enabled: true };
-      setCustomSettings(enabled);
-      if (!(publishShared && sharedMeta?.writable)) writeCustomBgSettings(enabled);
-      applyCustomBgDocumentState(enabled, true, customTone);
-    }
+    // Do not auto-enable wallpaper — use the panel toggle so the image can stay while display is off.
     window.setTimeout(() => {
       const root = rootRef.current;
       if (!root) return;
-      const focusable = root.querySelector<HTMLElement>('.site-custom-bg-action:not(:disabled), .site-custom-bg-panel select:not(:disabled), .site-custom-bg-panel input:not(:disabled)');
+      const focusable = root.querySelector<HTMLElement>(
+        '.site-ocean-toggle, .site-custom-bg-action:not(:disabled), .site-custom-bg-panel select:not(:disabled), .site-custom-bg-panel input:not(:disabled)',
+      );
       focusable?.focus();
     }, 0);
   };
@@ -810,11 +901,19 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
   };
 
   const customActive = Boolean(customSettings.enabled && customImageUrl);
+  // Only treat SSR wallpaper as adopted when the layout actually rendered that node.
+  // Shared wallpaper may be enabled server-side while visitors still default to mixed;
+  // in that case we must mount the client layer or opt-in never paints an image.
   const [ssrWallpaperAdopted, setSsrWallpaperAdopted] = useState(() => {
-    if (initialSharedBackground?.enabled && cssUrlForSharedImage(initialSharedBackground.imageUrl)) return true;
     return typeof document !== 'undefined' && Boolean(document.querySelector('[data-ssr-wallpaper]'));
   });
   useLayoutEffect(() => {
+    const root = document.documentElement;
+    if (customImageUrl) {
+      root.style.setProperty('--site-custom-bg-image', `url("${customImageUrl}")`);
+    } else {
+      root.style.removeProperty('--site-custom-bg-image');
+    }
     const ssr = document.querySelector<HTMLElement>('[data-ssr-wallpaper]');
     if (!ssr) return;
     ssr.className = ['site-custom-bg-layer', customActive ? 'is-active' : ''].filter(Boolean).join(' ');
@@ -828,7 +927,10 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
   } as CSSProperties;
 
   const copy = {
+    color: isChinese ? '颜色' : 'Color',
+    colorMenu: isChinese ? '选择配色' : 'Choose color theme',
     custom: isChinese ? '自定义背景' : 'Custom background',
+    wallpaperEnable: isChinese ? '显示壁纸' : 'Show wallpaper',
     upload: isChinese ? '上传图片' : 'Upload image',
     change: isChinese ? '更换图片' : 'Change image',
     clear: isChinese ? '清除' : 'Clear',
@@ -846,8 +948,59 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
     scopeHintPassword: isChinese ? '仅全站上传或清除背景图时需要站长密码；透明度、模式等可自由调整。' : 'Owner password is only for uploading or clearing the site-wide image. Overlay, mode, and position stay free.',
     scopeHintMissing: isChinese
       ? '当前环境未开放全站写入。生产需配置 Redis、站长密码哈希，以及 the Vercel Blob RW token env。'
-      : 'Shared writes are unavailable here. Production needs Redis, owner password hash, and the Vercel Blob RW token env.'
+      : 'Shared writes are unavailable here. Production needs Redis, owner password hash, and the Vercel Blob RW token env.',
+    oceanGroup: isChinese ? characterOceanLabels.zh.group : characterOceanLabels.en.group,
+    oceanEnable: isChinese ? characterOceanLabels.zh.enable : characterOceanLabels.en.enable,
+    oceanDensity: isChinese ? characterOceanLabels.zh.density : characterOceanLabels.en.density,
+    oceanOpacity: isChinese ? characterOceanLabels.zh.opacity : characterOceanLabels.en.opacity,
+    oceanStyle: isChinese ? characterOceanLabels.zh.style : characterOceanLabels.en.style,
+    oceanHint: isChinese ? characterOceanLabels.zh.hint : characterOceanLabels.en.hint,
+    oceanKinds: isChinese ? characterOceanLabels.zh.kinds : characterOceanLabels.en.kinds,
+    oceanKindsHint: isChinese ? characterOceanLabels.zh.kindsHint : characterOceanLabels.en.kindsHint,
+    oceanKindsAll: isChinese ? characterOceanLabels.zh.kindsAll : characterOceanLabels.en.kindsAll,
+    oceanKindsDefault: isChinese ? characterOceanLabels.zh.kindsDefault : characterOceanLabels.en.kindsDefault,
   };
+  const persistOcean = (next: CharacterOceanSettings) => {
+    setCharacterOcean(next);
+    if (next.style !== 'off') setOceanStyleBeforeOff(next.style);
+  };
+
+  const openOceanPanel = () => {
+    if (oceanMobileOff) return;
+    setPanelOpen(false);
+    setOceanPanelOpen(true);
+    setExpanded(true);
+    window.setTimeout(() => {
+      const root = rootRef.current;
+      if (!root) return;
+      const focusable = root.querySelector<HTMLElement>(
+        '.site-ocean-panel select:not(:disabled), .site-ocean-panel input:not(:disabled), .site-ocean-toggle',
+      );
+      focusable?.focus();
+    }, 0);
+  };
+
+  useEffect(() => {
+    // Mobile temporarily disables the ocean field: keep user preference in
+    // state/localStorage, but force DOM compose attrs to off so portal chrome
+    // is not left transparent without a canvas.
+    const effectiveStyle = oceanMobileOff ? 'off' : characterOcean.style;
+    const oceanOn = effectiveStyle !== 'off';
+    const wallpaperOn = Boolean(customSettings.enabled && customImageUrl);
+    document.documentElement.dataset.siteCharacterOcean = effectiveStyle;
+    document.documentElement.dataset.siteOceanDensity = String(characterOcean.density);
+    document.documentElement.dataset.siteOceanOpacity = String(characterOcean.opacity);
+    document.documentElement.dataset.siteOceanKinds = JSON.stringify(characterOcean.kinds);
+    document.documentElement.dataset.siteOceanMobile = oceanMobileOff ? '1' : '0';
+    document.documentElement.dataset.siteBgCompose = siteBackgroundComposeMode({ oceanOn, wallpaperOn });
+    document.documentElement.style.setProperty('--site-ocean-opacity', String(characterOcean.opacity));
+    try {
+      window.localStorage.setItem(CHARACTER_OCEAN_STORAGE_KEY, JSON.stringify(characterOcean));
+    } catch {
+      /* ignore quota */
+    }
+  }, [characterOcean, customSettings.enabled, customImageUrl, oceanMobileOff]);
+
   return (
     <>
       {!ssrWallpaperAdopted && (
@@ -859,42 +1012,126 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
       )}
       <div
         ref={rootRef}
-        className={['site-palette-root', panelOpen ? 'is-panel-open' : ''].filter(Boolean).join(' ')}
+        className={['site-palette-root', (panelOpen || oceanPanelOpen || colorMenuOpen) ? 'is-panel-open' : ''].filter(Boolean).join(' ')}
       >
       <div
-        aria-expanded={expanded || panelOpen}
+        aria-expanded={expanded || panelOpen || oceanPanelOpen || colorMenuOpen}
         aria-label={copy.group}
-        className={['site-palette-switcher', (expanded || panelOpen) ? 'is-expanded' : ''].filter(Boolean).join(' ')}
+        className={['site-palette-switcher', (expanded || panelOpen || oceanPanelOpen || colorMenuOpen) ? 'is-expanded' : ''].filter(Boolean).join(' ')}
         role="group"
       >
-        {sitePaletteOptions.map((option) => {
-          const pressed = mode === option.mode;
-          const active = mode === option.mode;
-          const style = { '--site-palette-swatch': option.color } as CSSProperties;
+        {(() => {
+          const activeOption = sitePaletteOptions.find((option) => option.mode === mode) ?? sitePaletteOptions[sitePaletteOptions.length - 1];
+          const colorStyle = { '--site-palette-swatch': activeOption.color } as CSSProperties;
+          const colorMenuId = `${panelId}-color-menu`;
           return (
-            <button
-              aria-label={option.title}
-              aria-pressed={pressed}
-              className={['site-palette-button', active ? 'is-active' : '', option.mode === 'text' ? 'site-palette-text' : '', option.mode === 'auto' ? 'site-palette-auto' : '']
-                .filter(Boolean)
-                .join(' ')}
-              key={option.mode}
-              onClick={() => {
-                if (active && prefersCoarsePalettePointer()) {
-                  setExpanded((current) => !current);
-                  setPanelOpen(false);
-                  return;
+            <div
+              className={['site-palette-color-wrap', colorMenuOpen ? 'is-color-menu-open' : ''].filter(Boolean).join(' ')}
+              onBlur={(event) => {
+                const next = event.relatedTarget as Node | null;
+                if (next && event.currentTarget.contains(next)) return;
+                if (colorMenuCloseTimerRef.current != null) {
+                  window.clearTimeout(colorMenuCloseTimerRef.current);
+                  colorMenuCloseTimerRef.current = null;
                 }
-                chooseMode(option.mode);
+                setColorMenuOpen(false);
               }}
-              style={style}
-              title={option.title}
-              type="button"
+              onFocus={() => {
+                // Coarse uses tap-to-toggle; auto-open on focus would race the click and immediately close.
+                if (prefersCoarsePalettePointer()) return;
+                if (colorMenuCloseTimerRef.current != null) {
+                  window.clearTimeout(colorMenuCloseTimerRef.current);
+                  colorMenuCloseTimerRef.current = null;
+                }
+                setColorMenuOpen(true);
+              }}
+              onMouseEnter={() => {
+                if (prefersCoarsePalettePointer()) return;
+                if (colorMenuCloseTimerRef.current != null) {
+                  window.clearTimeout(colorMenuCloseTimerRef.current);
+                  colorMenuCloseTimerRef.current = null;
+                }
+                setColorMenuOpen(true);
+              }}
+              onMouseLeave={() => {
+                if (prefersCoarsePalettePointer()) return;
+                if (colorMenuCloseTimerRef.current != null) {
+                  window.clearTimeout(colorMenuCloseTimerRef.current);
+                }
+                colorMenuCloseTimerRef.current = window.setTimeout(() => {
+                  colorMenuCloseTimerRef.current = null;
+                  setColorMenuOpen(false);
+                }, 160);
+              }}
             >
-              <span className="sr-only">{option.title}</span>
-            </button>
+              <button
+                aria-controls={colorMenuId}
+                aria-expanded={colorMenuOpen}
+                aria-haspopup="listbox"
+                aria-label={copy.color}
+                className={[
+                  'site-palette-button',
+                  'site-palette-color-trigger',
+                  activeOption.mode === 'text' ? 'site-palette-text' : '',
+                  activeOption.mode === 'auto' ? 'site-palette-auto' : '',
+                  colorMenuOpen ? 'is-panel-trigger' : '',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
+                onClick={() => {
+                  setPanelOpen(false);
+                  setOceanPanelOpen(false);
+                  if (prefersCoarsePalettePointer()) {
+                    setColorMenuOpen((current) => !current);
+                    setExpanded(true);
+                    return;
+                  }
+                  setColorMenuOpen(true);
+                }}
+                style={colorStyle}
+                title={copy.color}
+                type="button"
+              >
+                <span className="sr-only">{copy.color}</span>
+              </button>
+              <div
+                aria-label={copy.colorMenu}
+                className="site-palette-color-menu"
+                id={colorMenuId}
+                role="listbox"
+              >
+                {sitePaletteOptions.map((option) => {
+                  const active = mode === option.mode;
+                  const style = { '--site-palette-swatch': option.color } as CSSProperties;
+                  return (
+                    <button
+                      aria-label={option.title}
+                      aria-selected={active}
+                      className={[
+                        'site-palette-button',
+                        'site-palette-color-option',
+                        active ? 'is-active' : '',
+                        option.mode === 'text' ? 'site-palette-text' : '',
+                        option.mode === 'auto' ? 'site-palette-auto' : '',
+                      ]
+                        .filter(Boolean)
+                        .join(' ')}
+                      key={option.mode}
+                      onClick={() => chooseMode(option.mode)}
+                      role="option"
+                      style={style}
+                      tabIndex={colorMenuOpen ? 0 : -1}
+                      title={option.title}
+                      type="button"
+                    >
+                      <span className="sr-only">{option.title}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           );
-        })}
+        })()}
         <button
           aria-controls={panelId}
           aria-expanded={panelOpen}
@@ -916,13 +1153,62 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
             </svg>
           </span>
         </button>
+        {!oceanMobileOff ? (
+        <button
+          aria-controls={oceanPanelId}
+          aria-expanded={oceanPanelOpen}
+          aria-label={copy.oceanGroup}
+          aria-pressed={characterOcean.style !== 'off'}
+          className={[
+            'site-palette-button',
+            'site-palette-ocean',
+            characterOcean.style !== 'off' ? 'is-ocean-on' : '',
+            oceanPanelOpen ? 'is-panel-trigger' : '',
+          ]
+            .filter(Boolean)
+            .join(' ')}
+          onClick={() => {
+            if (oceanPanelOpen) {
+              setOceanPanelOpen(false);
+              return;
+            }
+            openOceanPanel();
+          }}
+          title={copy.oceanGroup}
+          type="button"
+        >
+          <span className="sr-only">{copy.oceanGroup}</span>
+          <span aria-hidden="true" className="site-palette-ocean-glyph">
+            <svg viewBox="0 0 16 16" width="12" height="12" focusable="false">
+              <path d="M1.5 10.2c1.4-1.2 2.7-1.8 4-1.8s2.6.6 4 1.8c1.4 1.2 2.7 1.8 4 1.8" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+              <path d="M1.5 6.8c1.4-1.2 2.7-1.8 4-1.8s2.6.6 4 1.8c1.4 1.2 2.7 1.8 4 1.8" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+              <circle cx="11.2" cy="4.2" r="1.1" fill="currentColor" />
+            </svg>
+          </span>
+        </button>
+        ) : null}
       </div>
-      {panelOpen ? (
+      {customPanelMounted ? (
         <div className="site-custom-bg-panel" id={panelId} role="region" aria-label={copy.custom}>
           <div className="site-custom-bg-panel-head">
             <p className="site-custom-bg-panel-title">{copy.custom}</p>
             {scopeNote ? <p className="site-custom-bg-panel-note">{scopeNote}</p> : null}
           </div>
+          {customImageUrl ? (
+            <div className="site-ocean-toggle-row">
+              <span className="site-custom-bg-field-label">{copy.wallpaperEnable}</span>
+              <button
+                aria-pressed={customSettings.enabled}
+                className={['site-ocean-toggle', customSettings.enabled ? 'is-on' : ''].filter(Boolean).join(' ')}
+                disabled={busy}
+                onClick={() => {
+                  persistCustom({ ...customSettings, enabled: !customSettings.enabled });
+                }}
+                title={copy.wallpaperEnable}
+                type="button"
+              />
+            </div>
+          ) : null}
           <label className="site-custom-bg-field">
             <span className="site-custom-bg-field-label">{copy.scopeLabel}</span>
             <select
@@ -954,11 +1240,6 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
               />
             </label>
           ) : null}
-          {sharedMeta?.writable && publishShared ? (
-            <p className="site-custom-bg-panel-note">
-              {copy[sharedMeta.passwordRequired ? 'scopeHintPassword' : 'scopeHintLocal']}
-            </p>
-          ) : null}
           <div className="site-custom-bg-panel-row">
             <button className="site-custom-bg-action" disabled={busy} onClick={() => fileInputRef.current?.click()} type="button">
               {busy ? copy.busy : (customImageUrl ? copy.change : copy.upload)}
@@ -973,13 +1254,13 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
             <div className="site-custom-bg-controls">
               <label className="site-custom-bg-field">
                 <span className="site-custom-bg-field-label">{copy.mode}</span>
-                <select disabled={busy || !customImageUrl} onChange={(event) => {
+                <select disabled={busy || !customImageUrl || !customSettings.enabled} onChange={(event) => {
                   const nextMode = event.target.value as CustomBgMode;
                   if (nextMode === 'depth' && !isDesktopPointer) {
-                    persistCustom({ ...customSettings, enabled: true, mode: 'cover' });
+                    persistCustom({ ...customSettings, mode: 'cover' });
                     return;
                   }
-                  persistCustom({ ...customSettings, enabled: Boolean(customImageUrl), mode: nextMode });
+                  persistCustom({ ...customSettings, mode: nextMode });
                 }} value={customSettings.mode}>
                   {customBgModeOptions.map((option) => (
                     <option disabled={option.mode === 'depth' && !isDesktopPointer} key={option.mode} value={option.mode}>{isChinese ? option.zh : option.en}</option>
@@ -988,11 +1269,11 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
               </label>
               <label className="site-custom-bg-field">
                 <span className="site-custom-bg-field-label">{copy.overlay}<span className="site-custom-bg-field-value">{customSettings.overlay}%</span></span>
-                <input disabled={busy || !customImageUrl} max={100} min={0} onChange={(event) => persistCustom({ ...customSettings, enabled: Boolean(customImageUrl), overlay: Number(event.target.value) })} type="range" value={customSettings.overlay} />
+                <input disabled={busy || !customImageUrl || !customSettings.enabled} max={100} min={0} onChange={(event) => persistCustom({ ...customSettings, overlay: Number(event.target.value) })} type="range" value={customSettings.overlay} />
               </label>
               <label className="site-custom-bg-field">
                 <span className="site-custom-bg-field-label">{copy.position}</span>
-                <select disabled={busy || !customImageUrl || customSettings.mode === 'tile'} onChange={(event) => persistCustom({ ...customSettings, enabled: Boolean(customImageUrl), position: event.target.value as CustomBgPosition })} value={customSettings.position}>
+                <select disabled={busy || !customImageUrl || !customSettings.enabled || customSettings.mode === 'tile'} onChange={(event) => persistCustom({ ...customSettings, position: event.target.value as CustomBgPosition })} value={customSettings.position}>
                   {customBgPositionOptions.map((option) => (
                     <option key={option.position} value={option.position}>{isChinese ? option.zh : option.en}</option>
                   ))}
@@ -1001,6 +1282,147 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
             </div>
           ) : null}
           {error ? <p className="site-custom-bg-error" role="alert">{error}</p> : null}
+        </div>
+      ) : null}
+      {oceanPanelMounted && !oceanMobileOff ? (
+        <div className="site-ocean-panel" id={oceanPanelId} role="region" aria-label={copy.oceanGroup}>
+          <div className="site-ocean-panel-head">
+            <p className="site-ocean-panel-title">{copy.oceanGroup}</p>
+            <p className="site-ocean-panel-note">{copy.oceanHint}</p>
+          </div>
+          <div className="site-ocean-toggle-row">
+            <span className="site-custom-bg-field-label">{copy.oceanEnable}</span>
+            <button
+              aria-pressed={characterOcean.style !== 'off'}
+              className={['site-ocean-toggle', characterOcean.style !== 'off' ? 'is-on' : ''].filter(Boolean).join(' ')}
+              onClick={() => {
+                if (characterOcean.style === 'off') {
+                  persistOcean({ ...characterOcean, style: oceanStyleBeforeOff });
+                } else {
+                  setOceanStyleBeforeOff(characterOcean.style);
+                  persistOcean({ ...characterOcean, style: 'off' });
+                }
+              }}
+              title={copy.oceanEnable}
+              type="button"
+            />
+          </div>
+          <label className="site-custom-bg-field">
+            <span className="site-custom-bg-field-label">{copy.oceanStyle}</span>
+            <select
+              disabled={characterOcean.style === 'off'}
+              onChange={(event) => {
+                const nextStyle = event.target.value as Exclude<CharacterOceanStyle, 'off'>;
+                persistOcean({ ...characterOcean, style: nextStyle });
+              }}
+              value={characterOcean.style === 'off' ? oceanStyleBeforeOff : characterOcean.style}
+            >
+              {CHARACTER_OCEAN_ACTIVE_STYLES.map((styleKey) => {
+                const labels = isChinese ? characterOceanLabels.zh : characterOceanLabels.en;
+                return (
+                  <option key={styleKey} value={styleKey}>
+                    {labels[styleKey]}
+                  </option>
+                );
+              })}
+            </select>
+          </label>
+          <label className="site-custom-bg-field">
+            <span className="site-custom-bg-field-label">
+              {copy.oceanDensity}
+              <span className="site-custom-bg-field-value">{Math.round(characterOcean.density * 100)}%</span>
+            </span>
+            <input
+              disabled={characterOcean.style === 'off'}
+              max={200}
+              min={35}
+              onChange={(event) => {
+                persistOcean({
+                  ...characterOcean,
+                  density: clampOceanDensity(Number(event.target.value) / 100),
+                });
+              }}
+              type="range"
+              value={Math.round(characterOcean.density * 100)}
+            />
+          </label>
+          <label className="site-custom-bg-field">
+            <span className="site-custom-bg-field-label">
+              {copy.oceanOpacity}
+              <span className="site-custom-bg-field-value">{Math.round(characterOcean.opacity * 100)}%</span>
+            </span>
+            <input
+              disabled={characterOcean.style === 'off'}
+              max={100}
+              min={20}
+              onChange={(event) => {
+                persistOcean({
+                  ...characterOcean,
+                  opacity: clampOceanOpacity(Number(event.target.value) / 100),
+                });
+              }}
+              type="range"
+              value={Math.round(characterOcean.opacity * 100)}
+            />
+          </label>
+
+          <div className="site-ocean-kinds">
+            <div className="site-ocean-kinds-head">
+              <span className="site-custom-bg-field-label">{copy.oceanKinds}</span>
+              <span className="site-ocean-kinds-actions">
+                <button
+                  className="site-ocean-kinds-action"
+                  disabled={characterOcean.style === 'off'}
+                  onClick={() => persistOcean({ ...characterOcean, kinds: [...OCEAN_SHARK_KINDS] })}
+                  type="button"
+                >
+                  {copy.oceanKindsAll}
+                </button>
+                <button
+                  className="site-ocean-kinds-action"
+                  disabled={characterOcean.style === 'off'}
+                  onClick={() => persistOcean({ ...characterOcean, kinds: [...DEFAULT_OCEAN_SHARK_KINDS] })}
+                  type="button"
+                >
+                  {copy.oceanKindsDefault}
+                </button>
+              </span>
+            </div>
+            <p className="site-ocean-panel-note">{copy.oceanKindsHint}</p>
+            <div className="site-ocean-kinds-grid" role="group" aria-label={copy.oceanKinds}>
+              {OCEAN_SHARK_KINDS.map((kind) => {
+                const labels = isChinese ? characterOceanLabels.zh : characterOceanLabels.en;
+                const on = characterOcean.kinds.includes(kind);
+                return (
+                  <button
+                    aria-pressed={on}
+                    className={['site-ocean-kind-chip', on ? 'is-on' : ''].filter(Boolean).join(' ')}
+                    disabled={characterOcean.style === 'off'}
+                    key={kind}
+                    onClick={() => {
+                      const has = characterOcean.kinds.includes(kind);
+                      if (has) {
+                        if (characterOcean.kinds.length <= 1) return;
+                        persistOcean({
+                          ...characterOcean,
+                          kinds: characterOcean.kinds.filter((k) => k !== kind),
+                        });
+                      } else {
+                        persistOcean({
+                          ...characterOcean,
+                          kinds: [...characterOcean.kinds, kind],
+                        });
+                      }
+                    }}
+                    title={labels[kind]}
+                    type="button"
+                  >
+                    {labels[kind]}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
       ) : null}
       </div>

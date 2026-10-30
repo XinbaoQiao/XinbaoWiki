@@ -3,35 +3,72 @@
 import { useEffect, useRef } from 'react';
 import { flushSync } from 'react-dom';
 
+export const DISCLOSURE_HEIGHT_MS = 420;
+export const DISCLOSURE_HEIGHT_EASE = 'cubic-bezier(.22, 1, .36, 1)';
+
+export type DisclosureHeightAnimateInfo = {
+  next: boolean;
+  startHeight: number;
+  endHeight: number;
+  duration: number;
+  easing: string;
+  reducedMotion: boolean;
+};
+
+type AnimatedDisclosureOptions = {
+  /** Fired in the same turn as the height WAAPI starts (after open commit / before close commit). */
+  onHeightAnimate?: (info: DisclosureHeightAnimateInfo) => void;
+};
+
 /** Keep native details semantics, but commit content before measuring its opening size. */
-export function useAnimatedDisclosure(open: boolean, commit: (open: boolean) => void) {
+export function useAnimatedDisclosure(
+  open: boolean,
+  commit: (open: boolean) => void,
+  options?: AnimatedDisclosureOptions
+) {
   const ref = useRef<HTMLDetailsElement>(null);
   const animation = useRef<Animation | null>(null);
   const closing = useRef(false);
-  const settlement = useRef<Animation[]>([]);
+  const onHeightAnimateRef = useRef(options?.onHeightAnimate);
+  onHeightAnimateRef.current = options?.onHeightAnimate;
+
   useEffect(() => () => {
     animation.current?.cancel();
-    settlement.current.forEach(item => item.cancel());
   }, []);
 
   function change(next: boolean) {
     const element = ref.current;
     if (!element) { commit(next); return; }
-    settlement.current.forEach(item => item.cancel());
-    settlement.current = [];
     const start = element.getBoundingClientRect().height;
     animation.current?.cancel();
     animation.current = null;
     closing.current = !next;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !element.animate) {
+    const reducedMotion =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion || !element.animate) {
       closing.current = false;
       commit(next);
+      onHeightAnimateRef.current?.({
+        next,
+        startHeight: start,
+        endHeight: start,
+        duration: 0,
+        easing: DISCLOSURE_HEIGHT_EASE,
+        reducedMotion: true
+      });
       return;
     }
+    // Pin height before any open commit so the first paint cannot flash full size.
+    element.style.height = `${start}px`;
+    element.style.overflow = 'clip';
+    element.style.willChange = 'height';
+
     let end: number;
     if (next) {
       flushSync(() => commit(true));
-      end = element.getBoundingClientRect().height;
+      // scrollHeight reflects full content even while the used height is pinned.
+      end = element.scrollHeight;
     } else {
       // Measure the closed summary without hiding the real outgoing contents.
       const probe = element.cloneNode(false) as HTMLDetailsElement;
@@ -46,31 +83,37 @@ export function useAnimatedDisclosure(open: boolean, commit: (open: boolean) => 
       end = probe.getBoundingClientRect().height;
       probe.remove();
     }
-    const current = element.animate([{ height: `${start}px`, overflow: 'clip' }, { height: `${end}px`, overflow: 'clip' }], {
-      duration: 260, easing: 'cubic-bezier(.22, 1, .36, 1)', fill: 'both'
+    onHeightAnimateRef.current?.({
+      next,
+      startHeight: start,
+      endHeight: end,
+      duration: DISCLOSURE_HEIGHT_MS,
+      easing: DISCLOSURE_HEIGHT_EASE,
+      reducedMotion: false
     });
+    const current = element.animate(
+      [{ height: `${start}px`, overflow: 'clip' }, { height: `${end}px`, overflow: 'clip' }],
+      { duration: DISCLOSURE_HEIGHT_MS, easing: DISCLOSURE_HEIGHT_EASE, fill: 'forwards' }
+    );
     animation.current = current;
-    current.onfinish = () => {
+    const clearHeightHint = () => {
+      if (element.style.willChange === 'height') element.style.willChange = '';
+      element.style.height = '';
+      element.style.overflow = '';
+    };
+    const finish = () => {
       if (animation.current !== current) return;
-      // Closing the feed also restores Compact and recenters the homepage.
-      // Animate those final layout changes from their actual outgoing positions.
-      const portal = !next && element.id === 'portal-news' ? element.closest<HTMLElement>('.wiki-portal') : null;
-      const items = portal ? [...portal.querySelectorAll<HTMLElement>('.wiki-portal-hero, .wiki-portal-disclosures > details')] : [];
-      const before = items.map(item => item.getBoundingClientRect());
-      if (portal) portal.dataset.measuredLayout = '';
       if (!next) flushSync(() => commit(false));
       closing.current = false;
+      // Drop the filled height only after open=false so layout matches the end keyframe.
       current.cancel();
       animation.current = null;
-      const after = items.map(item => item.getBoundingClientRect());
-      settlement.current = items.map((item, index) => {
-        const from = before[index], to = after[index];
-        return item.animate([
-          { transform: `translate(${from.left - to.left}px, ${from.top - to.top}px)`, width: `${from.width}px` },
-          { transform: 'translate(0, 0)', width: `${to.width}px` }
-        ], { duration: 280, easing: 'cubic-bezier(.22, 1, .36, 1)' });
-      });
+      clearHeightHint();
     };
+    current.oncancel = () => {
+      clearHeightHint();
+    };
+    current.onfinish = finish;
   }
 
   return { ref, change, toggle: () => change(closing.current || !open) };

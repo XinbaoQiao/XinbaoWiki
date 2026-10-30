@@ -1,5 +1,5 @@
 import { HomepagePortal } from '@/components/HomepagePortal';
-import { directorySections, languageEntries } from '@/lib/site-navigation';
+import { directorySections } from '@/lib/site-navigation';
 import { getWikiManifestEntry } from '@/lib/wiki-manifest';
 import { pathWithBasePath } from '@/lib/wiki';
 import { getPaperHighlights } from '@/lib/paper-highlights.server';
@@ -22,12 +22,6 @@ function entry(slug: string) {
 }
 
 export default function HomePage() {
-  const portalLanguageEntries = languageEntries.map((item) => ({
-    detail: item.detail,
-    href: wikiHref(item.slug),
-    label: item.label,
-    slug: item.slug
-  }));
   const portalDirectorySections = directorySections.map((section) => ({
     title: section.title,
     groups: section.groups.map((group) => ({
@@ -42,7 +36,6 @@ export default function HomePage() {
   return (
     <HomepagePortal
       directorySections={portalDirectorySections}
-      languageEntries={portalLanguageEntries}
       paperHighlights={getPaperHighlights()}
       updatesAsOf={new Date().toISOString()}
     />

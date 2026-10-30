@@ -233,6 +233,21 @@ textarea:focus-visible,
   outline-offset: 2px;
 }
 
+/* Mouse/pointer: no sticky focus box. Keyboard still hits :focus-visible rules above.
+   Also clear bare :focus — Chromium often flags <summary> mouse focus as :focus-visible. */
+a:focus:not(:focus-visible),
+button:focus:not(:focus-visible),
+summary:focus,
+summary:focus:not(:focus-visible),
+select:focus:not(:focus-visible),
+[tabindex]:focus:not(:focus-visible) {
+  outline: none;
+}
+summary:focus-visible {
+  outline: 2px solid var(--site-theme-action-ink);
+  outline-offset: 2px;
+}
+
 a.redlink {
   color: var(--wiki-link-red);
 }
@@ -325,7 +340,8 @@ a.external.wiki-link-pdf::after {
   background: var(--site-theme-surface);
   box-shadow: 0 8px 24px rgba(32, 33, 34, .12);
   backdrop-filter: blur(12px);
-  transition: width .22s ease, border-color .24s ease, background-color .24s ease, box-shadow .24s ease;
+  /* Width expand is layout; avoid co-animating fill/shadow paint. */
+  transition: width .22s ease, border-color .24s ease;
 }
 
 .site-palette-button {
@@ -369,7 +385,7 @@ a.external.wiki-link-pdf::after {
 
   .site-palette-switcher:hover,
   .site-palette-switcher:focus-within {
-    width: 228px;
+    width: 260px;
   }
 
   /* Collapsed: keep inactive swatches out of tab order / hit-testing. */
@@ -393,7 +409,7 @@ a.external.wiki-link-pdf::after {
   }
 
   .site-palette-switcher.is-expanded {
-    width: 228px;
+    width: 260px;
     border-radius: 12px;
     opacity: 1;
   }
@@ -866,6 +882,7 @@ a.external.wiki-link-pdf::after {
   bottom: max(24px, env(safe-area-inset-bottom));
   z-index: 80;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-rows: auto minmax(0, 1fr) auto auto;
   overflow: hidden;
   width: min(420px, calc(100vw - 32px - env(safe-area-inset-left) - env(safe-area-inset-right)));
@@ -877,7 +894,7 @@ a.external.wiki-link-pdf::after {
   box-shadow: 0 18px 48px color-mix(in srgb, var(--site-theme-accent) 18%, rgba(32, 33, 34, .18));
   color: var(--wiki-text);
   font-family: var(--font-sans);
-  animation: chat-owner-open .16s ease-out;
+  animation: chat-owner-open .18s cubic-bezier(.22, 1, .36, 1);
 }
 
 .chat-owner-header {
@@ -1296,7 +1313,19 @@ html[data-site-palette="text"] .chat-owner-quick-reply {
 @keyframes chat-owner-open {
   from {
     opacity: 0;
-    transform: translateY(8px);
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes chat-owner-sheet-open {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
   }
 
   to {
@@ -1510,17 +1539,15 @@ html[data-site-palette="text"] .chat-owner-quick-reply {
   max-width: 1080px;
   min-height: 100svh;
   padding: clamp(20px, 4vh, 42px) 24px 72px;
-  transition: padding .24s ease;
+  transition: padding .42s cubic-bezier(.22, 1, .36, 1);
 }
 
 .wiki-shell:has(.wiki-portal-collapsed) {
-  place-items: center;
-  padding: clamp(24px, 8vh, 72px) 24px;
-}
-
-.wiki-shell:has(.wiki-portal-collapsed) .wiki-main {
-  width: 100%;
-  max-width: 760px;
+  /* Stay top-anchored like expanded (place-items cannot interpolate). Vertical
+     center for collapsed is an animatable portal translateY synced with height. */
+  align-items: start;
+  justify-items: stretch;
+  padding: clamp(20px, 4vh, 42px) 24px 72px;
 }
 
 .wiki-shell:has(.wiki-portal) .wiki-sidebar {
@@ -1833,7 +1860,7 @@ html[data-site-custom-bg="on"] .wiki-article-contents {
   backdrop-filter: blur(8px) saturate(1.05);
   -webkit-backdrop-filter: blur(8px) saturate(1.05);
   border-bottom-color: color-mix(in srgb, var(--wiki-border-subtle) 70%, transparent);
-} / 目录 return chip. */
+} /* 目录 return chip. */
 body:has(.wiki-portal) .wiki-toc-return {
   display: none !important;
 }
@@ -2457,15 +2484,19 @@ body:has(.wiki-portal) .wiki-toc-return {
   width: 100%;
   color: var(--wiki-text);
   font-family: var(--font-sans);
-  transition: transform .26s ease;
+  /* transform is driven by WAAPI / inline style for collapsed vertical center */
+}
+
+.wiki-portal {
+  overflow-anchor: none;
 }
 
 .wiki-portal-collapsed {
-  animation: wiki-portal-recenter .26s ease-out;
-  transform: translateY(-2vh);
+  /* CSS fallback; JS sets inline translateY to vertically center when collapsed. */
+  transform: none;
 }
 
-/* The disclosure's measured return owns recentering after a feed close. */
+/* Measured layout / disclosure-synced center: suppress competing CSS transitions. */
 .wiki-portal[data-measured-layout],
 .wiki-shell:has(.wiki-portal[data-measured-layout]) {
   animation: none;
@@ -2478,15 +2509,23 @@ body:has(.wiki-portal) .wiki-toc-return {
   text-align: center;
 }
 
-.wiki-portal-collapsed .wiki-portal-hero {
-  margin-bottom: 0;
-}
+/* Keep hero bottom margin identical in collapsed/expanded so layoutMode flips do not jump. */
 
-/* Extreme fold: only the centered name remains. */
-.wiki-portal-name-only .wiki-portal-tagline,
+/* Extreme fold: only the centered name remains.
+   Prefer content-visibility + size collapse over display:none so the
+   disclosures / search style+layout cache stays warm — restoring
+   from name-only then paints Latest Updates + Site Activity bars immediately. */
 .wiki-portal-name-only .wiki-portal-search,
 .wiki-portal-name-only .wiki-portal-disclosures {
-  display: none;
+  content-visibility: hidden;
+  visibility: hidden;
+  height: 0;
+  max-height: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+  border: 0;
+  pointer-events: none;
 }
 
 .wiki-shell:has(.wiki-portal-name-only) {
@@ -2525,34 +2564,6 @@ body:has(.wiki-portal) .wiki-toc-return {
   margin: 0 auto 8px;
 }
 
-.wiki-main .wiki-portal-tagline {
-  width: 100%;
-  max-width: 620px;
-  margin: 0 auto 18px;
-  color: var(--site-theme-action-ink);
-  font-family: var(--font-sans);
-  font-size: var(--fs-body);
-  font-weight: 500;
-  line-height: 1.5;
-  text-align: center;
-  text-wrap: balance;
-}
-
-.wiki-portal-tagline-copy {
-  display: none;
-  animation: wiki-tagline-reveal .16s ease-out both;
-}
-
-html:not([data-site-palette]) .wiki-portal-tagline-text,
-html[data-site-palette="text"] .wiki-portal-tagline-text,
-html[data-site-palette="blue"] .wiki-portal-tagline-blue,
-html[data-site-palette="gold"] .wiki-portal-tagline-gold,
-html[data-site-palette="rose"] .wiki-portal-tagline-rose,
-html[data-site-palette="green"] .wiki-portal-tagline-green,
-html[data-site-palette="violet"] .wiki-portal-tagline-violet,
-html[data-site-palette="charcoal"] .wiki-portal-tagline-charcoal {
-  display: inline-block;
-}
 
 .wiki-portal-brand {
   display: grid;
@@ -2566,6 +2577,689 @@ html[data-site-palette="charcoal"] .wiki-portal-tagline-charcoal {
   display: inline-grid;
   place-items: center;
   max-width: min(620px, 86vw);
+}
+
+/* --- Character ocean: full-bleed behind content; stack = palette 鈫?wallpaper 鈫?ocean 鈫?UI --- */
+/* Full-bleed character ocean (canvas host) */
+.site-character-ocean {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  /* Soft depth wash so sparse water grain still reads on pale palette */
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 42%, color-mix(in srgb, var(--site-theme-accent, #9eb0c8) 16%, transparent), transparent 72%);
+}
+
+.site-character-ocean-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* ripples via window listeners 鈥?scroll/intro stay free */
+  touch-action: manipulation;
+  cursor: default;
+  opacity: var(--site-ocean-opacity, 0.92);
+}
+
+@media (max-width: 720px) {
+  /* Character ocean temporarily disabled on small screens 鈥?do not paint/run fish. */
+  .site-character-ocean,
+  .site-character-ocean-canvas,
+  .site-character-ocean-veil,
+  .site-character-ocean-layer {
+    display: none !important;
+  }
+
+  .site-palette-ocean,
+  .site-ocean-panel {
+    display: none !important;
+  }
+
+  .character-ocean-preview-copy {
+    margin: 24px 16px !important;
+    padding: 16px !important;
+    max-width: none !important;
+    font-size: 0.95rem;
+  }
+}
+
+.site-character-ocean-veil,
+
+.site-character-ocean-layer {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  width: 100dvw;
+  height: 100dvh;
+  pointer-events: none;
+}
+
+.site-character-ocean-veil {
+  /* Above wallpaper (z-index: -1), below wiki chrome/content */
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 55% 48% at 50% 40%, color-mix(in srgb, var(--site-theme-accent, #c8d4e4) 22%, transparent), transparent 74%),
+    linear-gradient(180deg, color-mix(in srgb, var(--site-theme-action-ink) 4%, transparent), transparent 42%, color-mix(in srgb, var(--site-theme-accent, #c8d4e4) 8%, transparent));
+  opacity: 0.7;
+  transition: opacity 0.55s ease;
+}
+
+.site-character-ocean-layer {
+  z-index: 0;
+  opacity: 0.95;
+  transition: opacity 0.55s ease;
+}
+
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .wiki-topbar,
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .wiki-shell,
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .wiki-footer,
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .wiki-main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Keep palette / ocean controls above ocean canvas + bottom scroll cue.
+   Do NOT demote .site-palette-root to relative/z-index:1 鈥?that trapped the
+   fixed switcher under .wiki-home-scroll-intro and blocked the right swatches. */
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .site-palette-root {
+  position: fixed !important;
+  z-index: 90 !important;
+  pointer-events: none;
+}
+
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .site-palette-root > * {
+  pointer-events: auto;
+}
+
+/* Ocean-on: clear shell slabs so the field shows through. Do not bleach or
+   re-paint portal cards here 鈥?leave edition/timeline/news on their base styles,
+   and leave intentionally unfilled bars (Browse / directory) unfilled. Ocean
+   sits behind; only palette / ocean / wallpaper panels are forced opaque below. */
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]),
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) body {
+  background: transparent !important;
+}
+
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .wiki-shell,
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .wiki-main,
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .wiki-content,
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .wiki-portal,
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) main {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .wiki-shell:has(.wiki-portal) {
+  max-width: min(1080px, 100%);
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Search wrapper: drop the outer slab, keep children opaque via rules below */
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .wiki-portal-search {
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Do NOT force solid fills onto portal chrome that is intentionally uncolored
+   (Browse MyWiki / directory, and any other disclosures > details without
+   its own card fill). Edition/timeline/news keep their normal base backgrounds.
+   Only interactive palette / ocean / wallpaper panels are forced opaque below. */
+
+/* Interactive controls: near-opaque so ocean does not show through */
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .wiki-search-portal input,
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .wiki-search-language-seg,
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .wiki-search-portal .wiki-search-submit,
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .chat-owner-trigger {
+  background-color: color-mix(in srgb, var(--wiki-bg) 94%, transparent);
+}
+
+/* Soft halo only on free-floating wordmark */
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .wiki-portal-name {
+  text-shadow:
+    0 1px 1px rgb(255 255 255 / 0.55),
+    0 0 14px rgb(255 255 255 / 0.28);
+}
+
+/* Palette / ocean chrome: --site-theme-surface is ~0.86 alpha and reads as glass over the
+   fish field. Force solid fill while ocean is on so the three-square bar and panels stay opaque. */
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .site-palette-switcher,
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .site-palette-color-menu,
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .site-ocean-panel,
+html[data-site-character-ocean]:not([data-site-character-ocean="off"]) .site-custom-bg-panel {
+  background: var(--wiki-bg) !important;
+  background-color: var(--wiki-bg) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+html[data-site-bg-compose="ocean"] .site-character-ocean,
+html[data-site-bg-compose="wallpaper-ocean"] .site-character-ocean {
+  z-index: 0;
+  opacity: 1;
+}
+
+html[data-site-bg-compose="wallpaper-ocean"] .site-character-ocean-canvas {
+  opacity: 0.7;
+}
+
+/* Ocean alone on palette: denser water field */
+html[data-site-bg-compose="ocean"] .site-character-ocean-veil {
+  opacity: 0.78;
+}
+
+html[data-site-bg-compose="ocean"] .site-character-ocean-layer {
+  opacity: 1;
+}
+
+/* Wallpaper + ocean: translucent characters over photo; do not clear wallpaper */
+html[data-site-bg-compose="wallpaper-ocean"] .site-character-ocean-veil {
+  opacity: 0.18;
+  background:
+    radial-gradient(ellipse 50% 42% at 50% 40%, color-mix(in srgb, var(--site-theme-accent, #c8d4e4) 10%, transparent), transparent 70%);
+}
+
+html[data-site-bg-compose="wallpaper-ocean"] .site-character-ocean-layer {
+  opacity: 0.55;
+}
+
+.site-character-ocean-chrome,
+.site-character-ocean-switcher,
+.site-character-ocean-button,
+.site-character-ocean-hint {
+  display: none !important; /* mode chrome removed 鈥?ocean runs with ASCII default */
+}
+
+.site-character-ocean-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  max-width: 100%;
+}
+
+.site-character-ocean-button {
+  appearance: none;
+  margin: 0;
+  padding: 4px 8px;
+  border: 1px solid color-mix(in srgb, var(--site-theme-action-ink) 22%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--site-surface, #fff) 78%, transparent);
+  color: color-mix(in srgb, var(--site-theme-action-ink) 78%, transparent);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.site-character-ocean-button:hover,
+.site-character-ocean-button:focus-visible {
+  color: var(--site-theme-action-ink);
+  border-color: color-mix(in srgb, var(--site-theme-action-ink) 40%, transparent);
+}
+
+.site-character-ocean-button.is-active {
+  color: var(--site-theme-action-ink);
+  border-color: color-mix(in srgb, var(--site-theme-action-ink) 48%, transparent);
+  background: color-mix(in srgb, var(--site-theme-accent, #c8d4e4) 28%, transparent);
+}
+
+.site-character-ocean-hint {
+  margin: 0;
+  max-width: 100%;
+  color: color-mix(in srgb, var(--site-theme-action-ink) 58%, transparent);
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-character-ocean-layer,
+  .site-character-ocean-veil {
+    opacity: 0.5;
+    transition: none;
+  }
+
+  .site-character-ocean-button {
+    transition: none;
+  }
+}
+
+html[data-site-custom-bg-ink="light"] .site-character-ocean-chrome {
+  display: none !important; /* mode chrome removed 鈥?ocean runs with default */
+  background: color-mix(in srgb, #101820 55%, transparent);
+  border-color: color-mix(in srgb, #d7e5ec 22%, transparent);
+  box-shadow: 0 8px 22px rgb(0 0 0 / 18%);
+}
+
+html[data-site-custom-bg-ink="light"] .site-character-ocean-button {
+  color: color-mix(in srgb, #d7e5ec 82%, transparent);
+  border-color: color-mix(in srgb, #d7e5ec 28%, transparent);
+  background: color-mix(in srgb, #152230 70%, transparent);
+}
+
+html[data-site-custom-bg-ink="light"] .site-character-ocean-button.is-active {
+  color: #e8f2f6;
+  border-color: color-mix(in srgb, #9bd3d9 48%, transparent);
+  background: color-mix(in srgb, #2a4a5c 55%, transparent);
+}
+
+html[data-site-custom-bg-ink="light"] .site-character-ocean-hint {
+  color: color-mix(in srgb, #c5d7e0 70%, transparent);
+}
+
+/* Homepage scroll cue 鈥?always pinned to the BOTTOM of the viewport */
+.wiki-home-scroll-intro {
+  position: fixed !important;
+  top: auto !important;
+  left: 50% !important;
+  right: auto !important;
+  bottom: max(18px, calc(12px + env(safe-area-inset-bottom, 0px))) !important;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  max-width: min(280px, calc(100vw - 32px));
+  width: max-content;
+  text-align: center;
+  opacity: 0.82;
+  transform: translate3d(-50%, 0, 0);
+  transition: opacity 0.45s ease, transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+  /* Wrapper never steals palette clicks; only the chevron link is hittable. */
+  pointer-events: none;
+  isolation: isolate;
+}
+
+body:has(.wiki-portal-name-only) .wiki-home-scroll-intro,
+.wiki-portal-name-only ~ .wiki-home-scroll-intro,
+.wiki-shell:has(.wiki-portal-name-only) ~ .wiki-home-scroll-intro {
+  display: none !important;
+}
+
+/* Hide when name-only mode is active (portal still in DOM). */
+body:has(.wiki-portal-name-only) .wiki-home-scroll-intro {
+  display: none !important;
+}
+
+.wiki-home-scroll-intro.is-armed {
+  opacity: 1;
+}
+
+/* Content taller than viewport: fixed hint would sit over mid-page — hide until bottom. */
+.wiki-home-scroll-intro.is-awaiting-bottom {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(-50%, 10px, 0);
+  transition: opacity 0.35s ease, transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.wiki-home-scroll-intro.is-awaiting-bottom .wiki-home-scroll-intro-link {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wiki-home-scroll-intro.is-awaiting-bottom {
+    transition: opacity 0.01ms linear;
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.wiki-home-scroll-intro.is-leaving {
+  opacity: 0;
+  transform: translate3d(-50%, 36px, 0) scale(0.96);
+  pointer-events: none;
+  transition: opacity 2.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 2.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.wiki-home-scroll-intro-link,
+.wiki-home-scroll-intro-link.wiki-link-page,
+.wiki-home-scroll-intro-link.wiki-link-page:link,
+.wiki-home-scroll-intro-link.wiki-link-page:visited {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 10px;
+  border-radius: 0;
+  pointer-events: auto;
+  /* Beat WikiLink .wiki-link-page / :visited purple — always track active palette. */
+  color: color-mix(in srgb, var(--site-theme-accent) 55%, var(--site-theme-action-ink));
+  text-decoration: none;
+  font-family: var(--font-mono), "Sarasa Mono SC", "Noto Sans Mono CJK SC", "Microsoft YaHei Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: none;
+  /* Chunkier glyph edges — pair with ocean ripple PIXEL=4 look */
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+  font-smooth: never;
+  image-rendering: pixelated;
+  animation: wiki-home-scroll-pulse 2.4s steps(4, end) infinite;
+}
+
+.wiki-home-scroll-intro-link:hover,
+.wiki-home-scroll-intro-link:focus-visible,
+.wiki-home-scroll-intro-link.wiki-link-page:hover,
+.wiki-home-scroll-intro-link.wiki-link-page:focus-visible,
+.wiki-home-scroll-intro-link.wiki-link-page:visited:hover,
+.wiki-home-scroll-intro-link.wiki-link-page:visited:focus-visible {
+  color: var(--site-theme-action-ink);
+  outline: none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--site-theme-accent) 35%, transparent);
+  animation-play-state: paused;
+}
+
+.wiki-home-scroll-intro-label {
+  display: inline-block;
+  /* Soft pixel outline so thin mono glyphs read chunkier on light page */
+  text-shadow:
+    1px 0 0 color-mix(in srgb, currentColor 28%, transparent),
+    0 1px 0 color-mix(in srgb, currentColor 22%, transparent);
+  animation: wiki-home-scroll-label 2.4s steps(4, end) infinite;
+}
+
+.wiki-home-scroll-intro-chevron {
+  display: block;
+  width: 28px;
+  height: 20px;
+  margin: 0;
+  border: 0;
+  opacity: 0.92;
+  transform: translateY(0);
+  animation: wiki-home-scroll-chevron 1.6s steps(4, end) infinite;
+  will-change: transform, opacity;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+.wiki-home-scroll-intro-chevron-svg {
+  display: block;
+  width: 28px;
+  height: 20px;
+  overflow: visible;
+  shape-rendering: crispEdges;
+}
+
+.wiki-home-scroll-intro.is-armed .wiki-home-scroll-intro-chevron {
+  opacity: 1;
+  animation-duration: 1.12s;
+}
+
+.wiki-home-scroll-intro-status {
+  min-height: 1em;
+  color: color-mix(in srgb, var(--site-theme-accent) 42%, var(--site-theme-action-ink));
+  font-family: var(--font-mono), "Sarasa Mono SC", "Noto Sans Mono CJK SC", "Microsoft YaHei Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  -webkit-font-smoothing: none;
+  font-smooth: never;
+}
+
+.wiki-portal.is-leaving-to-intro {
+  transition:
+    opacity 2.5s cubic-bezier(0.22, 0.61, 0.36, 1),
+    filter 2.5s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 2.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  opacity: 0;
+  filter: saturate(0.85) blur(0.8px);
+  transform: translate3d(0, -28px, 0) scale(0.98);
+  pointer-events: none;
+}
+
+.site-character-ocean.is-leaving-to-intro {
+  transition: opacity 2.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+    filter 2.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+  opacity: 0.28;
+  filter: blur(1.6px) saturate(0.88);
+  pointer-events: none;
+}
+
+/* Center leave ripple — canvas pixel circular rings (ocean click language, larger) */
+.wiki-home-leave-ripple {
+  position: fixed;
+  inset: 0;
+  z-index: 72;
+  pointer-events: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+/* Soft veil while the homepage drifts away into the intro */
+body.is-home-leaving-intro::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  pointer-events: none;
+  background: color-mix(in srgb, var(--site-theme-page, #f4f1ea) 42%, transparent);
+  opacity: 0;
+  animation: wiki-home-leave-veil 2.6s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+@keyframes wiki-home-leave-veil {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wiki-home-scroll-intro-chevron,
+  .wiki-home-scroll-intro-link,
+  .wiki-home-scroll-intro-label {
+    animation: none !important;
+  }
+
+  .wiki-home-scroll-intro.is-leaving,
+  .wiki-portal.is-leaving-to-intro,
+  .site-character-ocean.is-leaving-to-intro {
+    transition: none;
+    transform: none;
+    filter: none;
+  }
+
+  body.is-home-leaving-intro::after {
+    animation: none;
+    opacity: 0;
+  }
+
+  .wiki-home-leave-ripple {
+    display: none !important;
+  }
+}
+
+@keyframes wiki-home-scroll-chevron {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: translateY(0);
+  }
+  25% {
+    opacity: 0.85;
+    transform: translateY(2px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(4px);
+  }
+  75% {
+    opacity: 0.9;
+    transform: translateY(2px);
+  }
+}
+
+@keyframes wiki-home-scroll-pulse {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(4px);
+  }
+}
+
+@keyframes wiki-home-scroll-label {
+  0%,
+  100% {
+    opacity: 0.72;
+    letter-spacing: 0.08em;
+  }
+  50% {
+    opacity: 1;
+    letter-spacing: 0.1em;
+  }
+}
+
+/* your-wiki portal hero atmosphere */
+.wiki-portal-hero-atmosphere {
+  position: absolute;
+  inset: -28px -36px auto;
+  z-index: 0;
+  width: calc(100% + 72px);
+  height: min(280px, 46vw);
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.wiki-portal-hero > :not(.wiki-portal-hero-atmosphere) {
+  position: relative;
+  z-index: 1;
+}
+
+.wiki-portal-hero-status {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+
+.wiki-portal-hero-status-item {
+  position: absolute;
+  color: color-mix(in srgb, var(--site-theme-action-ink) 55%, transparent);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: lowercase;
+  white-space: nowrap;
+  opacity: 0.72;
+}
+
+.wiki-portal-hero-status-item.is-field { top: 2px; left: 0; }
+.wiki-portal-hero-status-item.is-orbit { top: 2px; right: 0; }
+.wiki-portal-hero-status-item.is-link {
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.wiki-portal-hero-tone {
+  position: absolute;
+  right: 0;
+  bottom: -6px;
+  z-index: 5;
+  pointer-events: auto;
+  appearance: none;
+  margin: 0;
+  padding: 4px 8px;
+  border: 1px solid color-mix(in srgb, var(--site-theme-action-ink) 22%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--site-surface, #fff) 72%, transparent);
+  color: color-mix(in srgb, var(--site-theme-action-ink) 78%, transparent);
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.wiki-portal-hero-tone:hover,
+.wiki-portal-hero-tone:focus-visible {
+  color: var(--site-theme-action-ink);
+  border-color: color-mix(in srgb, var(--site-theme-action-ink) 40%, transparent);
+  outline: none;
+}
+
+.wiki-portal-hero-tone[data-muted] { opacity: 0.7; }
+
+.wiki-portal-particle-wordmark {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.wiki-portal-particle-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.wiki-portal-hero[data-particles-ready] .wiki-portal-name-logos-fallback {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+html[data-site-palette="text"] .wiki-portal-hero[data-particles-ready] .wiki-portal-name-text {
+  opacity: 0;
+}
+
+@media (max-width: 720px) {
+  .wiki-portal-hero-status-item.is-link { display: none; }
+  .wiki-portal-hero-atmosphere {
+    height: min(220px, 58vw);
+    opacity: 0.7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wiki-portal-hero-atmosphere,
+  .wiki-portal-particle-wordmark,
+  .wiki-portal-hero-status,
+  .wiki-portal-hero-tone {
+    display: none !important;
+  }
+
+  .wiki-portal-hero[data-particles-ready] .wiki-portal-name-logos-fallback {
+    opacity: 1;
+  }
 }
 
 .wiki-portal-name {
@@ -2777,11 +3471,11 @@ html[data-site-palette="text"] .wiki-portal-name-text {
   block-size: 0;
   overflow: clip;
   opacity: 0;
-  transform: translateY(-4px);
+  transform: translateY(-10px);
   transition:
-    block-size .24s cubic-bezier(.22, 1, .36, 1),
-    opacity .16s ease,
-    transform .24s cubic-bezier(.22, 1, .36, 1);
+    block-size .42s cubic-bezier(.22, 1, .36, 1),
+    opacity .34s cubic-bezier(.22, 1, .36, 1),
+    transform .42s cubic-bezier(.22, 1, .36, 1);
 }
 
 .wiki-portal-disclosures > details[open]::details-content {
@@ -2938,10 +3632,10 @@ details[data-animated-disclosure]::details-content {
 }
 
 .wiki-portal-updates-window {
-  height: var(--portal-updates-window-height, 316px);
-  overflow-y: auto;
-  overscroll-behavior: auto;
-  scrollbar-gutter: stable;
+  /* Expand with content; page scroll only — no nested overflow (avoids edge latch). */
+  height: auto;
+  max-height: none;
+  overflow: visible;
 }
 
 .wiki-portal-updates-window:focus-visible {
@@ -3385,18 +4079,6 @@ details[data-animated-disclosure]::details-content {
   transition: transform .2s ease;
 }
 
-@keyframes wiki-portal-recenter {
-  from {
-    opacity: .92;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(-2vh);
-  }
-}
-
 @keyframes wiki-name-write {
   from {
     background-size: 0% 100%;
@@ -3425,15 +4107,6 @@ details[data-animated-disclosure]::details-content {
   }
 }
 
-@keyframes wiki-tagline-reveal {
-  from {
-    opacity: .3;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
 
 .wiki-portal-directory[open] summary span::after {
   transform: translateY(1px) rotate(90deg);
@@ -3510,6 +4183,8 @@ details[data-animated-disclosure]::details-content {
   height: 820px;
   margin-inline: auto;
   overflow: clip;
+  /* Face turns change stage height; do not let the browser re-anchor document scroll. */
+  overflow-anchor: none;
   perspective: 2050px;
   perspective-origin: 50% 40%;
   transition: height .78s cubic-bezier(.16, 1, .3, 1);
@@ -3527,15 +4202,15 @@ details[data-animated-disclosure]::details-content {
 .wiki-portal-cube-stage-cube::after {
   position: absolute;
   z-index: 0;
-  bottom: 28px;
+  bottom: 18px;
   left: 50%;
-  width: 610px;
-  height: 82px;
+  width: 640px;
+  height: 110px;
   background:
-    radial-gradient(ellipse, color-mix(in srgb, var(--site-theme-accent) 12%, rgb(24 28 36 / 24%)) 0, transparent 70%);
+    radial-gradient(ellipse at center, color-mix(in srgb, var(--site-theme-accent) 14%, rgb(24 28 36 / 22%)) 0%, transparent 68%);
   content: '';
-  filter: blur(18px);
-  opacity: .76;
+  /* Soft ellipse only 鈥?avoid live filter:blur on a large layer during cube turns. */
+  opacity: .62;
   pointer-events: none;
   transform: translateX(-50%);
 }
@@ -3563,7 +4238,6 @@ details[data-animated-disclosure]::details-content {
     height .68s cubic-bezier(.16, 1, .3, 1),
     transform .78s cubic-bezier(.16, 1, .3, 1);
   pointer-events: none;
-  will-change: transform;
 }
 
 .wiki-portal-grid-cube:hover {
@@ -3578,12 +4252,16 @@ details[data-animated-disclosure]::details-content {
   top: var(--portal-cube-reading-top);
   transform: none;
   transform-style: preserve-3d;
-  will-change: transform;
 }
 
 .wiki-portal-grid-cube[data-active-face]:hover {
   transform: none;
 }
+
+.wiki-portal-cube-stage-cube:not([data-face-settled]) .wiki-portal-grid-cube {
+  will-change: transform;
+}
+
 
 .wiki-portal-grid-cube[data-face-settled][data-active-face] {
   transform-style: flat;
@@ -3614,15 +4292,30 @@ details[data-animated-disclosure]::details-content {
     0 24px 58px rgb(31 35 42 / 8%);
   transform: var(--portal-cube-face-transform);
   transform-style: preserve-3d;
+  /* Layout size follows the cube; avoid animating width/height/shadow/paint on faces. */
   transition:
-    width .68s cubic-bezier(.16, 1, .3, 1),
-    height .68s cubic-bezier(.16, 1, .3, 1),
-    background-color .36s ease,
-    border-color .36s ease,
-    box-shadow .36s ease,
     opacity .24s ease,
     transform .78s cubic-bezier(.16, 1, .3, 1);
   pointer-events: auto;
+}
+
+/* Soft drop-shadows on large 3D faces are expensive mid-flight; snap full depth when settled.
+   Selector avoids `.wiki-portal-grid-cube .wiki-portal-cube-panel {` as a leading substring
+   so contract tests that take the first such rule still hit the base face styles. */
+.wiki-portal-cube-stage-cube:not([data-face-settled]) .wiki-portal-cube-panel {
+  box-shadow:
+    inset 1px 1px 0 rgb(255 255 255 / 88%),
+    inset -1px -1px 0 color-mix(in srgb, var(--portal-cube-accent) 9%, transparent);
+}
+
+.wiki-portal-cube-stage-cube:not([data-face-settled]) .wiki-portal-grid-cube[data-active-face="top"] [data-cube-face="top"],
+.wiki-portal-cube-stage-cube:not([data-face-settled]) .wiki-portal-grid-cube[data-active-face="top"] [data-cube-face="top"]:hover,
+.wiki-portal-cube-stage-cube:not([data-face-settled]) .wiki-portal-grid-cube[data-active-face="front"] [data-cube-face="front"],
+.wiki-portal-cube-stage-cube:not([data-face-settled]) .wiki-portal-grid-cube[data-active-face="front"] [data-cube-face="front"]:hover,
+.wiki-portal-cube-stage-cube:not([data-face-settled]) .wiki-portal-grid-cube[data-active-face="right"] [data-cube-face="right"],
+.wiki-portal-cube-stage-cube:not([data-face-settled]) .wiki-portal-grid-cube[data-active-face="right"] [data-cube-face="right"]:hover {
+  box-shadow:
+    inset 1px 1px 0 rgb(255 255 255 / 96%);
 }
 
 .wiki-portal-grid-cube .wiki-portal-block {
@@ -4214,7 +4907,7 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
   }
 
   .wiki-shell:has(.wiki-portal-collapsed) {
-    padding: clamp(20px, 7vh, 56px) 16px;
+    padding: clamp(16px, 4vh, 32px) 16px 56px;
   }
 
   .wiki-sidebar-desktop {
@@ -4700,6 +5393,9 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
     border-right: 0;
     border-bottom: 0;
     grid-template-rows: auto auto minmax(0, 1fr) auto auto;
+    animation-name: chat-owner-sheet-open;
+    animation-duration: .22s;
+    animation-timing-function: cubic-bezier(.22, 1, .36, 1);
   }
 
   .chat-owner-grab {
@@ -4842,13 +5538,6 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
     font-size: clamp(64px, 18vw, 78px);
   }
 
-  .wiki-main .wiki-portal-tagline {
-    max-width: 34em;
-    margin: 0 auto 20px;
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 1.55;
-  }
 
   .wiki-portal-search {
     --portal-search-leading-width: 56px;
@@ -5316,10 +6005,6 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
 }
 
 @media (max-width: 360px) {
-  .wiki-main .wiki-portal-tagline {
-    min-height: 3em;
-  }
-
   .wiki-portal-name {
     font-size: 64px;
   }
@@ -5335,7 +6020,6 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
   .chat-owner-shell,
   .chat-owner-typing i,
   .wiki-portal-name-logos,
-  .wiki-portal-tagline-copy,
   .wiki-portal-name-text,
   .wiki-portal-collapsed {
     animation: none;
@@ -5761,6 +6445,122 @@ html:not([data-wiki-morph-to]) ::view-transition-new(.wiki-title-morph) {
   }
 }
 
+
+/* Three-square palette bar: Color | Wallpaper | Ocean. Presets live in vertical color menu. */
+.site-palette-color-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.site-palette-color-trigger {
+  position: relative;
+  z-index: 1;
+}
+
+.site-palette-color-menu {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%) translateY(12px) scale(0.96);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  border: 1px solid var(--site-theme-accent-border);
+  border-radius: 8px;
+  background: var(--site-theme-surface);
+  box-shadow: 0 10px 24px rgba(32, 33, 34, .14);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform-origin: bottom center;
+  transition:
+    opacity .36s cubic-bezier(.22, 1, .36, 1),
+    transform .4s cubic-bezier(.22, 1, .36, 1),
+    visibility 0s linear .4s;
+  z-index: 92;
+}
+
+/* Open state is JS-driven (.is-color-menu-open) so :focus-within cannot pin the menu open after mouse leave. */
+.site-palette-color-wrap.is-color-menu-open .site-palette-color-menu {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0) scale(1);
+  transition:
+    opacity .36s cubic-bezier(.22, 1, .36, 1),
+    transform .4s cubic-bezier(.22, 1, .36, 1),
+    visibility 0s;
+}
+
+/* Invisible hit bridge across the 8px gap so pointer can reach the menu without flicker-close. */
+.site-palette-color-menu::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 12px;
+}
+
+.site-palette-color-option {
+  order: 0 !important;
+}
+
+.site-palette-color-option.is-active {
+  order: 0 !important;
+}
+
+.site-palette-button.is-active {
+  order: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-palette-color-menu,
+  .site-palette-color-wrap.is-color-menu-open .site-palette-color-menu {
+    transition: opacity .14s ease, visibility 0s;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+/* Always show the three main squares 鈥?no collapse-to-one-swatch. */
+@media (hover: hover) and (pointer: fine) {
+  .site-palette-switcher,
+  .site-palette-root .site-palette-switcher,
+  .site-palette-root .site-palette-switcher:hover,
+  .site-palette-root .site-palette-switcher:focus-within,
+  .site-palette-root.is-panel-open .site-palette-switcher {
+    overflow: visible;
+    width: auto;
+  }
+
+  .site-palette-switcher:not(:hover):not(:focus-within) .site-palette-button:not(.is-active) {
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .site-palette-switcher,
+  .site-palette-root .site-palette-switcher.is-expanded,
+  .site-palette-root.is-panel-open .site-palette-switcher {
+    overflow: visible;
+    width: auto;
+    opacity: 1;
+    border-radius: 8px;
+  }
+
+  .site-palette-switcher:not(.is-expanded) .site-palette-button:not(.is-active) {
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
+
 /* --- Custom background wallpaper (client-only; coexists with accent palette) --- */
 .site-palette-root {
   position: fixed;
@@ -5805,7 +6605,7 @@ html:not([data-wiki-morph-to]) ::view-transition-new(.wiki-title-morph) {
   transition: opacity .2s ease, background-color .2s ease;
 }
 
-/* At 0% overlay: no scrim at all — wallpaper must be fully clear. */
+/* At 0% overlay: no scrim at all 鈥?wallpaper must be fully clear. */
 html[data-site-custom-bg-overlay="0"] .site-custom-bg-layer::after {
   opacity: 0;
   background: transparent;
@@ -5841,7 +6641,7 @@ html[data-site-custom-bg-mode="tile"] .site-custom-bg-layer {
 html[data-site-custom-bg-mode="depth"] .site-custom-bg-layer.is-active {
   transform: translate3d(0, var(--site-custom-bg-parallax, 0px), 0) scale(1.06);
   transform-origin: center center;
-  /* Avoid permanent will-change — it keeps a large compositor layer and feels laggy. */
+  /* Avoid permanent will-change 鈥?it keeps a large compositor layer and feels laggy. */
 }
 
 html[data-site-custom-bg-position="top"] .site-custom-bg-layer {
@@ -5888,6 +6688,247 @@ html[data-site-custom-bg-position="bottom"] .site-custom-bg-layer {
   outline-offset: 2px;
 }
 
+.site-palette-ocean {
+  --site-palette-swatch: #1a6b8a;
+  color: #0b3a4a;
+  display: inline-grid;
+  place-items: center;
+}
+
+.site-palette-ocean.is-ocean-on {
+  box-shadow: 0 0 0 2px var(--wiki-bg), 0 0 0 4px color-mix(in srgb, #1a6b8a 70%, var(--site-theme-accent));
+}
+
+.site-palette-ocean.is-panel-trigger {
+  outline: 2px solid var(--site-theme-accent);
+  outline-offset: 2px;
+}
+
+.site-palette-ocean-glyph {
+  display: inline-flex;
+  line-height: 0;
+}
+
+.site-ocean-panel {
+  position: fixed;
+  left: max(14px, env(safe-area-inset-left));
+  bottom: calc(max(14px, env(safe-area-inset-bottom)) + 44px);
+  z-index: 91;
+  width: min(280px, calc(100vw - 28px));
+  padding: 10px 11px 11px;
+  border: 1px solid var(--site-theme-accent-border);
+  border-radius: 8px;
+  background: var(--site-theme-surface);
+  box-shadow: 0 8px 24px rgba(32, 33, 34, .12);
+  backdrop-filter: blur(12px);
+  color: var(--wiki-text);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  transform-origin: bottom left;
+  animation: site-floating-panel-enter .42s cubic-bezier(.22, 1, .36, 1) forwards;
+}
+
+.site-ocean-panel-head {
+  margin: 0 0 8px;
+}
+
+.site-ocean-panel-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--site-theme-heading);
+}
+
+.site-ocean-panel-note {
+  margin: 4px 0 0;
+  color: color-mix(in srgb, var(--wiki-text) 68%, transparent);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.site-ocean-panel .site-custom-bg-field {
+  display: grid;
+  gap: 4px;
+  margin: 0 0 8px;
+}
+
+.site-ocean-panel .site-custom-bg-field-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-weight: 650;
+}
+
+.site-ocean-panel .site-custom-bg-field-value {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.75;
+}
+
+.site-ocean-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0 0 10px;
+}
+
+.site-ocean-toggle {
+  appearance: none;
+  width: 42px;
+  height: 24px;
+  border: 1px solid var(--site-theme-chrome-border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--wiki-bg) 70%, #94a3b8);
+  cursor: pointer;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.site-ocean-toggle::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0,0,0,.2);
+  transition: transform .3s cubic-bezier(.22, 1, .36, 1);
+}
+
+.site-ocean-toggle.is-on {
+  background: color-mix(in srgb, #1a6b8a 72%, var(--site-theme-accent));
+  border-color: color-mix(in srgb, #1a6b8a 50%, transparent);
+}
+
+.site-ocean-toggle.is-on::after {
+  transform: translateX(18px);
+}
+
+.site-ocean-kinds {
+  margin-top: 4px;
+}
+
+.site-ocean-kinds-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.site-ocean-kinds-actions {
+  display: inline-flex;
+  gap: 6px;
+}
+
+.site-ocean-kinds-action {
+  appearance: none;
+  padding: 2px 7px;
+  border: 1px solid var(--site-theme-chrome-border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--wiki-bg) 80%, transparent);
+  color: var(--site-theme-action-ink);
+  font: inherit;
+  font-size: 10px;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.site-ocean-kinds-action:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.site-ocean-kinds-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 6px;
+}
+
+.site-ocean-kind-chip {
+  appearance: none;
+  padding: 4px 8px;
+  border: 1px solid var(--site-theme-chrome-border);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--wiki-bg) 78%, transparent);
+  color: var(--wiki-text);
+  font: inherit;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.2;
+  cursor: pointer;
+}
+
+.site-ocean-kind-chip.is-on {
+  border-color: color-mix(in srgb, #1a6b8a 55%, var(--site-theme-accent));
+  background: color-mix(in srgb, #1a6b8a 22%, var(--wiki-bg));
+  color: var(--site-theme-action-ink);
+  box-shadow: 0 0 0 1px color-mix(in srgb, #1a6b8a 35%, transparent);
+}
+
+.site-ocean-kind-chip:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.site-ocean-panel {
+  max-height: min(70dvh, 520px);
+  overflow: auto;
+}
+
+@keyframes site-floating-panel-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes site-floating-panel-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+}
+
+.site-ocean-panel[data-closing],
+.site-custom-bg-panel[data-closing] {
+  animation: site-floating-panel-exit .28s cubic-bezier(.4, 0, 1, 1) forwards;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-ocean-panel,
+  .site-custom-bg-panel {
+    animation: site-floating-panel-enter .16s ease forwards;
+  }
+
+  .site-ocean-panel[data-closing],
+  .site-custom-bg-panel[data-closing] {
+    animation: site-floating-panel-exit .12s ease forwards;
+  }
+}
+
+
+@media (hover: none), (pointer: coarse) {
+  .site-ocean-panel {
+    right: max(10px, env(safe-area-inset-right));
+    left: auto;
+    bottom: calc(max(10px, env(safe-area-inset-bottom)) + 42px);
+    transform-origin: bottom right;
+  }
+}
+
+
 .site-custom-bg-panel {
   position: fixed;
   left: max(14px, env(safe-area-inset-left));
@@ -5904,28 +6945,30 @@ html[data-site-custom-bg-position="bottom"] .site-custom-bg-layer {
   font-family: var(--font-sans);
   font-size: var(--fs-sm);
   line-height: 1.45;
+  transform-origin: bottom left;
+  animation: site-floating-panel-enter .42s cubic-bezier(.22, 1, .36, 1) forwards;
 }
 
 .site-custom-bg-panel-head {
   margin: 0 0 8px;
-  padding: 0 0 8px;
-  border-bottom: 1px solid var(--site-theme-chrome-border);
 }
 
 .site-custom-bg-panel-title {
-  margin: 0 0 2px;
-  color: var(--site-theme-heading);
-  font-size: var(--fs-xs);
+  margin: 0;
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: .03em;
-  text-transform: uppercase;
+  color: var(--site-theme-heading);
 }
 
 .site-custom-bg-panel-note {
-  margin: 0;
-  color: var(--wiki-text-soft);
+  margin: 4px 0 0;
+  color: color-mix(in srgb, var(--wiki-text) 68%, transparent);
   font-size: 11px;
-  font-weight: 500;
+  line-height: 1.35;
+}
+
+.site-custom-bg-panel .site-ocean-toggle-row {
+  margin-bottom: 10px;
 }
 
 .site-custom-bg-password {
@@ -6050,7 +7093,7 @@ html[data-site-custom-bg-position="bottom"] .site-custom-bg-layer {
   .site-palette-root .site-palette-switcher:hover,
   .site-palette-root .site-palette-switcher:focus-within,
   .site-palette-root.is-panel-open .site-palette-switcher {
-    width: 228px;
+    width: 260px;
   }
 }
 
@@ -6064,11 +7107,12 @@ html[data-site-custom-bg-position="bottom"] .site-custom-bg-layer {
     right: max(10px, env(safe-area-inset-right));
     left: auto;
     bottom: calc(max(10px, env(safe-area-inset-bottom)) + 42px);
+    transform-origin: bottom right;
   }
 
   .site-palette-root .site-palette-switcher.is-expanded,
   .site-palette-root.is-panel-open .site-palette-switcher {
-    width: 228px;
+    width: 260px;
   }
 }
 
@@ -6180,7 +7224,7 @@ html[data-site-custom-bg="on"] .wiki-topbar {
   contain-intrinsic-size: auto 320px;
 }
 
-/* Soft glyph edge: only titles — full-main text-shadow paints every glyph and lags long pages. */
+/* Soft glyph edge: only titles 鈥?full-main text-shadow paints every glyph and lags long pages. */
 html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] .wiki-main :is(h1, h2, h3, .wiki-title) {
   text-shadow: 0 1px 1px rgb(0 0 0 / .35);
 }
@@ -6244,3 +7288,36 @@ html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] a:visited {
     transform: none;
   }
 }
+
+/* Final: three-square palette bar 鈥?defeat older collapse-to-one-swatch widths. */
+@media (hover: hover) and (pointer: fine) {
+  .site-palette-root .site-palette-switcher,
+  .site-palette-root .site-palette-switcher:hover,
+  .site-palette-root .site-palette-switcher:focus-within,
+  .site-palette-root.is-panel-open .site-palette-switcher {
+    overflow: visible !important;
+    width: auto !important;
+  }
+  .site-palette-root .site-palette-switcher:not(:hover):not(:focus-within) .site-palette-button:not(.is-active),
+  .site-palette-root .site-palette-switcher .site-palette-button {
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+}
+@media (hover: none), (pointer: coarse) {
+  .site-palette-root .site-palette-switcher,
+  .site-palette-root .site-palette-switcher.is-expanded,
+  .site-palette-root.is-panel-open .site-palette-switcher {
+    overflow: visible !important;
+    width: auto !important;
+    opacity: 1 !important;
+    border-radius: 8px !important;
+  }
+  .site-palette-root .site-palette-switcher:not(.is-expanded) .site-palette-button:not(.is-active),
+  .site-palette-root .site-palette-switcher .site-palette-button {
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+}
+
+

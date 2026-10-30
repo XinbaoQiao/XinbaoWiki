@@ -1,7 +1,7 @@
 # Security Policy
 
 MyWiki combines a public academic Wiki, an LLM-backed question-answering
-API, pseudonymous usage metadata, and a production deployment. Security and
+API, private abuse/cost audit records, pseudonymous usage metadata, and a production deployment. Security and
 privacy reports are welcome and should be handled privately until a fix is
 available.
 
@@ -39,6 +39,31 @@ The maintainer aims to acknowledge a report within seven days, confirm its
 scope, and coordinate remediation and disclosure. Response time may vary with
 impact and reproducibility. This project does not currently operate a bug
 bounty program.
+
+## Private AI Audit Data Boundary
+
+New AI requests may retain bounded questions and delivered replies, validated
+Vercel request IPs, approximate location, bounded browser user agents, request
+and conversation identifiers, outcomes, retries and provider-reported token
+usage in a maintainer-only Redis audit for 365 Tokyo calendar days. The chat
+panel displays this notice before sending. These are personal records, not
+anonymous data. Full earlier client chat history is not transmitted.
+
+Known server secrets and obvious credential-shaped text are redacted; private
+system prompts, voice notes, cookies, authorization headers, provider credentials,
+raw provider errors and rejected raw model outputs are excluded. Audit records
+never enter public API payloads or application console logs. Authentication is
+required before any audit export or store access, with private/no-store/noindex
+responses. The legacy 90-day question-metadata dataset remains separate.
+
+A paid provider attempt requires durable audit admission and an atomic daily
+site-wide attempt reservation. The default ceiling is 200 attempts, including
+retries, errors and cancellations; this bounds request count rather than exact
+token charges. A storage failure prevents new provider work. Accepted and
+rejected audit buckets have separate caps and fixed expiry; a full accepted
+bucket stops provider work without erasing older evidence. Missing token usage
+and unfinished records remain explicit unknown states. See
+[`docs/chat/README.md`](docs/chat/README.md) for the audit/query contract.
 
 ## Site Activity Data Boundary
 
@@ -115,9 +140,9 @@ Examples of in-scope reports include:
   Markdown/URL handling;
 - practical bypasses of abuse controls that threaten service availability or
   cause material provider cost;
-- storage or disclosure of raw questions, chat history, raw IP addresses, or
-  other data outside the documented metadata policy, including public disclosure
-  or excessive retention of the private visit records;
+- collection, disclosure or retention of questions, replies, IP addresses or
+  other personal data outside the documented private audit and visit contracts,
+  including unauthorized exports, public disclosure or excessive retention;
 - cross-user disclosure or manipulation of Redis-backed quota or usage data;
 - prompt-injection or citation-integrity failures with a concrete
   confidentiality, integrity, or availability impact;

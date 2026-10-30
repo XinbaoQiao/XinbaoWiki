@@ -208,6 +208,7 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
   const shellRef = useRef<HTMLElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const activeRequestRef = useRef<AbortController | null>(null);
+  const conversationIdRef = useRef('');
   const dragStartY = useRef<number | null>(null);
   const quotaExhausted = remaining === 0;
   const composerDisabled = loading || quotaExhausted || !serviceAvailable;
@@ -236,6 +237,7 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
     setRetryAfterSeconds(null);
     setRetryRequest(null);
     setMessages(initialMessages);
+    conversationIdRef.current = crypto.randomUUID();
   }, [initialMessages]);
 
   useEffect(() => {
@@ -399,7 +401,7 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
       const response = await fetch(chatEndpoint(), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message, language }),
+        body: JSON.stringify({ message, language, conversationId: conversationIdRef.current || (conversationIdRef.current = crypto.randomUUID()) }),
         signal: controller.signal
       });
       const data = await response.json().catch(() => null) as
@@ -485,6 +487,7 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
   }
 
   function startNewChat() {
+    conversationIdRef.current = crypto.randomUUID();
     activeRequestRef.current?.abort();
     setLoading(false);
     setInput('');

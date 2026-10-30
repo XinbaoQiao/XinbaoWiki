@@ -82,7 +82,7 @@ export function WikiMarkdown({ editLabel, markdown, sourceHref }: Props) {
           },
           img({ src, alt }) {
             const safeSrc = typeof src === 'string' ? pathWithBasePath(src) : '';
-            return <img src={safeSrc} alt={alt || ''} loading="lazy" />;
+            return <img src={safeSrc} alt={alt || ''} loading="lazy" decoding="async" />;
           },
           h2({ id, tabIndex, children }) {
             return <h2 id={id} tabIndex={tabIndex}>{children}{editLink(sourceHref, editLabel)}</h2>;
