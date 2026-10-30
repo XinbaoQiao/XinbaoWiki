@@ -71,7 +71,7 @@ export function PaperAcceptancePreview({ papers, language, defaultOpen = false, 
 
   return (
     <details ref={disclosure.ref} className={styles.disclosure} data-animated-disclosure="" data-paper-acceptance="" data-preview-view={view} open={open} onToggle={(event) => setOpen(event.currentTarget.open)}>
-      <summary onClick={(event) => { event.preventDefault(); disclosure.toggle(); }}>{detailed ? copy.details : copy.summary} <span>({papers.length})</span></summary>
+      <summary onMouseDown={(event) => { event.preventDefault(); }} onClick={(event) => { event.preventDefault(); if (event.detail === 0) { (event.currentTarget as HTMLElement).focus({ preventScroll: true }); } disclosure.toggle(); }}>{detailed ? copy.details : copy.summary} <span>({papers.length})</span></summary>
       {detailed && papers.length > 1 && <div className={styles.navigation} role="group" aria-label={copy.navigation}>
         <button type="button" aria-label={copy.previous} aria-controls={galleryId} disabled={activePaper === 0} onClick={() => setActivePaper((index) => index - 1)}>
           <span aria-hidden="true">‹</span>

@@ -111,7 +111,7 @@ npm run build
 
 | Goal | Where to edit |
 | --- | --- |
-| Name, short taglines, research areas, chat starters | `lib/site-config.ts` |
+| Name, research areas, chat starters | `lib/site-config.ts` |
 | Wiki pages (English + Chinese) | `wiki/*.md` — each `Foo.md` has a twin `Foo_zh.md` |
 | Canonical site URL | `NEXT_PUBLIC_SITE_URL` |
 | Avatar, icons, figures | `public/` |

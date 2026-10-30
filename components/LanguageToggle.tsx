@@ -10,7 +10,6 @@ import {
 
   applyCustomBgDocumentState,
 
-  clearCustomBgSettings,
 
   compressImageFile,
   imageExtensionForMime,
@@ -738,15 +737,11 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
   };
 
   const persistCustom = (next: CustomBgSettings) => {
-    // Overlay / mode / position are always local preferences.
+    // Overlay / mode / position / enabled are always local preferences.
     // Only site-wide image upload (and clear) require the owner password.
+    // Keep settings (incl. enabled:false) so toggling wallpaper off does not lose the image or prefs.
     setCustomSettings(next);
-    if (!next.enabled) {
-      clearCustomBgSettings();
-      writeCustomBgSettings({ ...next, enabled: false });
-    } else {
-      writeCustomBgSettings(next);
-    }
+    writeCustomBgSettings(next);
   };
 
   const openCustomPanel = () => {
@@ -754,18 +749,13 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
     setPanelOpen(true);
     setExpanded(true);
     setError(null);
-    if (customImageUrl && !customSettings.enabled) {
-      const enabled = { ...customSettings, enabled: true };
-      setCustomSettings(enabled);
-      // Always persist local opt-in so image mode sticks on this device.
-      // Shared upload/clear still require the owner password; this flag is device-local.
-      writeCustomBgSettings(enabled);
-      applyCustomBgDocumentState(enabled, true, customTone);
-    }
+    // Do not auto-enable wallpaper — use the panel toggle so the image can stay while display is off.
     window.setTimeout(() => {
       const root = rootRef.current;
       if (!root) return;
-      const focusable = root.querySelector<HTMLElement>('.site-custom-bg-action:not(:disabled), .site-custom-bg-panel select:not(:disabled), .site-custom-bg-panel input:not(:disabled)');
+      const focusable = root.querySelector<HTMLElement>(
+        '.site-ocean-toggle, .site-custom-bg-action:not(:disabled), .site-custom-bg-panel select:not(:disabled), .site-custom-bg-panel input:not(:disabled)',
+      );
       focusable?.focus();
     }, 0);
   };
@@ -940,6 +930,7 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
     color: isChinese ? '颜色' : 'Color',
     colorMenu: isChinese ? '选择配色' : 'Choose color theme',
     custom: isChinese ? '自定义背景' : 'Custom background',
+    wallpaperEnable: isChinese ? '显示壁纸' : 'Show wallpaper',
     upload: isChinese ? '上传图片' : 'Upload image',
     change: isChinese ? '更换图片' : 'Change image',
     clear: isChinese ? '清除' : 'Clear',
@@ -1203,6 +1194,21 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
             <p className="site-custom-bg-panel-title">{copy.custom}</p>
             {scopeNote ? <p className="site-custom-bg-panel-note">{scopeNote}</p> : null}
           </div>
+          {customImageUrl ? (
+            <div className="site-ocean-toggle-row">
+              <span className="site-custom-bg-field-label">{copy.wallpaperEnable}</span>
+              <button
+                aria-pressed={customSettings.enabled}
+                className={['site-ocean-toggle', customSettings.enabled ? 'is-on' : ''].filter(Boolean).join(' ')}
+                disabled={busy}
+                onClick={() => {
+                  persistCustom({ ...customSettings, enabled: !customSettings.enabled });
+                }}
+                title={copy.wallpaperEnable}
+                type="button"
+              />
+            </div>
+          ) : null}
           <label className="site-custom-bg-field">
             <span className="site-custom-bg-field-label">{copy.scopeLabel}</span>
             <select
@@ -1234,11 +1240,6 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
               />
             </label>
           ) : null}
-          {sharedMeta?.writable && publishShared ? (
-            <p className="site-custom-bg-panel-note">
-              {copy[sharedMeta.passwordRequired ? 'scopeHintPassword' : 'scopeHintLocal']}
-            </p>
-          ) : null}
           <div className="site-custom-bg-panel-row">
             <button className="site-custom-bg-action" disabled={busy} onClick={() => fileInputRef.current?.click()} type="button">
               {busy ? copy.busy : (customImageUrl ? copy.change : copy.upload)}
@@ -1253,13 +1254,13 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
             <div className="site-custom-bg-controls">
               <label className="site-custom-bg-field">
                 <span className="site-custom-bg-field-label">{copy.mode}</span>
-                <select disabled={busy || !customImageUrl} onChange={(event) => {
+                <select disabled={busy || !customImageUrl || !customSettings.enabled} onChange={(event) => {
                   const nextMode = event.target.value as CustomBgMode;
                   if (nextMode === 'depth' && !isDesktopPointer) {
-                    persistCustom({ ...customSettings, enabled: true, mode: 'cover' });
+                    persistCustom({ ...customSettings, mode: 'cover' });
                     return;
                   }
-                  persistCustom({ ...customSettings, enabled: Boolean(customImageUrl), mode: nextMode });
+                  persistCustom({ ...customSettings, mode: nextMode });
                 }} value={customSettings.mode}>
                   {customBgModeOptions.map((option) => (
                     <option disabled={option.mode === 'depth' && !isDesktopPointer} key={option.mode} value={option.mode}>{isChinese ? option.zh : option.en}</option>
@@ -1268,11 +1269,11 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
               </label>
               <label className="site-custom-bg-field">
                 <span className="site-custom-bg-field-label">{copy.overlay}<span className="site-custom-bg-field-value">{customSettings.overlay}%</span></span>
-                <input disabled={busy || !customImageUrl} max={100} min={0} onChange={(event) => persistCustom({ ...customSettings, enabled: Boolean(customImageUrl), overlay: Number(event.target.value) })} type="range" value={customSettings.overlay} />
+                <input disabled={busy || !customImageUrl || !customSettings.enabled} max={100} min={0} onChange={(event) => persistCustom({ ...customSettings, overlay: Number(event.target.value) })} type="range" value={customSettings.overlay} />
               </label>
               <label className="site-custom-bg-field">
                 <span className="site-custom-bg-field-label">{copy.position}</span>
-                <select disabled={busy || !customImageUrl || customSettings.mode === 'tile'} onChange={(event) => persistCustom({ ...customSettings, enabled: Boolean(customImageUrl), position: event.target.value as CustomBgPosition })} value={customSettings.position}>
+                <select disabled={busy || !customImageUrl || !customSettings.enabled || customSettings.mode === 'tile'} onChange={(event) => persistCustom({ ...customSettings, position: event.target.value as CustomBgPosition })} value={customSettings.position}>
                   {customBgPositionOptions.map((option) => (
                     <option key={option.position} value={option.position}>{isChinese ? option.zh : option.en}</option>
                   ))}

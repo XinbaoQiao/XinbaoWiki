@@ -784,7 +784,6 @@ export class CharacterOceanEngine {
       '.wiki-portal-brand',
       '.wiki-portal-name',
       '.wiki-portal-name-text',
-      '.wiki-portal-tagline',
       '.wiki-portal-search',
       '.wiki-search-portal',
       '.wiki-portal-editions',

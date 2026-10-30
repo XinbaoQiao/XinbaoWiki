@@ -15,6 +15,8 @@ type Props = {
   onOpenChange: (open: boolean) => void;
   open: boolean;
   detailsRef?: Ref<HTMLDetailsElement>;
+  /** When true (e.g. name-only fold), prefetch activity soon so restore/open feels instant. */
+  priorityPrefetch?: boolean;
 };
 
 type ActivityStatus = 'empty' | 'error' | 'loading' | 'ready' | 'unavailable';
@@ -225,9 +227,9 @@ async function fetchSiteActivity(apiPath: string, signal: AbortSignal) {
   throw new Error('site activity response failed');
 }
 
-export function VisitorAtlasDisclosure({ language, onOpenChange, open, detailsRef }: Props) {
+export function VisitorAtlasDisclosure({ language, onOpenChange, open, detailsRef, priorityPrefetch = false }: Props) {
   const [payload, setPayload] = useState<SiteActivityPayload | null>(null);
-  const [status, setStatus] = useState<ActivityStatus>('loading');
+  const [status, setStatus] = useState<ActivityStatus>('empty'); // fallback summary until a fetch arms
   const [requestVersion, setRequestVersion] = useState(0);
   const [ownerDialogOpen, setOwnerDialogOpen] = useState(false);
   const [ownerExcluded, setOwnerExcluded] = useState(false);
@@ -340,24 +342,94 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open, detailsRe
 
   useEffect(() => {
     const controller = new AbortController();
-    setStatus('loading');
-    void fetchSiteActivity(apiPath, controller.signal)
-      .then((nextPayload) => {
-        setPayload(nextPayload);
-        if (!nextPayload.enabled) {
-          setStatus('unavailable');
-        } else if (nextPayload.uniqueBrowsersEstimate === null || nextPayload.cells.length === 0) {
-          setStatus('empty');
-        } else {
-          setStatus('ready');
-        }
-      })
-      .catch((error: unknown) => {
-        if (error instanceof DOMException && error.name === 'AbortError') return;
-        setStatus('error');
-      });
-    return () => controller.abort();
-  }, [apiPath, requestVersion]);
+    let idleHandle: number | null = null;
+    let timeoutHandle: ReturnType<typeof setTimeout> | null = null;
+    const run = () => {
+      // Keep a warm summary visible while a background re-prefetch runs (name-only / idle).
+      setStatus((prev) => (prev === 'ready' || prev === 'empty' || prev === 'unavailable' ? prev : 'loading'));
+      void fetchSiteActivity(apiPath, controller.signal)
+        .then((nextPayload) => {
+          setPayload(nextPayload);
+          if (!nextPayload.enabled) {
+            setStatus('unavailable');
+          } else if (nextPayload.uniqueBrowsersEstimate === null || nextPayload.cells.length === 0) {
+            setStatus('empty');
+          } else {
+            setStatus('ready');
+          }
+        })
+        .catch((error: unknown) => {
+          if (error instanceof DOMException && error.name === 'AbortError') {
+            // Warm prefetch may be cancelled when leaving name-only; don't stick on loading.
+            setStatus((prev) => (prev === 'loading' ? 'empty' : prev));
+            return;
+          }
+          setStatus('error');
+        });
+    };
+    // Homepage load: do not hit the activity API until the section is opened
+    // (or a late idle after first input / name-only priority). Collapsed summary
+    // stays light until then.
+    if (open) {
+      run();
+      return () => {
+        controller.abort();
+      };
+    }
+
+    let armed = false;
+    const detachArm = () => {
+      window.removeEventListener('pointerdown', arm);
+      window.removeEventListener('keydown', arm);
+      window.removeEventListener('touchstart', arm);
+    };
+    const clearPending = () => {
+      if (idleHandle !== null && typeof window.cancelIdleCallback === 'function') {
+        window.cancelIdleCallback(idleHandle);
+      }
+      idleHandle = null;
+      if (timeoutHandle !== null) clearTimeout(timeoutHandle);
+      timeoutHandle = null;
+    };
+    const scheduleDeferred = (idleTimeoutMs: number, fallbackMs: number) => {
+      clearPending();
+      if (typeof window.requestIdleCallback === 'function') {
+        idleHandle = window.requestIdleCallback(() => run(), { timeout: idleTimeoutMs });
+      } else {
+        timeoutHandle = setTimeout(run, fallbackMs);
+      }
+    };
+    const arm = () => {
+      if (armed) return;
+      armed = true;
+      detachArm();
+      // After first input: prefer a short idle so Site Activity is warm before open,
+      // without competing with homepage first paint.
+      scheduleDeferred(1200, 600);
+    };
+    // Name-only fold: user already interacted and will likely restore — prefetch soon.
+    if (priorityPrefetch) {
+      armed = true;
+      detachArm();
+      scheduleDeferred(400, 200);
+      return () => {
+        // Cancel only the idle timer — let an in-flight warm fetch finish so
+        // restoring from name-only keeps a ready Site Activity summary.
+        clearPending();
+      };
+    }
+    // No timer-based prefetch on cold collapsed load — first input arms a deferred
+    // fetch, and opening the section fetches immediately (see `open` branch above).
+    window.addEventListener('pointerdown', arm, { passive: true, once: true });
+    window.addEventListener('keydown', arm, { passive: true, once: true });
+    window.addEventListener('touchstart', arm, { passive: true, once: true });
+
+    return () => {
+      controller.abort();
+      detachArm();
+      clearPending();
+    };
+  }, [apiPath, requestVersion, open, priorityPrefetch]);
 
   const summary = status === 'loading'
     ? labels.summaryLoading
@@ -386,7 +458,17 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open, detailsRe
       }}
       open={open}
     >
-      <summary onClick={(event) => { event.preventDefault(); onOpenChange(!open); }}>
+      <summary
+        onMouseDown={(event) => {
+          event.preventDefault();
+        }}
+        onClick={(event) => {
+        event.preventDefault();
+        if (event.detail === 0) {
+          (event.currentTarget as HTMLElement).focus({ preventScroll: true });
+        }
+        onOpenChange(!open);
+      }}>
         <span className="wiki-portal-timeline-heading">
           <strong>{labels.title}</strong>
           <em>{summary}</em>
@@ -407,14 +489,16 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open, detailsRe
           >
             <title id="visitor-atlas-title">{labels.mapTitle}</title>
             <desc id="visitor-atlas-description">{labels.mapDescription}</desc>
-            <image
-              height={SITE_ACTIVITY_MAP_HEIGHT}
-              href={withBasePath('/maps/world-land-dots.svg')}
-              width={SITE_ACTIVITY_MAP_WIDTH}
-              x="0"
-              y="0"
-            />
-            {payload?.cells.map((cell, index) => (
+            {open ? (
+              <image
+                height={SITE_ACTIVITY_MAP_HEIGHT}
+                href={withBasePath('/maps/world-land-dots.svg')}
+                width={SITE_ACTIVITY_MAP_WIDTH}
+                x="0"
+                y="0"
+              />
+            ) : null}
+            {open && payload?.cells.map((cell, index) => (
               <g className={`wiki-visitor-atlas-cluster level-${cell.level}`} key={`${cell.x}-${cell.y}-${index}`}>
                 {clusterOffsets.map(([offsetX, offsetY]) => (
                   <circle

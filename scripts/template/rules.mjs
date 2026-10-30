@@ -93,7 +93,6 @@ export const patches = [
   // ---- Owner-specific UI copy comes from lib/site-config.ts (template override) ----
   ['lib/site-wallpaper-shared.ts', "['xinbao', 'site-wallpaper', 'v1']", "['site', 'wallpaper', 'v1']"],
   ['components/HomepagePortal.tsx', "import { WikiLink } from '@/components/WikiLink';\n", "import { WikiLink } from '@/components/WikiLink';\nimport { siteConfig } from '@/lib/site-config';\n"],
-  ['components/HomepagePortal.tsx', /const portalTaglines = \{[\s\S]*?\} satisfies Record<PortalPalette, LocalizedText>;/, 'const portalTaglines: Record<PortalPalette, LocalizedText> = siteConfig.taglines;'],
   // Text wordmark tinted by the palette accent replaces the per-palette PNG wordmarks.
   ['components/HomepagePortal.tsx', /\n *<span\n *aria-hidden="true"\n *className="wiki-portal-name-logos"[\s\S]*?\n *<\/span>\n( *)<span className="wiki-portal-name-text">Your Name<\/span>/, '\n$1<span className="wiki-portal-name-text">{siteConfig.ownerName[language]}</span>'],
   ['app/globals.css', /\.wiki-portal-name-logos,[\s\S]*?html\[data-site-palette="text"\] \.wiki-portal-name-text \{[\s\S]*?\}\n\}/, `.wiki-portal-name-logos,

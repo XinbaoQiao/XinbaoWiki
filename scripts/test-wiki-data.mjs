@@ -2246,9 +2246,8 @@ assert.match(styles, /\.wiki-logo-word \{[\s\S]*font-family: var\(--font-serif\)
 assert.match(styles, /\.wiki-logo-subtitle \{[\s\S]*font-family: var\(--font-sans\);[\s\S]*text-transform: uppercase;[\s\S]*\}/, 'topbar subtitle uses a small uppercase sans style');
 assert.match(styles, /body:has\(\.wiki-portal\) \.wiki-footer,[\s\S]*body:has\(\.wiki-portal\) \.wiki-topbar \{[\s\S]*display: none;[\s\S]*\}/, 'homepage hides the global topbar and footer chrome');
 assert.match(styles, /\.wiki-portal-hero \{[\s\S]*max-width: 760px;[\s\S]*text-align: center;[\s\S]*\}/, 'homepage has a centered compact Wikipedia-style portal hero');
-assert.match(styles, /\.wiki-main \.wiki-portal-tagline \{[\s\S]*width: 100%;[\s\S]*max-width: 620px;[\s\S]*margin: 0 auto 18px;[\s\S]*text-align: center;[\s\S]*\}/, 'homepage tagline overrides generic article paragraphs and shares the hero center line');
-assert.match(styles, /\.wiki-main \.wiki-portal-tagline \{[\s\S]*color: var\(--site-theme-action-ink\);[\s\S]*font-weight: 500;[\s\S]*\}/, 'homepage aphorism uses the accessible resolved theme ink');
-assert.match(styles, /html:not\(\[data-site-palette\]\) \.wiki-portal-tagline-text,[\s\S]*html\[data-site-palette="blue"\] \.wiki-portal-tagline-blue,[\s\S]*html\[data-site-palette="gold"\] \.wiki-portal-tagline-gold,[\s\S]*html\[data-site-palette="rose"\] \.wiki-portal-tagline-rose,[\s\S]*html\[data-site-palette="green"\] \.wiki-portal-tagline-green,[\s\S]*html\[data-site-palette="violet"\] \.wiki-portal-tagline-violet,[\s\S]*html\[data-site-palette="charcoal"\] \.wiki-portal-tagline-charcoal \{[\s\S]*display: inline-block;/, 'exactly the resolved palette aphorism becomes visible while Auto inherits its resolved color');
+assert.doesNotMatch(styles, /wiki-portal-tagline/, 'homepage no longer styles a decorative portal tagline');
+assert.doesNotMatch(homepagePortal, /portalTaglines|wiki-portal-tagline/, 'homepage portal omits decorative tagline markup and copy');
 assert.match(styles, /--font-signature: "Alex Brush"/, 'homepage signature typography uses Alex Brush');
 assert.match(styles, /\.wiki-portal-name \{[\s\S]*font-family: var\(--font-signature\);[\s\S]*font-size: 124px;[\s\S]*\}/, 'homepage starts directly with a logo-sized Xinbao Qiao in the Alex Brush signature face');
 assert.match(styles, /\.wiki-portal-name-wrap \{[\s\S]*position: relative;[\s\S]*display: inline-grid;[\s\S]*place-items: center;[\s\S]*max-width: min\(620px, 86vw\);[\s\S]*\}/, 'homepage signature wrapper centers the themed logo or text outside the button semantics');
@@ -2268,22 +2267,8 @@ assertCssRule(styles, 'html[data-site-palette="text"]', [
 assert.match(styles, /\.site-palette-text \{[\s\S]*border-color: #a2a9b1;[\s\S]*background: #ffffff;[\s\S]*\}/, 'pure-white text swatch remains visible against the palette surface');
 assert.match(styles, /Three-square palette bar: Color \| Wallpaper \| Ocean[\s\S]*\.site-palette-color-menu \{[\s\S]*Final: three-square palette bar[\s\S]*@media \(hover: hover\) and \(pointer: fine\) \{[\s\S]*\.site-palette-root \.site-palette-switcher[\s\S]*width: auto !important;/, 'fine-pointer palette keeps the three-square Color|Wallpaper|Ocean bar with presets in a color menu');
 assert.match(styles, /@media \(hover: none\), \(pointer: coarse\) \{[\s\S]*\.site-palette-root \.site-palette-switcher[\s\S]*width: auto !important;[\s\S]*opacity: 1 !important;/, 'touch palette keeps the three-square bar visible instead of collapsing to one swatch');
-assert.match(styles, /\.site-palette-button\.is-active \{[\s\S]*order: -1;/, 'active palette swatch remains visible in the collapsed state');
-const expectedPortalTaglines = [
-  ['text', 'Q is a lens: search the world, question the model.', '以 Q 为镜：探索世界，追问模型。'],
-  ['blue', 'To see farther, ask better questions.', '想看得更远，先问得更好。'],
-  ['gold', 'Where curiosity meets evidence, discovery begins.', '好奇与证据相遇，发现由此开始。'],
-  ['rose', 'Let the machine learn. Keep the question human.', '让机器学习，让问题保有人性。'],
-  ['green', 'Learn from the world, not just the dataset.', '向世界学习，而不只向数据集学习。'],
-  ['violet', "A model's limits are not the world's limits.", '模型的边界，不是世界的边界。'],
-  ['charcoal', 'In models we question; in evidence we trust.', '对模型保持追问，以证据建立信任。']
-];
-for (const [palette, english, chinese] of expectedPortalTaglines) {
-  assert.ok(homepagePortal.includes(`${palette}: {`), `homepage defines a ${palette} aphorism`);
-  assert.ok(homepagePortal.includes(english) && homepagePortal.includes(chinese), `${palette} aphorism is bilingual`);
-}
-assert.match(homepagePortal, /const portalPalettes: PortalPalette\[\] = \['text', 'blue', 'gold', 'rose', 'green', 'violet', 'charcoal'\];[\s\S]*satisfies Record<PortalPalette, LocalizedText>/, 'homepage aphorisms cover every resolved manual palette');
-assert.match(homepagePortal, /portalPalettes\.map\(\(palette\) => \([\s\S]*wiki-portal-tagline-\$\{palette\}[\s\S]*portalTaglines\[palette\]\[language\]/, 'homepage renders one CSS-selectable localized aphorism per resolved palette');
+assert.doesNotMatch(homepagePortal, /Where curiosity meets evidence|Q is a lens: search the world/, 'homepage removes decorative English palette aphorisms');
+assert.doesNotMatch(homepagePortal, /portalTaglines|portalPalettes|PortalPalette/, 'homepage removes palette tagline data structures');
 assert.doesNotMatch(homepagePortal, /A connected map of Xinbao Qiao's research/, 'homepage removes the old descriptive sentence from the visible portal');
 assert.match(homepagePortal, /useEffect\(\(\) => \{[\s\S]*document\.documentElement\.lang = language === 'zh' \? 'zh-CN' : 'en';[\s\S]*\}, \[language\]\);/, 'homepage language selection updates the document language for assistive technology');
 assert.match(homepagePortal, /const sectionToggleLabels = \{[\s\S]*Collapse homepage sections[\s\S]*Show only the name Xinbao Qiao[\s\S]*Restore the folded homepage[\s\S]*折叠首页板块[\s\S]*极限折叠，仅显示 Xinbao Qiao[\s\S]*恢复为折叠状态[\s\S]*\} satisfies Record<SearchLanguage,[\s\S]*aria-label=\{portalLayoutLabel\}/, 'homepage signature disclosure label follows the selected language');
@@ -2365,7 +2350,7 @@ assert.match(styles, /\.wiki-shell:has\(\.wiki-portal-collapsed\) \{[\s\S]*align
 assert.match(styles, /\.wiki-shell:has\(\.wiki-portal-name-only\) \{[\s\S]*place-items: center;[\s\S]*\}/, 'homepage name-only mode still centers the signature');
 assert.match(styles, /\.wiki-portal-collapsed \{[\s\S]*transform: none;[\s\S]*\}/, 'homepage collapsed state keeps transform neutral to avoid open/close jumps');
 assert.doesNotMatch(styles, /@keyframes wiki-portal-recenter/, 'homepage collapsed recenter uses FLIP, not a CSS keyframe jump');
-assert.match(styles, /\.wiki-portal-name-only \.wiki-portal-tagline,[\s\S]*\.wiki-portal-name-only \.wiki-portal-search,[\s\S]*\.wiki-portal-name-only \.wiki-portal-disclosures \{[\s\S]*display: none;[\s\S]*\}/, 'homepage name-only mode hides tagline, search, and disclosures');
+assert.match(styles, /wiki-portal-name-only[\s\S]*wiki-portal-search[\s\S]*wiki-portal-disclosures[\s\S]*content-visibility: hidden/, 'homepage name-only mode hides search and disclosures');
 assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.wiki-portal-collapsed[\s\S]*animation: none;[\s\S]*\.wiki-portal-collapsed \{[\s\S]*transform: none;[\s\S]*\}[\s\S]*\}/, 'homepage collapsed-state animation honors reduced-motion settings');
 assert.match(styles, /\.wiki-portal-block \{[\s\S]*--portal-section-accent: #36c;[\s\S]*--portal-section-accent-resolved: color-mix\(in srgb, var\(--portal-section-accent\) 72%, var\(--site-theme-accent\)\);[\s\S]*min-width: 0;[\s\S]*\}/, 'homepage browse taxonomy colors blend with the resolved site theme');
 assert.doesNotMatch(styles, /counter-reset: portal-section|counter\(portal-section|decimal-leading-zero|\.wiki-portal-block h3::before/, 'homepage browse top-level headings do not show numbered taxonomy badges');
@@ -2482,12 +2467,13 @@ assert.match(styles, /\.wiki-portal-disclosures \{[\s\S]*--portal-search-width: 
 assert.match(styles, /\.wiki-portal-disclosures > details \{[\s\S]*interpolate-size: allow-keywords;[\s\S]*\}[\s\S]*\.wiki-portal-disclosures > details::details-content \{[\s\S]*block-size: 0;[\s\S]*opacity: 0;[\s\S]*transition:[\s\S]*block-size \.42s[\s\S]*opacity \.34s[\s\S]*\}[\s\S]*\.wiki-portal-disclosures > details\[open\]::details-content \{[\s\S]*block-size: auto;[\s\S]*opacity: 1;/, 'homepage disclosures animate their content smoothly in both directions');
 assert.doesNotMatch(styles, /\.wiki-portal-disclosures > details::details-content \{[^}]*content-visibility/s, 'homepage disclosure animation avoids the Chromium details-content visibility deadlock');
 assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.wiki-portal-disclosures > details::details-content,[\s\S]*\.wiki-portal-directory summary span::after,[\s\S]*\.wiki-portal-timeline-heading::after,[\s\S]*\.wiki-portrait-gallery-frame \.wiki-portrait-gallery-arrow,[\s\S]*\.wiki-portrait-gallery-frame \.wiki-portrait-gallery-count \{[\s\S]*transition: none;/, 'homepage disclosure, indicator, and portrait-control animations honor reduced-motion settings');
-assert.match(styles, /@media \(prefers-reduced-motion: reduce\) \{[\s\S]*\.wiki-portal-tagline-copy,[\s\S]*animation: none;/, 'theme-linked aphorism changes honor reduced-motion settings');
+assert.match(styles, /prefers-reduced-motion: reduce[\s\S]*wiki-portal-name-logos[\s\S]*animation: none/, 'homepage name motion honors reduced-motion settings');
 assert.match(styles, /\.wiki-portal-timeline \{[\s\S]*width: var\(--portal-updates-track-width\);[\s\S]*margin-left: var\(--portal-updates-track-offset\);[\s\S]*border-left: 4px solid var\(--site-theme-accent\);[\s\S]*border-radius: 2px;[\s\S]*background: color-mix/, 'homepage Updates consumes the shared track that keeps it and fixed cube faces aligned to the white search field');
 assert.doesNotMatch(styles, /\.wiki-portal-timeline \{[^}]*radial-gradient|\.wiki-portal-timeline \{[^}]*box-shadow:/, 'homepage timelines avoid wide promotional-card effects');
 assert.match(styles, /\.wiki-portal-news-preview \{[\s\S]*grid-template-columns: 80px minmax\(0, 1fr\);[\s\S]*margin-top: 8px;[\s\S]*padding-top: 8px;/, 'collapsed Latest Updates previews the newest dated item');
 assert.match(styles, /\.wiki-portal-news\[open\] \.wiki-portal-news-preview \{[\s\S]*display: none;/, 'expanded Latest Updates replaces the preview with the full feed');
-assert.match(styles, /\.wiki-portal-updates-window \{[\s\S]*height: var\(--portal-updates-window-height, 316px\);[\s\S]*overflow-y: auto;[\s\S]*overscroll-behavior: auto;[\s\S]*scrollbar-gutter: stable;/, 'expanded Latest Updates uses a stable scroll window');
+assert.match(styles, /\.wiki-portal-updates-window \{[\s\S]*height: auto;[\s\S]*max-height: none;[\s\S]*overflow: visible;/, 'expanded Latest Updates grows with content and uses page scroll only');
+assert.doesNotMatch(styles, /\.wiki-portal-updates-window \{[^}]*(?:overflow-y:\s*auto|--portal-updates-window-height|scrollbar-gutter:\s*stable)/s, 'expanded Latest Updates no longer nests a fixed-height scroll window');
 assert.match(styles, /\.wiki-portal-news-list \{[\s\S]*grid-template-columns: 1fr;[\s\S]*padding: 0 12px 4px;/, 'homepage updates use one compact reading column at every breakpoint');
 assert.match(styles, /\.wiki-portal-news-list li \{[\s\S]*grid-template-columns: 80px minmax\(0, 1fr\);[\s\S]*align-items: start;[\s\S]*gap: 10px;[\s\S]*padding: 7px 0;/, 'homepage update dates and headlines share a compact stable first-line alignment');
 assert.match(styles, /\.wiki-portal-news-list time \{[\s\S]*padding-top: 2px;[\s\S]*font-size: var\(--fs-xs\);[\s\S]*line-height: 1\.35;[\s\S]*\}[\s\S]*\.wiki-portal-news-list a \{[\s\S]*display: block;[\s\S]*font-size: 14px;[\s\S]*line-height: 1\.35;[\s\S]*text-wrap: balance;[\s\S]*\}[\s\S]*\.wiki-portal-news-list p \{[\s\S]*font-size: 12\.5px;[\s\S]*line-height: 1\.4;[\s\S]*text-wrap: balance;/, 'homepage updates retain readable typography and avoid orphaned short final lines');
@@ -2508,8 +2494,9 @@ assert.doesNotMatch(homepagePortal, /portalBodyMounted/, 'homepage always mounts
 assert.doesNotMatch(homepagePortal, /enterHint|Click to enter|wiki-portal-name-hint/, 'homepage name-only affordance has no CTA copy hint');
 assert.doesNotMatch(styles, /wiki-portal-underline-breathe|wiki-portal-name-glow|wiki-portal-name-shimmer/, 'homepage styles omit name-only landing glow/underline invites');
 assert.doesNotMatch(styles, /wiki-portal-name-hint|wiki-portal-hint-breathe/, 'homepage styles no longer include the text hint breathe');
-assert.match(homepagePortal, /useLayoutEffect\(\(\) => \{[\s\S]*slice\(0, 5\)[\s\S]*--portal-updates-window-height[\s\S]*ResizeObserver[\s\S]*\}, \[language, newsOpen, recentUpdates.length, updatesView\]\);/, 'homepage sizes the scroll window from the first five recent updates and reacts to archive rollover');
-assert.match(homepagePortal, /className="wiki-portal-updates-window"[\s\S]*ref=\{updatesWindowRef\}[\s\S]*role="region"[\s\S]*tabIndex=\{0\}/, 'homepage update archive is a labeled keyboard-focusable scroll region');
+assert.doesNotMatch(homepagePortal, /--portal-updates-window-height|updatesWindowRef/, 'homepage no longer measures a nested updates scroll window height');
+assert.match(homepagePortal, /aria-label=\{updateLabels\[language\]\.window\}[\s\S]*className="wiki-portal-updates-window"[\s\S]*id="portal-updates-window"[\s\S]*role="region"/, 'homepage update archive remains a labeled region without a nested focusable scroller');
+assert.doesNotMatch(homepagePortal, /className="wiki-portal-updates-window"[\s\S]*tabIndex=\{0\}/, 'homepage update archive does not take nested scroll-region keyboard focus');
 assert.match(homepagePortal, /<h1 className="wiki-portal-name" id="portal-title">[\s\S]*<\/h1>[\s\S]*<button[\s\S]*aria-label=\{portalLayoutLabel\}[\s\S]*className="wiki-portal-name-button"[\s\S]*onClick=\{cyclePortalLayout\}[\s\S]*\/>/, 'homepage signature button is an empty named sibling overlay after the h1 title');
 assert.match(homepagePortal, /aria-controls="portal-news portal-activity portal-directory"[\s\S]*aria-expanded=\{layoutMode === 'expanded'\}/, 'homepage signature button names and controls all three disclosure sections');
 assert.doesNotMatch(homepagePortal, /onDoubleClick/, 'homepage signature avoids double-click-only hidden behavior');

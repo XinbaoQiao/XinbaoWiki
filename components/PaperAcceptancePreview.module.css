@@ -299,6 +299,10 @@
   font-weight: 400;
 }
 
+.disclosure > summary:focus {
+  outline: none;
+}
+
 .disclosure > summary:focus-visible,
 .gallery:focus-visible,
 .navigation button:focus-visible,
