@@ -78,6 +78,12 @@ async function main() {
   }
 
   console.log(`push-main: authenticated ${user.login}; origin/${branch} ${remoteHead.slice(0, 12)} can fast-forward to ${head.slice(0, 12)}`);
+  console.log('push-main: verifying template sanitizer (Sync template CI gate)...');
+  await run('node', ['scripts/run-with-node22.mjs', 'node', 'scripts/template/build-template.mjs', '--out', '.tmp/template-build'], {
+    displayCommand: 'npm run verify:template',
+    timeoutMs: 5 * 60_000,
+  });
+  console.log('push-main: template sanitizer clean');
   if (checkOnly) {
     console.log('push-main: preflight passed; no remote write performed');
     return;

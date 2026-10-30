@@ -3,6 +3,7 @@
 Generates the public, de-personalized `template` branch from main.
 
 ```bash
+npm run verify:template                                           # same sanitizer Sync template CI runs (preferred local gate)
 node scripts/template/build-template.mjs [--out <dir>] [--ref HEAD]   # default out: .tmp/template-build (gitignored)
 node scripts/template/build-template.mjs --update-lock                # after porting a main change into a whole-file override
 node scripts/template/build-template.mjs --refresh-overrides          # after editing template-overrides/wiki/*.md

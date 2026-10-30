@@ -22,6 +22,8 @@ export const deletePaths = [
   'scripts/evaluate-wiki-chat.mjs', 'scripts/audit-wiki-maintenance.mjs', 'scripts/test-content-manifest.mjs',
   'scripts/test-publication-resources.mjs', 'scripts/test-site-updates.mjs', 'scripts/test-publication-link-legend.mjs',
   'scripts/report-site-activity.mjs',
+  'scripts/report-chat-audit.mjs', 'scripts/test-chat-audit.mjs',
+  'public/related/',
   'tests/browser/paper-showcase.spec.mjs', 'tests/browser/updates-and-cv.spec.mjs', 'tests/browser/disclosure-motion.spec.mjs',
   '.env', '.vercel/', 'CNAME', 'vercel.json', 'netlify.toml', 'wrangler.toml'
 ];
@@ -78,7 +80,11 @@ export const patches = [
   ['scripts/wiki-maintenance.mjs', /Recommended attribution: "[^"]*"/, 'Recommended attribution: "<Your Name> and contributors, <Site Name>, <repository URL>, CC BY 4.0."'],
   ['scripts/wiki-maintenance.mjs', / \|\| \/cuhk\\\.edu\\\.hk\$\|zju\\\.edu\\\.cn\$\|sdu\\\.edu\\\.cn\$\|nus\\\.edu\\\.sg\$\/\.test\(hostname\)/, ''],
   ['scripts/wiki-maintenance.mjs', /  if \(slug\.includes\('Machine_Unlearning'\)[\s\S]*?tags\.push\('llm'\);\n/, "  if (slug.startsWith('Research_Area')) tags.push('research-area');\n"],
-  ['tests/browser/sidebar-motion.spec.mjs', /Machine_Unlearning/g, 'Research_Area_1'],
+  // Personal research slugs -> template Research_Area_* samples (Machine_Unlearning removed from main).
+  ['tests/browser/sidebar-motion.spec.mjs', /Data_Centric_Machine_Learning/g, 'Research_Area_1'],
+  ['tests/browser/sidebar-motion.spec.mjs', /AI_and_Networks/g, 'Research_Area_2'],
+  // Ocean glyph list keeps a personal token on main; strip it from the public template.
+  ['lib/character-ocean/alphabets.ts', "'xinbao'", "'curiosity'"],
 
   // Site URL is configurable in the template (NEXT_PUBLIC_SITE_URL), default https://example.com.
   ['app/layout.tsx', "metadataBase: new URL('https://example.com'),", "metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL?.trim() || 'https://example.com'),"],

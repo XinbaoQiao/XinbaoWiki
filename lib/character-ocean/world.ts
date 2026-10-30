@@ -340,8 +340,8 @@ export class World {
     this.ripples.push({ x, y, bornMs: performance.now() });
     while (this.ripples.length > 4) this.ripples.shift();
     // Stronger local impulse so the school visibly parts under a click ripple.
-    // Big fish (sharks) are not impulsed here — they get a brief cruise boost
-    // when the expanding ring contacts their silhouette (see applyRippleBoosts).
+    // Big fish (sharks) are not velocity-impulsed here — ring contact raises cruise
+    // (applyRippleBoosts) and stepSharks steers them away from the epicenter.
     const r = 280;
     for (const f of this.fish) {
       if (!f.alive) continue;
@@ -681,6 +681,26 @@ export class World {
       sh.wander = clamp(sh.wander + (Math.random() - 0.5) * dt * 3.2, -1.1, 1.1);
       dx += Math.cos(sh.heading + sh.wander) * 0.45;
       dy += Math.sin(sh.heading + sh.wander) * 0.45;
+
+      // Click/leave ripples: keep the sprint boost, but steer AWAY from the epicenter
+      // (surge out of the ring, never dive into it). Small fish use splash() instead.
+      {
+        const now = performance.now();
+        for (const ripple of this.ripples) {
+          const age = (now - ripple.bornMs) / 1000;
+          if (age < 0 || age * 1000 > RIPPLE_DURATION_MS) continue;
+          const front = Math.max(24, RIPPLE_WAVE_SPEED * age);
+          const rx = hx - ripple.x;
+          const ry = hy - ripple.y;
+          const d = Math.hypot(rx, ry) || 1e-3;
+          const reach = Math.max(front * 1.2, L * 0.85);
+          if (d >= reach) continue;
+          const falloff = 1 - d / reach;
+          const urgency = falloff * falloff * (1.15 + 1.55 * sh.rippleBoost);
+          dx += (rx / d) * urgency * 2.4;
+          dy += (ry / d) * urgency * 2.4;
+        }
+      }
 
       // Periphery patrol ring — larger radius keeps bodies in the margins.
       const rx = (hx - cxW) / (W / minSide);
