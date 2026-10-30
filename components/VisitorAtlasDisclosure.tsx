@@ -238,6 +238,10 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open, detailsRe
   const [password, setOwnerPassword] = useState('');
   const ownerDialogRef = useRef<HTMLDialogElement>(null);
   const ownerRequestRef = useRef<AbortController | null>(null);
+  const payloadRef = useRef(payload);
+  const statusRef = useRef(status);
+  payloadRef.current = payload;
+  statusRef.current = status;
   const labels = copy[language];
   const apiPath = withBasePath(SITE_ACTIVITY_API_PATH);
   const preferencePath = withBasePath('/api/site-activity/preference/');
@@ -371,7 +375,26 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open, detailsRe
     // (or a late idle after first input / name-only priority). Collapsed summary
     // stays light until then.
     if (open) {
-      run();
+      // Warm from name-only / idle: keep summary visible; refresh quietly in background.
+      const warmStatus = statusRef.current;
+      const warm =
+        payloadRef.current !== null &&
+        (warmStatus === 'ready' || warmStatus === 'empty' || warmStatus === 'unavailable');
+      if (!warm) {
+        run();
+      } else {
+        void fetchSiteActivity(apiPath, controller.signal)
+          .then((nextPayload) => {
+            setPayload(nextPayload);
+            if (!nextPayload.enabled) setStatus('unavailable');
+            else if (nextPayload.uniqueBrowsersEstimate === null || nextPayload.cells.length === 0) setStatus('empty');
+            else setStatus('ready');
+          })
+          .catch((error: unknown) => {
+            if (error instanceof DOMException && error.name === 'AbortError') return;
+            setStatus((prev) => (prev === 'ready' || prev === 'empty' || prev === 'unavailable' ? prev : 'error'));
+          });
+      }
       return () => {
         controller.abort();
       };
@@ -411,10 +434,10 @@ export function VisitorAtlasDisclosure({ language, onOpenChange, open, detailsRe
     if (priorityPrefetch) {
       armed = true;
       detachArm();
-      scheduleDeferred(400, 200);
+      // Name-only already means the user interacted — warm immediately (no idle gap).
+      run();
       return () => {
-        // Cancel only the idle timer — let an in-flight warm fetch finish so
-        // restoring from name-only keeps a ready Site Activity summary.
+        // Do not abort an in-flight warm fetch — restoring from name-only should stay ready.
         clearPending();
       };
     }

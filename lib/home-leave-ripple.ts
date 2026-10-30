@@ -161,7 +161,8 @@ export function startHomeLeaveRipple(canvas: HTMLCanvasElement): () => void {
     window.cancelAnimationFrame(raf);
     window.removeEventListener("resize", onResize);
     try {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // clearRect follows the current setTransform (CSS px), not device pixels.
+      ctx.clearRect(0, 0, window.innerWidth + 8, window.innerHeight + 8);
     } catch {
       /* ignore */
     }

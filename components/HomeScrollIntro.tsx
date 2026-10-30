@@ -243,7 +243,12 @@ export function HomeScrollIntro({ language, withBasePath }: Props) {
     window.addEventListener("pagehide", abortLeave);
     return () => {
       window.removeEventListener("pagehide", abortLeave);
-      window.clearTimeout(leaveTimerRef.current);
+      // Soft leave in flight: keep the Soft_NAV go() timer so unmount cannot
+      // cancel navigation mid-64ms paint beat. pagehide still aborts hard unloads.
+      if (!navigatingRef.current) {
+        window.clearTimeout(leaveTimerRef.current);
+        leaveTimerRef.current = 0;
+      }
       markLeavingChrome(false);
     };
   }, []);

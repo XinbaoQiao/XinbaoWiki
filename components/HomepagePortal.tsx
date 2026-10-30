@@ -502,6 +502,8 @@ export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf
     let timeoutHandle: number | null = null;
     const warm = () => {
       preloadPortalDisclosureChunks();
+      // After first paint idle: keep Latest Updates ready so restore/open is snappy.
+      setAcceptanceWarm(true);
     };
     if (typeof window.requestIdleCallback === 'function') {
       idleHandle = window.requestIdleCallback(warm, { timeout: 1800 });

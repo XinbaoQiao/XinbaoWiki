@@ -2959,16 +2959,48 @@ body:has(.wiki-portal-name-only) .wiki-home-scroll-intro {
   animation: wiki-home-scroll-pulse 2.4s steps(4, end) infinite;
 }
 
+/* Hover: quiet ink/brightness + chevron nudge - never a button frame. */
 .wiki-home-scroll-intro-link:hover,
-.wiki-home-scroll-intro-link:focus-visible,
 .wiki-home-scroll-intro-link.wiki-link-page:hover,
-.wiki-home-scroll-intro-link.wiki-link-page:focus-visible,
-.wiki-home-scroll-intro-link.wiki-link-page:visited:hover,
-.wiki-home-scroll-intro-link.wiki-link-page:visited:focus-visible {
+.wiki-home-scroll-intro-link.wiki-link-page:visited:hover {
   color: var(--site-theme-action-ink);
   outline: none;
   outline-offset: 0;
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--site-theme-accent) 35%, transparent);
+  box-shadow: none;
+  filter: brightness(1.08);
+  animation-play-state: paused;
+}
+
+.wiki-home-scroll-intro-link:hover .wiki-home-scroll-intro-chevron,
+.wiki-home-scroll-intro-link.wiki-link-page:hover .wiki-home-scroll-intro-chevron {
+  opacity: 1;
+  /* Drop the running keyframes so translateY actually sticks. */
+  animation: none;
+  transform: translateY(3px);
+}
+
+.wiki-home-scroll-intro-link:hover .wiki-home-scroll-intro-label,
+.wiki-home-scroll-intro-link.wiki-link-page:hover .wiki-home-scroll-intro-label {
+  opacity: 1;
+  animation: none;
+}
+
+/* Pointer click: no sticky ring (matches global a:focus:not(:focus-visible)). */
+.wiki-home-scroll-intro-link:focus:not(:focus-visible),
+.wiki-home-scroll-intro-link.wiki-link-page:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+  filter: none;
+}
+
+/* Keyboard only: accessible outline, still no box-shadow frame. */
+.wiki-home-scroll-intro-link:focus-visible,
+.wiki-home-scroll-intro-link.wiki-link-page:focus-visible,
+.wiki-home-scroll-intro-link.wiki-link-page:visited:focus-visible {
+  color: var(--site-theme-action-ink);
+  outline: 2px solid var(--site-theme-action-ink);
+  outline-offset: 3px;
+  box-shadow: none;
   animation-play-state: paused;
 }
 
