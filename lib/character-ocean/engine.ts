@@ -603,7 +603,10 @@ export class CharacterOceanEngine {
       const fx = col * cw + cw * 0.5;
       const fy = row * ch + ch * 0.5 + 1;
       // School fish stay quieter under copy, but never vanish -- body letters must read.
-      const textFade = Math.max(this.fadeAt(fx, fy), 0.52);
+      // Remap fadeAt so open water stays full, text cores sit near the ~0.5 floor,
+      // and the pad ring still changes opacity (raw Math.max flattened the gradient).
+      const rawFade = this.fadeAt(fx, fy);
+      const textFade = Math.max(0.5, 0.38 + rawFade * 0.62);
       const rimFade = Math.max(this.edgeFade(fx, fy), 0.4);
       const vis = Math.min(1, alpha * textFade * rimFade);
       const prevFont = ctx.font;
@@ -776,10 +779,11 @@ export class CharacterOceanEngine {
     const now = performance.now();
     if (now - this.contentRectsAt < 120) return;
     this.contentRectsAt = now;
-    // Real homepage / article text chrome — keep vicinity quiet.
+    // Real homepage / article *text* chrome — keep vicinity quiet.
+    // Do NOT include transparent layout shells (`.wiki-portal`, cube stage,
+    // disclosures wrapper, `main`, hero slab): they cover open water under the
+    // portal and flatten alpha so swimming into the name shows no extra fade.
     const sels = [
-      '.wiki-portal',
-      '.wiki-portal-hero',
       '.wiki-portal-masthead',
       '.wiki-portal-brand',
       '.wiki-portal-name',
@@ -788,13 +792,10 @@ export class CharacterOceanEngine {
       '.wiki-search-portal',
       '.wiki-portal-editions',
       '.wiki-portal-edition',
-      '.wiki-portal-disclosures',
       '.wiki-portal-news',
       '.wiki-portal-timeline',
       '.wiki-portal-updates-window',
       '.wiki-portal-directory',
-      '.wiki-portal-cube-stage',
-      '.wiki-portal-block',
       '.wiki-portal-group',
       '.wiki-portal-group-label',
       '.wiki-home-scroll-intro',
@@ -810,8 +811,6 @@ export class CharacterOceanEngine {
       '.wiki-body h3',
       '.wiki-body p',
       '.wiki-body li',
-      // Do not include bare `main` — on the homepage it wraps the full portal
-      // and would ghost the entire school to ~18% alpha.
       '[data-ocean-fade]',
     ];
     const out: { l: number; t: number; r: number; b: number }[] = [];
@@ -823,11 +822,17 @@ export class CharacterOceanEngine {
         if (!el) continue;
         const style = getComputedStyle(el);
         if (style.visibility === 'hidden' || style.display === 'none' || Number(style.opacity) < 0.05) continue;
+        // name-only / warm-cache collapse uses content-visibility without always
+        // flipping display — those boxes must not keep ghosting the school.
+        if ((style as CSSStyleDeclaration & { contentVisibility?: string }).contentVisibility === 'hidden') continue;
         const r = el.getBoundingClientRect();
         if (r.width < 6 || r.height < 6) continue;
         // Skip fully off-screen
         if (r.bottom < -40 || r.top > window.innerHeight + 40) continue;
         if (r.right < -40 || r.left > window.innerWidth + 40) continue;
+        // Ignore huge layout leftovers that still report on-screen tops while the
+        // bulk of the box sits far below the fold (collapsed portal chrome).
+        if (r.height > window.innerHeight * 0.85 && r.bottom > window.innerHeight + 120) continue;
         const key = `${r.left | 0},${r.top | 0},${r.right | 0},${r.bottom | 0}`;
         if (seen.has(key)) continue;
         seen.add(key);
@@ -861,10 +866,10 @@ export class CharacterOceanEngine {
     const px = x + cr.left;
     const py = y + cr.top;
     let fade = 1;
-    // Soft quiet halo around text/UI — a touch quieter, still faintly visible.
-    const pad = 110;
-    const insideAlpha = 0.18;
-    const rimAlpha = 0.32;
+    // Soft quiet halo around real text/UI only (layout shells excluded above).
+    const pad = 96;
+    const insideAlpha = 0.16;
+    const rimAlpha = 0.42;
     for (let i = 0; i < rects.length; i++) {
       const box = rects[i]!;
       const l = box.l - pad;
