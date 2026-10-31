@@ -23,20 +23,34 @@ type Props = {
   withBasePath: (pathname: string) => string;
 };
 
-/** Accumulated downward intent needed before navigating to intro. */
+/** Accumulated downward intent needed before navigating to intro (desktop wheel). */
 const WHEEL_THRESHOLD = 260;
+/** Touch path uses a lower bar so a normal phone swipe can finish. */
+const TOUCH_PROGRESS_THRESHOLD = 132;
 /** Ignore trackpad/wheel jitter below this (px after deltaMode scale). */
 const WHEEL_MIN_DELTA = 10;
 /** Cap per wheel event so one flick cannot finish the gesture alone. */
 const WHEEL_MAX_STEP = 52;
-/** Touch swipe distance (px up) that counts as a strong leave intent. */
+/** Desktop-ish touch: long swipe still required; mobile uses the softer path. */
 const TOUCH_THRESHOLD = 110;
+/** Mobile / coarse pointer: shorter swipe commits more readily. */
+const TOUCH_THRESHOLD_MOBILE = 48;
+/** Finger must move this far up before touch progress starts (desktop touchpads). */
+const TOUCH_ARM_PX = 20;
+/** Mobile: arm sooner — small swipes still count. */
+const TOUCH_ARM_PX_MOBILE = 8;
 /** Consecutive qualifying downward events at bottom before progress starts. */
 const DOWN_STREAK_NEEDED = 2;
 /** After upward scroll or leaving bottom, ignore downs briefly. */
 const COOLDOWN_MS = 280;
+/** Shorter cooldown on phones so a second swipe is not swallowed. */
+const COOLDOWN_MS_MOBILE = 120;
 /** Page must be within this many px of the bottom before intro can arm. */
 const BOTTOM_SLACK_PX = 16;
+/** Mobile address-bar / rubber-band slack for "at bottom". */
+const BOTTOM_SLACK_PX_MOBILE = 36;
+/** Show the scroll hint this far from bottom on touch UIs (discoverability). */
+const HINT_NEAR_BOTTOM_PX_MOBILE = 160;
 /** Soft leave: one paint beat so leave chrome/ripple can mount — never wait for ripple end. */
 const SOFT_NAV_PAINT_MS = 64;
 const BODY_LEAVE_CLASS = 'is-home-leaving-intro';
@@ -44,6 +58,15 @@ const PORTAL_LEAVE_CLASS = 'is-leaving-to-intro';
 
 function prefersReducedMotion() {
   return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+/** Phones / coarse pointers / narrow viewports — softer swipe + clearer cue. */
+function prefersTouchScrollUi() {
+  if (typeof window === 'undefined') return false;
+  return (
+    window.matchMedia('(hover: none), (pointer: coarse)').matches ||
+    window.matchMedia('(max-width: 720px)').matches
+  );
 }
 
 function markLeavingChrome(active: boolean) {
@@ -101,11 +124,15 @@ function pageCanScroll() {
   return pageScrollMetrics().maxScroll > 4;
 }
 
+function bottomSlackPx() {
+  return prefersTouchScrollUi() ? BOTTOM_SLACK_PX_MOBILE : BOTTOM_SLACK_PX;
+}
+
 /** True when the document is at (or effectively at) the bottom. */
 function isAtPageBottom() {
   const { maxScroll, scrollTop } = pageScrollMetrics();
   if (maxScroll <= 4) return true;
-  return scrollTop >= maxScroll - BOTTOM_SLACK_PX;
+  return scrollTop >= maxScroll - bottomSlackPx();
 }
 
 /**
@@ -117,7 +144,7 @@ function shouldDeferIntroForOpenPortal() {
   if (!hasOpenPortalSection()) return false;
   const { maxScroll, scrollTop } = pageScrollMetrics();
   // Still room to scroll the page → keep reading expanded content.
-  if (maxScroll > 4 && scrollTop < maxScroll - BOTTOM_SLACK_PX) return true;
+  if (maxScroll > 4 && scrollTop < maxScroll - bottomSlackPx()) return true;
   // Already at document bottom: allow leave even if a tall open section's
   // bounding box still extends past the viewport (that used to soft-lock intro).
   return false;
@@ -135,10 +162,15 @@ function shouldBlockIntroGesture() {
  * Fixed hint sits on the viewport bottom. When page content is taller than the
  * viewport, that spot overlays mid-content — hide until the user reaches the
  * very bottom (same slack as the intro gesture gate).
+ * Touch UIs reveal earlier (near-bottom) so swipe-into-intro is discoverable.
  */
 function shouldShowScrollHint() {
   if (!pageCanScroll()) return true;
-  return isAtPageBottom();
+  if (!prefersTouchScrollUi()) return isAtPageBottom();
+  const { maxScroll, scrollTop } = pageScrollMetrics();
+  // Short mobile layouts: keep the cue visible so users know swipe-up exists.
+  if (maxScroll < 96) return true;
+  return scrollTop >= maxScroll - HINT_NEAR_BOTTOM_PX_MOBILE;
 }
 
 export function HomeScrollIntro({ language, withBasePath }: Props) {
@@ -186,23 +218,29 @@ export function HomeScrollIntro({ language, withBasePath }: Props) {
     [commitNavigate]
   );
 
+  const progressThreshold = useCallback(() => {
+    return prefersTouchScrollUi() ? TOUCH_PROGRESS_THRESHOLD : WHEEL_THRESHOLD;
+  }, []);
+
   const addProgress = useCallback(
     (amount: number) => {
       if (navigatingRef.current || amount <= 0) return;
-      const next = Math.min(WHEEL_THRESHOLD, progressRef.current + amount);
+      const threshold = progressThreshold();
+      const next = Math.min(threshold, progressRef.current + amount);
       progressRef.current = next;
-      setProgress(next / WHEEL_THRESHOLD);
-      if (next >= WHEEL_THRESHOLD) commitNavigate();
+      setProgress(next / threshold);
+      if (next >= threshold) commitNavigate();
     },
-    [commitNavigate]
+    [commitNavigate, progressThreshold]
   );
 
   const decayProgress = useCallback(() => {
     if (navigatingRef.current) return;
     // Moderate decay: clears accidental nudges, keeps a sustained bottom gesture.
+    const threshold = progressThreshold();
     progressRef.current = Math.max(0, progressRef.current * 0.8 - 5);
-    setProgress(progressRef.current / WHEEL_THRESHOLD);
-  }, []);
+    setProgress(progressRef.current / threshold);
+  }, [progressThreshold]);
 
   useEffect(() => {
     let idleHandle: number | null = null;
@@ -258,17 +296,23 @@ export function HomeScrollIntro({ language, withBasePath }: Props) {
     let downStreak = 0;
     let cooldownUntil = 0;
     let touchArmed = false;
+    /** Sticky: once a swipe begins at bottom, rubber-band jitter must not cancel it. */
+    let touchGestureFromBottom = false;
+    let touchLastY: number | null = null;
 
     const resetProgress = () => {
       downStreak = 0;
       touchArmed = false;
+      touchGestureFromBottom = false;
+      touchLastY = null;
       if (progressRef.current === 0) return;
       progressRef.current = 0;
       setProgress(0);
     };
 
     const armCooldown = () => {
-      cooldownUntil = performance.now() + COOLDOWN_MS;
+      const cool = prefersTouchScrollUi() ? COOLDOWN_MS_MOBILE : COOLDOWN_MS;
+      cooldownUntil = performance.now() + cool;
       downStreak = 0;
     };
 
@@ -328,45 +372,73 @@ export function HomeScrollIntro({ language, withBasePath }: Props) {
       if (target?.closest('.wiki-portal-name-button')) {
         touchStartY.current = null;
         touchArmed = false;
+        touchGestureFromBottom = false;
+        touchLastY = null;
         return;
       }
       touchStartY.current = event.touches[0].clientY;
+      touchLastY = event.touches[0].clientY;
       touchArmed = false;
+      touchGestureFromBottom = !shouldBlockIntroGesture();
     };
 
     const onTouchMove = (event: TouchEvent) => {
       if (navigatingRef.current || touchStartY.current == null || event.touches.length !== 1) return;
       if (isNestedScrollableTarget(event.target, 1)) return;
-      if (shouldBlockIntroGesture()) {
-        resetProgress();
-        return;
+      // Rubber-band can briefly leave "bottom"; keep a gesture that started there.
+      if (!touchGestureFromBottom) {
+        if (shouldBlockIntroGesture()) {
+          resetProgress();
+          return;
+        }
+        touchGestureFromBottom = true;
       }
       if (performance.now() < cooldownUntil) return;
       const currentY = event.touches[0].clientY;
       const swipeUp = touchStartY.current - currentY;
+      const mobile = prefersTouchScrollUi();
+      const armPx = mobile ? TOUCH_ARM_PX_MOBILE : TOUCH_ARM_PX;
       // Ignore small finger jitter; only arm after a deliberate upward drag.
-      if (swipeUp < 20) return;
+      if (swipeUp < armPx) {
+        touchLastY = currentY;
+        return;
+      }
       touchArmed = true;
-      addProgress(Math.min(36, (swipeUp - 20) * 0.28));
+      const lastY = touchLastY == null ? touchStartY.current : touchLastY;
+      const deltaUp = Math.max(0, lastY - currentY);
+      touchLastY = currentY;
+      if (deltaUp <= 0) return;
+      // Mobile: count nearly full finger travel; desktop touch stays conservative.
+      const scale = mobile ? 1.15 : 0.28;
+      const cap = mobile ? 56 : 36;
+      addProgress(Math.min(cap, deltaUp * scale));
       window.clearTimeout(decayTimer);
-      decayTimer = window.setTimeout(decayProgress, 300);
+      decayTimer = window.setTimeout(decayProgress, mobile ? 420 : 300);
     };
 
     const onTouchEnd = (event: TouchEvent) => {
       if (touchStartY.current == null) return;
       const endY = event.changedTouches[0]?.clientY;
       const startY = touchStartY.current;
+      const fromBottom = touchGestureFromBottom;
       touchStartY.current = null;
+      touchLastY = null;
+      touchGestureFromBottom = false;
       if (endY == null || navigatingRef.current) return;
-      if (shouldBlockIntroGesture()) {
+      if (!fromBottom && shouldBlockIntroGesture()) {
         resetProgress();
         return;
       }
       const swipeUp = startY - endY;
-      // Never dump the full threshold on touchend — require a long swipe AND prior arming.
-      if (swipeUp >= TOUCH_THRESHOLD && touchArmed && progressRef.current >= WHEEL_THRESHOLD * 0.3) {
-        addProgress(WHEEL_THRESHOLD);
-      } else if (swipeUp < 36) {
+      const mobile = prefersTouchScrollUi();
+      const threshold = mobile ? TOUCH_THRESHOLD_MOBILE : TOUCH_THRESHOLD;
+      const cancelPx = mobile ? 22 : 36;
+      // Mobile: a clear upward flick at bottom finishes even if move events were sparse.
+      if (swipeUp >= threshold && touchArmed && (mobile || progressRef.current >= WHEEL_THRESHOLD * 0.3)) {
+        addProgress(progressThreshold());
+      } else if (mobile && swipeUp >= threshold * 1.25 && fromBottom) {
+        addProgress(progressThreshold());
+      } else if (swipeUp < cancelPx) {
         resetProgress();
         armCooldown();
       }
@@ -384,13 +456,28 @@ export function HomeScrollIntro({ language, withBasePath }: Props) {
       window.removeEventListener('touchend', onTouchEnd);
       window.clearTimeout(decayTimer);
     };
-  }, [addProgress, decayProgress]);
+  }, [addProgress, decayProgress, progressThreshold]);
 
   const [mounted, setMounted] = useState(false);
   const [hintVisible, setHintVisible] = useState(true);
+  const [touchUi, setTouchUi] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mqCoarse = window.matchMedia('(hover: none), (pointer: coarse)');
+    const mqNarrow = window.matchMedia('(max-width: 720px)');
+    const sync = () => setTouchUi(mqCoarse.matches || mqNarrow.matches);
+    sync();
+    mqCoarse.addEventListener('change', sync);
+    mqNarrow.addEventListener('change', sync);
+    return () => {
+      mqCoarse.removeEventListener('change', sync);
+      mqNarrow.removeEventListener('change', sync);
+    };
   }, []);
 
   useEffect(() => {
@@ -430,12 +517,14 @@ export function HomeScrollIntro({ language, withBasePath }: Props) {
         'wiki-home-scroll-intro',
         leaving ? 'is-leaving' : '',
         progress > 0.08 ? 'is-armed' : '',
-        !hintVisible && !leaving ? 'is-awaiting-bottom' : ''
+        !hintVisible && !leaving ? 'is-awaiting-bottom' : '',
+        touchUi ? 'is-touch-ui' : ''
       ]
         .filter(Boolean)
         .join(' ')}
       data-progress={progress.toFixed(2)}
       data-hint-visible={hintVisible ? '1' : '0'}
+      data-touch-ui={touchUi ? '1' : '0'}
       aria-hidden={!hintVisible && !leaving ? true : undefined}
       style={{ ['--home-scroll-progress' as string]: String(progress) }}
     >
@@ -464,7 +553,9 @@ export function HomeScrollIntro({ language, withBasePath }: Props) {
             />
           </svg>
         </span>
-        <span className="wiki-home-scroll-intro-label">{labels.affordance}</span>
+        <span className="wiki-home-scroll-intro-label">
+          {touchUi ? labels.touchAffordance : labels.affordance}
+        </span>
       </WikiLink>
       <span aria-live="polite" className="wiki-home-scroll-intro-status">
         {leaving ? labels.progress : ''}

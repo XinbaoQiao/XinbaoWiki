@@ -24,11 +24,15 @@ export const HOME_SCROLL_INTRO_PATH = HOME_SCROLL_INTRO_BY_LANG.en.path;
 export const homeScrollIntroLabels = {
   en: {
     affordance: 'Scroll for introduction',
+    /** Narrow / touch UIs: match the finger gesture users expect. */
+    touchAffordance: 'Swipe up for introduction',
     action: 'Open English introduction',
     progress: 'Entering introduction'
   },
   zh: {
     affordance: '下滑进入简介',
+    /** Narrow / touch UIs: 上滑 matches the finger swipe into intro. */
+    touchAffordance: '上滑进入简介',
     action: '打开中文简介',
     progress: '正在进入简介'
   }

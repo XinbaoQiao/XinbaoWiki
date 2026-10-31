@@ -3051,6 +3051,102 @@ body:has(.wiki-portal-name-only) .wiki-home-scroll-intro {
   font-smooth: never;
 }
 
+/* Mobile / coarse pointer: clearer scroll-into-intro cue (desktop stays quieter). */
+@media (hover: none), (pointer: coarse) {
+  .wiki-home-scroll-intro,
+  .wiki-home-scroll-intro.is-touch-ui {
+    opacity: 0.96;
+    bottom: max(24px, calc(18px + env(safe-area-inset-bottom, 0px))) !important;
+    max-width: min(340px, calc(100vw - 20px));
+    gap: 8px;
+  }
+
+  /* Still discoverable while scrolling toward the bottom — not fully invisible. */
+  .wiki-home-scroll-intro.is-awaiting-bottom {
+    opacity: 0.42;
+    transform: translate3d(-50%, 6px, 0);
+    pointer-events: none;
+  }
+
+  .wiki-home-scroll-intro.is-awaiting-bottom .wiki-home-scroll-intro-link {
+    pointer-events: none;
+  }
+
+  .wiki-home-scroll-intro-link,
+  .wiki-home-scroll-intro-link.wiki-link-page,
+  .wiki-home-scroll-intro-link.wiki-link-page:link,
+  .wiki-home-scroll-intro-link.wiki-link-page:visited {
+    font-size: 13px;
+    /* Keep the cue obvious, but avoid a fat hit-box covering Browse/News. */
+    padding: 8px 10px;
+    gap: 8px;
+    letter-spacing: 0.06em;
+    color: color-mix(in srgb, var(--site-theme-accent) 72%, var(--site-theme-action-ink));
+    animation: wiki-home-scroll-pulse 1.7s steps(4, end) infinite;
+  }
+
+  .wiki-home-scroll-intro-chevron,
+  .wiki-home-scroll-intro-chevron-svg {
+    width: 36px;
+    height: 26px;
+  }
+
+  .wiki-home-scroll-intro-chevron {
+    opacity: 1;
+    animation: wiki-home-scroll-chevron 1.15s steps(4, end) infinite;
+  }
+
+  .wiki-home-scroll-intro-label {
+    text-shadow:
+      1px 0 0 color-mix(in srgb, currentColor 42%, transparent),
+      0 1px 0 color-mix(in srgb, currentColor 34%, transparent);
+    animation-duration: 1.7s;
+  }
+
+  .wiki-home-scroll-intro.is-armed {
+    opacity: 1;
+  }
+
+  .wiki-home-scroll-intro.is-armed .wiki-home-scroll-intro-chevron {
+    animation-duration: 0.9s;
+  }
+}
+
+@media (max-width: 720px) {
+  .wiki-home-scroll-intro {
+    opacity: 0.96;
+    bottom: max(24px, calc(18px + env(safe-area-inset-bottom, 0px))) !important;
+    max-width: min(340px, calc(100vw - 20px));
+  }
+
+  .wiki-home-scroll-intro.is-awaiting-bottom {
+    opacity: 0.42;
+    transform: translate3d(-50%, 6px, 0);
+  }
+
+  .wiki-home-scroll-intro-link,
+  .wiki-home-scroll-intro-link.wiki-link-page,
+  .wiki-home-scroll-intro-link.wiki-link-page:link,
+  .wiki-home-scroll-intro-link.wiki-link-page:visited {
+    font-size: 13px;
+    padding: 8px 10px;
+    gap: 8px;
+    color: color-mix(in srgb, var(--site-theme-accent) 72%, var(--site-theme-action-ink));
+    animation: wiki-home-scroll-pulse 1.7s steps(4, end) infinite;
+  }
+
+  .wiki-home-scroll-intro-chevron,
+  .wiki-home-scroll-intro-chevron-svg {
+    width: 36px;
+    height: 26px;
+  }
+
+  .wiki-home-scroll-intro-chevron {
+    opacity: 1;
+    animation-duration: 1.15s;
+  }
+}
+
 .wiki-portal.is-leaving-to-intro {
   transition:
     opacity 2.5s cubic-bezier(0.22, 0.61, 0.36, 1),
