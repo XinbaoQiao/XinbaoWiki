@@ -23,24 +23,34 @@ type Props = {
   withBasePath: (pathname: string) => string;
 };
 
-/** Accumulated downward intent needed before navigating to intro (desktop wheel). */
-const WHEEL_THRESHOLD = 260;
-/** Touch path uses a lower bar so a normal phone swipe can finish. */
-const TOUCH_PROGRESS_THRESHOLD = 132;
+/** Desktop wheel when Browse/News/Activity is open: deliberate overscroll at bottom. */
+const WHEEL_THRESHOLD_EXPANDED = 260;
+/** Desktop wheel when name-only / fully collapsed: short deliberate flick. */
+const WHEEL_THRESHOLD_COLLAPSED = 96;
+/** Touch progress when a portal section is expanded. */
+const TOUCH_PROGRESS_THRESHOLD_EXPANDED = 132;
+/** Touch progress when fully collapsed - one short swipe finishes. */
+const TOUCH_PROGRESS_THRESHOLD_COLLAPSED = 56;
 /** Ignore trackpad/wheel jitter below this (px after deltaMode scale). */
 const WHEEL_MIN_DELTA = 10;
 /** Cap per wheel event so one flick cannot finish the gesture alone. */
 const WHEEL_MAX_STEP = 52;
+/** Cap per wheel event on the collapsed landing (snappier). */
+const WHEEL_MAX_STEP_COLLAPSED = 64;
 /** Desktop-ish touch: long swipe still required; mobile uses the softer path. */
 const TOUCH_THRESHOLD = 110;
 /** Mobile / coarse pointer: shorter swipe commits more readily. */
 const TOUCH_THRESHOLD_MOBILE = 48;
+/** Collapsed mobile: even shorter end-of-swipe commit. */
+const TOUCH_THRESHOLD_MOBILE_COLLAPSED = 36;
 /** Finger must move this far up before touch progress starts (desktop touchpads). */
 const TOUCH_ARM_PX = 20;
-/** Mobile: arm sooner — small swipes still count. */
+/** Mobile: arm sooner - small swipes still count. */
 const TOUCH_ARM_PX_MOBILE = 8;
-/** Consecutive qualifying downward events at bottom before progress starts. */
-const DOWN_STREAK_NEEDED = 2;
+/** Expanded: consecutive qualifying downward events at bottom before progress starts. */
+const DOWN_STREAK_NEEDED_EXPANDED = 2;
+/** Collapsed: first clear downward tick already builds progress. */
+const DOWN_STREAK_NEEDED_COLLAPSED = 1;
 /** After upward scroll or leaving bottom, ignore downs briefly. */
 const COOLDOWN_MS = 280;
 /** Shorter cooldown on phones so a second swipe is not swallowed. */
@@ -49,9 +59,11 @@ const COOLDOWN_MS_MOBILE = 120;
 const BOTTOM_SLACK_PX = 16;
 /** Mobile address-bar / rubber-band slack for "at bottom". */
 const BOTTOM_SLACK_PX_MOBILE = 36;
+/** Name-only leftover height below this is treated as already at bottom. */
+const COLLAPSED_SCROLL_IGNORE_PX = 120;
 /** Show the scroll hint this far from bottom on touch UIs (discoverability). */
 const HINT_NEAR_BOTTOM_PX_MOBILE = 160;
-/** Soft leave: one paint beat so leave chrome/ripple can mount — never wait for ripple end. */
+/** Soft leave: one paint beat so leave chrome/ripple can mount - never wait for ripple end. */
 const SOFT_NAV_PAINT_MS = 64;
 const BODY_LEAVE_CLASS = 'is-home-leaving-intro';
 const PORTAL_LEAVE_CLASS = 'is-leaving-to-intro';
@@ -132,6 +144,8 @@ function bottomSlackPx() {
 function isAtPageBottom() {
   const { maxScroll, scrollTop } = pageScrollMetrics();
   if (maxScroll <= 4) return true;
+  // Name-only: tiny leftover chrome/ocean height should not force a phantom scroll.
+  if (!hasOpenPortalSection() && maxScroll <= COLLAPSED_SCROLL_IGNORE_PX) return true;
   return scrollTop >= maxScroll - bottomSlackPx();
 }
 
@@ -153,7 +167,8 @@ function shouldDeferIntroForOpenPortal() {
 /** Unified gate: do not arm intro until the user is clearly past portal content. */
 function shouldBlockIntroGesture() {
   if (shouldDeferIntroForOpenPortal()) return true;
-  // Collapsed but page still scrolls (tall chrome / ocean): require bottom first.
+  // Collapsed with material leftover height: require bottom first.
+  // Tiny name-only leftover (<= COLLAPSED_SCROLL_IGNORE_PX) is already "at bottom".
   if (!hasOpenPortalSection() && pageCanScroll() && !isAtPageBottom()) return true;
   return false;
 }
@@ -166,8 +181,10 @@ function shouldBlockIntroGesture() {
  */
 function shouldShowScrollHint() {
   if (!pageCanScroll()) return true;
-  if (!prefersTouchScrollUi()) return isAtPageBottom();
   const { maxScroll, scrollTop } = pageScrollMetrics();
+  // Name-only short leftover: always show the cue (no phantom scroll hunt).
+  if (!hasOpenPortalSection() && maxScroll <= COLLAPSED_SCROLL_IGNORE_PX) return true;
+  if (!prefersTouchScrollUi()) return isAtPageBottom();
   // Short mobile layouts: keep the cue visible so users know swipe-up exists.
   if (maxScroll < 96) return true;
   return scrollTop >= maxScroll - HINT_NEAR_BOTTOM_PX_MOBILE;
@@ -219,7 +236,13 @@ export function HomeScrollIntro({ language, withBasePath }: Props) {
   );
 
   const progressThreshold = useCallback(() => {
-    return prefersTouchScrollUi() ? TOUCH_PROGRESS_THRESHOLD : WHEEL_THRESHOLD;
+    const collapsed = !hasOpenPortalSection();
+    if (prefersTouchScrollUi()) {
+      return collapsed
+        ? TOUCH_PROGRESS_THRESHOLD_COLLAPSED
+        : TOUCH_PROGRESS_THRESHOLD_EXPANDED;
+    }
+    return collapsed ? WHEEL_THRESHOLD_COLLAPSED : WHEEL_THRESHOLD_EXPANDED;
   }, []);
 
   const addProgress = useCallback(
@@ -352,18 +375,25 @@ export function HomeScrollIntro({ language, withBasePath }: Props) {
       if (magnitude < WHEEL_MIN_DELTA) return;
 
       downStreak += 1;
-      // Require several clear downward ticks at the bottom before progress builds.
-      if (downStreak < DOWN_STREAK_NEEDED) {
+      const collapsed = !hasOpenPortalSection();
+      const streakNeeded = collapsed
+        ? DOWN_STREAK_NEEDED_COLLAPSED
+        : DOWN_STREAK_NEEDED_EXPANDED;
+      // Expanded: need a few clear ticks; collapsed: first clear tick builds progress.
+      if (downStreak < streakNeeded) {
         window.clearTimeout(decayTimer);
         decayTimer = window.setTimeout(decayProgress, 300);
         return;
       }
 
-      // Collapsed unscrollable landing: mild penalty only (still reachable).
-      const stepScale = pageCanScroll() ? 1 : 0.9;
-      addProgress(Math.min(WHEEL_MAX_STEP, magnitude * 0.65) * stepScale);
+      // Collapsed: count nearly full wheel travel so a short flick finishes.
+      // Expanded: keep the deliberate 0.65 scale + lower per-event cap.
+      const stepScale = collapsed ? 1 : pageCanScroll() ? 1 : 0.9;
+      const magScale = collapsed ? 0.9 : 0.65;
+      const stepCap = collapsed ? WHEEL_MAX_STEP_COLLAPSED : WHEEL_MAX_STEP;
+      addProgress(Math.min(stepCap, magnitude * magScale) * stepScale);
       window.clearTimeout(decayTimer);
-      decayTimer = window.setTimeout(decayProgress, 300);
+      decayTimer = window.setTimeout(decayProgress, collapsed ? 420 : 300);
     };
 
     const onTouchStart = (event: TouchEvent) => {
@@ -408,12 +438,13 @@ export function HomeScrollIntro({ language, withBasePath }: Props) {
       const deltaUp = Math.max(0, lastY - currentY);
       touchLastY = currentY;
       if (deltaUp <= 0) return;
-      // Mobile: count nearly full finger travel; desktop touch stays conservative.
-      const scale = mobile ? 1.15 : 0.28;
-      const cap = mobile ? 56 : 36;
+      // Mobile / collapsed: count nearly full finger travel; expanded desktop touch stays conservative.
+      const collapsed = !hasOpenPortalSection();
+      const scale = mobile ? 1.15 : collapsed ? 0.7 : 0.28;
+      const cap = mobile ? 56 : collapsed ? 48 : 36;
       addProgress(Math.min(cap, deltaUp * scale));
       window.clearTimeout(decayTimer);
-      decayTimer = window.setTimeout(decayProgress, mobile ? 420 : 300);
+      decayTimer = window.setTimeout(decayProgress, mobile || collapsed ? 420 : 300);
     };
 
     const onTouchEnd = (event: TouchEvent) => {
@@ -431,12 +462,24 @@ export function HomeScrollIntro({ language, withBasePath }: Props) {
       }
       const swipeUp = startY - endY;
       const mobile = prefersTouchScrollUi();
-      const threshold = mobile ? TOUCH_THRESHOLD_MOBILE : TOUCH_THRESHOLD;
-      const cancelPx = mobile ? 22 : 36;
-      // Mobile: a clear upward flick at bottom finishes even if move events were sparse.
-      if (swipeUp >= threshold && touchArmed && (mobile || progressRef.current >= WHEEL_THRESHOLD * 0.3)) {
+      const collapsed = !hasOpenPortalSection();
+      const threshold = mobile
+        ? collapsed
+          ? TOUCH_THRESHOLD_MOBILE_COLLAPSED
+          : TOUCH_THRESHOLD_MOBILE
+        : collapsed
+          ? Math.round(TOUCH_THRESHOLD * 0.55)
+          : TOUCH_THRESHOLD;
+      const cancelPx = mobile ? 22 : collapsed ? 28 : 36;
+      const wheelFloor = collapsed
+        ? WHEEL_THRESHOLD_COLLAPSED * 0.25
+        : WHEEL_THRESHOLD_EXPANDED * 0.3;
+      // Mobile / collapsed: a clear upward flick at bottom finishes even if move events were sparse.
+      if (swipeUp >= threshold && touchArmed && (mobile || collapsed || progressRef.current >= wheelFloor)) {
         addProgress(progressThreshold());
       } else if (mobile && swipeUp >= threshold * 1.25 && fromBottom) {
+        addProgress(progressThreshold());
+      } else if (collapsed && swipeUp >= threshold * 1.15 && fromBottom) {
         addProgress(progressThreshold());
       } else if (swipeUp < cancelPx) {
         resetProgress();
