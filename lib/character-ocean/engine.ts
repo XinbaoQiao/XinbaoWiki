@@ -23,6 +23,7 @@ import {
   zhStreamGlyph,
 } from '@/lib/character-ocean/alphabets';
 import { clamp, hash3 } from '@/lib/character-ocean/math';
+import { activeOceanRipple, OCEAN_RIPPLE_EVENT, type OceanRipple } from '@/lib/ocean-ripple';
 import {
   FLAG_BODY,
   FLAG_EDGE,
@@ -37,6 +38,7 @@ import {
 } from '@/lib/character-ocean/silhouette';
 import {
   CHARACTER_OCEAN_MOBILE_MAX_WIDTH,
+  DEFAULT_CHARACTER_OCEAN,
   type CharacterOceanLanguage,
 } from '@/lib/site-character-ocean';
 import {
@@ -94,7 +96,7 @@ export class CharacterOceanEngine {
   private running = false;
   private visible = true;
   private mobile = false;
-  private speed = 0.65;
+  private speed = 0.55;
   private themeObserver: MutationObserver | null = null;
   private io: IntersectionObserver | null = null;
   private ro: ResizeObserver | null = null;
@@ -102,6 +104,7 @@ export class CharacterOceanEngine {
   private onPointerMove: ((e: PointerEvent) => void) | null = null;
   private onPointerDown: ((e: PointerEvent) => void) | null = null;
   private onPointerLeave: (() => void) | null = null;
+  private onSharedRipple: ((event: Event) => void) | null = null;
   private motionMq: MediaQueryList | null = null;
   private onMotionChange: (() => void) | null = null;
   private onFontsLoaded = () => {
@@ -124,7 +127,7 @@ export class CharacterOceanEngine {
   private splashLife: { x: number; y: number; born: number }[] = [];
   /** Soft fade under portal / article text so glyphs don't fight readability. */
   private contentRects: { l: number; t: number; r: number; b: number }[] = [];
-  private contentRectsAt = 0;
+  private contentRectsAt = -Infinity;
 
   constructor(canvas: HTMLCanvasElement, opts: OceanEngineOptions) {
     const ctx = canvas.getContext('2d', { alpha: true });
@@ -139,7 +142,7 @@ export class CharacterOceanEngine {
     this.running = true;
     this.applyFieldOpacity();
     this.world.setAllowedKinds(this.opts.kinds ?? []);
-    this.world.setDensity(this.opts.density ?? 1);
+    this.world.setDensity(this.opts.density ?? DEFAULT_CHARACTER_OCEAN.density);
     this.detectMobile();
     this.resize();
     this.bind();
@@ -157,16 +160,16 @@ export class CharacterOceanEngine {
   }
 
   setOptions(partial: Partial<OceanEngineOptions>) {
-    const prevDens = this.opts.density ?? 1;
+    const prevDens = this.opts.density ?? DEFAULT_CHARACTER_OCEAN.density;
     this.opts = { ...this.opts, ...partial };
     this.applyThemeFilter();
     this.applyFieldOpacity();
     this.world.setAllowedKinds(this.opts.kinds ?? []);
-    this.world.setDensity(this.opts.density ?? 1);
+    this.world.setDensity(this.opts.density ?? DEFAULT_CHARACTER_OCEAN.density);
     this.sharkRasterDirty = true;
     const prevMobile = this.mobile;
     this.detectMobile();
-    const densChanged = Math.abs((this.opts.density ?? 1) - prevDens) >= 0.001;
+    const densChanged = Math.abs((this.opts.density ?? DEFAULT_CHARACTER_OCEAN.density) - prevDens) >= 0.001;
     // Skip canvas buffer rebuild when only style/opacity/language/kinds cosmetics changed.
     if (densChanged || prevMobile !== this.mobile) {
       this.resize();
@@ -179,7 +182,7 @@ export class CharacterOceanEngine {
       this.canvas.style.opacity = '1';
       return;
     }
-    const op = clamp(this.opts.opacity ?? 0.92, 0.2, 1);
+    const op = clamp(this.opts.opacity ?? DEFAULT_CHARACTER_OCEAN.opacity, 0.2, 1);
     this.canvas.style.opacity = String(op);
   }
 
@@ -189,7 +192,7 @@ export class CharacterOceanEngine {
     // mobile sizing on a large tablet/desktop touchscreen.
     this.mobile = w <= CHARACTER_OCEAN_MOBILE_MAX_WIDTH;
     this.world.setMobile(this.mobile);
-    this.speed = this.opts.reducedMotion ? 0 : this.mobile ? 0.55 : 0.65;
+    this.speed = this.opts.reducedMotion ? 0 : 0.55;
   }
 
   private bind() {
@@ -254,9 +257,21 @@ export class CharacterOceanEngine {
     window.addEventListener('pointerdown', this.onPointerDown, { passive: true });
     window.addEventListener('pointerup', this.onPointerLeave, { passive: true });
     window.addEventListener('pointercancel', this.onPointerLeave, { passive: true });
+    const syncRipple = (ripple: OceanRipple | null) => {
+      this.world.ripples = this.world.ripples.filter(r => !r.shared);
+      if (!ripple || this.opts.reducedMotion) return;
+      const rect = this.canvas.getBoundingClientRect();
+      this.world.addRipple({ x: window.innerWidth * ripple.x - rect.left, y: window.innerHeight * ripple.y - rect.top,
+        bornMs: ripple.bornMs, waveSpeed: ripple.waveSpeed, durationMs: ripple.durationMs, shared: true });
+    };
+    this.onSharedRipple = event => syncRipple((event as CustomEvent<OceanRipple | null>).detail);
+    window.addEventListener(OCEAN_RIPPLE_EVENT, this.onSharedRipple);
+    syncRipple(activeOceanRipple());
   }
 
   private unbind() {
+    if (this.onSharedRipple) window.removeEventListener(OCEAN_RIPPLE_EVENT, this.onSharedRipple);
+    this.onSharedRipple = null;
     this.ro?.disconnect();
     this.io?.disconnect();
     this.themeObserver?.disconnect();
@@ -310,7 +325,7 @@ export class CharacterOceanEngine {
     this.dpr = Math.min(window.devicePixelRatio || 1, 1.5);
 
     // Density pulls cell pitch: higher = finer grid (busier field), lower = chunkier glyphs.
-    const dens = clamp(this.opts.density ?? 1, 0.35, 2);
+    const dens = clamp(this.opts.density ?? DEFAULT_CHARACTER_OCEAN.density, 0.35, 2);
     if (this.mobile) {
       const targetCols = clamp(Math.round((w / 10) * (0.75 + dens * 0.45)), 36, 90);
       this.cw = clamp(w / targetCols, 5.5, 13);
@@ -565,7 +580,7 @@ export class CharacterOceanEngine {
         const level = 46 + shade * 160;
         const kind: SharkKind = KIND_BY_INDEX[this.sharkKindId[i]!] ?? 'classic';
         const [tr, tg, tb] = tintFor(kind);
-        ctx.globalAlpha = 0.7 * rimFade;
+        ctx.globalAlpha = 0.7 * rimFade * textFade;
         ctx.fillStyle = `rgb(${Math.round(level * tr)},${Math.round(level * tg)},${Math.min(255, Math.round(level * tb))})`;
         if (ctx.globalAlpha > 0.02) ctx.fillRect(col * cw + 1, row * ch + 1, cw - 1, ch - 1);
       } else if (wash && !edge && flag !== FLAG_EYE && (density > 0.28 || isFinLike)) {
@@ -635,11 +650,8 @@ export class CharacterOceanEngine {
       const parts = schoolFishParts(style, this.opts.language, f.vx, f.species * 131 + Math.floor(f.phase * 64));
       const fx = col * cw + cw * 0.5;
       const fy = row * ch + ch * 0.5 + 1;
-      // School fish stay quieter under copy, but never vanish -- body letters must read.
-      // Remap fadeAt so open water stays full, text cores sit near the ~0.5 floor,
-      // and the pad ring still changes opacity (raw Math.max flattened the gradient).
-      const rawFade = this.fadeAt(fx, fy);
-      const textFade = Math.max(0.5, 0.38 + rawFade * 0.62);
+      // Schools and shark glyphs share the same quiet text mask on every route.
+      const textFade = this.fadeAt(fx, fy);
       const rimFade = Math.max(this.edgeFade(fx, fy), 0.4);
       const vis = Math.min(1, alpha * textFade * rimFade);
       // Mid sardine: tips ~5-6px, body ~7-9px (readable letter/Hanzi; not the old 9-12 whale).
@@ -812,17 +824,15 @@ export class CharacterOceanEngine {
       '.wiki-portal-news',
       '.wiki-portal-timeline',
       '.wiki-portal-updates-window',
-      '.wiki-portal-directory',
       '.wiki-portal-group',
       '.wiki-portal-group-label',
       '.wiki-home-scroll-intro',
       '.wiki-home-scroll-intro-link',
       '.wiki-topbar',
       '.wiki-footer',
-      '.wiki-article-layout-text',
       '.wiki-article-contents',
       '.wiki-article-facts',
-      '.wiki-body',
+      'body :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,th,td,figcaption,summary,label,button,input,textarea,select)',
       '.wiki-body h1',
       '.wiki-body h2',
       '.wiki-body h3',
@@ -842,14 +852,12 @@ export class CharacterOceanEngine {
       // name-only / warm-cache collapse uses content-visibility without always
       // flipping display — those boxes must not keep ghosting the school.
       if ((style as CSSStyleDeclaration & { contentVisibility?: string }).contentVisibility === 'hidden') continue;
+      if (typeof el.checkVisibility === 'function' && !el.checkVisibility()) continue;
       const r = el.getBoundingClientRect();
       if (r.width < 6 || r.height < 6) continue;
       // Skip fully off-screen
       if (r.bottom < -40 || r.top > window.innerHeight + 40) continue;
       if (r.right < -40 || r.left > window.innerWidth + 40) continue;
-      // Ignore huge layout leftovers that still report on-screen tops while the
-      // bulk of the box sits far below the fold (collapsed portal chrome).
-      if (r.height > window.innerHeight * 0.85 && r.bottom > window.innerHeight + 120) continue;
       const key = `${r.left | 0},${r.top | 0},${r.right | 0},${r.bottom | 0}`;
       if (seen.has(key)) continue;
       seen.add(key);
@@ -896,9 +904,8 @@ export class CharacterOceanEngine {
     const py = y + this.canvasTop;
     let fade = 1;
     // Soft quiet halo around real text/UI only (layout shells excluded above).
-    const pad = 96;
-    const insideAlpha = 0.16;
-    const rimAlpha = 0.42;
+    const pad = 64;
+    const insideAlpha = 0.04;
     for (let i = 0; i < rects.length; i++) {
       const box = rects[i]!;
       const l = box.l - pad;
@@ -916,7 +923,7 @@ export class CharacterOceanEngine {
       const edge = Math.min(dx, dy) / pad;
       // Smoothstep so vicinity goes quiet before touching glyphs.
       const tEdge = edge * edge * (3 - 2 * edge);
-      fade = Math.min(fade, 1 - (1 - rimAlpha) * tEdge);
+      fade = Math.min(fade, 1 - (1 - insideAlpha) * tEdge);
     }
     return fade;
   }

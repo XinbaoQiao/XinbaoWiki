@@ -20,6 +20,16 @@ function loadTypeScript(relativePath) {
 }
 
 const { SharkSampler } = loadTypeScript('lib/character-ocean/silhouette.ts');
+const { DEFAULT_CHARACTER_OCEAN, parseCharacterOceanSettings } = loadTypeScript('lib/site-character-ocean.ts');
+assert.equal(parseCharacterOceanSettings(null).density, 0.7);
+assert.equal(parseCharacterOceanSettings(null).opacity, 0.65);
+const upgraded = parseCharacterOceanSettings(JSON.stringify({ style: 'hanzi', density: 1, opacity: 0.92 }));
+assert.equal(upgraded.style, 'hanzi');
+assert.equal(upgraded.density, DEFAULT_CHARACTER_OCEAN.density);
+assert.equal(upgraded.opacity, DEFAULT_CHARACTER_OCEAN.opacity);
+assert.equal(parseCharacterOceanSettings(JSON.stringify({ ...upgraded, density: 1, opacity: 0.92 })).opacity, 0.92, 'a later explicit old-value choice remains intact');
+assert.equal(parseCharacterOceanSettings(JSON.stringify({ style: 'ascii', density: 0.9, opacity: 0.8 })).density, 0.9, 'custom settings remain intact');
+assert.equal(parseCharacterOceanSettings(JSON.stringify({ style: 'off', density: 1, opacity: 0.92 })).style, 'off', 'saved opt-out remains off');
 const fixtures = JSON.parse(fs.readFileSync('tests/fixtures/character-ocean-silhouettes.json', 'utf8'));
 for (const expected of fixtures) {
   const nodes = new Float32Array(40);
@@ -89,10 +99,10 @@ try {
   };
   const text = { getBoundingClientRect: () => ({ left: 200, top: 200, right: 600, bottom: 400, width: 400, height: 200 }) };
   Object.assign(globalThis, {
-    window: { ...windowEvents, innerWidth: 1440, innerHeight: 1000, devicePixelRatio: 1, matchMedia: () => motion },
+    window: { ...windowEvents, dispatchEvent: event => windowEvents.emit(event.type, event), requestAnimationFrame: fn => globalThis.requestAnimationFrame(fn), cancelAnimationFrame: id => globalThis.cancelAnimationFrame(id), innerWidth: 1440, innerHeight: 1000, devicePixelRatio: 1, matchMedia: () => motion },
     document: { ...documentEvents, documentElement: root, fonts, hidden: false, querySelectorAll: () => [text] },
     performance: { now: () => now },
-    getComputedStyle: () => ({ visibility: 'visible', display: 'block', opacity: '1', contentVisibility: 'visible' }),
+    getComputedStyle: () => ({ visibility: 'visible', display: 'block', opacity: '1', contentVisibility: 'visible', getPropertyValue: () => '' }),
     requestAnimationFrame: fn => { const id = nextFrameId++; frames.set(id, fn); return id; },
     cancelAnimationFrame: id => frames.delete(id),
     ResizeObserver: class { constructor(fn) { this.fn = fn; resizeObservers.push(this); } observe() {} disconnect() { this.disconnected = true; } },
@@ -123,7 +133,9 @@ try {
   assert.equal(rasters, 1, 'a frame with no simulation or flicker change reuses the raster');
   assert.equal(paints, 2, 'raster reuse preserves the display-frame cadence');
   assert.equal(fontReads, 0, 'drawing does not repeatedly read native font state');
-  assert.equal(engine.fadeAt(200, 200), 0.16, 'cached canvas origin preserves text fading');
+  assert.equal(engine.fadeAt(200, 200), 0.04, 'text cores retain only four percent of fish ink');
+  assert.ok(Math.abs(engine.fadeAt(169.9, 220) - engine.fadeAt(170, 220)) < 0.0001, 'text halo meets its core continuously');
+  assert.equal(engine.fadeAt(1000, 600), 1, 'open water retains full ink');
   fonts.emit('loadingdone');
   advance(1);
   assert.ok(measurements > initialMeasurements, 'loaded fonts invalidate cached widths');
@@ -180,6 +192,56 @@ try {
   assert.ok(resizeObservers[0].disconnected && intersectionObservers[0].disconnected, 'observers are disposed');
   for (const source of [documentEvents, fonts, windowEvents, motion]) {
     assert.equal([...source.listeners.values()].reduce((sum, set) => sum + set.size, 0), 0, 'event listeners are removed');
+  }
+
+  const { World, RIPPLE_SPEED_CAP } = loadTypeScript('lib/character-ocean/world.ts');
+  const { SPECIES } = loadTypeScript('lib/character-ocean/species.ts');
+  const world = new World(); world.resize(1440, 1000, 10, 14);
+  const shark = world.sharks[0];
+  shark.kind = 'classic'; shark.length = 100; shark.heading = Math.PI; shark.speed = 34;
+  for (let i = 0; i < 20; i++) { shark.nodes[i * 2] = 1100; shark.nodes[i * 2 + 1] = 500; }
+  const fish = { ...world.fish[0], x: 1100, y: 500, vx: 0, vy: 20, alarm: 0, species: 0 };
+  world.sharks = [shark]; world.fish = [fish];
+  world.addRipple({ x: 720, y: 500, bornMs: now, waveSpeed: 158, durationMs: 2850 });
+  now += 2000;
+  world.applyRippleBoosts(0);
+  assert.equal(shark.rippleBoost, 0, 'no distant sprint before the visible wave arrives');
+  assert.equal(fish.alarm, 0, 'schools do not receive an early global kick');
+  now += 400;
+  world.applyRippleBoosts(0);
+  assert.equal(shark.rippleBoost, 1, 'scroll-wave contact accelerates large fish outside the old capped steering radius');
+  assert.equal(shark.speed, 34 * RIPPLE_SPEED_CAP, 'large fish have a bounded sprint');
+  assert.ok(fish.vx > 0 && Math.hypot(fish.vx, fish.vy) > 20, 'small fish flee outward and accelerate on wave contact');
+  const hitVelocity = [fish.vx, fish.vy];
+  world.applyRippleBoosts(0);
+  assert.deepEqual([fish.vx, fish.vy], hitVelocity, 'the same wave cannot kick again every frame');
+  for (let i = 0; i < 60; i++) world.stepSharks(1 / 60);
+  assert.ok(Math.cos(shark.heading) > 0, 'an inward-facing large fish turns away from the wave origin');
+  assert.ok(shark.speed <= 34 * RIPPLE_SPEED_CAP);
+  world.addRipple({ x: 720, y: 500, bornMs: now - 2400, waveSpeed: 158, durationMs: 2850 });
+  world.applyRippleBoosts(0);
+  assert.ok(Math.hypot(fish.vx, fish.vy) <= SPECIES[0].maxSpeed * 2.8 + 1e-8, 'overlapping waves cannot stack unbounded school speed');
+  now += 3000;
+  world.applyRippleBoosts(1);
+  assert.equal(world.ripples.length, 0, 'expired waves stop interacting');
+  assert.ok(shark.rippleBoost < 1, 'sprint energy coasts down after the wave');
+
+  const waveEngine = createCharacterOceanEngine(canvas, { style: 'ascii', language: 'en', reducedMotion: false });
+  const { startHomeLeaveRipple } = loadTypeScript('lib/home-leave-ripple.ts');
+  const disposeWave = startHomeLeaveRipple(canvas);
+  const shared = waveEngine.world.ripples.find(r => r.shared);
+  assert.ok(shared, 'the actual home leave painter broadcasts to the ocean engine');
+  assert.equal(shared.waveSpeed, 158); assert.equal(shared.durationMs, 2850);
+  assert.equal(shared.x, 690); assert.equal(shared.y, 460);
+  const nextPageEngine = createCharacterOceanEngine(canvas, { style: 'ascii', language: 'en', reducedMotion: false });
+  assert.equal(nextPageEngine.world.ripples[0]?.bornMs, shared.bornMs, 'a route-mounted engine resumes the same wave clock');
+  const reducedEngine = createCharacterOceanEngine(canvas, { style: 'ascii', language: 'en', reducedMotion: true });
+  assert.equal(reducedEngine.world.ripples.length, 0, 'reduced motion ignores animated waves');
+  disposeWave();
+  assert.ok(waveEngine.world.ripples.every(r => !r.shared), 'aborting the visual wave removes its simulation influence');
+  waveEngine.stop(); nextPageEngine.stop(); reducedEngine.stop();
+  for (const source of [documentEvents, fonts, windowEvents, motion]) {
+    assert.equal([...source.listeners.values()].reduce((sum, set) => sum + set.size, 0), 0, 'shared wave subscriptions are disposed');
   }
 } finally {
   for (const [key, descriptor] of savedGlobals) {

@@ -73,6 +73,8 @@ export function normalizeOceanSharkKinds(raw: unknown): OceanSharkKind[] {
 }
 
 export type CharacterOceanSettings = {
+  /** Marks persisted defaults so later explicit choices are not migrated again. */
+  defaultsVersion?: number;
   style: CharacterOceanStyle;
   /** Field richness: school count, shark cast size, and glyph cell pitch (0.35–2). */
   density: number;
@@ -98,9 +100,10 @@ export function characterOceanMobileMediaQuery(): string {
 
 export const CHARACTER_OCEAN_STORAGE_KEY = 'mywiki-character-ocean';
 export const DEFAULT_CHARACTER_OCEAN: CharacterOceanSettings = {
+  defaultsVersion: 2,
   style: 'ascii',
-  density: 1,
-  opacity: 0.92,
+  density: 0.7,
+  opacity: 0.65,
   kinds: [...DEFAULT_OCEAN_SHARK_KINDS],
 };
 
@@ -184,18 +187,22 @@ export function parseCharacterOceanSettings(raw: string | null): CharacterOceanS
       density?: number;
       opacity?: number;
       kinds?: unknown;
+      defaultsVersion?: number;
     };
     if (isCharacterOceanStyle(parsed.style)) {
+      const legacyDefaults = parsed.defaultsVersion === undefined && parsed.density === 1 && parsed.opacity === 0.92;
       return {
+        defaultsVersion: 2,
         style: normalizeCharacterOceanStyle(parsed.style),
-        density: clampOceanDensity(typeof parsed.density === 'number' ? parsed.density : DEFAULT_CHARACTER_OCEAN.density),
-        opacity: clampOceanOpacity(typeof parsed.opacity === 'number' ? parsed.opacity : DEFAULT_CHARACTER_OCEAN.opacity),
+        density: clampOceanDensity(!legacyDefaults && typeof parsed.density === 'number' ? parsed.density : DEFAULT_CHARACTER_OCEAN.density),
+        opacity: clampOceanOpacity(!legacyDefaults && typeof parsed.opacity === 'number' ? parsed.opacity : DEFAULT_CHARACTER_OCEAN.opacity),
         kinds: normalizeOceanSharkKinds(parsed.kinds),
       };
     }
   } catch {
     if (isCharacterOceanStyle(raw)) {
       return {
+        defaultsVersion: 2,
         style: normalizeCharacterOceanStyle(raw),
         density: DEFAULT_CHARACTER_OCEAN.density,
         opacity: DEFAULT_CHARACTER_OCEAN.opacity,

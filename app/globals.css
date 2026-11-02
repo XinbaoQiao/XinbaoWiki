@@ -2606,7 +2606,7 @@ body:has(.wiki-portal) .wiki-toc-return {
   pointer-events: none; /* ripples via window listeners 鈥?scroll/intro stay free */
   touch-action: manipulation;
   cursor: default;
-  opacity: var(--site-ocean-opacity, 0.92);
+  opacity: var(--site-ocean-opacity, 0.65);
 }
 
 @media (max-width: 720px) {

@@ -7,6 +7,7 @@ import {
 } from '@/lib/character-ocean/engine';
 import type { ActiveOceanStyle } from '@/lib/character-ocean/alphabets';
 import type { CharacterOceanLanguage, OceanSharkKind } from '@/lib/site-character-ocean';
+import { DEFAULT_CHARACTER_OCEAN } from '@/lib/site-character-ocean';
 
 type Props = {
   style: ActiveOceanStyle;
@@ -23,8 +24,8 @@ export function SiteCharacterOcean({
   style,
   language,
   wash = true,
-  density = 1,
-  opacity = 0.92,
+  density = DEFAULT_CHARACTER_OCEAN.density,
+  opacity = DEFAULT_CHARACTER_OCEAN.opacity,
   kinds,
   className,
 }: Props) {
