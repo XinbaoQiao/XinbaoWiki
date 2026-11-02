@@ -9,8 +9,8 @@ tags:
 timestamp: '2026-01-01T00:00:00+00:00'
 modified: '2026-10-21T06:35:00.176Z'
 content_hash: 'sha256:6b18c067304d5ea8aa03f1929cc34b16981835cf0d7567940e7260ec2f5e156f'
-reviewed_at: '2026-10-21T06:35:02.000Z'
-review_due: '2027-01-19'
+reviewed_at: '2026-11-01T00:00:00.000Z'
+review_due: '2027-01-30'
 name: 论文
 summary: 论文列表（模板示例）。
 occupation: 论文列表

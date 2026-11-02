@@ -9,8 +9,8 @@ tags:
 timestamp: '2026-01-01T00:00:00+00:00'
 modified: '2026-10-21T06:35:00.170Z'
 content_hash: 'sha256:0ef33165ba934fd6655e00f740e54dbc05b45ef21ef8a6e3af9f5e05ba167063'
-reviewed_at: '2026-10-21T06:35:02.000Z'
-review_due: '2027-01-19'
+reviewed_at: '2026-11-01T00:00:00.000Z'
+review_due: '2027-01-30'
 name: 研究经历
 summary: 研究经历（模板示例）。
 show_summary: false

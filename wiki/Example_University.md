@@ -9,8 +9,8 @@ tags:
 timestamp: '2026-01-01T00:00:00+00:00'
 modified: '2026-10-21T06:35:00.169Z'
 content_hash: 'sha256:b4ea8d76f05c4fe023c4622d3f1ba44492f485a18f91da399056ebef423354aa'
-reviewed_at: '2026-10-21T06:35:02.000Z'
-review_due: '2027-04-19'
+reviewed_at: '2026-11-01T00:00:00.000Z'
+review_due: '2027-04-30'
 name: Example University
 summary: Sample institution page.
 person:

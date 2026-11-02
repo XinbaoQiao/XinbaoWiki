@@ -10,8 +10,8 @@ tags:
 timestamp: '2026-01-01T00:00:00+00:00'
 modified: '2026-10-21T06:35:30.476Z'
 content_hash: 'sha256:aecd21e161f49cc90e4c5d6507fa453c861b36429b959437454b69274f6decbf'
-reviewed_at: '2026-10-21T06:35:32.000Z'
-review_due: '2027-01-19'
+reviewed_at: '2026-11-01T00:00:00.000Z'
+review_due: '2027-01-30'
 language: zh
 aliases:
   - 你的昵称
@@ -20,8 +20,8 @@ lifecycle:
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-21T06:35:32.000Z'
-  reviewDue: '2027-01-19'
+  reviewedAt: '2026-11-01T00:00:00.000Z'
+  reviewDue: '2027-01-30'
   pendingReview: false
   overdue: false
 retrieval:

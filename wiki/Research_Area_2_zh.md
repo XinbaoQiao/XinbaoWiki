@@ -9,8 +9,8 @@ tags:
 timestamp: '2026-01-01T00:00:00+00:00'
 modified: '2026-10-21T06:35:30.471Z'
 content_hash: 'sha256:d0dd9a7c663b75820da82a833d1d7119a92789cbacc28f8543fb16419e65b173'
-reviewed_at: '2026-10-21T06:35:32.000Z'
-review_due: '2027-04-19'
+reviewed_at: '2026-11-01T00:00:00.000Z'
+review_due: '2027-04-30'
 name: 研究方向二
 summary: 研究方向占位页。改成你自己的方向名，并写下你在研究的问题。
 image: /images/research-area-2.svg

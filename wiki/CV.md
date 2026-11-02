@@ -9,8 +9,8 @@ tags:
 timestamp: '2026-01-01T00:00:00+00:00'
 modified: '2026-10-21T06:35:00.154Z'
 content_hash: 'sha256:1e6a6ec5da3a4479bf39138fdfe550a5866dfe48a210319ed0c610d7457cb162'
-reviewed_at: '2026-10-21T06:35:02.000Z'
-review_due: '2027-01-19'
+reviewed_at: '2026-11-01T00:00:00.000Z'
+review_due: '2027-01-30'
 name: Curriculum Vitae
 summary: Academic CV summary (template sample).
 occupation: CV summary

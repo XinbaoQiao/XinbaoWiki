@@ -10,8 +10,8 @@ tags:
 timestamp: '2026-01-01T00:00:00+00:00'
 modified: '2026-10-21T06:35:30.476Z'
 content_hash: 'sha256:aecd21e161f49cc90e4c5d6507fa453c861b36429b959437454b69274f6decbf'
-reviewed_at: '2026-10-21T06:35:32.000Z'
-review_due: '2027-01-19'
+reviewed_at: '2026-11-01T00:00:00.000Z'
+review_due: '2027-01-30'
 name: 你的名字
 summary: 示例大学博士生，研究方向一与研究方向二。请替换为你自己的一句话简介。
 aliases:

@@ -22,6 +22,7 @@
     "new:wiki": "node scripts/new-wiki-page.mjs",
     "test:cube-geometry": "node scripts/run-with-node22.mjs playwright test tests/browser/cube-geometry.spec.mjs",
     "test:site-activity": "node scripts/run-with-node22.mjs playwright test tests/browser/site-activity.spec.mjs",
+    "test:character-ocean": "node scripts/run-with-node22.mjs node scripts/test-character-ocean.mjs",
     "typecheck": "node scripts/prepare-typecheck.mjs && tsc --noEmit",
     "check": "node scripts/run-with-node22.mjs npm run check:node22",
     "check:node22": "npm run typecheck && npm run lint:wiki && npm run lint:content && npm run lint:okf && npm run test:features",

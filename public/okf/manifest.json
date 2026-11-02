@@ -11,7 +11,7 @@
   "source": {
     "directory": "wiki",
     "files": 35,
-    "contentHash": "a2605a946729f80fed4a0002ffb58ebb964e45848d5ac7e4478c8ed602ccb853",
+    "contentHash": "345b0fe2fd5cd54ea4371f62995f2467ef5f55713644919a12537d771afe357f",
     "hashAlgorithm": "sha256"
   },
   "bundle": {
@@ -30,6 +30,6 @@
     "pages": "pages.json",
     "sources": "sources.json",
     "qualityReport": "quality-report.json",
-    "reviewAsOf": "2026-10-26"
+    "reviewAsOf": "2026-11-02"
   }
 }

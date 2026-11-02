@@ -9,8 +9,8 @@ tags:
 timestamp: '2026-01-01T00:00:00+00:00'
 modified: '2026-10-21T06:35:00.161Z'
 content_hash: 'sha256:e624d9df27ee184747804dab762ce4d64f3a1389627bb862ae39fd4f30a1cf86'
-reviewed_at: '2026-10-21T06:35:02.000Z'
-review_due: '2027-04-19'
+reviewed_at: '2026-11-01T00:00:00.000Z'
+review_due: '2027-04-30'
 language: en
 relations:
   - type: related
@@ -21,8 +21,8 @@ lifecycle:
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-10-21T06:35:02.000Z'
-  reviewDue: '2027-04-19'
+  reviewedAt: '2026-11-01T00:00:00.000Z'
+  reviewDue: '2027-04-30'
   pendingReview: false
   overdue: false
 retrieval:

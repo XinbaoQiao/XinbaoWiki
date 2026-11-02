@@ -9,16 +9,16 @@ tags:
 timestamp: '2026-01-01T00:00:00+00:00'
 modified: '2026-10-21T06:35:30.470Z'
 content_hash: 'sha256:cce140752b47d977238b3c4853da257c6fa10474a3ce5536d6aed174dd52b549'
-reviewed_at: '2026-10-21T06:35:32.000Z'
-review_due: '2027-04-19'
+reviewed_at: '2026-11-01T00:00:00.000Z'
+review_due: '2027-04-30'
 language: zh
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-21T06:35:32.000Z'
-  reviewDue: '2027-04-19'
+  reviewedAt: '2026-11-01T00:00:00.000Z'
+  reviewDue: '2027-04-30'
   pendingReview: false
   overdue: false
 retrieval:

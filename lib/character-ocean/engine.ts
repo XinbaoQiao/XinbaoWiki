@@ -104,6 +104,15 @@ export class CharacterOceanEngine {
   private onPointerLeave: (() => void) | null = null;
   private motionMq: MediaQueryList | null = null;
   private onMotionChange: (() => void) | null = null;
+  private onFontsLoaded = () => {
+    this.textWidths.clear();
+    if (this.opts.reducedMotion && this.visible && !document.hidden) this.drawStill();
+  };
+  private textWidths = new Map<string, Map<string, number>>();
+  private sharkRasterDirty = true;
+  private sharkFlickerFrame = -1;
+  private canvasLeft = 0;
+  private canvasTop = 0;
 
   private sharkFlag = new Uint8Array(0);
   private sharkShade = new Float32Array(0);
@@ -137,12 +146,7 @@ export class CharacterOceanEngine {
     this.applyThemeFilter();
     // Settle schools briefly so first paint is not empty/jerky
     for (let i = 0; i < 48; i++) this.world.step(STEP);
-    this.last = performance.now();
-    if (this.opts.reducedMotion) {
-      this.drawStill();
-      return;
-    }
-    this.loop(this.last);
+    this.syncAnimation();
   }
 
   stop() {
@@ -153,13 +157,13 @@ export class CharacterOceanEngine {
   }
 
   setOptions(partial: Partial<OceanEngineOptions>) {
-    const prevMotion = this.opts.reducedMotion;
     const prevDens = this.opts.density ?? 1;
     this.opts = { ...this.opts, ...partial };
     this.applyThemeFilter();
     this.applyFieldOpacity();
     this.world.setAllowedKinds(this.opts.kinds ?? []);
     this.world.setDensity(this.opts.density ?? 1);
+    this.sharkRasterDirty = true;
     const prevMobile = this.mobile;
     this.detectMobile();
     const densChanged = Math.abs((this.opts.density ?? 1) - prevDens) >= 0.001;
@@ -167,14 +171,7 @@ export class CharacterOceanEngine {
     if (densChanged || prevMobile !== this.mobile) {
       this.resize();
     }
-    if (this.opts.reducedMotion) {
-      cancelAnimationFrame(this.raf);
-      this.raf = 0;
-      this.drawStill();
-    } else if (prevMotion && this.running) {
-      this.last = performance.now();
-      this.loop(this.last);
-    }
+    this.syncAnimation();
   }
 
   private applyFieldOpacity() {
@@ -199,22 +196,25 @@ export class CharacterOceanEngine {
     this.ro = new ResizeObserver(() => {
       this.detectMobile();
       this.resize();
+      // Resizing clears the bitmap, including when the animation is paused.
+      if (this.opts.reducedMotion && this.visible && !document.hidden) this.drawStill();
     });
     this.ro.observe(this.canvas.parentElement || this.canvas);
 
     this.io = new IntersectionObserver(
       (entries) => {
-        this.visible = entries.some((e) => e.isIntersecting);
+        const visible = entries.some((e) => e.isIntersecting);
+        if (visible === this.visible) return;
+        this.visible = visible;
+        this.syncAnimation();
       },
       { threshold: 0.01 },
     );
     this.io.observe(this.canvas);
 
-    this.onVis = () => {
-      if (document.hidden) return;
-      this.last = performance.now();
-    };
+    this.onVis = () => this.syncAnimation();
     document.addEventListener('visibilitychange', this.onVis);
+    document.fonts?.addEventListener('loadingdone', this.onFontsLoaded);
 
     this.themeObserver = new MutationObserver(() => this.applyThemeFilter());
     this.themeObserver.observe(document.documentElement, {
@@ -266,6 +266,7 @@ export class CharacterOceanEngine {
     this.motionMq = null;
     this.onMotionChange = null;
     if (this.onVis) document.removeEventListener('visibilitychange', this.onVis);
+    document.fonts?.removeEventListener('loadingdone', this.onFontsLoaded);
     if (this.onPointerMove) window.removeEventListener('pointermove', this.onPointerMove);
     if (this.onPointerDown) window.removeEventListener('pointerdown', this.onPointerDown);
     if (this.onPointerLeave) {
@@ -273,6 +274,7 @@ export class CharacterOceanEngine {
       window.removeEventListener('pointercancel', this.onPointerLeave);
     }
     this.splashLife.length = 0;
+    this.textWidths.clear();
   }
 
   private isLightTheme(): boolean {
@@ -298,6 +300,8 @@ export class CharacterOceanEngine {
 
   private resize() {
     this.contentRectsAt = 0;
+    this.textWidths.clear();
+    this.sharkRasterDirty = true;
     const parent = this.canvas.parentElement || this.canvas;
     const w = Math.max(1, parent.clientWidth || window.innerWidth);
     const h = Math.max(1, parent.clientHeight || window.innerHeight);
@@ -345,13 +349,19 @@ export class CharacterOceanEngine {
     }
   }
 
+  private syncAnimation() {
+    if (this.raf) cancelAnimationFrame(this.raf);
+    this.raf = 0;
+    this.last = performance.now();
+    this.acc = 0;
+    if (!this.running || !this.visible || document.hidden) return;
+    if (this.opts.reducedMotion) this.drawStill();
+    else this.raf = requestAnimationFrame(this.loop);
+  }
+
   private loop = (now: number) => {
-    if (!this.running || this.opts.reducedMotion) return;
-    this.raf = requestAnimationFrame(this.loop);
-    if (!this.visible || document.hidden) {
-      this.last = now;
-      return;
-    }
+    this.raf = 0;
+    if (!this.running || this.opts.reducedMotion || !this.visible || document.hidden) return;
     const dt = Math.min(0.1, (now - this.last) / 1000);
     this.last = now;
     this.acc += dt * this.speed;
@@ -362,12 +372,15 @@ export class CharacterOceanEngine {
       steps++;
     }
     if (steps === MAX_STEPS) this.acc = 0;
+    if (steps > 0) this.sharkRasterDirty = true;
     this.draw(now);
+    this.raf = requestAnimationFrame(this.loop);
   };
 
   private drawStill() {
     if (this.world.time < 4) {
       for (let i = 0; i < 180; i++) this.world.step(STEP);
+      this.sharkRasterDirty = true;
     }
     this.draw(performance.now());
   }
@@ -379,7 +392,7 @@ export class CharacterOceanEngine {
     return r * this.cols + c;
   }
 
-  private rasterizeSharks() {
+  private rasterizeSharks(now: number) {
     const { sharkFlag, sharkShade, sharkKey, sharkKindId, sharkS, cw, ch, cols, rows } = this;
     sharkFlag.fill(0);
     sharkShade.fill(0);
@@ -387,6 +400,7 @@ export class CharacterOceanEngine {
     sharkKindId.fill(0);
     sharkS.fill(0);
     const hit = this.hit;
+    const flickerFrame = Math.floor(now / 160);
 
     for (const sh of this.world.sharks) {
       const L = sh.length;
@@ -404,10 +418,8 @@ export class CharacterOceanEngine {
         for (let c = c0; c <= c1; c++) {
           const x = c * cw;
           const y = r * ch;
-          const centerHit = (() => {
-            this.sampler.sample(x + cw * 0.5, y + ch * 0.5, L, hit);
-            return hit.inside;
-          })();
+          this.sampler.sample(x + cw * 0.5, y + ch * 0.5, L, hit);
+          const centerHit = hit.inside;
           if (!centerHit && hit.dist > skipBeyond) continue;
           const flag = hit.flag;
           const shade = hit.shade;
@@ -428,7 +440,7 @@ export class CharacterOceanEngine {
           sharkS[i] = sAlong;
           if (centerHit && coverage >= 0.5) {
             sharkFlag[i] = flag || FLAG_BODY;
-            const flicker = (hash3(c, r, Math.floor(performance.now() / 160)) - 0.5) * 0.06;
+            const flicker = (hash3(c, r, flickerFrame) - 0.5) * 0.06;
             sharkShade[i] = clamp(shade + flicker, 0, 1);
           } else {
             sharkFlag[i] = FLAG_EDGE;
@@ -445,6 +457,11 @@ export class CharacterOceanEngine {
     const h = this.viewH;
     const { cw, ch, cols, rows } = this;
     this.refreshContentRects();
+    // The canvas origin is shared by every glyph in this frame. Reading layout
+    // inside fadeAt caused thousands of DOM reads per animation frame.
+    const canvasRect = this.canvas.getBoundingClientRect();
+    this.canvasLeft = canvasRect.left;
+    this.canvasTop = canvasRect.top;
     ctx.clearRect(0, 0, w, h);
 
     const wash = this.opts.wash !== false;
@@ -462,14 +479,20 @@ export class CharacterOceanEngine {
       }
     }
 
-    this.rasterizeSharks();
+    const flickerFrame = Math.floor(now / 160);
+    if (this.sharkRasterDirty || flickerFrame !== this.sharkFlickerFrame) {
+      this.rasterizeSharks(now);
+      this.sharkRasterDirty = false;
+      this.sharkFlickerFrame = flickerFrame;
+    }
     this.frameId = (this.frameId + 1) >>> 0;
 
     const style = this.opts.style;
     const ramp = glyphRampFor(style, this.opts.language);
     const family = fontFamilyFor(style, this.opts.language);
     const fontSize = Math.max(9, Math.round(ch * (style === 'hanzi' ? 0.92 : style === 'ascii' || style === 'type' ? 0.88 : 0.84)));
-    ctx.font = `${style === 'hanzi' ? 500 : 600} ${fontSize}px ${family}`;
+    const sharkFont = `${style === 'hanzi' ? 500 : 600} ${fontSize}px ${family}`;
+    ctx.font = sharkFont;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
 
@@ -536,29 +559,30 @@ export class CharacterOceanEngine {
 
       const punch = this.mobile ? 1.18 : 1.12;
       const isFinLike = flag === FLAG_FIN || flag === FLAG_TAIL || flag === FLAG_RIDGE || flag === FLAG_MARK;
+      const textFade = this.fadeAt(x, y);
+      const rimFade = this.edgeFade(x, y);
       if (darkDemo && !edge && flag !== FLAG_EYE) {
         const level = 46 + shade * 160;
         const kind: SharkKind = KIND_BY_INDEX[this.sharkKindId[i]!] ?? 'classic';
         const [tr, tg, tb] = tintFor(kind);
-        ctx.globalAlpha = 0.7 * this.edgeFade(x, y);
+        ctx.globalAlpha = 0.7 * rimFade;
         ctx.fillStyle = `rgb(${Math.round(level * tr)},${Math.round(level * tg)},${Math.min(255, Math.round(level * tb))})`;
         if (ctx.globalAlpha > 0.02) ctx.fillRect(col * cw + 1, row * ch + 1, cw - 1, ch - 1);
       } else if (wash && !edge && flag !== FLAG_EYE && (density > 0.28 || isFinLike)) {
         // Dense skin plate under body + fins so the silhouette holds at mid size.
-        const plateFade = this.fadeAt(x, y) * this.edgeFade(x, y);
+        const plateFade = textFade * rimFade;
         const plateA = Math.min(0.82, (0.38 + density * 0.55) * (this.mobile ? 1.05 : 1.0)) * plateFade;
         ctx.globalAlpha = plateA;
         ctx.fillStyle = this.mobile ? 'rgba(4, 8, 16, 0.7)' : 'rgba(6, 10, 18, 0.72)';
         if (plateFade > 0.02) ctx.fillRect(col * cw + 0.35, row * ch + 0.35, cw - 0.7, ch - 0.7);
       } else if (wash && edge) {
         // Soft outline plate so head/body/tail rim stays visible.
-        const plateFade = this.fadeAt(x, y) * this.edgeFade(x, y);
+        const plateFade = textFade * rimFade;
         ctx.globalAlpha = (0.22 + shade * 0.35) * plateFade;
         ctx.fillStyle = 'rgba(8, 12, 20, 0.55)';
         if (plateFade > 0.02) ctx.fillRect(col * cw + 0.5, row * ch + 0.5, cw - 1, ch - 1);
       }
 
-      const rimFade = this.edgeFade(x, y);
       ctx.globalAlpha = (wash
         ? edge
           ? (0.55 + shade * 0.4) * punch
@@ -578,7 +602,6 @@ export class CharacterOceanEngine {
       if (!wash && hash3(key, Math.floor(now / 400), 7) < 0.08) {
         ctx.fillStyle = ['#e0892c', '#33c8cc', '#3150e8', '#d9c14a'][key % 4]!;
       }
-      const textFade = this.fadeAt(x, y);
       ctx.globalAlpha *= textFade;
       if (textFade * rimFade > 0.02) ctx.fillText(glyph, x, y + 1);
     }
@@ -586,6 +609,16 @@ export class CharacterOceanEngine {
     // Mid school fish -- head+body+tail with a glance-readable body glyph.
     // Prior failure modes: 3-5px ink (illegible), wash dark-plate+dark-ink (no contrast),
     // and content fadeAt 0.18 wiping mid-page schools. Keep mid-sardine, not whales.
+    const tipPx = Math.max(5, Math.min(6, Math.round(Math.min(ch * 0.48, cw * 0.58, 6))));
+    const bodyPx = Math.max(7, Math.min(9, tipPx + 2));
+    const tipFont = `700 ${tipPx}px ${family}`;
+    const bodyFont = `700 ${bodyPx}px ${family}`;
+    const cjkBodyFont = `700 ${bodyPx}px "Microsoft YaHei", "PingFang SC", "Noto Sans SC", "Segoe UI", sans-serif`;
+    try {
+      ctx.letterSpacing = '-0.15px';
+    } catch {
+      /* older engines ignore */
+    }
     this.fishStamp.fill(0);
     for (const f of this.world.fish) {
       if (!f.alive) continue;
@@ -609,28 +642,13 @@ export class CharacterOceanEngine {
       const textFade = Math.max(0.5, 0.38 + rawFade * 0.62);
       const rimFade = Math.max(this.edgeFade(fx, fy), 0.4);
       const vis = Math.min(1, alpha * textFade * rimFade);
-      const prevFont = ctx.font;
-      const prevBaseline: CanvasTextBaseline = ctx.textBaseline;
-      const family = fontFamilyFor(style, this.opts.language);
       // Mid sardine: tips ~5-6px, body ~7-9px (readable letter/Hanzi; not the old 9-12 whale).
-      const tipPx = Math.max(5, Math.min(6, Math.round(Math.min(ch * 0.48, cw * 0.58, 6))));
       const bodyIsCjk = /[\u4e00-\u9fff]/.test(parts.body);
-      const bodyPx = Math.max(7, Math.min(9, tipPx + 2));
       // YaHei/PingFang first -- Noto Sans SC is not loaded as a webfont on this site.
-      const bodyFamily = bodyIsCjk
-        ? '"Microsoft YaHei", "PingFang SC", "Noto Sans SC", "Segoe UI", sans-serif'
-        : family;
-      try {
-        (ctx as CanvasRenderingContext2D & { letterSpacing?: string }).letterSpacing = '-0.15px';
-      } catch {
-        /* older engines ignore */
-      }
-      ctx.textBaseline = 'middle';
-      ctx.font = `700 ${tipPx}px ${family}`;
-      const headW = Math.max(parts.head ? ctx.measureText(parts.head).width : 0, parts.head ? tipPx * 0.45 : 0);
-      const tailW = Math.max(parts.tail ? ctx.measureText(parts.tail).width : 0, parts.tail ? tipPx * 0.45 : 0);
-      ctx.font = `700 ${bodyPx}px ${bodyFamily}`;
-      const bodyW = Math.max(parts.body ? ctx.measureText(parts.body).width : 0, bodyPx * (bodyIsCjk ? 0.9 : 0.55));
+      const fishBodyFont = bodyIsCjk ? cjkBodyFont : bodyFont;
+      const headW = Math.max(parts.head ? this.measureText(parts.head, tipFont) : 0, parts.head ? tipPx * 0.45 : 0);
+      const tailW = Math.max(parts.tail ? this.measureText(parts.tail, tipFont) : 0, parts.tail ? tipPx * 0.45 : 0);
+      const bodyW = Math.max(parts.body ? this.measureText(parts.body, fishBodyFont) : 0, bodyPx * (bodyIsCjk ? 0.9 : 0.55));
       const gap = 0.4;
       const totalW = headW + gap + bodyW + gap + tailW;
       const left = fx - totalW * 0.5;
@@ -648,9 +666,9 @@ export class CharacterOceanEngine {
       const halo = wash ? 'rgba(255, 255, 255, 0.7)' : 'rgba(0, 0, 0, 0.45)';
       if (vis > 0.02) {
         let x = left;
-        const drawPart = (glyph: string, px: number, fontFamily: string, w: number, emphasize: boolean) => {
+        const drawPart = (glyph: string, px: number, font: string, w: number, emphasize: boolean) => {
           if (!glyph) return;
-          ctx.font = `700 ${px}px ${fontFamily}`;
+          ctx.font = font;
           if (emphasize) {
             ctx.lineJoin = 'round';
             ctx.lineWidth = Math.max(1, px * 0.14);
@@ -661,18 +679,17 @@ export class CharacterOceanEngine {
           ctx.fillText(glyph, x, fy);
           x += w + gap;
         };
-        drawPart(parts.head, tipPx, family, headW, false);
-        drawPart(parts.body, bodyPx, bodyFamily, bodyW, true);
-        drawPart(parts.tail, tipPx, family, tailW, false);
+        drawPart(parts.head, tipPx, tipFont, headW, false);
+        drawPart(parts.body, bodyPx, fishBodyFont, bodyW, true);
+        drawPart(parts.tail, tipPx, tipFont, tailW, false);
       }
-      try {
-        (ctx as CanvasRenderingContext2D & { letterSpacing?: string }).letterSpacing = '0px';
-      } catch {
-        /* ignore */
-      }
-      ctx.textBaseline = prevBaseline;
-      ctx.font = prevFont;
     }
+    try {
+      ctx.letterSpacing = '0px';
+    } catch {
+      /* older engines ignore */
+    }
+    ctx.font = sharkFont;
 
     // Splash ripples -- pixelated wave train (chunky concentric rings).
     // Same pond-physics envelope as before (expanding front, multi-crest damp),
@@ -815,31 +832,44 @@ export class CharacterOceanEngine {
     ];
     const out: { l: number; t: number; r: number; b: number }[] = [];
     const seen = new Set<string>();
-    for (const sel of sels) {
-      const nodes = document.querySelectorAll(sel);
-      for (let i = 0; i < nodes.length; i++) {
-        const el = nodes[i] as HTMLElement;
-        if (!el) continue;
-        const style = getComputedStyle(el);
-        if (style.visibility === 'hidden' || style.display === 'none' || Number(style.opacity) < 0.05) continue;
-        // name-only / warm-cache collapse uses content-visibility without always
-        // flipping display — those boxes must not keep ghosting the school.
-        if ((style as CSSStyleDeclaration & { contentVisibility?: string }).contentVisibility === 'hidden') continue;
-        const r = el.getBoundingClientRect();
-        if (r.width < 6 || r.height < 6) continue;
-        // Skip fully off-screen
-        if (r.bottom < -40 || r.top > window.innerHeight + 40) continue;
-        if (r.right < -40 || r.left > window.innerWidth + 40) continue;
-        // Ignore huge layout leftovers that still report on-screen tops while the
-        // bulk of the box sits far below the fold (collapsed portal chrome).
-        if (r.height > window.innerHeight * 0.85 && r.bottom > window.innerHeight + 120) continue;
-        const key = `${r.left | 0},${r.top | 0},${r.right | 0},${r.bottom | 0}`;
-        if (seen.has(key)) continue;
-        seen.add(key);
-        out.push({ l: r.left, t: r.top, r: r.right, b: r.bottom });
-      }
+    // One selector traversal also deduplicates elements matching several selectors.
+    const nodes = document.querySelectorAll(sels.join(','));
+    for (let i = 0; i < nodes.length; i++) {
+      const el = nodes[i] as HTMLElement;
+      if (!el) continue;
+      const style = getComputedStyle(el);
+      if (style.visibility === 'hidden' || style.display === 'none' || Number(style.opacity) < 0.05) continue;
+      // name-only / warm-cache collapse uses content-visibility without always
+      // flipping display — those boxes must not keep ghosting the school.
+      if ((style as CSSStyleDeclaration & { contentVisibility?: string }).contentVisibility === 'hidden') continue;
+      const r = el.getBoundingClientRect();
+      if (r.width < 6 || r.height < 6) continue;
+      // Skip fully off-screen
+      if (r.bottom < -40 || r.top > window.innerHeight + 40) continue;
+      if (r.right < -40 || r.left > window.innerWidth + 40) continue;
+      // Ignore huge layout leftovers that still report on-screen tops while the
+      // bulk of the box sits far below the fold (collapsed portal chrome).
+      if (r.height > window.innerHeight * 0.85 && r.bottom > window.innerHeight + 120) continue;
+      const key = `${r.left | 0},${r.top | 0},${r.right | 0},${r.bottom | 0}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      out.push({ l: r.left, t: r.top, r: r.right, b: r.bottom });
     }
     this.contentRects = out;
+  }
+
+  private measureText(text: string, font: string): number {
+    let widths = this.textWidths.get(font);
+    if (!widths) {
+      widths = new Map<string, number>();
+      this.textWidths.set(font, widths);
+    }
+    const cached = widths.get(text);
+    if (cached !== undefined) return cached;
+    this.ctx.font = font;
+    const width = this.ctx.measureText(text).width;
+    widths.set(text, width);
+    return width;
   }
 
   /**
@@ -862,9 +892,8 @@ export class CharacterOceanEngine {
   private fadeAt(x: number, y: number): number {
     const rects = this.contentRects;
     if (!rects.length) return 1;
-    const cr = this.canvas.getBoundingClientRect();
-    const px = x + cr.left;
-    const py = y + cr.top;
+    const px = x + this.canvasLeft;
+    const py = y + this.canvasTop;
     let fade = 1;
     // Soft quiet halo around real text/UI only (layout shells excluded above).
     const pad = 96;
@@ -879,8 +908,7 @@ export class CharacterOceanEngine {
       if (px < l || px > r || py < t || py > b) continue;
       const inside = px >= box.l && px <= box.r && py >= box.t && py <= box.b;
       if (inside) {
-        fade = Math.min(fade, insideAlpha);
-        continue;
+        return insideAlpha;
       }
       // Distance into the pad ring (0 at outer edge, 1 at box edge).
       const dx = Math.min(px - l, r - px);

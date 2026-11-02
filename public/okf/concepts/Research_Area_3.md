@@ -11,16 +11,16 @@ tags:
 timestamp: '2026-01-01T00:00:00+00:00'
 modified: '2026-10-21T06:35:30.473Z'
 content_hash: 'sha256:7c7e2ab9fe093d73c6c80784f39752a0cfffe16acc25e87b9a686dbe33c50c4a'
-reviewed_at: '2026-10-21T06:35:32.000Z'
-review_due: '2027-04-19'
+reviewed_at: '2026-11-01T00:00:00.000Z'
+review_due: '2027-04-30'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-21T06:35:32.000Z'
-  reviewDue: '2027-04-19'
+  reviewedAt: '2026-11-01T00:00:00.000Z'
+  reviewDue: '2027-04-30'
   pendingReview: false
   overdue: false
 retrieval:

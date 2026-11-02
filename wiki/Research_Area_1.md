@@ -11,8 +11,8 @@ tags:
 timestamp: '2026-01-01T00:00:00+00:00'
 modified: '2026-10-21T06:35:30.470Z'
 content_hash: 'sha256:a608ac7f6a1206271a2f2649b5cc541c416573f15417d62f5006da413c101742'
-reviewed_at: '2026-10-21T06:35:32.000Z'
-review_due: '2027-04-19'
+reviewed_at: '2026-11-01T00:00:00.000Z'
+review_due: '2027-04-30'
 name: Research Area 1
 summary: >-
   A placeholder for one of your research areas. Rename it and describe the

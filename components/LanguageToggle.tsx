@@ -73,6 +73,7 @@ import type { CSSProperties, ChangeEvent } from 'react';
 import { useEffect, useId, useRef, useState, useLayoutEffect } from 'react';
 
 import { usePathname } from 'next/navigation';
+import { isSitePaletteMode, sitePaletteForLocalTime, sitePaletteStorageKey, type SitePaletteMode, type SitePaletteName } from '@/lib/site-palette';
 
 
 
@@ -189,9 +190,7 @@ export function LanguageToggle() {
 
 
 
-type SitePaletteName = 'text' | 'blue' | 'gold' | 'rose' | 'green' | 'violet' | 'charcoal';
 
-type SitePaletteMode = SitePaletteName | 'auto';
 
 
 
@@ -214,7 +213,6 @@ type SitePaletteProps = {
 
 
 
-const sitePaletteStorageKey = 'mywiki-palette-mode';
 
 
 
@@ -240,33 +238,6 @@ const sitePaletteOptions: SitePaletteOption[] = [
 
 
 
-function isSitePaletteMode(value: string | null): value is SitePaletteMode {
-
-  return value === 'auto' || value === 'text' || value === 'blue' || value === 'gold' || value === 'rose' || value === 'green' || value === 'violet' || value === 'charcoal';
-
-}
-
-
-
-function sitePaletteForLocalTime(date = new Date()): Exclude<SitePaletteName, 'text'> {
-
-  const hour = date.getHours();
-
-
-
-  if (hour >= 5 && hour < 9) return 'blue';
-
-  if (hour >= 9 && hour < 13) return 'gold';
-
-  if (hour >= 13 && hour < 16) return 'rose';
-
-  if (hour >= 16 && hour < 19) return 'green';
-
-  if (hour >= 19 && hour < 22) return 'violet';
-
-  return 'charcoal';
-
-}
 
 
 
@@ -439,6 +410,7 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
     ? { ...sharedBackgroundToSettings(initialSharedBackground!), enabled: false }
     : DEFAULT_CUSTOM_BG_SETTINGS;
   const [mode, setMode] = useState<SitePaletteMode>('auto');
+  const [appearanceReady, setAppearanceReady] = useState(false);
   const [characterOcean, setCharacterOcean] = useState<CharacterOceanSettings>({ ...DEFAULT_CHARACTER_OCEAN, kinds: [...DEFAULT_CHARACTER_OCEAN.kinds] });
   const [oceanPanelOpen, setOceanPanelOpen] = useState(false);
   const [oceanMobileOff, setOceanMobileOff] = useState(false);
@@ -513,14 +485,23 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
   };
 
 
+  useLayoutEffect(() => {
+    let savedOcean: string | null = null;
+    try {
+      const savedMode = window.localStorage.getItem(sitePaletteStorageKey);
+      if (isSitePaletteMode(savedMode)) setMode(savedMode);
+      savedOcean = window.localStorage.getItem(CHARACTER_OCEAN_STORAGE_KEY);
+    } catch {
+      // The bootstrap and controller both use auto when storage is unavailable.
+    }
+    const loadedOcean = parseCharacterOceanSettings(savedOcean);
+    setCharacterOcean(loadedOcean);
+    if (loadedOcean.style !== 'off') setOceanStyleBeforeOff(loadedOcean.style);
+    setOceanMobileOff(window.matchMedia(characterOceanMobileMediaQuery()).matches);
+    setAppearanceReady(true);
+  }, []);
+
   useEffect(() => {
-    const savedMode = window.localStorage.getItem(sitePaletteStorageKey);
-    if (isSitePaletteMode(savedMode)) setMode(savedMode);
-      const savedOcean = window.localStorage.getItem(CHARACTER_OCEAN_STORAGE_KEY);
-      const loadedOcean = parseCharacterOceanSettings(savedOcean);
-      // Default is on (ascii). Honor an explicit off saved in localStorage.
-      setCharacterOcean(loadedOcean);
-      if (loadedOcean.style !== 'off') setOceanStyleBeforeOff(loadedOcean.style);
     const savedCustom = readCustomBgSettings();
     setCustomSettings(savedCustom);
     if (initialSharedBackground) {
@@ -605,7 +586,8 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
       imageUrlRef.current = null;
     };
   }, []);
-  useEffect(() => {
+  useLayoutEffect(() => {
+    if (!appearanceReady) return;
     const applyPalette = () => {
       const palette = mode === 'auto' ? sitePaletteForLocalTime() : mode;
       document.documentElement.dataset.sitePalette = palette;
@@ -615,7 +597,7 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
     applyPalette();
     const intervalId = window.setInterval(applyPalette, 5 * 60 * 1000);
     return () => window.clearInterval(intervalId);
-  }, [icons, mode]);
+  }, [icons, mode, appearanceReady]);
 
   useEffect(() => {
     applyCustomBgDocumentState(customSettings, Boolean(customImageUrl), customTone);
@@ -729,11 +711,12 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
       writeCustomBgSettings(disabled);
       applyCustomBgDocumentState(disabled, Boolean(customImageUrl), customTone);
     }
-    if (nextMode === 'auto') {
-      window.localStorage.removeItem(sitePaletteStorageKey);
-      return;
+    try {
+      if (nextMode === 'auto') window.localStorage.removeItem(sitePaletteStorageKey);
+      else window.localStorage.setItem(sitePaletteStorageKey, nextMode);
+    } catch {
+      // The selected palette still applies for this page when persistence is blocked.
     }
-    window.localStorage.setItem(sitePaletteStorageKey, nextMode);
   };
 
   const persistCustom = (next: CustomBgSettings) => {
@@ -984,6 +967,7 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
     // Mobile temporarily disables the ocean field: keep user preference in
     // state/localStorage, but force DOM compose attrs to off so portal chrome
     // is not left transparent without a canvas.
+    if (!appearanceReady) return;
     const effectiveStyle = oceanMobileOff ? 'off' : characterOcean.style;
     const oceanOn = effectiveStyle !== 'off';
     const wallpaperOn = Boolean(customSettings.enabled && customImageUrl);
@@ -999,7 +983,7 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
     } catch {
       /* ignore quota */
     }
-  }, [characterOcean, customSettings.enabled, customImageUrl, oceanMobileOff]);
+  }, [characterOcean, customSettings.enabled, customImageUrl, oceanMobileOff, appearanceReady]);
 
   return (
     <>

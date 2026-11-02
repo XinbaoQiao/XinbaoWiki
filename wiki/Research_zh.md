@@ -9,8 +9,8 @@ tags:
 timestamp: '2026-01-01T00:00:00+00:00'
 modified: '2026-10-21T06:35:30.474Z'
 content_hash: 'sha256:7e270e1dd9dc2989ff5e45bf0db7f11454dd8ab079eddb097a3e0e3fb4fd64ae'
-reviewed_at: '2026-10-21T06:35:32.000Z'
-review_due: '2027-01-19'
+reviewed_at: '2026-11-01T00:00:00.000Z'
+review_due: '2027-01-30'
 name: 研究
 summary: 研究方向总览（模板示例）。
 show_summary: false

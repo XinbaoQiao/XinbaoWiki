@@ -9,8 +9,8 @@ tags:
 timestamp: '2026-01-01T00:00:00+00:00'
 modified: '2026-10-21T06:35:00.178Z'
 content_hash: 'sha256:d20ec23890d874a150c3af73036f5308e501ecbd43fa0c54dd207c209c486893'
-reviewed_at: '2026-10-21T06:35:02.000Z'
-review_due: '2027-01-19'
+reviewed_at: '2026-11-01T00:00:00.000Z'
+review_due: '2027-01-30'
 name: Publications
 summary: Publication list (template sample).
 occupation: Publication list
