@@ -40,6 +40,8 @@ export const globalReplacements = [
   [/https:\/\/xinbaopedia-[a-z-]*xinbaopedia\.vercel\.app/g, 'https://your-project.vercel.app'],
   [/xinbaopedia-[a-z-]*xinbaopedia\.vercel\.app/g, 'your-project.vercel.app'],
   [/xinbaopedia-preview\.vercel\.app/g, 'your-project-preview.vercel.app'],
+  // Layout-test wallpaper mocks use a placeholder host in the public template.
+  [/https:\/\/\*\.public\.blob\.vercel-storage\.com\/site-wallpaper\/\*\*/g, 'https://example.com/site-wallpaper/**'],
   [/https?:\/\/(XinbaoQiao@)?github\.com\/XinbaoQiao\/XinbaoWiki/g, 'https://github.com/your-username/your-wiki'],
   [/git@github\.com:XinbaoQiao\/XinbaoWiki/g, 'git@github.com:your-username/your-wiki'],
   [/https:\/\/github\.com\/XinbaoQiao/g, 'https://github.com/your-username'], [/@XinbaoQiao/g, '@your-username'],
