@@ -2312,9 +2312,9 @@ assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.chat-xinbao-backdro
 assert.match(styles, /\.chat-xinbao-composer-row \{[\s\S]*display: flex;[\s\S]*align-items: flex-end;/, 'chat composer keeps send beside the growing textarea');
 assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.chat-xinbao-quick-replies \{[\s\S]*flex-wrap: nowrap;[\s\S]*overflow-x: auto;/, 'phone quick-start chips scroll horizontally above the composer');
 assert.match(chatWithXinbaoPanel, /visualViewport[\s\S]*chat-xinbao-backdrop[\s\S]*chat-xinbao-grab[\s\S]*chat-xinbao-composer-row/, 'chat panel wires backdrop dismiss, grab handle, visualViewport inset, and composer row');
-assert.match(styles, /\.wiki-toc-return \{[\s\S]*position: fixed;[\s\S]*border-radius: 2px;/, 'articles expose a floating return-to-contents control');
+assert.doesNotMatch(articleContents, /wiki-toc-return|returnToContents|IntersectionObserver/, 'articles keep inline navigation without a floating Contents button');
 assert.match(styles, /@media \(min-width: 721px\) \{[\s\S]*\.wiki-article-contents \{[\s\S]*position: sticky;/, 'desktop Contents contents stay sticky while reading');
-assert.match(articleContents, /IntersectionObserver[\s\S]*wiki-on-this-page[\s\S]*wiki-toc-return/, 'ArticleContents shows a return control once the contents leave the viewport');
+assert.match(articleContents, /wiki-on-this-page[\s\S]*wiki-contents-mobile/, 'article Contents retain desktop and mobile inline navigation');
 assert.match(articleContents, /scrollIntoView\(\{ behavior:[\s\S]*smooth[\s\S]*\}\)/, 'Contents links smooth-scroll to headings');
 assert.match(styles, /@keyframes wiki-heading-flash/, 'heading flash animation is defined for Contents navigation');
 assert.match(styles, /@keyframes wiki-heading-flash[\s\S]*--site-theme-accent/, 'heading flash uses the active site theme accent');

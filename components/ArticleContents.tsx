@@ -1,24 +1,15 @@
 'use client';
 
 import { Children, isValidElement, useEffect, useRef, useState, type ReactNode } from 'react';
-import { usePathname } from 'next/navigation';
 
 function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
 export function ArticleContents({ children, label }: { children: ReactNode; label: string }) {
-  const pathname = usePathname();
-  const onWikiArticle = pathname === '/wiki' || pathname.startsWith('/wiki/');
   const [compact, setCompact] = useState(false);
-  const [showReturn, setShowReturn] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const flashTimerRef = useRef<number | null>(null);
-
-  // Floating return is wiki-article only — never on homepage / portal routes.
-  useEffect(() => {
-    if (!onWikiArticle) setShowReturn(false);
-  }, [onWikiArticle]);
 
   useEffect(() => {
     const mobile = window.matchMedia('(max-width: 720px)');
@@ -27,21 +18,6 @@ export function ArticleContents({ children, label }: { children: ReactNode; labe
     mobile.addEventListener('change', update);
     return () => mobile.removeEventListener('change', update);
   }, []);
-
-  useEffect(() => {
-    const nav = navRef.current;
-    if (!nav || typeof IntersectionObserver === 'undefined') return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        // Homepage / non-wiki routes must never show the floating Contents control.
-        setShowReturn(onWikiArticle && !entry.isIntersecting);
-      },
-      { root: null, rootMargin: '-64px 0px 0px 0px', threshold: 0 }
-    );
-    observer.observe(nav);
-    return () => observer.disconnect();
-  }, [onWikiArticle]);
 
   useEffect(() => {
     const contentsNav = navRef.current;
@@ -120,14 +96,6 @@ export function ArticleContents({ children, label }: { children: ReactNode; labe
     !isValidElement<{ className?: string }>(child) || child.props.className !== 'wiki-contents-label'
   ));
 
-  function returnToContents() {
-    const nav = navRef.current;
-    if (!nav) return;
-    nav.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
-    const details = nav.querySelector('details.wiki-contents-mobile');
-    if (details instanceof HTMLDetailsElement) details.open = true;
-  }
-
   return (
     <>
       <nav aria-label={label} className="wiki-article-contents" id="wiki-on-this-page" ref={navRef}>
@@ -138,18 +106,6 @@ export function ArticleContents({ children, label }: { children: ReactNode; labe
           </details>
         ) : children}
       </nav>
-      {showReturn && onWikiArticle ? (
-        <button
-          aria-controls="wiki-on-this-page"
-          aria-label={label}
-          className="wiki-toc-return"
-          onClick={returnToContents}
-          title={label}
-          type="button"
-        >
-          {label}
-        </button>
-      ) : null}
     </>
   );
 }

@@ -3,6 +3,8 @@
  * splash ripples (PIXEL=4 disks), scaled larger for the nav-wait beat.
  */
 
+import { publishOceanRipple } from '@/lib/ocean-ripple';
+
 export const HOME_LEAVE_RIPPLE_MS = 2850;
 
 const PIXEL = 4;
@@ -44,6 +46,7 @@ export function startHomeLeaveRipple(canvas: HTMLCanvasElement): () => void {
   if (!ctx) return () => undefined;
 
   const born = performance.now();
+  publishOceanRipple({ x: 0.5, y: 0.5, bornMs: born, waveSpeed: WAVE_SPEED, durationMs: HOME_LEAVE_RIPPLE_MS });
   const { ink, trough, base } = themeInkPair();
   let raf = 0;
   let stopped = false;
@@ -158,6 +161,7 @@ export function startHomeLeaveRipple(canvas: HTMLCanvasElement): () => void {
 
   return () => {
     stopped = true;
+    publishOceanRipple(null);
     window.cancelAnimationFrame(raf);
     window.removeEventListener("resize", onResize);
     try {

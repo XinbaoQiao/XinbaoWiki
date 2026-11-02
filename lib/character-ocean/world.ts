@@ -79,6 +79,7 @@ export type Fish = {
   turn: number;
   depth: number;
   millDir: 1 | -1;
+  rippleHitStamp?: number;
 };
 
 export type Shark = {
@@ -98,6 +99,7 @@ export type Shark = {
   rippleBoost: number;
   /** Bitmask / stamp of last ripple bornMs that already fired a spike (edge). */
   rippleHitStamp: number;
+  rippleOrigin?: { x: number; y: number };
 };
 
 /** Shared with engine ripple paint so hit-test matches the visible ring. */
@@ -116,7 +118,8 @@ export const RIPPLE_BOOST_DECAY_S = 3.6;
 export const RIPPLE_SPIKE_GATE = 0.28;
 
 export type WorldEvent = { kind: 'splash'; x: number; y: number };
-export type SplashRipple = { x: number; y: number; bornMs: number };
+export type SplashRipple = { x: number; y: number; bornMs: number; waveSpeed?: number; durationMs?: number; shared?: boolean;
+  hitFish?: Set<Fish>; hitSharks?: Set<Shark> };
 
 const FISH_SEPARATION_K = 380;
 const FISH_ALIGN_K = 2.05;
@@ -337,8 +340,7 @@ export class World {
   splash(x: number, y: number) {
     this.events.push({ kind: 'splash', x, y });
     // Wall-clock birth so expanding front stays locked to the painted ripple.
-    this.ripples.push({ x, y, bornMs: performance.now() });
-    while (this.ripples.length > 4) this.ripples.shift();
+    this.addRipple({ x, y, bornMs: performance.now() });
     // Stronger local impulse so the school visibly parts under a click ripple.
     // Big fish (sharks) are not velocity-impulsed here — ring contact raises cruise
     // (applyRippleBoosts) and stepSharks steers them away from the epicenter.
@@ -356,6 +358,11 @@ export class World {
     }
   }
 
+  addRipple(ripple: SplashRipple) {
+    this.ripples.push(ripple);
+    while (this.ripples.length > 4) this.ripples.shift();
+  }
+
   step(dt: number) {
     this.time += dt;
     this.rebuildHash();
@@ -369,7 +376,7 @@ export class World {
   /** When a painted ripple ring crosses a shark body, raise cruise briefly. */
   private applyRippleBoosts(dt: number) {
     const now = performance.now();
-    this.ripples = this.ripples.filter((r) => now - r.bornMs < RIPPLE_DURATION_MS);
+    this.ripples = this.ripples.filter((r) => now - r.bornMs < (r.durationMs ?? RIPPLE_DURATION_MS));
     for (const sh of this.sharks) {
       // Slow coast-down of leftover sprint energy.
       if (sh.rippleBoost > 0) {
@@ -385,8 +392,8 @@ export class World {
       const baseCruise = (30 + L * 0.04) * pace;
       for (const r of this.ripples) {
         // One sprint spike per ripple per shark (edge), not continuous re-bump while ring sweeps.
-        if (r.bornMs === sh.rippleHitStamp) continue;
-        const front = RIPPLE_WAVE_SPEED * ((now - r.bornMs) / 1000);
+        if (r.hitSharks?.has(sh)) continue;
+        const front = (r.waveSpeed ?? RIPPLE_WAVE_SPEED) * ((now - r.bornMs) / 1000);
         if (front < 4) continue;
         let hit = false;
         for (let k = 0; k < SHARK_NODES; k += 2) {
@@ -399,7 +406,9 @@ export class World {
           }
         }
         if (!hit) continue;
+        (r.hitSharks ??= new Set()).add(sh);
         sh.rippleHitStamp = r.bornMs;
+        sh.rippleOrigin = { x: r.x, y: r.y };
         const capped = baseCruise * RIPPLE_SPEED_CAP;
         // Cold / near-cruise: one readable sprint spike.
         // Already sprinting: only refresh decay so spam-clicks stay smooth (no speed slam).
@@ -411,6 +420,31 @@ export class World {
           if (sh.speed > capped) sh.speed = capped;
         }
         sh.rippleBoost = 1;
+      }
+    }
+    // Small schools react when the visible wave reaches them, including fish
+    // beyond splash()'s initial local impulse. Repeated frames do not stack kicks.
+    for (const fish of this.fish) {
+      if (!fish.alive) continue;
+      for (const ripple of this.ripples) {
+        if (ripple.hitFish?.has(fish)) continue;
+        const age = (now - ripple.bornMs) / 1000;
+        if (age < 0) continue;
+        const front = (ripple.waveSpeed ?? RIPPLE_WAVE_SPEED) * age;
+        const dx = fish.x - ripple.x;
+        const dy = fish.y - ripple.y;
+        const distance = Math.hypot(dx, dy);
+        if (front < 4 || distance < 1e-3 || Math.abs(distance - front) > 24) continue;
+        (ripple.hitFish ??= new Set()).add(fish);
+        fish.rippleHitStamp = ripple.bornMs;
+        const sp = SPECIES[fish.species]!;
+        fish.alarm = 1;
+        const kick = sp.maxSpeed * 1.5;
+        fish.vx += dx / distance * kick;
+        fish.vy += dy / distance * kick;
+        const speed = Math.hypot(fish.vx, fish.vy);
+        const cap = sp.maxSpeed * 2.8;
+        if (speed > cap) { fish.vx *= cap / speed; fish.vy *= cap / speed; }
       }
     }
   }
@@ -682,21 +716,30 @@ export class World {
       dx += Math.cos(sh.heading + sh.wander) * 0.45;
       dy += Math.sin(sh.heading + sh.wander) * 0.45;
 
+      // Keep the escape heading after the crest has passed the body. A fast
+      // wave otherwise leaves before a large fish has enough time to turn.
+      if (sh.rippleOrigin && sh.rippleBoost > 0) {
+        const ox = hx - sh.rippleOrigin.x;
+        const oy = hy - sh.rippleOrigin.y;
+        const distance = Math.hypot(ox, oy) || 1;
+        dx += ox / distance * 6 * sh.rippleBoost;
+        dy += oy / distance * 6 * sh.rippleBoost;
+      }
+
       // Click ripples: keep the sprint boost, but steer AWAY from the epicenter.
       // Cap influence (modest ring reach) and brake when still aimed inward so the
       // 4x surge cannot charge through the center before the turn catches up.
-      // Small fish keep splash() impulse only.
+      // Small fish receive their own wave-front impulse in applyRippleBoosts.
       {
         const now = performance.now();
-        const reachCap = Math.min(W, H) * 0.36;
         for (const ripple of this.ripples) {
           const age = (now - ripple.bornMs) / 1000;
-          if (age < 0 || age * 1000 > RIPPLE_DURATION_MS) continue;
-          const front = Math.max(24, RIPPLE_WAVE_SPEED * age);
+          if (age < 0 || age * 1000 > (ripple.durationMs ?? RIPPLE_DURATION_MS)) continue;
+          const front = Math.max(24, (ripple.waveSpeed ?? RIPPLE_WAVE_SPEED) * age);
           const rx = hx - ripple.x;
           const ry = hy - ripple.y;
           const d = Math.hypot(rx, ry) || 1e-3;
-          const reach = Math.min(Math.max(front * 1.08, L * 0.75), reachCap);
+          const reach = Math.max(front + L * 0.22, L * 0.75);
           if (d >= reach) continue;
           const ox = rx / d;
           const oy = ry / d;
@@ -713,7 +756,7 @@ export class World {
           if (inward > 0.08) {
             urgency *= 1.55 + inward * 0.9;
             if (d < front * 0.92 || nearCore) {
-              sh.speed *= 1 - Math.min(0.32, inward * 0.28);
+              sh.speed *= Math.exp(-dt * inward * 2);
             }
           }
           dx += ox * urgency * 2.55;
@@ -780,7 +823,7 @@ export class World {
 
       const desired = Math.atan2(dy, dx);
       // Turning circle grows with speed — no pivot-in-place (ref agility 0.8 cruise)
-      const agility = Math.min(0.8, sh.speed / (L * 0.22));
+      const agility = sh.rippleBoost > 0.05 ? 0.8 + sh.rippleBoost : Math.min(0.8, sh.speed / (L * 0.22));
       const maxTurn = agility * dt;
       const turned = clamp(angleDiff(sh.heading, desired), -maxTurn, maxTurn);
       sh.heading += turned;
