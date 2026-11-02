@@ -1,6 +1,7 @@
 'use client';
 
-import dynamic from 'next/dynamic';
+import { VisitorAtlasDisclosure } from '@/components/VisitorAtlasDisclosure';
+import { PaperAcceptancePreview } from '@/components/PaperAcceptancePreview';
 import { WikiLink } from '@/components/WikiLink';
 import { wikiSlugFromHref } from '@/lib/wiki-view-transition';
 import type { CSSProperties, PointerEvent as ReactPointerEvent, TransitionEvent as ReactTransitionEvent } from 'react';
@@ -16,21 +17,6 @@ import {
 } from '@/components/useAnimatedDisclosure';
 import { HomeScrollIntro } from '@/components/HomeScrollIntro';
 import type { PaperHighlightCatalog } from '@/lib/paper-highlights';
-
-const VisitorAtlasDisclosure = dynamic(
-  () => import('@/components/VisitorAtlasDisclosure').then((module) => module.VisitorAtlasDisclosure),
-  { ssr: false, loading: () => null }
-);
-
-const PaperAcceptancePreview = dynamic(
-  () => import('@/components/PaperAcceptancePreview').then((module) => module.PaperAcceptancePreview),
-  { ssr: false, loading: () => null }
-);
-
-function preloadPortalDisclosureChunks() {
-  void import('@/components/VisitorAtlasDisclosure');
-  void import('@/components/PaperAcceptancePreview');
-}
 
 type LocalizedText = Record<SearchLanguage, string>;
 type BrowseView = 'list' | 'cube';
@@ -176,12 +162,25 @@ export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf
   };
 
   const portalCenterRafRef = useRef<number | null>(null);
+  const portalScrollPinCleanupRef = useRef<(() => void) | null>(null);
   const stopPortalCenterSync = () => {
     if (portalCenterRafRef.current != null) {
       cancelAnimationFrame(portalCenterRafRef.current);
       portalCenterRafRef.current = null;
     }
+    portalScrollPinCleanupRef.current?.();
+    portalScrollPinCleanupRef.current = null;
   };
+
+  useEffect(() => () => {
+    stopPortalCenterSync();
+    const center = portalCenterAnimRef.current;
+    const flip = layoutFlipAnimRef.current;
+    portalCenterAnimRef.current = null;
+    layoutFlipAnimRef.current = null;
+    center?.cancel();
+    flip?.cancel();
+  }, []);
 
   const shouldCenterPortal = (height: number) => {
     // Center only at page top while the portal still fits the viewport.
@@ -243,8 +242,26 @@ export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf
 
     const pinScrollForDuration = (pinnedScroll: number, duration: number, onDone: () => void) => {
       const started = performance.now();
+      let pinning = true;
+      const input = new AbortController();
+      const releasePin = () => {
+        pinning = false;
+        input.abort();
+      };
+      const releaseForKey = (event: KeyboardEvent) => {
+        if (!['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '].includes(event.key)) return;
+        if (event.target instanceof Element && event.target.closest('input, textarea, select, [contenteditable="true"]')) return;
+        releasePin();
+      };
+      // Preserve the viewport against automatic focus/anchoring shifts, then
+      // yield immediately when the user scrolls or interacts with the page.
+      window.addEventListener('wheel', releasePin, { passive: true, signal: input.signal });
+      window.addEventListener('touchmove', releasePin, { passive: true, signal: input.signal });
+      window.addEventListener('pointerdown', releasePin, { passive: true, signal: input.signal });
+      window.addEventListener('keydown', releaseForKey, { signal: input.signal });
+      portalScrollPinCleanupRef.current = () => input.abort();
       const pin = () => {
-        if (Math.abs(scrolling.scrollTop - pinnedScroll) > 0.5) {
+        if (pinning && Math.abs(scrolling.scrollTop - pinnedScroll) > 0.5) {
           scrolling.scrollTop = pinnedScroll;
         }
         if (performance.now() - started < duration + 48) {
@@ -252,6 +269,8 @@ export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf
           return;
         }
         portalCenterRafRef.current = null;
+        portalScrollPinCleanupRef.current?.();
+        portalScrollPinCleanupRef.current = null;
         onDone();
       };
       portalCenterRafRef.current = requestAnimationFrame(pin);
@@ -344,6 +363,7 @@ export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf
     // Do NOT pin scrollTop to 0. That fights focus/scroll-anchoring and forces
     // the systemic scrollTop->0 jump-to-top on every landing portal open.
     const finish = () => {
+      if (portalCenterAnimRef.current !== anim) return;
       stopPortalCenterSync();
       const el = portalRef.current;
       anim.cancel();
@@ -372,10 +392,11 @@ export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf
             { transform: `translateY(${heldY}px)` },
             { transform: targetY === 0 ? 'translateY(0px)' : `translateY(${targetY}px)` }
           ],
-          { duration: Math.min(280, info.duration), easing: info.easing, fill: 'forwards' }
+          { duration: Math.min(320, info.duration), easing: 'cubic-bezier(.4, 0, .2, 1)', fill: 'forwards' }
         );
         portalCenterAnimRef.current = release;
         const done = () => {
+          if (portalCenterAnimRef.current !== release) return;
           applyPortalCenterForHeight(el, portalH1);
           release.cancel();
           portalCenterAnimRef.current = null;
@@ -383,7 +404,7 @@ export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf
         };
         release.onfinish = done;
         release.oncancel = () => {
-          portalCenterAnimRef.current = null;
+          if (portalCenterAnimRef.current === release) portalCenterAnimRef.current = null;
         };
         return;
       }
@@ -392,7 +413,7 @@ export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf
     };
     anim.onfinish = finish;
     anim.oncancel = () => {
-      portalCenterAnimRef.current = null;
+      if (portalCenterAnimRef.current === anim) portalCenterAnimRef.current = null;
     };
   }, []);
 
@@ -445,6 +466,12 @@ export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf
   // Resting center (collapsed) + FLIP only when entering/leaving nameOnly (place-items cannot interpolate).
   useLayoutEffect(() => {
     const el = portalRef.current;
+    // Resolve parent padding at its destination before reading any geometry.
+    // Otherwise its CSS transition keeps moving the FLIP's final landing point.
+    if (el) {
+      el.dataset.measuredLayout = '';
+      el.dataset.layoutReady = '';
+    }
     const from = layoutFlipFromRef.current;
     layoutFlipFromRef.current = null;
     layoutFlipAnimRef.current?.cancel();
@@ -490,17 +517,20 @@ export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf
       { duration: DISCLOSURE_HEIGHT_MS, easing: DISCLOSURE_HEIGHT_EASE, fill: "none" }
     );
     layoutFlipAnimRef.current = anim;
-    anim.onfinish = releaseMeasured;
-    anim.oncancel = releaseMeasured;
+    const releaseFlip = () => {
+      if (layoutFlipAnimRef.current !== anim) return;
+      layoutFlipAnimRef.current = null;
+      releaseMeasured();
+    };
+    anim.onfinish = releaseFlip;
+    anim.oncancel = releaseFlip;
   }, [layoutMode]);
 
-  // Warm disclosure JS chunks after first paint (idle) without mounting heavy UI yet —
-  // preserves homepage first-load wins while making later open/restore feel instant.
+  // Warm the closed preview state after first paint, without mounting images.
   useEffect(() => {
     let idleHandle: number | null = null;
     let timeoutHandle: number | null = null;
     const warm = () => {
-      preloadPortalDisclosureChunks();
       // After first paint idle: keep Latest Updates ready so restore/open is snappy.
       setAcceptanceWarm(true);
     };
@@ -517,11 +547,9 @@ export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf
     };
   }, []);
 
-  // Entering name-only: user already past first load — preload chunks and keep
-  // PaperAcceptance mounted under the hidden disclosures so restore/open is snappy.
+  // Keep closed previews ready while the user switches to the name-only view.
   useEffect(() => {
     if (layoutMode !== 'nameOnly') return;
-    preloadPortalDisclosureChunks();
     setAcceptanceWarm(true);
   }, [layoutMode]);
 
@@ -669,10 +697,20 @@ export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf
 
   const selectBrowseView = (nextView: BrowseView) => {
     clearCubeHoverIntent();
-    setBrowseView(nextView);
-    setActiveCubeFace(null);
-    setPinnedCubeFace(null);
-    setTouchCubeAngle('front');
+    const stage = cubeStageRef.current;
+    const updateView = () => {
+      setBrowseView(nextView);
+      setActiveCubeFace(null);
+      setPinnedCubeFace(null);
+      setTouchCubeAngle('front');
+    };
+    if (stage && nextView !== browseView) {
+      // Resolve the destination scene before measuring, without inheriting
+      // hundreds of competing auto-size transitions from the list layout.
+      stage.dataset.viewSwitching = '';
+      browseDisclosure.resize(updateView);
+      delete stage.dataset.viewSwitching;
+    } else updateView();
     try {
       window.localStorage.setItem('xinbaopedia-browse-view', nextView);
       window.localStorage.removeItem('xinbaopedia-cube-pinned-face');

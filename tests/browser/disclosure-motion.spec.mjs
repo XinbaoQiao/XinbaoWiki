@@ -9,7 +9,7 @@ for(const width of [1440,390]) test(`measured disclosure opening, closing and re
  const sample=async()=>news.evaluate(async el=>{
   const frames=[];const start=performance.now();
   el.querySelector(':scope > summary').click();
-  await new Promise(resolve=>{function frame(){frames.push({h:el.getBoundingClientRect().height,w:el.getBoundingClientRect().width,open:el.open,images:el.querySelectorAll('img').length});if(performance.now()-start<640)requestAnimationFrame(frame);else resolve();}requestAnimationFrame(frame);});
+  await new Promise(resolve=>{function frame(){frames.push({h:el.getBoundingClientRect().height,w:el.getBoundingClientRect().width,open:el.open,images:el.querySelectorAll('img').length});const elapsed=performance.now()-start;const active=el.getAnimations().some(animation=>animation.playState==='running');if(elapsed<640||(active&&elapsed<1400))requestAnimationFrame(frame);else resolve();}requestAnimationFrame(frame);});
   return frames;
  });
  const opening=await sample();
@@ -45,7 +45,8 @@ test('research topic images load in both languages',async({page})=>{
    await page.goto(`/wiki/${slug}${suffix}/`,{waitUntil:'domcontentloaded'});
    const img=page.locator('img[src^="/topics/"]').first();
    await img.scrollIntoViewIfNeeded();
-   await expect.poll(()=>img.evaluate(el=>el.complete&&el.naturalWidth===1400)).toBe(true);
+   // Current canonical topic WebP assets are 1000 x 666 (not the former 1400 px exports).
+   await expect.poll(()=>img.evaluate(el=>el.complete&&el.naturalWidth===1000&&el.naturalHeight===666)).toBe(true);
    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
   }
  }

@@ -20,6 +20,7 @@ import {
   siteBackgroundWritableConfigured
 } from '@/lib/site-wallpaper-store';
 import { ViewTransitions } from 'next-view-transitions';
+import { siteAppearanceBootstrapScript } from '@/lib/site-palette';
 import './globals.css';
 
 
@@ -93,8 +94,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
   return (
     <ViewTransitions>
-      <html lang="en" {...sharedDataset}>
+      <html lang="en" {...sharedDataset} suppressHydrationWarning>
         <head>
+          <script id="site-appearance-bootstrap" dangerouslySetInnerHTML={{ __html: siteAppearanceBootstrapScript() }} />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
           <link

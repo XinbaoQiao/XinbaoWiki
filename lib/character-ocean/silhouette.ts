@@ -271,6 +271,15 @@ export class SharkSampler {
   private kind: SharkKind = 'classic';
   private sharkId = 1;
   private cellW = 10;
+  // Per-spine geometry is shared by all cell/subsample hits in a frame.
+  private segmentX = new Float64Array(SHARK_NODES - 1);
+  private segmentY = new Float64Array(SHARK_NODES - 1);
+  private segmentLength2 = new Float64Array(SHARK_NODES - 1);
+  private segmentLength = new Float64Array(SHARK_NODES - 1);
+  private segmentAngle = new Float64Array(SHARK_NODES - 1);
+  private mantaAxisX = 0;
+  private mantaAxisY = 0;
+  private mantaLength = 1;
 
   prepare(sh: Shark, cellW = 10) {
     this.shape = SHAPES[sh.kind];
@@ -306,6 +315,22 @@ export class SharkSampler {
         );
     }
     this.arcTotal = this.arc[N - 1]! || 1;
+    for (let k = 0; k < N - 1; k++) {
+      const sx = this.spine[k * 2 + 2]! - this.spine[k * 2]!;
+      const sy = this.spine[k * 2 + 3]! - this.spine[k * 2 + 1]!;
+      const len2 = sx * sx + sy * sy || 1;
+      this.segmentX[k] = sx;
+      this.segmentY[k] = sy;
+      this.segmentLength2[k] = len2;
+      this.segmentLength[k] = Math.sqrt(len2);
+      this.segmentAngle[k] = Math.atan2(sy, sx);
+    }
+    const dx = this.spine[20]! - this.spine[0]!;
+    const dy = this.spine[21]! - this.spine[1]!;
+    const axisLength = Math.hypot(dx, dy) || 1;
+    this.mantaAxisX = dx / axisLength;
+    this.mantaAxisY = dy / axisLength;
+    this.mantaLength = (axisLength * (N - 1)) / 10;
 
     const bank = clamp(sh.turn * 0.45, -0.35, 0.35);
     const flex = 1 + 0.06 * Math.sin(sh.phase * 0.5);
@@ -372,12 +397,9 @@ export class SharkSampler {
 
   private sampleManta(px: number, py: number, L: number, out: Hit): Hit {
     const { spine } = this;
-    const dx = spine[20]! - spine[0]!;
-    const dy = spine[21]! - spine[1]!;
-    const axisLength = Math.hypot(dx, dy) || 1;
-    const tx = dx / axisLength;
-    const ty = dy / axisLength;
-    const localLength = (axisLength * (SHARK_NODES - 1)) / 10;
+    const tx = this.mantaAxisX;
+    const ty = this.mantaAxisY;
+    const localLength = this.mantaLength;
     const x = px - spine[0]!;
     const y = py - spine[1]!;
     const s = (x * tx + y * ty) / localLength;
@@ -455,41 +477,40 @@ export class SharkSampler {
     const { spine, arc } = this;
     const N = SHARK_NODES;
     let best = Infinity;
-    let bestS = 0;
-    let bestSign = 1;
-    let bestNx = 0;
-    let bestNy = 0;
-    let hitAngle = 0;
+    let bestSegment = 0;
+    let bestU = 0;
 
     for (let k = 0; k < N - 1; k++) {
       const ax = spine[k * 2]!;
       const ay = spine[k * 2 + 1]!;
-      const sx = spine[(k + 1) * 2]! - ax;
-      const sy = spine[(k + 1) * 2 + 1]! - ay;
-      const len2 = sx * sx + sy * sy || 1;
+      const sx = this.segmentX[k]!;
+      const sy = this.segmentY[k]!;
+      const len2 = this.segmentLength2[k]!;
       const u = clamp(((px - ax) * sx + (py - ay) * sy) / len2, 0, 1);
       const qx = ax + sx * u;
       const qy = ay + sy * u;
       const d2 = (px - qx) ** 2 + (py - qy) ** 2;
       if (d2 < best) {
         best = d2;
-        const len = Math.sqrt(len2);
-        bestS = (arc[k]! + u * len) / this.arcTotal;
-        bestSign = sx * (py - ay) - sy * (px - ax) >= 0 ? 1 : -1;
-        bestNx = (-sy / len) * bestSign;
-        bestNy = (sx / len) * bestSign;
-        hitAngle = Math.atan2(sy, sx);
+        bestSegment = k;
+        bestU = u;
       }
     }
 
+    const len = this.segmentLength[bestSegment]!;
+    const sx = this.segmentX[bestSegment]!;
+    const sy = this.segmentY[bestSegment]!;
+    const bestSign = sx * (py - spine[bestSegment * 2 + 1]!) - sy * (px - spine[bestSegment * 2]!) >= 0 ? 1 : -1;
+    const bestNx = (-sy / len) * bestSign;
+    const bestNy = (sx / len) * bestSign;
     const a = Math.sqrt(best);
-    const s = bestS;
+    const s = (arc[bestSegment]! + bestU * len) / this.arcTotal;
     const u = s * L;
     const shape = this.shape;
     const w = shape.halfWidth(s) * L;
     out.dist = a;
     out.s = s;
-    out.angle = hitAngle;
+    out.angle = this.segmentAngle[bestSegment]!;
     out.inside = false;
     out.flag = FLAG_NONE;
     out.shade = 0;

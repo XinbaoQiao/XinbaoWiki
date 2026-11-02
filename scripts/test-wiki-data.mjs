@@ -306,6 +306,7 @@ for (const logoPath of themedSiteWordmarks) {
   assert.ok(visibleColorCount <= 2, `${logoPath} uses a flat visible logo color without a separate decorative outline`);
 }
 const languageToggle = fs.readFileSync(path.join(root, 'components/LanguageToggle.tsx'), 'utf8');
+const sitePaletteLib = fs.readFileSync(path.join(root, 'lib/site-palette.ts'), 'utf8');
 const articleTabs = fs.readFileSync(path.join(root, 'components/ArticleTabs.tsx'), 'utf8');
 const wikiSearch = fs.readFileSync(path.join(root, 'components/WikiSearch.tsx'), 'utf8');
 const chatWithXinbao = fs.readFileSync(path.join(root, 'components/ChatWithXinbao.tsx'), 'utf8');
@@ -387,10 +388,12 @@ assert.doesNotMatch(layout, /getSearchIndex|searchIndex/, 'layout does not seria
 assert.match(layout, /<WikiSearch hideOnPortal \/>/, 'layout keeps topbar search on article pages without embedding its data');
 assert.match(layout, /className="wiki-topbar-controls"[\s\S]*<WikiSearch hideOnPortal \/>[\s\S]*<LanguageToggle \/>/, 'topbar groups search and language controls in visual reading order');
 assert.match(languageToggle, /const isWikiPage = decodeURIComponent\(pathname\)\.split\('\/'\)\.includes\('wiki'\);[\s\S]*if \(!isWikiPage\) return null;/, 'language toggle hides on the portal homepage where language editions are shown in the masthead');
-assert.match(languageToggle, /type SitePaletteName = 'text' \| 'blue' \| 'gold' \| 'rose' \| 'green' \| 'violet' \| 'charcoal';/, 'site palette exposes the pure-text theme alongside six color themes');
+assert.match(sitePaletteLib, /type SitePaletteName = 'text' \| 'blue' \| 'gold' \| 'rose' \| 'green' \| 'violet' \| 'charcoal';/, 'site palette exposes the pure-text theme alongside six color themes');
 assert.match(languageToggle, /color: '#ffffff', mode: 'text', title: 'Pure white text theme'/, 'pure-text mode uses a pure-white palette swatch');
 assert.match(languageToggle, /const sitePaletteOptions: SitePaletteOption\[\] = \[[\s\S]*mode: 'text'[\s\S]*mode: 'blue'[\s\S]*mode: 'gold'[\s\S]*mode: 'rose'[\s\S]*mode: 'green'[\s\S]*mode: 'violet'[\s\S]*mode: 'charcoal'[\s\S]*mode: 'auto'[\s\S]*\];/, 'site palette orders the text mode and six manual colors before auto mode');
-assert.match(languageToggle, /function sitePaletteForLocalTime\(date = new Date\(\)\): Exclude<SitePaletteName, 'text'> \{[\s\S]*hour >= 5 && hour < 9[\s\S]*return 'blue'[\s\S]*hour >= 9 && hour < 13[\s\S]*return 'gold'[\s\S]*hour >= 13 && hour < 16[\s\S]*return 'rose'[\s\S]*hour >= 16 && hour < 19[\s\S]*return 'green'[\s\S]*hour >= 19 && hour < 22[\s\S]*return 'violet'[\s\S]*return 'charcoal'[\s\S]*\}/, 'auto mode rotates through all six color themes without replacing the manual text mode');
+assert.match(sitePaletteLib, /function sitePaletteForLocalTime\(date = new Date\(\)\): Exclude<SitePaletteName, 'text'> \{[\s\S]*hour >= 5 && hour < 9[\s\S]*return 'blue'[\s\S]*hour >= 9 && hour < 13[\s\S]*return 'gold'[\s\S]*hour >= 13 && hour < 16[\s\S]*return 'rose'[\s\S]*hour >= 16 && hour < 19[\s\S]*return 'green'[\s\S]*hour >= 19 && hour < 22[\s\S]*return 'violet'[\s\S]*return 'charcoal'[\s\S]*\}/, 'auto mode rotates through all six color themes without replacing the manual text mode');
+assert.match(languageToggle, /from '@\/lib\/site-palette'/, 'controller reuses the palette resolver embedded by the head bootstrap');
+assert.match(layout, /id="site-appearance-bootstrap"[\s\S]*siteAppearanceBootstrapScript\(\)/, 'appearance is restored before the server-rendered body paints');
 assert.match(languageToggle, /window\.localStorage\.getItem\(sitePaletteStorageKey\)/, 'site palette restores a manual color override from local storage');
 assert.match(languageToggle, /document\.documentElement\.dataset\.sitePalette = palette;/, 'site palette exposes the active color as an html data attribute');
 assert.match(languageToggle, /document\.documentElement\.dataset\.sitePaletteMode = mode;/, 'site palette preserves whether the visible palette came from auto or manual mode');
@@ -2500,7 +2503,10 @@ assert.doesNotMatch(homepagePortal, /className="wiki-portal-updates-window"[\s\S
 assert.match(homepagePortal, /<h1 className="wiki-portal-name" id="portal-title">[\s\S]*<\/h1>[\s\S]*<button[\s\S]*aria-label=\{portalLayoutLabel\}[\s\S]*className="wiki-portal-name-button"[\s\S]*onClick=\{cyclePortalLayout\}[\s\S]*\/>/, 'homepage signature button is an empty named sibling overlay after the h1 title');
 assert.match(homepagePortal, /aria-controls="portal-news portal-activity portal-directory"[\s\S]*aria-expanded=\{layoutMode === 'expanded'\}/, 'homepage signature button names and controls all three disclosure sections');
 assert.doesNotMatch(homepagePortal, /onDoubleClick/, 'homepage signature avoids double-click-only hidden behavior');
-assert.doesNotMatch(homepagePortal, /onKeyDown=\{|handleSignatureKeyDown|KeyboardEvent/, 'homepage signature button uses native button activation instead of custom keyboard handling');
+const homepageSignatureButton = homepagePortal.match(/<button\b(?:(?!<button\b)[\s\S])*?className="wiki-portal-name-button"[\s\S]*?\/>/)?.[0];
+assert.ok(homepageSignatureButton, 'homepage signature button exists');
+assert.doesNotMatch(homepageSignatureButton, /onKeyDown=\{|KeyboardEvent/, 'homepage signature button uses native button activation instead of custom keyboard handling');
+assert.doesNotMatch(homepagePortal, /handleSignatureKeyDown/, 'homepage signature has no custom keyboard activation helper');
 assert.match(homepagePortal, /<details[\s\S]*className="wiki-portal-directory"[\s\S]*id="portal-directory"[\s\S]*ref=\{browseDisclosure\.ref\}[\s\S]*data-animated-disclosure=""[\s\S]*open=\{browseOpen\}[\s\S]*browseDisclosure\.toggle[\s\S]*browseLabels\[language\]/, 'homepage Browse uses native disclosure toggle semantics with controlled state sync');
 assert.match(homepagePortal, /<details[\s\S]*className="wiki-portal-news wiki-portal-timeline"[\s\S]*id="portal-news"[\s\S]*onToggle=\{\(event\) => \{[\s\S]*event\.target !== event\.currentTarget[\s\S]*changeNewsOpen\(event\.currentTarget\.open\);[\s\S]*\}\}[\s\S]*open=\{newsOpen\}[\s\S]*<summary[\s>]/, 'homepage Updates uses native disclosure toggle semantics with controlled state sync');
 assert.match(visitorAtlas, /<details[\s\S]*className="wiki-portal-activity wiki-portal-timeline"[\s\S]*id="portal-activity"[\s\S]*ref=\{detailsRef\}[\s\S]*data-animated-disclosure=""[\s\S]*onOpenChange\(event\.currentTarget\.open\)[\s\S]*open=\{open\}[\s\S]*<summary[\s>]/, 'homepage Site activity uses animated disclosure toggle semantics with controlled state sync');

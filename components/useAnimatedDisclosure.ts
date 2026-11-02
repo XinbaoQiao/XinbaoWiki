@@ -36,23 +36,33 @@ export function useAnimatedDisclosure(
     animation.current?.cancel();
   }, []);
 
-  function change(next: boolean) {
+  function change(next: boolean, updateContent?: () => void) {
     const element = ref.current;
-    if (!element) { commit(next); return; }
+    if (!element) { updateContent?.(); if (next !== open) commit(next); return; }
+    // Name-only restore requests all sections closed again. Re-animating an
+    // already-closed section changes its hidden height and spoils the FLIP target.
+    if (!updateContent && !animation.current && next === open && element.open === next) return;
     const start = element.getBoundingClientRect().height;
     animation.current?.cancel();
     animation.current = null;
     closing.current = !next;
+    const clearHeightHint = () => {
+      if (element.style.willChange === 'height') element.style.willChange = '';
+      element.style.height = '';
+      element.style.overflow = '';
+    };
     const reducedMotion =
       typeof window !== 'undefined' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reducedMotion || !element.animate) {
       closing.current = false;
-      commit(next);
+      clearHeightHint();
+      if (updateContent) flushSync(() => { commit(next); updateContent(); });
+      else commit(next);
       onHeightAnimateRef.current?.({
         next,
         startHeight: start,
-        endHeight: start,
+        endHeight: updateContent ? element.getBoundingClientRect().height : start,
         duration: 0,
         easing: DISCLOSURE_HEIGHT_EASE,
         reducedMotion: true
@@ -66,9 +76,12 @@ export function useAnimatedDisclosure(
 
     let end: number;
     if (next) {
-      flushSync(() => commit(true));
-      // scrollHeight reflects full content even while the used height is pinned.
-      end = element.scrollHeight;
+      flushSync(() => { commit(true); updateContent?.(); });
+      // Measure the natural border box, then restore the pin in the same turn.
+      // scrollHeight rounds content pixels and omits the borders, causing an end snap.
+      element.style.height = 'auto';
+      end = element.getBoundingClientRect().height;
+      element.style.height = `${start}px`;
     } else {
       // Measure the closed summary without hiding the real outgoing contents.
       const probe = element.cloneNode(false) as HTMLDetailsElement;
@@ -96,11 +109,6 @@ export function useAnimatedDisclosure(
       { duration: DISCLOSURE_HEIGHT_MS, easing: DISCLOSURE_HEIGHT_EASE, fill: 'forwards' }
     );
     animation.current = current;
-    const clearHeightHint = () => {
-      if (element.style.willChange === 'height') element.style.willChange = '';
-      element.style.height = '';
-      element.style.overflow = '';
-    };
     const finish = () => {
       if (animation.current !== current) return;
       if (!next) flushSync(() => commit(false));
@@ -111,10 +119,23 @@ export function useAnimatedDisclosure(
       clearHeightHint();
     };
     current.oncancel = () => {
+      // Cancellation events arrive asynchronously. An old animation must not
+      // clear the height/overflow owned by a newly reversed animation.
+      if (animation.current !== current) return;
+      animation.current = null;
+      closing.current = false;
       clearHeightHint();
     };
     current.onfinish = finish;
   }
 
-  return { ref, change, toggle: () => change(closing.current || !open) };
+  return {
+    ref, change, toggle: () => change(closing.current || !open),
+    // Content changes share the disclosure's single height-animation owner,
+    // including when the user switches views before opening has finished.
+    resize: (updateContent: () => void) => {
+      if (ref.current?.open) change(true, updateContent);
+      else updateContent();
+    }
+  };
 }
