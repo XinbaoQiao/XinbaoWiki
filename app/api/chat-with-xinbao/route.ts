@@ -20,7 +20,7 @@ import {
 
 export const runtime = 'nodejs';
 
-const MODEL = 'deepseek-v4-flash';
+const MODEL = 'deepseek-v4.1-flash';
 const DEFAULT_BASE_URL = 'https://api.openlux.ai/v1';
 const CHAT_BACKEND_VERSION = 'xinbao-chat-api-v10';
 const DAILY_LIMIT = 10;
@@ -883,7 +883,7 @@ export async function POST(request: NextRequest) {
         Authorization: `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },
-      // OpenLux/deepseek-v4-flash silently drops long (and often any) system-role
+      // OpenLux/deepseek-v4.1-flash silently drops long (and often any) system-role
       // content (prompt_tokens collapses to ~user-only). Fold the prompt into the
       // user message so grounded evidence actually reaches the model.
       body: JSON.stringify({

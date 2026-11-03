@@ -1606,7 +1606,7 @@ assert.match(chatRoute, /diagnostic'\) === 'retrieval'[\s\S]*getWikiRetrievalInd
 assert.match(chatRoute, /function modelApiConfiguration[\s\S]*modelApiConfigured: modelConfiguration\.ready/, 'chat diagnostic proves the model API configuration is ready without exposing it');
 assert.match(chatRoute, /if \(diagnostic && !modelConfiguration\.ready\)[\s\S]*return genericUnavailable\(visitorCookie, language\)/, 'chat diagnostic fails closed when the model API configuration is missing');
 assert.match(smokeProduction, /modelApiConfigured === true/, 'production smoke blocks promotion when the model API is not configured');
-assert.match(chatRoute, /MODEL = 'deepseek-v4-flash'/, 'chat API fixes the configured model');
+assert.match(chatRoute, /MODEL = 'deepseek-v4\.1-flash'/, 'chat API fixes the configured model');
 assert.match(chatRoute, /DEFAULT_BASE_URL = 'https:\/\/api\.openlux\.ai\/v1'/, 'chat API uses the documented OpenLux base URL');
 assert.match(chatRoute, /YUNWU_API_KEY/, 'chat API reads the deployment-compatible provider key from server env');
 assert.match(chatRoute, /YUNWU_API_BASE_URL/, 'chat API supports a server env base URL override');
