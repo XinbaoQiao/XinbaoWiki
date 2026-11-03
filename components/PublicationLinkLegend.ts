@@ -30,6 +30,48 @@ const icons = [
 ] as const;
 const labels = { en: ['OpenReview', 'arXiv', 'Code (GitHub)', 'Publisher'], zh: ['OpenReview', 'arXiv', '代码（GitHub）', '出版论文页'] } as const;
 
+
+export function isPdfHref(href: string | undefined): boolean {
+  if (!href) return false;
+  try {
+    if (/^(https?:|mailto:|tel:)/i.test(href)) {
+      return /\.pdf$/i.test(new URL(href).pathname);
+    }
+  } catch {
+    return false;
+  }
+  const pathOnly = href.split(/[?#]/)[0] || '';
+  return /\.pdf$/i.test(pathOnly);
+}
+
+export type PublicationLinkKind = 'openreview' | 'arxiv' | 'code' | 'publisher' | 'pdf';
+
+/** Prefer host markers (arXiv/OpenReview/…) over a generic PDF badge, even for /pdf/ paths. */
+export function publicationLinkKind(href: string): PublicationLinkKind | undefined {
+  let url: URL;
+  try { url = new URL(href); } catch {
+    return isPdfHref(href) ? 'pdf' : undefined;
+  }
+  if (!['https:', 'http:'].includes(url.protocol)) return isPdfHref(href) ? 'pdf' : undefined;
+  if (url.hostname === 'openreview.net' && url.pathname === '/forum' && url.searchParams.has('id')) return 'openreview';
+  if (url.hostname === 'arxiv.org' && (url.pathname.startsWith('/abs/') || url.pathname.startsWith('/pdf/'))) return 'arxiv';
+  if (url.hostname === 'github.com' && url.pathname.split('/').filter(Boolean).length >= 2) return 'code';
+  if (url.hostname === 'ojs.aaai.org' && url.pathname.includes('/article/view/')) return 'publisher';
+  if (isPdfHref(href)) return 'pdf';
+  return undefined;
+}
+
+export function publicationResourceLabel(href: string, language: 'en' | 'zh', fallback?: string): string {
+  const kind = publicationLinkKind(href);
+  if (kind === 'openreview') return 'OpenReview';
+  if (kind === 'arxiv') return 'arXiv';
+  if (kind === 'code') return language === 'zh' ? '代码（GitHub）' : 'GitHub';
+  if (kind === 'publisher') return language === 'zh' ? '出版论文页' : 'Publisher';
+  if (kind === 'pdf') return 'PDF';
+  if (fallback && fallback.trim()) return fallback;
+  return language === 'zh' ? '链接' : 'Link';
+}
+
 export function publicationLinkTitle(href: string, language: 'en' | 'zh'): string | undefined {
   let url: URL;
   try { url = new URL(href); } catch { return undefined; }
@@ -42,11 +84,18 @@ export function publicationLinkTitle(href: string, language: 'en' | 'zh'): strin
   return undefined;
 }
 
+const pdfIconPath = 'M6 2h8l4 4v16H6z M14 2v5h5 M9 12h6 M9 16h6';
+
 export function PublicationLinkIcon({ href }: { href: string }) {
-  if (!publicationLinkTitle(href, 'en')) return null;
-  const hostname = new URL(href).hostname;
-  const kind = hostname === 'openreview.net' ? 'openreview'
-    : hostname === 'arxiv.org' ? 'arxiv' : hostname === 'github.com' ? 'code' : 'publisher';
+  const kind = publicationLinkKind(href);
+  if (!kind) return null;
+  if (kind === 'pdf') {
+    return createElement('svg', {
+      className: 'publication-resource-icon', viewBox: '0 0 24 24',
+      width: 14, height: 14, 'aria-hidden': true, focusable: 'false', 'data-link-icon': 'pdf',
+      fill: 'none', stroke: 'currentColor', strokeWidth: 1.8
+    }, createElement('path', { d: pdfIconPath }));
+  }
   const icon = icons.find((entry) => entry.id === kind)!;
   return createElement('svg', {
     className: 'publication-resource-icon', viewBox: icon.viewBox,

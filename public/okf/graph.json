@@ -711,7 +711,7 @@
         "src-da17eb3884244bd3",
         "src-faaafad831fbefc5"
       ],
-      "contentHash": "sha256:2b2f78bff36adbfbc896613e68b76b5860b070bb029a5453af263e8bda57672c",
+      "contentHash": "sha256:d4eceeb64f58ffc20ad153ccdc89da64e467711822a7b307faecee6d8ada9cc0",
       "file": "CV.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -721,14 +721,15 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-10-19T10:48:47.060Z",
-        "reviewDue": "2027-01-17",
+        "reviewedAt": "2026-11-03T23:11:07+09:00",
+        "reviewDue": "2027-02-01",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-19T10:47:25.475Z",
+      "modifiedAt": "2026-11-03T14:10:44.475Z",
       "outgoing": [
         "Decentralized_Free_Support_Wasserstein_Barycenter",
+        "NUSRI_CQ",
         "Publications",
         "Zhejiang_University"
       ],
@@ -769,12 +770,12 @@
       "timestamp": "2026-07-02T19:37:18+08:00",
       "title": "Curriculum Vitae",
       "type": "CV summary",
-      "reviewedAt": "2026-10-19T10:48:47.060Z",
-      "reviewDue": "2027-01-17",
+      "reviewedAt": "2026-11-03T23:11:07+09:00",
+      "reviewDue": "2027-02-01",
       "retrieval": {
         "documentId": "wiki:CV",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:2b2f78bff36adbfbc896613e68b76b5860b070bb029a5453af263e8bda57672c",
+        "contentHash": "sha256:d4eceeb64f58ffc20ad153ccdc89da64e467711822a7b307faecee6d8ada9cc0",
         "textFields": [
           "title",
           "aliases",
@@ -823,7 +824,7 @@
         "src-da17eb3884244bd3",
         "src-faaafad831fbefc5"
       ],
-      "contentHash": "sha256:9ad7adea040b48bcf794ae0921c8b24225280f6d2d94e985b2dc5fac62fce2a6",
+      "contentHash": "sha256:a9fb7f517b4b09c771de3a6a0c5ccbfd4c96683d7b546d2ba9f462b89b65d676",
       "file": "CV_zh.md",
       "footnoteSourceIds": [],
       "hidden": false,
@@ -833,12 +834,12 @@
         "confidence": 0.9,
         "review": "periodic",
         "retention": "semantic memory",
-        "reviewedAt": "2026-10-19T10:48:47.060Z",
-        "reviewDue": "2027-01-17",
+        "reviewedAt": "2026-11-03T23:11:07+09:00",
+        "reviewDue": "2027-02-01",
         "pendingReview": false,
         "overdue": false
       },
-      "modifiedAt": "2026-10-19T10:47:25.474Z",
+      "modifiedAt": "2026-11-03T14:10:44.464Z",
       "outgoing": [
         "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
         "NUSRI_CQ_zh",
@@ -882,12 +883,12 @@
       "timestamp": "2026-07-02T19:37:18+08:00",
       "title": "简历",
       "type": "CV 摘要",
-      "reviewedAt": "2026-10-19T10:48:47.060Z",
-      "reviewDue": "2027-01-17",
+      "reviewedAt": "2026-11-03T23:11:07+09:00",
+      "reviewDue": "2027-02-01",
       "retrieval": {
         "documentId": "wiki:CV_zh",
         "chunking": "markdown-heading-v1",
-        "contentHash": "sha256:9ad7adea040b48bcf794ae0921c8b24225280f6d2d94e985b2dc5fac62fce2a6",
+        "contentHash": "sha256:a9fb7f517b4b09c771de3a6a0c5ccbfd4c96683d7b546d2ba9f462b89b65d676",
         "textFields": [
           "title",
           "aliases",
@@ -4281,6 +4282,7 @@
         ]
       },
       "backlinks": [
+        "CV",
         "Experience",
         "index",
         "LLM_Reliability",
@@ -8079,6 +8081,13 @@
       "relation": "wikilink",
       "source": "body",
       "to": "Decentralized_Free_Support_Wasserstein_Barycenter"
+    },
+    {
+      "from": "CV",
+      "label": "",
+      "relation": "wikilink",
+      "source": "body",
+      "to": "NUSRI_CQ"
     },
     {
       "from": "CV",
@@ -14970,7 +14979,7 @@
     },
     "pages": 88,
     "publicPages": 88,
-    "relations": 1064,
+    "relations": 1065,
     "types": {
       "Academic advisor": 4,
       "CV summary": 1,

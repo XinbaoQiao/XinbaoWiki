@@ -156,7 +156,7 @@ const siteUpdateEvents: readonly SiteUpdateEvent[] = [
       image: '/papers/soft-weighted/camera-ready-first-page.webp',
       width: 1200,
       height: 1553,
-      pdf: 'https://ojs.aaai.org/index.php/AAAI/article/view/39681/43642'
+      pdf: 'https://arxiv.org/pdf/2505.18783'
     }],
     venue: 'AAAI 2026'
   }),

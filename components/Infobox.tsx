@@ -1,6 +1,7 @@
 import { Fragment, type ReactNode } from 'react';
 import { PortraitGallery } from '@/components/PortraitGallery';
 import { WikiHrefLink } from '@/components/WikiHrefLink';
+import { PublicationLinkIcon, publicationLinkKind, publicationResourceLabel } from '@/components/PublicationLinkLegend';
 import type { LinkItem, WikiFrontmatter, WikiImageItem } from '@/lib/wiki';
 import { pathWithBasePath, toChineseSlug, toEnglishSlug } from '@/lib/wiki';
 
@@ -166,10 +167,17 @@ function render(value: unknown, language: InfoboxLanguage): ReactNode {
     return lineGroup(value.map((item, index) => <Fragment key={index}>{render(item, language)}</Fragment>));
   }
   if (isLink(value)) {
+    const kind = publicationLinkKind(value.url);
+    const resourceLabel = kind ? publicationResourceLabel(value.url, language, value.label) : value.label;
     return (
       <>
-        <WikiHrefLink applyBasePath={false} href={localizeUrl(value.url, language)}>
-          {linkLabel(value.label, value.url)}
+        <WikiHrefLink
+          applyBasePath={false}
+          className={kind && kind !== 'pdf' ? 'publication-resource-link' : undefined}
+          href={localizeUrl(value.url, language)}
+        >
+          {kind && kind !== 'pdf' ? <PublicationLinkIcon href={value.url} /> : null}
+          {linkLabel(resourceLabel, value.url)}
         </WikiHrefLink>
         {value.detail && (
           <>
@@ -238,7 +246,10 @@ export function Infobox({ data, language = 'en' }: Props) {
           <table>
             <tbody>
               {links.map((item) => {
-                const label = item.title || (item.url.startsWith('mailto:') ? (language === 'zh' ? '邮箱' : 'Email') : item.label);
+                const kind = publicationLinkKind(item.url);
+                const label = item.title
+                  || (item.url.startsWith('mailto:') ? (language === 'zh' ? '邮箱' : 'Email') : undefined)
+                  || (kind ? publicationResourceLabel(item.url, language, item.label) : item.label);
                 return (
                   <tr key={`${item.label}-${item.url}`}>
                     <th>{label}</th>

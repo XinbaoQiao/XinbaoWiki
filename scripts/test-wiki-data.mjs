@@ -1,4 +1,4 @@
-import fs from 'node:fs';
+﻿import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
@@ -2315,7 +2315,7 @@ assert.match(chatWithXinbaoPanel, /visualViewport[\s\S]*chat-xinbao-backdrop[\s\
 assert.doesNotMatch(articleContents, /wiki-toc-return|returnToContents|IntersectionObserver/, 'articles keep inline navigation without a floating Contents button');
 assert.match(styles, /@media \(min-width: 721px\) \{[\s\S]*\.wiki-article-contents \{[\s\S]*position: sticky;/, 'desktop Contents contents stay sticky while reading');
 assert.match(articleContents, /wiki-on-this-page[\s\S]*wiki-contents-mobile/, 'article Contents retain desktop and mobile inline navigation');
-assert.match(articleContents, /scrollIntoView\(\{ behavior:[\s\S]*smooth[\s\S]*\}\)/, 'Contents links smooth-scroll to headings');
+assert.match(articleContents, /scrollIntoView\(\{ behavior:[\s\S]*auto[\s\S]*\}\)/, 'Contents links jump to headings without native smooth scrolling');
 assert.match(styles, /@keyframes wiki-heading-flash/, 'heading flash animation is defined for Contents navigation');
 assert.match(styles, /@keyframes wiki-heading-flash[\s\S]*--site-theme-accent/, 'heading flash uses the active site theme accent');
 assert.match(styles, /@media \(max-width: 640px\) \{[\s\S]*Publications[\s\S]*\.wiki-body tr \{[\s\S]*padding: 14px 14px 12px;[\s\S]*border-radius: 14px;/, 'Publications mobile rows render as padded cards with radius');

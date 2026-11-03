@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { hasInfoboxDetails, Infobox } from '@/components/Infobox';
 import { ArticleFacts } from '@/components/ArticleFacts';
+import { CvDocument } from '@/components/CvDocument';
 import { WikiMarkdown } from '@/components/WikiMarkdown';
 import { WikiTitleText } from '@/components/WikiTitleText';
 import {
@@ -101,23 +102,26 @@ export default async function WikiPage({ params }: Props) {
   const updatedLabel = language === 'zh' ? '最后更新' : 'Last updated';
   const pageType = wikiConceptType(page.data, page.slug);
   const hasFacts = hasInfoboxDetails(page.data);
+  const isCvPage = page.slug === 'CV' || page.slug === 'CV_zh';
   return (
     <article
-      className="wiki-page"
+      className={isCvPage ? 'wiki-page wiki-page-cv' : 'wiki-page'}
       data-page-language={language}
       data-page-slug={page.slug}
       data-page-type={pageType}
       lang={language === 'zh' ? 'zh-CN' : 'en'}
     >
-      <h1 className="wiki-title">
+      <h1 className={isCvPage ? 'wiki-title wiki-title-cv-sr' : 'wiki-title'}>
         <WikiTitleText slug={page.slug}>
           {page.title}
         </WikiTitleText>
-        <span className="edit-link">
-          <a href={sourceHref} target="_blank" rel="noreferrer">{editLabel}</a>
-        </span>
+        {!isCvPage && (
+          <span className="edit-link">
+            <a href={sourceHref} target="_blank" rel="noreferrer">{editLabel}</a>
+          </span>
+        )}
       </h1>
-      {updatedAt && (
+      {!isCvPage && updatedAt && (
         <p className="wiki-page-meta">
           {updatedLabel} <time dateTime={updatedAt}>{readableDate(updatedAt)}</time>
         </p>
@@ -129,7 +133,11 @@ export default async function WikiPage({ params }: Props) {
             <Infobox data={page.data} language={language} />
           </ArticleFacts>
         )}
-        <WikiMarkdown editLabel={editLabel} sourceHref={sourceHref} markdown={preprocessWikiLinks(page.content, { language })} />
+        {isCvPage ? (
+          <CvDocument editLabel={editLabel} language={language === 'zh' ? 'zh' : 'en'} sourceHref={sourceHref} />
+        ) : (
+          <WikiMarkdown editLabel={editLabel} sourceHref={sourceHref} markdown={preprocessWikiLinks(page.content, { language })} />
+        )}
       </div>
     </article>
   );

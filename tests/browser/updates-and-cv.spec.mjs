@@ -259,37 +259,35 @@ for (const width of [1440, 390, 320]) {
 
 for (const slug of ['CV', 'CV_zh']) {
   for (const width of [1440, 320]) {
-    test(`${slug}: resource icons and a separate link line at ${width}px`, async ({ page }) => {
+    test(`${slug}: PDF-aligned document, resource icons and section order at ${width}px`, async ({ page }) => {
       const errors = captureErrors(page);
       await page.setViewportSize({ width, height: 1100 });
       await page.goto(`/wiki/${slug}/`, { waitUntil: 'networkidle' });
-      const publications = page.locator('.wiki-body li').filter({ has: page.locator('strong', { hasText: /^Paper #/ }) });
-      await expect(publications).toHaveCount(7);
+      const cv = page.locator('[data-cv-document]');
+      await expect(cv).toHaveCount(1);
+      await expect(cv.locator('[data-cv-paper]')).toHaveCount(7);
       for (let index = 0; index < 5; index++) {
-        const row = publications.nth(index);
+        const row = cv.locator('[data-cv-paper]').nth(index);
         await expect(row.locator('a.publication-resource-link svg')).toHaveCount(3);
         const icons = await row.locator('a.publication-resource-link svg').evaluateAll(elements => elements.map(element => element.dataset.linkIcon));
         expect(icons).toEqual(['openreview', 'arxiv', index === 2 ? 'publisher' : 'code']);
-        const linkPrefix = await row.evaluate(element => {
-          const firstLink = element.querySelector('a.publication-resource-link');
-          let sibling = firstLink.previousSibling;
-          const prefix = [];
-          while (sibling && sibling.nodeName !== 'BR') {
-            prefix.unshift(sibling.textContent);
-            sibling = sibling.previousSibling;
-          }
-          return { hardBreak: sibling?.nodeName === 'BR', text: prefix.join('').trim() };
-        });
-        expect(linkPrefix).toEqual({ hardBreak: true, text: slug === 'CV_zh' ? '链接：' : 'Links:' });
       }
+      const expectedName = slug === 'CV_zh' ? '乔鑫宝' : 'Xinbao Qiao';
+      await expect(cv.locator('h2')).toContainText(expectedName);
+      await expect(cv.getByRole('heading', { name: slug === 'CV_zh' ? '教育经历' : 'Education' })).toHaveCount(1);
+      await expect(cv.getByRole('heading', { name: slug === 'CV_zh' ? '研究经历' : 'Experience' })).toHaveCount(1);
+      await expect(cv.getByRole('heading', { name: slug === 'CV_zh' ? '精选论文' : 'Selected Publications' })).toHaveCount(1);
       if (slug === 'CV_zh') {
-        await expect(publications.nth(4)).toContainText('沈卓洋');
-        await expect(publications.nth(4)).not.toContainText('Zhuoyang Shen');
+        await expect(cv.locator('[data-cv-paper="5"]')).toContainText('沈卓洋');
+        await expect(cv.locator('[data-cv-paper="5"]')).not.toContainText('Zhuoyang Shen');
+      } else {
+        await expect(cv).toContainText('NUSRI CQ');
+        await expect(cv).toContainText('Research Areas');
       }
       await expectNoPageOverflow(page);
       if (width === 1440 && slug === 'CV_zh') {
-        await publications.first().scrollIntoViewIfNeeded();
-        await captureScreenshot(publications.first().locator('..'), 'cv-zh-publication-links.png');
+        await cv.locator('[data-cv-paper="1"]').scrollIntoViewIfNeeded();
+        await captureScreenshot(cv.locator('[data-cv-paper="1"]'), 'cv-zh-publication-links.png');
       }
       expect(errors).toEqual([]);
     });

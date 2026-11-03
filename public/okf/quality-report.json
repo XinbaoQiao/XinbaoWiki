@@ -5,7 +5,7 @@
     "pages": 88,
     "publicPages": 88,
     "hiddenPages": 4,
-    "edges": 1064,
+    "edges": 1065,
     "warnings": 0,
     "languages": {
       "en": 44,
@@ -968,17 +968,17 @@
         "slug": "CV",
         "title": "Curriculum Vitae",
         "language": "en",
-        "modifiedAt": "2026-10-19T10:47:25.475Z",
-        "reviewedAt": "2026-10-19T10:48:47.060Z",
-        "reviewDue": "2027-01-17"
+        "modifiedAt": "2026-11-03T14:10:44.475Z",
+        "reviewedAt": "2026-11-03T23:11:07+09:00",
+        "reviewDue": "2027-02-01"
       },
       {
         "slug": "CV_zh",
         "title": "简历",
         "language": "zh",
-        "modifiedAt": "2026-10-19T10:47:25.474Z",
-        "reviewedAt": "2026-10-19T10:48:47.060Z",
-        "reviewDue": "2027-01-17"
+        "modifiedAt": "2026-11-03T14:10:44.464Z",
+        "reviewedAt": "2026-11-03T23:11:07+09:00",
+        "reviewDue": "2027-02-01"
       },
       {
         "slug": "Data_Centric_Machine_Learning",
@@ -1591,7 +1591,7 @@
     ],
     "coverage": 0.0227,
     "structuredEdges": 2,
-    "totalEdges": 1064
+    "totalEdges": 1065
   },
   "retrievalReadiness": {
     "pages": 88,

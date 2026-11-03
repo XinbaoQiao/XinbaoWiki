@@ -8,18 +8,18 @@ tags:
   - profile
   - cv-summary
 timestamp: '2026-07-02T19:37:18+08:00'
-modified: '2026-10-19T10:47:25.475Z'
-content_hash: 'sha256:2b2f78bff36adbfbc896613e68b76b5860b070bb029a5453af263e8bda57672c'
-reviewed_at: '2026-10-19T10:48:47.060Z'
-review_due: '2027-01-17'
+modified: '2026-11-03T14:10:44.475Z'
+content_hash: 'sha256:d4eceeb64f58ffc20ad153ccdc89da64e467711822a7b307faecee6d8ada9cc0'
+reviewed_at: '2026-11-03T23:11:07+09:00'
+review_due: '2027-02-01'
 language: en
 lifecycle:
   status: active
   confidence: 0.9
   review: periodic
   retention: semantic memory
-  reviewedAt: '2026-10-19T10:48:47.060Z'
-  reviewDue: '2027-01-17'
+  reviewedAt: '2026-11-03T23:11:07+09:00'
+  reviewDue: '2027-02-01'
   pendingReview: false
   overdue: false
 retrieval:
@@ -51,6 +51,8 @@ source_path: wiki/CV.md
 ---
 Academic CV summary for Xinbao Qiao, with a downloadable PDF [résumé](/files/XinbaoQiao_CV.pdf).
 
+Related wiki pages: [Zhejiang University](./Zhejiang_University.md), [NUSRI CQ](./NUSRI_CQ.md), [publications](./Publications.md), and [Decentralized Free-Support Wasserstein Barycenter](./Decentralized_Free_Support_Wasserstein_Barycenter.md).
+
 ## Contact
 
 - Phone: [+852-70141618](tel:+85270141618)
@@ -62,36 +64,35 @@ Academic CV summary for Xinbao Qiao, with a downloadable PDF [résumé](/files/X
 
 ## Education
 
-- **The Chinese University of Hong Kong**, PhD student in Information Engineering, 2026-08-01-present. Advised by [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/).
-- **Zhejiang University**, M.Eng. in Artificial Intelligence, 2022-09 to 2025-12.
-- **Shandong University**, B.Eng. in Communication Engineering, 2018-09 to 2022-07.
+- **The Chinese University of Hong Kong** Ph.D., Information Engineering. Advisor: [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/). Aug 2026∼present.
+  - **Research Areas** My research primarily studies lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are acquired, used, and deleted. My recent work aims to improve the reliability, interpretability, and controllability of AI models in heterogeneous, computation-constrained, and communication-constrained environments.
+- **Zhejiang University** M.Eng. in Artificial Intelligence. Advised by [Meng Zhang](https://person.zju.edu.cn/mengzhang). Zhejiang. Sep 2022 ∼ Dec 2025.
+- **Shandong University** B.Eng. in Communication Engineering. Shandong. Sep 2018 ∼ Jul 2022.
 
 ## Research interests
 
-- Qiao's research primarily studies lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are acquired, used, and deleted. His recent work aims to improve the reliability, interpretability, and controllability of AI models in heterogeneous, computation-constrained, and communication-constrained environments.
+- My research primarily studies lifecycle management of data in AI models, focusing on theoretical methods and practical problems that arise as data are acquired, used, and deleted. My recent work aims to improve the reliability, interpretability, and controllability of AI models in heterogeneous, computation-constrained, and communication-constrained environments.
 
-## Research experience
+## Experience
 
-- **Doctoral Research at The Chinese University of Hong Kong**, 2026-08-01-present, advised by [Angela Yingjun Zhang](https://www.ie.cuhk.edu.hk/faculty/zhang-yingjun-angela/). Investigates data lifecycle management in distributed AI systems, connecting data acquisition, use, and deletion with federated representation geometry.
-  - Paper #6: proposed an optimal-transport view of federated learning and a barycentric multi-prototype classifier for communication-constrained representation geometry.
-- **Master's Research on Data-Centric ML Systems**, 03/2023 to 12/2025, advised by Prof. [Meng Zhang](https://person.zju.edu.cn/mengzhang) at [Zhejiang University](./Zhejiang_University.md). Built unlearning methods for data deletion across continuous influence weights, certified online updates, and dynamic tree ensembles.
-  - Paper #3: introduced soft-weighted unlearning for continuous influence weights, supporting fairness and robustness interventions beyond binary erasure.
-  - Paper #4: developed Hessian-free online certified unlearning with recollected trajectory statistics, avoiding explicit Hessian inversion for streaming deletion requests.
-  - Paper #5: built an exact and efficient random-forest unlearning framework for dynamic online environments, updating affected tree statistics instead of retraining.
-- **Research Internship on Trustworthy LLM Systems**, 06/2025 to 12/2025, full-time research intern advised by PANG Yan, James at the National University of Singapore. Analyzed reliability failures that emerge when models train on recursively selected synthetic data or make unsupported relational inferences.
-  - Paper #1: showed that sample selection during recursive synthetic-data training can prune tail samples under low-resource verification and precipitate model collapse.
-  - Paper #2: compared LLM and human illusory pattern perception across three psychological tasks and analyzed associated SAE features.
+- **Doctoral Research @ The Chinese University of Hong Kong**, Hong Kong. Aug 2026 ∼ present. Investigates data lifecycle management in distributed AI across acquisition, use, deletion, and federated learning.
+  - Paper #6: Proposed optimal-transport federated learning with barycentric multi-prototype classification.
+- **Master's Research on Data-Centric ML Systems @ Zhejiang University**, Zhejiang. Mar 2023 ∼ Dec 2025. Developed data-deletion methods for continuous influence control, certified online removal, and dynamic tree ensembles.
+  - Paper #3: Extended machine unlearning beyond binary erasure through continuous example weights, enabling targeted fairness and robustness interventions.
+  - Paper #4: Built Hessian-free online certified unlearning with recollected trajectory statistics, replacing explicit Hessian inversion for streaming deletion requests.
+  - Paper #5: Built exact dynamic random-forest unlearning through affected-tree updates, avoiding full retraining.
+- **Research Internship on Trustworthy LLM Systems @ NUSRI CQ**, Chongqing. Jun 2025 ∼ Dec 2025. Studied LLM reliability in synthetic-data feedback loops and unsupported relational inference.
+  - Paper #1: Showed how low-resource verification amplifies sample-selection bias in recursive synthetic-data training, persistently pruning tail data and precipitating model collapse.
+  - Paper #2: Compared LLM and human illusory pattern perception across three psychological tasks and analyzed associated SAE features.
 
 ## Open-Source Contributions and Academic Service
 
-- **Research code releases**: maintains public code for accepted papers on certified unlearning, soft-weighted unlearning, and sample-selection model collapse.
-- **Xinbaopedia**: maintains a public academic homepage and wiki-style research archive with paper pages, figures, CV, and project notes.
+- **Research code releases**: public code for certified unlearning, soft-weighted unlearning, and model-collapse work.
+- **Xinbaopedia**: public academic homepage and wiki-style research archive with papers, figures, CV, and project notes.
 - **Academic service, 2026**: reviewer for ICML, NeurIPS, and AAAI. Recognized as a **[Top Reviewer at NeurIPS 2026](/files/NeurIPS2026_TopReviewer_XinbaoQiao.pdf)**.
 - **Academic service, 2025**: reviewer for NeurIPS, ICLR, AAAI, and IEEE TNNLS.
 
 ## Publications
-
-Qiao's [publications](./Publications.md) cover machine unlearning, decentralized learning, synthetic-data model collapse, federated learning, and LLM reliability.
 
 Asterisks (*) denote co-first authorship; daggers (†) denote corresponding authors.
 
@@ -99,27 +100,34 @@ Link icons: OpenReview · arXiv · Code (GitHub) · Publisher.
 
 - **Paper #1: When Sample Selection Bias Precipitates Model Collapse**.\
   **Xinbao Qiao**†, Xianglong Du, Wei Liu, Jingqi Zhang, Peihua Mai, Meng Zhang†, Yan Pang†.\
-  Forty-Third International Conference on Machine Learning, ICML, 2026.\
+  Shows how low-resource verification turns selection bias into persistent tail pruning and model collapse.\
+  ICML 2026.\
   Links: [OpenReview](https://openreview.net/forum?id=FFXvnzM254), [arXiv](https://arxiv.org/abs/2606.13732), [GitHub](https://github.com/XinbaoQiao/When-Sample-Selection-Bias-Precipitates-Model-Collapse).
 - **Paper #2: Illusory Pattern Perception Drives Spurious Inference in Large Language Models**.\
   Peihua Mai\*, Zhuoyan Shao\*, **Xinbao Qiao**\*, Meng Zhang, Xinyue Zhou†, Yan Pang†.\
+  Compares LLM and human illusory pattern perception with SAE analysis of associated features.\
   NeurIPS 2026, accepted.\
   Links: [OpenReview](https://openreview.net/forum?id=VLcmdFfRQc), [arXiv](https://arxiv.org/abs/2610.07791), [GitHub](https://github.com/NusIoraPrivacy/illusory).
 - **Paper #3: Beyond Binary Erasure: Soft-Weighted Unlearning for Fairness and Robustness**.\
   **Xinbao Qiao**, Ningning Ding, Yushi Cheng, Meng Zhang†.\
-  Fortieth AAAI Conference on Artificial Intelligence, AAAI, 2026.\
+  Generalizes binary deletion into continuous influence control for targeted fairness and robustness interventions.\
+  AAAI 2026.\
   Links: [OpenReview](https://openreview.net/forum?id=bCPJ6Jiqv7), [arXiv](https://arxiv.org/abs/2505.18783), [AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/39681).
 - **Paper #4: Hessian-Free Online Certified Unlearning**.\
   **Xinbao Qiao**, Meng Zhang†, Ming Tang, Ermin Wei.\
-  Thirteenth International Conference on Learning Representations, ICLR, 2025.\
+  Replaces explicit Hessian inversion with recollected trajectory statistics for scalable certified deletion.\
+  ICLR 2025.\
   Links: [OpenReview](https://openreview.net/forum?id=C3TrHWanh5), [arXiv](https://arxiv.org/abs/2404.01712), [GitHub](https://github.com/XinbaoQiao/Hessian-Free-Certified-Unlearning).
 - **Paper #5: DynFrs: An Efficient Framework for Machine Unlearning in Random Forest**.\
   Shurong Wang, Zhuoyang Shen, **Xinbao Qiao**, Tongning Zhang, Meng Zhang†.\
-  Thirteenth International Conference on Learning Representations, ICLR, 2025.\
+  Updates affected tree statistics to deliver exact random-forest unlearning in dynamic environments.\
+  ICLR 2025.\
   Links: [OpenReview](https://openreview.net/forum?id=nsCOeCLR8e), [arXiv](https://arxiv.org/abs/2410.01588), [GitHub](https://github.com/shurongwang/DynFrs).
 - **Paper #6: Federated Learning as Optimal Transport: Barycentric Multi-Prototype Classification**.\
   **Xinbao Qiao**, Wenjing Yan†, Ying-Jun Angela Zhang.\
+  Frames federated learning as optimal transport with barycentric multi-prototype classification under communication constraints.\
   Under review.
 - **Paper #7: Decentralized Free-Support Wasserstein Barycenter**.\
   **Xinbao Qiao**, Bokai Hou, Peihua Mai, Wenqian Li, Wenjing Yan, Ying-Jun Angela Zhang.\
-  Under review. Details: [Decentralized Free-Support Wasserstein Barycenter](./Decentralized_Free_Support_Wasserstein_Barycenter.md).
+  Learns movable barycenter supports through neighbor gossip, separating geometric quality from network agreement.\
+  Under review.
