@@ -7476,4 +7476,15 @@ html[data-site-custom-bg="on"][data-site-custom-bg-ink="light"] a:visited {
   }
 }
 
-
+/* CV page: PDF-style document owns the visual title; keep h1 for a11y/SEO. */
+.wiki-page-cv > .wiki-title-cv-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

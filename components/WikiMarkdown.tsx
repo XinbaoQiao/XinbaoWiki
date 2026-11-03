@@ -6,7 +6,7 @@ import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
 import { ArticleContents } from '@/components/ArticleContents';
 import { WikiHrefLink } from '@/components/WikiHrefLink';
-import { PublicationLinkIcon, PublicationLinkLegend, publicationLinkLegendTexts, publicationLinkTitle } from '@/components/PublicationLinkLegend';
+import { PublicationLinkIcon, PublicationLinkLegend, publicationLinkLegendTexts, publicationLinkKind, publicationLinkTitle } from '@/components/PublicationLinkLegend';
 import { pathWithBasePath } from '@/lib/wiki';
 import { rehypeWikiOutline } from '@/lib/wiki-outline';
 
@@ -64,10 +64,13 @@ export function WikiMarkdown({ editLabel, markdown, sourceHref }: Props) {
             const raw = href || '#';
             const missing = raw.includes('missing=1');
             const pageLanguage = legendLanguage ?? (editLabel === '编辑' ? 'zh' : 'en');
-            const iconTitle = !raw.startsWith('#') ? publicationLinkTitle(pathWithBasePath(raw), pageLanguage) : undefined;
-            const className = [missing ? 'redlink' : '', iconTitle ? 'publication-resource-link' : ''].filter(Boolean).join(' ') || undefined;
+            const kind = !raw.startsWith('#') ? publicationLinkKind(raw) : undefined;
+            const iconTitle = !raw.startsWith('#') ? publicationLinkTitle(raw, pageLanguage) : undefined;
+            const showLegendIcon = Boolean(kind && kind !== 'pdf');
+            const className = [missing ? 'redlink' : '', showLegendIcon ? 'publication-resource-link' : ''].filter(Boolean).join(' ') || undefined;
             const linkTitle = missing ? 'Page does not exist yet' : title ?? iconTitle;
             // WikiHrefLink: # → local smooth-scroll color; /wiki → page morph; http → external.
+            // Legend icons for OpenReview/arXiv/GitHub/publisher; real .pdf files keep wiki-link-pdf instead.
             return (
               <WikiHrefLink
                 aria-label={iconTitle}
@@ -75,7 +78,7 @@ export function WikiMarkdown({ editLabel, markdown, sourceHref }: Props) {
                 href={raw}
                 title={linkTitle}
               >
-                {legendLanguage && iconTitle && <PublicationLinkIcon href={raw} />}
+                {showLegendIcon ? <PublicationLinkIcon href={raw} /> : null}
                 {children}
               </WikiHrefLink>
             );

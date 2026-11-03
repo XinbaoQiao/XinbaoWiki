@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useState, type CSSProperties } from 'react';
 import { WikiLink } from '@/components/WikiLink';
-import { PublicationLinkIcon, publicationLinkTitle } from '@/components/PublicationLinkLegend';
+import { PublicationLinkIcon, publicationLinkKind, publicationLinkTitle, publicationResourceLabel, isPdfHref } from '@/components/PublicationLinkLegend';
 import { PaperImageLightbox, type ExpandedPaperImage } from '@/components/PaperImageLightbox';
 import type { PaperHighlightCatalog, PaperHighlightImage } from '@/lib/paper-highlights';
 import type { AcceptedPaper } from '@/lib/site-updates';
@@ -85,8 +85,9 @@ export function PaperAcceptancePreview({ papers, language, defaultOpen = false, 
         {papers.map((paper, index) => {
           const slug = language === 'zh' ? `${paper.slug}_zh` : paper.slug;
           const highlight = highlights?.[paper.slug]?.[language];
-          const resources = highlight ? [{ label: 'PDF', url: paper.pdf }, ...highlight.resources]
-            .filter((resource, index, links) => links.findIndex(link => link.url === resource.url) === index) : [];
+          const resources = highlight ? [{ label: publicationResourceLabel(paper.pdf, language, 'PDF'), url: paper.pdf }, ...highlight.resources]
+            .filter((resource, index, links) => links.findIndex(link => link.url === resource.url) === index)
+            .map((resource) => ({ ...resource, label: publicationResourceLabel(resource.url, language, resource.label) })) : [];
           const isActive = !detailed || activePaper === index;
           const prioritize = Boolean(((visible && open) || retainContent) && isActive && index === (detailed ? activePaper : 0));
           return (
@@ -104,15 +105,19 @@ export function PaperAcceptancePreview({ papers, language, defaultOpen = false, 
                 </div></div>
                 <div className={styles.resources} data-paper-resources="">
                   <span>{copy.links}</span>
-                  {resources.map((resource) => <a className="publication-resource-link" key={resource.url} href={resource.url} target="_blank" rel="noopener noreferrer" title={publicationLinkTitle(resource.url, language)}>
-                    {publicationLinkTitle(resource.url, language) ? <PublicationLinkIcon href={resource.url} /> : <svg className="publication-resource-icon" aria-hidden="true" viewBox="0 0 24 24" width="14" height="14" data-link-icon={resource.label === 'PDF' ? 'pdf' : 'link'}><path fill="none" stroke="currentColor" strokeWidth="1.8" d={resource.label === 'PDF' ? 'M6 2h8l4 4v16H6z M14 2v5h5 M9 12h6 M9 16h6' : 'M10 13a4 4 0 0 0 6 0l4-4a4 4 0 0 0-6-6l-2 2 M14 11a4 4 0 0 0-6 0l-4 4a4 4 0 0 0 6 6l2-2'} /></svg>}
-                    {resource.label === 'Code' ? (language === 'zh' ? '代码（GitHub）' : 'GitHub') : resource.label}
+                  {resources.map((resource) => <a className="publication-resource-link" key={resource.url} href={resource.url} target="_blank" rel="noopener noreferrer" title={publicationLinkTitle(resource.url, language) ?? resource.label}>
+                    {publicationLinkKind(resource.url) ? <PublicationLinkIcon href={resource.url} /> : <svg className="publication-resource-icon" aria-hidden="true" viewBox="0 0 24 24" width="14" height="14" data-link-icon="link"><path fill="none" stroke="currentColor" strokeWidth="1.8" d="M10 13a4 4 0 0 0 6 0l4-4a4 4 0 0 0-6-6l-2 2 M14 11a4 4 0 0 0-6 0l-4 4a4 4 0 0 0 6 6l2-2" /></svg>}
+                    {resource.label}
                   </a>)}
                 </div>
               </div>}
               {!detailed && <figcaption>
                 <WikiLink href={withBasePath(`/wiki/${slug}/`)} titleMorphSlug={slug} titleMorphDestTitle={paper.title}>{paper.title}</WikiLink>
-                <span>{copy.page} · <a href={paper.pdf} target="_blank" rel="noopener noreferrer">PDF ↗</a></span>
+                <span>{copy.page} · <a className="publication-resource-link" href={paper.pdf} target="_blank" rel="noopener noreferrer" title={publicationLinkTitle(paper.pdf, language) ?? publicationResourceLabel(paper.pdf, language)}>
+                  {publicationLinkKind(paper.pdf) ? <PublicationLinkIcon href={paper.pdf} /> : null}
+                  {publicationResourceLabel(paper.pdf, language)}
+                  {isPdfHref(paper.pdf) || publicationLinkKind(paper.pdf) ? '' : ' ↗'}
+                </a></span>
               </figcaption>}
               </>}
             </figure>
