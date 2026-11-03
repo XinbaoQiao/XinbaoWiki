@@ -6,8 +6,9 @@
   "THIRD_PARTY_NOTICES.md": "22ef350d806ae005acd8f5b7c251b556832bdcd0",
   "docs/chat/README.md": "d4a05cae17c61ca32d99990bff5b1924910f6495",
   "docs/chat/env.example": "b8aa3b3400f94daee8ba8ee8382895fee7733712",
-  "docs/content-template.md": "5f2eeaae47881816c71a2199f5d6bae6ba9ef000",
+  "docs/content-template.md": "b1ae6424fc815fb86dc9078fe7f96c48560eac76",
   "docs/site-activity/README.md": "ed222d71033152c56b77588613c11d5bc4449ba4",
   "docs/standards-and-conformance.md": "c241cc49540d068e490d8a1024b880312fdb35db",
+  "lib/cv-document-data.ts": "90326bd9edb4b514cd567981a9d270c9da9d2503",
   "lib/site-navigation.ts": "399253694ada2d3f2b9b9b83b04c8f89c6ee761a"
 }
