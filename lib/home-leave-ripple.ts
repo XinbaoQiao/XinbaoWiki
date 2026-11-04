@@ -3,7 +3,7 @@
  * splash ripples (PIXEL=4 disks), scaled larger for the nav-wait beat.
  */
 
-import { publishOceanRipple } from '@/lib/ocean-ripple';
+import { crestOuterFirstExtinction, publishOceanRipple } from '@/lib/ocean-ripple';
 
 export const HOME_LEAVE_RIPPLE_MS = 2850;
 
@@ -36,6 +36,7 @@ function themeInkPair(): { ink: string; trough: string; base: number } {
   const action = parseCssRgb(style.getPropertyValue("--site-theme-action-ink"), "29,36,48");
   return { ink: accent, trough: action, base: 0.92 };
 }
+
 
 /**
  * Paint one leave splash onto `canvas` for `HOME_LEAVE_RIPPLE_MS`.
@@ -74,15 +75,19 @@ export function startHomeLeaveRipple(canvas: HTMLCanvasElement): () => void {
     if (alpha < 0.02 || radius < PIXEL * 0.5) return;
     const rMax = Math.ceil(radius / PIXEL) * PIXEL;
     const rInner = Math.max(0, hollowInner);
+    const outerR = radius + PIXEL * 0.35;
+    const innerR = Math.max(0, rInner - PIXEL * 0.15);
+    const outer2 = outerR * outerR;
+    const inner2 = innerR * innerR;
     const gap = Math.max(1, PIXEL - 1);
     ctx.fillStyle = `rgba(${rgb},${Math.min(1, alpha)})`;
     for (let py = -rMax; py <= rMax; py += PIXEL) {
       for (let px = -rMax; px <= rMax; px += PIXEL) {
         const cx = px + PIXEL * 0.5;
         const cy = py + PIXEL * 0.5;
-        const d = Math.hypot(cx, cy);
-        if (d > radius + PIXEL * 0.35) continue;
-        if (d < rInner - PIXEL * 0.15) continue;
+        const d2 = cx * cx + cy * cy;
+        if (d2 > outer2) continue;
+        if (d2 < inner2) continue;
         ctx.fillRect(ox + px, oy + py, gap, gap);
       }
     }
@@ -116,24 +121,29 @@ export function startHomeLeaveRipple(canvas: HTMLCanvasElement): () => void {
       paintPixelDisk(ox, oy, blotR + PIXEL * 2, ink, 0.34 * (1 - bt) * base, blotR * 0.35);
     }
 
-    // Soft energy disc (larger than click wash)
-    if (front > PIXEL * 2 && lifeT < 0.9) {
+    // Soft energy disc (larger than click wash). Extinguish with the outer crest.
+    const washExtinct = crestOuterFirstExtinction(0, lifeT);
+    if (front > PIXEL * 2 && washExtinct > 0.02) {
       const washR = Math.min(front * 0.92, Math.min(w, h) * 0.42);
-      const energy = Math.exp(-DAMP_TIME * age) * (1 - lifeT * 0.5);
+      const energy = Math.exp(-DAMP_TIME * age) * washExtinct;
       paintPixelDisk(ox, oy, washR, ink, 0.07 * energy * base, washR * 0.4);
     }
 
-    // Multi-crest circular pixel rings — same language as ocean click splash
+    // Multi-crest circular pixel rings - same language as ocean click splash.
+    // n=0 is the leading/outer crest; higher n trails inward. Fade outer->inner
+    // (not a shared global life alpha), so the bloom dies from the outside in.
     const maxCrests = 5;
     for (let n = 0; n < maxCrests; n++) {
       const rRaw = frontRaw - n * WAVELENGTH;
       const r = Math.round(rRaw / PIXEL) * PIXEL;
       if (r < PIXEL * 2 || r > front + PIXEL) continue;
+      const extinct = crestOuterFirstExtinction(n, lifeT);
+      if (extinct < 0.02) continue;
       const amp =
         Math.exp(-DAMP_TIME * age) *
         Math.exp(-DAMP_DIST * r) *
         (1 / Math.sqrt(1 + r * 0.012)) *
-        (1 - lifeT * 0.28);
+        extinct;
       if (amp < 0.02) continue;
       const isCrest = n % 2 === 0;
       const bandPx = Math.max(PIXEL, (isCrest ? 3 : 2) * PIXEL - (n > 2 ? PIXEL : 0));
