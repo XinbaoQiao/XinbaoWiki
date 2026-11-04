@@ -184,6 +184,21 @@ export function getSearchIndex(): SearchIndexItem[] {
   }));
 }
 
+/** Slim title/alias map for view-transition morphs (not full-text search). */
+export type WikiTitleCacheItem = {
+  slug: string;
+  title: string;
+  aliases?: string[];
+};
+
+export function getWikiTitleCacheIndex(): WikiTitleCacheItem[] {
+  return getManifestSearchIndex().map((item) => ({
+    slug: item.slug,
+    title: item.title,
+    ...(item.aliases?.length ? { aliases: item.aliases } : {}),
+  }));
+}
+
 function hasExplicitEnglishLabel(label: string) {
   return /English|英文/i.test(label);
 }

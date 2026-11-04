@@ -23,7 +23,7 @@ import {
   zhStreamGlyph,
 } from '@/lib/character-ocean/alphabets';
 import { clamp, hash3 } from '@/lib/character-ocean/math';
-import { activeOceanRipple, OCEAN_RIPPLE_EVENT, type OceanRipple } from '@/lib/ocean-ripple';
+import { activeOceanRipple, crestOuterFirstExtinction, OCEAN_RIPPLE_EVENT, type OceanRipple } from '@/lib/ocean-ripple';
 import {
   FLAG_BODY,
   FLAG_EDGE,
@@ -740,15 +740,19 @@ export class CharacterOceanEngine {
         if (alpha < 0.02 || radius < PIXEL * 0.5) return;
         const rMax = Math.ceil(radius / PIXEL) * PIXEL;
         const rInner = Math.max(0, hollowInner);
+        const outerR = radius + PIXEL * 0.35;
+        const innerR = Math.max(0, rInner - PIXEL * 0.15);
+        const outer2 = outerR * outerR;
+        const inner2 = innerR * innerR;
         const gap = Math.max(1, PIXEL - 1); // 1px gutter keeps the chunky look
         ctx.fillStyle = `rgba(${rgb},${Math.min(1, alpha)})`;
         for (let py = -rMax; py <= rMax; py += PIXEL) {
           for (let px = -rMax; px <= rMax; px += PIXEL) {
             const cx = px + PIXEL * 0.5;
             const cy = py + PIXEL * 0.5;
-            const d = Math.hypot(cx, cy);
-            if (d > radius + PIXEL * 0.35) continue;
-            if (d < rInner - PIXEL * 0.15) continue;
+            const d2 = cx * cx + cy * cy;
+            if (d2 > outer2) continue;
+            if (d2 < inner2) continue;
             ctx.fillRect(ox + px, oy + py, gap, gap);
           }
         }
@@ -763,24 +767,28 @@ export class CharacterOceanEngine {
         paintPixelDisk(blotR + PIXEL, ink, 0.28 * (1 - bt) * base, blotR * 0.35);
       }
 
-      // Soft energy disc under the train (pixel wash, flat alpha).
-      if (front > PIXEL * 2 && lifeT < 0.85) {
+      // Soft energy disc under the train (pixel wash). Extinguish with outer crest.
+      const washExtinct = crestOuterFirstExtinction(0, lifeT);
+      if (front > PIXEL * 2 && washExtinct > 0.02) {
         const washR = Math.min(front * 0.9, 160);
-        const energy = Math.exp(-DAMP_TIME * age) * (1 - lifeT * 0.55);
+        const energy = Math.exp(-DAMP_TIME * age) * washExtinct;
         paintPixelDisk(washR, ink, 0.05 * energy * base, washR * 0.35);
       }
 
       // Multi-crest / trough pixel rings behind the leading front.
+      // n=0 leading/outer; fade outer->inner (shared crestOuterFirstExtinction).
       const maxCrests = 6;
       for (let n = 0; n < maxCrests; n++) {
         const rRaw = frontRaw - n * WAVELENGTH;
         const r = Math.round(rRaw / PIXEL) * PIXEL;
         if (r < PIXEL * 2 || r > front + PIXEL) continue;
+        const extinct = crestOuterFirstExtinction(n, lifeT);
+        if (extinct < 0.02) continue;
         const amp =
           Math.exp(-DAMP_TIME * age) *
           Math.exp(-DAMP_DIST * r) *
           (1 / Math.sqrt(1 + r * 0.018)) *
-          (1 - lifeT * 0.35);
+          extinct;
         if (amp < 0.02) continue;
         const isCrest = n % 2 === 0;
         // Band thickness in whole pixels -- thicker near impact, thinner outward.

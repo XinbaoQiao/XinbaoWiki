@@ -48,7 +48,7 @@ function englishStemSlug(slug: string) {
   return decoded.replace(/_zh$/i, '');
 }
 
-/* ---------- slug -> real H1 title cache (from /search-index.json) ---------- */
+/* ---------- slug -> real H1 title cache (from /wiki-title-cache.json) ---------- */
 
 type WikiTitleCacheEntry = { title: string; aliases?: string[] };
 
@@ -107,13 +107,13 @@ function lookupWikiTitleAliases(slug: string): string[] {
   return entry?.aliases?.filter(Boolean) || [];
 }
 
-/** Prefetch search-index titles so body links can match real H1 text. */
+/** Prefetch slim title/alias cache so body links can match real H1 text. */
 export function ensureWikiTitleCache(): Promise<void> {
   if (typeof window === 'undefined') return Promise.resolve();
   if (wikiTitleCache) return Promise.resolve();
   if (wikiTitleCachePromise) return wikiTitleCachePromise;
   const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
-  wikiTitleCachePromise = fetch(`${basePath}/search-index.json`, { cache: 'force-cache' })
+  wikiTitleCachePromise = fetch(`${basePath}/wiki-title-cache.json`, { cache: 'force-cache' })
     .then(async (response) => {
       if (!response.ok) throw new Error(`title cache ${response.status}`);
       const payload = await response.json() as unknown;

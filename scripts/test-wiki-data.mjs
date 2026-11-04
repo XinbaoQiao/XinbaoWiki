@@ -190,6 +190,7 @@ assertFile('components/ChatWithXinbao.tsx');
 assertFile('components/ChatWithXinbaoPanel.tsx');
 assertFile('components/SidebarClient.tsx');
 assertFile('app/search-index.json/route.ts');
+assertFile('app/wiki-title-cache.json/route.ts');
 assertFile('app/feed.xml/route.ts');
 assertFile('app/robots.ts');
 assertFile('app/sitemap.ts');

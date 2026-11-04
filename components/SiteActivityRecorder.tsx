@@ -47,9 +47,7 @@ export function SiteActivityRecorder() {
 
   useLayoutEffect(() => installWikiTitleMorphHooks(), []);
 
-  useEffect(() => {
-    void ensureWikiTitleCache();
-  }, []);
+  // Title cache warms on idle (below) and on first morph/search need.
 
   // Drop click-time title names on shared chrome before the new VT snapshot
   // (duplicate names with the article H1 abort the morph in Chrome).
