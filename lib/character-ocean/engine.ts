@@ -127,7 +127,11 @@ export class CharacterOceanEngine {
   private splashLife: { x: number; y: number; born: number }[] = [];
   /** Soft fade under portal / article text so glyphs don't fight readability. */
   private contentRects: { l: number; t: number; r: number; b: number }[] = [];
+  /** Union of contentRects (no pad); fadeAt skips the rect loop outside this + pad. */
+  private contentBounds: { l: number; t: number; r: number; b: number } | null = null;
   private contentRectsAt = -Infinity;
+  private contentRectsDirty = true;
+  private onContentRectsInvalidate: (() => void) | null = null;
 
   constructor(canvas: HTMLCanvasElement, opts: OceanEngineOptions) {
     const ctx = canvas.getContext('2d', { alpha: true });
@@ -219,10 +223,34 @@ export class CharacterOceanEngine {
     document.addEventListener('visibilitychange', this.onVis);
     document.fonts?.addEventListener('loadingdone', this.onFontsLoaded);
 
-    this.themeObserver = new MutationObserver(() => this.applyThemeFilter());
+    this.onContentRectsInvalidate = () => {
+      this.contentRectsDirty = true;
+    };
+    window.addEventListener('scroll', this.onContentRectsInvalidate, { passive: true, capture: true });
+    // Disclosure open/close changes text boxes without always scrolling.
+    this.themeObserver = new MutationObserver((records) => {
+      let theme = false;
+      let layout = false;
+      for (const record of records) {
+        if (record.type !== 'attributes' || !record.attributeName) continue;
+        if (record.attributeName === 'data-theme' || record.attributeName === 'class' || record.attributeName === 'style') {
+          theme = true;
+        }
+        if (record.attributeName === 'open' || record.attributeName === 'data-layout-mode') {
+          layout = true;
+        }
+      }
+      if (theme) this.applyThemeFilter();
+      if (layout) this.contentRectsDirty = true;
+    });
     this.themeObserver.observe(document.documentElement, {
       attributes: true,
-      attributeFilter: ['data-theme', 'class', 'style'],
+      attributeFilter: ['data-theme', 'class', 'style', 'data-layout-mode'],
+    });
+    this.themeObserver.observe(document.body, {
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['open'],
     });
 
     this.motionMq = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -275,6 +303,10 @@ export class CharacterOceanEngine {
     this.ro?.disconnect();
     this.io?.disconnect();
     this.themeObserver?.disconnect();
+    if (this.onContentRectsInvalidate) {
+      window.removeEventListener('scroll', this.onContentRectsInvalidate, true);
+    }
+    this.onContentRectsInvalidate = null;
     if (this.motionMq && this.onMotionChange) {
       this.motionMq.removeEventListener('change', this.onMotionChange);
     }
@@ -314,6 +346,7 @@ export class CharacterOceanEngine {
   }
 
   private resize() {
+    this.contentRectsDirty = true;
     this.contentRectsAt = 0;
     this.textWidths.clear();
     this.sharkRasterDirty = true;
@@ -814,7 +847,12 @@ export class CharacterOceanEngine {
   private refreshContentRects() {
     if (typeof document === 'undefined') return;
     const now = performance.now();
-    if (now - this.contentRectsAt < 120) return;
+    // Idle frames skip DOM work entirely. Scroll/resize/open mark dirty;
+    // a soft max-age catches layout shifts that never scrolled.
+    const stale = now - this.contentRectsAt > 700;
+    if (!this.contentRectsDirty && !stale) return;
+    if (now - this.contentRectsAt < 100) return;
+    this.contentRectsDirty = false;
     this.contentRectsAt = now;
     // Real homepage / article *text* chrome — keep vicinity quiet.
     // Do NOT include transparent layout shells (`.wiki-portal`, cube stage,
@@ -840,27 +878,27 @@ export class CharacterOceanEngine {
       '.wiki-footer',
       '.wiki-article-contents',
       '.wiki-article-facts',
-      'body :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,th,td,figcaption,summary,label,button,input,textarea,select)',
-      '.wiki-body h1',
-      '.wiki-body h2',
-      '.wiki-body h3',
-      '.wiki-body p',
-      '.wiki-body li',
+      // Text/copy nodes site-wide; skip button/input/textarea/select to cut mask cost.
+      'body :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,th,td,figcaption,summary,label)',
+      '.wiki-body :is(h1,h2,h3,h4,h5,h6,p,li,dt,dd,th,td,figcaption,summary,label)',
+      '.wiki-portal-disclosures :is(summary,p,li,h2,h3)',
       '[data-ocean-fade]',
     ];
     const out: { l: number; t: number; r: number; b: number }[] = [];
     const seen = new Set<string>();
+    const visOpts = { checkOpacity: true, checkVisibilityCSS: true, contentVisibilityAuto: true } as const;
     // One selector traversal also deduplicates elements matching several selectors.
     const nodes = document.querySelectorAll(sels.join(','));
     for (let i = 0; i < nodes.length; i++) {
       const el = nodes[i] as HTMLElement;
       if (!el) continue;
-      const style = getComputedStyle(el);
-      if (style.visibility === 'hidden' || style.display === 'none' || Number(style.opacity) < 0.05) continue;
-      // name-only / warm-cache collapse uses content-visibility without always
-      // flipping display — those boxes must not keep ghosting the school.
-      if ((style as CSSStyleDeclaration & { contentVisibility?: string }).contentVisibility === 'hidden') continue;
-      if (typeof el.checkVisibility === 'function' && !el.checkVisibility()) continue;
+      if (typeof el.checkVisibility === 'function') {
+        if (!el.checkVisibility(visOpts)) continue;
+      } else {
+        const style = getComputedStyle(el);
+        if (style.visibility === 'hidden' || style.display === 'none' || Number(style.opacity) < 0.05) continue;
+        if ((style as CSSStyleDeclaration & { contentVisibility?: string }).contentVisibility === 'hidden') continue;
+      }
       const r = el.getBoundingClientRect();
       if (r.width < 6 || r.height < 6) continue;
       // Skip fully off-screen
@@ -872,6 +910,22 @@ export class CharacterOceanEngine {
       out.push({ l: r.left, t: r.top, r: r.right, b: r.bottom });
     }
     this.contentRects = out;
+    if (!out.length) {
+      this.contentBounds = null;
+      return;
+    }
+    let l = out[0]!.l;
+    let t = out[0]!.t;
+    let rr = out[0]!.r;
+    let b = out[0]!.b;
+    for (let i = 1; i < out.length; i++) {
+      const box = out[i]!;
+      if (box.l < l) l = box.l;
+      if (box.t < t) t = box.t;
+      if (box.r > rr) rr = box.r;
+      if (box.b > b) b = box.b;
+    }
+    this.contentBounds = { l, t, r: rr, b };
   }
 
   private measureText(text: string, font: string): number {
@@ -914,6 +968,10 @@ export class CharacterOceanEngine {
     // Soft quiet halo around real text/UI only (layout shells excluded above).
     const pad = 64;
     const insideAlpha = 0.04;
+    const bounds = this.contentBounds;
+    if (bounds && (px < bounds.l - pad || px > bounds.r + pad || py < bounds.t - pad || py > bounds.b + pad)) {
+      return 1;
+    }
     for (let i = 0; i < rects.length; i++) {
       const box = rects[i]!;
       const l = box.l - pad;

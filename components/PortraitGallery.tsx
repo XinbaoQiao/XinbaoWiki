@@ -11,6 +11,7 @@ type Props = {
 export function PortraitGallery({ items, language }: Props) {
   const [index, setIndex] = useState(0);
   const current = items[index];
+  const reserveCaptionSlot = items.some((item) => Boolean(item.caption));
   const previousLabel = language === 'zh' ? '上一张肖像' : 'Previous portrait';
   const nextLabel = language === 'zh' ? '下一张肖像' : 'Next portrait';
   const status = language === 'zh'
@@ -76,7 +77,14 @@ export function PortraitGallery({ items, language }: Props) {
           {index + 1} / {items.length}
         </span>
       </div>
-      {current.caption && <div className="wiki-infobox-caption">{current.caption}</div>}
+      {(reserveCaptionSlot || current.caption) && (
+        <div
+          className="wiki-infobox-caption"
+          aria-hidden={current.caption ? undefined : true}
+        >
+          {current.caption || null}
+        </div>
+      )}
       <span className="sr-only" aria-live="polite">{status}</span>
     </div>
   );

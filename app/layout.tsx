@@ -100,11 +100,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <script id="site-appearance-bootstrap" dangerouslySetInnerHTML={{ __html: siteAppearanceBootstrapScript() }} />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-          <link
-            rel="preload"
-            as="style"
-            href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=optional"
-          />
+          {/* No rel=preload: Alex Brush is decorative; print→all defer keeps it off the critical path. */}
           <link
             href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=optional"
             rel="stylesheet"
