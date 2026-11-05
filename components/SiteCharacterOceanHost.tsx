@@ -95,7 +95,17 @@ export function SiteCharacterOceanHost() {
     setSettings(readSettings());
     setLanguage(readLanguage());
     setSolidDemo(isDevPreviewPath());
-    setReady(true);
+
+    // Defer mounting the heavy canvas engine until after first paint / idle so
+    // Soft_NAV chrome and title morph stay on the critical path.
+    let idleId = 0;
+    let fallback = 0;
+    const arm = () => setReady(true);
+    if (typeof requestIdleCallback === 'function') {
+      idleId = requestIdleCallback(arm, { timeout: 900 });
+    } else {
+      fallback = window.setTimeout(arm, 200);
+    }
 
     const mo = new MutationObserver(() => {
       const next = readSettings();
@@ -127,6 +137,8 @@ export function SiteCharacterOceanHost() {
       mq.removeEventListener('change', syncMobile);
       mo.disconnect();
       window.removeEventListener('storage', onStorage);
+      if (idleId && typeof cancelIdleCallback === 'function') cancelIdleCallback(idleId);
+      if (fallback) window.clearTimeout(fallback);
     };
   }, []);
 

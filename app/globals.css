@@ -1639,74 +1639,90 @@ body:has(.wiki-portal) .wiki-topbar {
 }
 
 .wiki-article-contents {
+  /* Quiet Wikipedia-like Contents panel (content-template §9). */
   display: flex;
-  align-items: baseline;
-  gap: 8px 18px;
-  margin: 24px 0 30px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--wiki-border-subtle);
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  margin: 20px 0 28px;
+  padding: 10px 12px 12px;
+  border: 1px solid var(--wiki-border-subtle);
+  border-radius: 4px;
+  background: color-mix(in srgb, var(--site-theme-accent) 5%, var(--wiki-bg));
+  box-shadow: none;
   font-family: var(--font-sans);
   font-size: var(--fs-ui);
-  line-height: 1.6;
+  line-height: 1.55;
 }
 
 .wiki-contents-label {
+  display: block;
   flex: 0 0 auto;
+  margin: 0;
+  padding: 0 0 8px;
+  border-bottom: 1px solid var(--wiki-border-subtle);
   color: var(--wiki-text);
   font-size: var(--fs-ui);
   font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 .wiki-body .wiki-article-contents ol {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2px 18px;
   margin: 0;
-  padding: 0;
+  padding: 0 0 0 1.35em;
   min-width: 0;
-  list-style: none;
+  list-style: decimal;
+  list-style-position: outside;
 }
 
 .wiki-body .wiki-article-contents li {
   margin: 0;
   max-width: 100%;
+  padding: 0;
+  color: var(--wiki-text-soft);
 }
 
-.wiki-article-contents a {
+.wiki-article-contents a,
+.wiki-article-contents a[href^="#"],
+.wiki-contents-mobile a[href^="#"],
+.wiki-article-contents a[href^="#"]:visited,
+.wiki-contents-mobile a[href^="#"]:visited {
   display: block;
-  padding: 2px 0;
-  color: var(--wiki-link);
+  margin: 0 -6px;
+  padding: 4px 6px;
+  border-radius: 3px;
+  border-left: 3px solid transparent;
+  color: var(--wiki-text);
   font-weight: 400;
   text-decoration: none;
 }
 
-.wiki-article-contents a[href^="#"],
-.wiki-contents-mobile a[href^="#"] {
-  color: var(--wiki-link-local);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  font-weight: 500;
-}
-
-.wiki-article-contents a[href^="#"]:visited,
-.wiki-contents-mobile a[href^="#"]:visited {
-  color: var(--wiki-link-local);
-}
-
+.wiki-article-contents a:hover,
+.wiki-article-contents a:focus-visible,
+.wiki-contents-mobile a:hover,
+.wiki-contents-mobile a:focus-visible,
 .wiki-article-contents a[href^="#"]:hover,
 .wiki-contents-mobile a[href^="#"]:hover {
-  color: #085a7d;
+  color: var(--wiki-text);
+  text-decoration: none;
+  background: color-mix(in srgb, var(--site-theme-accent) 10%, transparent);
 }
 
-.wiki-article-contents a:hover,
-.wiki-article-contents a:focus-visible {
-  color: var(--wiki-link);
-  text-decoration: underline;
+.wiki-article-contents a:focus-visible,
+.wiki-contents-mobile a:focus-visible {
+  outline: 1px solid color-mix(in srgb, var(--site-theme-accent) 55%, var(--wiki-border-subtle));
+  outline-offset: 1px;
 }
 
-.wiki-article-contents a:focus-visible {
-  outline: 1px solid var(--wiki-link);
-  outline-offset: 2px;
+.wiki-article-contents a[aria-current="true"],
+.wiki-contents-mobile a[aria-current="true"] {
+  border-left-color: var(--site-theme-accent);
+  background: color-mix(in srgb, var(--site-theme-accent) 12%, transparent);
+  color: var(--wiki-text);
+  font-weight: 600;
 }
 
 .wiki-body .wiki-article-contents + h2 {
@@ -1772,13 +1788,13 @@ body:has(.wiki-portal) .wiki-topbar {
 
   .wiki-article-layout .wiki-body h2,
   .wiki-article-layout .wiki-body h3 {
-    scroll-margin-top: 72px;
+    scroll-margin-top: var(--wiki-sticky-toc-offset, 72px);
   }
 }
 
 
 .wiki-article-contents {
-  scroll-margin-top: 72px;
+  scroll-margin-top: var(--wiki-sticky-toc-offset, 72px);
 }
 
 @keyframes wiki-heading-flash {
@@ -1794,7 +1810,7 @@ body:has(.wiki-portal) .wiki-topbar {
 
 .wiki-main :is(h2, h3).wiki-heading-flash {
   border-radius: 2px;
-  animation: wiki-heading-flash 1.05s ease-out;
+  animation: wiki-heading-flash 0.55s ease-out;
 }
 
 .wiki-main :is(h2, h3):target {
@@ -1863,10 +1879,10 @@ html[data-site-custom-bg="on"] .wiki-toc-return {
 }
 
 html[data-site-custom-bg="on"] .wiki-article-contents {
-  background: color-mix(in srgb, var(--wiki-bg) 58%, transparent);
-  backdrop-filter: blur(8px) saturate(1.05);
-  -webkit-backdrop-filter: blur(8px) saturate(1.05);
-  border-bottom-color: color-mix(in srgb, var(--wiki-border-subtle) 70%, transparent);
+  background: color-mix(in srgb, var(--wiki-bg) 92%, var(--site-theme-accent));
+  border-color: color-mix(in srgb, var(--wiki-border-subtle) 70%, transparent);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
 } /* 目录 return chip. */
 body:has(.wiki-portal) .wiki-toc-return {
   display: none !important;
@@ -1878,13 +1894,14 @@ body:has(.wiki-portal) .wiki-toc-return {
     top: 0;
     z-index: 20;
     margin-top: 16px;
-    padding: 8px 0 10px;
+    padding: 10px 12px 12px;
+    /* Sticky chrome: near-opaque, bottom hairline only — no live blur. */
     border: 0;
     border-bottom: 1px solid color-mix(in srgb, var(--wiki-border-subtle) 80%, transparent);
     border-radius: 0;
-    background: color-mix(in srgb, var(--wiki-bg) 78%, transparent);
-    backdrop-filter: blur(8px) saturate(1.04);
-    -webkit-backdrop-filter: blur(8px) saturate(1.04);
+    background: color-mix(in srgb, var(--wiki-bg) 94%, var(--site-theme-accent));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     box-shadow: none;
   }
 }
@@ -2082,7 +2099,10 @@ body:has(.wiki-portal) .wiki-toc-return {
 
 .wiki-portrait-gallery .wiki-infobox-caption {
   font-size: var(--fs-xs);
+  line-height: 1.4;
   white-space: nowrap;
+  /* One caption line: empty slides keep the same height as captioned ones. */
+  min-height: calc(var(--fs-xs) * 1.4);
 }
 
 .wiki-infobox table {
@@ -2147,7 +2167,7 @@ body:has(.wiki-portal) .wiki-toc-return {
   font-size: var(--fs-h2);
   font-weight: 400;
   line-height: 1.25;
-  scroll-margin-top: 72px;
+  scroll-margin-top: var(--wiki-sticky-toc-offset, 72px);
   text-wrap: balance;
 }
 
@@ -2158,7 +2178,7 @@ body:has(.wiki-portal) .wiki-toc-return {
   font-size: var(--fs-h3);
   font-weight: 700;
   line-height: 1.3;
-  scroll-margin-top: 72px;
+  scroll-margin-top: var(--wiki-sticky-toc-offset, 72px);
   text-wrap: balance;
 }
 
@@ -2341,18 +2361,19 @@ body:has(.wiki-portal) .wiki-toc-return {
 
 @media (max-width: 640px) {
   .wiki-article-contents {
-    flex-direction: column;
-    gap: 4px;
+    gap: 6px;
     margin-top: 20px;
     margin-bottom: 24px;
+    padding: 10px 12px 12px;
   }
 
   .wiki-body .wiki-article-contents ol {
-    gap: 4px 16px;
+    grid-template-columns: 1fr;
+    gap: 2px 0;
   }
 
   .wiki-article-contents a {
-    padding: 6px 0;
+    padding: 6px 8px;
   }
 
   .wiki-page:is([data-page-slug="Publications"], [data-page-slug="Publications_zh"]) .wiki-body thead {
@@ -3155,21 +3176,19 @@ body:has(.wiki-portal-name-only) .wiki-home-scroll-intro {
 }
 
 .wiki-portal.is-leaving-to-intro {
+  /* Opacity + transform only: live filter:blur on the portal layer was a Soft_NAV hitch. */
   transition:
     opacity 2.5s cubic-bezier(0.22, 0.61, 0.36, 1),
-    filter 2.5s cubic-bezier(0.22, 0.61, 0.36, 1),
     transform 2.6s cubic-bezier(0.22, 0.61, 0.36, 1);
   opacity: 0;
-  filter: saturate(0.85) blur(0.8px);
   transform: translate3d(0, -28px, 0) scale(0.98);
   pointer-events: none;
 }
 
 .site-character-ocean.is-leaving-to-intro {
-  transition: opacity 2.55s cubic-bezier(0.22, 0.61, 0.36, 1),
-    filter 2.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+  /* Full-viewport canvas blur during leave was expensive; opacity fade keeps the soft exit. */
+  transition: opacity 2.55s cubic-bezier(0.22, 0.61, 0.36, 1);
   opacity: 0.28;
-  filter: blur(1.6px) saturate(0.88);
   pointer-events: none;
 }
 
@@ -5521,8 +5540,9 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
   .wiki-page .wiki-article-contents {
     display: block;
     margin: 20px 0 24px;
-    padding-bottom: 0;
-    border-top: 1px solid var(--wiki-border-subtle);
+    padding: 8px 10px 10px;
+    border: 1px solid var(--wiki-border-subtle);
+    border-radius: 4px;
     font-size: var(--fs-body);
   }
 
