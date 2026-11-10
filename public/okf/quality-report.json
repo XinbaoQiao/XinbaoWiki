@@ -161,7 +161,7 @@
         "language": "en",
         "modifiedAt": "2026-10-07T07:07:23.846Z",
         "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2026-11-06"
+        "reviewDue": "2026-12-10"
       },
       {
         "slug": "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
@@ -538,7 +538,7 @@
         "language": "en",
         "modifiedAt": "2026-10-07T07:07:23.846Z",
         "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2026-11-06"
+        "reviewDue": "2026-12-10"
       },
       {
         "slug": "Decentralized_Free_Support_Wasserstein_Barycenter_zh",
@@ -889,12 +889,12 @@
     "footnoteCoverage": 0.3409
   },
   "reviewFreshness": {
-    "asOf": "2026-11-02",
+    "asOf": "2026-11-09",
     "policy": "review status is recalculated at the start of each UTC week",
     "currentPages": 88,
     "overduePages": [],
     "pendingReviewPages": [],
-    "nextReviewDue": "2026-11-06"
+    "nextReviewDue": "2026-11-12"
   },
   "typedRelationCoverage": {
     "pages": 88,
@@ -1034,7 +1034,7 @@
         "language": "en",
         "modifiedAt": "2026-10-07T07:07:23.846Z",
         "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2026-11-06"
+        "reviewDue": "2026-12-10"
       },
       {
         "slug": "Decentralized_Free_Support_Wasserstein_Barycenter_zh",

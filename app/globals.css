@@ -871,7 +871,8 @@ a.external.wiki-link-pdf::after {
   gap: 8px;
 }
 
-.chat-xinbao-composer-row textarea {
+.chat-xinbao-composer-row textarea,
+.chat-xinbao-composer-field {
   flex: 1 1 auto;
   min-width: 0;
 }
@@ -1205,24 +1206,117 @@ a.external.wiki-link-pdf::after {
   background: var(--site-theme-chrome-surface-strong);
 }
 
-.chat-xinbao-composer textarea {
-  width: 100%;
-  min-height: 78px;
+.chat-xinbao-composer-field {
+  position: relative;
+  display: grid;
+  min-height: max(78px, var(--chat-composer-grow, 0px));
   max-height: 150px;
+  overflow: hidden;
   resize: vertical;
-  padding: 9px 10px;
   border: 1px solid var(--site-theme-chrome-border);
   border-radius: 6px;
   background: color-mix(in srgb, var(--site-theme-accent) 2%, var(--wiki-bg));
+}
+
+.chat-xinbao-composer-field:focus-within {
+  border-color: var(--site-theme-action-ink);
+  box-shadow: inset 0 0 0 1px var(--site-theme-action-ink);
+}
+
+.chat-xinbao-composer-field.is-disabled,
+.chat-xinbao-composer-field:has(textarea:disabled) {
+  cursor: not-allowed;
+  opacity: .65;
+}
+
+.chat-xinbao-composer-sizer,
+.chat-xinbao-composer-ghost,
+.chat-xinbao-composer-field textarea {
+  grid-area: 1 / 1;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: 9px 10px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
   color: var(--wiki-text);
   font-family: var(--font-sans);
   font-size: var(--fs-body);
   line-height: 1.4;
+  letter-spacing: normal;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-wrap: break-word;
+  scrollbar-gutter: stable;
 }
 
-.chat-xinbao-composer textarea:focus {
-  border-color: var(--site-theme-action-ink);
-  box-shadow: inset 0 0 0 1px var(--site-theme-action-ink);
+.chat-xinbao-composer-sizer {
+  height: auto;
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.chat-xinbao-composer-ghost,
+.chat-xinbao-composer-field textarea {
+  height: 100%;
+  min-height: 0;
+  overflow: auto;
+  resize: none;
+}
+
+.chat-xinbao-composer-ghost {
+  pointer-events: none;
+  z-index: 2;
+  color: transparent;
+  scrollbar-width: none;
+}
+
+.chat-xinbao-composer-ghost::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.chat-xinbao-composer-ghost-suffix {
+  color: var(--wiki-text-soft);
+}
+
+.has-ghost .chat-xinbao-composer-ghost-suffix {
+  animation: chat-xinbao-ghost-in 180ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .has-ghost .chat-xinbao-composer-ghost-suffix {
+    animation: none;
+  }
+}
+
+@keyframes chat-xinbao-ghost-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (hover: none), (pointer: coarse) {
+  .chat-xinbao-composer-ghost-suffix {
+    pointer-events: auto;
+  }
+}
+
+.chat-xinbao-composer-field.has-ghost textarea::placeholder {
+  color: transparent;
+  opacity: 0;
+}
+
+.chat-xinbao-composer-field textarea {
+  position: relative;
+  z-index: 1;
+  caret-color: var(--wiki-text);
+}
+
+.chat-xinbao-composer-field textarea:focus {
+  border-color: transparent;
+  box-shadow: none;
   outline: 0;
 }
 
@@ -1236,6 +1330,45 @@ a.external.wiki-link-pdf::after {
   font-size: var(--fs-xs);
 }
 
+.chat-xinbao-composer-hint {
+  min-width: 0;
+  color: var(--wiki-text-soft);
+}
+
+.chat-xinbao-composer-hint-tab {
+  display: inline;
+}
+
+.chat-xinbao-composer .chat-xinbao-composer-accept {
+  display: none;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--wiki-text-soft);
+  font-size: inherit;
+  font-weight: 500;
+  line-height: inherit;
+  box-shadow: none;
+}
+
+.chat-xinbao-composer .chat-xinbao-composer-accept:disabled {
+  opacity: .55;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .chat-xinbao-composer-hint-tab {
+    display: none;
+  }
+
+  .chat-xinbao-composer .chat-xinbao-composer-accept {
+    display: inline;
+  }
+}
+
 .chat-xinbao-composer button {
   min-width: 62px;
   padding: 6px 12px;
@@ -1246,8 +1379,7 @@ a.external.wiki-link-pdf::after {
   font-weight: 700;
 }
 
-.chat-xinbao-composer button:disabled,
-.chat-xinbao-composer textarea:disabled {
+.chat-xinbao-composer button:disabled {
   cursor: not-allowed;
   opacity: .65;
 }
@@ -1273,7 +1405,7 @@ html[data-site-palette="text"] .chat-xinbao-messages,
 html[data-site-palette="text"] .chat-xinbao-message,
 html[data-site-palette="text"] .chat-xinbao-typing,
 html[data-site-palette="text"] .chat-xinbao-composer,
-html[data-site-palette="text"] .chat-xinbao-composer textarea,
+html[data-site-palette="text"] .chat-xinbao-composer-field,
 html[data-site-palette="text"] .chat-xinbao-quick-reply,
 html[data-site-palette="text"] .chat-xinbao-minimized {
   background: #ffffff;
@@ -5648,6 +5780,9 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
   }
 
   .chat-xinbao-message,
+  .chat-xinbao-composer-sizer,
+  .chat-xinbao-composer-ghost,
+  .chat-xinbao-composer-field textarea,
   .chat-xinbao-composer textarea {
     font-size: 17px;
   }
@@ -5690,10 +5825,16 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
     padding: 8px 12px calc(10px + env(safe-area-inset-bottom));
   }
 
-  .chat-xinbao-composer textarea {
-    min-height: 48px;
+  .chat-xinbao-composer-field {
+    min-height: max(48px, var(--chat-composer-grow, 0px));
     max-height: 120px;
     resize: none;
+    border-radius: 22px;
+  }
+
+  .chat-xinbao-composer-sizer,
+  .chat-xinbao-composer-ghost,
+  .chat-xinbao-composer-field textarea {
     border-radius: 22px;
     padding: 12px 14px;
   }

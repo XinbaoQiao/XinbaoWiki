@@ -50,6 +50,7 @@ export const globalReplacements = [
   [/Xinbao Qiao/g, 'Your Name'], [/Qiao Xinbao/g, 'Your Name'], [/乔鑫宝/g, '你的名字'], [/鑫宝乔/g, '你的名字'], [/鑫宝/g, '你的名字'],
   [/xinbao\(\?: qiao\)\?/g, 'your name'], [/qiao xinbao/g, 'your name'], [/xinbao qiao/g, 'your name'],
   [/Xinbao AI/g, 'Site AI'], [/Xinbao’s/g, 'the owner’s'], [/has Xinbao/g, 'has the owner'], [/contact Xinbao/g, 'contact the owner'],
+  [/\bXinbao\b/g, 'the owner'],
   [/how to reach him/g, 'how to get in touch'], [/Sha Tin/g, 'Springfield']
 ];
 
@@ -172,7 +173,7 @@ export function transformPackageJson(p) {
     'push:check', 'push:main', 'smoke:production', 'deploy:production', 'release:production', 'release:resume', 'submit:indexnow',
     'template:build']) delete p.scripts[k];
   p.scripts['check:node22'] = 'npm run typecheck && npm run lint:wiki && npm run lint:content && npm run lint:okf && npm run test:features';
-  p.scripts['test:features'] = 'node scripts/test-chat-hardening.mjs && node scripts/test-site-activity.mjs && node scripts/test-site-activity-daily.mjs && node scripts/test-site-activity-events.mjs && node scripts/test-wiki-outline.mjs';
+  p.scripts['test:features'] = 'node scripts/test-chat-hardening.mjs && node scripts/test-chat-composer-predict.mjs && node scripts/test-site-activity.mjs && node scripts/test-site-activity-daily.mjs && node scripts/test-site-activity-events.mjs && node scripts/test-wiki-outline.mjs';
   return p;
 }
 

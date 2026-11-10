@@ -1436,7 +1436,7 @@
         "review": "periodic or when linked evidence changes",
         "retention": "semantic memory with quality warnings",
         "reviewedAt": "2026-10-07T07:07:51.129Z",
-        "reviewDue": "2026-11-06",
+        "reviewDue": "2026-12-10",
         "pendingReview": false,
         "overdue": false
       },
@@ -1465,7 +1465,7 @@
       "title": "Decentralized Free-Support Wasserstein Barycenter",
       "type": "publication",
       "reviewedAt": "2026-10-07T07:07:51.129Z",
-      "reviewDue": "2026-11-06",
+      "reviewDue": "2026-12-10",
       "retrieval": {
         "documentId": "wiki:Decentralized_Free_Support_Wasserstein_Barycenter",
         "chunking": "markdown-heading-v1",
