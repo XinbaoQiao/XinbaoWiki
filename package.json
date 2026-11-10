@@ -26,7 +26,7 @@
     "typecheck": "node scripts/prepare-typecheck.mjs && tsc --noEmit",
     "check": "node scripts/run-with-node22.mjs npm run check:node22",
     "check:node22": "npm run typecheck && npm run lint:wiki && npm run lint:content && npm run lint:okf && npm run test:features",
-    "test:features": "node scripts/test-chat-hardening.mjs && node scripts/test-site-activity.mjs && node scripts/test-site-activity-daily.mjs && node scripts/test-site-activity-events.mjs && node scripts/test-wiki-outline.mjs",
+    "test:features": "node scripts/test-chat-hardening.mjs && node scripts/test-chat-composer-predict.mjs && node scripts/test-site-activity.mjs && node scripts/test-site-activity-daily.mjs && node scripts/test-site-activity-events.mjs && node scripts/test-wiki-outline.mjs",
     "verify:template": "node scripts/run-with-node22.mjs node scripts/template/build-template.mjs --out .tmp/template-build"
   },
   "dependencies": {

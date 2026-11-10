@@ -1,6 +1,7 @@
 'use client';
 
-import { FormEvent, useEffect, useMemo, useRef, useState } from 'react';
+import { FormEvent, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { WikiHrefLink } from '@/components/WikiHrefLink';
 import { siteConfig } from '@/lib/site-config';
 import ReactMarkdown from 'react-markdown';
@@ -8,6 +9,13 @@ import { createPortal } from 'react-dom';
 import rehypeKatex from 'rehype-katex';
 import remarkGfm from 'remark-gfm';
 import remarkMath from 'remark-math';
+import {
+  alignArrivedSuggestion,
+  canFlushComposerPredict,
+  contextTurnsForPredict,
+  normalizeComposerPredictDraft,
+  trimComposerSuggestion
+} from '@/lib/chat-composer-predict';
 
 type Language = 'en' | 'zh';
 type MessageRole = 'user' | 'assistant';
@@ -66,7 +74,9 @@ const copy = {
     quotaUnknown: '10 messages/day',
     quota: (remaining: number, limit: number) => `${remaining}/${limit} messages left today`,
     empty: 'Please enter a question.',
-    tooLong: `Please keep the message within ${MAX_INPUT_LENGTH} characters.`
+    tooLong: `Please keep the message within ${MAX_INPUT_LENGTH} characters.`,
+    acceptSuggestionHint: 'Tab to accept',
+    acceptSuggestion: 'Accept'
   },
   zh: {
     close: '关闭',
@@ -100,13 +110,20 @@ const copy = {
     quotaUnknown: '每天 10 条消息',
     quota: (remaining: number, limit: number) => `今天还剩 ${remaining}/${limit} 条消息`,
     empty: '请输入一个问题。',
-    tooLong: `请将消息控制在 ${MAX_INPUT_LENGTH} 个字符以内。`
+    tooLong: `请将消息控制在 ${MAX_INPUT_LENGTH} 个字符以内。`,
+    acceptSuggestionHint: '按 Tab 采纳',
+    acceptSuggestion: '采纳'
   }
 };
 
 function chatEndpoint() {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
   return `${basePath}/api/chat-with-owner/`;
+}
+
+function predictEndpoint() {
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  return `${basePath}/api/chat-with-owner/complete/`;
 }
 
 function randomTypingMessage(options: string[]) {
@@ -207,16 +224,33 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
   const messagesRef = useRef<HTMLDivElement>(null);
   const shellRef = useRef<HTMLElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const fieldRef = useRef<HTMLDivElement>(null);
+  const sizerRef = useRef<HTMLDivElement>(null);
+  const ghostRef = useRef<HTMLDivElement>(null);
   const activeRequestRef = useRef<AbortController | null>(null);
+  const predictAbortRef = useRef<AbortController | null>(null);
   const conversationIdRef = useRef('');
+  const suggestionRef = useRef('');
+  const inputValueRef = useRef('');
+  const pendingPredictRef = useRef(0);
+  const consumedPredictRef = useRef(0);
+  const predictSpendSeqRef = useRef(0);
+  const pagePathRef = useRef('');
   const dragStartY = useRef<number | null>(null);
+  const [suggestion, setSuggestion] = useState('');
+  const [composing, setComposing] = useState(false);
+  const [predictSpendId, setPredictSpendId] = useState(0);
+  const pathname = usePathname() || '';
   const quotaExhausted = remaining === 0;
   const composerDisabled = loading || quotaExhausted || !serviceAvailable;
+  inputValueRef.current = input;
+  suggestionRef.current = suggestion;
 
   useEffect(() => {
     setMounted(true);
     return () => {
       activeRequestRef.current?.abort();
+      predictAbortRef.current?.abort();
     };
   }, []);
 
@@ -225,14 +259,30 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
   }, [open, restoreRequest]);
 
   useEffect(() => {
-    if (!open) activeRequestRef.current?.abort();
+    if (!open) {
+      activeRequestRef.current?.abort();
+      predictAbortRef.current?.abort();
+      predictAbortRef.current = null;
+      pendingPredictRef.current = 0;
+      consumedPredictRef.current = predictSpendSeqRef.current;
+      suggestionRef.current = '';
+      setSuggestion('');
+    }
   }, [open]);
 
   useEffect(() => {
     // Language changes start a fresh localized session so chrome, greeting, and history stay consistent.
     activeRequestRef.current?.abort();
+    predictAbortRef.current?.abort();
     setLoading(false);
     setInput('');
+    setSuggestion('');
+    suggestionRef.current = '';
+    pendingPredictRef.current = 0;
+    consumedPredictRef.current = 0;
+    predictSpendSeqRef.current = 0;
+    setPredictSpendId(0);
+    setComposing(false);
     setError('');
     setRetryAfterSeconds(null);
     setRetryRequest(null);
@@ -284,6 +334,12 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
 
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === 'Escape') {
+        if (event.isComposing || event.keyCode === 229) return;
+        if (suggestionRef.current) {
+          event.preventDefault();
+          cancelComposerPredict();
+          return;
+        }
         event.preventDefault();
         onClose();
         return;
@@ -362,6 +418,172 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
     };
   }, [open]);
 
+
+  function syncComposerFieldSize() {
+    const field = fieldRef.current;
+    const sizer = sizerRef.current;
+    if (!field || !sizer) return;
+    const maxHeight = Number.parseFloat(window.getComputedStyle(field).maxHeight);
+    const grow = Number.isFinite(maxHeight) ? Math.min(sizer.scrollHeight, maxHeight) : sizer.scrollHeight;
+    field.style.setProperty('--chat-composer-grow', `${Math.ceil(grow)}px`);
+  }
+
+  function syncGhostScroll() {
+    const textarea = inputRef.current;
+    const ghost = ghostRef.current;
+    if (!textarea || !ghost) return;
+    ghost.scrollTop = textarea.scrollTop;
+    ghost.scrollLeft = textarea.scrollLeft;
+  }
+
+  function syncComposerGhostLayout() {
+    syncComposerFieldSize();
+    syncGhostScroll();
+  }
+
+  function cancelComposerPredict() {
+    predictAbortRef.current?.abort();
+    predictAbortRef.current = null;
+    if (pendingPredictRef.current) consumedPredictRef.current = pendingPredictRef.current;
+    pendingPredictRef.current = 0;
+    suggestionRef.current = '';
+    setSuggestion('');
+  }
+
+  function resetComposerPredictState() {
+    predictAbortRef.current?.abort();
+    predictAbortRef.current = null;
+    pendingPredictRef.current = 0;
+    consumedPredictRef.current = 0;
+    predictSpendSeqRef.current = 0;
+    suggestionRef.current = '';
+    setSuggestion('');
+    setPredictSpendId(0);
+  }
+
+  function armComposerPredictAfterQuotaSpend(remainingAfterTurn: number | null) {
+    predictAbortRef.current?.abort();
+    predictAbortRef.current = null;
+    suggestionRef.current = '';
+    setSuggestion('');
+    if (remainingAfterTurn === 0) {
+      pendingPredictRef.current = 0;
+      consumedPredictRef.current = predictSpendSeqRef.current;
+      return;
+    }
+    predictSpendSeqRef.current += 1;
+    pendingPredictRef.current = predictSpendSeqRef.current;
+    consumedPredictRef.current = 0;
+    setPredictSpendId(predictSpendSeqRef.current);
+  }
+
+  function acceptSuggestion() {
+    const suffix = suggestionRef.current;
+    if (!suffix || composing) return;
+    const next = `${inputValueRef.current}${suffix}`.slice(0, MAX_INPUT_LENGTH);
+    inputValueRef.current = next;
+    setInput(next);
+    suggestionRef.current = '';
+    setSuggestion('');
+    pendingPredictRef.current = 0;
+    requestAnimationFrame(() => {
+      const textarea = inputRef.current;
+      if (!textarea) return;
+      const end = next.length;
+      textarea.focus();
+      textarea.setSelectionRange(end, end);
+      syncGhostScroll();
+    });
+  }
+
+  function updateCaretFromTextarea(textarea: HTMLTextAreaElement) {
+    const atEnd = textarea.selectionStart === textarea.value.length && textarea.selectionEnd === textarea.value.length;
+    if (!atEnd) cancelComposerPredict();
+  }
+
+  useLayoutEffect(() => {
+    syncComposerGhostLayout();
+  }, [input, suggestion, open, minimized]);
+
+  useEffect(() => {
+    if (!open || minimized) return;
+    function onResize() {
+      syncComposerGhostLayout();
+    }
+    window.addEventListener('resize', onResize);
+    window.visualViewport?.addEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('resize', onResize);
+      window.visualViewport?.removeEventListener('resize', onResize);
+    };
+  }, [open, minimized]);
+
+  useEffect(() => {
+    if (pagePathRef.current && pagePathRef.current !== pathname) cancelComposerPredict();
+    pagePathRef.current = pathname;
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+    const spendId = pendingPredictRef.current;
+    if (!spendId || spendId === consumedPredictRef.current) return;
+    if (composing) return;
+    const draft = inputValueRef.current;
+    const textarea = inputRef.current;
+    const caretIsAtEnd = !textarea || (textarea.selectionStart === draft.length && textarea.selectionEnd === draft.length);
+    if (!canFlushComposerPredict({
+      draft,
+      caretAtEnd: caretIsAtEnd,
+      composing,
+      disabled: composerDisabled
+    })) {
+      cancelComposerPredict();
+      return;
+    }
+
+    consumedPredictRef.current = spendId;
+    pendingPredictRef.current = 0;
+    const requestDraft = normalizeComposerPredictDraft(draft);
+    const controller = new AbortController();
+    predictAbortRef.current = controller;
+    const timeout = window.setTimeout(() => controller.abort(), 4_000);
+    const turns = contextTurnsForPredict(messages);
+    void fetch(predictEndpoint(), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        draft: requestDraft,
+        language,
+        pagePath: pathname || window.location.pathname,
+        recentTurns: turns
+      }),
+      signal: controller.signal
+    }).then(async (response) => {
+      if (!response.ok) return;
+      const data = await response.json().catch(() => null) as { suggestion?: unknown } | null;
+      if (controller.signal.aborted) return;
+      const suffix = alignArrivedSuggestion(
+        requestDraft,
+        inputValueRef.current,
+        typeof data?.suggestion === 'string' ? data.suggestion : ''
+      );
+      suggestionRef.current = suffix;
+      setSuggestion(suffix);
+    }).catch(() => {
+      if (!controller.signal.aborted && suggestionRef.current) {
+        suggestionRef.current = '';
+        setSuggestion('');
+      }
+    }).finally(() => {
+      window.clearTimeout(timeout);
+      if (predictAbortRef.current === controller) predictAbortRef.current = null;
+    });
+
+    return () => {
+      window.clearTimeout(timeout);
+    };
+  }, [predictSpendId, composing, composerDisabled, open, messages, language, pathname]);
+
   function rollbackFailedUserMessage(message: string, appended: boolean) {
     if (!appended) return;
     setMessages((current) => {
@@ -381,6 +603,7 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
     setRetryAfterSeconds(null);
     setRetryRequest(null);
     setInput('');
+    cancelComposerPredict();
     setTypingMessage(randomTypingMessage(strings.typing));
     setLoading(true);
     let appended = false;
@@ -392,6 +615,8 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
     const controller = new AbortController();
     activeRequestRef.current = controller;
     let timedOut = false;
+    let shouldArmComposerPredict = false;
+    let remainingAfterQuotaSpend: number | null = null;
     const timeout = setTimeout(() => {
       timedOut = true;
       controller.abort();
@@ -442,6 +667,8 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
         content: reply,
         sources: sanitizeSources(data?.sources)
       }]);
+      shouldArmComposerPredict = true;
+      remainingAfterQuotaSpend = typeof data?.remaining === 'number' ? data.remaining : remaining;
     } catch (requestError) {
       rollbackFailedUserMessage(message, appended);
       setInput(message);
@@ -452,6 +679,7 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
       clearTimeout(timeout);
       if (activeRequestRef.current === controller) activeRequestRef.current = null;
       setLoading(false);
+      if (shouldArmComposerPredict) armComposerPredictAfterQuotaSpend(remainingAfterQuotaSpend);
     }
   }
 
@@ -491,6 +719,8 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
     activeRequestRef.current?.abort();
     setLoading(false);
     setInput('');
+    resetComposerPredictState();
+    setComposing(false);
     setError('');
     setRetryAfterSeconds(null);
     setRetryRequest(null);
@@ -625,25 +855,88 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
             )}
             <label className="sr-only" htmlFor="chat-with-owner-input">{strings.inputLabel}</label>
             <div className="chat-owner-composer-row">
-              <textarea
-                disabled={composerDisabled}
-                enterKeyHint="send"
-                id="chat-with-owner-input"
-                maxLength={MAX_INPUT_LENGTH}
-                onChange={(event) => setInput(event.target.value)}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing) {
-                    const coarse = window.matchMedia('(hover: none), (pointer: coarse)').matches;
-                    if (coarse) return;
-                    event.preventDefault();
-                    event.currentTarget.form?.requestSubmit();
-                  }
-                }}
-                placeholder={strings.placeholder}
-                ref={inputRef}
-                rows={1}
-                value={input}
-              />
+              <div className={`chat-owner-composer-field${composerDisabled ? ' is-disabled' : ''}${suggestion ? ' has-ghost' : ''}`} ref={fieldRef}>
+                <div aria-hidden="true" className="chat-owner-composer-sizer" ref={sizerRef}>
+                  <span>{input}</span>
+                  {suggestion ? <span className="chat-owner-composer-ghost-suffix">{suggestion}</span> : null}
+                  {(input.endsWith('\n') || suggestion.endsWith('\n')) ? '\n' : null}
+                </div>
+                <div aria-hidden="true" className="chat-owner-composer-ghost" ref={ghostRef}>
+                  <span>{input}</span>
+                  {suggestion ? (
+                    <span
+                      className="chat-owner-composer-ghost-suffix"
+                      onPointerDown={(event) => {
+                        if (event.pointerType === 'mouse' || composing || composerDisabled) return;
+                        event.preventDefault();
+                        acceptSuggestion();
+                      }}
+                    >
+                      {suggestion}
+                    </span>
+                  ) : null}
+                  {(input.endsWith('\n') || suggestion.endsWith('\n')) ? '\n' : null}
+                </div>
+                <textarea
+                  disabled={composerDisabled}
+                  enterKeyHint="send"
+                  id="chat-with-owner-input"
+                  maxLength={MAX_INPUT_LENGTH}
+                  onChange={(event) => {
+                    const next = event.target.value;
+                    const atEnd = event.target.selectionStart === next.length && event.target.selectionEnd === next.length;
+                    const nextSuggestion = trimComposerSuggestion(input, suggestionRef.current, next, atEnd);
+                    suggestionRef.current = nextSuggestion;
+                    setSuggestion(nextSuggestion);
+                    if (!atEnd) cancelComposerPredict();
+                    if ('isComposing' in event.nativeEvent && event.nativeEvent.isComposing) setComposing(true);
+                    setInput(next);
+                  }}
+                  onCompositionStart={() => setComposing(true)}
+                  onCompositionEnd={(event) => {
+                    setComposing(false);
+                    updateCaretFromTextarea(event.currentTarget);
+                  }}
+                  onClick={(event) => updateCaretFromTextarea(event.currentTarget)}
+                  onKeyUp={(event) => updateCaretFromTextarea(event.currentTarget)}
+                  onSelect={(event) => updateCaretFromTextarea(event.currentTarget)}
+                  onScroll={syncGhostScroll}
+                  onKeyDown={(event) => {
+                    const isIme = event.nativeEvent.isComposing || event.key === 'Process' || event.keyCode === 229;
+                    if (isIme) return;
+                    if (event.key === 'Tab' && !event.shiftKey && suggestionRef.current) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      acceptSuggestion();
+                      return;
+                    }
+                    if (event.key === 'Escape' && suggestionRef.current) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      cancelComposerPredict();
+                      return;
+                    }
+                    if (event.key === 'ArrowRight' && suggestionRef.current) {
+                      const textarea = event.currentTarget;
+                      if (textarea.selectionStart === textarea.value.length && textarea.selectionEnd === textarea.value.length) {
+                        event.preventDefault();
+                        acceptSuggestion();
+                        return;
+                      }
+                    }
+                    if (event.key === 'Enter' && !event.shiftKey) {
+                      const coarse = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+                      if (coarse) return;
+                      event.preventDefault();
+                      event.currentTarget.form?.requestSubmit();
+                    }
+                  }}
+                  placeholder={suggestion ? '' : strings.placeholder}
+                  ref={inputRef}
+                  rows={1}
+                  value={input}
+                />
+              </div>
               {loading ? (
                 <button className="chat-owner-cancel" onClick={cancelRequest} type="button">{strings.cancel}</button>
               ) : (
@@ -651,7 +944,22 @@ export function ChatWithOwnerPanel({ language, onClose, open, restoreRequest }: 
               )}
             </div>
             <div className="chat-owner-composer-footer">
-              <span>{MAX_INPUT_LENGTH - input.length}</span>
+              <span className="chat-owner-composer-hint">
+                {suggestion ? (
+                  <>
+                    <span className="chat-owner-composer-hint-tab">{strings.acceptSuggestionHint}</span>
+                    <button
+                      className="chat-owner-composer-accept"
+                      disabled={composerDisabled || composing}
+                      onClick={() => acceptSuggestion()}
+                      type="button"
+                    >
+                      {strings.acceptSuggestion}
+                    </button>
+                  </>
+                ) : null}
+              </span>
+              <span>{MAX_INPUT_LENGTH - Math.min(MAX_INPUT_LENGTH, input.length + suggestion.length)}</span>
             </div>
           </form>
         </section>

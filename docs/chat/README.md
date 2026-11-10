@@ -8,8 +8,11 @@
 components/ChatWithOwner.tsx
 app/api/chat-with-owner/route.ts
 app/api/chat-with-owner/questions/route.ts
+app/api/chat-with-owner/complete/route.ts
 app/api/chat-with-owner/audit/route.ts
 lib/chat-with-owner.ts
+lib/chat-composer-predict.ts
+lib/chat-composer-predict-server.ts
 wiki/*.md
 docs/chat/
   README.md
@@ -26,6 +29,10 @@ docs/chat/
 6. Sensitive and hidden-content requests return a localized protected-information refusal with no sources. Weak retrieval by itself is never mapped to the old fixed “public evidence is insufficient” sentence.
 7. Accepted calls require a durable private audit admission before any provider request, with per-attempt reservations and terminal usage accounting.
 8. The route returns `{ reply, remaining, limit, sources, meta }` or a safe generic error.
+
+## Composer ghost-text prediction
+
+After a visitor successfully sends a Chat with the owner message that consumes one of the 10 daily conversation turns, the composer may request exactly one cheap-model prediction of their likely next message. The first draft before any quota-consuming send is never predicted. Failed, cancelled, invalid, or rate-limited chat responses do not trigger a prediction, and dismissing or continuing to type never issues a second call in that turn. Tab or Right Arrow at the end of the draft accepts the gray ghost (Escape dismisses it first; a later Escape still closes the panel). On touch devices, tapping the gray text or a compact Accept control in the footer does the same. The composer grows with the suggested next message up to its usual maximum height, then scrolls in sync, and stays at that height after accept. Predictions come from `POST /api/chat-with-owner/complete/` and a cheap model (`YUNWU_PREDICT_MODEL`, default `deepseek-v4-flash-0731`). The endpoint only returns a sanitized next-message or suffix; it is not a general chat API, does not decrement the 10-message conversation quota, and does not write to the main chat audit store. It has a separate, stricter rate limit (20/minute and 60/hour per IP, 120/day per visitor, and a 2,000-call site-wide Tokyo daily cap). Chinese IME composition never triggers or accepts a prediction; a pending one-shot waits until composition ends.
 
 ## Private abuse and cost audit
 

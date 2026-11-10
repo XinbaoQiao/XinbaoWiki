@@ -19,7 +19,7 @@ assert.ok(panel.includes('activeRequestRef = useRef<AbortController | null>(null
 hasAll(panel, ['const controller = new AbortController()', 'signal: controller.signal'], 'client passes AbortController.signal to fetch');
 hasAll(panel, ['const timeout = setTimeout(() => {', 'timedOut = true;', 'controller.abort();'], 'client aborts slow requests with timeout state');
 hasAll(panel, ['function cancelRequest()', 'activeRequestRef.current?.abort();'], 'client cancel button aborts the active request');
-hasAll(panel, ['if (!open) activeRequestRef.current?.abort();', '[open]'], 'closing the panel aborts the active request');
+hasAll(panel, ['if (!open) {', 'activeRequestRef.current?.abort();', 'predictAbortRef.current?.abort();', '[open]'], 'closing the panel aborts the active chat and predict requests');
 hasAll(panel, ['setInput(message);', 'setRetryRequest({ message, language });'], 'failed requests preserve the current question and retry target');
 assert.ok(panel.includes('function rollbackFailedUserMessage'), 'failed sends roll back the optimistic user bubble');
 assert.ok(panel.includes("void sendMessage(retryRequest.message, retryRequest.language, true)"), 'one-click retry re-appends after a failed-bubble rollback');
