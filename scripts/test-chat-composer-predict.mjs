@@ -41,7 +41,7 @@ assert.equal(sanitizePredictedSuffix('', 'How can I contact Xinbao?'), 'How can 
 assert.equal(sanitizePredictedSuffix('', '"How can I contact Xinbao?"'), 'How can I contact Xinbao?');
 assert.equal(sanitizePredictedSuffix('', 'Next message: What projects has Xinbao worked on?'), 'What projects has Xinbao worked on?');
 assert.equal(sanitizePredictedSuffix('How can I contact', 'How can I contact Xinbao?'), ' Xinbao?');
-assert.equal(sanitizePredictedSuffix('How can I contact', ' Xinbao?'), ' Xinbao?');
+assert.equal(sanitizePredictedSuffix('How can I reach', ' Xinbao?'), ' Xinbao?');
 assert.equal(sanitizePredictedSuffix('How can I cont', 'contact Xinbao?'), 'act Xinbao?');
 assert.equal(sanitizePredictedSuffix('怎么联系', '"乔鑫宝？"'), '乔鑫宝？');
 assert.equal(sanitizePredictedSuffix('Hello', '  \n```\n```  '), '');
