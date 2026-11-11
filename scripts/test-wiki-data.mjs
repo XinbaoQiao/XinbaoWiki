@@ -1529,6 +1529,9 @@ assert.match(wikiSearch, /id=\{`\$\{generatedId\}-option-\$\{item\.slug\}`\}[\s\
 assert.match(wikiSearch, /role="listbox"/, 'wiki search renders accessible result listbox');
 assert.match(wikiSearch, /window\.location\.assign\(item\.href\)/, 'wiki search submit navigates to the selected result');
 assert.match(chatWithXinbao, /dynamic\([\s\S]*ChatWithXinbaoPanel[\s\S]*ssr: false/, 'Chat with Xinbao dynamically loads its heavy panel on the client');
+assert.match(chatWithXinbao, /prefetchChatPanelAssets/, 'chat prefetches the panel chunk and KaTeX CSS before the first open');
+assert.match(chatWithXinbao, /requestIdleCallback/, 'chat panel prefetch waits for idle so it stays off the critical path');
+assert.match(chatWithXinbao, /onPointerEnter=\{prefetchChatPanelAssets\}/, 'hovering the AI button prefetches the chat panel');
 
 assert.match(chatWithXinbao, /function closeChat[\s\S]*triggerRef\.current\?\.focus[\s\S]*aria-haspopup="dialog"[\s\S]*ref=\{triggerRef\}/, 'chat trigger restores focus after the dialog closes');
 assert.match(chatWithXinbao, /const \[hasOpened, setHasOpened\] = useState\(false\)/, 'Chat with Xinbao does not mount the heavy panel before the first user click');
@@ -2371,6 +2374,8 @@ assert.doesNotMatch(styles, /\.wiki-portal-block span \{/, 'homepage link-summar
 assert.match(styles, /\.wiki-portal-grid \{[\s\S]*grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);[\s\S]*\}/, 'homepage browse directory uses a three-column desktop layout');
 assert.match(styles, /\.wiki-shell:has\(\.wiki-portal\) \.wiki-sidebar \{[\s\S]*display: none;[\s\S]*\}/, 'homepage hides the article sidebar');
 assert.match(homePage, /import \{ HomepagePortal \} from '@\/components\/HomepagePortal';/, 'homepage delegates interactive portal state to a client component');
+assert.match(homePage, /staticHomepageUpdatesAsOf/, 'homepage uses a static updates stamp so the page can be cached');
+assert.doesNotMatch(homePage, /new Date\(\)\.toISOString\(\)/, 'homepage does not take a request-time Date that would force dynamic rendering');
 assert.match(homePage, /import \{ directorySections \} from '@\/lib\/site-navigation';[\s\S]*getWikiManifestEntry/, 'homepage uses shared site update metadata and manifest entries instead of duplicating page data');
 assert.doesNotMatch(homePage, hiddenManuscriptPattern, 'homepage directory does not expose the hidden under-review manuscript');
 assert.match(homePage, /if \(!page\) \{[\s\S]*throw new Error\(`Homepage directory slug must resolve to a public wiki page: \$\{slug\}`\);[\s\S]*\}/, 'homepage directory refuses missing or hidden wiki pages instead of generating fallback links');

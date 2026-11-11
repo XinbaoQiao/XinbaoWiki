@@ -54,7 +54,7 @@ const expectations = [
   ['store', '@vercel/blob', 'SITE_BACKGROUND_REDIS_KEY', 'SITE_BACKGROUND_BLOB_PATHNAME', 'siteBackgroundLocalFallbackEnabled', 'siteBackgroundPasswordRequired', 'blobReadWriteTokenEnv'],
   ['shared', "join(':')", 'site-wallpaper', 'wallpaper', 'sharedBackgroundInlineStyle', 'sniffImageMimeType', 'isAcceptedSiteBackgroundMime'],
   ['toggle', '/api/site-activity/wallpaper/', 'SITE_WALLPAPER_API', 'AbortController', 'compressImageFile', 'publishShared', '全站可见', '仅此设备', 'imageExtensionForMime', 'normalizeImageMimeType'],
-  ['layout', 'initialSharedBackground', 'loadInitialSharedBackground', 'data-site-custom-bg'],
+  ['layout', 'SitePalette', 'data-site-custom-bg'],
   ['css', 'html[data-site-custom-bg="on"] .wiki-toc-return', 'backdrop-filter: blur(10px)', 'site-custom-bg-password'],
   ['deny', 'vercel-storage\\.com/site-wallpaper', 'public/site-wallpaper/'],
   ['rules', "'public/site-wallpaper/'"],
@@ -72,6 +72,10 @@ const forbiddenPath = ['site', 'background'].join('-');
 const forbiddenBlobEnv = ['BLOB', 'READ', 'WRITE', 'TOKEN'].join('_');
 assert.equal(files.route.includes(forbiddenPath), false);
 assert.equal(files.store.includes(forbiddenBlobEnv), false);
+assert.equal(files.layout.includes('loadInitialSharedBackground'), false, 'layout must not block document rendering on a Redis wallpaper read');
+assert.equal(files.layout.includes('readSharedSiteBackground'), false, 'layout must not import the wallpaper store');
+assert.equal(files.layout.includes('initialSharedBackground'), false);
+assert.match(files.toggle, /initialSharedBackground \?\? \(await refreshSharedBackground\(\)\)/, 'SitePalette still loads shared wallpaper from the API when the layout does not preload it');
 
 
 const customBg = fs.readFileSync('lib/site-custom-background.ts', 'utf8');

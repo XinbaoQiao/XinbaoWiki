@@ -7,10 +7,10 @@ import {
   type ParsedComposerPredictBody
 } from './chat-composer-predict';
 
-export const CHAT_PREDICT_DEFAULT_MODEL = 'deepseek-v4-flash-0731';
+export const CHAT_PREDICT_DEFAULT_MODEL = 'gemini-3.1-flash-lite';
 export const CHAT_PREDICT_FALLBACK_MODEL = 'deepseek-v4.1-flash';
 export const CHAT_PREDICT_MAX_TOKENS = 48;
-export const CHAT_PREDICT_TIMEOUT_MS = 2_500;
+export const CHAT_PREDICT_TIMEOUT_MS = 3_000;
 export const CHAT_PREDICT_TEMPERATURE = 0.35;
 export const CHAT_PREDICT_MINUTE_LIMIT = 20;
 export const CHAT_PREDICT_HOURLY_LIMIT = 60;
@@ -250,50 +250,77 @@ export async function executeChatComposerComplete(
   const timeout = setTimeout(() => controller.abort(), CHAT_PREDICT_TIMEOUT_MS);
   const onAbort = () => controller.abort();
   request.signal?.addEventListener('abort', onAbort, { once: true });
-  try {
-    const fetchImpl = deps.fetch ?? fetch;
-    const response = await fetchImpl(`${config.baseUrl}/chat/completions`, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${config.providerAuth}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        model,
-        messages: [
-          {
-            role: 'user',
-            content: `${prompt}\n\n---\nComplete only the visitor draft suffix.`
-          }
-        ],
-        temperature: CHAT_PREDICT_TEMPERATURE,
-        max_tokens: CHAT_PREDICT_MAX_TOKENS,
-        thinking: { type: 'disabled' },
-        stream: false
-      }),
-      signal: controller.signal
-    });
-    if (!response.ok) return emptySuggestion(200, { visitorId: visitorCookie.visitorId, shouldSetCookie: visitorCookie.shouldSet, model, redisKeysTouched });
+  const startedAt = Date.now();
+  const completionMeta = {
+    visitorId: visitorCookie.visitorId,
+    shouldSetCookie: visitorCookie.shouldSet,
+    redisKeysTouched
+  };
+  const requestCompletion = (fetchImpl: typeof fetch, modelId: string) => fetchImpl(`${config.baseUrl}/chat/completions`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${config.providerAuth}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      model: modelId,
+      messages: [
+        {
+          role: 'user',
+          content: `${prompt}\n\n---\nComplete only the visitor draft suffix.`
+        }
+      ],
+      temperature: CHAT_PREDICT_TEMPERATURE,
+      max_tokens: CHAT_PREDICT_MAX_TOKENS,
+      thinking: { type: 'disabled' },
+      stream: false
+    }),
+    signal: controller.signal
+  });
+  const readSuggestion = async (response: { json(): Promise<unknown> }) => {
     const data = (await response.json()) as CompletionResponse;
     const raw = data.choices?.[0]?.message?.content;
-    const suggestion = typeof raw === 'string' ? sanitizePredictedSuffix(parsed.draft, raw) : '';
-    const usage = data.usage;
+    return {
+      suggestion: typeof raw === 'string' ? sanitizePredictedSuffix(parsed.draft, raw) : '',
+      usage: data.usage
+    };
+  };
+  const finishSuggestion = (suggestion: string, usedModel: string, usage?: CompletionResponse['usage']) => {
     console.info('[chat-with-xinbao-complete]', JSON.stringify({
       outcome: suggestion ? 'ok' : 'empty',
-      model,
+      model: usedModel,
       promptTokens: usage?.prompt_tokens,
       completionTokens: usage?.completion_tokens
     }));
     return {
       status: 200,
       body: { suggestion },
-      visitorId: visitorCookie.visitorId,
-      shouldSetCookie: visitorCookie.shouldSet,
-      model,
-      redisKeysTouched
+      ...completionMeta,
+      model: usedModel
     };
+  };
+  try {
+    const fetchImpl = deps.fetch ?? fetch;
+    let usedModel = model;
+    const response = await requestCompletion(fetchImpl, model);
+    if (!response.ok) {
+      const remainingMs = CHAT_PREDICT_TIMEOUT_MS - (Date.now() - startedAt);
+      const canFallback = (
+        model !== CHAT_PREDICT_FALLBACK_MODEL
+        && remainingMs > 0
+        && !controller.signal.aborted
+      );
+      if (!canFallback) return emptySuggestion(200, { ...completionMeta, model });
+      usedModel = CHAT_PREDICT_FALLBACK_MODEL;
+      const fallbackResponse = await requestCompletion(fetchImpl, usedModel);
+      if (!fallbackResponse.ok) return emptySuggestion(200, { ...completionMeta, model: usedModel });
+      const fallbackResult = await readSuggestion(fallbackResponse);
+      return finishSuggestion(fallbackResult.suggestion, usedModel, fallbackResult.usage);
+    }
+    const result = await readSuggestion(response);
+    return finishSuggestion(result.suggestion, usedModel, result.usage);
   } catch {
-    return emptySuggestion(200, { visitorId: visitorCookie.visitorId, shouldSetCookie: visitorCookie.shouldSet, model, redisKeysTouched });
+    return emptySuggestion(200, { ...completionMeta, model });
   } finally {
     clearTimeout(timeout);
     request.signal?.removeEventListener('abort', onAbort);

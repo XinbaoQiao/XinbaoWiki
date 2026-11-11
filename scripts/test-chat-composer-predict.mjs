@@ -23,8 +23,11 @@ const {
 } = await import('../lib/chat-composer-predict.ts');
 const {
   CHAT_PREDICT_DEFAULT_MODEL,
+  CHAT_PREDICT_FALLBACK_MODEL,
   CHAT_PREDICT_KEY_PREFIX,
   CHAT_PREDICT_MAX_TOKENS,
+  CHAT_PREDICT_TEMPERATURE,
+  CHAT_PREDICT_TIMEOUT_MS,
   composerPredictRateLimitKeys,
   executeChatComposerComplete,
   predictModelId,
@@ -307,7 +310,97 @@ const rejected = await executeChatComposerComplete(fakeRequest({
 assert.equal(rejected.status, 400);
 
 assert.equal(predictModelId({}), CHAT_PREDICT_DEFAULT_MODEL);
-assert.equal(CHAT_PREDICT_DEFAULT_MODEL, 'deepseek-v4-flash-0731');
+assert.equal(CHAT_PREDICT_DEFAULT_MODEL, 'gemini-3.1-flash-lite');
+assert.equal(CHAT_PREDICT_FALLBACK_MODEL, 'deepseek-v4.1-flash');
+assert.equal(CHAT_PREDICT_TIMEOUT_MS, 3000);
+assert.equal(predictModelId({ YUNWU_PREDICT_MODEL: 'custom-fast-model' }), 'custom-fast-model');
+assert.equal(predictModelId({ YUNWU_PREDICT_MODEL: 'bad model!!' }), CHAT_PREDICT_DEFAULT_MODEL);
+
+const fallbackModels = [];
+const fallbackSignals = [];
+const fallbackCompletion = await executeChatComposerComplete(fakeRequest({
+  draft: '',
+  language: 'en',
+  pagePath: '/wiki/CV/',
+  recentTurns: [{ role: 'user', content: 'Hi' }, { role: 'assistant', content: 'Hello' }]
+}, { 'x-vercel-forwarded-for': '203.0.113.10' }), {
+  now: new Date('2026-11-10T11:00:00+09:00'),
+  env,
+  redis: new MemoryRedis(),
+  fetch: async (_url, options) => {
+    const payload = JSON.parse(options.body);
+    fallbackModels.push(payload.model);
+    fallbackSignals.push(options.signal);
+    assert.equal(payload.max_tokens, CHAT_PREDICT_MAX_TOKENS);
+    assert.equal(payload.temperature, CHAT_PREDICT_TEMPERATURE);
+    assert.deepEqual(payload.thinking, { type: 'disabled' });
+    if (payload.model === CHAT_PREDICT_DEFAULT_MODEL) {
+      return { ok: false, status: 404, json: async () => ({ error: 'missing-model' }) };
+    }
+    assert.equal(payload.model, CHAT_PREDICT_FALLBACK_MODEL);
+    return {
+      ok: true,
+      json: async () => ({ choices: [{ message: { content: 'What papers has the author published recently?' } }], usage: { prompt_tokens: 36, completion_tokens: 9, total_tokens: 45 } })
+    };
+  }
+});
+assert.deepEqual(fallbackModels, [CHAT_PREDICT_DEFAULT_MODEL, CHAT_PREDICT_FALLBACK_MODEL]);
+assert.equal(fallbackSignals.length, 2);
+assert.equal(fallbackSignals[0], fallbackSignals[1], 'fallback must reuse the same overall timeout signal');
+assert.equal(fallbackCompletion.status, 200);
+assert.equal(fallbackCompletion.body.suggestion, 'What papers has the author published recently?');
+assert.equal(fallbackCompletion.model, CHAT_PREDICT_FALLBACK_MODEL);
+assert.ok(fallbackCompletion.redisKeysTouched.every((key) => key.startsWith(CHAT_PREDICT_KEY_PREFIX)));
+assert.ok(fallbackCompletion.redisKeysTouched.every((key) => !usesChatConversationQuotaKey(key)));
+
+let emptyOkCalls = 0;
+const emptyOkCompletion = await executeChatComposerComplete(fakeRequest({
+  draft: '',
+  language: 'en',
+  pagePath: '/wiki/CV/',
+  recentTurns: [{ role: 'user', content: 'Hi' }, { role: 'assistant', content: 'Hello' }]
+}, { 'x-vercel-forwarded-for': '203.0.113.10' }), {
+  now: new Date('2026-11-10T11:00:00+09:00'),
+  env,
+  redis: new MemoryRedis(),
+  fetch: async (_url, options) => {
+    emptyOkCalls += 1;
+    const payload = JSON.parse(options.body);
+    assert.equal(payload.model, CHAT_PREDICT_DEFAULT_MODEL);
+    return { ok: true, json: async () => ({ choices: [{ message: { content: '  \n`\n`  ' } }], usage: { prompt_tokens: 40, completion_tokens: 1, total_tokens: 41 } }) };
+  }
+});
+assert.equal(emptyOkCalls, 1, 'a successful empty suggestion must not invoke the fallback model');
+assert.equal(emptyOkCompletion.status, 200);
+assert.equal(emptyOkCompletion.body.suggestion, '');
+assert.equal(emptyOkCompletion.model, CHAT_PREDICT_DEFAULT_MODEL);
+
+const overrideModels = [];
+const overrideCompletion = await executeChatComposerComplete(fakeRequest({
+  draft: '',
+  language: 'en',
+  pagePath: '/wiki/CV/',
+  recentTurns: [{ role: 'user', content: 'Hi' }, { role: 'assistant', content: 'Hello' }]
+}, { 'x-vercel-forwarded-for': '203.0.113.10' }), {
+  now: new Date('2026-11-10T11:00:00+09:00'),
+  env: { ...env, YUNWU_PREDICT_MODEL: 'custom-fast-model' },
+  redis: new MemoryRedis(),
+  fetch: async (_url, options) => {
+    const payload = JSON.parse(options.body);
+    overrideModels.push(payload.model);
+    if (payload.model === 'custom-fast-model') {
+      return { ok: false, status: 403, json: async () => ({ error: 'forbidden' }) };
+    }
+    return {
+      ok: true,
+      json: async () => ({ choices: [{ message: { content: 'Tell me about recent papers.' } }] })
+    };
+  }
+});
+assert.deepEqual(overrideModels, ['custom-fast-model', CHAT_PREDICT_FALLBACK_MODEL]);
+assert.equal(overrideCompletion.status, 200);
+assert.equal(overrideCompletion.body.suggestion, 'Tell me about recent papers.');
+assert.equal(overrideCompletion.model, CHAT_PREDICT_FALLBACK_MODEL);
 
 assert.doesNotMatch(panel, /COMPOSER_PREDICT_DEBOUNCE_MS|canRequestComposerPredict/);
 assert.match(panel, /armComposerPredictAfterQuotaSpend/);

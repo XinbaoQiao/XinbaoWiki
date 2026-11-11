@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import sharp from 'sharp';
 import matter from 'gray-matter';
-import { getRecentSiteUpdates, siteUpdates } from '../lib/site-updates.ts';
+import { getRecentSiteUpdates, siteUpdates, staticHomepageUpdatesAsOf } from '../lib/site-updates.ts';
 
 const current = new Date('2026-10-19T03:00:00Z');
 for (const language of ['en', 'zh']) {
@@ -19,6 +19,9 @@ for (const language of ['en', 'zh']) {
   assert.ok(getRecentSiteUpdates(language, new Date('2025-01-01T03:00:00Z')).every(item => item.dateTime <= '2025-01-01'), 'Future events are excluded');
 }
 assert.deepEqual(getRecentSiteUpdates('en', current).map(item => item.dateTime), getRecentSiteUpdates('zh', current).map(item => item.dateTime));
+const staticAsOf = staticHomepageUpdatesAsOf();
+assert.match(staticAsOf, /^\d{4}-\d{2}-\d{2}T00:00:00\+09:00$/);
+assert.ok(getRecentSiteUpdates('en', new Date(staticAsOf)).some((item) => item.dateTime === siteUpdates.en[0].dateTime), 'the static homepage stamp includes the latest published update');
 
 const papers = siteUpdates.en.flatMap(item => item.papers || []);
 assert.equal(papers.length, 5);
