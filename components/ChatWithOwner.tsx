@@ -6,10 +6,23 @@ import { useEffect, useRef, useState } from 'react';
 type Language = 'en' | 'zh';
 type Props = { language: Language };
 
-const ChatWithOwnerPanel = dynamic(
-  () => import('@/components/ChatWithOwnerPanel').then((module) => module.ChatWithOwnerPanel),
-  { ssr: false }
-);
+const loadChatWithOwnerPanel = () =>
+  import('@/components/ChatWithOwnerPanel').then((module) => module.ChatWithOwnerPanel);
+
+const ChatWithOwnerPanel = dynamic(loadChatWithOwnerPanel, { ssr: false });
+
+function prefetchChatPanelAssets() {
+  void loadChatWithOwnerPanel();
+  if (typeof document === 'undefined') return;
+  if (document.querySelector('link[data-katex-css], link[data-katex-css-prefetch]')) return;
+  const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? '').replace(/\/$/, '');
+  const link = document.createElement('link');
+  link.rel = 'prefetch';
+  link.as = 'style';
+  link.href = `${basePath}/vendor/katex.min.css`;
+  link.dataset.katexCssPrefetch = '';
+  document.head.appendChild(link);
+}
 
 const openLabels: Record<Language, string> = {
   en: 'Open Chat with the owner',
@@ -37,6 +50,21 @@ export function ChatWithOwner({ language }: Props) {
     if (hasOpened) ensureKatexStylesheet();
   }, [hasOpened]);
 
+  useEffect(() => {
+    let idleId = 0;
+    let fallback = 0;
+    const arm = () => prefetchChatPanelAssets();
+    if (typeof requestIdleCallback === 'function') {
+      idleId = requestIdleCallback(arm, { timeout: 2500 });
+    } else {
+      fallback = window.setTimeout(arm, 400);
+    }
+    return () => {
+      if (idleId && typeof cancelIdleCallback === 'function') cancelIdleCallback(idleId);
+      if (fallback) window.clearTimeout(fallback);
+    };
+  }, []);
+
   function closeChat() {
     setOpen(false);
     requestAnimationFrame(() => {
@@ -56,6 +84,8 @@ export function ChatWithOwner({ language }: Props) {
           setOpen(true);
           setRestoreRequest((current) => current + 1);
         }}
+        onFocus={prefetchChatPanelAssets}
+        onPointerEnter={prefetchChatPanelAssets}
         ref={triggerRef}
         type="button"
       >

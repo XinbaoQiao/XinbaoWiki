@@ -9,17 +9,6 @@ import { SiteActivityRecorder } from '@/components/SiteActivityRecorder';
 import { WikiLink } from '@/components/WikiLink';
 import { pathWithBasePath } from '@/lib/wiki';
 import { siteConfig } from '@/lib/site-config';
-import {
-  type SharedSiteBackgroundPublic
-} from '@/lib/site-wallpaper-shared';
-import {
-  readSharedSiteBackground,
-  siteBackgroundBlobConfigured,
-  siteBackgroundLocalFallbackEnabled,
-  siteBackgroundPasswordRequired,
-  siteBackgroundSharedConfigured,
-  siteBackgroundWritableConfigured
-} from '@/lib/site-wallpaper-store';
 import { ViewTransitions } from 'next-view-transitions';
 import { siteAppearanceBootstrapScript } from '@/lib/site-palette';
 import './globals.css';
@@ -72,25 +61,10 @@ export const viewport: Viewport = {
   interactiveWidget: 'resizes-content'
 };
 
-async function loadInitialSharedBackground(): Promise<SharedSiteBackgroundPublic | null> {
-  try {
-    const shared = await readSharedSiteBackground();
-    return {
-      ...shared,
-      shared: siteBackgroundSharedConfigured(),
-      writable: siteBackgroundWritableConfigured(),
-      blob: siteBackgroundBlobConfigured(),
-      localFallback: siteBackgroundLocalFallbackEnabled(),
-      passwordRequired: siteBackgroundPasswordRequired()
-    };
-  } catch {
-    return null;
-  }
-}
-
-export default async function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
-  const initialSharedBackground = await loadInitialSharedBackground();
-  // Visitors default to mixed/auto palette. Shared wallpaper stays available for opt-in.
+export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+  // Visitors default to mixed/auto palette. Shared wallpaper stays available for
+  // opt-in through SitePalette's existing /api/site-activity/wallpaper/ fetch, so
+  // this layout does not block document TTFB on Redis and can be statically cached.
   const sharedDataset = { 'data-site-custom-bg': 'off' } as Record<string, string>;
 
   return (
@@ -120,7 +94,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <SiteActivityRecorder />
           <SiteCharacterOceanHost />
           <a className="skip-to-content" href="#main-content">Skip to content / 跳到正文</a>
-          <SitePalette icons={sitePaletteIcons} initialSharedBackground={initialSharedBackground} />
+          <SitePalette icons={sitePaletteIcons} />
           <header className="wiki-topbar">
             <div className="wiki-topbar-inner">
               <WikiLink className="wiki-logo" href={pathWithBasePath('/')}>

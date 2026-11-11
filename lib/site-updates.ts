@@ -119,6 +119,22 @@ export const siteUpdates: Record<SiteLanguage, SiteUpdate[]> = {
   zh: updatesFor('zh')
 };
 
+function staticHomepageUpdatesAsOfFromEvents(): string {
+  let latest = '';
+  for (const event of siteUpdateEvents) {
+    if (event.dateTime > latest) latest = event.dateTime;
+  }
+  const [year, month, day] = latest.split('-').map(Number);
+  if (!year || !month) return '2026-01-01T00:00:00+09:00';
+  const inclusiveDay = day || new Date(Date.UTC(year, month, 0)).getUTCDate();
+  return `${year}-${String(month).padStart(2, '0')}-${String(inclusiveDay).padStart(2, '0')}T00:00:00+09:00`;
+}
+
+/** Stable SSR stamp for the homepage updates list. The portal still refreshes to "now" after hydration. */
+export function staticHomepageUpdatesAsOf(): string {
+  return staticHomepageUpdatesAsOfFromEvents();
+}
+
 // Keep the full archive above. Month-only events describe a whole month, so
 // they remain recent until that month lies entirely outside the four-year window.
 export function getRecentSiteUpdates(language: SiteLanguage, asOf = new Date()): SiteUpdate[] {

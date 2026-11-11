@@ -3,6 +3,7 @@ import { directorySections } from '@/lib/site-navigation';
 import { getWikiManifestEntry } from '@/lib/wiki-manifest';
 import { pathWithBasePath } from '@/lib/wiki';
 import { getPaperHighlights } from '@/lib/paper-highlights.server';
+import { staticHomepageUpdatesAsOf } from '@/lib/site-updates';
 
 function wikiHref(slug: string) {
   return pathWithBasePath(`/wiki/${encodeURIComponent(slug)}/`);
@@ -37,7 +38,7 @@ export default function HomePage() {
     <HomepagePortal
       directorySections={portalDirectorySections}
       paperHighlights={getPaperHighlights()}
-      updatesAsOf={new Date().toISOString()}
+      updatesAsOf={staticHomepageUpdatesAsOf()}
     />
   );
 }
