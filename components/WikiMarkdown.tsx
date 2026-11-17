@@ -88,10 +88,10 @@ export function WikiMarkdown({ editLabel, markdown, sourceHref }: Props) {
             return <img src={safeSrc} alt={alt || ''} loading="lazy" decoding="async" />;
           },
           h2({ id, tabIndex, children }) {
-            return <h2 id={id} tabIndex={tabIndex}>{children}{editLink(sourceHref, editLabel)}</h2>;
+            return <h2 id={id} tabIndex={tabIndex}><span className="wiki-heading-text">{children}</span>{editLink(sourceHref, editLabel)}</h2>;
           },
           h3({ id, tabIndex, children }) {
-            return <h3 id={id} tabIndex={tabIndex}>{children}{editLink(sourceHref, editLabel)}</h3>;
+            return <h3 id={id} tabIndex={tabIndex}><span className="wiki-heading-text">{children}</span>{editLink(sourceHref, editLabel)}</h3>;
           },
           p({ children }) {
             if (children === publicationLinkLegendTexts.en) return <PublicationLinkLegend language="en" />;

@@ -61,6 +61,10 @@ export const viewport: Viewport = {
   interactiveWidget: 'resizes-content'
 };
 
+// Short ISR window so static HTML can be served stale-while-revalidate.
+// API routes stay force-dynamic and are not affected.
+export const revalidate = 60;
+
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   // Visitors default to mixed/auto palette. Shared wallpaper stays available for
   // opt-in through SitePalette's existing /api/site-activity/wallpaper/ fetch, so
@@ -72,21 +76,6 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
       <html lang="en" {...sharedDataset} suppressHydrationWarning>
         <head>
           <script id="site-appearance-bootstrap" dangerouslySetInnerHTML={{ __html: siteAppearanceBootstrapScript() }} />
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-          {/* No rel=preload: Alex Brush is decorative; print→all defer keeps it off the critical path. */}
-          <link
-            href="https://fonts.googleapis.com/css2?family=Alex+Brush&display=optional"
-            rel="stylesheet"
-            media="print"
-            data-alex-brush-font=""
-          />
-          <script
-            dangerouslySetInnerHTML={{
-              __html:
-                '(function(){var l=document.querySelector("link[data-alex-brush-font]");if(!l)return;var r=function(){l.media="all"};if(l.sheet)r();else l.addEventListener("load",r);})();'
-            }}
-          />
 
         </head>
         <body>
