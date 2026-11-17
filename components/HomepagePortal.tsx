@@ -33,7 +33,6 @@ type PortalSection = {
   groups: PortalGroup[];
 };
 type Props = {
-  directorySections: PortalSection[];
   paperHighlights: PaperHighlightCatalog;
   updatesAsOf: string;
 };
@@ -110,8 +109,10 @@ function withBasePath(pathname: string) {
   return basePath ? `${basePath}${pathname}` : pathname;
 }
 
-export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf }: Props) {
+export function HomepagePortal({ paperHighlights, updatesAsOf }: Props) {
   const [language, setLanguage] = useState<SearchLanguage>('en');
+  const [directorySections, setDirectorySections] = useState<PortalSection[]>([]);
+  const [directoryStatus, setDirectoryStatus] = useState<'loading' | 'ready' | 'error'>('loading');
   const [updatesAsOfDate, setUpdatesAsOfDate] = useState(updatesAsOf);
   const [browseView, setBrowseView] = useState<BrowseView>('list');
   const [activeCubeFace, setActiveCubeFace] = useState<CubeFace | null>(null);
@@ -652,6 +653,29 @@ export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf
   }, [language]);
 
   useEffect(() => {
+    let cancelled = false;
+    const loadDirectory = async () => {
+      try {
+        const response = await fetch(withBasePath('/portal-directory.json'), {
+          cache: 'force-cache',
+          credentials: 'same-origin'
+        });
+        if (!response.ok) throw new Error(`directory ${response.status}`);
+        const payload = (await response.json()) as PortalSection[];
+        if (cancelled) return;
+        setDirectorySections(payload);
+        setDirectoryStatus('ready');
+      } catch {
+        if (!cancelled) setDirectoryStatus('error');
+      }
+    };
+    void loadDirectory();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  useEffect(() => {
     try {
       const savedView = window.localStorage.getItem('xinbaopedia-browse-view');
       if (savedView === 'list' || savedView === 'cube') setBrowseView(savedView);
@@ -985,6 +1009,7 @@ export function HomepagePortal({ directorySections, paperHighlights, updatesAsOf
 
         <details
           className="wiki-portal-directory"
+          data-directory-status={directoryStatus}
           id="portal-directory"
           ref={browseDisclosure.ref}
           data-animated-disclosure=""

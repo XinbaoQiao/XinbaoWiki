@@ -13,16 +13,16 @@ tags:
 timestamp: '2026-08-20T00:00:00+09:00'
 modified: '2026-10-07T07:07:23.846Z'
 content_hash: 'sha256:880653007652fbf48f1f36ddd63085d593512f97ebeefa5b48c7c036001989fb'
-reviewed_at: '2026-10-07T07:07:51.129Z'
-review_due: '2026-12-10'
+reviewed_at: '2026-11-17T11:34:54.098Z'
+review_due: '2026-12-17'
 language: en
 lifecycle:
   status: active
   confidence: 0.8
   review: periodic or when linked evidence changes
   retention: semantic memory with quality warnings
-  reviewedAt: '2026-10-07T07:07:51.129Z'
-  reviewDue: '2026-12-10'
+  reviewedAt: '2026-11-17T11:34:54.098Z'
+  reviewDue: '2026-12-17'
   pendingReview: false
   overdue: false
 retrieval:

@@ -11,8 +11,8 @@ tags:
 timestamp: '2026-05-06T06:22:22+08:00'
 modified: '2026-10-13T11:36:03.385Z'
 content_hash: 'sha256:f196a3cc0b70b7b2c2e20724dd3fc6e1600c7b1ff139e6e6cc0d230a5d87c36b'
-reviewed_at: '2026-10-13T11:36:03.385Z'
-review_due: '2026-11-12'
+reviewed_at: '2026-11-17T11:34:28.142Z'
+review_due: '2026-12-17'
 name: 'Learn What Matters: Data Pruning for Efficient Decentralized Learning'
 language: zh
 summary: 关于高效去中心化学习中数据剪枝的在审手稿。

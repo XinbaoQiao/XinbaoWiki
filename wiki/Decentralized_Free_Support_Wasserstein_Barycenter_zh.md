@@ -11,8 +11,8 @@ tags:
 timestamp: '2026-08-20T00:00:00+09:00'
 modified: '2026-10-13T11:36:03.385Z'
 content_hash: 'sha256:5080e7384b659bb4021914df5601284920f20e5b614b5ced0f611a0e4b239a3b'
-reviewed_at: '2026-10-13T11:36:03.385Z'
-review_due: '2026-11-12'
+reviewed_at: '2026-11-17T11:34:28.142Z'
+review_due: '2026-12-17'
 name: Decentralized Free-Support Wasserstein Barycenter
 language: zh
 summary: 在审稿件，研究可移动支撑点如何在去中心化通信约束下构建共享几何参考。

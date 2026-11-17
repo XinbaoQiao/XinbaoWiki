@@ -75,7 +75,9 @@ assert.equal(files.store.includes(forbiddenBlobEnv), false);
 assert.equal(files.layout.includes('loadInitialSharedBackground'), false, 'layout must not block document rendering on a Redis wallpaper read');
 assert.equal(files.layout.includes('readSharedSiteBackground'), false, 'layout must not import the wallpaper store');
 assert.equal(files.layout.includes('initialSharedBackground'), false);
-assert.match(files.toggle, /initialSharedBackground \?\? \(await refreshSharedBackground\(\)\)/, 'SitePalette still loads shared wallpaper from the API when the layout does not preload it');
+assert.match(files.toggle, /shouldFetchShared = Boolean\(savedCustom\.enabled && !localUrl\)/, 'default visitors with wallpaper off skip the shared wallpaper request');
+assert.match(files.toggle, /initialSharedBackground \?\? \(shouldFetchShared \? await refreshSharedBackground\(\) : null\)/, 'shared wallpaper is fetched on first load only when a local opt-in needs it');
+assert.match(files.toggle, /if \(!panelOpen\) return;[\s\S]*refreshSharedBackground\(\)/, 'opening the wallpaper panel still loads the shared wallpaper for opt-in');
 
 
 const customBg = fs.readFileSync('lib/site-custom-background.ts', 'utf8');

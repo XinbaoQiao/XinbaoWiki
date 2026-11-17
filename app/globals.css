@@ -1,4 +1,11 @@
-/* Alex Brush loaded via <link> in layout head (avoids CSS @import block). */
+/* Alex Brush is self-hosted and applied only on the text-palette signature. */
+@font-face {
+  font-family: "Alex Brush";
+  src: url("./fonts/AlexBrush-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: optional;
+}
 @layer xinbaopedia.base;
 
 :root {
@@ -1822,14 +1829,19 @@ body:has(.wiki-portal) .wiki-topbar {
 .wiki-contents-mobile a[href^="#"],
 .wiki-article-contents a[href^="#"]:visited,
 .wiki-contents-mobile a[href^="#"]:visited {
-  display: block;
-  margin: 0 -6px;
-  padding: 4px 6px;
+  display: inline-block;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0;
+  padding: 2px 8px 2px 6px;
   border-radius: 3px;
   border-left: 3px solid transparent;
   color: var(--wiki-text);
   font-weight: 400;
   text-decoration: none;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .wiki-article-contents a:hover,
@@ -1940,25 +1952,30 @@ body:has(.wiki-portal) .wiki-topbar {
   }
 }
 
-.wiki-main :is(h2, h3).wiki-heading-flash {
+.wiki-main :is(h2, h3) .wiki-heading-text {
   border-radius: 2px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.wiki-main :is(h2, h3).wiki-heading-flash .wiki-heading-text {
   animation: wiki-heading-flash 0.55s ease-out;
 }
 
-.wiki-main :is(h2, h3):target {
+.wiki-main :is(h2, h3):target .wiki-heading-text {
   background-color: color-mix(in srgb, var(--site-theme-accent) 12%, transparent);
   box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--site-theme-accent) 35%, transparent);
   transition: background-color .6s ease-out, box-shadow .6s ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wiki-main :is(h2, h3).wiki-heading-flash {
+  .wiki-main :is(h2, h3).wiki-heading-flash .wiki-heading-text {
     animation: none;
     background-color: color-mix(in srgb, var(--site-theme-accent) 14%, transparent);
     box-shadow: inset 0 -2px 0 color-mix(in srgb, var(--site-theme-accent) 35%, transparent);
   }
 
-  .wiki-main :is(h2, h3):target {
+  .wiki-main :is(h2, h3):target .wiki-heading-text {
     transition: none;
   }
 }
@@ -3554,11 +3571,14 @@ html[data-site-palette="text"] .wiki-portal-hero[data-particles-ready] .wiki-por
   justify-items: center;
   margin: 0;
   color: var(--site-theme-heading);
-  font-family: var(--font-signature);
   font-size: 124px;
   font-style: normal;
   font-weight: 400;
   line-height: .95;
+}
+
+html[data-site-palette="text"] .wiki-portal-name {
+  font-family: var(--font-signature);
 }
 
 .wiki-portal-name-button {
@@ -5697,6 +5717,8 @@ html[data-site-palette="text"] .wiki-portal-grid-cube {
   .wiki-contents-mobile a {
     display: flex;
     align-items: center;
+    width: 100%;
+    max-width: 100%;
     min-height: 44px;
     padding: 8px 0;
     overflow-wrap: anywhere;

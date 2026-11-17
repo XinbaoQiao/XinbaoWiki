@@ -7,7 +7,7 @@ This inventory records third-party material shipped with the template.
 | Component | Tracked location | Terms |
 | --- | --- | --- |
 | Font Awesome 5 Free SVG icons | Inline paths in `components/PublicationLinkLegend.ts` (comment-dots, archive, github, link) | CC BY 4.0, Fonticons, Inc. See [local license](LICENSES/CC-BY-4.0.txt) and [upstream](https://github.com/FortAwesome/Font-Awesome/tree/5.15.4/svgs). |
-| Alex Brush (homepage name wordmark, loaded from Google Fonts) | `app/layout.tsx` | SIL Open Font License 1.1. See [local license](LICENSES/OFL-1.1.txt). |
+| Alex Brush (homepage text-palette signature) | `app/fonts/AlexBrush-Regular.woff2` | SIL Open Font License 1.1. See [local license](LICENSES/OFL-1.1.txt) and [bundled OFL](app/fonts/OFL.txt). |
 
 ## Visitor activity map geometry
 

@@ -1,44 +1,17 @@
 import { HomepagePortal } from '@/components/HomepagePortal';
-import { directorySections } from '@/lib/site-navigation';
-import { getWikiManifestEntry } from '@/lib/wiki-manifest';
 import { pathWithBasePath } from '@/lib/wiki';
 import { getPaperHighlights } from '@/lib/paper-highlights.server';
 import { staticHomepageUpdatesAsOf } from '@/lib/site-updates';
 
-function wikiHref(slug: string) {
-  return pathWithBasePath(`/wiki/${encodeURIComponent(slug)}/`);
-}
-
-function entry(slug: string) {
-  const page = getWikiManifestEntry(slug);
-  if (!page) {
-    throw new Error(`Homepage directory slug must resolve to a public wiki page: ${slug}`);
-  }
-  return {
-    href: wikiHref(slug),
-    slug,
-    summary: page.summary,
-    title: page.title
-  };
-}
-
 export default function HomePage() {
-  const portalDirectorySections = directorySections.map((section) => ({
-    title: section.title,
-    groups: section.groups.map((group) => ({
-      label: group.label,
-      links: {
-        en: group.links.en.map(entry),
-        zh: group.links.zh.map(entry)
-      }
-    }))
-  }));
-
+  const directoryHref = pathWithBasePath('/portal-directory.json');
   return (
-    <HomepagePortal
-      directorySections={portalDirectorySections}
-      paperHighlights={getPaperHighlights()}
-      updatesAsOf={staticHomepageUpdatesAsOf()}
-    />
+    <>
+      <link rel="preload" href={directoryHref} as="fetch" crossOrigin="anonymous" />
+      <HomepagePortal
+        paperHighlights={getPaperHighlights()}
+        updatesAsOf={staticHomepageUpdatesAsOf()}
+      />
+    </>
   );
 }

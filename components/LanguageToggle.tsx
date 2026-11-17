@@ -529,7 +529,8 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
         localUrl = null;
       }
       if (cancelled) { revokeObjectUrl(localUrl); return; }
-      const shared = initialSharedBackground ?? (await refreshSharedBackground());
+      const shouldFetchShared = Boolean(savedCustom.enabled && !localUrl);
+      const shared = initialSharedBackground ?? (shouldFetchShared ? await refreshSharedBackground() : null);
       if (initialSharedBackground) {
         void refreshSharedBackground().then((payload) => {
           if (cancelled || !payload) return;
@@ -586,6 +587,23 @@ export function SitePalette({ icons, initialSharedBackground = null }: SitePalet
       imageUrlRef.current = null;
     };
   }, []);
+
+  useEffect(() => {
+    if (!panelOpen) return;
+    let cancelled = false;
+    void refreshSharedBackground().then((payload) => {
+      if (cancelled || !payload?.imageUrl) return;
+      // Keep a local blob preview intact; only adopt shared image when none is loaded.
+      if (imageUrlRef.current?.startsWith('blob:')) return;
+      if (!customImageUrl) {
+        loadSharedImageOnly(payload);
+        setScopeNote(isChinese ? '已保存全站壁纸，点击可切换。' : 'Saved site wallpaper available — click to switch.');
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [panelOpen]);
   useLayoutEffect(() => {
     if (!appearanceReady) return;
     const applyPalette = () => {

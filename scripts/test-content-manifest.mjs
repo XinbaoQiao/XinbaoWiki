@@ -34,6 +34,8 @@ const manifestSource = source('lib/wiki-manifest.ts');
 const metadataSource = source('lib/wiki-metadata.ts');
 const wikiSource = source('lib/wiki.ts');
 const pageSource = source('app/page.tsx');
+const portalDirectorySource = source('lib/portal-directory.ts');
+const portalDirectoryRouteSource = source('app/portal-directory.json/route.ts');
 const sidebarSource = source('components/Sidebar.tsx');
 const sidebarClientSource = source('components/SidebarClient.tsx');
 const navigationSource = source('lib/site-navigation.ts');
@@ -81,8 +83,11 @@ for (const slug of new Set(curatedSlugs.filter((slug) => !slug.endsWith('_zh')))
   assert.equal(existsPublic(slug), true, `${slug} exists as a public English navigation target`);
   assert.equal(existsPublic(chineseSlug(slug)), true, `${slug} has a public Chinese navigation target`);
 }
-assert.match(pageSource, /directorySections.+@\/lib\/site-navigation/s, 'homepage reuses curated shared navigation slugs');
-assert.match(pageSource, /getWikiManifestEntry\(slug\)/, 'homepage entries resolve through the public manifest');
+assert.match(portalDirectorySource, /directorySections.+@\/lib\/site-navigation/s, 'homepage directory reuses curated shared navigation slugs');
+assert.match(portalDirectorySource, /getWikiManifestEntry\(slug\)/, 'homepage entries resolve through the public manifest');
+assert.match(portalDirectoryRouteSource, /buildPortalDirectorySections/, 'homepage directory is served from a static JSON route');
+assert.match(pageSource, /pathWithBasePath\('\/portal-directory\.json'\)/, 'homepage preloads the directory JSON instead of inlining it');
+assert.doesNotMatch(pageSource, /directorySections/, 'homepage document no longer inlines the bilingual directory');
 assert.doesNotMatch(pageSource, /getWikiPageBySlug/, 'homepage no longer rereads wiki files per curated link');
 assert.match(sidebarSource, /getWikiManifestEntry/, 'sidebar server wrapper validates links against the public manifest');
 assert.match(sidebarSource, /<SidebarClient sections=\{sidebarManifest\(\)\}/, 'sidebar keeps the layout import stable while passing manifest-derived data to the client');

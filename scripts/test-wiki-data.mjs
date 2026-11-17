@@ -191,6 +191,10 @@ assertFile('components/ChatWithXinbaoPanel.tsx');
 assertFile('components/SidebarClient.tsx');
 assertFile('app/search-index.json/route.ts');
 assertFile('app/wiki-title-cache.json/route.ts');
+assertFile('app/portal-directory.json/route.ts');
+assertFile('lib/portal-directory.ts');
+assertFile('app/fonts/AlexBrush-Regular.woff2');
+assertFile('app/fonts/OFL.txt');
 assertFile('app/feed.xml/route.ts');
 assertFile('app/robots.ts');
 assertFile('app/sitemap.ts');
@@ -427,7 +431,7 @@ assert.match(licensingPolicy, /Project software: MIT[\s\S]*Original text and kno
 for (const policyFile of ['LICENSING.md', 'THIRD_PARTY_NOTICES.md', 'ASSET_PROVENANCE.md']) {
   assert.ok(licensingPolicy.includes(`\`${policyFile}\``), `${policyFile} has an explicit repository license scope`);
 }
-assert.match(thirdPartyNotices, /Roboto[\s\S]*Source Sans Pro[\s\S]*Font Awesome 5 Free[\s\S]*Latin Modern Math/, 'third-party notices preserve every bundled or embedded font family');
+assert.match(thirdPartyNotices, /Roboto[\s\S]*Source Sans Pro[\s\S]*Font Awesome 5 Free[\s\S]*Latin Modern Math[\s\S]*Alex Brush/, 'third-party notices preserve every bundled or embedded font family');
 assert.match(thirdPartyNotices, /\[ASSET_PROVENANCE\.md\]\(ASSET_PROVENANCE\.md\)/, 'third-party notices link the per-file asset register');
 assert.match(assetProvenance, /Portrait\.webp[\s\S]*gpt-image 2\.0[\s\S]*not been signature-verified[\s\S]*Portrait-Seoul-ICML-2026\.webp/, 'asset register records embedded portrait provenance claims without overstating verification');
 assert.match(contributingGuide, /Code contributions are accepted under the MIT License;[\s\S]*original text contributions are accepted under CC BY 4\.0/, 'contribution terms match the mixed repository license');
@@ -2003,6 +2007,8 @@ assert.match(styles, /::view-transition-group\(\.wiki-title-morph\)/, 'title mor
 assert.match(styles, /chat-xinbao-quick-replies[\s\S]*chat-xinbao-quick-reply/, 'chat styles include quick-start chip layout');
 const homePage = fs.readFileSync(path.join(root, 'app/page.tsx'), 'utf8');
 const homepagePortal = fs.readFileSync(path.join(root, 'components/HomepagePortal.tsx'), 'utf8');
+const portalDirectory = fs.readFileSync(path.join(root, 'lib/portal-directory.ts'), 'utf8');
+const portalDirectoryRoute = fs.readFileSync(path.join(root, 'app/portal-directory.json/route.ts'), 'utf8');
 const homeScrollIntro = fs.readFileSync(path.join(root, 'components', 'HomeScrollIntro.tsx'), 'utf8');
 const siteHomeIntro = fs.readFileSync(path.join(root, 'lib', 'site-home-intro.ts'), 'utf8');
 const visitorAtlas = fs.readFileSync(path.join(root, 'components/VisitorAtlasDisclosure.tsx'), 'utf8');
@@ -2259,7 +2265,11 @@ assert.match(styles, /\.wiki-portal-hero \{[\s\S]*max-width: 760px;[\s\S]*text-a
 assert.doesNotMatch(styles, /wiki-portal-tagline/, 'homepage no longer styles a decorative portal tagline');
 assert.doesNotMatch(homepagePortal, /portalTaglines|wiki-portal-tagline/, 'homepage portal omits decorative tagline markup and copy');
 assert.match(styles, /--font-signature: "Alex Brush"/, 'homepage signature typography uses Alex Brush');
-assert.match(styles, /\.wiki-portal-name \{[\s\S]*font-family: var\(--font-signature\);[\s\S]*font-size: 124px;[\s\S]*\}/, 'homepage starts directly with a logo-sized Xinbao Qiao in the Alex Brush signature face');
+assert.match(styles, /@font-face \{[\s\S]*font-family: "Alex Brush";[\s\S]*url\("\.\/fonts\/AlexBrush-Regular\.woff2"\)[\s\S]*font-display: optional;/, 'Alex Brush is self-hosted with optional display');
+assert.match(styles, /html\[data-site-palette="text"\] \.wiki-portal-name \{[\s\S]*font-family: var\(--font-signature\);/, 'signature font applies only in the text palette');
+assert.match(styles, /\.wiki-portal-name \{[\s\S]*font-size: 124px;[\s\S]*\}/, 'homepage starts directly with a logo-sized Xinbao Qiao name');
+assert.doesNotMatch(layout, /fonts\.googleapis\.com|fonts\.gstatic\.com|data-alex-brush-font/, 'documents no longer depend on Google Fonts for the signature');
+assert.match(layout, /export const revalidate = 60;/, 'static documents use a short ISR revalidation window');
 assert.match(styles, /\.wiki-portal-name-wrap \{[\s\S]*position: relative;[\s\S]*display: inline-grid;[\s\S]*place-items: center;[\s\S]*max-width: min\(620px, 86vw\);[\s\S]*\}/, 'homepage signature wrapper centers the themed logo or text outside the button semantics');
 assert.match(styles, /\.wiki-portal-name-button \{[\s\S]*appearance: none;[\s\S]*-webkit-appearance: none;[\s\S]*position: absolute;[\s\S]*inset: 0;[\s\S]*width: 100%;[\s\S]*height: 100%;[\s\S]*cursor: pointer;[\s\S]*user-select: none;[\s\S]*-webkit-tap-highlight-color: transparent;[\s\S]*\}/, 'homepage signature button is a transparent overlay sibling, not an h1-wrapped control');
 assert.match(styles, /\.wiki-portal-name-text \{[\s\S]*max-width: 100%;[\s\S]*line-height: \.95;[\s\S]*white-space: nowrap;[\s\S]*\}/, 'homepage pure text signature stays centered inside the shared wordmark box');
@@ -2325,6 +2335,9 @@ assert.match(articleContents, /wiki-on-this-page[\s\S]*wiki-contents-mobile/, 'a
 assert.match(articleContents, /scrollIntoView\(\{ behavior:[\s\S]*auto[\s\S]*\}\)/, 'Contents links jump to headings without native smooth scrolling');
 assert.match(styles, /@keyframes wiki-heading-flash/, 'heading flash animation is defined for Contents navigation');
 assert.match(styles, /@keyframes wiki-heading-flash[\s\S]*--site-theme-accent/, 'heading flash uses the active site theme accent');
+assert.match(styles, /\.wiki-article-contents a,[\s\S]*display: inline-block;[\s\S]*width: fit-content;[\s\S]*max-width: 100%;/, 'Contents current-item highlight hugs the link text instead of filling the column');
+assert.match(styles, /\.wiki-main :is\(h2, h3\)\.wiki-heading-flash \.wiki-heading-text/, 'heading flash highlight is applied to the heading text, not the full-width heading box');
+assert.match(wikiMarkdownTsx, /className="wiki-heading-text"/, 'article headings wrap title text so the flash highlight can hug it');
 assert.match(styles, /@media \(max-width: 640px\) \{[\s\S]*Publications[\s\S]*\.wiki-body tr \{[\s\S]*padding: 14px 14px 12px;[\s\S]*border-radius: 14px;/, 'Publications mobile rows render as padded cards with radius');
 assert.match(styles, /Publications[\s\S]*td:nth-child\(2\) \{[\s\S]*margin-top: 8px;[\s\S]*color: var\(--wiki-text-soft\)/, 'Publications mobile card meta is quieter and spaced under the title');
 assert.match(styles, /@media \(max-width: 720px\) \{[\s\S]*\.wiki-portal-cube-stage-cube \{[\s\S]*height: 320px;/, 'homepage cube stage shrinks on phones so search and editions stay above the fold');
@@ -2376,10 +2389,16 @@ assert.match(styles, /\.wiki-shell:has\(\.wiki-portal\) \.wiki-sidebar \{[\s\S]*
 assert.match(homePage, /import \{ HomepagePortal \} from '@\/components\/HomepagePortal';/, 'homepage delegates interactive portal state to a client component');
 assert.match(homePage, /staticHomepageUpdatesAsOf/, 'homepage uses a static updates stamp so the page can be cached');
 assert.doesNotMatch(homePage, /new Date\(\)\.toISOString\(\)/, 'homepage does not take a request-time Date that would force dynamic rendering');
-assert.match(homePage, /import \{ directorySections \} from '@\/lib\/site-navigation';[\s\S]*getWikiManifestEntry/, 'homepage uses shared site update metadata and manifest entries instead of duplicating page data');
+assert.match(portalDirectory, /import \{ directorySections \} from '@\/lib\/site-navigation';[\s\S]*getWikiManifestEntry/, 'homepage directory uses shared navigation slugs and manifest entries instead of duplicating page data');
+assert.match(portalDirectoryRoute, /export const dynamic = 'force-static'/, 'directory JSON is statically generated');
+assert.match(homePage, /pathWithBasePath\('\/portal-directory\.json'\)/, 'homepage preloads the directory JSON after the first HTML');
+assert.doesNotMatch(homePage, /directorySections/, 'homepage document no longer inlines the bilingual directory');
+assert.match(homepagePortal, /fetch\(withBasePath\('\/portal-directory\.json'\)/, 'homepage portal loads the directory after paint');
 assert.doesNotMatch(homePage, hiddenManuscriptPattern, 'homepage directory does not expose the hidden under-review manuscript');
-assert.match(homePage, /if \(!page\) \{[\s\S]*throw new Error\(`Homepage directory slug must resolve to a public wiki page: \$\{slug\}`\);[\s\S]*\}/, 'homepage directory refuses missing or hidden wiki pages instead of generating fallback links');
-assert.doesNotMatch(homePage, /slug\.replaceAll\('_', ' '\)/, 'homepage directory does not fall back to slug text for missing pages');
+assert.doesNotMatch(portalDirectory, hiddenManuscriptPattern, 'directory builder does not expose the hidden under-review manuscript');
+assert.match(portalDirectory, /if \(!page\) \{[\s\S]*throw new Error\(`Homepage directory slug must resolve to a public wiki page: \$\{slug\}`\);[\s\S]*\}/, 'homepage directory refuses missing or hidden wiki pages instead of generating fallback links');
+assert.doesNotMatch(portalDirectory, /slug\.replaceAll\('_', ' '\)/, 'homepage directory does not fall back to slug text for missing pages');
+assert.doesNotMatch(homePage, /slug\.replaceAll\('_', ' '\)/, 'homepage page does not fall back to slug text for missing pages');
 assert.doesNotMatch(homePage, /wiki-portal-emblem|\/xinbaopedia-icon\.png/, 'homepage no longer renders the in-page icon');
 assert.match(homepagePortal, /className="wiki-portal-name"[\s\S]*Xinbao Qiao/, 'homepage uses Xinbao Qiao as the central portal name');
 assert.match(homepagePortal, /wiki-portal-name-text[\s\S]*Xinbao Qiao/, 'homepage keeps the pure text signature as the central name');
