@@ -38,7 +38,7 @@
   --font-display: "Cormorant Garamond", "EB Garamond", Georgia, "Times New Roman", serif;
   --font-signature: "Alex Brush", "Brush Script MT", "Segoe Script", cursive;
   --font-mono: "SF Mono", Menlo, Consolas, monospace;
-  --content-width: 920px;
+  --content-width: 1212px;
   --sidebar-width: 192px;
   --infobox-width: 300px;
   --article-gap: 28px;
@@ -450,7 +450,7 @@ a.external.wiki-link-pdf::after {
   grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
   align-items: center;
   column-gap: var(--article-gap);
-  max-width: 1320px;
+  max-width: 1480px;
   margin: 0 auto;
   padding: 10px 24px 9px;
 }
@@ -1498,7 +1498,7 @@ html[data-site-palette="text"] .chat-xinbao-quick-reply {
   display: grid;
   grid-template-columns: var(--sidebar-width) minmax(0, var(--content-width));
   gap: var(--article-gap);
-  max-width: 1320px;
+  max-width: 1480px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -1556,7 +1556,7 @@ html[data-site-palette="text"] .chat-xinbao-quick-reply {
   display: grid;
   grid-template-columns: var(--sidebar-width) minmax(0, var(--content-width));
   gap: var(--article-gap);
-  max-width: 1320px;
+  max-width: 1480px;
   margin: 0 auto;
   padding: 18px 24px 80px;
 }
@@ -1723,7 +1723,7 @@ body:has(.wiki-portal) .wiki-topbar {
 
 .wiki-article-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 280px;
+  grid-template-columns: minmax(0, 1fr) var(--infobox-width);
   align-items: start;
   gap: 32px;
 }
@@ -1736,11 +1736,6 @@ body:has(.wiki-portal) .wiki-topbar {
 
 .wiki-article-layout-text {
   display: block;
-  max-width: 76ch;
-}
-
-.wiki-article-layout-text:has(table) {
-  max-width: none;
 }
 
 .wiki-article-facts {
@@ -7115,21 +7110,21 @@ html[data-site-custom-bg-position="bottom"] .site-custom-bg-layer {
 }
 
 .site-ocean-panel-head {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
 }
 
 .site-ocean-panel-title {
   margin: 0;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--site-theme-heading);
 }
 
 .site-ocean-panel-note {
-  margin: 4px 0 0;
+  margin: 3px 0 0;
   color: color-mix(in srgb, var(--wiki-text) 68%, transparent);
   font-size: 11px;
-  line-height: 1.35;
+  line-height: 1.45;
 }
 
 .site-ocean-panel .site-custom-bg-field {
@@ -7210,20 +7205,31 @@ html[data-site-custom-bg-position="bottom"] .site-custom-bg-layer {
 
 .site-ocean-kinds-action {
   appearance: none;
-  padding: 2px 7px;
-  border: 1px solid var(--site-theme-chrome-border);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--wiki-bg) 80%, transparent);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   color: var(--site-theme-action-ink);
   font: inherit;
-  font-size: 10px;
-  font-weight: 650;
+  font-size: 11px;
+  font-weight: 500;
   cursor: pointer;
+}
+
+.site-ocean-kinds-action:hover,
+.site-ocean-kinds-action:focus-visible {
+  text-decoration: underline;
+}
+
+.site-ocean-kinds-action:focus-visible {
+  outline: 2px solid var(--site-theme-action-ink);
+  outline-offset: 2px;
 }
 
 .site-ocean-kinds-action:disabled {
   opacity: 0.45;
   cursor: default;
+  text-decoration: none;
 }
 
 .site-ocean-kinds-grid {
@@ -7235,23 +7241,22 @@ html[data-site-custom-bg-position="bottom"] .site-custom-bg-layer {
 
 .site-ocean-kind-chip {
   appearance: none;
-  padding: 4px 8px;
+  padding: 3px 7px;
   border: 1px solid var(--site-theme-chrome-border);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--wiki-bg) 78%, transparent);
+  border-radius: 4px;
+  background: transparent;
   color: var(--wiki-text);
   font: inherit;
   font-size: 11px;
-  font-weight: 650;
-  line-height: 1.2;
+  font-weight: 500;
+  line-height: 1.3;
   cursor: pointer;
 }
 
 .site-ocean-kind-chip.is-on {
-  border-color: color-mix(in srgb, #1a6b8a 55%, var(--site-theme-accent));
-  background: color-mix(in srgb, #1a6b8a 22%, var(--wiki-bg));
+  border-color: color-mix(in srgb, #1a6b8a 40%, var(--site-theme-chrome-border));
+  background: color-mix(in srgb, #1a6b8a 12%, var(--wiki-bg));
   color: var(--site-theme-action-ink);
-  box-shadow: 0 0 0 1px color-mix(in srgb, #1a6b8a 35%, transparent);
 }
 
 .site-ocean-kind-chip:disabled {

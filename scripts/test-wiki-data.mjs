@@ -2104,7 +2104,7 @@ assertCssRule(styles, 'a:visited', [/color: var\(--wiki-link-visited\);/], 'visi
 assertCssRule(styles, 'a.redlink', [/color: var\(--wiki-link-red\);/], 'missing-page links retain semantic red');
 assert.doesNotMatch(styles, /research-atlas|wiki-portal-atlas/, 'retired Research Atlas styles are removed');
 assert.doesNotMatch(styles, /\.wiki-logo-mark/, 'topbar CSS does not keep custom logo-image styling');
-assert.match(styles, /--content-width: 920px;[\s\S]*--sidebar-width: 192px;[\s\S]*--infobox-width: 300px;[\s\S]*--article-gap: 28px;/, 'article dimensions use the approved shared Wikipedia-style grid tokens');
+assert.match(styles, /--content-width: 1212px;[\s\S]*--sidebar-width: 192px;[\s\S]*--infobox-width: 300px;[\s\S]*--article-gap: 28px;/, 'article dimensions use the approved shared Wikipedia-style grid tokens');
 assert.match(styles, /\.wiki-topbar-inner \{[\s\S]*grid-template-columns: var\(--sidebar-width\) minmax\(0, 1fr\);[\s\S]*column-gap: var\(--article-gap\);[\s\S]*\}/, 'desktop masthead aligns its controls with the shared article grid');
 assertCssRule(styles, '.wiki-topbar', [
   /border-bottom: 1px solid var\(--site-theme-chrome-border\);/,
