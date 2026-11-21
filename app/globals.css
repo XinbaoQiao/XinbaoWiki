@@ -38,7 +38,7 @@
   --font-display: "Cormorant Garamond", "EB Garamond", Georgia, "Times New Roman", serif;
   --font-signature: "Alex Brush", "Brush Script MT", "Segoe Script", cursive;
   --font-mono: "SF Mono", Menlo, Consolas, monospace;
-  --content-width: 1212px;
+  --content-width: 1132px;
   --sidebar-width: 192px;
   --infobox-width: 300px;
   --article-gap: 28px;
@@ -450,7 +450,7 @@ a.external.wiki-link-pdf::after {
   grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
   align-items: center;
   column-gap: var(--article-gap);
-  max-width: 1480px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 10px 24px 9px;
 }
@@ -1498,7 +1498,7 @@ html[data-site-palette="text"] .chat-owner-quick-reply {
   display: grid;
   grid-template-columns: var(--sidebar-width) minmax(0, var(--content-width));
   gap: var(--article-gap);
-  max-width: 1480px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -1556,7 +1556,7 @@ html[data-site-palette="text"] .chat-owner-quick-reply {
   display: grid;
   grid-template-columns: var(--sidebar-width) minmax(0, var(--content-width));
   gap: var(--article-gap);
-  max-width: 1480px;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 18px 24px 80px;
 }
